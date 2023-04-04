@@ -1,0 +1,22 @@
+(package vx/sample
+ :doc "Sample VxLisp Code")
+
+(type mytype
+ :extends :struct
+ :properties
+  [mynum : int    :doc "mynum"
+   mystr : string :doc "mystr"])
+
+(const myconst : int
+ 4
+ :doc  "My Constant"
+ :test (test 4 myconst))
+
+(func main : none []
+ (myfunc 2))
+
+(func myfunc : int
+ [myarg : int :doc "My Arg"]
+ (+ myconst myarg)
+ :doc "My Function"
+ :test (test 5 (myfunc 1)))

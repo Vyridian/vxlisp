@@ -1,0 +1,192 @@
+(package nexus/tactics/base
+ :libs (lib html :path vx/web/html)
+	     (lib tb   :path vx/data/textblock)
+       (lib xml  :path vx/data/xml)
+ :doc "Tactics Base Types")
+
+(type ability
+ :extends    :struct
+ :traits     [card])
+
+(type abilitylist
+ :extends    :list
+ :allowtypes [ability])
+
+(type book
+ :extends    :struct
+ :traits     [card]
+ :properties [chapterlist : chapterlist])
+
+(type booklist
+ :extends    :list
+ :allowtypes [book])
+
+(type card
+ :extends    :struct
+ :properties [name       : string
+              titles     : string
+						  references : string
+						  summary    : string])
+
+(type cardlist
+ :extends    :list
+ :allowtypes [card])
+
+(type chapter
+ :extends    :struct
+ :traits     [card]
+ :properties [sectionlist : sectionlist])
+
+(type chapterlist
+ :extends    :list
+ :allowtypes [chapter])
+
+(type deck
+ :extends    :struct
+ :traits     [card]
+ :properties [cardlist : cardlist])
+
+(type decklist
+ :extends    :list
+ :traits     [card]
+ :allowtypes [deck])
+
+(type item
+ :extends    :struct
+ :traits     [card]
+ :properties [mass   : string])
+
+(type itemlist
+ :extends    :list
+ :allowtypes [item])
+
+(type location
+ :extends    :struct
+ :traits     [card]
+ :properties [locationlist : locationlist
+              unitlist     : unitlist])
+
+(type locationlist
+ :extends    :list
+ :allowtypes [location])
+
+(type playingcard
+ :extends    :struct
+ :traits     [card]
+ :properties [rank : rank
+              suit : suit])
+
+(type power
+ :extends    :struct
+ :traits     [card]
+ :properties [rating        : rating
+              abilitylist   : abilitylist
+							specialtylist : specialtylist])
+
+(type powerlist
+ :extends    :list
+ :allowtypes [power])
+
+(type rank
+ :extends :struct
+ :traits  [card])
+
+(type rating
+ :extends    :struct
+ :traits     [card]
+ :properties [level : int
+              scale : int])
+
+(type rule
+ :extends    :struct
+ :traits     [card])
+
+(type rulelist
+ :extends    :list
+ :allowtypes [rule])
+
+(type scenario
+ :extends    :struct
+ :traits     [card]
+ :properties [unitlist : unitlist])
+
+(type scenariolist
+ :extends    :list
+ :allowtypes [scenario])
+
+(type section
+ :extends    :struct
+ :traits     [card]
+ :properties [decklist     : decklist
+              itemlist     : itemlist
+              locationlist : locationlist
+              powerlist    : powerlist
+              rulelist     : rulelist
+	            scenariolist : scenariolist
+	            sectionlist  : sectionlist
+              skilllist    : skilllist
+	            suitlist     : suitlist
+              unitlist     : unitlist])
+
+(type sectionlist
+ :extends    :list
+ :allowtypes [section])
+
+(type skill
+ :extends    :struct
+ :traits     [card]
+ :properties [rating        : rating
+              abilitylist   : abilitylist
+							specialtylist : specialtylist])
+
+(type skilllist
+ :extends    :list
+ :allowtypes [skill])
+
+(type specialty
+ :extends    :struct
+ :traits     [card])
+
+(type specialtylist
+ :extends    :list
+ :traits     [card]
+ :allowtypes [specialty])
+
+(type suit
+ :extends    :struct
+ :traits     [card])
+
+(type suitlist
+ :extends    :list
+ :traits     [card]
+ :allowtypes [suit])
+
+(type unit
+ :extends    :struct
+ :traits     [card]
+ :properties [body   : rating
+              mind   : rating
+              will   : rating
+              move   : rating
+              mass   : string
+              skills : skilllist
+							powers : powerlist])
+
+(type unitlist
+ :extends    :list
+ :allowtypes [unit])
+
+(const card-ace-spade : playingcard
+ (playingcard
+  :rank rank-ace
+  :suit suit-spade))
+
+(const rank-ace : rank)
+
+(const suit-club : suit)
+
+(const suit-diamond : suit)
+
+(const suit-heart : suit)
+
+(const suit-spade : suit)

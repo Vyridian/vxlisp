@@ -1,0 +1,42 @@
+(package vx/data/csv
+ :libs (lib collection :path vx/collection)
+       (lib type :path vx/type)
+       (lib tb :path vx/data/textblock)
+ :doc "Csv handler")
+
+(type csv
+ :extends    :struct
+ :properties
+  [headers : stringlist
+   rows    : csvrows])
+
+(type csvrows
+ :extends      :list
+ :allowtypes [stringlist])
+
+(const delims : tb/delimset
+ (tb/delimset
+  :split (stringlist "\n")
+  :subset
+   (tb/delimset
+    :split (stringlist ",")
+    :subset
+     (tb/delimset
+      :start (stringlist "\"")
+      :end   (stringlist "\"")))))
+
+(func csv<-textblock : csv
+ [textblock : tb/textblock]
+ (let
+  [allrows : csvrows    := (csvrows<-textblock textblock)
+   headers : stringlist := (:0 allrows)
+   rows    : csvrows    := (list<-list-end allrows 1)]
+  (csv :headers headers :rows rows)))
+
+(func csvrows<-textblock : csvrows
+ [textblock : tb/textblock]
+ (let
+  [parsedtb : tb/textblock := (tb/parse textblock delims)
+   childtbs : tb/textblocklist := (tb/textblocks<-textblock parsedtb)
+   strings  : stringlist := (tb/stringlist<-textblocklist childtbs)]
+  (csvrows strings)))

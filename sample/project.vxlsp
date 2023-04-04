@@ -1,0 +1,45 @@
+(project sample
+ :version "0.1"
+ :author  ""
+ :doc     "This is a sample project shell"
+ :libs
+  (lib javaniofile
+   :path "java.nio.file.*"
+   :lang :java)
+  (lib javafuture
+   :path "java.util.concurrent.CompletableFuture"
+   :lang :java)
+  (lib javafunction
+   :path "java.util.function.*"
+   :lang :java)
+  (lib javacollectors
+   :path "java.util.stream.Collectors"
+   :lang :java)
+ :paths
+  (path projectpath
+   :path "")
+ :cmds
+  (cmd doc
+   :code      :doc
+   :path      *projectpath*/doc
+   :doc       "Build documentation html")
+  (cmd webserver
+   :code      :webserver
+   :doc       "Run Simple Web Server")
+  (cmd srcjs
+   :code      :source
+   :lang      :js
+   :path      *projectpath*/js/src)
+  (cmd testjs
+   :code      :test
+   :lang      :js
+   :path      *projectpath*/js/test)
+  (cmd srcjava
+   :code      :source
+   :lang      :java
+   :path      *projectpath*/java/src/main/java/com/sarvalex)
+  (cmd testjava
+   :code      :test
+   :lang      :java
+   :path      *projectpath*/java/src/test/java/com/sarvalex)
+)
