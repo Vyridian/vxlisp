@@ -1,4 +1,4 @@
-module sarvalex
+module vxcompiler
 
 go 1.20
 

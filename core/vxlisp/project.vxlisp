@@ -1,0 +1,44 @@
+(project core
+ :version  "0.5"
+ :author   ""
+ :doc      "This is the vx/core project"
+ :packages "."
+ :libs
+  (lib javaniofile
+   :path "java.nio.file.*"
+   :lang :java)
+  (lib javafuture
+   :path "java.util.concurrent.CompletableFuture"
+   :lang :java)
+  (lib javafunction
+   :path "java.util.function.*"
+   :lang :java)
+  (lib javacollectors
+   :path "java.util.stream.Collectors"
+   :lang :java)
+ :cmds
+  (cmd doc
+   :code :doc
+   :path ../doc
+   :doc  "Build documentation html")
+  (cmd webserver
+   :code :webserver
+   :port 8081
+   :doc  "Run Simple Development Web Server")
+  (cmd srcjs
+   :code :source
+   :lang :js
+   :path ../js/src)
+  (cmd testjs
+   :code :test
+   :lang :js
+   :path ../js/test)
+  (cmd srcjava
+   :code :source
+   :lang :java
+   :path ../java/src/main/java/com/vxlisp)
+  (cmd testjava
+   :code :test
+   :lang :java
+   :path ../java/src/test/java/com/vxlisp)
+)

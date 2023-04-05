@@ -1,17 +1,19 @@
-Features
+# Features
+
 * Open Source
 * Compact consistent syntax
 * Interoperable with native code
 * All-in-one: code, test, documentation
 * Everything is the same data structure
 * Test cases in documentation
-* Simplified generics
-* Simplified exceptions
-* Eliminated null
-* Simplified multiple inheritence
-* Simplified asynchronous code
-* Simplified constructors
-* Simplified context management
+* generics
+* exceptions
+* Null
+* Multiple inheritence
+* asynchronous code
+* constructors
+* context management
+* Permissions
 * Immutability
 * Thread-safety
 * Simplified overloading

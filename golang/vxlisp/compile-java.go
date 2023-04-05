@@ -118,10 +118,11 @@ func JavaEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	return output
 }
 
-func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcmd) ([]*vxfile, *vxmsgblock) {
+func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JavaFilesFromProjectCmd")
 	var files []*vxfile
-	cmdpaths := ListStringSplitFromStringDelim(cmd.path, "/")
+	cmdpath := PathFromProjectCmd(prj, cmd)
+	cmdpaths := ListStringFromStringSplit(cmdpath, "/")
 	cmdpathlen := len(cmdpaths)
 	domainname := cmdpaths[cmdpathlen-1]
 	urlsuffix := cmdpaths[cmdpathlen-2]
@@ -130,13 +131,13 @@ func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcmd) ([]*vxfile, *vxmsgblock
 	switch cmd.code {
 	case ":test":
 		file := NewFile()
-		file.name = "Appcom.sarvalex.vx.Test.java"
-		file.path = cmd.path + "/vx"
+		file.name = "Appcom.vxlisp.vx.Test.java"
+		file.path = cmdpath + "/vx"
 		file.text = JavaAppTest(prj, pkgprefix)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib.java"
-		file.path = cmd.path + "/vx"
+		file.path = cmdpath + "/vx"
 		file.text = JavaTestLib()
 		files = append(files, file)
 	}
@@ -155,15 +156,15 @@ func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcmd) ([]*vxfile, *vxmsgblock
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + ".java"
-			file.path = cmd.path + "/" + pkgpath
+			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		case ":test":
 			text, msgs := JavaTestFromPackage(pkg, prj, pkgprefix)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
-			file.name = pkgname + "com.sarvalex.vx.Test.java"
-			file.path = cmd.path + "/" + pkgpath
+			file.name = pkgname + "com.vxlisp.vx.Test.java"
+			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		}
@@ -541,11 +542,11 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	instancefuncs += repltext
 	valuetext, msgs := JavaFromValue(fnc.value, fnc.pkgname, fnc, "", true, false, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
-	valuetexts := ListStringSplitFromStringDelim(valuetext, "\n")
+	valuetexts := ListStringFromStringSplit(valuetext, "\n")
 	var chgvaluetexts []string
 	for _, item := range valuetexts {
 		if BooleanFromStringContains(item, "@SuppressWarnings") {
-			f_suppresswarnings += "\n  " + StringTrim(StringReplace(item, "\\\"", "\""))
+			f_suppresswarnings += "\n  " + StringTrim(StringFromStringFindReplace(item, "\\\"", "\""))
 		} else {
 			chgvaluetexts = append(chgvaluetexts, item)
 		}
@@ -575,7 +576,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		indent += "  "
 	}
 	lineindent = "\n" + indent
-	valuetext = StringJoinFromListString(chgvaluetexts, "\n")
+	valuetext = StringFromListStringJoin(chgvaluetexts, "\n")
 	if IntFromStringIndex(valuetext, "output ") >= 0 {
 	} else if IntFromStringIndex(valuetext, "output.") >= 0 {
 	} else if fnc.vxtype.name == "none" {
@@ -744,7 +745,7 @@ func JavaFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 				lineindent + "  )"
 			outputtypes = append(outputtypes, name)
 		}
-		output = "Core.arraylist_from_array(" + StringJoinFromListString(outputtypes, ",") + lineindent + ")"
+		output = "Core.arraylist_from_array(" + StringFromListStringJoin(outputtypes, ",") + lineindent + ")"
 	}
 	return output
 }
@@ -781,13 +782,13 @@ func JavaFromName(name string) string {
 	if output == "extends" {
 		output = "extend"
 	}
-	output = StringReplace(output, "->", "_to_")
-	output = StringReplace(output, "<-", "_from_")
-	output = StringReplace(output, "<", "lt")
-	output = StringReplace(output, ">", "gt")
-	output = StringReplace(output, "?", "is")
-	output = StringReplace(output, "-", "_")
-	output = StringReplace(output, "/", "_")
+	output = StringFromStringFindReplace(output, "->", "_to_")
+	output = StringFromStringFindReplace(output, "<-", "_from_")
+	output = StringFromStringFindReplace(output, "<", "lt")
+	output = StringFromStringFindReplace(output, ">", "gt")
+	output = StringFromStringFindReplace(output, "?", "is")
+	output = StringFromStringFindReplace(output, "-", "_")
+	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
 
@@ -1964,7 +1965,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 						if nativeindent == "undefined" {
 							nativeindent = "\n" + StringRepeat(" ", argvalue.textblock.charnum)
 						} else if nativeindent != "" {
-							argtext = StringReplace(argtext, nativeindent, "\n")
+							argtext = StringFromStringFindReplace(argtext, nativeindent, "\n")
 						}
 					}
 					if !multiline {
@@ -1980,9 +1981,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 			}
 			if len(argtexts) > 0 {
 				if multiline {
-					output += StringFromStringIndent(StringJoinFromListString(argtexts, ""), indent)
+					output += StringFromStringIndent(StringFromListStringJoin(argtexts, ""), indent)
 				} else {
-					output += StringJoinFromListString(argtexts, "")
+					output += StringFromListStringJoin(argtexts, "")
 				}
 			}
 		default:
@@ -2050,8 +2051,8 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 								lambdavar := argvaltype + " " + lambdaarg.name + " = Core.f_any_from_any(" + argvalinstance + ", " + lambdaarg.name + "_any);"
 								lambdavars = append(lambdavars, lambdavar)
 							}
-							lambdatext := StringJoinFromListString(lambdaargs, ", ")
-							lambdavartext := "\n  " + StringJoinFromListString(lambdavars, "\n  ")
+							lambdatext := StringFromListStringJoin(lambdaargs, ", ")
+							lambdavartext := "\n  " + StringFromListStringJoin(lambdavars, "\n  ")
 							if argfunc.async {
 								work, msgs := JavaFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -2280,7 +2281,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 				argtexts = append(argtexts, "context")
 			}
 			if multiline {
-				output += "\n" + indent + "  " + StringFromStringIndent(StringJoinFromListString(argtexts, ",\n"), indent+"  ")
+				output += "\n" + indent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), indent+"  ")
 				if multiflag {
 					output += "\n" + indent + "  )"
 				}
@@ -2290,7 +2291,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 					output += "\n" + indent + ")"
 				}
 			} else {
-				output += StringJoinFromListString(argtexts, ", ")
+				output += StringFromListStringJoin(argtexts, ", ")
 				if multiflag {
 					output += ")"
 				}
@@ -2319,7 +2320,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
 			if encode {
-				output = StringReplace(valstr, "\n", "\\n")
+				output = StringFromStringFindReplace(valstr, "\n", "\\n")
 			} else {
 				output = valstr
 			}
@@ -2481,7 +2482,7 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 				isskip = true
 			} else {
 				libpath = pkgprefix + "/" + libpkgpath + "*"
-				libpath = StringReplace(libpath, "/", ".")
+				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
 				importline := "\nimport " + libpath + ";"
@@ -2509,7 +2510,7 @@ func JavaInterfaceFromType(typ *vxtype) string {
 		"\n    public " + typename + " vx_type();"
 	createtext, _ := JavaFromValue(typ.createvalue, "", emptyfunc, "", true, false, "")
 	if createtext != "" {
-		createlines := ListStringSplitFromStringDelim(createtext, "\n")
+		createlines := ListStringFromStringSplit(createtext, "\n")
 		isoverride := false
 		for _, createline := range createlines {
 			if createline == "@Override" {
@@ -2668,7 +2669,7 @@ func JavaInterfaceFromType(typ *vxtype) string {
 				for _, trait := range typ.traits {
 					traitnames = append(traitnames, JavaNameTypeFullFromType(trait))
 				}
-				extends = StringJoinFromListString(traitnames, ", ")
+				extends = StringFromListStringJoin(traitnames, ", ")
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
 				extras += "\n    public " + JavaNameTypeFromType(arg.vxtype) + " " + JavaFromName(arg.alias) + "();"
@@ -2835,7 +2836,7 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 			listargtext = append(listargtext, "final "+argtypename+" "+argname)
 		}
 	}
-	argtext := StringJoinFromListString(listargtext, ", ")
+	argtext := StringFromListStringJoin(listargtext, ", ")
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
@@ -2932,11 +2933,11 @@ func JavaNameFromPkgName(pkgname string) string {
 	ipos := IntFromStringIndexLast(pkgname, "/")
 	output = StringSubstring(pkgname, ipos+1, len(pkgname))
 	output = StringUCaseFirst(output)
-	output = StringReplace(output, "<", "lt")
-	output = StringReplace(output, ">", "gt")
-	output = StringReplace(output, "?", "is")
-	output = StringReplace(output, "-", "_")
-	output = StringReplace(output, "/", "_")
+	output = StringFromStringFindReplace(output, "<", "lt")
+	output = StringFromStringFindReplace(output, ">", "gt")
+	output = StringFromStringFindReplace(output, "?", "is")
+	output = StringFromStringFindReplace(output, "-", "_")
+	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
 
@@ -3001,7 +3002,7 @@ func JavaPackagePathFromPrefixName(pkgprefix string, pkgname string) (string, st
 	ipos := IntFromStringIndexLast(pkgpath, "/")
 	name := StringSubstring(pkgpath, ipos+1, len(pkgpath))
 	pkgpath = StringSubstring(pkgpath, 0, ipos)
-	pkgpath = StringReplace(pkgpath, "/", ".")
+	pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 	pkgpath = JavaFromName(pkgpath)
 	name = JavaNameFromPkgName(name)
 	return pkgpath, name
@@ -3078,7 +3079,7 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func JavaStringFromProjectCmd(prj *vxproject, cmd *vxcmd) (string, *vxmsgblock) {
+func JavaStringFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JavaStringFromProjectCmd")
 	files, msgs := JavaFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -3096,22 +3097,22 @@ func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcas
 			descvaluetext, msgs := JavaFromValue(testvalue, testpkg, fnc, "            ", true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			desctext := "" +
-				"\n        com.sarvalex.vx.Test.t_testdescribe.vx_new(" +
+				"\n        com.vxlisp.vx.Test.t_testdescribe.vx_new(" +
 				"\n          \":describename\", \"" + JavaTestFromValue(testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
 				"\n        )"
 			desctexts = append(desctexts, desctext)
 		}
-		describelist := StringJoinFromListString(desctexts, ",")
+		describelist := StringFromListStringJoin(desctexts, ",")
 		output = "" +
-			"\n  static com.sarvalex.vx.Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
-			"\n    com.sarvalex.vx.Test.Type_testcase output = com.sarvalex.vx.Test.t_testcase.vx_new(" +
+			"\n  static com.vxlisp.vx.Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
+			"\n    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(" +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
 			"\n      \":casename\", \"" + testname + "\"," +
 			"\n      \":describelist\"," +
-			"\n      com.sarvalex.vx.Test.t_testdescribelist.vx_new(" + describelist +
+			"\n      com.vxlisp.vx.Test.t_testdescribelist.vx_new(" + describelist +
 			"\n      )" +
 			"\n    );" +
 			"\n    return output;" +
@@ -3168,7 +3169,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"com.sarvalex.vx.Test.t_"+JavaFromName(typ.alias)+"(context)")
+			testall = append(testall, pkgname+"com.vxlisp.vx.Test.t_"+JavaFromName(typ.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -3190,7 +3191,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
-			testall = append(testall, pkgname+"com.sarvalex.vx.Test.c_"+JavaFromName(cnst.alias)+"(context)")
+			testall = append(testall, pkgname+"com.vxlisp.vx.Test.c_"+JavaFromName(cnst.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -3216,7 +3217,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"com.sarvalex.vx.Test.f_"+JavaFromName(fnc.alias)+JavaIndexFromFunc(fnc)+"(context)")
+				testall = append(testall, pkgname+"com.vxlisp.vx.Test.f_"+JavaFromName(fnc.alias)+JavaIndexFromFunc(fnc)+"(context)")
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -3266,16 +3267,16 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static com.sarvalex.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
+		"\n  public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
 		"\n    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
 		"\n      " + strings.Join(testall, ",\n      ") +
 		"\n    ));" +
-		"\n    com.sarvalex.vx.Test.Type_testcaselist output = com.sarvalex.vx.Test.t_testcaselist.vx_new(arraylisttestcase);" +
+		"\n    com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);" +
 		"\n    return output;" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.sarvalex.vx.Test.Type_testcoveragesummary test_coveragesummary() {" +
-		"\n    return com.sarvalex.vx.Test.t_testcoveragesummary.vx_new(" +
+		"\n  public static com.vxlisp.vx.Test.Type_testcoveragesummary test_coveragesummary() {" +
+		"\n    return com.vxlisp.vx.Test.t_testcoveragesummary.vx_new(" +
 		"\n      \":testpkg\",   \"" + pkg.name + "\", " +
 		"\n      \":constnums\", " + JavaTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
 		"\n      \":docnums\", " + JavaTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
@@ -3287,8 +3288,8 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.sarvalex.vx.Test.Type_testcoveragedetail test_coveragedetail() {" +
-		"\n    return com.sarvalex.vx.Test.t_testcoveragedetail.vx_new(" +
+		"\n  public static com.vxlisp.vx.Test.Type_testcoveragedetail test_coveragedetail() {" +
+		"\n    return com.vxlisp.vx.Test.t_testcoveragedetail.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\"," +
 		"\n      \":typemap\", Core.t_intmap.vx_new(" +
 		"\n  " + strings.Join(covertype, ",\n  ") +
@@ -3302,9 +3303,9 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.sarvalex.vx.Test.Type_testpackage test_package(final Core.Type_context context) {" +
-		"\n    com.sarvalex.vx.Test.Type_testcaselist testcaselist = test_cases(context);" +
-		"\n    com.sarvalex.vx.Test.Type_testpackage output = com.sarvalex.vx.Test.t_testpackage.vx_new(" +
+		"\n  public static com.vxlisp.vx.Test.Type_testpackage test_package(final Core.Type_context context) {" +
+		"\n    com.vxlisp.vx.Test.Type_testcaselist testcaselist = test_cases(context);" +
+		"\n    com.vxlisp.vx.Test.Type_testpackage output = com.vxlisp.vx.Test.t_testpackage.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
 		"\n      \":caselist\", testcaselist," +
 		"\n      \":coveragesummary\", test_coveragesummary()," +
@@ -3347,7 +3348,7 @@ func JavaTestFromValue(value vxvalue) string {
 
 func JavaTypeCoverageNumsValNew(pct int, tests int, total int) string {
 	return "" +
-		"com.sarvalex.vx.Test.t_testcoveragenums.vx_new(" +
+		"com.vxlisp.vx.Test.t_testcoveragenums.vx_new(" +
 		"\":pct\", " + StringFromInt(pct) + ", " +
 		"\":tests\", " + StringFromInt(tests) + ", " +
 		"\":total\", " + StringFromInt(total) +
@@ -3393,7 +3394,7 @@ func JavaTypeDefMapFromProperties(args []vxarg, indent string) string {
 		}
 		output = "" +
 			"Core.hashmap_from_keyvalues(" +
-			lineindent + "  " + StringJoinFromListString(props, ","+lineindent+"  ") +
+			lineindent + "  " + StringFromListStringJoin(props, ","+lineindent+"  ") +
 			lineindent + ")"
 	}
 	return output
@@ -3411,17 +3412,17 @@ func JavaTypeListFromListType(listtype []*vxtype) string {
 			typetext := JavaNameTFromType(typ)
 			listtext = append(listtext, typetext)
 		}
-		output = "Core.t_typelist.vx_new(" + StringJoinFromListString(listtext, ", ") + ")"
+		output = "Core.t_typelist.vx_new(" + StringFromListStringJoin(listtext, ", ") + ")"
 	}
 	return output
 }
 
 func JavaTypeStringValNew(val string) string {
-	valstr := StringReplace(val, "\n", "\\n")
+	valstr := StringFromStringFindReplace(val, "\n", "\\n")
 	return "Core.t_string.vx_new_from_string(\"" + valstr + "\")"
 }
 
-func WriteJavaFromProjectCmd(prj *vxproject, cmd *vxcmd) *vxmsgblock {
+func WriteJavaFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteJavaFromProjectCmd")
 	files, msgs := JavaFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -3444,10 +3445,10 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 			pkgname = pkgname[pos+1:]
 		}
 		pkgname = StringUCaseFirst(pkgname)
-		testpackage := "\n    " + pkgname + "com.sarvalex.vx.Test.test_package(context)"
+		testpackage := "\n    " + pkgname + "com.vxlisp.vx.Test.test_package(context)"
 		listtestpackage = append(listtestpackage, testpackage)
-		importline := "import " + pkgprefix + "." + StringReplace(pkgpath, "/", ".") + ".*;\n"
-		if importline == "import com.sarvalex.vx.*;\n" {
+		importline := "import " + pkgprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
+		if importline == "import com.vxlisp.vx.*;\n" {
 		} else if BooleanFromStringContains(imports, importline) {
 		} else {
 			imports += importline
@@ -3455,16 +3456,16 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 		tests += "" +
 			`  @Test
   @DisplayName("` + pkg.name + `")
-  void test_` + StringReplace(pkg.name, "/", "_") + `() {
-	  com.sarvalex.vx.Test.Type_testpackage testpackage = ` + pkgname + `com.sarvalex.vx.Test.test_package(context);
+  void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = ` + pkgname + `com.vxlisp.vx.Test.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
 `
 	}
-	testpackages := StringJoinFromListString(listtestpackage, ",")
+	testpackages := StringFromListStringJoin(listtestpackage, ",")
 	output := "" +
-		`package com.sarvalex.vx;
+		`package com.vxlisp.vx;
 
 ` + imports +
 		`
@@ -3483,7 +3484,7 @@ public class AppTest {
   @Test
 	@DisplayName("writetestsuite")
   void test_writetestsuite() {
-    com.sarvalex.vx.Test.Type_testpackagelist testpackagelist = com.sarvalex.vx.Test.t_testpackagelist.vx_new(` +
+    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = com.vxlisp.vx.Test.t_testpackagelist.vx_new(` +
 		testpackages +
 		`
     );
@@ -3497,14 +3498,14 @@ public class AppTest {
 
 func JavaTestLib() string {
 	return "" +
-		`package com.sarvalex.vx;
+		`package com.vxlisp.vx;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import static org.junit.jupiter.api.Assertions.*;
-import com.sarvalex.vx.data.File;
-import com.sarvalex.vx.Test;
-import com.sarvalex.vx.web.Html;
+import com.vxlisp.vx.data.File;
+import com.vxlisp.vx.Test;
+import com.vxlisp.vx.web.Html;
 
 public class TestLib {
 
@@ -3564,10 +3565,10 @@ public class TestLib {
     return run_testcaselist(testcaselist);
   }
 
-  public static boolean run_testpackagelist(final com.sarvalex.vx.Test.Type_testpackagelist testpackagelist) {
+  public static boolean run_testpackagelist(final com.vxlisp.vx.Test.Type_testpackagelist testpackagelist) {
     boolean output = true;
-    List<com.sarvalex.vx.Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
-    for (com.sarvalex.vx.Test.Type_testpackage testpackage : listtestpackage) {
+    List<com.vxlisp.vx.Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
+    for (com.vxlisp.vx.Test.Type_testpackage testpackage : listtestpackage) {
       boolean testoutput = run_testpackage(testpackage);
       if (!testoutput) {
         output = false;

@@ -42,19 +42,21 @@ func LibraryPathFromPackage(pkg *vxpackage, libname string) string {
 func ListPackageFromReadPath(packagepath string) ([]*vxpackage, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListPackageFromReadFile")
 	var output []*vxpackage
-	filenames, msgs := ListStringFromReadReadPath(packagepath+"/packages", ".vxlsp")
+	filenames, msgs := ListStringReadFromPathExtension(packagepath, ".vxlisp")
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		for _, filename := range filenames {
-			textblock, msgs := TextblockFromReadFile(filename)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-			if !msgblock.iserror {
-				textblock, msgs = TextblockParse(textblock)
+			if !BooleanFromStringEnds(filename, "/project.vxlisp") {
+				textblock, msgs := TextblockFromReadFile(filename)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				if !msgblock.iserror {
-					pkg, msgs := PackageFromTextblock(textblock)
+					textblock, msgs = TextblockParse(textblock)
 					msgblock = MsgblockAddBlock(msgblock, msgs)
-					output = append(output, pkg)
+					if !msgblock.iserror {
+						pkg, msgs := PackageFromTextblock(textblock)
+						msgblock = MsgblockAddBlock(msgblock, msgs)
+						output = append(output, pkg)
+					}
 				}
 			}
 		}
@@ -294,7 +296,7 @@ func PackageFromTextblock(textblock *vxtextblock) (*vxpackage, *vxmsgblock) {
 							}
 						}
 						if pkg.alias == "" {
-							pkg.alias = StringReplace(pkg.name, "/", "_")
+							pkg.alias = StringFromStringFindReplace(pkg.name, "/", "_")
 						}
 
 					}

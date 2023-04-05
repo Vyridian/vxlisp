@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"sarvalex/vxlisp"
+	"vxcompiler/vxlisp"
 )
 
 func main() {

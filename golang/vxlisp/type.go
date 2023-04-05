@@ -448,7 +448,7 @@ func ListNameFromListType(listtype []*vxtype) string {
 	for _, typ := range listtype {
 		names = append(names, typ.pkgname+"/"+typ.name)
 	}
-	return "[" + StringJoinFromListString(names, " ") + "]"
+	return "[" + StringFromListStringJoin(names, " ") + "]"
 }
 
 func ListNameFromMapType(maptype map[string]*vxtype) string {
@@ -464,7 +464,7 @@ func ListNameFromMapType(maptype map[string]*vxtype) string {
 			typ := maptype[key]
 			listname = append(listname, key+" "+typ.pkgname+"/"+typ.name)
 		}
-		output = "(typemap " + StringJoinFromListString(listname, " ") + ")"
+		output = "(typemap " + StringFromListStringJoin(listname, " ") + ")"
 	}
 	return output
 }
@@ -731,13 +731,13 @@ func MapGenericSetType(mapgeneric map[string]*vxtype, generic string, typ *vxtyp
 	if BooleanFromStringStarts(generic, "list-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
-			generic = StringReplace(generic, "list-", "any-")
+			generic = StringFromStringFindReplace(generic, "list-", "any-")
 			mapgeneric[generic] = allowtype
 		}
 	} else if BooleanFromStringStarts(generic, "map-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
-			generic = StringReplace(generic, "map-", "any-")
+			generic = StringFromStringFindReplace(generic, "map-", "any-")
 			mapgeneric[generic] = allowtype
 		}
 	}

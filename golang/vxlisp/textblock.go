@@ -56,7 +56,7 @@ func StringFromTextblockStartEnd(textblock *vxtextblock, startline int, startcha
 			}
 			chgoutputs = append(chgoutputs, suboutput)
 		}
-		output = StringJoinFromListString(chgoutputs, "")
+		output = StringFromListStringJoin(chgoutputs, "")
 	}
 	return output
 }
@@ -119,8 +119,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 	startline := 0
 	startchar := 0
 	text := textblock.text
-	text = StringReplace(text, "\r\n", "\n")
-	text = StringReplace(text, "\r", "\n")
+	text = StringFromStringFindReplace(text, "\r\n", "\n")
+	text = StringFromStringFindReplace(text, "\r", "\n")
 	for _, rune := range text {
 		char := string(rune)
 		switch char {
@@ -203,7 +203,7 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				} else {
 					if IntFromStringIndex(word, "\n") >= 0 {
 						indentchars := StringRepeat(" ", quoteindent)
-						wordlines := ListStringSplitFromStringDelim(word, "\n")
+						wordlines := ListStringFromStringSplit(word, "\n")
 						for wordidx, wordline := range wordlines {
 							switch wordidx {
 							case 0:
@@ -215,7 +215,7 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 								}
 							}
 						}
-						word = StringJoinFromListString(wordlines, "\n")
+						word = StringFromListStringJoin(wordlines, "\n")
 					}
 					wordtextblock := NewTextblockFromText(word)
 					wordtextblock.blocktype = BLOCKTYPE_QUOTE

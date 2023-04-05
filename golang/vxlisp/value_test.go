@@ -7,7 +7,7 @@ import (
 func TestValueValidate(t *testing.T) {
 	//msgblock := MsgBlockNew("TestValueValidate")
 	textblock := NewTextblock()
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	path := ""
 	expected := ""
 	actual := ""
@@ -608,7 +608,7 @@ func TestValueValidate(t *testing.T) {
 func TestPackageValidate(t *testing.T) {
 	msgblock := NewMsgBlock("TestPackageValidate")
 	textblock := NewTextblock()
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	textblock.text = `
 (package vx/core)
 

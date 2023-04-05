@@ -36,7 +36,7 @@ func NewMsg(data ...interface{}) *vxmsg {
 	for _, msg := range data {
 		listtext = append(listtext, fmt.Sprint(msg))
 	}
-	output.text = StringJoinFromListString(listtext, ", ")
+	output.text = StringFromListStringJoin(listtext, ", ")
 	return output
 }
 
@@ -52,7 +52,7 @@ func NewMsgFromTextblock(textblock *vxtextblock, data ...interface{}) *vxmsg {
 	for _, msg := range data {
 		texts = append(texts, fmt.Sprint(msg))
 	}
-	output.text = StringJoinFromListString(texts, "\n")
+	output.text = StringFromListStringJoin(texts, "\n")
 	output.text += "" +
 		"\n" + textblock.name + " Line:" + StringFromInt(textblock.linenum) + " Char:" + StringFromInt(textblock.charnum) +
 		"\n" + textblock.text +
@@ -80,7 +80,7 @@ func MsgLog(output ...interface{}) {
 
 func MsgStartLog() {
 	var err error
-	outputFile, err = os.Create("tmp/build.log")
+	outputFile, err = os.Create("build.log")
 	if err != nil {
 		panic(err)
 	}

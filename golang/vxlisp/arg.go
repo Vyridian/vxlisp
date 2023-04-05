@@ -381,7 +381,7 @@ func StringFromMapArgIndent(maparg map[string]vxarg, indent string) string {
 		arg := maparg[id]
 		listtext = append(listtext, StringFromArg(arg))
 	}
-	return StringJoinFromListString(listtext, "\n"+indent)
+	return StringFromListStringJoin(listtext, "\n"+indent)
 }
 
 func TypeFromArg(arg vxarg) *vxtype {

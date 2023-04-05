@@ -19,7 +19,7 @@ func TestTextblockParse(t *testing.T) {
  */
   v4))`
 	textblock := NewTextblockFromText(blocktext)
-	textblock.name = "samplepath/samplefile.vxlsp"
+	textblock.name = "samplepath/samplefile.vxlisp"
 	textblock, msgs := TextblockParse(textblock)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	expectedblock := NewTextblock()

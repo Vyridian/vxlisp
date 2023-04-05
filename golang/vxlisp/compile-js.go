@@ -69,7 +69,7 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 					}
 					proptexts = append(proptexts, proptext)
 				}
-				output = "{\n" + indent + "    " + StringJoinFromListString(proptexts, "\n"+indent+"    ") + "\n" + indent + "  }"
+				output = "{\n" + indent + "    " + StringFromListStringJoin(proptexts, "\n"+indent+"    ") + "\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
 				//			if !strings.HasPrefix(defaultvalue, "\"") {
@@ -81,10 +81,11 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	return output
 }
 
-func JsFilesFromProjectCmd(prj *vxproject, cmd *vxcmd) ([]*vxfile, *vxmsgblock) {
+func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFilesFromProjectCmd")
 	var files []*vxfile
-	pkgs := prj.listpackage
+	pkgs := project.listpackage
+	cmdpath := PathFromProjectCmd(project, command)
 	for _, pkg := range pkgs {
 		pkgname := pkg.name
 		pkgpath := ""
@@ -93,21 +94,21 @@ func JsFilesFromProjectCmd(prj *vxproject, cmd *vxcmd) ([]*vxfile, *vxmsgblock) 
 			pkgpath = pkgname[0:pos]
 			pkgname = pkgname[pos+1:]
 		}
-		switch cmd.code {
+		switch command.code {
 		case ":source":
-			jstext, msgs := JsFromPackage(pkg, prj)
+			jstext, msgs := JsFromPackage(pkg, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + ".js"
-			file.path = cmd.path + "/" + pkgpath
+			file.path = cmdpath + "/" + pkgpath
 			file.text = jstext
 			files = append(files, file)
 		case ":test":
-			jstext, msgs := JsTestFromPackage(pkg, prj)
+			jstext, msgs := JsTestFromPackage(pkg, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "_test.js"
-			file.path = cmd.path + "/" + pkgpath
+			file.path = cmdpath + "/" + pkgpath
 			file.text = jstext
 			files = append(files, file)
 		}
@@ -126,7 +127,7 @@ func JsFromArg(arg vxarg, indent string) string {
 		props = append(props, "\"multi\": "+StringFromBoolean(arg.multi))
 		output = "{" +
 			"\n" + indent + "  " +
-			StringJoinFromListString(props, ",\n"+indent+"  ") +
+			StringFromListStringJoin(props, ",\n"+indent+"  ") +
 			"\n" + indent + "}"
 	}
 	return output
@@ -143,7 +144,7 @@ func JsFromArgs(args []vxarg, indent string) string {
 		}
 		output += "" +
 			"\n" + indent + "  " +
-			StringJoinFromListString(props, ",\n"+indent+"  ") +
+			StringFromListStringJoin(props, ",\n"+indent+"  ") +
 			"\n" + indent
 	}
 	output += "}"
@@ -360,13 +361,13 @@ func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 
 func JsFromName(name string) string {
 	output := name
-	output = StringReplace(output, "->", "_to_")
-	output = StringReplace(output, "<-", "_from_")
-	output = StringReplace(output, "<", "lt")
-	output = StringReplace(output, ">", "gt")
-	output = StringReplace(output, "?", "is")
-	output = StringReplace(output, "-", "_")
-	output = StringReplace(output, "/", "_")
+	output = StringFromStringFindReplace(output, "->", "_to_")
+	output = StringFromStringFindReplace(output, "<-", "_from_")
+	output = StringFromStringFindReplace(output, "<", "lt")
+	output = StringFromStringFindReplace(output, ">", "gt")
+	output = StringFromStringFindReplace(output, "?", "is")
+	output = StringFromStringFindReplace(output, "-", "_")
+	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
 
@@ -451,7 +452,7 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		emptytypes +
 		"\n" +
 		"\n  static c_empty = {" +
-		"\n    " + StringJoinFromListString(emptyvalues, ",\n    ") +
+		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
 		"\n  }" +
 		"\n"
 	allconsts := ""
@@ -499,15 +500,15 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 func JsFromPackageName(name string) string {
 	output := name
 	if strings.HasPrefix(name, "vx/") {
-		output = StringReplace(output, "vx/", "vx.")
+		output = StringFromStringFindReplace(output, "vx/", "vx.")
 	} else {
 		output = "vx." + output
 	}
-	output = StringReplace(output, "<", "lt")
-	output = StringReplace(output, ">", "gt")
-	output = StringReplace(output, "?", "is")
-	output = StringReplace(output, "-", "_")
-	output = StringReplace(output, "/", "_")
+	output = StringFromStringFindReplace(output, "<", "lt")
+	output = StringFromStringFindReplace(output, ">", "gt")
+	output = StringFromStringFindReplace(output, "?", "is")
+	output = StringFromStringFindReplace(output, "-", "_")
+	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
 
@@ -631,7 +632,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 						if nativeindent == "undefined" {
 							nativeindent = "\n" + StringRepeat(" ", argvalue.textblock.charnum)
 						} else if nativeindent != "" {
-							argtext = StringReplace(argtext, nativeindent, "\n")
+							argtext = StringFromStringFindReplace(argtext, nativeindent, "\n")
 						}
 					}
 					if !multiline {
@@ -647,9 +648,9 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 			}
 			if len(argtexts) > 0 {
 				if multiline {
-					output += StringFromStringIndent(StringJoinFromListString(argtexts, ""), indent)
+					output += StringFromStringIndent(StringFromListStringJoin(argtexts, ""), indent)
 				} else {
-					output += StringJoinFromListString(argtexts, "")
+					output += StringFromListStringJoin(argtexts, "")
 				}
 			}
 		default:
@@ -769,7 +770,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 				argtexts = append(argtexts, "context")
 			}
 			if multiline {
-				output += "\n" + indent + "  " + StringFromStringIndent(StringJoinFromListString(argtexts, ",\n"), indent+"  ")
+				output += "\n" + indent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), indent+"  ")
 				if multiflag {
 					output += "\n" + indent + "  )"
 				}
@@ -779,7 +780,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 					output += "\n" + indent + ")"
 				}
 			} else {
-				output += StringJoinFromListString(argtexts, ", ")
+				output += StringFromListStringJoin(argtexts, ", ")
 				if multiflag {
 					output += ")"
 				}
@@ -810,7 +811,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 			output = "\"" + valstr + "\""
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			if encode {
-				output = StringReplace(valstr, "\n", "\\n")
+				output = StringFromStringFindReplace(valstr, "\n", "\\n")
 			} else {
 				output = valstr
 			}
@@ -883,7 +884,7 @@ func JsNamesFromListFunc(listfunc []*vxfunc) string {
 		}
 		outputtypes = append(outputtypes, name)
 	}
-	return "[" + StringJoinFromListString(outputtypes, ", ") + "]"
+	return "[" + StringFromListStringJoin(outputtypes, ", ") + "]"
 }
 
 func JsNamesTFromListType(listtype []*vxtype) string {
@@ -1260,7 +1261,7 @@ func JsTestFromValue(value vxvalue) string {
 	return output
 }
 
-func JsTextFromProjectCmd(prj *vxproject, cmd *vxcmd) (string, *vxmsgblock) {
+func JsTextFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTextFromProjectCmd")
 	prjjs, msgs := JsFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1278,7 +1279,7 @@ func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
 		")"
 }
 
-func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcmd) *vxmsgblock {
+func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteJsFromProjectCmd")
 	files, msgs := JsFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)

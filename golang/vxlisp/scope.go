@@ -112,11 +112,11 @@ func StringFromScopeIndent(scope vxscope, indent string) string {
 	output := "" +
 		indent + "(scope" +
 		"\n" + indent + " :name    " + scope.pkgname +
-		"\n" + indent + " :argmap  " + StringJoinFromListString(ListKeyFromMapArg(scope.maparg), ", ") +
+		"\n" + indent + " :argmap  " + StringFromListStringJoin(ListKeyFromMapArg(scope.maparg), ", ") +
 		//"\n" + indent + " :argmap  " + TextFromArgMapIndent(scope.argmap, indent) +
-		"\n" + indent + " :cnstmap " + StringJoinFromListString(ListKeyFromMapConst(scope.mapconst), ", ") +
-		"\n" + indent + " :funcmap " + StringJoinFromListString(ListKeyFromMapFunc(scope.mapfunc), ", ") +
-		"\n" + indent + " :typemap " + StringJoinFromListString(ListKeyFromMapType(scope.maptype), ", ") +
+		"\n" + indent + " :cnstmap " + StringFromListStringJoin(ListKeyFromMapConst(scope.mapconst), ", ") +
+		"\n" + indent + " :funcmap " + StringFromListStringJoin(ListKeyFromMapFunc(scope.mapfunc), ", ") +
+		"\n" + indent + " :typemap " + StringFromListStringJoin(ListKeyFromMapType(scope.maptype), ", ") +
 		"\n" + indent + ")" +
 		"\n"
 	return output

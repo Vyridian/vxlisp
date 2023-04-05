@@ -62,7 +62,7 @@ func ListenToPath(path string) {
 	<-done
 }
 
-func ListStringFromReadReadPath(path string, extension string) ([]string, *vxmsgblock) {
+func ListStringReadFromPathExtension(path string, extension string) ([]string, *vxmsgblock) {
 	var files []string
 	msgblock := NewMsgBlock("ReadFileNames")
 	if BooleanExistsFromPath(path) {
@@ -72,6 +72,7 @@ func ListStringFromReadReadPath(path string, extension string) ([]string, *vxmsg
 				if info.IsDir() {
 				} else if extension != "" && !BooleanFromStringEnds(path, extension) {
 				} else {
+					path = StringFromStringFindReplace(path, "\\", "/")
 					files = append(files, path)
 				}
 				return nil
@@ -84,13 +85,38 @@ func ListStringFromReadReadPath(path string, extension string) ([]string, *vxmsg
 	return files, msgblock
 }
 
+func PathAbsoluteFromPath(path string) (string, error) {
+	output, err := filepath.Abs(path)
+	return output, err
+}
+
+func PathFromPathRelativePath(basepath string, relativepath string) string {
+	abspath, _ := PathAbsoluteFromPath(basepath)
+	abspath = StringFromStringFindReplace(abspath, "\\", "/")
+	listbasepath := ListStringFromStringSplit(abspath, "/")
+	listrelpath := ListStringFromStringSplit(relativepath, "/")
+	for _, relpath := range listrelpath {
+		switch relpath {
+		case ".":
+		case "..":
+			if len(listbasepath) > 0 {
+				listbasepath = listbasepath[:len(listbasepath)-1]
+			}
+		default:
+			listbasepath = append(listbasepath, relpath)
+		}
+	}
+	output := StringFromListStringJoin(listbasepath, "/")
+	return output
+}
+
 func StringFromExec() string {
 	output := ""
 	path, err := os.Getwd()
 	if err != nil {
 		MsgLog(err)
 	}
-	output = StringReplace(path, "\\", "/")
+	output = StringFromStringFindReplace(path, "\\", "/")
 	return output
 }
 
@@ -129,6 +155,24 @@ func TextblockFromReadFile(filename string) (*vxtextblock, *vxmsgblock) {
 	return textblock, msgblock
 }
 
+func WriteFile(file *vxfile) *vxmsgblock {
+	return WriteListFile([]*vxfile{file})
+}
+
+func WriteFileFromFilenameText(filename string, text string) (int, error) {
+	file, err := os.Create(filename)
+	if err != nil {
+		return 0, err
+	}
+	num, err := file.WriteString(text)
+	if err != nil {
+		file.Close()
+		return 0, err
+	}
+	err = file.Close()
+	return num, err
+}
+
 func WriteListFile(listfile []*vxfile) *vxmsgblock {
 	msgblock := NewMsgBlock("FileWriteFiles")
 	for _, file := range listfile {
@@ -145,37 +189,19 @@ func WriteListFile(listfile []*vxfile) *vxmsgblock {
 		if BooleanExistsFromPath(filepath) {
 			readtext, _ := StringFromReadTextFile(filepath)
 			if readtext != writetext {
-				_, err := WriteFileFromString(filepath, writetext)
+				_, err := WriteFileFromFilenameText(filepath, writetext)
 				if err != nil {
 					msgblock = MsgblockAddException(msgblock, err)
 				}
 			}
 		} else {
-			_, err := WriteFileFromString(filepath, writetext)
+			_, err := WriteFileFromFilenameText(filepath, writetext)
 			if err != nil {
 				msgblock = MsgblockAddException(msgblock, err)
 			}
 		}
 	}
 	return msgblock
-}
-
-func WriteFile(file *vxfile) *vxmsgblock {
-	return WriteListFile([]*vxfile{file})
-}
-
-func WriteFileFromString(filename string, text string) (int, error) {
-	file, err := os.Create(filename)
-	if err != nil {
-		return 0, err
-	}
-	num, err := file.WriteString(text)
-	if err != nil {
-		file.Close()
-		return 0, err
-	}
-	err = file.Close()
-	return num, err
 }
 
 func WritePath(path string, all bool) error {

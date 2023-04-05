@@ -183,19 +183,19 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 			lineindent + "  <div class=\"lbl\">Types:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
-			lineindent + StringJoinFromListString(pkgtypes, ", ") +
+			lineindent + StringFromListStringJoin(pkgtypes, ", ") +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
 			lineindent + "  <div class=\"lbl\">Constants:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
-			lineindent + StringJoinFromListString(pkgconsts, ", ") +
+			lineindent + StringFromListStringJoin(pkgconsts, ", ") +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
 			lineindent + "  <div class=\"lbl\">Functions:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
-			lineindent + StringJoinFromListString(pkgfuncs, ", ") +
+			lineindent + StringFromListStringJoin(pkgfuncs, ", ") +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
 			HtmlFromSourceCode(pkg.textblock.text, indent+"  ") +
@@ -333,10 +333,10 @@ func HtmlFromSourceCode(text string, indent string) string {
 
 func HtmlFromString(text string) string {
 	output := text
-	output = StringReplace(output, "&", "&amp;")
-	output = StringReplace(output, "<", "&lt;")
-	output = StringReplace(output, ">", "&gt;")
-	output = StringReplace(output, "\"", "&quot;")
+	output = StringFromStringFindReplace(output, "&", "&amp;")
+	output = StringFromStringFindReplace(output, "<", "&lt;")
+	output = StringFromStringFindReplace(output, ">", "&gt;")
+	output = StringFromStringFindReplace(output, "\"", "&quot;")
 	return output
 }
 
@@ -567,12 +567,12 @@ func HtmlNameFromType(typ *vxtype) string {
 	return output
 }
 
-func WriteDocFromProjectCmd(prj *vxproject, cmd *vxcmd) *vxmsgblock {
+func WriteDocFromProjectCmd(project *vxproject, command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteDocFromProjectCmd")
-	html := HtmlFromProject(prj)
+	html := HtmlFromProject(project)
 	file := NewFile()
 	file.name = "doc.html"
-	file.path = cmd.path
+	file.path = PathFromProjectCmd(project, command)
 	file.text = html
 	msgs := WriteFile(file)
 	msgblock = MsgblockAddBlock(msgblock, msgs)

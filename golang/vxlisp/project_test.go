@@ -43,7 +43,7 @@ func TestProjectFromTextblock(t *testing.T) {
    :path      *projectpath*/build/java/test)
 )`
 	textblock := NewTextblockFromText(typetext)
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	prj, msgs := ProjectFromTextblock(textblock)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	expectedprj := NewProject()

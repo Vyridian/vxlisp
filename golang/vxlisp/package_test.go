@@ -19,7 +19,7 @@ func TestPackageParse(t *testing.T) {
  (func f1)`
 	pkgname := "testpkg"
 	textblock := NewTextblockFromText(typetext)
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	parsedtextblock, msgs := TextblockParse(textblock)
 	textblock = parsedtextblock
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -81,7 +81,7 @@ func TestPackagesValidate(t *testing.T) {
   (f1 a2))`
 	pkgname := "testpkg"
 	textblock := NewTextblockFromText(typetext)
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	parsedtextblock, msgs := TextblockParse(textblock)
 	textblock = parsedtextblock
 	msgblock = MsgblockAddBlock(msgblock, msgs)

@@ -507,8 +507,8 @@ func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpacka
 			output = NewValueFromFunc(fnc)
 		}
 	case "\"", "`":
-		text = StringReplace(text, "“", "\"")
-		text = StringReplace(text, "”", "\"")
+		text = StringFromStringFindReplace(text, "“", "\"")
+		text = StringFromStringFindReplace(text, "”", "\"")
 		output = NewValueFromString("\"" + text + "\"")
 	case "text":
 		if BooleanFromStringStarts(text, ":") {

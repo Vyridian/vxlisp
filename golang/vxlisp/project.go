@@ -1,11 +1,12 @@
 package vxlisp
 
-type vxcmd struct {
+type vxcommand struct {
 	name string
 	code string
 	doc  string
 	lang string
 	path string
+	port int
 }
 
 type vxpath struct {
@@ -18,19 +19,21 @@ type vxproject struct {
 	name        string
 	author      string
 	doc         string
+	path        string
 	version     string
-	listcmd     []*vxcmd
+	listcmd     []*vxcommand
 	listlib     []*vxlibrary
 	listpath    []*vxpath
 	listpackage []*vxpackage
+	listpkgpath []string
 	textblock   *vxtextblock
 }
 
-func NewCmd() *vxcmd {
-	return new(vxcmd)
+func NewCmd() *vxcommand {
+	return new(vxcommand)
 }
 
-func NewCmdCopy(cmd *vxcmd) *vxcmd {
+func NewCmdCopy(cmd *vxcommand) *vxcommand {
 	output := NewCmd()
 	output.code = cmd.code
 	output.doc = cmd.doc
@@ -48,7 +51,7 @@ func NewProject() *vxproject {
 	return new(vxproject)
 }
 
-func CmdFromTextblock(textblock *vxtextblock) (*vxcmd, *vxmsgblock) {
+func CmdFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
 	msgblock := NewMsgBlock("CmdTextblock")
 	cmd := NewCmd()
 	switch textblock.blocktype {
@@ -74,7 +77,7 @@ func CmdFromTextblock(textblock *vxtextblock) (*vxcmd, *vxmsgblock) {
 					default:
 						if BooleanFromStringStarts(prop, ":") {
 							switch prop {
-							case ":code", ":doc", ":lang", ":name", ":path":
+							case ":code", ":doc", ":lang", ":name", ":path", ":port":
 								lastprop = prop
 							default:
 								msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", prop)
@@ -95,6 +98,8 @@ func CmdFromTextblock(textblock *vxtextblock) (*vxcmd, *vxmsgblock) {
 						cmd.lang = prop
 					case ":path":
 						cmd.path = prop
+					case ":port":
+						cmd.port = IntFromString(prop)
 					}
 					lastprop = ""
 				}
@@ -107,8 +112,8 @@ func CmdFromTextblock(textblock *vxtextblock) (*vxcmd, *vxmsgblock) {
 	return cmd, msgblock
 }
 
-func CmdsFromProject(prj *vxproject, cmdtexts []string) []*vxcmd {
-	var output []*vxcmd
+func CmdsFromProject(prj *vxproject, cmdtexts []string) []*vxcommand {
+	var output []*vxcommand
 	for _, cmd := range prj.listcmd {
 		if BooleanFromListStringContains(cmdtexts, cmd.name) {
 			output = append(output, cmd)
@@ -136,7 +141,7 @@ func CmdsFromTextblock(textblock *vxtextblock) ([]*vxcmd, *vxmsgblock) {
 }
 */
 
-func ExecuteProjectCmd(prj *vxproject, origcmd *vxcmd) *vxmsgblock {
+func ExecuteProjectCmd(prj *vxproject, origcmd *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmd")
 	path := StringPathFromProjectCmd(prj, origcmd)
 	cmd := NewCmdCopy(origcmd)
@@ -169,7 +174,7 @@ func ExecuteProjectCmd(prj *vxproject, origcmd *vxcmd) *vxmsgblock {
 	return msgblock
 }
 
-func ExecuteProjectCmds(prj *vxproject, cmds []*vxcmd) *vxmsgblock {
+func ExecuteProjectCmds(prj *vxproject, cmds []*vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmds")
 	for _, cmd := range cmds {
 		msgs := ExecuteProjectCmd(prj, cmd)
@@ -182,7 +187,7 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecuteProjectFromArgs")
 	MsgStartLog()
 	var cmdtexts []string
-	prjpath := ""
+	projectpath := ""
 	lastarg := ""
 	for argidx, arg := range args {
 		switch argidx {
@@ -190,7 +195,7 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 		default:
 			switch lastarg {
 			case "--path":
-				prjpath = arg
+				projectpath = arg
 			default:
 				switch arg {
 				case "--path":
@@ -201,12 +206,11 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 			}
 		}
 	}
-	exepath := StringFromExec()
-	prj, msgs := ProjectFromPath(prjpath, exepath)
+	project, msgs := ProjectFromPath(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !IsErrorFromMsgblock(msgblock) {
-		cmds := CmdsFromProject(prj, cmdtexts)
-		msgs := ExecuteProjectCmds(prj, cmds)
+		cmds := CmdsFromProject(project, cmdtexts)
+		msgs := ExecuteProjectCmds(project, cmds)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	if IsErrorFromMsgblock(msgblock) {
@@ -218,24 +222,15 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 	return msgblock
 }
 
-/*
-func ListPathFromTextblock(textblock *vxtextblock) ([]*vxpath, *vxmsgblock) {
-	msgblock := NewMsgBlock("PathsFromTextblock")
-	var output []*vxpath
-	switch textblock.blocktype {
-	case "[":
-		for _, textblock := range textblock.listtextblock {
-			path, msgs := PathFromTextblock(textblock)
-			msgblock = MsgBlockAddBlock(msgblock, msgs)
-			output = append(output, path)
-		}
-	default:
-		msg := NewMsgFromTextblock(textblock, "Invalid Paths definition:", textblock.blocktype)
-		msgblock = MsgBlockAddError(msgblock, msg)
-	}
-	return output, msgblock
+func PathFromProjectCmd(project *vxproject, command *vxcommand) string {
+	output := PathFromPathRelativePath(project.path, command.path)
+	return output
 }
-*/
+
+func PathFromProjectPath(project *vxproject, relativepath string) string {
+	output := PathFromPathRelativePath(project.path, relativepath)
+	return output
+}
 
 func PathFromTextblock(textblock *vxtextblock) (*vxpath, *vxmsgblock) {
 	msgblock := NewMsgBlock("PathFromTextblock")
@@ -285,42 +280,49 @@ func PathFromTextblock(textblock *vxtextblock) (*vxpath, *vxmsgblock) {
 func ProjectFromFile(projectpath string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromFile")
 	var prj = NewProject()
-	textblock, msgs := TextblockFromReadFile(projectpath + "/project.vxlsp")
+	textblock, msgs := TextblockFromReadFile(projectpath + "/project.vxlisp")
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		parseprj, msgs := ProjectFromTextblock(textblock)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		prj = parseprj
 	}
+	prj.path = projectpath
 	return prj, msgblock
 }
 
-func ProjectFromPath(projectpath string, exepath string) (*vxproject, *vxmsgblock) {
+func ProjectFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromPath")
-	prj, msgs := ProjectFromFile(projectpath)
+	project, msgs := ProjectFromFile(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
-		corepkgs, msgs := ListPackageFromReadPath(exepath)
+		var pkgs []*vxpackage
+		for _, pkgpath := range project.listpkgpath {
+			// projectpath
+			workpath := PathFromProjectPath(project, pkgpath)
+			loadpkgs, msgs := ListPackageFromReadPath(workpath)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			pkgs = append(pkgs, loadpkgs...)
+		}
+		loadpkgs, msgs := ListPackageFromReadPath(projectpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		prjpkgs, msgs := ListPackageFromReadPath(projectpath)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-		pkgs := append(corepkgs, prjpkgs...)
+		pkgs = append(pkgs, loadpkgs...)
 		if !msgblock.iserror {
-			pkgs, msgs = ListPackageValidateLibraries(pkgs, prj)
+			pkgs, msgs = ListPackageValidateLibraries(pkgs, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 		if !msgblock.iserror {
 			pkgs, msgs = ListPackageLink(pkgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			prj.listpackage = pkgs
+			project.listpackage = pkgs
 		}
 		if !msgblock.iserror {
 			pkgs, msgs = ListPackageValidate(pkgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			prj.listpackage = pkgs
+			project.listpackage = pkgs
 		}
 	}
-	return prj, msgblock
+	return project, msgblock
 }
 
 func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
@@ -357,7 +359,7 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 							default:
 								if BooleanFromStringStarts(word, ":") {
 									switch word {
-									case ":author", ":cmds", ":doc", ":libs", ":paths", ":version":
+									case ":author", ":cmds", ":doc", ":libs", ":packages", ":paths", ":version":
 										lastword = word
 									default:
 										msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
@@ -382,6 +384,8 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 										lib, msgs := LibraryFromTextblock(wordtextblock)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
 										prj.listlib = append(prj.listlib, lib)
+									case ":packages":
+										prj.listpkgpath = append(prj.listpkgpath, word)
 									case ":paths":
 										path, msgs := PathFromTextblock(wordtextblock)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -401,11 +405,11 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 	return prj, msgblock
 }
 
-func StringFromCmd(cmd *vxcmd) string {
+func StringFromCmd(cmd *vxcommand) string {
 	return StringFromCmdIndent(cmd, "")
 }
 
-func StringFromCmdIndent(cmd *vxcmd, indent string) string {
+func StringFromCmdIndent(cmd *vxcommand, indent string) string {
 	lineindent := "\n" + indent
 	var output = "" +
 		lineindent + "(cmd" +
@@ -418,11 +422,11 @@ func StringFromCmdIndent(cmd *vxcmd, indent string) string {
 	return output
 }
 
-func StringFromListCmd(cmds []*vxcmd) string {
+func StringFromListCmd(cmds []*vxcommand) string {
 	return StringFromListCmdIndent(cmds, "")
 }
 
-func StringFromListCmdIndent(cmds []*vxcmd, indent string) string {
+func StringFromListCmdIndent(cmds []*vxcommand, indent string) string {
 	output := "(cmdlist"
 	for _, cmd := range cmds {
 		output += StringFromCmdIndent(cmd, indent+" ")
@@ -472,11 +476,11 @@ func StringFromProject(prj *vxproject) string {
 		"\n :cmds " + StringFromListCmdIndent(prj.listcmd, " ") +
 		"\n :libs " + StringFromListLibraryIndent(prj.listlib, " ") +
 		"\n :paths " + StringFromListPathIndent(prj.listpath, " ") +
-		"\n :packages [" + StringJoinFromListString(pkgnames, " ") + "])"
+		"\n :packages [" + StringFromListStringJoin(pkgnames, " ") + "])"
 	return output
 }
 
-func StringPathFromProjectCmd(prj *vxproject, cmd *vxcmd) string {
+func StringPathFromProjectCmd(prj *vxproject, cmd *vxcommand) string {
 	pathtext := cmd.path
 	switch cmd.path {
 	case "":
@@ -509,7 +513,7 @@ func StringPathFromProjectCmd(prj *vxproject, cmd *vxcmd) string {
 			case pathtext:
 				pathtext = pathpath
 			default:
-				pathtext = StringReplace(pathtext, "*"+pathname+"*", path.path)
+				pathtext = StringFromStringFindReplace(pathtext, "*"+pathname+"*", path.path)
 			}
 		}
 	}

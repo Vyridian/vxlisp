@@ -1,5 +1,19 @@
-FAQ
-* What is the elevator pitch? - vxlisp is a proposal for a simple, new programming language/data structure that could actually fullfill the dream of 'write once, run anywhere'.
+# vxlisp
+
+## Overview
+
+* vxlisp is a proposal for a new programming language/data structure that might fullfill the dream of 'write once, run anywhere'. It also tries to address a large number of complaints I have with other languages.
+
+## Sample
+
+(func foo : int
+ [arg1 : int
+  arg2 : int]
+ (+ arg1 arg2)
+ :test (test 3 (foo 1 2))
+ :doc  "Returns the result of adding to numbers")
+
+## FAQ
 
 * Write once, run anywhere is a pipedream. How can it possibly work? - Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
 
@@ -11,11 +25,12 @@ FAQ
 
 * What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible.
 
-* What are the key features of the language? - Open Source. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, and overloading.
+* What are the key features of the language? - Open Source. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context.
 
-* Are there any unusual features of the language? - Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified asynchronous programming, Simplified error handling. Simplified context management. Simplified multiple inheritence. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling. State Management. File parsing. Repl. Programmatic Html/Xml generation. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
+* Are there any unusual features of the language? - Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified context management. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling. State Management. File parsing. Repl. Programmatic Html/Xml generation. Function level permissions. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
 
 * Alright, that was a lot of Pros. What are the Cons?
+
 1. Tooling - Since vxlisp compiles to other languages, it relies on thoses languages for runtime debugging besides basic logging. You may find that indirection overwhelms the benefits.
 2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Therefore, I recommend using optimized native code for operations that require maximum performance.
 
@@ -26,27 +41,27 @@ FAQ
 * What does a function that adds 2 integers look like? -
  (func foo : int
   [arg1 : int
-	 arg2 : int]
-	(+ arg1 arg2))
+  arg2 : int]
+ (+ arg1 arg2))
 
 * What does type declaration look like? -
  (type personlist
   :extends    :list
-	:allowtypes [person]
-	:doc "This is a list of person")
+ :allowtypes [person]
+ :doc "This is a list of person")
 
  (type personmap
   :extends    :map
-	:allowtypes [person]
-	:doc "This is a hash map of person")
+ :allowtypes [person]
+ :doc "This is a hash map of person")
 
  (type person
   :extends    :struct
-	:properties [name    : string     :doc "The person's name"
-	             age     : number     :doc "The person's age"
-	             kidlist : personlist :doc "List of kids"
-							 kidmap  : personmap  :doc "Map of kids"]
-	:doc "This is a person structure")
+  :properties [name    : string     :doc "The person's name"
+               age     : number     :doc "The person's age"
+               kidlist : personlist :doc "List of kids"
+               kidmap  : personmap  :doc "Map of kids"]
+ :doc "This is a person structure")
 
 * How do a make a new people? -
  (const jack : person
@@ -60,15 +75,15 @@ FAQ
 
  (const kidmap : personmap
   (personmap
-	 "Jack" jack
-	 "Jill" jill))
+  "Jack" jack
+  "Jill" jill))
 
  (const mary : person
   (person
-	 :name "Mary"
-	 :age  "30"
-	 :kidlist kidlist
-	 :kidmap  kidmap))
+  :name "Mary"
+  :age  "30"
+  :kidlist kidlist
+  :kidmap  kidmap))
 
  Alternatively, you can use the longhand (new person) instead of (person)
 

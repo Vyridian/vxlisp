@@ -1,4 +1,4 @@
-# Lisp Variant (VxLisp .vxlsp files)
+# Lisp Variant (VxLisp .vxlisp files)
 ## What is VXL/Vexel?
 * VXL - Variable-Type Cross-Language Lisp
 * Vexel is an opinionated general purpose functional language that prefers convention over configuration.
@@ -25,7 +25,7 @@ vxlisp :update
 vxlisp :doc
 vxlisp :test
 
-## Project (project.vxlsp file)
+## Project (project.vxlisp file)
 (project myproject
  :version "0.1"
  :client  :react-native // :react|:react-native

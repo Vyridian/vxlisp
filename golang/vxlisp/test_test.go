@@ -16,8 +16,8 @@ func CompareText(expected string, actual string, size int, msgblock *vxmsgblock)
 	if msgblock.iserror {
 		errortext = StringFromMsgblock(msgblock)
 	} else if expected != actual {
-		expectedlines := ListStringSplitFromStringDelim(expected, "\n")
-		actuallines := ListStringSplitFromStringDelim(actual, "\n")
+		expectedlines := ListStringFromStringSplit(expected, "\n")
+		actuallines := ListStringFromStringSplit(actual, "\n")
 		var maxlen = len(expectedlines)
 		if maxlen < len(actuallines) {
 			maxlen = len(actuallines)
@@ -77,7 +77,7 @@ func CompareText(expected string, actual string, size int, msgblock *vxmsgblock)
 				errortexts = append(errortexts, errortext)
 			}
 		}
-		errortext = "Line: " + StringFromInt(foundline) + "\n" + StringJoinFromListString(errortexts, "\n")
+		errortext = "Line: " + StringFromInt(foundline) + "\n" + StringFromListStringJoin(errortexts, "\n")
 	}
 	return errortext
 }

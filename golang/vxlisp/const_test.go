@@ -13,7 +13,7 @@ func TestConstFromTextblock(t *testing.T) {
 	pkg := NewPackage()
 	pkg.name = "testpkg"
 	textblock := NewTextblockFromText(typetext)
-	textblock.name = "testfile.vxlsp"
+	textblock.name = "testfile.vxlisp"
 	textblock, msgs := TextblockParse(textblock)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	consts, msgs := ListConstFromTextblock(textblock, pkg)

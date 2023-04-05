@@ -144,7 +144,7 @@ func ListStringSort(liststring []string) []string {
 	return liststring
 }
 
-func ListStringSplitFromStringDelim(str string, delim string) []string {
+func ListStringFromStringSplit(str string, delim string) []string {
 	return strings.Split(str, delim)
 }
 
@@ -182,24 +182,24 @@ func StringFromInt(intval int) string {
 }
 
 func StringFromStringIndent(str string, indent string) string {
-	output := StringReplace(str, "\n", "\n"+indent)
+	output := StringFromStringFindReplace(str, "\n", "\n"+indent)
 	return output
 }
 
 func StringFromListString(liststring []string) string {
 	output := ""
 	if len(liststring) > 0 {
-		output = "(stringlist " + StringJoinFromListString(liststring, " ") + ")"
+		output = "(stringlist " + StringFromListStringJoin(liststring, " ") + ")"
 	}
 	return output
 }
 
-func StringJoinFromListString(liststring []string, delim string) string {
+func StringFromListStringJoin(liststring []string, delim string) string {
 	return strings.Join(liststring, delim)
 }
 
 func StringOutdentLines(str string, indent string) string {
-	return StringReplace(str, "\n"+indent, "\n")
+	return StringFromStringFindReplace(str, "\n"+indent, "\n")
 }
 
 func StringRemoveQuotes(str string) string {
@@ -208,7 +208,7 @@ func StringRemoveQuotes(str string) string {
 		output = str[1 : len(str)-1]
 	} else if strings.HasPrefix(str, "\"") && strings.HasSuffix(str, "\"") {
 		output = str[1 : len(str)-1]
-		output = StringReplace(output, "\\\"", "\"")
+		output = StringFromStringFindReplace(output, "\\\"", "\"")
 	} else {
 		output = str
 	}
@@ -219,7 +219,7 @@ func StringRepeat(str string, repeat int) string {
 	return strings.Repeat(str, repeat)
 }
 
-func StringReplace(str string, find string, replace string) string {
+func StringFromStringFindReplace(str string, find string, replace string) string {
 	return strings.ReplaceAll(str, find, replace)
 }
 

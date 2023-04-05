@@ -1,0 +1,45 @@
+(project sample
+ :version  "0.1"
+ :author   ""
+ :doc      "This is a sample project shell"
+ :packages "../../core/vxlisp"
+           "."
+ :libs
+  (lib javaniofile
+   :path "java.nio.file.*"
+   :lang :java)
+  (lib javafuture
+   :path "java.util.concurrent.CompletableFuture"
+   :lang :java)
+  (lib javafunction
+   :path "java.util.function.*"
+   :lang :java)
+  (lib javacollectors
+   :path "java.util.stream.Collectors"
+   :lang :java)
+ :cmds
+  (cmd doc
+   :code      :doc
+   :path      doc
+   :doc       "Build documentation html")
+  (cmd webserver
+   :code      :webserver
+   :port      8081
+   :doc       "Run Simple Web Server")
+  (cmd srcjs
+   :code      :source
+   :lang      :js
+   :path      "js/src")
+  (cmd testjs
+   :code      :test
+   :lang      :js
+   :path      "js/test")
+  (cmd srcjava
+   :code      :source
+   :lang      :java
+   :path      "java/src/main/java/com/nexus")
+  (cmd testjava
+   :code      :test
+   :lang      :java
+   :path      "java/src/test/java/com/nexus")
+)
