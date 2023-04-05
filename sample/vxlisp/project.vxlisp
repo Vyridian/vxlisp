@@ -19,27 +19,27 @@
    :lang :java)
  :cmds
   (cmd doc
-   :code      :doc
-   :path      doc
-   :doc       "Build documentation html")
+   :code :doc
+   :path doc
+   :doc  "Build documentation html")
   (cmd webserver
-   :code      :webserver
-   :port      8081
-   :doc       "Run Simple Web Server")
+   :code :webserver
+   :port 8081
+   :doc  "Run Simple Web Server")
   (cmd srcjs
-   :code      :source
-   :lang      :js
-   :path      "js/src")
+   :code :source
+   :lang :js
+   :path "js/src")
   (cmd testjs
-   :code      :test
-   :lang      :js
-   :path      "js/test")
+   :code :test
+   :lang :js
+   :path "js/test")
   (cmd srcjava
-   :code      :source
-   :lang      :java
-   :path      "java/src/main/java/com/nexus")
+   :code :source
+   :lang :java
+   :path "../java/src/main/java/com/sample")
   (cmd testjava
-   :code      :test
-   :lang      :java
-   :path      "java/src/test/java/com/nexus")
+   :code :test
+   :lang :java
+   :path "../java/src/test/java/com/sample")
 )

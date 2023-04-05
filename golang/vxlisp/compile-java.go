@@ -131,7 +131,7 @@ func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcommand) ([]*vxfile, *vxmsgb
 	switch cmd.code {
 	case ":test":
 		file := NewFile()
-		file.name = "Appcom.vxlisp.vx.Test.java"
+		file.name = "AppTest.java"
 		file.path = cmdpath + "/vx"
 		file.text = JavaAppTest(prj, pkgprefix)
 		files = append(files, file)
@@ -163,7 +163,7 @@ func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcommand) ([]*vxfile, *vxmsgb
 			text, msgs := JavaTestFromPackage(pkg, prj, pkgprefix)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
-			file.name = pkgname + "com.vxlisp.vx.Test.java"
+			file.name = pkgname + "Test.java"
 			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
