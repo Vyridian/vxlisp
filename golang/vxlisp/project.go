@@ -21,13 +21,17 @@ type vxproject struct {
 	doc         string
 	path        string
 	version     string
+	javadomain  string
 	listcmd     []*vxcommand
 	listlib     []*vxlibrary
 	listpath    []*vxpath
 	listpackage []*vxpackage
-	listpkgpath []string
+	listprjpath []string
+	listproject []*vxproject
 	textblock   *vxtextblock
 }
+
+var emptyproject = NewProject()
 
 func NewCmd() *vxcommand {
 	return new(vxcommand)
@@ -122,25 +126,6 @@ func CmdsFromProject(prj *vxproject, cmdtexts []string) []*vxcommand {
 	return output
 }
 
-/*
-func CmdsFromTextblock(textblock *vxtextblock) ([]*vxcmd, *vxmsgblock) {
-	msgblock := NewMsgBlock("CmdsFromTextblock")
-	var output []*vxcmd
-	switch textblock.blocktype {
-	case "[":
-		for _, textblock := range textblock.listtextblock {
-			cmd, msgs := CmdFromTextblock(textblock)
-			msgblock = MsgBlockAddBlock(msgblock, msgs)
-			output = append(output, cmd)
-		}
-	default:
-		msg := NewMsgFromTextblock(textblock, "Invalid Cmds definition:", textblock.blocktype)
-		msgblock = MsgBlockAddError(msgblock, msg)
-	}
-	return output, msgblock
-}
-*/
-
 func ExecuteProjectCmd(prj *vxproject, origcmd *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmd")
 	path := StringPathFromProjectCmd(prj, origcmd)
@@ -206,7 +191,7 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 			}
 		}
 	}
-	project, msgs := ProjectFromPath(projectpath)
+	project, msgs := ProjectReadFromPath(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !IsErrorFromMsgblock(msgblock) {
 		cmds := CmdsFromProject(project, cmdtexts)
@@ -220,6 +205,15 @@ func ExecuteProjectFromArgs(args []string) *vxmsgblock {
 	}
 	MsgStopLog()
 	return msgblock
+}
+
+func ListPackageFromProject(project *vxproject) []*vxpackage {
+	var output []*vxpackage
+	for _, subproject := range project.listproject {
+		output = append(output, subproject.listpackage...)
+	}
+	output = append(output, project.listpackage...)
+	return output
 }
 
 func PathFromProjectCmd(project *vxproject, command *vxcommand) string {
@@ -277,36 +271,36 @@ func PathFromTextblock(textblock *vxtextblock) (*vxpath, *vxmsgblock) {
 	return path, msgblock
 }
 
-func ProjectFromFile(projectpath string) (*vxproject, *vxmsgblock) {
+func ProjectReadFromFilename(filename string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromFile")
 	var prj = NewProject()
-	textblock, msgs := TextblockFromReadFile(projectpath + "/project.vxlisp")
+	textblock, msgs := TextblockFromReadFile(filename)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		parseprj, msgs := ProjectFromTextblock(textblock)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		prj = parseprj
 	}
-	prj.path = projectpath
+	filename = StringFromStringBefore(filename, "/project.vxlisp")
+	prj.path = filename
 	return prj, msgblock
 }
 
-func ProjectFromPath(projectpath string) (*vxproject, *vxmsgblock) {
+func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromPath")
-	project, msgs := ProjectFromFile(projectpath)
+	project, msgs := ProjectReadAllFromPath(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
-		var pkgs []*vxpackage
-		for _, pkgpath := range project.listpkgpath {
-			// projectpath
-			workpath := PathFromProjectPath(project, pkgpath)
-			loadpkgs, msgs := ListPackageFromReadPath(workpath)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-			pkgs = append(pkgs, loadpkgs...)
+		if len(project.listprjpath) > 0 {
+			var subprojects []*vxproject
+			for _, subprojectpath := range project.listprjpath {
+				subproject, msgs := ProjectReadFromPath(subprojectpath)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				subprojects = append(subprojects, subproject)
+			}
+			project.listproject = subprojects
 		}
-		loadpkgs, msgs := ListPackageFromReadPath(projectpath)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-		pkgs = append(pkgs, loadpkgs...)
+		pkgs := ListPackageFromProject(project)
 		if !msgblock.iserror {
 			pkgs, msgs = ListPackageValidateLibraries(pkgs, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -321,6 +315,44 @@ func ProjectFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			project.listpackage = pkgs
 		}
+	}
+	return project, msgblock
+}
+
+func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
+	msgblock := NewMsgBlock("ProjectReadAllFromPath")
+	var packages []*vxpackage
+	project := emptyproject
+	filenames, msgs := ListStringReadFromPathExtension(projectpath, ".vxlisp")
+	msgblock = MsgblockAddBlock(msgblock, msgs)
+	if !msgblock.iserror {
+		for _, filename := range filenames {
+			if project == emptyproject && BooleanFromStringEnds(filename, "/project.vxlisp") {
+				project, msgs = ProjectReadFromFilename(filename)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			} else {
+				textblock, msgs := TextblockFromReadFile(filename)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				if !msgblock.iserror {
+					textblock, msgs = TextblockParse(textblock)
+					msgblock = MsgblockAddBlock(msgblock, msgs)
+					if !msgblock.iserror {
+						pkg, msgs := PackageFromTextblock(textblock)
+						msgblock = MsgblockAddBlock(msgblock, msgs)
+						packages = append(packages, pkg)
+					}
+				}
+			}
+		}
+	}
+	if project == emptyproject {
+		msg := NewMsg("project.vxlisp file not found in " + projectpath)
+		msgblock = MsgblockAddError(msgblock, msg)
+	} else {
+		for _, pkg := range packages {
+			pkg.project = project
+		}
+		project.listpackage = packages
 	}
 	return project, msgblock
 }
@@ -359,7 +391,7 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 							default:
 								if BooleanFromStringStarts(word, ":") {
 									switch word {
-									case ":author", ":cmds", ":doc", ":libs", ":packages", ":paths", ":version":
+									case ":author", ":cmds", ":doc", ":javadomain", ":libs", ":paths", ":projects", ":version":
 										lastword = word
 									default:
 										msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
@@ -373,6 +405,8 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 									case ":doc":
 										prj.doc = word
 										lastword = ""
+									case ":javadomain":
+										prj.javadomain = word
 									case ":version":
 										prj.version = word
 										lastword = ""
@@ -384,8 +418,8 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 										lib, msgs := LibraryFromTextblock(wordtextblock)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
 										prj.listlib = append(prj.listlib, lib)
-									case ":packages":
-										prj.listpkgpath = append(prj.listpkgpath, word)
+									case ":projects":
+										prj.listprjpath = append(prj.listprjpath, word)
 									case ":paths":
 										path, msgs := PathFromTextblock(wordtextblock)
 										msgblock = MsgblockAddBlock(msgblock, msgs)

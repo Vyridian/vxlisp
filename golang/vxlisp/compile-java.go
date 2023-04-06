@@ -118,30 +118,28 @@ func JavaEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	return output
 }
 
-func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcommand) ([]*vxfile, *vxmsgblock) {
+func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JavaFilesFromProjectCmd")
 	var files []*vxfile
-	cmdpath := PathFromProjectCmd(prj, cmd)
-	cmdpaths := ListStringFromStringSplit(cmdpath, "/")
-	cmdpathlen := len(cmdpaths)
-	domainname := cmdpaths[cmdpathlen-1]
-	urlsuffix := cmdpaths[cmdpathlen-2]
-	pkgprefix := urlsuffix + "." + domainname
-	pkgs := prj.listpackage
-	switch cmd.code {
+	cmdpath := PathFromProjectCmd(project, command)
+	switch command.code {
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest.java"
-		file.path = cmdpath + "/vx"
-		file.text = JavaAppTest(prj, pkgprefix)
+		file.path = cmdpath + "/com/vxlisp/vx"
+		file.text = JavaAppTest(project, project.javadomain)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib.java"
-		file.path = cmdpath + "/vx"
+		file.path = cmdpath + "/com/vxlisp/vx"
 		file.text = JavaTestLib()
 		files = append(files, file)
 	}
+	pkgs := ListPackageFromProject(project)
 	for _, pkg := range pkgs {
+		subproject := pkg.project
+		javadomain := subproject.javadomain
+		javadomainpath := StringFromStringFindReplace(javadomain, ".", "/")
 		pkgname := pkg.name
 		pkgpath := ""
 		pos := strings.LastIndex(pkgname, "/")
@@ -150,21 +148,21 @@ func JavaFilesFromProjectCmd(prj *vxproject, cmd *vxcommand) ([]*vxfile, *vxmsgb
 			pkgname = pkgname[pos+1:]
 		}
 		pkgname = StringUCaseFirst(pkgname)
-		switch cmd.code {
+		switch command.code {
 		case ":source":
-			text, msgs := JavaFromPackage(pkg, prj, pkgprefix)
+			text, msgs := JavaFromPackage(pkg, project, javadomain)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + ".java"
-			file.path = cmdpath + "/" + pkgpath
+			file.path = cmdpath + "/" + javadomainpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		case ":test":
-			text, msgs := JavaTestFromPackage(pkg, prj, pkgprefix)
+			text, msgs := JavaTestFromPackage(pkg, project, javadomain)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "Test.java"
-			file.path = cmdpath + "/" + pkgpath
+			file.path = cmdpath + "/" + javadomainpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		}

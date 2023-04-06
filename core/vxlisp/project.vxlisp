@@ -1,8 +1,8 @@
 (project core
- :version  "0.5"
- :author   ""
- :doc      "This is the vx/core project"
- :packages "."
+ :version    "0.5"
+ :author     ""
+ :doc        "This is the vx/core project"
+ :javadomain "com.vxlisp"
  :libs
   (lib javaniofile
    :path "java.nio.file.*"
@@ -36,9 +36,9 @@
   (cmd srcjava
    :code :source
    :lang :java
-   :path ../java/src/main/java/com/vxlisp)
+   :path ../java/src/main/java)
   (cmd testjava
    :code :test
    :lang :java
-   :path ../java/src/test/java/com/vxlisp)
+   :path ../java/src/test/java)
 )

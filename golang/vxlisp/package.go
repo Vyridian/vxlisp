@@ -12,6 +12,7 @@ type vxpackage struct {
 	mapconst  map[string]*vxconst
 	mapfunc   map[string][]*vxfunc
 	maptype   map[string]*vxtype
+	project   *vxproject
 }
 
 func NewMapPackage() map[string]*vxpackage {
@@ -37,31 +38,6 @@ func LibraryPathFromPackage(pkg *vxpackage, libname string) string {
 		}
 	}
 	return output
-}
-
-func ListPackageFromReadPath(packagepath string) ([]*vxpackage, *vxmsgblock) {
-	msgblock := NewMsgBlock("ListPackageFromReadFile")
-	var output []*vxpackage
-	filenames, msgs := ListStringReadFromPathExtension(packagepath, ".vxlisp")
-	msgblock = MsgblockAddBlock(msgblock, msgs)
-	if !msgblock.iserror {
-		for _, filename := range filenames {
-			if !BooleanFromStringEnds(filename, "/project.vxlisp") {
-				textblock, msgs := TextblockFromReadFile(filename)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-				if !msgblock.iserror {
-					textblock, msgs = TextblockParse(textblock)
-					msgblock = MsgblockAddBlock(msgblock, msgs)
-					if !msgblock.iserror {
-						pkg, msgs := PackageFromTextblock(textblock)
-						msgblock = MsgblockAddBlock(msgblock, msgs)
-						output = append(output, pkg)
-					}
-				}
-			}
-		}
-	}
-	return output, msgblock
 }
 
 func ListPackageLink(listpackage []*vxpackage) ([]*vxpackage, *vxmsgblock) {

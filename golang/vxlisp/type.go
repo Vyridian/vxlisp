@@ -859,6 +859,14 @@ func StringFromMapTypeIndent(maptype map[string]*vxtype, indent string) string {
 	return output
 }
 
+func StringFromStringBefore(text string, before string) string {
+	output := text
+	if BooleanFromStringEnds(text, before) {
+		output = text[0 : len(text)-len(before)]
+	}
+	return output
+}
+
 func TypeAllowFromType(typ *vxtype) (*vxtype, bool) {
 	output := emptytype
 	ok := false

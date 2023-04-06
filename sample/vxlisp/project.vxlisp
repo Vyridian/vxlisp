@@ -1,9 +1,9 @@
 (project sample
- :version  "0.1"
- :author   ""
- :doc      "This is a sample project shell"
- :packages "../../core/vxlisp"
-           "."
+ :version    "0.1"
+ :author     ""
+ :doc        "This is a sample project shell"
+ :projects   "../core/vxlisp"
+ :javadomain "com.sample"
  :libs
   (lib javaniofile
    :path "java.nio.file.*"
@@ -29,17 +29,17 @@
   (cmd srcjs
    :code :source
    :lang :js
-   :path "js/src")
+   :path "../js/src")
   (cmd testjs
    :code :test
    :lang :js
-   :path "js/test")
+   :path "../js/test")
   (cmd srcjava
    :code :source
    :lang :java
-   :path "../java/src/main/java/com/sample")
+   :path "../java/src/main/java")
   (cmd testjava
    :code :test
    :lang :java
-   :path "../java/src/test/java/com/sample")
+   :path "../java/src/test/java")
 )
