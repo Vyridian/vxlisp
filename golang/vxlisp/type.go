@@ -85,9 +85,9 @@ func NewType(typename string) *vxtype {
 		typ.name = typename[pos+1:]
 	}
 	switch typename {
-	case ":1", ":2", ":3", ":4", ":5", ":1a", ":2a", ":3a", ":4a", ":5a":
-		typ.pkgname = "vx/core"
-		typ.name = "generic-" + StringSubstring(typename, 1, len(typename))
+	//case ":1", ":2", ":3", ":4", ":5", ":1a", ":2a", ":3a", ":4a", ":5a":
+	//	typ.pkgname = "vx/core"
+	//	typ.name = "generic-" + StringSubstring(typename, 1, len(typename))
 	case "vx/core/arglist", "vx/core/intlist", "vx/core/list", "vx/core/stringlist":
 		typ.extends = ":list"
 	case "vx/core/intmap", "vx/core/map", "vx/core/stringmap":
@@ -252,52 +252,7 @@ func BooleanGenericFromType(typ *vxtype) bool {
 	return output
 }
 
-func BooleanTypeGenericMatch(expectedtype *vxtype, actualtype *vxtype, multi bool, index int, path string) (*vxtype, bool, *vxmsgblock) {
-	msgblock := NewMsgBlock("BooleanTypeGenericMatch")
-	resulttype := actualtype
-	pass := false
-	expectedtypename := NameFromType(expectedtype)
-	actualtypename := NameFromType(actualtype)
-	switch expectedtypename {
-	case actualtypename:
-		// same type
-		pass = true
-	case "vx/core/any":
-		// no type defined
-		// FIXME This can produce a warning or an error with strict typing turned on
-		pass = true
-	case "/", "vx/core/unknown":
-		// no type defined
-		pass = true
-	case "vx/core/anytype":
-		// no type defined
-		// FIXME This can produce a warning or an error with strict typing turned on
-		pass = true
-	case "vx/core/list", "vx/core/listtype":
-		switch actualtype.extends {
-		case ":list":
-			// both types are lists
-			pass = true
-		}
-	case "vx/core/map":
-		switch actualtype.extends {
-		case ":map":
-			// both types are maps
-			pass = true
-		case ":struct":
-			// structs are also maps
-			pass = true
-		}
-	default:
-		if expectedtype.extends == ":list" && multi {
-			// both list paired with a multi argument
-			pass = true
-		}
-	}
-	return resulttype, pass, msgblock
-}
-
-func IsTypeSimpleMatch(expectedtype *vxtype, actualtype *vxtype, multi bool, index int, path string) (*vxtype, bool, *vxmsgblock) {
+func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bool, index int, path string) (*vxtype, bool, *vxmsgblock) {
 	msgblock := NewMsgBlock("IsTypeSimpleMatch")
 	resulttype := actualtype
 	pass := false
@@ -695,34 +650,6 @@ func ListTypeValidate(listtype []*vxtype, path string) ([]*vxtype, *vxmsgblock) 
 	return listtype, msgblock
 }
 
-func MapGenericFromMapGenericListGeneric(mapgeneric map[string]*vxtype, listgeneric []string) map[string]*vxtype {
-	for _, key := range listgeneric {
-		parentkey := ""
-		switch key {
-		case ":1a":
-			parentkey = ":1"
-		case ":2a":
-			parentkey = ":2"
-		case ":3a":
-			parentkey = ":3"
-		case ":4a":
-			parentkey = ":4"
-		case ":5a":
-			parentkey = ":5"
-		}
-		if parentkey != "" {
-			parenttype, ok := mapgeneric[parentkey]
-			if ok {
-				allowtype, ok := TypeAllowFromType(parenttype)
-				if ok {
-					mapgeneric[key] = allowtype
-				}
-			}
-		}
-	}
-	return mapgeneric
-}
-
 func MapGenericSetType(mapgeneric map[string]*vxtype, generic string, typ *vxtype) map[string]*vxtype {
 	if mapgeneric == nil {
 		mapgeneric = NewMapType()
@@ -768,7 +695,7 @@ func MapTypeMerge(maptype map[string]*vxtype, maptype2 map[string]*vxtype, path 
 		if ok {
 			type1, ok := TypeFromMapType(maptype, typeid)
 			if ok {
-				type3, ok, msgs := IsTypeSimpleMatch(type1, type2, false, 0, path)
+				type3, ok, msgs := BooleanMatchFromTypeType(type1, type2, false, 0, path)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				if ok {
 					maptype = MapTypeSetType(maptype, typeid, type3)
@@ -856,14 +783,6 @@ func StringFromMapTypeIndent(maptype map[string]*vxtype, indent string) string {
 		}
 	}
 	output += ")"
-	return output
-}
-
-func StringFromStringBefore(text string, before string) string {
-	output := text
-	if BooleanFromStringEnds(text, before) {
-		output = text[0 : len(text)-len(before)]
-	}
 	return output
 }
 

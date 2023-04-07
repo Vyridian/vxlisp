@@ -23,6 +23,7 @@
    :doc  "Build documentation html")
   (cmd webserver
    :code :webserver
+   :path ..
    :port 8081
    :doc  "Run Simple Development Web Server")
   (cmd srcjs

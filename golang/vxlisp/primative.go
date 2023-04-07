@@ -181,6 +181,14 @@ func StringFromInt(intval int) string {
 	return strconv.Itoa(intval)
 }
 
+func StringFromStringBefore(text string, before string) string {
+	output := text
+	if BooleanFromStringEnds(text, before) {
+		output = text[0 : len(text)-len(before)]
+	}
+	return output
+}
+
 func StringFromStringIndent(str string, indent string) string {
 	output := StringFromStringFindReplace(str, "\n", "\n"+indent)
 	return output

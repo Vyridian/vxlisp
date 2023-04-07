@@ -78,6 +78,10 @@ func MsgLog(output ...interface{}) {
 	}
 }
 
+func MsgPrint(output ...interface{}) {
+	fmt.Println(output...)
+}
+
 func MsgStartLog() {
 	var err error
 	outputFile, err = os.Create("build.log")

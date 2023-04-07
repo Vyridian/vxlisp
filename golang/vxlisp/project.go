@@ -44,6 +44,7 @@ func NewCmdCopy(cmd *vxcommand) *vxcommand {
 	output.lang = cmd.lang
 	output.name = cmd.name
 	output.path = cmd.path
+	output.port = cmd.port
 	return output
 }
 
@@ -126,55 +127,55 @@ func CmdsFromProject(prj *vxproject, cmdtexts []string) []*vxcommand {
 	return output
 }
 
-func ExecuteProjectCmd(prj *vxproject, origcmd *vxcommand) *vxmsgblock {
+func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmd")
-	path := StringPathFromProjectCmd(prj, origcmd)
+	path := StringPathFromProjectCmd(project, origcmd)
 	cmd := NewCmdCopy(origcmd)
 	cmd.path = path
 	switch cmd.code {
 	case ":doc":
-		msgs := WriteDocFromProjectCmd(prj, cmd)
+		msgs := WriteDocFromProjectCmd(project, cmd)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source":
 		switch cmd.lang {
 		case ":java":
-			msgs := WriteJavaFromProjectCmd(prj, cmd)
+			msgs := WriteJavaFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
-			msgs := WriteJsFromProjectCmd(prj, cmd)
+			msgs := WriteJsFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":test":
 		switch cmd.lang {
 		case ":java":
-			msgs := WriteJavaFromProjectCmd(prj, cmd)
+			msgs := WriteJavaFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
-			msgs := WriteJsFromProjectCmd(prj, cmd)
+			msgs := WriteJsFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":webserver":
-		WebServerStart()
+		WebServerStart(project, cmd)
 	}
 	return msgblock
 }
 
-func ExecuteProjectCmds(prj *vxproject, cmds []*vxcommand) *vxmsgblock {
+func ExecuteProjectCmds(project *vxproject, listcommand []*vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmds")
-	for _, cmd := range cmds {
-		msgs := ExecuteProjectCmd(prj, cmd)
+	for _, command := range listcommand {
+		msgs := ExecuteProjectCmd(project, command)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
 }
 
-func ExecuteProjectFromArgs(args []string) *vxmsgblock {
+func ExecuteProjectFromArgs(listarg []string) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecuteProjectFromArgs")
 	MsgStartLog()
 	var cmdtexts []string
 	projectpath := ""
 	lastarg := ""
-	for argidx, arg := range args {
+	for argidx, arg := range listarg {
 		switch argidx {
 		case 0:
 		default:

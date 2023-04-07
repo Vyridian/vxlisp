@@ -86,6 +86,14 @@ func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *
 	var files []*vxfile
 	pkgs := project.listpackage
 	cmdpath := PathFromProjectCmd(project, command)
+	switch command.code {
+	case ":test":
+		file := NewFile()
+		file.name = "testlib.js"
+		file.path = cmdpath + "/vx"
+		file.text = JsTestLib(pkgs)
+		files = append(files, file)
+	}
 	for _, pkg := range pkgs {
 		pkgname := pkg.name
 		pkgpath := ""
@@ -1286,4 +1294,50 @@ func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	return msgblock
+}
+
+func JsTestLib(listpackage []*vxpackage) string {
+	var listimport []string
+	var listtest []string
+	for _, pkg := range listpackage {
+		importname := StringFromStringFindReplace(pkg.name, "/", "_")
+		importpath := StringFromStringFindReplace(pkg.name, "/", "/")
+		packageimport := "import " + importname + "_test from \"../" + importpath + "_test.js\""
+		packagetest := "      " + importname + "_test.test_package(context)"
+		listimport = append(listimport, packageimport)
+		listtest = append(listtest, packagetest)
+	}
+	packageimports := StringFromListStringJoin(listimport, "\n")
+	packagetests := StringFromListStringJoin(listtest, ",\n")
+	return "" +
+		`'strict mode'
+
+import vx_core from "../../src/vx/core.js"
+import vx_test from "../../src/vx/test.js"
+import vx_web_html from "../../src/vx/web/html.js"
+` + packageimports + `
+
+export default class testlib {
+
+  static async f_displaytestsuite() {
+    const context = vx_core.e_context
+    const stylesheet = vx_test.c_stylesheet_test
+    const testpackagelist = testlib.f_testpackagelist_from_all_test(context)
+    const resolvedtestpackagelist = await vx_test.f_resolve_testpackagelist(testpackagelist)
+    const div = vx_test.f_div_from_testpackagelist(resolvedtestpackagelist)
+    const htmltext = vx_web_html.f_string_from_div_indent(div, 0)
+    vx_web_html.f_boolean_write_from_stylesheet(stylesheet)
+    vx_web_html.f_boolean_write_from_id_htmltext("testdisplay", htmltext)
+  }
+
+  static f_testpackagelist_from_all_test(context) {
+    const testpackagelist = vx_core.f_new(
+      vx_test.t_testpackagelist,
+			` + packagetests + `
+    )
+    return testpackagelist
+  }
+
+}`
+
 }

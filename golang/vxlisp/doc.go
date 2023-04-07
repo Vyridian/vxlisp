@@ -268,54 +268,254 @@ func HtmlFromProject(prj *vxproject) string {
 			lineindent + "        </ul>"
 	}
 	output := "" +
-		"<!DOCTYPE html>" +
-		lineindent + "<html lang=\"en\">" +
-		lineindent + "<head>" +
-		lineindent + "  <meta charset=\"UTF-8\">" +
-		lineindent + "  <title>Project: " + HtmlFromName(prj.name) + "</title>" +
-		lineindent + "  <link rel=\"stylesheet\" type=\"text/css\" href=\"doccss.css\">" +
-		lineindent + "  <script src=\"docjs.js\"></script>" +
-		lineindent + "</head>" +
-		lineindent + "<body onload=\"docjs.navigate('prj')\">" +
-		lineindent + "  <noscript>Warning: JavaScript disabled in browser.</noscript>" +
-		lineindent + "  <div class=\"project\" id=\"project\">" +
-		lineindent + "    <div class=\"nav\" id=\"nav\">" +
-		lineindent + "      <div class=\"nproject\" onclick=\"docjs.navigate('prj')\">project</div>" +
-		nav +
-		lineindent + "    </div>" +
-		lineindent + "    <div class=\"detail\" id=\"detail\">" +
-		lineindent + "      <div class=\"d\" id=\"d_prj\">" +
-		lineindent + "        <div class=\"lbl\">Project:</div>" +
-		lineindent + "        <ul>" +
-		lineindent + "          <li>" +
-		lineindent + "            <div class=\"txt\">" + HtmlFromName(prj.name) + "</div>" +
-		lineindent + "          </li>" +
-		lineindent + "        </ul>" +
-		lineindent + "        <div class=\"lbl\">Version:</div>" +
-		lineindent + "        <ul>" +
-		lineindent + "          <li>" +
-		lineindent + "            <div class=\"txt\">" + HtmlFromString(prj.version) + "</div>" +
-		lineindent + "          </li>" +
-		lineindent + "        </ul>" +
-		lineindent + "        <div class=\"lbl\">Author:</div>" +
-		lineindent + "        <ul>" +
-		lineindent + "          <li>" +
-		lineindent + "            <div class=\"txt\">" + HtmlFromString(prj.author) + "</div>" +
-		lineindent + "          </li>" +
-		lineindent + "        </ul>" +
-		HtmlFromDoc(prj.doc, "        ") +
-		lineindent + "        <div class=\"lbl\">Paths:</div>" +
-		paths +
-		lineindent + "        <div class=\"lbl\">Commands:</div>" +
-		commands +
-		lineindent + "        <div class=\"lbl\">Packages:</div>" +
+		`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project: ` + HtmlFromName(prj.name) + `</title>
+	<style>
+	  html {
+		  height: 100%;
+	  }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      height: 100%;
+      margin: 0px;
+    }
+
+    .table {
+      display: table;
+    }
+
+    .th {
+      display: table-header-group;
+      background-color: #f2f2f2;
+    }
+
+    .tr {
+      display: table-row;
+    }
+
+    .td {
+      display: table-cell;
+      overflow: hidden;
+      padding: 5px;
+      text-overflow: ellipsis;
+      min-width: 0px;
+      white-space: nowrap;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    ul {
+      margin-block-start: 0.5em;
+      margin-block-end: 0.5em;
+      padding-inline-start: 40px;  
+    }
+
+    .nav {
+      width: 22%;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .detail {
+      width: 78%;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .d {
+      display: none;
+    }
+
+    .header {
+      font-size: 130%;
+      font-weight: bold;
+      padding-bottom: 1em;
+      padding-top: 1em;
+    }
+
+    .lbl {
+      color: gray;
+      font-weight: bold;
+      font-size: 100%;
+    }
+
+    .nconst {
+      color: brown;
+      cursor: pointer;
+    }
+
+    .nconst:hover {
+      color: red;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    .nfunc {
+      color: green;
+      cursor: pointer;
+    }
+
+    .nfunc:hover {
+      color: red;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    .npackage {
+      color: goldenrod;
+      cursor: pointer;
+      font-size: 110%;
+    }
+
+    .npackage:hover {
+      color: red;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    .nproject {
+      color: orange;
+      cursor: pointer;
+      font-size: 120%;
+      padding-bottom: 3px;
+    }
+
+    .nproject:hover {
+      color: red;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    .ntype {
+      color: blue;
+      cursor: pointer;
+    }
+
+    .ntype:hover {
+      color: red;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    .packagenav {
+      list-style-type: none;
+      margin-block-start: 0.5em;
+      margin-block-end: 0.5em;
+      padding-inline-start: 5px;
+    }
+
+    .project {
+      display: flex;
+      flex-wrap: nowrap;
+      height: 100%;
+      width: 100%;
+    }
+
+    .source {
+      display: block;
+      font-family: monospace;
+      unicode-bidi: embed;
+      white-space: pre;
+    }
+
+    .test {
+      display: block;
+      font-family: monospace;
+      unicode-bidi: embed;
+      white-space: pre;
+    }
+
+    .txt {
+      font-size: 100%;
+    }
+  </style>
+  <script>
+    const docjs = {
+      selected: null,
+/*
+      packagename_click: function (element) {
+        const elementid = element.id
+        const navelement = document.getElementById('n_' + elementid)
+        docjs.visibilitytoggle(navelement)
+      },
+*/
+      navigate: function (elementid) {
+        if (docjs.selected != null) {
+          docjs.visibilityhide(docjs.selected)
+          docjs.selected = null
+        }
+        const detailelement = document.getElementById('d_' + elementid)
+        docjs.visibilityshow(detailelement)
+        docjs.selected = detailelement
+      },
+
+      visibilityhide: function (element) {
+        element.style.display = 'none'
+      },
+
+      visibilityshow: function (element) {
+        element.style.display = 'block'
+      },
+
+      visibilitytoggle: function (element) {
+        const style = element.style
+        let display = style.display
+        switch (display) {
+        case 'none':
+          docjs.visibilityshow(element)
+          break
+        default:
+          docjs.visibilityhide(element)
+          break
+        }
+      }
+    }
+	</script>
+</head>
+<body onload="docjs.navigate('prj')">
+  <noscript>Warning: JavaScript disabled in browser.</noscript>
+  <div class="project" id="project">
+    <div class="nav" id="nav">
+    <div class="nproject" onclick="docjs.navigate('prj')">project</div>
+    ` + nav + `
+    </div>
+    <div class="detail" id="detail">
+      <div class="d" id="d_prj">
+			  <div class="lbl">Project:</div>
+        <ul>
+          <li>
+            <div class="txt">` + HtmlFromName(prj.name) + `</div>
+          </li>
+        </ul>
+        <div class="lbl">Version:</div>
+        <ul>
+          <li>
+            <div class="txt">` + HtmlFromString(prj.version) + `</div>
+          </li>
+        </ul>
+        <div class="lbl">Author:</div>
+        <ul>
+          <li>
+            <div class="txt">` + HtmlFromString(prj.author) + `</div>
+          </li>
+        </ul>` +
+		HtmlFromDoc(prj.doc, "        ") + `
+        <div class=\"lbl\">Paths:</div>` +
+		paths + `
+        <div class="lbl">Commands:</div>` +
+		commands + `
+        <div class="lbl">Packages:</div>` +
 		prjpackages +
-		HtmlFromSourceCode(prj.textblock.text, "        ") +
-		lineindent + "      </div>" +
-		detail +
-		lineindent + "    </div>" +
-		lineindent + "</body>" +
-		lineindent + "</html>"
+		HtmlFromSourceCode(prj.textblock.text, "        ") + `
+		  </div>
+		  ` + detail + `
+    </div>
+  </div>
+</body>
+</html>`
 	return output
 }
 

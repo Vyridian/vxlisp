@@ -770,7 +770,7 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 					actualtype = actualfunc.vxtype
 				}
 				subtype := expectedfuncref.vxtype
-				actualtype, pass, msgs = IsTypeSimpleMatch(subtype, actualtype, multi, 0, path)
+				actualtype, pass, msgs = BooleanMatchFromTypeType(subtype, actualtype, multi, 0, path)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			}
 			if IsErrorFromMsgblock(msgblock) {
@@ -855,7 +855,7 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 				}
 			}
 			if !pass {
-				actualtype, pass, msgs = IsTypeSimpleMatch(expectedtype, actualtype, multi, -1, path)
+				actualtype, pass, msgs = BooleanMatchFromTypeType(expectedtype, actualtype, multi, -1, path)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				if pass {
 					value.vxtype = actualtype

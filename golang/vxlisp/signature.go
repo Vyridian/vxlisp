@@ -49,7 +49,7 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 			//} else if len(template.listgeneric) > 0 {
 			//	_, output, _ = BooleanTypeGenericMatch(templatetype, actualtype, multi, index, path)
 		} else {
-			_, output, _ = IsTypeSimpleMatch(templatetype, actualtype, multi, index, path)
+			_, output, _ = BooleanMatchFromTypeType(templatetype, actualtype, multi, index, path)
 		}
 	} else if templatelen == 0 || actuallen == 0 {
 		output = false
