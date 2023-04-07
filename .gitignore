@@ -14,3 +14,9 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

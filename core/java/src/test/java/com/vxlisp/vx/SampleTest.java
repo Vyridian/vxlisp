@@ -52,8 +52,8 @@ public final class SampleTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Samplecom.vxlisp.vx.Test.c_myconst(context),
-      Samplecom.vxlisp.vx.Test.f_myfunc(context)
+      SampleTest.c_myconst(context),
+      SampleTest.f_myfunc(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

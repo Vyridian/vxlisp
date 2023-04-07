@@ -99,7 +99,7 @@ public final class ReplTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Replcom.vxlisp.vx.Test.f_any_from_repl(context)
+      ReplTest.f_any_from_repl(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

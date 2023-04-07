@@ -426,15 +426,15 @@ public final class TypeTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Typecom.vxlisp.vx.Test.f_is_string(context),
-      Typecom.vxlisp.vx.Test.f_is_type(context),
-      Typecom.vxlisp.vx.Test.f_is_type_from_any_typelist(context),
-      Typecom.vxlisp.vx.Test.f_length_from_string(context),
-      Typecom.vxlisp.vx.Test.f_string_from_int(context),
-      Typecom.vxlisp.vx.Test.f_string_from_string_end(context),
-      Typecom.vxlisp.vx.Test.f_string_from_string_start(context),
-      Typecom.vxlisp.vx.Test.f_string_from_string_start_end(context),
-      Typecom.vxlisp.vx.Test.f_string_from_stringlist_join(context)
+      TypeTest.f_is_string(context),
+      TypeTest.f_is_type(context),
+      TypeTest.f_is_type_from_any_typelist(context),
+      TypeTest.f_length_from_string(context),
+      TypeTest.f_string_from_int(context),
+      TypeTest.f_string_from_string_end(context),
+      TypeTest.f_string_from_string_start(context),
+      TypeTest.f_string_from_string_start_end(context),
+      TypeTest.f_string_from_stringlist_join(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

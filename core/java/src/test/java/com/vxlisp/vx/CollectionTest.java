@@ -245,11 +245,11 @@ public final class CollectionTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Collectioncom.vxlisp.vx.Test.f_list_from_list_end(context),
-      Collectioncom.vxlisp.vx.Test.f_list_from_list_filtertypes(context),
-      Collectioncom.vxlisp.vx.Test.f_list_from_list_fn_filter(context),
-      Collectioncom.vxlisp.vx.Test.f_list_from_list_start(context),
-      Collectioncom.vxlisp.vx.Test.f_list_from_list_start_end(context)
+      CollectionTest.f_list_from_list_end(context),
+      CollectionTest.f_list_from_list_filtertypes(context),
+      CollectionTest.f_list_from_list_fn_filter(context),
+      CollectionTest.f_list_from_list_start(context),
+      CollectionTest.f_list_from_list_start_end(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

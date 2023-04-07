@@ -170,11 +170,11 @@ public final class FileTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Filecom.vxlisp.vx.Test.f_boolean_exists_from_file(context),
-      Filecom.vxlisp.vx.Test.f_boolean_write_from_file_string(context),
-      Filecom.vxlisp.vx.Test.f_file_read_from_file(context),
-      Filecom.vxlisp.vx.Test.f_pathcurrent_from_os(context),
-      Filecom.vxlisp.vx.Test.f_string_read_from_file(context)
+      FileTest.f_boolean_exists_from_file(context),
+      FileTest.f_boolean_write_from_file_string(context),
+      FileTest.f_file_read_from_file(context),
+      FileTest.f_pathcurrent_from_os(context),
+      FileTest.f_string_read_from_file(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

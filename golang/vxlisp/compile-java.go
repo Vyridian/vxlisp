@@ -3167,7 +3167,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"com.vxlisp.vx.Test.t_"+JavaFromName(typ.alias)+"(context)")
+			testall = append(testall, pkgname+"Test.t_"+JavaFromName(typ.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -3189,7 +3189,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
-			testall = append(testall, pkgname+"com.vxlisp.vx.Test.c_"+JavaFromName(cnst.alias)+"(context)")
+			testall = append(testall, pkgname+"Test.c_"+JavaFromName(cnst.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -3215,7 +3215,7 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"com.vxlisp.vx.Test.f_"+JavaFromName(fnc.alias)+JavaIndexFromFunc(fnc)+"(context)")
+				testall = append(testall, pkgname+"Test.f_"+JavaFromName(fnc.alias)+JavaIndexFromFunc(fnc)+"(context)")
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -3443,7 +3443,7 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 			pkgname = pkgname[pos+1:]
 		}
 		pkgname = StringUCaseFirst(pkgname)
-		testpackage := "\n    " + pkgname + "com.vxlisp.vx.Test.test_package(context)"
+		testpackage := "\n    " + pkgname + "Test.test_package(context)"
 		listtestpackage = append(listtestpackage, testpackage)
 		importline := "import " + pkgprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
 		if importline == "import com.vxlisp.vx.*;\n" {
@@ -3455,7 +3455,7 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 			`  @Test
   @DisplayName("` + pkg.name + `")
   void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = ` + pkgname + `com.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = ` + pkgname + `Test.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 

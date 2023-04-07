@@ -102,9 +102,9 @@ public final class TestTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Testcom.vxlisp.vx.Test.f_file_test(context),
-      Testcom.vxlisp.vx.Test.f_file_testhtml(context),
-      Testcom.vxlisp.vx.Test.f_file_testnode(context)
+      TestTest.f_file_test(context),
+      TestTest.f_file_testhtml(context),
+      TestTest.f_file_testnode(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

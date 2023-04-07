@@ -241,12 +241,12 @@ public final class HtmlTest {
 
   public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Htmlcom.vxlisp.vx.Test.f_string_from_body_indent(context),
-      Htmlcom.vxlisp.vx.Test.f_string_from_div_indent(context),
-      Htmlcom.vxlisp.vx.Test.f_string_from_head_indent(context),
-      Htmlcom.vxlisp.vx.Test.f_string_from_html(context),
-      Htmlcom.vxlisp.vx.Test.f_string_from_meta_indent(context),
-      Htmlcom.vxlisp.vx.Test.f_string_from_p_indent(context)
+      HtmlTest.f_string_from_body_indent(context),
+      HtmlTest.f_string_from_div_indent(context),
+      HtmlTest.f_string_from_head_indent(context),
+      HtmlTest.f_string_from_html(context),
+      HtmlTest.f_string_from_meta_indent(context),
+      HtmlTest.f_string_from_p_indent(context)
     ));
     com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;

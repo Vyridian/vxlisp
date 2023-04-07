@@ -23,6 +23,8 @@
 
 * Everyone has a bias. What is yours? - I admit it. I love Functional Programming and Test driven development. I dislike Imperitive programming, and Object-oriented programming. I also dislike vendor lockin, large corporations, and I am horrified by the probable impact of AI.
 
+* Why Functional Programming instead of Object-Oriented? - The best example is the development of SOAP and REST web services. SOAP was the original, Object Oriented web service solution similar to .dll linking. It had sophiticated type binding and state management. REST on the other hand was a very simplistic system similar to web page calls. Soon the practical complexities overwhelmed SOAP and REST grew to replace it. Simplicity makes a better product in the end.
+
 * What are your inspirations? - Obviously, Lisp. I was introduced to it in 1987 and it stuck with me. More recently: Javascript, Typescript, Scala, Clojure, Clojurescript, Elm, and an obscure XML programming language called NuXML.
 
 * What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible.
@@ -31,12 +33,10 @@
 
 * Are there any unusual features of the language? - Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified context management. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling. State Management. File parsing. Repl. Programmatic Html/Xml generation. Function level permissions. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
 
-* Why Functional Programming instead of Object-Oriented? - The best example is the development of SOAP and REST web services. SOAP was the original, Object Oriented web service solution similar to .dll linking. It had sophiticated type binding and state management. REST on the other hand was a very simplistic system similar to web page calls. Soon the practical complexities overwhelmed SOAP and REST grew to replace it. Simplicity makes a better product in the end.
-
 * Alright, that was a lot of Pros. What are the Cons?
 
 1. Tooling - Since vxlisp compiles to other languages, it relies on thoses languages for runtime debugging besides basic logging. You may find that indirection overwhelms the benefits.
-2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Therefore, I recommend using optimized native code for operations that require maximum performance.
+2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Memory pooling may mitigate this cost, but I recommend using optimized native code for operations that require maximum performance.
 3. Overkill - vxlisp is focused on making complex cases easier. Conversely, it is possible that simple cases may seem overbuilt with features you don't need, e.g. Helloworld programs.
 
 * What does a function that returns Hello World look like? -
