@@ -10,7 +10,7 @@
  [arg1 : int              // arg1
   arg2 : int]             // arg2
  (+ arg1 arg2)            // arg1 + arg2
- :test (test 3 (foo 1 2)) // A Test case {expect:3, actual: {foo 1 2}}
+ :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
  :doc  "Foo function returns an integer after adding arg1 and arg2")
 
 ## FAQ
@@ -36,7 +36,9 @@
 * Alright, that was a lot of Pros. What are the Cons?
 
 1. Tooling - Since vxlisp compiles to other languages, it relies on thoses languages for runtime debugging besides basic logging. You may find that indirection overwhelms the benefits.
+
 2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Memory pooling may mitigate this cost, but I recommend using optimized native code for operations that require maximum performance.
+
 3. Overkill - vxlisp is focused on making complex cases easier. Conversely, it is possible that simple cases may seem overbuilt with features you don't need, e.g. Helloworld programs.
 
 * What does a function that returns Hello World look like? -
@@ -101,3 +103,5 @@
  (any<-list   kidlist 0)
  (any<-map    kidmap "Jack")
  (any<-struct person "name")
+
+* Overall, how do you feel about vxlisp? - I've been writing code since 1980 and have seen a lot of languages come and go. vxlisp brings together so many concepts that I have struggled with in the past, so it is a pleasure to work with. It feels like my Magnum Opus, and I feel it's muse calling to me. It feels pretty good.

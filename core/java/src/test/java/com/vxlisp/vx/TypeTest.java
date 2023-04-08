@@ -8,14 +8,14 @@ import java.util.List;
 
 public final class TypeTest {
 
-  static com.vxlisp.vx.Test.Type_testcase f_is_string(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_is_string(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "is-string",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-string \"\"))",
           ":testresult",
             Test.f_test_true(
@@ -23,7 +23,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-string \"a\"))",
           ":testresult",
             Test.f_test_true(
@@ -31,7 +31,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-false (is-string 5))",
           ":testresult",
             Test.f_test_false(
@@ -39,7 +39,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-false (is-string (list)))",
           ":testresult",
             Test.f_test_false(
@@ -56,14 +56,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_is_type(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_is_type(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "is-type",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-type false boolean))",
           ":testresult",
             Test.f_test_true(
@@ -74,7 +74,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-type \"a\"   string))",
           ":testresult",
             Test.f_test_true(
@@ -85,7 +85,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-type 5.5   number))",
           ":testresult",
             Test.f_test_true(
@@ -96,7 +96,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-type 4     int))",
           ":testresult",
             Test.f_test_true(
@@ -112,14 +112,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_is_type_from_any_typelist(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_is_type_from_any_typelist(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "is-type<-any-typelist",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (is-type<-any-typelist\n  false (typelist int boolean)))",
           ":testresult",
             Test.f_test_true(
@@ -136,7 +136,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"   (typelist number string)))",
           ":testresult",
             Test.f_test_true(
@@ -153,7 +153,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (is-type<-any-typelist\n  5.5   (typelist string number)))",
           ":testresult",
             Test.f_test_true(
@@ -170,7 +170,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (is-type<-any-typelist\n  4     (typelist string int)))",
           ":testresult",
             Test.f_test_true(
@@ -192,14 +192,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_length_from_string(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_length_from_string(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "length<-string",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test 4 (length<-string \"abcd\"))",
           ":testresult",
             Test.f_test(
@@ -208,7 +208,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test 0 (length<-string \"\"))",
           ":testresult",
             Test.f_test(
@@ -222,14 +222,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_string_from_int(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_string_from_int(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "string<-int",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"4\"           (string<-int 4))",
           ":testresult",
             Test.f_test(
@@ -238,7 +238,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"51\"          (string<-int 51))",
           ":testresult",
             Test.f_test(
@@ -247,7 +247,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"notanumber\"  (string<-int notanumber))",
           ":testresult",
             Test.f_test(
@@ -258,7 +258,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"infinity\"    (string<-int infinity))",
           ":testresult",
             Test.f_test(
@@ -269,7 +269,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"neginfinity\" (string<-int neginfinity))",
           ":testresult",
             Test.f_test(
@@ -285,14 +285,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_string_from_string_end(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_string_from_string_end(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "string<-string-end",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"abc\" (string<-string-end \"abcd\" 3))",
           ":testresult",
             Test.f_test(
@@ -301,7 +301,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"ab\"  (string<-string-end \"abcd\" 2))",
           ":testresult",
             Test.f_test(
@@ -315,14 +315,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_string_from_string_start(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_string_from_string_start(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "string<-string-start",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"abcd\" (string<-string-start \"abcd\" 0))",
           ":testresult",
             Test.f_test(
@@ -331,7 +331,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"bcd\"  (string<-string-start \"abcd\" 1))",
           ":testresult",
             Test.f_test(
@@ -345,14 +345,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_string_from_string_start_end(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_string_from_string_start_end(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "string<-string-start-end",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"abc\" (string<-string-start-end \"abcd\" 0 3))",
           ":testresult",
             Test.f_test(
@@ -361,7 +361,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"bc\"  (string<-string-start-end \"abcd\" 1 3))",
           ":testresult",
             Test.f_test(
@@ -370,7 +370,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"\"    (string<-string-start-end \"abcd\" 5 6))",
           ":testresult",
             Test.f_test(
@@ -379,7 +379,7 @@ public final class TypeTest {
               context
             )
         ),
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"bcd\" (string<-string-start-end \"abcd\" 1 5))",
           ":testresult",
             Test.f_test(
@@ -393,14 +393,14 @@ public final class TypeTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_string_from_stringlist_join(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_string_from_stringlist_join(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/type",
       ":casename", "string<-stringlist-join",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"a$b$c\" (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
           ":testresult",
             Test.f_test(
@@ -424,7 +424,7 @@ public final class TypeTest {
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
+  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       TypeTest.f_is_string(context),
       TypeTest.f_is_type(context),
@@ -436,25 +436,25 @@ public final class TypeTest {
       TypeTest.f_string_from_string_start_end(context),
       TypeTest.f_string_from_stringlist_join(context)
     ));
-    com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return com.vxlisp.vx.Test.t_testcoveragesummary.vx_new(
+  public static Test.Type_testcoveragesummary test_coveragesummary() {
+    return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/type", 
-      ":constnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 11, ":total", 18), 
-      ":funcnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 9, ":total", 18), 
-      ":ospacenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
-      ":otimenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
-      ":totalnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 9, ":total", 18), 
-      ":typenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 11, ":total", 18), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 9, ":total", 18), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 9, ":total", 18), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return com.vxlisp.vx.Test.t_testcoveragedetail.vx_new(
+  public static Test.Type_testcoveragedetail test_coveragedetail() {
+    return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/type",
       ":typemap", Core.t_intmap.vx_new(
   
@@ -485,9 +485,9 @@ public final class TypeTest {
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testpackage test_package(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcaselist testcaselist = test_cases(context);
-    com.vxlisp.vx.Test.Type_testpackage output = com.vxlisp.vx.Test.t_testpackage.vx_new(
+  public static Test.Type_testpackage test_package(final Core.Type_context context) {
+    Test.Type_testcaselist testcaselist = test_cases(context);
+    Test.Type_testpackage output = Test.t_testpackage.vx_new(
       ":testpkg", "vx/type", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

@@ -8,14 +8,14 @@ import java.util.List;
 
 public final class CollectionTest {
 
-  static com.vxlisp.vx.Test.Type_testcase f_list_from_list_end(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_list_from_list_end(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
       ":casename", "list<-list-end",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  3))",
           ":testresult",
             Test.f_test(
@@ -48,14 +48,14 @@ public final class CollectionTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
       ":casename", "list<-list-filtertypes",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test\n (list \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
           ":testresult",
             Test.f_test(
@@ -93,14 +93,14 @@ public final class CollectionTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_list_from_list_fn_filter(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_list_from_list_fn_filter(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
       ":casename", "list<-list-fn-filter",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringlist \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-fn-filter : stringlist\n  (list \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
           ":testresult",
             Test.f_test(
@@ -163,14 +163,14 @@ public final class CollectionTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_list_from_list_start(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_list_from_list_start(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
       ":casename", "list<-list-start",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringlist \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1))",
           ":testresult",
             Test.f_test(
@@ -203,14 +203,14 @@ public final class CollectionTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_list_from_list_start_end(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_list_from_list_start_end(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
       ":casename", "list<-list-start-end",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringlist \"b\" \"c\")\n (list<-list-start-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1 3))",
           ":testresult",
             Test.f_test(
@@ -243,7 +243,7 @@ public final class CollectionTest {
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
+  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       CollectionTest.f_list_from_list_end(context),
       CollectionTest.f_list_from_list_filtertypes(context),
@@ -251,25 +251,25 @@ public final class CollectionTest {
       CollectionTest.f_list_from_list_start(context),
       CollectionTest.f_list_from_list_start_end(context)
     ));
-    com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return com.vxlisp.vx.Test.t_testcoveragesummary.vx_new(
+  public static Test.Type_testcoveragesummary test_coveragesummary() {
+    return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/collection", 
-      ":constnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 7, ":total", 7), 
-      ":funcnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 5, ":total", 7), 
-      ":ospacenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":otimenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":totalnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 5, ":total", 7), 
-      ":typenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 7, ":total", 7), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 5, ":total", 7), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 5, ":total", 7), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return com.vxlisp.vx.Test.t_testcoveragedetail.vx_new(
+  public static Test.Type_testcoveragedetail test_coveragedetail() {
+    return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/collection",
       ":typemap", Core.t_intmap.vx_new(
   
@@ -289,9 +289,9 @@ public final class CollectionTest {
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testpackage test_package(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcaselist testcaselist = test_cases(context);
-    com.vxlisp.vx.Test.Type_testpackage output = com.vxlisp.vx.Test.t_testpackage.vx_new(
+  public static Test.Type_testpackage test_package(final Core.Type_context context) {
+    Test.Type_testcaselist testcaselist = test_cases(context);
+    Test.Type_testpackage output = Test.t_testpackage.vx_new(
       ":testpkg", "vx/collection", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

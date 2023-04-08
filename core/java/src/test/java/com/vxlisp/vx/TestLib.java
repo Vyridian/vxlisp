@@ -65,10 +65,10 @@ public class TestLib {
     return run_testcaselist(testcaselist);
   }
 
-  public static boolean run_testpackagelist(final com.vxlisp.vx.Test.Type_testpackagelist testpackagelist) {
+  public static boolean run_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
     boolean output = true;
-    List<com.vxlisp.vx.Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
-    for (com.vxlisp.vx.Test.Type_testpackage testpackage : listtestpackage) {
+    List<Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
+    for (Test.Type_testpackage testpackage : listtestpackage) {
       boolean testoutput = run_testpackage(testpackage);
       if (!testoutput) {
         output = false;

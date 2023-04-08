@@ -3095,7 +3095,7 @@ func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcas
 			descvaluetext, msgs := JavaFromValue(testvalue, testpkg, fnc, "            ", true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			desctext := "" +
-				"\n        com.vxlisp.vx.Test.t_testdescribe.vx_new(" +
+				"\n        Test.t_testdescribe.vx_new(" +
 				"\n          \":describename\", \"" + JavaTestFromValue(testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
@@ -3104,13 +3104,13 @@ func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcas
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
 		output = "" +
-			"\n  static com.vxlisp.vx.Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
-			"\n    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(" +
+			"\n  static Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
+			"\n    Test.Type_testcase output = Test.t_testcase.vx_new(" +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
 			"\n      \":casename\", \"" + testname + "\"," +
 			"\n      \":describelist\"," +
-			"\n      com.vxlisp.vx.Test.t_testdescribelist.vx_new(" + describelist +
+			"\n      Test.t_testdescribelist.vx_new(" + describelist +
 			"\n      )" +
 			"\n    );" +
 			"\n    return output;" +
@@ -3265,16 +3265,16 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
+		"\n  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
 		"\n    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
 		"\n      " + strings.Join(testall, ",\n      ") +
 		"\n    ));" +
-		"\n    com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);" +
+		"\n    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);" +
 		"\n    return output;" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.vxlisp.vx.Test.Type_testcoveragesummary test_coveragesummary() {" +
-		"\n    return com.vxlisp.vx.Test.t_testcoveragesummary.vx_new(" +
+		"\n  public static Test.Type_testcoveragesummary test_coveragesummary() {" +
+		"\n    return Test.t_testcoveragesummary.vx_new(" +
 		"\n      \":testpkg\",   \"" + pkg.name + "\", " +
 		"\n      \":constnums\", " + JavaTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
 		"\n      \":docnums\", " + JavaTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
@@ -3286,8 +3286,8 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.vxlisp.vx.Test.Type_testcoveragedetail test_coveragedetail() {" +
-		"\n    return com.vxlisp.vx.Test.t_testcoveragedetail.vx_new(" +
+		"\n  public static Test.Type_testcoveragedetail test_coveragedetail() {" +
+		"\n    return Test.t_testcoveragedetail.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\"," +
 		"\n      \":typemap\", Core.t_intmap.vx_new(" +
 		"\n  " + strings.Join(covertype, ",\n  ") +
@@ -3301,9 +3301,9 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static com.vxlisp.vx.Test.Type_testpackage test_package(final Core.Type_context context) {" +
-		"\n    com.vxlisp.vx.Test.Type_testcaselist testcaselist = test_cases(context);" +
-		"\n    com.vxlisp.vx.Test.Type_testpackage output = com.vxlisp.vx.Test.t_testpackage.vx_new(" +
+		"\n  public static Test.Type_testpackage test_package(final Core.Type_context context) {" +
+		"\n    Test.Type_testcaselist testcaselist = test_cases(context);" +
+		"\n    Test.Type_testpackage output = Test.t_testpackage.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
 		"\n      \":caselist\", testcaselist," +
 		"\n      \":coveragesummary\", test_coveragesummary()," +
@@ -3346,7 +3346,7 @@ func JavaTestFromValue(value vxvalue) string {
 
 func JavaTypeCoverageNumsValNew(pct int, tests int, total int) string {
 	return "" +
-		"com.vxlisp.vx.Test.t_testcoveragenums.vx_new(" +
+		"Test.t_testcoveragenums.vx_new(" +
 		"\":pct\", " + StringFromInt(pct) + ", " +
 		"\":tests\", " + StringFromInt(tests) + ", " +
 		"\":total\", " + StringFromInt(total) +
@@ -3426,6 +3426,20 @@ func WriteJavaFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
+	switch cmd.code {
+	case ":test":
+		sourcepath := PathFromProjectPath(prj, "./testdata")
+		if BooleanExistsFromPath(sourcepath) {
+			targetpath := PathFromProjectCmd(prj, cmd)
+			ipos := IntFromStringIndexLast(targetpath, "/")
+			if ipos > 0 {
+				targetpath = targetpath[0:ipos]
+			}
+			targetpath += "/resources"
+			msgs := CopyFolderFromSourceTarget(sourcepath, targetpath)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		}
+	}
 	return msgblock
 }
 
@@ -3563,10 +3577,10 @@ public class TestLib {
     return run_testcaselist(testcaselist);
   }
 
-  public static boolean run_testpackagelist(final com.vxlisp.vx.Test.Type_testpackagelist testpackagelist) {
+  public static boolean run_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
     boolean output = true;
-    List<com.vxlisp.vx.Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
-    for (com.vxlisp.vx.Test.Type_testpackage testpackage : listtestpackage) {
+    List<Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
+    for (Test.Type_testpackage testpackage : listtestpackage) {
       boolean testoutput = run_testpackage(testpackage);
       if (!testoutput) {
         output = false;

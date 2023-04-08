@@ -20,3 +20,7 @@
 
 # Ignore Gradle build output directory
 build
+gradle
+
+# Ignore Java bin
+bin
