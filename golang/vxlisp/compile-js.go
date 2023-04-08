@@ -1293,6 +1293,17 @@ func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
+	switch cmd.code {
+	case ":test":
+		sourcepath := PathFromProjectPath(prj, "./testdata")
+		if BooleanExistsFromPath(sourcepath) {
+			targetpath := PathFromProjectCmd(prj, cmd)
+			targetpath += "/resources"
+			msgs := CopyFolderFromSourceTarget(sourcepath, targetpath)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		}
+	}
+
 	return msgblock
 }
 
