@@ -10,14 +10,14 @@ import com.vxlisp.vx.web.*;
 
 public final class TestTest {
 
-  static com.vxlisp.vx.Test.Type_testcase f_file_test(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_file_test(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/test",
       ":casename", "file-test",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
@@ -40,14 +40,14 @@ public final class TestTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_file_testhtml(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_file_testhtml(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/test",
       ":casename", "file-testhtml",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
@@ -70,14 +70,14 @@ public final class TestTest {
     return output;
   }
 
-  static com.vxlisp.vx.Test.Type_testcase f_file_testnode(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcase output = com.vxlisp.vx.Test.t_testcase.vx_new(
+  static Test.Type_testcase f_file_testnode(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/test",
       ":casename", "file-testnode",
       ":describelist",
-      com.vxlisp.vx.Test.t_testdescribelist.vx_new(
-        com.vxlisp.vx.Test.t_testdescribe.vx_new(
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
@@ -100,31 +100,31 @@ public final class TestTest {
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcaselist test_cases(final Core.Type_context context) {
+  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      Testcom.vxlisp.vx.Test.f_file_test(context),
-      Testcom.vxlisp.vx.Test.f_file_testhtml(context),
-      Testcom.vxlisp.vx.Test.f_file_testnode(context)
+      TestTest.f_file_test(context),
+      TestTest.f_file_testhtml(context),
+      TestTest.f_file_testnode(context)
     ));
-    com.vxlisp.vx.Test.Type_testcaselist output = com.vxlisp.vx.Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return com.vxlisp.vx.Test.t_testcoveragesummary.vx_new(
+  public static Test.Type_testcoveragesummary test_coveragesummary() {
+    return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/test", 
-      ":constnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":docnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 93, ":tests", 41, ":total", 44), 
-      ":funcnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 11, ":tests", 3, ":total", 26), 
-      ":ospacenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
-      ":otimenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
-      ":totalnums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 7, ":tests", 3, ":total", 38), 
-      ":typenums", com.vxlisp.vx.Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11)
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 93, ":tests", 41, ":total", 44), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 11, ":tests", 3, ":total", 26), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 7, ":tests", 3, ":total", 38), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11)
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return com.vxlisp.vx.Test.t_testcoveragedetail.vx_new(
+  public static Test.Type_testcoveragedetail test_coveragedetail() {
+    return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/test",
       ":typemap", Core.t_intmap.vx_new(
         ":testcase", 0,
@@ -179,9 +179,9 @@ public final class TestTest {
     );
   }
 
-  public static com.vxlisp.vx.Test.Type_testpackage test_package(final Core.Type_context context) {
-    com.vxlisp.vx.Test.Type_testcaselist testcaselist = test_cases(context);
-    com.vxlisp.vx.Test.Type_testpackage output = com.vxlisp.vx.Test.t_testpackage.vx_new(
+  public static Test.Type_testpackage test_package(final Core.Type_context context) {
+    Test.Type_testcaselist testcaselist = test_cases(context);
+    Test.Type_testpackage output = Test.t_testpackage.vx_new(
       ":testpkg", "vx/test", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

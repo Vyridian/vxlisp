@@ -290,7 +290,7 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 				fnc.alias = "any<-struct"
 				arg.name = "struct"
 				arg.alias = "struct"
-				arg.generictype = NewType("map-1")
+				arg.generictype = NewType("struct-1")
 				listarg[0] = arg
 				fnc.listarg = listarg
 				structtype, ok := fnc.mapgeneric["map-1"]

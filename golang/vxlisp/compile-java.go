@@ -748,33 +748,6 @@ func JavaFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 	return output
 }
 
-func JavaFromGenericCode(generic string) string {
-	var output = ""
-	switch generic {
-	case ":1":
-		output = "T"
-	case ":2":
-		output = "U"
-	case ":3":
-		output = "V"
-	case ":4":
-		output = "W"
-	case ":5":
-		output = "X"
-	case ":1a":
-		output = "Y"
-	case ":2a":
-		output = "Z"
-	case ":3a":
-		output = "Q"
-	case ":4a":
-		output = "R"
-	case ":5a":
-		output = "S"
-	}
-	return output
-}
-
 func JavaFromName(name string) string {
 	output := name
 	if output == "extends" {

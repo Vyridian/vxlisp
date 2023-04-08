@@ -19,126 +19,126 @@ public class AppTest {
   @Test
   @DisplayName("vx/collection")
   void test_vx_collection() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Collectioncom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = CollectionTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/core")
   void test_vx_core() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Corecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = CoreTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/csv")
   void test_vx_data_csv() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Csvcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = CsvTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/db")
   void test_vx_data_db() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Dbcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = DbTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/file")
   void test_vx_data_file() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Filecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = FileTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/table")
   void test_vx_data_table() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Tablecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TableTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/textblock")
   void test_vx_data_textblock() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Textblockcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TextblockTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/tree")
   void test_vx_data_tree() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Treecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TreeTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/data/xml")
   void test_vx_data_xml() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Xmlcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = XmlTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/repl")
   void test_vx_repl() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Replcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = ReplTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/sample")
   void test_vx_sample() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Samplecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = SampleTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/state")
   void test_vx_state() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Statecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = StateTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/test")
   void test_vx_test() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Testcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TestTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/type")
   void test_vx_type() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Typecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TypeTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/web/html")
   void test_vx_web_html() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Htmlcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = HtmlTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("vx/web/http")
   void test_vx_web_http() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Httpcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = HttpTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("nexus/crypto/cryptosheet")
   void test_nexus_crypto_cryptosheet() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Cryptosheetcom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = CryptosheetTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
   @DisplayName("nexus/tactics/base")
   void test_nexus_tactics_base() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = Basecom.vxlisp.vx.Test.test_package(context);
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = BaseTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
@@ -147,24 +147,24 @@ public class AppTest {
 	@DisplayName("writetestsuite")
   void test_writetestsuite() {
     com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = com.vxlisp.vx.Test.t_testpackagelist.vx_new(
-    Collectioncom.vxlisp.vx.Test.test_package(context),
-    Corecom.vxlisp.vx.Test.test_package(context),
-    Csvcom.vxlisp.vx.Test.test_package(context),
-    Dbcom.vxlisp.vx.Test.test_package(context),
-    Filecom.vxlisp.vx.Test.test_package(context),
-    Tablecom.vxlisp.vx.Test.test_package(context),
-    Textblockcom.vxlisp.vx.Test.test_package(context),
-    Treecom.vxlisp.vx.Test.test_package(context),
-    Xmlcom.vxlisp.vx.Test.test_package(context),
-    Replcom.vxlisp.vx.Test.test_package(context),
-    Samplecom.vxlisp.vx.Test.test_package(context),
-    Statecom.vxlisp.vx.Test.test_package(context),
-    Testcom.vxlisp.vx.Test.test_package(context),
-    Typecom.vxlisp.vx.Test.test_package(context),
-    Htmlcom.vxlisp.vx.Test.test_package(context),
-    Httpcom.vxlisp.vx.Test.test_package(context),
-    Cryptosheetcom.vxlisp.vx.Test.test_package(context),
-    Basecom.vxlisp.vx.Test.test_package(context)
+    CollectionTest.test_package(context),
+    CoreTest.test_package(context),
+    CsvTest.test_package(context),
+    DbTest.test_package(context),
+    FileTest.test_package(context),
+    TableTest.test_package(context),
+    TextblockTest.test_package(context),
+    TreeTest.test_package(context),
+    XmlTest.test_package(context),
+    ReplTest.test_package(context),
+    SampleTest.test_package(context),
+    StateTest.test_package(context),
+    TestTest.test_package(context),
+    TypeTest.test_package(context),
+    HtmlTest.test_package(context),
+    HttpTest.test_package(context),
+    CryptosheetTest.test_package(context),
+    BaseTest.test_package(context)
     );
     TestLib.write_testpackagelist_async(testpackagelist, context);
   }
