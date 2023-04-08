@@ -16089,7 +16089,7 @@
  (boolean-exists<-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources")))")))
+   :path "src/test/resources/vx")))")))
                             (td
                              :id ""
                              :style
@@ -16204,7 +16204,7 @@
  (boolean-write<-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources")
+   :path "src/test/resources/vx")
   "writetext"))")))
                             (td
                              :id ""
@@ -16319,12 +16319,12 @@
                                  "(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources"
+  :path "src/test/resources/vx"
   :text "testdata")
  (file-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))")))
+   :path "src/test/resources/vx")))")))
                             (td
                              :id ""
                              :style
@@ -16348,7 +16348,7 @@
                                  "(file
  :name "string_read_from_file.txt"
  :format 
- :path "src/test/resources"
+ :path "src/test/resources/vx"
  :permission
   (permission
    :id "")
@@ -16376,7 +16376,7 @@
                                  "(file
  :name "string_read_from_file.txt"
  :format 
- :path "src/test/resources"
+ :path "src/test/resources/vx"
  :permission
   (permission
    :id "")
@@ -16568,7 +16568,7 @@
  (string-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))")))
+   :path "src/test/resources/vx")))")))
                             (td
                              :id ""
                              :style
@@ -18716,16 +18716,16 @@
                   :id ""
                   :style
                    (style
-                    :name ".failflag"
+                    :name ".passflag"
                     :props
                      (propmap
-                      :background-color "red"
+                      :background-color "green"
                       :color "white"
                       :padding-left "4px"
                       :padding-right "4px"
                       :padding-top "1px"
                       :padding-bottom "1px"))
-                  :text "Fail")
+                  :text "Pass")
                  (p
                   :id ""
                   :style
@@ -18844,16 +18844,16 @@
                                 :id ""
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :id ""
                              :style
@@ -18938,7 +18938,7 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "false")))))
+                                :text "true")))))
                          (tr
                           :id ""
                           :style
@@ -19074,16 +19074,16 @@
                                 :id ""
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :id ""
                              :style
@@ -19168,7 +19168,7 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "false")))))))
+                                :text "true")))))))
                      :thead
                       (thead
                        :id ""

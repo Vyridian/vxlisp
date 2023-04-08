@@ -2397,7 +2397,7 @@
  (boolean-exists<-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources")))"
+   :path "src/test/resources/vx")))"
         :testpkg ""
         :testresult
          (testresult
@@ -2418,7 +2418,7 @@
  (boolean-write<-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources")
+   :path "src/test/resources/vx")
   "writetext"))"
         :testpkg ""
         :testresult
@@ -2439,12 +2439,12 @@
          "(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources"
+  :path "src/test/resources/vx"
   :text "testdata")
  (file-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))"
+   :path "src/test/resources/vx")))"
         :testpkg ""
         :testresult
          (testresult
@@ -2454,7 +2454,7 @@
            (file
             :name "string_read_from_file.txt"
             :format 
-            :path "src/test/resources"
+            :path "src/test/resources/vx"
             :permission
              (permission
               :id "")
@@ -2463,7 +2463,7 @@
            (file
             :name "string_read_from_file.txt"
             :format 
-            :path "src/test/resources"
+            :path "src/test/resources/vx"
             :permission
              (permission
               :id "")
@@ -2500,7 +2500,7 @@
  (string-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))"
+   :path "src/test/resources/vx")))"
         :testpkg ""
         :testresult
          (testresult
@@ -3108,7 +3108,7 @@
   :caselist
    (testcaselist
     (testcase
-     :passfail false
+     :passfail true
      :testpkg "vx/test"
      :casename "file-test"
      :describelist
@@ -3124,9 +3124,9 @@
         :testresult
          (testresult
           :code ":true"
-          :passfail false
+          :passfail true
           :expected true
-          :actual false
+          :actual true
           :fn-actual (vx/core/any<-func-async)))))
     (testcase
      :passfail true
@@ -3150,7 +3150,7 @@
           :actual true
           :fn-actual (vx/core/any<-func-async)))))
     (testcase
-     :passfail false
+     :passfail true
      :testpkg "vx/test"
      :casename "file-testnode"
      :describelist
@@ -3166,9 +3166,9 @@
         :testresult
          (testresult
           :code ":true"
-          :passfail false
+          :passfail true
           :expected true
-          :actual false
+          :actual true
           :fn-actual (vx/core/any<-func-async))))))
   :coveragedetail
    (testcoveragedetail
@@ -3268,7 +3268,7 @@
       :testpkg ""
       :tests 0
       :total 11))
-  :passfail false
+  :passfail true
   :testpkg "vx/test")
  (testpackage
   :caselist

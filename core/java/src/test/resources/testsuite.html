@@ -2691,7 +2691,7 @@
  (boolean-exists&lt;-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources")))</p>
+   :path "src/test/resources/vx")))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>
@@ -2712,7 +2712,7 @@
  (boolean-write&lt;-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources")
+   :path "src/test/resources/vx")
   "writetext"))</p>
                     </td>
                     <td>
@@ -2733,18 +2733,18 @@
                       <p class="preformatted">(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources"
+  :path "src/test/resources/vx"
   :text "testdata")
  (file-read&lt;-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))</p>
+   :path "src/test/resources/vx")))</p>
                     </td>
                     <td>
                       <p class="preformatted">(file
  :name "string_read_from_file.txt"
  :format 
- :path "src/test/resources"
+ :path "src/test/resources/vx"
  :permission
   (permission
    :id "")
@@ -2754,7 +2754,7 @@
                       <p class="preformatted">(file
  :name "string_read_from_file.txt"
  :format 
- :path "src/test/resources"
+ :path "src/test/resources/vx"
  :permission
   (permission
    :id "")
@@ -2792,7 +2792,7 @@
  (string-read&lt;-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources")))</p>
+   :path "src/test/resources/vx")))</p>
                     </td>
                     <td>
                       <p class="preformatted">"testdata"</p>
@@ -3170,7 +3170,7 @@
         <div>
           <details>
             <summary>
-              <p class="failflag">Fail</p>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/test</p>
               <p class="coveragenums">7% 3/38</p>
               <p class="coveragenums">0% 0/11</p>
@@ -3204,7 +3204,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">file-test</p>
@@ -3220,7 +3220,7 @@
                       <p class="preformatted">true</p>
                     </td>
                     <td>
-                      <p class="preformatted">false</p>
+                      <p class="preformatted">true</p>
                     </td>
                   </tr>
                   <tr>
@@ -3246,7 +3246,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">file-testnode</p>
@@ -3262,7 +3262,7 @@
                       <p class="preformatted">true</p>
                     </td>
                     <td>
-                      <p class="preformatted">false</p>
+                      <p class="preformatted">true</p>
                     </td>
                   </tr>
                 </tbody>
