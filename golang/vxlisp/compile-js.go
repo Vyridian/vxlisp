@@ -1299,7 +1299,7 @@ func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 		if BooleanExistsFromPath(sourcepath) {
 			targetpath := PathFromProjectCmd(prj, cmd)
 			targetpath += "/resources"
-			msgs := CopyFolderFromSourceTarget(sourcepath, targetpath)
+			msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	}

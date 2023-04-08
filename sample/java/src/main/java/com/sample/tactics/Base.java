@@ -1,12 +1,12 @@
-package com.sample.nexus.tactics;
+package com.sample.tactics;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import com.sample.vx.*;
-import com.sample.vx.web.*;
-import com.sample.vx.data.*;
+import com.vxlisp.vx.*;
+import com.vxlisp.vx.web.*;
+import com.vxlisp.vx.data.*;
 
 
 public final class Base {
@@ -189,7 +189,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "ability", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -297,7 +297,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "abilitylist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -515,7 +515,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "book", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -623,7 +623,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "booklist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -819,7 +819,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "card", // name
         ":struct", // extends
         Core.e_typelist, // traits
@@ -927,7 +927,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "cardlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -1145,7 +1145,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "chapter", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -1253,7 +1253,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "chapterlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -1471,7 +1471,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "deck", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -1579,7 +1579,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "decklist", // name
         ":list", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -1799,7 +1799,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "item", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -1907,7 +1907,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "itemlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -2147,7 +2147,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "location", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -2255,7 +2255,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "locationlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -2495,7 +2495,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "playingcard", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -2757,7 +2757,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "power", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -2865,7 +2865,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "powerlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -3061,7 +3061,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "rank", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -3305,7 +3305,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "rating", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -3501,7 +3501,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "rule", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -3609,7 +3609,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "rulelist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -3827,7 +3827,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "scenario", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -3935,7 +3935,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "scenariolist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -4351,7 +4351,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "section", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -4459,7 +4459,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "sectionlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -4721,7 +4721,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "skill", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -4829,7 +4829,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "skilllist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -5025,7 +5025,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "specialty", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5133,7 +5133,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "specialtylist", // name
         ":list", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5329,7 +5329,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suit", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5437,7 +5437,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suitlist", // name
         ":list", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5789,7 +5789,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "unit", // name
         ":struct", // extends
         Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5897,7 +5897,7 @@ public final class Base {
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "unitlist", // name
         ":list", // extends
         Core.e_typelist, // traits
@@ -5924,10 +5924,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "card-ace-spade", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "playingcard", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits
@@ -5976,10 +5976,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "rank-ace", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "rank", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits
@@ -6013,10 +6013,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suit-club", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "suit", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits
@@ -6050,10 +6050,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suit-diamond", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "suit", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits
@@ -6087,10 +6087,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suit-heart", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "suit", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits
@@ -6124,10 +6124,10 @@ public final class Base {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
-        "nexus/tactics/base", // pkgname
+        "tactics/base", // pkgname
         "suit-spade", // name
         Core.typedef_new(
-          "nexus/tactics/base", // pkgname
+          "tactics/base", // pkgname
           "suit", // name
           ":struct", // extends
           Core.t_typelist.vx_new(Base.t_card), // traits

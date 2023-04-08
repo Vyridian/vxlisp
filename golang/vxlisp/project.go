@@ -192,6 +192,7 @@ func ExecuteProjectFromArgs(listarg []string) *vxmsgblock {
 			}
 		}
 	}
+	projectpath = StringFromStringFindReplace(projectpath, "\\", "/")
 	project, msgs := ProjectReadFromPath(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !IsErrorFromMsgblock(msgblock) {

@@ -1,22 +1,22 @@
 'strict mode'
 
-import nexus_tactics_base from "../../../src/nexus/tactics/base.js"
-import vx_core from "../../../src/vx/core.js"
-import vx_test from "../../../src/vx/test.js"
-import vx_web_html from "../../../src/vx/web/html.js"
-import vx_data_textblock from "../../../src/vx/data/textblock.js"
-import vx_data_xml from "../../../src/vx/data/xml.js"
+import tactics_base from "../../src/tactics/base.js"
+import vx_core from "../../src/vx/core.js"
+import vx_test from "../../src/vx/test.js"
+import vx_web_html from "../../src/vx/web/html.js"
+import vx_data_textblock from "../../src/vx/data/textblock.js"
+import vx_data_xml from "../../src/vx/data/xml.js"
 
-export default class nexus_tactics_base_test {
+export default class tactics_base_test {
 
   static test_package(context) {
-    const testcaselist = nexus_tactics_base_test.test_cases(context)
+    const testcaselist = tactics_base_test.test_cases(context)
     const output = vx_core.f_new(
       vx_test.t_testpackage,
-      ":testpkg", "nexus/tactics/base",
+      ":testpkg", "tactics/base",
       ":caselist", testcaselist,
-      ":coveragesummary", nexus_tactics_base_test.test_coveragesummary(),
-      ":coveragedetail", nexus_tactics_base_test.test_coveragedetail()
+      ":coveragesummary", tactics_base_test.test_coveragesummary(),
+      ":coveragedetail", tactics_base_test.test_coveragedetail()
     );
     return output;
   }
@@ -24,7 +24,7 @@ export default class nexus_tactics_base_test {
   static test_coveragesummary() {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
-      "testpkg",   "nexus/tactics/base", 
+      "testpkg",   "tactics/base", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
       "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 39), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -38,7 +38,7 @@ export default class nexus_tactics_base_test {
   static test_coveragedetail() {
     return vx_core.f_new(
       vx_test.t_testcoveragedetail,
-      "testpkg", "nexus/tactics/base",
+      "testpkg", "tactics/base",
       "typemap",
         vx_core.f_new(
           vx_core.t_intmap,

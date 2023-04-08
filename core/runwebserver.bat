@@ -1,4 +1,5 @@
 cls
+set currentfolder=%cd%
 cd ../golang
-go run . webserver --path ../core/vxlisp
-cd ../core
+go run . webserver --path %currentfolder%/vxlisp
+cd %currentfolder%

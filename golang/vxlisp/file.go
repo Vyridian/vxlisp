@@ -31,7 +31,7 @@ func BooleanExistsFromPath(path string) bool {
 	return output
 }
 
-func CopyFolderFromSourceTarget(sourcepath string, targetpath string) *vxmsgblock {
+func FolderCopyFromSourceTarget(sourcepath string, targetpath string) *vxmsgblock {
 	msgblock := NewMsgBlock("CopyFolderFromSourceTarget")
 	walkerror := filepath.Walk(sourcepath, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {

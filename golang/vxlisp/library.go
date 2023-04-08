@@ -5,6 +5,7 @@ type vxlibrary struct {
 	path string
 	lang string
 	doc  string
+	pkg  *vxpackage
 }
 
 var emptylistlibrary = []*vxlibrary{}

@@ -4,6 +4,20 @@ import (
 	"strings"
 )
 
+func FolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
+	msgblock := NewMsgBlock("FileCopyTestdataFromProjectPath")
+	sourcepath := PathFromProjectPath(project, "./testdata")
+	if BooleanExistsFromPath(sourcepath) {
+		msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+	}
+	for _, subproject := range project.listproject {
+		msgs := FolderCopyTestdataFromProjectPath(subproject, targetpath)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+	}
+	return msgblock
+}
+
 func JavaConstDefsFromListConst(values []*vxconst, indent string) string {
 	output := "null"
 	lineindent := "\n" + indent
@@ -2452,7 +2466,11 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 			} else if libpkgpath == pkgpath {
 				isskip = true
 			} else {
-				libpath = pkgprefix + "/" + libpkgpath + "*"
+				libprefix := pkgpath
+				if lib.pkg != nil {
+					libprefix = lib.pkg.project.javadomain
+				}
+				libpath = libprefix + "/" + libpkgpath + "*"
 				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
@@ -3401,17 +3419,14 @@ func WriteJavaFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	switch cmd.code {
 	case ":test":
-		sourcepath := PathFromProjectPath(prj, "./testdata")
-		if BooleanExistsFromPath(sourcepath) {
-			targetpath := PathFromProjectCmd(prj, cmd)
-			ipos := IntFromStringIndexLast(targetpath, "/")
-			if ipos > 0 {
-				targetpath = targetpath[0:ipos]
-			}
-			targetpath += "/resources"
-			msgs := CopyFolderFromSourceTarget(sourcepath, targetpath)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
+		targetpath := PathFromProjectCmd(prj, cmd)
+		ipos := IntFromStringIndexLast(targetpath, "/")
+		if ipos > 0 {
+			targetpath = targetpath[0:ipos]
 		}
+		targetpath += "/resources"
+		msgs := FolderCopyTestdataFromProjectPath(prj, targetpath)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
 }
@@ -3432,7 +3447,8 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 		pkgname = StringUCaseFirst(pkgname)
 		testpackage := "\n    " + pkgname + "Test.test_package(context)"
 		listtestpackage = append(listtestpackage, testpackage)
-		importline := "import " + pkgprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
+		libprefix := pkg.project.javadomain
+		importline := "import " + libprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
 		if importline == "import com.vxlisp.vx.*;\n" {
 		} else if BooleanFromStringContains(imports, importline) {
 		} else {

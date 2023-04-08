@@ -1,19 +1,19 @@
 'strict mode'
 
-import nexus_crypto_cryptosheet from "../../../src/nexus/crypto/cryptosheet.js"
-import vx_core from "../../../src/vx/core.js"
-import vx_test from "../../../src/vx/test.js"
+import crypto_cryptosheet from "../../src/crypto/cryptosheet.js"
+import vx_core from "../../src/vx/core.js"
+import vx_test from "../../src/vx/test.js"
 
-export default class nexus_crypto_cryptosheet_test {
+export default class crypto_cryptosheet_test {
 
   static test_package(context) {
-    const testcaselist = nexus_crypto_cryptosheet_test.test_cases(context)
+    const testcaselist = crypto_cryptosheet_test.test_cases(context)
     const output = vx_core.f_new(
       vx_test.t_testpackage,
-      ":testpkg", "nexus/crypto/cryptosheet",
+      ":testpkg", "crypto/cryptosheet",
       ":caselist", testcaselist,
-      ":coveragesummary", nexus_crypto_cryptosheet_test.test_coveragesummary(),
-      ":coveragedetail", nexus_crypto_cryptosheet_test.test_coveragedetail()
+      ":coveragesummary", crypto_cryptosheet_test.test_coveragesummary(),
+      ":coveragedetail", crypto_cryptosheet_test.test_coveragedetail()
     );
     return output;
   }
@@ -21,7 +21,7 @@ export default class nexus_crypto_cryptosheet_test {
   static test_coveragesummary() {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
-      "testpkg",   "nexus/crypto/cryptosheet", 
+      "testpkg",   "crypto/cryptosheet", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -35,7 +35,7 @@ export default class nexus_crypto_cryptosheet_test {
   static test_coveragedetail() {
     return vx_core.f_new(
       vx_test.t_testcoveragedetail,
-      "testpkg", "nexus/crypto/cryptosheet",
+      "testpkg", "crypto/cryptosheet",
       "typemap",
         vx_core.f_new(
           vx_core.t_intmap

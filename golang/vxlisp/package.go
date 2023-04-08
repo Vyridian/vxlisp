@@ -116,8 +116,10 @@ func ListPackageValidateLibraries(listpackage []*vxpackage, prj *vxproject) ([]*
 		listlib := pkg.listlib
 		for _, lib := range listlib {
 			libpath := lib.path
-			_, ok := mappackage[libpath]
-			if !ok {
+			lookuppackage, ok := mappackage[libpath]
+			if ok {
+				lib.pkg = lookuppackage
+			} else {
 				libname := lib.name
 				prjlib, ok := mapprjlib[libname]
 				if ok {

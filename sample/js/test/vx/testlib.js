@@ -19,8 +19,8 @@ import vx_test_test from "../vx/test_test.js"
 import vx_type_test from "../vx/type_test.js"
 import vx_web_html_test from "../vx/web/html_test.js"
 import vx_web_http_test from "../vx/web/http_test.js"
-import nexus_crypto_cryptosheet_test from "../nexus/crypto/cryptosheet_test.js"
-import nexus_tactics_base_test from "../nexus/tactics/base_test.js"
+import crypto_cryptosheet_test from "../crypto/cryptosheet_test.js"
+import tactics_base_test from "../tactics/base_test.js"
 
 export default class testlib {
 
@@ -54,8 +54,8 @@ export default class testlib {
       vx_type_test.test_package(context),
       vx_web_html_test.test_package(context),
       vx_web_http_test.test_package(context),
-      nexus_crypto_cryptosheet_test.test_package(context),
-      nexus_tactics_base_test.test_package(context)
+      crypto_cryptosheet_test.test_package(context),
+      tactics_base_test.test_package(context)
     )
     return testpackagelist
   }

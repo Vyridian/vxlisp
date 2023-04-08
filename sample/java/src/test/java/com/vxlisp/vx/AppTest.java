@@ -1,10 +1,9 @@
 package com.vxlisp.vx;
 
-import com.sample.vx.*;
-import com.sample.vx.data.*;
-import com.sample.vx.web.*;
-import com.sample.nexus.crypto.*;
-import com.sample.nexus.tactics.*;
+import com.vxlisp.vx.data.*;
+import com.vxlisp.vx.web.*;
+import com.sample.crypto.*;
+import com.sample.tactics.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -129,15 +128,15 @@ public class AppTest {
   }
 
   @Test
-  @DisplayName("nexus/crypto/cryptosheet")
-  void test_nexus_crypto_cryptosheet() {
+  @DisplayName("crypto/cryptosheet")
+  void test_crypto_cryptosheet() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = CryptosheetTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
   @Test
-  @DisplayName("nexus/tactics/base")
-  void test_nexus_tactics_base() {
+  @DisplayName("tactics/base")
+  void test_tactics_base() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = BaseTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }

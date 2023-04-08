@@ -1,4 +1,5 @@
 cls
+set currentfolder=%cd%
 cd ../golang
-go run . srcjs testjs srcjava testjava --path ../sample/vxlisp
-cd ../sample
+go run . srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
+cd %currentfolder%

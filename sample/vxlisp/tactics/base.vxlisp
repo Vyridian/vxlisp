@@ -1,4 +1,4 @@
-(package nexus/tactics/base
+(package tactics/base
  :libs (lib html :path vx/web/html)
 	     (lib tb   :path vx/data/textblock)
        (lib xml  :path vx/data/xml)

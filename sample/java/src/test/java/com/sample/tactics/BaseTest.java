@@ -1,12 +1,12 @@
 
-package com.sample.nexus.tactics;
+package com.sample.tactics;
 
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
-import com.sample.vx.*;
-import com.sample.vx.web.*;
-import com.sample.vx.data.*;
+import com.vxlisp.vx.*;
+import com.vxlisp.vx.web.*;
+import com.vxlisp.vx.data.*;
 
 
 public final class BaseTest {
@@ -21,7 +21,7 @@ public final class BaseTest {
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "nexus/tactics/base", 
+      ":testpkg",   "tactics/base", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
@@ -34,7 +34,7 @@ public final class BaseTest {
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
     return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "nexus/tactics/base",
+      ":testpkg", "tactics/base",
       ":typemap", Core.t_intmap.vx_new(
         ":ability", 0,
         ":abilitylist", 0,
@@ -87,7 +87,7 @@ public final class BaseTest {
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
     Test.Type_testpackage output = Test.t_testpackage.vx_new(
-      ":testpkg", "nexus/tactics/base", 
+      ":testpkg", "tactics/base", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),
       ":coveragedetail", test_coveragedetail()
