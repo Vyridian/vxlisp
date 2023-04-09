@@ -1,9 +1,9 @@
-(project sample
+(project projecttemplate
  :version    "0.1"
  :author     ""
  :doc        "This is a sample project shell"
  :projects   "../vxruntime/vxlisp"
- :javadomain "com.sample"
+ :javadomain "com.projecttemplate"
  :libs
   (lib javaniofile
    :path "java.nio.file.*"

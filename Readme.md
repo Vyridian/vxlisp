@@ -15,6 +15,20 @@
 
 ## FAQ
 
+* What is vxlisp?
+
+1. vxlisp is a simple data structure similar to JSON, but it is simpler and more consistent while also being able to describe complex objects and functions.
+
+2. vxlisp is a meta language designed to be natively compiled to other languages. It is sort of like Typescript's relationship to Javascript or Kotlin's relationship to Java.
+
+3. vxlisp is a transparency layer so that code can be more easily read, shared, tested, and ported between applications and platforms.
+
+* What is vxlisp not?
+
+1. vxlisp is not a platform.
+
+2. vxlisp is not a replacement for other languages. Instead it is meant to interact with existing platforms and languages.
+
 * Write once, run anywhere is a pipedream. How can it possibly work? - Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
 
 * New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. Vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, I'm pretty pleased with the result.
