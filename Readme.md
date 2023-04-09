@@ -9,9 +9,9 @@
     (func foo : int           // function foo() returns integer
      [arg1 : int              // arg1
       arg2 : int]             // arg2
-    (+ arg1 arg2)            // arg1 + arg2
-    :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
-    :doc  "Foo function returns an integer after adding arg1 and arg2")
+     (+ arg1 arg2)            // arg1 + arg2
+     :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
+     :doc  "Foo function returns an integer after adding arg1 and arg2")
 
 ## FAQ
 
