@@ -6,12 +6,12 @@
 
 ## Sample
 
-(func foo : int           // function foo() returns integer
- [arg1 : int              // arg1
-  arg2 : int]             // arg2
- (+ arg1 arg2)            // arg1 + arg2
- :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
- :doc  "Foo function returns an integer after adding arg1 and arg2")
+    (func foo : int           // function foo() returns integer
+     [arg1 : int              // arg1
+      arg2 : int]             // arg2
+    (+ arg1 arg2)            // arg1 + arg2
+    :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
+    :doc  "Foo function returns an integer after adding arg1 and arg2")
 
 ## FAQ
 
@@ -56,66 +56,66 @@
 3. Overkill - vxlisp is focused on making complex cases easier. Conversely, it is possible that simple cases may seem overbuilt with features you don't need, e.g. Helloworld programs.
 
 * What does a function that returns Hello World look like? -
- (func foo : string
-  "Hello World")
+     (func foo : string
+      "Hello World")
 
 * What does a function that adds 2 integers look like? -
- (func foo : int
-  [arg1 : int
-  arg2 : int]
- (+ arg1 arg2))
+     (func foo : int
+      [arg1 : int
+       arg2 : int]
+      (+ arg1 arg2))
 
 * What does type declaration look like? -
- (type personlist
-  :extends    :list
-  :allowtypes [person]
-  :doc "This is a list of person")
+    (type personlist
+     :extends    :list
+     :allowtypes [person]
+     :doc "This is a list of person")
 
- (type personmap
-  :extends    :map
-  :allowtypes [person]
-  :doc "This is a hash map of person")
+    (type personmap
+     :extends    :map
+     :allowtypes [person]
+     :doc "This is a hash map of person")
 
- (type person
-  :extends    :struct
-  :properties [name    : string     :doc "The person's name"
-               age     : number     :doc "The person's age"
-               kidlist : personlist :doc "List of kids"
-               kidmap  : personmap  :doc "Map of kids"]
-  :doc "This is a person structure")
+    (type person
+     :extends    :struct
+     :properties [name    : string     :doc "The person's name"
+                  age     : number     :doc "The person's age"
+                  kidlist : personlist :doc "List of kids"
+                  kidmap  : personmap  :doc "Map of kids"]
+     :doc "This is a person structure")
 
 * How do a make a new people? -
- (const jack : person
-  (person :name "Jack" :age 10))
+    (const jack : person
+     (person :name "Jack" :age 10))
 
- (const jill : person
-  (person :name "Jack" :age 8))
+    (const jill : person
+     (person :name "Jack" :age 8))
 
- (const kidlist : personlist
-  (personlist jack jill))
+    (const kidlist : personlist
+     (personlist jack jill))
 
- (const kidmap : personmap
-  (personmap
-  "Jack" jack
-  "Jill" jill))
+    (const kidmap : personmap
+     (personmap
+      "Jack" jack
+      "Jill" jill))
 
- (const mary : person
-  (person
-  :name "Mary"
-  :age  "30"
-  :kidlist kidlist
-  :kidmap  kidmap))
+    (const mary : person
+     (person
+      :name "Mary"
+      :age  "30"
+      :kidlist kidlist
+      :kidmap  kidmap))
 
  Alternatively, you can use the longhand (new person) instead of (person)
 
 * How do I access properties from types? -
- (:0 kidlist)   // Get the first value of kidlist aka jack
- (:Jack kidmap) // Get jack from kidmap
- (:name mary)   // Get Mary's name
+    (:0 kidlist)   // Get the first value of kidlist aka jack
+    (:Jack kidmap) // Get jack from kidmap
+    (:name mary)   // Get Mary's name
 
  Alternatively, you can use the longhand versions:
- (any<-list   kidlist 0)
- (any<-map    kidmap "Jack")
- (any<-struct person "name")
+    (any<-list   kidlist 0)
+    (any<-map    kidmap "Jack")
+    (any<-struct person "name")
 
 * Overall, how do you feel about vxlisp? - I've been writing code since 1980 and have seen a lot of languages come and go. vxlisp brings together so many concepts that I have struggled with in the past, so it is a pleasure to work with. It feels like my Magnum Opus, and I feel it's muse calling to me. It feels pretty good.
