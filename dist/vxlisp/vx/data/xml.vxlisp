@@ -1,0 +1,26 @@
+(package vx/data/xml
+ :libs (lib tb :path vx/data/textblock)
+ :doc "Xml handler")
+
+(type xml
+ :extends    :struct
+ :properties [nodes : xmlnodelist])
+
+(type xmlnode
+ :extends    :struct
+ :properties [nodes : xmlnode
+              props : xmlpropmap
+							tag   : string
+							text  : string])
+
+(type xmlnodelist
+ :extends    :list
+ :allowtypes [xmlnode])
+
+(type xmlpropmap
+ :extends    :map
+ :allowtypes [string])
+
+(func xml<-textblock : xml
+ [textblock : tb/textblock]
+ (xml))

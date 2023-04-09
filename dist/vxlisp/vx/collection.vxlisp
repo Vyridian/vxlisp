@@ -1,0 +1,140 @@
+(package vx/collection
+ :libs (lib type :path vx/type)
+ :doc "Collection Package")
+
+(func is-list : boolean
+ [val : any :doc "Any value"]
+ (= ":list" (extends<-any val))
+ :doc "Returns true if the given value is a list.")
+
+(func is-map : boolean
+ [val : any :doc "Any value"]
+ (= ":map" (extends<-any val))
+ :doc "Returns true if the given value is a map.")
+
+(func list<-list-end : list-1
+ [values : list-1
+  end    : int]
+ (list<-list-start-end values 0 end)
+ :test (test
+        (stringlist "a" "b" "c")
+        (list<-list-end
+         (stringlist "a" "b" "c" "d")
+         3))
+ :doc "Returns a sub list from positions 0 to end.")
+
+(func list<-list-filtertypes : list-1
+ [vallist     : list-2
+  filtertypes : typelist :...]
+ (list<-list-fn-filter
+  vallist
+  (fn : any
+   [val : any]
+   (if
+    (is-type<-any-typelist val filtertypes)
+    val)
+  )
+ )
+ :test (test
+        (list "a" 1 "b" "c")
+        (list<-list-filtertypes : list
+         (list "a" 1 "b" "c" 4.5)
+         string int))
+ :doc "Filter List to only include matching types")
+
+(func list<-list-fn-filter : list-1
+ [vallist   : list-2
+  fn-filter : any<-any]
+ (native
+  :js
+   "const fn = fn_filter['vx_value']
+    if (fn) {
+      const items = []
+      vallist.forEach(val => {
+        const newval = fn(val)
+        if (!vx_core.f_is_empty_1(newval)) {
+          items.push(newval)
+        }
+      })
+      const type = " (type<-any output :native) "
+      output = vx_core.f_new(generic_list_1, ...items)
+    }"
+  :java
+   "List<Core.Type_any> listval = vallist.vx_list();
+    List<Core.Type_any> items = new ArrayList<>();
+    for (Core.Type_any val : listval) {
+      Core.Type_any newval = fn_filter.f_any_from_any(Core.t_any, val);
+      Core.Type_boolean isempty = Core.f_is_empty_1(newval);
+      if (!isempty.vx_boolean()) {
+        items.add(newval);
+      }
+    }
+    Core.Type_any work = generic_list_1.vx_new(items);
+    output = Core.f_any_from_any(generic_list_1, work);")
+ :test (test
+        (stringlist "a1" "b1" "c1" "d1")
+        (list<-list-fn-filter : stringlist
+         (list "a" 4 "b" (list) "c" (map) "d")
+         (fn : string
+          [val : any]
+          (if
+           (then
+            (is-string val)
+            (string val "1"))))))
+ :doc "Filter List to only include non-empty values")
+
+(func list<-list-start : list-1
+ [values : list-1
+  start  : int]
+ (list<-list-start-end values start (length<-list values))
+ :test (test
+        (stringlist "b" "c" "d")
+        (list<-list-start
+         (stringlist "a" "b" "c" "d")
+         1))
+ :doc "Returns a sub list from start to list end.")
+
+(func list<-list-start-end : list-1
+ [values : list-1
+  start  : int
+  end    : int]
+ (native
+  :js
+   "let istart = start
+    let iend = end
+    const isize = values.length
+    if (isize > 0) {
+      if (istart < 0) {
+        istart = 0
+      }
+      if (iend > isize) {
+        iend = isize
+      }
+      output = values.slice(istart, iend)
+      const typ = values['vx_type']
+      if (typ) {
+        output['vx_type'] = typ
+      }
+    }"
+  :java
+   "int istart = start.vx_int();
+    int iend = end.vx_int();
+    List<Core.Type_any> listval = values.vx_list();
+    int isize = listval.size();
+    if (isize > 0) {
+      if (istart < 0) {
+        istart = 0;
+      }
+      if (iend > isize) {
+        iend = isize;
+      }
+      List<Core.Type_any> listsub = listval.subList(istart, iend);
+      Core.Type_any work = generic_list_1.vx_new(listsub);
+      output = Core.f_any_from_any(generic_list_1, work);
+    }")
+ :test (test
+        (stringlist "b" "c")
+        (list<-list-start-end
+         (stringlist "a" "b" "c" "d")
+         1 3))
+ :doc "Returns a list from another list")

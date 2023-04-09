@@ -1,5 +1,5 @@
 cls
 set currentfolder=%cd%
-cd ../golang
-go run . doc --path %currentfolder%/vxlisp
+cd ../dist
+vxlisp_win64 doc --path %currentfolder%/vxlisp
 cd %currentfolder%

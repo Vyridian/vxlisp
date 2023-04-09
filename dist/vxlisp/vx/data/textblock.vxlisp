@@ -1,0 +1,45 @@
+(package vx/data/textblock
+ :doc "Text parser")
+
+(type delimset
+ :extends    :struct
+ :properties
+  [start  : stringlist
+   end    : stringlist
+   split  : stringlist
+   subset : delimset])
+
+(type textblock
+ :extends     :struct
+ :properties
+  [name       : string
+   text       : string
+   line       : int
+   column     : int
+   textblocks : textblocklist])
+
+(type textblocklist
+ :extends      :list
+ :allowtypes [textblock])
+
+(func parse : textblock
+ [block         : textblock
+  delimpairlist : delimset]
+ block)
+
+(func stringlist<-textblocklist : stringlist
+ [textblocks : textblocklist]
+ (list<-list : stringlist
+  textblocks
+  text<-textblock)
+ :doc "Returns the child textblocks from a given textblock.")
+
+(func text<-textblock : string
+ [block : textblock]
+ (:text block)
+ :doc "Returns the text from a given textblock.")
+
+(func textblocks<-textblock : textblocklist
+ [block : textblock]
+ (:textblocks block)
+ :doc "Returns the child textblocks from a given textblock.")

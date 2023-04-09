@@ -1,0 +1,143 @@
+(package vx/data/file
+ :libs (lib tb :path vx/data/textblock)
+       (lib javaniofile)
+ :doc "File handler")
+
+(type file
+ :extends :struct
+ :properties [name       : string
+              format     : fileformat
+              path       : string
+              permission : permission
+              text       : string]
+ :doc "File structure")
+
+(type fileformat
+ :extends :string
+ :allowvalues [:text])
+
+(func boolean-exists<-file : boolean
+ [file : file]
+ (native
+  :java
+   "Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    String sfullpath = fullpath.vx_string();
+    Path path = Paths.get(sfullpath);
+    if (Files.exists(path)) {
+      output = Core.c_true;
+    }")
+ :test (test-true
+        (boolean-exists<-file
+         (file
+          :name "boolean_exists_from_file.txt"
+          :path "src/test/resources/vx")))
+ :clientserver :server
+ :doc "Returns true if file/path exists.")
+
+(func boolean-write<-file-any : boolean
+ [file : file
+  val  : any]
+ (boolean-write<-file-string file (string<-any val))
+ :context
+ :sideeffects "Writes to file io"
+ :clientserver :server
+ :doc "Write any data structure as a file.")
+
+(func boolean-write<-file-string : boolean
+ [file : file
+  text : string]
+ (native
+  :java
+   "Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    String sfullpath = fullpath.vx_string();
+    Path path = Paths.get(sfullpath);
+    String stext = text.vx_string();
+    byte[] bytes = stext.getBytes();
+    java.nio.file.Files.write(path, bytes);
+    output = Core.c_true;")
+ :context
+ :messages
+ :sideeffects "Writes to file io"
+ :test (test-true
+        (boolean-write<-file-string
+         (file
+          :name "boolean_write_from_file_string.txt"
+          :path "src/test/resources/vx")
+         "writetext"))
+ :clientserver :server
+ :doc "Write a File to Disk")
+
+(func file-read<-file : file
+ [file : file]
+ (copy
+  file
+  :text (string-read<-file file))
+ :context
+ :test (test
+        (file
+         :name "string_read_from_file.txt"
+         :path "src/test/resources/vx"
+         :text "testdata")
+        (file-read<-file
+         (file
+          :name "string_read_from_file.txt"
+          :path "src/test/resources/vx")))
+ :clientserver :server
+ :doc "Read a Text File from Disk")
+
+(func string-read<-file : string
+ [file : file]
+ (native
+  :java
+   "Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    String sfullpath = fullpath.vx_string();
+    Path path = Paths.get(sfullpath);
+    if (Files.exists(path)) {
+      byte[] bytes = Files.readAllBytes(path);
+      String scontent = new String(bytes);
+      Core.Type_string valcontent = Core.t_string.vx_new_from_string(scontent);
+      output = valcontent;
+    } else {
+      Core.Type_msg msg = Core.t_msg.vx_new_error(“File Not Found: ” + sfullpath);
+      output = Core.t_string.vx_copy(output, msg);
+    }")
+ :messages
+ :context
+ :test (test
+        "testdata"
+        (string-read<-file
+         (file
+          :name "string_read_from_file.txt"
+          :path "src/test/resources/vx")))
+ :clientserver :server
+ :doc "Read text from a File")
+
+(func name<-file : string
+ [file : file]
+ (:name file)
+ :doc "Returns path and name from file.")
+
+(func path<-file : string
+ [file : file]
+ (:path file)
+ :doc "Returns path and name from file.")
+
+(func pathcurrent<-os : string
+ (native
+  :java
+   "Path path = Paths.get(“”);
+    path = path.toAbsolutePath();
+    String spath = path.toString();
+    output = Core.t_string.vx_new_from_string(spath);")
+ :test (test-true
+        (is-endswith (pathcurrent<-os) "\\java"))
+ :clientserver :server
+ :doc  "Returns current system path.")
+
+(func pathfull<-file : string
+ [file : file]
+ (let : string
+  [path : string := (path<-file file)
+   name : string := (name<-file file)]
+  (string path "/" name))
+ :doc "Returns full path and name from file.")

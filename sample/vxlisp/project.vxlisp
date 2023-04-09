@@ -2,7 +2,7 @@
  :version    "0.1"
  :author     ""
  :doc        "This is a sample project shell"
- :projects   "../core/vxlisp"
+ :projects   "../dist/vxlisp"
  :javadomain "com.sample"
  :libs
   (lib javaniofile
