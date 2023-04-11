@@ -4,54 +4,54 @@ import (
 	"strings"
 )
 
-func JavaFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
-	msgblock := NewMsgBlock("JavaFileCopyTestdataFromProjectPath")
+func CppFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
+	msgblock := NewMsgBlock("CppFileCopyTestdataFromProjectPath")
 	sourcepath := PathFromProjectPath(project, "./testdata")
 	if BooleanExistsFromPath(sourcepath) {
 		msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	for _, subproject := range project.listproject {
-		msgs := JavaFolderCopyTestdataFromProjectPath(subproject, targetpath)
+		msgs := CppFolderCopyTestdataFromProjectPath(subproject, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
 }
 
-func JavaConstDefsFromListConst(values []*vxconst, indent string) string {
+func CppConstDefsFromListConst(values []*vxconst, indent string) string {
 	output := "null"
 	lineindent := "\n" + indent
 	var outputvalues []string
 	if len(values) > 0 {
 		for _, val := range values {
 			name := "" +
-				lineindent + "Core.constdef_new(" +
+				lineindent + "vx_core::constdef_new(" +
 				lineindent + "  \"" + val.pkgname + "\"," +
 				lineindent + "  \"" + val.name + "\"," +
 				lineindent + "  null" +
 				lineindent + ")"
 			outputvalues = append(outputvalues, name)
 		}
-		output = "Core.arraylist_from_array(" + strings.Join(outputvalues, ",") + lineindent + ")"
+		output = "vx_core::arraylist_from_array(" + strings.Join(outputvalues, ",") + lineindent + ")"
 	}
 	return output
 }
 
-func JavaDebugFromFunc(fnc *vxfunc, lineindent string) (string, string) {
+func CppDebugFromFunc(fnc *vxfunc, lineindent string) (string, string) {
 	debugstart := ""
 	debugend := ""
 	if fnc.debug {
-		debugstart = lineindent + "Core.debug(\"" + fnc.name + "\", \"start\""
+		debugstart = lineindent + "vx_core::debug(\"" + fnc.name + "\", \"start\""
 		for _, arg := range fnc.listarg {
-			debugstart += ", " + JavaTypeStringValNew(arg.name+"=") + ", " + JavaFromName(arg.alias)
+			debugstart += ", " + CppTypeStringValNew(arg.name+"=") + ", " + CppFromName(arg.alias)
 		}
 		debugstart += ");"
-		debugend = lineindent + "Core.debug(\"" + fnc.name + "\", \"end\", output);"
+		debugend = lineindent + "vx_core::debug(\"" + fnc.name + "\", \"end\", output);"
 	}
 	return debugstart, debugend
 }
 
-func JavaDocFromFunc(fnc *vxfunc) string {
+func CppDocFromFunc(fnc *vxfunc) string {
 	var doc = ""
 	var argsdoc = ""
 	switch NameFromFunc(fnc) {
@@ -76,7 +76,7 @@ func JavaDocFromFunc(fnc *vxfunc) string {
 			"\n@async" +
 			"\n"
 	}
-	doc += "@function " + JavaFromName(fnc.alias)
+	doc += "@function " + CppFromName(fnc.alias)
 	if fnc.idx > 0 {
 		doc += " " + StringFromInt(fnc.idx)
 	}
@@ -97,11 +97,11 @@ func JavaDocFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func JavaEmptyValueFromType(typ *vxtype) string {
-	return JavaEmptyValueFromTypeIndent(typ, "")
+func CppEmptyValueFromType(typ *vxtype) string {
+	return CppEmptyValueFromTypeIndent(typ, "")
 }
 
-func JavaEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
+func CppEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	output := "\"\""
 	if len(indent) < 10 {
 		output = typ.defaultvalue
@@ -109,20 +109,20 @@ func JavaEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 		case "string":
 			output = "\"" + output + "\""
 		case ":list":
-			output = "Core.f_type_to_list(" + JavaNameFromPkgName(typ.pkgname) + ".t_" + typ.name + ")"
+			output = "vx_core::f_type_to_list(" + CppNameFromPkgName(typ.pkgname) + ".t_" + typ.name + ")"
 		default:
 			if len(typ.properties) > 0 {
 				output = "{\n"
 				for _, property := range typ.properties {
-					propdefault := JavaEmptyValueFromTypeIndent(property.vxtype, indent+"  ")
-					output += indent + "    " + JavaFromName(property.name) + ": " + propdefault + ","
+					propdefault := CppEmptyValueFromTypeIndent(property.vxtype, indent+"  ")
+					output += indent + "    " + CppFromName(property.name) + ": " + propdefault + ","
 					if property.doc != "" {
 						output += " // " + property.doc
 					}
 					output += "\n"
 				}
 				output += "" +
-					indent + "    vxtype: " + JavaNameFromPkgName(typ.pkgname) + ".t_" + JavaFromName(typ.name) +
+					indent + "    vxtype: " + CppNameFromPkgName(typ.pkgname) + ".t_" + CppFromName(typ.name) +
 					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
@@ -132,28 +132,25 @@ func JavaEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	return output
 }
 
-func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFilesFromProjectCmd")
+func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFilesFromProjectCmd")
 	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
 	switch command.code {
 	case ":test":
 		file := NewFile()
-		file.name = "AppTest.java"
+		file.name = "AppTest.cpp"
 		file.path = cmdpath + "/com/vxlisp/vx"
-		file.text = JavaAppTest(project, project.javadomain)
+		file.text = CppAppTest(project, "")
 		files = append(files, file)
 		file = NewFile()
-		file.name = "TestLib.java"
+		file.name = "TestLib.cpp"
 		file.path = cmdpath + "/com/vxlisp/vx"
-		file.text = JavaTestLib()
+		file.text = CppTestLib()
 		files = append(files, file)
 	}
 	pkgs := ListPackageFromProject(project)
 	for _, pkg := range pkgs {
-		subproject := pkg.project
-		javadomain := subproject.javadomain
-		javadomainpath := StringFromStringFindReplace(javadomain, ".", "/")
 		pkgname := pkg.name
 		pkgpath := ""
 		pos := strings.LastIndex(pkgname, "/")
@@ -164,19 +161,19 @@ func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile,
 		pkgname = StringUCaseFirst(pkgname)
 		switch command.code {
 		case ":source":
-			text, msgs := JavaFromPackage(pkg, project, javadomain)
+			text, msgs := CppFromPackage(pkg, project, "")
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
-			file.name = pkgname + ".java"
-			file.path = cmdpath + "/" + javadomainpath + "/" + pkgpath
+			file.name = pkgname + ".cpp"
+			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		case ":test":
-			text, msgs := JavaTestFromPackage(pkg, project, javadomain)
+			text, msgs := CppTestFromPackage(pkg, project, "")
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
-			file.name = pkgname + "Test.java"
-			file.path = cmdpath + "/" + javadomainpath + "/" + pkgpath
+			file.name = pkgname + "Test.cpp"
+			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
 		}
@@ -184,8 +181,8 @@ func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile,
 	return files, msgblock
 }
 
-func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFromConst")
+func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFromConst")
 	var output = ""
 	var doc = ""
 	path := cnst.pkgname + "/" + cnst.name
@@ -198,10 +195,10 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 	}
 	cnsttype := cnst.vxtype
 	doc += "{" + cnsttype.name + "}"
-	cnstname := JavaFromName(cnst.alias)
+	cnstname := CppFromName(cnst.alias)
 	cnstclassname := "Const_" + cnstname
-	cnsttypename := JavaNameFromType(cnst.vxtype)
-	cnsttypeclassname := JavaNameTypeFullFromType(cnsttype)
+	cnsttypename := CppNameFromType(cnst.vxtype)
+	cnsttypeclassname := CppNameTypeFullFromType(cnsttype)
 	initval := ""
 	const_new := ""
 	cnstval := StringValueFromValue(cnst.value)
@@ -266,7 +263,7 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 	default:
 		switch cnsttype.extends {
 		case ":list":
-			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
+			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				listtypename := cnsttypename
@@ -278,7 +275,7 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 					"\n      output.vxlist" + listtypename + " = val.vx_list" + listtypename + "();"
 			}
 		case ":map":
-			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
+			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				maptypename := cnsttypename
@@ -290,19 +287,19 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 					"\n      output.vxmap" + maptypename + " = val.vx_map" + maptypename + "();"
 			}
 		case ":struct":
-			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
+			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				const_new += "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";"
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					const_new += "" +
-						"\n      output.vx_p_" + JavaFromName(prop.name) + " = val." + JavaFromName(prop.name) + "();"
+						"\n      output.vx_p_" + CppFromName(prop.name) + " = val." + CppFromName(prop.name) + "();"
 
 				}
 			}
 			/*
-				clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, "        ", true, false, path)
+				clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "        ", true, false, path)
 				msgblock = MsgBlockAddBlock(msgblock, msgs)
 				if clstext != "" {
 					cnstval = "" +
@@ -312,7 +309,7 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 						"\n      }"
 					initval = "" +
 						"\n    @Override" +
-						"\n    public Map<String, Core.Type_any> vx_map() {" +
+						"\n    public Map<String, vx_core::Type_any> vx_map() {" +
 						cnstval +
 						"\n      return this.vxmap;" +
 						"\n    }"
@@ -320,18 +317,18 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 			*/
 		}
 	}
-	extends := JavaNameClassFullFromType(cnsttype)
+	extends := CppNameClassFullFromType(cnsttype)
 	output += "" +
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
 		"\n  public static class " + cnstclassname + " extends " + extends + " {" +
 		"\n" +
-		"\n    public Core.Type_constdef constdef() {" +
-		"\n      return Core.constdef_new(" +
+		"\n    public vx_core::Type_constdef constdef() {" +
+		"\n      return vx_core::constdef_new(" +
 		"\n        \"" + cnst.pkgname + "\", // pkgname" +
 		"\n        \"" + cnst.name + "\", // name" +
-		"\n        " + JavaTypeDefFromType(cnsttype, "        ") +
+		"\n        " + CppTypeDefFromType(cnsttype, "        ") +
 		"\n      );" +
 		"\n    }" +
 		"\n" +
@@ -345,31 +342,31 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 		"\n" +
 		"\n  }" +
 		"\n" +
-		"\n  public static final " + cnstclassname + " c_" + cnstname + " = " + cnstclassname + ".const_new();" +
+		"\n  const " + cnstclassname + " c_" + cnstname + " = " + cnstclassname + ".const_new();" +
 		"\n" +
 		"\n"
 	return output, msgblock
 }
 
-func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFromFunc")
+func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFromFunc")
 	var listargtype []string
 	var listargname []string
-	funcname := JavaFromName(fnc.alias) + JavaIndexFromFunc(fnc)
+	funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
 	returntype := ""
 	if fnc.generictype == nil {
-		returntype = JavaGenericFromType(fnc.vxtype)
+		returntype = CppGenericFromType(fnc.vxtype)
 	} else {
-		returntype = JavaGenericFromType(fnc.generictype)
+		returntype = CppGenericFromType(fnc.generictype)
 	}
-	pkgname := JavaNameFromPkgName(fnc.pkgname)
+	pkgname := CppNameFromPkgName(fnc.pkgname)
 	instancevars := ""
 	staticvars := ""
 	instancefuncs := ""
 	staticfuncs := ""
 	f_suppresswarnings := ""
-	path := fnc.pkgname + "/" + fnc.name + JavaIndexFromFunc(fnc)
-	genericdefinition := JavaGenericDefinitionFromFunc(fnc)
+	path := fnc.pkgname + "/" + fnc.name + CppIndexFromFunc(fnc)
+	genericdefinition := CppGenericDefinitionFromFunc(fnc)
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
 		case "vx/core/copy", "vx/core/empty", "vx/core/new":
@@ -384,8 +381,8 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			listargtype = append(listargtype, argtext)
 		default:
 			if fnc.generictype != nil {
-				genericargname := JavaNameTFromTypeGeneric(fnc.generictype)
-				argtext := "final " + JavaGenericFromType(fnc.generictype) + " " + genericargname
+				genericargname := CppNameTFromTypeGeneric(fnc.generictype)
+				argtext := "final " + CppGenericFromType(fnc.generictype) + " " + genericargname
 				listargtype = append(listargtype, argtext)
 				listargname = append(listargname, genericargname)
 			}
@@ -393,11 +390,11 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/let":
-		argtext := "Core.Func_any_from_func fn_any"
+		argtext := "vx_core::Func_any_from_func fn_any"
 		listargtype = append(listargtype, argtext)
 		listargname = append(listargname, "fn_any")
 	case "vx/core/let-async":
-		argtext := "Core.Func_any_from_func_async fn_any_async"
+		argtext := "vx_core::Func_any_from_func_async fn_any_async"
 		listargtype = append(listargtype, argtext)
 		listargname = append(listargname, "fn_any_async")
 	default:
@@ -405,12 +402,12 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			argtype := arg.vxtype
 			argtypename := ""
 			if fnc.generictype != nil && argtype.isgeneric {
-				argtypename = JavaGenericFromType(argtype)
+				argtypename = CppGenericFromType(argtype)
 			} else {
-				argtypename = JavaNameTypeFromType(argtype)
+				argtypename = CppNameTypeFromType(argtype)
 			}
-			argtext := "final " + argtypename + " " + JavaFromName(arg.alias)
-			listargname = append(listargname, JavaFromName(arg.alias))
+			argtext := "final " + argtypename + " " + CppFromName(arg.alias)
+			listargname = append(listargname, CppFromName(arg.alias))
 			if arg.multi {
 				listargtype = append(listargtype, argtext)
 			} else {
@@ -419,13 +416,13 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		}
 	}
 	if fnc.context {
-		listargtype = append(listargtype, "final Core.Type_context context")
+		listargtype = append(listargtype, "final vx_core::Type_context context")
 		listargname = append(listargname, "context")
 	}
 	//var funcgenerics []string
 	functypetext := ""
 	if fnc.generictype != nil {
-		functypetext = JavaGenericFromType(fnc.generictype)
+		functypetext = CppGenericFromType(fnc.generictype)
 	} else {
 		functypetext = returntype
 	}
@@ -434,7 +431,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	}
 	contextarg := ""
 	if fnc.context {
-		contextarg = ", final Core.Type_context context"
+		contextarg = ", final vx_core::Type_context context"
 	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context", "vx/core/any<-func",
@@ -444,7 +441,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			"\n    public IFn fn = null;" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Func_" + funcname + " fn_new(Core.Class_" + funcname + ".IFn fn) {" +
+			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn) {" +
 			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
@@ -458,7 +455,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			"\n    public IFn fn = null;" +
 			"\n" +
 			"\n    // static" +
-			"\n    public Func_" + funcname + " fn_new(Core.Class_" + funcname + ".IFn fn) {" +
+			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn) {" +
 			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
@@ -467,10 +464,10 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	case "vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/int<-func", "vx/core/string<-func":
 		instancefuncs += "" +
-			"\n    public Core.Class_any_from_func.IFn fn = null;" +
+			"\n    public vx_core::Class_any_from_func.IFn fn = null;" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Func_" + funcname + " fn_new(Core.Class_any_from_func.IFn fn) {" +
+			"\n    public Func_" + funcname + " fn_new(vx_core::Class_any_from_func.IFn fn) {" +
 			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
@@ -484,13 +481,13 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			case 1:
 				argtypename := ""
 				arg := fnc.listarg[0]
-				argtypename = JavaNameTypeFromType(arg.vxtype)
+				argtypename = CppNameTypeFromType(arg.vxtype)
 				subargnames := "inputval"
 				switch NameFromFunc(fnc) {
 				case "vx/core/empty":
 				default:
 					if fnc.generictype != nil {
-						subargnames = JavaNameTFromType(fnc.vxtype) + ", inputval"
+						subargnames = CppNameTFromType(fnc.vxtype) + ", inputval"
 					}
 				}
 				contextname := ""
@@ -513,21 +510,21 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 					if issamegeneric {
 						// both generics are the same
 						asyncbody += "" +
-							"\n      T inputval = Core.f_any_from_any(generic_any_1, value);" +
-							"\n      CompletableFuture<T> output = Core.f_async(generic_any_1, inputval);"
+							"\n      T inputval = vx_core::f_any_from_any(generic_any_1, value);" +
+							"\n      CompletableFuture<T> output = vx_core::f_async(generic_any_1, inputval);"
 					} else {
 						asyncbody += "" +
-							"\n      " + JavaNameTypeFromType(arg.vxtype) + " inputval = Core.f_any_from_any(" + JavaNameTFromType(arg.vxtype) + ", value);" +
+							"\n      " + CppNameTypeFromType(arg.vxtype) + " inputval = vx_core::f_any_from_any(" + CppNameTFromType(arg.vxtype) + ", value);" +
 							"\n      CompletableFuture<" + returntype + "> future = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
 							"\n      @SuppressWarnings(\"unchecked\")" +
 							"\n      CompletableFuture<T> output = (CompletableFuture<T>)future;"
 					}
 					instancefuncs += "" +
 						"\n    @Override" +
-						"\n    public Core.Func_any_from_any" + contextname + "_async fn_new(Core.Class_any_from_any" + contextname + "_async.IFn fn) {return Core.e_any_from_any" + contextname + "_async;}" +
+						"\n    public vx_core::Func_any_from_any" + contextname + "_async fn_new(vx_core::Class_any_from_any" + contextname + "_async.IFn fn) {return vx_core::e_any_from_any" + contextname + "_async;}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n    public <T extends vx_core::Type_any, U extends vx_core::Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1, final U value" + contextarg + ") {" +
 						asyncbody +
 						"\n      return output;" +
 						"\n    }" +
@@ -535,14 +532,14 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 				} else {
 					instancefuncs += "" +
 						"\n    @Override" +
-						"\n    public Core.Func_any_from_any" + contextname + " fn_new(Core.Class_any_from_any" + contextname + ".IFn fn) {return Core.e_any_from_any" + contextname + ";}" +
+						"\n    public vx_core::Func_any_from_any" + contextname + " fn_new(vx_core::Class_any_from_any" + contextname + ".IFn fn) {return vx_core::e_any_from_any" + contextname + ";}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any" + contextname + "(final T generic_any_1, final U value" + contextarg + ") {" +
-						"\n      T output = Core.f_empty(generic_any_1);" +
+						"\n    public <T extends vx_core::Type_any, U extends vx_core::Type_any> T f_any_from_any" + contextname + "(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n      T output = vx_core::f_empty(generic_any_1);" +
 						"\n      " + argtypename + " inputval = (" + argtypename + ")value;" +
-						"\n      Core.Type_any outputval = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
-						"\n      output = Core.f_any_from_any(generic_any_1, outputval);" +
+						"\n      vx_core::Type_any outputval = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
+						"\n      output = vx_core::f_any_from_any(generic_any_1, outputval);" +
 						"\n      return output;" +
 						"\n    }" +
 						"\n"
@@ -550,9 +547,9 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			}
 		}
 	}
-	repltext := JavaReplFromFunc(fnc)
+	repltext := CppReplFromFunc(fnc)
 	instancefuncs += repltext
-	valuetext, msgs := JavaFromValue(fnc.value, fnc.pkgname, fnc, "", true, false, path)
+	valuetext, msgs := CppFromValue(fnc.value, fnc.pkgname, fnc, "", true, false, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	valuetexts := ListStringFromStringSplit(valuetext, "\n")
 	var chgvaluetexts []string
@@ -570,10 +567,10 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	permissiontop := ""
 	permissionbottom := ""
 	if fnc.permission {
-		permissiontop = lineindent + "if (Core.f_boolean_permission_from_any(" + JavaNameTFromFunc(fnc) + ", context)) {"
+		permissiontop = lineindent + "if (vx_core::f_boolean_permission_from_any(" + CppNameTFromFunc(fnc) + ", context)) {"
 		permissionbottom = "" +
 			lineindent + "} else {" +
-			lineindent + "  Core.Type_msg msg = Core.t_msg.vx_new_error(\"Permission Denied: " + fnc.name + "\");" +
+			lineindent + "  vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"Permission Denied: " + fnc.name + "\");" +
 			lineindent + "  output = output.vx_copy(msg);" +
 			lineindent + "}"
 		indent += "  "
@@ -582,7 +579,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		msgtop = lineindent + "try {"
 		msgbottom = "" +
 			lineindent + "} catch (Exception err) {" +
-			lineindent + "  Core.Type_msg msg = Core.t_msg.vx_new_from_exception(\"" + fnc.name + "\", err);" +
+			lineindent + "  vx_core::Type_msg msg = vx_core::t_msg.vx_new_from_exception(\"" + fnc.name + "\", err);" +
 			lineindent + "  output = output.vx_copy(msg);" +
 			lineindent + "}"
 		indent += "  "
@@ -603,8 +600,8 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	if valuetext != "" {
 		valuetext = "\n" + indent + StringFromStringIndent(valuetext, indent)
 	}
-	interfacefn := JavaInterfaceFnFromFunc(fnc)
-	debugtop, debugbottom := JavaDebugFromFunc(fnc, lineindent)
+	interfacefn := CppInterfaceFnFromFunc(fnc)
+	debugtop, debugbottom := CppDebugFromFunc(fnc, lineindent)
 	switch NameFromFunc(fnc) {
 	case "vx/core/new":
 		f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
@@ -619,24 +616,24 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		returnvalue += "" +
 			"\n      CompletableFuture<T> output;" +
 			"\n      if (fn == null) {" +
-			"\n        output = CompletableFuture.completedFuture(Core.f_empty(generic_any_1));" +
+			"\n        output = CompletableFuture.completedFuture(vx_core::f_empty(generic_any_1));" +
 			"\n      } else {" +
-			"\n        CompletableFuture<Core.Type_any> future = fn.resolve(" + strings.Join(listargname, ", ") + ");" +
-			"\n        output = Core.async_from_async(generic_any_1, future);" +
+			"\n        CompletableFuture<vx_core::Type_any> future = fn.resolve(" + strings.Join(listargname, ", ") + ");" +
+			"\n        output = vx_core::async_from_async(generic_any_1, future);" +
 			"\n      }" +
 			"\n      return output;"
 	} else {
 		if BooleanFromStringStarts(fnc.name, "boolean<-") {
 			returnvalue += "" +
-				"\n      Core.Type_boolean output = Core.c_false;" +
+				"\n      vx_core::Type_boolean output = vx_core::c_false;" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(Core.t_boolean, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				"\n        output = vx_core::f_any_from_any(vx_core::t_boolean, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
 				"\n      }"
 		} else {
 			returnvalue += "" +
-				"\n      T output = Core.f_empty(generic_any_1);" +
+				"\n      T output = vx_core::f_empty(generic_any_1);" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(generic_any_1, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				"\n        output = vx_core::f_any_from_any(generic_any_1, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
 				"\n      }"
 		}
 		if returntype != "void" {
@@ -658,28 +655,28 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 				} else if BooleanFromListStringContains(fnc.listgeneric, ":1") {
 					if fnc.async {
 						defaultvalue = "" +
-							lineindent + "T value_empty = Core.f_empty(generic_any_1);" +
-							lineindent + "CompletableFuture<T> output = Core.async_new_completed(value_empty);"
+							lineindent + "T value_empty = vx_core::f_empty(generic_any_1);" +
+							lineindent + "CompletableFuture<T> output = vx_core::async_new_completed(value_empty);"
 					} else {
-						defaultvalue = lineindent + "T output = Core.f_empty(generic_any_1);"
+						defaultvalue = lineindent + "T output = vx_core::f_empty(generic_any_1);"
 					}
 			*/
 		} else if fnc.async {
-			defaultvalue = lineindent + "CompletableFuture<" + returntype + "> output = Core.async_new_completed(" + JavaNameEFromType(fnc.vxtype) + ");"
+			defaultvalue = lineindent + "CompletableFuture<" + returntype + "> output = vx_core::async_new_completed(" + CppNameEFromType(fnc.vxtype) + ");"
 		} else if fnc.generictype != nil {
-			defaultvalue = lineindent + returntype + " output = Core.f_empty(" + JavaNameTFromTypeGeneric(fnc.generictype) + ");"
+			defaultvalue = lineindent + returntype + " output = vx_core::f_empty(" + CppNameTFromTypeGeneric(fnc.generictype) + ");"
 		} else {
-			defaultvalue = lineindent + returntype + " output = " + JavaNameEFromType(fnc.vxtype) + ";"
+			defaultvalue = lineindent + returntype + " output = " + CppNameEFromType(fnc.vxtype) + ";"
 		}
 	}
-	interfacefunc := JavaInterfaceFromFunc(fnc)
-	doc := JavaDocFromFunc(fnc)
+	interfacefunc := CppInterfaceFromFunc(fnc)
+	doc := CppDocFromFunc(fnc)
 	output := "" +
 		doc +
 		interfacefunc +
-		"\n  public static class Class_" + funcname + " extends Core.Class_base implements Func_" + funcname + " {" +
+		"\n  public static class Class_" + funcname + " extends vx_core::Class_base implements Func_" + funcname + " {" +
 		"\n" +
-		//"\n    protected Core.Type_msgblock vxmsgblock = null;" +
+		//"\n    protected vx_core::Type_msgblock vxmsgblock = null;" +
 		//"\n" +
 		instancevars +
 		"\n    @Override" +
@@ -695,16 +692,16 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		"\n    }" +
 		"\n" +
 		"\n    @Override" +
-		"\n    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}" +
+		"\n    public vx_core::Type_typedef vx_typedef() {return vx_core::t_func.vx_typedef();}" +
 		"\n" +
 		"\n    @Override" +
-		"\n    public Core.Type_funcdef vx_funcdef() {" +
-		"\n      return Core.funcdef_new(" +
+		"\n    public vx_core::Type_funcdef vx_funcdef() {" +
+		"\n      return vx_core::funcdef_new(" +
 		"\n        \"" + fnc.pkgname + "\", // pkgname" +
 		"\n        \"" + fnc.name + "\", // name" +
 		"\n        " + StringFromInt(fnc.idx) + ", // idx" +
 		"\n        " + StringFromBoolean(fnc.async) + ", // async" +
-		"\n        " + JavaTypeDefFromType(fnc.vxtype, "        ") + " // typedef" +
+		"\n        " + CppTypeDefFromType(fnc.vxtype, "        ") + " // typedef" +
 		"\n      );" +
 		"\n    }" +
 		"\n" +
@@ -724,8 +721,8 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		"\n" +
 		"\n  }" +
 		"\n" +
-		"\n  public static final Func_" + funcname + " e_" + funcname + " = new " + JavaNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
-		"\n  public static final Func_" + funcname + " t_" + funcname + " = new " + JavaNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
+		"\n  const Func_" + funcname + " e_" + funcname + " = new " + CppNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
+		"\n  const Func_" + funcname + " t_" + funcname + " = new " + CppNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
 		"\n" +
 		f_suppresswarnings +
 		"\n  public static " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
@@ -741,14 +738,14 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JavaFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
+func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 	output := "null"
 	lineindent := "\n" + indent
 	if len(funcs) > 0 {
 		var outputtypes []string
 		for _, fnc := range funcs {
 			name := "" +
-				lineindent + "  Core.funcdef_new(" +
+				lineindent + "  vx_core::funcdef_new(" +
 				lineindent + "    \"" + fnc.pkgname + "\"," +
 				lineindent + "    \"" + fnc.name + "\"," +
 				lineindent + "    " + StringFromInt(fnc.idx) + "," +
@@ -757,12 +754,12 @@ func JavaFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 				lineindent + "  )"
 			outputtypes = append(outputtypes, name)
 		}
-		output = "Core.arraylist_from_array(" + StringFromListStringJoin(outputtypes, ",") + lineindent + ")"
+		output = "vx_core::arraylist_from_array(" + StringFromListStringJoin(outputtypes, ",") + lineindent + ")"
 	}
 	return output
 }
 
-func JavaFromName(name string) string {
+func CppFromName(name string) string {
 	output := name
 	if output == "extends" {
 		output = "extend"
@@ -777,280 +774,282 @@ func JavaFromName(name string) string {
 	return output
 }
 
-func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFromPackage")
-	pkgpath, pkgname := JavaPackagePathFromPrefixName(pkgprefix, pkg.name)
+func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFromPackage")
+	pkgname := CppFromName(pkg.name)
 	specialcode := ""
-	switch pkg.name {
-	case "vx/core":
-		specialcode = "" +
-			"\n  public static interface Type_replfunc {" +
-			"\n    public Core.Type_any vx_repl(Core.Type_anylist arglist);" +
-			"\n  }" +
-			"\n" +
-			"\n  public static interface Type_replfunc_async {" +
-			"\n    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);" +
-			"\n  }" +
-			"\n" +
-			"\n  public static List<Core.Type_any> emptylistany = Core.immutablelist(new ArrayList<Core.Type_any>());" +
-			"\n" +
-			"\n  public static Map<String, Core.Type_any> emptymapany = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());" +
-			"\n" +
-			"\n  public static <T> List<T> immutablelist(List<T> listany) {" +
-			"\n    return Collections.unmodifiableList(listany);" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T> Map<String, T> immutablemap(Map<String, T> mapany) {" +
-			"\n    return Collections.unmodifiableMap(mapany);" +
-			"\n  }" +
-			"\n" +
-			"\n  public static class Class_base {" +
-			"\n    protected int vx_iref = 0;" +
-			"\n    protected Core.Type_msgblock vxmsgblock = null;" +
-			"\n    public List<Type_any> vx_dispose() {" +
-			"\n      this.vx_iref = 0;" +
-			"\n      this.vxmsgblock = null;" +
-			"\n      return emptylistany;" +
-			"\n    }" +
-			"\n    public Core.Type_msgblock vx_msgblock() {return vxmsgblock;}" +
-			"\n    public boolean vx_release() {" +
-			"\n      boolean output = false;" +
-			"\n      if (this.vx_iref < 0) {" +
-			"\n      } else if (vx_iref == 0) {" +
-			"\n        vx_iref = -1;" +
-			"\n        output = true;" +
-			"\n      } else {" +
-			"\n        vx_iref -= 1;" +
-			"\n      }" +
-			"\n      return output;" +
-			"\n    }" +
-			"\n    public void vx_reserve() {this.vx_iref += 1;}" +
-			"\n  }" +
-			"\n" +
-			"\n  public static class KeyValue<T> {" +
-			"\n    public String key = \"\";" +
-			"\n    public T value = null;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static Core.Type_constdef constdef_new(" +
-			"\n    String pkgname," +
-			"\n    String name," +
-			"\n    Core.Type_any typ" +
-			"\n  ) {" +
-			"\n    Core.Class_constdef output = new Core.Class_constdef();" +
-			"\n    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);" +
-			"\n    output.vx_p_name = Core.t_string.vx_new_from_string(name);" +
-			"\n    output.vx_p_type = typ;" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static Core.Type_funcdef funcdef_new(" +
-			"\n    String pkgname," +
-			"\n    String name," +
-			"\n    int idx," +
-			"\n    boolean async," +
-			"\n    Core.Type_any typ" +
-			"\n  ) {" +
-			"\n    Core.Class_funcdef output = new Core.Class_funcdef();" +
-			"\n    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);" +
-			"\n    output.vx_p_name = Core.t_string.vx_new_from_string(name);" +
-			"\n    output.vx_p_idx = Core.t_int.vx_new_from_int(idx);" +
-			"\n    output.vx_p_async = Core.t_boolean.vx_new_from_boolean(async);" +
-			"\n    output.vx_p_type = typ;" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {" +
-			"\n    return list.vx_list().toArray(new Core.Type_any[0]);" +
-			"\n  }" +
-			"\n" +
-			"\n  @SafeVarargs" +
-			"\n  public static <T> List<T> arraylist_from_array(final T... items) {" +
-			"\n    List<T> output = new ArrayList<T>(Arrays.asList(items));" +
-			"\n    output = Core.immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T extends Core.Type_any, U extends Core.Type_any> List<T> arraylist_from_arraylist(final T generic_any_1, final List<U> listval) {" +
-			"\n    List<T> output = new ArrayList<>();" +
-			"\n    for (Core.Type_any value : listval) {" +
-			"\n      T t_val = Core.f_any_from_any(generic_any_1, value);" +
-			"\n      output.add(t_val);" +
-			"\n    }" +
-			"\n    output = Core.immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T, U> List<T> arraylist_from_arraylist_fn(final List<U> listval, final Function<U, T> fn_any_from_any) {" +
-			"\n    List<T> output = new ArrayList<>();" +
-			"\n    for (U value_u : listval) {" +
-			"\n      T t_val = fn_any_from_any.apply(value_u);" +
-			"\n      output.add(t_val);" +
-			"\n    }" +
-			"\n    output = Core.immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T extends Core.Type_any, U extends Core.Type_any> List<T> arraylist_from_linkedhashmap(final T generic_any_1, final Map<String, U> mapval) {" +
-			"\n    List<T> output = new ArrayList<T>();" +
-			"\n    Set<String> keys = mapval.keySet();" +
-			"\n    for (String key : keys) {" +
-			"\n      U u_val = mapval.get(key);" +
-			"\n      T t_val = Core.f_any_from_any(generic_any_1, u_val);" +
-			"\n      output.add(t_val);" +
-			"\n    }" +
-			"\n    output = Core.immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T, U> List<T> arraylist_from_linkedhashmap_fn(final Map<String, U> mapval, final BiFunction<String, U, T> fn_any_from_key_value) {" +
-			"\n    List<T> output = new ArrayList<T>();" +
-			"\n    Set<String> keys = mapval.keySet();" +
-			"\n    for (String key : keys) {" +
-			"\n      U u_val = mapval.get(key);" +
-			"\n      T t_val = fn_any_from_key_value.apply(key, u_val);" +
-			"\n      output.add(t_val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T> CompletableFuture<T> async_new_completed(final T val) {" +
-			"\n    CompletableFuture<T> output = CompletableFuture.completedFuture(val);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {" +
-			"\n    CompletableFuture<T> output = future.thenApply(val -> {" +
-			"\n      return Core.f_any_from_any(generic_any_1, val);" +
-			"\n    });" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {" +
-			"\n    CompletableFuture<T> output = future.thenApply(fn);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {" +
-			"\n    CompletableFuture<Void> allFutures = CompletableFuture.allOf(" +
-			"\n      list_future.toArray(new CompletableFuture[list_future.size()])" +
-			"\n    );" +
-			"\n    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {" +
-			"\n      List<T> list = list_future.stream()" +
-			"\n        .map(future -> future.join())" +
-			"\n        .collect(Collectors.toList());" +
-			"\n      return Core.immutablelist(list);" +
-			"\n    });" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static void debug(Object... values) {" +
-			"\n    for (Object value : values) {" +
-			"\n      String text = \"\";" +
-			"\n      if (value == null) {" +
-			"\n        text = \"null\";" +
-			"\n      } else if (value instanceof Core.Type_any) {" +
-			"\n        Core.Type_any val_any = (Core.Type_any)value;" +
-			"\n        Core.Type_string valstring = Core.f_string_from_any(val_any);" +
-			"\n        text = valstring.vx_string();" +
-			"\n      } else {" +
-			"\n        text = value.toString();" +
-			"\n      }" +
-			"\n      System.out.println(text);" +
-			"\n    }" +
-			"\n  }" +
-			"\n" +
-			"\n  @SafeVarargs" +
-			"\n  public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {" +
-			"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
-			"\n    for (KeyValue<T> keyvalue : keyvalues) {" +
-			"\n      String key = keyvalue.key;" +
-			"\n      T value = keyvalue.value;" +
-			"\n      output.put(key, value);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T> KeyValue<T> keyvalue_from_key_value(final String key, final T value) {" +
-			"\n    KeyValue<T> output = new KeyValue<T>();" +
-			"\n    output.key = key;" +
-			"\n    output.value = value;" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T> Map<String, T> map_from_list_fn(final List<T> listval, final Function<T, Core.Type_string> fn_any_from_any) {" +
-			"\n    Map<String, T> output = new LinkedHashMap<>();" +
-			"\n    for (T val : listval) {" +
-			"\n      Core.Type_string valkey = fn_any_from_any.apply(val);" +
-			"\n      String key = valkey.vx_string();" +
-			"\n      output.put(key, val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static <T extends Core.Type_any> LinkedHashMap<String, T> map_from_map(final LinkedHashMap<String, Core.Type_any> mapval) {" +
-			"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
-			"\n    Set<String> keys = mapval.keySet();" +
-			"\n    for (String key : keys) {" +
-			"\n      Core.Type_any value = mapval.get(key);" +
-			"\n      try {" +
-			"\n        @SuppressWarnings(\"unchecked\")" +
-			"\n        T castval = (T)value;" +
-			"\n        output.put(key, castval);" +
-			"\n      } catch (Exception ex) {" +
-			"\n        Core.debug(\"map<-map\", ex);" +
-			"\n      }" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  // Warning!: Blocking" +
-			"\n  public static <T extends Core.Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {" +
-			"\n    T output = Core.f_empty(generic_any_1);" +
-			"\n    try {" +
-			"\n      output = future.get();" +
-			"\n    } catch (Exception e) {" +
-			"\n      Core.Type_msg msg = Core.t_msg.vx_new_from_exception(\"sync<-async\", e);" +
-			"\n      Core.Type_any val = generic_any_1.vx_new(msg);" +
-			"\n      output = Core.f_any_from_any(generic_any_1, val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static Core.Type_typedef typedef_new(" +
-			"\n    String pkgname," +
-			"\n    String name," +
-			"\n    String extend," +
-			"\n    Core.Type_typelist traits," +
-			"\n    Core.Type_typelist allowtypes," +
-			"\n    Core.Type_typelist disallowtypes," +
-			"\n    Core.Type_funclist allowfuncs," +
-			"\n    Core.Type_funclist disallowfuncs," +
-			"\n    Core.Type_anylist allowvalues," +
-			"\n    Core.Type_anylist disallowvalues," +
-			"\n    Core.Type_argmap properties" +
-			"\n  ) {" +
-			"\n    Core.Class_typedef output = new Core.Class_typedef();" +
-			"\n    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);" +
-			"\n    output.vx_p_name = Core.t_string.vx_new_from_string(name);" +
-			"\n    output.vx_p_extend = Core.t_string.vx_new_from_string(extend);" +
-			"\n    output.vx_p_traits = traits;" +
-			"\n    output.vx_p_allowtypes = allowtypes;" +
-			"\n    output.vx_p_disallowtypes = disallowtypes;" +
-			"\n    output.vx_p_allowfuncs = disallowfuncs;" +
-			"\n    output.vx_p_disallowfuncs = disallowfuncs;" +
-			"\n    output.vx_p_allowvalues = disallowvalues;" +
-			"\n    output.vx_p_disallowvalues = disallowvalues;" +
-			"\n    output.vx_p_properties = properties;" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n"
-	}
+	/*
+		switch pkg.name {
+		case "vx/core":
+			specialcode = "" +
+				"\n  public static interface Type_replfunc {" +
+				"\n    public vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);" +
+				"\n  }" +
+				"\n" +
+				"\n  public static interface Type_replfunc_async {" +
+				"\n    public CompletableFuture<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist);" +
+				"\n  }" +
+				"\n" +
+				"\n  public static List<vx_core::Type_any> emptylistany = vx_core::immutablelist(new ArrayList<vx_core::Type_any>());" +
+				"\n" +
+				"\n  public static Map<String, vx_core::Type_any> emptymapany = vx_core::immutablemap(new LinkedHashMap<String, vx_core::Type_any>());" +
+				"\n" +
+				"\n  public static <T> List<T> immutablelist(List<T> listany) {" +
+				"\n    return Collections.unmodifiableList(listany);" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T> Map<String, T> immutablemap(Map<String, T> mapany) {" +
+				"\n    return Collections.unmodifiableMap(mapany);" +
+				"\n  }" +
+				"\n" +
+				"\n  public static class Class_base {" +
+				"\n    protected int vx_iref = 0;" +
+				"\n    protected vx_core::Type_msgblock vxmsgblock = null;" +
+				"\n    public List<Type_any> vx_dispose() {" +
+				"\n      this.vx_iref = 0;" +
+				"\n      this.vxmsgblock = null;" +
+				"\n      return emptylistany;" +
+				"\n    }" +
+				"\n    public vx_core::Type_msgblock vx_msgblock() {return vxmsgblock;}" +
+				"\n    public boolean vx_release() {" +
+				"\n      boolean output = false;" +
+				"\n      if (this.vx_iref < 0) {" +
+				"\n      } else if (vx_iref == 0) {" +
+				"\n        vx_iref = -1;" +
+				"\n        output = true;" +
+				"\n      } else {" +
+				"\n        vx_iref -= 1;" +
+				"\n      }" +
+				"\n      return output;" +
+				"\n    }" +
+				"\n    public void vx_reserve() {this.vx_iref += 1;}" +
+				"\n  }" +
+				"\n" +
+				"\n  public static class KeyValue<T> {" +
+				"\n    public String key = \"\";" +
+				"\n    public T value = null;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static vx_core::Type_constdef constdef_new(" +
+				"\n    String pkgname," +
+				"\n    String name," +
+				"\n    vx_core::Type_any typ" +
+				"\n  ) {" +
+				"\n    vx_core::Class_constdef output = new vx_core::Class_constdef();" +
+				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
+				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
+				"\n    output.vx_p_type = typ;" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static vx_core::Type_funcdef funcdef_new(" +
+				"\n    String pkgname," +
+				"\n    String name," +
+				"\n    int idx," +
+				"\n    boolean async," +
+				"\n    vx_core::Type_any typ" +
+				"\n  ) {" +
+				"\n    vx_core::Class_funcdef output = new vx_core::Class_funcdef();" +
+				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
+				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
+				"\n    output.vx_p_idx = vx_core::t_int.vx_new_from_int(idx);" +
+				"\n    output.vx_p_async = vx_core::t_boolean.vx_new_from_boolean(async);" +
+				"\n    output.vx_p_type = typ;" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static vx_core::Type_any[] arrayany_from_anylist(final vx_core::Type_anylist list) {" +
+				"\n    return list.vx_list().toArray(new vx_core::Type_any[0]);" +
+				"\n  }" +
+				"\n" +
+				"\n  @SafeVarargs" +
+				"\n  public static <T> List<T> arraylist_from_array(final T... items) {" +
+				"\n    List<T> output = new ArrayList<T>(Arrays.asList(items));" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> List<T> arraylist_from_arraylist(final T generic_any_1, final List<U> listval) {" +
+				"\n    List<T> output = new ArrayList<>();" +
+				"\n    for (vx_core::Type_any value : listval) {" +
+				"\n      T t_val = vx_core::f_any_from_any(generic_any_1, value);" +
+				"\n      output.add(t_val);" +
+				"\n    }" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T, U> List<T> arraylist_from_arraylist_fn(final List<U> listval, final Function<U, T> fn_any_from_any) {" +
+				"\n    List<T> output = new ArrayList<>();" +
+				"\n    for (U value_u : listval) {" +
+				"\n      T t_val = fn_any_from_any.apply(value_u);" +
+				"\n      output.add(t_val);" +
+				"\n    }" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> List<T> arraylist_from_linkedhashmap(final T generic_any_1, final Map<String, U> mapval) {" +
+				"\n    List<T> output = new ArrayList<T>();" +
+				"\n    Set<String> keys = mapval.keySet();" +
+				"\n    for (String key : keys) {" +
+				"\n      U u_val = mapval.get(key);" +
+				"\n      T t_val = vx_core::f_any_from_any(generic_any_1, u_val);" +
+				"\n      output.add(t_val);" +
+				"\n    }" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T, U> List<T> arraylist_from_linkedhashmap_fn(final Map<String, U> mapval, final BiFunction<String, U, T> fn_any_from_key_value) {" +
+				"\n    List<T> output = new ArrayList<T>();" +
+				"\n    Set<String> keys = mapval.keySet();" +
+				"\n    for (String key : keys) {" +
+				"\n      U u_val = mapval.get(key);" +
+				"\n      T t_val = fn_any_from_key_value.apply(key, u_val);" +
+				"\n      output.add(t_val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T> CompletableFuture<T> async_new_completed(final T val) {" +
+				"\n    CompletableFuture<T> output = CompletableFuture.completedFuture(val);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {" +
+				"\n    CompletableFuture<T> output = future.thenApply(val -> {" +
+				"\n      return vx_core::f_any_from_any(generic_any_1, val);" +
+				"\n    });" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {" +
+				"\n    CompletableFuture<T> output = future.thenApply(fn);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {" +
+				"\n    CompletableFuture<Void> allFutures = CompletableFuture.allOf(" +
+				"\n      list_future.toArray(new CompletableFuture[list_future.size()])" +
+				"\n    );" +
+				"\n    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {" +
+				"\n      List<T> list = list_future.stream()" +
+				"\n        .map(future -> future.join())" +
+				"\n        .collect(Collectors.toList());" +
+				"\n      return vx_core::immutablelist(list);" +
+				"\n    });" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static void debug(Object... values) {" +
+				"\n    for (Object value : values) {" +
+				"\n      String text = \"\";" +
+				"\n      if (value == null) {" +
+				"\n        text = \"null\";" +
+				"\n      } else if (value instanceof vx_core::Type_any) {" +
+				"\n        vx_core::Type_any val_any = (vx_core::Type_any)value;" +
+				"\n        vx_core::Type_string valstring = vx_core::f_string_from_any(val_any);" +
+				"\n        text = valstring.vx_string();" +
+				"\n      } else {" +
+				"\n        text = value.toString();" +
+				"\n      }" +
+				"\n      System.out.println(text);" +
+				"\n    }" +
+				"\n  }" +
+				"\n" +
+				"\n  @SafeVarargs" +
+				"\n  public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {" +
+				"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
+				"\n    for (KeyValue<T> keyvalue : keyvalues) {" +
+				"\n      String key = keyvalue.key;" +
+				"\n      T value = keyvalue.value;" +
+				"\n      output.put(key, value);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T> KeyValue<T> keyvalue_from_key_value(final String key, final T value) {" +
+				"\n    KeyValue<T> output = new KeyValue<T>();" +
+				"\n    output.key = key;" +
+				"\n    output.value = value;" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T> Map<String, T> map_from_list_fn(final List<T> listval, final Function<T, vx_core::Type_string> fn_any_from_any) {" +
+				"\n    Map<String, T> output = new LinkedHashMap<>();" +
+				"\n    for (T val : listval) {" +
+				"\n      vx_core::Type_string valkey = fn_any_from_any.apply(val);" +
+				"\n      String key = valkey.vx_string();" +
+				"\n      output.put(key, val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static <T extends vx_core::Type_any> LinkedHashMap<String, T> map_from_map(final LinkedHashMap<String, vx_core::Type_any> mapval) {" +
+				"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
+				"\n    Set<String> keys = mapval.keySet();" +
+				"\n    for (String key : keys) {" +
+				"\n      vx_core::Type_any value = mapval.get(key);" +
+				"\n      try {" +
+				"\n        @SuppressWarnings(\"unchecked\")" +
+				"\n        T castval = (T)value;" +
+				"\n        output.put(key, castval);" +
+				"\n      } catch (Exception ex) {" +
+				"\n        vx_core::debug(\"map<-map\", ex);" +
+				"\n      }" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  // Warning!: Blocking" +
+				"\n  public static <T extends vx_core::Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {" +
+				"\n    T output = vx_core::f_empty(generic_any_1);" +
+				"\n    try {" +
+				"\n      output = future.get();" +
+				"\n    } catch (Exception e) {" +
+				"\n      vx_core::Type_msg msg = vx_core::t_msg.vx_new_from_exception(\"sync<-async\", e);" +
+				"\n      vx_core::Type_any val = generic_any_1.vx_new(msg);" +
+				"\n      output = vx_core::f_any_from_any(generic_any_1, val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  public static vx_core::Type_typedef typedef_new(" +
+				"\n    String pkgname," +
+				"\n    String name," +
+				"\n    String extend," +
+				"\n    vx_core::Type_typelist traits," +
+				"\n    vx_core::Type_typelist allowtypes," +
+				"\n    vx_core::Type_typelist disallowtypes," +
+				"\n    vx_core::Type_funclist allowfuncs," +
+				"\n    vx_core::Type_funclist disallowfuncs," +
+				"\n    vx_core::Type_anylist allowvalues," +
+				"\n    vx_core::Type_anylist disallowvalues," +
+				"\n    vx_core::Type_argmap properties" +
+				"\n  ) {" +
+				"\n    vx_core::Class_typedef output = new vx_core::Class_typedef();" +
+				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
+				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
+				"\n    output.vx_p_extend = vx_core::t_string.vx_new_from_string(extend);" +
+				"\n    output.vx_p_traits = traits;" +
+				"\n    output.vx_p_allowtypes = allowtypes;" +
+				"\n    output.vx_p_disallowtypes = disallowtypes;" +
+				"\n    output.vx_p_allowfuncs = disallowfuncs;" +
+				"\n    output.vx_p_disallowfuncs = disallowfuncs;" +
+				"\n    output.vx_p_allowvalues = disallowvalues;" +
+				"\n    output.vx_p_disallowvalues = disallowvalues;" +
+				"\n    output.vx_p_properties = properties;" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n"
+		}
+	*/
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
-		typetext, msgs := JavaFromType(typ)
+		typetext, msgs := CppFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		typetexts += typetext
 	}
@@ -1058,7 +1057,7 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 	consttexts := ""
 	for _, cnstid := range cnstkeys {
 		cnst := pkg.mapconst[cnstid]
-		consttext, msgs := JavaFromConst(cnst, pkg)
+		consttext, msgs := CppFromConst(cnst, pkg)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		consttexts += consttext
 	}
@@ -1067,7 +1066,7 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 	for _, fncid := range fnckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			fnctext, msgs := JavaFromFunc(fnc)
+			fnctext, msgs := CppFromFunc(fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			functexts += fnctext
 		}
@@ -1079,13 +1078,11 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 		consttexts +
 		functexts
 		//		emptytypes
-	imports := JavaImportsFromPackage(pkg, pkgprefix, body, false)
+	imports := CppImportsFromPackage(pkg, pkgprefix, body, false)
 	output := "" +
-		"package " + pkgpath + ";" +
-		"\n" +
 		imports +
 		"\n" +
-		"\npublic final class " + pkgname + " {" +
+		"\nnamespace " + pkgname + " {" +
 		"\n" +
 		body +
 		"\n}" +
@@ -1093,7 +1090,7 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 	return output, msgblock
 }
 
-func JavaFromText(text string) string {
+func CppFromText(text string) string {
 	var output = text
 	output = strings.ReplaceAll(output, "\n", "\\n")
 	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
@@ -1101,8 +1098,8 @@ func JavaFromText(text string) string {
 	return output
 }
 
-func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFromType")
+func CppFromType(typ *vxtype) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFromType")
 	output := ""
 	path := typ.pkgname + "/" + typ.name
 	doc := "" +
@@ -1113,9 +1110,9 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	if typ.deprecated != "" {
 		doc += "\n" + typ.deprecated
 	}
-	typename := JavaFromName(typ.alias)
+	typename := CppFromName(typ.alias)
 	instancefuncs := ""
-	createtext, msgs := JavaFromValue(typ.createvalue, "", emptyfunc, "    ", true, false, path)
+	createtext, msgs := CppFromValue(typ.createvalue, "", emptyfunc, "    ", true, false, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if createtext != "" {
 		instancefuncs += "\n    " + createtext + "\n"
@@ -1123,56 +1120,56 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	staticfuncs := ""
 	valnew := ""
 	extendinterface := ""
-	extendsclass := " extends Core.Class_base"
+	extendsclass := " extends vx_core::Class_base"
 	valcopy := ""
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		valnew += "" +
-			"\n      Core.Type_msgblock msgblock = Core.e_msgblock;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	case "vx/core/anytype":
-		extendinterface = "Core.Type_any"
+		extendinterface = "vx_core::Type_any"
 	case "vx/core/const":
 	case "vx/core/list":
-		extendinterface = "Core.Type_anytype"
+		extendinterface = "vx_core::Type_anytype"
 		instancefuncs += "" +
 			"\n" +
-			"\n    public <T extends Core.Type_any> List<T> vx_any(final T generic_any_1) {" +
-			"\n      return Core.arraylist_from_arraylist(generic_any_1, this.vx_list());" +
+			"\n    public <T extends vx_core::Type_any> List<T> vx_any(final T generic_any_1) {" +
+			"\n      return vx_core::arraylist_from_arraylist(generic_any_1, this.vx_list());" +
 			"\n    }" +
 			"\n" +
-			"\n    public <T extends Core.Type_any> T vx_any_from_list(final T generic_any_1, final int index) {" +
+			"\n    public <T extends vx_core::Type_any> T vx_any_from_list(final T generic_any_1, final int index) {" +
 			"\n      return vx_any_from_list(generic_any_1, this.vx_list(), index);" +
 			"\n    }" +
 			"\n"
 		staticfuncs = "" +
-			"\n    public static <T extends Core.Type_any> List<T> list_new(final T generic_any_1, final Core.Type_any... vals) {" +
-			"\n      List<Core.Type_any> listval = Arrays.asList(vals);" +
-			"\n      return Core.arraylist_from_arraylist(generic_any_1, listval);" +
+			"\n    public static <T extends vx_core::Type_any> List<T> list_new(final T generic_any_1, final vx_core::Type_any... vals) {" +
+			"\n      List<vx_core::Type_any> listval = Arrays.asList(vals);" +
+			"\n      return vx_core::arraylist_from_arraylist(generic_any_1, listval);" +
 			"\n    }" +
 			"\n" +
-			"\n    public static <T extends Core.Type_any> T vx_any_from_list(final T generic_any_1, final List<Core.Type_any> list, final int index) {" +
-			"\n      T output = Core.f_empty(generic_any_1);" +
+			"\n    public static <T extends vx_core::Type_any> T vx_any_from_list(final T generic_any_1, final List<vx_core::Type_any> list, final int index) {" +
+			"\n      T output = vx_core::f_empty(generic_any_1);" +
 			"\n      if (list.size() > index) {" +
-			"\n        output = Core.f_any_from_any(generic_any_1, list.get(index));" +
+			"\n        output = vx_core::f_any_from_any(generic_any_1, list.get(index));" +
 			"\n      }" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n" +
-			"\n    public static <T extends Core.Type_any> T vx_any_first_from_list_fn(final T generic_any_1, final Core.Type_list list, final Function<Core.Type_any, T> fn_any) {" +
-			"\n      T output = Core.f_empty(generic_any_1);" +
-			"\n      List<Core.Type_any> listany = list.vx_list();" +
-			"\n      for (Core.Type_any any : listany) {" +
-			"\n        T tany = Core.f_any_from_any(generic_any_1, any);" +
+			"\n    public static <T extends vx_core::Type_any> T vx_any_first_from_list_fn(final T generic_any_1, final vx_core::Type_list list, final Function<vx_core::Type_any, T> fn_any) {" +
+			"\n      T output = vx_core::f_empty(generic_any_1);" +
+			"\n      List<vx_core::Type_any> listany = list.vx_list();" +
+			"\n      for (vx_core::Type_any any : listany) {" +
+			"\n        T tany = vx_core::f_any_from_any(generic_any_1, any);" +
 			"\n        T val = fn_any.apply(tany);" +
 			"\n        if (val != null) {" +
 			"\n          output = val;" +
@@ -1183,88 +1180,88 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n    }" +
 			"\n"
 	case "vx/core/map":
-		extendinterface = "Core.Type_anytype"
+		extendinterface = "vx_core::Type_anytype"
 	case "vx/core/struct":
-		extendinterface = "Core.Type_map"
+		extendinterface = "vx_core::Type_map"
 	case "vx/core/func":
-		extendinterface = "Core.Type_anytype"
+		extendinterface = "vx_core::Type_anytype"
 		instancefuncs += "" +
-			"\n    public Core.Type_funcdef vx_funcdef() {" +
-			"\n      return Core.e_funcdef;" +
+			"\n    public vx_core::Type_funcdef vx_funcdef() {" +
+			"\n      return vx_core::e_funcdef;" +
 			"\n    }"
 	case "vx/core/type":
-		extendinterface = "Core.Type_anytype"
+		extendinterface = "vx_core::Type_anytype"
 	case "vx/core/boolean":
 		valcopy = "" +
-			"\n      Core.Type_boolean val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Type_boolean val = this;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxboolean = val.vx_boolean();"
 		valnew = "" +
 			"\n      boolean booleanval = false;" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_boolean) {" +
-			"\n          Core.Type_boolean valboolean = (Core.Type_boolean)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_boolean) {" +
+			"\n          vx_core::Type_boolean valboolean = (vx_core::Type_boolean)valsub;" +
 			"\n          booleanval = booleanval || valboolean.vx_boolean();" +
 			"\n        } else if (valsub instanceof Boolean) {" +
 			"\n          booleanval = booleanval || (Boolean)valsub;" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output.vxboolean = booleanval;" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	case "vx/core/decimal":
-		extendinterface = "Core.Type_number"
+		extendinterface = "vx_core::Type_number"
 		valcopy = "" +
-			"\n      Core.Type_decimal val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Type_decimal val = this;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxdecimal = val.vx_string();"
 		valnew = "" +
 			"\n      String sval = \"\";" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_string) {" +
-			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_string) {" +
+			"\n          vx_core::Type_string valstring = (vx_core::Type_string)valsub;" +
 			"\n          sval = valstring.vx_string();" +
 			"\n        } else if (valsub instanceof String) {" +
 			"\n          sval = (String)valsub;" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output.vxdecimal = sval;" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	case "vx/core/float":
-		extendinterface = "Core.Type_number"
+		extendinterface = "vx_core::Type_number"
 		valcopy = "" +
-			"\n      Core.Type_float val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Type_float val = this;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxfloat = val.vx_float();"
 		valnew = "" +
 			"\n      float floatval = 0;" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_decimal) {" +
-			"\n          Core.Type_decimal valnum = (Core.Type_decimal)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_decimal) {" +
+			"\n          vx_core::Type_decimal valnum = (vx_core::Type_decimal)valsub;" +
 			"\n          floatval += valnum.vx_float();" +
-			"\n        } else if (valsub instanceof Core.Type_float) {" +
-			"\n          Core.Type_float valnum = (Core.Type_float)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_float) {" +
+			"\n          vx_core::Type_float valnum = (vx_core::Type_float)valsub;" +
 			"\n          floatval += valnum.vx_float();" +
-			"\n        } else if (valsub instanceof Core.Type_int) {" +
-			"\n          Core.Type_int valnum = (Core.Type_int)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_int) {" +
+			"\n          vx_core::Type_int valnum = (vx_core::Type_int)valsub;" +
 			"\n          floatval += valnum.vx_int();" +
-			"\n        } else if (valsub instanceof Core.Type_string) {" +
-			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_string) {" +
+			"\n          vx_core::Type_string valstring = (vx_core::Type_string)valsub;" +
 			"\n          floatval += Float.parseFloat(valstring.vx_string());" +
 			"\n        } else if (valsub instanceof Float) {" +
 			"\n          floatval += (Float)valsub;" +
@@ -1275,58 +1272,58 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }" +
 			"\n      output.vxfloat = floatval;" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	case "vx/core/int":
-		extendinterface = "Core.Type_number"
+		extendinterface = "vx_core::Type_number"
 		valcopy = "" +
-			"\n      Core.Type_int val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Type_int val = this;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxint = val.vx_int();"
 		valnew = "" +
 			"\n      int intval = 0;" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_int) {" +
-			"\n          Core.Type_int valnum = (Core.Type_int)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_int) {" +
+			"\n          vx_core::Type_int valnum = (vx_core::Type_int)valsub;" +
 			"\n          intval += valnum.vx_int();" +
 			"\n        } else if (valsub instanceof Integer) {" +
 			"\n          intval += (Integer)valsub;" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output.vxint = intval;" +
-			"\n      if (msgblock != Core.t_msgblock) {" +
+			"\n      if (msgblock != vx_core::t_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	case "vx/core/msg":
 	case "vx/core/msgblock":
 	case "vx/core/string":
 		valcopy = "" +
-			"\n      Core.Class_string val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Class_string val = this;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxstring = val.vx_string();"
 		valnew = "" +
 			"\n      StringBuilder sb = new StringBuilder(output.vx_string());" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_string) {" +
-			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_string) {" +
+			"\n          vx_core::Type_string valstring = (vx_core::Type_string)valsub;" +
 			"\n          sb.append(valstring.vx_string());" +
-			"\n        } else if (valsub instanceof Core.Type_int) {" +
-			"\n          Core.Type_int valint = (Core.Type_int)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_int) {" +
+			"\n          vx_core::Type_int valint = (vx_core::Type_int)valsub;" +
 			"\n          sb.append(valint.vx_int());" +
-			"\n        } else if (valsub instanceof Core.Type_float) {" +
-			"\n          Core.Type_float valfloat = (Core.Type_float)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_float) {" +
+			"\n          vx_core::Type_float valfloat = (vx_core::Type_float)valsub;" +
 			"\n          sb.append(valfloat.vx_float());" +
-			"\n        } else if (valsub instanceof Core.Type_decimal) {" +
-			"\n          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;" +
+			"\n        } else if (valsub instanceof vx_core::Type_decimal) {" +
+			"\n          vx_core::Type_decimal valdecimal = (vx_core::Type_decimal)valsub;" +
 			"\n          sb.append(valdecimal.vx_string());" +
 			"\n        } else if (valsub instanceof String) {" +
 			"\n          sb.append((String)valsub);" +
@@ -1335,12 +1332,12 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n        } else if (valsub instanceof Float) {" +
 			"\n          sb.append((Float)valsub);" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
+			"\n          vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output.vxstring = sb.toString();" +
-			"\n      if (msgblock != Core.t_msgblock) {" +
+			"\n      if (msgblock != vx_core::t_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 	}
@@ -1348,16 +1345,16 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	case ":list":
 		allowcode := ""
 		allowname := "any"
-		allowclass := "Core.Type_any"
+		allowclass := "vx_core::Type_any"
 		allowtypes := ListAllowTypeFromType(typ)
 		if len(allowtypes) > 0 {
 			allowtype := allowtypes[0]
-			allowclass = JavaNameTypeFullFromType(allowtype)
-			allowempty := JavaNameEFromType(allowtype)
-			allowname = JavaNameFromType(allowtype)
+			allowclass = CppNameTypeFullFromType(allowtype)
+			allowempty := CppNameEFromType(allowtype)
+			allowname = CppNameFromType(allowtype)
 			allowcode = "" +
 				"\n    @Override" +
-				"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_int index) {" +
+				"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_int index) {" +
 				"\n      " + allowclass + " output = " + allowempty + ";" +
 				"\n      Class_" + typename + " list = this;" +
 				"\n      int iindex = index.vx_int();" +
@@ -1377,60 +1374,60 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n    public List<" + allowclass + "> vx_list" + allowname + "() {return vxlist;}" +
 				"\n" +
 				"\n    @Override" +
-				"\n    public Core.Type_any vx_any(final Core.Type_int index) {" +
+				"\n    public vx_core::Type_any vx_any(final vx_core::Type_int index) {" +
 				"\n      return this.vx_" + allowname + "(index);" +
 				"\n    }" +
 				"\n"
 		}
 		instancefuncs += "" +
-			"\n    protected List<" + allowclass + "> vxlist = Core.immutablelist(new ArrayList<" + allowclass + ">());" +
+			"\n    protected List<" + allowclass + "> vxlist = vx_core::immutablelist(new ArrayList<" + allowclass + ">());" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}" +
+			"\n    public List<vx_core::Type_any> vx_list() {return vx_core::immutablelist(new ArrayList<vx_core::Type_any>(this.vxlist));}" +
 			"\n" +
 			allowcode
 		valcopy = "" +
 			"\n      Type_" + typename + " val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      List<" + allowclass + "> listval = new ArrayList<>(val.vx_list" + allowname + "());"
 		switch typ.name {
 		case "msgblocklist":
 			valnew = "" +
 				"\n      for (Object valsub : vals) {" +
-				"\n        if (valsub instanceof Core.Type_msg) {" +
+				"\n        if (valsub instanceof vx_core::Type_msg) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		case "msglist":
 			valnew = "" +
 				"\n      for (Object valsub : vals) {" +
-				"\n        if (valsub instanceof Core.Type_msgblock) {" +
+				"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		default:
 			valnew = "" +
 				"\n      for (Object valsub : vals) {" +
-				"\n        if (valsub instanceof Core.Type_msgblock) {" +
+				"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);" +
-				"\n        } else if (valsub instanceof Core.Type_msg) {" +
+				"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);" +
 				"\n        } else if (valsub instanceof " + allowclass + ") {" +
 				"\n          listval.add((" + allowclass + ")valsub);"
 		}
 		for _, allowedtype := range typ.allowtypes {
-			allowedtypename := JavaNameTypeFromType(allowedtype)
+			allowedtypename := CppNameTypeFromType(allowedtype)
 			castval := "(" + allowedtypename + ")valsub"
 			if allowedtypename == allowclass {
 				switch NameFromType(allowedtype) {
 				case "vx/core/boolean":
 					allowedtypename = "Boolean"
-					castval = "Core.t_boolean.vx_new(valsub)"
+					castval = "vx_core::t_boolean.vx_new(valsub)"
 				case "vx/core/int":
 					allowedtypename = "Integer"
-					castval = "Core.t_int.vx_new(valsub)"
+					castval = "vx_core::t_int.vx_new(valsub)"
 				case "vx/core/float":
 					allowedtypename = "Float"
-					castval = "Core.t_float.vx_new(valsub)"
+					castval = "vx_core::t_float.vx_new(valsub)"
 				case "vx/core/string":
 					allowedtypename = "String"
-					castval = "Core.t_string.vx_new(valsub)"
+					castval = "vx_core::t_string.vx_new(valsub)"
 				}
 			}
 			if allowedtypename != "" {
@@ -1452,16 +1449,16 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n            }" +
 			"\n          }" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
+			"\n          vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxlist = Core.immutablelist(listval);" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      output.vxlist = vx_core::immutablelist(listval);" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 		if extendinterface == "" {
-			extendinterface = "Core.Type_list"
+			extendinterface = "vx_core::Type_list"
 		}
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
 			MsgLog("Missing allowed types", typ.name)
@@ -1469,16 +1466,16 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	case ":map":
 		allowcode := ""
 		allowname := "any"
-		allowclass := "Core.Type_any"
+		allowclass := "vx_core::Type_any"
 		allowtypes := ListAllowTypeFromType(typ)
 		if len(allowtypes) > 0 {
 			allowtype := allowtypes[0]
-			allowclass = JavaNameTypeFullFromType(allowtype)
-			allowempty := JavaNameEFromType(allowtype)
-			allowname = JavaNameFromType(allowtype)
+			allowclass = CppNameTypeFullFromType(allowtype)
+			allowempty := CppNameEFromType(allowtype)
+			allowname = CppNameFromType(allowtype)
 			allowcode = "" +
 				"\n    @Override" +
-				"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_string key) {" +
+				"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_string key) {" +
 				"\n      " + allowclass + " output = " + allowempty + ";" +
 				"\n      Class_" + typename + " map = this;" +
 				"\n      String skey = key.vx_string();" +
@@ -1496,36 +1493,36 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "() {return vxmap;}" +
 				"\n" +
 				"\n    @Override" +
-				"\n    public Core.Type_any vx_any(final Core.Type_string key) {" +
+				"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key) {" +
 				"\n      return this.vx_" + allowname + "(key);" +
 				"\n    }" +
 				"\n"
 		}
 		instancefuncs += "" +
-			"\n    protected Map<String, " + allowclass + "> vxmap = Core.immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
+			"\n    protected Map<String, " + allowclass + "> vxmap = vx_core::immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}" +
+			"\n    public Map<String, vx_core::Type_any> vx_map() {return vx_core::immutablemap(new LinkedHashMap<String, vx_core::Type_any>(this.vxmap));}" +
 			"\n" +
 			allowcode +
 			"\n    @Override" +
-			"\n    public Type_" + typename + " vx_new_from_map(final Map<String, Core.Type_any> mapval) {" +
+			"\n    public Type_" + typename + " vx_new_from_map(final Map<String, vx_core::Type_any> mapval) {" +
 			"\n      Class_" + typename + " output = new Class_" + typename + "();" +
-			"\n      Core.Type_msgblock msgblock = Core.e_msgblock;" +
+			"\n      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;" +
 			"\n      Map<String, " + allowclass + "> map = new LinkedHashMap<>();" +
 			"\n      Set<String> keys = mapval.keySet();" +
 			"\n      for (String key : keys) {" +
-			"\n        Core.Type_any val = mapval.get(key);" +
+			"\n        vx_core::Type_any val = mapval.get(key);" +
 			"\n        if (val instanceof " + allowclass + ") {" +
 			"\n          " + allowclass + " castval = (" + allowclass + ")val;" +
 			"\n          map.put(key, castval);" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.t_msg.vx_new_error(\"(" + typename + ") Invalid Value: \" + val.toString() + \"\");" +
-			"\n          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
+			"\n          vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(" + typename + ") Invalid Value: \" + val.toString() + \"\");" +
+			"\n          msgblock = vx_core::t_msgblock.vx_copy(msgblock, msg);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxmap = Core.immutablemap(map);" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      output.vxmap = vx_core::immutablemap(map);" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }" +
 			"\n      return output;" +
@@ -1533,46 +1530,46 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n"
 		valcopy = "" +
 			"\n      Type_" + typename + " valmap = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);"
+			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);"
 		valnew = "" +
 			"\n      Map<String, " + allowclass + "> mapval = new LinkedHashMap<>(valmap.vx_map" + allowname + "());" +
 			"\n      String key = \"\";" +
 			"\n      for (Object valsub : vals) {" +
-			"\n        if (valsub instanceof Core.Type_msgblock) {" +
-			"\n          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);" +
-			"\n        } else if (valsub instanceof Core.Type_msg) {" +
-			"\n          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);" +
+			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
+			"\n          msgblock = vx_core::t_msgblock.vx_copy(msgblock, valsub);" +
+			"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
+			"\n          msgblock = vx_core::t_msgblock.vx_copy(msgblock, valsub);" +
 			"\n        } else if (key.equals(\"\")) {" +
-			"\n          if (valsub instanceof Core.Type_string) {" +
-			"\n            Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n          if (valsub instanceof vx_core::Type_string) {" +
+			"\n            vx_core::Type_string valstring = (vx_core::Type_string)valsub;" +
 			"\n            key = valstring.vx_string();" +
 			"\n          } else if (valsub instanceof String) {" +
 			"\n            key = (String)valsub;" +
 			"\n          } else {" +
-			"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"Key Expected: \" + valsub.toString() + \"\");" +
-			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
+			"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"Key Expected: \" + valsub.toString() + \"\");" +
+			"\n            msgblock = vx_core::t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n        } else {" +
 			"\n          " + allowclass + " valany = null;" +
 			"\n          if (valsub instanceof " + allowclass + ") {" +
 			"\n            valany = (" + allowclass + ")valsub;"
 		for _, allowedtype := range typ.allowtypes {
-			allowedtypename := JavaNameTypeFromType(allowedtype)
+			allowedtypename := CppNameTypeFromType(allowedtype)
 			castval := "(" + allowedtypename + ")valsub"
 			if allowedtypename == allowclass {
 				switch NameFromType(allowedtype) {
 				case "vx/core/boolean":
 					allowedtypename = "Boolean"
-					castval = "Core.t_boolean.vx_new(valsub);"
+					castval = "vx_core::t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					allowedtypename = "Integer"
-					castval = "Core.t_int.vx_new(valsub);"
+					castval = "vx_core::t_int.vx_new(valsub);"
 				case "vx/core/float":
 					allowedtypename = "Float"
-					castval = "Core.t_float.vx_new(valsub);"
+					castval = "vx_core::t_float.vx_new(valsub);"
 				case "vx/core/string":
 					allowedtypename = "String"
-					castval = "Core.t_string.vx_new(valsub);"
+					castval = "vx_core::t_string.vx_new(valsub);"
 				}
 			}
 			if allowedtypename != "" {
@@ -1583,8 +1580,8 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		}
 		valnew += "" +
 			"\n          } else {" +
-			"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"Invalid Key/Value: \" + key + \" \"  + valsub.toString() + \"\");" +
-			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
+			"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"Invalid Key/Value: \" + key + \" \"  + valsub.toString() + \"\");" +
+			"\n            msgblock = vx_core::t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n          if (valany != null) {" +
 			"\n            mapval.put(key, valany);" +
@@ -1592,12 +1589,12 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          }" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxmap = Core.immutablemap(mapval);" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
+			"\n      output.vxmap = vx_core::immutablemap(mapval);" +
+			"\n      if (msgblock != vx_core::e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }"
 		if extendinterface == "" {
-			extendinterface = "Core.Type_map"
+			extendinterface = "vx_core::Type_map"
 		}
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
 			MsgLog("Missing allowed types", typ.name)
@@ -1610,19 +1607,19 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		switch NameFromType(typ) {
 		case "vx/core/msgblock":
 			valcopy += "" +
-				"\n      Core.Type_msgblock msgblock = this;"
+				"\n      vx_core::Type_msgblock msgblock = this;"
 		default:
 			valcopy += "" +
-				"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);"
+				"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);"
 		}
 		if extendinterface == "" {
-			extendinterface = "Core.Type_struct"
+			extendinterface = "vx_core::Type_struct"
 		}
 		props := ListPropertyTraitFromType(typ)
 		switch len(props) {
 		case 0:
 			valnew = "" +
-				"\n      if (msgblock != Core.e_msgblock) {" +
+				"\n      if (msgblock != vx_core::e_msgblock) {" +
 				"\n        output.vxmsgblock = msgblock;" +
 				"\n      }"
 		default:
@@ -1630,32 +1627,32 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			valnewswitch := ""
 			for _, arg := range props {
 				validkeys += "\n      validkeys.add(\":" + arg.name + "\");"
-				argname := JavaFromName(arg.name)
+				argname := CppFromName(arg.name)
 				valcopy += "\n      output.vx_p_" + argname + " = val." + argname + "();"
 				vx_map += "\n      output.put(\":" + arg.name + "\", this." + argname + "());"
 				vx_any += "" +
 					"\n      case \":" + arg.name + "\":" +
 					"\n        output = this." + argname + "();" +
 					"\n        break;"
-				argclassname := JavaNameTypeFromType(arg.vxtype)
+				argclassname := CppNameTypeFromType(arg.vxtype)
 				argalt := ""
 				switch NameFromType(arg.vxtype) {
 				case "vx/core/boolean":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Boolean) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_boolean.vx_new(valsub);"
+						"\n              output.vx_p_" + argname + " = vx_core::t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Integer) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_int.vx_new(valsub);"
+						"\n              output.vx_p_" + argname + " = vx_core::t_int.vx_new(valsub);"
 				case "vx/core/float":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Float) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_float.vx_new(valsub);"
+						"\n              output.vx_p_" + argname + " = vx_core::t_float.vx_new(valsub);"
 				case "vx/core/string":
 					argalt = "" +
 						"\n            } else if (valsub instanceof String) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_string.vx_new(valsub);"
+						"\n              output.vx_p_" + argname + " = vx_core::t_string.vx_new(valsub);"
 				}
 				valnewswitch += "" +
 					"\n          case \":" + arg.name + "\":" +
@@ -1663,7 +1660,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n              output.vx_p_" + argname + " = (" + argclassname + ")valsub;" +
 					argalt +
 					"\n            } else {" +
-					"\n              Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
+					"\n              vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
 					"\n              msgblock = msgblock.vx_copy(msg);" +
 					"\n            }" +
 					"\n            break;"
@@ -1672,17 +1669,17 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n" +
 					"\n    @Override" +
 					"\n    public " + argclassname + " " + argname + "() {" +
-					"\n      return this.vx_p_" + argname + " == null ? " + JavaNameEFromType(arg.vxtype) + " : this.vx_p_" + argname + ";" +
-					//"\n      Core.Type_any valsub = this.vx_map().getOrDefault(\":" + arg.name + "\", " + JavaNameEFromType(arg.vxtype) + ");" +
-					//"\n      return Core.f_any_from_any(" + JavaNameTFromType(arg.vxtype) + ", valsub);" +
+					"\n      return this.vx_p_" + argname + " == null ? " + CppNameEFromType(arg.vxtype) + " : this.vx_p_" + argname + ";" +
+					//"\n      vx_core::Type_any valsub = this.vx_map().getOrDefault(\":" + arg.name + "\", " + CppNameEFromType(arg.vxtype) + ");" +
+					//"\n      return vx_core::f_any_from_any(" + CppNameTFromType(arg.vxtype) + ", valsub);" +
 					"\n    }" +
 					"\n"
 			}
 			defaultkey := ""
 			lastarg := props[len(props)-1]
 			if lastarg.isdefault {
-				lastargname := JavaFromName(lastarg.name)
-				argclassname := JavaNameTypeFromType(lastarg.vxtype)
+				lastargname := CppFromName(lastarg.name)
+				argclassname := CppNameTypeFromType(lastarg.vxtype)
 				defaultkey += "" +
 					"\n          } else if (valsub instanceof " + argclassname + ") { // default property" +
 					"\n            output.vx_p_" + lastargname + " = (" + argclassname + ")valsub;"
@@ -1690,29 +1687,29 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				case "vx/core/boolean":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Boolean) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_boolean.vx_new(valsub);"
+						"\n            output.vx_p_" + lastargname + " = vx_core::t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Integer) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_int.vx_new(valsub);"
+						"\n            output.vx_p_" + lastargname + " = vx_core::t_int.vx_new(valsub);"
 				case "vx/core/float":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Float) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_float.vx_new(valsub);"
+						"\n            output.vx_p_" + lastargname + " = vx_core::t_float.vx_new(valsub);"
 				case "vx/core/string":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof String) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_string.vx_new(valsub);"
+						"\n            output.vx_p_" + lastargname + " = vx_core::t_string.vx_new(valsub);"
 				}
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
-						subargclassname := JavaNameTypeFromType(allowtype)
+						subargclassname := CppNameTypeFromType(allowtype)
 						defaultkey += "" +
 							"\n          } else if (valsub instanceof " + subargclassname + ") { // default property" +
 							"\n            " + subargclassname + " valdefault = (" + subargclassname + ")valsub;" +
 							"\n            " + argclassname + " vallist = output.vx_p_" + lastargname + ";" +
 							"\n            if (vallist == null) {" +
-							"\n              vallist = " + JavaNameTFromType(lastarg.vxtype) + ".vx_new(valdefault);" +
+							"\n              vallist = " + CppNameTFromType(lastarg.vxtype) + ".vx_new(valdefault);" +
 							"\n            } else {" +
 							"\n              vallist = vallist.vx_copy(valdefault);" +
 							"\n            }" +
@@ -1726,13 +1723,13 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n      String key = \"\";" +
 					"\n      for (Object valsub : vals) {" +
 					"\n        if (key == \"\") {" +
-					"\n          if (valsub instanceof Core.Type_string) {" +
-					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
+					"\n          if (valsub instanceof vx_core::Type_string) {" +
+					"\n            vx_core::Type_string valstr = (vx_core::Type_string)valsub;" +
 					"\n            key = valstr.vx_string();" +
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            key = (String)valsub;" +
 					"\n          } else {" +
-					"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
+					"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n        } else {" +
@@ -1746,30 +1743,30 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				valnew = "" +
 					"\n      String key = \"\";" +
 					"\n      for (Object valsub : vals) {" +
-					"\n        if (valsub instanceof Core.Type_msgblock) {" +
-					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
+					"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
+					"\n          vx_core::Type_msgblocklist msgblocks = this.msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
 					"\n          output.vx_p_msgblocks = msgblocks;" +
-					"\n        } else if (valsub instanceof Core.Type_msg) {" +
-					"\n          Core.Type_msglist msgs = this.msgs();" +
+					"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
+					"\n          vx_core::Type_msglist msgs = this.msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
 					"\n          output.vx_p_msgs = msgs;" +
-					"\n        } else if (valsub instanceof Core.Type_msgblocklist) {" +
-					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
+					"\n        } else if (valsub instanceof vx_core::Type_msgblocklist) {" +
+					"\n          vx_core::Type_msgblocklist msgblocks = this.msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
 					"\n          output.vx_p_msgblocks = msgblocks;" +
-					"\n        } else if (valsub instanceof Core.Type_msglist) {" +
-					"\n          Core.Type_msglist msgs = this.msgs();" +
+					"\n        } else if (valsub instanceof vx_core::Type_msglist) {" +
+					"\n          vx_core::Type_msglist msgs = this.msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
 					"\n          output.vx_p_msgs = msgs;" +
 					"\n        } else if (key == \"\") {" +
-					"\n          if (valsub instanceof Core.Type_string) {" +
-					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
+					"\n          if (valsub instanceof vx_core::Type_string) {" +
+					"\n            vx_core::Type_string valstr = (vx_core::Type_string)valsub;" +
 					"\n            key = valstr.vx_string();" +
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            key = (String)valsub;" +
 					"\n          } else {" +
-					"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
+					"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n        } else {" +
@@ -1784,14 +1781,14 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					validkeys +
 					"\n      String key = \"\";" +
 					"\n      for (Object valsub : vals) {" +
-					"\n        if (valsub instanceof Core.Type_msgblock) {" +
+					"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 					"\n          msgblock = msgblock.vx_copy(valsub);" +
-					"\n        } else if (valsub instanceof Core.Type_msg) {" +
+					"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
 					"\n          msgblock = msgblock.vx_copy(valsub);" +
 					"\n        } else if (key == \"\") {" +
 					"\n          String testkey = \"\";" +
-					"\n          if (valsub instanceof Core.Type_string) {" +
-					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
+					"\n          if (valsub instanceof vx_core::Type_string) {" +
+					"\n            vx_core::Type_string valstr = (vx_core::Type_string)valsub;" +
 					"\n            testkey = valstr.vx_string();" +
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            testkey = (String)valsub;" +
@@ -1801,28 +1798,28 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n            key = testkey;" +
 					defaultkey +
 					"\n          } else {" +
-					"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
+					"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n        } else {" +
 					"\n          switch (key) {" +
 					valnewswitch +
 					"\n          default:" +
-					"\n            Core.Type_msg msg = Core.t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key: \" + key);" +
+					"\n            vx_core::Type_msg msg = vx_core::t_msg.vx_new_error(\"(new " + typ.name + ") - Invalid Key: \" + key);" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n          key = \"\";" +
 					"\n        }" +
 					"\n      }" +
-					"\n      if (msgblock != Core.e_msgblock) {" +
+					"\n      if (msgblock != vx_core::e_msgblock) {" +
 					"\n        output.vxmsgblock = msgblock;" +
 					"\n      }"
 			}
 		}
 		instancefuncs += "" +
 			"\n    @Override" +
-			"\n    public Core.Type_any vx_any(final Core.Type_string key) {" +
-			"\n      Core.Type_any output = Core.e_any;" +
+			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key) {" +
+			"\n      vx_core::Type_any output = vx_core::e_any;" +
 			"\n      String skey = key.vx_string();" +
 			"\n      switch (skey) {" +
 			vx_any +
@@ -1831,15 +1828,15 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n    }" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Map<String, Core.Type_any> vx_map() {" +
-			"\n      Map<String, Core.Type_any> output = new LinkedHashMap<>();" +
+			"\n    public Map<String, vx_core::Type_any> vx_map() {" +
+			"\n      Map<String, vx_core::Type_any> output = new LinkedHashMap<>();" +
 			vx_map +
-			"\n      return Core.immutablemap(output);" +
+			"\n      return vx_core::immutablemap(output);" +
 			"\n    }" +
 			"\n"
 	default:
 		if extendinterface == "" {
-			extendinterface = "Core.Type_anytype"
+			extendinterface = "vx_core::Type_anytype"
 		}
 	}
 	vxmsgblock := ""
@@ -1847,17 +1844,17 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	case "vx/core/msg":
 		vxmsgblock = "" +
 			"\n    @Override" +
-			"\n    public Core.Type_msgblock vx_msgblock() {return Core.e_msgblock;}"
+			"\n    public vx_core::Type_msgblock vx_msgblock() {return vx_core::e_msgblock;}"
 	case "vx/core/msgblock":
 		vxmsgblock = "" +
 			"\n    @Override" +
-			"\n    public Core.Type_msgblock vx_msgblock() {return this;}"
+			"\n    public vx_core::Type_msgblock vx_msgblock() {return this;}"
 	}
-	sinterface := JavaInterfaceFromType(typ)
+	sinterface := CppInterfaceFromType(typ)
 	typedef := "" +
 		"\n    @Override" +
-		"\n    public Core.Type_typedef vx_typedef() {" +
-		"\n      return " + JavaTypeDefFromType(typ, "      ") + ";" +
+		"\n    public vx_core::Type_typedef vx_typedef() {" +
+		"\n      return " + CppTypeDefFromType(typ, "      ") + ";" +
 		"\n    }" +
 		"\n"
 	output += "" +
@@ -1866,7 +1863,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		"\n   * (type " + typ.name + ")" +
 		"\n   */" +
 		sinterface +
-		"\n  public static class Class_" + typename + extendsclass + " implements Type_" + JavaNameFromType(typ) + " {" +
+		"\n  class Class_" + typename + extendsclass + " implements Type_" + CppNameFromType(typ) + " {" +
 		"\n" +
 		instancefuncs +
 		"\n    @Override" +
@@ -1890,31 +1887,31 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		staticfuncs +
 		"\n  }" +
 		"\n" +
-		"\n  public static final Type_" + typename + " e_" + typename + " = new Class_" + typename + "();" +
-		"\n  public static final Type_" + typename + " t_" + typename + " = new Class_" + typename + "();" +
+		"\n  const Type_" + typename + " e_" + typename + " = new Class_" + typename + "();" +
+		"\n  const Type_" + typename + " t_" + typename + " = new Class_" + typename + "();" +
 		"\n"
 	return output, msgblock
 }
 
-func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string, encode bool, test bool, path string) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaFromValue")
+func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string, encode bool, test bool, path string) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppFromValue")
 	var output = ""
 	valstr := ""
 	switch value.code {
 	case ":arg":
 		valarg := ArgFromValue(value)
-		valstr = JavaFromName(valarg.name)
+		valstr = CppFromName(valarg.name)
 		output += valstr
 	case ":const":
 		switch value.name {
 		case "false", "true":
-			valstr = "Core.t_boolean.vx_new_from_boolean(" + value.name + ")"
+			valstr = "vx_core::t_boolean.vx_new_from_boolean(" + value.name + ")"
 		default:
 			if value.pkg == ":native" {
-				valstr = JavaFromName(value.name)
+				valstr = CppFromName(value.name)
 			} else {
 				valconst := ConstFromValue(value)
-				valstr = JavaNameFromPkgName(valconst.pkgname) + ".c_" + JavaFromName(valconst.alias)
+				valstr = CppNameFromPkgName(valconst.pkgname) + ".c_" + CppFromName(valconst.alias)
 			}
 		}
 		output = valstr
@@ -1924,7 +1921,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 		funcname := NameFromFunc(fnc)
 		switch fnc.name {
 		case "native":
-			// (native :java)
+			// (native :cpp)
 			isNative := false
 			var argtexts []string
 			multiline := false
@@ -1936,7 +1933,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 				if argvalue.code == "string" {
 					valuetext = StringValueFromValue(argvalue)
 				}
-				if valuetext == ":java" {
+				if valuetext == ":cpp" {
 					isNative = true
 				} else if BooleanFromStringStarts(valuetext, ":") {
 					isNative = false
@@ -1944,7 +1941,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 					if argvalue.name == "newline" {
 						argtext = "\n"
 					} else {
-						clstext, msgs := JavaFromValue(argvalue, pkgname, parentfn, "", false, test, subpath)
+						clstext, msgs := CppFromValue(argvalue, pkgname, parentfn, "", false, test, subpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						argtext = clstext
 						if nativeindent == "undefined" {
@@ -1987,21 +1984,21 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 						propname = propname[1:]
 					}
 					structvalue := funcargs[0].value
-					work, msgs := JavaFromValue(structvalue, pkgname, fnc, "", true, test, subpath)
+					work, msgs := CppFromValue(structvalue, pkgname, fnc, "", true, test, subpath)
 					msgblock = MsgblockAddBlock(msgblock, msgs)
-					work = work + "." + JavaFromName(propname) + "()"
+					work = work + "." + CppFromName(propname) + "()"
 					argtexts = append(argtexts, work)
 					isskip = true
 				}
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += JavaNameFromPkgName(fnc.pkgname) + ".f_let_async("
+					output += CppNameFromPkgName(fnc.pkgname) + ".f_let_async("
 				} else {
-					output += JavaNameFromPkgName(fnc.pkgname) + ".f_" + JavaNameFromFunc(fnc) + "("
+					output += CppNameFromPkgName(fnc.pkgname) + ".f_" + CppNameFromFunc(fnc) + "("
 				}
 			default:
-				output += JavaNameFromPkgName(fnc.pkgname) + ".f_" + JavaNameFromFunc(fnc) + "("
+				output += CppNameFromPkgName(fnc.pkgname) + ".f_" + CppNameFromFunc(fnc) + "("
 			}
 			if !isskip {
 				if fnc.isgeneric {
@@ -2009,7 +2006,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 					case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/fn":
 					default:
 						if fnc.generictype != nil {
-							genericarg := JavaNameTFromTypeGeneric(fnc.vxtype)
+							genericarg := CppNameTFromTypeGeneric(fnc.vxtype)
 							argtexts = append(argtexts, genericarg)
 						}
 					}
@@ -2031,84 +2028,84 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 								argvaltype := ""
 								argvalinstance := ""
 								argtype := lambdaarg.vxtype
-								argvaltype = JavaNameTypeFullFromType(argtype)
-								argvalinstance = JavaNameTFromType(argtype)
-								lambdavar := argvaltype + " " + lambdaarg.name + " = Core.f_any_from_any(" + argvalinstance + ", " + lambdaarg.name + "_any);"
+								argvaltype = CppNameTypeFullFromType(argtype)
+								argvalinstance = CppNameTFromType(argtype)
+								lambdavar := argvaltype + " " + lambdaarg.name + " = vx_core::f_any_from_any(" + argvalinstance + ", " + lambdaarg.name + "_any);"
 								lambdavars = append(lambdavars, lambdavar)
 							}
 							lambdatext := StringFromListStringJoin(lambdaargs, ", ")
 							lambdavartext := "\n  " + StringFromListStringJoin(lambdavars, "\n  ")
 							if argfunc.async {
-								work, msgs := JavaFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
+								work, msgs := CppFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
 								case "any<-key-value-async":
 									argtext = "" +
-										"Core.t_any_from_key_value_async.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_key_value_async.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								case "any<-reduce-async":
 									argtext = "" +
-										"Core.t_any_from_reduce_async.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_reduce_async.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								case "any<-reduce-next-async":
 									argtext = "" +
-										"Core.t_any_from_reduce_next_async.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_reduce_next_async.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								default:
 									if len(arglist) == 1 {
 										argtext = "" +
-											"Core.t_any_from_any_async.fn_new((" + lambdatext + ") -> {" +
+											"vx_core::t_any_from_any_async.fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
 									} else {
 										argtext = "" +
-											"Core.t_any_from_func_async.fn_new((" + lambdatext + ") -> {" +
+											"vx_core::t_any_from_func_async.fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
 									}
 								}
 							} else {
-								work, msgs := JavaFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
+								work, msgs := CppFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
 								case "any<-key-value":
 									argtext = "" +
-										"Core.t_any_from_key_value.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_key_value.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								case "any<-reduce":
 									argtext = "" +
-										"Core.t_any_from_reduce.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_reduce.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								case "any<-reduce-next":
 									argtext = "" +
-										"Core.t_any_from_reduce_next.fn_new((" + lambdatext + ") -> {" +
+										"vx_core::t_any_from_reduce_next.fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								default:
 									if len(arglist) == 1 {
 										argtext = "" +
-											"Core.t_any_from_any.fn_new((" + lambdatext + ") -> {" +
+											"vx_core::t_any_from_any.fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
 									} else {
 										argtext = "" +
-											"Core.t_any_from_func.fn_new((" + lambdatext + ") -> {" +
+											"vx_core::t_any_from_func.fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
@@ -2134,24 +2131,24 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 									for _, lambdaarg := range arglist {
 										arglineindent := "\n" + argindent
 										if lambdaarg.async {
-											lambdavaluetext, msgs := JavaFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
+											lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
 											lambdatext += "" +
-												arglineindent + "final CompletableFuture<" + JavaNameTypeFromType(lambdaarg.vxtype) + "> future_" + JavaFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
-												arglineindent + "return Core.async_from_async_fn(future_" + JavaFromName(lambdaarg.name) + ", (" + JavaFromName(lambdaarg.name) + ") -> {"
+												arglineindent + "final CompletableFuture<" + CppNameTypeFromType(lambdaarg.vxtype) + "> future_" + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
+												arglineindent + "return vx_core::async_from_async_fn(future_" + CppFromName(lambdaarg.name) + ", (" + CppFromName(lambdaarg.name) + ") -> {"
 											aftertext += "" +
 												arglineindent + "});"
 											argindent += "  "
 										} else {
-											lambdavaluetext, msgs := JavaFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
+											lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
-											lambdatext += arglineindent + "final " + JavaNameTypeFromType(lambdaarg.vxtype) + " " + JavaFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
+											lambdatext += arglineindent + "final " + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
 										}
 									}
-									work, msgs := JavaFromValue(argvalue, pkgname, fnc, "    ", true, test, argsubpath)
+									work, msgs := CppFromValue(argvalue, pkgname, fnc, "    ", true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									argtext = "" +
-										"Core.t_any_from_func_async.fn_new(() -> {" +
+										"vx_core::t_any_from_func_async.fn_new(() -> {" +
 										lambdatext +
 										"\n    return " + work + ";" +
 										aftertext +
@@ -2161,15 +2158,15 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 									arglineindent := "\n" + argindent
 									for _, lambdaarg := range arglist {
 										lambdaargpath := argsubpath + "/:arg/" + lambdaarg.name
-										lambdavaluetext, msgs := JavaFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
+										lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
-										lambdatext += arglineindent + "final " + JavaNameTypeFromType(lambdaarg.vxtype) + " " + JavaFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
+										lambdatext += arglineindent + "final " + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
 									}
-									work, msgs := JavaFromValue(argvalue, pkgname, fnc, "", true, test, argsubpath)
+									work, msgs := CppFromValue(argvalue, pkgname, fnc, "", true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									work = StringFromStringIndent(work, "  ")
 									argtext = "" +
-										"Core.t_any_from_func.fn_new(() -> {" +
+										"vx_core::t_any_from_func.fn_new(() -> {" +
 										lambdatext +
 										arglineindent + "return " + work + ";" +
 										"\n})"
@@ -2181,10 +2178,10 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 							case ":arg":
 								argvaluearg := ArgFromValue(argvalue)
 								if !argvaluearg.vxtype.isfunc {
-									work, msgs := JavaFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
+									work, msgs := CppFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									argtext = "" +
-										"Core.t_any_from_func.fn_new(() -> {" +
+										"vx_core::t_any_from_func.fn_new(() -> {" +
 										"\n  return " + work + ";" +
 										"\n})"
 								}
@@ -2207,9 +2204,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 								if converttoasync {
 									workindent += "  "
 								}
-								work, msgs := JavaFromValue(argvalue, pkgname, fnc, workindent, true, test, argsubpath)
+								work, msgs := CppFromValue(argvalue, pkgname, fnc, workindent, true, test, argsubpath)
 								if converttoasync {
-									work = "Core.f_async(" + JavaNameTFromType(argfunctype) + ",\n" + workindent + work + "\n  )"
+									work = "vx_core::f_async(" + CppNameTFromType(argfunctype) + ",\n" + workindent + work + "\n  )"
 								}
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								if argvalue.code == ":func" && argvalue.name == "native" {
@@ -2217,13 +2214,13 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 									work = "\n  return " + work + ";"
 								}
 								argtext = "" +
-									JavaNameTFromType(funcarg.vxtype) + ".fn_new(() -> {" +
+									CppNameTFromType(funcarg.vxtype) + ".fn_new(() -> {" +
 									work +
 									"\n})"
 							}
 						}
 						if argtext == "" {
-							work, msgs := JavaFromValue(argvalue, pkgname, fnc, "", true, test, argsubpath)
+							work, msgs := CppFromValue(argvalue, pkgname, fnc, "", true, test, argsubpath)
 							argtext = work
 							msgblock = MsgblockAddBlock(msgblock, msgs)
 						}
@@ -2252,7 +2249,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 							} else {
 								multiflag = true
 								argtext = "" +
-									JavaNameTFromType(funcarg.vxtype) + ".vx_new(" +
+									CppNameTFromType(funcarg.vxtype) + ".vx_new(" +
 									"\n" + subindent + StringFromStringIndent(argtext, subindent)
 							}
 						}
@@ -2292,11 +2289,11 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 	case ":funcref":
 		valfunc := FuncFromValue(value)
 		valstr = ""
-		valstr += JavaNameFromPkgName(valfunc.pkgname) + ".t_" + JavaFromName(valfunc.alias)
+		valstr += CppNameFromPkgName(valfunc.pkgname) + ".t_" + CppFromName(valfunc.alias)
 		output = indent + valstr
 	case ":type":
 		valtype := TypeFromValue(value)
-		output = JavaNameFromPkgName(valtype.pkgname) + ".t_" + JavaFromName(valtype.alias)
+		output = CppNameFromPkgName(valtype.pkgname) + ".t_" + CppFromName(valtype.alias)
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
@@ -2315,27 +2312,27 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 			output = valstr
 		}
 		if encode {
-			output = JavaTypeStringValNew(output)
+			output = CppTypeStringValNew(output)
 		}
 	case "boolean":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.t_boolean.vx_new_from_boolean(" + valstr + ")"
+			output = "vx_core::t_boolean.vx_new_from_boolean(" + valstr + ")"
 		}
 	case "decimal":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.t_decimal.vx_new_from_string(\"" + valstr + "\")"
+			output = "vx_core::t_decimal.vx_new_from_string(\"" + valstr + "\")"
 		}
 	case "float":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.t_float.vx_new_from_float(" + valstr + ")"
+			output = "vx_core::t_float.vx_new_from_float(" + valstr + ")"
 		}
 	case "int":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.t_int.vx_new_from_int(" + valstr + ")"
+			output = "vx_core::t_int.vx_new_from_int(" + valstr + ")"
 		}
 	case "number":
 		if encode {
@@ -2349,20 +2346,20 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent strin
 	return output, msgblock
 }
 
-func JavaGenericDefinitionFromFunc(fnc *vxfunc) string {
+func CppGenericDefinitionFromFunc(fnc *vxfunc) string {
 	output := ""
 	var mapgeneric = make(map[string]string)
 	if fnc.generictype != nil {
-		returntype := JavaGenericFromType(fnc.generictype)
-		mapgeneric[fnc.vxtype.name] = returntype + " extends " + JavaNameTypeFromType(fnc.vxtype)
+		returntype := CppGenericFromType(fnc.generictype)
+		mapgeneric[fnc.vxtype.name] = returntype + " extends " + CppNameTypeFromType(fnc.vxtype)
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			if !argtype.isfunc {
 				if argtype.isgeneric {
 					_, ok := mapgeneric[argtype.name]
 					if !ok {
-						argtypename := JavaGenericFromType(argtype)
-						worktext := argtypename + " extends " + JavaNameTypeFromType(arg.vxtype)
+						argtypename := CppGenericFromType(argtype)
+						worktext := argtypename + " extends " + CppNameTypeFromType(arg.vxtype)
 						mapgeneric[argtype.name] = worktext
 					}
 				}
@@ -2380,7 +2377,7 @@ func JavaGenericDefinitionFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func JavaGenericFromType(typ *vxtype) string {
+func CppGenericFromType(typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
 		switch typ.name {
@@ -2410,46 +2407,48 @@ func JavaGenericFromType(typ *vxtype) string {
 			output = "S"
 		}
 	} else {
-		output = JavaNameTypeFromType(typ)
+		output = CppNameTypeFromType(typ)
 	}
 	return output
 }
 
-func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test bool) string {
+func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test bool) string {
 	output := ""
-	if BooleanFromStringContains(body, "Arrays.") {
-		output += "\nimport java.util.Arrays;"
-	}
-	if BooleanFromStringContains(body, " ArrayList<") {
-		output += "\nimport java.util.ArrayList;"
-	}
-	if BooleanFromStringContains(body, "Collections.") {
-		output += "\nimport java.util.Collections;"
-	}
-	if BooleanFromStringContains(body, " CompletableFuture<") {
-		output += "\nimport java.util.concurrent.CompletableFuture;"
-	}
-	if BooleanFromStringContains(body, " ConcurrentLinkedDeque<") {
-		output += "\nimport java.util.concurrent.ConcurrentLinkedDeque;"
-	}
-	if BooleanFromStringContains(body, " ConcurrentHashMap<") {
-		output += "\nimport java.util.concurrent.ConcurrentHashMap;"
-	}
-	if BooleanFromStringContains(body, " Deque<") {
-		output += "\nimport java.util.Deque;"
-	}
-	if BooleanFromStringContains(body, " LinkedHashMap<") {
-		output += "\nimport java.util.LinkedHashMap;"
-	}
-	if BooleanFromStringContains(body, " List<") {
-		output += "\nimport java.util.List;"
-	}
-	if BooleanFromStringContains(body, " Map<") {
-		output += "\nimport java.util.Map;"
-	}
-	if BooleanFromStringContains(body, " Set<") {
-		output += "\nimport java.util.Set;"
-	}
+	/*
+		if BooleanFromStringContains(body, "Arrays.") {
+			output += "\nimport Cpp.util.Arrays;"
+		}
+		if BooleanFromStringContains(body, " ArrayList<") {
+			output += "\nimport Cpp.util.ArrayList;"
+		}
+		if BooleanFromStringContains(body, "Collections.") {
+			output += "\nimport Cpp.util.Collections;"
+		}
+		if BooleanFromStringContains(body, " CompletableFuture<") {
+			output += "\nimport Cpp.util.concurrent.CompletableFuture;"
+		}
+		if BooleanFromStringContains(body, " ConcurrentLinkedDeque<") {
+			output += "\nimport Cpp.util.concurrent.ConcurrentLinkedDeque;"
+		}
+		if BooleanFromStringContains(body, " ConcurrentHashMap<") {
+			output += "\nimport Cpp.util.concurrent.ConcurrentHashMap;"
+		}
+		if BooleanFromStringContains(body, " Deque<") {
+			output += "\nimport Cpp.util.Deque;"
+		}
+		if BooleanFromStringContains(body, " LinkedHashMap<") {
+			output += "\nimport Cpp.util.LinkedHashMap;"
+		}
+		if BooleanFromStringContains(body, " List<") {
+			output += "\nimport Cpp.util.List;"
+		}
+		if BooleanFromStringContains(body, " Map<") {
+			output += "\nimport Cpp.util.Map;"
+		}
+		if BooleanFromStringContains(body, " Set<") {
+			output += "\nimport Cpp.util.Set;"
+		}
+	*/
 	pkgpath, _ := PackagePathNameFromName(pkg.name)
 	if len(pkg.listlib) > 0 {
 		for _, lib := range pkg.listlib {
@@ -2459,7 +2458,7 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 			if lib.lang != "" {
 				if test {
 					isskip = true
-				} else if lib.lang == ":java" {
+				} else if lib.lang == ":cpp" {
 				} else {
 					isskip = true
 				}
@@ -2467,14 +2466,11 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 				isskip = true
 			} else {
 				libprefix := pkgpath
-				if lib.pkg != nil {
-					libprefix = lib.pkg.project.javadomain
-				}
 				libpath = libprefix + "/" + libpkgpath + "*"
 				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
-				importline := "\nimport " + libpath + ";"
+				importline := "\n#include \"" + libpath + ".h\";"
 				if IntFromStringIndex(output, importline) < 0 {
 					output += importline
 				}
@@ -2485,19 +2481,19 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 	return output
 }
 
-func JavaIndexFromFunc(fnc *vxfunc) string {
+func CppIndexFromFunc(fnc *vxfunc) string {
 	return StringIndexFromFunc(fnc)
 }
 
-func JavaInterfaceFromType(typ *vxtype) string {
+func CppInterfaceFromType(typ *vxtype) string {
 	output := ""
-	typename := JavaNameTypeFullFromType(typ)
+	typename := CppNameTypeFullFromType(typ)
 	basics := "" +
 		"\n    public " + typename + " vx_new(final Object... vals);" +
 		"\n    public " + typename + " vx_copy(final Object... vals);" +
 		"\n    public " + typename + " vx_empty();" +
 		"\n    public " + typename + " vx_type();"
-	createtext, _ := JavaFromValue(typ.createvalue, "", emptyfunc, "", true, false, "")
+	createtext, _ := CppFromValue(typ.createvalue, "", emptyfunc, "", true, false, "")
 	if createtext != "" {
 		createlines := ListStringFromStringSplit(createtext, "\n")
 		isoverride := false
@@ -2517,73 +2513,73 @@ func JavaInterfaceFromType(typ *vxtype) string {
 		output = "" +
 			"\n  public interface Type_any {" +
 			basics +
-			"\n    public Core.Type_typedef vx_typedef();" +
+			"\n    public vx_core::Type_typedef vx_typedef();" +
 			"\n    public List<Type_any> vx_dispose();" +
-			"\n    public Core.Type_msgblock vx_msgblock();" +
+			"\n    public vx_core::Type_msgblock vx_msgblock();" +
 			"\n    public boolean vx_release();" +
 			"\n    public void vx_reserve();" +
 			"\n  }" +
 			"\n"
 	case "vx/core/boolean":
 		output = "" +
-			"\n  public interface Type_boolean extends Core.Type_any {" +
+			"\n  public interface Type_boolean extends vx_core::Type_any {" +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/decimal":
 		output = "" +
-			"\n  public interface Type_decimal extends Core.Type_number {" +
+			"\n  public interface Type_decimal extends vx_core::Type_number {" +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/float":
 		output = "" +
-			"\n  public interface Type_float extends Core.Type_number {" +
+			"\n  public interface Type_float extends vx_core::Type_number {" +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/func":
 		output = "" +
-			"\n  public interface Type_func extends Core.Type_any {" +
+			"\n  public interface Type_func extends vx_core::Type_any {" +
 			basics +
-			"\n	   public Core.Type_funcdef vx_funcdef();" +
+			"\n	   public vx_core::Type_funcdef vx_funcdef();" +
 			"\n  }" +
 			"\n"
 	case "vx/core/int":
 		output = "" +
-			"\n  public interface Type_int extends Core.Type_number {" +
+			"\n  public interface Type_int extends vx_core::Type_number {" +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/string":
 		output = "" +
-			"\n  public interface Type_string extends Core.Type_any {" +
+			"\n  public interface Type_string extends vx_core::Type_any {" +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/list":
 		output = "" +
-			"\n  public interface Type_list extends Core.Type_any {" +
+			"\n  public interface Type_list extends vx_core::Type_any {" +
 			basics +
-			"\n    public List<Core.Type_any> vx_list();" +
-			"\n    public Core.Type_any vx_any(final Core.Type_int index);" +
+			"\n    public List<vx_core::Type_any> vx_list();" +
+			"\n    public vx_core::Type_any vx_any(final vx_core::Type_int index);" +
 			"\n  }" +
 			"\n"
 	case "vx/core/map":
 		output = "" +
-			"\n  public interface Type_map extends Core.Type_any {" +
+			"\n  public interface Type_map extends vx_core::Type_any {" +
 			basics +
-			"\n    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval);" +
-			"\n    public Core.Type_any vx_any(final Core.Type_string key);" +
-			"\n    public Map<String, Core.Type_any> vx_map();" +
+			"\n    public vx_core::Type_map vx_new_from_map(final Map<String, vx_core::Type_any> mapval);" +
+			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key);" +
+			"\n    public Map<String, vx_core::Type_any> vx_map();" +
 			"\n  }" +
 			"\n"
 	case "vx/core/struct":
 		output = "" +
-			"\n  public interface Type_struct extends Core.Type_any {" +
+			"\n  public interface Type_struct extends vx_core::Type_any {" +
 			basics +
-			"\n    public Core.Type_any vx_any(final Core.Type_string key);" +
-			"\n    public Map<String, Core.Type_any> vx_map();" +
+			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key);" +
+			"\n    public Map<String, vx_core::Type_any> vx_map();" +
 			"\n  }" +
 			"\n"
 	default:
@@ -2595,7 +2591,7 @@ func JavaInterfaceFromType(typ *vxtype) string {
 				"\n    public " + typename + " vx_copy(final Object... vals);" +
 				"\n    public " + typename + " vx_empty();" +
 				"\n    public " + typename + " vx_type();" +
-				"\n    public Core.Type_typedef vx_typedef();"
+				"\n    public vx_core::Type_typedef vx_typedef();"
 			extras += "" +
 				"\n    public Type_msg vx_new_error(final String text);" +
 				"\n    public Type_msg vx_new_from_exception(final String text, final Exception err);"
@@ -2605,68 +2601,68 @@ func JavaInterfaceFromType(typ *vxtype) string {
 				"\n    public " + typename + " vx_copy(final Object... vals);" +
 				"\n    public " + typename + " vx_empty();" +
 				"\n    public " + typename + " vx_type();" +
-				"\n    public Core.Type_typedef vx_typedef();"
+				"\n    public vx_core::Type_typedef vx_typedef();"
 			extras += "" +
-				"\n    public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals);"
+				"\n    public Type_msgblock vx_msgblock_from_copy_arrayval(final vx_core::Type_any copy, final Object... vals);"
 		}
 		extends := ""
 		switch typ.extends {
 		case "boolean":
-			extends += "Core.Type_boolean"
+			extends += "vx_core::Type_boolean"
 		case "decimal":
-			extends += "Core.Type_decimal"
+			extends += "vx_core::Type_decimal"
 		case "float":
-			extends += "Core.Type_float"
+			extends += "vx_core::Type_float"
 		case "int":
-			extends += "Core.Type_int"
+			extends += "vx_core::Type_int"
 		case "string":
-			extends += "Core.Type_string"
+			extends += "vx_core::Type_string"
 		case ":list":
-			extends += "Core.Type_list"
-			allowclass := "Core.Type_any"
+			extends += "vx_core::Type_list"
+			allowclass := "vx_core::Type_any"
 			allowname := "any"
 			allowtypes := ListAllowTypeFromType(typ)
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
-				allowclass = JavaNameTypeFullFromType(allowtype)
-				allowname = JavaNameFromType(allowtype)
+				allowclass = CppNameTypeFullFromType(allowtype)
+				allowname = CppNameFromType(allowtype)
 			}
 			if allowname != "any" {
 				extras += "" +
 					"\n    public List<" + allowclass + "> vx_list" + allowname + "();" +
-					"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_int index);"
+					"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_int index);"
 			}
 		case ":map":
-			extends = "Core.Type_map"
-			allowclass := "Core.Type_any"
+			extends = "vx_core::Type_map"
+			allowclass := "vx_core::Type_any"
 			allowname := "any"
 			allowtypes := ListAllowTypeFromType(typ)
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
-				allowclass = JavaNameTypeFullFromType(allowtype)
-				allowname = JavaNameFromType(allowtype)
+				allowclass = CppNameTypeFullFromType(allowtype)
+				allowname = CppNameFromType(allowtype)
 			}
 			if allowname != "any" {
 				extras += "" +
 					"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "();" +
-					"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_string key);"
+					"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_string key);"
 			}
 		case ":struct":
-			extends = "Core.Type_struct"
+			extends = "vx_core::Type_struct"
 			if len(typ.traits) > 0 {
 				var traitnames []string
 				for _, trait := range typ.traits {
-					traitnames = append(traitnames, JavaNameTypeFullFromType(trait))
+					traitnames = append(traitnames, CppNameTypeFullFromType(trait))
 				}
 				extends = StringFromListStringJoin(traitnames, ", ")
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
-				extras += "\n    public " + JavaNameTypeFromType(arg.vxtype) + " " + JavaFromName(arg.alias) + "();"
+				extras += "\n    public " + CppNameTypeFromType(arg.vxtype) + " " + CppFromName(arg.alias) + "();"
 			}
 		default:
-			extends += "Core.Type_any"
+			extends += "vx_core::Type_any"
 		}
-		typename := JavaNameFromType(typ)
+		typename := CppNameFromType(typ)
 		output = "" +
 			"\n  public interface Type_" + typename + " extends " + extends + " {" +
 			basics +
@@ -2677,120 +2673,120 @@ func JavaInterfaceFromType(typ *vxtype) string {
 	return output
 }
 
-func JavaInterfaceFnFromFunc(fnc *vxfunc) string {
+func CppInterfaceFnFromFunc(fnc *vxfunc) string {
 	interfaces := ""
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve(Core.Type_any val);" +
+			"\n      public vx_core::Type_any resolve(vx_core::Type_any val);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-any-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve(Core.Type_any val);" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any val);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-any-context":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve(Core.Type_any val, Core.Type_context context);" +
+			"\n      public vx_core::Type_any resolve(vx_core::Type_any val, vx_core::Type_context context);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-any-context-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve(Core.Type_any val, Core.Type_context context);" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any val, vx_core::Type_context context);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-key-value":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve(Core.Type_string key, Core.Type_any val);" +
+			"\n      public vx_core::Type_any resolve(vx_core::Type_string key, vx_core::Type_any val);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-func", "vx/core/any<-none":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve();" +
+			"\n      public vx_core::Type_any resolve();" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-reduce":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve(Core.Type_any reduce, Core.Type_any item);" +
+			"\n      public vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-reduce-next":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any resolve(Core.Type_any reduce, Core.Type_any current, Core.Type_any next);" +
+			"\n      public vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-key-value-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any val);" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_string key, vx_core::Type_any val);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-func-async", "vx/core/any<-none-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve();" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve();" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-reduce-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve(Core.Type_any reduce, Core.Type_any item);" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-reduce-next-async":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<Core.Type_any> resolve(Core.Type_any reduce, Core.Type_any current, Core.Type_any next);" +
+			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
 			"\n    }" +
 			"\n"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_boolean resolve();" +
+			"\n      public vx_core::Type_boolean resolve();" +
 			"\n    }" +
 			"\n"
 	case "vx/core/none<-any":
 		interfaces = "" +
 			"\n    @FunctionalInterface" +
 			"\n    public static interface IFn {" +
-			"\n      public Core.Type_any void resolve(Core.Type_any val);" +
+			"\n      public vx_core::Type_any void resolve(vx_core::Type_any val);" +
 			"\n    }" +
 			"\n"
 	}
 	return interfaces
 }
 
-func JavaInterfaceFromFunc(fnc *vxfunc) string {
-	funcname := JavaNameFromFunc(fnc)
+func CppInterfaceFromFunc(fnc *vxfunc) string {
+	funcname := CppNameFromFunc(fnc)
 	extends := ""
 	interfaces := ""
-	generictypes := JavaGenericDefinitionFromFunc(fnc)
-	returntype := JavaNameTypeFromType(fnc.vxtype)
+	generictypes := CppGenericDefinitionFromFunc(fnc)
+	returntype := CppNameTypeFromType(fnc.vxtype)
 	var listargtext []string
 	if fnc.generictype != nil {
-		returntype = JavaGenericFromType(fnc.generictype)
+		returntype = CppGenericFromType(fnc.generictype)
 		switch NameFromFunc(fnc) {
 		case "vx/core/new", "vx/core/copy", "vx/core/empty":
 		default:
@@ -2800,11 +2796,11 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 			argtype := arg.vxtype
 			argtypename := ""
 			if argtype.isgeneric {
-				argtypename = JavaGenericFromType(argtype)
+				argtypename = CppGenericFromType(argtype)
 			} else {
-				argtypename = JavaNameTypeFromType(argtype)
+				argtypename = CppNameTypeFromType(argtype)
 			}
-			argname := JavaFromName(arg.alias)
+			argname := CppFromName(arg.alias)
 			isskip := false
 			switch NameFromFunc(fnc) {
 			case "vx/core/let", "vx/core/let-async":
@@ -2820,8 +2816,8 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 	} else {
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
-			argtypename := JavaNameTypeFromType(argtype)
-			argname := JavaFromName(arg.alias)
+			argtypename := CppNameTypeFromType(argtype)
+			argname := CppFromName(arg.alias)
 			listargtext = append(listargtext, "final "+argtypename+" "+argname)
 		}
 	}
@@ -2834,25 +2830,25 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
-		extends = "Core.Type_func"
+		extends = "vx_core::Type_func"
 		interfaces += "" +
-			"\n    public Func_" + funcname + " fn_new(Core.Class_" + funcname + ".IFn fn);"
+			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn);"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/int<-func", "vx/core/int<-none",
 		"vx/core/string<-func", "vx/core/string<-none":
-		extends = "Core.Type_func"
+		extends = "vx_core::Type_func"
 		interfaces += "" +
-			"\n    public Func_" + funcname + " fn_new(Core.Class_any_from_func.IFn fn);"
+			"\n    public Func_" + funcname + " fn_new(vx_core::Class_any_from_func.IFn fn);"
 	case "vx/core/none<-any":
 	default:
 		if extends == "" {
 			switch NameFromType(fnc.vxtype) {
 			case "vx/core/none":
-				extends = "Core.Type_func"
+				extends = "vx_core::Type_func"
 			default:
 				switch len(fnc.listarg) {
 				case 1:
-					extends = "Core.Func_any_from_any"
+					extends = "vx_core::Func_any_from_any"
 					if fnc.context {
 						extends += "_context"
 					}
@@ -2860,7 +2856,7 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 						extends += "_async"
 					}
 				default:
-					extends = "Core.Type_func"
+					extends = "vx_core::Type_func"
 				}
 			}
 		}
@@ -2871,16 +2867,16 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 	contextarg := ""
 	if fnc.context {
 		if argtext == "" {
-			contextarg = "Core.Type_context context"
+			contextarg = "vx_core::Type_context context"
 		} else {
-			contextarg = ", Core.Type_context context"
+			contextarg = ", vx_core::Type_context context"
 		}
 	}
-	if extends == "Core.Type_func" {
+	if extends == "vx_core::Type_func" {
 		if fnc.async {
-			extends += ", Core.Type_replfunc_async"
+			extends += ", vx_core::Type_replfunc_async"
 		} else {
-			extends += ", Core.Type_replfunc"
+			extends += ", vx_core::Type_replfunc"
 		}
 	}
 	interfaces += "" +
@@ -2893,35 +2889,32 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func JavaNameClassFullFromType(typ *vxtype) string {
-	name := JavaNameFromPkgName(typ.pkgname)
+func CppNameClassFullFromType(typ *vxtype) string {
+	name := CppNameFromPkgName(typ.pkgname)
 	name += ".Class_"
-	name += JavaNameFromType(typ)
+	name += CppNameFromType(typ)
 	return name
 }
 
-func JavaNameEFromType(typ *vxtype) string {
+func CppNameEFromType(typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
-		output = "Core.f_empty(generic_" + JavaFromName(typ.name) + ")"
+		output = "vx_core::f_empty(generic_" + CppFromName(typ.name) + ")"
 	} else {
-		output = "e_" + JavaNameFromType(typ)
+		output = "e_" + CppNameFromType(typ)
 		if typ.pkgname != "" {
-			output = JavaNameFromPkgName(typ.pkgname) + "." + output
+			output = CppNameFromPkgName(typ.pkgname) + "::" + output
 		}
 	}
 	return output
 }
 
-func JavaNameFromFunc(fnc *vxfunc) string {
-	return JavaFromName(fnc.alias) + JavaIndexFromFunc(fnc)
+func CppNameFromFunc(fnc *vxfunc) string {
+	return CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
 }
 
-func JavaNameFromPkgName(pkgname string) string {
-	output := ""
-	ipos := IntFromStringIndexLast(pkgname, "/")
-	output = StringSubstring(pkgname, ipos+1, len(pkgname))
-	output = StringUCaseFirst(output)
+func CppNameFromPkgName(pkgname string) string {
+	output := pkgname
 	output = StringFromStringFindReplace(output, "<", "lt")
 	output = StringFromStringFindReplace(output, ">", "gt")
 	output = StringFromStringFindReplace(output, "?", "is")
@@ -2930,93 +2923,95 @@ func JavaNameFromPkgName(pkgname string) string {
 	return output
 }
 
-func JavaNameFromType(typ *vxtype) string {
+func CppNameFromType(typ *vxtype) string {
 	name := ""
 	if typ.alias == "" {
-		name += JavaFromName(typ.name)
+		name += CppFromName(typ.name)
 	} else {
-		name += JavaFromName(typ.alias)
+		name += CppFromName(typ.alias)
 	}
 	return name
 }
 
-func JavaNameTFromFunc(fnc *vxfunc) string {
-	name := "t_" + JavaNameFromFunc(fnc)
+func CppNameTFromFunc(fnc *vxfunc) string {
+	name := "t_" + CppNameFromFunc(fnc)
 	if fnc.pkgname != "" {
-		name = JavaNameFromPkgName(fnc.pkgname) + "." + name
+		name = CppNameFromPkgName(fnc.pkgname) + "::" + name
 	}
 	return name
 }
 
-func JavaNameTFromType(typ *vxtype) string {
-	name := "t_" + JavaNameFromType(typ)
+func CppNameTFromType(typ *vxtype) string {
+	name := "t_" + CppNameFromType(typ)
 	if typ.pkgname != "" {
-		name = JavaNameFromPkgName(typ.pkgname) + "." + name
+		name = CppNameFromPkgName(typ.pkgname) + "::" + name
 	}
 	return name
 }
 
-func JavaNameTFromTypeGeneric(typ *vxtype) string {
+func CppNameTFromTypeGeneric(typ *vxtype) string {
 	name := ""
 	if typ.isgeneric {
-		name = "generic_" + JavaFromName(typ.name)
+		name = "generic_" + CppFromName(typ.name)
 	} else {
-		name = JavaNameTFromType(typ)
+		name = CppNameTFromType(typ)
 	}
 	return name
 }
 
-func JavaNameTypeFromType(typ *vxtype) string {
-	name := JavaNameTypeFullFromType(typ)
+func CppNameTypeFromType(typ *vxtype) string {
+	name := CppNameTypeFullFromType(typ)
 	switch name {
-	case "Core.Type_none":
+	case "vx_core::Type_none":
 		name = "void"
 	}
 	return name
 }
 
-func JavaNameTypeFullFromType(typ *vxtype) string {
-	name := JavaNameFromPkgName(typ.pkgname)
+func CppNameTypeFullFromType(typ *vxtype) string {
+	name := CppNameFromPkgName(typ.pkgname)
 	if typ.isfunc {
 		name += ".Func_"
 	} else {
 		name += ".Type_"
 	}
-	name += JavaNameFromType(typ)
+	name += CppNameFromType(typ)
 	return name
 }
 
-func JavaPackagePathFromPrefixName(pkgprefix string, pkgname string) (string, string) {
+/*
+func CppPackagePathFromPrefixName(pkgprefix string, pkgname string) (string, string) {
 	pkgpath := pkgprefix + "/" + pkgname
 	ipos := IntFromStringIndexLast(pkgpath, "/")
 	name := StringSubstring(pkgpath, ipos+1, len(pkgpath))
 	pkgpath = StringSubstring(pkgpath, 0, ipos)
 	pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
-	pkgpath = JavaFromName(pkgpath)
-	name = JavaNameFromPkgName(name)
+	pkgpath = CppFromName(pkgpath)
+	name = CppNameFromPkgName(name)
 	return pkgpath, name
 }
+*/
 
-func JavaReplFromFunc(fnc *vxfunc) string {
+func CppReplFromFunc(fnc *vxfunc) string {
 	output := ""
 	replparams := ""
 	argidx := 0
 	var listargname []string
-	pkgname := JavaNameFromPkgName(fnc.pkgname)
-	funcname := JavaFromName(fnc.alias) + JavaIndexFromFunc(fnc)
+	pkgname := CppNameFromPkgName(fnc.pkgname)
+	funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
 	outputtype := ""
 	outputttype := ""
 	//emptytype := ""
 	returnvalue := ""
 	switch NameFromType(fnc.vxtype) {
 	case "vx/core/none":
-		outputtype = "Core.Type_any"
-		outputttype = "Core.t_any"
-		//emptytype = "Core.e_any"
+		outputtype = "vx_core::Type_any"
+		outputttype = "vx_core::t_any"
+		//emptytype = "vx_core::e_any"
 	default:
-		outputtype = JavaNameTypeFromType(fnc.vxtype)
-		outputttype = JavaNameTFromType(fnc.vxtype)
-		//emptytype = JavaNameEFromType(fnc.vxtype)
+		outputtype = CppNameTypeFromType(fnc.vxtype)
+		outputttype = CppNameTFromType(fnc.vxtype)
+		//emptytype = CppNameEFromType(fnc.vxtype)
 		returnvalue = "output = "
 	}
 	if fnc.isgeneric {
@@ -3024,17 +3019,17 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 		case "vx/core/copy", "vx/core/empty", "vx/core/new":
 		default:
 			if fnc.generictype != nil {
-				replparam := outputtype + " generic_" + JavaFromName(fnc.generictype.name) + " = Core.f_any_from_any(" + outputttype + ", arglist.vx_any(Core.t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
+				replparam := outputtype + " generic_" + CppFromName(fnc.generictype.name) + " = vx_core::f_any_from_any(" + outputttype + ", arglist.vx_any(vx_core::t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
 				replparams += "\n      " + replparam
-				listargname = append(listargname, "generic_"+JavaFromName(fnc.generictype.name))
+				listargname = append(listargname, "generic_"+CppFromName(fnc.generictype.name))
 			}
 		}
 	}
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
-			argname := JavaFromName(arg.alias)
-			replparam := JavaNameTypeFromType(arg.vxtype) + " " + argname + " = Core.f_any_from_any(" + JavaNameTFromType(arg.vxtype) + ", arglist.vx_any(Core.t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
+			argname := CppFromName(arg.alias)
+			replparam := CppNameTypeFromType(arg.vxtype) + " " + argname + " = vx_core::f_any_from_any(" + CppNameTFromType(arg.vxtype) + ", arglist.vx_any(vx_core::t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
 			replparams += "\n      " + replparam
 			listargname = append(listargname, argname)
 			argidx += 1
@@ -3042,23 +3037,23 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 	}
 	if fnc.context {
 		listargname = append(listargname, "context")
-		replparam := "Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
+		replparam := "vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist.vx_any(vx_core::t_int.vx_new_from_int(" + StringFromInt(argidx) + ")));"
 		replparams += "\n      " + replparam
 	}
 	if fnc.async {
 		output = "" +
-			"\n    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {" +
-			"\n      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);" +
+			"\n    public CompletableFuture<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist) {" +
+			"\n      CompletableFuture<vx_core::Type_any> output = CompletableFuture.completedFuture(vx_core::e_any);" +
 			replparams +
 			"\n      CompletableFuture<" + outputtype + "> future = " + pkgname + ".f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
-			"\n      output = Core.async_from_async(Core.t_any, future);" +
+			"\n      output = vx_core::async_from_async(vx_core::t_any, future);" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
 	} else {
 		output = "" +
-			"\n    public Core.Type_any vx_repl(Core.Type_anylist arglist) {" +
-			"\n      Core.Type_any output = Core.e_any;" +
+			"\n    public vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) {" +
+			"\n      vx_core::Type_any output = vx_core::e_any;" +
 			replparams +
 			"\n      " + returnvalue + pkgname + ".f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
 			"\n      return output;" +
@@ -3068,26 +3063,26 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func JavaStringFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaStringFromProjectCmd")
-	files, msgs := JavaFilesFromProjectCmd(prj, cmd)
+func CppStringFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppStringFromProjectCmd")
+	files, msgs := CppFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	text := StringFromListFile(files)
 	return text, msgblock
 }
 
-func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcasename string, fnc *vxfunc, path string) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaTestCase")
+func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcasename string, fnc *vxfunc, path string) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppTestCase")
 	var output = ""
 	if len(testvalues) > 0 {
 		var desctexts []string
 		for idx, testvalue := range testvalues {
 			subpath := path + "/tests" + StringFromInt(idx+1)
-			descvaluetext, msgs := JavaFromValue(testvalue, testpkg, fnc, "            ", true, true, subpath)
+			descvaluetext, msgs := CppFromValue(testvalue, testpkg, fnc, "            ", true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			desctext := "" +
 				"\n        Test.t_testdescribe.vx_new(" +
-				"\n          \":describename\", \"" + JavaTestFromValue(testvalue) + "\"," +
+				"\n          \":describename\", \"" + CppTestFromValue(testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
 				"\n        )"
@@ -3095,7 +3090,7 @@ func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcas
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
 		output = "" +
-			"\n  static Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
+			"\n  static Test.Type_testcase " + testcasename + "(final vx_core::Type_context context) {" +
 			"\n    Test.Type_testcase output = Test.t_testcase.vx_new(" +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
@@ -3111,36 +3106,36 @@ func JavaTestCase(testvalues []vxvalue, testpkg string, testname string, testcas
 	return output, msgblock
 }
 
-func JavaTestFromConst(cnst *vxconst) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaTestFromConst")
+func CppTestFromConst(cnst *vxconst) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppTestFromConst")
 	testvalues := cnst.listtestvalue
 	testpkg := cnst.pkgname
 	testname := cnst.name
-	testcasename := "c_" + JavaFromName(cnst.alias)
+	testcasename := "c_" + CppFromName(cnst.alias)
 	path := cnst.pkgname + "/" + cnst.name
 	fnc := emptyfunc
-	output, msgs := JavaTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
+	output, msgs := CppTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	return output, msgblock
 }
 
-func JavaTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaTestFromFunc")
+func CppTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppTestFromFunc")
 	testvalues := fnc.listtestvalue
 	testpkg := fnc.pkgname
-	idx := JavaIndexFromFunc(fnc)
+	idx := CppIndexFromFunc(fnc)
 	testname := fnc.name + idx
-	funcname := JavaFromName(fnc.alias) + idx
+	funcname := CppFromName(fnc.alias) + idx
 	testcasename := "f_" + funcname
 	path := fnc.pkgname + "/" + fnc.name
-	output, msgs := JavaTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
+	output, msgs := CppTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	return output, msgblock
 }
 
-func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaTestFromPackage")
-	pkgpath, pkgname := JavaPackagePathFromPrefixName(pkgprefix, pkg.name)
+func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppTestFromPackage")
+	pkgname := CppFromName(pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	var coverdoccnt = 0
 	var coverdoctotal = 0
@@ -3152,13 +3147,13 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 	for _, typid := range typkeys {
 		covertypetotal += 1
 		typ := pkg.maptype[typid]
-		test, msgs := JavaTestFromType(typ)
+		test, msgs := CppTestFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(covertype, "      \":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"Test.t_"+JavaFromName(typ.alias)+"(context)")
+			testall = append(testall, pkgname+"Test.t_"+CppFromName(typ.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -3174,13 +3169,13 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 	for _, cnstid := range cnstkeys {
 		coverconsttotal += 1
 		cnst := pkg.mapconst[cnstid]
-		test, msgs := JavaTestFromConst(cnst)
+		test, msgs := CppTestFromConst(cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(coverconst, "      \":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
-			testall = append(testall, pkgname+"Test.c_"+JavaFromName(cnst.alias)+"(context)")
+			testall = append(testall, pkgname+"Test.c_"+CppFromName(cnst.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -3199,14 +3194,14 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		coverfunctotal += 1
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			test, msgs := JavaTestFromFunc(fnc)
+			test, msgs := CppTestFromFunc(fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "      \":"+fncid+JavaIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+			coverfunc = append(coverfunc, "      \":"+fncid+CppIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"Test.f_"+JavaFromName(fnc.alias)+JavaIndexFromFunc(fnc)+"(context)")
+				testall = append(testall, pkgname+"Test.f_"+CppFromName(fnc.alias)+CppIndexFromFunc(fnc)+"(context)")
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -3256,8 +3251,8 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
-		"\n    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
+		"\n  public static Test.Type_testcaselist test_cases(final vx_core::Type_context context) {" +
+		"\n    List<vx_core::Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
 		"\n      " + strings.Join(testall, ",\n      ") +
 		"\n    ));" +
 		"\n    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);" +
@@ -3267,32 +3262,32 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n  public static Test.Type_testcoveragesummary test_coveragesummary() {" +
 		"\n    return Test.t_testcoveragesummary.vx_new(" +
 		"\n      \":testpkg\",   \"" + pkg.name + "\", " +
-		"\n      \":constnums\", " + JavaTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
-		"\n      \":docnums\", " + JavaTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
-		"\n      \":funcnums\", " + JavaTypeCoverageNumsValNew(coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
-		"\n      \":ospacenums\", " + JavaTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
-		"\n      \":otimenums\", " + JavaTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
-		"\n      \":totalnums\", " + JavaTypeCoverageNumsValNew(coverpct, covercnt, covertotal) + ", " +
-		"\n      \":typenums\", " + JavaTypeCoverageNumsValNew(covertypepct, covertypecnt, covertypetotal) +
+		"\n      \":constnums\", " + CppTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
+		"\n      \":docnums\", " + CppTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
+		"\n      \":funcnums\", " + CppTypeCoverageNumsValNew(coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
+		"\n      \":ospacenums\", " + CppTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
+		"\n      \":otimenums\", " + CppTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
+		"\n      \":totalnums\", " + CppTypeCoverageNumsValNew(coverpct, covercnt, covertotal) + ", " +
+		"\n      \":typenums\", " + CppTypeCoverageNumsValNew(covertypepct, covertypecnt, covertypetotal) +
 		"\n    );" +
 		"\n  }" +
 		"\n" +
 		"\n  public static Test.Type_testcoveragedetail test_coveragedetail() {" +
 		"\n    return Test.t_testcoveragedetail.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\"," +
-		"\n      \":typemap\", Core.t_intmap.vx_new(" +
+		"\n      \":typemap\", vx_core::t_intmap.vx_new(" +
 		"\n  " + strings.Join(covertype, ",\n  ") +
 		"\n      )," +
-		"\n      \":constmap\", Core.t_intmap.vx_new(" +
+		"\n      \":constmap\", vx_core::t_intmap.vx_new(" +
 		"\n  " + strings.Join(coverconst, ",\n  ") +
 		"\n      )," +
-		"\n      \":funcmap\", Core.t_intmap.vx_new(" +
+		"\n      \":funcmap\", vx_core::t_intmap.vx_new(" +
 		"\n  " + strings.Join(coverfunc, ",\n  ") +
 		"\n      )" +
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testpackage test_package(final Core.Type_context context) {" +
+		"\n  public static Test.Type_testpackage test_package(final vx_core::Type_context context) {" +
 		"\n    Test.Type_testcaselist testcaselist = test_cases(context);" +
 		"\n    Test.Type_testpackage output = Test.t_testpackage.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
@@ -3303,39 +3298,37 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		"\n    return output;" +
 		"\n  }" +
 		"\n"
-	imports := JavaImportsFromPackage(pkg, pkgprefix, body, true)
+	imports := CppImportsFromPackage(pkg, pkgprefix, body, true)
 	output := "" +
-		"\npackage " + pkgpath + ";" +
-		"\n" +
 		imports +
 		"\n" +
-		"\npublic final class " + pkgname + "Test {" +
+		"\nnamespace " + pkgname + "Test {" +
 		"\n" +
 		body +
 		"\n}\n"
 	return output, msgblock
 }
 
-func JavaTestFromType(typ *vxtype) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("JavaTestFromType")
+func CppTestFromType(typ *vxtype) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("CppTestFromType")
 	testvalues := typ.testvalues
 	testpkg := typ.pkgname
 	testname := typ.name
-	testcasename := "t_" + JavaFromName(typ.alias)
+	testcasename := "t_" + CppFromName(typ.alias)
 	fnc := emptyfunc
 	path := typ.pkgname + "/" + typ.name
-	output, msgs := JavaTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
+	output, msgs := CppTestCase(testvalues, testpkg, testname, testcasename, fnc, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	return output, msgblock
 }
 
-func JavaTestFromValue(value vxvalue) string {
+func CppTestFromValue(value vxvalue) string {
 	var output = ""
-	output = JavaFromText(value.textblock.text)
+	output = CppFromText(value.textblock.text)
 	return output
 }
 
-func JavaTypeCoverageNumsValNew(pct int, tests int, total int) string {
+func CppTypeCoverageNumsValNew(pct int, tests int, total int) string {
 	return "" +
 		"Test.t_testcoveragenums.vx_new(" +
 		"\":pct\", " + StringFromInt(pct) + ", " +
@@ -3344,18 +3337,18 @@ func JavaTypeCoverageNumsValNew(pct int, tests int, total int) string {
 		")"
 }
 
-func JavaTypeDefFromType(typ *vxtype, indent string) string {
+func CppTypeDefFromType(typ *vxtype, indent string) string {
 	lineindent := "\n" + indent
-	allowtypes := JavaTypeListFromListType(typ.allowtypes)
-	disallowtypes := JavaTypeListFromListType(typ.disallowtypes)
-	allowfuncs := "Core.e_funclist"
-	disallowfuncs := "Core.e_funclist"
-	allowvalues := "Core.e_anylist"
-	disallowvalues := "Core.e_anylist"
-	properties := "Core.e_argmap"
-	traits := JavaTypeListFromListType(typ.traits)
+	allowtypes := CppTypeListFromListType(typ.allowtypes)
+	disallowtypes := CppTypeListFromListType(typ.disallowtypes)
+	allowfuncs := "vx_core::e_funclist"
+	disallowfuncs := "vx_core::e_funclist"
+	allowvalues := "vx_core::e_anylist"
+	disallowvalues := "vx_core::e_anylist"
+	properties := "vx_core::e_argmap"
+	traits := CppTypeListFromListType(typ.traits)
 	output := "" +
-		"Core.typedef_new(" +
+		"vx_core::typedef_new(" +
 		lineindent + "  \"" + typ.pkgname + "\", // pkgname" +
 		lineindent + "  \"" + typ.name + "\", // name" +
 		lineindent + "  \"" + typ.extends + "\", // extends" +
@@ -3371,49 +3364,49 @@ func JavaTypeDefFromType(typ *vxtype, indent string) string {
 	return output
 }
 
-func JavaTypeDefMapFromProperties(args []vxarg, indent string) string {
+func CppTypeDefMapFromProperties(args []vxarg, indent string) string {
 	output := "null"
 	lineindent := "\n" + indent
 	if len(args) > 0 {
 		var props []string
 		for _, arg := range args {
-			key := JavaFromName(arg.alias)
-			typ := JavaTypeDefFromType(arg.vxtype, indent+"  ")
-			props = append(props, "Core.keyvalue_from_key_value(\":"+key+"\", "+typ+")")
+			key := CppFromName(arg.alias)
+			typ := CppTypeDefFromType(arg.vxtype, indent+"  ")
+			props = append(props, "vx_core::keyvalue_from_key_value(\":"+key+"\", "+typ+")")
 		}
 		output = "" +
-			"Core.hashmap_from_keyvalues(" +
+			"vx_core::hashmap_from_keyvalues(" +
 			lineindent + "  " + StringFromListStringJoin(props, ","+lineindent+"  ") +
 			lineindent + ")"
 	}
 	return output
 }
 
-func JavaTypeIntValNew(val int) string {
-	return "Core.t_int.vx_new_from_int(" + StringFromInt(val) + ")"
+func CppTypeIntValNew(val int) string {
+	return "vx_core::t_int.vx_new_from_int(" + StringFromInt(val) + ")"
 }
 
-func JavaTypeListFromListType(listtype []*vxtype) string {
-	output := "Core.e_typelist"
+func CppTypeListFromListType(listtype []*vxtype) string {
+	output := "vx_core::e_typelist"
 	if len(listtype) > 0 {
 		var listtext []string
 		for _, typ := range listtype {
-			typetext := JavaNameTFromType(typ)
+			typetext := CppNameTFromType(typ)
 			listtext = append(listtext, typetext)
 		}
-		output = "Core.t_typelist.vx_new(" + StringFromListStringJoin(listtext, ", ") + ")"
+		output = "vx_core::t_typelist.vx_new(" + StringFromListStringJoin(listtext, ", ") + ")"
 	}
 	return output
 }
 
-func JavaTypeStringValNew(val string) string {
+func CppTypeStringValNew(val string) string {
 	valstr := StringFromStringFindReplace(val, "\n", "\\n")
-	return "Core.t_string.vx_new_from_string(\"" + valstr + "\")"
+	return "vx_core::t_string.vx_new_from_string(\"" + valstr + "\")"
 }
 
-func JavaWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
-	msgblock := NewMsgBlock("JavaWriteFromProjectCmd")
-	files, msgs := JavaFilesFromProjectCmd(prj, cmd)
+func CppWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
+	msgblock := NewMsgBlock("CppWriteFromProjectCmd")
+	files, msgs := CppFilesFromProjectCmd(prj, cmd)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -3425,13 +3418,13 @@ func JavaWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 			targetpath = targetpath[0:ipos]
 		}
 		targetpath += "/resources"
-		msgs := JavaFolderCopyTestdataFromProjectPath(prj, targetpath)
+		msgs := CppFolderCopyTestdataFromProjectPath(prj, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
 }
 
-func JavaAppTest(prj *vxproject, pkgprefix string) string {
+func CppAppTest(prj *vxproject, pkgprefix string) string {
 	listpackage := prj.listpackage
 	var listtestpackage []string
 	tests := ""
@@ -3447,8 +3440,7 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 		pkgname = StringUCaseFirst(pkgname)
 		testpackage := "\n    " + pkgname + "Test.test_package(context)"
 		listtestpackage = append(listtestpackage, testpackage)
-		libprefix := pkg.project.javadomain
-		importline := "import " + libprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
+		importline := "import " + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;\n"
 		if importline == "import com.vxlisp.vx.*;\n" {
 		} else if BooleanFromStringContains(imports, importline) {
 		} else {
@@ -3466,9 +3458,7 @@ func JavaAppTest(prj *vxproject, pkgprefix string) string {
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
 	output := "" +
-		`package com.vxlisp.vx;
-
-` + imports +
+		imports +
 		`
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -3478,7 +3468,7 @@ import org.junit.jupiter.api.Test;
  */
 public class AppTest {
 
-  Core.Type_context context = Core.t_context.vx_new();
+  vx_core::Type_context context = vx_core::t_context.vx_new();
 
 ` + tests +
 		`
@@ -3497,12 +3487,12 @@ public class AppTest {
 	return output
 }
 
-func JavaTestLib() string {
+func CppTestLib() string {
 	return "" +
 		`package com.vxlisp.vx;
 
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
+import Cpp.util.*;
+import Cpp.util.concurrent.CompletableFuture;
 import static org.junit.jupiter.api.Assertions.*;
 import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
@@ -3521,7 +3511,7 @@ public class TestLib {
   // Only use if running a single testcase
   public static boolean run_testcase_async(final Test.Type_testcase testcase) {
     CompletableFuture<Test.Type_testcase> async_testcase = Test.f_resolve_testcase(testcase);
-    Core.Type_any work = Core.sync_from_async(Test.t_testcase, async_testcase);
+    vx_core::Type_any work = vx_core::sync_from_async(Test.t_testcase, async_testcase);
     Test.Type_testcase testcase_resolved = (Test.Type_testcase)work;
     return run_testcase(testcase_resolved);
   }
@@ -3535,7 +3525,7 @@ public class TestLib {
   }
 
   public static boolean run_testdescribe(final String testpkg, final String casename, final Test.Type_testdescribe describe) {
-    Core.Type_string testcode = describe.describename();
+    vx_core::Type_string testcode = describe.describename();
     String message = testcode.vx_string();
     Test.Type_testresult testresult = describe.testresult();
     return run_testresult(testpkg, casename, message, testresult);
@@ -3545,7 +3535,7 @@ public class TestLib {
   // Only use if running a single testdescribe
   public static boolean run_testdescribe_async(final String testpkg, final String casename, final Test.Type_testdescribe testdescribe) {
     CompletableFuture<Test.Type_testdescribe> async_testdescribe = Test.f_resolve_testdescribe(testdescribe);
-    Test.Type_testdescribe testdescribe_resolved = Core.sync_from_async(Test.t_testdescribe, async_testdescribe);
+    Test.Type_testdescribe testdescribe_resolved = vx_core::sync_from_async(Test.t_testdescribe, async_testdescribe);
     return run_testdescribe(testpkg, casename, testdescribe_resolved);
   }
 
@@ -3582,7 +3572,7 @@ public class TestLib {
   // This is the preferred way of calling test (1 block per package)
   public static boolean run_testpackage_async(final Test.Type_testpackage testpackage) {
     CompletableFuture<Test.Type_testpackage> async_testpackage = Test.f_resolve_testpackage(testpackage);
-    Test.Type_testpackage testpackage_resolved = Core.sync_from_async(Test.t_testpackage, async_testpackage);
+    Test.Type_testpackage testpackage_resolved = vx_core::sync_from_async(Test.t_testpackage, async_testpackage);
     return run_testpackage(testpackage_resolved);
   }
 
@@ -3590,23 +3580,23 @@ public class TestLib {
   // This is the preferred way of calling testsuite (1 block per testsuite)
   public static boolean run_testpackagelist_async(final Test.Type_testpackagelist testpackagelist) {
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = Core.sync_from_async(Test.t_testpackagelist, async_testpackagelist);
+    Test.Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(Test.t_testpackagelist, async_testpackagelist);
     return run_testpackagelist(testpackagelist_resolved);
   }
 
   public static boolean run_testresult(final String testpkg, final String testname, final String message, final Test.Type_testresult testresult) {
-    Core.Type_any valexpected = testresult.expected();
-    Core.Type_any valactual = testresult.actual();
+    vx_core::Type_any valexpected = testresult.expected();
+    vx_core::Type_any valactual = testresult.actual();
     boolean passfail = testresult.passfail().vx_boolean();
     String code = testresult.code().vx_string();
-    String expected = Core.f_string_from_any(valexpected).vx_string();
-    String actual = Core.f_string_from_any(valactual).vx_string();
+    String expected = vx_core::f_string_from_any(valexpected).vx_string();
+    String actual = vx_core::f_string_from_any(valactual).vx_string();
     String msg = testpkg + "/" + testname + " " + message;
     if (!passfail) {
       System.out.println(msg);
       System.out.println(expected);
       System.out.println(actual);
-      Core.f_log(testresult);
+      vx_core::f_log(testresult);
     }
     switch (code) {
     case ":ne":
@@ -3622,18 +3612,18 @@ public class TestLib {
   // Blocking
   public static boolean run_testresult_async(final String testpkg, final String testname, final String message, Test.Type_testresult testresult) {
     CompletableFuture<Test.Type_testresult> async_testresult = Test.f_resolve_testresult(testresult);
-    Test.Type_testresult testresult_resolved = Core.sync_from_async(Test.t_testresult, async_testresult);
+    Test.Type_testresult testresult_resolved = vx_core::sync_from_async(Test.t_testresult, async_testresult);
     return run_testresult(testpkg, testname, message, testresult_resolved);
   }
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  public static boolean write_testpackagelist_async(final Test.Type_testpackagelist testpackagelist, final Core.Type_context context) {
+  public static boolean write_testpackagelist_async(final Test.Type_testpackagelist testpackagelist, final vx_core::Type_context context) {
     boolean output = false;
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = Core.sync_from_async(Test.t_testpackagelist, async_testpackagelist);
+    Test.Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(Test.t_testpackagelist, async_testpackagelist);
     File.Type_file filetest = Test.f_file_test();
-    Core.Type_boolean valboolean = File.f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
+    vx_core::Type_boolean valboolean = File.f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     output = valboolean.vx_boolean();
     Html.Type_div divtest = Test.f_div_from_testpackagelist(testpackagelist_resolved);
     Html.Type_html htmlnode = Test.f_html_from_divtest(divtest);
@@ -3641,7 +3631,7 @@ public class TestLib {
     valboolean = File.f_boolean_write_from_file_any(filenode, htmlnode, context);
     output = output && valboolean.vx_boolean();
     File.Type_file filehtml = Test.f_file_testhtml();
-    Core.Type_string shtml = Html.f_string_from_html(htmlnode);
+    vx_core::Type_string shtml = Html.f_string_from_html(htmlnode);
     valboolean = File.f_boolean_write_from_file_string(filehtml, shtml, context);
     output = output && valboolean.vx_boolean();
     return output;

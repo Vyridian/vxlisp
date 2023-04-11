@@ -33,6 +33,8 @@ func TestFuncParse(t *testing.T) {
 	arg := NewArg("object")
 	typ = NewType("any-1")
 	arg.vxtype = typ
+	arg.isgeneric = true
+	arg.generictype = typ
 	args = append(args, arg)
 	arg = NewArg("method")
 	typ = NewType("string")
@@ -40,6 +42,8 @@ func TestFuncParse(t *testing.T) {
 	args = append(args, arg)
 	arg = NewArg("params")
 	typ = NewType("any-2")
+	arg.isgeneric = true
+	arg.generictype = typ
 	arg.multi = true
 	arg.vxtype = typ
 	args = append(args, arg)

@@ -1236,6 +1236,9 @@
  :test (test
         "b"
         (any<-list (list "a" "b" "c") 1))
+       (test
+        "b"
+        (:1 (stringlist "a" "b" "c")))
  :doc "Returns nth value from a list or none if out of bounds")
 
 (func any<-list-reduce : any-1

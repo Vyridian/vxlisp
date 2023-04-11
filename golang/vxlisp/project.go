@@ -138,8 +138,11 @@ func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source":
 		switch cmd.lang {
+		case ":cpp":
+			msgs := CppWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
-			msgs := WriteJavaFromProjectCmd(project, cmd)
+			msgs := JavaWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
 			msgs := WriteJsFromProjectCmd(project, cmd)
@@ -147,8 +150,11 @@ func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 		}
 	case ":test":
 		switch cmd.lang {
+		case ":cpp":
+			msgs := CppWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
-			msgs := WriteJavaFromProjectCmd(project, cmd)
+			msgs := JavaWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
 			msgs := WriteJsFromProjectCmd(project, cmd)

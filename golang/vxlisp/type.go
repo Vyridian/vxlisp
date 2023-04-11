@@ -39,7 +39,9 @@ var anylisttype = NewTypeList("vx/core/anylist", anytype)
 
 var anytype = NewType("vx/core/any")
 
-var anytypetype = NewType("vx/core/anytype")
+var anytype1 = NewType("vx/core/any-1")
+
+var anytype2 = NewType("vx/core/any-2")
 
 var argtype = NewType("vx/core/arg")
 
@@ -55,9 +57,17 @@ var intlisttype = NewTypeList("vx/core/intlist", inttype)
 
 var intmaptype = NewTypeMap("vx/core/intmap", inttype)
 
-var listtype = NewTypeList("vx/core/list", anytype)
+//var listtype = NewTypeList("vx/core/list", anytype)
 
-var maptype = NewTypeMap("vx/core/map", anytype)
+var listtype1 = NewTypeList("vx/core/list-1", anytype)
+
+var listtype2 = NewTypeList("vx/core/list-2", anytype)
+
+//var maptype = NewTypeMap("vx/core/map", anytype)
+
+var maptype1 = NewTypeMap("vx/core/map1", anytype)
+
+var maptype2 = NewTypeMap("vx/core/map2", anytype)
 
 var stringtype = NewType("vx/core/string")
 
@@ -65,7 +75,11 @@ var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
 
 var stringmaptype = NewTypeMap("vx/core/stringmap", stringtype)
 
-var structtype = NewTypeStruct("vx/core/struct")
+//var structtype = NewTypeStruct("vx/core/struct")
+
+//var structtype1 = NewType("vx/core/struct-1")
+
+var structtype2 = NewType("vx/core/struct-2")
 
 var testresulttype = NewTypeStruct("vx/test/testresult")
 
@@ -85,9 +99,6 @@ func NewType(typename string) *vxtype {
 		typ.name = typename[pos+1:]
 	}
 	switch typename {
-	//case ":1", ":2", ":3", ":4", ":5", ":1a", ":2a", ":3a", ":4a", ":5a":
-	//	typ.pkgname = "vx/core"
-	//	typ.name = "generic-" + StringSubstring(typename, 1, len(typename))
 	case "vx/core/arglist", "vx/core/intlist", "vx/core/list", "vx/core/stringlist":
 		typ.extends = ":list"
 	case "vx/core/intmap", "vx/core/map", "vx/core/stringmap":
@@ -157,6 +168,22 @@ func NewTypeList(typename string, basetype *vxtype) *vxtype {
 	typ := NewType(typename)
 	typ.extends = ":list"
 	typ.allowtypes = []*vxtype{basetype}
+	isfound := false
+	if BooleanFromStringEnds(typename, "-1") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-2") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-3") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-4") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-5") {
+		isfound = true
+	}
+	if isfound {
+		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.isgeneric = true
+	}
 	return typ
 }
 
@@ -164,12 +191,44 @@ func NewTypeMap(typename string, basetype *vxtype) *vxtype {
 	typ := NewType(typename)
 	typ.extends = ":map"
 	typ.allowtypes = []*vxtype{basetype}
+	isfound := false
+	if BooleanFromStringEnds(typename, "-1") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-2") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-3") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-4") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-5") {
+		isfound = true
+	}
+	if isfound {
+		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.isgeneric = true
+	}
 	return typ
 }
 
 func NewTypeStruct(typename string) *vxtype {
 	typ := NewType(typename)
 	typ.extends = ":struct"
+	isfound := false
+	if BooleanFromStringEnds(typename, "-1") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-2") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-3") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-4") {
+		isfound = true
+	} else if BooleanFromStringEnds(typename, "-5") {
+		isfound = true
+	}
+	if isfound {
+		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.isgeneric = true
+	}
 	return typ
 }
 
@@ -955,12 +1014,6 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 				switch word {
 				case ":alias", ":allowfuncs", ":allowtypes", ":allowvalues", ":convert", ":create", ":default", ":deprecated", ":destroy", ":disallowfuncs", ":disallowtypes", ":disallowvalues", ":doc", ":extends", ":properties", ":traits":
 					lastword = word
-				case ":1", ":2", ":3", ":4", ":5", ":1a", ":2a", ":3a", ":4a", ":5a":
-					if typ.generic == "" {
-						typ.generic = word
-					} else {
-						typ.generic += " " + word
-					}
 				case ":test":
 					testcls = true
 				default:

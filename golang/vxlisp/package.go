@@ -327,14 +327,31 @@ func PackagePathNameFromName(pkgname string) (string, string) {
 	return path, name
 }
 
+func StringFromListPackage(listpackage []*vxpackage) string {
+	return StringFromListPackageIndent(listpackage, " ")
+}
+
+func StringFromListPackageIndent(listpackage []*vxpackage, indent string) string {
+	output := ""
+	if len(listpackage) > 0 {
+		lineindent := "\n" + indent
+		output += "(packagelist"
+		for _, pkg := range listpackage {
+			output += lineindent + StringFromPackageIndent(pkg, indent+" ")
+		}
+		output += ")"
+	}
+	return output
+}
+
 func StringFromPackage(pkg *vxpackage) string {
-	return StringFromPackageIndent(pkg, "")
+	return StringFromPackageIndent(pkg, " ")
 }
 
 func StringFromPackageIndent(pkg *vxpackage, indent string) string {
 	lineindent := "\n" + indent
 	output := "" +
-		"{package" +
+		"(package" +
 		lineindent + ":name  \"" + pkg.name + "\"" +
 		lineindent + ":alias \"" + pkg.alias + "\"" +
 		lineindent + ":doc   \"" + pkg.doc + "\"" +
@@ -342,7 +359,7 @@ func StringFromPackageIndent(pkg *vxpackage, indent string) string {
 		lineindent + ":types " + StringFromListTypeIndent(pkg.listtype, indent+" ") +
 		lineindent + ":consts " + StringFromListConstIndent(pkg.listconst, indent+" ") +
 		lineindent + ":funcs " + StringFromListFuncIndent(pkg.listfunc, indent+" ") +
-		"}"
+		")"
 	StringFromTextblock(pkg.textblock)
 	return output
 }

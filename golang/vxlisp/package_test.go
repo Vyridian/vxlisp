@@ -34,6 +34,10 @@ func TestPackageParse(t *testing.T) {
 	lib.path = "vx/core"
 	expectedpkg.listlib = append(expectedpkg.listlib, lib)
 	lib = NewLibrary()
+	lib.name = "vx/test"
+	lib.path = "vx/test"
+	expectedpkg.listlib = append(expectedpkg.listlib, lib)
+	lib = NewLibrary()
 	lib.name = "testlibalias1"
 	lib.path = "testlib1"
 	expectedpkg.listlib = append(expectedpkg.listlib, lib)
@@ -64,8 +68,8 @@ func TestPackageParse(t *testing.T) {
 	}
 }
 
-func TestPackagesValidate(t *testing.T) {
-	msgblock := NewMsgBlock("TestPackagesValidate")
+func TestValuePackageValidate(t *testing.T) {
+	msgblock := NewMsgBlock("TestValuePackageValidate")
 	typetext := `(package testpkg)
  
  (type t1

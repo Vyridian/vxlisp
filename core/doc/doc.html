@@ -1636,6 +1636,20 @@
                 <div class="td">Run Simple Development Web Server</div>
               </div>
               <div class="tr">
+                <div class="td">srccpp</div>
+                <div class="td">:source</div>
+                <div class="td">../cpp/src</div>
+                <div class="td">:cpp</div>
+                <div class="td"></div>
+              </div>
+              <div class="tr">
+                <div class="td">testcpp</div>
+                <div class="td">:test</div>
+                <div class="td">../cpp/test</div>
+                <div class="td">:cpp</div>
+                <div class="td"></div>
+              </div>
+              <div class="tr">
                 <div class="td">srcjs</div>
                 <div class="td">:source</div>
                 <div class="td">../js/src</div>
@@ -1746,6 +1760,14 @@
    :path ..
    :port 8081
    :doc  &quot;Run Simple Development Web Server&quot;)
+  (cmd srccpp
+   :code :source
+   :lang :cpp
+   :path ../cpp/src)
+  (cmd testcpp
+   :code :test
+   :lang :cpp
+   :path ../cpp/test)
   (cmd srcjs
    :code :source
    :lang :js
@@ -3051,9 +3073,9 @@
  :doc        &quot;A list of string.&quot;)
 
 (type stringmap
- :extends      :map
+ :extends    :map
  :allowtypes [string]
- :doc          &quot;A map of string.&quot;)
+ :doc        &quot;A map of string.&quot;)
 
 (type struct
  :extends :struct
@@ -3789,6 +3811,9 @@
  :test (test
         &quot;b&quot;
         (any&lt;-list (list &quot;a&quot; &quot;b&quot; &quot;c&quot;) 1))
+       (test
+        &quot;b&quot;
+        (:1 (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))
  :doc &quot;Returns nth value from a list or none if out of bounds&quot;)
 
 (func any&lt;-list-reduce : any-1
@@ -8960,9 +8985,9 @@
           <ul>
             <li>
               <div class="source">(type stringmap
- :extends      :map
+ :extends    :map
  :allowtypes [string]
- :doc          &quot;A map of string.&quot;)</div>
+ :doc        &quot;A map of string.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -12700,6 +12725,9 @@ improves readability.</div>
             <li><div class="test">(test
  &quot;b&quot;
  (any&lt;-list (list &quot;a&quot; &quot;b&quot; &quot;c&quot;) 1))</div></li>
+            <li><div class="test">(test
+ &quot;b&quot;
+ (:1 (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
@@ -12723,6 +12751,9 @@ improves readability.</div>
  :test (test
         &quot;b&quot;
         (any&lt;-list (list &quot;a&quot; &quot;b&quot; &quot;c&quot;) 1))
+       (test
+        &quot;b&quot;
+        (:1 (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))
  :doc &quot;Returns nth value from a list or none if out of bounds&quot;)</div>
             </li>
           </ul>
@@ -20652,7 +20683,7 @@ improves readability.</div>
         (boolean-exists&lt;-file
          (file
           :name &quot;boolean_exists_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Returns true if file/path exists.&quot;)
 
@@ -20684,7 +20715,7 @@ improves readability.</div>
         (boolean-write&lt;-file-string
          (file
           :name &quot;boolean_write_from_file_string.txt&quot;
-          :path &quot;src/test/resources&quot;)
+          :path &quot;src/test/resources/vx&quot;)
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)
@@ -20698,12 +20729,12 @@ improves readability.</div>
  :test (test
         (file
          :name &quot;string_read_from_file.txt&quot;
-         :path &quot;src/test/resources&quot;
+         :path &quot;src/test/resources/vx&quot;
          :text &quot;testdata&quot;)
         (file-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Read a Text File from Disk&quot;)
 
@@ -20730,7 +20761,7 @@ improves readability.</div>
         (string-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Read text from a File&quot;)
 
@@ -20929,7 +20960,7 @@ improves readability.</div>
  (boolean-exists&lt;-file
   (file
    :name &quot;boolean_exists_from_file.txt&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path &quot;src/test/resources/vx&quot;)))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
@@ -20948,7 +20979,7 @@ improves readability.</div>
         (boolean-exists&lt;-file
          (file
           :name &quot;boolean_exists_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Returns true if file/path exists.&quot;)</div>
             </li>
@@ -21063,7 +21094,7 @@ improves readability.</div>
  (boolean-write&lt;-file-string
   (file
    :name &quot;boolean_write_from_file_string.txt&quot;
-   :path &quot;src/test/resources&quot;)
+   :path &quot;src/test/resources/vx&quot;)
   &quot;writetext&quot;))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
@@ -21088,7 +21119,7 @@ improves readability.</div>
         (boolean-write&lt;-file-string
          (file
           :name &quot;boolean_write_from_file_string.txt&quot;
-          :path &quot;src/test/resources&quot;)
+          :path &quot;src/test/resources/vx&quot;)
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)</div>
@@ -21138,12 +21169,12 @@ improves readability.</div>
             <li><div class="test">(test
  (file
   :name &quot;string_read_from_file.txt&quot;
-  :path &quot;src/test/resources&quot;
+  :path &quot;src/test/resources/vx&quot;
   :text &quot;testdata&quot;)
  (file-read&lt;-file
   (file
    :name &quot;string_read_from_file.txt&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path &quot;src/test/resources/vx&quot;)))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
@@ -21157,12 +21188,12 @@ improves readability.</div>
  :test (test
         (file
          :name &quot;string_read_from_file.txt&quot;
-         :path &quot;src/test/resources&quot;
+         :path &quot;src/test/resources/vx&quot;
          :text &quot;testdata&quot;)
         (file-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Read a Text File from Disk&quot;)</div>
             </li>
@@ -21213,7 +21244,7 @@ improves readability.</div>
  (string-read&lt;-file
   (file
    :name &quot;string_read_from_file.txt&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path &quot;src/test/resources/vx&quot;)))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
@@ -21241,7 +21272,7 @@ improves readability.</div>
         (string-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path &quot;src/test/resources/vx&quot;)))
  :clientserver :server
  :doc &quot;Read text from a File&quot;)</div>
             </li>

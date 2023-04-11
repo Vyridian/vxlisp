@@ -12,109 +12,132 @@ func TestValueValidate(t *testing.T) {
 	expected := ""
 	actual := ""
 
-	// new: (func new : any :1 [type : anytype :1 values : any :...])
+	// new: (func new : any-1 [type : any-1 values : anylist :...])
 	newfunc := NewFunc()
 	newfunc.name = "new"
 	newfunc.pkgname = "vx/core"
-	newfunc.vxtype = anytype
+	newfunc.vxtype = anytype1
 	arg := NewArg("type")
-	arg.vxtype = anytypetype
+	arg.vxtype = anytype1
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	newfunc.listarg = append(newfunc.listarg, arg)
 	arg = NewArg("values")
 	arg.vxtype = anylisttype
 	arg.multi = true
 	newfunc.listarg = append(newfunc.listarg, arg)
 
-	// any<-any: (func any<-any : any :1 [value : any :2])
+	// any<-any: (func any<-any : any-1 [value : any-2])
 	anyfromanyfunc := NewFunc()
 	anyfromanyfunc.name = "any<-any"
 	anyfromanyfunc.pkgname = "vx/core"
-	anyfromanyfunc.vxtype = anytype
+	anyfromanyfunc.vxtype = anytype1
+	anyfromanyfunc.isgeneric = true
+	anyfromanyfunc.generictype = anytype1
 	arg = NewArg("value")
-	arg.vxtype = anytype
+	arg.vxtype = anytype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	anyfromanyfunc.listarg = append(anyfromanyfunc.listarg, arg)
 	anyfromanytype := NewTypeFromFunc(anyfromanyfunc)
 
-	// any<-func: (func any<-func : any :1)
+	// any<-func: (func any<-func : any-1)
 	anyfromfunc := NewFunc()
 	anyfromfunc.name = "any<-func"
 	anyfromfunc.pkgname = "vx/core"
-	anyfromfunc.vxtype = anytype
+	anyfromfunc.vxtype = anytype1
+	anyfromfunc.isgeneric = true
+	anyfromfunc.generictype = anytype1
 	anyfromfunctype := NewTypeFromFunc(anyfromfunc)
 
-	// any<-key-value (func any<-key-value : any :1 [key : string val : any :2])
+	// any<-key-value (func any<-key-value : any-1 [key : string val : any-2])
 	anyfromkeyvaluefunc := NewFunc()
 	anyfromkeyvaluefunc.name = "any<-key-value"
 	anyfromkeyvaluefunc.pkgname = "vx/core"
-	anyfromkeyvaluefunc.vxtype = anytype
+	anyfromkeyvaluefunc.vxtype = anytype1
+	anyfromkeyvaluefunc.isgeneric = true
+	anyfromkeyvaluefunc.generictype = anytype1
 	arg = NewArg("key")
 	arg.vxtype = stringtype
 	anyfromkeyvaluefunc.listarg = append(anyfromkeyvaluefunc.listarg, arg)
 	arg = NewArg("val")
-	arg.vxtype = anytype
+	arg.vxtype = anytype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	anyfromkeyvaluefunc.listarg = append(anyfromkeyvaluefunc.listarg, arg)
 	anyfromkeyvaluetype := NewTypeFromFunc(anyfromkeyvaluefunc)
 
-	// any<-none: (func any<-none : any :1)
-	anyfromnonefunc := NewFunc()
-	anyfromnonefunc.name = "any<-none"
-	anyfromnonefunc.pkgname = "vx/core"
-	anyfromnonefunc.vxtype = anytype
-	anyfromnonetype := NewTypeFromFunc(anyfromnonefunc)
-
-	// any<-list: (func any<-list : any :1 [values : list :2 index : int])
+	// any<-list: (func any<-list : any-1 [values : list-1 index : int])
 	anyfromlistfunc := NewFunc()
 	anyfromlistfunc.name = "any<-list"
 	anyfromlistfunc.pkgname = "vx/core"
-	anyfromlistfunc.vxtype = anytype
+	anyfromlistfunc.vxtype = anytype1
+	anyfromlistfunc.isgeneric = true
+	anyfromlistfunc.generictype = anytype1
 	arg = NewArg("values")
-	arg.vxtype = listtype
+	arg.vxtype = listtype1
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	anyfromlistfunc.listarg = append(anyfromlistfunc.listarg, arg)
 	arg = NewArg("index")
 	arg.vxtype = inttype
 	anyfromlistfunc.listarg = append(anyfromlistfunc.listarg, arg)
 
-	// list<-list: (func list<-list : list :1 [values : list :2 fn-any<-any : any<-any :1 :2])
+	// list<-list: (func list<-list : list-1 [values : list-2 fn-any<-any : any<-any])
 	listfromlistfunc := NewFunc()
 	listfromlistfunc.name = "list<-list"
 	listfromlistfunc.pkgname = "vx/core"
-	listfromlistfunc.vxtype = listtype
+	listfromlistfunc.vxtype = listtype1
+	listfromlistfunc.isgeneric = true
+	listfromlistfunc.generictype = listtype1
 	arg = NewArg("values")
-	arg.vxtype = listtype
+	arg.vxtype = listtype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	listfromlistfunc.listarg = append(listfromlistfunc.listarg, arg)
 	arg = NewArg("fn-any<-any")
 	arg.vxtype = anyfromanytype
 	listfromlistfunc.listarg = append(listfromlistfunc.listarg, arg)
 
-	// any<-map: (func any<-map : any :1 [valuemap : map :2 key : string])
+	// any<-map: (func any<-map : any-1 [valuemap : map-2 key : string])
 	mapgetfunc := NewFunc()
 	mapgetfunc.name = "any<-map"
 	mapgetfunc.pkgname = "vx/core"
-	mapgetfunc.vxtype = anytype
+	mapgetfunc.vxtype = anytype1
+	mapgetfunc.isgeneric = true
+	mapgetfunc.generictype = anytype1
 	arg = NewArg("valuemap")
-	arg.vxtype = maptype
+	arg.vxtype = maptype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	mapgetfunc.listarg = append(mapgetfunc.listarg, arg)
 	arg = NewArg("key")
 	arg.vxtype = stringtype
 	mapgetfunc.listarg = append(mapgetfunc.listarg, arg)
 
-	// list<-map: (func list<-map : list :1 [valuemap : map :2 fn-any<-key-value : any<-key-value :1 :2])
+	// list<-map: (func list<-map : list-1 [valuemap : map-2 fn-any<-key-value : any<-key-value])
 	listfrommapfunc := NewFunc()
 	listfrommapfunc.name = "list<-map"
 	listfrommapfunc.pkgname = "vx/core"
-	listfrommapfunc.vxtype = listtype
+	listfrommapfunc.vxtype = listtype1
+	listfrommapfunc.isgeneric = true
+	listfrommapfunc.generictype = listtype1
 	arg = NewArg("valuemap")
-	arg.vxtype = maptype
+	arg.vxtype = maptype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	listfrommapfunc.listarg = append(listfrommapfunc.listarg, arg)
 	arg = NewArg("fn-any<-key-value")
 	arg.vxtype = anyfromkeyvaluetype
 	listfrommapfunc.listarg = append(listfrommapfunc.listarg, arg)
 
-	// fn (func fn : any :1 [params : arglist fn-any<-any : any<-any :1])
+	// fn (func fn : any-1 [params : arglist fn-any<-any : any<-any])
 	fnfunc := NewFunc()
 	fnfunc.name = "fn"
 	fnfunc.pkgname = "vx/core"
-	fnfunc.vxtype = anytype
+	fnfunc.vxtype = anytype1
+	fnfunc.isgeneric = true
+	fnfunc.generictype = arg.vxtype
 	arg = NewArg("params")
 	arg.vxtype = arglisttype
 	fnfunc.listarg = append(fnfunc.listarg, arg)
@@ -122,13 +145,17 @@ func TestValueValidate(t *testing.T) {
 	arg.vxtype = anyfromfunctype
 	fnfunc.listarg = append(fnfunc.listarg, arg)
 
-	// any<-struct: (func any<-struct : any :1 [valuestruct : struct :2 key : string])
+	// any<-struct: (func any<-struct : any-1 [valuestruct : struct-2 key : string])
 	anyfromstructfunc := NewFunc()
 	anyfromstructfunc.name = "any<-struct"
 	anyfromstructfunc.pkgname = "vx/core"
-	anyfromstructfunc.vxtype = anytype
+	anyfromstructfunc.vxtype = anytype1
+	anyfromstructfunc.isgeneric = true
+	anyfromstructfunc.generictype = arg.vxtype
 	arg = NewArg("valuestruct")
-	arg.vxtype = structtype
+	arg.vxtype = structtype2
+	arg.isgeneric = true
+	arg.generictype = arg.vxtype
 	anyfromstructfunc.listarg = append(anyfromstructfunc.listarg, arg)
 	arg = NewArg("key")
 	arg.vxtype = stringtype
@@ -211,17 +238,21 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// value<-list: stringlist
+	// any<-list: stringlist
 	// actual string
 	expectedtype = anytype
 
+	genericmap := NewMapType()
+	genericmap["any-1"] = stringlisttype
+
 	fnc := NewFuncCopy(newfunc)
+	fnc.mapgeneric = genericmap
 	arglist := fnc.listarg
 	arg = arglist[0]
 	arg.value = NewValueFromType(stringlisttype)
 	arglist[0] = arg
-
 	argvalue := NewValueFromFunc(fnc)
+
 	fnc = NewFuncCopy(anyfromlistfunc)
 	arglist = fnc.listarg
 	arg = arglist[0]
@@ -316,23 +347,9 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// expected generic list, actual stringlist function
-	expectedtype = listtype
-	fnc = NewFunc()
-	fnc.name = "f4"
-	fnc.vxtype = stringlisttype
-	value = NewValueFromFunc(fnc)
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringlisttype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
-
 	// expected generic map
 	// actual stringmap function
-	expectedtype = maptype
+	expectedtype = maptype1
 	fnc = NewFunc()
 	fnc.name = "f5"
 	fnc.vxtype = stringmaptype
@@ -384,81 +401,6 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// (f8 : any :1 [fn-any : any<-none :1])
-	// expected string
-	// actual (f8 (fn : string "a")))
-	f8 := NewFunc()
-	f8.name = "f8"
-	f8.vxtype = anytype
-	arg = NewArg("fn-any")
-	arg.vxtype = anyfromnonetype
-	f8.listarg = append(f8.listarg, arg)
-	valuefnfunc := NewFuncCopy(fnfunc)
-	valuefnfunc = FuncSetType(valuefnfunc, stringtype)
-	arglist = valuefnfunc.listarg
-	arg = arglist[1]
-	arg.value = NewValueFromString("a")
-	arglist[1] = arg
-	valuefnfunc.listarg = arglist
-
-	fnc = NewFuncCopy(f8)
-	arglist = fnc.listarg
-	arg = arglist[0]
-	arg.value = NewValueFromFunc(valuefnfunc)
-	arglist[0] = arg
-	fnc.listarg = arglist
-	value = NewValueFromFunc(fnc)
-
-	expectedtype = unknowntype
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
-
-	// (f9 : any :1 [fn-any<-any : any<-any :1 :2])
-	// expected string
-	// actual (f9 : any :1 (fn : string [val : int := 2] "a")))
-	f9 := NewFunc()
-	f9.name = "f9"
-	f9.vxtype = anytype
-	arg = NewArg("fn-any<-any")
-	arg.vxtype = anyfromanytype
-	f9.listarg = append(f9.listarg, arg)
-	valuefnfunc = NewFuncCopy(fnfunc)
-	valuefnfunc = FuncSetType(valuefnfunc, stringtype)
-	subarg := NewArg("val")
-	subarg.vxtype = inttype
-	subarg.value = NewValueFromInteger("2")
-	subarglist := []vxarg{subarg}
-	arglist = valuefnfunc.listarg
-	arg = arglist[0]
-	argvalue = arg.value
-	arg.value = ValueSetListArg(argvalue, subarglist)
-	arglist[0] = arg
-	arg = arglist[1]
-	arg.value = NewValueFromString("a")
-	arglist[1] = arg
-	valuefnfunc.listarg = arglist
-
-	fnc = NewFuncCopy(f9)
-	arglist = fnc.listarg
-	arg = arglist[0]
-	arg.value = NewValueFromFunc(valuefnfunc)
-	arglist[0] = arg
-	fnc.listarg = arglist
-	value = NewValueFromFunc(fnc)
-	expectedtype = unknowntype
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
-
 	// expected int
 	// actual (f10 : unknown (new int 4))
 	newintfunc := NewFuncCopy(newfunc)
@@ -498,11 +440,11 @@ func TestValueValidate(t *testing.T) {
 	arglist[1] = arg
 	newintlistfunc.listarg = arglist
 
-	valuefnfunc = NewFuncCopy(fnfunc)
+	valuefnfunc := NewFuncCopy(fnfunc)
 	arglist = valuefnfunc.listarg
-	subarg = NewArg("val")
+	subarg := NewArg("val")
 	subarg.vxtype = inttype
-	subarglist = []vxarg{subarg}
+	subarglist := []vxarg{subarg}
 	arg = arglist[0]
 	argvalue = arg.value
 	arg.value = ValueSetListArg(argvalue, subarglist)
@@ -615,7 +557,7 @@ func TestPackageValidate(t *testing.T) {
 (type any)
 
 (type anylist
- :extends      :list
+ :extends    :list
  :allowtypes [any])
   
 (type anytype
@@ -629,68 +571,69 @@ func TestPackageValidate(t *testing.T) {
    fn-any  : any<-func])
 
 (type arglist
- :extends      :list
+ :extends    :list
  :allowtypes [arg])
 
 (type int)
 
 (type intlist
- :extends :list
+ :extends    :list
  :allowtypes [int])
 
 (type intmap
- :extends :map
+ :extends    :map
  :allowtypes [int])
 
-(type list)
+(type list
+ :extends    :list
+ :allowtypes [any])
 
-(type map)
+(type map
+ :extends    :map
+ :allowtypes [any])
 
-(type string)
+(type string
+ :extends string)
 
 (type stringlist
- :extends :list
+ :extends    :list
  :allowtypes [string])
 
 (type stringmap
- :extends :map
+ :extends    :map
  :allowtypes [string])
 
 (type type
  :extends :type)
 
-(func any<-any : any :1
- [value : any :2])
+(func any<-any : any-1
+ [value : any-2])
 
-(func any<-func : any :1
+(func any<-func : any-1
  [])
 
-(func any<-key-value : any :1
+(func any<-key-value : any-1
  [key : string
-  val : any :2])
+  val : any-2])
    
-(func fn : any :1
+(func fn : any-1
  [params : arglist
-  fn-any : any<-func :1])
+  fn-any : any<-func])
 
-(func list<-list : list :1
- [values      : list :2
-  fn-any<-any : any<-any :1 :2])
+(func list<-list : list-1
+ [values      : list-2
+  fn-any<-any : any<-any])
 
-(func list<-map : list :1
- [valuemap         : map :2
- fn-any<-key-value : any<-key-value :1 :2])
+(func list<-map : list-1
+ [valuemap         : map-2
+ fn-any<-key-value : any<-key-value])
 
-(func new : any :1
- [type   : anytype :1
+(func new : any-1
+ [type   : any-1
   values : anylist :...])
 
 (func string<-int : string
  [value : int])
-   
-(func test : list :1
- [expectedfn : any<-func
-  actualfn   : any<-func])
 
 (func test1 : string
  (string<-int 4))
@@ -707,21 +650,12 @@ func TestPackageValidate(t *testing.T) {
    [key   : string
     value : int]
    (string<-int value))))
-
-(func test4 : stringlist
- (test
-  (stringlist "a1" "b2")
-  (list<-map : stringlist
-   (stringmap "a" "1" "b" "2")
-   (fn : string
-    [key : string
-     val : string]
-    (string key val)))))
 `
 
 	textblock, msgs := TextblockParse(textblock)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	pkg, msgs := PackageFromTextblock(textblock)
+	pkg.listlib = emptylistlibrary
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	pkgs := []*vxpackage{pkg}
 	pkgs, msgs = ListPackageLink(pkgs)
