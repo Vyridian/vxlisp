@@ -92,7 +92,7 @@
                   kidmap  : personmap  :doc "Map of kids"]
      :doc "This is a person structure")
 
-* How do a make a new people? -
+* How do I make new people? -
     (const jack : person
      (person :name "Jack" :age 10))
 
