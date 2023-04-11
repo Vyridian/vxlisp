@@ -498,9 +498,9 @@
  :doc        "A list of string.")
 
 (type stringmap
- :extends      :map
+ :extends    :map
  :allowtypes [string]
- :doc          "A map of string.")
+ :doc        "A map of string.")
 
 (type struct
  :extends :struct

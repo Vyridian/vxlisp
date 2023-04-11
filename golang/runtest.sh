@@ -1,2 +1,2 @@
-cls
+#!/bin/bash
 go test -v ./...

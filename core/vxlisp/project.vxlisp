@@ -26,6 +26,14 @@
    :path ..
    :port 8081
    :doc  "Run Simple Development Web Server")
+  (cmd srccpp
+   :code :source
+   :lang :cpp
+   :path ../cpp/src)
+  (cmd testcpp
+   :code :test
+   :lang :cpp
+   :path ../cpp/test)
   (cmd srcjs
    :code :source
    :lang :js

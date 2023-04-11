@@ -6,12 +6,20 @@
 
 ## Sample
 
-    (func foo : int           // function foo() returns integer
-     [arg1 : int              // arg1
-      arg2 : int]             // arg2
-     (+ arg1 arg2)            // arg1 + arg2
-     :test (test 3 (foo 1 2)) // A Test case {expect: 3, actual: {foo 1 2}}
+    (func foo : int               // function foo() returns integer
+     [arg1 : int                  // arg1
+      arg2 : int]                 // arg2
+     (+ arg1 arg2)                // arg1 + arg2
+     :test (test 3 (foo 1 2))     // A Test case {expect: 3, actual: {foo 1 2}}
      :doc  "Foo function returns an integer after adding arg1 and arg2")
+
+## Folder Structure
+
+1. core - The core library of vxlisp. This library is intended to be included in all vxlisp projects.
+2. gettingstarted - The runtime version of vxlisp with any compiler source code.
+3. golang - The vxcompiler development code written in golang.
+4. notes - Markdown files of various instructions and notes.
+5. sample - An example project with generated docs, java source, java test, js source, and js test.
 
 ## FAQ
 
