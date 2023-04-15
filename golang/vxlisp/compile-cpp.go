@@ -109,7 +109,7 @@ func CppEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 		case "string":
 			output = "\"" + output + "\""
 		case ":list":
-			output = "vx_core::f_type_to_list(" + CppNameFromPkgName(typ.pkgname) + ".t_" + typ.name + ")"
+			output = "vx_core::f_type_to_list(" + CppNameFromPkgName(typ.pkgname) + "::t_" + typ.name + ")"
 		default:
 			if len(typ.properties) > 0 {
 				output = "{\n"
@@ -122,7 +122,7 @@ func CppEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 					output += "\n"
 				}
 				output += "" +
-					indent + "    vxtype: " + CppNameFromPkgName(typ.pkgname) + ".t_" + CppFromName(typ.name) +
+					indent + "    vxtype: " + CppNameFromPkgName(typ.pkgname) + "::t_" + CppFromName(typ.name) +
 					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
@@ -139,13 +139,13 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 	switch command.code {
 	case ":test":
 		file := NewFile()
-		file.name = "AppTest.cpp"
-		file.path = cmdpath + "/com/vxlisp/vx"
+		file.name = "app_test.cpp"
+		file.path = cmdpath + "/vx"
 		file.text = CppAppTest(project, "")
 		files = append(files, file)
 		file = NewFile()
-		file.name = "TestLib.cpp"
-		file.path = cmdpath + "/com/vxlisp/vx"
+		file.name = "test_lib.cpp"
+		file.path = cmdpath + "/vx"
 		file.text = CppTestLib()
 		files = append(files, file)
 	}
@@ -158,21 +158,26 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 			pkgpath = pkgname[0:pos]
 			pkgname = pkgname[pos+1:]
 		}
-		pkgname = StringUCaseFirst(pkgname)
+		pkgname = StringFromStringFindReplace(pkgname, "/", "_")
 		switch command.code {
 		case ":source":
-			text, msgs := CppFromPackage(pkg, project, "")
+			text, header, msgs := CppFromPackage(pkg, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + ".cpp"
 			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
+			file = NewFile()
+			file.name = pkgname + ".h"
+			file.path = cmdpath + "/" + pkgpath
+			file.text = header
+			files = append(files, file)
 		case ":test":
-			text, msgs := CppTestFromPackage(pkg, project, "")
+			text, _, msgs := CppTestFromPackage(pkg, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
-			file.name = pkgname + "Test.cpp"
+			file.name = pkgname + "_test.cpp"
 			file.path = cmdpath + "/" + pkgpath
 			file.text = text
 			files = append(files, file)
@@ -181,9 +186,8 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 	return files, msgblock
 }
 
-func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
+func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromConst")
-	var output = ""
 	var doc = ""
 	path := cnst.pkgname + "/" + cnst.name
 	doc += "Constant: " + cnst.name + "\n"
@@ -212,53 +216,48 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 				cnstval = "false"
 			}
 		}
-		cnstval = "\n      this.vxboolean = " + cnstval + ";"
+		cnstval = "\n      this->vxboolean = " + cnstval + ";"
 		initval = "" +
-			"\n    @Override" +
-			"\n    public boolean vx_boolean() {" +
+			"\n    bool vx_boolean() {" +
 			cnstval +
-			"\n      return this.vxboolean;" +
+			"\n      return this->vxboolean;" +
 			"\n    }"
 	case "vx/core/decimal":
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this.vxdecimal = " + cnstval + ";"
+		cnstval = "\n      this->vxdecimal = " + cnstval + ";"
 		initval = "" +
-			"\n    @Override" +
-			"\n    public String vx_decimal() {" +
+			"\n    String vx_decimal() {" +
 			cnstval +
-			"\n      return this.vxdecimal;" +
+			"\n      return this->vxdecimal;" +
 			"\n    }"
 	case "vx/core/float":
 		if cnstval == "" {
 			cnstval = "f0"
 		}
-		cnstval = "\n      this.vxfloat = " + cnstval + ";"
+		cnstval = "\n      this->vxfloat = " + cnstval + ";"
 		initval = "" +
-			"\n    @Override" +
-			"\n    public float vx_float() {" +
+			"\n    float vx_float() {" +
 			cnstval +
-			"\n      return this.vxdecimal;" +
+			"\n      return this->vxdecimal;" +
 			"\n    }"
 	case "vx/core/int":
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this.vxint = " + cnstval + ";"
+		cnstval = "\n      this->vxint = " + cnstval + ";"
 		initval = "" +
-			"\n    @Override" +
-			"\n    public int vx_int() {" +
+			"\n    int vx_int() {" +
 			cnstval +
-			"\n      return this.vxint;" +
+			"\n      return this->vxint;" +
 			"\n    }"
 	case "vx/core/string":
-		cnstval = "\n      this.vxstring = " + cnstval + ";"
+		cnstval = "\n      this->vxstring = " + cnstval + ";"
 		initval = "" +
-			"\n    @Override" +
-			"\n    public String vx_string() {" +
+			"\n    String vx_string() {" +
 			cnstval +
-			"\n      return this.vxstring;" +
+			"\n      return this->vxstring;" +
 			"\n    }"
 	default:
 		switch cnsttype.extends {
@@ -303,28 +302,36 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 				msgblock = MsgBlockAddBlock(msgblock, msgs)
 				if clstext != "" {
 					cnstval = "" +
-						"\n      if ((this.vxmap == null) || (this.vxmap.size() == 0)) {" +
+						"\n      if ((this->vxmap == null) || (this->vxmap.size() == 0)) {" +
 						"\n        " + cnsttypeclassname + " orig = " + clstext + ";" +
-						"\n        this.vxmap = orig.vx_map();" +
+						"\n        this->vxmap = orig.vx_map();" +
 						"\n      }"
 					initval = "" +
 						"\n    @Override" +
-						"\n    public Map<String, vx_core::Type_any> vx_map() {" +
+						"\n    std::map<std::string, vx_core::Type_any> vx_map() {" +
 						cnstval +
-						"\n      return this.vxmap;" +
+						"\n      return this->vxmap;" +
 						"\n    }"
 				}
 			*/
 		}
 	}
-	extends := CppNameClassFullFromType(cnsttype)
-	output += "" +
+	extends := CppNameTypeFullFromType(cnsttype)
+	headers := "" +
+		"\n  // (const " + cnst.name + ")" +
+		"\n  class " + cnstclassname + " : " + extends + " {" +
+		"\n    vx_core::Type_constdef constdef();" +
+		"\n    " + cnstclassname + " const_new();" +
+		"\n  };" +
+		"\n  const " + cnstclassname + " c_" + cnstname + ";" +
+		"\n"
+	output := "" +
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
-		"\n  public static class " + cnstclassname + " extends " + extends + " {" +
+		"\n  class " + cnstclassname + " : " + extends + " {" +
 		"\n" +
-		"\n    public vx_core::Type_constdef constdef() {" +
+		"\n    vx_core::Type_constdef constdef() {" +
 		"\n      return vx_core::constdef_new(" +
 		"\n        \"" + cnst.pkgname + "\", // pkgname" +
 		"\n        \"" + cnst.name + "\", // name" +
@@ -332,7 +339,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 		"\n      );" +
 		"\n    }" +
 		"\n" +
-		"\n    public static " + cnstclassname + " const_new() {" +
+		"\n    " + cnstclassname + " const_new() {" +
 		"\n      Const_" + cnstname + " output = new " + cnstclassname + "();" +
 		const_new +
 		"\n      return output;" +
@@ -345,10 +352,10 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, *vxmsgblock) {
 		"\n  const " + cnstclassname + " c_" + cnstname + " = " + cnstclassname + ".const_new();" +
 		"\n" +
 		"\n"
-	return output, msgblock
+	return output, headers, msgblock
 }
 
-func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
+func CppFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromFunc")
 	var listargtype []string
 	var listargname []string
@@ -427,22 +434,21 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		functypetext = returntype
 	}
 	if fnc.async {
-		functypetext = "CompletableFuture<" + functypetext + ">"
+		functypetext = "std::future<" + functypetext + ">"
 	}
 	contextarg := ""
 	if fnc.context {
-		contextarg = ", final vx_core::Type_context context"
+		contextarg = ", vx_core::Type_context context"
 	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context", "vx/core/any<-func",
 		"vx/core/any<-none", "vx/core/any<-key-value",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-next":
 		instancevars += "" +
-			"\n    public IFn fn = null;" +
+			"\n    IFn fn = null;" +
 			"\n" +
-			"\n    @Override" +
-			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn) {" +
-			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
+			"\n    Func_" + funcname + " fn_new(vx_core::Func_" + funcname + "::IFn fn) {" +
+			"\n      Func_" + funcname + " output;" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
 			"\n    }" +
@@ -452,11 +458,11 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		"vx/core/any<-none-async", "vx/core/any<-key-value-async",
 		"vx/core/any<-reduce-async", "vx/core/any<-reduce-next-async":
 		instancevars += "" +
-			"\n    public IFn fn = null;" +
+			"\n    IFn fn = null;" +
 			"\n" +
 			"\n    // static" +
-			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn) {" +
-			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
+			"\n    Func_" + funcname + " fn_new(vx_core::Func_" + funcname + "::IFn fn) {" +
+			"\n      Func_" + funcname + " output;" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
 			"\n    }" +
@@ -464,11 +470,10 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	case "vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/int<-func", "vx/core/string<-func":
 		instancefuncs += "" +
-			"\n    public vx_core::Class_any_from_func.IFn fn = null;" +
+			"\n    vx_core::Func_any_from_func::IFn fn = null;" +
 			"\n" +
-			"\n    @Override" +
-			"\n    public Func_" + funcname + " fn_new(vx_core::Class_any_from_func.IFn fn) {" +
-			"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
+			"\n    Func_" + funcname + " fn_new(vx_core::Func_any_from_func::IFn fn) {" +
+			"\n      Func_" + funcname + " output;" +
 			"\n      output.fn = fn;" +
 			"\n      return output;" +
 			"\n    }" +
@@ -511,34 +516,29 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 						// both generics are the same
 						asyncbody += "" +
 							"\n      T inputval = vx_core::f_any_from_any(generic_any_1, value);" +
-							"\n      CompletableFuture<T> output = vx_core::f_async(generic_any_1, inputval);"
+							"\n      std::future<T> output = vx_core::f_async(generic_any_1, inputval);"
 					} else {
 						asyncbody += "" +
 							"\n      " + CppNameTypeFromType(arg.vxtype) + " inputval = vx_core::f_any_from_any(" + CppNameTFromType(arg.vxtype) + ", value);" +
-							"\n      CompletableFuture<" + returntype + "> future = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
-							"\n      @SuppressWarnings(\"unchecked\")" +
-							"\n      CompletableFuture<T> output = (CompletableFuture<T>)future;"
+							"\n      std::future<" + returntype + "> future = " + pkgname + "::f_" + funcname + "(" + subargnames + ");" +
+							"\n      std::future<T> output = (std::future<T>)future;"
 					}
 					instancefuncs += "" +
-						"\n    @Override" +
-						"\n    public vx_core::Func_any_from_any" + contextname + "_async fn_new(vx_core::Class_any_from_any" + contextname + "_async.IFn fn) {return vx_core::e_any_from_any" + contextname + "_async;}" +
+						"\n    vx_core::Func_any_from_any" + contextname + "_async fn_new(vx_core::Func_any_from_any" + contextname + "_async::IFn fn) {return vx_core::e_any_from_any" + contextname + "_async;}" +
 						"\n" +
-						"\n    @Override" +
-						"\n    public <T extends vx_core::Type_any, U extends vx_core::Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n    template <class T, class U> std::future<T> f_any_from_any" + contextname + "_async(T generic_any_1, final U value" + contextarg + ") {" +
 						asyncbody +
 						"\n      return output;" +
 						"\n    }" +
 						"\n"
 				} else {
 					instancefuncs += "" +
-						"\n    @Override" +
-						"\n    public vx_core::Func_any_from_any" + contextname + " fn_new(vx_core::Class_any_from_any" + contextname + ".IFn fn) {return vx_core::e_any_from_any" + contextname + ";}" +
+						"\n    vx_core::Func_any_from_any" + contextname + " fn_new(vx_core::Func_any_from_any" + contextname + "::IFn fn) {return vx_core::e_any_from_any" + contextname + ";}" +
 						"\n" +
-						"\n    @Override" +
-						"\n    public <T extends vx_core::Type_any, U extends vx_core::Type_any> T f_any_from_any" + contextname + "(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n    template <class T, class U> T f_any_from_any" + contextname + "(T generic_any_1, final U value" + contextarg + ") {" +
 						"\n      T output = vx_core::f_empty(generic_any_1);" +
 						"\n      " + argtypename + " inputval = (" + argtypename + ")value;" +
-						"\n      vx_core::Type_any outputval = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
+						"\n      vx_core::Type_any outputval = " + pkgname + "::f_" + funcname + "(" + subargnames + ");" +
 						"\n      output = vx_core::f_any_from_any(generic_any_1, outputval);" +
 						"\n      return output;" +
 						"\n    }" +
@@ -578,7 +578,7 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	if fnc.messages {
 		msgtop = lineindent + "try {"
 		msgbottom = "" +
-			lineindent + "} catch (Exception err) {" +
+			lineindent + "} catch (std::exception err) {" +
 			lineindent + "  vx_core::Type_msg msg = vx_core::t_msg.vx_new_from_exception(\"" + fnc.name + "\", err);" +
 			lineindent + "  output = output.vx_copy(msg);" +
 			lineindent + "}"
@@ -600,25 +600,25 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	if valuetext != "" {
 		valuetext = "\n" + indent + StringFromStringIndent(valuetext, indent)
 	}
-	interfacefn := CppInterfaceFnFromFunc(fnc)
 	debugtop, debugbottom := CppDebugFromFunc(fnc, lineindent)
 	switch NameFromFunc(fnc) {
 	case "vx/core/new":
 		f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
 	}
 	returnvalue := ""
+	interfacefn := CppHeaderFnFromFunc(fnc)
 	if interfacefn == "" {
 		if returntype != "void" {
 			returnvalue += "\n      return "
 		}
-		returnvalue += pkgname + ".f_" + funcname + "(" + strings.Join(listargname, ", ") + ");"
+		returnvalue += pkgname + "::f_" + funcname + "(" + strings.Join(listargname, ", ") + ");"
 	} else if fnc.async {
 		returnvalue += "" +
-			"\n      CompletableFuture<T> output;" +
+			"\n      std::future<T> output;" +
 			"\n      if (fn == null) {" +
-			"\n        output = CompletableFuture.completedFuture(vx_core::f_empty(generic_any_1));" +
+			"\n        output = std::future.completedFuture(vx_core::f_empty(generic_any_1));" +
 			"\n      } else {" +
-			"\n        CompletableFuture<vx_core::Type_any> future = fn.resolve(" + strings.Join(listargname, ", ") + ");" +
+			"\n        std::future<vx_core::Type_any> future = fn.resolve(" + strings.Join(listargname, ", ") + ");" +
 			"\n        output = vx_core::async_from_async(generic_any_1, future);" +
 			"\n      }" +
 			"\n      return output;"
@@ -651,51 +651,34 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	case "vx/core/new", "vx/core/copy", "vx/core/empty":
 	default:
 		if fnc.vxtype.name == "none" {
-			/*
-				} else if BooleanFromListStringContains(fnc.listgeneric, ":1") {
-					if fnc.async {
-						defaultvalue = "" +
-							lineindent + "T value_empty = vx_core::f_empty(generic_any_1);" +
-							lineindent + "CompletableFuture<T> output = vx_core::async_new_completed(value_empty);"
-					} else {
-						defaultvalue = lineindent + "T output = vx_core::f_empty(generic_any_1);"
-					}
-			*/
 		} else if fnc.async {
-			defaultvalue = lineindent + "CompletableFuture<" + returntype + "> output = vx_core::async_new_completed(" + CppNameEFromType(fnc.vxtype) + ");"
+			defaultvalue = lineindent + "std::future<" + returntype + "> output = vx_core::async_new_completed(" + CppNameEFromType(fnc.vxtype) + ");"
 		} else if fnc.generictype != nil {
 			defaultvalue = lineindent + returntype + " output = vx_core::f_empty(" + CppNameTFromTypeGeneric(fnc.generictype) + ");"
 		} else {
 			defaultvalue = lineindent + returntype + " output = " + CppNameEFromType(fnc.vxtype) + ";"
 		}
 	}
-	interfacefunc := CppInterfaceFromFunc(fnc)
+	headertext := CppHeaderFromFunc(fnc)
 	doc := CppDocFromFunc(fnc)
 	output := "" +
 		doc +
-		interfacefunc +
-		"\n  public static class Class_" + funcname + " extends vx_core::Class_base implements Func_" + funcname + " {" +
+		"\n  class Type_" + funcname + " : vx_core::Type_base {" +
 		"\n" +
-		//"\n    protected vx_core::Type_msgblock vxmsgblock = null;" +
-		//"\n" +
 		instancevars +
-		"\n    @Override" +
-		"\n    public Func_" + funcname + " vx_new(Object... vals) {" +
-		"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
+		"\n    Func_" + funcname + " vx_new(std::any vals...) {" +
+		"\n      Func_" + funcname + " output;" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
-		"\n    @Override" +
-		"\n    public Func_" + funcname + " vx_copy(Object... vals) {" +
-		"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
+		"\n    Func_" + funcname + " vx_copy(std::any vals...) {" +
+		"\n      Func_" + funcname + " output;" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
-		"\n    @Override" +
-		"\n    public vx_core::Type_typedef vx_typedef() {return vx_core::t_func.vx_typedef();}" +
+		"\n    vx_core::Type_typedef vx_typedef() {return vx_core::t_func.vx_typedef();}" +
 		"\n" +
-		"\n    @Override" +
-		"\n    public vx_core::Type_funcdef vx_funcdef() {" +
+		"\n    vx_core::Type_funcdef vx_funcdef() {" +
 		"\n      return vx_core::funcdef_new(" +
 		"\n        \"" + fnc.pkgname + "\", // pkgname" +
 		"\n        \"" + fnc.name + "\", // name" +
@@ -705,27 +688,23 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		"\n      );" +
 		"\n    }" +
 		"\n" +
-		"\n    @Override" +
-		"\n    public Func_" + funcname + " vx_empty() {return e_" + funcname + ";}" +
-		"\n    @Override" +
-		"\n    public Func_" + funcname + " vx_type() {return t_" + funcname + ";}" +
+		"\n    Func_" + funcname + " vx_empty() {return e_" + funcname + ";}" +
+		"\n    Func_" + funcname + " vx_type() {return t_" + funcname + ";}" +
 		"\n" +
 		staticvars +
-		interfacefn +
 		instancefuncs +
-		"\n    @Override" +
-		"\n    public " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
+		"\n    " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
 		staticfuncs +
 		returnvalue +
 		"\n    }" +
 		"\n" +
 		"\n  }" +
 		"\n" +
-		"\n  const Func_" + funcname + " e_" + funcname + " = new " + CppNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
-		"\n  const Func_" + funcname + " t_" + funcname + " = new " + CppNameFromPkgName(fnc.pkgname) + ".Class_" + funcname + "();" +
+		"\n  const " + CppNameFromPkgName(fnc.pkgname) + "::Func_" + funcname + " e_" + funcname + ";" +
+		"\n  const " + CppNameFromPkgName(fnc.pkgname) + "::Func_" + funcname + " t_" + funcname + ";" +
 		"\n" +
 		f_suppresswarnings +
-		"\n  public static " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
+		"\n  static " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
 		debugtop +
 		defaultvalue +
 		permissiontop +
@@ -735,7 +714,7 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		permissionbottom +
 		debugbottom +
 		after
-	return output, msgblock
+	return output, headertext, msgblock
 }
 
 func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
@@ -761,7 +740,8 @@ func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 
 func CppFromName(name string) string {
 	output := name
-	if output == "extends" {
+	switch output {
+	case "extends":
 		output = "extend"
 	}
 	output = StringFromStringFindReplace(output, "->", "_to_")
@@ -774,82 +754,125 @@ func CppFromName(name string) string {
 	return output
 }
 
-func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromPackage")
 	pkgname := CppFromName(pkg.name)
+	specialheader := ""
 	specialcode := ""
-	/*
-		switch pkg.name {
-		case "vx/core":
+	switch pkg.name {
+	case "vx/core":
+		specialheader = "" +
+			"\n  class Type_replfunc {" +
+			"\n    vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);" +
+			"\n  };" +
+			"\n" +
+			"\n  class Type_replfunc_async {" +
+			"\n    std::future<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist);" +
+			"\n  };" +
+			"\n" +
+			"\n  class Type_base {" +
+			"\n    protected:" +
+			"\n      int vx_iref;" +
+			"\n      vx_core::Type_msgblock vxmsgblock;" +
+			"\n      std::vector<Type_any> vx_dispose();" +
+			"\n      vx_core::Type_msgblock vx_msgblock();" +
+			"\n      bool vx_release();" +
+			"\n      void vx_reserve();" +
+			"\n  };" +
+			"\n"
+		specialcode = "" +
+			"\n  class Type_base {" +
+			"\n    protected:" +
+			"\n      int vx_iref = 0;" +
+			"\n      vx_core::Type_msgblock vxmsgblock = null;" +
+			"\n      std::vector<vx_core::Type_any> Type_base::vx_dispose() {" +
+			"\n        this->vx_iref = 0;" +
+			"\n        this->vxmsgblock = null;" +
+			"\n        return emptylistany;" +
+			"\n      }" +
+			"\n      vx_core::Type_msgblock vx_msgblock() {return vxmsgblock;}" +
+			"\n      bool vx_release() {" +
+			"\n        bool output = false;" +
+			"\n        if (this->vx_iref < 0) {" +
+			"\n        } else if (vx_iref == 0) {" +
+			"\n          vx_iref = -1;" +
+			"\n          output = true;" +
+			"\n        } else {" +
+			"\n          vx_iref -= 1;" +
+			"\n        }" +
+			"\n        return output;" +
+			"\n      }" +
+			"\n      void vx_reserve() {this->vx_iref += 1;}" +
+			"\n  }" +
+			"\n" +
+			"\n  vx_core::Type_typedef typedef_new(" +
+			"\n    String pkgname," +
+			"\n    String name," +
+			"\n    String extend," +
+			"\n    vx_core::Type_typelist traits," +
+			"\n    vx_core::Type_typelist allowtypes," +
+			"\n    vx_core::Type_typelist disallowtypes," +
+			"\n    vx_core::Type_funclist allowfuncs," +
+			"\n    vx_core::Type_funclist disallowfuncs," +
+			"\n    vx_core::Type_anylist allowvalues," +
+			"\n    vx_core::Type_anylist disallowvalues," +
+			"\n    vx_core::Type_argmap properties" +
+			"\n  ) {" +
+			"\n    vx_core::Type_typedef output;" +
+			"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
+			"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
+			"\n    output.vx_p_extend = vx_core::t_string.vx_new_from_string(extend);" +
+			"\n    output.vx_p_traits = traits;" +
+			"\n    output.vx_p_allowtypes = allowtypes;" +
+			"\n    output.vx_p_disallowtypes = disallowtypes;" +
+			"\n    output.vx_p_allowfuncs = disallowfuncs;" +
+			"\n    output.vx_p_disallowfuncs = disallowfuncs;" +
+			"\n    output.vx_p_allowvalues = disallowvalues;" +
+			"\n    output.vx_p_disallowvalues = disallowvalues;" +
+			"\n    output.vx_p_properties = properties;" +
+			"\n    return output;" +
+			"\n  }" +
+			"\n"
+		/*
 			specialcode = "" +
-				"\n  public static interface Type_replfunc {" +
-				"\n    public vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);" +
-				"\n  }" +
 				"\n" +
-				"\n  public static interface Type_replfunc_async {" +
-				"\n    public CompletableFuture<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist);" +
-				"\n  }" +
+				"\n  static std::vector<vx_core::Type_any> emptylistany = vx_core::immutablelist(new Arraystd::vector<vx_core::Type_any>());" +
 				"\n" +
-				"\n  public static List<vx_core::Type_any> emptylistany = vx_core::immutablelist(new ArrayList<vx_core::Type_any>());" +
+				"\n  static std::map<std::string, vx_core::Type_any> emptymapany = vx_core::immutablemap(new LinkedHashstd::map<std::string, vx_core::Type_any>());" +
 				"\n" +
-				"\n  public static Map<String, vx_core::Type_any> emptymapany = vx_core::immutablemap(new LinkedHashMap<String, vx_core::Type_any>());" +
-				"\n" +
-				"\n  public static <T> List<T> immutablelist(List<T> listany) {" +
+				"\n  static <T> std::vector<T> immutablelist(std::vector<T> listany) {" +
 				"\n    return Collections.unmodifiableList(listany);" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T> Map<String, T> immutablemap(Map<String, T> mapany) {" +
+				"\n  static <T> std::map<std::string, T> immutablemap(std::map<std::string, T> mapany) {" +
 				"\n    return Collections.unmodifiableMap(mapany);" +
 				"\n  }" +
 				"\n" +
-				"\n  public static class Class_base {" +
-				"\n    protected int vx_iref = 0;" +
-				"\n    protected vx_core::Type_msgblock vxmsgblock = null;" +
-				"\n    public List<Type_any> vx_dispose() {" +
-				"\n      this.vx_iref = 0;" +
-				"\n      this.vxmsgblock = null;" +
-				"\n      return emptylistany;" +
-				"\n    }" +
-				"\n    public vx_core::Type_msgblock vx_msgblock() {return vxmsgblock;}" +
-				"\n    public boolean vx_release() {" +
-				"\n      boolean output = false;" +
-				"\n      if (this.vx_iref < 0) {" +
-				"\n      } else if (vx_iref == 0) {" +
-				"\n        vx_iref = -1;" +
-				"\n        output = true;" +
-				"\n      } else {" +
-				"\n        vx_iref -= 1;" +
-				"\n      }" +
-				"\n      return output;" +
-				"\n    }" +
-				"\n    public void vx_reserve() {this.vx_iref += 1;}" +
+				"\n  static class KeyValue<T> {" +
+				"\n    String key = \"\";" +
+				"\n    T value = null;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static class KeyValue<T> {" +
-				"\n    public String key = \"\";" +
-				"\n    public T value = null;" +
-				"\n  }" +
-				"\n" +
-				"\n  public static vx_core::Type_constdef constdef_new(" +
+				"\n  static vx_core::Type_constdef constdef_new(" +
 				"\n    String pkgname," +
 				"\n    String name," +
 				"\n    vx_core::Type_any typ" +
 				"\n  ) {" +
-				"\n    vx_core::Class_constdef output = new vx_core::Class_constdef();" +
+				"\n    vx_core::Type_constdef output;" +
 				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
 				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
 				"\n    output.vx_p_type = typ;" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static vx_core::Type_funcdef funcdef_new(" +
+				"\n  static vx_core::Type_funcdef funcdef_new(" +
 				"\n    String pkgname," +
 				"\n    String name," +
 				"\n    int idx," +
-				"\n    boolean async," +
+				"\n    bool async," +
 				"\n    vx_core::Type_any typ" +
 				"\n  ) {" +
-				"\n    vx_core::Class_funcdef output = new vx_core::Class_funcdef();" +
+				"\n    vx_core::Type_funcdef output;" +
 				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
 				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
 				"\n    output.vx_p_idx = vx_core::t_int.vx_new_from_int(idx);" +
@@ -858,19 +881,19 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static vx_core::Type_any[] arrayany_from_anylist(final vx_core::Type_anylist list) {" +
+				"\n  static vx_core::Type_any[] arrayany_from_anylist(vx_core::Type_anylist list) {" +
 				"\n    return list.vx_list().toArray(new vx_core::Type_any[0]);" +
 				"\n  }" +
 				"\n" +
 				"\n  @SafeVarargs" +
-				"\n  public static <T> List<T> arraylist_from_array(final T... items) {" +
-				"\n    List<T> output = new ArrayList<T>(Arrays.asList(items));" +
+				"\n  static <T> std::vector<T> arraylist_from_array(T items...) {" +
+				"\n    std::vector<T> output = new Arraystd::vector<T>(Arrays.asList(items));" +
 				"\n    output = vx_core::immutablelist(output);" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> List<T> arraylist_from_arraylist(final T generic_any_1, final List<U> listval) {" +
-				"\n    List<T> output = new ArrayList<>();" +
+				"\n  static <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T> arraylist_from_arraylist(T generic_any_1, final std::vector<U> listval) {" +
+				"\n    std::vector<T> output = new Arraystd::vector<>();" +
 				"\n    for (vx_core::Type_any value : listval) {" +
 				"\n      T t_val = vx_core::f_any_from_any(generic_any_1, value);" +
 				"\n      output.add(t_val);" +
@@ -879,8 +902,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T, U> List<T> arraylist_from_arraylist_fn(final List<U> listval, final Function<U, T> fn_any_from_any) {" +
-				"\n    List<T> output = new ArrayList<>();" +
+				"\n  static <T, U> std::vector<T> arraylist_from_arraylist_fn(std::vector<U> listval, final Function<U, T> fn_any_from_any) {" +
+				"\n    std::vector<T> output = new Arraystd::vector<>();" +
 				"\n    for (U value_u : listval) {" +
 				"\n      T t_val = fn_any_from_any.apply(value_u);" +
 				"\n      output.add(t_val);" +
@@ -889,8 +912,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> List<T> arraylist_from_linkedhashmap(final T generic_any_1, final Map<String, U> mapval) {" +
-				"\n    List<T> output = new ArrayList<T>();" +
+				"\n  static <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T> arraylist_from_linkedhashmap(T generic_any_1, final std::map<std::string, U> mapval) {" +
+				"\n    std::vector<T> output = new Arraystd::vector<T>();" +
 				"\n    Set<String> keys = mapval.keySet();" +
 				"\n    for (String key : keys) {" +
 				"\n      U u_val = mapval.get(key);" +
@@ -901,8 +924,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T, U> List<T> arraylist_from_linkedhashmap_fn(final Map<String, U> mapval, final BiFunction<String, U, T> fn_any_from_key_value) {" +
-				"\n    List<T> output = new ArrayList<T>();" +
+				"\n  static <T, U> std::vector<T> arraylist_from_linkedhashmap_fn(std::map<std::string, U> mapval, final BiFunction<String, U, T> fn_any_from_key_value) {" +
+				"\n    std::vector<T> output = new Arraystd::vector<T>();" +
 				"\n    Set<String> keys = mapval.keySet();" +
 				"\n    for (String key : keys) {" +
 				"\n      U u_val = mapval.get(key);" +
@@ -912,29 +935,29 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T> CompletableFuture<T> async_new_completed(final T val) {" +
-				"\n    CompletableFuture<T> output = CompletableFuture.completedFuture(val);" +
+				"\n  static <T> std::future<T> async_new_completed(T val) {" +
+				"\n    std::future<T> output = std::future.completedFuture(val);" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T extends vx_core::Type_any, U extends vx_core::Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {" +
-				"\n    CompletableFuture<T> output = future.thenApply(val -> {" +
+				"\n  static <T extends vx_core::Type_any, U extends vx_core::Type_any> std::future<T> async_from_async(T generic_any_1, final std::future<U> future) {" +
+				"\n    std::future<T> output = future.thenApply(val -> {" +
 				"\n      return vx_core::f_any_from_any(generic_any_1, val);" +
 				"\n    });" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {" +
-				"\n    CompletableFuture<T> output = future.thenApply(fn);" +
+				"\n  static <T, U> std::future<T> async_from_async_fn(std::future<U> future, final Function<? super U, ? extends T> fn) {" +
+				"\n    std::future<T> output = future.thenApply(fn);" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {" +
-				"\n    CompletableFuture<Void> allFutures = CompletableFuture.allOf(" +
-				"\n      list_future.toArray(new CompletableFuture[list_future.size()])" +
+				"\n  static <T> std::future<std::vector<T>> async_arraylist_from_arraylist_async(std::vector<std::future<T>> list_future) {" +
+				"\n    std::future<Void> allFutures = std::future.allOf(" +
+				"\n      list_future.toArray(new std::future[list_future.size()])" +
 				"\n    );" +
-				"\n    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {" +
-				"\n      List<T> list = list_future.stream()" +
+				"\n    std::future<std::vector<T>> output = allFutures.thenApply(v -> {" +
+				"\n      std::vector<T> list = list_future.stream()" +
 				"\n        .map(future -> future.join())" +
 				"\n        .collect(Collectors.toList());" +
 				"\n      return vx_core::immutablelist(list);" +
@@ -942,7 +965,7 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static void debug(Object... values) {" +
+				"\n  static void debug(std::any values...) {" +
 				"\n    for (Object value : values) {" +
 				"\n      String text = \"\";" +
 				"\n      if (value == null) {" +
@@ -959,8 +982,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n  }" +
 				"\n" +
 				"\n  @SafeVarargs" +
-				"\n  public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {" +
-				"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
+				"\n  static <T> LinkedHashstd::map<std::string, T> hashmap_from_keyvalues(KeyValue<T> keyvalues...) {" +
+				"\n    LinkedHashstd::map<std::string, T> output = new LinkedHashstd::map<std::string, T>();" +
 				"\n    for (KeyValue<T> keyvalue : keyvalues) {" +
 				"\n      String key = keyvalue.key;" +
 				"\n      T value = keyvalue.value;" +
@@ -969,15 +992,15 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T> KeyValue<T> keyvalue_from_key_value(final String key, final T value) {" +
-				"\n    KeyValue<T> output = new KeyValue<T>();" +
+				"\n  static <T> KeyValue<T> keyvalue_from_key_value(String key, final T value) {" +
+				"\n    KeyValue<T> output;" +
 				"\n    output.key = key;" +
 				"\n    output.value = value;" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T> Map<String, T> map_from_list_fn(final List<T> listval, final Function<T, vx_core::Type_string> fn_any_from_any) {" +
-				"\n    Map<String, T> output = new LinkedHashMap<>();" +
+				"\n  static <T> std::map<std::string, T> map_from_list_fn(std::vector<T> listval, final Function<T, vx_core::Type_string> fn_any_from_any) {" +
+				"\n    std::map<std::string, T> output;" +
 				"\n    for (T val : listval) {" +
 				"\n      vx_core::Type_string valkey = fn_any_from_any.apply(val);" +
 				"\n      String key = valkey.vx_string();" +
@@ -986,8 +1009,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static <T extends vx_core::Type_any> LinkedHashMap<String, T> map_from_map(final LinkedHashMap<String, vx_core::Type_any> mapval) {" +
-				"\n    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();" +
+				"\n  static <T extends vx_core::Type_any> LinkedHashstd::map<std::string, T> map_from_map(LinkedHashstd::map<std::string, vx_core::Type_any> mapval) {" +
+				"\n    LinkedHashstd::map<std::string, T> output;" +
 				"\n    Set<String> keys = mapval.keySet();" +
 				"\n    for (String key : keys) {" +
 				"\n      vx_core::Type_any value = mapval.get(key);" +
@@ -996,14 +1019,14 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n        T castval = (T)value;" +
 				"\n        output.put(key, castval);" +
 				"\n      } catch (Exception ex) {" +
-				"\n        vx_core::debug(\"map<-map\", ex);" +
+				"\n        vx_core::debug(\"std::map<-map\", ex);" +
 				"\n      }" +
 				"\n    }" +
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
 				"\n  // Warning!: Blocking" +
-				"\n  public static <T extends vx_core::Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {" +
+				"\n  static <T extends vx_core::Type_any> T sync_from_async(T generic_any_1, final std::future<T> future) {" +
 				"\n    T output = vx_core::f_empty(generic_any_1);" +
 				"\n    try {" +
 				"\n      output = future.get();" +
@@ -1015,60 +1038,38 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 				"\n    return output;" +
 				"\n  }" +
 				"\n" +
-				"\n  public static vx_core::Type_typedef typedef_new(" +
-				"\n    String pkgname," +
-				"\n    String name," +
-				"\n    String extend," +
-				"\n    vx_core::Type_typelist traits," +
-				"\n    vx_core::Type_typelist allowtypes," +
-				"\n    vx_core::Type_typelist disallowtypes," +
-				"\n    vx_core::Type_funclist allowfuncs," +
-				"\n    vx_core::Type_funclist disallowfuncs," +
-				"\n    vx_core::Type_anylist allowvalues," +
-				"\n    vx_core::Type_anylist disallowvalues," +
-				"\n    vx_core::Type_argmap properties" +
-				"\n  ) {" +
-				"\n    vx_core::Class_typedef output = new vx_core::Class_typedef();" +
-				"\n    output.vx_p_pkgname = vx_core::t_string.vx_new_from_string(pkgname);" +
-				"\n    output.vx_p_name = vx_core::t_string.vx_new_from_string(name);" +
-				"\n    output.vx_p_extend = vx_core::t_string.vx_new_from_string(extend);" +
-				"\n    output.vx_p_traits = traits;" +
-				"\n    output.vx_p_allowtypes = allowtypes;" +
-				"\n    output.vx_p_disallowtypes = disallowtypes;" +
-				"\n    output.vx_p_allowfuncs = disallowfuncs;" +
-				"\n    output.vx_p_disallowfuncs = disallowfuncs;" +
-				"\n    output.vx_p_allowvalues = disallowvalues;" +
-				"\n    output.vx_p_disallowvalues = disallowvalues;" +
-				"\n    output.vx_p_properties = properties;" +
-				"\n    return output;" +
-				"\n  }" +
-				"\n"
-		}
-	*/
+		*/
+	}
 	typkeys := ListKeyFromMapType(pkg.maptype)
+	typeheaders := ""
 	typetexts := ""
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
-		typetext, msgs := CppFromType(typ)
+		typetext, typeheader, msgs := CppFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		typetexts += typetext
+		typeheaders += typeheader
 	}
 	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
+	constheaders := ""
 	consttexts := ""
 	for _, cnstid := range cnstkeys {
 		cnst := pkg.mapconst[cnstid]
-		consttext, msgs := CppFromConst(cnst, pkg)
+		consttext, constheader, msgs := CppFromConst(cnst, pkg)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		consttexts += consttext
+		constheaders += constheader
 	}
 	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
+	funcheaders := ""
 	functexts := ""
 	for _, fncid := range fnckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			fnctext, msgs := CppFromFunc(fnc)
+			fnctext, fncheader, msgs := CppFromFunc(fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			functexts += fnctext
+			funcheaders += fncheader
 		}
 	}
 	body := "" +
@@ -1078,16 +1079,29 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *
 		consttexts +
 		functexts
 		//		emptytypes
-	imports := CppImportsFromPackage(pkg, pkgprefix, body, false)
+	imports := CppImportsFromPackage(pkg, "", body, false)
+	headertext := "" +
+		"#pragma once" +
+		"\n" +
+		imports +
+		"\nnamespace " + pkgname + " {" +
+		"\n" +
+		specialheader +
+		typeheaders +
+		constheaders +
+		funcheaders +
+		"\n}" +
+		"\n"
 	output := "" +
 		imports +
+		"#include \"" + pkg.name + ".h\"" +
 		"\n" +
 		"\nnamespace " + pkgname + " {" +
 		"\n" +
 		body +
 		"\n}" +
 		"\n"
-	return output, msgblock
+	return output, headertext, msgblock
 }
 
 func CppFromText(text string) string {
@@ -1098,9 +1112,8 @@ func CppFromText(text string) string {
 	return output
 }
 
-func CppFromType(typ *vxtype) (string, *vxmsgblock) {
+func CppFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromType")
-	output := ""
 	path := typ.pkgname + "/" + typ.name
 	doc := "" +
 		"type: " + typ.name
@@ -1120,7 +1133,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 	staticfuncs := ""
 	valnew := ""
 	extendinterface := ""
-	extendsclass := " extends vx_core::Class_base"
+	extendsclass := " : vx_core::Type_base"
 	valcopy := ""
 	switch NameFromType(typ) {
 	case "vx/core/any":
@@ -1143,21 +1156,21 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 		extendinterface = "vx_core::Type_anytype"
 		instancefuncs += "" +
 			"\n" +
-			"\n    public <T extends vx_core::Type_any> List<T> vx_any(final T generic_any_1) {" +
-			"\n      return vx_core::arraylist_from_arraylist(generic_any_1, this.vx_list());" +
+			"\n    template <class T> std::vector<T> vx_any(T generic_any_1) {" +
+			"\n      return vx_core::arraylist_from_arraylist(generic_any_1, this->vx_list());" +
 			"\n    }" +
 			"\n" +
-			"\n    public <T extends vx_core::Type_any> T vx_any_from_list(final T generic_any_1, final int index) {" +
-			"\n      return vx_any_from_list(generic_any_1, this.vx_list(), index);" +
+			"\n    template <class T> T vx_any_from_list(T generic_any_1, final int index) {" +
+			"\n      return vx_any_from_list(generic_any_1, this->vx_list(), index);" +
 			"\n    }" +
 			"\n"
 		staticfuncs = "" +
-			"\n    public static <T extends vx_core::Type_any> List<T> list_new(final T generic_any_1, final vx_core::Type_any... vals) {" +
-			"\n      List<vx_core::Type_any> listval = Arrays.asList(vals);" +
+			"\n    template <class T> std::vector<T> list_new(T generic_any_1, final vx_core::Type_any vals...) {" +
+			"\n      std::vector<vx_core::Type_any> listval = Arrays.asList(vals);" +
 			"\n      return vx_core::arraylist_from_arraylist(generic_any_1, listval);" +
 			"\n    }" +
 			"\n" +
-			"\n    public static <T extends vx_core::Type_any> T vx_any_from_list(final T generic_any_1, final List<vx_core::Type_any> list, final int index) {" +
+			"\n    template <class T> T vx_any_from_list(T generic_any_1, final std::vector<vx_core::Type_any> list, final int index) {" +
 			"\n      T output = vx_core::f_empty(generic_any_1);" +
 			"\n      if (list.size() > index) {" +
 			"\n        output = vx_core::f_any_from_any(generic_any_1, list.get(index));" +
@@ -1165,9 +1178,9 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      return output;" +
 			"\n    }" +
 			"\n" +
-			"\n    public static <T extends vx_core::Type_any> T vx_any_first_from_list_fn(final T generic_any_1, final vx_core::Type_list list, final Function<vx_core::Type_any, T> fn_any) {" +
+			"\n    template <class T> T vx_any_first_from_list_fn(T generic_any_1, final vx_core::Type_list list, final Function<vx_core::Type_any, T> fn_any) {" +
 			"\n      T output = vx_core::f_empty(generic_any_1);" +
-			"\n      List<vx_core::Type_any> listany = list.vx_list();" +
+			"\n      std::vector<vx_core::Type_any> listany = list.vx_list();" +
 			"\n      for (vx_core::Type_any any : listany) {" +
 			"\n        T tany = vx_core::f_any_from_any(generic_any_1, any);" +
 			"\n        T val = fn_any.apply(tany);" +
@@ -1186,7 +1199,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 	case "vx/core/func":
 		extendinterface = "vx_core::Type_anytype"
 		instancefuncs += "" +
-			"\n    public vx_core::Type_funcdef vx_funcdef() {" +
+			"\n    vx_core::Type_funcdef vx_funcdef() {" +
 			"\n      return vx_core::e_funcdef;" +
 			"\n    }"
 	case "vx/core/type":
@@ -1197,7 +1210,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxboolean = val.vx_boolean();"
 		valnew = "" +
-			"\n      boolean booleanval = false;" +
+			"\n      bool booleanval = false;" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -1303,7 +1316,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 	case "vx/core/msgblock":
 	case "vx/core/string":
 		valcopy = "" +
-			"\n      vx_core::Class_string val = this;" +
+			"\n      vx_core::Type_string val = this;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      output.vxstring = val.vx_string();"
 		valnew = "" +
@@ -1353,12 +1366,11 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			allowempty := CppNameEFromType(allowtype)
 			allowname = CppNameFromType(allowtype)
 			allowcode = "" +
-				"\n    @Override" +
-				"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_int index) {" +
+				"\n    " + allowclass + " vx_" + allowname + "(vx_core::Type_int index) {" +
 				"\n      " + allowclass + " output = " + allowempty + ";" +
-				"\n      Class_" + typename + " list = this;" +
+				"\n      Type_" + typename + " list = this;" +
 				"\n      int iindex = index.vx_int();" +
-				"\n      List<" + allowclass + "> listval = list.vxlist;" +
+				"\n      std::vector<" + allowclass + "> listval = list.vxlist;" +
 				"\n      if (iindex < listval.size()) {" +
 				"\n        output = listval.get(iindex);" +
 				"\n      }" +
@@ -1370,26 +1382,23 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			allowname = ""
 		} else {
 			allowcode += "" +
-				"\n    @Override" +
-				"\n    public List<" + allowclass + "> vx_list" + allowname + "() {return vxlist;}" +
+				"\n    std::vector<" + allowclass + "> vx_list" + allowname + "() {return vxlist;}" +
 				"\n" +
-				"\n    @Override" +
-				"\n    public vx_core::Type_any vx_any(final vx_core::Type_int index) {" +
-				"\n      return this.vx_" + allowname + "(index);" +
+				"\n    vx_core::Type_any vx_any(vx_core::Type_int index) {" +
+				"\n      return this->vx_" + allowname + "(index);" +
 				"\n    }" +
 				"\n"
 		}
 		instancefuncs += "" +
-			"\n    protected List<" + allowclass + "> vxlist = vx_core::immutablelist(new ArrayList<" + allowclass + ">());" +
+			"\n    protected std::vector<" + allowclass + "> vxlist = vx_core::immutablelist(new Arraystd::vector<" + allowclass + ">());" +
 			"\n" +
-			"\n    @Override" +
-			"\n    public List<vx_core::Type_any> vx_list() {return vx_core::immutablelist(new ArrayList<vx_core::Type_any>(this.vxlist));}" +
+			"\n    std::vector<vx_core::Type_any> vx_list() {return vx_core::immutablelist(new Arraystd::vector<vx_core::Type_any>(this->vxlist));}" +
 			"\n" +
 			allowcode
 		valcopy = "" +
 			"\n      Type_" + typename + " val = this;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      List<" + allowclass + "> listval = new ArrayList<>(val.vx_list" + allowname + "());"
+			"\n      std::vector<" + allowclass + "> listval = new Arraystd::vector<>(val.vx_list" + allowname + "());"
 		switch typ.name {
 		case "msgblocklist":
 			valnew = "" +
@@ -1441,7 +1450,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          Type_" + typename + " multi = (Type_" + typename + ")valsub;" +
 			"\n          listval.addAll(multi.vx_list" + allowname + "());" +
 			"\n        } else if (valsub instanceof List) {" +
-			"\n          List<?> listunknown = (List<?>)valsub;" +
+			"\n          std::vector<?> listunknown = (std::vector<?>)valsub;" +
 			"\n          for (Object item : listunknown) {" +
 			"\n            if (item instanceof " + allowclass + ") {" +
 			"\n              " + allowclass + " valitem = (" + allowclass + ")item;" +
@@ -1474,12 +1483,11 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			allowempty := CppNameEFromType(allowtype)
 			allowname = CppNameFromType(allowtype)
 			allowcode = "" +
-				"\n    @Override" +
-				"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_string key) {" +
+				"\n    " + allowclass + " vx_" + allowname + "(vx_core::Type_string key) {" +
 				"\n      " + allowclass + " output = " + allowempty + ";" +
-				"\n      Class_" + typename + " map = this;" +
+				"\n      Type_" + typename + " map = this;" +
 				"\n      String skey = key.vx_string();" +
-				"\n      Map<String, " + allowclass + "> mapval = map.vxmap;" +
+				"\n      std::map<std::string, " + allowclass + "> mapval = map.vxmap;" +
 				"\n      output = mapval.getOrDefault(skey, " + allowempty + ");" +
 				"\n      return output;" +
 				"\n    }" +
@@ -1489,27 +1497,25 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			allowname = ""
 		} else {
 			allowcode += "" +
-				"\n    @Override" +
-				"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "() {return vxmap;}" +
+				"\n    std::map<std::string, " + allowclass + "> vx_map" + allowname + "() {return vxmap;}" +
 				"\n" +
-				"\n    @Override" +
-				"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key) {" +
-				"\n      return this.vx_" + allowname + "(key);" +
+				"\n    vx_core::Type_any vx_any(vx_core::Type_string key) {" +
+				"\n      return this->vx_" + allowname + "(key);" +
 				"\n    }" +
 				"\n"
 		}
 		instancefuncs += "" +
-			"\n    protected Map<String, " + allowclass + "> vxmap = vx_core::immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
+			"\n    protected:" +
+			"\n    std::map<std::string, " + allowclass + "> vxmap = vx_core::immutablemap(new LinkedHashstd::map<std::string, " + allowclass + ">());" +
 			"\n" +
-			"\n    @Override" +
-			"\n    public Map<String, vx_core::Type_any> vx_map() {return vx_core::immutablemap(new LinkedHashMap<String, vx_core::Type_any>(this.vxmap));}" +
+			"\n    public:" +
+			"\n    std::map<std::string, vx_core::Type_any> vx_map() {return vx_core::immutablemap(new LinkedHashstd::map<std::string, vx_core::Type_any>(this->vxmap));}" +
 			"\n" +
 			allowcode +
-			"\n    @Override" +
-			"\n    public Type_" + typename + " vx_new_from_map(final Map<String, vx_core::Type_any> mapval) {" +
-			"\n      Class_" + typename + " output = new Class_" + typename + "();" +
+			"\n    Type_" + typename + " vx_new_from_map(std::map<std::string, vx_core::Type_any> mapval) {" +
+			"\n      Type_" + typename + " output;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;" +
-			"\n      Map<String, " + allowclass + "> map = new LinkedHashMap<>();" +
+			"\n      std::map<std::string, " + allowclass + "> map;" +
 			"\n      Set<String> keys = mapval.keySet();" +
 			"\n      for (String key : keys) {" +
 			"\n        vx_core::Type_any val = mapval.get(key);" +
@@ -1532,7 +1538,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      Type_" + typename + " valmap = this;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);"
 		valnew = "" +
-			"\n      Map<String, " + allowclass + "> mapval = new LinkedHashMap<>(valmap.vx_map" + allowname + "());" +
+			"\n      std::map<std::string, " + allowclass + "> mapval;" +
 			"\n      String key = \"\";" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
@@ -1623,16 +1629,16 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n        output.vxmsgblock = msgblock;" +
 				"\n      }"
 		default:
-			validkeys := "\n      ArrayList<String> validkeys = new ArrayList<>();"
+			validkeys := "\n      Arraystd::vector<String> validkeys;"
 			valnewswitch := ""
 			for _, arg := range props {
 				validkeys += "\n      validkeys.add(\":" + arg.name + "\");"
 				argname := CppFromName(arg.name)
 				valcopy += "\n      output.vx_p_" + argname + " = val." + argname + "();"
-				vx_map += "\n      output.put(\":" + arg.name + "\", this." + argname + "());"
+				vx_map += "\n      output.put(\":" + arg.name + "\", this->" + argname + "());"
 				vx_any += "" +
 					"\n      case \":" + arg.name + "\":" +
-					"\n        output = this." + argname + "();" +
+					"\n        output = this->" + argname + "();" +
 					"\n        break;"
 				argclassname := CppNameTypeFromType(arg.vxtype)
 				argalt := ""
@@ -1667,10 +1673,9 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 				instancefuncs += "" +
 					"\n    protected " + argclassname + " vx_p_" + argname + ";" +
 					"\n" +
-					"\n    @Override" +
-					"\n    public " + argclassname + " " + argname + "() {" +
-					"\n      return this.vx_p_" + argname + " == null ? " + CppNameEFromType(arg.vxtype) + " : this.vx_p_" + argname + ";" +
-					//"\n      vx_core::Type_any valsub = this.vx_map().getOrDefault(\":" + arg.name + "\", " + CppNameEFromType(arg.vxtype) + ");" +
+					"\n    " + argclassname + " " + argname + "() {" +
+					"\n      return this->vx_p_" + argname + " == null ? " + CppNameEFromType(arg.vxtype) + " : this->vx_p_" + argname + ";" +
+					//"\n      vx_core::Type_any valsub = this->vx_map().getOrDefault(\":" + arg.name + "\", " + CppNameEFromType(arg.vxtype) + ");" +
 					//"\n      return vx_core::f_any_from_any(" + CppNameTFromType(arg.vxtype) + ", valsub);" +
 					"\n    }" +
 					"\n"
@@ -1744,19 +1749,19 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n      String key = \"\";" +
 					"\n      for (Object valsub : vals) {" +
 					"\n        if (valsub instanceof vx_core::Type_msgblock) {" +
-					"\n          vx_core::Type_msgblocklist msgblocks = this.msgblocks();" +
+					"\n          vx_core::Type_msgblocklist msgblocks = this->msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
 					"\n          output.vx_p_msgblocks = msgblocks;" +
 					"\n        } else if (valsub instanceof vx_core::Type_msg) {" +
-					"\n          vx_core::Type_msglist msgs = this.msgs();" +
+					"\n          vx_core::Type_msglist msgs = this->msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
 					"\n          output.vx_p_msgs = msgs;" +
 					"\n        } else if (valsub instanceof vx_core::Type_msgblocklist) {" +
-					"\n          vx_core::Type_msgblocklist msgblocks = this.msgblocks();" +
+					"\n          vx_core::Type_msgblocklist msgblocks = this->msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
 					"\n          output.vx_p_msgblocks = msgblocks;" +
 					"\n        } else if (valsub instanceof vx_core::Type_msglist) {" +
-					"\n          vx_core::Type_msglist msgs = this.msgs();" +
+					"\n          vx_core::Type_msglist msgs = this->msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
 					"\n          output.vx_p_msgs = msgs;" +
 					"\n        } else if (key == \"\") {" +
@@ -1793,7 +1798,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            testkey = (String)valsub;" +
 					"\n          }" +
-					"\n          boolean isvalidkey = validkeys.contains(testkey);" +
+					"\n          bool isvalidkey = validkeys.contains(testkey);" +
 					"\n          if (isvalidkey) {" +
 					"\n            key = testkey;" +
 					defaultkey +
@@ -1817,8 +1822,7 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			}
 		}
 		instancefuncs += "" +
-			"\n    @Override" +
-			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key) {" +
+			"\n    vx_core::Type_any vx_any(vx_core::Type_string key) {" +
 			"\n      vx_core::Type_any output = vx_core::e_any;" +
 			"\n      String skey = key.vx_string();" +
 			"\n      switch (skey) {" +
@@ -1827,9 +1831,8 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      return output;" +
 			"\n    }" +
 			"\n" +
-			"\n    @Override" +
-			"\n    public Map<String, vx_core::Type_any> vx_map() {" +
-			"\n      Map<String, vx_core::Type_any> output = new LinkedHashMap<>();" +
+			"\n    std::map<std::string, vx_core::Type_any> vx_map() {" +
+			"\n      std::map<std::string, vx_core::Type_any> output;" +
 			vx_map +
 			"\n      return vx_core::immutablemap(output);" +
 			"\n    }" +
@@ -1843,54 +1846,47 @@ func CppFromType(typ *vxtype) (string, *vxmsgblock) {
 	switch NameFromType(typ) {
 	case "vx/core/msg":
 		vxmsgblock = "" +
-			"\n    @Override" +
-			"\n    public vx_core::Type_msgblock vx_msgblock() {return vx_core::e_msgblock;}"
+			"\n    vx_core::Type_msgblock vx_msgblock() {return vx_core::e_msgblock;}"
 	case "vx/core/msgblock":
 		vxmsgblock = "" +
-			"\n    @Override" +
-			"\n    public vx_core::Type_msgblock vx_msgblock() {return this;}"
+			"\n    vx_core::Type_msgblock vx_msgblock() {return this;}"
 	}
-	sinterface := CppInterfaceFromType(typ)
+	headers := CppHeaderFromType(typ)
+	pkgname := CppNameFromPkgName(typ.pkgname)
 	typedef := "" +
-		"\n    @Override" +
-		"\n    public vx_core::Type_typedef vx_typedef() {" +
+		"\n    vx_core::Type_typedef vx_typedef() {" +
 		"\n      return " + CppTypeDefFromType(typ, "      ") + ";" +
 		"\n    }" +
 		"\n"
-	output += "" +
+	output := "" +
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   * (type " + typ.name + ")" +
 		"\n   */" +
-		sinterface +
-		"\n  class Class_" + typename + extendsclass + " implements Type_" + CppNameFromType(typ) + " {" +
+		"\n  class Type_" + typename + extendsclass + " {" +
 		"\n" +
 		instancefuncs +
-		"\n    @Override" +
-		"\n    public Type_" + typename + " vx_new(final Object... vals) {return e_" + typename + ".vx_copy(vals);}" +
+		"\n    Type_" + typename + " vx_new(std::any vals...) {return e_" + typename + ".vx_copy(vals);}" +
 		"\n" +
-		"\n    @Override" +
-		"\n    public Type_" + typename + " vx_copy(final Object... vals) {" +
-		"\n      Class_" + typename + " output = new Class_" + typename + "();" +
+		"\n    Type_" + typename + " vx_copy(std::any vals...) {" +
+		"\n      Type_" + typename + " output;" +
 		valcopy +
 		valnew +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
 		vxmsgblock +
-		"\n    @Override" +
-		"\n    public Type_" + typename + " vx_empty() {return e_" + typename + ";}" +
-		"\n    @Override" +
-		"\n    public Type_" + typename + " vx_type() {return t_" + typename + ";}" +
+		"\n    " + pkgname + "::Type_" + typename + " vx_empty() {return e_" + typename + ";}" +
+		"\n    " + pkgname + "::Type_" + typename + " vx_type() {return t_" + typename + ";}" +
 		"\n" +
 		typedef +
 		staticfuncs +
 		"\n  }" +
 		"\n" +
-		"\n  const Type_" + typename + " e_" + typename + " = new Class_" + typename + "();" +
-		"\n  const Type_" + typename + " t_" + typename + " = new Class_" + typename + "();" +
+		"\n  const " + pkgname + "::Type_" + typename + " e_" + typename + ";" +
+		"\n  const " + pkgname + "::Type_" + typename + " t_" + typename + ";" +
 		"\n"
-	return output, msgblock
+	return output, headers, msgblock
 }
 
 func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string, encode bool, test bool, path string) (string, *vxmsgblock) {
@@ -1993,12 +1989,12 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += CppNameFromPkgName(fnc.pkgname) + ".f_let_async("
+					output += CppNameFromPkgName(fnc.pkgname) + "::f_let_async("
 				} else {
-					output += CppNameFromPkgName(fnc.pkgname) + ".f_" + CppNameFromFunc(fnc) + "("
+					output += CppNameFromPkgName(fnc.pkgname) + "::f_" + CppNameFromFunc(fnc) + "("
 				}
 			default:
-				output += CppNameFromPkgName(fnc.pkgname) + ".f_" + CppNameFromFunc(fnc) + "("
+				output += CppNameFromPkgName(fnc.pkgname) + "::f_" + CppNameFromFunc(fnc) + "("
 			}
 			if !isskip {
 				if fnc.isgeneric {
@@ -2134,7 +2130,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string
 											lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
 											lambdatext += "" +
-												arglineindent + "final CompletableFuture<" + CppNameTypeFromType(lambdaarg.vxtype) + "> future_" + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
+												arglineindent + "final std::future<" + CppNameTypeFromType(lambdaarg.vxtype) + "> future_" + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
 												arglineindent + "return vx_core::async_from_async_fn(future_" + CppFromName(lambdaarg.name) + ", (" + CppFromName(lambdaarg.name) + ") -> {"
 											aftertext += "" +
 												arglineindent + "});"
@@ -2160,7 +2156,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string
 										lambdaargpath := argsubpath + "/:arg/" + lambdaarg.name
 										lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
-										lambdatext += arglineindent + "final " + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
+										lambdatext += arglineindent + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
 									}
 									work, msgs := CppFromValue(argvalue, pkgname, fnc, "", true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -2289,11 +2285,11 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string
 	case ":funcref":
 		valfunc := FuncFromValue(value)
 		valstr = ""
-		valstr += CppNameFromPkgName(valfunc.pkgname) + ".t_" + CppFromName(valfunc.alias)
+		valstr += CppNameFromPkgName(valfunc.pkgname) + "::t_" + CppFromName(valfunc.alias)
 		output = indent + valstr
 	case ":type":
 		valtype := TypeFromValue(value)
-		output = CppNameFromPkgName(valtype.pkgname) + ".t_" + CppFromName(valtype.alias)
+		output = CppNameFromPkgName(valtype.pkgname) + "::t_" + CppFromName(valtype.alias)
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
@@ -2351,7 +2347,7 @@ func CppGenericDefinitionFromFunc(fnc *vxfunc) string {
 	var mapgeneric = make(map[string]string)
 	if fnc.generictype != nil {
 		returntype := CppGenericFromType(fnc.generictype)
-		mapgeneric[fnc.vxtype.name] = returntype + " extends " + CppNameTypeFromType(fnc.vxtype)
+		mapgeneric[fnc.vxtype.name] = "class " + returntype
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			if !argtype.isfunc {
@@ -2359,7 +2355,7 @@ func CppGenericDefinitionFromFunc(fnc *vxfunc) string {
 					_, ok := mapgeneric[argtype.name]
 					if !ok {
 						argtypename := CppGenericFromType(argtype)
-						worktext := argtypename + " extends " + CppNameTypeFromType(arg.vxtype)
+						worktext := "class " + argtypename
 						mapgeneric[argtype.name] = worktext
 					}
 				}
@@ -2372,7 +2368,7 @@ func CppGenericDefinitionFromFunc(fnc *vxfunc) string {
 			}
 			output += mapgeneric[generickey]
 		}
-		output = "<" + output + "> "
+		output = "template <" + output + "> "
 	}
 	return output
 }
@@ -2414,47 +2410,28 @@ func CppGenericFromType(typ *vxtype) string {
 
 func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test bool) string {
 	output := ""
-	/*
-		if BooleanFromStringContains(body, "Arrays.") {
-			output += "\nimport Cpp.util.Arrays;"
-		}
-		if BooleanFromStringContains(body, " ArrayList<") {
-			output += "\nimport Cpp.util.ArrayList;"
-		}
-		if BooleanFromStringContains(body, "Collections.") {
-			output += "\nimport Cpp.util.Collections;"
-		}
-		if BooleanFromStringContains(body, " CompletableFuture<") {
-			output += "\nimport Cpp.util.concurrent.CompletableFuture;"
-		}
-		if BooleanFromStringContains(body, " ConcurrentLinkedDeque<") {
-			output += "\nimport Cpp.util.concurrent.ConcurrentLinkedDeque;"
-		}
-		if BooleanFromStringContains(body, " ConcurrentHashMap<") {
-			output += "\nimport Cpp.util.concurrent.ConcurrentHashMap;"
-		}
-		if BooleanFromStringContains(body, " Deque<") {
-			output += "\nimport Cpp.util.Deque;"
-		}
-		if BooleanFromStringContains(body, " LinkedHashMap<") {
-			output += "\nimport Cpp.util.LinkedHashMap;"
-		}
-		if BooleanFromStringContains(body, " List<") {
-			output += "\nimport Cpp.util.List;"
-		}
-		if BooleanFromStringContains(body, " Map<") {
-			output += "\nimport Cpp.util.Map;"
-		}
-		if BooleanFromStringContains(body, " Set<") {
-			output += "\nimport Cpp.util.Set;"
-		}
-	*/
-	pkgpath, _ := PackagePathNameFromName(pkg.name)
+	if BooleanFromStringContains(body, "std::any") {
+		output += "#include <any>\n"
+	}
+	if BooleanFromStringContains(body, "std::exception") {
+		output += "#include <exception>\n"
+	}
+	if BooleanFromStringContains(body, "std::map<") {
+		output += "#include <map>\n"
+	}
+	if BooleanFromStringContains(body, "std::string") {
+		output += "#include <string>\n"
+	}
+	if BooleanFromStringContains(body, "std::vector<") {
+		output += "#include <vector>\n"
+	}
+	if BooleanFromStringContains(body, " std::future<") {
+		output += "#include <future>\n"
+	}
 	if len(pkg.listlib) > 0 {
 		for _, lib := range pkg.listlib {
 			isskip := false
 			libpath := lib.path
-			libpkgpath, _ := PackagePathNameFromName(lib.path)
 			if lib.lang != "" {
 				if test {
 					isskip = true
@@ -2462,21 +2439,16 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 				} else {
 					isskip = true
 				}
-			} else if libpkgpath == pkgpath {
+			} else if !test && lib.path == "vx/test" {
 				isskip = true
-			} else {
-				libprefix := pkgpath
-				libpath = libprefix + "/" + libpkgpath + "*"
-				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
-				importline := "\n#include \"" + libpath + ".h\";"
+				importline := "#include \"" + libpath + ".h\"\n"
 				if IntFromStringIndex(output, importline) < 0 {
 					output += importline
 				}
 			}
 		}
-		output += "\n"
 	}
 	return output
 }
@@ -2485,14 +2457,14 @@ func CppIndexFromFunc(fnc *vxfunc) string {
 	return StringIndexFromFunc(fnc)
 }
 
-func CppInterfaceFromType(typ *vxtype) string {
+func CppHeaderFromType(typ *vxtype) string {
 	output := ""
 	typename := CppNameTypeFullFromType(typ)
 	basics := "" +
-		"\n    public " + typename + " vx_new(final Object... vals);" +
-		"\n    public " + typename + " vx_copy(final Object... vals);" +
-		"\n    public " + typename + " vx_empty();" +
-		"\n    public " + typename + " vx_type();"
+		"\n    " + typename + " vx_new(std::any vals...);" +
+		"\n    " + typename + " vx_copy(std::any vals...);" +
+		"\n    " + typename + " vx_empty();" +
+		"\n    " + typename + " vx_type();"
 	createtext, _ := CppFromValue(typ.createvalue, "", emptyfunc, "", true, false, "")
 	if createtext != "" {
 		createlines := ListStringFromStringSplit(createtext, "\n")
@@ -2511,99 +2483,108 @@ func CppInterfaceFromType(typ *vxtype) string {
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		output = "" +
-			"\n  public interface Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_any {" +
 			basics +
-			"\n    public vx_core::Type_typedef vx_typedef();" +
-			"\n    public List<Type_any> vx_dispose();" +
-			"\n    public vx_core::Type_msgblock vx_msgblock();" +
-			"\n    public boolean vx_release();" +
-			"\n    public void vx_reserve();" +
-			"\n  }" +
+			"\n    vx_core::Type_typedef vx_typedef();" +
+			"\n    std::vector<vx_core::Type_any> vx_dispose();" +
+			"\n    vx_core::Type_msgblock vx_msgblock();" +
+			"\n    bool vx_release();" +
+			"\n    void vx_reserve();" +
+			"\n  };" +
 			"\n"
 	case "vx/core/boolean":
 		output = "" +
-			"\n  public interface Type_boolean extends vx_core::Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_boolean : vx_core::Type_any {" +
 			basics +
-			"\n  }" +
+			"\n  };" +
 			"\n"
 	case "vx/core/decimal":
 		output = "" +
-			"\n  public interface Type_decimal extends vx_core::Type_number {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_decimal : virtual vx_core::Type_number {" +
 			basics +
-			"\n  }" +
+			"\n  };" +
 			"\n"
 	case "vx/core/float":
 		output = "" +
-			"\n  public interface Type_float extends vx_core::Type_number {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_float : virtual vx_core::Type_number {" +
 			basics +
-			"\n  }" +
+			"\n  };" +
 			"\n"
 	case "vx/core/func":
 		output = "" +
-			"\n  public interface Type_func extends vx_core::Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_func : vx_core::Type_any {" +
 			basics +
-			"\n	   public vx_core::Type_funcdef vx_funcdef();" +
-			"\n  }" +
+			"\n	   vx_core::Type_funcdef vx_funcdef();" +
+			"\n  };" +
 			"\n"
 	case "vx/core/int":
 		output = "" +
-			"\n  public interface Type_int extends vx_core::Type_number {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_int : vx_core::Type_number {" +
 			basics +
-			"\n  }" +
+			"\n  };" +
 			"\n"
 	case "vx/core/string":
 		output = "" +
-			"\n  public interface Type_string extends vx_core::Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_string : vx_core::Type_any {" +
 			basics +
-			"\n  }" +
+			"\n  };" +
 			"\n"
 	case "vx/core/list":
 		output = "" +
-			"\n  public interface Type_list extends vx_core::Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_list : vx_core::Type_any {" +
 			basics +
-			"\n    public List<vx_core::Type_any> vx_list();" +
-			"\n    public vx_core::Type_any vx_any(final vx_core::Type_int index);" +
-			"\n  }" +
+			"\n    std::vector<vx_core::Type_any> vx_list();" +
+			"\n    vx_core::Type_any vx_any(vx_core::Type_int index);" +
+			"\n  };" +
 			"\n"
 	case "vx/core/map":
 		output = "" +
-			"\n  public interface Type_map extends vx_core::Type_any {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_map : vx_core::Type_any {" +
 			basics +
-			"\n    public vx_core::Type_map vx_new_from_map(final Map<String, vx_core::Type_any> mapval);" +
-			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key);" +
-			"\n    public Map<String, vx_core::Type_any> vx_map();" +
-			"\n  }" +
+			"\n    vx_core::Type_map vx_new_from_map(std::map<std::string, vx_core::Type_any> mapval);" +
+			"\n    vx_core::Type_any vx_any(vx_core::Type_string key);" +
+			"\n    std::map<std::string, vx_core::Type_any> vx_map();" +
+			"\n  };" +
 			"\n"
 	case "vx/core/struct":
 		output = "" +
-			"\n  public interface Type_struct extends vx_core::Type_any {" +
+			"\n  class Type_struct : vx_core::Type_any {" +
 			basics +
-			"\n    public vx_core::Type_any vx_any(final vx_core::Type_string key);" +
-			"\n    public Map<String, vx_core::Type_any> vx_map();" +
-			"\n  }" +
+			"\n    vx_core::Type_any vx_any(vx_core::Type_string key);" +
+			"\n    std::map<std::string, vx_core::Type_any> vx_map();" +
+			"\n  };" +
 			"\n"
 	default:
 		extras := ""
 		switch NameFromType(typ) {
 		case "vx/core/msg":
 			basics = "" +
-				"\n    public " + typename + " vx_new(final Object... vals);" +
-				"\n    public " + typename + " vx_copy(final Object... vals);" +
-				"\n    public " + typename + " vx_empty();" +
-				"\n    public " + typename + " vx_type();" +
-				"\n    public vx_core::Type_typedef vx_typedef();"
+				"\n    " + typename + " vx_new(std::any vals...);" +
+				"\n    " + typename + " vx_copy(std::any vals...);" +
+				"\n    " + typename + " vx_empty();" +
+				"\n    " + typename + " vx_type();" +
+				"\n    vx_core::Type_typedef vx_typedef();"
 			extras += "" +
-				"\n    public Type_msg vx_new_error(final String text);" +
-				"\n    public Type_msg vx_new_from_exception(final String text, final Exception err);"
+				"\n    Type_msg vx_new_error(std::string text);" +
+				"\n    Type_msg vx_new_from_exception(std::string text, std::exception err);"
 		case "vx/core/msgblock":
 			basics = "" +
-				"\n    public " + typename + " vx_new(final Object... vals);" +
-				"\n    public " + typename + " vx_copy(final Object... vals);" +
-				"\n    public " + typename + " vx_empty();" +
-				"\n    public " + typename + " vx_type();" +
-				"\n    public vx_core::Type_typedef vx_typedef();"
+				"\n    " + typename + " vx_new(std::any vals...);" +
+				"\n    " + typename + " vx_copy(std::any vals...);" +
+				"\n    " + typename + " vx_empty();" +
+				"\n    " + typename + " vx_type();" +
+				"\n    vx_core::Type_typedef vx_typedef();"
 			extras += "" +
-				"\n    public Type_msgblock vx_msgblock_from_copy_arrayval(final vx_core::Type_any copy, final Object... vals);"
+				"\n    vx_core::Type_msgblock vx_msgblock_from_copy_arrayval(vx_core::Type_any copy, std::any vals...);"
 		}
 		extends := ""
 		switch typ.extends {
@@ -2629,8 +2610,8 @@ func CppInterfaceFromType(typ *vxtype) string {
 			}
 			if allowname != "any" {
 				extras += "" +
-					"\n    public List<" + allowclass + "> vx_list" + allowname + "();" +
-					"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_int index);"
+					"\n    std::vector<" + allowclass + "> vx_list" + allowname + "();" +
+					"\n    " + allowclass + " vx_" + allowname + "(vx_core::Type_int index);"
 			}
 		case ":map":
 			extends = "vx_core::Type_map"
@@ -2644,8 +2625,8 @@ func CppInterfaceFromType(typ *vxtype) string {
 			}
 			if allowname != "any" {
 				extras += "" +
-					"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "();" +
-					"\n    public " + allowclass + " vx_" + allowname + "(final vx_core::Type_string key);"
+					"\n    std::map<std::string, " + allowclass + "> vx_map" + allowname + "();" +
+					"\n    " + allowclass + " vx_" + allowname + "(vx_core::Type_string key);"
 			}
 		case ":struct":
 			extends = "vx_core::Type_struct"
@@ -2657,128 +2638,104 @@ func CppInterfaceFromType(typ *vxtype) string {
 				extends = StringFromListStringJoin(traitnames, ", ")
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
-				extras += "\n    public " + CppNameTypeFromType(arg.vxtype) + " " + CppFromName(arg.alias) + "();"
+				extras += "\n    " + CppNameTypeFromType(arg.vxtype) + " " + CppFromName(arg.alias) + "();"
 			}
 		default:
 			extends += "vx_core::Type_any"
 		}
 		typename := CppNameFromType(typ)
+		pkgname := CppNameFromPkgName(typ.pkgname)
 		output = "" +
-			"\n  public interface Type_" + typename + " extends " + extends + " {" +
+			"\n  // (type " + typ.name + ")" +
+			"\n  class Type_" + typename + " : " + extends + " {" +
 			basics +
 			extras +
-			"\n  }" +
+			"\n  };" +
+			"\n  extern const " + pkgname + "::Type_" + typename + " e_" + typename + ";" +
+			"\n  extern const " + pkgname + "::Type_" + typename + " t_" + typename + ";" +
 			"\n"
 	}
 	return output
 }
 
-func CppInterfaceFnFromFunc(fnc *vxfunc) string {
+func CppHeaderFnFromFunc(fnc *vxfunc) string {
 	interfaces := ""
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve(vx_core::Type_any val);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve(vx_core::Type_any val);" +
+			"\n    };"
 	case "vx/core/any<-any-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any val);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve(vx_core::Type_any val);" +
+			"\n    };"
 	case "vx/core/any<-any-context":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve(vx_core::Type_any val, vx_core::Type_context context);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve(vx_core::Type_any val, vx_core::Type_context context);" +
+			"\n    };"
 	case "vx/core/any<-any-context-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any val, vx_core::Type_context context);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve(vx_core::Type_any val, vx_core::Type_context context);" +
+			"\n    };"
 	case "vx/core/any<-key-value":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve(vx_core::Type_string key, vx_core::Type_any val);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve(vx_core::Type_string key, vx_core::Type_any val);" +
+			"\n    };"
 	case "vx/core/any<-func", "vx/core/any<-none":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve();" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve();" +
+			"\n    };"
 	case "vx/core/any<-reduce":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
+			"\n    };"
 	case "vx/core/any<-reduce-next":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
+			"\n    };"
 	case "vx/core/any<-key-value-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_string key, vx_core::Type_any val);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve(vx_core::Type_string key, vx_core::Type_any val);" +
+			"\n    };"
 	case "vx/core/any<-func-async", "vx/core/any<-none-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve();" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve();" +
+			"\n    };"
 	case "vx/core/any<-reduce-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any item);" +
+			"\n    };"
 	case "vx/core/any<-reduce-next-async":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public CompletableFuture<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      std::future<vx_core::Type_any> resolve(vx_core::Type_any reduce, vx_core::Type_any current, vx_core::Type_any next);" +
+			"\n    };"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_boolean resolve();" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_boolean resolve();" +
+			"\n    };"
 	case "vx/core/none<-any":
 		interfaces = "" +
-			"\n    @FunctionalInterface" +
-			"\n    public static interface IFn {" +
-			"\n      public vx_core::Type_any void resolve(vx_core::Type_any val);" +
-			"\n    }" +
-			"\n"
+			"\n    class IFn {" +
+			"\n      vx_core::Type_any void resolve(vx_core::Type_any val);" +
+			"\n    };"
 	}
 	return interfaces
 }
 
-func CppInterfaceFromFunc(fnc *vxfunc) string {
+func CppHeaderFromFunc(fnc *vxfunc) string {
 	funcname := CppNameFromFunc(fnc)
 	extends := ""
 	interfaces := ""
@@ -2790,7 +2747,7 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 		switch NameFromFunc(fnc) {
 		case "vx/core/new", "vx/core/copy", "vx/core/empty":
 		default:
-			listargtext = append(listargtext, "final "+returntype+" generic_any_1")
+			listargtext = append(listargtext, returntype+" generic_any_1")
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
@@ -2810,7 +2767,7 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 				}
 			}
 			if !isskip {
-				listargtext = append(listargtext, "final "+argtypename+" "+argname)
+				listargtext = append(listargtext, argtypename+" "+argname)
 			}
 		}
 	} else {
@@ -2818,7 +2775,7 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 			argtype := arg.vxtype
 			argtypename := CppNameTypeFromType(argtype)
 			argname := CppFromName(arg.alias)
-			listargtext = append(listargtext, "final "+argtypename+" "+argname)
+			listargtext = append(listargtext, argtypename+" "+argname)
 		}
 	}
 	argtext := StringFromListStringJoin(listargtext, ", ")
@@ -2830,25 +2787,25 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
-		extends = "vx_core::Type_func"
+		extends = "virtual vx_core::Type_func"
 		interfaces += "" +
-			"\n    public Func_" + funcname + " fn_new(vx_core::Class_" + funcname + ".IFn fn);"
+			"\n    vx_core::Func_" + funcname + " fn_new(vx_core::Func_" + funcname + "::IFn fn);"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/int<-func", "vx/core/int<-none",
 		"vx/core/string<-func", "vx/core/string<-none":
-		extends = "vx_core::Type_func"
+		extends = "virtual vx_core::Type_func"
 		interfaces += "" +
-			"\n    public Func_" + funcname + " fn_new(vx_core::Class_any_from_func.IFn fn);"
+			"\n    vx_core::Func_" + funcname + " fn_new(vx_core::Func_any_from_func::IFn fn);"
 	case "vx/core/none<-any":
 	default:
 		if extends == "" {
 			switch NameFromType(fnc.vxtype) {
 			case "vx/core/none":
-				extends = "vx_core::Type_func"
+				extends = "virtual vx_core::Type_func"
 			default:
 				switch len(fnc.listarg) {
 				case 1:
-					extends = "vx_core::Func_any_from_any"
+					extends = "virtual vx_core::Func_any_from_any"
 					if fnc.context {
 						extends += "_context"
 					}
@@ -2856,13 +2813,13 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 						extends += "_async"
 					}
 				default:
-					extends = "vx_core::Type_func"
+					extends = "virtual vx_core::Type_func"
 				}
 			}
 		}
 	}
 	if fnc.async {
-		returntype = "CompletableFuture<" + returntype + ">"
+		returntype = "std::future<" + returntype + ">"
 	}
 	contextarg := ""
 	if fnc.context {
@@ -2872,28 +2829,25 @@ func CppInterfaceFromFunc(fnc *vxfunc) string {
 			contextarg = ", vx_core::Type_context context"
 		}
 	}
-	if extends == "vx_core::Type_func" {
+	if extends == "virtual vx_core::Type_func" {
 		if fnc.async {
-			extends += ", vx_core::Type_replfunc_async"
+			extends += ", virtual vx_core::Type_replfunc_async"
 		} else {
-			extends += ", vx_core::Type_replfunc"
+			extends += ", virtual vx_core::Type_replfunc"
 		}
 	}
 	interfaces += "" +
-		"\n    public " + generictypes + returntype + " f_" + funcname + "(" + argtext + contextarg + ");"
+		"\n    " + generictypes + returntype + " f_" + funcname + "(" + argtext + contextarg + ");"
+	fnheaders := CppHeaderFnFromFunc(fnc)
 	output := "" +
-		"\n  public static interface Func_" + funcname + " extends " + extends + " {" +
+		"\n  // (func " + fnc.name + ")" +
+		"\n  class Func_" + funcname + " : " + extends + " {" +
+		"\n  public:" +
+		fnheaders +
 		interfaces +
-		"\n  }" +
+		"\n  };" +
 		"\n"
 	return output
-}
-
-func CppNameClassFullFromType(typ *vxtype) string {
-	name := CppNameFromPkgName(typ.pkgname)
-	name += ".Class_"
-	name += CppNameFromType(typ)
-	return name
 }
 
 func CppNameEFromType(typ *vxtype) string {
@@ -2971,9 +2925,9 @@ func CppNameTypeFromType(typ *vxtype) string {
 func CppNameTypeFullFromType(typ *vxtype) string {
 	name := CppNameFromPkgName(typ.pkgname)
 	if typ.isfunc {
-		name += ".Func_"
+		name += "::Func_"
 	} else {
-		name += ".Type_"
+		name += "::Type_"
 	}
 	name += CppNameFromType(typ)
 	return name
@@ -3042,20 +2996,20 @@ func CppReplFromFunc(fnc *vxfunc) string {
 	}
 	if fnc.async {
 		output = "" +
-			"\n    public CompletableFuture<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist) {" +
-			"\n      CompletableFuture<vx_core::Type_any> output = CompletableFuture.completedFuture(vx_core::e_any);" +
+			"\n    std::future<vx_core::Type_any> vx_repl(vx_core::Type_anylist arglist) {" +
+			"\n      std::future<vx_core::Type_any> output = std::future.completedFuture(vx_core::e_any);" +
 			replparams +
-			"\n      CompletableFuture<" + outputtype + "> future = " + pkgname + ".f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
+			"\n      std::future<" + outputtype + "> future = " + pkgname + "::f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
 			"\n      output = vx_core::async_from_async(vx_core::t_any, future);" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
 	} else {
 		output = "" +
-			"\n    public vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) {" +
+			"\n    vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) {" +
 			"\n      vx_core::Type_any output = vx_core::e_any;" +
 			replparams +
-			"\n      " + returnvalue + pkgname + ".f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
+			"\n      " + returnvalue + pkgname + "::f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
@@ -3081,7 +3035,7 @@ func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcase
 			descvaluetext, msgs := CppFromValue(testvalue, testpkg, fnc, "            ", true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			desctext := "" +
-				"\n        Test.t_testdescribe.vx_new(" +
+				"\n        vx_test::t_testdescribe.vx_new(" +
 				"\n          \":describename\", \"" + CppTestFromValue(testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
@@ -3090,13 +3044,13 @@ func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcase
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
 		output = "" +
-			"\n  static Test.Type_testcase " + testcasename + "(final vx_core::Type_context context) {" +
-			"\n    Test.Type_testcase output = Test.t_testcase.vx_new(" +
+			"\n  static vx_test::Type_testcase " + testcasename + "(vx_core::Type_context context) {" +
+			"\n    vx_test::Type_testcase output = vx_test::t_testcase.vx_new(" +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
 			"\n      \":casename\", \"" + testname + "\"," +
 			"\n      \":describelist\"," +
-			"\n      Test.t_testdescribelist.vx_new(" + describelist +
+			"\n      vx_test::t_testdescribelist.vx_new(" + describelist +
 			"\n      )" +
 			"\n    );" +
 			"\n    return output;" +
@@ -3133,7 +3087,7 @@ func CppTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppTestFromPackage")
 	pkgname := CppFromName(pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
@@ -3153,7 +3107,7 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"Test.t_"+CppFromName(typ.alias)+"(context)")
+			testall = append(testall, pkgname+"Test::t_"+CppFromName(typ.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -3201,7 +3155,7 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"Test.f_"+CppFromName(fnc.alias)+CppIndexFromFunc(fnc)+"(context)")
+				testall = append(testall, pkgname+"Test::f_"+CppFromName(fnc.alias)+CppIndexFromFunc(fnc)+"(context)")
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -3251,16 +3205,16 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static Test.Type_testcaselist test_cases(final vx_core::Type_context context) {" +
-		"\n    List<vx_core::Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
+		"\n  vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {" +
+		"\n    std::vector<vx_core::Type_any> arraylisttestcase = new Arraystd::vector<>(Arrays.asList(" +
 		"\n      " + strings.Join(testall, ",\n      ") +
 		"\n    ));" +
-		"\n    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);" +
+		"\n    vx_test::Type_testcaselist output = vx_test::t_testcaselist.vx_new(arraylisttestcase);" +
 		"\n    return output;" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testcoveragesummary test_coveragesummary() {" +
-		"\n    return Test.t_testcoveragesummary.vx_new(" +
+		"\n  vx_test::Type_testcoveragesummary test_coveragesummary() {" +
+		"\n    return vx_test::t_testcoveragesummary.vx_new(" +
 		"\n      \":testpkg\",   \"" + pkg.name + "\", " +
 		"\n      \":constnums\", " + CppTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
 		"\n      \":docnums\", " + CppTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
@@ -3272,8 +3226,8 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testcoveragedetail test_coveragedetail() {" +
-		"\n    return Test.t_testcoveragedetail.vx_new(" +
+		"\n  vx_test::Type_testcoveragedetail test_coveragedetail() {" +
+		"\n    return vx_test::t_testcoveragedetail.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\"," +
 		"\n      \":typemap\", vx_core::t_intmap.vx_new(" +
 		"\n  " + strings.Join(covertype, ",\n  ") +
@@ -3287,9 +3241,9 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testpackage test_package(final vx_core::Type_context context) {" +
-		"\n    Test.Type_testcaselist testcaselist = test_cases(context);" +
-		"\n    Test.Type_testpackage output = Test.t_testpackage.vx_new(" +
+		"\n  vx_test::Type_testpackage test_package(vx_core::Type_context context) {" +
+		"\n    vx_test::Type_testcaselist testcaselist = test_cases(context);" +
+		"\n    vx_test::Type_testpackage output = vx_test::t_testpackage.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
 		"\n      \":caselist\", testcaselist," +
 		"\n      \":coveragesummary\", test_coveragesummary()," +
@@ -3298,15 +3252,15 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (strin
 		"\n    return output;" +
 		"\n  }" +
 		"\n"
-	imports := CppImportsFromPackage(pkg, pkgprefix, body, true)
+	imports := CppImportsFromPackage(pkg, "", body, true)
+	headertext := ""
 	output := "" +
 		imports +
-		"\n" +
 		"\nnamespace " + pkgname + "Test {" +
 		"\n" +
 		body +
 		"\n}\n"
-	return output, msgblock
+	return output, headertext, msgblock
 }
 
 func CppTestFromType(typ *vxtype) (string, *vxmsgblock) {
@@ -3330,7 +3284,7 @@ func CppTestFromValue(value vxvalue) string {
 
 func CppTypeCoverageNumsValNew(pct int, tests int, total int) string {
 	return "" +
-		"Test.t_testcoveragenums.vx_new(" +
+		"vx_test::t_testcoveragenums.vx_new(" +
 		"\":pct\", " + StringFromInt(pct) + ", " +
 		"\":tests\", " + StringFromInt(tests) + ", " +
 		"\":total\", " + StringFromInt(total) +
@@ -3450,7 +3404,7 @@ func CppAppTest(prj *vxproject, pkgprefix string) string {
 			`  @Test
   @DisplayName("` + pkg.name + `")
   void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = ` + pkgname + `Test.test_package(context);
+	  vx_test::Type_testpackage testpackage = ` + pkgname + `Test::test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
 
@@ -3466,7 +3420,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for whole App.
  */
-public class AppTest {
+class AppTest {
 
   vx_core::Type_context context = vx_core::t_context.vx_new();
 
@@ -3475,7 +3429,7 @@ public class AppTest {
   @Test
 	@DisplayName("writetestsuite")
   void test_writetestsuite() {
-    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = com.vxlisp.vx.Test.t_testpackagelist.vx_new(` +
+    vx_test::Type_testpackagelist testpackagelist = vx_test::t_testpackagelist.vx_new(` +
 		testpackages +
 		`
     );
@@ -3492,58 +3446,58 @@ func CppTestLib() string {
 		`package com.vxlisp.vx;
 
 import Cpp.util.*;
-import Cpp.util.concurrent.CompletableFuture;
+import Cpp.util.concurrent.std::future;
 import static org.junit.jupiter.api.Assertions.*;
 import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
 import com.vxlisp.vx.web.Html;
 
-public class TestLib {
+namespace TestLib {
 
-  public static boolean run_testcase(final Test.Type_testcase testcase) {
+  bool run_testcase(vx_test::Type_testcase testcase) {
     String testpkg = testcase.testpkg().vx_string();
     String casename = testcase.casename().vx_string();
-    Test.Type_testdescribelist testdescribelist = testcase.describelist();
+    vx_test::Type_testdescribelist testdescribelist = testcase.describelist();
     return run_testdescribelist(testpkg, casename, testdescribelist);
   }
 
   // Blocking
   // Only use if running a single testcase
-  public static boolean run_testcase_async(final Test.Type_testcase testcase) {
-    CompletableFuture<Test.Type_testcase> async_testcase = Test.f_resolve_testcase(testcase);
-    vx_core::Type_any work = vx_core::sync_from_async(Test.t_testcase, async_testcase);
-    Test.Type_testcase testcase_resolved = (Test.Type_testcase)work;
+  bool run_testcase_async(vx_test::Type_testcase testcase) {
+    std::future<vx_test::Type_testcase> async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_core::Type_any work = vx_core::sync_from_async(vx_test::t_testcase, async_testcase);
+    vx_test::Type_testcase testcase_resolved = (vx_test::Type_testcase)work;
     return run_testcase(testcase_resolved);
   }
 
-  public static boolean run_testcaselist(final Test.Type_testcaselist testcaselist) {
-    List<Test.Type_testcase> listtestcase = testcaselist.vx_listtestcase();
-    for (Test.Type_testcase testcase : listtestcase) {
+  bool run_testcaselist(vx_test::Type_testcaselist testcaselist) {
+    std::vector<vx_test::Type_testcase> listtestcase = testcaselist.vx_listtestcase();
+    for (vx_test::Type_testcase testcase : listtestcase) {
       run_testcase(testcase);
     }
     return true;
   }
 
-  public static boolean run_testdescribe(final String testpkg, final String casename, final Test.Type_testdescribe describe) {
+  bool run_testdescribe(String testpkg, final String casename, final vx_test::Type_testdescribe describe) {
     vx_core::Type_string testcode = describe.describename();
     String message = testcode.vx_string();
-    Test.Type_testresult testresult = describe.testresult();
+    vx_test::Type_testresult testresult = describe.testresult();
     return run_testresult(testpkg, casename, message, testresult);
   }
 
   // Blocking
   // Only use if running a single testdescribe
-  public static boolean run_testdescribe_async(final String testpkg, final String casename, final Test.Type_testdescribe testdescribe) {
-    CompletableFuture<Test.Type_testdescribe> async_testdescribe = Test.f_resolve_testdescribe(testdescribe);
-    Test.Type_testdescribe testdescribe_resolved = vx_core::sync_from_async(Test.t_testdescribe, async_testdescribe);
+  bool run_testdescribe_async(String testpkg, final String casename, final vx_test::Type_testdescribe testdescribe) {
+    std::future<vx_test::Type_testdescribe> async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
+    vx_test::Type_testdescribe testdescribe_resolved = vx_core::sync_from_async(vx_test::t_testdescribe, async_testdescribe);
     return run_testdescribe(testpkg, casename, testdescribe_resolved);
   }
 
-  public static boolean run_testdescribelist(final String testpkg, final String casename, final Test.Type_testdescribelist testdescribelist) {
-    boolean output = true;
-    List<Test.Type_testdescribe> listtestdescribe = testdescribelist.vx_listtestdescribe();
-    for (Test.Type_testdescribe testdescribe : listtestdescribe) {
-      boolean testoutput = run_testdescribe(testpkg, casename, testdescribe);
+  bool run_testdescribelist(String testpkg, final String casename, final vx_test::Type_testdescribelist testdescribelist) {
+    bool output = true;
+    std::vector<vx_test::Type_testdescribe> listtestdescribe = testdescribelist.vx_listtestdescribe();
+    for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
+      bool testoutput = run_testdescribe(testpkg, casename, testdescribe);
       if (!testoutput) {
         output = false;
       }
@@ -3551,16 +3505,16 @@ public class TestLib {
     return output;
   }
 
-  public static boolean run_testpackage(final Test.Type_testpackage testpackage) {
-    Test.Type_testcaselist testcaselist = testpackage.caselist();
+  bool run_testpackage(vx_test::Type_testpackage testpackage) {
+    vx_test::Type_testcaselist testcaselist = testpackage.caselist();
     return run_testcaselist(testcaselist);
   }
 
-  public static boolean run_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-    boolean output = true;
-    List<Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
-    for (Test.Type_testpackage testpackage : listtestpackage) {
-      boolean testoutput = run_testpackage(testpackage);
+  bool run_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
+    bool output = true;
+    std::vector<vx_test::Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
+    for (vx_test::Type_testpackage testpackage : listtestpackage) {
+      bool testoutput = run_testpackage(testpackage);
       if (!testoutput) {
         output = false;
       }
@@ -3570,24 +3524,24 @@ public class TestLib {
 
   // Blocking
   // This is the preferred way of calling test (1 block per package)
-  public static boolean run_testpackage_async(final Test.Type_testpackage testpackage) {
-    CompletableFuture<Test.Type_testpackage> async_testpackage = Test.f_resolve_testpackage(testpackage);
-    Test.Type_testpackage testpackage_resolved = vx_core::sync_from_async(Test.t_testpackage, async_testpackage);
+  bool run_testpackage_async(vx_test::Type_testpackage testpackage) {
+    std::future<vx_test::Type_testpackage> async_testpackage = vx_test::f_resolve_testpackage(testpackage);
+    vx_test::Type_testpackage testpackage_resolved = vx_core::sync_from_async(vx_test::t_testpackage, async_testpackage);
     return run_testpackage(testpackage_resolved);
   }
 
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
-  public static boolean run_testpackagelist_async(final Test.Type_testpackagelist testpackagelist) {
-    CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(Test.t_testpackagelist, async_testpackagelist);
+  bool run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
+    std::future<vx_test::Type_testpackagelist> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     return run_testpackagelist(testpackagelist_resolved);
   }
 
-  public static boolean run_testresult(final String testpkg, final String testname, final String message, final Test.Type_testresult testresult) {
+  bool run_testresult(String testpkg, final String testname, final String message, final vx_test::Type_testresult testresult) {
     vx_core::Type_any valexpected = testresult.expected();
     vx_core::Type_any valactual = testresult.actual();
-    boolean passfail = testresult.passfail().vx_boolean();
+    bool passfail = testresult.passfail().vx_boolean();
     String code = testresult.code().vx_string();
     String expected = vx_core::f_string_from_any(valexpected).vx_string();
     String actual = vx_core::f_string_from_any(valactual).vx_string();
@@ -3610,29 +3564,29 @@ public class TestLib {
   }
 
   // Blocking
-  public static boolean run_testresult_async(final String testpkg, final String testname, final String message, Test.Type_testresult testresult) {
-    CompletableFuture<Test.Type_testresult> async_testresult = Test.f_resolve_testresult(testresult);
-    Test.Type_testresult testresult_resolved = vx_core::sync_from_async(Test.t_testresult, async_testresult);
+  bool run_testresult_async(String testpkg, final String testname, final String message, vx_test::Type_testresult testresult) {
+    std::future<vx_test::Type_testresult> async_testresult = vx_test::f_resolve_testresult(testresult);
+    vx_test::Type_testresult testresult_resolved = vx_core::sync_from_async(vx_test::t_testresult, async_testresult);
     return run_testresult(testpkg, testname, message, testresult_resolved);
   }
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  public static boolean write_testpackagelist_async(final Test.Type_testpackagelist testpackagelist, final vx_core::Type_context context) {
-    boolean output = false;
-    CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(Test.t_testpackagelist, async_testpackagelist);
-    File.Type_file filetest = Test.f_file_test();
-    vx_core::Type_boolean valboolean = File.f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
+  bool write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, final vx_core::Type_context context) {
+    bool output = false;
+    std::future<vx_test::Type_testpackagelist> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
+    vx_file::Type_file filetest = vx_test::f_file_test();
+    vx_core::Type_boolean valboolean = vx_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     output = valboolean.vx_boolean();
-    Html.Type_div divtest = Test.f_div_from_testpackagelist(testpackagelist_resolved);
-    Html.Type_html htmlnode = Test.f_html_from_divtest(divtest);
-    File.Type_file filenode = Test.f_file_testnode();
-    valboolean = File.f_boolean_write_from_file_any(filenode, htmlnode, context);
+    vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
+    vx_web_html::Type_html htmlnode = vx_test::f_html_from_divtest(divtest);
+    vx_data_file::Type_file filenode = vx_test::f_file_testnode();
+    valboolean = vx_data_file::f_boolean_write_from_file_any(filenode, htmlnode, context);
     output = output && valboolean.vx_boolean();
-    File.Type_file filehtml = Test.f_file_testhtml();
-    vx_core::Type_string shtml = Html.f_string_from_html(htmlnode);
-    valboolean = File.f_boolean_write_from_file_string(filehtml, shtml, context);
+    vx_file::Type_file filehtml = vx_test::f_file_testhtml();
+    vx_core::Type_string shtml = vx_web_html::f_string_from_html(htmlnode);
+    valboolean = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
     output = output && valboolean.vx_boolean();
     return output;
   }

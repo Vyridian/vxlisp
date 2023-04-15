@@ -67,6 +67,11 @@ func IntFromString(str string) int {
 	return output
 }
 
+func IntFromStringCount(str string, scount string) int {
+	output := strings.Count(str, scount)
+	return output
+}
+
 func IntFromListStringIndex(texts []string, index string) int {
 	output := -1
 	for pos, text := range texts {
