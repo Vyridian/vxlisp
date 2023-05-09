@@ -123,16 +123,18 @@ func ArgValidate(arg vxarg, mapgeneric map[string]*vxtype, textblock *vxtextbloc
 	value, mapgeneric, msgs = ValueValidate(arg.value, arg.vxtype, arg.multi, mapgeneric, textblock, subpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	valuetype := value.vxtype
-	arg.mapgeneric = mapgeneric
 	if arg.generictype == nil {
 	} else if valuetype.name == "" {
 	} else if valuetype.isgeneric {
-	} else {
+	} else if !valuetype.isfunc {
+		lookuptype, ok := mapgeneric[arg.generictype.name]
+		if ok && !lookuptype.isgeneric {
+			valuetype = lookuptype
+		} else {
+			mapgeneric = MapGenericSetType(mapgeneric, arg.generictype.name, valuetype)
+		}
 		if !arg.vxtype.isfunc {
 			arg.vxtype = valuetype
-		}
-		if !valuetype.isfunc {
-			arg.mapgeneric = MapGenericSetType(arg.mapgeneric, arg.generictype.name, valuetype)
 		}
 	}
 	switch value.code {
@@ -155,7 +157,10 @@ func ArgValidate(arg vxarg, mapgeneric map[string]*vxtype, textblock *vxtextbloc
 		}
 	}
 	arg.value = value
-	return arg, arg.mapgeneric, msgblock
+	if arg.isgeneric {
+		arg.mapgeneric = mapgeneric
+	}
+	return arg, mapgeneric, msgblock
 }
 
 func ListArgFromMapArg(maparg map[string]vxarg) []vxarg {
@@ -167,7 +172,7 @@ func ListArgFromMapArg(maparg map[string]vxarg) []vxarg {
 }
 
 func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) ([]vxarg, *vxmsgblock) {
-	msgblock := NewMsgBlock("ArgListFromTextblock")
+	msgblock := NewMsgBlock("ListArgFromTextblock")
 	//	typmap := prj.vxtype_map
 	var listarg []vxarg
 	var lastargstr = ""

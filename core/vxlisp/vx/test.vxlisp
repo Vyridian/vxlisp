@@ -433,7 +433,7 @@
 
 (func test : testresult
  [expected : any-1
-  actual   : any-1]
+  actual   : any-2]
  (testresult
   :code     :eq
   :passfail (= expected actual)

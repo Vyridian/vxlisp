@@ -82,19 +82,19 @@ func IntFromListStringIndex(texts []string, index string) int {
 	return output
 }
 
-func IntFromStringIndex(str string, index string) int {
-	return strings.Index(str, index)
+func IntFromStringFind(str string, find string) int {
+	return strings.Index(str, find)
 }
 
-func IntFromStringIndexLast(str string, indexlast string) int {
-	return strings.LastIndex(str, indexlast)
+func IntFromStringFindLast(str string, findlast string) int {
+	return strings.LastIndex(str, findlast)
 }
 
-func IntFromStringIndexNth(str string, index string, nth int) int {
+func IntFromStringFindNth(str string, find string, nth int) int {
 	output := -1
 	i := 0
 	for m := 1; m <= nth; m++ {
-		x := strings.Index(str[i:], index)
+		x := strings.Index(str[i:], find)
 		if x < 0 {
 			break
 		}
@@ -103,7 +103,15 @@ func IntFromStringIndexNth(str string, index string, nth int) int {
 			output = i
 			break
 		}
-		i += len(index)
+		i += len(find)
+	}
+	return output
+}
+
+func IntFromStringFindStart(str string, find string, start int) int {
+	output := strings.Index(str[start:], find)
+	if output >= 0 {
+		output += start
 	}
 	return output
 }
@@ -113,14 +121,14 @@ func ListStringFromStringSplitByDelims(str string, startdelim string, enddelim s
 	worktext := str
 	isdone := false
 	for ok := true; ok; ok = !isdone {
-		startpos := IntFromStringIndex(worktext, startdelim)
+		startpos := IntFromStringFind(worktext, startdelim)
 		if startpos < 0 {
 			isdone = true
 			output = append(output, worktext)
 		} else {
 			output = append(output, worktext[0:startpos])
 			worktext = worktext[startpos:]
-			endpos := IntFromStringIndex(worktext, enddelim)
+			endpos := IntFromStringFind(worktext, enddelim)
 			if endpos < 0 {
 				output = append(output, worktext)
 				isdone = true

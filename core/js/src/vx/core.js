@@ -612,7 +612,7 @@ export default class vx_core {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
     output = vx_core.f_any_from_list_reduce(
-      {"any-1": vx_core.t_int, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
+      {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       1,
       vx_core.f_new(vx_core.t_any_from_reduce, (total, num) => 
@@ -688,7 +688,7 @@ export default class vx_core {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
     output = vx_core.f_any_from_list_reduce(
-      {"any-1": vx_core.t_int, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
+      {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       0,
       vx_core.f_new(vx_core.t_any_from_reduce, (total, num) => 
@@ -779,7 +779,7 @@ export default class vx_core {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
     output = vx_core.f_any_from_list_reduce(
-      {"any-1": vx_core.t_int, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
+      {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       0,
       vx_core.f_new(vx_core.t_any_from_reduce, (total, num) => 
@@ -1141,16 +1141,16 @@ export default class vx_core {
   /**
    * @function allowtypenames_from_typedef
    * Return allow name list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {stringlist}
    */
   static t_allowtypenames_from_typedef = {}
   static e_allowtypenames_from_typedef = {vx_type: vx_core.t_allowtypenames_from_typedef}
 
-  static f_allowtypenames_from_typedef(typedef) {
+  static f_allowtypenames_from_typedef(vtypedef) {
     let output = vx_core.e_stringlist
     output = vx_core.f_typenames_from_typelist(
-      vx_core.f_allowtypes_from_typedef(typedef)
+      vx_core.f_allowtypes_from_typedef(vtypedef)
     )
     return output
   }
@@ -1158,15 +1158,15 @@ export default class vx_core {
   /**
    * @function allowtypes_from_typedef
    * Return allow type list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    */
   static t_allowtypes_from_typedef = {}
   static e_allowtypes_from_typedef = {vx_type: vx_core.t_allowtypes_from_typedef}
 
-  static f_allowtypes_from_typedef(typedef) {
+  static f_allowtypes_from_typedef(vtypedef) {
     let output = vx_core.e_typelist
-    output = typedef['vx_value']['allowtypes']
+    output = vtypedef['vx_value']['allowtypes']
     return output
   }
 
@@ -1565,17 +1565,17 @@ export default class vx_core {
    * @function any_from_struct
    * Returns value from a struct
    * @param  {typemap} generic
-   * @param  {struct} struct
+   * @param  {struct} vstruct
    * @param  {string} key
    * @return {any-1}
    */
   static t_any_from_struct = {}
   static e_any_from_struct = {vx_type: vx_core.t_any_from_struct}
 
-  static f_any_from_struct(generic, struct, key) {
+  static f_any_from_struct(generic, vstruct, key) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    const subvalmap = struct['vx_value']
+    const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
       if (key.startsWith(':')) {
         key = key.substring(1)
@@ -1820,15 +1820,15 @@ export default class vx_core {
   /**
    * @function extends_from_typedef
    * Get the basetype of a given type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    */
   static t_extends_from_typedef = {}
   static e_extends_from_typedef = {vx_type: vx_core.t_extends_from_typedef}
 
-  static f_extends_from_typedef(typedef) {
+  static f_extends_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, typedef, ":extends")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":extends")
     return output
   }
 
@@ -2685,15 +2685,15 @@ export default class vx_core {
   /**
    * @function name_from_typedef
    * Returns the name from a typedef.
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    */
   static t_name_from_typedef = {}
   static e_name_from_typedef = {vx_type: vx_core.t_name_from_typedef}
 
-  static f_name_from_typedef(typedef) {
+  static f_name_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, typedef, ":name")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":name")
     return output
   }
 
@@ -3469,15 +3469,15 @@ export default class vx_core {
   /**
    * @function packagename_from_typedef
    * Returns the package name from a typedef.
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    */
   static t_packagename_from_typedef = {}
   static e_packagename_from_typedef = {vx_type: vx_core.t_packagename_from_typedef}
 
-  static f_packagename_from_typedef(typedef) {
+  static f_packagename_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, typedef, ":pkgname")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":pkgname")
     return output
   }
 
@@ -3541,30 +3541,30 @@ export default class vx_core {
   /**
    * @function properties_from_typedef
    * Return property map from typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {argmap}
    */
   static t_properties_from_typedef = {}
   static e_properties_from_typedef = {vx_type: vx_core.t_properties_from_typedef}
 
-  static f_properties_from_typedef(typedef) {
+  static f_properties_from_typedef(vtypedef) {
     let output = vx_core.e_argmap
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_argmap, "struct-1": vx_core.t_typedef}, typedef, ":properties")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_argmap, "struct-1": vx_core.t_typedef}, vtypedef, ":properties")
     return output
   }
 
   /**
    * @function proplast_from_typedef
    * Return last property from typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {arg}
    */
   static t_proplast_from_typedef = {}
   static e_proplast_from_typedef = {vx_type: vx_core.t_proplast_from_typedef}
 
-  static f_proplast_from_typedef(typedef) {
+  static f_proplast_from_typedef(vtypedef) {
     let output = vx_core.e_arg
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_arg, "struct-1": vx_core.t_typedef}, typedef, ":proplast")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_arg, "struct-1": vx_core.t_typedef}, vtypedef, ":proplast")
     return output
   }
 
@@ -3957,15 +3957,15 @@ export default class vx_core {
   /**
    * @function traits_from_typedef
    * Return trait list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    */
   static t_traits_from_typedef = {}
   static e_traits_from_typedef = {vx_type: vx_core.t_traits_from_typedef}
 
-  static f_traits_from_typedef(typedef) {
+  static f_traits_from_typedef(vtypedef) {
     let output = vx_core.e_typelist
-    output = typedef['vx_value']['traits']
+    output = vtypedef['vx_value']['traits']
     return output
   }
 
@@ -4084,19 +4084,19 @@ export default class vx_core {
   /**
    * @function typename_from_typedef
    * Get the name of a given type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    */
   static t_typename_from_typedef = {}
   static e_typename_from_typedef = {vx_type: vx_core.t_typename_from_typedef}
 
-  static f_typename_from_typedef(typedef) {
+  static f_typename_from_typedef(vtypedef) {
     let output = vx_core.e_string
     output = vx_core.f_new(
       vx_core.t_string,
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, typedef, ":pkgname"),
+      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, vtypedef, ":pkgname"),
       "/",
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, typedef, ":name")
+      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, vtypedef, ":name")
     )
     return output
   }

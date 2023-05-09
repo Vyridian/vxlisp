@@ -165,6 +165,6 @@
  :doc "Get the traits of a given value")
 
 (func traits<-typedef : typelist
- [typedef : typedef]
- (:traits typedef)
+ [vtypedef : typedef]
+ (:traits vtypedef)
  :doc "Get the traits of a given typedef")

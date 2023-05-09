@@ -31,15 +31,19 @@
 
 3. vxlisp is a transparency layer so that code can be more easily read, shared, tested, and ported between applications and platforms.
 
+4. vxlisp is a mass-production tool allowing the quick and concise creation of many complex interconnected objects while maintaining readability.
+
+5. vxlisp is a future-proofing tool allowing code to be recompiled in the future when new languages or features appear.
+
 * What is vxlisp not?
 
-1. vxlisp is not a platform.
+1. vxlisp is not a platform. vxlisp produces plain old (JavaScript/Java/C++) for any purpose. vxlisp does not require outside libraries (except Java:JUnit for test support)
 
 2. vxlisp is not a replacement for other languages. Instead it is meant to interact with existing platforms and languages.
 
 * Write once, run anywhere is a pipedream. How can it possibly work? - Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
 
-* New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. Vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, I'm pretty pleased with the result.
+* New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, Though its only in its infancy, I'm very pleased with the result.
 
 * What is its best use cases? - I think it might be best suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application. Also, it would be ideal for a developer who wants to work on a platform that requires a language they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
 
@@ -47,9 +51,9 @@
 
 * Why Functional Programming instead of Object-Oriented? - The best example is the development of SOAP and REST web services. SOAP was the original, Object Oriented web service solution similar to .dll linking. It had sophiticated type binding and state management. REST on the other hand was a very simplistic system similar to web page calls. Soon the practical complexities overwhelmed SOAP and REST grew to replace it. Simplicity makes a better product in the end.
 
-* What are your inspirations? - Obviously, Lisp. I was introduced to it in 1987 and it stuck with me. More recently: Javascript, Typescript, Scala, Clojure, Clojurescript, Elm, and an obscure XML programming language called NuXML.
+* What are your inspirations? - Obviously, Lisp. I was introduced to it in 1987 and it stuck with me. More recently: JavaScript, Typescript, Scala, Clojure, Clojurescript, Elm, and an obscure XML programming language called NuXML.
 
-* What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible.
+* What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible. Mass production and reliability can only be maintained through simpilfication.
 
 * What are the key features of the language? - Open Source. Language is a data structure. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context.
 

@@ -401,7 +401,7 @@ func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpacka
 						}
 					} else if fncname == "/" {
 					} else {
-						pos := IntFromStringIndexLast(fncname, "/")
+						pos := IntFromStringFindLast(fncname, "/")
 						if pos >= 0 {
 							pkgcode := fncname[0:pos]
 							pkgpath := LibraryPathFromPackage(pkg, pkgcode)
@@ -711,7 +711,9 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 					}
 				default:
 					switch expectedtypename {
-					case "vx/core/any<-func", "vx/core/any<-func-async", "vx/core/boolean<-func", "vx/core/int<-func", "vx/core/number<-func", "vx/core/string<-func":
+					case "vx/core/any<-func", "vx/core/any<-func-async",
+						"vx/core/boolean<-func", "vx/core/int<-func",
+						"vx/core/number<-func", "vx/core/string<-func":
 						actualtype := actualfunc.vxtype
 						if actualtype.isgeneric {
 							genericname := actualtype.name
@@ -729,7 +731,8 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						//actualtype = actualfunc.vxtype
 						pass = true
-					case "vx/core/any<-any", "vx/core/any<-any-async", "v/core/any<-key-value", "vx/core/any<-key-value-async":
+					case "vx/core/any<-any", "vx/core/any<-any-async",
+						"v/core/any<-key-value", "vx/core/any<-key-value-async":
 						actualargs := actualfunc.listarg
 						if len(expectedfuncref.listarg) != len(actualargs) {
 							msg := NewMsgFromTextblock(textblock, "Value with Function Type must have the same number of arguments", len(expectedfuncref.listarg), len(actualfunc.listarg), expectedfuncname, actualfuncname, "\n"+subpath+"\n", StringFromValue(value))
@@ -794,8 +797,8 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 				value = ValueSetArg(value, arg)
 			case ":arglist":
 				arglist := ListArgFromValue(value)
-				subpath = path + "/:arglist"
-				arglist, mapgeneric, msgs = ListArgValidate(arglist, mapgeneric, textblock, subpath)
+				subpath2 := subpath + "/:arglist"
+				arglist, mapgeneric, msgs = ListArgValidate(arglist, mapgeneric, textblock, subpath2)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				value = ValueSetListArg(value, arglist)
 				if expectedtypename == "vx/core/arglist" {
@@ -809,15 +812,16 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			case ":func":
 				fnc := FuncFromValue(value)
-				if fnc.isgeneric {
-					if expectedtype.isgeneric {
-					} else if fnc.generictype == nil {
-					} else {
-						if fnc.vxtype.isgeneric {
-							fnc.vxtype = expectedtype
-						}
-						fnc.mapgeneric = MapGenericSetType(fnc.mapgeneric, fnc.generictype.name, fnc.vxtype)
+				if fnc.isgeneric && fnc.generictype != nil {
+					if expectedtype.name == "" {
+					} else if fnc.vxtype.isgeneric {
+						fnc.vxtype = expectedtype
 					}
+					//if fnc.vxtype.isgeneric {
+					//} else if fnc.vxtype.name == "" {
+					//} else {
+					//mapgeneric = MapGenericSetType(mapgeneric, fnc.generictype.name, fnc.vxtype)
+					//}
 				}
 				fnc, msgs = FuncValidate(fnc, textblock, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)

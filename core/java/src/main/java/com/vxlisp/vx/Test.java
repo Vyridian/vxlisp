@@ -4338,7 +4338,7 @@ public final class Test {
    * @function test
    * Test expected equal actual
    * @param  {any-1} expected
-   * @param  {any-1} actual
+   * @param  {any-2} actual
    * @return {testresult}
    * (func test)
    */

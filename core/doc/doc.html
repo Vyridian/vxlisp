@@ -2582,6 +2582,11 @@
 (type any
  :convert [int    string string&lt;-int
            string int    int&lt;-string]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     virtual vx_core::Type_any* vx_type_from_any(std::any* value);&quot;)
  :doc &quot;Any Value for Variant Type&quot;)
 
 (type any-async&lt;-func
@@ -2624,6 +2629,11 @@
  :allowvalues [true false]
  :create
   (native
+   :cpp
+    &quot;// :header
+     bool vx_p_boolean = false;
+     bool vx_boolean();
+     vx_core::Type_boolean* vx_new_from_boolean(bool isval);&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
@@ -2677,6 +2687,15 @@
  :properties [pkgname : string
               name    : string
               type    : any]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+       std::string pkgname,
+       std::string name,
+       vx_core::Type_typedef* typ
+     );&quot;)
  :doc &quot;Const Definition Class for inspecting properties.&quot;)
 
 (type constlist
@@ -2702,6 +2721,12 @@
  :default    0
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::string vx_decimal = “0.0”;
+     float vx_float();
+     std::string vx_string();
+     vx_core::Type_decimal* vx_new_from_string(std::string sval);&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -2729,6 +2754,11 @@
  :traits  [number]
  :create
   (native
+   :cpp
+    &quot;// :header
+     float vx_p_float = 0;
+     float vx_float();
+     vx_core::Type_float* vx_new_from_float(float fval);&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -2755,6 +2785,25 @@
               idx     : int
               type    : any
               async   : boolean]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+       std::string pkgname,
+       std::string name,
+       int idx,
+       bool async,
+       vx_core::Type_typedef* typ
+     ) {
+       vx_core::Type_funcdef* output;
+       output-&gt;vx_p_pkgname = vx_core::t_string-&gt;vx_new_from_string(pkgname);
+       output-&gt;vx_p_name = vx_core::t_string-&gt;vx_new_from_string(name);
+       output-&gt;vx_p_idx = vx_core::t_int-&gt;vx_new_from_int(idx);
+       output-&gt;vx_p_async = vx_core::t_boolean-&gt;vx_new_from_boolean(async);
+       output-&gt;vx_p_type = typ;
+       return output;
+     };&quot;)
  :doc &quot;Func Definition Class for inspecting properties.&quot;)
 
 (type funclist
@@ -2773,6 +2822,11 @@
  :traits      [number]
  :create
   (native
+   :cpp
+    &quot;// :header
+     int vx_p_int = 0;
+     int vx_int();
+     vx_core::Type_int* vx_new_from_int(int ival);&quot;
    :java
     &quot;protected int vxint = 0;
 
@@ -2885,6 +2939,9 @@
               text     : string  :doc &quot;Message Text&quot;]
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::exception* err;&quot;
    :java
     &quot;public Exception err = null;
 
@@ -3043,6 +3100,11 @@
  :default &quot;&quot;
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::string vx_p_string = “”;
+     std::string vx_string();
+     vx_core::Type_string* vx_new_from_string(std::string text);&quot;
    :java
     &quot;protected String vxstring = “”;
 
@@ -3111,6 +3173,23 @@
               properties     : argmap
               proplast       : arg
               traits         : typelist]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_typedef* vx_typedef_new(
+       std::string pkgname,
+       std::string name,
+       std::string extend,
+       vx_core::Type_typelist* traits,
+       vx_core::Type_typelist* allowtypes,
+       vx_core::Type_typelist* disallowtypes,
+       vx_core::Type_funclist* allowfuncs,
+       vx_core::Type_funclist* disallowfuncs,
+       vx_core::Type_anylist* allowvalues,
+       vx_core::Type_anylist* disallowvalues,
+       vx_core::Type_argmap* properties
+     );&quot;)
  :doc &quot;Type Definition Class for inspecting Type properties.&quot;)
 
 (type typelist
@@ -3693,17 +3772,17 @@
  :doc   &quot;Returns true if the first arg is greater or equal than all of the other args&quot;)
 
 (func allowtypenames&lt;-typedef : stringlist
- [typedef : typedef]
- (typenames&lt;-typelist (allowtypes&lt;-typedef typedef))
+ [vtypedef : typedef]
+ (typenames&lt;-typelist (allowtypes&lt;-typedef vtypedef))
  :doc &quot;Return allow name list from type&quot;)
 
 (func allowtypes&lt;-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   &quot;typedef['vx_value']['allowtypes']&quot;
+   &quot;vtypedef['vx_value']['allowtypes']&quot;
   :java
-   &quot;typedef.allowtypes();&quot;)
+   &quot;vtypedef.allowtypes();&quot;)
  :doc &quot;Return allow type list from type&quot;)
 
 (func and : boolean
@@ -3821,6 +3900,12 @@
   valstart  : any-1
   fn-reduce : any&lt;-reduce]
  (native
+  :cpp
+   &quot;output = valstart;
+    std::vector&lt;vx_core::Type_any*&gt; listval = list-&gt;vx_list();
+    for (vx_core::Type_any* item : listval) {
+      output = fn_reduce-&gt;f_any_from_reduce(generic_any_1, output, item);
+    }&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -3930,11 +4015,11 @@
   next    : any-2])
 
 (func any&lt;-struct : any-1
- [struct : struct-2
+ [vstruct : struct-2
   key    : string]
  (native
   :js
-   &quot;const subvalmap = struct['vx_value']
+   &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
       if (key.startsWith(':')) {
         key = key.substring(1)
@@ -3945,7 +4030,7 @@
       }
     }&quot;
   :java
-   &quot;Core.Type_any val = struct.vx_any(key);
+   &quot;Core.Type_any val = vstruct.vx_any(key);
     output = Core.f_any_from_any(generic_any_1, val);&quot;)
  :doc &quot;Returns value from a struct&quot;)
 
@@ -4104,8 +4189,8 @@
  (extends&lt;-typedef (typedef&lt;-any val)))
 
 (func extends&lt;-typedef : string
- [typedef : typedef]
- (:extends typedef)
+ [vtypedef : typedef]
+ (:extends vtypedef)
  :doc &quot;Get the basetype of a given type&quot;)
 
 (func first&lt;-list : any-1
@@ -4295,6 +4380,17 @@
   (case &quot;neginfinity&quot; neginfinity)
   (else
    (native
+    :cpp
+     &quot;// :capture val
+      vx_core::Type_int* intresult = vx_core::e_int;
+      try {
+        std::string sval = val-&gt;vx_string();
+        int ival = std::stoi(sval);
+        intresult = vx_core::t_int-&gt;vx_new_from_int(ival);
+      } catch (std::exception ex) {
+        intresult = vx_core::c_notanumber;
+      }
+      return intresult;&quot;
     :js
      &quot;parseInt(val)&quot;
     :java
@@ -4495,7 +4591,7 @@
 
 (func let : any-1
  [args   : arglist
-  fn_any : any&lt;-func :: any-1]
+  fn-any : any&lt;-func :: any-1]
  (native
   :js
    &quot;const fn = fn_any['vx_value']
@@ -4776,8 +4872,8 @@
  :doc &quot;Return a new Msgblock with the added block&quot;)
 
 (func name&lt;-typedef : string
- [typedef : typedef]
- (:name typedef)
+ [vtypedef : typedef]
+ (:name vtypedef)
  :doc &quot;Returns the name from a typedef.&quot;)
 
 (func native : any-1
@@ -5517,8 +5613,8 @@
        (test-false (or false false false)))
 
 (func packagename&lt;-typedef : string
- [typedef : typedef]
- (:pkgname typedef)
+ [vtypedef : typedef]
+ (:pkgname vtypedef)
  :doc &quot;Returns the package name from a typedef.&quot;)
 
 (func path&lt;-context-path : string
@@ -5545,13 +5641,13 @@
  :doc &quot;Return a permission from context by id&quot;)
 
 (func properties&lt;-typedef : argmap
- [typedef : typedef]
- (:properties typedef)
+ [vtypedef : typedef]
+ (:properties vtypedef)
  :doc &quot;Return property map from typedef&quot;)
 
 (func proplast&lt;-typedef : arg
- [typedef : typedef]
- (:proplast typedef)
+ [vtypedef : typedef]
+ (:proplast vtypedef)
  :doc &quot;Return last property from typedef&quot;)
 
 (func resolve : any-1
@@ -5952,12 +6048,12 @@
   :fn-any  fn-any))
 
 (func traits&lt;-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   &quot;typedef['vx_value']['traits']&quot;
+   &quot;vtypedef['vx_value']['traits']&quot;
   :java
-   &quot;typedef.traits();&quot;)
+   &quot;vtypedef.traits();&quot;)
  :doc &quot;Return trait list from type&quot;)
 
 (func type&lt;-any : any
@@ -6031,8 +6127,8 @@
  :doc &quot;Get the name of a given type&quot;)
 
 (func typename&lt;-typedef : string
- [typedef : typedef]
- (string (:pkgname typedef) &quot;/&quot; (:name typedef))
+ [vtypedef : typedef]
+ (string (:pkgname vtypedef) &quot;/&quot; (:name vtypedef))
  :doc &quot;Get the name of a given type&quot;)
 
 (func typenames&lt;-typelist : stringlist
@@ -6087,6 +6183,11 @@
               <div class="source">(type any
  :convert [int    string string&lt;-int
            string int    int&lt;-string]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     virtual vx_core::Type_any* vx_type_from_any(std::any* value);&quot;)
  :doc &quot;Any Value for Variant Type&quot;)</div>
             </li>
           </ul>
@@ -6466,6 +6567,11 @@
  :allowvalues [true false]
  :create
   (native
+   :cpp
+    &quot;// :header
+     bool vx_p_boolean = false;
+     bool vx_boolean();
+     vx_core::Type_boolean* vx_new_from_boolean(bool isval);&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
@@ -6846,6 +6952,15 @@
  :properties [pkgname : string
               name    : string
               type    : any]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+       std::string pkgname,
+       std::string name,
+       vx_core::Type_typedef* typ
+     );&quot;)
  :doc &quot;Const Definition Class for inspecting properties.&quot;)</div>
             </li>
           </ul>
@@ -7051,6 +7166,12 @@
  :default    0
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::string vx_decimal = “0.0”;
+     float vx_float();
+     std::string vx_string();
+     vx_core::Type_decimal* vx_new_from_string(std::string sval);&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -7147,6 +7268,11 @@
  :traits  [number]
  :create
   (native
+   :cpp
+    &quot;// :header
+     float vx_p_float = 0;
+     float vx_float();
+     vx_core::Type_float* vx_new_from_float(float fval);&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -7278,6 +7404,25 @@
               idx     : int
               type    : any
               async   : boolean]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+       std::string pkgname,
+       std::string name,
+       int idx,
+       bool async,
+       vx_core::Type_typedef* typ
+     ) {
+       vx_core::Type_funcdef* output;
+       output-&gt;vx_p_pkgname = vx_core::t_string-&gt;vx_new_from_string(pkgname);
+       output-&gt;vx_p_name = vx_core::t_string-&gt;vx_new_from_string(name);
+       output-&gt;vx_p_idx = vx_core::t_int-&gt;vx_new_from_int(idx);
+       output-&gt;vx_p_async = vx_core::t_boolean-&gt;vx_new_from_boolean(async);
+       output-&gt;vx_p_type = typ;
+       return output;
+     };&quot;)
  :doc &quot;Func Definition Class for inspecting properties.&quot;)</div>
             </li>
           </ul>
@@ -7417,6 +7562,11 @@
  :traits      [number]
  :create
   (native
+   :cpp
+    &quot;// :header
+     int vx_p_int = 0;
+     int vx_int();
+     vx_core::Type_int* vx_new_from_int(int ival);&quot;
    :java
     &quot;protected int vxint = 0;
 
@@ -7869,6 +8019,9 @@
               text     : string  :doc &quot;Message Text&quot;]
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::exception* err;&quot;
    :java
     &quot;public Exception err = null;
 
@@ -8875,6 +9028,11 @@
  :default &quot;&quot;
  :create
   (native
+   :cpp
+    &quot;// :header
+     std::string vx_p_string = “”;
+     std::string vx_string();
+     vx_core::Type_string* vx_new_from_string(std::string text);&quot;
    :java
     &quot;protected String vxstring = “”;
 
@@ -9308,6 +9466,23 @@
               properties     : argmap
               proplast       : arg
               traits         : typelist]
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     static vx_core::Type_typedef* vx_typedef_new(
+       std::string pkgname,
+       std::string name,
+       std::string extend,
+       vx_core::Type_typelist* traits,
+       vx_core::Type_typelist* allowtypes,
+       vx_core::Type_typelist* disallowtypes,
+       vx_core::Type_funclist* allowfuncs,
+       vx_core::Type_funclist* disallowfuncs,
+       vx_core::Type_anylist* allowvalues,
+       vx_core::Type_anylist* disallowvalues,
+       vx_core::Type_argmap* properties
+     );&quot;)
  :doc &quot;Type Definition Class for inspecting Type properties.&quot;)</div>
             </li>
           </ul>
@@ -12041,7 +12216,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -12061,8 +12236,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func allowtypenames&lt;-typedef : stringlist
- [typedef : typedef]
- (typenames&lt;-typelist (allowtypes&lt;-typedef typedef))
+ [vtypedef : typedef]
+ (typenames&lt;-typelist (allowtypes&lt;-typedef vtypedef))
  :doc &quot;Return allow name list from type&quot;)</div>
             </li>
           </ul>
@@ -12092,7 +12267,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -12112,12 +12287,12 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func allowtypes&lt;-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   &quot;typedef['vx_value']['allowtypes']&quot;
+   &quot;vtypedef['vx_value']['allowtypes']&quot;
   :java
-   &quot;typedef.allowtypes();&quot;)
+   &quot;vtypedef.allowtypes();&quot;)
  :doc &quot;Return allow type list from type&quot;)</div>
             </li>
           </ul>
@@ -12827,6 +13002,12 @@ improves readability.</div>
   valstart  : any-1
   fn-reduce : any&lt;-reduce]
  (native
+  :cpp
+   &quot;output = valstart;
+    std::vector&lt;vx_core::Type_any*&gt; listval = list-&gt;vx_list();
+    for (vx_core::Type_any* item : listval) {
+      output = fn_reduce-&gt;f_any_from_reduce(generic_any_1, output, item);
+    }&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -13368,7 +13549,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">struct</div>
+                  <div class="td">vstruct</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/struct-2')">vx/core/struct-2</span></div>
                   <div class="td"></div>
                 </div>
@@ -13393,11 +13574,11 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func any&lt;-struct : any-1
- [struct : struct-2
+ [vstruct : struct-2
   key    : string]
  (native
   :js
-   &quot;const subvalmap = struct['vx_value']
+   &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
       if (key.startsWith(':')) {
         key = key.substring(1)
@@ -13408,7 +13589,7 @@ improves readability.</div>
       }
     }&quot;
   :java
-   &quot;Core.Type_any val = struct.vx_any(key);
+   &quot;Core.Type_any val = vstruct.vx_any(key);
     output = Core.f_any_from_any(generic_any_1, val);&quot;)
  :doc &quot;Returns value from a struct&quot;)</div>
             </li>
@@ -14221,7 +14402,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -14241,8 +14422,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func extends&lt;-typedef : string
- [typedef : typedef]
- (:extends typedef)
+ [vtypedef : typedef]
+ (:extends vtypedef)
  :doc &quot;Get the basetype of a given type&quot;)</div>
             </li>
           </ul>
@@ -15009,6 +15190,17 @@ improves readability.</div>
   (case &quot;neginfinity&quot; neginfinity)
   (else
    (native
+    :cpp
+     &quot;// :capture val
+      vx_core::Type_int* intresult = vx_core::e_int;
+      try {
+        std::string sval = val-&gt;vx_string();
+        int ival = std::stoi(sval);
+        intresult = vx_core::t_int-&gt;vx_new_from_int(ival);
+      } catch (std::exception ex) {
+        intresult = vx_core::c_notanumber;
+      }
+      return intresult;&quot;
     :js
      &quot;parseInt(val)&quot;
     :java
@@ -15666,7 +15858,7 @@ improves readability.</div>
                   <div class="td"></div>
                 </div>
                 <div class="tr">
-                  <div class="td">fn_any</div>
+                  <div class="td">fn-any</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-func')">vx/core/any&lt;-func</span></div>
                   <div class="td"></div>
                 </div>
@@ -15693,7 +15885,7 @@ improves readability.</div>
             <li>
               <div class="source">(func let : any-1
  [args   : arglist
-  fn_any : any&lt;-func :: any-1]
+  fn-any : any&lt;-func :: any-1]
  (native
   :js
    &quot;const fn = fn_any['vx_value']
@@ -16838,7 +17030,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -16858,8 +17050,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func name&lt;-typedef : string
- [typedef : typedef]
- (:name typedef)
+ [vtypedef : typedef]
+ (:name vtypedef)
  :doc &quot;Returns the name from a typedef.&quot;)</div>
             </li>
           </ul>
@@ -17921,7 +18113,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -17941,8 +18133,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func packagename&lt;-typedef : string
- [typedef : typedef]
- (:pkgname typedef)
+ [vtypedef : typedef]
+ (:pkgname vtypedef)
  :doc &quot;Returns the package name from a typedef.&quot;)</div>
             </li>
           </ul>
@@ -18138,7 +18330,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -18158,8 +18350,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func properties&lt;-typedef : argmap
- [typedef : typedef]
- (:properties typedef)
+ [vtypedef : typedef]
+ (:properties vtypedef)
  :doc &quot;Return property map from typedef&quot;)</div>
             </li>
           </ul>
@@ -18189,7 +18381,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -18209,8 +18401,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func proplast&lt;-typedef : arg
- [typedef : typedef]
- (:proplast typedef)
+ [vtypedef : typedef]
+ (:proplast vtypedef)
  :doc &quot;Return last property from typedef&quot;)</div>
             </li>
           </ul>
@@ -19269,7 +19461,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -19289,12 +19481,12 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func traits&lt;-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   &quot;typedef['vx_value']['traits']&quot;
+   &quot;vtypedef['vx_value']['traits']&quot;
   :java
-   &quot;typedef.traits();&quot;)
+   &quot;vtypedef.traits();&quot;)
  :doc &quot;Return trait list from type&quot;)</div>
             </li>
           </ul>
@@ -19630,7 +19822,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -19650,8 +19842,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func typename&lt;-typedef : string
- [typedef : typedef]
- (string (:pkgname typedef) &quot;/&quot; (:name typedef))
+ [vtypedef : typedef]
+ (string (:pkgname vtypedef) &quot;/&quot; (:name vtypedef))
  :doc &quot;Get the name of a given type&quot;)</div>
             </li>
           </ul>
@@ -25493,7 +25685,7 @@ improves readability.</div>
 
 (func test : testresult
  [expected : any-1
-  actual   : any-1]
+  actual   : any-2]
  (testresult
   :code     :eq
   :passfail (= expected actual)
@@ -27586,7 +27778,7 @@ improves readability.</div>
                 </div>
                 <div class="tr">
                   <div class="td">actual</div>
-                  <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+                  <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
                   <div class="td"></div>
                 </div>
               </div>
@@ -27606,7 +27798,7 @@ improves readability.</div>
             <li>
               <div class="source">(func test : testresult
  [expected : any-1
-  actual   : any-1]
+  actual   : any-2]
  (testresult
   :code     :eq
   :passfail (= expected actual)
@@ -28687,8 +28879,8 @@ improves readability.</div>
  :doc &quot;Get the traits of a given value&quot;)
 
 (func traits&lt;-typedef : typelist
- [typedef : typedef]
- (:traits typedef)
+ [vtypedef : typedef]
+ (:traits vtypedef)
  :doc &quot;Get the traits of a given typedef&quot;)
 </div>
           </li>
@@ -29735,7 +29927,7 @@ improves readability.</div>
                   <div class="td">Description</div>
                 </div>
                 <div class="tr">
-                  <div class="td">typedef</div>
+                  <div class="td">vtypedef</div>
                   <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">vx/core/typedef</span></div>
                   <div class="td"></div>
                 </div>
@@ -29755,8 +29947,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func traits&lt;-typedef : typelist
- [typedef : typedef]
- (:traits typedef)
+ [vtypedef : typedef]
+ (:traits vtypedef)
  :doc &quot;Get the traits of a given typedef&quot;)</div>
             </li>
           </ul>

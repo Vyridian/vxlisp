@@ -7,6 +7,11 @@
 (type any
  :convert [int    string string<-int
            string int    int<-string]
+ :create
+  (native
+   :cpp
+    "// :header
+     virtual vx_core::Type_any* vx_type_from_any(std::any* value);")
  :doc "Any Value for Variant Type")
 
 (type any-async<-func
@@ -49,6 +54,11 @@
  :allowvalues [true false]
  :create
   (native
+   :cpp
+    "// :header
+     bool vx_p_boolean = false;
+     bool vx_boolean();
+     vx_core::Type_boolean* vx_new_from_boolean(bool isval);"
    :java
     "protected boolean vxboolean = false;
 
@@ -102,6 +112,15 @@
  :properties [pkgname : string
               name    : string
               type    : any]
+ :create
+  (native
+   :cpp
+    "// :header
+     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+       std::string pkgname,
+       std::string name,
+       vx_core::Type_typedef* typ
+     );")
  :doc "Const Definition Class for inspecting properties.")
 
 (type constlist
@@ -127,6 +146,12 @@
  :default    0
  :create
   (native
+   :cpp
+    "// :header
+     std::string vx_decimal = “0.0”;
+     float vx_float();
+     std::string vx_string();
+     vx_core::Type_decimal* vx_new_from_string(std::string sval);"
    :java
     "protected String vxdecimal = “0.0”;
 
@@ -154,6 +179,11 @@
  :traits  [number]
  :create
   (native
+   :cpp
+    "// :header
+     float vx_p_float = 0;
+     float vx_float();
+     vx_core::Type_float* vx_new_from_float(float fval);"
    :java
     "protected float vxfloat = 0;
 
@@ -180,6 +210,25 @@
               idx     : int
               type    : any
               async   : boolean]
+ :create
+  (native
+   :cpp
+    "// :header
+     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+       std::string pkgname,
+       std::string name,
+       int idx,
+       bool async,
+       vx_core::Type_typedef* typ
+     ) {
+       vx_core::Type_funcdef* output;
+       output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
+       output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
+       output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
+       output->vx_p_async = vx_core::t_boolean->vx_new_from_boolean(async);
+       output->vx_p_type = typ;
+       return output;
+     };")
  :doc "Func Definition Class for inspecting properties.")
 
 (type funclist
@@ -198,6 +247,11 @@
  :traits      [number]
  :create
   (native
+   :cpp
+    "// :header
+     int vx_p_int = 0;
+     int vx_int();
+     vx_core::Type_int* vx_new_from_int(int ival);"
    :java
     "protected int vxint = 0;
 
@@ -310,6 +364,9 @@
               text     : string  :doc "Message Text"]
  :create
   (native
+   :cpp
+    "// :header
+     std::exception* err;"
    :java
     "public Exception err = null;
 
@@ -468,6 +525,11 @@
  :default ""
  :create
   (native
+   :cpp
+    "// :header
+     std::string vx_p_string = “”;
+     std::string vx_string();
+     vx_core::Type_string* vx_new_from_string(std::string text);"
    :java
     "protected String vxstring = “”;
 
@@ -536,6 +598,23 @@
               properties     : argmap
               proplast       : arg
               traits         : typelist]
+ :create
+  (native
+   :cpp
+    "// :header
+     static vx_core::Type_typedef* vx_typedef_new(
+       std::string pkgname,
+       std::string name,
+       std::string extend,
+       vx_core::Type_typelist* traits,
+       vx_core::Type_typelist* allowtypes,
+       vx_core::Type_typelist* disallowtypes,
+       vx_core::Type_funclist* allowfuncs,
+       vx_core::Type_funclist* disallowfuncs,
+       vx_core::Type_anylist* allowvalues,
+       vx_core::Type_anylist* disallowvalues,
+       vx_core::Type_argmap* properties
+     );")
  :doc "Type Definition Class for inspecting Type properties.")
 
 (type typelist
@@ -1118,17 +1197,17 @@
  :doc   "Returns true if the first arg is greater or equal than all of the other args")
 
 (func allowtypenames<-typedef : stringlist
- [typedef : typedef]
- (typenames<-typelist (allowtypes<-typedef typedef))
+ [vtypedef : typedef]
+ (typenames<-typelist (allowtypes<-typedef vtypedef))
  :doc "Return allow name list from type")
 
 (func allowtypes<-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   "typedef['vx_value']['allowtypes']"
+   "vtypedef['vx_value']['allowtypes']"
   :java
-   "typedef.allowtypes();")
+   "vtypedef.allowtypes();")
  :doc "Return allow type list from type")
 
 (func and : boolean
@@ -1246,6 +1325,12 @@
   valstart  : any-1
   fn-reduce : any<-reduce]
  (native
+  :cpp
+   "output = valstart;
+    std::vector<vx_core::Type_any*> listval = list->vx_list();
+    for (vx_core::Type_any* item : listval) {
+      output = fn_reduce->f_any_from_reduce(generic_any_1, output, item);
+    }"
   :js
    "output = valstart
     const fn = fn_reduce['vx_value']
@@ -1355,11 +1440,11 @@
   next    : any-2])
 
 (func any<-struct : any-1
- [struct : struct-2
+ [vstruct : struct-2
   key    : string]
  (native
   :js
-   "const subvalmap = struct['vx_value']
+   "const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
       if (key.startsWith(':')) {
         key = key.substring(1)
@@ -1370,7 +1455,7 @@
       }
     }"
   :java
-   "Core.Type_any val = struct.vx_any(key);
+   "Core.Type_any val = vstruct.vx_any(key);
     output = Core.f_any_from_any(generic_any_1, val);")
  :doc "Returns value from a struct")
 
@@ -1529,8 +1614,8 @@
  (extends<-typedef (typedef<-any val)))
 
 (func extends<-typedef : string
- [typedef : typedef]
- (:extends typedef)
+ [vtypedef : typedef]
+ (:extends vtypedef)
  :doc "Get the basetype of a given type")
 
 (func first<-list : any-1
@@ -1720,6 +1805,17 @@
   (case "neginfinity" neginfinity)
   (else
    (native
+    :cpp
+     "// :capture val
+      vx_core::Type_int* intresult = vx_core::e_int;
+      try {
+        std::string sval = val->vx_string();
+        int ival = std::stoi(sval);
+        intresult = vx_core::t_int->vx_new_from_int(ival);
+      } catch (std::exception ex) {
+        intresult = vx_core::c_notanumber;
+      }
+      return intresult;"
     :js
      "parseInt(val)"
     :java
@@ -1920,7 +2016,7 @@
 
 (func let : any-1
  [args   : arglist
-  fn_any : any<-func :: any-1]
+  fn-any : any<-func :: any-1]
  (native
   :js
    "const fn = fn_any['vx_value']
@@ -2201,8 +2297,8 @@
  :doc "Return a new Msgblock with the added block")
 
 (func name<-typedef : string
- [typedef : typedef]
- (:name typedef)
+ [vtypedef : typedef]
+ (:name vtypedef)
  :doc "Returns the name from a typedef.")
 
 (func native : any-1
@@ -2942,8 +3038,8 @@
        (test-false (or false false false)))
 
 (func packagename<-typedef : string
- [typedef : typedef]
- (:pkgname typedef)
+ [vtypedef : typedef]
+ (:pkgname vtypedef)
  :doc "Returns the package name from a typedef.")
 
 (func path<-context-path : string
@@ -2970,13 +3066,13 @@
  :doc "Return a permission from context by id")
 
 (func properties<-typedef : argmap
- [typedef : typedef]
- (:properties typedef)
+ [vtypedef : typedef]
+ (:properties vtypedef)
  :doc "Return property map from typedef")
 
 (func proplast<-typedef : arg
- [typedef : typedef]
- (:proplast typedef)
+ [vtypedef : typedef]
+ (:proplast vtypedef)
  :doc "Return last property from typedef")
 
 (func resolve : any-1
@@ -3377,12 +3473,12 @@
   :fn-any  fn-any))
 
 (func traits<-typedef : typelist
- [typedef : typedef]
+ [vtypedef : typedef]
  (native
   :js
-   "typedef['vx_value']['traits']"
+   "vtypedef['vx_value']['traits']"
   :java
-   "typedef.traits();")
+   "vtypedef.traits();")
  :doc "Return trait list from type")
 
 (func type<-any : any
@@ -3456,8 +3552,8 @@
  :doc "Get the name of a given type")
 
 (func typename<-typedef : string
- [typedef : typedef]
- (string (:pkgname typedef) "/" (:name typedef))
+ [vtypedef : typedef]
+ (string (:pkgname vtypedef) "/" (:name vtypedef))
  :doc "Get the name of a given type")
 
 (func typenames<-typelist : stringlist

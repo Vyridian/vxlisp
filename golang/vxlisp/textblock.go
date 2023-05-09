@@ -38,12 +38,12 @@ func StringFromTextblockStartEnd(textblock *vxtextblock, startline int, startcha
 	if startlinenum == 0 {
 		startpos = startchar - textblock.charnum
 	} else {
-		startpos = IntFromStringIndexNth(text, "\n", startlinenum) + startchar
+		startpos = IntFromStringFindNth(text, "\n", startlinenum) + startchar
 	}
 	if endlinenum == 0 {
 		endpos = endchar - textblock.charnum + 1
 	} else {
-		endpos = IntFromStringIndexNth(text, "\n", endlinenum) + endchar + 1
+		endpos = IntFromStringFindNth(text, "\n", endlinenum) + endchar + 1
 	}
 	output = StringSubstring(text, startpos, endpos)
 	if startchar > 1 {
@@ -80,7 +80,7 @@ func StringFromTextblocks(textblocks []*vxtextblock, indent string) string {
 
 func StringFromTextblockIndent(textblock *vxtextblock, indent string) string {
 	text := textblock.text
-	if IntFromStringIndex(textblock.text, "\n") >= 0 {
+	if IntFromStringFind(textblock.text, "\n") >= 0 {
 		text = "\n" + text
 	}
 	output := "" +
@@ -201,7 +201,7 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				if lastchar == "\\" {
 					word += char
 				} else {
-					if IntFromStringIndex(word, "\n") >= 0 {
+					if IntFromStringFind(word, "\n") >= 0 {
 						indentchars := StringRepeat(" ", quoteindent)
 						wordlines := ListStringFromStringSplit(word, "\n")
 						for wordidx, wordline := range wordlines {

@@ -1595,12 +1595,12 @@ public final class Type {
   /**
    * @function traits_from_typedef
    * Get the traits of a given typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    * (func traits<-typedef)
    */
   public static interface Func_traits_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
@@ -1662,14 +1662,14 @@ public final class Type {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Type.f_traits_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Type.f_traits_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef) {
-      return Type.f_traits_from_typedef(typedef);
+    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
+      return Type.f_traits_from_typedef(vtypedef);
     }
 
   }
@@ -1677,9 +1677,9 @@ public final class Type {
   public static final Func_traits_from_typedef e_traits_from_typedef = new Type.Class_traits_from_typedef();
   public static final Func_traits_from_typedef t_traits_from_typedef = new Type.Class_traits_from_typedef();
 
-  public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;
-    output = typedef.traits();
+    output = vtypedef.traits();
     return output;
   }
 

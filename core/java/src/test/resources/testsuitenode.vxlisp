@@ -8264,6 +8264,119 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
+                                :text "any<-list")))
+                            (td
+                             :id ""
+                             :style
+                              (style
+                               :name ""
+                               :props (propmap))
+                             :nodes
+                              (divchildlist
+                               (p
+                                :id ""
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "b"
+ (:1 (stringlist "a" "b" "c")))")))
+                            (td
+                             :id ""
+                             :style
+                              (style
+                               :name ""
+                               :props (propmap))
+                             :nodes
+                              (divchildlist
+                               (p
+                                :id ""
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""b"")))
+                            (td
+                             :id ""
+                             :style
+                              (style
+                               :name ""
+                               :props (propmap))
+                             :nodes
+                              (divchildlist
+                               (p
+                                :id ""
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""b"")))))
+                         (tr
+                          :id ""
+                          :style
+                           (style
+                            :name ""
+                            :props (propmap))
+                          :nodes
+                           (tdlist
+                            (td
+                             :id ""
+                             :style
+                              (style
+                               :name ""
+                               :props (propmap))
+                             :nodes
+                              (divchildlist
+                               (p
+                                :id ""
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :id ""
+                             :style
+                              (style
+                               :name ""
+                               :props (propmap))
+                             :nodes
+                              (divchildlist
+                               (p
+                                :id ""
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
                                 :text "any<-list-reduce")))
                             (td
                              :id ""

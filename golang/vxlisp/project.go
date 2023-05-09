@@ -28,6 +28,7 @@ type vxproject struct {
 	listpackage []*vxpackage
 	listprjpath []string
 	listproject []*vxproject
+	maptext     map[string]string
 	textblock   *vxtextblock
 }
 
@@ -330,6 +331,7 @@ func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectReadAllFromPath")
 	var packages []*vxpackage
+	maptext := NewMapString()
 	project := emptyproject
 	filenames, msgs := ListStringReadFromPathExtension(projectpath, ".vxlisp")
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -353,6 +355,20 @@ func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			}
 		}
 	}
+	if !msgblock.iserror {
+		extrafilenames, msgs := ListStringReadFromPathExtension(projectpath, "_cpp.txt")
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+		if !msgblock.iserror {
+			for _, filename := range extrafilenames {
+				extraname := StringFromStringFindReplace(filename, projectpath+"/", "")
+				extratext, msgs := StringFromReadTextFile(filename)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				if !msgblock.iserror {
+					maptext[extraname] = extratext
+				}
+			}
+		}
+	}
 	if project == emptyproject {
 		msg := NewMsg("project.vxlisp file not found in " + projectpath)
 		msgblock = MsgblockAddError(msgblock, msg)
@@ -361,6 +377,7 @@ func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			pkg.project = project
 		}
 		project.listpackage = packages
+		project.maptext = maptext
 	}
 	return project, msgblock
 }

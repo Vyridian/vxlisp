@@ -333,15 +333,15 @@ export default class vx_type {
   /**
    * @function traits_from_typedef
    * Get the traits of a given typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    */
   static t_traits_from_typedef = {}
   static e_traits_from_typedef = {vx_type: vx_type.t_traits_from_typedef}
 
-  static f_traits_from_typedef(typedef) {
+  static f_traits_from_typedef(vtypedef) {
     let output = vx_core.e_typelist
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_typelist, "struct-1": vx_core.t_typedef}, typedef, ":traits")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_typelist, "struct-1": vx_core.t_typedef}, vtypedef, ":traits")
     return output
   }
 

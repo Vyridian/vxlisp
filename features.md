@@ -11,15 +11,31 @@ It's pretty simple.
 
 * Parenthesis - Lisps contains each idea in a list. A function foo(1, 2) would be written as (foo 1 2). Note: empty parentheses () are invalid in vxlisp.
 
-* Delimiters - vxlisp uses any amount of whitespace as a single delimiter. No comma, no semi-colons. New lines and tabs don't matter. Focus on readability.
+Object-oriented code typically has two patterns:
+
+static calls: e.g. String.replace(mytext). vxlisp would be written as (replace mytext)
+
+method calls: e.g. myobject.foo(myval). vxlisp would be written as (foo myobject myval)
+
+vxlisp (and all lisps) always put the verb first.
+
+* Delimiters - vxlisp uses any amount of whitespace as a single delimiter. No comma, no semi-colons. New lines and tabs don't matter. Focus on readability. In my experience, the vast majority of my compile errors in other languages are missing semi-colons and commas.
 
 * Square Brackets - Clojure used [] to separate function arguments from the rest of the function definition. vxlisp copies that behavior and adds type declarations and more. e.g.
     (func myfunc : string
      [arg1 : string
       arg2 : string])
 
-* Keywords : - Any word starting with : is considered a keyword. This is similar to JavaScript maps/objects.
-    vxlisp (map :key1 value1 :key2 value2) vs. JavaScript {key1: value1, key2: value2}
+* Keywords : (colon) - Any word starting with : is considered a keyword. 
+
+: - Colon by itself is a type declaration. e.g. (func foo : string)
+
+:= - Colon equal sign is a variable assignment. e.g. (let [a := "Hello"])
+
+:{text} - Any other string is a keyword for a map or a constant. This is similar to JavaScript maps/objects.
+
+    vxlisp: (map :key1 value1 :key2 value2)
+    JavaScript: {key1: value1, key2: value2}
 
 * Double Quote "" - Double quotes surround strings. The string maintains linefeeds, but the string matches the indentation to the opening quotation mark. e.g. The following text would have a linefeed but no spaces "line1\nline2".
     "line1
@@ -63,21 +79,103 @@ Test cases appear within published html documentation. This allows managers, sup
 
 Languages change all the time and yesterday's tools may be incompatible with new standards. A few examples are modules being introduced to C++ in 2020. This standard eliminates header files and completely rewrites code. Java has a long history of introducing standards filled with problems and later introducing new standards like Date handling or CompletableFutures replaceing Futures in Java8. Apache Foundation practically exists to patch bad Java design. vxlisp allows you to recompile your code to a new standard and pass all of your old tests.
 
-## Type-safety
+## Type-safety and Generics
 
 vxlisp is strongly-type and supports generics (without erasures).
 
-I have gone back and forth on the importance of type-safety. Type-safety should be a good thing, but if you spend a lot of time on type-safety, you might have been better off making more test cases. My conclusion is that type-safety is good, but many languages (I'm looking at you Java) are so cumbersome that the benefit is unclear. JavaScript and Clojure are not type-safe. Java is just bad. C# and Typescript are better, but generics are still hard for laymen. Hopefully, you will find vxlisp to be more elegant.
+I have gone back and forth on the importance of type-safety. Type-safety should be a good thing, but if you spend a lot of time on type-safety, you might have been better off making more test cases. My conclusion is that type-safety is good, but many languages (I'm looking at you Java) are so cumbersome that the benefit is unclear. JavaScript and Clojure are not type-safe. Java has a sloppy, incomplete type-erasure system. C# and Typescript are better, but generics are still hard for laymen. Hopefully, you will find vxlisp to be more elegant.
+
+### Mixing Types
+
+Non-Typesafe Languages: For non-typesafe languages mixing types is easy, but there are no checks for type:
+
+    ["a", 1, 2.5, bar]
+
+Typesafe Languages: For typesafe languages a construct like this is not directly possible, so you have to defeat typesafety by using a non-typesafe generic:
+
+    new List<Object>["a", 1, 2.5, bar]
+
+vxlisp: vxlisp enforces typesafety on such constructs by declaring type and allowing substypes.
+
+    (type foo :extends :list :allowtypes [string, int, float, bar])
+
+    (foo "a", 1, 2.5, bar)
+
+### Complex Types
+
+For this example, we want to create a complex structure: a map of lists of integer map.
+
+Non-Typesafe Languages: For non-typesafe languages, creating complex structures is error prone:
+
+    foo = {a: [{b: 4}]}
+
+Typesafe Languages: For typesafe languages, you gain typesafety, but you some force you to redeclare types again and again. Very confusing and irritating.
+
+    Map<string, List<Map<string, int>>> foo = new Map<string, List<Map<string, int>>>{a: new List<Map<string, int>(new Map<string, int>){b: 4}()>}
+
+vxlisp: Types are declared upfront and reused (like C++ typedef).
+
+    (type type1 :extends :map :allowtypes [int])
+
+    (type type2 :extends :list :allowtypes [type1])
+
+    (type type3 :extends :map :allowtypes [type2])
+
+    (let
+     [foo := (type3 :a (type2 (type1 :b 4)))])
+
+## Generic Types
+
+Other languages usually define generics using captial letters like T and declares List, Map, etc. using that T. vxlisp uses a suffix number to distinquish and relate generic types. e.g. any-1 and list-1 refer to the same generic.
+
+    Java:
+    <T, U> List<U> convertList(List<T> mylist) {
+      List<U> output = new List<T>();
+      for (T myval : mylist) {
+        output.add(foo(myval));
+      }
+      return output;
+    }
+
+    vxlisp:
+    (func convert-list : list-1
+     [mylist : list-2]
+     (list<-list : list-1
+      mylist
+      (fn : any-1
+       [myval : any-2]
+       (foo myval))
+     )
+    )
 
 ## Immutability
 
+Everything in vxlisp is logically immutable. Once you have created an object, it cannot be changed. This is the same as String in most languages. e.g. a = "Hello"; b = a.substring(0, 2); // a is unchanged.
+
+There are only 2 functions to make an object in vxlisp: (new) and (copy), so once you make an object it is safe to use and cannot change. All pointers to objects can be freely passed ByRef since subfunctions will not alter them.
+
+Lists and Maps do shallow copies since their children are also immutable. This is obviously not the way Object-Oriented Programmers see the world, but it is simple and the rewards reaped from simplicity are worth the trade-offs. Note: when comparing the cost of shallow copies to other languages, remember that if you are passing a parameter ByVal (aka final in Java), the compiler is already making a copy, sometimes a large and deep one (Golang tends to do this a lot).
+
 ## Thread-safety
 
-## Generics
+Since objects are immutable, they are thread-safe. This can never be 100% the answer, but it is close.
 
 ## Error Handling
 
-There are a few possible sources of errors:
+TRIGGER ALERT! In my opinion, try-catch exception handling is a design flaw. It is an all or nothing result where you either get a result or an exception. This is like taking a test with no partial credit even you just put the wrong date at the top.
+
+vxlisp attempts to address this by allowing EVERY object to contain any number of error messages IN ADDITION to their normal result. Some erros may be big, some may be trivial warnings. Each calling program can decide what to do with them (if anything). Erros will automatically be bubbled up to each further result.
+
+    (func foo : string
+     [value : string]
+     (if
+      (then (= value "Dog")
+       (string "echo " value
+        :msg (msg :severity msg-warning :text "Are you sure you want a dog?")))
+      (else (string "echo " arg)))
+     :doc "This function echos the original value and also produces a warning if the value is a Dog.")
+
+vxlisp also tries to reduce the number of exceptions generated in the first place. There are a few possible sources of errors:
 
 * Logical errors - If you code something wrong the best way to control it is tightly knit error trapping. vxlisp seeks to bundle test with the original function to address this. It also supports a :debug tag that adds code to a function to log all input and output from that function.
 * Type mismatch - vxlisp is strongly typed, so this should be a rare occurrance.
@@ -90,7 +188,17 @@ There are a few possible sources of errors:
 
 ## Multiple inheritence
 
-vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces.Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the rest.
+Typesafe languages have a problem with complex inheritence structures. The Deadly Diamond of Death occurs when 2 classes inherit from a common class and then another class inherits from both of them. e.g. Dog extends Animal, Cat extends Animal, Hybrid extends Dog, Cat. Java avoided this by leaning on interfaces, but this still requires a lot of planning and code.
+
+vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces.Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the heavy lifting for you.
+
+    (type animal :extends struct)
+
+    (type dog :extends :struct :traits [animal])
+
+    (type cat :extends :struct :traits [animal])
+
+    (type hybrid :extends :struct :traits [dog, cat])
 
 ## Constructors
 

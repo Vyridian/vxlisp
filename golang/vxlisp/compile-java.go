@@ -589,8 +589,8 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	}
 	lineindent = "\n" + indent
 	valuetext = StringFromListStringJoin(chgvaluetexts, "\n")
-	if IntFromStringIndex(valuetext, "output ") >= 0 {
-	} else if IntFromStringIndex(valuetext, "output.") >= 0 {
+	if IntFromStringFind(valuetext, "output ") >= 0 {
+	} else if IntFromStringFind(valuetext, "output.") >= 0 {
 	} else if fnc.vxtype.name == "none" {
 	} else if valuetext == "" {
 	} else {
@@ -2475,7 +2475,7 @@ func JavaImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test 
 			}
 			if !isskip {
 				importline := "\nimport " + libpath + ";"
-				if IntFromStringIndex(output, importline) < 0 {
+				if IntFromStringFind(output, importline) < 0 {
 					output += importline
 				}
 			}
@@ -2505,7 +2505,7 @@ func JavaInterfaceFromType(typ *vxtype) string {
 			if createline == "@Override" {
 				isoverride = true
 			} else if isoverride {
-				ipos := IntFromStringIndexLast(createline, ")")
+				ipos := IntFromStringFindLast(createline, ")")
 				createline = createline[0:ipos+1] + ";"
 				basics += "\n    " + createline
 				isoverride = false
@@ -2919,7 +2919,7 @@ func JavaNameFromFunc(fnc *vxfunc) string {
 
 func JavaNameFromPkgName(pkgname string) string {
 	output := ""
-	ipos := IntFromStringIndexLast(pkgname, "/")
+	ipos := IntFromStringFindLast(pkgname, "/")
 	output = StringSubstring(pkgname, ipos+1, len(pkgname))
 	output = StringUCaseFirst(output)
 	output = StringFromStringFindReplace(output, "<", "lt")
@@ -2988,7 +2988,7 @@ func JavaNameTypeFullFromType(typ *vxtype) string {
 
 func JavaPackagePathFromPrefixName(pkgprefix string, pkgname string) (string, string) {
 	pkgpath := pkgprefix + "/" + pkgname
-	ipos := IntFromStringIndexLast(pkgpath, "/")
+	ipos := IntFromStringFindLast(pkgpath, "/")
 	name := StringSubstring(pkgpath, ipos+1, len(pkgpath))
 	pkgpath = StringSubstring(pkgpath, 0, ipos)
 	pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
@@ -3420,7 +3420,7 @@ func JavaWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	switch cmd.code {
 	case ":test":
 		targetpath := PathFromProjectCmd(prj, cmd)
-		ipos := IntFromStringIndexLast(targetpath, "/")
+		ipos := IntFromStringFindLast(targetpath, "/")
 		if ipos > 0 {
 			targetpath = targetpath[0:ipos]
 		}

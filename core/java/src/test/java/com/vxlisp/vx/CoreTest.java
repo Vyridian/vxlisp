@@ -1098,6 +1098,26 @@ public final class CoreTest {
               ),
               context
             )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
+          ":testresult",
+            Test.f_test(
+              Core.t_string.vx_new_from_string("b"),
+              Core.f_any_from_list(
+                Core.t_string,
+                Core.f_new(
+                  Core.t_stringlist,
+                  Core.t_anylist.vx_new(
+                    Core.t_string.vx_new_from_string("a"),
+                    Core.t_string.vx_new_from_string("b"),
+                    Core.t_string.vx_new_from_string("c")
+                  )
+                ),
+                Core.t_int.vx_new_from_int(1)
+              ),
+              context
+            )
         )
       )
     );
@@ -2597,7 +2617,7 @@ public final class CoreTest {
         ":any<-func-async", 0,
         ":any<-key-value", 0,
         ":any<-key-value-async", 0,
-        ":any<-list", 1,
+        ":any<-list", 2,
         ":any<-list-reduce", 1,
         ":any<-list-reduce-next", 0,
         ":any<-map", 1,

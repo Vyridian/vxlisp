@@ -612,8 +612,8 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string,
 		fnc := FuncFromValue(value)
 		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
-		switch funcname {
-		case "vx/core/native":
+		switch fnc.name {
+		case "native":
 			// (native :js)
 			isNative := false
 			var argtexts []string

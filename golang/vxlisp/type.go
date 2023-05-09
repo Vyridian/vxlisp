@@ -91,7 +91,7 @@ func NewMapType() map[string]*vxtype {
 
 func NewType(typename string) *vxtype {
 	typ := new(vxtype)
-	pos := IntFromStringIndexLast(typename, "/")
+	pos := IntFromStringFindLast(typename, "/")
 	if pos < 0 {
 		typ.name = typename
 	} else {
@@ -312,7 +312,7 @@ func BooleanGenericFromType(typ *vxtype) bool {
 }
 
 func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bool, index int, path string) (*vxtype, bool, *vxmsgblock) {
-	msgblock := NewMsgBlock("IsTypeSimpleMatch")
+	msgblock := NewMsgBlock("BooleanMatchTypeType")
 	resulttype := actualtype
 	pass := false
 	expectedtypename := NameFromType(expectedtype)

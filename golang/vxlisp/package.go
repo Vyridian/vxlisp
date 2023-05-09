@@ -318,7 +318,7 @@ func PackageFromTextblock(textblock *vxtextblock) (*vxpackage, *vxmsgblock) {
 func PackagePathNameFromName(pkgname string) (string, string) {
 	path := ""
 	name := ""
-	ipos := IntFromStringIndexLast(pkgname, "/")
+	ipos := IntFromStringFindLast(pkgname, "/")
 	if ipos > 0 {
 		path = pkgname[0 : ipos+1]
 		name = pkgname[ipos+1:]

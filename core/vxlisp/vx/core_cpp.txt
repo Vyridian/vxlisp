@@ -1,0 +1,318 @@
+// :header
+  const vx_core::Type_any* vx_core::t_nativeboolean = new vx_core::Type_any;
+  const vx_core::Type_any* vx_core::t_nativefloat = new vx_core::Type_any;
+  const vx_core::Type_any* vx_core::t_nativeint = new vx_core::Type_any;
+  const vx_core::Type_any* vx_core::t_nativelist = new vx_core::Type_list;
+  const vx_core::Type_any* vx_core::t_nativemap = new vx_core::Type_map;
+  const vx_core::Type_any* vx_core::t_nativestring = new vx_core::Type_any;
+  const std::vector<vx_core::Type_any*> vx_core::emptylistany;
+  const std::map<std::string, vx_core::Type_any*> vx_core::emptymapany;
+
+  // any_from_any(T, U)
+  template <class T, class U> T* any_from_any(T* generic_any_1, U* value);
+  // any_from_map(T, T)
+  template <class T> T* any_from_map(const std::map<std::string, T*> &map, const std::string key, const T* defaultval);
+  // async_await(T, async<T>)
+  template <class T> static vx_core::Async<T>* async_await(T generic_any_1, vx_core::Async<T>* async);
+  // async_from_async(T, async<U>)
+  template <class T, class U> static vx_core::Async<T>* async_from_async(T generic_any_1, vx_core::Async<U>* async);
+  // async_from_async_fn(T, async<U>, fn<T>(U))
+  template <class T, class U> static vx_core::Async<T>* async_from_async_fn(T generic_any_1, vx_core::Async<U>* async, std::function<T(U)> fn);
+  // async_new_from_val (T)
+  template <class T> static vx_core::Async<T>* async_new_from_val (T val);
+
+  // boolean_contains_from_set_val(set<T>, val)
+  template <class T> bool boolean_contains_from_set_val(std::set<T> set, T val);
+  // keyset_from_map(map)
+  template <class T> std::set<T> keyset_from_map(std::map<std::string, T> map);
+  // list_from_list(T, list<U>)
+  template <class T, class U> std::vector<T*> vx_core::list_from_list(T* generic_any_1, std::vector<U*> list);
+  // listaddall(list, listadd)
+  template <class T> std::vector<T*> listaddall(vector<T*> listtarget, vector<T*> listadd);
+  // map_from_map(T, map<U>)
+  template <class T, class U> std::map<std::string, T*> map_from_map(T* generic_any_1, std::map<std::string, U*> map);
+  // string_from_any(val)
+  std::string string_from_any(std::any);
+
+  // class Async
+  template <class T> class Async {
+  public:
+    std::shared_future<T>* future;
+    vx_core::Async<std::any*>* async_parent;
+    std::function<T(std::any*)>* fn;
+  };
+
+  // sync_from_async(generic_any_1, async)
+  template <class T> T sync_from_async(T generic_any_1, Async<T>* async);
+
+  class Type_replfunc {
+  public:
+    virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
+  };
+
+  class Type_replfunc_async {
+  public:
+    virtual vx_core::Async<vx_core::Type_any*>* vx_repl(vx_core::Type_anylist* arglist);
+  };
+
+// :body
+
+  // any_from_any(T, U)
+  template <class T, class U> T* vx_core::any_from_any(T* generic_any_1, U* value) {
+    T* output = dynamic_cast<T*>(value);
+    return output;
+  }
+
+  // any_from_map(T, key, defaultval)
+  template <class T> T* vx_core::any_from_map(const std::map<std::string, T*> &map, const std::string key, const T* defaultval) {
+    T* output = defaultval;
+    std::map<std::string, V*>::const_iterator iter = map.find(key);
+    if (iter != map.end()) {
+      output = it->second;
+    }
+    return output;
+  }
+
+  // async_await(T, async<T>)
+  template <class T> static T vx_core::Async<T>::async_await(T generic_any_1, vx_core::Async<T>* async) {
+    std::shared_future<T> futureT = async->future;
+    T output;
+    vx_core::Async<std::any*>>* async_parent = async->async_parent;
+    if (async_parent == NULL) {
+      output = futureT.await();
+    } else {
+      std::any* parentval = vx_core::Async<std:any*>::await(T generic_any_1, std::Async<std::any*> async_parent);
+      std::function<T(std::any*) fn = async->fn;
+      output = fn(parentval);
+    }
+    return T;
+  }
+
+  // async_from_async(T, async<U>)
+  template <class T, class U> static vx_core::Async<T>* vx_core::async_from_async(T generic_any_1, vx_core::Async<U>* async) {
+    vx_core::Async<T*>* output = vx_core::Async<T>::async_new_from_val (vx_core::f_empty(generic_any_1));
+    return output;
+  }
+
+  // async_from_async_fn(T, async<U>, fn<T>(U))
+  template <class T, class U> static vx_core::Async<T>* vx_core::async_from_async_fn(T generic_any_1, vx_core::Async<U>* async, std::function<T(U)> fn) {
+    vx_core::Async<T>* futureT = this;
+    vx_core::Async<U>* output = new vx_core::Async<T>();
+    output->future = futureU;
+    output->async_parent = async;
+    output->fn = fn;
+    return output;
+  }
+
+  // async_new_from_val(T)
+  template <class T> static vx_core::Async<T>* vx_core::async_new_from_val (T val) {
+    std::promise<T> promise;
+    promise.set_value(val);
+    vx_core::Async<T>* output = promise.get_future();
+    return output;
+  }
+
+  // boolean_contains_from_set_val(set<T>, val)
+  template <class T> bool vx_core::boolean_contains_from_set_val(std::set<T> set, T val) {
+    const bool output = container.find(element) != container.end();
+    return output;
+  }
+
+  // keyset_from_map(map)
+  template <class T> std::set<T> vx_core::keyset_from_map(std::map<std::string, T> map) {
+    std::set<T> output;
+    for (std::map<std::string, T>::iterator it = map.begin(); it != map.end(); ++it) {
+      output.push_back(it->first);
+    }
+    return output;
+  }
+
+  // list_from_list(T, list<U>)
+  template <class T, class U> std::vector<T*> vx_core::list_from_list(T* generic_any_1, std::vector<U*> list) {
+    std::vector<T*> output = reinterpret_cast<std::vector<T*>&>(list);
+    return output;
+  }
+
+  // listaddall(list, listadd)
+  template <class T> std::vector<T*> vx_core::listaddall(std::vector<T*> list, std::vector<T*> listadd) {
+    list.insert(list.end(), listadd.begin(), listadd.end());
+  }
+
+  // map_from_map(T, map<U>)
+  template <class T, class U> std::map<std::string, T*> vx_core::map_from_map(T* generic_any_1, std::map<std::string, U*> map) {
+
+  }
+
+  // string_from_any(val)
+  std::string vx_core::string_from_any(std::any) {
+    std::string output = "";
+    return output;
+  }
+
+  // sync_from_async(generic_any_1, async)
+  template <class T> T vx_core::sync_from_async(T generic_any_1, Async<T>* async) {
+    future = async->future;
+    T output = future->wait();
+    return output;
+  }
+
+  //class Type_replfunc {
+    vx_core::Type_any* vx_core::Type_replfunc::vx_repl(vx_core::Type_anylist* arglist) {return vx_core::t_any;}
+  //};
+
+  //class Type_replfunc_async {
+    vx_core::Async<vx_core::Type_any*>* vx_core::Type_replfunc_async::vx_repl(vx_core::Type_anylist* arglist) {
+      return vx_core::async_async_new_from_val (vx_core::t_any);
+    }
+  //};
+
+  //class Type_any {
+
+    vx_core::Type_any* vx_core::Type_any::vx_type_from_any(std::any* value) {
+      vx_core::Type_any* output = vx_core::t_any;
+      vx_core::Type_any* anyvalue = dynamic_cast<vx_core::Type_any*>(value);
+      if (anyvalue != NULL) {
+        output = anyvalue->vx_type();
+      } else {
+        std::string* svalue = dynamic_cast<std::string*>(value);
+        if (svalue != NULL) {
+          output = vx_core::t_string;
+        }
+      }
+      return output;
+    }
+
+    std::vector<vx_core::Type_any*> vx_core::Type_any::vx_dispose() {
+      this->vx_iref = 0;
+      return vx_core::emptylistany;
+    }
+
+    bool vx_core::Type_any::vx_release() {
+      bool output = false;
+      if (this->vx_iref < 0) {
+      } else if (vx_iref == 0) {
+        vx_iref = -1;
+        output = true;
+      } else {
+        vx_iref -= 1;
+      }
+      return output;
+    }
+
+    void vx_core::Type_any::vx_reserve() {this->vx_iref += 1;}
+
+  //};
+
+  //class Type_boolean {
+
+    bool vx_core::Type_boolean::vx_boolean() {return this->vx_p_boolean;}
+
+    vx_core::Type_boolean* vx_core::Type_boolean::vx_new_from_boolean(bool isval) {
+      vx_core::Type_boolean* output = vx_core::c_false;
+      if (isval) {
+        output = vx_core::c_true;
+      }
+      return output;
+    }
+
+  //};
+
+  //class Type_constdef {
+    vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+      std::string pkgname,
+      std::string name,
+      vx_core::Type_typedef* typ
+    ) {
+      vx_core::Type_constdef* output;
+      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
+      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
+      output->vx_p_type = typ;
+      return output;
+    }
+  //};
+
+  //class Type_float {
+    float vx_core::Type_float::vx_float() {return vx_p_float;}
+
+    vx_core::Type_float* vx_core::Type_float::vx_new_from_float(float fval) {
+      vx_core::Type_float* output = new vx_core::Type_float;
+      output->vx_p_float = fval;
+      return output;
+    }
+  //};
+
+  //class Type_funcdef {
+    vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+      std::string pkgname,
+      std::string name,
+      int idx,
+      bool async,
+      vx_core::Type_typedef* typ
+    ) {
+      vx_core::Type_funcdef* output;
+      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
+      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
+      output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
+      output->vx_p_async = vx_core::t_boolean->vx_new_from_boolean(async);
+      output->vx_p_type = typ;
+      return output;
+    }
+  //};
+
+  //class Type_int {
+    int vx_core::Type_int::vx_int() {return vx_p_int;}
+
+    vx_core::Type_int* vx_core::Type_int::vx_new_from_int(int ival) {
+      vx_core::Type_int* output = new vx_core::Type_int;
+      output->vx_p_int = ival;
+      return output;
+    }
+  //};
+
+  //class Type_string {
+    std::string vx_core::Type_string::vx_string() {
+      return vx_p_string;
+    }
+
+    vx_core::Type_string* vx_core::Type_string::vx_new_from_string(std::string text) {
+      vx_core::Type_string* output;
+      if (text == "" && vx_core::e_string != NULL) {
+        output = vx_core::e_string;
+      } else {
+        output = new vx_core::Type_string;
+        output->vx_p_string = text;
+      }
+      return output;
+    }
+  //};
+
+  //class Type_typedef {
+    vx_core::Type_typedef* vx_core::Type_typedef::vx_typedef_new(
+      std::string pkgname,
+      std::string name,
+      std::string extend,
+      vx_core::Type_typelist* traits,
+      vx_core::Type_typelist* allowtypes,
+      vx_core::Type_typelist* disallowtypes,
+      vx_core::Type_funclist* allowfuncs,
+      vx_core::Type_funclist* disallowfuncs,
+      vx_core::Type_anylist* allowvalues,
+      vx_core::Type_anylist* disallowvalues,
+      vx_core::Type_argmap* properties
+    ) {
+      vx_core::Type_typedef* output;
+      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
+      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
+      output->vx_p_extend = vx_core::t_string->vx_new_from_string(extend);
+      output->vx_p_traits = traits;
+      output->vx_p_allowtypes = allowtypes;
+      output->vx_p_disallowtypes = disallowtypes;
+      output->vx_p_allowfuncs = disallowfuncs;
+      output->vx_p_disallowfuncs = disallowfuncs;
+      output->vx_p_allowvalues = disallowvalues;
+      output->vx_p_disallowvalues = disallowvalues;
+      output->vx_p_properties = properties;
+      return output;
+    }
+
+  //}

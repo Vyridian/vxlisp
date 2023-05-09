@@ -11425,12 +11425,12 @@ public final class Core {
   /**
    * @function allowtypenames_from_typedef
    * Return allow name list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {stringlist}
    * (func allowtypenames<-typedef)
    */
   public static interface Func_allowtypenames_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_allowtypenames_from_typedef extends Core.Class_base implements Func_allowtypenames_from_typedef {
@@ -11492,14 +11492,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_allowtypenames_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_allowtypenames_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_allowtypenames_from_typedef(typedef);
+    public Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_allowtypenames_from_typedef(vtypedef);
     }
 
   }
@@ -11507,10 +11507,10 @@ public final class Core {
   public static final Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
   public static final Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
 
-  public static Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_stringlist output = Core.e_stringlist;
     output = Core.f_typenames_from_typelist(
-      Core.f_allowtypes_from_typedef(typedef)
+      Core.f_allowtypes_from_typedef(vtypedef)
     );
     return output;
   }
@@ -11518,12 +11518,12 @@ public final class Core {
   /**
    * @function allowtypes_from_typedef
    * Return allow type list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    * (func allowtypes<-typedef)
    */
   public static interface Func_allowtypes_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_allowtypes_from_typedef extends Core.Class_base implements Func_allowtypes_from_typedef {
@@ -11585,14 +11585,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_allowtypes_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_allowtypes_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_allowtypes_from_typedef(typedef);
+    public Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_allowtypes_from_typedef(vtypedef);
     }
 
   }
@@ -11600,9 +11600,9 @@ public final class Core {
   public static final Func_allowtypes_from_typedef e_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
   public static final Func_allowtypes_from_typedef t_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
 
-  public static Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;
-    output = typedef.allowtypes();
+    output = vtypedef.allowtypes();
     return output;
   }
 
@@ -13597,13 +13597,13 @@ public final class Core {
   /**
    * @function any_from_struct
    * Returns value from a struct
-   * @param  {struct-2} struct
+   * @param  {struct-2} vstruct
    * @param  {string} key
    * @return {any-1}
    * (func any<-struct)
    */
   public static interface Func_any_from_struct extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R struct, final Core.Type_string key);
+    public <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key);
   }
 
   public static class Class_any_from_struct extends Core.Class_base implements Func_any_from_struct {
@@ -13654,15 +13654,15 @@ public final class Core {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_struct struct = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_struct vstruct = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      output = Core.f_any_from_struct(generic_any_1, struct, key);
+      output = Core.f_any_from_struct(generic_any_1, vstruct, key);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R struct, final Core.Type_string key) {
-      return Core.f_any_from_struct(generic_any_1, struct, key);
+    public <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key) {
+      return Core.f_any_from_struct(generic_any_1, vstruct, key);
     }
 
   }
@@ -13670,9 +13670,9 @@ public final class Core {
   public static final Func_any_from_struct e_any_from_struct = new Core.Class_any_from_struct();
   public static final Func_any_from_struct t_any_from_struct = new Core.Class_any_from_struct();
 
-  public static <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R struct, final Core.Type_string key) {
+  public static <T extends Core.Type_any, R extends Core.Type_struct> T f_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
-    Core.Type_any val = struct.vx_any(key);
+    Core.Type_any val = vstruct.vx_any(key);
     output = Core.f_any_from_any(generic_any_1, val);
     return output;
   }
@@ -14874,12 +14874,12 @@ public final class Core {
   /**
    * @function extends_from_typedef
    * Get the basetype of a given type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    * (func extends<-typedef)
    */
   public static interface Func_extends_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_string f_extends_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_string f_extends_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_extends_from_typedef extends Core.Class_base implements Func_extends_from_typedef {
@@ -14941,14 +14941,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_extends_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_extends_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_string f_extends_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_extends_from_typedef(typedef);
+    public Core.Type_string f_extends_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_extends_from_typedef(vtypedef);
     }
 
   }
@@ -14956,9 +14956,9 @@ public final class Core {
   public static final Func_extends_from_typedef e_extends_from_typedef = new Core.Class_extends_from_typedef();
   public static final Func_extends_from_typedef t_extends_from_typedef = new Core.Class_extends_from_typedef();
 
-  public static Core.Type_string f_extends_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_string f_extends_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
-    output = typedef.extend();
+    output = vtypedef.extend();
     return output;
   }
 
@@ -16973,7 +16973,7 @@ public final class Core {
   /**
    * @function let
    * @param  {arglist} args
-   * @param  {any<-func} fn_any
+   * @param  {any<-func} fn-any
    * @return {any-1}
    * (func let)
    */
@@ -18491,12 +18491,12 @@ public final class Core {
   /**
    * @function name_from_typedef
    * Returns the name from a typedef.
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    * (func name<-typedef)
    */
   public static interface Func_name_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_string f_name_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_string f_name_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_name_from_typedef extends Core.Class_base implements Func_name_from_typedef {
@@ -18558,14 +18558,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_name_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_name_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_string f_name_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_name_from_typedef(typedef);
+    public Core.Type_string f_name_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_name_from_typedef(vtypedef);
     }
 
   }
@@ -18573,9 +18573,9 @@ public final class Core {
   public static final Func_name_from_typedef e_name_from_typedef = new Core.Class_name_from_typedef();
   public static final Func_name_from_typedef t_name_from_typedef = new Core.Class_name_from_typedef();
 
-  public static Core.Type_string f_name_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_string f_name_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
-    output = typedef.name();
+    output = vtypedef.name();
     return output;
   }
 
@@ -19112,12 +19112,12 @@ public final class Core {
   /**
    * @function packagename_from_typedef
    * Returns the package name from a typedef.
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    * (func packagename<-typedef)
    */
   public static interface Func_packagename_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_string f_packagename_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_string f_packagename_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_packagename_from_typedef extends Core.Class_base implements Func_packagename_from_typedef {
@@ -19179,14 +19179,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_packagename_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_packagename_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_string f_packagename_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_packagename_from_typedef(typedef);
+    public Core.Type_string f_packagename_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_packagename_from_typedef(vtypedef);
     }
 
   }
@@ -19194,9 +19194,9 @@ public final class Core {
   public static final Func_packagename_from_typedef e_packagename_from_typedef = new Core.Class_packagename_from_typedef();
   public static final Func_packagename_from_typedef t_packagename_from_typedef = new Core.Class_packagename_from_typedef();
 
-  public static Core.Type_string f_packagename_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_string f_packagename_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
-    output = typedef.pkgname();
+    output = vtypedef.pkgname();
     return output;
   }
 
@@ -19478,12 +19478,12 @@ public final class Core {
   /**
    * @function properties_from_typedef
    * Return property map from typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {argmap}
    * (func properties<-typedef)
    */
   public static interface Func_properties_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_properties_from_typedef extends Core.Class_base implements Func_properties_from_typedef {
@@ -19545,14 +19545,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_properties_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_properties_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_properties_from_typedef(typedef);
+    public Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_properties_from_typedef(vtypedef);
     }
 
   }
@@ -19560,21 +19560,21 @@ public final class Core {
   public static final Func_properties_from_typedef e_properties_from_typedef = new Core.Class_properties_from_typedef();
   public static final Func_properties_from_typedef t_properties_from_typedef = new Core.Class_properties_from_typedef();
 
-  public static Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_argmap output = Core.e_argmap;
-    output = typedef.properties();
+    output = vtypedef.properties();
     return output;
   }
 
   /**
    * @function proplast_from_typedef
    * Return last property from typedef
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {arg}
    * (func proplast<-typedef)
    */
   public static interface Func_proplast_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_proplast_from_typedef extends Core.Class_base implements Func_proplast_from_typedef {
@@ -19636,14 +19636,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_proplast_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_proplast_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_proplast_from_typedef(typedef);
+    public Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_proplast_from_typedef(vtypedef);
     }
 
   }
@@ -19651,9 +19651,9 @@ public final class Core {
   public static final Func_proplast_from_typedef e_proplast_from_typedef = new Core.Class_proplast_from_typedef();
   public static final Func_proplast_from_typedef t_proplast_from_typedef = new Core.Class_proplast_from_typedef();
 
-  public static Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_arg output = Core.e_arg;
-    output = typedef.proplast();
+    output = vtypedef.proplast();
     return output;
   }
 
@@ -20932,12 +20932,12 @@ public final class Core {
   /**
    * @function traits_from_typedef
    * Return trait list from type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {typelist}
    * (func traits<-typedef)
    */
   public static interface Func_traits_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
@@ -20999,14 +20999,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_traits_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_traits_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_traits_from_typedef(typedef);
+    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_traits_from_typedef(vtypedef);
     }
 
   }
@@ -21014,9 +21014,9 @@ public final class Core {
   public static final Func_traits_from_typedef e_traits_from_typedef = new Core.Class_traits_from_typedef();
   public static final Func_traits_from_typedef t_traits_from_typedef = new Core.Class_traits_from_typedef();
 
-  public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;
-    output = typedef.traits();
+    output = vtypedef.traits();
     return output;
   }
 
@@ -21482,12 +21482,12 @@ public final class Core {
   /**
    * @function typename_from_typedef
    * Get the name of a given type
-   * @param  {typedef} typedef
+   * @param  {typedef} vtypedef
    * @return {string}
    * (func typename<-typedef)
    */
   public static interface Func_typename_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_string f_typename_from_typedef(final Core.Type_typedef typedef);
+    public Core.Type_string f_typename_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_typename_from_typedef extends Core.Class_base implements Func_typename_from_typedef {
@@ -21549,14 +21549,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef typedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      output = Core.f_typename_from_typedef(typedef);
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      output = Core.f_typename_from_typedef(vtypedef);
       return output;
     }
 
     @Override
-    public Core.Type_string f_typename_from_typedef(final Core.Type_typedef typedef) {
-      return Core.f_typename_from_typedef(typedef);
+    public Core.Type_string f_typename_from_typedef(final Core.Type_typedef vtypedef) {
+      return Core.f_typename_from_typedef(vtypedef);
     }
 
   }
@@ -21564,14 +21564,14 @@ public final class Core {
   public static final Func_typename_from_typedef e_typename_from_typedef = new Core.Class_typename_from_typedef();
   public static final Func_typename_from_typedef t_typename_from_typedef = new Core.Class_typename_from_typedef();
 
-  public static Core.Type_string f_typename_from_typedef(final Core.Type_typedef typedef) {
+  public static Core.Type_string f_typename_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
     output = Core.f_new(
       Core.t_string,
       Core.t_anylist.vx_new(
-        typedef.pkgname(),
+        vtypedef.pkgname(),
         Core.t_string.vx_new_from_string("/"),
-        typedef.name()
+        vtypedef.name()
       )
     );
     return output;

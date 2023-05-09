@@ -140,12 +140,12 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 	var ok = false
 	isgeneric := false
 	origname := typename
-	ipos := IntFromStringIndexLast(typename, "-1")
+	ipos := IntFromStringFindLast(typename, "-1")
 	if ipos < 0 {
-		ipos = IntFromStringIndexLast(typename, "-2")
+		ipos = IntFromStringFindLast(typename, "-2")
 	}
 	if ipos < 0 {
-		ipos = IntFromStringIndexLast(typename, "-3")
+		ipos = IntFromStringFindLast(typename, "-3")
 	}
 	if ipos >= 0 {
 		typename = StringSubstring(typename, 0, ipos)

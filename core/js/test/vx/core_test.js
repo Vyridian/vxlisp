@@ -169,7 +169,7 @@ export default class vx_core_test {
           "any<-func-async", 0,
           "any<-key-value", 0,
           "any<-key-value-async", 0,
-          "any<-list", 1,
+          "any<-list", 2,
           "any<-list-reduce", 1,
           "any<-list-reduce-next", 0,
           "any<-map", 1,
@@ -1390,6 +1390,25 @@ export default class vx_core_test {
                 {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
+                  "a",
+                  "b",
+                  "c"
+                ),
+                1
+              ),
+              context
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
+            ":testresult",
+            vx_test.f_test(
+              "b",
+              vx_core.f_any_from_list(
+                {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
+                vx_core.f_new(
+                  vx_core.t_stringlist,
                   "a",
                   "b",
                   "c"

@@ -245,10 +245,7 @@ func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgb
 
 func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("FuncValidate")
-	path = path + "/" + fnc.name
-	if fnc.idx > 0 {
-		path += "/" + StringFromInt(fnc.idx)
-	}
+	path = path + "/" + fnc.name + StringIndexFromFunc(fnc)
 	if fnc.isgeneric && fnc.generictype != nil {
 		// explict type added to function
 		genericname := fnc.generictype.name
@@ -359,10 +356,7 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncLink")
 	for _, fnc := range listfunc {
-		subpath := path + "/" + fnc.name
-		if fnc.idx > 0 {
-			subpath += "/" + StringFromInt(fnc.idx)
-		}
+		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)
 		typ := fnc.vxtype
 		lookuptype, ok := TypeOrFuncFromListScope(listscope, typ.pkgname, typ.name, subpath)
 		if ok {
@@ -390,10 +384,7 @@ func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfu
 func ListFuncLinkValues(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncLinkValues")
 	for _, fnc := range listfunc {
-		subpath := path + "/" + fnc.name
-		if fnc.idx > 0 {
-			subpath += "/" + StringFromInt(fnc.idx)
-		}
+		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)
 		listfuncscope := ListScopeAddFuncArg(listscope, fnc)
 		value, msgs := ValueLink(fnc.value, fnc.vxtype, listfuncscope, fnc.textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -508,7 +499,7 @@ func StringFromFunc(fnc *vxfunc) string {
 
 func StringFromFuncIndent(fnc *vxfunc, indent string) string {
 	output := ""
-	if len(indent) > 20 {
+	if len(indent) > 30 {
 		output += "..."
 	} else {
 		lineindent := "\n" + indent
@@ -562,6 +553,33 @@ func StringFromListFuncIndent(listfunc []*vxfunc, indent string) string {
 			output += lineindent + StringFromFuncIndent(fnc, indent+" ")
 		}
 		output += ")"
+	}
+	return output
+}
+
+func StringFromNativeFunc(fnc *vxfunc, lang string) string {
+	output := ""
+	if fnc.name == "native" {
+		isNative := false
+		for _, arg := range fnc.listarg {
+			var argvalue = arg.value
+			valuetext := ""
+			if argvalue.code == "string" {
+				valuetext = StringValueFromValue(argvalue)
+			}
+			if valuetext == lang {
+				isNative = true
+			} else if BooleanFromStringStarts(valuetext, ":") {
+				isNative = false
+			} else if isNative {
+				if argvalue.name == "newline" {
+					output += "\n"
+				} else {
+					value := arg.value
+					output += value.textblock.text
+				}
+			}
+		}
 	}
 	return output
 }
