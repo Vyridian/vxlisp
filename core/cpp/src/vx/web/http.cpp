@@ -150,12 +150,12 @@
    */
   //class Func_csv_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_csv_from_httpget* vx_web_http::Func_csv_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_csv_from_httpget* vx_web_http::Func_csv_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_csv_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_csv_from_httpget* vx_web_http::Func_csv_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_csv_from_httpget* vx_web_http::Func_csv_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_csv_from_httpget* output;
       return output;
     }
@@ -239,12 +239,12 @@
    */
   //class Func_json_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_json_from_httpget* vx_web_http::Func_json_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_json_from_httpget* vx_web_http::Func_json_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_json_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_json_from_httpget* vx_web_http::Func_json_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_json_from_httpget* vx_web_http::Func_json_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_json_from_httpget* output;
       return output;
     }
@@ -329,12 +329,12 @@
    */
   //class Func_response_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_response_from_httpget* vx_web_http::Func_response_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_response_from_httpget* vx_web_http::Func_response_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_response_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_response_from_httpget* vx_web_http::Func_response_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_response_from_httpget* vx_web_http::Func_response_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_response_from_httpget* output;
       return output;
     }
@@ -400,12 +400,12 @@
    */
   //class Func_text_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_text_from_httpget* vx_web_http::Func_text_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_text_from_httpget* vx_web_http::Func_text_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_text_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_text_from_httpget* vx_web_http::Func_text_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_text_from_httpget* vx_web_http::Func_text_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_text_from_httpget* output;
       return output;
     }
@@ -487,12 +487,12 @@
    */
   //class Func_text_from_response {
 
-    template<typename... Args> vx_web_http::Func_text_from_response* vx_web_http::Func_text_from_response::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_text_from_response* vx_web_http::Func_text_from_response::vx_new(Args*... args) {
       vx_web_http::Func_text_from_response* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_text_from_response* vx_web_http::Func_text_from_response::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_text_from_response* vx_web_http::Func_text_from_response::vx_copy(Args*... args) {
       vx_web_http::Func_text_from_response* output;
       return output;
     }
@@ -567,12 +567,12 @@
    */
   //class Func_textblock_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_textblock_from_httpget* vx_web_http::Func_textblock_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_textblock_from_httpget* vx_web_http::Func_textblock_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_textblock_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_textblock_from_httpget* vx_web_http::Func_textblock_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_textblock_from_httpget* vx_web_http::Func_textblock_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_textblock_from_httpget* output;
       return output;
     }
@@ -646,12 +646,12 @@
    */
   //class Func_textblock_from_response {
 
-    template<typename... Args> vx_web_http::Func_textblock_from_response* vx_web_http::Func_textblock_from_response::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_textblock_from_response* vx_web_http::Func_textblock_from_response::vx_new(Args*... args) {
       vx_web_http::Func_textblock_from_response* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_textblock_from_response* vx_web_http::Func_textblock_from_response::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_textblock_from_response* vx_web_http::Func_textblock_from_response::vx_copy(Args*... args) {
       vx_web_http::Func_textblock_from_response* output;
       return output;
     }
@@ -732,12 +732,12 @@
    */
   //class Func_xml_from_httpget {
 
-    template<typename... Args> vx_web_http::Func_xml_from_httpget* vx_web_http::Func_xml_from_httpget::vx_new(Args*... args) {
+    template<class... Args> vx_web_http::Func_xml_from_httpget* vx_web_http::Func_xml_from_httpget::vx_new(Args*... args) {
       vx_web_http::Func_xml_from_httpget* output;
       return output;
     }
 
-    template<typename... Args> vx_web_http::Func_xml_from_httpget* vx_web_http::Func_xml_from_httpget::vx_copy(Args*... args) {
+    template<class... Args> vx_web_http::Func_xml_from_httpget* vx_web_http::Func_xml_from_httpget::vx_copy(Args*... args) {
       vx_web_http::Func_xml_from_httpget* output;
       return output;
     }

@@ -463,12 +463,12 @@
    */
   //class Func_parse {
 
-    template<typename... Args> vx_data_textblock::Func_parse* vx_data_textblock::Func_parse::vx_new(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_parse* vx_data_textblock::Func_parse::vx_new(Args*... args) {
       vx_data_textblock::Func_parse* output;
       return output;
     }
 
-    template<typename... Args> vx_data_textblock::Func_parse* vx_data_textblock::Func_parse::vx_copy(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_parse* vx_data_textblock::Func_parse::vx_copy(Args*... args) {
       vx_data_textblock::Func_parse* output;
       return output;
     }
@@ -532,12 +532,12 @@
    */
   //class Func_stringlist_from_textblocklist {
 
-    template<typename... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_data_textblock::Func_stringlist_from_textblocklist::vx_new(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_data_textblock::Func_stringlist_from_textblocklist::vx_new(Args*... args) {
       vx_data_textblock::Func_stringlist_from_textblocklist* output;
       return output;
     }
 
-    template<typename... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_data_textblock::Func_stringlist_from_textblocklist::vx_copy(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_data_textblock::Func_stringlist_from_textblocklist::vx_copy(Args*... args) {
       vx_data_textblock::Func_stringlist_from_textblocklist* output;
       return output;
     }
@@ -614,12 +614,12 @@
    */
   //class Func_text_from_textblock {
 
-    template<typename... Args> vx_data_textblock::Func_text_from_textblock* vx_data_textblock::Func_text_from_textblock::vx_new(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_text_from_textblock* vx_data_textblock::Func_text_from_textblock::vx_new(Args*... args) {
       vx_data_textblock::Func_text_from_textblock* output;
       return output;
     }
 
-    template<typename... Args> vx_data_textblock::Func_text_from_textblock* vx_data_textblock::Func_text_from_textblock::vx_copy(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_text_from_textblock* vx_data_textblock::Func_text_from_textblock::vx_copy(Args*... args) {
       vx_data_textblock::Func_text_from_textblock* output;
       return output;
     }
@@ -692,12 +692,12 @@
    */
   //class Func_textblocks_from_textblock {
 
-    template<typename... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_data_textblock::Func_textblocks_from_textblock::vx_new(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_data_textblock::Func_textblocks_from_textblock::vx_new(Args*... args) {
       vx_data_textblock::Func_textblocks_from_textblock* output;
       return output;
     }
 
-    template<typename... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_data_textblock::Func_textblocks_from_textblock::vx_copy(Args*... args) {
+    template<class... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_data_textblock::Func_textblocks_from_textblock::vx_copy(Args*... args) {
       vx_data_textblock::Func_textblocks_from_textblock* output;
       return output;
     }

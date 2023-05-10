@@ -486,7 +486,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 		"\n    vx_core::Type_constdef* vx_constdef();" +
 		"\n    static " + cnstclassname + "* vx_const_new();" +
 		"\n  };" +
-		"\n  extern " + cnstclassname + "* c_" + cnstname + ";" +
+		//"\n  extern " + cnstclassname + "* c_" + cnstname + ";" +
 		"\n"
 	output := "" +
 		"\n  /**" +
@@ -514,7 +514,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 		"\n" +
 		"\n  //}" +
 		"\n" +
-		"\n  extern " + pkgname + "::" + cnstclassname + "* " + pkgname + "::c_" + cnstname + " = " + pkgname + "::" + cnstclassname + "::vx_const_new();" +
+		"\n  " + pkgname + "::" + cnstclassname + "* " + pkgname + "::c_" + cnstname + " = " + pkgname + "::" + cnstclassname + "::vx_const_new();" +
 		"\n" +
 		"\n"
 	return output, headers, msgblock
@@ -827,12 +827,12 @@ func CppFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		"\n  //class Func_" + funcname + " {" +
 		"\n" +
 		instancevars +
-		"\n    template<typename... Args> " + fullfuncname + "* " + fullfuncname + "::vx_new(Args*... args) {" +
+		"\n    template<class... Args> " + fullfuncname + "* " + fullfuncname + "::vx_new(Args*... args) {" +
 		"\n      " + pkgname + "::Func_" + funcname + "* output;" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
-		"\n    template<typename... Args> " + fullfuncname + "* " + fullfuncname + "::vx_copy(Args*... args) {" +
+		"\n    template<class... Args> " + fullfuncname + "* " + fullfuncname + "::vx_copy(Args*... args) {" +
 		"\n      " + pkgname + "::Func_" + funcname + "* output;" +
 		"\n      return output;" +
 		"\n    }" +
@@ -917,168 +917,230 @@ func CppFromName(name string) string {
 func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromPackage")
 	pkgname := CppFromName(pkg.name)
+	var specialtypeorder []string
+	var specialfuncorder []string
+	specialfirst := ""
 	specialheader := ""
 	specialbody := ""
 	extratext, ok := prj.maptext[pkg.name+"_cpp.txt"]
 	if ok {
-		//iheader := IntFromStringIndex("\n" + extratext, "\n// :header\n")
-		ibody := IntFromStringFind("\n"+extratext, "\n// :body\n")
-		specialheader = extratext[0:ibody]
-		specialbody = extratext[ibody-1:]
+		delimheaderfirst := "// :headerfirst\n"
+		delimheadertype := "// :headertype\n"
+		delimheaderfunc := "// :headerfunc\n"
+		delimheader := "// :header\n"
+		delimbody := "// :body\n"
+		specialfirst = StringFromStringFromTo(extratext, delimheaderfirst, delimheadertype)
+		specialtype := StringFromStringFromTo(extratext, delimheadertype, delimheaderfunc)
+		specialfunc := StringFromStringFromTo(extratext, delimheaderfunc, delimheader)
+		specialheader = StringFromStringFromTo(extratext, delimheader, delimbody)
+		specialbody = StringFromStringFromTo(extratext, delimbody, "")
+		if specialtype != "" {
+			specialtype = StringFromStringFindReplace(specialtype, delimheadertype, "")
+			specialtypeorder = ListStringFromStringSplit(specialtype, "\n")
+		}
+		if specialfunc != "" {
+			specialfunc = StringFromStringFindReplace(specialfunc, delimheaderfunc, "")
+			specialfuncorder = ListStringFromStringSplit(specialfunc, "\n")
+		}
 	}
-	switch pkg.name {
-	case "vx/core1":
-		specialheader = ""
-		specialbody = "" /* +
-		specialcode = "" +
-			"\n" +
-			"\n  class KeyValue<T> {" +
-			"\n    std::string key = \"\";" +
-			"\n    T value = null;" +
-			"\n  }" +
-			"\n" +
-			"\n  vx_core::Type_any[] arrayany_from_anylist(vx_core::Type_anylist* list) {" +
-			"\n    return list->vx_list().toArray(new vx_core::Type_any[0]);" +
-			"\n  }" +
-			"\n" +
-			"\n  <T> std::vector<T*> arraylist_from_array(T* items...) {" +
-			"\n    std::vector<T*> output = new std::vector<T>(Arrays.asList(items));" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T*> arraylist_from_arraylist(T* generic_any_1, std::vector<U*> listval) {" +
-			"\n    std::vector<T*> output;" +
-			"\n    for (vx_core::Type_any value : listval) {" +
-			"\n      T t_val = vx_core::f_any_from_any(generic_any_1, value);" +
-			"\n      output.push_back(t_val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T, U> std::vector<T*> arraylist_from_arraylist_fn(std::vector<U*> listval, Function<U*, T*> fn_any_from_any) {" +
-			"\n    std::vector<*> output;" +
-			"\n    for (U* value_u : listval) {" +
-			"\n      T* t_val = fn_any_from_any->apply(value_u);" +
-			"\n      output.push_back(t_val);" +
-			"\n    }" +
-			"\n    output = vx_core::immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T> arraylist_from_linkedhashmap(T generic_any_1, std::map<std::string, U> mapval) {" +
-			"\n    std::vector<T> output = new std::vector<T>();" +
-			"\n    std::set<std:string> keys = mapval.keySet();" +
-			"\n    for (std::string key : keys) {" +
-			"\n      U u_val = mapval.get(key);" +
-			"\n      T t_val = vx_core::f_any_from_any(generic_any_1, u_val);" +
-			"\n      output.push_back(t_val);" +
-			"\n    }" +
-			"\n    output = vx_core::immutablelist(output);" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T, U> std::vector<T> arraylist_from_linkedhashmap_fn(std::map<std::string, U> mapval, BiFunction<String, U, T> fn_any_from_key_value) {" +
-			"\n    std::vector<T> output = new std::vector<T>();" +
-			"\n    std::set<std::string> keys = mapval.keySet();" +
-			"\n    for (std::string key : keys) {" +
-			"\n      U u_val = mapval.get(key);" +
-			"\n      T t_val = fn_any_from_key_value.apply(key, u_val);" +
-			"\n      output.push_back(t_val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T> vx_core::Async<std::vector<T>> async_arraylist_from_arraylist_async(std::vector<vx_core::Async<T>> list_future) {" +
-			"\n    vx_core::Async<Void> allFutures = vx_core::Async.allOf(" +
-			"\n      list_future.toArray(new vx_core::Async[list_future.size()])" +
-			"\n    );" +
-			"\n    vx_core::Async<std::vector<T*>> output = allFutures.thenApply(v -> {" +
-			"\n      std::vector<T*> list = list_future.stream()" +
-			"\n        .map(future -> future.join())" +
-			"\n        .collect(Collectors.toList());" +
-			"\n      return vx_core::immutablelist(list);" +
-			"\n    });" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  void debug(std::any* values...) {" +
-			"\n    for (std::any* value : values) {" +
-			"\n      std::string text = \"\";" +
-			"\n      if (value == null) {" +
-			"\n        text = \"null\";" +
-			"\n      } else if (value == vx_core::t_any) {" +
-			"\n        vx_core::Type_any* val_any = (vx_core::Type_any)value;" +
-			"\n        vx_core::Type_string* valstring = vx_core::f_string_from_any(val_any);" +
-			"\n        text = valstring->vx_string();" +
-			"\n      } else {" +
-			"\n        text = vx_core::string_from_any(value);" +
-			"\n      }" +
-			"\n      System.out.println(text);" +
-			"\n    }" +
-			"\n  }" +
-			"\n" +
-			"\n  <T> LinkedHashstd::map<std::string, T> hashmap_from_keyvalues(KeyValue<T> keyvalues...) {" +
-			"\n    LinkedHashstd::map<std::string, T> output = new LinkedHashstd::map<std::string, T>();" +
-			"\n    for (KeyValue<T> keyvalue : keyvalues) {" +
-			"\n      std::string key = keyvalue.key;" +
-			"\n      T value = keyvalue.value;" +
-			"\n      output[key] = value;" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T> KeyValue<T> keyvalue_from_key_value(std::string key, T value) {" +
-			"\n    KeyValue<T> output;" +
-			"\n    output.key = key;" +
-			"\n    output.value = value;" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T*> std::map<std::string, T*> map_from_list_fn(std::vector<T*> listval, Function<T*, vx_core::Type_string> fn_any_from_any) {" +
-			"\n    std::map<std::string, T*> output;" +
-			"\n    for (T* val : listval) {" +
-			"\n      vx_core::Type_string valkey = fn_any_from_any->apply(val);" +
-			"\n      std::string key = valkey->vx_string();" +
-			"\n      output[key] = val;" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  <T extends vx_core::Type_any> LinkedHashstd::map<std::string, T> map_from_map(LinkedHashstd::map<std::string, vx_core::Type_any> mapval) {" +
-			"\n    LinkedHashstd::map<std::string, T> output;" +
-			"\n    std::set<std::string> keys = mapval.keySet();" +
-			"\n    for (std::string key : keys) {" +
-			"\n      vx_core::Type_any value = mapval.get(key);" +
-			"\n      try {" +
-			"\n        @SuppressWarnings(\"unchecked\")" +
-			"\n        T castval = (T)value;" +
-			"\n        output[key] = castval;" +
-			"\n      } catch (Exception ex) {" +
-			"\n        vx_core::debug(\"std::map<-map\", ex);" +
-			"\n      }" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-			"\n  // Warning!: Blocking" +
-			"\n  <T extends vx_core::Type_any> T sync_from_async(T generic_any_1, vx_core::Async<T> future) {" +
-			"\n    T output = vx_core::f_empty(generic_any_1);" +
-			"\n    try {" +
-			"\n      output = future.get();" +
-			"\n    } catch (Exception e) {" +
-			"\n      vx_core::Type_msg* msg = vx_core::t_msg->vx_new_from_exception(\"sync<-async\", e);" +
-			"\n      vx_core::Type_any* val = generic_any_1->vx_new(msg);" +
-			"\n      output = vx_core::f_any_from_any(generic_any_1, val);" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n" +
-		*/
-	}
+	/*
+		switch pkg.name {
+		case "vx/core1":
+			specialheader = ""
+			specialbody = "" +
+			specialcode = "" +
+				"\n" +
+				"\n  class KeyValue<T> {" +
+				"\n    std::string key = \"\";" +
+				"\n    T value = null;" +
+				"\n  }" +
+				"\n" +
+				"\n  vx_core::Type_any[] arrayany_from_anylist(vx_core::Type_anylist* list) {" +
+				"\n    return list->vx_list().toArray(new vx_core::Type_any[0]);" +
+				"\n  }" +
+				"\n" +
+				"\n  <T> std::vector<T*> arraylist_from_array(T* items...) {" +
+				"\n    std::vector<T*> output = new std::vector<T>(Arrays.asList(items));" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T*> arraylist_from_arraylist(T* generic_any_1, std::vector<U*> listval) {" +
+				"\n    std::vector<T*> output;" +
+				"\n    for (vx_core::Type_any value : listval) {" +
+				"\n      T t_val = vx_core::f_any_from_any(generic_any_1, value);" +
+				"\n      output.push_back(t_val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T, U> std::vector<T*> arraylist_from_arraylist_fn(std::vector<U*> listval, Function<U*, T*> fn_any_from_any) {" +
+				"\n    std::vector<*> output;" +
+				"\n    for (U* value_u : listval) {" +
+				"\n      T* t_val = fn_any_from_any->apply(value_u);" +
+				"\n      output.push_back(t_val);" +
+				"\n    }" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T extends vx_core::Type_any, U extends vx_core::Type_any> std::vector<T> arraylist_from_linkedhashmap(T generic_any_1, std::map<std::string, U> mapval) {" +
+				"\n    std::vector<T> output = new std::vector<T>();" +
+				"\n    std::set<std:string> keys = mapval.keySet();" +
+				"\n    for (std::string key : keys) {" +
+				"\n      U u_val = mapval.get(key);" +
+				"\n      T t_val = vx_core::f_any_from_any(generic_any_1, u_val);" +
+				"\n      output.push_back(t_val);" +
+				"\n    }" +
+				"\n    output = vx_core::immutablelist(output);" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T, U> std::vector<T> arraylist_from_linkedhashmap_fn(std::map<std::string, U> mapval, BiFunction<String, U, T> fn_any_from_key_value) {" +
+				"\n    std::vector<T> output = new std::vector<T>();" +
+				"\n    std::set<std::string> keys = mapval.keySet();" +
+				"\n    for (std::string key : keys) {" +
+				"\n      U u_val = mapval.get(key);" +
+				"\n      T t_val = fn_any_from_key_value.apply(key, u_val);" +
+				"\n      output.push_back(t_val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T> vx_core::Async<std::vector<T>> async_arraylist_from_arraylist_async(std::vector<vx_core::Async<T>> list_future) {" +
+				"\n    vx_core::Async<Void> allFutures = vx_core::Async.allOf(" +
+				"\n      list_future.toArray(new vx_core::Async[list_future.size()])" +
+				"\n    );" +
+				"\n    vx_core::Async<std::vector<T*>> output = allFutures.thenApply(v -> {" +
+				"\n      std::vector<T*> list = list_future.stream()" +
+				"\n        .map(future -> future.join())" +
+				"\n        .collect(Collectors.toList());" +
+				"\n      return vx_core::immutablelist(list);" +
+				"\n    });" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  void debug(std::any* values...) {" +
+				"\n    for (std::any* value : values) {" +
+				"\n      std::string text = \"\";" +
+				"\n      if (value == null) {" +
+				"\n        text = \"null\";" +
+				"\n      } else if (value == vx_core::t_any) {" +
+				"\n        vx_core::Type_any* val_any = (vx_core::Type_any)value;" +
+				"\n        vx_core::Type_string* valstring = vx_core::f_string_from_any(val_any);" +
+				"\n        text = valstring->vx_string();" +
+				"\n      } else {" +
+				"\n        text = vx_core::string_from_any(value);" +
+				"\n      }" +
+				"\n      System.out.println(text);" +
+				"\n    }" +
+				"\n  }" +
+				"\n" +
+				"\n  <T> LinkedHashstd::map<std::string, T> hashmap_from_keyvalues(KeyValue<T> keyvalues...) {" +
+				"\n    LinkedHashstd::map<std::string, T> output = new LinkedHashstd::map<std::string, T>();" +
+				"\n    for (KeyValue<T> keyvalue : keyvalues) {" +
+				"\n      std::string key = keyvalue.key;" +
+				"\n      T value = keyvalue.value;" +
+				"\n      output[key] = value;" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T> KeyValue<T> keyvalue_from_key_value(std::string key, T value) {" +
+				"\n    KeyValue<T> output;" +
+				"\n    output.key = key;" +
+				"\n    output.value = value;" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T*> std::map<std::string, T*> map_from_list_fn(std::vector<T*> listval, Function<T*, vx_core::Type_string> fn_any_from_any) {" +
+				"\n    std::map<std::string, T*> output;" +
+				"\n    for (T* val : listval) {" +
+				"\n      vx_core::Type_string valkey = fn_any_from_any->apply(val);" +
+				"\n      std::string key = valkey->vx_string();" +
+				"\n      output[key] = val;" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  <T extends vx_core::Type_any> LinkedHashstd::map<std::string, T> map_from_map(LinkedHashstd::map<std::string, vx_core::Type_any> mapval) {" +
+				"\n    LinkedHashstd::map<std::string, T> output;" +
+				"\n    std::set<std::string> keys = mapval.keySet();" +
+				"\n    for (std::string key : keys) {" +
+				"\n      vx_core::Type_any value = mapval.get(key);" +
+				"\n      try {" +
+				"\n        @SuppressWarnings(\"unchecked\")" +
+				"\n        T castval = (T)value;" +
+				"\n        output[key] = castval;" +
+				"\n      } catch (Exception ex) {" +
+				"\n        vx_core::debug(\"std::map<-map\", ex);" +
+				"\n      }" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+				"\n  // Warning!: Blocking" +
+				"\n  <T extends vx_core::Type_any> T sync_from_async(T generic_any_1, vx_core::Async<T> future) {" +
+				"\n    T output = vx_core::f_empty(generic_any_1);" +
+				"\n    try {" +
+				"\n      output = future.get();" +
+				"\n    } catch (Exception e) {" +
+				"\n      vx_core::Type_msg* msg = vx_core::t_msg->vx_new_from_exception(\"sync<-async\", e);" +
+				"\n      vx_core::Type_any* val = generic_any_1->vx_new(msg);" +
+				"\n      output = vx_core::f_any_from_any(generic_any_1, val);" +
+				"\n    }" +
+				"\n    return output;" +
+				"\n  }" +
+				"\n" +
+		}
+	*/
+	forwardheader := "\n  // forward declarations"
 	typkeys := ListKeyFromMapType(pkg.maptype)
+	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
+	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
+	for _, typid := range typkeys {
+		typ := pkg.maptype[typid]
+		typename := CppFromName(typ.alias)
+		forwardheader += "" +
+			"\n  class Type_" + typename + ";" +
+			"\n  extern Type_" + typename + "* e_" + typename + ";" +
+			"\n  extern Type_" + typename + "* t_" + typename + ";"
+	}
+	for _, constid := range cnstkeys {
+		cnst := pkg.mapconst[constid]
+		constname := CppFromName(cnst.alias)
+		forwardheader += "" +
+			"\n  class Const_" + constname + ";" +
+			"\n  extern Const_" + constname + "* c_" + constname + ";"
+	}
+	for _, funcid := range fnckeys {
+		fncs := pkg.mapfunc[funcid]
+		for _, fnc := range fncs {
+			funcname := CppFromName(fnc.alias)
+			forwardheader += "" +
+				"\n  class Func_" + funcname + ";" +
+				"\n  extern Func_" + funcname + "* e_" + funcname + ";" +
+				"\n  extern Func_" + funcname + "* t_" + funcname + ";"
+		}
+	}
 	typeheaders := ""
 	typetexts := ""
-	for _, typid := range typkeys {
+	for _, typid := range specialtypeorder {
+		if typid != "" {
+			typ, ok := pkg.maptype[typid]
+			if !ok {
+				msg := NewMsg(":headertype type not found: " + pkg.name + "/" + typid)
+				msgblock = MsgblockAddError(msgblock, msg)
+			} else {
+				typeheader := CppHeaderFromType(typ)
+				typetext, msgs := CppFromType(typ)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				typetexts += typetext
+				specialheader += typeheader
+			}
+		}
+	}
+	remainingkeys := ListStringFromListStringNotMatch(typkeys, specialtypeorder)
+	for _, typid := range remainingkeys {
 		typ := pkg.maptype[typid]
 		typeheader := CppHeaderFromType(typ)
 		typetext, msgs := CppFromType(typ)
@@ -1086,7 +1148,6 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		typetexts += typetext
 		typeheaders += typeheader
 	}
-	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
 	constheaders := ""
 	consttexts := ""
 	for _, cnstid := range cnstkeys {
@@ -1096,11 +1157,29 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		consttexts += consttext
 		constheaders += constheader
 	}
-	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	funcheaders := ""
 	funcheaderfooters := ""
 	functexts := ""
-	for _, fncid := range fnckeys {
+	for _, fncid := range specialfuncorder {
+		if fncid != "" {
+			fncs, ok := pkg.mapfunc[fncid]
+			if !ok {
+				msg := NewMsg(":headerfunc func not found: " + pkg.name + "/" + fncid)
+				msgblock = MsgblockAddError(msgblock, msg)
+			} else {
+				for _, fnc := range fncs {
+					fncheader, fncheaderfooter := CppHeaderFromFunc(fnc)
+					fnctext, msgs := CppFromFunc(fnc)
+					msgblock = MsgblockAddBlock(msgblock, msgs)
+					functexts += fnctext
+					specialheader += fncheader
+					funcheaderfooters += fncheaderfooter
+				}
+			}
+		}
+	}
+	remainingkeys = ListStringFromListStringNotMatch(fnckeys, specialfuncorder)
+	for _, fncid := range remainingkeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
 			fncheader, fncheaderfooter := CppHeaderFromFunc(fnc)
@@ -1125,6 +1204,10 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		imports +
 		"\nnamespace " + pkgname + " {" +
 		"\n" +
+		forwardheader +
+		"\n" +
+		"\n" +
+		specialfirst +
 		specialheader +
 		typeheaders +
 		constheaders +
@@ -2507,6 +2590,9 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 	if BooleanFromStringContains(body, " std::function<") {
 		output += "#include <functional>\n"
 	}
+	if BooleanFromStringContains(body, " std::shared_future<") {
+		output += "#include <future>\n"
+	}
 	if BooleanFromStringContains(body, " std::cout ") {
 		output += "#include <iostream>\n"
 	}
@@ -2564,8 +2650,8 @@ func CppHeaderFromType(typ *vxtype) string {
 	typename := CppNameFromType(typ)
 	fulltypename := pkgname + "::Type_" + typename
 	basics := "" +
-		"\n    template<typename... Args> " + fulltypename + "* vx_new(Args*... args);" +
-		"\n    template<typename... Args> " + fulltypename + "* vx_copy(Args*... args);" +
+		"\n    template<class... Args> " + fulltypename + "* vx_new(Args*... args);" +
+		"\n    template<class... Args> " + fulltypename + "* vx_copy(Args*... args);" +
 		"\n    virtual " + fulltypename + "* vx_empty();" +
 		"\n    virtual " + fulltypename + "* vx_type();" +
 		"\n    virtual vx_core::Type_typedef* vx_typedef();"
@@ -2607,7 +2693,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    virtual void vx_reserve();" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/boolean":
 		output = "" +
 			"\n  // (type boolean)" +
@@ -2615,7 +2702,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/decimal":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2623,7 +2711,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/float":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2631,7 +2720,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/func":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2640,7 +2730,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			basics +
 			extras +
 			"\n    virtual vx_core::Type_funcdef* vx_funcdef();" +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/int":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2648,7 +2739,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/string":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2656,7 +2748,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/list":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2667,7 +2760,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    std::vector<vx_core::Type_any*> vx_p_list;" +
 			"\n    virtual std::vector<vx_core::Type_any*> vx_list();" +
 			"\n    virtual vx_core::Type_any* vx_any(vx_core::Type_int* index);" +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/map":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2679,7 +2773,8 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    virtual std::map<std::string, vx_core::Type_any*> vx_map();" +
 			"\n    virtual vx_core::Type_any* vx_any(vx_core::Type_string* key);" +
 			"\n    virtual vx_core::Type_map* vx_new_from_map(std::map<std::string, vx_core::Type_any*> mapval);" +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	case "vx/core/struct":
 		output = "" +
 			"\n  // (type " + typ.name + ")" +
@@ -2695,8 +2790,8 @@ func CppHeaderFromType(typ *vxtype) string {
 		switch NameFromType(typ) {
 		case "vx/core/msg":
 			basics = "" +
-				"\n    template<typename... Args> " + fulltypename + "* vx_new(Args*... args);" +
-				"\n    template<typename... Args> " + fulltypename + "* vx_copy(Args*... args);" +
+				"\n    template<class... Args> " + fulltypename + "* vx_new(Args*... args);" +
+				"\n    template<class... Args> " + fulltypename + "* vx_copy(Args*... args);" +
 				"\n    virtual " + fulltypename + "* vx_empty();" +
 				"\n    virtual " + fulltypename + "* vx_type();" +
 				"\n    virtual vx_core::Type_typedef* vx_typedef();"
@@ -2705,8 +2800,8 @@ func CppHeaderFromType(typ *vxtype) string {
 				"\n    virtual vx_core::Type_msg* vx_new_from_exception(std::string text, std::exception err);"
 		case "vx/core/msgblock":
 			basics = "" +
-				"\n    template<typename... Args> " + fulltypename + "* vx_new(Args*... args);" +
-				"\n    template<typename... Args> " + fulltypename + "* vx_copy(Args*... args);" +
+				"\n    template<class... Args> " + fulltypename + "* vx_new(Args*... args);" +
+				"\n    template<class... Args> " + fulltypename + "* vx_copy(Args*... args);" +
 				"\n    virtual " + fulltypename + "* vx_empty();" +
 				"\n    virtual " + fulltypename + "* vx_type();" +
 				"\n    virtual vx_core::Type_typedef* vx_typedef();"
@@ -2807,12 +2902,13 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n  public:" +
 			basics +
 			extras +
-			"\n  };"
+			"\n  };" +
+			"\n"
 	}
-	output += "" +
-		"\n  extern " + pkgname + "::Type_" + typename + "* e_" + typename + ";" +
-		"\n  extern " + pkgname + "::Type_" + typename + "* t_" + typename + ";" +
-		"\n"
+	//	output += "" +
+	//		"\n  extern " + pkgname + "::Type_" + typename + "* e_" + typename + ";" +
+	//		"\n  extern " + pkgname + "::Type_" + typename + "* t_" + typename + ";" +
+	//		"\n"
 	return output
 }
 
@@ -3009,8 +3105,8 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		"\n  // (func " + fnc.name + ")" +
 		"\n  class Func_" + funcname + " : " + extends + " {" +
 		"\n  public:" +
-		"\n    template<typename... Args> " + pkgname + "::Func_" + funcname + "* vx_new(Args*... args);" +
-		"\n    template<typename... Args> " + pkgname + "::Func_" + funcname + "* vx_copy(Args*... args);" +
+		"\n    template<class... Args> " + pkgname + "::Func_" + funcname + "* vx_new(Args*... args);" +
+		"\n    template<class... Args> " + pkgname + "::Func_" + funcname + "* vx_copy(Args*... args);" +
 		"\n    virtual vx_core::Type_funcdef* vx_funcdef();" +
 		"\n    virtual vx_core::Type_typedef* vx_typedef();" +
 		"\n    virtual " + pkgname + "::Func_" + funcname + "* vx_empty();" +
@@ -3018,8 +3114,8 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		fnheaders +
 		interfaces +
 		"\n  };" +
-		"\n  extern Func_" + funcname + "* e_" + funcname + ";" +
-		"\n  extern Func_" + funcname + "* t_" + funcname + ";" +
+		//		"\n  extern Func_" + funcname + "* e_" + funcname + ";" +
+		//		"\n  extern Func_" + funcname + "* t_" + funcname + ";" +
 		"\n"
 	headerfooter := "" +
 		"\n  // (func " + fnc.name + ")" +
@@ -3587,7 +3683,7 @@ namespace app_test {
 ` + tests +
 		`
 	// test_writetestsuite
-  std::string test_writetestsuite() {
+  vx_core::Type_boolean* test_writetestsuite() {
     vx_test::Type_testpackagelist* testpackagelist = vx_test::t_testpackagelist->vx_new(` +
 		testpackages +
 		`
@@ -3602,8 +3698,10 @@ namespace app_test {
       all_args.assign(argv + 1, argv + argc);
     }
     int output = 1;
-    std::string writetest = test_writetestsuite();
-		std::cout << writetest;
+    vx_core::Type_boolean* writetest = test_writetestsuite();
+		vx_core::Type_string* stringwritetest = vx_core::f_string_from_any(writetest);
+		std::string swritetest = stringwritetest->vx_string();
+		std::cout << swritetest;
     return output;
   }
 
@@ -3619,95 +3717,6 @@ func CppTestLib() string {
 #include "../../src/vx/data/file.hpp"
 
 namespace test_lib {
-
-  vx_test::Type_testcase* run_testcase(vx_test::Type_testcase* testcase) {
-    std::string testpkg = testcase->testpkg()->vx_string();
-    std::string casename = testcase->casename()->vx_string();
-    vx_test::Type_testdescribelist* testdescribelist = testcase->describelist();
-    vx_test::Type_testdescribelist* testdescribelist_resolved = run_testdescribelist(testpkg, casename, testdescribelist);
-		vx_test::Type_testcase* output = testcase->vx_copy(vx_core::t_string->new_from_string(":describelist", testdescribelist_resolved);
-		return output;
-  }
-
-  // Blocking
-  // Only use if running a single testcase
-  vx_test::Type_testcase* run_testcase_async(vx_test::Type_testcase* testcase) {
-    vx_core::Async<vx_test::Type_testcase*>* async_testcase = vx_test::f_resolve_testcase(testcase);
-    vx_test::Type_testcase* testcase_resolved = vx_core::sync_from_async(vx_test::t_testcase, async_testcase);
-    return run_testcase(testcase_resolved);
-  }
-
-  vx_test::Type_testcaselist* run_testcaselist(vx_test::Type_testcaselist* testcaselist) {
-    std::vector<vx_test::Type_testcase*> listtestcase = testcaselist->vx_listtestcase();
-    std::vector<vx_test::Type_testcase*> listtestcase_resolved;
-    for (vx_test::Type_testcase* testcase : listtestcase) {
-      vx_test::Type_testcase* testcase_resolved = run_testcase(testcase);
-			listtestcase_resolved.push_back(testcase_resolved);
-    }
-		vx_test::Type_testcase* output = testcaselist->vx_copy(testcaselist_resolved);
-    return output;
-  }
-
-  vx_test::Type_testdescribe* run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe* describe) {
-    vx_core::Type_string* testcode = describe->describename();
-    std::string message = testcode->vx_string();
-    vx_test::Type_testresult* testresult = describe->testresult();
-    vx_test::Type_testresult* testresultresolved = run_testresult(testpkg, casename, message, testresult);
-		return output;
-  }
-
-  // Blocking
-  // Only use if running a single testdescribe
-  vx_test::Type_testdescribe* run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe* testdescribe) {
-    vx_core::Async<vx_test::Type_testdescribe*>* async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
-    vx_test::Type_testdescribe* testdescribe_resolved = vx_core::sync_from_async(vx_test::t_testdescribe, async_testdescribe);
-    return run_testdescribe(testpkg, casename, testdescribe_resolved);
-  }
-
-  vx_test::Type_testdescribelist* run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist* testdescribelist) {
-    std::vector<vx_test::Type_testdescribe*> listtestdescribe = testdescribelist->vx_listtestdescribe();
-    std::vector<vx_test::Type_testdescribe*> listtestdescribe_resolved;
-    for (vx_test::Type_testdescribe* testdescribe : listtestdescribe) {
-      vx_test::Type_testdescribe* testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
-			listtestdescribe_resolved.push_back(testdescribe_resolved);
-    }
-		vx_test::Type_testpackagelist* output = testdescribelist->vx_copy(listtestdescribe_resolved);
-    return output;
-  }
-
-  vx_test::Type_testpackage* run_testpackage(vx_test::Type_testpackage* testpackage) {
-    vx_test::Type_testcaselist* testcaselist = testpackage->caselist();
-    vx_test::Type_testcaselist* testcaselist_resolved = run_testcaselist(testcaselist);
-		vx_test::Type_testpackage* output = testpackage->vx_copy(vx_core::t_string.new_from_string(":caselist"), testcaselist_resolved);
-		return output;
-  }
-
-  vx_test::Type_testpackagelist* run_testpackagelist(vx_test::Type_testpackagelist* testpackagelist) {
-    std::vector<vx_test::Type_testpackage*> listtestpackage = testpackagelist->vx_listtestpackage();
-    std::vector<vx_test::Type_testpackage*> listtestpackage_resolved;
-    for (vx_test::Type_testpackage* testpackage : listtestpackage) {
-      vx_test::Type_testpackage* testpackage_resolved = run_testpackage(testpackage);
-			listtestpackage_resolved.push_back(testpackage_resolved);
-    }
-		vx_test::Type_testpackagelist* output = testpackagelist->vx_copy(listtestpackage_resolved);
-    return output;
-  }
-
-  // Blocking
-  // This is the preferred way of calling test (1 block per package)
-  vx_test::Type_testpackage* run_testpackage_async(vx_test::Type_testpackage* testpackage) {
-    vx_core::Async<vx_test::Type_testpackage*>* async_testpackage = vx_test::f_resolve_testpackage(testpackage);
-    vx_test::Type_testpackage* testpackage_resolved = vx_core::sync_from_async(vx_test::t_testpackage, async_testpackage);
-    return run_testpackage(testpackage_resolved);
-  }
-
-  // Blocking
-  // This is the preferred way of calling testsuite (1 block per testsuite)
-  vx_test::Type_testpackagelist* run_testpackagelist_async(vx_test::Type_testpackagelist* testpackagelist) {
-    vx_core::Async<vx_test::Type_testpackagelist*>* async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
-    vx_test::Type_testpackagelist* testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
-    return run_testpackagelist(testpackagelist_resolved);
-  }
 
   vx_test::Type_testresult* run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult* testresult) {
     vx_core::Type_any* valexpected = testresult->expected();
@@ -3732,29 +3741,117 @@ namespace test_lib {
   }
 
   // Blocking
-  vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult* testresult) {
+  vx_test::Type_testresult* run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult* testresult) {
     vx_core::Async<vx_test::Type_testresult*>* async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_test::Type_testresult* testresult_resolved = vx_core::sync_from_async(vx_test::t_testresult, async_testresult);
     return run_testresult(testpkg, testname, message, testresult_resolved);
   }
 
+  vx_test::Type_testdescribe* run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe* describe) {
+    vx_core::Type_string* testcode = describe->describename();
+    std::string message = testcode->vx_string();
+    vx_test::Type_testresult* testresult = describe->testresult();
+    vx_test::Type_testresult* testresultresolved = run_testresult(testpkg, casename, message, testresult);
+    vx_test::Type_testdescribe* output = describe->vx_copy(vx_core::t_string->vx_new_from_string(":testresult"), testresultresolved);
+		return output;
+  }
+
+  // Blocking
+  // Only use if running a single testdescribe
+  vx_test::Type_testdescribe* run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe* testdescribe) {
+    vx_core::Async<vx_test::Type_testdescribe*>* async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
+    vx_test::Type_testdescribe* testdescribe_resolved = vx_core::sync_from_async(vx_test::t_testdescribe, async_testdescribe);
+    return run_testdescribe(testpkg, casename, testdescribe_resolved);
+  }
+
+  vx_test::Type_testdescribelist* run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist* testdescribelist) {
+    std::vector<vx_test::Type_testdescribe*> listtestdescribe = testdescribelist->vx_listtestdescribe();
+    std::vector<vx_test::Type_testdescribe*> listtestdescribe_resolved;
+    for (vx_test::Type_testdescribe* testdescribe : listtestdescribe) {
+      vx_test::Type_testdescribe* testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
+			listtestdescribe_resolved.push_back(testdescribe_resolved);
+    }
+		vx_test::Type_testdescribelist* output = testdescribelist->vx_copy(&listtestdescribe_resolved);
+    return output;
+  }
+
+	vx_test::Type_testcase* run_testcase(vx_test::Type_testcase* testcase) {
+    std::string testpkg = testcase->testpkg()->vx_string();
+    std::string casename = testcase->casename()->vx_string();
+    vx_test::Type_testdescribelist* testdescribelist = testcase->describelist();
+    vx_test::Type_testdescribelist* testdescribelist_resolved = run_testdescribelist(testpkg, casename, testdescribelist);
+		vx_test::Type_testcase* output = testcase->vx_copy(vx_core::t_string->vx_new_from_string(":describelist"), testdescribelist_resolved);
+		return output;
+  }
+
+  // Blocking
+  // Only use if running a single testcase
+  vx_test::Type_testcase* run_testcase_async(vx_test::Type_testcase* testcase) {
+    vx_core::Async<vx_test::Type_testcase*>* async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_test::Type_testcase* testcase_resolved = vx_core::sync_from_async(vx_test::t_testcase, async_testcase);
+    return run_testcase(testcase_resolved);
+  }
+
+	vx_test::Type_testcaselist* run_testcaselist(vx_test::Type_testcaselist* testcaselist) {
+    std::vector<vx_test::Type_testcase*> listtestcase = testcaselist->vx_listtestcase();
+    std::vector<vx_test::Type_testcase*> listtestcase_resolved;
+    for (vx_test::Type_testcase* testcase : listtestcase) {
+      vx_test::Type_testcase* testcase_resolved = run_testcase(testcase);
+			listtestcase_resolved.push_back(testcase_resolved);
+    }
+		vx_test::Type_testcaselist* output = testcaselist->vx_copy(&listtestcase_resolved);
+    return output;
+  }
+
+  vx_test::Type_testpackage* run_testpackage(vx_test::Type_testpackage* testpackage) {
+    vx_test::Type_testcaselist* testcaselist = testpackage->caselist();
+    vx_test::Type_testcaselist* testcaselist_resolved = run_testcaselist(testcaselist);
+		vx_test::Type_testpackage* output = testpackage->vx_copy(vx_core::t_string->vx_new_from_string(":caselist"), testcaselist_resolved);
+		return output;
+  }
+
+  vx_test::Type_testpackagelist* run_testpackagelist(vx_test::Type_testpackagelist* testpackagelist) {
+    std::vector<vx_test::Type_testpackage*> listtestpackage = testpackagelist->vx_listtestpackage();
+    std::vector<vx_test::Type_testpackage*> listtestpackage_resolved;
+    for (vx_test::Type_testpackage* testpackage : listtestpackage) {
+      vx_test::Type_testpackage* testpackage_resolved = run_testpackage(testpackage);
+			listtestpackage_resolved.push_back(testpackage_resolved);
+    }
+		vx_test::Type_testpackagelist* output = testpackagelist->vx_copy(&listtestpackage_resolved);
+    return output;
+  }
+
+  // Blocking
+  // This is the preferred way of calling test (1 block per package)
+  vx_test::Type_testpackage* run_testpackage_async(vx_test::Type_testpackage* testpackage) {
+    vx_core::Async<vx_test::Type_testpackage*>* async_testpackage = vx_test::f_resolve_testpackage(testpackage);
+    vx_test::Type_testpackage* testpackage_resolved = vx_core::sync_from_async(vx_test::t_testpackage, async_testpackage);
+    return run_testpackage(testpackage_resolved);
+  }
+
+  // Blocking
+  // This is the preferred way of calling testsuite (1 block per testsuite)
+  vx_test::Type_testpackagelist* run_testpackagelist_async(vx_test::Type_testpackagelist* testpackagelist) {
+    vx_core::Async<vx_test::Type_testpackagelist*>* async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    vx_test::Type_testpackagelist* testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
+    return run_testpackagelist(testpackagelist_resolved);
+  }
+
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  std::string write_testpackagelist_async(vx_test::Type_testpackagelist* testpackagelist, vx_core::Type_context* context) {
+  vx_core::Type_boolean* write_testpackagelist_async(vx_test::Type_testpackagelist* testpackagelist, vx_core::Type_context* context) {
     vx_core::Async<vx_test::Type_testpackagelist*>* async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist* testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     vx_data_file::Type_file* filetest = vx_test::f_file_test();
-    vx_core::Type_boolean* valboolean = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
-    output = valboolean->vx_boolean();
+    vx_core::Type_boolean* booleanwritetest = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     vx_web_html::Type_div* divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
     vx_web_html::Type_html* htmlnode = vx_test::f_html_from_divtest(divtest);
     vx_data_file::Type_file* filenode = vx_test::f_file_testnode();
-    valboolean = vx_data_file::f_boolean_write_from_file_any(filenode, htmlnode, context);
-    output = output && valboolean->vx_boolean();
+    vx_core::Type_boolean* booleanwritenode = vx_data_file::f_boolean_write_from_file_any(filenode, htmlnode, context);
     vx_data_file::Type_file* filehtml = vx_test::f_file_testhtml();
     vx_core::Type_string* shtml = vx_web_html::f_string_from_html(htmlnode);
-    valboolean = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
-    output += valstring->vx_string();
+    vx_core::Type_boolean* booleanwritehtml = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
+    vx_core::Type_boolean* output = vx_core::t_boolean->vx_new(booleanwritetest, booleanwritenode, booleanwritehtml);
     return output;
   }
 

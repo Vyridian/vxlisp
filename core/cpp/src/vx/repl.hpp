@@ -9,11 +9,44 @@
 
 namespace vx_repl {
 
+  // forward declarations
+  class Type_liblist;
+  extern Type_liblist* e_liblist;
+  extern Type_liblist* t_liblist;
+  class Type_repl;
+  extern Type_repl* e_repl;
+  extern Type_repl* t_repl;
+  class Type_repllist;
+  extern Type_repllist* e_repllist;
+  extern Type_repllist* t_repllist;
+  class Func_any_repl_from_functype_args;
+  extern Func_any_repl_from_functype_args* e_any_repl_from_functype_args;
+  extern Func_any_repl_from_functype_args* t_any_repl_from_functype_args;
+  class Func_any_from_liblist_string;
+  extern Func_any_from_liblist_string* e_any_from_liblist_string;
+  extern Func_any_from_liblist_string* t_any_from_liblist_string;
+  class Func_any_from_liblist_string_async;
+  extern Func_any_from_liblist_string_async* e_any_from_liblist_string_async;
+  extern Func_any_from_liblist_string_async* t_any_from_liblist_string_async;
+  class Func_any_from_repl;
+  extern Func_any_from_repl* e_any_from_repl;
+  extern Func_any_from_repl* t_any_from_repl;
+  class Func_any_from_repl_async;
+  extern Func_any_from_repl_async* e_any_from_repl_async;
+  extern Func_any_from_repl_async* t_any_from_repl_async;
+  class Func_anylist_from_repllist;
+  extern Func_anylist_from_repllist* e_anylist_from_repllist;
+  extern Func_anylist_from_repllist* t_anylist_from_repllist;
+  class Func_repl_from_liblist_string;
+  extern Func_repl_from_liblist_string* e_repl_from_liblist_string;
+  extern Func_repl_from_liblist_string* t_repl_from_liblist_string;
+
+
   // (type liblist)
   class Type_liblist : public virtual vx_core::Type_list {
   public:
-    template<typename... Args> vx_repl::Type_liblist* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Type_liblist* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Type_liblist* vx_new(Args*... args);
+    template<class... Args> vx_repl::Type_liblist* vx_copy(Args*... args);
     virtual vx_repl::Type_liblist* vx_empty();
     virtual vx_repl::Type_liblist* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -28,14 +61,12 @@ namespace vx_repl {
     // vx_string(index)
     virtual vx_core::Type_string* vx_string(vx_core::Type_int* index);
   };
-  extern vx_repl::Type_liblist* e_liblist;
-  extern vx_repl::Type_liblist* t_liblist;
 
   // (type repl)
   class Type_repl : public virtual vx_core::Type_struct {
   public:
-    template<typename... Args> vx_repl::Type_repl* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Type_repl* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Type_repl* vx_new(Args*... args);
+    template<class... Args> vx_repl::Type_repl* vx_copy(Args*... args);
     virtual vx_repl::Type_repl* vx_empty();
     virtual vx_repl::Type_repl* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -56,14 +87,12 @@ namespace vx_repl {
     vx_core::Type_any* vx_p_val;
     virtual vx_core::Type_any* val();
   };
-  extern vx_repl::Type_repl* e_repl;
-  extern vx_repl::Type_repl* t_repl;
 
   // (type repllist)
   class Type_repllist : public virtual vx_core::Type_list {
   public:
-    template<typename... Args> vx_repl::Type_repllist* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Type_repllist* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Type_repllist* vx_new(Args*... args);
+    template<class... Args> vx_repl::Type_repllist* vx_copy(Args*... args);
     virtual vx_repl::Type_repllist* vx_empty();
     virtual vx_repl::Type_repllist* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -78,14 +107,12 @@ namespace vx_repl {
     // vx_repl(index)
     virtual vx_repl::Type_repl* vx_repl(vx_core::Type_int* index);
   };
-  extern vx_repl::Type_repllist* e_repllist;
-  extern vx_repl::Type_repllist* t_repllist;
 
   // (func any-repl<-functype-args)
   class Func_any_repl_from_functype_args : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_repl::Func_any_repl_from_functype_args* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_any_repl_from_functype_args* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_any_repl_from_functype_args* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_any_repl_from_functype_args* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_any_repl_from_functype_args* vx_empty();
@@ -93,14 +120,12 @@ namespace vx_repl {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_any* vx_any_repl_from_functype_args(vx_core::Type_any* type, vx_core::Type_anylist* args);
   };
-  extern Func_any_repl_from_functype_args* e_any_repl_from_functype_args;
-  extern Func_any_repl_from_functype_args* t_any_repl_from_functype_args;
 
   // (func any<-liblist-string)
   class Func_any_from_liblist_string : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_repl::Func_any_from_liblist_string* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_any_from_liblist_string* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_liblist_string* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_liblist_string* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_any_from_liblist_string* vx_empty();
@@ -108,14 +133,12 @@ namespace vx_repl {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_any* vx_any_from_liblist_string(vx_repl::Type_liblist* liblist, vx_core::Type_string* text, vx_core::Type_context* context);
   };
-  extern Func_any_from_liblist_string* e_any_from_liblist_string;
-  extern Func_any_from_liblist_string* t_any_from_liblist_string;
 
   // (func any<-liblist-string-async)
   class Func_any_from_liblist_string_async : public vx_core::Type_func, public virtual vx_core::Type_replfunc_async {
   public:
-    template<typename... Args> vx_repl::Func_any_from_liblist_string_async* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_any_from_liblist_string_async* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_liblist_string_async* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_liblist_string_async* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_any_from_liblist_string_async* vx_empty();
@@ -123,14 +146,12 @@ namespace vx_repl {
     virtual vx_core::Async<vx_core::Type_any*>* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Async<vx_core::Type_any*>* vx_any_from_liblist_string_async(vx_repl::Type_liblist* liblist, vx_core::Type_string* text, vx_core::Type_context* context);
   };
-  extern Func_any_from_liblist_string_async* e_any_from_liblist_string_async;
-  extern Func_any_from_liblist_string_async* t_any_from_liblist_string_async;
 
   // (func any<-repl)
   class Func_any_from_repl : public vx_core::Func_any_from_any_context, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_repl::Func_any_from_repl* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_any_from_repl* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_repl* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_repl* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_any_from_repl* vx_empty();
@@ -140,14 +161,12 @@ namespace vx_repl {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_any* vx_any_from_repl(vx_repl::Type_repl* repl, vx_core::Type_context* context);
   };
-  extern Func_any_from_repl* e_any_from_repl;
-  extern Func_any_from_repl* t_any_from_repl;
 
   // (func any<-repl-async)
   class Func_any_from_repl_async : public vx_core::Func_any_from_any_context_async, public virtual vx_core::Type_replfunc_async {
   public:
-    template<typename... Args> vx_repl::Func_any_from_repl_async* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_any_from_repl_async* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_repl_async* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_any_from_repl_async* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_any_from_repl_async* vx_empty();
@@ -157,14 +176,12 @@ namespace vx_repl {
     virtual vx_core::Async<vx_core::Type_any*>* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Async<vx_core::Type_any*>* vx_any_from_repl_async(vx_repl::Type_repl* repl, vx_core::Type_context* context);
   };
-  extern Func_any_from_repl_async* e_any_from_repl_async;
-  extern Func_any_from_repl_async* t_any_from_repl_async;
 
   // (func anylist<-repllist)
   class Func_anylist_from_repllist : public vx_core::Func_any_from_any_context, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_repl::Func_anylist_from_repllist* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_anylist_from_repllist* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_anylist_from_repllist* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_anylist_from_repllist* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_anylist_from_repllist* vx_empty();
@@ -174,14 +191,12 @@ namespace vx_repl {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_anylist* vx_anylist_from_repllist(vx_repl::Type_repllist* repllist, vx_core::Type_context* context);
   };
-  extern Func_anylist_from_repllist* e_anylist_from_repllist;
-  extern Func_anylist_from_repllist* t_anylist_from_repllist;
 
   // (func repl<-liblist-string)
   class Func_repl_from_liblist_string : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_repl::Func_repl_from_liblist_string* vx_new(Args*... args);
-    template<typename... Args> vx_repl::Func_repl_from_liblist_string* vx_copy(Args*... args);
+    template<class... Args> vx_repl::Func_repl_from_liblist_string* vx_new(Args*... args);
+    template<class... Args> vx_repl::Func_repl_from_liblist_string* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_repl::Func_repl_from_liblist_string* vx_empty();
@@ -189,8 +204,6 @@ namespace vx_repl {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_repl::Type_repl* vx_repl_from_liblist_string(vx_repl::Type_liblist* liblist, vx_core::Type_string* text);
   };
-  extern Func_repl_from_liblist_string* e_repl_from_liblist_string;
-  extern Func_repl_from_liblist_string* t_repl_from_liblist_string;
 
   // (func any-repl<-functype-args)
   vx_core::Type_any* f_any_repl_from_functype_args(vx_core::Type_any* type, vx_core::Type_anylist* args);

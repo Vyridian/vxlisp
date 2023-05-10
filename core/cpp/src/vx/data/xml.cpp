@@ -500,12 +500,12 @@
    */
   //class Func_xml_from_textblock {
 
-    template<typename... Args> vx_data_xml::Func_xml_from_textblock* vx_data_xml::Func_xml_from_textblock::vx_new(Args*... args) {
+    template<class... Args> vx_data_xml::Func_xml_from_textblock* vx_data_xml::Func_xml_from_textblock::vx_new(Args*... args) {
       vx_data_xml::Func_xml_from_textblock* output;
       return output;
     }
 
-    template<typename... Args> vx_data_xml::Func_xml_from_textblock* vx_data_xml::Func_xml_from_textblock::vx_copy(Args*... args) {
+    template<class... Args> vx_data_xml::Func_xml_from_textblock* vx_data_xml::Func_xml_from_textblock::vx_copy(Args*... args) {
       vx_data_xml::Func_xml_from_textblock* output;
       return output;
     }

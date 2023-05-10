@@ -138,7 +138,7 @@ namespace app_test {
 
 
 	// test_writetestsuite
-  std::string test_writetestsuite() {
+  vx_core::Type_boolean* test_writetestsuite() {
     vx_test::Type_testpackagelist* testpackagelist = vx_test::t_testpackagelist->vx_new(
       vx_collection_test::test_package(context),
       vx_core_test::test_package(context),
@@ -167,8 +167,10 @@ namespace app_test {
       all_args.assign(argv + 1, argv + argc);
     }
     int output = 1;
-    std::string writetest = test_writetestsuite();
-		std::cout << writetest;
+    vx_core::Type_boolean* writetest = test_writetestsuite();
+		vx_core::Type_string* stringwritetest = vx_core::f_string_from_any(writetest);
+		std::string swritetest = stringwritetest->vx_string();
+		std::cout << swritetest;
     return output;
   }
 

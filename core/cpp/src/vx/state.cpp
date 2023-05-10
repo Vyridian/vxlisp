@@ -127,12 +127,12 @@
    */
   //class Func_change {
 
-    template<typename... Args> vx_state::Func_change* vx_state::Func_change::vx_new(Args*... args) {
+    template<class... Args> vx_state::Func_change* vx_state::Func_change::vx_new(Args*... args) {
       vx_state::Func_change* output;
       return output;
     }
 
-    template<typename... Args> vx_state::Func_change* vx_state::Func_change::vx_copy(Args*... args) {
+    template<class... Args> vx_state::Func_change* vx_state::Func_change::vx_copy(Args*... args) {
       vx_state::Func_change* output;
       return output;
     }
@@ -203,12 +203,12 @@
    */
   //class Func_register {
 
-    template<typename... Args> vx_state::Func_register* vx_state::Func_register::vx_new(Args*... args) {
+    template<class... Args> vx_state::Func_register* vx_state::Func_register::vx_new(Args*... args) {
       vx_state::Func_register* output;
       return output;
     }
 
-    template<typename... Args> vx_state::Func_register* vx_state::Func_register::vx_copy(Args*... args) {
+    template<class... Args> vx_state::Func_register* vx_state::Func_register::vx_copy(Args*... args) {
       vx_state::Func_register* output;
       return output;
     }

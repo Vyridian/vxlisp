@@ -11,12 +11,12 @@
    */
   //class Func_allowtypenames_from_type {
 
-    template<typename... Args> vx_type::Func_allowtypenames_from_type* vx_type::Func_allowtypenames_from_type::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_allowtypenames_from_type* vx_type::Func_allowtypenames_from_type::vx_new(Args*... args) {
       vx_type::Func_allowtypenames_from_type* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_allowtypenames_from_type* vx_type::Func_allowtypenames_from_type::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_allowtypenames_from_type* vx_type::Func_allowtypenames_from_type::vx_copy(Args*... args) {
       vx_type::Func_allowtypenames_from_type* output;
       return output;
     }
@@ -91,12 +91,12 @@
    */
   //class Func_allowtypes_from_type {
 
-    template<typename... Args> vx_type::Func_allowtypes_from_type* vx_type::Func_allowtypes_from_type::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_allowtypes_from_type* vx_type::Func_allowtypes_from_type::vx_new(Args*... args) {
       vx_type::Func_allowtypes_from_type* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_allowtypes_from_type* vx_type::Func_allowtypes_from_type::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_allowtypes_from_type* vx_type::Func_allowtypes_from_type::vx_copy(Args*... args) {
       vx_type::Func_allowtypes_from_type* output;
       return output;
     }
@@ -168,12 +168,12 @@
    */
   //class Func_is_boolean {
 
-    template<typename... Args> vx_type::Func_is_boolean* vx_type::Func_is_boolean::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_boolean* vx_type::Func_is_boolean::vx_new(Args*... args) {
       vx_type::Func_is_boolean* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_boolean* vx_type::Func_is_boolean::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_boolean* vx_type::Func_is_boolean::vx_copy(Args*... args) {
       vx_type::Func_is_boolean* output;
       return output;
     }
@@ -248,12 +248,12 @@
    */
   //class Func_is_decimal {
 
-    template<typename... Args> vx_type::Func_is_decimal* vx_type::Func_is_decimal::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_decimal* vx_type::Func_is_decimal::vx_new(Args*... args) {
       vx_type::Func_is_decimal* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_decimal* vx_type::Func_is_decimal::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_decimal* vx_type::Func_is_decimal::vx_copy(Args*... args) {
       vx_type::Func_is_decimal* output;
       return output;
     }
@@ -328,12 +328,12 @@
    */
   //class Func_is_float {
 
-    template<typename... Args> vx_type::Func_is_float* vx_type::Func_is_float::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_float* vx_type::Func_is_float::vx_new(Args*... args) {
       vx_type::Func_is_float* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_float* vx_type::Func_is_float::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_float* vx_type::Func_is_float::vx_copy(Args*... args) {
       vx_type::Func_is_float* output;
       return output;
     }
@@ -408,12 +408,12 @@
    */
   //class Func_is_none {
 
-    template<typename... Args> vx_type::Func_is_none* vx_type::Func_is_none::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_none* vx_type::Func_is_none::vx_new(Args*... args) {
       vx_type::Func_is_none* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_none* vx_type::Func_is_none::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_none* vx_type::Func_is_none::vx_copy(Args*... args) {
       vx_type::Func_is_none* output;
       return output;
     }
@@ -488,12 +488,12 @@
    */
   //class Func_is_string {
 
-    template<typename... Args> vx_type::Func_is_string* vx_type::Func_is_string::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_string* vx_type::Func_is_string::vx_new(Args*... args) {
       vx_type::Func_is_string* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_string* vx_type::Func_is_string::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_string* vx_type::Func_is_string::vx_copy(Args*... args) {
       vx_type::Func_is_string* output;
       return output;
     }
@@ -569,12 +569,12 @@
    */
   //class Func_is_type {
 
-    template<typename... Args> vx_type::Func_is_type* vx_type::Func_is_type::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_type* vx_type::Func_is_type::vx_new(Args*... args) {
       vx_type::Func_is_type* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_type* vx_type::Func_is_type::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_type* vx_type::Func_is_type::vx_copy(Args*... args) {
       vx_type::Func_is_type* output;
       return output;
     }
@@ -654,12 +654,12 @@
    */
   //class Func_is_type_from_any_typelist {
 
-    template<typename... Args> vx_type::Func_is_type_from_any_typelist* vx_type::Func_is_type_from_any_typelist::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_is_type_from_any_typelist* vx_type::Func_is_type_from_any_typelist::vx_new(Args*... args) {
       vx_type::Func_is_type_from_any_typelist* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_is_type_from_any_typelist* vx_type::Func_is_type_from_any_typelist::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_is_type_from_any_typelist* vx_type::Func_is_type_from_any_typelist::vx_copy(Args*... args) {
       vx_type::Func_is_type_from_any_typelist* output;
       return output;
     }
@@ -736,12 +736,12 @@
    */
   //class Func_length_from_string {
 
-    template<typename... Args> vx_type::Func_length_from_string* vx_type::Func_length_from_string::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_length_from_string* vx_type::Func_length_from_string::vx_new(Args*... args) {
       vx_type::Func_length_from_string* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_length_from_string* vx_type::Func_length_from_string::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_length_from_string* vx_type::Func_length_from_string::vx_copy(Args*... args) {
       vx_type::Func_length_from_string* output;
       return output;
     }
@@ -813,12 +813,12 @@
    */
   //class Func_string_from_int {
 
-    template<typename... Args> vx_type::Func_string_from_int* vx_type::Func_string_from_int::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_int* vx_type::Func_string_from_int::vx_new(Args*... args) {
       vx_type::Func_string_from_int* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_string_from_int* vx_type::Func_string_from_int::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_int* vx_type::Func_string_from_int::vx_copy(Args*... args) {
       vx_type::Func_string_from_int* output;
       return output;
     }
@@ -925,12 +925,12 @@
    */
   //class Func_string_from_string_end {
 
-    template<typename... Args> vx_type::Func_string_from_string_end* vx_type::Func_string_from_string_end::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_end* vx_type::Func_string_from_string_end::vx_new(Args*... args) {
       vx_type::Func_string_from_string_end* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_string_from_string_end* vx_type::Func_string_from_string_end::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_end* vx_type::Func_string_from_string_end::vx_copy(Args*... args) {
       vx_type::Func_string_from_string_end* output;
       return output;
     }
@@ -995,12 +995,12 @@
    */
   //class Func_string_from_string_start {
 
-    template<typename... Args> vx_type::Func_string_from_string_start* vx_type::Func_string_from_string_start::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_start* vx_type::Func_string_from_string_start::vx_new(Args*... args) {
       vx_type::Func_string_from_string_start* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_string_from_string_start* vx_type::Func_string_from_string_start::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_start* vx_type::Func_string_from_string_start::vx_copy(Args*... args) {
       vx_type::Func_string_from_string_start* output;
       return output;
     }
@@ -1070,12 +1070,12 @@
    */
   //class Func_string_from_string_start_end {
 
-    template<typename... Args> vx_type::Func_string_from_string_start_end* vx_type::Func_string_from_string_start_end::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_start_end* vx_type::Func_string_from_string_start_end::vx_new(Args*... args) {
       vx_type::Func_string_from_string_start_end* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_string_from_string_start_end* vx_type::Func_string_from_string_start_end::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_string_start_end* vx_type::Func_string_from_string_start_end::vx_copy(Args*... args) {
       vx_type::Func_string_from_string_start_end* output;
       return output;
     }
@@ -1139,12 +1139,12 @@
    */
   //class Func_string_from_stringlist_join {
 
-    template<typename... Args> vx_type::Func_string_from_stringlist_join* vx_type::Func_string_from_stringlist_join::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_stringlist_join* vx_type::Func_string_from_stringlist_join::vx_new(Args*... args) {
       vx_type::Func_string_from_stringlist_join* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_string_from_stringlist_join* vx_type::Func_string_from_stringlist_join::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_string_from_stringlist_join* vx_type::Func_string_from_stringlist_join::vx_copy(Args*... args) {
       vx_type::Func_string_from_stringlist_join* output;
       return output;
     }
@@ -1207,12 +1207,12 @@
    */
   //class Func_traitnames_from_any {
 
-    template<typename... Args> vx_type::Func_traitnames_from_any* vx_type::Func_traitnames_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_traitnames_from_any* vx_type::Func_traitnames_from_any::vx_new(Args*... args) {
       vx_type::Func_traitnames_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_traitnames_from_any* vx_type::Func_traitnames_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_traitnames_from_any* vx_type::Func_traitnames_from_any::vx_copy(Args*... args) {
       vx_type::Func_traitnames_from_any* output;
       return output;
     }
@@ -1287,12 +1287,12 @@
    */
   //class Func_traits_from_any {
 
-    template<typename... Args> vx_type::Func_traits_from_any* vx_type::Func_traits_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_traits_from_any* vx_type::Func_traits_from_any::vx_new(Args*... args) {
       vx_type::Func_traits_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_traits_from_any* vx_type::Func_traits_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_traits_from_any* vx_type::Func_traits_from_any::vx_copy(Args*... args) {
       vx_type::Func_traits_from_any* output;
       return output;
     }
@@ -1367,12 +1367,12 @@
    */
   //class Func_traits_from_typedef {
 
-    template<typename... Args> vx_type::Func_traits_from_typedef* vx_type::Func_traits_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_type::Func_traits_from_typedef* vx_type::Func_traits_from_typedef::vx_new(Args*... args) {
       vx_type::Func_traits_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_type::Func_traits_from_typedef* vx_type::Func_traits_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_type::Func_traits_from_typedef* vx_type::Func_traits_from_typedef::vx_copy(Args*... args) {
       vx_type::Func_traits_from_typedef* output;
       return output;
     }

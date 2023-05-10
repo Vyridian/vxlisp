@@ -244,12 +244,12 @@
    */
   //class Func_boolean_exists_from_file {
 
-    template<typename... Args> vx_data_file::Func_boolean_exists_from_file* vx_data_file::Func_boolean_exists_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_exists_from_file* vx_data_file::Func_boolean_exists_from_file::vx_new(Args*... args) {
       vx_data_file::Func_boolean_exists_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_boolean_exists_from_file* vx_data_file::Func_boolean_exists_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_exists_from_file* vx_data_file::Func_boolean_exists_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_boolean_exists_from_file* output;
       return output;
     }
@@ -322,12 +322,12 @@
    */
   //class Func_boolean_write_from_file_any {
 
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_any* vx_data_file::Func_boolean_write_from_file_any::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_any* vx_data_file::Func_boolean_write_from_file_any::vx_new(Args*... args) {
       vx_data_file::Func_boolean_write_from_file_any* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_any* vx_data_file::Func_boolean_write_from_file_any::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_any* vx_data_file::Func_boolean_write_from_file_any::vx_copy(Args*... args) {
       vx_data_file::Func_boolean_write_from_file_any* output;
       return output;
     }
@@ -397,12 +397,12 @@
    */
   //class Func_boolean_write_from_file_string {
 
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_string* vx_data_file::Func_boolean_write_from_file_string::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_string* vx_data_file::Func_boolean_write_from_file_string::vx_new(Args*... args) {
       vx_data_file::Func_boolean_write_from_file_string* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_string* vx_data_file::Func_boolean_write_from_file_string::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_string* vx_data_file::Func_boolean_write_from_file_string::vx_copy(Args*... args) {
       vx_data_file::Func_boolean_write_from_file_string* output;
       return output;
     }
@@ -471,12 +471,12 @@
    */
   //class Func_file_read_from_file {
 
-    template<typename... Args> vx_data_file::Func_file_read_from_file* vx_data_file::Func_file_read_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_file_read_from_file* vx_data_file::Func_file_read_from_file::vx_new(Args*... args) {
       vx_data_file::Func_file_read_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_file_read_from_file* vx_data_file::Func_file_read_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_file_read_from_file* vx_data_file::Func_file_read_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_file_read_from_file* output;
       return output;
     }
@@ -556,12 +556,12 @@
    */
   //class Func_name_from_file {
 
-    template<typename... Args> vx_data_file::Func_name_from_file* vx_data_file::Func_name_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_name_from_file* vx_data_file::Func_name_from_file::vx_new(Args*... args) {
       vx_data_file::Func_name_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_name_from_file* vx_data_file::Func_name_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_name_from_file* vx_data_file::Func_name_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_name_from_file* output;
       return output;
     }
@@ -634,12 +634,12 @@
    */
   //class Func_path_from_file {
 
-    template<typename... Args> vx_data_file::Func_path_from_file* vx_data_file::Func_path_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_path_from_file* vx_data_file::Func_path_from_file::vx_new(Args*... args) {
       vx_data_file::Func_path_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_path_from_file* vx_data_file::Func_path_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_path_from_file* vx_data_file::Func_path_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_path_from_file* output;
       return output;
     }
@@ -711,12 +711,12 @@
    */
   //class Func_pathcurrent_from_os {
 
-    template<typename... Args> vx_data_file::Func_pathcurrent_from_os* vx_data_file::Func_pathcurrent_from_os::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_pathcurrent_from_os* vx_data_file::Func_pathcurrent_from_os::vx_new(Args*... args) {
       vx_data_file::Func_pathcurrent_from_os* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_pathcurrent_from_os* vx_data_file::Func_pathcurrent_from_os::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_pathcurrent_from_os* vx_data_file::Func_pathcurrent_from_os::vx_copy(Args*... args) {
       vx_data_file::Func_pathcurrent_from_os* output;
       return output;
     }
@@ -777,12 +777,12 @@
    */
   //class Func_pathfull_from_file {
 
-    template<typename... Args> vx_data_file::Func_pathfull_from_file* vx_data_file::Func_pathfull_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_pathfull_from_file* vx_data_file::Func_pathfull_from_file::vx_new(Args*... args) {
       vx_data_file::Func_pathfull_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_pathfull_from_file* vx_data_file::Func_pathfull_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_pathfull_from_file* vx_data_file::Func_pathfull_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_pathfull_from_file* output;
       return output;
     }
@@ -869,12 +869,12 @@
    */
   //class Func_string_read_from_file {
 
-    template<typename... Args> vx_data_file::Func_string_read_from_file* vx_data_file::Func_string_read_from_file::vx_new(Args*... args) {
+    template<class... Args> vx_data_file::Func_string_read_from_file* vx_data_file::Func_string_read_from_file::vx_new(Args*... args) {
       vx_data_file::Func_string_read_from_file* output;
       return output;
     }
 
-    template<typename... Args> vx_data_file::Func_string_read_from_file* vx_data_file::Func_string_read_from_file::vx_copy(Args*... args) {
+    template<class... Args> vx_data_file::Func_string_read_from_file* vx_data_file::Func_string_read_from_file::vx_copy(Args*... args) {
       vx_data_file::Func_string_read_from_file* output;
       return output;
     }

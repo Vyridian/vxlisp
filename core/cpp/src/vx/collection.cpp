@@ -12,12 +12,12 @@
    */
   //class Func_is_list {
 
-    template<typename... Args> vx_collection::Func_is_list* vx_collection::Func_is_list::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_is_list* vx_collection::Func_is_list::vx_new(Args*... args) {
       vx_collection::Func_is_list* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_is_list* vx_collection::Func_is_list::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_is_list* vx_collection::Func_is_list::vx_copy(Args*... args) {
       vx_collection::Func_is_list* output;
       return output;
     }
@@ -93,12 +93,12 @@
    */
   //class Func_is_map {
 
-    template<typename... Args> vx_collection::Func_is_map* vx_collection::Func_is_map::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_is_map* vx_collection::Func_is_map::vx_new(Args*... args) {
       vx_collection::Func_is_map* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_is_map* vx_collection::Func_is_map::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_is_map* vx_collection::Func_is_map::vx_copy(Args*... args) {
       vx_collection::Func_is_map* output;
       return output;
     }
@@ -175,12 +175,12 @@
    */
   //class Func_list_from_list_end {
 
-    template<typename... Args> vx_collection::Func_list_from_list_end* vx_collection::Func_list_from_list_end::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_end* vx_collection::Func_list_from_list_end::vx_new(Args*... args) {
       vx_collection::Func_list_from_list_end* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_list_from_list_end* vx_collection::Func_list_from_list_end::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_end* vx_collection::Func_list_from_list_end::vx_copy(Args*... args) {
       vx_collection::Func_list_from_list_end* output;
       return output;
     }
@@ -246,12 +246,12 @@
    */
   //class Func_list_from_list_filtertypes {
 
-    template<typename... Args> vx_collection::Func_list_from_list_filtertypes* vx_collection::Func_list_from_list_filtertypes::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_filtertypes* vx_collection::Func_list_from_list_filtertypes::vx_new(Args*... args) {
       vx_collection::Func_list_from_list_filtertypes* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_list_from_list_filtertypes* vx_collection::Func_list_from_list_filtertypes::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_filtertypes* vx_collection::Func_list_from_list_filtertypes::vx_copy(Args*... args) {
       vx_collection::Func_list_from_list_filtertypes* output;
       return output;
     }
@@ -329,12 +329,12 @@
    */
   //class Func_list_from_list_fn_filter {
 
-    template<typename... Args> vx_collection::Func_list_from_list_fn_filter* vx_collection::Func_list_from_list_fn_filter::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_fn_filter* vx_collection::Func_list_from_list_fn_filter::vx_new(Args*... args) {
       vx_collection::Func_list_from_list_fn_filter* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_list_from_list_fn_filter* vx_collection::Func_list_from_list_fn_filter::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_fn_filter* vx_collection::Func_list_from_list_fn_filter::vx_copy(Args*... args) {
       vx_collection::Func_list_from_list_fn_filter* output;
       return output;
     }
@@ -399,12 +399,12 @@
    */
   //class Func_list_from_list_start {
 
-    template<typename... Args> vx_collection::Func_list_from_list_start* vx_collection::Func_list_from_list_start::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_start* vx_collection::Func_list_from_list_start::vx_new(Args*... args) {
       vx_collection::Func_list_from_list_start* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_list_from_list_start* vx_collection::Func_list_from_list_start::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_start* vx_collection::Func_list_from_list_start::vx_copy(Args*... args) {
       vx_collection::Func_list_from_list_start* output;
       return output;
     }
@@ -476,12 +476,12 @@
    */
   //class Func_list_from_list_start_end {
 
-    template<typename... Args> vx_collection::Func_list_from_list_start_end* vx_collection::Func_list_from_list_start_end::vx_new(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_start_end* vx_collection::Func_list_from_list_start_end::vx_new(Args*... args) {
       vx_collection::Func_list_from_list_start_end* output;
       return output;
     }
 
-    template<typename... Args> vx_collection::Func_list_from_list_start_end* vx_collection::Func_list_from_list_start_end::vx_copy(Args*... args) {
+    template<class... Args> vx_collection::Func_list_from_list_start_end* vx_collection::Func_list_from_list_start_end::vx_copy(Args*... args) {
       vx_collection::Func_list_from_list_start_end* output;
       return output;
     }

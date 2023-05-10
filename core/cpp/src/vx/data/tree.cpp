@@ -760,7 +760,7 @@
 
   //}
 
-  extern vx_data_tree::Const_brancharrow_down* vx_data_tree::c_brancharrow_down = vx_data_tree::Const_brancharrow_down::vx_const_new();
+  vx_data_tree::Const_brancharrow_down* vx_data_tree::c_brancharrow_down = vx_data_tree::Const_brancharrow_down::vx_const_new();
 
 
   /**
@@ -799,7 +799,7 @@
 
   //}
 
-  extern vx_data_tree::Const_brancharrow_up* vx_data_tree::c_brancharrow_up = vx_data_tree::Const_brancharrow_up::vx_const_new();
+  vx_data_tree::Const_brancharrow_up* vx_data_tree::c_brancharrow_up = vx_data_tree::Const_brancharrow_up::vx_const_new();
 
 
   /**
@@ -838,7 +838,7 @@
 
   //}
 
-  extern vx_data_tree::Const_brancharrow_updown* vx_data_tree::c_brancharrow_updown = vx_data_tree::Const_brancharrow_updown::vx_const_new();
+  vx_data_tree::Const_brancharrow_updown* vx_data_tree::c_brancharrow_updown = vx_data_tree::Const_brancharrow_updown::vx_const_new();
 
 
 //}

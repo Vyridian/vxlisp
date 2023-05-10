@@ -309,7 +309,7 @@
 
   //}
 
-  extern vx_data_csv::Const_delims* vx_data_csv::c_delims = vx_data_csv::Const_delims::vx_const_new();
+  vx_data_csv::Const_delims* vx_data_csv::c_delims = vx_data_csv::Const_delims::vx_const_new();
 
   /**
    * @function csv_from_textblock
@@ -319,12 +319,12 @@
    */
   //class Func_csv_from_textblock {
 
-    template<typename... Args> vx_data_csv::Func_csv_from_textblock* vx_data_csv::Func_csv_from_textblock::vx_new(Args*... args) {
+    template<class... Args> vx_data_csv::Func_csv_from_textblock* vx_data_csv::Func_csv_from_textblock::vx_new(Args*... args) {
       vx_data_csv::Func_csv_from_textblock* output;
       return output;
     }
 
-    template<typename... Args> vx_data_csv::Func_csv_from_textblock* vx_data_csv::Func_csv_from_textblock::vx_copy(Args*... args) {
+    template<class... Args> vx_data_csv::Func_csv_from_textblock* vx_data_csv::Func_csv_from_textblock::vx_copy(Args*... args) {
       vx_data_csv::Func_csv_from_textblock* output;
       return output;
     }
@@ -412,12 +412,12 @@
    */
   //class Func_csvrows_from_textblock {
 
-    template<typename... Args> vx_data_csv::Func_csvrows_from_textblock* vx_data_csv::Func_csvrows_from_textblock::vx_new(Args*... args) {
+    template<class... Args> vx_data_csv::Func_csvrows_from_textblock* vx_data_csv::Func_csvrows_from_textblock::vx_new(Args*... args) {
       vx_data_csv::Func_csvrows_from_textblock* output;
       return output;
     }
 
-    template<typename... Args> vx_data_csv::Func_csvrows_from_textblock* vx_data_csv::Func_csvrows_from_textblock::vx_copy(Args*... args) {
+    template<class... Args> vx_data_csv::Func_csvrows_from_textblock* vx_data_csv::Func_csvrows_from_textblock::vx_copy(Args*... args) {
       vx_data_csv::Func_csvrows_from_textblock* output;
       return output;
     }

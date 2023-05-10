@@ -116,6 +116,30 @@ func IntFromStringFindStart(str string, find string, start int) int {
 	return output
 }
 
+func ListStringFromListStringMatch(liststring []string, listmatch []string) []string {
+	var output []string
+	mapnotmatch := MapStringFromListStringValue(listmatch, "")
+	for _, text := range liststring {
+		_, ok := mapnotmatch[text]
+		if ok {
+			output = append(output, text)
+		}
+	}
+	return output
+}
+
+func ListStringFromListStringNotMatch(liststring []string, listnotmatch []string) []string {
+	var output []string
+	mapnotmatch := MapStringFromListStringValue(listnotmatch, "")
+	for _, text := range liststring {
+		_, ok := mapnotmatch[text]
+		if !ok {
+			output = append(output, text)
+		}
+	}
+	return output
+}
+
 func ListStringFromStringSplitByDelims(str string, startdelim string, enddelim string) []string {
 	var output []string
 	worktext := str
@@ -174,6 +198,14 @@ func ListStringUniques(liststring []string) []string {
 	return output
 }
 
+func MapStringFromListStringValue(liststring []string, value string) map[string]string {
+	output := NewMapString()
+	for _, text := range liststring {
+		output[text] = value
+	}
+	return output
+}
+
 func StringByteFromBoolean(booleanval bool) string {
 	if booleanval {
 		return "1"
@@ -198,6 +230,30 @@ func StringFromStringBefore(text string, before string) string {
 	output := text
 	if BooleanFromStringEnds(text, before) {
 		output = text[0 : len(text)-len(before)]
+	}
+	return output
+}
+
+func StringFromStringFromTo(text string, from string, to string) string {
+	output := ""
+	if text == "" {
+	} else if from == "" && to == "" {
+	} else {
+		ifrom := 0
+		ito := len(text)
+		if from != "" {
+			ifrom = IntFromStringFind(text, from)
+			if ifrom < 0 {
+				ifrom = 0
+			}
+		}
+		if to != "" {
+			ito = IntFromStringFind(text, to)
+			if ito < 0 {
+				ito = len(text)
+			}
+		}
+		output = text[ifrom:ito]
 	}
 	return output
 }

@@ -7,7 +7,192 @@
 #include "../../vx/type.hpp"
 #include "vx/web/html.hpp"
 
-//namespace vx_web_html {
+//namespace vx_web_html {// :body
+
+
+  /**
+   * type: node
+   * Common Html Node Trait
+   * (type node)
+   */
+  //class Type_node {
+    // id()
+    vx_core::Type_string* vx_web_html::Type_node::id() {
+      vx_core::Type_string* output = this->vx_p_id;
+      if (output == NULL) {
+        output = vx_core::t_string;
+      }
+    }
+
+    // style()
+    vx_web_html::Type_style* vx_web_html::Type_node::style() {
+      vx_web_html::Type_style* output = this->vx_p_style;
+      if (output == NULL) {
+        output = vx_web_html::t_style;
+      }
+    }
+
+    // vx_any(key)
+    vx_core::Type_any* vx_web_html::Type_node::vx_any(vx_core::Type_string* key) {
+      vx_core::Type_any* output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      } else if (skey == ":id") {
+        output = this->id();
+      } else if (skey == ":style") {
+        output = this->style();
+      }
+      return output;
+    }
+
+    // vx_map()
+    std::map<std::string, vx_core::Type_any*> vx_web_html::Type_node::vx_map() {
+      std::map<std::string, vx_core::Type_any*> output;
+      output[":id"] = this->id();
+      output[":style"] = this->style();
+      return output;
+    }
+
+    template<typename... Args> vx_web_html::Type_node* vx_web_html::Type_node::vx_new(Args*... args) {return vx_web_html::e_node->vx_copy(args...);}
+    template<typename... Args> vx_web_html::Type_node* vx_web_html::Type_node::vx_copy(Args*... args) {
+      vx_web_html::Type_node* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      Type_node* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_id = val->id();
+      output->vx_p_style = val->style();
+      std::set<std::string> validkeys;
+      validkeys.insert(":id");
+      validkeys.insert(":style");
+      std::string key = "";
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (key == "") {
+          std::string testkey = "";
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string* valstr = vx_core::any_from_any(vx_core::t_string, valsub);
+            testkey = valstr->vx_string();
+          } else if (valsubtype == vx_core::t_nativestring) {
+            testkey = vx_core::any_from_any("", valsub);
+          }
+          bool isvalidkey = vx_core::boolean_contains_from_set_val(validkeys, testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node) - Invalid Key Type: " + vx_core::string_from_any(valsub));
+            msgblock = msgblock->vx_copy(msg);
+          }
+        } else {
+          if (false) {
+          } else if (key == ":id") {
+            if (valsubtype == vx_core::t_string) {
+              output->vx_p_id = vx_core::any_from_any(vx_core::t_string, valsub);
+            } else if (valsubtype == vx_core::t_nativestring) {
+              output->vx_p_id = vx_core::t_string->vx_new(valsub);
+            } else {
+              vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node :id " + vx_core::string_from_any(valsub) + ") - Invalid Value");
+              msgblock = msgblock->vx_copy(msg);
+            }
+          } else if (key == ":style") {
+            if (valsubtype == vx_web_html::t_style) {
+              output->vx_p_style = vx_core::any_from_any(vx_web_html::t_style, valsub);
+            } else {
+              vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node :style " + vx_core::string_from_any(valsub) + ") - Invalid Value");
+              msgblock = msgblock->vx_copy(msg);
+            }
+          } else {
+            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node) - Invalid Key: " + key);
+            msgblock = msgblock->vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_web_html::Type_node* vx_web_html::Type_node::vx_empty() {return vx_web_html::e_node;}
+    vx_web_html::Type_node* vx_web_html::Type_node::vx_type() {return vx_web_html::t_node;}
+
+    vx_core::Type_typedef* vx_web_html::Type_node::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/web/html", // pkgname
+        "node", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: divchild
+   * Div Child Trait
+   * (type divchild)
+   */
+  //class Type_divchild {
+    // vx_any(key)
+    vx_core::Type_any* vx_web_html::Type_divchild::vx_any(vx_core::Type_string* key) {
+      vx_core::Type_any* output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      }
+      return output;
+    }
+
+    // vx_map()
+    std::map<std::string, vx_core::Type_any*> vx_web_html::Type_divchild::vx_map() {
+      std::map<std::string, vx_core::Type_any*> output;
+      return output;
+    }
+
+    template<typename... Args> vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_new(Args*... args) {return vx_web_html::e_divchild->vx_copy(args...);}
+    template<typename... Args> vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_copy(Args*... args) {
+      vx_web_html::Type_divchild* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      Type_divchild* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_empty() {return vx_web_html::e_divchild;}
+    vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_type() {return vx_web_html::t_divchild;}
+
+    vx_core::Type_typedef* vx_web_html::Type_divchild::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/web/html", // pkgname
+        "divchild", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
 
   /**
    * type: body
@@ -444,61 +629,6 @@
         "div", // name
         ":struct", // extends
         vx_core::t_typelist->vx_new(vx_web_html::t_node, vx_web_html::t_divchild), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: divchild
-   * Div Child Trait
-   * (type divchild)
-   */
-  //class Type_divchild {
-    // vx_any(key)
-    vx_core::Type_any* vx_web_html::Type_divchild::vx_any(vx_core::Type_string* key) {
-      vx_core::Type_any* output = vx_core::e_any;
-      std::string skey = key->vx_string();
-      if (false) {
-      }
-      return output;
-    }
-
-    // vx_map()
-    std::map<std::string, vx_core::Type_any*> vx_web_html::Type_divchild::vx_map() {
-      std::map<std::string, vx_core::Type_any*> output;
-      return output;
-    }
-
-    template<typename... Args> vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_new(Args*... args) {return vx_web_html::e_divchild->vx_copy(args...);}
-    template<typename... Args> vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_copy(Args*... args) {
-      vx_web_html::Type_divchild* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      Type_divchild* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_empty() {return vx_web_html::e_divchild;}
-    vx_web_html::Type_divchild* vx_web_html::Type_divchild::vx_type() {return vx_web_html::t_divchild;}
-
-    vx_core::Type_typedef* vx_web_html::Type_divchild::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/web/html", // pkgname
-        "divchild", // name
-        ":struct", // extends
-        vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1839,135 +1969,6 @@
         "meta", // name
         ":struct", // extends
         vx_core::t_typelist->vx_new(vx_web_html::t_node, vx_web_html::t_headchild), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: node
-   * Common Html Node Trait
-   * (type node)
-   */
-  //class Type_node {
-    // id()
-    vx_core::Type_string* vx_web_html::Type_node::id() {
-      vx_core::Type_string* output = this->vx_p_id;
-      if (output == NULL) {
-        output = vx_core::t_string;
-      }
-    }
-
-    // style()
-    vx_web_html::Type_style* vx_web_html::Type_node::style() {
-      vx_web_html::Type_style* output = this->vx_p_style;
-      if (output == NULL) {
-        output = vx_web_html::t_style;
-      }
-    }
-
-    // vx_any(key)
-    vx_core::Type_any* vx_web_html::Type_node::vx_any(vx_core::Type_string* key) {
-      vx_core::Type_any* output = vx_core::e_any;
-      std::string skey = key->vx_string();
-      if (false) {
-      } else if (skey == ":id") {
-        output = this->id();
-      } else if (skey == ":style") {
-        output = this->style();
-      }
-      return output;
-    }
-
-    // vx_map()
-    std::map<std::string, vx_core::Type_any*> vx_web_html::Type_node::vx_map() {
-      std::map<std::string, vx_core::Type_any*> output;
-      output[":id"] = this->id();
-      output[":style"] = this->style();
-      return output;
-    }
-
-    template<typename... Args> vx_web_html::Type_node* vx_web_html::Type_node::vx_new(Args*... args) {return vx_web_html::e_node->vx_copy(args...);}
-    template<typename... Args> vx_web_html::Type_node* vx_web_html::Type_node::vx_copy(Args*... args) {
-      vx_web_html::Type_node* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      Type_node* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_id = val->id();
-      output->vx_p_style = val->style();
-      std::set<std::string> validkeys;
-      validkeys.insert(":id");
-      validkeys.insert(":style");
-      std::string key = "";
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (key == "") {
-          std::string testkey = "";
-          if (valsubtype == vx_core::t_string) {
-            vx_core::Type_string* valstr = vx_core::any_from_any(vx_core::t_string, valsub);
-            testkey = valstr->vx_string();
-          } else if (valsubtype == vx_core::t_nativestring) {
-            testkey = vx_core::any_from_any("", valsub);
-          }
-          bool isvalidkey = vx_core::boolean_contains_from_set_val(validkeys, testkey);
-          if (isvalidkey) {
-            key = testkey;
-          } else {
-            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node) - Invalid Key Type: " + vx_core::string_from_any(valsub));
-            msgblock = msgblock->vx_copy(msg);
-          }
-        } else {
-          if (false) {
-          } else if (key == ":id") {
-            if (valsubtype == vx_core::t_string) {
-              output->vx_p_id = vx_core::any_from_any(vx_core::t_string, valsub);
-            } else if (valsubtype == vx_core::t_nativestring) {
-              output->vx_p_id = vx_core::t_string->vx_new(valsub);
-            } else {
-              vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node :id " + vx_core::string_from_any(valsub) + ") - Invalid Value");
-              msgblock = msgblock->vx_copy(msg);
-            }
-          } else if (key == ":style") {
-            if (valsubtype == vx_web_html::t_style) {
-              output->vx_p_style = vx_core::any_from_any(vx_web_html::t_style, valsub);
-            } else {
-              vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node :style " + vx_core::string_from_any(valsub) + ") - Invalid Value");
-              msgblock = msgblock->vx_copy(msg);
-            }
-          } else {
-            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new node) - Invalid Key: " + key);
-            msgblock = msgblock->vx_copy(msg);
-          }
-          key = "";
-        }
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_web_html::Type_node* vx_web_html::Type_node::vx_empty() {return vx_web_html::e_node;}
-    vx_web_html::Type_node* vx_web_html::Type_node::vx_type() {return vx_web_html::t_node;}
-
-    vx_core::Type_typedef* vx_web_html::Type_node::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/web/html", // pkgname
-        "node", // name
-        ":struct", // extends
-        vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4020,12 +4021,12 @@
    */
   //class Func_boolean_write_from_id_htmltext {
 
-    template<typename... Args> vx_web_html::Func_boolean_write_from_id_htmltext* vx_web_html::Func_boolean_write_from_id_htmltext::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_boolean_write_from_id_htmltext* vx_web_html::Func_boolean_write_from_id_htmltext::vx_new(Args*... args) {
       vx_web_html::Func_boolean_write_from_id_htmltext* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_boolean_write_from_id_htmltext* vx_web_html::Func_boolean_write_from_id_htmltext::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_boolean_write_from_id_htmltext* vx_web_html::Func_boolean_write_from_id_htmltext::vx_copy(Args*... args) {
       vx_web_html::Func_boolean_write_from_id_htmltext* output;
       return output;
     }
@@ -4090,12 +4091,12 @@
    */
   //class Func_boolean_write_from_stylesheet {
 
-    template<typename... Args> vx_web_html::Func_boolean_write_from_stylesheet* vx_web_html::Func_boolean_write_from_stylesheet::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_boolean_write_from_stylesheet* vx_web_html::Func_boolean_write_from_stylesheet::vx_new(Args*... args) {
       vx_web_html::Func_boolean_write_from_stylesheet* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_boolean_write_from_stylesheet* vx_web_html::Func_boolean_write_from_stylesheet::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_boolean_write_from_stylesheet* vx_web_html::Func_boolean_write_from_stylesheet::vx_copy(Args*... args) {
       vx_web_html::Func_boolean_write_from_stylesheet* output;
       return output;
     }
@@ -4167,12 +4168,12 @@
    */
   //class Func_htmlstring_from_string {
 
-    template<typename... Args> vx_web_html::Func_htmlstring_from_string* vx_web_html::Func_htmlstring_from_string::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_htmlstring_from_string* vx_web_html::Func_htmlstring_from_string::vx_new(Args*... args) {
       vx_web_html::Func_htmlstring_from_string* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_htmlstring_from_string* vx_web_html::Func_htmlstring_from_string::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_htmlstring_from_string* vx_web_html::Func_htmlstring_from_string::vx_copy(Args*... args) {
       vx_web_html::Func_htmlstring_from_string* output;
       return output;
     }
@@ -4243,12 +4244,12 @@
    */
   //class Func_string_indent {
 
-    template<typename... Args> vx_web_html::Func_string_indent* vx_web_html::Func_string_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_indent* vx_web_html::Func_string_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_indent* vx_web_html::Func_string_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_indent* vx_web_html::Func_string_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_indent* output;
       return output;
     }
@@ -4322,12 +4323,12 @@
    */
   //class Func_string_from_body_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_body_indent* vx_web_html::Func_string_from_body_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_body_indent* vx_web_html::Func_string_from_body_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_body_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_body_indent* vx_web_html::Func_string_from_body_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_body_indent* vx_web_html::Func_string_from_body_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_body_indent* output;
       return output;
     }
@@ -4398,12 +4399,12 @@
    */
   //class Func_string_from_details_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_details_indent* vx_web_html::Func_string_from_details_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_details_indent* vx_web_html::Func_string_from_details_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_details_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_details_indent* vx_web_html::Func_string_from_details_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_details_indent* vx_web_html::Func_string_from_details_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_details_indent* output;
       return output;
     }
@@ -4498,12 +4499,12 @@
    */
   //class Func_string_from_div_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_div_indent* vx_web_html::Func_string_from_div_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_div_indent* vx_web_html::Func_string_from_div_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_div_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_div_indent* vx_web_html::Func_string_from_div_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_div_indent* vx_web_html::Func_string_from_div_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_div_indent* output;
       return output;
     }
@@ -4592,12 +4593,12 @@
    */
   //class Func_string_from_footer_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_footer_indent* vx_web_html::Func_string_from_footer_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_footer_indent* vx_web_html::Func_string_from_footer_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_footer_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_footer_indent* vx_web_html::Func_string_from_footer_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_footer_indent* vx_web_html::Func_string_from_footer_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_footer_indent* output;
       return output;
     }
@@ -4668,12 +4669,12 @@
    */
   //class Func_string_from_h1_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_h1_indent* vx_web_html::Func_string_from_h1_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h1_indent* vx_web_html::Func_string_from_h1_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_h1_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_h1_indent* vx_web_html::Func_string_from_h1_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h1_indent* vx_web_html::Func_string_from_h1_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_h1_indent* output;
       return output;
     }
@@ -4759,12 +4760,12 @@
    */
   //class Func_string_from_h2_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_h2_indent* vx_web_html::Func_string_from_h2_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h2_indent* vx_web_html::Func_string_from_h2_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_h2_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_h2_indent* vx_web_html::Func_string_from_h2_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h2_indent* vx_web_html::Func_string_from_h2_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_h2_indent* output;
       return output;
     }
@@ -4850,12 +4851,12 @@
    */
   //class Func_string_from_h3_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_h3_indent* vx_web_html::Func_string_from_h3_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h3_indent* vx_web_html::Func_string_from_h3_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_h3_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_h3_indent* vx_web_html::Func_string_from_h3_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_h3_indent* vx_web_html::Func_string_from_h3_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_h3_indent* output;
       return output;
     }
@@ -4941,12 +4942,12 @@
    */
   //class Func_string_from_head_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_head_indent* vx_web_html::Func_string_from_head_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_head_indent* vx_web_html::Func_string_from_head_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_head_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_head_indent* vx_web_html::Func_string_from_head_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_head_indent* vx_web_html::Func_string_from_head_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_head_indent* output;
       return output;
     }
@@ -5016,12 +5017,12 @@
    */
   //class Func_string_from_html {
 
-    template<typename... Args> vx_web_html::Func_string_from_html* vx_web_html::Func_string_from_html::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_html* vx_web_html::Func_string_from_html::vx_new(Args*... args) {
       vx_web_html::Func_string_from_html* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_html* vx_web_html::Func_string_from_html::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_html* vx_web_html::Func_string_from_html::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_html* output;
       return output;
     }
@@ -5123,12 +5124,12 @@
    */
   //class Func_string_from_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_indent* vx_web_html::Func_string_from_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_indent* vx_web_html::Func_string_from_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_indent* vx_web_html::Func_string_from_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_indent* vx_web_html::Func_string_from_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_indent* output;
       return output;
     }
@@ -5213,12 +5214,12 @@
    */
   //class Func_string_from_meta_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_meta_indent* vx_web_html::Func_string_from_meta_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_meta_indent* vx_web_html::Func_string_from_meta_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_meta_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_meta_indent* vx_web_html::Func_string_from_meta_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_meta_indent* vx_web_html::Func_string_from_meta_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_meta_indent* output;
       return output;
     }
@@ -5301,12 +5302,12 @@
    */
   //class Func_string_from_node_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_node_indent* vx_web_html::Func_string_from_node_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_node_indent* vx_web_html::Func_string_from_node_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_node_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_node_indent* vx_web_html::Func_string_from_node_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_node_indent* vx_web_html::Func_string_from_node_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_node_indent* output;
       return output;
     }
@@ -5529,12 +5530,12 @@
    */
   //class Func_string_from_nodelist_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_nodelist_indent* vx_web_html::Func_string_from_nodelist_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_nodelist_indent* vx_web_html::Func_string_from_nodelist_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_nodelist_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_nodelist_indent* vx_web_html::Func_string_from_nodelist_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_nodelist_indent* vx_web_html::Func_string_from_nodelist_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_nodelist_indent* output;
       return output;
     }
@@ -5615,12 +5616,12 @@
    */
   //class Func_string_from_nodelist_tag_prop_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_nodelist_tag_prop_indent* vx_web_html::Func_string_from_nodelist_tag_prop_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_nodelist_tag_prop_indent* vx_web_html::Func_string_from_nodelist_tag_prop_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_nodelist_tag_prop_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_nodelist_tag_prop_indent* vx_web_html::Func_string_from_nodelist_tag_prop_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_nodelist_tag_prop_indent* vx_web_html::Func_string_from_nodelist_tag_prop_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_nodelist_tag_prop_indent* output;
       return output;
     }
@@ -5737,12 +5738,12 @@
    */
   //class Func_string_from_p_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_p_indent* vx_web_html::Func_string_from_p_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_p_indent* vx_web_html::Func_string_from_p_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_p_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_p_indent* vx_web_html::Func_string_from_p_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_p_indent* vx_web_html::Func_string_from_p_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_p_indent* output;
       return output;
     }
@@ -5834,12 +5835,12 @@
    */
   //class Func_string_from_propname_val {
 
-    template<typename... Args> vx_web_html::Func_string_from_propname_val* vx_web_html::Func_string_from_propname_val::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_propname_val* vx_web_html::Func_string_from_propname_val::vx_new(Args*... args) {
       vx_web_html::Func_string_from_propname_val* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_propname_val* vx_web_html::Func_string_from_propname_val::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_propname_val* vx_web_html::Func_string_from_propname_val::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_propname_val* output;
       return output;
     }
@@ -5917,12 +5918,12 @@
    */
   //class Func_string_from_propstyle {
 
-    template<typename... Args> vx_web_html::Func_string_from_propstyle* vx_web_html::Func_string_from_propstyle::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_propstyle* vx_web_html::Func_string_from_propstyle::vx_new(Args*... args) {
       vx_web_html::Func_string_from_propstyle* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_propstyle* vx_web_html::Func_string_from_propstyle::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_propstyle* vx_web_html::Func_string_from_propstyle::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_propstyle* output;
       return output;
     }
@@ -6011,12 +6012,12 @@
    */
   //class Func_string_from_style_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_style_indent* vx_web_html::Func_string_from_style_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_style_indent* vx_web_html::Func_string_from_style_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_style_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_style_indent* vx_web_html::Func_string_from_style_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_style_indent* vx_web_html::Func_string_from_style_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_style_indent* output;
       return output;
     }
@@ -6103,12 +6104,12 @@
    */
   //class Func_string_from_stylelist_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_stylelist_indent* vx_web_html::Func_string_from_stylelist_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylelist_indent* vx_web_html::Func_string_from_stylelist_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_stylelist_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_stylelist_indent* vx_web_html::Func_string_from_stylelist_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylelist_indent* vx_web_html::Func_string_from_stylelist_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_stylelist_indent* output;
       return output;
     }
@@ -6187,12 +6188,12 @@
    */
   //class Func_string_from_stylepropmap_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_stylepropmap_indent* vx_web_html::Func_string_from_stylepropmap_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylepropmap_indent* vx_web_html::Func_string_from_stylepropmap_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_stylepropmap_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_stylepropmap_indent* vx_web_html::Func_string_from_stylepropmap_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylepropmap_indent* vx_web_html::Func_string_from_stylepropmap_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_stylepropmap_indent* output;
       return output;
     }
@@ -6282,12 +6283,12 @@
    */
   //class Func_string_from_stylesheet_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_stylesheet_indent* vx_web_html::Func_string_from_stylesheet_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylesheet_indent* vx_web_html::Func_string_from_stylesheet_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_stylesheet_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_stylesheet_indent* vx_web_html::Func_string_from_stylesheet_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_stylesheet_indent* vx_web_html::Func_string_from_stylesheet_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_stylesheet_indent* output;
       return output;
     }
@@ -6376,12 +6377,12 @@
    */
   //class Func_string_from_table_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_table_indent* vx_web_html::Func_string_from_table_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_table_indent* vx_web_html::Func_string_from_table_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_table_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_table_indent* vx_web_html::Func_string_from_table_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_table_indent* vx_web_html::Func_string_from_table_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_table_indent* output;
       return output;
     }
@@ -6478,12 +6479,12 @@
    */
   //class Func_string_from_tbody_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_tbody_indent* vx_web_html::Func_string_from_tbody_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_tbody_indent* vx_web_html::Func_string_from_tbody_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_tbody_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_tbody_indent* vx_web_html::Func_string_from_tbody_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_tbody_indent* vx_web_html::Func_string_from_tbody_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_tbody_indent* output;
       return output;
     }
@@ -6554,12 +6555,12 @@
    */
   //class Func_string_from_td_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_td_indent* vx_web_html::Func_string_from_td_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_td_indent* vx_web_html::Func_string_from_td_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_td_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_td_indent* vx_web_html::Func_string_from_td_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_td_indent* vx_web_html::Func_string_from_td_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_td_indent* output;
       return output;
     }
@@ -6630,12 +6631,12 @@
    */
   //class Func_string_from_thead_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_thead_indent* vx_web_html::Func_string_from_thead_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_thead_indent* vx_web_html::Func_string_from_thead_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_thead_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_thead_indent* vx_web_html::Func_string_from_thead_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_thead_indent* vx_web_html::Func_string_from_thead_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_thead_indent* output;
       return output;
     }
@@ -6706,12 +6707,12 @@
    */
   //class Func_string_from_title_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_title_indent* vx_web_html::Func_string_from_title_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_title_indent* vx_web_html::Func_string_from_title_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_title_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_title_indent* vx_web_html::Func_string_from_title_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_title_indent* vx_web_html::Func_string_from_title_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_title_indent* output;
       return output;
     }
@@ -6791,12 +6792,12 @@
    */
   //class Func_string_from_tr_indent {
 
-    template<typename... Args> vx_web_html::Func_string_from_tr_indent* vx_web_html::Func_string_from_tr_indent::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_tr_indent* vx_web_html::Func_string_from_tr_indent::vx_new(Args*... args) {
       vx_web_html::Func_string_from_tr_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_tr_indent* vx_web_html::Func_string_from_tr_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_tr_indent* vx_web_html::Func_string_from_tr_indent::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_tr_indent* output;
       return output;
     }
@@ -6866,12 +6867,12 @@
    */
   //class Func_string_from_uri {
 
-    template<typename... Args> vx_web_html::Func_string_from_uri* vx_web_html::Func_string_from_uri::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_uri* vx_web_html::Func_string_from_uri::vx_new(Args*... args) {
       vx_web_html::Func_string_from_uri* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_string_from_uri* vx_web_html::Func_string_from_uri::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_string_from_uri* vx_web_html::Func_string_from_uri::vx_copy(Args*... args) {
       vx_web_html::Func_string_from_uri* output;
       return output;
     }
@@ -6944,12 +6945,12 @@
    */
   //class Func_style_from_stylesheet_name {
 
-    template<typename... Args> vx_web_html::Func_style_from_stylesheet_name* vx_web_html::Func_style_from_stylesheet_name::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_style_from_stylesheet_name* vx_web_html::Func_style_from_stylesheet_name::vx_new(Args*... args) {
       vx_web_html::Func_style_from_stylesheet_name* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_style_from_stylesheet_name* vx_web_html::Func_style_from_stylesheet_name::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_style_from_stylesheet_name* vx_web_html::Func_style_from_stylesheet_name::vx_copy(Args*... args) {
       vx_web_html::Func_style_from_stylesheet_name* output;
       return output;
     }
@@ -7017,12 +7018,12 @@
    */
   //class Func_stylemap_from_stylelist {
 
-    template<typename... Args> vx_web_html::Func_stylemap_from_stylelist* vx_web_html::Func_stylemap_from_stylelist::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylemap_from_stylelist* vx_web_html::Func_stylemap_from_stylelist::vx_new(Args*... args) {
       vx_web_html::Func_stylemap_from_stylelist* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_stylemap_from_stylelist* vx_web_html::Func_stylemap_from_stylelist::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylemap_from_stylelist* vx_web_html::Func_stylemap_from_stylelist::vx_copy(Args*... args) {
       vx_web_html::Func_stylemap_from_stylelist* output;
       return output;
     }
@@ -7103,12 +7104,12 @@
    */
   //class Func_stylemap_from_stylesheet {
 
-    template<typename... Args> vx_web_html::Func_stylemap_from_stylesheet* vx_web_html::Func_stylemap_from_stylesheet::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylemap_from_stylesheet* vx_web_html::Func_stylemap_from_stylesheet::vx_new(Args*... args) {
       vx_web_html::Func_stylemap_from_stylesheet* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_stylemap_from_stylesheet* vx_web_html::Func_stylemap_from_stylesheet::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylemap_from_stylesheet* vx_web_html::Func_stylemap_from_stylesheet::vx_copy(Args*... args) {
       vx_web_html::Func_stylemap_from_stylesheet* output;
       return output;
     }
@@ -7181,12 +7182,12 @@
    */
   //class Func_styles_from_stylesheet {
 
-    template<typename... Args> vx_web_html::Func_styles_from_stylesheet* vx_web_html::Func_styles_from_stylesheet::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_styles_from_stylesheet* vx_web_html::Func_styles_from_stylesheet::vx_new(Args*... args) {
       vx_web_html::Func_styles_from_stylesheet* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_styles_from_stylesheet* vx_web_html::Func_styles_from_stylesheet::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_styles_from_stylesheet* vx_web_html::Func_styles_from_stylesheet::vx_copy(Args*... args) {
       vx_web_html::Func_styles_from_stylesheet* output;
       return output;
     }
@@ -7259,12 +7260,12 @@
    */
   //class Func_stylesheet_loadmap {
 
-    template<typename... Args> vx_web_html::Func_stylesheet_loadmap* vx_web_html::Func_stylesheet_loadmap::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylesheet_loadmap* vx_web_html::Func_stylesheet_loadmap::vx_new(Args*... args) {
       vx_web_html::Func_stylesheet_loadmap* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_stylesheet_loadmap* vx_web_html::Func_stylesheet_loadmap::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_stylesheet_loadmap* vx_web_html::Func_stylesheet_loadmap::vx_copy(Args*... args) {
       vx_web_html::Func_stylesheet_loadmap* output;
       return output;
     }
@@ -7345,12 +7346,12 @@
    */
   //class Func_uri_from_string {
 
-    template<typename... Args> vx_web_html::Func_uri_from_string* vx_web_html::Func_uri_from_string::vx_new(Args*... args) {
+    template<class... Args> vx_web_html::Func_uri_from_string* vx_web_html::Func_uri_from_string::vx_new(Args*... args) {
       vx_web_html::Func_uri_from_string* output;
       return output;
     }
 
-    template<typename... Args> vx_web_html::Func_uri_from_string* vx_web_html::Func_uri_from_string::vx_copy(Args*... args) {
+    template<class... Args> vx_web_html::Func_uri_from_string* vx_web_html::Func_uri_from_string::vx_copy(Args*... args) {
       vx_web_html::Func_uri_from_string* output;
       return output;
     }

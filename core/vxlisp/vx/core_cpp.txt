@@ -1,17 +1,46 @@
+// :headerfirst
+  int refcount = 0;
+
+// :headertype
+any
+list
+map
+struct
+boolean
+number
+decimal
+float
+int
+string
+func
+
+// :headerfunc
+any<-any
+any<-func
+
 // :header
-  const vx_core::Type_any* vx_core::t_nativeboolean = new vx_core::Type_any;
-  const vx_core::Type_any* vx_core::t_nativefloat = new vx_core::Type_any;
-  const vx_core::Type_any* vx_core::t_nativeint = new vx_core::Type_any;
-  const vx_core::Type_any* vx_core::t_nativelist = new vx_core::Type_list;
-  const vx_core::Type_any* vx_core::t_nativemap = new vx_core::Type_map;
-  const vx_core::Type_any* vx_core::t_nativestring = new vx_core::Type_any;
-  const std::vector<vx_core::Type_any*> vx_core::emptylistany;
-  const std::map<std::string, vx_core::Type_any*> vx_core::emptymapany;
+  extern vx_core::Type_any* t_nativeboolean;
+  extern vx_core::Type_any* t_nativefloat;
+  extern vx_core::Type_any* t_nativeint;
+  extern vx_core::Type_any* t_nativelist;
+  extern vx_core::Type_any* t_nativemap;
+  extern vx_core::Type_any* t_nativestring;
+  extern std::vector<vx_core::Type_any*> emptylistany;
+  extern std::map<std::string, vx_core::Type_any*> emptymapany;
 
   // any_from_any(T, U)
   template <class T, class U> T* any_from_any(T* generic_any_1, U* value);
   // any_from_map(T, T)
   template <class T> T* any_from_map(const std::map<std::string, T*> &map, const std::string key, const T* defaultval);
+
+  // class Async
+  template <class T> class Async {
+  public:
+    std::shared_future<T>* future;
+    vx_core::Async<std::any*>* async_parent;
+    std::function<T(std::any*)>* fn;
+  };
+
   // async_await(T, async<T>)
   template <class T> static vx_core::Async<T>* async_await(T generic_any_1, vx_core::Async<T>* async);
   // async_from_async(T, async<U>)
@@ -26,21 +55,13 @@
   // keyset_from_map(map)
   template <class T> std::set<T> keyset_from_map(std::map<std::string, T> map);
   // list_from_list(T, list<U>)
-  template <class T, class U> std::vector<T*> vx_core::list_from_list(T* generic_any_1, std::vector<U*> list);
+  template <class T, class U> std::vector<T*> list_from_list(T* generic_any_1, std::vector<U*> list);
   // listaddall(list, listadd)
-  template <class T> std::vector<T*> listaddall(vector<T*> listtarget, vector<T*> listadd);
+  template <class T> std::vector<T*> listaddall(std::vector<T*> listtarget, std::vector<T*> listadd);
   // map_from_map(T, map<U>)
   template <class T, class U> std::map<std::string, T*> map_from_map(T* generic_any_1, std::map<std::string, U*> map);
   // string_from_any(val)
   std::string string_from_any(std::any);
-
-  // class Async
-  template <class T> class Async {
-  public:
-    std::shared_future<T>* future;
-    vx_core::Async<std::any*>* async_parent;
-    std::function<T(std::any*)>* fn;
-  };
 
   // sync_from_async(generic_any_1, async)
   template <class T> T sync_from_async(T generic_any_1, Async<T>* async);
@@ -56,6 +77,15 @@
   };
 
 // :body
+
+  vx_core::Type_any* vx_core::t_nativeboolean = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativefloat = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativeint = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativelist = new vx_core::Type_list;
+  vx_core::Type_any* vx_core::t_nativemap = new vx_core::Type_map;
+  vx_core::Type_any* vx_core::t_nativestring = new vx_core::Type_any;
+  std::vector<vx_core::Type_any*> vx_core::emptylistany;
+  std::map<std::string, vx_core::Type_any*> vx_core::emptymapany;
 
   // any_from_any(T, U)
   template <class T, class U> T* vx_core::any_from_any(T* generic_any_1, U* value) {

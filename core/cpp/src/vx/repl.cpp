@@ -363,12 +363,12 @@
    */
   //class Func_any_repl_from_functype_args {
 
-    template<typename... Args> vx_repl::Func_any_repl_from_functype_args* vx_repl::Func_any_repl_from_functype_args::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_any_repl_from_functype_args* vx_repl::Func_any_repl_from_functype_args::vx_new(Args*... args) {
       vx_repl::Func_any_repl_from_functype_args* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_any_repl_from_functype_args* vx_repl::Func_any_repl_from_functype_args::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_any_repl_from_functype_args* vx_repl::Func_any_repl_from_functype_args::vx_copy(Args*... args) {
       vx_repl::Func_any_repl_from_functype_args* output;
       return output;
     }
@@ -432,12 +432,12 @@
    */
   //class Func_any_from_liblist_string {
 
-    template<typename... Args> vx_repl::Func_any_from_liblist_string* vx_repl::Func_any_from_liblist_string::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_liblist_string* vx_repl::Func_any_from_liblist_string::vx_new(Args*... args) {
       vx_repl::Func_any_from_liblist_string* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_any_from_liblist_string* vx_repl::Func_any_from_liblist_string::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_liblist_string* vx_repl::Func_any_from_liblist_string::vx_copy(Args*... args) {
       vx_repl::Func_any_from_liblist_string* output;
       return output;
     }
@@ -511,12 +511,12 @@
    */
   //class Func_any_from_liblist_string_async {
 
-    template<typename... Args> vx_repl::Func_any_from_liblist_string_async* vx_repl::Func_any_from_liblist_string_async::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_liblist_string_async* vx_repl::Func_any_from_liblist_string_async::vx_new(Args*... args) {
       vx_repl::Func_any_from_liblist_string_async* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_any_from_liblist_string_async* vx_repl::Func_any_from_liblist_string_async::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_liblist_string_async* vx_repl::Func_any_from_liblist_string_async::vx_copy(Args*... args) {
       vx_repl::Func_any_from_liblist_string_async* output;
       return output;
     }
@@ -592,12 +592,12 @@
    */
   //class Func_any_from_repl {
 
-    template<typename... Args> vx_repl::Func_any_from_repl* vx_repl::Func_any_from_repl::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_repl* vx_repl::Func_any_from_repl::vx_new(Args*... args) {
       vx_repl::Func_any_from_repl* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_any_from_repl* vx_repl::Func_any_from_repl::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_repl* vx_repl::Func_any_from_repl::vx_copy(Args*... args) {
       vx_repl::Func_any_from_repl* output;
       return output;
     }
@@ -707,12 +707,12 @@
    */
   //class Func_any_from_repl_async {
 
-    template<typename... Args> vx_repl::Func_any_from_repl_async* vx_repl::Func_any_from_repl_async::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_repl_async* vx_repl::Func_any_from_repl_async::vx_new(Args*... args) {
       vx_repl::Func_any_from_repl_async* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_any_from_repl_async* vx_repl::Func_any_from_repl_async::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_any_from_repl_async* vx_repl::Func_any_from_repl_async::vx_copy(Args*... args) {
       vx_repl::Func_any_from_repl_async* output;
       return output;
     }
@@ -785,12 +785,12 @@
    */
   //class Func_anylist_from_repllist {
 
-    template<typename... Args> vx_repl::Func_anylist_from_repllist* vx_repl::Func_anylist_from_repllist::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_anylist_from_repllist* vx_repl::Func_anylist_from_repllist::vx_new(Args*... args) {
       vx_repl::Func_anylist_from_repllist* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_anylist_from_repllist* vx_repl::Func_anylist_from_repllist::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_anylist_from_repllist* vx_repl::Func_anylist_from_repllist::vx_copy(Args*... args) {
       vx_repl::Func_anylist_from_repllist* output;
       return output;
     }
@@ -873,12 +873,12 @@
    */
   //class Func_repl_from_liblist_string {
 
-    template<typename... Args> vx_repl::Func_repl_from_liblist_string* vx_repl::Func_repl_from_liblist_string::vx_new(Args*... args) {
+    template<class... Args> vx_repl::Func_repl_from_liblist_string* vx_repl::Func_repl_from_liblist_string::vx_new(Args*... args) {
       vx_repl::Func_repl_from_liblist_string* output;
       return output;
     }
 
-    template<typename... Args> vx_repl::Func_repl_from_liblist_string* vx_repl::Func_repl_from_liblist_string::vx_copy(Args*... args) {
+    template<class... Args> vx_repl::Func_repl_from_liblist_string* vx_repl::Func_repl_from_liblist_string::vx_copy(Args*... args) {
       vx_repl::Func_repl_from_liblist_string* output;
       return output;
     }

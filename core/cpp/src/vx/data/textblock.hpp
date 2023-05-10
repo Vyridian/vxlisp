@@ -8,11 +8,35 @@
 
 namespace vx_data_textblock {
 
+  // forward declarations
+  class Type_delimset;
+  extern Type_delimset* e_delimset;
+  extern Type_delimset* t_delimset;
+  class Type_textblock;
+  extern Type_textblock* e_textblock;
+  extern Type_textblock* t_textblock;
+  class Type_textblocklist;
+  extern Type_textblocklist* e_textblocklist;
+  extern Type_textblocklist* t_textblocklist;
+  class Func_parse;
+  extern Func_parse* e_parse;
+  extern Func_parse* t_parse;
+  class Func_stringlist_from_textblocklist;
+  extern Func_stringlist_from_textblocklist* e_stringlist_from_textblocklist;
+  extern Func_stringlist_from_textblocklist* t_stringlist_from_textblocklist;
+  class Func_text_from_textblock;
+  extern Func_text_from_textblock* e_text_from_textblock;
+  extern Func_text_from_textblock* t_text_from_textblock;
+  class Func_textblocks_from_textblock;
+  extern Func_textblocks_from_textblock* e_textblocks_from_textblock;
+  extern Func_textblocks_from_textblock* t_textblocks_from_textblock;
+
+
   // (type delimset)
   class Type_delimset : public virtual vx_core::Type_struct {
   public:
-    template<typename... Args> vx_data_textblock::Type_delimset* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Type_delimset* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Type_delimset* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Type_delimset* vx_copy(Args*... args);
     virtual vx_data_textblock::Type_delimset* vx_empty();
     virtual vx_data_textblock::Type_delimset* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -33,14 +57,12 @@ namespace vx_data_textblock {
     vx_data_textblock::Type_delimset* vx_p_subset;
     virtual vx_data_textblock::Type_delimset* subset();
   };
-  extern vx_data_textblock::Type_delimset* e_delimset;
-  extern vx_data_textblock::Type_delimset* t_delimset;
 
   // (type textblock)
   class Type_textblock : public virtual vx_core::Type_struct {
   public:
-    template<typename... Args> vx_data_textblock::Type_textblock* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Type_textblock* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Type_textblock* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Type_textblock* vx_copy(Args*... args);
     virtual vx_data_textblock::Type_textblock* vx_empty();
     virtual vx_data_textblock::Type_textblock* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -64,14 +86,12 @@ namespace vx_data_textblock {
     vx_data_textblock::Type_textblocklist* vx_p_textblocks;
     virtual vx_data_textblock::Type_textblocklist* textblocks();
   };
-  extern vx_data_textblock::Type_textblock* e_textblock;
-  extern vx_data_textblock::Type_textblock* t_textblock;
 
   // (type textblocklist)
   class Type_textblocklist : public virtual vx_core::Type_list {
   public:
-    template<typename... Args> vx_data_textblock::Type_textblocklist* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Type_textblocklist* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Type_textblocklist* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Type_textblocklist* vx_copy(Args*... args);
     virtual vx_data_textblock::Type_textblocklist* vx_empty();
     virtual vx_data_textblock::Type_textblocklist* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -86,14 +106,12 @@ namespace vx_data_textblock {
     // vx_textblock(index)
     virtual vx_data_textblock::Type_textblock* vx_textblock(vx_core::Type_int* index);
   };
-  extern vx_data_textblock::Type_textblocklist* e_textblocklist;
-  extern vx_data_textblock::Type_textblocklist* t_textblocklist;
 
   // (func parse)
   class Func_parse : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_textblock::Func_parse* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Func_parse* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Func_parse* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Func_parse* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_textblock::Func_parse* vx_empty();
@@ -101,14 +119,12 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_data_textblock::Type_textblock* vx_parse(vx_data_textblock::Type_textblock* block, vx_data_textblock::Type_delimset* delimpairlist);
   };
-  extern Func_parse* e_parse;
-  extern Func_parse* t_parse;
 
   // (func stringlist<-textblocklist)
   class Func_stringlist_from_textblocklist : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Func_stringlist_from_textblocklist* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_textblock::Func_stringlist_from_textblocklist* vx_empty();
@@ -118,14 +134,12 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_stringlist* vx_stringlist_from_textblocklist(vx_data_textblock::Type_textblocklist* textblocks);
   };
-  extern Func_stringlist_from_textblocklist* e_stringlist_from_textblocklist;
-  extern Func_stringlist_from_textblocklist* t_stringlist_from_textblocklist;
 
   // (func text<-textblock)
   class Func_text_from_textblock : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_textblock::Func_text_from_textblock* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Func_text_from_textblock* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Func_text_from_textblock* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Func_text_from_textblock* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_textblock::Func_text_from_textblock* vx_empty();
@@ -135,14 +149,12 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_text_from_textblock(vx_data_textblock::Type_textblock* block);
   };
-  extern Func_text_from_textblock* e_text_from_textblock;
-  extern Func_text_from_textblock* t_text_from_textblock;
 
   // (func textblocks<-textblock)
   class Func_textblocks_from_textblock : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_new(Args*... args);
-    template<typename... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_copy(Args*... args);
+    template<class... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_new(Args*... args);
+    template<class... Args> vx_data_textblock::Func_textblocks_from_textblock* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_textblock::Func_textblocks_from_textblock* vx_empty();
@@ -152,8 +164,6 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_data_textblock::Type_textblocklist* vx_textblocks_from_textblock(vx_data_textblock::Type_textblock* block);
   };
-  extern Func_textblocks_from_textblock* e_textblocks_from_textblock;
-  extern Func_textblocks_from_textblock* t_textblocks_from_textblock;
 
   // (func parse)
   vx_data_textblock::Type_textblock* f_parse(vx_data_textblock::Type_textblock* block, vx_data_textblock::Type_delimset* delimpairlist);

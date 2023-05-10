@@ -9,11 +9,47 @@
 
 namespace vx_data_file {
 
+  // forward declarations
+  class Type_file;
+  extern Type_file* e_file;
+  extern Type_file* t_file;
+  class Type_fileformat;
+  extern Type_fileformat* e_fileformat;
+  extern Type_fileformat* t_fileformat;
+  class Func_boolean_exists_from_file;
+  extern Func_boolean_exists_from_file* e_boolean_exists_from_file;
+  extern Func_boolean_exists_from_file* t_boolean_exists_from_file;
+  class Func_boolean_write_from_file_any;
+  extern Func_boolean_write_from_file_any* e_boolean_write_from_file_any;
+  extern Func_boolean_write_from_file_any* t_boolean_write_from_file_any;
+  class Func_boolean_write_from_file_string;
+  extern Func_boolean_write_from_file_string* e_boolean_write_from_file_string;
+  extern Func_boolean_write_from_file_string* t_boolean_write_from_file_string;
+  class Func_file_read_from_file;
+  extern Func_file_read_from_file* e_file_read_from_file;
+  extern Func_file_read_from_file* t_file_read_from_file;
+  class Func_name_from_file;
+  extern Func_name_from_file* e_name_from_file;
+  extern Func_name_from_file* t_name_from_file;
+  class Func_path_from_file;
+  extern Func_path_from_file* e_path_from_file;
+  extern Func_path_from_file* t_path_from_file;
+  class Func_pathcurrent_from_os;
+  extern Func_pathcurrent_from_os* e_pathcurrent_from_os;
+  extern Func_pathcurrent_from_os* t_pathcurrent_from_os;
+  class Func_pathfull_from_file;
+  extern Func_pathfull_from_file* e_pathfull_from_file;
+  extern Func_pathfull_from_file* t_pathfull_from_file;
+  class Func_string_read_from_file;
+  extern Func_string_read_from_file* e_string_read_from_file;
+  extern Func_string_read_from_file* t_string_read_from_file;
+
+
   // (type file)
   class Type_file : public virtual vx_core::Type_struct {
   public:
-    template<typename... Args> vx_data_file::Type_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Type_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Type_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Type_file* vx_copy(Args*... args);
     virtual vx_data_file::Type_file* vx_empty();
     virtual vx_data_file::Type_file* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
@@ -37,26 +73,22 @@ namespace vx_data_file {
     vx_core::Type_string* vx_p_text;
     virtual vx_core::Type_string* text();
   };
-  extern vx_data_file::Type_file* e_file;
-  extern vx_data_file::Type_file* t_file;
 
   // (type fileformat)
   class Type_fileformat : public vx_core::Type_any {
   public:
-    template<typename... Args> vx_data_file::Type_fileformat* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Type_fileformat* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Type_fileformat* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Type_fileformat* vx_copy(Args*... args);
     virtual vx_data_file::Type_fileformat* vx_empty();
     virtual vx_data_file::Type_fileformat* vx_type();
     virtual vx_core::Type_typedef* vx_typedef();
   };
-  extern vx_data_file::Type_fileformat* e_fileformat;
-  extern vx_data_file::Type_fileformat* t_fileformat;
 
   // (func boolean-exists<-file)
   class Func_boolean_exists_from_file : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_boolean_exists_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_boolean_exists_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_exists_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_exists_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_boolean_exists_from_file* vx_empty();
@@ -66,14 +98,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_boolean* vx_boolean_exists_from_file(vx_data_file::Type_file* file);
   };
-  extern Func_boolean_exists_from_file* e_boolean_exists_from_file;
-  extern Func_boolean_exists_from_file* t_boolean_exists_from_file;
 
   // (func boolean-write<-file-any)
   class Func_boolean_write_from_file_any : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_any* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_any* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_any* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_any* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_boolean_write_from_file_any* vx_empty();
@@ -81,14 +111,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_boolean* vx_boolean_write_from_file_any(vx_data_file::Type_file* file, vx_core::Type_any* val, vx_core::Type_context* context);
   };
-  extern Func_boolean_write_from_file_any* e_boolean_write_from_file_any;
-  extern Func_boolean_write_from_file_any* t_boolean_write_from_file_any;
 
   // (func boolean-write<-file-string)
   class Func_boolean_write_from_file_string : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_string* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_boolean_write_from_file_string* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_string* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_boolean_write_from_file_string* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_boolean_write_from_file_string* vx_empty();
@@ -96,14 +124,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_boolean* vx_boolean_write_from_file_string(vx_data_file::Type_file* file, vx_core::Type_string* text, vx_core::Type_context* context);
   };
-  extern Func_boolean_write_from_file_string* e_boolean_write_from_file_string;
-  extern Func_boolean_write_from_file_string* t_boolean_write_from_file_string;
 
   // (func file-read<-file)
   class Func_file_read_from_file : public vx_core::Func_any_from_any_context, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_file_read_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_file_read_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_file_read_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_file_read_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_file_read_from_file* vx_empty();
@@ -113,14 +139,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_data_file::Type_file* vx_file_read_from_file(vx_data_file::Type_file* file, vx_core::Type_context* context);
   };
-  extern Func_file_read_from_file* e_file_read_from_file;
-  extern Func_file_read_from_file* t_file_read_from_file;
 
   // (func name<-file)
   class Func_name_from_file : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_name_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_name_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_name_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_name_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_name_from_file* vx_empty();
@@ -130,14 +154,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_name_from_file(vx_data_file::Type_file* file);
   };
-  extern Func_name_from_file* e_name_from_file;
-  extern Func_name_from_file* t_name_from_file;
 
   // (func path<-file)
   class Func_path_from_file : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_path_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_path_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_path_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_path_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_path_from_file* vx_empty();
@@ -147,14 +169,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_path_from_file(vx_data_file::Type_file* file);
   };
-  extern Func_path_from_file* e_path_from_file;
-  extern Func_path_from_file* t_path_from_file;
 
   // (func pathcurrent<-os)
   class Func_pathcurrent_from_os : public vx_core::Type_func, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_pathcurrent_from_os* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_pathcurrent_from_os* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_pathcurrent_from_os* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_pathcurrent_from_os* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_pathcurrent_from_os* vx_empty();
@@ -162,14 +182,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_pathcurrent_from_os();
   };
-  extern Func_pathcurrent_from_os* e_pathcurrent_from_os;
-  extern Func_pathcurrent_from_os* t_pathcurrent_from_os;
 
   // (func pathfull<-file)
   class Func_pathfull_from_file : public vx_core::Func_any_from_any, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_pathfull_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_pathfull_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_pathfull_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_pathfull_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_pathfull_from_file* vx_empty();
@@ -179,14 +197,12 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_pathfull_from_file(vx_data_file::Type_file* file);
   };
-  extern Func_pathfull_from_file* e_pathfull_from_file;
-  extern Func_pathfull_from_file* t_pathfull_from_file;
 
   // (func string-read<-file)
   class Func_string_read_from_file : public vx_core::Func_any_from_any_context, public virtual vx_core::Type_replfunc {
   public:
-    template<typename... Args> vx_data_file::Func_string_read_from_file* vx_new(Args*... args);
-    template<typename... Args> vx_data_file::Func_string_read_from_file* vx_copy(Args*... args);
+    template<class... Args> vx_data_file::Func_string_read_from_file* vx_new(Args*... args);
+    template<class... Args> vx_data_file::Func_string_read_from_file* vx_copy(Args*... args);
     virtual vx_core::Type_funcdef* vx_funcdef();
     virtual vx_core::Type_typedef* vx_typedef();
     virtual vx_data_file::Func_string_read_from_file* vx_empty();
@@ -196,8 +212,6 @@ namespace vx_data_file {
     virtual vx_core::Type_any* vx_repl(vx_core::Type_anylist* arglist);
     vx_core::Type_string* vx_string_read_from_file(vx_data_file::Type_file* file, vx_core::Type_context* context);
   };
-  extern Func_string_read_from_file* e_string_read_from_file;
-  extern Func_string_read_from_file* t_string_read_from_file;
 
   // (func boolean-exists<-file)
   vx_core::Type_boolean* f_boolean_exists_from_file(vx_data_file::Type_file* file);

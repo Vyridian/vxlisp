@@ -1,14 +1,23 @@
 #include <any>
 #include <exception>
 #include <functional>
+#include <future>
 #include <map>
 #include <set>
 #include <string>
 #include <vector>
 #include "vx/core.hpp"
 
-//namespace vx_core {
-// :body
+//namespace vx_core {// :body
+
+  vx_core::Type_any* vx_core::t_nativeboolean = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativefloat = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativeint = new vx_core::Type_any;
+  vx_core::Type_any* vx_core::t_nativelist = new vx_core::Type_list;
+  vx_core::Type_any* vx_core::t_nativemap = new vx_core::Type_map;
+  vx_core::Type_any* vx_core::t_nativestring = new vx_core::Type_any;
+  std::vector<vx_core::Type_any*> vx_core::emptylistany;
+  std::map<std::string, vx_core::Type_any*> vx_core::emptymapany;
 
   // any_from_any(T, U)
   template <class T, class U> T* vx_core::any_from_any(T* generic_any_1, U* value) {
@@ -305,6 +314,672 @@
         "vx/core", // pkgname
         "any", // name
         "", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: list
+   * A simple untyped list.
+   * (type list)
+   */
+  //class Type_list {
+
+    template <class T> std::vector<T*> vx_core::Type_list::vx_any(T* generic_any_1) {
+      return vx_core::arraylist_from_arraylist(generic_any_1, this->vx_list());
+    }
+
+    template <class T> T* vx_core::Type_list::vx_any_from_list(T* generic_any_1, int index) {
+      return vx_any_from_list(generic_any_1, this->vx_list(), index);
+    }
+
+    std::vector<vx_core::Type_any*> vx_core::Type_list::vx_list() {
+      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
+    }
+
+    vx_core::Type_any* vx_core::Type_list::vx_any(vx_core::Type_int* index) {
+      vx_core::Type_any* output = vx_core::e_any;
+      vx_core::Type_list* list = this;
+      int iindex = index->vx_int();
+      std::vector<vx_core::Type_any*> listval = list->vx_p_list;
+      if (iindex < listval.size()) {
+        output = listval[iindex];
+      }
+      return output;
+    }
+
+    template<typename... Args> vx_core::Type_list* vx_core::Type_list::vx_new(Args*... args) {return vx_core::e_list->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_list* vx_core::Type_list::vx_copy(Args*... args) {
+      vx_core::Type_list* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_list* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      std::vector<vx_core::Type_any*> listval = val->vx_list();
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_any) {
+          listval.push_back(vx_core::any_from_any(vx_core::t_any, valsub));
+        } else if (valsubtype == vx_core::t_list) {
+          vx_core::Type_list* multi = vx_core::any_from_any(vx_core::t_list, valsub);
+          listval = vx_core::listaddall(listval, multi->vx_list());
+        } else if (valsubtype == vx_core::t_nativelist) {
+          std::vector<std::any*> listunknown = vx_core::any_from_any(std::vector<vx_core::Type_any*>, valsub);
+          for (std::any* item : listunknown) {
+            vx_core::Type_any* itemtype = vx_core::t_any->vx_type_from_any(item);
+            if (itemtype == vx_core::t_any) {
+              vx_core::Type_any* valitem = vx_core::any_from_any(vx_core::t_any, item);
+              listval.push_back(valitem);
+            }
+          }
+        } else {
+          vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new list) - Invalid Type: " + vx_core::string_from_any(valsub));
+          msgblock = msgblock->vx_copy(msg);
+        }
+      }
+      output->vx_p_list = listval;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_list* vx_core::Type_list::vx_empty() {return vx_core::e_list;}
+    vx_core::Type_list* vx_core::Type_list::vx_type() {return vx_core::t_list;}
+
+    vx_core::Type_typedef* vx_core::Type_list::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "list", // name
+        ":list", // extends
+        vx_core::e_typelist, // traits
+        vx_core::t_typelist->vx_new(vx_core::t_any), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+    template <class T> std::vector<T*> vx_core::Type_list::list_new(T* generic_any_1, vx_core::Type_any* vals...) {
+      std::vector<vx_core::Type_any*> listval = Arrays.asList(vals);
+      return vx_core::arraylist_from_arraylist(generic_any_1, listval);
+    }
+
+    template <class T> T* vx_core::Type_list::vx_any_from_list(T* generic_any_1, std::vector<vx_core::Type_any*> list, int index) {
+      T* output = vx_core::f_empty(generic_any_1);
+      if (list.size() > index) {
+        output = vx_core::f_any_from_any(generic_any_1, list[index]);
+      }
+      return output;
+    }
+
+    template <class T> T* vx_core::Type_list::vx_any_first_from_list_fn(T* generic_any_1, vx_core::Type_list* list, Function<vx_core::Type_any*, T*> fn_any) {
+      T* output = vx_core::f_empty(generic_any_1);
+      std::vector<vx_core::Type_any*> listany = list->vx_list();
+      for (vx_core::Type_any* any : listany) {
+        T* tany = vx_core::f_any_from_any(generic_any_1, any);
+        T* val = fn_any->apply(tany);
+        if (val != NULL) {
+          output = val;
+          break;
+        }
+      }
+      return output;
+    }
+
+  //}
+
+  /**
+   * type: map
+   * A simple untyped map.
+   * (type map)
+   */
+  //class Type_map {
+    // vx_map()
+    std::map<std::string, vx_core::Type_any*> vx_core::Type_map::vx_map() {
+      return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
+    }
+
+    // vx_any(key)
+    vx_core::Type_any* vx_core::Type_map::vx_any(vx_core::Type_string* key) {
+      vx_core::Type_any* output = vx_core::e_any;
+      vx_core::Type_map* map = this;
+      std::string skey = key->vx_string();
+      std::map<std::string, vx_core::Type_any*> mapval = map->vx_p_map;
+      output = vx_core::any_from_map(mapval, skey, vx_core::e_any);
+      return output;
+    }
+
+    // vx_new_from_map(mapval)
+    vx_core::Type_map* vx_core::Type_map::vx_new_from_map(std::map<std::string, vx_core::Type_any*> mapval) {
+      vx_core::Type_map* output;
+      vx_core::Type_msgblock* msgblock = vx_core::e_msgblock;
+      std::map<std::string, vx_core::Type_any*> map;
+      for (auto const& iter : mapval) {
+        std::string key = iter.first;
+        vx_core::Type_any* val = iter.second;
+        vx_core::Type_any* valtype = vx_core::t_any->vx_type_from_any(val);
+        if (valtype == vx_core::t_any) {
+          vx_core::Type_any* castval = vx_core::any_from_any(vx_core::t_any, val);
+          map[key] = castval;
+        } else {
+          vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(map) Invalid Value: " + vx_core::string_from_any(val) + "");
+          msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
+        }
+      }
+      output->vx_p_map = map;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    template<typename... Args> vx_core::Type_map* vx_core::Type_map::vx_new(Args*... args) {return vx_core::e_map->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_map* vx_core::Type_map::vx_copy(Args*... args) {
+      vx_core::Type_map* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_map* valmap = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      std::map<std::string, vx_core::Type_any*> mapval;
+      std::string key = "";
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = vx_core::t_msgblock->vx_copy(msgblock, valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = vx_core::t_msgblock->vx_copy(msgblock, valsub);
+        } else if (key == "") {
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
+            key = valstring->vx_string();
+          } else if (valsubtype == vx_core::t_nativestring) {
+            key = vx_core_::any_from_any("", valsub);
+          } else {
+            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("Key Expected: " + vx_core::string_from_any(valsub) + "");
+            msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
+          }
+        } else {
+          vx_core::Type_any* valany;
+          if (valsubtype == vx_core::t_any) {
+            valany = vx_core::any_from_any(vx_core::t_any, valsub);
+          } else if (valsubtype == vx_core::t_any) {
+            valany = vx_core::any_from_any(vx_core::t_any, valsub);
+          } else {
+            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("Invalid Key/Value: " + key + " "  + vx_core::string_from_any(valsub) + "");
+            msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
+          }
+          if (valany != NULL) {
+            mapval[key] = valany;
+            key = "";
+          }
+        }
+      }
+      output->vx_p_map = mapval;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_map* vx_core::Type_map::vx_empty() {return vx_core::e_map;}
+    vx_core::Type_map* vx_core::Type_map::vx_type() {return vx_core::t_map;}
+
+    vx_core::Type_typedef* vx_core::Type_map::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "map", // name
+        ":map", // extends
+        vx_core::e_typelist, // traits
+        vx_core::t_typelist->vx_new(vx_core::t_any), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: struct
+   * Struct is the type of all structures/objects with properties.
+   * (type struct)
+   */
+  //class Type_struct {
+    // vx_any(key)
+    vx_core::Type_any* vx_core::Type_struct::vx_any(vx_core::Type_string* key) {
+      vx_core::Type_any* output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      }
+      return output;
+    }
+
+    // vx_map()
+    std::map<std::string, vx_core::Type_any*> vx_core::Type_struct::vx_map() {
+      std::map<std::string, vx_core::Type_any*> output;
+      return output;
+    }
+
+    template<typename... Args> vx_core::Type_struct* vx_core::Type_struct::vx_new(Args*... args) {return vx_core::e_struct->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_struct* vx_core::Type_struct::vx_copy(Args*... args) {
+      vx_core::Type_struct* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      Type_struct* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_struct* vx_core::Type_struct::vx_empty() {return vx_core::e_struct;}
+    vx_core::Type_struct* vx_core::Type_struct::vx_type() {return vx_core::t_struct;}
+
+    vx_core::Type_typedef* vx_core::Type_struct::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "struct", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: boolean
+   * (type boolean)
+   */
+  //class Type_boolean {
+    template<typename... Args> vx_core::Type_boolean* vx_core::Type_boolean::vx_new(Args*... args) {return vx_core::e_boolean->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_boolean* vx_core::Type_boolean::vx_copy(Args*... args) {
+      vx_core::Type_boolean* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_boolean* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_boolean = val->vx_boolean();
+      bool booleanval = false;
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_boolean) {
+          vx_core::Type_boolean* valboolean = vx_core::any_from_any(vx_core::t_boolean, valsub);
+          booleanval = booleanval || valboolean->vx_boolean();
+        } else if (valsubtype == vx_core::t_nativeboolean) {
+          booleanval = booleanval || vx_core::any_from_any(true, valsub);
+        }
+      }
+      output->vx_p_boolean = booleanval;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_boolean* vx_core::Type_boolean::vx_empty() {return vx_core::e_boolean;}
+    vx_core::Type_boolean* vx_core::Type_boolean::vx_type() {return vx_core::t_boolean;}
+
+    vx_core::Type_typedef* vx_core::Type_boolean::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: number
+   * A generic number that could be int, float, or decimal.
+   * (type number)
+   */
+  //class Type_number {
+    template<typename... Args> vx_core::Type_number* vx_core::Type_number::vx_new(Args*... args) {return vx_core::e_number->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_number* vx_core::Type_number::vx_copy(Args*... args) {
+      vx_core::Type_number* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      return output;
+    }
+
+    vx_core::Type_number* vx_core::Type_number::vx_empty() {return vx_core::e_number;}
+    vx_core::Type_number* vx_core::Type_number::vx_type() {return vx_core::t_number;}
+
+    vx_core::Type_typedef* vx_core::Type_number::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "number", // name
+        "", // extends
+        vx_core::e_typelist, // traits
+        vx_core::t_typelist->vx_new(vx_core::t_int, vx_core::t_float, vx_core::t_decimal), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: decimal
+   * A clean version of float like Java BigDecimal.
+   * (type decimal)
+   */
+  //class Type_decimal {
+    template<typename... Args> vx_core::Type_decimal* vx_core::Type_decimal::vx_new(Args*... args) {return vx_core::e_decimal->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_decimal* vx_core::Type_decimal::vx_copy(Args*... args) {
+      vx_core::Type_decimal* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_decimal* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_decimal = val->vx_string();
+      std::string sval = "";
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_string) {
+          vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
+          sval = valstring->vx_string();
+        } else if (valsubtype == vx_core::t_nativestring) {
+          sval = vx_core::any_from_any("", valsub);
+        }
+      }
+      output->vx_p_decimal = sval;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_decimal* vx_core::Type_decimal::vx_empty() {return vx_core::e_decimal;}
+    vx_core::Type_decimal* vx_core::Type_decimal::vx_type() {return vx_core::t_decimal;}
+
+    vx_core::Type_typedef* vx_core::Type_decimal::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "decimal", // name
+        "", // extends
+        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: float
+   * (type float)
+   */
+  //class Type_float {
+    template<typename... Args> vx_core::Type_float* vx_core::Type_float::vx_new(Args*... args) {return vx_core::e_float->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_float* vx_core::Type_float::vx_copy(Args*... args) {
+      vx_core::Type_float* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_float* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_float = val->vx_float();
+      float floatval = 0;
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype =- vx_core::t_decimal) {
+          vx_core::Type_decimal* valnum = vx_core::any_from_any(vx_core::t_decimal, valsub);
+          floatval += valnum->vx_float();
+        } else if (valsubtype == vx_core::t_float) {
+          vx_core::Type_float* valnum = vx_core::any_from_any(vx_core::t_float, valsub);
+          floatval += valnum->vx_float();
+        } else if (valsubtype == vx_core::t_int) {
+          vx_core::Type_int* valnum = vx_core::any_from_any(vx_core::t_int, valsub);
+          floatval += valnum->vx_int();
+        } else if (valsubtype == vx_core::t_string) {
+          vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
+          floatval += Float.parseFloat(valstring->vx_string());
+        } else if (valsubtype == vx_core::t_nativefloat) {
+          floatval += vx_core::any_from_any(0f, valsub);
+        } else if (valsubtype == vx_core::t_nativeint) {
+          floatval += vx_core::any_from_any(0, valsub);
+        } else if (valsubtype == vx_core::t_nativestring) {
+          std::string ssubtype = vx_core::any_from_any("", valsub);
+          floatval += Float.parseFloat(ssubtype);
+        }
+      }
+      output->vx_float = floatval;
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_float* vx_core::Type_float::vx_empty() {return vx_core::e_float;}
+    vx_core::Type_float* vx_core::Type_float::vx_type() {return vx_core::t_float;}
+
+    vx_core::Type_typedef* vx_core::Type_float::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "float", // name
+        "", // extends
+        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: int
+   * (type int)
+   */
+  //class Type_int {
+    template<typename... Args> vx_core::Type_int* vx_core::Type_int::vx_new(Args*... args) {return vx_core::e_int->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_int* vx_core::Type_int::vx_copy(Args*... args) {
+      vx_core::Type_int* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_int* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_int = val->vx_int();
+      int intval = 0;
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_int) {
+          vx_core::Type_int valnum = vx_core::any_from_any(vx_core::t_int, valsub);
+          intval += valnum->vx_int();
+        } else if (valsubtype == vx_core::t_nativeint) {
+          intval += vx_core::any_from_any(0, valsub);
+        }
+      }
+      output->vx_p_int = intval;
+      if (msgblock != vx_core::t_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_int* vx_core::Type_int::vx_empty() {return vx_core::e_int;}
+    vx_core::Type_int* vx_core::Type_int::vx_type() {return vx_core::t_int;}
+
+    vx_core::Type_typedef* vx_core::Type_int::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "int", // name
+        "", // extends
+        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: string
+   * (type string)
+   */
+  //class Type_string {
+    template<typename... Args> vx_core::Type_string* vx_core::Type_string::vx_new(Args*... args) {return vx_core::e_string->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_string* vx_core::Type_string::vx_copy(Args*... args) {
+      vx_core::Type_string* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      vx_core::Type_string* val = this;
+      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      output->vx_p_string = val->vx_string();
+      string sb = output->vx_string();
+      for (std::any* valsub : vals) {
+        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = msgblock->vx_copy(valsub);
+        } else if (valsubtype == vx_core::t_string) {
+          vx_core::Type_string valstring = vx_core::any_from_any(vx_core::t_string, valsub);
+          sb.append(valstring->vx_string());
+        } else if (valsubtype == vx_core::t_int) {
+          vx_core::Type_int valint = vx_core::any_from_any(vx_core::t_int, valsub);
+          sb.append(valint->vx_int());
+        } else if (valsubtype == vx_core::t_float) {
+          vx_core::Type_float valfloat = vx_core::any_from_any(vx_core::t_float, valsub);
+          sb.append(valfloat->vx_float());
+        } else if (valsubtype == vx_core::t_decimal) {
+          vx_core::Type_decimal valdecimal = vx_core::any_from_any(vx_core::t_decimal, valsub);
+          sb.append(valdecimal->vx_string());
+        } else if (valsubtype == vx_core::t_nativestring) {
+          sb.append(vx_core::any_from_any("", valsub));
+        } else if (valsubtype == vx_core::t_nativeint) {
+          sb.append(vx_core::any_from_any(0, valsub));
+        } else if (valsubtype == vx_core::t_nativefloat) {
+          sb.append(vx_core::any_from_any(0f, valsub));
+        } else {
+          vx_core::Type_msg msg* = vx_core::t_msg->vx_new_error("(new string) - Invalid Type: " + vx_core::string_from_any(valsub));
+          msgblock = msgblock->vx_copy(msg);
+        }
+      }
+      output->vx_p_string = sb;
+      if (msgblock != vx_core::t_msgblock) {
+        output->vx_p_msgblock = msgblock;
+      }
+      return output;
+    }
+
+    vx_core::Type_string* vx_core::Type_string::vx_empty() {return vx_core::e_string;}
+    vx_core::Type_string* vx_core::Type_string::vx_type() {return vx_core::t_string;}
+
+    vx_core::Type_typedef* vx_core::Type_string::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+    }
+
+  //}
+
+  /**
+   * type: func
+   * Original Function Class.
+   * (type func)
+   */
+  //class Type_func {
+    vx_core::Type_funcdef* vx_core::Type_func::vx_funcdef() {
+      return vx_core::e_funcdef;
+    }
+    template<typename... Args> vx_core::Type_func* vx_core::Type_func::vx_new(Args*... args) {return vx_core::e_func->vx_copy(args...);}
+    template<typename... Args> vx_core::Type_func* vx_core::Type_func::vx_copy(Args*... args) {
+      vx_core::Type_func* output;
+      const int size = sizeof...(args);
+      const std::any vals[size];
+      return output;
+    }
+
+    vx_core::Type_func* vx_core::Type_func::vx_empty() {return vx_core::e_func;}
+    vx_core::Type_func* vx_core::Type_func::vx_type() {return vx_core::t_func;}
+
+    vx_core::Type_typedef* vx_core::Type_func::vx_typedef() {
+      return vx_core::Type_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "func", // name
+        ":func", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
@@ -903,61 +1578,6 @@
         ":map", // extends
         vx_core::e_typelist, // traits
         vx_core::t_typelist->vx_new(vx_core::t_arg), // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: boolean
-   * (type boolean)
-   */
-  //class Type_boolean {
-    template<typename... Args> vx_core::Type_boolean* vx_core::Type_boolean::vx_new(Args*... args) {return vx_core::e_boolean->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_boolean* vx_core::Type_boolean::vx_copy(Args*... args) {
-      vx_core::Type_boolean* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_boolean* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_boolean = val->vx_boolean();
-      bool booleanval = false;
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_boolean) {
-          vx_core::Type_boolean* valboolean = vx_core::any_from_any(vx_core::t_boolean, valsub);
-          booleanval = booleanval || valboolean->vx_boolean();
-        } else if (valsubtype == vx_core::t_nativeboolean) {
-          booleanval = booleanval || vx_core::any_from_any(true, valsub);
-        }
-      }
-      output->vx_p_boolean = booleanval;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_boolean* vx_core::Type_boolean::vx_empty() {return vx_core::e_boolean;}
-    vx_core::Type_boolean* vx_core::Type_boolean::vx_type() {return vx_core::t_boolean;}
-
-    vx_core::Type_typedef* vx_core::Type_boolean::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "boolean", // name
-        "", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
         vx_core::e_funclist, // disallowfuncs
@@ -1935,62 +2555,6 @@
   //}
 
   /**
-   * type: decimal
-   * A clean version of float like Java BigDecimal.
-   * (type decimal)
-   */
-  //class Type_decimal {
-    template<typename... Args> vx_core::Type_decimal* vx_core::Type_decimal::vx_new(Args*... args) {return vx_core::e_decimal->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_decimal* vx_core::Type_decimal::vx_copy(Args*... args) {
-      vx_core::Type_decimal* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_decimal* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_decimal = val->vx_string();
-      std::string sval = "";
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_string) {
-          vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
-          sval = valstring->vx_string();
-        } else if (valsubtype == vx_core::t_nativestring) {
-          sval = vx_core::any_from_any("", valsub);
-        }
-      }
-      output->vx_p_decimal = sval;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_decimal* vx_core::Type_decimal::vx_empty() {return vx_core::e_decimal;}
-    vx_core::Type_decimal* vx_core::Type_decimal::vx_type() {return vx_core::t_decimal;}
-
-    vx_core::Type_typedef* vx_core::Type_decimal::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "decimal", // name
-        "", // extends
-        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
    * type: error
    * Error Type
    * (type error)
@@ -2012,113 +2576,6 @@
         "vx/core", // pkgname
         "error", // name
         "", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: float
-   * (type float)
-   */
-  //class Type_float {
-    template<typename... Args> vx_core::Type_float* vx_core::Type_float::vx_new(Args*... args) {return vx_core::e_float->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_float* vx_core::Type_float::vx_copy(Args*... args) {
-      vx_core::Type_float* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_float* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_float = val->vx_float();
-      float floatval = 0;
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype =- vx_core::t_decimal) {
-          vx_core::Type_decimal* valnum = vx_core::any_from_any(vx_core::t_decimal, valsub);
-          floatval += valnum->vx_float();
-        } else if (valsubtype == vx_core::t_float) {
-          vx_core::Type_float* valnum = vx_core::any_from_any(vx_core::t_float, valsub);
-          floatval += valnum->vx_float();
-        } else if (valsubtype == vx_core::t_int) {
-          vx_core::Type_int* valnum = vx_core::any_from_any(vx_core::t_int, valsub);
-          floatval += valnum->vx_int();
-        } else if (valsubtype == vx_core::t_string) {
-          vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
-          floatval += Float.parseFloat(valstring->vx_string());
-        } else if (valsubtype == vx_core::t_nativefloat) {
-          floatval += vx_core::any_from_any(0f, valsub);
-        } else if (valsubtype == vx_core::t_nativeint) {
-          floatval += vx_core::any_from_any(0, valsub);
-        } else if (valsubtype == vx_core::t_nativestring) {
-          std::string ssubtype = vx_core::any_from_any("", valsub);
-          floatval += Float.parseFloat(ssubtype);
-        }
-      }
-      output->vx_float = floatval;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_float* vx_core::Type_float::vx_empty() {return vx_core::e_float;}
-    vx_core::Type_float* vx_core::Type_float::vx_type() {return vx_core::t_float;}
-
-    vx_core::Type_typedef* vx_core::Type_float::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "float", // name
-        "", // extends
-        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: func
-   * Original Function Class.
-   * (type func)
-   */
-  //class Type_func {
-    vx_core::Type_funcdef* vx_core::Type_func::vx_funcdef() {
-      return vx_core::e_funcdef;
-    }
-    template<typename... Args> vx_core::Type_func* vx_core::Type_func::vx_new(Args*... args) {return vx_core::e_func->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_func* vx_core::Type_func::vx_copy(Args*... args) {
-      vx_core::Type_func* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      return output;
-    }
-
-    vx_core::Type_func* vx_core::Type_func::vx_empty() {return vx_core::e_func;}
-    vx_core::Type_func* vx_core::Type_func::vx_type() {return vx_core::t_func;}
-
-    vx_core::Type_typedef* vx_core::Type_func::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "func", // name
-        ":func", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
@@ -2538,61 +2995,6 @@
   //}
 
   /**
-   * type: int
-   * (type int)
-   */
-  //class Type_int {
-    template<typename... Args> vx_core::Type_int* vx_core::Type_int::vx_new(Args*... args) {return vx_core::e_int->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_int* vx_core::Type_int::vx_copy(Args*... args) {
-      vx_core::Type_int* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_int* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_int = val->vx_int();
-      int intval = 0;
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_int) {
-          vx_core::Type_int valnum = vx_core::any_from_any(vx_core::t_int, valsub);
-          intval += valnum->vx_int();
-        } else if (valsubtype == vx_core::t_nativeint) {
-          intval += vx_core::any_from_any(0, valsub);
-        }
-      }
-      output->vx_p_int = intval;
-      if (msgblock != vx_core::t_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_int* vx_core::Type_int::vx_empty() {return vx_core::e_int;}
-    vx_core::Type_int* vx_core::Type_int::vx_type() {return vx_core::t_int;}
-
-    vx_core::Type_typedef* vx_core::Type_int::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "int", // name
-        "", // extends
-        vx_core::t_typelist->vx_new(vx_core::t_number), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
    * type: intlist
    * A list of int.
    * (type intlist)
@@ -2803,124 +3205,6 @@
   //}
 
   /**
-   * type: list
-   * A simple untyped list.
-   * (type list)
-   */
-  //class Type_list {
-
-    template <class T> std::vector<T*> vx_core::Type_list::vx_any(T* generic_any_1) {
-      return vx_core::arraylist_from_arraylist(generic_any_1, this->vx_list());
-    }
-
-    template <class T> T* vx_core::Type_list::vx_any_from_list(T* generic_any_1, int index) {
-      return vx_any_from_list(generic_any_1, this->vx_list(), index);
-    }
-
-    std::vector<vx_core::Type_any*> vx_core::Type_list::vx_list() {
-      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
-    }
-
-    vx_core::Type_any* vx_core::Type_list::vx_any(vx_core::Type_int* index) {
-      vx_core::Type_any* output = vx_core::e_any;
-      vx_core::Type_list* list = this;
-      int iindex = index->vx_int();
-      std::vector<vx_core::Type_any*> listval = list->vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval[iindex];
-      }
-      return output;
-    }
-
-    template<typename... Args> vx_core::Type_list* vx_core::Type_list::vx_new(Args*... args) {return vx_core::e_list->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_list* vx_core::Type_list::vx_copy(Args*... args) {
-      vx_core::Type_list* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_list* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      std::vector<vx_core::Type_any*> listval = val->vx_list();
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_any) {
-          listval.push_back(vx_core::any_from_any(vx_core::t_any, valsub));
-        } else if (valsubtype == vx_core::t_list) {
-          vx_core::Type_list* multi = vx_core::any_from_any(vx_core::t_list, valsub);
-          listval = vx_core::listaddall(listval, multi->vx_list());
-        } else if (valsubtype == vx_core::t_nativelist) {
-          std::vector<std::any*> listunknown = vx_core::any_from_any(std::vector<vx_core::Type_any*>, valsub);
-          for (std::any* item : listunknown) {
-            vx_core::Type_any* itemtype = vx_core::t_any->vx_type_from_any(item);
-            if (itemtype == vx_core::t_any) {
-              vx_core::Type_any* valitem = vx_core::any_from_any(vx_core::t_any, item);
-              listval.push_back(valitem);
-            }
-          }
-        } else {
-          vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(new list) - Invalid Type: " + vx_core::string_from_any(valsub));
-          msgblock = msgblock->vx_copy(msg);
-        }
-      }
-      output->vx_p_list = listval;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_list* vx_core::Type_list::vx_empty() {return vx_core::e_list;}
-    vx_core::Type_list* vx_core::Type_list::vx_type() {return vx_core::t_list;}
-
-    vx_core::Type_typedef* vx_core::Type_list::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "list", // name
-        ":list", // extends
-        vx_core::e_typelist, // traits
-        vx_core::t_typelist->vx_new(vx_core::t_any), // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-    template <class T> std::vector<T*> vx_core::Type_list::list_new(T* generic_any_1, vx_core::Type_any* vals...) {
-      std::vector<vx_core::Type_any*> listval = Arrays.asList(vals);
-      return vx_core::arraylist_from_arraylist(generic_any_1, listval);
-    }
-
-    template <class T> T* vx_core::Type_list::vx_any_from_list(T* generic_any_1, std::vector<vx_core::Type_any*> list, int index) {
-      T* output = vx_core::f_empty(generic_any_1);
-      if (list.size() > index) {
-        output = vx_core::f_any_from_any(generic_any_1, list[index]);
-      }
-      return output;
-    }
-
-    template <class T> T* vx_core::Type_list::vx_any_first_from_list_fn(T* generic_any_1, vx_core::Type_list* list, Function<vx_core::Type_any*, T*> fn_any) {
-      T* output = vx_core::f_empty(generic_any_1);
-      std::vector<vx_core::Type_any*> listany = list->vx_list();
-      for (vx_core::Type_any* any : listany) {
-        T* tany = vx_core::f_any_from_any(generic_any_1, any);
-        T* val = fn_any->apply(tany);
-        if (val != NULL) {
-          output = val;
-          break;
-        }
-      }
-      return output;
-    }
-
-  //}
-
-  /**
    * type: listtype
    * A generic type that extends :list.
    * (type listtype)
@@ -2944,120 +3228,6 @@
         ":type", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: map
-   * A simple untyped map.
-   * (type map)
-   */
-  //class Type_map {
-    // vx_map()
-    std::map<std::string, vx_core::Type_any*> vx_core::Type_map::vx_map() {
-      return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
-    }
-
-    // vx_any(key)
-    vx_core::Type_any* vx_core::Type_map::vx_any(vx_core::Type_string* key) {
-      vx_core::Type_any* output = vx_core::e_any;
-      vx_core::Type_map* map = this;
-      std::string skey = key->vx_string();
-      std::map<std::string, vx_core::Type_any*> mapval = map->vx_p_map;
-      output = vx_core::any_from_map(mapval, skey, vx_core::e_any);
-      return output;
-    }
-
-    // vx_new_from_map(mapval)
-    vx_core::Type_map* vx_core::Type_map::vx_new_from_map(std::map<std::string, vx_core::Type_any*> mapval) {
-      vx_core::Type_map* output;
-      vx_core::Type_msgblock* msgblock = vx_core::e_msgblock;
-      std::map<std::string, vx_core::Type_any*> map;
-      for (auto const& iter : mapval) {
-        std::string key = iter.first;
-        vx_core::Type_any* val = iter.second;
-        vx_core::Type_any* valtype = vx_core::t_any->vx_type_from_any(val);
-        if (valtype == vx_core::t_any) {
-          vx_core::Type_any* castval = vx_core::any_from_any(vx_core::t_any, val);
-          map[key] = castval;
-        } else {
-          vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("(map) Invalid Value: " + vx_core::string_from_any(val) + "");
-          msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
-        }
-      }
-      output->vx_p_map = map;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    template<typename... Args> vx_core::Type_map* vx_core::Type_map::vx_new(Args*... args) {return vx_core::e_map->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_map* vx_core::Type_map::vx_copy(Args*... args) {
-      vx_core::Type_map* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_map* valmap = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
-      std::map<std::string, vx_core::Type_any*> mapval;
-      std::string key = "";
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::t_msgblock->vx_copy(msgblock, valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::t_msgblock->vx_copy(msgblock, valsub);
-        } else if (key == "") {
-          if (valsubtype == vx_core::t_string) {
-            vx_core::Type_string* valstring = vx_core::any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
-          } else if (valsubtype == vx_core::t_nativestring) {
-            key = vx_core_::any_from_any("", valsub);
-          } else {
-            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("Key Expected: " + vx_core::string_from_any(valsub) + "");
-            msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
-          }
-        } else {
-          vx_core::Type_any* valany;
-          if (valsubtype == vx_core::t_any) {
-            valany = vx_core::any_from_any(vx_core::t_any, valsub);
-          } else if (valsubtype == vx_core::t_any) {
-            valany = vx_core::any_from_any(vx_core::t_any, valsub);
-          } else {
-            vx_core::Type_msg* msg = vx_core::t_msg->vx_new_error("Invalid Key/Value: " + key + " "  + vx_core::string_from_any(valsub) + "");
-            msgblock = vx_core::t_msgblock->vx_copy(msgblock, msg);
-          }
-          if (valany != NULL) {
-            mapval[key] = valany;
-            key = "";
-          }
-        }
-      }
-      output->vx_p_map = mapval;
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_map* vx_core::Type_map::vx_empty() {return vx_core::e_map;}
-    vx_core::Type_map* vx_core::Type_map::vx_type() {return vx_core::t_map;}
-
-    vx_core::Type_typedef* vx_core::Type_map::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "map", // name
-        ":map", // extends
-        vx_core::e_typelist, // traits
-        vx_core::t_typelist->vx_new(vx_core::t_any), // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
         vx_core::e_funclist, // disallowfuncs
@@ -3703,41 +3873,6 @@
         "", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: number
-   * A generic number that could be int, float, or decimal.
-   * (type number)
-   */
-  //class Type_number {
-    template<typename... Args> vx_core::Type_number* vx_core::Type_number::vx_new(Args*... args) {return vx_core::e_number->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_number* vx_core::Type_number::vx_copy(Args*... args) {
-      vx_core::Type_number* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      return output;
-    }
-
-    vx_core::Type_number* vx_core::Type_number::vx_empty() {return vx_core::e_number;}
-    vx_core::Type_number* vx_core::Type_number::vx_type() {return vx_core::t_number;}
-
-    vx_core::Type_typedef* vx_core::Type_number::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "number", // name
-        "", // extends
-        vx_core::e_typelist, // traits
-        vx_core::t_typelist->vx_new(vx_core::t_int, vx_core::t_float, vx_core::t_decimal), // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
         vx_core::e_funclist, // disallowfuncs
@@ -5163,77 +5298,6 @@
   //}
 
   /**
-   * type: string
-   * (type string)
-   */
-  //class Type_string {
-    template<typename... Args> vx_core::Type_string* vx_core::Type_string::vx_new(Args*... args) {return vx_core::e_string->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_string* vx_core::Type_string::vx_copy(Args*... args) {
-      vx_core::Type_string* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      vx_core::Type_string* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      output->vx_p_string = val->vx_string();
-      string sb = output->vx_string();
-      for (std::any* valsub : vals) {
-        vx_core::Type_any* valsubtype = vx_core::t_any->vx_type_from_any(valsub);
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = msgblock->vx_copy(valsub);
-        } else if (valsubtype == vx_core::t_string) {
-          vx_core::Type_string valstring = vx_core::any_from_any(vx_core::t_string, valsub);
-          sb.append(valstring->vx_string());
-        } else if (valsubtype == vx_core::t_int) {
-          vx_core::Type_int valint = vx_core::any_from_any(vx_core::t_int, valsub);
-          sb.append(valint->vx_int());
-        } else if (valsubtype == vx_core::t_float) {
-          vx_core::Type_float valfloat = vx_core::any_from_any(vx_core::t_float, valsub);
-          sb.append(valfloat->vx_float());
-        } else if (valsubtype == vx_core::t_decimal) {
-          vx_core::Type_decimal valdecimal = vx_core::any_from_any(vx_core::t_decimal, valsub);
-          sb.append(valdecimal->vx_string());
-        } else if (valsubtype == vx_core::t_nativestring) {
-          sb.append(vx_core::any_from_any("", valsub));
-        } else if (valsubtype == vx_core::t_nativeint) {
-          sb.append(vx_core::any_from_any(0, valsub));
-        } else if (valsubtype == vx_core::t_nativefloat) {
-          sb.append(vx_core::any_from_any(0f, valsub));
-        } else {
-          vx_core::Type_msg msg* = vx_core::t_msg->vx_new_error("(new string) - Invalid Type: " + vx_core::string_from_any(valsub));
-          msgblock = msgblock->vx_copy(msg);
-        }
-      }
-      output->vx_p_string = sb;
-      if (msgblock != vx_core::t_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_string* vx_core::Type_string::vx_empty() {return vx_core::e_string;}
-    vx_core::Type_string* vx_core::Type_string::vx_type() {return vx_core::t_string;}
-
-    vx_core::Type_typedef* vx_core::Type_string::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "string", // name
-        "string", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
    * type: stringlist
    * A list of string.
    * (type stringlist)
@@ -5432,61 +5496,6 @@
         ":map", // extends
         vx_core::e_typelist, // traits
         vx_core::t_typelist->vx_new(vx_core::t_string), // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-    }
-
-  //}
-
-  /**
-   * type: struct
-   * Struct is the type of all structures/objects with properties.
-   * (type struct)
-   */
-  //class Type_struct {
-    // vx_any(key)
-    vx_core::Type_any* vx_core::Type_struct::vx_any(vx_core::Type_string* key) {
-      vx_core::Type_any* output = vx_core::e_any;
-      std::string skey = key->vx_string();
-      if (false) {
-      }
-      return output;
-    }
-
-    // vx_map()
-    std::map<std::string, vx_core::Type_any*> vx_core::Type_struct::vx_map() {
-      std::map<std::string, vx_core::Type_any*> output;
-      return output;
-    }
-
-    template<typename... Args> vx_core::Type_struct* vx_core::Type_struct::vx_new(Args*... args) {return vx_core::e_struct->vx_copy(args...);}
-    template<typename... Args> vx_core::Type_struct* vx_core::Type_struct::vx_copy(Args*... args) {
-      vx_core::Type_struct* output;
-      const int size = sizeof...(args);
-      const std::any vals[size];
-      Type_struct* val = this;
-      vx_core::Type_msgblock* msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-      }
-      return output;
-    }
-
-    vx_core::Type_struct* vx_core::Type_struct::vx_empty() {return vx_core::e_struct;}
-    vx_core::Type_struct* vx_core::Type_struct::vx_type() {return vx_core::t_struct;}
-
-    vx_core::Type_typedef* vx_core::Type_struct::vx_typedef() {
-      return vx_core::Type_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "struct", // name
-        ":struct", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
         vx_core::e_funclist, // disallowfuncs
@@ -6656,7 +6665,7 @@
 
   //}
 
-  extern vx_core::Const_false* vx_core::c_false = vx_core::Const_false::vx_const_new();
+  vx_core::Const_false* vx_core::c_false = vx_core::Const_false::vx_const_new();
 
 
   /**
@@ -6695,7 +6704,7 @@
 
   //}
 
-  extern vx_core::Const_globalpackagemap* vx_core::c_globalpackagemap = vx_core::Const_globalpackagemap::vx_const_new();
+  vx_core::Const_globalpackagemap* vx_core::c_globalpackagemap = vx_core::Const_globalpackagemap::vx_const_new();
 
 
   /**
@@ -6739,7 +6748,7 @@
 
   //}
 
-  extern vx_core::Const_infinity* vx_core::c_infinity = vx_core::Const_infinity::vx_const_new();
+  vx_core::Const_infinity* vx_core::c_infinity = vx_core::Const_infinity::vx_const_new();
 
 
   /**
@@ -6779,7 +6788,7 @@
 
   //}
 
-  extern vx_core::Const_mempool_active* vx_core::c_mempool_active = vx_core::Const_mempool_active::vx_const_new();
+  vx_core::Const_mempool_active* vx_core::c_mempool_active = vx_core::Const_mempool_active::vx_const_new();
 
 
   /**
@@ -6823,7 +6832,7 @@
 
   //}
 
-  extern vx_core::Const_msg_error* vx_core::c_msg_error = vx_core::Const_msg_error::vx_const_new();
+  vx_core::Const_msg_error* vx_core::c_msg_error = vx_core::Const_msg_error::vx_const_new();
 
 
   /**
@@ -6867,7 +6876,7 @@
 
   //}
 
-  extern vx_core::Const_msg_info* vx_core::c_msg_info = vx_core::Const_msg_info::vx_const_new();
+  vx_core::Const_msg_info* vx_core::c_msg_info = vx_core::Const_msg_info::vx_const_new();
 
 
   /**
@@ -6911,7 +6920,7 @@
 
   //}
 
-  extern vx_core::Const_msg_severe* vx_core::c_msg_severe = vx_core::Const_msg_severe::vx_const_new();
+  vx_core::Const_msg_severe* vx_core::c_msg_severe = vx_core::Const_msg_severe::vx_const_new();
 
 
   /**
@@ -6955,7 +6964,7 @@
 
   //}
 
-  extern vx_core::Const_msg_warning* vx_core::c_msg_warning = vx_core::Const_msg_warning::vx_const_new();
+  vx_core::Const_msg_warning* vx_core::c_msg_warning = vx_core::Const_msg_warning::vx_const_new();
 
 
   /**
@@ -6999,7 +7008,7 @@
 
   //}
 
-  extern vx_core::Const_neginfinity* vx_core::c_neginfinity = vx_core::Const_neginfinity::vx_const_new();
+  vx_core::Const_neginfinity* vx_core::c_neginfinity = vx_core::Const_neginfinity::vx_const_new();
 
 
   /**
@@ -7043,7 +7052,7 @@
 
   //}
 
-  extern vx_core::Const_newline* vx_core::c_newline = vx_core::Const_newline::vx_const_new();
+  vx_core::Const_newline* vx_core::c_newline = vx_core::Const_newline::vx_const_new();
 
 
   /**
@@ -7087,7 +7096,7 @@
 
   //}
 
-  extern vx_core::Const_notanumber* vx_core::c_notanumber = vx_core::Const_notanumber::vx_const_new();
+  vx_core::Const_notanumber* vx_core::c_notanumber = vx_core::Const_notanumber::vx_const_new();
 
 
   /**
@@ -7131,7 +7140,7 @@
 
   //}
 
-  extern vx_core::Const_nothing* vx_core::c_nothing = vx_core::Const_nothing::vx_const_new();
+  vx_core::Const_nothing* vx_core::c_nothing = vx_core::Const_nothing::vx_const_new();
 
 
   /**
@@ -7175,7 +7184,7 @@
 
   //}
 
-  extern vx_core::Const_quote* vx_core::c_quote = vx_core::Const_quote::vx_const_new();
+  vx_core::Const_quote* vx_core::c_quote = vx_core::Const_quote::vx_const_new();
 
 
   /**
@@ -7218,7 +7227,161 @@
 
   //}
 
-  extern vx_core::Const_true* vx_core::c_true = vx_core::Const_true::vx_const_new();
+  vx_core::Const_true* vx_core::c_true = vx_core::Const_true::vx_const_new();
+
+  /**
+   * @function any_from_any
+   * Function Type taking any value any-2 and returning generic any-1
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any)
+   */
+  //class Func_any_from_any {
+
+    vx_core::Func_any_from_any* vx_core::Func_any_from_any::fn_new(vx_core::Func_any_from_any::IFn fn) {
+      vx_core::Func_any_from_any* output;
+      output->fn = fn;
+      return output;
+    }
+
+    template<class... Args> vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_new(Args*... args) {
+      vx_core::Func_any_from_any* output;
+      return output;
+    }
+
+    template<class... Args> vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_copy(Args*... args) {
+      vx_core::Func_any_from_any* output;
+      return output;
+    }
+
+    vx_core::Type_typedef* vx_core::Func_any_from_any::vx_typedef() {return vx_core::t_any_from_any->vx_typedef();}
+
+    vx_core::Type_funcdef* vx_core::Func_any_from_any::vx_funcdef() {
+      return vx_core::Type_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "any<-any", // name
+        0, // idx
+        false, // async
+        vx_core::Type_typedef::vx_typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          vx_core::e_typelist, // traits
+          vx_core::e_typelist, // allowtypes
+          vx_core::e_typelist, // disallowtypes
+          vx_core::e_funclist, // allowfuncs
+          vx_core::e_funclist, // disallowfuncs
+          vx_core::e_anylist, // allowvalues
+          vx_core::e_anylist, // disallowvalues
+          vx_core::e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_empty() {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_type() {return vx_core::t_any_from_any;}
+
+    vx_core::Type_any* vx_core::Func_any_from_any::vx_repl(vx_core::Type_anylist* arglist) {
+      vx_core::Type_any* output = vx_core::e_any;
+      vx_core::Type_any* generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any* value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      output = vx_core::f_any_from_any(generic_any_1, value);
+      return output;
+    }
+
+    template <class T, class U> T* vx_core::Func_any_from_any::vx_any_from_any(T* generic_any_1, U* value) {
+      T* output = vx_core::f_empty(generic_any_1);
+      if (fn != NULL) {
+        output = vx_core::f_any_from_any(generic_any_1, fn(value));
+      }
+      return output;
+    }
+
+  //}
+
+  vx_core::Func_any_from_any* vx_core::e_any_from_any = new vx_core::Func_any_from_any();
+  vx_core::Func_any_from_any* vx_core::t_any_from_any = new vx_core::Func_any_from_any();
+
+  template <class T, class U> T* vx_core::f_any_from_any(T* generic_any_1, U* value) {
+    T* output = vx_core::f_empty(generic_any_1);
+    return output;
+  }
+
+  /**
+   * @function any_from_func
+   * Function Type returning Generic any-1 with any parameters
+   * @return {any-1}
+   * (func any<-func)
+   */
+  //class Func_any_from_func {
+
+    vx_core::Func_any_from_func* vx_core::Func_any_from_func::fn_new(vx_core::Func_any_from_func::IFn fn) {
+      vx_core::Func_any_from_func* output;
+      output->fn = fn;
+      return output;
+    }
+
+    template<class... Args> vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_new(Args*... args) {
+      vx_core::Func_any_from_func* output;
+      return output;
+    }
+
+    template<class... Args> vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_copy(Args*... args) {
+      vx_core::Func_any_from_func* output;
+      return output;
+    }
+
+    vx_core::Type_typedef* vx_core::Func_any_from_func::vx_typedef() {return vx_core::t_any_from_func->vx_typedef();}
+
+    vx_core::Type_funcdef* vx_core::Func_any_from_func::vx_funcdef() {
+      return vx_core::Type_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "any<-func", // name
+        0, // idx
+        false, // async
+        vx_core::Type_typedef::vx_typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          vx_core::e_typelist, // traits
+          vx_core::e_typelist, // allowtypes
+          vx_core::e_typelist, // disallowtypes
+          vx_core::e_funclist, // allowfuncs
+          vx_core::e_funclist, // disallowfuncs
+          vx_core::e_anylist, // allowvalues
+          vx_core::e_anylist, // disallowvalues
+          vx_core::e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_empty() {return vx_core::e_any_from_func;}
+    vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_type() {return vx_core::t_any_from_func;}
+
+    vx_core::Type_any* vx_core::Func_any_from_func::vx_repl(vx_core::Type_anylist* arglist) {
+      vx_core::Type_any* output = vx_core::e_any;
+      vx_core::Type_any* generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      output = vx_core::f_any_from_func(generic_any_1);
+      return output;
+    }
+
+    template <class T> T* vx_core::Func_any_from_func::vx_any_from_func(T* generic_any_1) {
+      T* output = vx_core::f_empty(generic_any_1);
+      if (fn != NULL) {
+        output = vx_core::f_any_from_any(generic_any_1, fn());
+      }
+      return output;
+    }
+
+  //}
+
+  vx_core::Func_any_from_func* vx_core::e_any_from_func = new vx_core::Func_any_from_func();
+  vx_core::Func_any_from_func* vx_core::t_any_from_func = new vx_core::Func_any_from_func();
+
+  template <class T> T* vx_core::f_any_from_func(T* generic_any_1) {
+    T* output = vx_core::f_empty(generic_any_1);
+    return output;
+  }
 
   /**
    * @function not
@@ -7229,12 +7392,12 @@
    */
   //class Func_not {
 
-    template<typename... Args> vx_core::Func_not* vx_core::Func_not::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_not* vx_core::Func_not::vx_new(Args*... args) {
       vx_core::Func_not* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_not* vx_core::Func_not::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_not* vx_core::Func_not::vx_copy(Args*... args) {
       vx_core::Func_not* output;
       return output;
     }
@@ -7306,12 +7469,12 @@
    */
   //class Func_notempty {
 
-    template<typename... Args> vx_core::Func_notempty* vx_core::Func_notempty::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_notempty* vx_core::Func_notempty::vx_new(Args*... args) {
       vx_core::Func_notempty* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_notempty* vx_core::Func_notempty::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_notempty* vx_core::Func_notempty::vx_copy(Args*... args) {
       vx_core::Func_notempty* output;
       return output;
     }
@@ -7386,12 +7549,12 @@
    */
   //class Func_notempty_1 {
 
-    template<typename... Args> vx_core::Func_notempty_1* vx_core::Func_notempty_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_notempty_1* vx_core::Func_notempty_1::vx_new(Args*... args) {
       vx_core::Func_notempty_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_notempty_1* vx_core::Func_notempty_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_notempty_1* vx_core::Func_notempty_1::vx_copy(Args*... args) {
       vx_core::Func_notempty_1* output;
       return output;
     }
@@ -7467,12 +7630,12 @@
    */
   //class Func_ne {
 
-    template<typename... Args> vx_core::Func_ne* vx_core::Func_ne::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_ne* vx_core::Func_ne::vx_new(Args*... args) {
       vx_core::Func_ne* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_ne* vx_core::Func_ne::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_ne* vx_core::Func_ne::vx_copy(Args*... args) {
       vx_core::Func_ne* output;
       return output;
     }
@@ -7539,12 +7702,12 @@
    */
   //class Func_multiply {
 
-    template<typename... Args> vx_core::Func_multiply* vx_core::Func_multiply::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_multiply* vx_core::Func_multiply::vx_new(Args*... args) {
       vx_core::Func_multiply* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_multiply* vx_core::Func_multiply::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_multiply* vx_core::Func_multiply::vx_copy(Args*... args) {
       vx_core::Func_multiply* output;
       return output;
     }
@@ -7608,12 +7771,12 @@
    */
   //class Func_multiply_1 {
 
-    template<typename... Args> vx_core::Func_multiply_1* vx_core::Func_multiply_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_1* vx_core::Func_multiply_1::vx_new(Args*... args) {
       vx_core::Func_multiply_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_multiply_1* vx_core::Func_multiply_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_1* vx_core::Func_multiply_1::vx_copy(Args*... args) {
       vx_core::Func_multiply_1* output;
       return output;
     }
@@ -7676,12 +7839,12 @@
    */
   //class Func_multiply_2 {
 
-    template<typename... Args> vx_core::Func_multiply_2* vx_core::Func_multiply_2::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_2* vx_core::Func_multiply_2::vx_new(Args*... args) {
       vx_core::Func_multiply_2* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_multiply_2* vx_core::Func_multiply_2::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_2* vx_core::Func_multiply_2::vx_copy(Args*... args) {
       vx_core::Func_multiply_2* output;
       return output;
     }
@@ -7764,12 +7927,12 @@
    */
   //class Func_multiply_3 {
 
-    template<typename... Args> vx_core::Func_multiply_3* vx_core::Func_multiply_3::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_3* vx_core::Func_multiply_3::vx_new(Args*... args) {
       vx_core::Func_multiply_3* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_multiply_3* vx_core::Func_multiply_3::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_multiply_3* vx_core::Func_multiply_3::vx_copy(Args*... args) {
       vx_core::Func_multiply_3* output;
       return output;
     }
@@ -7853,12 +8016,12 @@
    */
   //class Func_plus {
 
-    template<typename... Args> vx_core::Func_plus* vx_core::Func_plus::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_plus* vx_core::Func_plus::vx_new(Args*... args) {
       vx_core::Func_plus* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_plus* vx_core::Func_plus::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_plus* vx_core::Func_plus::vx_copy(Args*... args) {
       vx_core::Func_plus* output;
       return output;
     }
@@ -7922,12 +8085,12 @@
    */
   //class Func_plus_1 {
 
-    template<typename... Args> vx_core::Func_plus_1* vx_core::Func_plus_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_plus_1* vx_core::Func_plus_1::vx_new(Args*... args) {
       vx_core::Func_plus_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_plus_1* vx_core::Func_plus_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_plus_1* vx_core::Func_plus_1::vx_copy(Args*... args) {
       vx_core::Func_plus_1* output;
       return output;
     }
@@ -7990,12 +8153,12 @@
    */
   //class Func_plus_2 {
 
-    template<typename... Args> vx_core::Func_plus_2* vx_core::Func_plus_2::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_plus_2* vx_core::Func_plus_2::vx_new(Args*... args) {
       vx_core::Func_plus_2* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_plus_2* vx_core::Func_plus_2::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_plus_2* vx_core::Func_plus_2::vx_copy(Args*... args) {
       vx_core::Func_plus_2* output;
       return output;
     }
@@ -8078,12 +8241,12 @@
    */
   //class Func_plus_3 {
 
-    template<typename... Args> vx_core::Func_plus_3* vx_core::Func_plus_3::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_plus_3* vx_core::Func_plus_3::vx_new(Args*... args) {
       vx_core::Func_plus_3* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_plus_3* vx_core::Func_plus_3::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_plus_3* vx_core::Func_plus_3::vx_copy(Args*... args) {
       vx_core::Func_plus_3* output;
       return output;
     }
@@ -8166,12 +8329,12 @@
    */
   //class Func_plus1 {
 
-    template<typename... Args> vx_core::Func_plus1* vx_core::Func_plus1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_plus1* vx_core::Func_plus1::vx_new(Args*... args) {
       vx_core::Func_plus1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_plus1* vx_core::Func_plus1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_plus1* vx_core::Func_plus1::vx_copy(Args*... args) {
       vx_core::Func_plus1* output;
       return output;
     }
@@ -8244,12 +8407,12 @@
    */
   //class Func_minus {
 
-    template<typename... Args> vx_core::Func_minus* vx_core::Func_minus::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_minus* vx_core::Func_minus::vx_new(Args*... args) {
       vx_core::Func_minus* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_minus* vx_core::Func_minus::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_minus* vx_core::Func_minus::vx_copy(Args*... args) {
       vx_core::Func_minus* output;
       return output;
     }
@@ -8313,12 +8476,12 @@
    */
   //class Func_minus_1 {
 
-    template<typename... Args> vx_core::Func_minus_1* vx_core::Func_minus_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_minus_1* vx_core::Func_minus_1::vx_new(Args*... args) {
       vx_core::Func_minus_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_minus_1* vx_core::Func_minus_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_minus_1* vx_core::Func_minus_1::vx_copy(Args*... args) {
       vx_core::Func_minus_1* output;
       return output;
     }
@@ -8381,12 +8544,12 @@
    */
   //class Func_minus_2 {
 
-    template<typename... Args> vx_core::Func_minus_2* vx_core::Func_minus_2::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_minus_2* vx_core::Func_minus_2::vx_new(Args*... args) {
       vx_core::Func_minus_2* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_minus_2* vx_core::Func_minus_2::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_minus_2* vx_core::Func_minus_2::vx_copy(Args*... args) {
       vx_core::Func_minus_2* output;
       return output;
     }
@@ -8469,12 +8632,12 @@
    */
   //class Func_minus_3 {
 
-    template<typename... Args> vx_core::Func_minus_3* vx_core::Func_minus_3::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_minus_3* vx_core::Func_minus_3::vx_new(Args*... args) {
       vx_core::Func_minus_3* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_minus_3* vx_core::Func_minus_3::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_minus_3* vx_core::Func_minus_3::vx_copy(Args*... args) {
       vx_core::Func_minus_3* output;
       return output;
     }
@@ -8559,12 +8722,12 @@
    */
   //class Func_dotmethod {
 
-    template<typename... Args> vx_core::Func_dotmethod* vx_core::Func_dotmethod::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_dotmethod* vx_core::Func_dotmethod::vx_new(Args*... args) {
       vx_core::Func_dotmethod* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_dotmethod* vx_core::Func_dotmethod::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_dotmethod* vx_core::Func_dotmethod::vx_copy(Args*... args) {
       vx_core::Func_dotmethod* output;
       return output;
     }
@@ -8629,12 +8792,12 @@
    */
   //class Func_divide {
 
-    template<typename... Args> vx_core::Func_divide* vx_core::Func_divide::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_divide* vx_core::Func_divide::vx_new(Args*... args) {
       vx_core::Func_divide* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_divide* vx_core::Func_divide::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_divide* vx_core::Func_divide::vx_copy(Args*... args) {
       vx_core::Func_divide* output;
       return output;
     }
@@ -8698,12 +8861,12 @@
    */
   //class Func_lt {
 
-    template<typename... Args> vx_core::Func_lt* vx_core::Func_lt::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_lt* vx_core::Func_lt::vx_new(Args*... args) {
       vx_core::Func_lt* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_lt* vx_core::Func_lt::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_lt* vx_core::Func_lt::vx_copy(Args*... args) {
       vx_core::Func_lt* output;
       return output;
     }
@@ -8783,12 +8946,12 @@
    */
   //class Func_lt_1 {
 
-    template<typename... Args> vx_core::Func_lt_1* vx_core::Func_lt_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_lt_1* vx_core::Func_lt_1::vx_new(Args*... args) {
       vx_core::Func_lt_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_lt_1* vx_core::Func_lt_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_lt_1* vx_core::Func_lt_1::vx_copy(Args*... args) {
       vx_core::Func_lt_1* output;
       return output;
     }
@@ -8878,12 +9041,12 @@
    */
   //class Func_chainfirst {
 
-    template<typename... Args> vx_core::Func_chainfirst* vx_core::Func_chainfirst::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_chainfirst* vx_core::Func_chainfirst::vx_new(Args*... args) {
       vx_core::Func_chainfirst* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_chainfirst* vx_core::Func_chainfirst::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_chainfirst* vx_core::Func_chainfirst::vx_copy(Args*... args) {
       vx_core::Func_chainfirst* output;
       return output;
     }
@@ -8950,12 +9113,12 @@
    */
   //class Func_chainlast {
 
-    template<typename... Args> vx_core::Func_chainlast* vx_core::Func_chainlast::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_chainlast* vx_core::Func_chainlast::vx_new(Args*... args) {
       vx_core::Func_chainlast* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_chainlast* vx_core::Func_chainlast::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_chainlast* vx_core::Func_chainlast::vx_copy(Args*... args) {
       vx_core::Func_chainlast* output;
       return output;
     }
@@ -9020,12 +9183,12 @@
    */
   //class Func_le {
 
-    template<typename... Args> vx_core::Func_le* vx_core::Func_le::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_le* vx_core::Func_le::vx_new(Args*... args) {
       vx_core::Func_le* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_le* vx_core::Func_le::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_le* vx_core::Func_le::vx_copy(Args*... args) {
       vx_core::Func_le* output;
       return output;
     }
@@ -9091,12 +9254,12 @@
    */
   //class Func_le_1 {
 
-    template<typename... Args> vx_core::Func_le_1* vx_core::Func_le_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_le_1* vx_core::Func_le_1::vx_new(Args*... args) {
       vx_core::Func_le_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_le_1* vx_core::Func_le_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_le_1* vx_core::Func_le_1::vx_copy(Args*... args) {
       vx_core::Func_le_1* output;
       return output;
     }
@@ -9172,12 +9335,12 @@
    */
   //class Func_eq {
 
-    template<typename... Args> vx_core::Func_eq* vx_core::Func_eq::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_eq* vx_core::Func_eq::vx_new(Args*... args) {
       vx_core::Func_eq* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_eq* vx_core::Func_eq::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_eq* vx_core::Func_eq::vx_copy(Args*... args) {
       vx_core::Func_eq* output;
       return output;
     }
@@ -9240,12 +9403,12 @@
    */
   //class Func_eq_1 {
 
-    template<typename... Args> vx_core::Func_eq_1* vx_core::Func_eq_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_eq_1* vx_core::Func_eq_1::vx_new(Args*... args) {
       vx_core::Func_eq_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_eq_1* vx_core::Func_eq_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_eq_1* vx_core::Func_eq_1::vx_copy(Args*... args) {
       vx_core::Func_eq_1* output;
       return output;
     }
@@ -9333,12 +9496,12 @@
    */
   //class Func_gt {
 
-    template<typename... Args> vx_core::Func_gt* vx_core::Func_gt::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_gt* vx_core::Func_gt::vx_new(Args*... args) {
       vx_core::Func_gt* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_gt* vx_core::Func_gt::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_gt* vx_core::Func_gt::vx_copy(Args*... args) {
       vx_core::Func_gt* output;
       return output;
     }
@@ -9418,12 +9581,12 @@
    */
   //class Func_gt_1 {
 
-    template<typename... Args> vx_core::Func_gt_1* vx_core::Func_gt_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_gt_1* vx_core::Func_gt_1::vx_new(Args*... args) {
       vx_core::Func_gt_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_gt_1* vx_core::Func_gt_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_gt_1* vx_core::Func_gt_1::vx_copy(Args*... args) {
       vx_core::Func_gt_1* output;
       return output;
     }
@@ -9511,12 +9674,12 @@
    */
   //class Func_ge {
 
-    template<typename... Args> vx_core::Func_ge* vx_core::Func_ge::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_ge* vx_core::Func_ge::vx_new(Args*... args) {
       vx_core::Func_ge* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_ge* vx_core::Func_ge::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_ge* vx_core::Func_ge::vx_copy(Args*... args) {
       vx_core::Func_ge* output;
       return output;
     }
@@ -9582,12 +9745,12 @@
    */
   //class Func_ge_1 {
 
-    template<typename... Args> vx_core::Func_ge_1* vx_core::Func_ge_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_ge_1* vx_core::Func_ge_1::vx_new(Args*... args) {
       vx_core::Func_ge_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_ge_1* vx_core::Func_ge_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_ge_1* vx_core::Func_ge_1::vx_copy(Args*... args) {
       vx_core::Func_ge_1* output;
       return output;
     }
@@ -9662,12 +9825,12 @@
    */
   //class Func_allowtypenames_from_typedef {
 
-    template<typename... Args> vx_core::Func_allowtypenames_from_typedef* vx_core::Func_allowtypenames_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_allowtypenames_from_typedef* vx_core::Func_allowtypenames_from_typedef::vx_new(Args*... args) {
       vx_core::Func_allowtypenames_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_allowtypenames_from_typedef* vx_core::Func_allowtypenames_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_allowtypenames_from_typedef* vx_core::Func_allowtypenames_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_allowtypenames_from_typedef* output;
       return output;
     }
@@ -9742,12 +9905,12 @@
    */
   //class Func_allowtypes_from_typedef {
 
-    template<typename... Args> vx_core::Func_allowtypes_from_typedef* vx_core::Func_allowtypes_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_allowtypes_from_typedef* vx_core::Func_allowtypes_from_typedef::vx_new(Args*... args) {
       vx_core::Func_allowtypes_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_allowtypes_from_typedef* vx_core::Func_allowtypes_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_allowtypes_from_typedef* vx_core::Func_allowtypes_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_allowtypes_from_typedef* output;
       return output;
     }
@@ -9820,12 +9983,12 @@
    */
   //class Func_and {
 
-    template<typename... Args> vx_core::Func_and* vx_core::Func_and::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_and* vx_core::Func_and::vx_new(Args*... args) {
       vx_core::Func_and* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_and* vx_core::Func_and::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_and* vx_core::Func_and::vx_copy(Args*... args) {
       vx_core::Func_and* output;
       return output;
     }
@@ -9888,12 +10051,12 @@
    */
   //class Func_and_1 {
 
-    template<typename... Args> vx_core::Func_and_1* vx_core::Func_and_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_and_1* vx_core::Func_and_1::vx_new(Args*... args) {
       vx_core::Func_and_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_and_1* vx_core::Func_and_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_and_1* vx_core::Func_and_1::vx_copy(Args*... args) {
       vx_core::Func_and_1* output;
       return output;
     }
@@ -9994,84 +10157,6 @@
   }
 
   /**
-   * @function any_from_any
-   * Function Type taking any value any-2 and returning generic any-1
-   * @param  {any-2} value
-   * @return {any-1}
-   * (func any<-any)
-   */
-  //class Func_any_from_any {
-
-    vx_core::Func_any_from_any* vx_core::Func_any_from_any::fn_new(vx_core::Func_any_from_any::IFn fn) {
-      vx_core::Func_any_from_any* output;
-      output->fn = fn;
-      return output;
-    }
-
-    template<typename... Args> vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_new(Args*... args) {
-      vx_core::Func_any_from_any* output;
-      return output;
-    }
-
-    template<typename... Args> vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_copy(Args*... args) {
-      vx_core::Func_any_from_any* output;
-      return output;
-    }
-
-    vx_core::Type_typedef* vx_core::Func_any_from_any::vx_typedef() {return vx_core::t_any_from_any->vx_typedef();}
-
-    vx_core::Type_funcdef* vx_core::Func_any_from_any::vx_funcdef() {
-      return vx_core::Type_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "any<-any", // name
-        0, // idx
-        false, // async
-        vx_core::Type_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "any-1", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_empty() {return vx_core::e_any_from_any;}
-    vx_core::Func_any_from_any* vx_core::Func_any_from_any::vx_type() {return vx_core::t_any_from_any;}
-
-    vx_core::Type_any* vx_core::Func_any_from_any::vx_repl(vx_core::Type_anylist* arglist) {
-      vx_core::Type_any* output = vx_core::e_any;
-      vx_core::Type_any* generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any* value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_core::f_any_from_any(generic_any_1, value);
-      return output;
-    }
-
-    template <class T, class U> T* vx_core::Func_any_from_any::vx_any_from_any(T* generic_any_1, U* value) {
-      T* output = vx_core::f_empty(generic_any_1);
-      if (fn != NULL) {
-        output = vx_core::f_any_from_any(generic_any_1, fn(value));
-      }
-      return output;
-    }
-
-  //}
-
-  vx_core::Func_any_from_any* vx_core::e_any_from_any = new vx_core::Func_any_from_any();
-  vx_core::Func_any_from_any* vx_core::t_any_from_any = new vx_core::Func_any_from_any();
-
-  template <class T, class U> T* vx_core::f_any_from_any(T* generic_any_1, U* value) {
-    T* output = vx_core::f_empty(generic_any_1);
-    return output;
-  }
-
-  /**
    * 
    * @async
    * @function any_from_any_async
@@ -10089,12 +10174,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_async* vx_core::Func_any_from_any_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_async* vx_core::Func_any_from_any_async::vx_new(Args*... args) {
       vx_core::Func_any_from_any_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_async* vx_core::Func_any_from_any_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_async* vx_core::Func_any_from_any_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_any_async* output;
       return output;
     }
@@ -10171,12 +10256,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_context* vx_core::Func_any_from_any_context::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_context* vx_core::Func_any_from_any_context::vx_new(Args*... args) {
       vx_core::Func_any_from_any_context* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_context* vx_core::Func_any_from_any_context::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_context* vx_core::Func_any_from_any_context::vx_copy(Args*... args) {
       vx_core::Func_any_from_any_context* output;
       return output;
     }
@@ -10253,12 +10338,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_context_async* vx_core::Func_any_from_any_context_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_context_async* vx_core::Func_any_from_any_context_async::vx_new(Args*... args) {
       vx_core::Func_any_from_any_context_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_any_context_async* vx_core::Func_any_from_any_context_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_any_context_async* vx_core::Func_any_from_any_context_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_any_context_async* output;
       return output;
     }
@@ -10322,82 +10407,6 @@
   }
 
   /**
-   * @function any_from_func
-   * Function Type returning Generic any-1 with any parameters
-   * @return {any-1}
-   * (func any<-func)
-   */
-  //class Func_any_from_func {
-
-    vx_core::Func_any_from_func* vx_core::Func_any_from_func::fn_new(vx_core::Func_any_from_func::IFn fn) {
-      vx_core::Func_any_from_func* output;
-      output->fn = fn;
-      return output;
-    }
-
-    template<typename... Args> vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_new(Args*... args) {
-      vx_core::Func_any_from_func* output;
-      return output;
-    }
-
-    template<typename... Args> vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_copy(Args*... args) {
-      vx_core::Func_any_from_func* output;
-      return output;
-    }
-
-    vx_core::Type_typedef* vx_core::Func_any_from_func::vx_typedef() {return vx_core::t_any_from_func->vx_typedef();}
-
-    vx_core::Type_funcdef* vx_core::Func_any_from_func::vx_funcdef() {
-      return vx_core::Type_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "any<-func", // name
-        0, // idx
-        false, // async
-        vx_core::Type_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "any-1", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_empty() {return vx_core::e_any_from_func;}
-    vx_core::Func_any_from_func* vx_core::Func_any_from_func::vx_type() {return vx_core::t_any_from_func;}
-
-    vx_core::Type_any* vx_core::Func_any_from_func::vx_repl(vx_core::Type_anylist* arglist) {
-      vx_core::Type_any* output = vx_core::e_any;
-      vx_core::Type_any* generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_core::f_any_from_func(generic_any_1);
-      return output;
-    }
-
-    template <class T> T* vx_core::Func_any_from_func::vx_any_from_func(T* generic_any_1) {
-      T* output = vx_core::f_empty(generic_any_1);
-      if (fn != NULL) {
-        output = vx_core::f_any_from_any(generic_any_1, fn());
-      }
-      return output;
-    }
-
-  //}
-
-  vx_core::Func_any_from_func* vx_core::e_any_from_func = new vx_core::Func_any_from_func();
-  vx_core::Func_any_from_func* vx_core::t_any_from_func = new vx_core::Func_any_from_func();
-
-  template <class T> T* vx_core::f_any_from_func(T* generic_any_1) {
-    T* output = vx_core::f_empty(generic_any_1);
-    return output;
-  }
-
-  /**
    * 
    * @async
    * @function any_from_func_async
@@ -10414,12 +10423,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_func_async* vx_core::Func_any_from_func_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_func_async* vx_core::Func_any_from_func_async::vx_new(Args*... args) {
       vx_core::Func_any_from_func_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_func_async* vx_core::Func_any_from_func_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_func_async* vx_core::Func_any_from_func_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_func_async* output;
       return output;
     }
@@ -10495,12 +10504,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_key_value* vx_core::Func_any_from_key_value::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_key_value* vx_core::Func_any_from_key_value::vx_new(Args*... args) {
       vx_core::Func_any_from_key_value* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_key_value* vx_core::Func_any_from_key_value::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_key_value* vx_core::Func_any_from_key_value::vx_copy(Args*... args) {
       vx_core::Func_any_from_key_value* output;
       return output;
     }
@@ -10577,12 +10586,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_key_value_async* vx_core::Func_any_from_key_value_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_key_value_async* vx_core::Func_any_from_key_value_async::vx_new(Args*... args) {
       vx_core::Func_any_from_key_value_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_key_value_async* vx_core::Func_any_from_key_value_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_key_value_async* vx_core::Func_any_from_key_value_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_key_value_async* output;
       return output;
     }
@@ -10655,12 +10664,12 @@
    */
   //class Func_any_from_list {
 
-    template<typename... Args> vx_core::Func_any_from_list* vx_core::Func_any_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list* vx_core::Func_any_from_list::vx_new(Args*... args) {
       vx_core::Func_any_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_list* vx_core::Func_any_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list* vx_core::Func_any_from_list::vx_copy(Args*... args) {
       vx_core::Func_any_from_list* output;
       return output;
     }
@@ -10726,12 +10735,12 @@
    */
   //class Func_any_from_list_reduce {
 
-    template<typename... Args> vx_core::Func_any_from_list_reduce* vx_core::Func_any_from_list_reduce::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list_reduce* vx_core::Func_any_from_list_reduce::vx_new(Args*... args) {
       vx_core::Func_any_from_list_reduce* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_list_reduce* vx_core::Func_any_from_list_reduce::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list_reduce* vx_core::Func_any_from_list_reduce::vx_copy(Args*... args) {
       vx_core::Func_any_from_list_reduce* output;
       return output;
     }
@@ -10803,12 +10812,12 @@
    */
   //class Func_any_from_list_reduce_next {
 
-    template<typename... Args> vx_core::Func_any_from_list_reduce_next* vx_core::Func_any_from_list_reduce_next::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list_reduce_next* vx_core::Func_any_from_list_reduce_next::vx_new(Args*... args) {
       vx_core::Func_any_from_list_reduce_next* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_list_reduce_next* vx_core::Func_any_from_list_reduce_next::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_list_reduce_next* vx_core::Func_any_from_list_reduce_next::vx_copy(Args*... args) {
       vx_core::Func_any_from_list_reduce_next* output;
       return output;
     }
@@ -10874,12 +10883,12 @@
    */
   //class Func_any_from_map {
 
-    template<typename... Args> vx_core::Func_any_from_map* vx_core::Func_any_from_map::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_map* vx_core::Func_any_from_map::vx_new(Args*... args) {
       vx_core::Func_any_from_map* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_map* vx_core::Func_any_from_map::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_map* vx_core::Func_any_from_map::vx_copy(Args*... args) {
       vx_core::Func_any_from_map* output;
       return output;
     }
@@ -10948,12 +10957,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_none* vx_core::Func_any_from_none::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_none* vx_core::Func_any_from_none::vx_new(Args*... args) {
       vx_core::Func_any_from_none* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_none* vx_core::Func_any_from_none::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_none* vx_core::Func_any_from_none::vx_copy(Args*... args) {
       vx_core::Func_any_from_none* output;
       return output;
     }
@@ -11027,12 +11036,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_none_async* vx_core::Func_any_from_none_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_none_async* vx_core::Func_any_from_none_async::vx_new(Args*... args) {
       vx_core::Func_any_from_none_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_none_async* vx_core::Func_any_from_none_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_none_async* vx_core::Func_any_from_none_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_none_async* output;
       return output;
     }
@@ -11108,12 +11117,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce* vx_core::Func_any_from_reduce::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce* vx_core::Func_any_from_reduce::vx_new(Args*... args) {
       vx_core::Func_any_from_reduce* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce* vx_core::Func_any_from_reduce::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce* vx_core::Func_any_from_reduce::vx_copy(Args*... args) {
       vx_core::Func_any_from_reduce* output;
       return output;
     }
@@ -11190,12 +11199,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_async* vx_core::Func_any_from_reduce_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_async* vx_core::Func_any_from_reduce_async::vx_new(Args*... args) {
       vx_core::Func_any_from_reduce_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_async* vx_core::Func_any_from_reduce_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_async* vx_core::Func_any_from_reduce_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_reduce_async* output;
       return output;
     }
@@ -11274,12 +11283,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_next* vx_core::Func_any_from_reduce_next::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_next* vx_core::Func_any_from_reduce_next::vx_new(Args*... args) {
       vx_core::Func_any_from_reduce_next* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_next* vx_core::Func_any_from_reduce_next::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_next* vx_core::Func_any_from_reduce_next::vx_copy(Args*... args) {
       vx_core::Func_any_from_reduce_next* output;
       return output;
     }
@@ -11358,12 +11367,12 @@
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_next_async* vx_core::Func_any_from_reduce_next_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_next_async* vx_core::Func_any_from_reduce_next_async::vx_new(Args*... args) {
       vx_core::Func_any_from_reduce_next_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_reduce_next_async* vx_core::Func_any_from_reduce_next_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_reduce_next_async* vx_core::Func_any_from_reduce_next_async::vx_copy(Args*... args) {
       vx_core::Func_any_from_reduce_next_async* output;
       return output;
     }
@@ -11437,12 +11446,12 @@
    */
   //class Func_any_from_struct {
 
-    template<typename... Args> vx_core::Func_any_from_struct* vx_core::Func_any_from_struct::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_struct* vx_core::Func_any_from_struct::vx_new(Args*... args) {
       vx_core::Func_any_from_struct* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_any_from_struct* vx_core::Func_any_from_struct::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_any_from_struct* vx_core::Func_any_from_struct::vx_copy(Args*... args) {
       vx_core::Func_any_from_struct* output;
       return output;
     }
@@ -11508,12 +11517,12 @@
    */
   //class Func_async {
 
-    template<typename... Args> vx_core::Func_async* vx_core::Func_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_async* vx_core::Func_async::vx_new(Args*... args) {
       vx_core::Func_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_async* vx_core::Func_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_async* vx_core::Func_async::vx_copy(Args*... args) {
       vx_core::Func_async* output;
       return output;
     }
@@ -11585,12 +11594,12 @@
    */
   //class Func_boolean_from_any {
 
-    template<typename... Args> vx_core::Func_boolean_from_any* vx_core::Func_boolean_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_any* vx_core::Func_boolean_from_any::vx_new(Args*... args) {
       vx_core::Func_boolean_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_boolean_from_any* vx_core::Func_boolean_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_any* vx_core::Func_boolean_from_any::vx_copy(Args*... args) {
       vx_core::Func_boolean_from_any* output;
       return output;
     }
@@ -11661,12 +11670,12 @@
    */
   //class Func_boolean_from_func {
 
-    template<typename... Args> vx_core::Func_boolean_from_func* vx_core::Func_boolean_from_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_func* vx_core::Func_boolean_from_func::vx_new(Args*... args) {
       vx_core::Func_boolean_from_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_boolean_from_func* vx_core::Func_boolean_from_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_func* vx_core::Func_boolean_from_func::vx_copy(Args*... args) {
       vx_core::Func_boolean_from_func* output;
       return output;
     }
@@ -11736,12 +11745,12 @@
    */
   //class Func_boolean_from_none {
 
-    template<typename... Args> vx_core::Func_boolean_from_none* vx_core::Func_boolean_from_none::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_none* vx_core::Func_boolean_from_none::vx_new(Args*... args) {
       vx_core::Func_boolean_from_none* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_boolean_from_none* vx_core::Func_boolean_from_none::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_boolean_from_none* vx_core::Func_boolean_from_none::vx_copy(Args*... args) {
       vx_core::Func_boolean_from_none* output;
       return output;
     }
@@ -11812,12 +11821,12 @@
    */
   //class Func_case {
 
-    template<typename... Args> vx_core::Func_case* vx_core::Func_case::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_case* vx_core::Func_case::vx_new(Args*... args) {
       vx_core::Func_case* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_case* vx_core::Func_case::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_case* vx_core::Func_case::vx_copy(Args*... args) {
       vx_core::Func_case* output;
       return output;
     }
@@ -11891,12 +11900,12 @@
    */
   //class Func_case_1 {
 
-    template<typename... Args> vx_core::Func_case_1* vx_core::Func_case_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_case_1* vx_core::Func_case_1::vx_new(Args*... args) {
       vx_core::Func_case_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_case_1* vx_core::Func_case_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_case_1* vx_core::Func_case_1::vx_copy(Args*... args) {
       vx_core::Func_case_1* output;
       return output;
     }
@@ -11971,12 +11980,12 @@
    */
   //class Func_compare {
 
-    template<typename... Args> vx_core::Func_compare* vx_core::Func_compare::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_compare* vx_core::Func_compare::vx_new(Args*... args) {
       vx_core::Func_compare* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_compare* vx_core::Func_compare::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_compare* vx_core::Func_compare::vx_copy(Args*... args) {
       vx_core::Func_compare* output;
       return output;
     }
@@ -12040,12 +12049,12 @@
    */
   //class Func_contains {
 
-    template<typename... Args> vx_core::Func_contains* vx_core::Func_contains::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_contains* vx_core::Func_contains::vx_new(Args*... args) {
       vx_core::Func_contains* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_contains* vx_core::Func_contains::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_contains* vx_core::Func_contains::vx_copy(Args*... args) {
       vx_core::Func_contains* output;
       return output;
     }
@@ -12109,12 +12118,12 @@
    */
   //class Func_contains_1 {
 
-    template<typename... Args> vx_core::Func_contains_1* vx_core::Func_contains_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_contains_1* vx_core::Func_contains_1::vx_new(Args*... args) {
       vx_core::Func_contains_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_contains_1* vx_core::Func_contains_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_contains_1* vx_core::Func_contains_1::vx_copy(Args*... args) {
       vx_core::Func_contains_1* output;
       return output;
     }
@@ -12178,12 +12187,12 @@
    */
   //class Func_copy {
 
-    template<typename... Args> vx_core::Func_copy* vx_core::Func_copy::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_copy* vx_core::Func_copy::vx_new(Args*... args) {
       vx_core::Func_copy* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_copy* vx_core::Func_copy::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_copy* vx_core::Func_copy::vx_copy(Args*... args) {
       vx_core::Func_copy* output;
       return output;
     }
@@ -12244,12 +12253,12 @@
    */
   //class Func_else {
 
-    template<typename... Args> vx_core::Func_else* vx_core::Func_else::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_else* vx_core::Func_else::vx_new(Args*... args) {
       vx_core::Func_else* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_else* vx_core::Func_else::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_else* vx_core::Func_else::vx_copy(Args*... args) {
       vx_core::Func_else* output;
       return output;
     }
@@ -12330,12 +12339,12 @@
    */
   //class Func_empty {
 
-    template<typename... Args> vx_core::Func_empty* vx_core::Func_empty::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_empty* vx_core::Func_empty::vx_new(Args*... args) {
       vx_core::Func_empty* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_empty* vx_core::Func_empty::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_empty* vx_core::Func_empty::vx_copy(Args*... args) {
       vx_core::Func_empty* output;
       return output;
     }
@@ -12405,12 +12414,12 @@
    */
   //class Func_extends_from_any {
 
-    template<typename... Args> vx_core::Func_extends_from_any* vx_core::Func_extends_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_extends_from_any* vx_core::Func_extends_from_any::vx_new(Args*... args) {
       vx_core::Func_extends_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_extends_from_any* vx_core::Func_extends_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_extends_from_any* vx_core::Func_extends_from_any::vx_copy(Args*... args) {
       vx_core::Func_extends_from_any* output;
       return output;
     }
@@ -12485,12 +12494,12 @@
    */
   //class Func_extends_from_typedef {
 
-    template<typename... Args> vx_core::Func_extends_from_typedef* vx_core::Func_extends_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_extends_from_typedef* vx_core::Func_extends_from_typedef::vx_new(Args*... args) {
       vx_core::Func_extends_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_extends_from_typedef* vx_core::Func_extends_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_extends_from_typedef* vx_core::Func_extends_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_extends_from_typedef* output;
       return output;
     }
@@ -12563,12 +12572,12 @@
    */
   //class Func_first_from_list {
 
-    template<typename... Args> vx_core::Func_first_from_list* vx_core::Func_first_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_first_from_list* vx_core::Func_first_from_list::vx_new(Args*... args) {
       vx_core::Func_first_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_first_from_list* vx_core::Func_first_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_first_from_list* vx_core::Func_first_from_list::vx_copy(Args*... args) {
       vx_core::Func_first_from_list* output;
       return output;
     }
@@ -12643,12 +12652,12 @@
    */
   //class Func_first_from_list_fn_any_from_any {
 
-    template<typename... Args> vx_core::Func_first_from_list_fn_any_from_any* vx_core::Func_first_from_list_fn_any_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_first_from_list_fn_any_from_any* vx_core::Func_first_from_list_fn_any_from_any::vx_new(Args*... args) {
       vx_core::Func_first_from_list_fn_any_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_first_from_list_fn_any_from_any* vx_core::Func_first_from_list_fn_any_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_first_from_list_fn_any_from_any* vx_core::Func_first_from_list_fn_any_from_any::vx_copy(Args*... args) {
       vx_core::Func_first_from_list_fn_any_from_any* output;
       return output;
     }
@@ -12713,12 +12722,12 @@
    */
   //class Func_fn {
 
-    template<typename... Args> vx_core::Func_fn* vx_core::Func_fn::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_fn* vx_core::Func_fn::vx_new(Args*... args) {
       vx_core::Func_fn* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_fn* vx_core::Func_fn::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_fn* vx_core::Func_fn::vx_copy(Args*... args) {
       vx_core::Func_fn* output;
       return output;
     }
@@ -12781,12 +12790,12 @@
    */
   //class Func_funcdef_from_func {
 
-    template<typename... Args> vx_core::Func_funcdef_from_func* vx_core::Func_funcdef_from_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_funcdef_from_func* vx_core::Func_funcdef_from_func::vx_new(Args*... args) {
       vx_core::Func_funcdef_from_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_funcdef_from_func* vx_core::Func_funcdef_from_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_funcdef_from_func* vx_core::Func_funcdef_from_func::vx_copy(Args*... args) {
       vx_core::Func_funcdef_from_func* output;
       return output;
     }
@@ -12858,12 +12867,12 @@
    */
   //class Func_funcname_from_funcdef {
 
-    template<typename... Args> vx_core::Func_funcname_from_funcdef* vx_core::Func_funcname_from_funcdef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_funcname_from_funcdef* vx_core::Func_funcname_from_funcdef::vx_new(Args*... args) {
       vx_core::Func_funcname_from_funcdef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_funcname_from_funcdef* vx_core::Func_funcname_from_funcdef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_funcname_from_funcdef* vx_core::Func_funcname_from_funcdef::vx_copy(Args*... args) {
       vx_core::Func_funcname_from_funcdef* output;
       return output;
     }
@@ -12942,12 +12951,12 @@
    */
   //class Func_global_package_get {
 
-    template<typename... Args> vx_core::Func_global_package_get* vx_core::Func_global_package_get::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_global_package_get* vx_core::Func_global_package_get::vx_new(Args*... args) {
       vx_core::Func_global_package_get* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_global_package_get* vx_core::Func_global_package_get::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_global_package_get* vx_core::Func_global_package_get::vx_copy(Args*... args) {
       vx_core::Func_global_package_get* output;
       return output;
     }
@@ -13019,12 +13028,12 @@
    */
   //class Func_global_package_set {
 
-    template<typename... Args> vx_core::Func_global_package_set* vx_core::Func_global_package_set::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_global_package_set* vx_core::Func_global_package_set::vx_new(Args*... args) {
       vx_core::Func_global_package_set* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_global_package_set* vx_core::Func_global_package_set::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_global_package_set* vx_core::Func_global_package_set::vx_copy(Args*... args) {
       vx_core::Func_global_package_set* output;
       return output;
     }
@@ -13085,12 +13094,12 @@
    */
   //class Func_if {
 
-    template<typename... Args> vx_core::Func_if* vx_core::Func_if::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_if* vx_core::Func_if::vx_new(Args*... args) {
       vx_core::Func_if* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_if* vx_core::Func_if::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_if* vx_core::Func_if::vx_copy(Args*... args) {
       vx_core::Func_if* output;
       return output;
     }
@@ -13156,12 +13165,12 @@
    */
   //class Func_if_1 {
 
-    template<typename... Args> vx_core::Func_if_1* vx_core::Func_if_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_if_1* vx_core::Func_if_1::vx_new(Args*... args) {
       vx_core::Func_if_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_if_1* vx_core::Func_if_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_if_1* vx_core::Func_if_1::vx_copy(Args*... args) {
       vx_core::Func_if_1* output;
       return output;
     }
@@ -13226,12 +13235,12 @@
    */
   //class Func_if_2 {
 
-    template<typename... Args> vx_core::Func_if_2* vx_core::Func_if_2::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_if_2* vx_core::Func_if_2::vx_new(Args*... args) {
       vx_core::Func_if_2* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_if_2* vx_core::Func_if_2::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_if_2* vx_core::Func_if_2::vx_copy(Args*... args) {
       vx_core::Func_if_2* output;
       return output;
     }
@@ -13303,12 +13312,12 @@
    */
   //class Func_int_from_func {
 
-    template<typename... Args> vx_core::Func_int_from_func* vx_core::Func_int_from_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_int_from_func* vx_core::Func_int_from_func::vx_new(Args*... args) {
       vx_core::Func_int_from_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_int_from_func* vx_core::Func_int_from_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_int_from_func* vx_core::Func_int_from_func::vx_copy(Args*... args) {
       vx_core::Func_int_from_func* output;
       return output;
     }
@@ -13379,12 +13388,12 @@
    */
   //class Func_int_from_string {
 
-    template<typename... Args> vx_core::Func_int_from_string* vx_core::Func_int_from_string::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_int_from_string* vx_core::Func_int_from_string::vx_new(Args*... args) {
       vx_core::Func_int_from_string* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_int_from_string* vx_core::Func_int_from_string::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_int_from_string* vx_core::Func_int_from_string::vx_copy(Args*... args) {
       vx_core::Func_int_from_string* output;
       return output;
     }
@@ -13493,12 +13502,12 @@
    */
   //class Func_is_empty {
 
-    template<typename... Args> vx_core::Func_is_empty* vx_core::Func_is_empty::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_empty* vx_core::Func_is_empty::vx_new(Args*... args) {
       vx_core::Func_is_empty* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_empty* vx_core::Func_is_empty::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_empty* vx_core::Func_is_empty::vx_copy(Args*... args) {
       vx_core::Func_is_empty* output;
       return output;
     }
@@ -13570,12 +13579,12 @@
    */
   //class Func_is_empty_1 {
 
-    template<typename... Args> vx_core::Func_is_empty_1* vx_core::Func_is_empty_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_empty_1* vx_core::Func_is_empty_1::vx_new(Args*... args) {
       vx_core::Func_is_empty_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_empty_1* vx_core::Func_is_empty_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_empty_1* vx_core::Func_is_empty_1::vx_copy(Args*... args) {
       vx_core::Func_is_empty_1* output;
       return output;
     }
@@ -13648,12 +13657,12 @@
    */
   //class Func_is_endswith {
 
-    template<typename... Args> vx_core::Func_is_endswith* vx_core::Func_is_endswith::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_endswith* vx_core::Func_is_endswith::vx_new(Args*... args) {
       vx_core::Func_is_endswith* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_endswith* vx_core::Func_is_endswith::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_endswith* vx_core::Func_is_endswith::vx_copy(Args*... args) {
       vx_core::Func_is_endswith* output;
       return output;
     }
@@ -13716,12 +13725,12 @@
    */
   //class Func_is_func {
 
-    template<typename... Args> vx_core::Func_is_func* vx_core::Func_is_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_func* vx_core::Func_is_func::vx_new(Args*... args) {
       vx_core::Func_is_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_func* vx_core::Func_is_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_func* vx_core::Func_is_func::vx_copy(Args*... args) {
       vx_core::Func_is_func* output;
       return output;
     }
@@ -13793,12 +13802,12 @@
    */
   //class Func_is_int {
 
-    template<typename... Args> vx_core::Func_is_int* vx_core::Func_is_int::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_int* vx_core::Func_is_int::vx_new(Args*... args) {
       vx_core::Func_is_int* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_int* vx_core::Func_is_int::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_int* vx_core::Func_is_int::vx_copy(Args*... args) {
       vx_core::Func_is_int* output;
       return output;
     }
@@ -13870,12 +13879,12 @@
    */
   //class Func_is_number {
 
-    template<typename... Args> vx_core::Func_is_number* vx_core::Func_is_number::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_number* vx_core::Func_is_number::vx_new(Args*... args) {
       vx_core::Func_is_number* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_number* vx_core::Func_is_number::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_number* vx_core::Func_is_number::vx_copy(Args*... args) {
       vx_core::Func_is_number* output;
       return output;
     }
@@ -13972,12 +13981,12 @@
    */
   //class Func_is_pass_from_permission {
 
-    template<typename... Args> vx_core::Func_is_pass_from_permission* vx_core::Func_is_pass_from_permission::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_is_pass_from_permission* vx_core::Func_is_pass_from_permission::vx_new(Args*... args) {
       vx_core::Func_is_pass_from_permission* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_is_pass_from_permission* vx_core::Func_is_pass_from_permission::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_is_pass_from_permission* vx_core::Func_is_pass_from_permission::vx_copy(Args*... args) {
       vx_core::Func_is_pass_from_permission* output;
       return output;
     }
@@ -14058,12 +14067,12 @@
    */
   //class Func_last_from_list {
 
-    template<typename... Args> vx_core::Func_last_from_list* vx_core::Func_last_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_last_from_list* vx_core::Func_last_from_list::vx_new(Args*... args) {
       vx_core::Func_last_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_last_from_list* vx_core::Func_last_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_last_from_list* vx_core::Func_last_from_list::vx_copy(Args*... args) {
       vx_core::Func_last_from_list* output;
       return output;
     }
@@ -14144,12 +14153,12 @@
    */
   //class Func_length_from_list {
 
-    template<typename... Args> vx_core::Func_length_from_list* vx_core::Func_length_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_length_from_list* vx_core::Func_length_from_list::vx_new(Args*... args) {
       vx_core::Func_length_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_length_from_list* vx_core::Func_length_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_length_from_list* vx_core::Func_length_from_list::vx_copy(Args*... args) {
       vx_core::Func_length_from_list* output;
       return output;
     }
@@ -14221,12 +14230,12 @@
    */
   //class Func_let {
 
-    template<typename... Args> vx_core::Func_let* vx_core::Func_let::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_let* vx_core::Func_let::vx_new(Args*... args) {
       vx_core::Func_let* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_let* vx_core::Func_let::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_let* vx_core::Func_let::vx_copy(Args*... args) {
       vx_core::Func_let* output;
       return output;
     }
@@ -14292,12 +14301,12 @@
    */
   //class Func_let_async {
 
-    template<typename... Args> vx_core::Func_let_async* vx_core::Func_let_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_let_async* vx_core::Func_let_async::vx_new(Args*... args) {
       vx_core::Func_let_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_let_async* vx_core::Func_let_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_let_async* vx_core::Func_let_async::vx_copy(Args*... args) {
       vx_core::Func_let_async* output;
       return output;
     }
@@ -14362,12 +14371,12 @@
    */
   //class Func_list_join_from_list {
 
-    template<typename... Args> vx_core::Func_list_join_from_list* vx_core::Func_list_join_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_join_from_list* vx_core::Func_list_join_from_list::vx_new(Args*... args) {
       vx_core::Func_list_join_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_join_from_list* vx_core::Func_list_join_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_join_from_list* vx_core::Func_list_join_from_list::vx_copy(Args*... args) {
       vx_core::Func_list_join_from_list* output;
       return output;
     }
@@ -14432,12 +14441,12 @@
    */
   //class Func_list_from_list {
 
-    template<typename... Args> vx_core::Func_list_from_list* vx_core::Func_list_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_list* vx_core::Func_list_from_list::vx_new(Args*... args) {
       vx_core::Func_list_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_from_list* vx_core::Func_list_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_list* vx_core::Func_list_from_list::vx_copy(Args*... args) {
       vx_core::Func_list_from_list* output;
       return output;
     }
@@ -14504,12 +14513,12 @@
    */
   //class Func_list_from_list_async {
 
-    template<typename... Args> vx_core::Func_list_from_list_async* vx_core::Func_list_from_list_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_list_async* vx_core::Func_list_from_list_async::vx_new(Args*... args) {
       vx_core::Func_list_from_list_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_from_list_async* vx_core::Func_list_from_list_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_list_async* vx_core::Func_list_from_list_async::vx_copy(Args*... args) {
       vx_core::Func_list_from_list_async* output;
       return output;
     }
@@ -14575,12 +14584,12 @@
    */
   //class Func_list_from_map {
 
-    template<typename... Args> vx_core::Func_list_from_map* vx_core::Func_list_from_map::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_map* vx_core::Func_list_from_map::vx_new(Args*... args) {
       vx_core::Func_list_from_map* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_from_map* vx_core::Func_list_from_map::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_map* vx_core::Func_list_from_map::vx_copy(Args*... args) {
       vx_core::Func_list_from_map* output;
       return output;
     }
@@ -14646,12 +14655,12 @@
    */
   //class Func_list_from_map_async {
 
-    template<typename... Args> vx_core::Func_list_from_map_async* vx_core::Func_list_from_map_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_map_async* vx_core::Func_list_from_map_async::vx_new(Args*... args) {
       vx_core::Func_list_from_map_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_from_map_async* vx_core::Func_list_from_map_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_map_async* vx_core::Func_list_from_map_async::vx_copy(Args*... args) {
       vx_core::Func_list_from_map_async* output;
       return output;
     }
@@ -14716,12 +14725,12 @@
    */
   //class Func_list_from_type {
 
-    template<typename... Args> vx_core::Func_list_from_type* vx_core::Func_list_from_type::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_type* vx_core::Func_list_from_type::vx_new(Args*... args) {
       vx_core::Func_list_from_type* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_list_from_type* vx_core::Func_list_from_type::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_list_from_type* vx_core::Func_list_from_type::vx_copy(Args*... args) {
       vx_core::Func_list_from_type* output;
       return output;
     }
@@ -14792,12 +14801,12 @@
    */
   //class Func_log {
 
-    template<typename... Args> vx_core::Func_log* vx_core::Func_log::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_log* vx_core::Func_log::vx_new(Args*... args) {
       vx_core::Func_log* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_log* vx_core::Func_log::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_log* vx_core::Func_log::vx_copy(Args*... args) {
       vx_core::Func_log* output;
       return output;
     }
@@ -14870,12 +14879,12 @@
    */
   //class Func_map_from_list {
 
-    template<typename... Args> vx_core::Func_map_from_list* vx_core::Func_map_from_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_map_from_list* vx_core::Func_map_from_list::vx_new(Args*... args) {
       vx_core::Func_map_from_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_map_from_list* vx_core::Func_map_from_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_map_from_list* vx_core::Func_map_from_list::vx_copy(Args*... args) {
       vx_core::Func_map_from_list* output;
       return output;
     }
@@ -14939,12 +14948,12 @@
    */
   //class Func_mempool_addref {
 
-    template<typename... Args> vx_core::Func_mempool_addref* vx_core::Func_mempool_addref::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_addref* vx_core::Func_mempool_addref::vx_new(Args*... args) {
       vx_core::Func_mempool_addref* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_mempool_addref* vx_core::Func_mempool_addref::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_addref* vx_core::Func_mempool_addref::vx_copy(Args*... args) {
       vx_core::Func_mempool_addref* output;
       return output;
     }
@@ -15003,12 +15012,12 @@
    */
   //class Func_mempool_release {
 
-    template<typename... Args> vx_core::Func_mempool_release* vx_core::Func_mempool_release::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_release* vx_core::Func_mempool_release::vx_new(Args*... args) {
       vx_core::Func_mempool_release* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_mempool_release* vx_core::Func_mempool_release::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_release* vx_core::Func_mempool_release::vx_copy(Args*... args) {
       vx_core::Func_mempool_release* output;
       return output;
     }
@@ -15067,12 +15076,12 @@
    */
   //class Func_mempool_removeref {
 
-    template<typename... Args> vx_core::Func_mempool_removeref* vx_core::Func_mempool_removeref::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_removeref* vx_core::Func_mempool_removeref::vx_new(Args*... args) {
       vx_core::Func_mempool_removeref* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_mempool_removeref* vx_core::Func_mempool_removeref::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_removeref* vx_core::Func_mempool_removeref::vx_copy(Args*... args) {
       vx_core::Func_mempool_removeref* output;
       return output;
     }
@@ -15131,12 +15140,12 @@
    */
   //class Func_mempool_removerefchildren {
 
-    template<typename... Args> vx_core::Func_mempool_removerefchildren* vx_core::Func_mempool_removerefchildren::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_removerefchildren* vx_core::Func_mempool_removerefchildren::vx_new(Args*... args) {
       vx_core::Func_mempool_removerefchildren* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_mempool_removerefchildren* vx_core::Func_mempool_removerefchildren::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_removerefchildren* vx_core::Func_mempool_removerefchildren::vx_copy(Args*... args) {
       vx_core::Func_mempool_removerefchildren* output;
       return output;
     }
@@ -15194,12 +15203,12 @@
    */
   //class Func_mempool_reserve {
 
-    template<typename... Args> vx_core::Func_mempool_reserve* vx_core::Func_mempool_reserve::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_reserve* vx_core::Func_mempool_reserve::vx_new(Args*... args) {
       vx_core::Func_mempool_reserve* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_mempool_reserve* vx_core::Func_mempool_reserve::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_mempool_reserve* vx_core::Func_mempool_reserve::vx_copy(Args*... args) {
       vx_core::Func_mempool_reserve* output;
       return output;
     }
@@ -15260,12 +15269,12 @@
    */
   //class Func_msg_from_error {
 
-    template<typename... Args> vx_core::Func_msg_from_error* vx_core::Func_msg_from_error::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_msg_from_error* vx_core::Func_msg_from_error::vx_new(Args*... args) {
       vx_core::Func_msg_from_error* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_msg_from_error* vx_core::Func_msg_from_error::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_msg_from_error* vx_core::Func_msg_from_error::vx_copy(Args*... args) {
       vx_core::Func_msg_from_error* output;
       return output;
     }
@@ -15347,12 +15356,12 @@
    */
   //class Func_msgblock_from_msgblock_msg {
 
-    template<typename... Args> vx_core::Func_msgblock_from_msgblock_msg* vx_core::Func_msgblock_from_msgblock_msg::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_msgblock_from_msgblock_msg* vx_core::Func_msgblock_from_msgblock_msg::vx_new(Args*... args) {
       vx_core::Func_msgblock_from_msgblock_msg* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_msgblock_from_msgblock_msg* vx_core::Func_msgblock_from_msgblock_msg::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_msgblock_from_msgblock_msg* vx_core::Func_msgblock_from_msgblock_msg::vx_copy(Args*... args) {
       vx_core::Func_msgblock_from_msgblock_msg* output;
       return output;
     }
@@ -15418,12 +15427,12 @@
    */
   //class Func_msgblock_from_msgblock_msgblock {
 
-    template<typename... Args> vx_core::Func_msgblock_from_msgblock_msgblock* vx_core::Func_msgblock_from_msgblock_msgblock::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_msgblock_from_msgblock_msgblock* vx_core::Func_msgblock_from_msgblock_msgblock::vx_new(Args*... args) {
       vx_core::Func_msgblock_from_msgblock_msgblock* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_msgblock_from_msgblock_msgblock* vx_core::Func_msgblock_from_msgblock_msgblock::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_msgblock_from_msgblock_msgblock* vx_core::Func_msgblock_from_msgblock_msgblock::vx_copy(Args*... args) {
       vx_core::Func_msgblock_from_msgblock_msgblock* output;
       return output;
     }
@@ -15493,12 +15502,12 @@
    */
   //class Func_name_from_typedef {
 
-    template<typename... Args> vx_core::Func_name_from_typedef* vx_core::Func_name_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_name_from_typedef* vx_core::Func_name_from_typedef::vx_new(Args*... args) {
       vx_core::Func_name_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_name_from_typedef* vx_core::Func_name_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_name_from_typedef* vx_core::Func_name_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_name_from_typedef* output;
       return output;
     }
@@ -15571,12 +15580,12 @@
    */
   //class Func_native {
 
-    template<typename... Args> vx_core::Func_native* vx_core::Func_native::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_native* vx_core::Func_native::vx_new(Args*... args) {
       vx_core::Func_native* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_native* vx_core::Func_native::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_native* vx_core::Func_native::vx_copy(Args*... args) {
       vx_core::Func_native* output;
       return output;
     }
@@ -15649,12 +15658,12 @@
    */
   //class Func_native_from_any {
 
-    template<typename... Args> vx_core::Func_native_from_any* vx_core::Func_native_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_native_from_any* vx_core::Func_native_from_any::vx_new(Args*... args) {
       vx_core::Func_native_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_native_from_any* vx_core::Func_native_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_native_from_any* vx_core::Func_native_from_any::vx_copy(Args*... args) {
       vx_core::Func_native_from_any* output;
       return output;
     }
@@ -15727,12 +15736,12 @@
    */
   //class Func_new {
 
-    template<typename... Args> vx_core::Func_new* vx_core::Func_new::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_new* vx_core::Func_new::vx_new(Args*... args) {
       vx_core::Func_new* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_new* vx_core::Func_new::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_new* vx_core::Func_new::vx_copy(Args*... args) {
       vx_core::Func_new* output;
       return output;
     }
@@ -15793,12 +15802,12 @@
    */
   //class Func_number_from_func {
 
-    template<typename... Args> vx_core::Func_number_from_func* vx_core::Func_number_from_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_number_from_func* vx_core::Func_number_from_func::vx_new(Args*... args) {
       vx_core::Func_number_from_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_number_from_func* vx_core::Func_number_from_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_number_from_func* vx_core::Func_number_from_func::vx_copy(Args*... args) {
       vx_core::Func_number_from_func* output;
       return output;
     }
@@ -15860,12 +15869,12 @@
    */
   //class Func_or {
 
-    template<typename... Args> vx_core::Func_or* vx_core::Func_or::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_or* vx_core::Func_or::vx_new(Args*... args) {
       vx_core::Func_or* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_or* vx_core::Func_or::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_or* vx_core::Func_or::vx_copy(Args*... args) {
       vx_core::Func_or* output;
       return output;
     }
@@ -15928,12 +15937,12 @@
    */
   //class Func_or_1 {
 
-    template<typename... Args> vx_core::Func_or_1* vx_core::Func_or_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_or_1* vx_core::Func_or_1::vx_new(Args*... args) {
       vx_core::Func_or_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_or_1* vx_core::Func_or_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_or_1* vx_core::Func_or_1::vx_copy(Args*... args) {
       vx_core::Func_or_1* output;
       return output;
     }
@@ -16020,12 +16029,12 @@
    */
   //class Func_packagename_from_typedef {
 
-    template<typename... Args> vx_core::Func_packagename_from_typedef* vx_core::Func_packagename_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_packagename_from_typedef* vx_core::Func_packagename_from_typedef::vx_new(Args*... args) {
       vx_core::Func_packagename_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_packagename_from_typedef* vx_core::Func_packagename_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_packagename_from_typedef* vx_core::Func_packagename_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_packagename_from_typedef* output;
       return output;
     }
@@ -16098,12 +16107,12 @@
    */
   //class Func_path_from_context_path {
 
-    template<typename... Args> vx_core::Func_path_from_context_path* vx_core::Func_path_from_context_path::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_path_from_context_path* vx_core::Func_path_from_context_path::vx_new(Args*... args) {
       vx_core::Func_path_from_context_path* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_path_from_context_path* vx_core::Func_path_from_context_path::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_path_from_context_path* vx_core::Func_path_from_context_path::vx_copy(Args*... args) {
       vx_core::Func_path_from_context_path* output;
       return output;
     }
@@ -16181,12 +16190,12 @@
    */
   //class Func_path_from_setting_path {
 
-    template<typename... Args> vx_core::Func_path_from_setting_path* vx_core::Func_path_from_setting_path::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_path_from_setting_path* vx_core::Func_path_from_setting_path::vx_new(Args*... args) {
       vx_core::Func_path_from_setting_path* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_path_from_setting_path* vx_core::Func_path_from_setting_path::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_path_from_setting_path* vx_core::Func_path_from_setting_path::vx_copy(Args*... args) {
       vx_core::Func_path_from_setting_path* output;
       return output;
     }
@@ -16249,12 +16258,12 @@
    */
   //class Func_permission_from_id_context {
 
-    template<typename... Args> vx_core::Func_permission_from_id_context* vx_core::Func_permission_from_id_context::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_permission_from_id_context* vx_core::Func_permission_from_id_context::vx_new(Args*... args) {
       vx_core::Func_permission_from_id_context* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_permission_from_id_context* vx_core::Func_permission_from_id_context::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_permission_from_id_context* vx_core::Func_permission_from_id_context::vx_copy(Args*... args) {
       vx_core::Func_permission_from_id_context* output;
       return output;
     }
@@ -16336,12 +16345,12 @@
    */
   //class Func_properties_from_typedef {
 
-    template<typename... Args> vx_core::Func_properties_from_typedef* vx_core::Func_properties_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_properties_from_typedef* vx_core::Func_properties_from_typedef::vx_new(Args*... args) {
       vx_core::Func_properties_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_properties_from_typedef* vx_core::Func_properties_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_properties_from_typedef* vx_core::Func_properties_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_properties_from_typedef* output;
       return output;
     }
@@ -16414,12 +16423,12 @@
    */
   //class Func_proplast_from_typedef {
 
-    template<typename... Args> vx_core::Func_proplast_from_typedef* vx_core::Func_proplast_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_proplast_from_typedef* vx_core::Func_proplast_from_typedef::vx_new(Args*... args) {
       vx_core::Func_proplast_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_proplast_from_typedef* vx_core::Func_proplast_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_proplast_from_typedef* vx_core::Func_proplast_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_proplast_from_typedef* output;
       return output;
     }
@@ -16491,12 +16500,12 @@
    */
   //class Func_resolve {
 
-    template<typename... Args> vx_core::Func_resolve* vx_core::Func_resolve::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_resolve* vx_core::Func_resolve::vx_new(Args*... args) {
       vx_core::Func_resolve* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_resolve* vx_core::Func_resolve::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_resolve* vx_core::Func_resolve::vx_copy(Args*... args) {
       vx_core::Func_resolve* output;
       return output;
     }
@@ -16569,12 +16578,12 @@
    */
   //class Func_resolve_1 {
 
-    template<typename... Args> vx_core::Func_resolve_1* vx_core::Func_resolve_1::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_1* vx_core::Func_resolve_1::vx_new(Args*... args) {
       vx_core::Func_resolve_1* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_resolve_1* vx_core::Func_resolve_1::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_1* vx_core::Func_resolve_1::vx_copy(Args*... args) {
       vx_core::Func_resolve_1* output;
       return output;
     }
@@ -16648,12 +16657,12 @@
    */
   //class Func_resolve_async {
 
-    template<typename... Args> vx_core::Func_resolve_async* vx_core::Func_resolve_async::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_async* vx_core::Func_resolve_async::vx_new(Args*... args) {
       vx_core::Func_resolve_async* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_resolve_async* vx_core::Func_resolve_async::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_async* vx_core::Func_resolve_async::vx_copy(Args*... args) {
       vx_core::Func_resolve_async* output;
       return output;
     }
@@ -16725,12 +16734,12 @@
    */
   //class Func_resolve_first {
 
-    template<typename... Args> vx_core::Func_resolve_first* vx_core::Func_resolve_first::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_first* vx_core::Func_resolve_first::vx_new(Args*... args) {
       vx_core::Func_resolve_first* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_resolve_first* vx_core::Func_resolve_first::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_first* vx_core::Func_resolve_first::vx_copy(Args*... args) {
       vx_core::Func_resolve_first* output;
       return output;
     }
@@ -16807,12 +16816,12 @@
    */
   //class Func_resolve_list {
 
-    template<typename... Args> vx_core::Func_resolve_list* vx_core::Func_resolve_list::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_list* vx_core::Func_resolve_list::vx_new(Args*... args) {
       vx_core::Func_resolve_list* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_resolve_list* vx_core::Func_resolve_list::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_resolve_list* vx_core::Func_resolve_list::vx_copy(Args*... args) {
       vx_core::Func_resolve_list* output;
       return output;
     }
@@ -16889,12 +16898,12 @@
    */
   //class Func_session_from_context {
 
-    template<typename... Args> vx_core::Func_session_from_context* vx_core::Func_session_from_context::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_session_from_context* vx_core::Func_session_from_context::vx_new(Args*... args) {
       vx_core::Func_session_from_context* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_session_from_context* vx_core::Func_session_from_context::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_session_from_context* vx_core::Func_session_from_context::vx_copy(Args*... args) {
       vx_core::Func_session_from_context* output;
       return output;
     }
@@ -16956,12 +16965,12 @@
    */
   //class Func_setting_from_context {
 
-    template<typename... Args> vx_core::Func_setting_from_context* vx_core::Func_setting_from_context::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_setting_from_context* vx_core::Func_setting_from_context::vx_new(Args*... args) {
       vx_core::Func_setting_from_context* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_setting_from_context* vx_core::Func_setting_from_context::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_setting_from_context* vx_core::Func_setting_from_context::vx_copy(Args*... args) {
       vx_core::Func_setting_from_context* output;
       return output;
     }
@@ -17024,12 +17033,12 @@
    */
   //class Func_string_repeat {
 
-    template<typename... Args> vx_core::Func_string_repeat* vx_core::Func_string_repeat::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_string_repeat* vx_core::Func_string_repeat::vx_new(Args*... args) {
       vx_core::Func_string_repeat* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_string_repeat* vx_core::Func_string_repeat::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_string_repeat* vx_core::Func_string_repeat::vx_copy(Args*... args) {
       vx_core::Func_string_repeat* output;
       return output;
     }
@@ -17092,12 +17101,12 @@
    */
   //class Func_string_from_any {
 
-    template<typename... Args> vx_core::Func_string_from_any* vx_core::Func_string_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_any* vx_core::Func_string_from_any::vx_new(Args*... args) {
       vx_core::Func_string_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_string_from_any* vx_core::Func_string_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_any* vx_core::Func_string_from_any::vx_copy(Args*... args) {
       vx_core::Func_string_from_any* output;
       return output;
     }
@@ -17176,12 +17185,12 @@
    */
   //class Func_string_from_any_indent {
 
-    template<typename... Args> vx_core::Func_string_from_any_indent* vx_core::Func_string_from_any_indent::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_any_indent* vx_core::Func_string_from_any_indent::vx_new(Args*... args) {
       vx_core::Func_string_from_any_indent* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_string_from_any_indent* vx_core::Func_string_from_any_indent::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_any_indent* vx_core::Func_string_from_any_indent::vx_copy(Args*... args) {
       vx_core::Func_string_from_any_indent* output;
       return output;
     }
@@ -17244,12 +17253,12 @@
    */
   //class Func_string_from_func {
 
-    template<typename... Args> vx_core::Func_string_from_func* vx_core::Func_string_from_func::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_func* vx_core::Func_string_from_func::vx_new(Args*... args) {
       vx_core::Func_string_from_func* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_string_from_func* vx_core::Func_string_from_func::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_string_from_func* vx_core::Func_string_from_func::vx_copy(Args*... args) {
       vx_core::Func_string_from_func* output;
       return output;
     }
@@ -17320,12 +17329,12 @@
    */
   //class Func_switch {
 
-    template<typename... Args> vx_core::Func_switch* vx_core::Func_switch::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_switch* vx_core::Func_switch::vx_new(Args*... args) {
       vx_core::Func_switch* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_switch* vx_core::Func_switch::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_switch* vx_core::Func_switch::vx_copy(Args*... args) {
       vx_core::Func_switch* output;
       return output;
     }
@@ -17389,12 +17398,12 @@
    */
   //class Func_then {
 
-    template<typename... Args> vx_core::Func_then* vx_core::Func_then::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_then* vx_core::Func_then::vx_new(Args*... args) {
       vx_core::Func_then* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_then* vx_core::Func_then::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_then* vx_core::Func_then::vx_copy(Args*... args) {
       vx_core::Func_then* output;
       return output;
     }
@@ -17468,12 +17477,12 @@
    */
   //class Func_traits_from_typedef {
 
-    template<typename... Args> vx_core::Func_traits_from_typedef* vx_core::Func_traits_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_traits_from_typedef* vx_core::Func_traits_from_typedef::vx_new(Args*... args) {
       vx_core::Func_traits_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_traits_from_typedef* vx_core::Func_traits_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_traits_from_typedef* vx_core::Func_traits_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_traits_from_typedef* output;
       return output;
     }
@@ -17545,12 +17554,12 @@
    */
   //class Func_type_from_any {
 
-    template<typename... Args> vx_core::Func_type_from_any* vx_core::Func_type_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_type_from_any* vx_core::Func_type_from_any::vx_new(Args*... args) {
       vx_core::Func_type_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_type_from_any* vx_core::Func_type_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_type_from_any* vx_core::Func_type_from_any::vx_copy(Args*... args) {
       vx_core::Func_type_from_any* output;
       return output;
     }
@@ -17621,12 +17630,12 @@
    */
   //class Func_typedef_from_any {
 
-    template<typename... Args> vx_core::Func_typedef_from_any* vx_core::Func_typedef_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typedef_from_any* vx_core::Func_typedef_from_any::vx_new(Args*... args) {
       vx_core::Func_typedef_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typedef_from_any* vx_core::Func_typedef_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typedef_from_any* vx_core::Func_typedef_from_any::vx_copy(Args*... args) {
       vx_core::Func_typedef_from_any* output;
       return output;
     }
@@ -17700,12 +17709,12 @@
    */
   //class Func_typedef_from_type {
 
-    template<typename... Args> vx_core::Func_typedef_from_type* vx_core::Func_typedef_from_type::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typedef_from_type* vx_core::Func_typedef_from_type::vx_new(Args*... args) {
       vx_core::Func_typedef_from_type* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typedef_from_type* vx_core::Func_typedef_from_type::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typedef_from_type* vx_core::Func_typedef_from_type::vx_copy(Args*... args) {
       vx_core::Func_typedef_from_type* output;
       return output;
     }
@@ -17777,12 +17786,12 @@
    */
   //class Func_typename_from_any {
 
-    template<typename... Args> vx_core::Func_typename_from_any* vx_core::Func_typename_from_any::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_any* vx_core::Func_typename_from_any::vx_new(Args*... args) {
       vx_core::Func_typename_from_any* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typename_from_any* vx_core::Func_typename_from_any::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_any* vx_core::Func_typename_from_any::vx_copy(Args*... args) {
       vx_core::Func_typename_from_any* output;
       return output;
     }
@@ -17857,12 +17866,12 @@
    */
   //class Func_typename_from_type {
 
-    template<typename... Args> vx_core::Func_typename_from_type* vx_core::Func_typename_from_type::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_type* vx_core::Func_typename_from_type::vx_new(Args*... args) {
       vx_core::Func_typename_from_type* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typename_from_type* vx_core::Func_typename_from_type::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_type* vx_core::Func_typename_from_type::vx_copy(Args*... args) {
       vx_core::Func_typename_from_type* output;
       return output;
     }
@@ -17937,12 +17946,12 @@
    */
   //class Func_typename_from_typedef {
 
-    template<typename... Args> vx_core::Func_typename_from_typedef* vx_core::Func_typename_from_typedef::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_typedef* vx_core::Func_typename_from_typedef::vx_new(Args*... args) {
       vx_core::Func_typename_from_typedef* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typename_from_typedef* vx_core::Func_typename_from_typedef::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typename_from_typedef* vx_core::Func_typename_from_typedef::vx_copy(Args*... args) {
       vx_core::Func_typename_from_typedef* output;
       return output;
     }
@@ -18022,12 +18031,12 @@
    */
   //class Func_typenames_from_typelist {
 
-    template<typename... Args> vx_core::Func_typenames_from_typelist* vx_core::Func_typenames_from_typelist::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_typenames_from_typelist* vx_core::Func_typenames_from_typelist::vx_new(Args*... args) {
       vx_core::Func_typenames_from_typelist* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_typenames_from_typelist* vx_core::Func_typenames_from_typelist::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_typenames_from_typelist* vx_core::Func_typenames_from_typelist::vx_copy(Args*... args) {
       vx_core::Func_typenames_from_typelist* output;
       return output;
     }
@@ -18107,12 +18116,12 @@
    */
   //class Func_user_from_context {
 
-    template<typename... Args> vx_core::Func_user_from_context* vx_core::Func_user_from_context::vx_new(Args*... args) {
+    template<class... Args> vx_core::Func_user_from_context* vx_core::Func_user_from_context::vx_new(Args*... args) {
       vx_core::Func_user_from_context* output;
       return output;
     }
 
-    template<typename... Args> vx_core::Func_user_from_context* vx_core::Func_user_from_context::vx_copy(Args*... args) {
+    template<class... Args> vx_core::Func_user_from_context* vx_core::Func_user_from_context::vx_copy(Args*... args) {
       vx_core::Func_user_from_context* output;
       return output;
     }

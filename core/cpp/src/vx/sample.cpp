@@ -178,7 +178,7 @@
 
   //}
 
-  extern vx_sample::Const_myconst* vx_sample::c_myconst = vx_sample::Const_myconst::vx_const_new();
+  vx_sample::Const_myconst* vx_sample::c_myconst = vx_sample::Const_myconst::vx_const_new();
 
   /**
    * @function main
@@ -187,12 +187,12 @@
    */
   //class Func_main {
 
-    template<typename... Args> vx_sample::Func_main* vx_sample::Func_main::vx_new(Args*... args) {
+    template<class... Args> vx_sample::Func_main* vx_sample::Func_main::vx_new(Args*... args) {
       vx_sample::Func_main* output;
       return output;
     }
 
-    template<typename... Args> vx_sample::Func_main* vx_sample::Func_main::vx_copy(Args*... args) {
+    template<class... Args> vx_sample::Func_main* vx_sample::Func_main::vx_copy(Args*... args) {
       vx_sample::Func_main* output;
       return output;
     }
@@ -251,12 +251,12 @@
    */
   //class Func_myfunc {
 
-    template<typename... Args> vx_sample::Func_myfunc* vx_sample::Func_myfunc::vx_new(Args*... args) {
+    template<class... Args> vx_sample::Func_myfunc* vx_sample::Func_myfunc::vx_new(Args*... args) {
       vx_sample::Func_myfunc* output;
       return output;
     }
 
-    template<typename... Args> vx_sample::Func_myfunc* vx_sample::Func_myfunc::vx_copy(Args*... args) {
+    template<class... Args> vx_sample::Func_myfunc* vx_sample::Func_myfunc::vx_copy(Args*... args) {
       vx_sample::Func_myfunc* output;
       return output;
     }

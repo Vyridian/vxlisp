@@ -116,7 +116,7 @@
   (native
    :cpp
     "// :header
-     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+     static vx_core::Type_constdef* vx_constdef_new(
        std::string pkgname,
        std::string name,
        vx_core::Type_typedef* typ
@@ -214,12 +214,12 @@
   (native
    :cpp
     "// :header
-     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+     static vx_core::Type_funcdef* vx_funcdef_new(
        std::string pkgname,
        std::string name,
        int idx,
        bool async,
-       vx_core::Type_typedef* typ
+       vx_core::Type_any* typ
      ) {
        vx_core::Type_funcdef* output;
        output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
