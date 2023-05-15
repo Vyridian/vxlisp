@@ -1,2 +1,2 @@
 cls
-gradlew runapp
+gradlew build

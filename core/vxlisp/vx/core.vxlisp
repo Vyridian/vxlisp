@@ -11,7 +11,7 @@
   (native
    :cpp
     "// :header
-     virtual vx_core::Type_any* vx_type_from_any(std::any* value);")
+     virtual vx_core::Type_any vx_type_from_any(vx_core::Type_any value);")
  :doc "Any Value for Variant Type")
 
 (type any-async<-func
@@ -58,7 +58,7 @@
     "// :header
      bool vx_p_boolean = false;
      bool vx_boolean();
-     vx_core::Type_boolean* vx_new_from_boolean(bool isval);"
+     vx_core::Type_boolean vx_new_from_boolean(bool isval);"
    :java
     "protected boolean vxboolean = false;
 
@@ -116,10 +116,10 @@
   (native
    :cpp
     "// :header
-     static vx_core::Type_constdef* vx_constdef_new(
+     static vx_core::Type_constdef vx_constdef_new(
        std::string pkgname,
        std::string name,
-       vx_core::Type_typedef* typ
+       vx_core::Type_typedef typ
      );")
  :doc "Const Definition Class for inspecting properties.")
 
@@ -148,10 +148,10 @@
   (native
    :cpp
     "// :header
-     std::string vx_decimal = “0.0”;
+     std::string vx_p_decimal = “0.0”;
      float vx_float();
      std::string vx_string();
-     vx_core::Type_decimal* vx_new_from_string(std::string sval);"
+     vx_core::Type_decimal vx_new_from_string(std::string sval);"
    :java
     "protected String vxdecimal = “0.0”;
 
@@ -183,7 +183,7 @@
     "// :header
      float vx_p_float = 0;
      float vx_float();
-     vx_core::Type_float* vx_new_from_float(float fval);"
+     vx_core::Type_float vx_new_from_float(float fval);"
    :java
     "protected float vxfloat = 0;
 
@@ -214,14 +214,14 @@
   (native
    :cpp
     "// :header
-     static vx_core::Type_funcdef* vx_funcdef_new(
+     static vx_core::Type_funcdef vx_funcdef_new(
        std::string pkgname,
        std::string name,
        int idx,
        bool async,
-       vx_core::Type_any* typ
+       vx_core::Type_any typ
      ) {
-       vx_core::Type_funcdef* output;
+       vx_core::Type_funcdef output;
        output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
        output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
        output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
@@ -251,7 +251,7 @@
     "// :header
      int vx_p_int = 0;
      int vx_int();
-     vx_core::Type_int* vx_new_from_int(int ival);"
+     vx_core::Type_int vx_new_from_int(int ival);"
    :java
     "protected int vxint = 0;
 
@@ -469,11 +469,11 @@
  :doc        "A map of number.")
 
 (type package
- :extends    :map
- :allowtypes [any])
+ :extends :struct
+ :doc     "A package that store types, consts and funcs.")
 
 (type packagemap
- :extends      :map
+ :extends    :map
  :allowtypes [package])
 
 (type permission
@@ -529,7 +529,7 @@
     "// :header
      std::string vx_p_string = “”;
      std::string vx_string();
-     vx_core::Type_string* vx_new_from_string(std::string text);"
+     vx_core::Type_string vx_new_from_string(std::string text);"
    :java
     "protected String vxstring = “”;
 
@@ -602,18 +602,18 @@
   (native
    :cpp
     "// :header
-     static vx_core::Type_typedef* vx_typedef_new(
+     static vx_core::Type_typedef vx_typedef_new(
        std::string pkgname,
        std::string name,
        std::string extend,
-       vx_core::Type_typelist* traits,
-       vx_core::Type_typelist* allowtypes,
-       vx_core::Type_typelist* disallowtypes,
-       vx_core::Type_funclist* allowfuncs,
-       vx_core::Type_funclist* disallowfuncs,
-       vx_core::Type_anylist* allowvalues,
-       vx_core::Type_anylist* disallowvalues,
-       vx_core::Type_argmap* properties
+       vx_core::Type_typelist traits,
+       vx_core::Type_typelist allowtypes,
+       vx_core::Type_typelist disallowtypes,
+       vx_core::Type_funclist allowfuncs,
+       vx_core::Type_funclist disallowfuncs,
+       vx_core::Type_anylist allowvalues,
+       vx_core::Type_anylist disallowvalues,
+       vx_core::Type_argmap properties
      );")
  :doc "Type Definition Class for inspecting Type properties.")
 
@@ -1327,8 +1327,8 @@
  (native
   :cpp
    "output = valstart;
-    std::vector<vx_core::Type_any*> listval = list->vx_list();
-    for (vx_core::Type_any* item : listval) {
+    std::vector<vx_core::Type_any> listval = list->vx_list();
+    for (vx_core::Type_any item : listval) {
       output = fn_reduce->f_any_from_reduce(generic_any_1, output, item);
     }"
   :js
@@ -1807,7 +1807,7 @@
    (native
     :cpp
      "// :capture val
-      vx_core::Type_int* intresult = vx_core::e_int;
+      vx_core::Type_int intresult = vx_core::e_int;
       try {
         std::string sval = val->vx_string();
         int ival = std::stoi(sval);
@@ -1842,6 +1842,10 @@
 (func is-empty : boolean
  [text : string]
  (native
+  :cpp
+   "if (text->vx_string().length() == 0) {
+     output = vx_core::c_true;
+    }"
   :js
    "if (text.length == 0) {
       output = vx_core.c_true
@@ -1855,6 +1859,12 @@
 (func is-empty : boolean
  [value : any]
  (native
+  :cpp
+   "if (value == value->vx_empty(value)) {
+      output = vx_core::c_true;
+    } else {
+      output = vx_core::c_false;
+    }"
   :js
    "const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
