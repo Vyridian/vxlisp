@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_sample_hpp
+#define vx_sample_hpp
 #include <memory>
 #include <set>
 #include <string>
@@ -35,8 +36,8 @@ namespace vx_sample {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // mynum()
     vx_core::Type_int vx_p_mynum;
     virtual vx_core::Type_int mynum();
@@ -50,7 +51,7 @@ namespace vx_sample {
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_sample::Const_myconst vx_const_new();
-    int vx_sample::Class_myconst::vx_int();
+    int vx_int();
   };
 
   // (func main)
@@ -63,7 +64,7 @@ namespace vx_sample {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_main();
+    void vx_f_main();
   };
 
   // (func myfunc)
@@ -78,7 +79,7 @@ namespace vx_sample {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_myfunc(vx_core::Type_int myarg);
+    vx_core::Type_int vx_f_myfunc(vx_core::Type_int myarg);
   };
 
   // (func main)
@@ -88,3 +89,4 @@ namespace vx_sample {
   vx_core::Type_int f_myfunc(vx_core::Type_int myarg);
 
 }
+#endif

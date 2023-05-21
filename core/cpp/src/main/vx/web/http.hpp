@@ -1,4 +1,6 @@
-#pragma once
+#ifndef vx_web_http_hpp
+#define vx_web_http_hpp
+#include <functional>
 #include <memory>
 #include <set>
 #include <string>
@@ -59,8 +61,8 @@ namespace vx_web_http {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // ok()
     vx_core::Type_boolean vx_p_ok;
     virtual vx_core::Type_boolean ok();
@@ -81,7 +83,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_data_csv::Type_csv>> vx_csv_from_httpget(vx_core::Type_string url);
+    std::shared_ptr<vx_core::Async<vx_data_csv::Type_csv>> vx_f_csv_from_httpget(vx_core::Type_string url);
   };
 
   // (func json<-httpget)
@@ -96,7 +98,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_json_from_httpget(vx_core::Type_string url);
+    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_f_json_from_httpget(vx_core::Type_string url);
   };
 
   // (func response<-httpget)
@@ -109,7 +111,7 @@ namespace vx_web_http {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype);
+    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_f_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype);
   };
 
   // (func text<-httpget)
@@ -124,7 +126,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_core::Type_string>> vx_text_from_httpget(vx_core::Type_string url);
+    std::shared_ptr<vx_core::Async<vx_core::Type_string>> vx_f_text_from_httpget(vx_core::Type_string url);
   };
 
   // (func text<-response)
@@ -139,7 +141,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_text_from_response(vx_web_http::Type_response response);
+    vx_core::Type_string vx_f_text_from_response(vx_web_http::Type_response response);
   };
 
   // (func textblock<-httpget)
@@ -152,7 +154,7 @@ namespace vx_web_http {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> vx_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype);
+    std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> vx_f_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype);
   };
 
   // (func textblock<-response)
@@ -167,7 +169,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_data_textblock::Type_textblock vx_textblock_from_response(vx_web_http::Type_response response);
+    vx_data_textblock::Type_textblock vx_f_textblock_from_response(vx_web_http::Type_response response);
   };
 
   // (func xml<-httpget)
@@ -182,7 +184,7 @@ namespace vx_web_http {
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> vx_xml_from_httpget(vx_core::Type_string url);
+    std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> vx_f_xml_from_httpget(vx_core::Type_string url);
   };
 
   // (func csv<-httpget)
@@ -210,3 +212,4 @@ namespace vx_web_http {
   std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> f_xml_from_httpget(vx_core::Type_string url);
 
 }
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_tree_hpp
+#define vx_data_tree_hpp
 #include <memory>
 #include <set>
 #include <string>
@@ -54,8 +55,8 @@ namespace vx_data_tree {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -96,18 +97,18 @@ namespace vx_data_tree {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_tree::Type_branch> vx_p_list;
 
     // vx_listbranch()
     virtual std::vector<vx_data_tree::Type_branch> vx_listbranch();
-    // vx_branch(index)
-    virtual vx_data_tree::Type_branch vx_branch(vx_core::Type_int index);
+    // vx_get_branch(index)
+    virtual vx_data_tree::Type_branch vx_get_branch(vx_core::Type_int index);
   };
 
   // (type leaf)
@@ -121,8 +122,8 @@ namespace vx_data_tree {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -143,18 +144,18 @@ namespace vx_data_tree {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_tree::Type_leaf> vx_p_list;
 
     // vx_listleaf()
     virtual std::vector<vx_data_tree::Type_leaf> vx_listleaf();
-    // vx_leaf(index)
-    virtual vx_data_tree::Type_leaf vx_leaf(vx_core::Type_int index);
+    // vx_get_leaf(index)
+    virtual vx_data_tree::Type_leaf vx_get_leaf(vx_core::Type_int index);
   };
 
   // (type tree)
@@ -168,8 +169,8 @@ namespace vx_data_tree {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -203,3 +204,4 @@ namespace vx_data_tree {
   };
 
 }
+#endif

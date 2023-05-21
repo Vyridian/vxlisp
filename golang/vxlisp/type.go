@@ -514,7 +514,10 @@ func ListTypeFromListFunc(listfunc []*vxfunc) []*vxtype {
 	var output []*vxtype
 	for _, fnc := range listfunc {
 		typ := NewTypeFromFunc(fnc)
-		output = append(output, typ)
+		if typ.isfunc {
+		} else {
+			output = append(output, typ)
+		}
 	}
 	return output
 }

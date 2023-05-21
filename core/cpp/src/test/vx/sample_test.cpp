@@ -10,16 +10,19 @@ namespace vx_sample_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/sample"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("myconst"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test 4 myconst)"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test 4 myconst)"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test(
-              vx_core::t_int->vx_new_from_int(4),
-              vx_sample::c_myconst,
-              context
-            )
-        })
+                vx_core::t_int->vx_new_from_int(4),
+                vx_sample::c_myconst,
+                context
+              )
+          })
+        }
       )
     });
     return output;
@@ -31,16 +34,19 @@ namespace vx_sample_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/sample"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("myfunc"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test 5 (myfunc 1))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test 5 (myfunc 1))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test(
-              vx_core::t_int->vx_new_from_int(5),
-              vx_sample::f_myfunc(vx_core::t_int->vx_new_from_int(1)),
-              context
-            )
-        })
+                vx_core::t_int->vx_new_from_int(5),
+                vx_sample::f_myfunc(vx_core::t_int->vx_new_from_int(1)),
+                context
+              )
+          })
+        }
       )
     });
     return output;
@@ -48,8 +54,8 @@ namespace vx_sample_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase->push_back(vx_sample_test::c_myconst(context));
-    arraylisttestcase->push_back(vx_sample_test::f_myfunc(context));
+    arraylisttestcase.push_back(vx_sample_test::c_myconst(context));
+    arraylisttestcase.push_back(vx_sample_test::f_myfunc(context));
     vx_test::Type_testcaselist output = vx_test::t_testcaselist->vx_new_from_list(vx_test::t_testcaselist, arraylisttestcase);
     return output;
   }

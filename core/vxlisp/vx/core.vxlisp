@@ -220,15 +220,7 @@
        int idx,
        bool async,
        vx_core::Type_any typ
-     ) {
-       vx_core::Type_funcdef output;
-       output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
-       output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
-       output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
-       output->vx_p_async = vx_core::t_boolean->vx_new_from_boolean(async);
-       output->vx_p_type = typ;
-       return output;
-     };")
+     );")
  :doc "Func Definition Class for inspecting properties.")
 
 (type funclist
@@ -1329,7 +1321,7 @@
    "output = valstart;
     std::vector<vx_core::Type_any> listval = list->vx_list();
     for (vx_core::Type_any item : listval) {
-      output = fn_reduce->f_any_from_reduce(generic_any_1, output, item);
+      output = fn_reduce->vx_f_any_from_reduce(generic_any_1, output, item);
     }"
   :js
    "output = valstart
@@ -1577,6 +1569,8 @@
  [value  : any-1
   values : anylist :...]
  (native
+  :cpp
+   "std::shared_ptr<T> output = vx_core::f_new(value, values);"
   :js
    "vx_core.f_new(value, ...values)"
   :java
@@ -1595,6 +1589,8 @@
 (func empty : any-1
  [type : any-1]
  (native
+  :cpp
+   "std::shared_ptr<T> output = vx_core::any_from_any(type, type->vx_empty(type));"
   :js
    "const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
@@ -2345,6 +2341,8 @@
  [type   : any-1
   values : anylist :...]
  (native
+  :cpp
+   "std::shared_ptr<T> output = vx_core::f_new(type, values);"
   :js
    "const typedef = vx_core.f_typedef_from_any(type)
     const copy = type

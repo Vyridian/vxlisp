@@ -13,11 +13,11 @@
   //class Type_value_map {
     // vx_map()
     vx_core::vx_Type_mapany vx_state::Class_value_map::vx_map() {
-      return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
+      return this->vx_p_map;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_state::Class_value_map::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_state::Class_value_map::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       vx_state::Class_value_map* map = this;
       std::string skey = key->vx_string();
@@ -54,7 +54,7 @@
     template <class T> std::shared_ptr<T> vx_state::Class_value_map::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_state::Type_value_map output;
       vx_state::Class_value_map* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -174,12 +174,12 @@
 
     vx_core::Type_any vx_state::Class_change::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_state::Type_value_map valuemap = vx_core::f_any_from_any(vx_state::t_value_map, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_state::Type_value_map valuemap = vx_core::f_any_from_any(vx_state::t_value_map, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_state::f_change(valuemap);
       return output;
     }
 
-    vx_core::Type_boolean vx_state::Class_change::vx_change(vx_state::Type_value_map valuemap) {
+    vx_core::Type_boolean vx_state::Class_change::vx_f_change(vx_state::Type_value_map valuemap) {
       return vx_state::f_change(valuemap);
     }
 
@@ -250,12 +250,12 @@
 
     vx_core::Type_any vx_state::Class_register::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_statelistener listener = vx_core::f_any_from_any(vx_core::t_statelistener, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_statelistener listener = vx_core::f_any_from_any(vx_core::t_statelistener, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_state::f_register(listener);
       return output;
     }
 
-    vx_core::Type_boolean vx_state::Class_register::vx_register(vx_core::Type_statelistener listener) {
+    vx_core::Type_boolean vx_state::Class_register::vx_f_register(vx_core::Type_statelistener listener) {
       return vx_state::f_register(listener);
     }
 

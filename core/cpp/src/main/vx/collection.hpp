@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_collection_hpp
+#define vx_collection_hpp
 #include <memory>
 #include "../vx/core.hpp"
 #include "../vx/type.hpp"
@@ -48,7 +49,7 @@ namespace vx_collection {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_list(vx_core::Type_any val);
+    vx_core::Type_boolean vx_f_is_list(vx_core::Type_any val);
   };
 
   // (func is-map)
@@ -63,7 +64,7 @@ namespace vx_collection {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_map(vx_core::Type_any val);
+    vx_core::Type_boolean vx_f_is_map(vx_core::Type_any val);
   };
 
   // (func list<-list-end)
@@ -76,7 +77,7 @@ namespace vx_collection {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_list_from_list_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int end);
+    template <class X> std::shared_ptr<X> vx_f_list_from_list_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int end);
   };
 
   // (func list<-list-filtertypes)
@@ -89,7 +90,7 @@ namespace vx_collection {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_list_from_list_filtertypes(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Type_typelist filtertypes);
+    template <class X, class Y> std::shared_ptr<X> vx_f_list_from_list_filtertypes(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Type_typelist filtertypes);
   };
 
   // (func list<-list-fn-filter)
@@ -102,7 +103,7 @@ namespace vx_collection {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_list_from_list_fn_filter(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_filter);
+    template <class X, class Y> std::shared_ptr<X> vx_f_list_from_list_fn_filter(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_filter);
   };
 
   // (func list<-list-start)
@@ -115,7 +116,7 @@ namespace vx_collection {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_list_from_list_start(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start);
+    template <class X> std::shared_ptr<X> vx_f_list_from_list_start(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start);
   };
 
   // (func list<-list-start-end)
@@ -128,7 +129,7 @@ namespace vx_collection {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_list_from_list_start_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start, vx_core::Type_int end);
+    template <class X> std::shared_ptr<X> vx_f_list_from_list_start_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start, vx_core::Type_int end);
   };
 
   // (func is-list)
@@ -153,3 +154,4 @@ namespace vx_collection {
   template <class X> std::shared_ptr<X> f_list_from_list_start_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start, vx_core::Type_int end);
 
 }
+#endif

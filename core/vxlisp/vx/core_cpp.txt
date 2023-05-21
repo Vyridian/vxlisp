@@ -21,6 +21,15 @@ any<-func
 // :header
 
 /*
+  // Virtual_any
+  class Virtual_any : std::enable_shared_from_this<Virtual_any> {
+  };
+
+
+vx_shared_from_this<T>() {
+return std::dynamic_pointer_cast<T>(Virtual_any::shared_from_this());
+}
+
   template<typename X> X func() {
          cout << "vfunc in derived class\n";
          return static_cast<X>(2);
@@ -65,7 +74,6 @@ int main()
 	return 0;
 }
 */
-
   typedef std::vector<vx_core::Type_any> vx_Type_listany;
   typedef std::map<std::string, vx_core::Type_any> vx_Type_mapany;
 
@@ -82,19 +90,19 @@ int main()
   // class Async
   template <class T> class Async {
   public:
-    std::shared_future<T>* future;
+    std::shared_ptr<std::shared_future<T>> future;
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent;
-    std::function<T(vx_core::Type_any)>* fn;
+    std::shared_ptr<std::function<T(vx_core::Type_any)>> fn;
   };
 
   // async_await(T, async<T>)
-  template <class T> static std::shared_ptr<vx_core::Async<T>> async_await(T generic_any_1, std::shared_ptr<vx_core::Async<T>> async);
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async);
   // async_from_async(T, async<U>)
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> async_from_async(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async);
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async);
   // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> async_from_async_fn(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async, std::function<T(U)> fn);
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn);
   // async_new_from_val (T)
-  template <class T> static std::shared_ptr<vx_core::Async<T>> async_new_from_val(T val);
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_new_from_val(std::shared_ptr<T> val);
 
   // boolean_contains_from_set_val(set<T>, val)
   template <class T> bool boolean_contains_from_set_val(std::set<T> set, T val);
@@ -110,7 +118,7 @@ int main()
   std::string string_from_any(std::any);
 
   // sync_from_async(generic_any_1, async)
-  template <class T> T sync_from_async(T generic_any_1, Async<T>* async);
+  template <class T> std::shared_ptr<T> sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async);
 
   class Class_replfunc {
   public:
@@ -129,31 +137,30 @@ int main()
 
   // any_from_any(T, U)
   template <class T, class U> std::shared_ptr<T> vx_core::any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-    T tvalue = dynamic_cast<T>(&value);
-    std::shared_ptr<T> output = std::make_shared<T>(tvalue);
+    std::shared_ptr<T> output = std::dynamic_pointer_cast<T>(value);
     return output;
   }
 
   // any_from_map(T, key, defaultval)
   template <class T> std::shared_ptr<T> vx_core::any_from_map(const std::map<std::string, std::shared_ptr<T>> &map, const std::string key, const std::shared_ptr<T> defaultval) {
     std::shared_ptr<T> output = defaultval;
-    vx_core::vx_Type_mapany::const_iterator iter = map.find(key);
+    auto iter = map.find(key);
     if (iter != map.end()) {
-      output = it->second;
+      output = iter->second;
     }
     return output;
   }
 
   // async_await(T, async<T>)
-  template <class T> static std::shared_ptr<T> vx_core::async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async) {
+  template <class T> std::shared_ptr<T> vx_core::async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async) {
     std::shared_future<T> futureT = async->future;
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent = async->async_parent;
     T valueT;
     if (async_parent == NULL) {
       valueT = futureT.await();
     } else {
-      vx_core::Type_any parentval = vx_core::async_await(T generic_any_1, std::Async<vx_core::Type_any> async_parent);
-      std::function<T(vx_core::Type_any) fn = async->fn;
+      vx_core::Type_any parentval = vx_core::async_await(generic_any_1, async_parent);
+      std::function<std::shared_ptr<T>(vx_core::Type_any)> fn = async->fn;
       valueT = fn(parentval);
     }
     std::shared_ptr<T> output = std::make_shared<T>(valueT);
@@ -161,57 +168,77 @@ int main()
   }
 
   // async_from_async(T, async<U>)
-  template <class T, class U> static std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async) {
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async) {
     std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
     return output;
   }
 
   // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> vx_core::async_from_async_fn(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async, std::function<T(U)> fn) {
-    std::shared_ptr<vx_core::Async<T>> futureT = this;
-    std::shared_ptr<vx_core::Async<U>> output = std::make_shared(vx_core::Async<T>);
-    output->future = futureU;
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn) {
+    //std::shared_ptr<std::shared_future<T>>> futureT = async->future;
+    std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>();
+    //output->future = futureU;
     output->async_parent = async;
     output->fn = fn;
     return output;
   }
 
   // async_new_from_val(T)
-  template <class T> static std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_new_from_val(std::shared_ptr<T> val) {
-    std::promise<T> promise;
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_new_from_val(std::shared_ptr<T> val) {
+    std::promise<std::shared_ptr<T>> promise;
     promise.set_value(val);
-    std::shared_ptr<vx_core::Async<std:shared_ptr<T>>> output = std::make_shared(promise.get_future());
+    std::shared_future<std::shared_ptr<T>> sharedfuture = promise.get_future();
+    std::shared_ptr<std::shared_future<std::shared_ptr<T>>> psharedfuture = std::make_shared<std::shared_future<std::shared_ptr<T>>>(sharedfuture);
+    vx_core::Async<std::shared_ptr<T>> async;
+    async.future = psharedfuture;
+    std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>(async);
     return output;
   }
 
   // boolean_contains_from_set_val(set<T>, val)
   template <class T> bool vx_core::boolean_contains_from_set_val(std::set<T> set, T val) {
-    const bool output = container.find(element) != container.end();
+    const bool output = set.find(val) != set.end();
     return output;
   }
 
   // keyset_from_map(map)
   template <class T> std::set<T> vx_core::keyset_from_map(std::map<std::string, T> map) {
     std::set<T> output;
-    for (std::map<std::string, T>::iterator it = map.begin(); it != map.end(); ++it) {
-      output.push_back(it->first);
+    for (auto iter = map.begin(); iter != map.end(); ++iter) {
+      output.push_back(iter->first);
     }
     return output;
   }
 
   // list_from_list(T, list<U>)
   template <class T, class U> std::vector<std::shared_ptr<T>> vx_core::list_from_list(std::shared_ptr<T> generic_any_1, std::vector<std::shared_ptr<U>> list) {
-    std::vector<T*> output = reinterpret_cast<std::vector<T*>&>(list);
+    std::vector<std::shared_ptr<T>> output;
+    int len = list.size();
+    for (int i = 0; i < len; ++i) {
+      std::shared_ptr<U> itemu = list[i];
+      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
+      output.push_back(itemt);
+    }
     return output;
   }
 
   // listaddall(list, listadd)
   template <class T> std::vector<std::shared_ptr<T>> vx_core::listaddall(std::vector<std::shared_ptr<T>> list, std::vector<std::shared_ptr<T>> listadd) {
     list.insert(list.end(), listadd.begin(), listadd.end());
+    return list;
   }
 
   // map_from_map(T, map<U>)
   template <class T, class U> std::map<std::string, std::shared_ptr<T>> vx_core::map_from_map(std::shared_ptr<T> generic_any_1, std::map<std::string, std::shared_ptr<U>> map) {
+    std::map<std::string, std::shared_ptr<T>> output;
+//    int len = .size();
+//    for (int i = 0; i < len; ++i) {
+//      std::shared_ptr<U> itemu = list[i];
+//      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
+//      output.push_back(itemt);
+//    }
+    return output;
+
   }
 
   // string_from_any(val)
@@ -222,7 +249,7 @@ int main()
 
   // sync_from_async(generic_any_1, async)
   template <class T> std::shared_ptr<T> vx_core::sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async) {
-    future = async->future;
+    std::future<T> future = async->future;
     T valuet = future->wait();
     std::shared_ptr<T> output = std::make_shared<T>(valuet);
     return output;

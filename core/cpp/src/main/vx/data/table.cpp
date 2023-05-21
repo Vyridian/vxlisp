@@ -31,8 +31,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_cell::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_cell::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -56,7 +56,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_cell::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_cell output;
       vx_data_table::Class_cell* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_value = val->value();
       std::set<std::string> validkeys;
@@ -143,7 +143,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_data_table::Type_cell vx_data_table::Class_celllist::vx_cell(vx_core::Type_int index) {
+    vx_data_table::Type_cell vx_data_table::Class_celllist::vx_get_cell(vx_core::Type_int index) {
       vx_data_table::Type_cell output = vx_data_table::e_cell;
       vx_data_table::Class_celllist* list = this;
       int iindex = index->vx_int();
@@ -156,15 +156,15 @@
 
     std::vector<vx_data_table::Type_cell> vx_data_table::Class_celllist::vx_listcell() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_table::Class_celllist::vx_any(vx_core::Type_int index) {
-      return this->vx_cell(index);
+    vx_core::Type_any vx_data_table::Class_celllist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_cell(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_table::Class_celllist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_table::e_celllist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_table::Class_celllist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_celllist output;
       vx_data_table::Class_celllist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_cell> listval = val->vx_listcell();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -173,7 +173,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_cell) {
-          listval->push_back(vx_core::any_from_any(vx_data_table::t_cell, valsub));
+          listval.push_back(vx_core::any_from_any(vx_data_table::t_cell, valsub));
         } else if (valsubtype == vx_data_table::t_celllist) {
           vx_data_table::Type_celllist multi = vx_core::any_from_any(vx_data_table::t_celllist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listcell());
@@ -222,8 +222,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_cell(key)
-    vx_data_table::Type_cell vx_data_table::Class_cellmap::vx_cell(vx_core::Type_string key) {
+    // vx_get_cell(key)
+    vx_data_table::Type_cell vx_data_table::Class_cellmap::vx_get_cell(vx_core::Type_string key) {
       vx_data_table::Type_cell output = vx_data_table::e_cell;
       vx_data_table::Class_cellmap* map = this;
       std::string skey = key->vx_string();
@@ -232,9 +232,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_cellmap::vx_any(vx_core::Type_string key) {
-      return this->vx_cell(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_cellmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_cell(key);
     }
 
     // vx_mapcell()
@@ -268,7 +268,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_cellmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_cellmap output;
       vx_data_table::Class_cellmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_data_table::Type_cell> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -363,8 +363,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_field::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_field::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -391,7 +391,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_field::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_field output;
       vx_data_table::Class_field* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_name = val->name();
       output->vx_p_fldtype = val->fldtype();
@@ -487,7 +487,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_data_table::Type_field vx_data_table::Class_fieldlist::vx_field(vx_core::Type_int index) {
+    vx_data_table::Type_field vx_data_table::Class_fieldlist::vx_get_field(vx_core::Type_int index) {
       vx_data_table::Type_field output = vx_data_table::e_field;
       vx_data_table::Class_fieldlist* list = this;
       int iindex = index->vx_int();
@@ -500,15 +500,15 @@
 
     std::vector<vx_data_table::Type_field> vx_data_table::Class_fieldlist::vx_listfield() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_table::Class_fieldlist::vx_any(vx_core::Type_int index) {
-      return this->vx_field(index);
+    vx_core::Type_any vx_data_table::Class_fieldlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_field(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_table::Class_fieldlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_table::e_fieldlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_table::Class_fieldlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_fieldlist output;
       vx_data_table::Class_fieldlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_field> listval = val->vx_listfield();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -517,7 +517,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_field) {
-          listval->push_back(vx_core::any_from_any(vx_data_table::t_field, valsub));
+          listval.push_back(vx_core::any_from_any(vx_data_table::t_field, valsub));
         } else if (valsubtype == vx_data_table::t_fieldlist) {
           vx_data_table::Type_fieldlist multi = vx_core::any_from_any(vx_data_table::t_fieldlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listfield());
@@ -565,7 +565,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_data_table::Type_field vx_data_table::Class_fieldmap::vx_field(vx_core::Type_int index) {
+    vx_data_table::Type_field vx_data_table::Class_fieldmap::vx_get_field(vx_core::Type_int index) {
       vx_data_table::Type_field output = vx_data_table::e_field;
       vx_data_table::Class_fieldmap* list = this;
       int iindex = index->vx_int();
@@ -578,15 +578,15 @@
 
     std::vector<vx_data_table::Type_field> vx_data_table::Class_fieldmap::vx_listfield() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_table::Class_fieldmap::vx_any(vx_core::Type_int index) {
-      return this->vx_field(index);
+    vx_core::Type_any vx_data_table::Class_fieldmap::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_field(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_table::Class_fieldmap::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_table::e_fieldmap->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_table::Class_fieldmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_fieldmap output;
       vx_data_table::Class_fieldmap* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_field> listval = val->vx_listfield();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -595,7 +595,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_field) {
-          listval->push_back(vx_core::any_from_any(vx_data_table::t_field, valsub));
+          listval.push_back(vx_core::any_from_any(vx_data_table::t_field, valsub));
         } else if (valsubtype == vx_data_table::t_fieldmap) {
           vx_data_table::Type_fieldmap multi = vx_core::any_from_any(vx_data_table::t_fieldmap, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listfield());
@@ -666,8 +666,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_filter::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_filter::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -694,7 +694,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_filter::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_filter output;
       vx_data_table::Class_filter* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_name = val->name();
       output->vx_p_idlist = val->idlist();
@@ -813,8 +813,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_row::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_row::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -841,7 +841,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_row::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_row output;
       vx_data_table::Class_row* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_cellmap = val->cellmap();
       output->vx_p_cellsort = val->cellsort();
@@ -937,7 +937,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_data_table::Type_row vx_data_table::Class_rowlist::vx_row(vx_core::Type_int index) {
+    vx_data_table::Type_row vx_data_table::Class_rowlist::vx_get_row(vx_core::Type_int index) {
       vx_data_table::Type_row output = vx_data_table::e_row;
       vx_data_table::Class_rowlist* list = this;
       int iindex = index->vx_int();
@@ -950,15 +950,15 @@
 
     std::vector<vx_data_table::Type_row> vx_data_table::Class_rowlist::vx_listrow() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_table::Class_rowlist::vx_any(vx_core::Type_int index) {
-      return this->vx_row(index);
+    vx_core::Type_any vx_data_table::Class_rowlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_row(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_table::Class_rowlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_table::e_rowlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_table::Class_rowlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_rowlist output;
       vx_data_table::Class_rowlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_row> listval = val->vx_listrow();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -967,7 +967,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_row) {
-          listval->push_back(vx_core::any_from_any(vx_data_table::t_row, valsub));
+          listval.push_back(vx_core::any_from_any(vx_data_table::t_row, valsub));
         } else if (valsubtype == vx_data_table::t_rowlist) {
           vx_data_table::Type_rowlist multi = vx_core::any_from_any(vx_data_table::t_rowlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listrow());
@@ -1016,8 +1016,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_row(key)
-    vx_data_table::Type_row vx_data_table::Class_rowmap::vx_row(vx_core::Type_string key) {
+    // vx_get_row(key)
+    vx_data_table::Type_row vx_data_table::Class_rowmap::vx_get_row(vx_core::Type_string key) {
       vx_data_table::Type_row output = vx_data_table::e_row;
       vx_data_table::Class_rowmap* map = this;
       std::string skey = key->vx_string();
@@ -1026,9 +1026,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_rowmap::vx_any(vx_core::Type_string key) {
-      return this->vx_row(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_rowmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_row(key);
     }
 
     // vx_maprow()
@@ -1062,7 +1062,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_rowmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_rowmap output;
       vx_data_table::Class_rowmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_data_table::Type_row> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1157,8 +1157,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_sort::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_sort::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1185,7 +1185,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_sort::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_sort output;
       vx_data_table::Class_sort* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_name = val->name();
       output->vx_p_idlist = val->idlist();
@@ -1340,8 +1340,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_table::Class_table::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_table::Class_table::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1380,7 +1380,7 @@
     template <class T> std::shared_ptr<T> vx_data_table::Class_table::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_table::Type_table output;
       vx_data_table::Class_table* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_name = val->name();
       output->vx_p_fieldmap = val->fieldmap();

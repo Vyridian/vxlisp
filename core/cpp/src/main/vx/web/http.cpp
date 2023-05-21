@@ -1,3 +1,4 @@
+#include <functional>
 #include <memory>
 #include <set>
 #include <string>
@@ -32,8 +33,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_http::Class_response::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_http::Class_response::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -57,7 +58,7 @@
     template <class T> std::shared_ptr<T> vx_web_http::Class_response::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_http::Type_response output;
       vx_web_http::Class_response* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_ok = val->ok();
       output->vx_p_status = val->status();
       std::set<std::string> validkeys;
@@ -193,13 +194,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_csv_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_data_csv::Type_csv>> future = vx_web_http::f_csv_from_httpget(url);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_data_csv::Type_csv>> vx_web_http::Class_csv_from_httpget::vx_csv_from_httpget(vx_core::Type_string url) {
+    std::shared_ptr<vx_core::Async<vx_data_csv::Type_csv>> vx_web_http::Class_csv_from_httpget::vx_f_csv_from_httpget(vx_core::Type_string url) {
       return vx_web_http::f_csv_from_httpget(url);
     }
 
@@ -213,10 +214,11 @@
     vx_core::f_let_async(
       vx_data_csv::t_csv,
       vx_core::t_any_from_func_async->fn_new([url]() {
-        vx_core::Async<vx_data_textblock::Type_textblock>* future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::t_string->vx_new_from_string("text/csv"));
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_textblock, [](vx_data_textblock::Type_textblock textblock) {
+        std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::t_string->vx_new_from_string("text/csv"));
+        std::function<vx_core::Type_any(vx_data_textblock::Type_textblock)> fn_any_any_textblock = [](vx_data_textblock::Type_textblock textblock) {
           return vx_data_csv::f_csv_from_textblock(textblock);
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_textblock, fn_any_any_textblock);
         return output;
       })
     );
@@ -282,13 +284,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_json_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> future = vx_web_http::f_json_from_httpget(url);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_web_http::Class_json_from_httpget::vx_json_from_httpget(vx_core::Type_string url) {
+    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_web_http::Class_json_from_httpget::vx_f_json_from_httpget(vx_core::Type_string url) {
       return vx_web_http::f_json_from_httpget(url);
     }
 
@@ -302,10 +304,11 @@
     vx_core::f_let_async(
       vx_web_http::t_response,
       vx_core::t_any_from_func_async->fn_new([url]() {
-        vx_core::Async<vx_web_http::Type_response>* future_response = vx_web_http::f_response_from_httpget(url, vx_core::t_string->vx_new_from_string("application/json"));
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_response, [](vx_web_http::Type_response response) {
+        std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> future_response = vx_web_http::f_response_from_httpget(url, vx_core::t_string->vx_new_from_string("application/json"));
+        std::function<vx_core::Type_any(vx_web_http::Type_response)> fn_any_any_response = [](vx_web_http::Type_response response) {
           return response;
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_response, fn_any_any_response);
         return output;
       })
     );
@@ -363,14 +366,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_response_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string contenttype = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string contenttype = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> future = vx_web_http::f_response_from_httpget(url, contenttype);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_web_http::Class_response_from_httpget::vx_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
+    std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> vx_web_http::Class_response_from_httpget::vx_f_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
       return vx_web_http::f_response_from_httpget(url, contenttype);
     }
 
@@ -443,13 +446,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_text_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_string>> future = vx_web_http::f_text_from_httpget(url);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_core::Type_string>> vx_web_http::Class_text_from_httpget::vx_text_from_httpget(vx_core::Type_string url) {
+    std::shared_ptr<vx_core::Async<vx_core::Type_string>> vx_web_http::Class_text_from_httpget::vx_f_text_from_httpget(vx_core::Type_string url) {
       return vx_web_http::f_text_from_httpget(url);
     }
 
@@ -463,10 +466,11 @@
     vx_core::f_let_async(
       vx_core::t_string,
       vx_core::t_any_from_func_async->fn_new([url]() {
-        vx_core::Async<vx_web_http::Type_response>* future_response = vx_web_http::f_response_from_httpget(url, vx_core::t_string->vx_new_from_string("text/plain"));
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_response, [](vx_web_http::Type_response response) {
+        std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> future_response = vx_web_http::f_response_from_httpget(url, vx_core::t_string->vx_new_from_string("text/plain"));
+        std::function<vx_core::Type_any(vx_web_http::Type_response)> fn_any_any_response = [](vx_web_http::Type_response response) {
           return vx_web_http::f_text_from_response(response);
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_response, fn_any_any_response);
         return output;
       })
     );
@@ -531,12 +535,12 @@
 
     vx_core::Type_any vx_web_http::Class_text_from_response::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_http::Type_response response = vx_core::f_any_from_any(vx_web_http::t_response, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_http::Type_response response = vx_core::f_any_from_any(vx_web_http::t_response, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_http::f_text_from_response(response);
       return output;
     }
 
-    vx_core::Type_string vx_web_http::Class_text_from_response::vx_text_from_response(vx_web_http::Type_response response) {
+    vx_core::Type_string vx_web_http::Class_text_from_response::vx_f_text_from_response(vx_web_http::Type_response response) {
       return vx_web_http::f_text_from_response(response);
     }
 
@@ -601,14 +605,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_textblock_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string contenttype = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string contenttype = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> future = vx_web_http::f_textblock_from_httpget(url, contenttype);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> vx_web_http::Class_textblock_from_httpget::vx_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
+    std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> vx_web_http::Class_textblock_from_httpget::vx_f_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
       return vx_web_http::f_textblock_from_httpget(url, contenttype);
     }
 
@@ -622,10 +626,11 @@
     vx_core::f_let_async(
       vx_data_textblock::t_textblock,
       vx_core::t_any_from_func_async->fn_new([url, contenttype]() {
-        vx_core::Async<vx_web_http::Type_response>* future_response = vx_web_http::f_response_from_httpget(url, contenttype);
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_response, [](vx_web_http::Type_response response) {
+        std::shared_ptr<vx_core::Async<vx_web_http::Type_response>> future_response = vx_web_http::f_response_from_httpget(url, contenttype);
+        std::function<vx_core::Type_any(vx_web_http::Type_response)> fn_any_any_response = [](vx_web_http::Type_response response) {
           return vx_web_http::f_textblock_from_response(response);
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_response, fn_any_any_response);
         return output;
       })
     );
@@ -690,12 +695,12 @@
 
     vx_core::Type_any vx_web_http::Class_textblock_from_response::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_http::Type_response response = vx_core::f_any_from_any(vx_web_http::t_response, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_http::Type_response response = vx_core::f_any_from_any(vx_web_http::t_response, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_http::f_textblock_from_response(response);
       return output;
     }
 
-    vx_data_textblock::Type_textblock vx_web_http::Class_textblock_from_response::vx_textblock_from_response(vx_web_http::Type_response response) {
+    vx_data_textblock::Type_textblock vx_web_http::Class_textblock_from_response::vx_f_textblock_from_response(vx_web_http::Type_response response) {
       return vx_web_http::f_textblock_from_response(response);
     }
 
@@ -775,13 +780,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_http::Class_xml_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string url = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> future = vx_web_http::f_xml_from_httpget(url);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> vx_web_http::Class_xml_from_httpget::vx_xml_from_httpget(vx_core::Type_string url) {
+    std::shared_ptr<vx_core::Async<vx_data_xml::Type_xml>> vx_web_http::Class_xml_from_httpget::vx_f_xml_from_httpget(vx_core::Type_string url) {
       return vx_web_http::f_xml_from_httpget(url);
     }
 
@@ -795,10 +800,11 @@
     vx_core::f_let_async(
       vx_data_xml::t_xml,
       vx_core::t_any_from_func_async->fn_new([url]() {
-        vx_core::Async<vx_data_textblock::Type_textblock>* future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::t_string->vx_new_from_string("text/xml"));
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_textblock, [](vx_data_textblock::Type_textblock textblock) {
+        std::shared_ptr<vx_core::Async<vx_data_textblock::Type_textblock>> future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::t_string->vx_new_from_string("text/xml"));
+        std::function<vx_core::Type_any(vx_data_textblock::Type_textblock)> fn_any_any_textblock = [](vx_data_textblock::Type_textblock textblock) {
           return vx_data_xml::f_xml_from_textblock(textblock);
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_textblock, fn_any_any_textblock);
         return output;
       })
     );

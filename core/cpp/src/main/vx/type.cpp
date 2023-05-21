@@ -61,12 +61,12 @@
 
     vx_core::Type_any vx_type::Class_allowtypenames_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_allowtypenames_from_type(type);
       return output;
     }
 
-    vx_core::Type_stringlist vx_type::Class_allowtypenames_from_type::vx_allowtypenames_from_type(vx_core::Type_any type) {
+    vx_core::Type_stringlist vx_type::Class_allowtypenames_from_type::vx_f_allowtypenames_from_type(vx_core::Type_any type) {
       return vx_type::f_allowtypenames_from_type(type);
     }
 
@@ -141,12 +141,12 @@
 
     vx_core::Type_any vx_type::Class_allowtypes_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_allowtypes_from_type(type);
       return output;
     }
 
-    vx_core::Type_typelist vx_type::Class_allowtypes_from_type::vx_allowtypes_from_type(vx_core::Type_any type) {
+    vx_core::Type_typelist vx_type::Class_allowtypes_from_type::vx_f_allowtypes_from_type(vx_core::Type_any type) {
       return vx_type::f_allowtypes_from_type(type);
     }
 
@@ -218,12 +218,12 @@
 
     vx_core::Type_any vx_type::Class_is_boolean::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_is_boolean(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_boolean::vx_is_boolean(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_type::Class_is_boolean::vx_f_is_boolean(vx_core::Type_any value) {
       return vx_type::f_is_boolean(value);
     }
 
@@ -298,12 +298,12 @@
 
     vx_core::Type_any vx_type::Class_is_decimal::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_is_decimal(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_decimal::vx_is_decimal(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_type::Class_is_decimal::vx_f_is_decimal(vx_core::Type_any value) {
       return vx_type::f_is_decimal(value);
     }
 
@@ -378,12 +378,12 @@
 
     vx_core::Type_any vx_type::Class_is_float::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_is_float(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_float::vx_is_float(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_type::Class_is_float::vx_f_is_float(vx_core::Type_any value) {
       return vx_type::f_is_float(value);
     }
 
@@ -458,12 +458,12 @@
 
     vx_core::Type_any vx_type::Class_is_none::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_is_none(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_none::vx_is_none(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_type::Class_is_none::vx_f_is_none(vx_core::Type_any value) {
       return vx_type::f_is_none(value);
     }
 
@@ -538,12 +538,12 @@
 
     vx_core::Type_any vx_type::Class_is_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_is_string(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_string::vx_is_string(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_type::Class_is_string::vx_f_is_string(vx_core::Type_any value) {
       return vx_type::f_is_string(value);
     }
 
@@ -609,13 +609,13 @@
 
     vx_core::Type_any vx_type::Class_is_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_type::f_is_type(val, type);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_type::vx_is_type(vx_core::Type_any val, vx_core::Type_any type) {
+    vx_core::Type_boolean vx_type::Class_is_type::vx_f_is_type(vx_core::Type_any val, vx_core::Type_any type) {
       return vx_type::f_is_type(val, type);
     }
 
@@ -694,13 +694,13 @@
 
     vx_core::Type_any vx_type::Class_is_type_from_any_typelist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_typelist typelist = vx_core::f_any_from_any(vx_core::t_typelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typelist typelist = vx_core::f_any_from_any(vx_core::t_typelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_type::f_is_type_from_any_typelist(val, typelist);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_type_from_any_typelist::vx_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
+    vx_core::Type_boolean vx_type::Class_is_type_from_any_typelist::vx_f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
       return vx_type::f_is_type_from_any_typelist(val, typelist);
     }
 
@@ -786,12 +786,12 @@
 
     vx_core::Type_any vx_type::Class_length_from_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_length_from_string(text);
       return output;
     }
 
-    vx_core::Type_int vx_type::Class_length_from_string::vx_length_from_string(vx_core::Type_string text) {
+    vx_core::Type_int vx_type::Class_length_from_string::vx_f_length_from_string(vx_core::Type_string text) {
       return vx_type::f_length_from_string(text);
     }
 
@@ -863,12 +863,12 @@
 
     vx_core::Type_any vx_type::Class_string_from_int::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int val = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int val = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_string_from_int(val);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_int::vx_string_from_int(vx_core::Type_int val) {
+    vx_core::Type_string vx_type::Class_string_from_int::vx_f_string_from_int(vx_core::Type_int val) {
       return vx_type::f_string_from_int(val);
     }
 
@@ -965,13 +965,13 @@
 
     vx_core::Type_any vx_type::Class_string_from_string_end::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int endpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int endpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_type::f_string_from_string_end(text, endpos);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_string_end::vx_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
+    vx_core::Type_string vx_type::Class_string_from_string_end::vx_f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
       return vx_type::f_string_from_string_end(text, endpos);
     }
 
@@ -1035,13 +1035,13 @@
 
     vx_core::Type_any vx_type::Class_string_from_string_start::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int startpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int startpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_type::f_string_from_string_start(text, startpos);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_string_start::vx_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
+    vx_core::Type_string vx_type::Class_string_from_string_start::vx_f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
       return vx_type::f_string_from_string_start(text, startpos);
     }
 
@@ -1110,14 +1110,14 @@
 
     vx_core::Type_any vx_type::Class_string_from_string_start_end::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int start = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_int end = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int start = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_int end = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_type::f_string_from_string_start_end(text, start, end);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_string_start_end::vx_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
+    vx_core::Type_string vx_type::Class_string_from_string_start_end::vx_f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
       return vx_type::f_string_from_string_start_end(text, start, end);
     }
 
@@ -1179,13 +1179,13 @@
 
     vx_core::Type_any vx_type::Class_string_from_stringlist_join::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_stringlist vals = vx_core::f_any_from_any(vx_core::t_stringlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string delim = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_stringlist vals = vx_core::f_any_from_any(vx_core::t_stringlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string delim = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_type::f_string_from_stringlist_join(vals, delim);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_stringlist_join::vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
+    vx_core::Type_string vx_type::Class_string_from_stringlist_join::vx_f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
       return vx_type::f_string_from_stringlist_join(vals, delim);
     }
 
@@ -1257,12 +1257,12 @@
 
     vx_core::Type_any vx_type::Class_traitnames_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_traitnames_from_any(val);
       return output;
     }
 
-    vx_core::Type_stringlist vx_type::Class_traitnames_from_any::vx_traitnames_from_any(vx_core::Type_any val) {
+    vx_core::Type_stringlist vx_type::Class_traitnames_from_any::vx_f_traitnames_from_any(vx_core::Type_any val) {
       return vx_type::f_traitnames_from_any(val);
     }
 
@@ -1337,12 +1337,12 @@
 
     vx_core::Type_any vx_type::Class_traits_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_traits_from_any(val);
       return output;
     }
 
-    vx_core::Type_typelist vx_type::Class_traits_from_any::vx_traits_from_any(vx_core::Type_any val) {
+    vx_core::Type_typelist vx_type::Class_traits_from_any::vx_f_traits_from_any(vx_core::Type_any val) {
       return vx_type::f_traits_from_any(val);
     }
 
@@ -1417,12 +1417,12 @@
 
     vx_core::Type_any vx_type::Class_traits_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_type::f_traits_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_typelist vx_type::Class_traits_from_typedef::vx_traits_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_typelist vx_type::Class_traits_from_typedef::vx_f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_type::f_traits_from_typedef(vtypedef);
     }
 

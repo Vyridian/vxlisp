@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_table_hpp
+#define vx_data_table_hpp
 #include <map>
 #include <memory>
 #include <set>
@@ -70,8 +71,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -89,18 +90,18 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_table::Type_cell> vx_p_list;
 
     // vx_listcell()
     virtual std::vector<vx_data_table::Type_cell> vx_listcell();
-    // vx_cell(index)
-    virtual vx_data_table::Type_cell vx_cell(vx_core::Type_int index);
+    // vx_get_cell(index)
+    virtual vx_data_table::Type_cell vx_get_cell(vx_core::Type_int index);
   };
 
   // (type cellmap)
@@ -112,8 +113,8 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -121,8 +122,8 @@ namespace vx_data_table {
     std::map<std::string, vx_data_table::Type_cell> vx_p_map;
     // vx_mapcell()
     virtual std::map<std::string, vx_data_table::Type_cell> vx_mapcell();
-    // vx_cell(key)
-    virtual vx_data_table::Type_cell vx_cell(vx_core::Type_string key);
+    // vx_get_cell(key)
+    virtual vx_data_table::Type_cell vx_get_cell(vx_core::Type_string key);
   };
 
   // (type field)
@@ -136,8 +137,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -158,18 +159,18 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_table::Type_field> vx_p_list;
 
     // vx_listfield()
     virtual std::vector<vx_data_table::Type_field> vx_listfield();
-    // vx_field(index)
-    virtual vx_data_table::Type_field vx_field(vx_core::Type_int index);
+    // vx_get_field(index)
+    virtual vx_data_table::Type_field vx_get_field(vx_core::Type_int index);
   };
 
   // (type fieldmap)
@@ -181,18 +182,18 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_table::Type_field> vx_p_list;
 
     // vx_listfield()
     virtual std::vector<vx_data_table::Type_field> vx_listfield();
-    // vx_field(index)
-    virtual vx_data_table::Type_field vx_field(vx_core::Type_int index);
+    // vx_get_field(index)
+    virtual vx_data_table::Type_field vx_get_field(vx_core::Type_int index);
   };
 
   // (type filter)
@@ -206,8 +207,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -230,8 +231,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -252,18 +253,18 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_table::Type_row> vx_p_list;
 
     // vx_listrow()
     virtual std::vector<vx_data_table::Type_row> vx_listrow();
-    // vx_row(index)
-    virtual vx_data_table::Type_row vx_row(vx_core::Type_int index);
+    // vx_get_row(index)
+    virtual vx_data_table::Type_row vx_get_row(vx_core::Type_int index);
   };
 
   // (type rowmap)
@@ -275,8 +276,8 @@ namespace vx_data_table {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -284,8 +285,8 @@ namespace vx_data_table {
     std::map<std::string, vx_data_table::Type_row> vx_p_map;
     // vx_maprow()
     virtual std::map<std::string, vx_data_table::Type_row> vx_maprow();
-    // vx_row(key)
-    virtual vx_data_table::Type_row vx_row(vx_core::Type_string key);
+    // vx_get_row(key)
+    virtual vx_data_table::Type_row vx_get_row(vx_core::Type_string key);
   };
 
   // (type sort)
@@ -299,8 +300,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -323,8 +324,8 @@ namespace vx_data_table {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -349,3 +350,4 @@ namespace vx_data_table {
   };
 
 }
+#endif

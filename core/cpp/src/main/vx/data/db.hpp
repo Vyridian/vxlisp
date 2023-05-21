@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_db_hpp
+#define vx_data_db_hpp
 #include <map>
 #include <memory>
 #include <set>
@@ -45,8 +46,8 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // dbid()
     vx_core::Type_string vx_p_dbid;
     virtual vx_core::Type_string dbid();
@@ -63,8 +64,8 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // dbcellid()
     vx_core::Type_string vx_p_dbcellid;
     virtual vx_core::Type_string dbcellid();
@@ -91,8 +92,8 @@ namespace vx_data_db {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -100,8 +101,8 @@ namespace vx_data_db {
     std::map<std::string, vx_data_db::Type_dbcell> vx_p_map;
     // vx_mapdbcell()
     virtual std::map<std::string, vx_data_db::Type_dbcell> vx_mapdbcell();
-    // vx_dbcell(key)
-    virtual vx_data_db::Type_dbcell vx_dbcell(vx_core::Type_string key);
+    // vx_get_dbcell(key)
+    virtual vx_data_db::Type_dbcell vx_get_dbcell(vx_core::Type_string key);
   };
 
   // (type dbfield)
@@ -115,8 +116,8 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // dbfieldid()
     vx_core::Type_string vx_p_dbfieldid;
     virtual vx_core::Type_string dbfieldid();
@@ -137,8 +138,8 @@ namespace vx_data_db {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -146,8 +147,8 @@ namespace vx_data_db {
     std::map<std::string, vx_data_db::Type_dbfield> vx_p_map;
     // vx_mapdbfield()
     virtual std::map<std::string, vx_data_db::Type_dbfield> vx_mapdbfield();
-    // vx_dbfield(key)
-    virtual vx_data_db::Type_dbfield vx_dbfield(vx_core::Type_string key);
+    // vx_get_dbfield(key)
+    virtual vx_data_db::Type_dbfield vx_get_dbfield(vx_core::Type_string key);
   };
 
   // (type dbtable)
@@ -161,8 +162,8 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // dbtableid()
     vx_core::Type_string vx_p_dbtableid;
     virtual vx_core::Type_string dbtableid();
@@ -178,3 +179,4 @@ namespace vx_data_db {
   };
 
 }
+#endif

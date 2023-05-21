@@ -28,7 +28,7 @@ namespace test_lib {
 
   // Blocking
   vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
-    vx_core::Async<vx_test::Type_testresult>* async_testresult = vx_test::f_resolve_testresult(testresult);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_test::Type_testresult testresult_resolved = vx_core::sync_from_async(vx_test::t_testresult, async_testresult);
     return run_testresult(testpkg, testname, message, testresult_resolved);
   }
@@ -45,7 +45,7 @@ namespace test_lib {
   // Blocking
   // Only use if running a single testdescribe
   vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
-    vx_core::Async<vx_test::Type_testdescribe>* async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribe>> async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
     vx_test::Type_testdescribe testdescribe_resolved = vx_core::sync_from_async(vx_test::t_testdescribe, async_testdescribe);
     return run_testdescribe(testpkg, casename, testdescribe_resolved);
   }
@@ -57,7 +57,7 @@ namespace test_lib {
       vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
 			listtestdescribe_resolved.push_back(testdescribe_resolved);
     }
-		vx_test::Type_testdescribelist output = testdescribelist->vx_copy(&listtestdescribe_resolved);
+		vx_test::Type_testdescribelist output = testdescribelist->vx_copy(vx_test::t_testdescribelist, listtestdescribe_resolved);
     return output;
   }
 
@@ -73,7 +73,7 @@ namespace test_lib {
   // Blocking
   // Only use if running a single testcase
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase) {
-    vx_core::Async<vx_test::Type_testcase>* async_testcase = vx_test::f_resolve_testcase(testcase);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testcase>> async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_test::Type_testcase testcase_resolved = vx_core::sync_from_async(vx_test::t_testcase, async_testcase);
     return run_testcase(testcase_resolved);
   }
@@ -110,7 +110,7 @@ namespace test_lib {
   // Blocking
   // This is the preferred way of calling test (1 block per package)
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage) {
-    vx_core::Async<vx_test::Type_testpackage>* async_testpackage = vx_test::f_resolve_testpackage(testpackage);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testpackage>> async_testpackage = vx_test::f_resolve_testpackage(testpackage);
     vx_test::Type_testpackage testpackage_resolved = vx_core::sync_from_async(vx_test::t_testpackage, async_testpackage);
     return run_testpackage(testpackage_resolved);
   }
@@ -118,7 +118,7 @@ namespace test_lib {
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
-    vx_core::Async<vx_test::Type_testpackagelist>* async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     return run_testpackagelist(testpackagelist_resolved);
   }
@@ -126,7 +126,7 @@ namespace test_lib {
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
-    vx_core::Async<vx_test::Type_testpackagelist>* async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     vx_data_file::Type_file filetest = vx_test::f_file_test();
     vx_core::Type_boolean booleanwritetest = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);

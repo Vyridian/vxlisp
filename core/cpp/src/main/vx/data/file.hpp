@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_file_hpp
+#define vx_data_file_hpp
 #include <exception>
 #include <memory>
 #include <set>
@@ -66,8 +67,8 @@ namespace vx_data_file {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // name()
     vx_core::Type_string vx_p_name;
     virtual vx_core::Type_string name();
@@ -108,7 +109,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file);
+    vx_core::Type_boolean vx_f_boolean_exists_from_file(vx_data_file::Type_file file);
   };
 
   // (func boolean-write<-file-any)
@@ -121,7 +122,7 @@ namespace vx_data_file {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_write_from_file_any(vx_data_file::Type_file file, vx_core::Type_any val, vx_core::Type_context context);
+    vx_core::Type_boolean vx_f_boolean_write_from_file_any(vx_data_file::Type_file file, vx_core::Type_any val, vx_core::Type_context context);
   };
 
   // (func boolean-write<-file-string)
@@ -134,7 +135,7 @@ namespace vx_data_file {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text, vx_core::Type_context context);
+    vx_core::Type_boolean vx_f_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text, vx_core::Type_context context);
   };
 
   // (func file-read<-file)
@@ -149,7 +150,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_data_file::Type_file vx_file_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context);
+    vx_data_file::Type_file vx_f_file_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context);
   };
 
   // (func name<-file)
@@ -164,7 +165,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_name_from_file(vx_data_file::Type_file file);
+    vx_core::Type_string vx_f_name_from_file(vx_data_file::Type_file file);
   };
 
   // (func path<-file)
@@ -179,7 +180,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_path_from_file(vx_data_file::Type_file file);
+    vx_core::Type_string vx_f_path_from_file(vx_data_file::Type_file file);
   };
 
   // (func pathcurrent<-os)
@@ -192,7 +193,7 @@ namespace vx_data_file {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_pathcurrent_from_os();
+    vx_core::Type_string vx_f_pathcurrent_from_os();
   };
 
   // (func pathfull<-file)
@@ -207,7 +208,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_pathfull_from_file(vx_data_file::Type_file file);
+    vx_core::Type_string vx_f_pathfull_from_file(vx_data_file::Type_file file);
   };
 
   // (func string-read<-file)
@@ -222,7 +223,7 @@ namespace vx_data_file {
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context);
+    vx_core::Type_string vx_f_string_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context);
   };
 
   // (func boolean-exists<-file)
@@ -253,3 +254,4 @@ namespace vx_data_file {
   vx_core::Type_string f_string_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context);
 
 }
+#endif

@@ -22,8 +22,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_db::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_db::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -44,7 +44,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_db::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_db output;
       vx_data_db::Class_db* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_dbid = val->dbid();
       std::set<std::string> validkeys;
       validkeys.insert(":dbid");
@@ -164,8 +164,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_dbcell::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_dbcell::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -198,7 +198,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_dbcell::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_dbcell output;
       vx_data_db::Class_dbcell* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_dbcellid = val->dbcellid();
       output->vx_p_dbcellmap = val->dbcellmap();
       output->vx_p_dbfieldmap = val->dbfieldmap();
@@ -314,8 +314,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_dbcell(key)
-    vx_data_db::Type_dbcell vx_data_db::Class_dbcellmap::vx_dbcell(vx_core::Type_string key) {
+    // vx_get_dbcell(key)
+    vx_data_db::Type_dbcell vx_data_db::Class_dbcellmap::vx_get_dbcell(vx_core::Type_string key) {
       vx_data_db::Type_dbcell output = vx_data_db::e_dbcell;
       vx_data_db::Class_dbcellmap* map = this;
       std::string skey = key->vx_string();
@@ -324,9 +324,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_dbcellmap::vx_any(vx_core::Type_string key) {
-      return this->vx_dbcell(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_dbcellmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_dbcell(key);
     }
 
     // vx_mapdbcell()
@@ -360,7 +360,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_dbcellmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_dbcellmap output;
       vx_data_db::Class_dbcellmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_data_db::Type_dbcell> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -456,8 +456,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_dbfield::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_dbfield::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -484,7 +484,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_dbfield::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_dbfield output;
       vx_data_db::Class_dbfield* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_dbfieldid = val->dbfieldid();
       output->vx_p_type = val->type();
       output->vx_p_value = val->value();
@@ -582,8 +582,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_dbfield(key)
-    vx_data_db::Type_dbfield vx_data_db::Class_dbfieldmap::vx_dbfield(vx_core::Type_string key) {
+    // vx_get_dbfield(key)
+    vx_data_db::Type_dbfield vx_data_db::Class_dbfieldmap::vx_get_dbfield(vx_core::Type_string key) {
       vx_data_db::Type_dbfield output = vx_data_db::e_dbfield;
       vx_data_db::Class_dbfieldmap* map = this;
       std::string skey = key->vx_string();
@@ -592,9 +592,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_dbfieldmap::vx_any(vx_core::Type_string key) {
-      return this->vx_dbfield(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_dbfieldmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_dbfield(key);
     }
 
     // vx_mapdbfield()
@@ -628,7 +628,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_dbfieldmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_dbfieldmap output;
       vx_data_db::Class_dbfieldmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_data_db::Type_dbfield> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -733,8 +733,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_db::Class_dbtable::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_db::Class_dbtable::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -764,7 +764,7 @@
     template <class T> std::shared_ptr<T> vx_data_db::Class_dbtable::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_db::Type_dbtable output;
       vx_data_db::Class_dbtable* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_dbtableid = val->dbtableid();
       output->vx_p_db = val->db();
       output->vx_p_dbcellmap = val->dbcellmap();

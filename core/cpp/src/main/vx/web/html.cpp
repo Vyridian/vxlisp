@@ -34,8 +34,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_node::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_node::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -59,7 +59,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_node::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_node output;
       vx_web_html::Class_node* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       std::set<std::string> validkeys;
@@ -143,8 +143,8 @@
    * (type divchild)
    */
   //class Type_divchild {
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_divchild::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_divchild::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -162,7 +162,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_divchild::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_divchild output;
       vx_web_html::Class_divchild* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
       }
@@ -207,8 +207,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_body::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_body::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -229,7 +229,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_body::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_body output;
       vx_web_html::Class_body* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_nodes = val->nodes();
       std::set<std::string> validkeys;
       validkeys.insert(":nodes");
@@ -254,7 +254,7 @@
           } else if (valsubtype == vx_web_html::t_divchild) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::any_from_any(vx_web_html::t_divchild, valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_divchildlist->vx_new(vx_web_html::t_divchildlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_divchildlist, {valdefault});
@@ -351,8 +351,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_details::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_details::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -382,7 +382,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_details::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_details output;
       vx_web_html::Class_details* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_summary = val->summary();
@@ -511,8 +511,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_div::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_div::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -539,7 +539,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_div::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_div output;
       vx_web_html::Class_div* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_nodes = val->nodes();
@@ -568,7 +568,7 @@
           } else if (valsubtype == vx_web_html::t_divchild) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::any_from_any(vx_web_html::t_divchild, valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_divchildlist->vx_new(vx_web_html::t_divchildlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_divchildlist, {valdefault});
@@ -647,7 +647,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_divchild vx_web_html::Class_divchildlist::vx_divchild(vx_core::Type_int index) {
+    vx_web_html::Type_divchild vx_web_html::Class_divchildlist::vx_get_divchild(vx_core::Type_int index) {
       vx_web_html::Type_divchild output = vx_web_html::e_divchild;
       vx_web_html::Class_divchildlist* list = this;
       int iindex = index->vx_int();
@@ -660,15 +660,15 @@
 
     std::vector<vx_web_html::Type_divchild> vx_web_html::Class_divchildlist::vx_listdivchild() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_divchildlist::vx_any(vx_core::Type_int index) {
-      return this->vx_divchild(index);
+    vx_core::Type_any vx_web_html::Class_divchildlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_divchild(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_divchildlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_divchildlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_divchildlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_divchildlist output;
       vx_web_html::Class_divchildlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_divchild> listval = val->vx_listdivchild();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -677,7 +677,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_divchild) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_divchild, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_divchild, valsub));
         } else if (valsubtype == vx_web_html::t_divchildlist) {
           vx_web_html::Type_divchildlist multi = vx_core::any_from_any(vx_web_html::t_divchildlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listdivchild());
@@ -726,7 +726,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_div vx_web_html::Class_divlist::vx_div(vx_core::Type_int index) {
+    vx_web_html::Type_div vx_web_html::Class_divlist::vx_get_div(vx_core::Type_int index) {
       vx_web_html::Type_div output = vx_web_html::e_div;
       vx_web_html::Class_divlist* list = this;
       int iindex = index->vx_int();
@@ -739,15 +739,15 @@
 
     std::vector<vx_web_html::Type_div> vx_web_html::Class_divlist::vx_listdiv() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_divlist::vx_any(vx_core::Type_int index) {
-      return this->vx_div(index);
+    vx_core::Type_any vx_web_html::Class_divlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_div(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_divlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_divlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_divlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_divlist output;
       vx_web_html::Class_divlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_div> listval = val->vx_listdiv();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -756,7 +756,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_div) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_div, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_div, valsub));
         } else if (valsubtype == vx_web_html::t_divlist) {
           vx_web_html::Type_divlist multi = vx_core::any_from_any(vx_web_html::t_divlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listdiv());
@@ -810,8 +810,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_footer::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_footer::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -832,7 +832,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_footer::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_footer output;
       vx_web_html::Class_footer* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_nodes = val->nodes();
       std::set<std::string> validkeys;
       validkeys.insert(":nodes");
@@ -857,7 +857,7 @@
           } else if (valsubtype == vx_web_html::t_divchild) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::any_from_any(vx_web_html::t_divchild, valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_divchildlist->vx_new(vx_web_html::t_divchildlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_divchildlist, {valdefault});
@@ -945,8 +945,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_h1::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_h1::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -973,7 +973,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_h1::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_h1 output;
       vx_web_html::Class_h1* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_text = val->text();
@@ -1095,8 +1095,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_h2::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_h2::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1123,7 +1123,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_h2::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_h2 output;
       vx_web_html::Class_h2* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_text = val->text();
@@ -1245,8 +1245,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_h3::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_h3::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1273,7 +1273,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_h3::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_h3 output;
       vx_web_html::Class_h3* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_text = val->text();
@@ -1377,8 +1377,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_head::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_head::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1399,7 +1399,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_head::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_head output;
       vx_web_html::Class_head* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_nodes = val->nodes();
       std::set<std::string> validkeys;
       validkeys.insert(":nodes");
@@ -1424,7 +1424,7 @@
           } else if (valsubtype == vx_web_html::t_headchild) { // default property
             vx_web_html::Type_headchild valdefault = vx_core::any_from_any(vx_web_html::t_headchild, valsub);
             vx_web_html::Type_headchildlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_headchildlist->vx_new(vx_web_html::t_headchildlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_headchildlist, {valdefault});
@@ -1485,8 +1485,8 @@
    * (type headchild)
    */
   //class Type_headchild {
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_headchild::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_headchild::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1504,7 +1504,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_headchild::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_headchild output;
       vx_web_html::Class_headchild* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
       }
@@ -1544,7 +1544,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_headchild vx_web_html::Class_headchildlist::vx_headchild(vx_core::Type_int index) {
+    vx_web_html::Type_headchild vx_web_html::Class_headchildlist::vx_get_headchild(vx_core::Type_int index) {
       vx_web_html::Type_headchild output = vx_web_html::e_headchild;
       vx_web_html::Class_headchildlist* list = this;
       int iindex = index->vx_int();
@@ -1557,15 +1557,15 @@
 
     std::vector<vx_web_html::Type_headchild> vx_web_html::Class_headchildlist::vx_listheadchild() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_headchildlist::vx_any(vx_core::Type_int index) {
-      return this->vx_headchild(index);
+    vx_core::Type_any vx_web_html::Class_headchildlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_headchild(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_headchildlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_headchildlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_headchildlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_headchildlist output;
       vx_web_html::Class_headchildlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_headchild> listval = val->vx_listheadchild();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1574,7 +1574,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_headchild) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_headchild, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_headchild, valsub));
         } else if (valsubtype == vx_web_html::t_headchildlist) {
           vx_web_html::Type_headchildlist multi = vx_core::any_from_any(vx_web_html::t_headchildlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listheadchild());
@@ -1655,8 +1655,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_html::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_html::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1686,7 +1686,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_html::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_html output;
       vx_web_html::Class_html* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_lang = val->lang();
       output->vx_p_head = val->head();
       output->vx_p_body = val->body();
@@ -1815,8 +1815,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_meta::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_meta::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1843,7 +1843,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_meta::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_meta output;
       vx_web_html::Class_meta* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_charset = val->charset();
@@ -1940,7 +1940,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_node vx_web_html::Class_nodelist::vx_node(vx_core::Type_int index) {
+    vx_web_html::Type_node vx_web_html::Class_nodelist::vx_get_node(vx_core::Type_int index) {
       vx_web_html::Type_node output = vx_web_html::e_node;
       vx_web_html::Class_nodelist* list = this;
       int iindex = index->vx_int();
@@ -1953,15 +1953,15 @@
 
     std::vector<vx_web_html::Type_node> vx_web_html::Class_nodelist::vx_listnode() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_nodelist::vx_any(vx_core::Type_int index) {
-      return this->vx_node(index);
+    vx_core::Type_any vx_web_html::Class_nodelist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_node(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_nodelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_nodelist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_nodelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_nodelist output;
       vx_web_html::Class_nodelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_node> listval = val->vx_listnode();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1970,7 +1970,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_node) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_node, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_node, valsub));
         } else if (valsubtype == vx_web_html::t_nodelist) {
           vx_web_html::Type_nodelist multi = vx_core::any_from_any(vx_web_html::t_nodelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listnode());
@@ -2042,8 +2042,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_p::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_p::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2070,7 +2070,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_p::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_p output;
       vx_web_html::Class_p* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_text = val->text();
@@ -2170,8 +2170,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_string(key)
-    vx_core::Type_string vx_web_html::Class_propmap::vx_string(vx_core::Type_string key) {
+    // vx_get_string(key)
+    vx_core::Type_string vx_web_html::Class_propmap::vx_get_string(vx_core::Type_string key) {
       vx_core::Type_string output = vx_core::e_string;
       vx_web_html::Class_propmap* map = this;
       std::string skey = key->vx_string();
@@ -2180,9 +2180,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_propmap::vx_any(vx_core::Type_string key) {
-      return this->vx_string(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_propmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_string(key);
     }
 
     // vx_mapstring()
@@ -2216,7 +2216,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_propmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_propmap output;
       vx_web_html::Class_propmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -2303,8 +2303,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_style::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_style::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2328,7 +2328,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_style::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_style output;
       vx_web_html::Class_style* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_name = val->name();
       output->vx_p_props = val->props();
       std::set<std::string> validkeys;
@@ -2416,7 +2416,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_style vx_web_html::Class_stylelist::vx_style(vx_core::Type_int index) {
+    vx_web_html::Type_style vx_web_html::Class_stylelist::vx_get_style(vx_core::Type_int index) {
       vx_web_html::Type_style output = vx_web_html::e_style;
       vx_web_html::Class_stylelist* list = this;
       int iindex = index->vx_int();
@@ -2429,15 +2429,15 @@
 
     std::vector<vx_web_html::Type_style> vx_web_html::Class_stylelist::vx_liststyle() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_stylelist::vx_any(vx_core::Type_int index) {
-      return this->vx_style(index);
+    vx_core::Type_any vx_web_html::Class_stylelist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_style(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_stylelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_stylelist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_stylelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_stylelist output;
       vx_web_html::Class_stylelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_style> listval = val->vx_liststyle();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -2446,7 +2446,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_style) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_style, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_style, valsub));
         } else if (valsubtype == vx_web_html::t_stylelist) {
           vx_web_html::Type_stylelist multi = vx_core::any_from_any(vx_web_html::t_stylelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_liststyle());
@@ -2496,8 +2496,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_style(key)
-    vx_web_html::Type_style vx_web_html::Class_stylemap::vx_style(vx_core::Type_string key) {
+    // vx_get_style(key)
+    vx_web_html::Type_style vx_web_html::Class_stylemap::vx_get_style(vx_core::Type_string key) {
       vx_web_html::Type_style output = vx_web_html::e_style;
       vx_web_html::Class_stylemap* map = this;
       std::string skey = key->vx_string();
@@ -2506,9 +2506,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_stylemap::vx_any(vx_core::Type_string key) {
-      return this->vx_style(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_stylemap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_style(key);
     }
 
     // vx_mapstyle()
@@ -2542,7 +2542,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_stylemap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_stylemap output;
       vx_web_html::Class_stylemap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_web_html::Type_style> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -2656,8 +2656,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_stylesheet::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_stylesheet::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2690,7 +2690,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_stylesheet::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_stylesheet output;
       vx_web_html::Class_stylesheet* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_name = val->name();
@@ -2837,8 +2837,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_table::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_table::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2868,7 +2868,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_table::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_table output;
       vx_web_html::Class_table* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_tbody = val->tbody();
@@ -2997,8 +2997,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_tbody::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_tbody::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3025,7 +3025,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_tbody::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_tbody output;
       vx_web_html::Class_tbody* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_nodes = val->nodes();
@@ -3054,7 +3054,7 @@
           } else if (valsubtype == vx_web_html::t_tr) { // default property
             vx_web_html::Type_tr valdefault = vx_core::any_from_any(vx_web_html::t_tr, valsub);
             vx_web_html::Type_trlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_trlist->vx_new(vx_web_html::t_trlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_trlist, {valdefault});
@@ -3156,8 +3156,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_td::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_td::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3184,7 +3184,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_td::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_td output;
       vx_web_html::Class_td* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_nodes = val->nodes();
@@ -3213,7 +3213,7 @@
           } else if (valsubtype == vx_web_html::t_divchild) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::any_from_any(vx_web_html::t_divchild, valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_divchildlist->vx_new(vx_web_html::t_divchildlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_divchildlist, {valdefault});
@@ -3292,7 +3292,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_td vx_web_html::Class_tdlist::vx_td(vx_core::Type_int index) {
+    vx_web_html::Type_td vx_web_html::Class_tdlist::vx_get_td(vx_core::Type_int index) {
       vx_web_html::Type_td output = vx_web_html::e_td;
       vx_web_html::Class_tdlist* list = this;
       int iindex = index->vx_int();
@@ -3305,15 +3305,15 @@
 
     std::vector<vx_web_html::Type_td> vx_web_html::Class_tdlist::vx_listtd() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_tdlist::vx_any(vx_core::Type_int index) {
-      return this->vx_td(index);
+    vx_core::Type_any vx_web_html::Class_tdlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_td(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_tdlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_tdlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_tdlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_tdlist output;
       vx_web_html::Class_tdlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_td> listval = val->vx_listtd();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -3322,7 +3322,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_td) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_td, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_td, valsub));
         } else if (valsubtype == vx_web_html::t_tdlist) {
           vx_web_html::Type_tdlist multi = vx_core::any_from_any(vx_web_html::t_tdlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtd());
@@ -3394,8 +3394,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_thead::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_thead::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3422,7 +3422,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_thead::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_thead output;
       vx_web_html::Class_thead* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_nodes = val->nodes();
@@ -3451,7 +3451,7 @@
           } else if (valsubtype == vx_web_html::t_tr) { // default property
             vx_web_html::Type_tr valdefault = vx_core::any_from_any(vx_web_html::t_tr, valsub);
             vx_web_html::Type_trlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_trlist->vx_new(vx_web_html::t_trlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_trlist, {valdefault});
@@ -3553,8 +3553,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_title::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_title::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3581,7 +3581,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_title::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_title output;
       vx_web_html::Class_title* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_text = val->text();
@@ -3701,8 +3701,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_web_html::Class_tr::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_web_html::Class_tr::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3729,7 +3729,7 @@
     template <class T> std::shared_ptr<T> vx_web_html::Class_tr::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_tr output;
       vx_web_html::Class_tr* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       output->vx_p_style = val->style();
       output->vx_p_nodes = val->nodes();
@@ -3758,7 +3758,7 @@
           } else if (valsubtype == vx_web_html::t_td) { // default property
             vx_web_html::Type_td valdefault = vx_core::any_from_any(vx_web_html::t_td, valsub);
             vx_web_html::Type_tdlist vallist = output->vx_p_nodes;
-            if (vallist == null) {
+            if (vallist == NULL) {
               vallist = vx_web_html::t_tdlist->vx_new(vx_web_html::t_tdlist, {valdefault});
             } else {
               vallist = vallist->vx_copy(vx_web_html::t_tdlist, {valdefault});
@@ -3837,7 +3837,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_web_html::Type_tr vx_web_html::Class_trlist::vx_tr(vx_core::Type_int index) {
+    vx_web_html::Type_tr vx_web_html::Class_trlist::vx_get_tr(vx_core::Type_int index) {
       vx_web_html::Type_tr output = vx_web_html::e_tr;
       vx_web_html::Class_trlist* list = this;
       int iindex = index->vx_int();
@@ -3850,15 +3850,15 @@
 
     std::vector<vx_web_html::Type_tr> vx_web_html::Class_trlist::vx_listtr() {return vx_p_list;}
 
-    vx_core::Type_any vx_web_html::Class_trlist::vx_any(vx_core::Type_int index) {
-      return this->vx_tr(index);
+    vx_core::Type_any vx_web_html::Class_trlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_tr(index);
     }
 
     template <class T> std::shared_ptr<T> vx_web_html::Class_trlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_web_html::e_trlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_web_html::Class_trlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_web_html::Type_trlist output;
       vx_web_html::Class_trlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_tr> listval = val->vx_listtr();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -3867,7 +3867,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_web_html::t_tr) {
-          listval->push_back(vx_core::any_from_any(vx_web_html::t_tr, valsub));
+          listval.push_back(vx_core::any_from_any(vx_web_html::t_tr, valsub));
         } else if (valsubtype == vx_web_html::t_trlist) {
           vx_web_html::Type_trlist multi = vx_core::any_from_any(vx_web_html::t_trlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtr());
@@ -3954,13 +3954,13 @@
 
     vx_core::Type_any vx_web_html::Class_boolean_write_from_id_htmltext::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string id = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string htmltext = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string id = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string htmltext = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_boolean_write_from_id_htmltext(id, htmltext);
       return output;
     }
 
-    vx_core::Type_boolean vx_web_html::Class_boolean_write_from_id_htmltext::vx_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
+    vx_core::Type_boolean vx_web_html::Class_boolean_write_from_id_htmltext::vx_f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
       return vx_web_html::f_boolean_write_from_id_htmltext(id, htmltext);
     }
 
@@ -4033,13 +4033,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_web_html::Class_boolean_write_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_boolean>> future = vx_web_html::f_boolean_write_from_stylesheet(stylesheet);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_core::Type_boolean>> vx_web_html::Class_boolean_write_from_stylesheet::vx_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
+    std::shared_ptr<vx_core::Async<vx_core::Type_boolean>> vx_web_html::Class_boolean_write_from_stylesheet::vx_f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
       return vx_web_html::f_boolean_write_from_stylesheet(stylesheet);
     }
 
@@ -4111,12 +4111,12 @@
 
     vx_core::Type_any vx_web_html::Class_htmlstring_from_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_htmlstring_from_string(text);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_htmlstring_from_string::vx_htmlstring_from_string(vx_core::Type_string text) {
+    vx_core::Type_string vx_web_html::Class_htmlstring_from_string::vx_f_htmlstring_from_string(vx_core::Type_string text) {
       return vx_web_html::f_htmlstring_from_string(text);
     }
 
@@ -4187,12 +4187,12 @@
 
     vx_core::Type_any vx_web_html::Class_string_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_string_indent(indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_indent::vx_string_indent(vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_indent::vx_f_string_indent(vx_core::Type_int indent) {
       return vx_web_html::f_string_indent(indent);
     }
 
@@ -4256,13 +4256,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_body_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_body body = vx_core::f_any_from_any(vx_web_html::t_body, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_body body = vx_core::f_any_from_any(vx_web_html::t_body, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_body_indent(body, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_body_indent::vx_string_from_body_indent(vx_web_html::Type_body body, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_body_indent::vx_f_string_from_body_indent(vx_web_html::Type_body body, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_body_indent(body, indent);
     }
 
@@ -4332,13 +4332,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_details_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_details details = vx_core::f_any_from_any(vx_web_html::t_details, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_details details = vx_core::f_any_from_any(vx_web_html::t_details, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_details_indent(details, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_details_indent::vx_string_from_details_indent(vx_web_html::Type_details details, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_details_indent::vx_f_string_from_details_indent(vx_web_html::Type_details details, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_details_indent(details, indent);
     }
 
@@ -4432,13 +4432,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_div_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_div div = vx_core::f_any_from_any(vx_web_html::t_div, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_div div = vx_core::f_any_from_any(vx_web_html::t_div, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_div_indent(div, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_div_indent::vx_string_from_div_indent(vx_web_html::Type_div div, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_div_indent::vx_f_string_from_div_indent(vx_web_html::Type_div div, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_div_indent(div, indent);
     }
 
@@ -4526,13 +4526,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_footer_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_footer footer = vx_core::f_any_from_any(vx_web_html::t_footer, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_footer footer = vx_core::f_any_from_any(vx_web_html::t_footer, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_footer_indent(footer, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_footer_indent::vx_string_from_footer_indent(vx_web_html::Type_footer footer, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_footer_indent::vx_f_string_from_footer_indent(vx_web_html::Type_footer footer, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_footer_indent(footer, indent);
     }
 
@@ -4602,13 +4602,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_h1_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_h1 h1 = vx_core::f_any_from_any(vx_web_html::t_h1, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_h1 h1 = vx_core::f_any_from_any(vx_web_html::t_h1, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_h1_indent(h1, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_h1_indent::vx_string_from_h1_indent(vx_web_html::Type_h1 h1, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_h1_indent::vx_f_string_from_h1_indent(vx_web_html::Type_h1 h1, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_h1_indent(h1, indent);
     }
 
@@ -4693,13 +4693,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_h2_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_h2 h2 = vx_core::f_any_from_any(vx_web_html::t_h2, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_h2 h2 = vx_core::f_any_from_any(vx_web_html::t_h2, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_h2_indent(h2, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_h2_indent::vx_string_from_h2_indent(vx_web_html::Type_h2 h2, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_h2_indent::vx_f_string_from_h2_indent(vx_web_html::Type_h2 h2, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_h2_indent(h2, indent);
     }
 
@@ -4784,13 +4784,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_h3_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_h3 h3 = vx_core::f_any_from_any(vx_web_html::t_h3, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_h3 h3 = vx_core::f_any_from_any(vx_web_html::t_h3, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_h3_indent(h3, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_h3_indent::vx_string_from_h3_indent(vx_web_html::Type_h3 h3, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_h3_indent::vx_f_string_from_h3_indent(vx_web_html::Type_h3 h3, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_h3_indent(h3, indent);
     }
 
@@ -4875,13 +4875,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_head_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_head head = vx_core::f_any_from_any(vx_web_html::t_head, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_head head = vx_core::f_any_from_any(vx_web_html::t_head, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_head_indent(head, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_head_indent::vx_string_from_head_indent(vx_web_html::Type_head head, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_head_indent::vx_f_string_from_head_indent(vx_web_html::Type_head head, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_head_indent(head, indent);
     }
 
@@ -4960,12 +4960,12 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_html::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_html html = vx_core::f_any_from_any(vx_web_html::t_html, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_html html = vx_core::f_any_from_any(vx_web_html::t_html, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_string_from_html(html);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_html::vx_string_from_html(vx_web_html::Type_html html) {
+    vx_core::Type_string vx_web_html::Class_string_from_html::vx_f_string_from_html(vx_web_html::Type_html html) {
       return vx_web_html::f_string_from_html(html);
     }
 
@@ -5067,12 +5067,12 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_string_from_indent(indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_indent::vx_string_from_indent(vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_indent::vx_f_string_from_indent(vx_core::Type_int indent) {
       return vx_web_html::f_string_from_indent(indent);
     }
 
@@ -5147,13 +5147,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_meta_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_meta meta = vx_core::f_any_from_any(vx_web_html::t_meta, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_meta meta = vx_core::f_any_from_any(vx_web_html::t_meta, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_meta_indent(meta, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_meta_indent::vx_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_meta_indent::vx_f_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_meta_indent(meta, indent);
     }
 
@@ -5235,13 +5235,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_node_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any node = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any node = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_node_indent(node, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_node_indent::vx_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_node_indent::vx_f_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_node_indent(node, indent);
     }
 
@@ -5463,13 +5463,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_nodelist_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list nodelist = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list nodelist = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_nodelist_indent(nodelist, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_nodelist_indent::vx_string_from_nodelist_indent(vx_core::Type_list nodelist, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_nodelist_indent::vx_f_string_from_nodelist_indent(vx_core::Type_list nodelist, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_nodelist_indent(nodelist, indent);
     }
 
@@ -5549,15 +5549,15 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_nodelist_tag_prop_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list nodes = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string tag = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_string prop = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(3)));
+      vx_core::Type_list nodes = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string tag = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string prop = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(3)));
       output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_nodelist_tag_prop_indent::vx_string_from_nodelist_tag_prop_indent(vx_core::Type_list nodes, vx_core::Type_string tag, vx_core::Type_string prop, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_nodelist_tag_prop_indent::vx_f_string_from_nodelist_tag_prop_indent(vx_core::Type_list nodes, vx_core::Type_string tag, vx_core::Type_string prop, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
     }
 
@@ -5671,13 +5671,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_p_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_p p = vx_core::f_any_from_any(vx_web_html::t_p, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_p p = vx_core::f_any_from_any(vx_web_html::t_p, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_p_indent(p, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_p_indent::vx_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_p_indent::vx_f_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_p_indent(p, indent);
     }
 
@@ -5768,13 +5768,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_propname_val::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string val = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string val = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_propname_val(key, val);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_propname_val::vx_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val) {
+    vx_core::Type_string vx_web_html::Class_string_from_propname_val::vx_f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val) {
       return vx_web_html::f_string_from_propname_val(key, val);
     }
 
@@ -5861,12 +5861,12 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_propstyle::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_style style = vx_core::f_any_from_any(vx_web_html::t_style, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_style style = vx_core::f_any_from_any(vx_web_html::t_style, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_string_from_propstyle(style);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_propstyle::vx_string_from_propstyle(vx_web_html::Type_style style) {
+    vx_core::Type_string vx_web_html::Class_string_from_propstyle::vx_f_string_from_propstyle(vx_web_html::Type_style style) {
       return vx_web_html::f_string_from_propstyle(style);
     }
 
@@ -5945,13 +5945,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_style_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_style style = vx_core::f_any_from_any(vx_web_html::t_style, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_style style = vx_core::f_any_from_any(vx_web_html::t_style, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_style_indent(style, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_style_indent::vx_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_style_indent::vx_f_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_style_indent(style, indent);
     }
 
@@ -6037,13 +6037,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_stylelist_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylelist stylelist = vx_core::f_any_from_any(vx_web_html::t_stylelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_stylelist stylelist = vx_core::f_any_from_any(vx_web_html::t_stylelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_stylelist_indent(stylelist, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_stylelist_indent::vx_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_stylelist_indent::vx_f_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_stylelist_indent(stylelist, indent);
     }
 
@@ -6121,13 +6121,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_stylepropmap_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_propmap propmap = vx_core::f_any_from_any(vx_web_html::t_propmap, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_propmap propmap = vx_core::f_any_from_any(vx_web_html::t_propmap, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_stylepropmap_indent(propmap, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_stylepropmap_indent::vx_string_from_stylepropmap_indent(vx_web_html::Type_propmap propmap, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_stylepropmap_indent::vx_f_string_from_stylepropmap_indent(vx_web_html::Type_propmap propmap, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_stylepropmap_indent(propmap, indent);
     }
 
@@ -6216,13 +6216,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_stylesheet_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_stylesheet_indent(stylesheet, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_stylesheet_indent::vx_string_from_stylesheet_indent(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_stylesheet_indent::vx_f_string_from_stylesheet_indent(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_stylesheet_indent(stylesheet, indent);
     }
 
@@ -6310,13 +6310,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_table_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_table table = vx_core::f_any_from_any(vx_web_html::t_table, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_table table = vx_core::f_any_from_any(vx_web_html::t_table, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_table_indent(table, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_table_indent::vx_string_from_table_indent(vx_web_html::Type_table table, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_table_indent::vx_f_string_from_table_indent(vx_web_html::Type_table table, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_table_indent(table, indent);
     }
 
@@ -6412,13 +6412,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_tbody_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_tbody tbody = vx_core::f_any_from_any(vx_web_html::t_tbody, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_tbody tbody = vx_core::f_any_from_any(vx_web_html::t_tbody, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_tbody_indent(tbody, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_tbody_indent::vx_string_from_tbody_indent(vx_web_html::Type_tbody tbody, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_tbody_indent::vx_f_string_from_tbody_indent(vx_web_html::Type_tbody tbody, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_tbody_indent(tbody, indent);
     }
 
@@ -6488,13 +6488,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_td_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_td td = vx_core::f_any_from_any(vx_web_html::t_td, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_td td = vx_core::f_any_from_any(vx_web_html::t_td, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_td_indent(td, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_td_indent::vx_string_from_td_indent(vx_web_html::Type_td td, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_td_indent::vx_f_string_from_td_indent(vx_web_html::Type_td td, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_td_indent(td, indent);
     }
 
@@ -6564,13 +6564,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_thead_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_thead thead = vx_core::f_any_from_any(vx_web_html::t_thead, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_thead thead = vx_core::f_any_from_any(vx_web_html::t_thead, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_thead_indent(thead, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_thead_indent::vx_string_from_thead_indent(vx_web_html::Type_thead thead, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_thead_indent::vx_f_string_from_thead_indent(vx_web_html::Type_thead thead, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_thead_indent(thead, indent);
     }
 
@@ -6640,13 +6640,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_title_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_title title = vx_core::f_any_from_any(vx_web_html::t_title, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_title title = vx_core::f_any_from_any(vx_web_html::t_title, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_title_indent(title, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_title_indent::vx_string_from_title_indent(vx_web_html::Type_title title, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_title_indent::vx_f_string_from_title_indent(vx_web_html::Type_title title, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_title_indent(title, indent);
     }
 
@@ -6725,13 +6725,13 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_tr_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_tr tr = vx_core::f_any_from_any(vx_web_html::t_tr, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_tr tr = vx_core::f_any_from_any(vx_web_html::t_tr, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_string_from_tr_indent(tr, indent);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_tr_indent::vx_string_from_tr_indent(vx_web_html::Type_tr tr, vx_core::Type_int indent) {
+    vx_core::Type_string vx_web_html::Class_string_from_tr_indent::vx_f_string_from_tr_indent(vx_web_html::Type_tr tr, vx_core::Type_int indent) {
       return vx_web_html::f_string_from_tr_indent(tr, indent);
     }
 
@@ -6810,12 +6810,12 @@
 
     vx_core::Type_any vx_web_html::Class_string_from_uri::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string uri = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string uri = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_string_from_uri(uri);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_string_from_uri::vx_string_from_uri(vx_core::Type_string uri) {
+    vx_core::Type_string vx_web_html::Class_string_from_uri::vx_f_string_from_uri(vx_core::Type_string uri) {
       return vx_web_html::f_string_from_uri(uri);
     }
 
@@ -6878,13 +6878,13 @@
 
     vx_core::Type_any vx_web_html::Class_style_from_stylesheet_name::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string name = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string name = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_web_html::f_style_from_stylesheet_name(stylesheet, name);
       return output;
     }
 
-    vx_web_html::Type_style vx_web_html::Class_style_from_stylesheet_name::vx_style_from_stylesheet_name(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_string name) {
+    vx_web_html::Type_style vx_web_html::Class_style_from_stylesheet_name::vx_f_style_from_stylesheet_name(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_string name) {
       return vx_web_html::f_style_from_stylesheet_name(stylesheet, name);
     }
 
@@ -6961,12 +6961,12 @@
 
     vx_core::Type_any vx_web_html::Class_stylemap_from_stylelist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylelist stylelist = vx_core::f_any_from_any(vx_web_html::t_stylelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_stylelist stylelist = vx_core::f_any_from_any(vx_web_html::t_stylelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_stylemap_from_stylelist(stylelist);
       return output;
     }
 
-    vx_web_html::Type_stylemap vx_web_html::Class_stylemap_from_stylelist::vx_stylemap_from_stylelist(vx_web_html::Type_stylelist stylelist) {
+    vx_web_html::Type_stylemap vx_web_html::Class_stylemap_from_stylelist::vx_f_stylemap_from_stylelist(vx_web_html::Type_stylelist stylelist) {
       return vx_web_html::f_stylemap_from_stylelist(stylelist);
     }
 
@@ -7047,12 +7047,12 @@
 
     vx_core::Type_any vx_web_html::Class_stylemap_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_stylemap_from_stylesheet(stylesheet);
       return output;
     }
 
-    vx_web_html::Type_stylemap vx_web_html::Class_stylemap_from_stylesheet::vx_stylemap_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
+    vx_web_html::Type_stylemap vx_web_html::Class_stylemap_from_stylesheet::vx_f_stylemap_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
       return vx_web_html::f_stylemap_from_stylesheet(stylesheet);
     }
 
@@ -7125,12 +7125,12 @@
 
     vx_core::Type_any vx_web_html::Class_styles_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_styles_from_stylesheet(stylesheet);
       return output;
     }
 
-    vx_web_html::Type_stylelist vx_web_html::Class_styles_from_stylesheet::vx_styles_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
+    vx_web_html::Type_stylelist vx_web_html::Class_styles_from_stylesheet::vx_f_styles_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
       return vx_web_html::f_styles_from_stylesheet(stylesheet);
     }
 
@@ -7203,12 +7203,12 @@
 
     vx_core::Type_any vx_web_html::Class_stylesheet_loadmap::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_stylesheet stylesheet = vx_core::f_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_stylesheet_loadmap(stylesheet);
       return output;
     }
 
-    vx_web_html::Type_stylesheet vx_web_html::Class_stylesheet_loadmap::vx_stylesheet_loadmap(vx_web_html::Type_stylesheet stylesheet) {
+    vx_web_html::Type_stylesheet vx_web_html::Class_stylesheet_loadmap::vx_f_stylesheet_loadmap(vx_web_html::Type_stylesheet stylesheet) {
       return vx_web_html::f_stylesheet_loadmap(stylesheet);
     }
 
@@ -7289,12 +7289,12 @@
 
     vx_core::Type_any vx_web_html::Class_uri_from_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_web_html::f_uri_from_string(text);
       return output;
     }
 
-    vx_core::Type_string vx_web_html::Class_uri_from_string::vx_uri_from_string(vx_core::Type_string text) {
+    vx_core::Type_string vx_web_html::Class_uri_from_string::vx_f_uri_from_string(vx_core::Type_string text) {
       return vx_web_html::f_uri_from_string(text);
     }
 

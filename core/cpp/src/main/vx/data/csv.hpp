@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_csv_hpp
+#define vx_data_csv_hpp
 #include <memory>
 #include <set>
 #include <string>
@@ -43,8 +44,8 @@ namespace vx_data_csv {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // headers()
     vx_core::Type_stringlist vx_p_headers;
     virtual vx_core::Type_stringlist headers();
@@ -62,18 +63,18 @@ namespace vx_data_csv {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_stringlist> vx_p_list;
 
     // vx_liststringlist()
     virtual std::vector<vx_core::Type_stringlist> vx_liststringlist();
-    // vx_stringlist(index)
-    virtual vx_core::Type_stringlist vx_stringlist(vx_core::Type_int index);
+    // vx_get_stringlist(index)
+    virtual vx_core::Type_stringlist vx_get_stringlist(vx_core::Type_int index);
   };
 
   // (const delims)
@@ -95,7 +96,7 @@ namespace vx_data_csv {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_data_csv::Type_csv vx_csv_from_textblock(vx_data_textblock::Type_textblock textblock);
+    vx_data_csv::Type_csv vx_f_csv_from_textblock(vx_data_textblock::Type_textblock textblock);
   };
 
   // (func csvrows<-textblock)
@@ -110,7 +111,7 @@ namespace vx_data_csv {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_data_csv::Type_csvrows vx_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock);
+    vx_data_csv::Type_csvrows vx_f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock);
   };
 
   // (func csv<-textblock)
@@ -120,3 +121,4 @@ namespace vx_data_csv {
   vx_data_csv::Type_csvrows f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock);
 
 }
+#endif

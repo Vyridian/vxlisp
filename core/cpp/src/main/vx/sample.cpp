@@ -29,8 +29,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_sample::Class_mytype::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_sample::Class_mytype::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -54,7 +54,7 @@
     template <class T> std::shared_ptr<T> vx_sample::Class_mytype::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_sample::Type_mytype output;
       vx_sample::Class_mytype* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_mynum = val->mynum();
       output->vx_p_mystr = val->mystr();
       std::set<std::string> validkeys;
@@ -225,7 +225,7 @@
       return output;
     }
 
-    void vx_sample::Class_main::vx_main() {vx_sample::f_main();
+    void vx_sample::Class_main::vx_f_main() {vx_sample::f_main();
     }
 
   //}
@@ -295,12 +295,12 @@
 
     vx_core::Type_any vx_sample::Class_myfunc::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int myarg = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int myarg = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_sample::f_myfunc(myarg);
       return output;
     }
 
-    vx_core::Type_int vx_sample::Class_myfunc::vx_myfunc(vx_core::Type_int myarg) {
+    vx_core::Type_int vx_sample::Class_myfunc::vx_f_myfunc(vx_core::Type_int myarg) {
       return vx_sample::f_myfunc(myarg);
     }
 

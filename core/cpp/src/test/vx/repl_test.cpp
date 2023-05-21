@@ -11,83 +11,86 @@ namespace vx_repl_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/repl"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("any<-repl"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test(
-              vx_core::t_string->vx_new_from_string("HelloWorld"),
-              vx_repl::f_any_from_repl(
-                vx_core::f_new(
-                  vx_repl::t_repl,
-                  vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                    vx_core::t_string->vx_new_from_string(":type"),
-                    vx_core::t_string,
-                    vx_core::t_string->vx_new_from_string(":repllist"),
-                    vx_core::f_new(
-                      vx_repl::t_repllist,
-                      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                        vx_core::f_new(
-                          vx_repl::t_repl,
-                          vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                            vx_core::t_string->vx_new_from_string(":val"),
-                            vx_core::t_string->vx_new_from_string("Hello")
-                          })
-                        ),
-                        vx_core::f_new(
-                          vx_repl::t_repl,
-                          vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                            vx_core::t_string->vx_new_from_string(":val"),
-                            vx_core::t_string->vx_new_from_string("World")
-                          })
-                        )
-                      })
-                    )
-                  })
+                vx_core::t_string->vx_new_from_string("HelloWorld"),
+                vx_repl::f_any_from_repl(
+                  vx_core::f_new(
+                    vx_repl::t_repl,
+                    vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                      vx_core::t_string->vx_new_from_string(":type"),
+                      vx_core::t_string,
+                      vx_core::t_string->vx_new_from_string(":repllist"),
+                      vx_core::f_new(
+                        vx_repl::t_repllist,
+                        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                          vx_core::f_new(
+                            vx_repl::t_repl,
+                            vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                              vx_core::t_string->vx_new_from_string(":val"),
+                              vx_core::t_string->vx_new_from_string("Hello")
+                            })
+                          ),
+                          vx_core::f_new(
+                            vx_repl::t_repl,
+                            vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                              vx_core::t_string->vx_new_from_string(":val"),
+                              vx_core::t_string->vx_new_from_string("World")
+                            })
+                          )
+                        })
+                      )
+                    })
+                  ),
+                  context
                 ),
                 context
-              ),
-              context
-            )
-        }),
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+              )
+          }),
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test(
-              vx_core::t_int->vx_new_from_int(5),
-              vx_repl::f_any_from_repl(
-                vx_core::f_new(
-                  vx_repl::t_repl,
-                  vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                    vx_core::t_string->vx_new_from_string(":type"),
-                    vx_core::t_plus,
-                    vx_core::t_string->vx_new_from_string(":repllist"),
-                    vx_core::f_new(
-                      vx_repl::t_repllist,
-                      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                        vx_core::f_new(
-                          vx_repl::t_repl,
-                          vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                            vx_core::t_string->vx_new_from_string(":val"),
-                            vx_core::t_int->vx_new_from_int(2)
-                          })
-                        ),
-                        vx_core::f_new(
-                          vx_repl::t_repl,
-                          vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                            vx_core::t_string->vx_new_from_string(":val"),
-                            vx_core::t_int->vx_new_from_int(3)
-                          })
-                        )
-                      })
-                    )
-                  })
+                vx_core::t_int->vx_new_from_int(5),
+                vx_repl::f_any_from_repl(
+                  vx_core::f_new(
+                    vx_repl::t_repl,
+                    vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                      vx_core::t_string->vx_new_from_string(":type"),
+                      vx_core::t_plus,
+                      vx_core::t_string->vx_new_from_string(":repllist"),
+                      vx_core::f_new(
+                        vx_repl::t_repllist,
+                        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                          vx_core::f_new(
+                            vx_repl::t_repl,
+                            vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                              vx_core::t_string->vx_new_from_string(":val"),
+                              vx_core::t_int->vx_new_from_int(2)
+                            })
+                          ),
+                          vx_core::f_new(
+                            vx_repl::t_repl,
+                            vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                              vx_core::t_string->vx_new_from_string(":val"),
+                              vx_core::t_int->vx_new_from_int(3)
+                            })
+                          )
+                        })
+                      )
+                    })
+                  ),
+                  context
                 ),
                 context
-              ),
-              context
-            )
-        })
+              )
+          })
+        }
       )
     });
     return output;
@@ -95,7 +98,7 @@ namespace vx_repl_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase->push_back(vx_repl_test::f_any_from_repl(context));
+    arraylisttestcase.push_back(vx_repl_test::f_any_from_repl(context));
     vx_test::Type_testcaselist output = vx_test::t_testcaselist->vx_new_from_list(vx_test::t_testcaselist, arraylisttestcase);
     return output;
   }

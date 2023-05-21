@@ -33,8 +33,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_csv::Class_csv::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_csv::Class_csv::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -58,7 +58,7 @@
     template <class T> std::shared_ptr<T> vx_data_csv::Class_csv::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_csv::Type_csv output;
       vx_data_csv::Class_csv* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_headers = val->headers();
       output->vx_p_rows = val->rows();
       std::set<std::string> validkeys;
@@ -145,7 +145,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_stringlist vx_data_csv::Class_csvrows::vx_stringlist(vx_core::Type_int index) {
+    vx_core::Type_stringlist vx_data_csv::Class_csvrows::vx_get_stringlist(vx_core::Type_int index) {
       vx_core::Type_stringlist output = vx_core::e_stringlist;
       vx_data_csv::Class_csvrows* list = this;
       int iindex = index->vx_int();
@@ -158,15 +158,15 @@
 
     std::vector<vx_core::Type_stringlist> vx_data_csv::Class_csvrows::vx_liststringlist() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_csv::Class_csvrows::vx_any(vx_core::Type_int index) {
-      return this->vx_stringlist(index);
+    vx_core::Type_any vx_data_csv::Class_csvrows::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_stringlist(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_csv::Class_csvrows::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_csv::e_csvrows->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_csv::Class_csvrows::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_csv::Type_csvrows output;
       vx_data_csv::Class_csvrows* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_stringlist> listval = val->vx_liststringlist();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -175,7 +175,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_stringlist) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_stringlist, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_stringlist, valsub));
         } else if (valsubtype == vx_data_csv::t_csvrows) {
           vx_data_csv::Type_csvrows multi = vx_core::any_from_any(vx_data_csv::t_csvrows, valsub);
           listval = vx_core::listaddall(listval, multi->vx_liststringlist());
@@ -358,12 +358,12 @@
 
     vx_core::Type_any vx_data_csv::Class_csv_from_textblock::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_data_csv::f_csv_from_textblock(textblock);
       return output;
     }
 
-    vx_data_csv::Type_csv vx_data_csv::Class_csv_from_textblock::vx_csv_from_textblock(vx_data_textblock::Type_textblock textblock) {
+    vx_data_csv::Type_csv vx_data_csv::Class_csv_from_textblock::vx_f_csv_from_textblock(vx_data_textblock::Type_textblock textblock) {
       return vx_data_csv::f_csv_from_textblock(textblock);
     }
 
@@ -451,12 +451,12 @@
 
     vx_core::Type_any vx_data_csv::Class_csvrows_from_textblock::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_data_csv::f_csvrows_from_textblock(textblock);
       return output;
     }
 
-    vx_data_csv::Type_csvrows vx_data_csv::Class_csvrows_from_textblock::vx_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock) {
+    vx_data_csv::Type_csvrows vx_data_csv::Class_csvrows_from_textblock::vx_f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock) {
       return vx_data_csv::f_csvrows_from_textblock(textblock);
     }
 

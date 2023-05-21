@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_web_html_hpp
+#define vx_web_html_hpp
 #include <map>
 #include <memory>
 #include <set>
@@ -303,8 +304,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -324,8 +325,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
   };
 
   // (type body)
@@ -339,8 +340,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // nodes()
     vx_web_html::Type_divchildlist vx_p_nodes;
     virtual vx_web_html::Type_divchildlist nodes();
@@ -357,8 +358,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -384,8 +385,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -406,18 +407,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_divchild> vx_p_list;
 
     // vx_listdivchild()
     virtual std::vector<vx_web_html::Type_divchild> vx_listdivchild();
-    // vx_divchild(index)
-    virtual vx_web_html::Type_divchild vx_divchild(vx_core::Type_int index);
+    // vx_get_divchild(index)
+    virtual vx_web_html::Type_divchild vx_get_divchild(vx_core::Type_int index);
   };
 
   // (type divlist)
@@ -429,18 +430,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_div> vx_p_list;
 
     // vx_listdiv()
     virtual std::vector<vx_web_html::Type_div> vx_listdiv();
-    // vx_div(index)
-    virtual vx_web_html::Type_div vx_div(vx_core::Type_int index);
+    // vx_get_div(index)
+    virtual vx_web_html::Type_div vx_get_div(vx_core::Type_int index);
   };
 
   // (type footer)
@@ -454,8 +455,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // nodes()
     vx_web_html::Type_divchildlist vx_p_nodes;
     virtual vx_web_html::Type_divchildlist nodes();
@@ -472,8 +473,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -496,8 +497,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -520,8 +521,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -544,8 +545,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // nodes()
     vx_web_html::Type_headchildlist vx_p_nodes;
     virtual vx_web_html::Type_headchildlist nodes();
@@ -562,8 +563,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
   };
 
   // (type headchildlist)
@@ -575,18 +576,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_headchild> vx_p_list;
 
     // vx_listheadchild()
     virtual std::vector<vx_web_html::Type_headchild> vx_listheadchild();
-    // vx_headchild(index)
-    virtual vx_web_html::Type_headchild vx_headchild(vx_core::Type_int index);
+    // vx_get_headchild(index)
+    virtual vx_web_html::Type_headchild vx_get_headchild(vx_core::Type_int index);
   };
 
   // (type html)
@@ -600,8 +601,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // lang()
     vx_core::Type_string vx_p_lang;
     virtual vx_core::Type_string lang();
@@ -627,8 +628,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -649,18 +650,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_node> vx_p_list;
 
     // vx_listnode()
     virtual std::vector<vx_web_html::Type_node> vx_listnode();
-    // vx_node(index)
-    virtual vx_web_html::Type_node vx_node(vx_core::Type_int index);
+    // vx_get_node(index)
+    virtual vx_web_html::Type_node vx_get_node(vx_core::Type_int index);
   };
 
   // (type p)
@@ -674,8 +675,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -696,8 +697,8 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -705,8 +706,8 @@ namespace vx_web_html {
     std::map<std::string, vx_core::Type_string> vx_p_map;
     // vx_mapstring()
     virtual std::map<std::string, vx_core::Type_string> vx_mapstring();
-    // vx_string(key)
-    virtual vx_core::Type_string vx_string(vx_core::Type_string key);
+    // vx_get_string(key)
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_string key);
   };
 
   // (type style)
@@ -720,8 +721,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // name()
     vx_core::Type_string vx_p_name;
     virtual vx_core::Type_string name();
@@ -739,18 +740,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_style> vx_p_list;
 
     // vx_liststyle()
     virtual std::vector<vx_web_html::Type_style> vx_liststyle();
-    // vx_style(index)
-    virtual vx_web_html::Type_style vx_style(vx_core::Type_int index);
+    // vx_get_style(index)
+    virtual vx_web_html::Type_style vx_get_style(vx_core::Type_int index);
   };
 
   // (type stylemap)
@@ -762,8 +763,8 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -771,8 +772,8 @@ namespace vx_web_html {
     std::map<std::string, vx_web_html::Type_style> vx_p_map;
     // vx_mapstyle()
     virtual std::map<std::string, vx_web_html::Type_style> vx_mapstyle();
-    // vx_style(key)
-    virtual vx_web_html::Type_style vx_style(vx_core::Type_string key);
+    // vx_get_style(key)
+    virtual vx_web_html::Type_style vx_get_style(vx_core::Type_string key);
   };
 
   // (type stylesheet)
@@ -786,8 +787,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -816,8 +817,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -843,8 +844,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -867,8 +868,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -889,18 +890,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_td> vx_p_list;
 
     // vx_listtd()
     virtual std::vector<vx_web_html::Type_td> vx_listtd();
-    // vx_td(index)
-    virtual vx_web_html::Type_td vx_td(vx_core::Type_int index);
+    // vx_get_td(index)
+    virtual vx_web_html::Type_td vx_get_td(vx_core::Type_int index);
   };
 
   // (type thead)
@@ -914,8 +915,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -938,8 +939,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -962,8 +963,8 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -984,18 +985,18 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_web_html::Type_tr> vx_p_list;
 
     // vx_listtr()
     virtual std::vector<vx_web_html::Type_tr> vx_listtr();
-    // vx_tr(index)
-    virtual vx_web_html::Type_tr vx_tr(vx_core::Type_int index);
+    // vx_get_tr(index)
+    virtual vx_web_html::Type_tr vx_get_tr(vx_core::Type_int index);
   };
 
   // (func boolean-write<-id-htmltext)
@@ -1008,7 +1009,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext);
+    vx_core::Type_boolean vx_f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext);
   };
 
   // (func boolean-write<-stylesheet)
@@ -1023,7 +1024,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    std::shared_ptr<vx_core::Async<vx_core::Type_boolean>> vx_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
+    std::shared_ptr<vx_core::Async<vx_core::Type_boolean>> vx_f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
   };
 
   // (func htmlstring<-string)
@@ -1038,7 +1039,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_htmlstring_from_string(vx_core::Type_string text);
+    vx_core::Type_string vx_f_htmlstring_from_string(vx_core::Type_string text);
   };
 
   // (func string-indent)
@@ -1053,7 +1054,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_indent(vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_indent(vx_core::Type_int indent);
   };
 
   // (func string<-body-indent)
@@ -1066,7 +1067,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_body_indent(vx_web_html::Type_body body, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_body_indent(vx_web_html::Type_body body, vx_core::Type_int indent);
   };
 
   // (func string<-details-indent)
@@ -1079,7 +1080,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_details_indent(vx_web_html::Type_details details, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_details_indent(vx_web_html::Type_details details, vx_core::Type_int indent);
   };
 
   // (func string<-div-indent)
@@ -1092,7 +1093,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_div_indent(vx_web_html::Type_div div, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_div_indent(vx_web_html::Type_div div, vx_core::Type_int indent);
   };
 
   // (func string<-footer-indent)
@@ -1105,7 +1106,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_footer_indent(vx_web_html::Type_footer footer, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_footer_indent(vx_web_html::Type_footer footer, vx_core::Type_int indent);
   };
 
   // (func string<-h1-indent)
@@ -1118,7 +1119,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_h1_indent(vx_web_html::Type_h1 h1, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_h1_indent(vx_web_html::Type_h1 h1, vx_core::Type_int indent);
   };
 
   // (func string<-h2-indent)
@@ -1131,7 +1132,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_h2_indent(vx_web_html::Type_h2 h2, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_h2_indent(vx_web_html::Type_h2 h2, vx_core::Type_int indent);
   };
 
   // (func string<-h3-indent)
@@ -1144,7 +1145,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_h3_indent(vx_web_html::Type_h3 h3, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_h3_indent(vx_web_html::Type_h3 h3, vx_core::Type_int indent);
   };
 
   // (func string<-head-indent)
@@ -1157,7 +1158,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_head_indent(vx_web_html::Type_head head, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_head_indent(vx_web_html::Type_head head, vx_core::Type_int indent);
   };
 
   // (func string<-html)
@@ -1172,7 +1173,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_html(vx_web_html::Type_html html);
+    vx_core::Type_string vx_f_string_from_html(vx_web_html::Type_html html);
   };
 
   // (func string<-indent)
@@ -1187,7 +1188,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_indent(vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_indent(vx_core::Type_int indent);
   };
 
   // (func string<-meta-indent)
@@ -1200,7 +1201,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent);
   };
 
   // (func string<-node-indent)
@@ -1213,7 +1214,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent);
   };
 
   // (func string<-nodelist-indent)
@@ -1226,7 +1227,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_nodelist_indent(vx_core::Type_list nodelist, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_nodelist_indent(vx_core::Type_list nodelist, vx_core::Type_int indent);
   };
 
   // (func string<-nodelist-tag-prop-indent)
@@ -1239,7 +1240,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_nodelist_tag_prop_indent(vx_core::Type_list nodes, vx_core::Type_string tag, vx_core::Type_string prop, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_nodelist_tag_prop_indent(vx_core::Type_list nodes, vx_core::Type_string tag, vx_core::Type_string prop, vx_core::Type_int indent);
   };
 
   // (func string<-p-indent)
@@ -1252,7 +1253,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent);
   };
 
   // (func string<-propname-val)
@@ -1265,7 +1266,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val);
+    vx_core::Type_string vx_f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val);
   };
 
   // (func string<-propstyle)
@@ -1280,7 +1281,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_propstyle(vx_web_html::Type_style style);
+    vx_core::Type_string vx_f_string_from_propstyle(vx_web_html::Type_style style);
   };
 
   // (func string<-style-indent)
@@ -1293,7 +1294,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent);
   };
 
   // (func string<-stylelist-indent)
@@ -1306,7 +1307,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent);
   };
 
   // (func string<-stylepropmap-indent)
@@ -1319,7 +1320,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_stylepropmap_indent(vx_web_html::Type_propmap propmap, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_stylepropmap_indent(vx_web_html::Type_propmap propmap, vx_core::Type_int indent);
   };
 
   // (func string<-stylesheet-indent)
@@ -1332,7 +1333,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_stylesheet_indent(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_stylesheet_indent(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_int indent);
   };
 
   // (func string<-table-indent)
@@ -1345,7 +1346,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_table_indent(vx_web_html::Type_table table, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_table_indent(vx_web_html::Type_table table, vx_core::Type_int indent);
   };
 
   // (func string<-tbody-indent)
@@ -1358,7 +1359,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_tbody_indent(vx_web_html::Type_tbody tbody, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_tbody_indent(vx_web_html::Type_tbody tbody, vx_core::Type_int indent);
   };
 
   // (func string<-td-indent)
@@ -1371,7 +1372,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_td_indent(vx_web_html::Type_td td, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_td_indent(vx_web_html::Type_td td, vx_core::Type_int indent);
   };
 
   // (func string<-thead-indent)
@@ -1384,7 +1385,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_thead_indent(vx_web_html::Type_thead thead, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_thead_indent(vx_web_html::Type_thead thead, vx_core::Type_int indent);
   };
 
   // (func string<-title-indent)
@@ -1397,7 +1398,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_title_indent(vx_web_html::Type_title title, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_title_indent(vx_web_html::Type_title title, vx_core::Type_int indent);
   };
 
   // (func string<-tr-indent)
@@ -1410,7 +1411,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_tr_indent(vx_web_html::Type_tr tr, vx_core::Type_int indent);
+    vx_core::Type_string vx_f_string_from_tr_indent(vx_web_html::Type_tr tr, vx_core::Type_int indent);
   };
 
   // (func string<-uri)
@@ -1425,7 +1426,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_uri(vx_core::Type_string uri);
+    vx_core::Type_string vx_f_string_from_uri(vx_core::Type_string uri);
   };
 
   // (func style<-stylesheet-name)
@@ -1438,7 +1439,7 @@ namespace vx_web_html {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_web_html::Type_style vx_style_from_stylesheet_name(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_string name);
+    vx_web_html::Type_style vx_f_style_from_stylesheet_name(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_string name);
   };
 
   // (func stylemap<-stylelist)
@@ -1453,7 +1454,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_web_html::Type_stylemap vx_stylemap_from_stylelist(vx_web_html::Type_stylelist stylelist);
+    vx_web_html::Type_stylemap vx_f_stylemap_from_stylelist(vx_web_html::Type_stylelist stylelist);
   };
 
   // (func stylemap<-stylesheet)
@@ -1468,7 +1469,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_web_html::Type_stylemap vx_stylemap_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
+    vx_web_html::Type_stylemap vx_f_stylemap_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
   };
 
   // (func styles<-stylesheet)
@@ -1483,7 +1484,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_web_html::Type_stylelist vx_styles_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
+    vx_web_html::Type_stylelist vx_f_styles_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
   };
 
   // (func stylesheet-loadmap)
@@ -1498,7 +1499,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_web_html::Type_stylesheet vx_stylesheet_loadmap(vx_web_html::Type_stylesheet stylesheet);
+    vx_web_html::Type_stylesheet vx_f_stylesheet_loadmap(vx_web_html::Type_stylesheet stylesheet);
   };
 
   // (func uri<-string)
@@ -1513,7 +1514,7 @@ namespace vx_web_html {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_uri_from_string(vx_core::Type_string text);
+    vx_core::Type_string vx_f_uri_from_string(vx_core::Type_string text);
   };
 
   // (func boolean-write<-id-htmltext)
@@ -1631,3 +1632,4 @@ namespace vx_web_html {
   vx_core::Type_string f_uri_from_string(vx_core::Type_string text);
 
 }
+#endif

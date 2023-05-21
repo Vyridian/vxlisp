@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_type_hpp
+#define vx_type_hpp
 #include <memory>
 #include "../vx/core.hpp"
 
@@ -91,7 +92,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_stringlist vx_allowtypenames_from_type(vx_core::Type_any type);
+    vx_core::Type_stringlist vx_f_allowtypenames_from_type(vx_core::Type_any type);
   };
 
   // (func allowtypes<-type)
@@ -106,7 +107,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typelist vx_allowtypes_from_type(vx_core::Type_any type);
+    vx_core::Type_typelist vx_f_allowtypes_from_type(vx_core::Type_any type);
   };
 
   // (func is-boolean)
@@ -121,7 +122,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_boolean(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_boolean(vx_core::Type_any value);
   };
 
   // (func is-decimal)
@@ -136,7 +137,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_decimal(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_decimal(vx_core::Type_any value);
   };
 
   // (func is-float)
@@ -151,7 +152,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_float(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_float(vx_core::Type_any value);
   };
 
   // (func is-none)
@@ -166,7 +167,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_none(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_none(vx_core::Type_any value);
   };
 
   // (func is-string)
@@ -181,7 +182,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_string(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_string(vx_core::Type_any value);
   };
 
   // (func is-type)
@@ -194,7 +195,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_type(vx_core::Type_any val, vx_core::Type_any type);
+    vx_core::Type_boolean vx_f_is_type(vx_core::Type_any val, vx_core::Type_any type);
   };
 
   // (func is-type<-any-typelist)
@@ -207,7 +208,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist);
+    vx_core::Type_boolean vx_f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist);
   };
 
   // (func length<-string)
@@ -222,7 +223,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_length_from_string(vx_core::Type_string text);
+    vx_core::Type_int vx_f_length_from_string(vx_core::Type_string text);
   };
 
   // (func string<-int)
@@ -237,7 +238,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_int(vx_core::Type_int val);
+    vx_core::Type_string vx_f_string_from_int(vx_core::Type_int val);
   };
 
   // (func string<-string-end)
@@ -250,7 +251,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos);
+    vx_core::Type_string vx_f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos);
   };
 
   // (func string<-string-start)
@@ -263,7 +264,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos);
+    vx_core::Type_string vx_f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos);
   };
 
   // (func string<-string-start-end)
@@ -276,7 +277,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end);
+    vx_core::Type_string vx_f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end);
   };
 
   // (func string<-stringlist-join)
@@ -289,7 +290,7 @@ namespace vx_type {
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
+    vx_core::Type_string vx_f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
   };
 
   // (func traitnames<-any)
@@ -304,7 +305,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_stringlist vx_traitnames_from_any(vx_core::Type_any val);
+    vx_core::Type_stringlist vx_f_traitnames_from_any(vx_core::Type_any val);
   };
 
   // (func traits<-any)
@@ -319,7 +320,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typelist vx_traits_from_any(vx_core::Type_any val);
+    vx_core::Type_typelist vx_f_traits_from_any(vx_core::Type_any val);
   };
 
   // (func traits<-typedef)
@@ -334,7 +335,7 @@ namespace vx_type {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typelist vx_traits_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_typelist vx_f_traits_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func allowtypenames<-type)
@@ -392,3 +393,4 @@ namespace vx_type {
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef);
 
 }
+#endif

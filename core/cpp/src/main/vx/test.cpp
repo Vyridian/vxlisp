@@ -1,4 +1,5 @@
 #include <exception>
+#include <functional>
 #include <memory>
 #include <set>
 #include <string>
@@ -52,8 +53,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testcase::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testcase::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -83,7 +84,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testcase::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testcase output;
       vx_test::Class_testcase* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_passfail = val->passfail();
       output->vx_p_testpkg = val->testpkg();
       output->vx_p_casename = val->casename();
@@ -189,7 +190,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_test::Type_testcase vx_test::Class_testcaselist::vx_testcase(vx_core::Type_int index) {
+    vx_test::Type_testcase vx_test::Class_testcaselist::vx_get_testcase(vx_core::Type_int index) {
       vx_test::Type_testcase output = vx_test::e_testcase;
       vx_test::Class_testcaselist* list = this;
       int iindex = index->vx_int();
@@ -202,15 +203,15 @@
 
     std::vector<vx_test::Type_testcase> vx_test::Class_testcaselist::vx_listtestcase() {return vx_p_list;}
 
-    vx_core::Type_any vx_test::Class_testcaselist::vx_any(vx_core::Type_int index) {
-      return this->vx_testcase(index);
+    vx_core::Type_any vx_test::Class_testcaselist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_testcase(index);
     }
 
     template <class T> std::shared_ptr<T> vx_test::Class_testcaselist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_test::e_testcaselist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_test::Class_testcaselist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testcaselist output;
       vx_test::Class_testcaselist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testcase> listval = val->vx_listtestcase();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -219,7 +220,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_test::t_testcase) {
-          listval->push_back(vx_core::any_from_any(vx_test::t_testcase, valsub));
+          listval.push_back(vx_core::any_from_any(vx_test::t_testcase, valsub));
         } else if (valsubtype == vx_test::t_testcaselist) {
           vx_test::Type_testcaselist multi = vx_core::any_from_any(vx_test::t_testcaselist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtestcase());
@@ -300,8 +301,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testcoveragedetail::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testcoveragedetail::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -331,7 +332,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testcoveragedetail::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testcoveragedetail output;
       vx_test::Class_testcoveragedetail* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_constmap = val->constmap();
       output->vx_p_funcmap = val->funcmap();
       output->vx_p_testpkg = val->testpkg();
@@ -469,8 +470,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testcoveragenums::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testcoveragenums::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -500,7 +501,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testcoveragenums::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testcoveragenums output;
       vx_test::Class_testcoveragenums* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_pct = val->pct();
       output->vx_p_testpkg = val->testpkg();
       output->vx_p_tests = val->tests();
@@ -674,8 +675,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testcoveragesummary::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testcoveragesummary::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -717,7 +718,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testcoveragesummary::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testcoveragesummary output;
       vx_test::Class_testcoveragesummary* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_bigospacenums = val->bigospacenums();
       output->vx_p_bigotimenums = val->bigotimenums();
       output->vx_p_constnums = val->constnums();
@@ -882,8 +883,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testdescribe::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testdescribe::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -910,7 +911,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testdescribe::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testdescribe output;
       vx_test::Class_testdescribe* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_describename = val->describename();
       output->vx_p_testpkg = val->testpkg();
       output->vx_p_testresult = val->testresult();
@@ -1007,7 +1008,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_test::Type_testdescribe vx_test::Class_testdescribelist::vx_testdescribe(vx_core::Type_int index) {
+    vx_test::Type_testdescribe vx_test::Class_testdescribelist::vx_get_testdescribe(vx_core::Type_int index) {
       vx_test::Type_testdescribe output = vx_test::e_testdescribe;
       vx_test::Class_testdescribelist* list = this;
       int iindex = index->vx_int();
@@ -1020,15 +1021,15 @@
 
     std::vector<vx_test::Type_testdescribe> vx_test::Class_testdescribelist::vx_listtestdescribe() {return vx_p_list;}
 
-    vx_core::Type_any vx_test::Class_testdescribelist::vx_any(vx_core::Type_int index) {
-      return this->vx_testdescribe(index);
+    vx_core::Type_any vx_test::Class_testdescribelist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_testdescribe(index);
     }
 
     template <class T> std::shared_ptr<T> vx_test::Class_testdescribelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_test::e_testdescribelist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_test::Class_testdescribelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testdescribelist output;
       vx_test::Class_testdescribelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testdescribe> listval = val->vx_listtestdescribe();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1037,7 +1038,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_test::t_testdescribe) {
-          listval->push_back(vx_core::any_from_any(vx_test::t_testdescribe, valsub));
+          listval.push_back(vx_core::any_from_any(vx_test::t_testdescribe, valsub));
         } else if (valsubtype == vx_test::t_testdescribelist) {
           vx_test::Type_testdescribelist multi = vx_core::any_from_any(vx_test::t_testdescribelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtestdescribe());
@@ -1127,8 +1128,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testpackage::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testpackage::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1161,7 +1162,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testpackage::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testpackage output;
       vx_test::Class_testpackage* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_caselist = val->caselist();
       output->vx_p_coveragedetail = val->coveragedetail();
       output->vx_p_coveragesummary = val->coveragesummary();
@@ -1276,7 +1277,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_test::Type_testpackage vx_test::Class_testpackagelist::vx_testpackage(vx_core::Type_int index) {
+    vx_test::Type_testpackage vx_test::Class_testpackagelist::vx_get_testpackage(vx_core::Type_int index) {
       vx_test::Type_testpackage output = vx_test::e_testpackage;
       vx_test::Class_testpackagelist* list = this;
       int iindex = index->vx_int();
@@ -1289,15 +1290,15 @@
 
     std::vector<vx_test::Type_testpackage> vx_test::Class_testpackagelist::vx_listtestpackage() {return vx_p_list;}
 
-    vx_core::Type_any vx_test::Class_testpackagelist::vx_any(vx_core::Type_int index) {
-      return this->vx_testpackage(index);
+    vx_core::Type_any vx_test::Class_testpackagelist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_testpackage(index);
     }
 
     template <class T> std::shared_ptr<T> vx_test::Class_testpackagelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_test::e_testpackagelist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_test::Class_testpackagelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testpackagelist output;
       vx_test::Class_testpackagelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testpackage> listval = val->vx_listtestpackage();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1306,7 +1307,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_test::t_testpackage) {
-          listval->push_back(vx_core::any_from_any(vx_test::t_testpackage, valsub));
+          listval.push_back(vx_core::any_from_any(vx_test::t_testpackage, valsub));
         } else if (valsubtype == vx_test::t_testpackagelist) {
           vx_test::Type_testpackagelist multi = vx_core::any_from_any(vx_test::t_testpackagelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtestpackage());
@@ -1396,8 +1397,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_test::Class_testresult::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_test::Class_testresult::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1430,7 +1431,7 @@
     template <class T> std::shared_ptr<T> vx_test::Class_testresult::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testresult output;
       vx_test::Class_testresult* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_code = val->code();
       output->vx_p_passfail = val->passfail();
       output->vx_p_expected = val->expected();
@@ -1545,7 +1546,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_test::Type_testresult vx_test::Class_testresultlist::vx_testresult(vx_core::Type_int index) {
+    vx_test::Type_testresult vx_test::Class_testresultlist::vx_get_testresult(vx_core::Type_int index) {
       vx_test::Type_testresult output = vx_test::e_testresult;
       vx_test::Class_testresultlist* list = this;
       int iindex = index->vx_int();
@@ -1558,15 +1559,15 @@
 
     std::vector<vx_test::Type_testresult> vx_test::Class_testresultlist::vx_listtestresult() {return vx_p_list;}
 
-    vx_core::Type_any vx_test::Class_testresultlist::vx_any(vx_core::Type_int index) {
-      return this->vx_testresult(index);
+    vx_core::Type_any vx_test::Class_testresultlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_testresult(index);
     }
 
     template <class T> std::shared_ptr<T> vx_test::Class_testresultlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_test::e_testresultlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_test::Class_testresultlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_test::Type_testresultlist output;
       vx_test::Class_testresultlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testresult> listval = val->vx_listtestresult();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1575,7 +1576,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_test::t_testresult) {
-          listval->push_back(vx_core::any_from_any(vx_test::t_testresult, valsub));
+          listval.push_back(vx_core::any_from_any(vx_test::t_testresult, valsub));
         } else if (valsubtype == vx_test::t_testresultlist) {
           vx_test::Type_testresultlist multi = vx_core::any_from_any(vx_test::t_testresultlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listtestresult());
@@ -2047,12 +2048,12 @@
 
     vx_core::Type_any vx_test::Class_div_from_testcaselist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_div_from_testcaselist(testcaselist);
       return output;
     }
 
-    vx_web_html::Type_div vx_test::Class_div_from_testcaselist::vx_div_from_testcaselist(vx_test::Type_testcaselist testcaselist) {
+    vx_web_html::Type_div vx_test::Class_div_from_testcaselist::vx_f_div_from_testcaselist(vx_test::Type_testcaselist testcaselist) {
       return vx_test::f_div_from_testcaselist(testcaselist);
     }
 
@@ -2212,12 +2213,12 @@
 
     vx_core::Type_any vx_test::Class_div_from_testpackage::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testpackage testpackage = vx_core::f_any_from_any(vx_test::t_testpackage, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testpackage testpackage = vx_core::f_any_from_any(vx_test::t_testpackage, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_div_from_testpackage(testpackage);
       return output;
     }
 
-    vx_web_html::Type_div vx_test::Class_div_from_testpackage::vx_div_from_testpackage(vx_test::Type_testpackage testpackage) {
+    vx_web_html::Type_div vx_test::Class_div_from_testpackage::vx_f_div_from_testpackage(vx_test::Type_testpackage testpackage) {
       return vx_test::f_div_from_testpackage(testpackage);
     }
 
@@ -2368,12 +2369,12 @@
 
     vx_core::Type_any vx_test::Class_div_from_testpackagelist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_div_from_testpackagelist(testpackagelist);
       return output;
     }
 
-    vx_web_html::Type_div vx_test::Class_div_from_testpackagelist::vx_div_from_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
+    vx_web_html::Type_div vx_test::Class_div_from_testpackagelist::vx_f_div_from_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
       return vx_test::f_div_from_testpackagelist(testpackagelist);
     }
 
@@ -2565,12 +2566,12 @@
 
     vx_core::Type_any vx_test::Class_divchildlist_from_testpackagelist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_divchildlist_from_testpackagelist(testpackagelist);
       return output;
     }
 
-    vx_web_html::Type_divchildlist vx_test::Class_divchildlist_from_testpackagelist::vx_divchildlist_from_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
+    vx_web_html::Type_divchildlist vx_test::Class_divchildlist_from_testpackagelist::vx_f_divchildlist_from_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
       return vx_test::f_divchildlist_from_testpackagelist(testpackagelist);
     }
 
@@ -2640,7 +2641,7 @@
       return output;
     }
 
-    vx_data_file::Type_file vx_test::Class_file_test::vx_file_test() {
+    vx_data_file::Type_file vx_test::Class_file_test::vx_f_file_test() {
       return vx_test::f_file_test();
     }
 
@@ -2714,7 +2715,7 @@
       return output;
     }
 
-    vx_data_file::Type_file vx_test::Class_file_testhtml::vx_file_testhtml() {
+    vx_data_file::Type_file vx_test::Class_file_testhtml::vx_f_file_testhtml() {
       return vx_test::f_file_testhtml();
     }
 
@@ -2788,7 +2789,7 @@
       return output;
     }
 
-    vx_data_file::Type_file vx_test::Class_file_testnode::vx_file_testnode() {
+    vx_data_file::Type_file vx_test::Class_file_testnode::vx_f_file_testnode() {
       return vx_test::f_file_testnode();
     }
 
@@ -2869,12 +2870,12 @@
 
     vx_core::Type_any vx_test::Class_html_from_divtest::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_web_html::Type_div divtest = vx_core::f_any_from_any(vx_web_html::t_div, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_web_html::Type_div divtest = vx_core::f_any_from_any(vx_web_html::t_div, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_html_from_divtest(divtest);
       return output;
     }
 
-    vx_web_html::Type_html vx_test::Class_html_from_divtest::vx_html_from_divtest(vx_web_html::Type_div divtest) {
+    vx_web_html::Type_html vx_test::Class_html_from_divtest::vx_f_html_from_divtest(vx_web_html::Type_div divtest) {
       return vx_test::f_html_from_divtest(divtest);
     }
 
@@ -2992,12 +2993,12 @@
 
     vx_core::Type_any vx_test::Class_p_from_passfail::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_boolean passfail = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean passfail = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_p_from_passfail(passfail);
       return output;
     }
 
-    vx_web_html::Type_p vx_test::Class_p_from_passfail::vx_p_from_passfail(vx_core::Type_boolean passfail) {
+    vx_web_html::Type_p vx_test::Class_p_from_passfail::vx_f_p_from_passfail(vx_core::Type_boolean passfail) {
       return vx_test::f_p_from_passfail(passfail);
     }
 
@@ -3089,12 +3090,12 @@
 
     vx_core::Type_any vx_test::Class_p_from_testcoveragenums::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testcoveragenums nums = vx_core::f_any_from_any(vx_test::t_testcoveragenums, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcoveragenums nums = vx_core::f_any_from_any(vx_test::t_testcoveragenums, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_p_from_testcoveragenums(nums);
       return output;
     }
 
-    vx_web_html::Type_p vx_test::Class_p_from_testcoveragenums::vx_p_from_testcoveragenums(vx_test::Type_testcoveragenums nums) {
+    vx_web_html::Type_p vx_test::Class_p_from_testcoveragenums::vx_f_p_from_testcoveragenums(vx_test::Type_testcoveragenums nums) {
       return vx_test::f_p_from_testcoveragenums(nums);
     }
 
@@ -3188,13 +3189,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testcase::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testcase testcase = vx_core::f_any_from_any(vx_test::t_testcase, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcase testcase = vx_core::f_any_from_any(vx_test::t_testcase, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testcase>> future = vx_test::f_resolve_testcase(testcase);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testcase>> vx_test::Class_resolve_testcase::vx_resolve_testcase(vx_test::Type_testcase testcase) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testcase>> vx_test::Class_resolve_testcase::vx_f_resolve_testcase(vx_test::Type_testcase testcase) {
       return vx_test::f_resolve_testcase(testcase);
     }
 
@@ -3209,8 +3210,8 @@
       vx_test::t_testcase,
       vx_core::t_any_from_func_async->fn_new([testcase]() {
         vx_test::Type_testdescribelist describelist = testcase->describelist();
-        vx_core::Async<vx_test::Type_testdescribelist>* future_resolvedlist = vx_test::f_resolve_testdescribelist(describelist);
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_resolvedlist, [testcase](vx_test::Type_testdescribelist resolvedlist) {
+        std::shared_ptr<vx_core::Async<vx_test::Type_testdescribelist>> future_resolvedlist = vx_test::f_resolve_testdescribelist(describelist);
+        std::function<vx_core::Type_any(vx_test::Type_testdescribelist)> fn_any_any_resolvedlist = [testcase](vx_test::Type_testdescribelist resolvedlist) {
           vx_core::Type_booleanlist passfaillist = vx_core::f_list_from_list(
             vx_core::t_booleanlist,
             resolvedlist,
@@ -3236,7 +3237,8 @@
               resolvedlist
             })
           );
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_resolvedlist, fn_any_any_resolvedlist);
         return output;
       })
     );
@@ -3302,13 +3304,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testcaselist::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testcaselist>> future = vx_test::f_resolve_testcaselist(testcaselist);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testcaselist>> vx_test::Class_resolve_testcaselist::vx_resolve_testcaselist(vx_test::Type_testcaselist testcaselist) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testcaselist>> vx_test::Class_resolve_testcaselist::vx_f_resolve_testcaselist(vx_test::Type_testcaselist testcaselist) {
       return vx_test::f_resolve_testcaselist(testcaselist);
     }
 
@@ -3386,13 +3388,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testdescribe::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testdescribe testdescribe = vx_core::f_any_from_any(vx_test::t_testdescribe, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testdescribe testdescribe = vx_core::f_any_from_any(vx_test::t_testdescribe, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testdescribe>> future = vx_test::f_resolve_testdescribe(testdescribe);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribe>> vx_test::Class_resolve_testdescribe::vx_resolve_testdescribe(vx_test::Type_testdescribe testdescribe) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribe>> vx_test::Class_resolve_testdescribe::vx_f_resolve_testdescribe(vx_test::Type_testdescribe testdescribe) {
       return vx_test::f_resolve_testdescribe(testdescribe);
     }
 
@@ -3407,8 +3409,8 @@
       vx_test::t_testdescribe,
       vx_core::t_any_from_func_async->fn_new([testdescribe]() {
         vx_test::Type_testresult testresult = testdescribe->testresult();
-        vx_core::Async<vx_test::Type_testresult>* future_resolved = vx_test::f_resolve_testresult(testresult);
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_resolved, [testdescribe](vx_test::Type_testresult resolved) {
+        std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> future_resolved = vx_test::f_resolve_testresult(testresult);
+        std::function<vx_core::Type_any(vx_test::Type_testresult)> fn_any_any_resolved = [testdescribe](vx_test::Type_testresult resolved) {
           return vx_core::f_copy(
             testdescribe,
             vx_core::t_anylist->vx_new(vx_core::t_anylist, {
@@ -3416,7 +3418,8 @@
               resolved
             })
           );
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_resolved, fn_any_any_resolved);
         return output;
       })
     );
@@ -3482,13 +3485,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testdescribelist::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testdescribelist testdescribelist = vx_core::f_any_from_any(vx_test::t_testdescribelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testdescribelist testdescribelist = vx_core::f_any_from_any(vx_test::t_testdescribelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testdescribelist>> future = vx_test::f_resolve_testdescribelist(testdescribelist);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribelist>> vx_test::Class_resolve_testdescribelist::vx_resolve_testdescribelist(vx_test::Type_testdescribelist testdescribelist) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribelist>> vx_test::Class_resolve_testdescribelist::vx_f_resolve_testdescribelist(vx_test::Type_testdescribelist testdescribelist) {
       return vx_test::f_resolve_testdescribelist(testdescribelist);
     }
 
@@ -3566,13 +3569,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testpackage::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testpackage testpackage = vx_core::f_any_from_any(vx_test::t_testpackage, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testpackage testpackage = vx_core::f_any_from_any(vx_test::t_testpackage, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testpackage>> future = vx_test::f_resolve_testpackage(testpackage);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testpackage>> vx_test::Class_resolve_testpackage::vx_resolve_testpackage(vx_test::Type_testpackage testpackage) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testpackage>> vx_test::Class_resolve_testpackage::vx_f_resolve_testpackage(vx_test::Type_testpackage testpackage) {
       return vx_test::f_resolve_testpackage(testpackage);
     }
 
@@ -3587,8 +3590,8 @@
       vx_test::t_testpackage,
       vx_core::t_any_from_func_async->fn_new([testpackage]() {
         vx_test::Type_testcaselist testcaselist = testpackage->caselist();
-        vx_core::Async<vx_test::Type_testcaselist>* future_resolvedlist = vx_test::f_resolve_testcaselist(testcaselist);
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_resolvedlist, [testpackage](vx_test::Type_testcaselist resolvedlist) {
+        std::shared_ptr<vx_core::Async<vx_test::Type_testcaselist>> future_resolvedlist = vx_test::f_resolve_testcaselist(testcaselist);
+        std::function<vx_core::Type_any(vx_test::Type_testcaselist)> fn_any_any_resolvedlist = [testpackage](vx_test::Type_testcaselist resolvedlist) {
           vx_core::Type_booleanlist passfaillist = vx_core::f_list_from_list(
             vx_core::t_booleanlist,
             resolvedlist,
@@ -3608,7 +3611,8 @@
               resolvedlist
             })
           );
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_resolvedlist, fn_any_any_resolvedlist);
         return output;
       })
     );
@@ -3674,13 +3678,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testpackagelist::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testpackagelist testpackagelist = vx_core::f_any_from_any(vx_test::t_testpackagelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> future = vx_test::f_resolve_testpackagelist(testpackagelist);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> vx_test::Class_resolve_testpackagelist::vx_resolve_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> vx_test::Class_resolve_testpackagelist::vx_f_resolve_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
       return vx_test::f_resolve_testpackagelist(testpackagelist);
     }
 
@@ -3758,13 +3762,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_test::Class_resolve_testresult::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_test::Type_testresult testresult = vx_core::f_any_from_any(vx_test::t_testresult, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testresult testresult = vx_core::f_any_from_any(vx_test::t_testresult, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> future = vx_test::f_resolve_testresult(testresult);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> vx_test::Class_resolve_testresult::vx_resolve_testresult(vx_test::Type_testresult testresult) {
+    std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> vx_test::Class_resolve_testresult::vx_f_resolve_testresult(vx_test::Type_testresult testresult) {
       return vx_test::f_resolve_testresult(testresult);
     }
 
@@ -3780,8 +3784,8 @@
       vx_core::t_any_from_func_async->fn_new([testresult]() {
         vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
         vx_core::Type_any expected = testresult->expected();
-        vx_core::Async<vx_core::Type_any>* future_actual = vx_core::f_resolve_async(vx_core::t_any, fn_actual);
-        vx_core::Async<vx_core::Type_any>* output = vx_core::async_from_async_fn(vx_core::t_any, future_actual, [fn_actual, testresult, expected](vx_core::Type_any actual) {
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> future_actual = vx_core::f_resolve_async(vx_core::t_any, fn_actual);
+        std::function<vx_core::Type_any(vx_core::Type_any)> fn_any_any_actual = [fn_actual, testresult, expected](vx_core::Type_any actual) {
           return vx_core::f_if_2(
             vx_test::t_testresult,
             vx_core::t_thenelselist->vx_new(vx_core::t_thenelselist, {
@@ -3814,7 +3818,8 @@
               )
             })
           );
-        });
+        };
+        std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_from_async_fn(vx_core::t_any, future_actual, fn_any_any_actual);
         return output;
       })
     );
@@ -3870,14 +3875,14 @@
 
     vx_core::Type_any vx_test::Class_test::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test(expected, actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test::vx_test(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test::vx_f_test(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test(expected, actual, context);
     }
 
@@ -3887,26 +3892,26 @@
   vx_test::Func_test vx_test::t_test = std::make_shared<vx_test::Class_test>();
 
   vx_test::Type_testresult vx_test::f_test(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":eq"),
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_eq(expected, actual),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":actual"),
-          actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":eq"),
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_eq(expected, actual),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test", err);
-      output = output->vx_copy(vx_test::t_test, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -3958,14 +3963,14 @@
 
     vx_core::Type_any vx_test::Class_test_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_1(expected, fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_1::vx_test_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_1::vx_f_test_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_1(expected, fn_actual, context);
     }
 
@@ -3975,24 +3980,24 @@
   vx_test::Func_test_1 vx_test::t_test_1 = std::make_shared<vx_test::Class_test_1>();
 
   vx_test::Type_testresult vx_test::f_test_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":eq"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":eq"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test", err);
-      output = output->vx_copy(vx_test::t_test_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4053,13 +4058,13 @@
 
     vx_core::Type_any vx_test::Class_test_false::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_test::f_test_false(actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_false::vx_test_false(vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_false::vx_f_test_false(vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test_false(actual, context);
     }
 
@@ -4069,29 +4074,29 @@
   vx_test::Func_test_false vx_test::t_test_false = std::make_shared<vx_test::Class_test_false>();
 
   vx_test::Type_testresult vx_test::f_test_false(vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":false"),
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_eq(
-            vx_core::t_boolean->vx_new_from_boolean(false),
-            actual
-          ),
-          vx_core::t_string->vx_new_from_string(":expected"),
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":false"),
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_eq(
           vx_core::t_boolean->vx_new_from_boolean(false),
-          vx_core::t_string->vx_new_from_string(":actual"),
           actual
-        })
-      );
+        ),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        vx_core::t_boolean->vx_new_from_boolean(false),
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-false", err);
-      output = output->vx_copy(vx_test::t_test_false, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4152,13 +4157,13 @@
 
     vx_core::Type_any vx_test::Class_test_false_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_test::f_test_false_1(fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_false_1::vx_test_false_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_false_1::vx_f_test_false_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_false_1(fn_actual, context);
     }
 
@@ -4168,24 +4173,24 @@
   vx_test::Func_test_false_1 vx_test::t_test_false_1 = std::make_shared<vx_test::Class_test_false_1>();
 
   vx_test::Type_testresult vx_test::f_test_false_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":false"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          vx_core::t_boolean->vx_new_from_boolean(false),
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":false"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        vx_core::t_boolean->vx_new_from_boolean(false),
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-false", err);
-      output = output->vx_copy(vx_test::t_test_false_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4237,14 +4242,14 @@
 
     vx_core::Type_any vx_test::Class_test_gt::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_gt(expected, actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_gt::vx_test_gt(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_gt::vx_f_test_gt(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test_gt(expected, actual, context);
     }
 
@@ -4254,26 +4259,26 @@
   vx_test::Func_test_gt vx_test::t_test_gt = std::make_shared<vx_test::Class_test_gt>();
 
   vx_test::Type_testresult vx_test::f_test_gt(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":gt"),
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_gt(expected, actual),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":actual"),
-          actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":gt"),
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_gt(expected, actual),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-gt", err);
-      output = output->vx_copy(vx_test::t_test_gt, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4325,14 +4330,14 @@
 
     vx_core::Type_any vx_test::Class_test_gt_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_gt_1(expected, fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_gt_1::vx_test_gt_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_gt_1::vx_f_test_gt_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_gt_1(expected, fn_actual, context);
     }
 
@@ -4342,24 +4347,24 @@
   vx_test::Func_test_gt_1 vx_test::t_test_gt_1 = std::make_shared<vx_test::Class_test_gt_1>();
 
   vx_test::Type_testresult vx_test::f_test_gt_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":gt"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":gt"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-gt", err);
-      output = output->vx_copy(vx_test::t_test_gt_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4411,14 +4416,14 @@
 
     vx_core::Type_any vx_test::Class_test_ne::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_ne(expected, actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_ne::vx_test_ne(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_ne::vx_f_test_ne(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test_ne(expected, actual, context);
     }
 
@@ -4428,26 +4433,26 @@
   vx_test::Func_test_ne vx_test::t_test_ne = std::make_shared<vx_test::Class_test_ne>();
 
   vx_test::Type_testresult vx_test::f_test_ne(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":ne"),
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_ne(expected, actual),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":actual"),
-          actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":ne"),
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_ne(expected, actual),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-ne", err);
-      output = output->vx_copy(vx_test::t_test_ne, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4499,14 +4504,14 @@
 
     vx_core::Type_any vx_test::Class_test_ne_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_ne_1(expected, fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_ne_1::vx_test_ne_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_ne_1::vx_f_test_ne_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_ne_1(expected, fn_actual, context);
     }
 
@@ -4516,24 +4521,24 @@
   vx_test::Func_test_ne_1 vx_test::t_test_ne_1 = std::make_shared<vx_test::Class_test_ne_1>();
 
   vx_test::Type_testresult vx_test::f_test_ne_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":ne"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":ne"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-ne", err);
-      output = output->vx_copy(vx_test::t_test_ne_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4585,14 +4590,14 @@
 
     vx_core::Type_any vx_test::Class_test_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_string(expected, actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_string::vx_test_string(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_string::vx_f_test_string(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test_string(expected, actual, context);
     }
 
@@ -4602,27 +4607,27 @@
   vx_test::Func_test_string vx_test::t_test_string = std::make_shared<vx_test::Class_test_string>();
 
   vx_test::Type_testresult vx_test::f_test_string(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_eq(
-            vx_core::f_string_from_any(expected),
-            vx_core::f_string_from_any(actual)
-          ),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":actual"),
-          actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_eq(
+          vx_core::f_string_from_any(expected),
+          vx_core::f_string_from_any(actual)
+        ),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-string", err);
-      output = output->vx_copy(vx_test::t_test_string, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4674,14 +4679,14 @@
 
     vx_core::Type_any vx_test::Class_test_string_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any expected = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_test::f_test_string_1(expected, fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_string_1::vx_test_string_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_string_1::vx_f_test_string_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_string_1(expected, fn_actual, context);
     }
 
@@ -4691,24 +4696,24 @@
   vx_test::Func_test_string_1 vx_test::t_test_string_1 = std::make_shared<vx_test::Class_test_string_1>();
 
   vx_test::Type_testresult vx_test::f_test_string_1(vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":string"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          expected,
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":string"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        expected,
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-string", err);
-      output = output->vx_copy(vx_test::t_test_string_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4769,13 +4774,13 @@
 
     vx_core::Type_any vx_test::Class_test_true::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any actual = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_test::f_test_true(actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_true::vx_test_true(vx_core::Type_any actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_true::vx_f_test_true(vx_core::Type_any actual, vx_core::Type_context context) {
       return vx_test::f_test_true(actual, context);
     }
 
@@ -4785,29 +4790,29 @@
   vx_test::Func_test_true vx_test::t_test_true = std::make_shared<vx_test::Class_test_true>();
 
   vx_test::Type_testresult vx_test::f_test_true(vx_core::Type_any actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":true"),
-          vx_core::t_string->vx_new_from_string(":passfail"),
-          vx_core::f_eq(
-            vx_core::t_boolean->vx_new_from_boolean(true),
-            actual
-          ),
-          vx_core::t_string->vx_new_from_string(":expected"),
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":true"),
+        vx_core::t_string->vx_new_from_string(":passfail"),
+        vx_core::f_eq(
           vx_core::t_boolean->vx_new_from_boolean(true),
-          vx_core::t_string->vx_new_from_string(":actual"),
           actual
-        })
-      );
+        ),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        vx_core::t_boolean->vx_new_from_boolean(true),
+        vx_core::t_string->vx_new_from_string(":actual"),
+        actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-true", err);
-      output = output->vx_copy(vx_test::t_test_true, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4868,13 +4873,13 @@
 
     vx_core::Type_any vx_test::Class_test_true_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Func_any_from_func_async fn_actual = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_test::f_test_true_1(fn_actual, context);
       return output;
     }
 
-    vx_test::Type_testresult vx_test::Class_test_true_1::vx_test_true_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
+    vx_test::Type_testresult vx_test::Class_test_true_1::vx_f_test_true_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
       return vx_test::f_test_true_1(fn_actual, context);
     }
 
@@ -4884,24 +4889,24 @@
   vx_test::Func_test_true_1 vx_test::t_test_true_1 = std::make_shared<vx_test::Class_test_true_1>();
 
   vx_test::Type_testresult vx_test::f_test_true_1(vx_core::Func_any_from_func_async fn_actual, vx_core::Type_context context) {
-      vx_test::Type_testresult output = vx_test::e_testresult;
+    vx_test::Type_testresult output = vx_test::e_testresult;
     try {
       output = vx_core::f_new(
-        vx_test::t_testresult,
-        vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-          vx_core::t_string->vx_new_from_string(":code"),
-          vx_core::t_string->vx_new_from_string(":true"),
-          vx_core::t_string->vx_new_from_string(":expected"),
-          vx_core::t_boolean->vx_new_from_boolean(true),
-          vx_core::t_string->vx_new_from_string(":fn-actual"),
-          fn_actual
-        })
-      );
+      vx_test::t_testresult,
+      vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+        vx_core::t_string->vx_new_from_string(":code"),
+        vx_core::t_string->vx_new_from_string(":true"),
+        vx_core::t_string->vx_new_from_string(":expected"),
+        vx_core::t_boolean->vx_new_from_boolean(true),
+        vx_core::t_string->vx_new_from_string(":fn-actual"),
+        fn_actual
+      })
+    );
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_new_from_exception("test-true", err);
-      output = output->vx_copy(vx_test::t_test_true_1, {msg});
+      output = output->vx_copy(vx_test::t_testresult, {msg});
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4953,13 +4958,13 @@
 
     vx_core::Type_any vx_test::Class_tr_from_testdescribe_casename::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testdescribe testdescribe = vx_core::f_any_from_any(vx_test::t_testdescribe, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string casename = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_test::Type_testdescribe testdescribe = vx_core::f_any_from_any(vx_test::t_testdescribe, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string casename = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_test::f_tr_from_testdescribe_casename(testdescribe, casename);
       return output;
     }
 
-    vx_web_html::Type_tr vx_test::Class_tr_from_testdescribe_casename::vx_tr_from_testdescribe_casename(vx_test::Type_testdescribe testdescribe, vx_core::Type_string casename) {
+    vx_web_html::Type_tr vx_test::Class_tr_from_testdescribe_casename::vx_f_tr_from_testdescribe_casename(vx_test::Type_testdescribe testdescribe, vx_core::Type_string casename) {
       return vx_test::f_tr_from_testdescribe_casename(testdescribe, casename);
     }
 
@@ -5115,12 +5120,12 @@
 
     vx_core::Type_any vx_test::Class_trlist_from_testcase::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testcase testcase = vx_core::f_any_from_any(vx_test::t_testcase, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcase testcase = vx_core::f_any_from_any(vx_test::t_testcase, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_trlist_from_testcase(testcase);
       return output;
     }
 
-    vx_web_html::Type_trlist vx_test::Class_trlist_from_testcase::vx_trlist_from_testcase(vx_test::Type_testcase testcase) {
+    vx_web_html::Type_trlist vx_test::Class_trlist_from_testcase::vx_f_trlist_from_testcase(vx_test::Type_testcase testcase) {
       return vx_test::f_trlist_from_testcase(testcase);
     }
 
@@ -5208,12 +5213,12 @@
 
     vx_core::Type_any vx_test::Class_trlist_from_testcaselist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_test::Type_testcaselist testcaselist = vx_core::f_any_from_any(vx_test::t_testcaselist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_test::f_trlist_from_testcaselist(testcaselist);
       return output;
     }
 
-    vx_web_html::Type_trlist vx_test::Class_trlist_from_testcaselist::vx_trlist_from_testcaselist(vx_test::Type_testcaselist testcaselist) {
+    vx_web_html::Type_trlist vx_test::Class_trlist_from_testcaselist::vx_f_trlist_from_testcaselist(vx_test::Type_testcaselist testcaselist) {
       return vx_test::f_trlist_from_testcaselist(testcaselist);
     }
 

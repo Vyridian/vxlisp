@@ -16,31 +16,30 @@
 
   // any_from_any(T, U)
   template <class T, class U> std::shared_ptr<T> vx_core::any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-    T tvalue = dynamic_cast<T>(&value);
-    std::shared_ptr<T> output = std::make_shared<T>(tvalue);
+    std::shared_ptr<T> output = std::dynamic_pointer_cast<T>(value);
     return output;
   }
 
   // any_from_map(T, key, defaultval)
   template <class T> std::shared_ptr<T> vx_core::any_from_map(const std::map<std::string, std::shared_ptr<T>> &map, const std::string key, const std::shared_ptr<T> defaultval) {
     std::shared_ptr<T> output = defaultval;
-    vx_core::vx_Type_mapany::const_iterator iter = map.find(key);
+    auto iter = map.find(key);
     if (iter != map.end()) {
-      output = it->second;
+      output = iter->second;
     }
     return output;
   }
 
   // async_await(T, async<T>)
-  template <class T> static std::shared_ptr<T> vx_core::async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async) {
+  template <class T> std::shared_ptr<T> vx_core::async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async) {
     std::shared_future<T> futureT = async->future;
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent = async->async_parent;
     T valueT;
     if (async_parent == NULL) {
       valueT = futureT.await();
     } else {
-      vx_core::Type_any parentval = vx_core::async_await(T generic_any_1, std::Async<vx_core::Type_any> async_parent);
-      std::function<T(vx_core::Type_any) fn = async->fn;
+      vx_core::Type_any parentval = vx_core::async_await(generic_any_1, async_parent);
+      std::function<std::shared_ptr<T>(vx_core::Type_any)> fn = async->fn;
       valueT = fn(parentval);
     }
     std::shared_ptr<T> output = std::make_shared<T>(valueT);
@@ -48,57 +47,77 @@
   }
 
   // async_from_async(T, async<U>)
-  template <class T, class U> static std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async) {
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async) {
     std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
     return output;
   }
 
   // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> vx_core::async_from_async_fn(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async, std::function<T(U)> fn) {
-    std::shared_ptr<vx_core::Async<T>> futureT = this;
-    std::shared_ptr<vx_core::Async<U>> output = std::make_shared(vx_core::Async<T>);
-    output->future = futureU;
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn) {
+    //std::shared_ptr<std::shared_future<T>>> futureT = async->future;
+    std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>();
+    //output->future = futureU;
     output->async_parent = async;
     output->fn = fn;
     return output;
   }
 
   // async_new_from_val(T)
-  template <class T> static std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_new_from_val(std::shared_ptr<T> val) {
-    std::promise<T> promise;
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_new_from_val(std::shared_ptr<T> val) {
+    std::promise<std::shared_ptr<T>> promise;
     promise.set_value(val);
-    std::shared_ptr<vx_core::Async<std:shared_ptr<T>>> output = std::make_shared(promise.get_future());
+    std::shared_future<std::shared_ptr<T>> sharedfuture = promise.get_future();
+    std::shared_ptr<std::shared_future<std::shared_ptr<T>>> psharedfuture = std::make_shared<std::shared_future<std::shared_ptr<T>>>(sharedfuture);
+    vx_core::Async<std::shared_ptr<T>> async;
+    async.future = psharedfuture;
+    std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>(async);
     return output;
   }
 
   // boolean_contains_from_set_val(set<T>, val)
   template <class T> bool vx_core::boolean_contains_from_set_val(std::set<T> set, T val) {
-    const bool output = container.find(element) != container.end();
+    const bool output = set.find(val) != set.end();
     return output;
   }
 
   // keyset_from_map(map)
   template <class T> std::set<T> vx_core::keyset_from_map(std::map<std::string, T> map) {
     std::set<T> output;
-    for (std::map<std::string, T>::iterator it = map.begin(); it != map.end(); ++it) {
-      output.push_back(it->first);
+    for (auto iter = map.begin(); iter != map.end(); ++iter) {
+      output.push_back(iter->first);
     }
     return output;
   }
 
   // list_from_list(T, list<U>)
   template <class T, class U> std::vector<std::shared_ptr<T>> vx_core::list_from_list(std::shared_ptr<T> generic_any_1, std::vector<std::shared_ptr<U>> list) {
-    std::vector<T*> output = reinterpret_cast<std::vector<T*>&>(list);
+    std::vector<std::shared_ptr<T>> output;
+    int len = list.size();
+    for (int i = 0; i < len; ++i) {
+      std::shared_ptr<U> itemu = list[i];
+      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
+      output.push_back(itemt);
+    }
     return output;
   }
 
   // listaddall(list, listadd)
   template <class T> std::vector<std::shared_ptr<T>> vx_core::listaddall(std::vector<std::shared_ptr<T>> list, std::vector<std::shared_ptr<T>> listadd) {
     list.insert(list.end(), listadd.begin(), listadd.end());
+    return list;
   }
 
   // map_from_map(T, map<U>)
   template <class T, class U> std::map<std::string, std::shared_ptr<T>> vx_core::map_from_map(std::shared_ptr<T> generic_any_1, std::map<std::string, std::shared_ptr<U>> map) {
+    std::map<std::string, std::shared_ptr<T>> output;
+//    int len = .size();
+//    for (int i = 0; i < len; ++i) {
+//      std::shared_ptr<U> itemu = list[i];
+//      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
+//      output.push_back(itemt);
+//    }
+    return output;
+
   }
 
   // string_from_any(val)
@@ -109,7 +128,7 @@
 
   // sync_from_async(generic_any_1, async)
   template <class T> std::shared_ptr<T> vx_core::sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async) {
-    future = async->future;
+    std::future<T> future = async->future;
     T valuet = future->wait();
     std::shared_ptr<T> output = std::make_shared<T>(valuet);
     return output;
@@ -321,10 +340,10 @@
    */
   //class Type_list {
     vx_core::vx_Type_listany vx_core::Class_list::vx_list() {
-      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
+      return this->vx_p_list;
     }
 
-    vx_core::Type_any vx_core::Class_list::vx_any(vx_core::Type_int index) {
+    vx_core::Type_any vx_core::Class_list::vx_get_any(vx_core::Type_int index) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Class_list* list = this;
       int iindex = index->vx_int();
@@ -339,7 +358,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_list::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_list output;
       vx_core::Class_list* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -348,7 +367,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_any) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_any, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_any, valsub));
         } else if (valsubtype == vx_core::t_list) {
           vx_core::Type_list multi = vx_core::any_from_any(vx_core::t_list, valsub);
           listval = vx_core::listaddall(listval, multi->vx_list());
@@ -395,11 +414,11 @@
   //class Type_map {
     // vx_map()
     vx_core::vx_Type_mapany vx_core::Class_map::vx_map() {
-      return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
+      return this->vx_p_map;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_map::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_map::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Class_map* map = this;
       std::string skey = key->vx_string();
@@ -436,7 +455,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_map::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_map output;
       vx_core::Class_map* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -505,8 +524,8 @@
    * (type struct)
    */
   //class Type_struct {
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_struct::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_struct::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -524,7 +543,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_struct::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_struct output;
       vx_core::Class_struct* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
       }
@@ -563,7 +582,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_boolean::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_boolean output;
       vx_core::Class_boolean* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_boolean = val->vx_boolean();
       bool booleanval = false;
       for (vx_core::Type_any valsub : vals) {
@@ -652,7 +671,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_decimal::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_decimal output;
       vx_core::Class_decimal* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_decimal = val->vx_string();
       std::string sval = "";
       for (vx_core::Type_any valsub : vals) {
@@ -705,7 +724,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_float::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_float output;
       vx_core::Class_float* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_float = val->vx_float();
       float floatval = 0;
       for (vx_core::Type_any valsub : vals) {
@@ -766,8 +785,8 @@
     template <class T> std::shared_ptr<T> vx_core::Class_int::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_int->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_int::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_int output;
-      vx_core::Class_int val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Class_int* val = this;
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_int = val->vx_int();
       int intval = 0;
       for (vx_core::Type_any valsub : vals) {
@@ -819,8 +838,8 @@
     template <class T> std::shared_ptr<T> vx_core::Class_string::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_string->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_string::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_string output;
-      vx_core::Class_string val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Class_string* val = this;
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_string = val->vx_string();
       std::string sb = output->vx_string();
       for (vx_core::Type_any valsub : vals) {
@@ -956,32 +975,15 @@
    */
   //class Type_any_from_anylist {
     vx_core::vx_Type_listany vx_core::Class_any_from_anylist::vx_list() {
-      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
-    }
-
-    vx_core::Func_any_from_any vx_core::Class_any_from_anylist::vx_any_from_any(vx_core::Type_int index) {
-      vx_core::Func_any_from_any output = vx_core::e_any_from_any;
-      vx_core::Class_any_from_anylist* list = this;
-      int iindex = index->vx_int();
-      std::vector<vx_core::Func_any_from_any> listval = list->vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval[iindex];
-      }
-      return output;
-    }
-
-    std::vector<vx_core::Func_any_from_any> vx_core::Class_any_from_anylist::vx_listany_from_any() {return vx_p_list;}
-
-    vx_core::Type_any vx_core::Class_any_from_anylist::vx_any(vx_core::Type_int index) {
-      return this->vx_any_from_any(index);
+      return this->vx_p_list;
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_any_from_anylist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_any_from_anylist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_any_from_anylist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_any_from_anylist output;
       vx_core::Class_any_from_anylist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
-      std::vector<vx_core::Func_any_from_any> listval = val->vx_listany_from_any();
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
+      std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
         if (valsubtype == vx_core::t_msgblock) {
@@ -990,7 +992,7 @@
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_any_from_anylist) {
           vx_core::Type_any_from_anylist multi = vx_core::any_from_any(vx_core::t_any_from_anylist, valsub);
-          listval = vx_core::listaddall(listval, multi->vx_listany_from_any());
+          listval = vx_core::listaddall(listval, multi->vx_list());
         } else {
           vx_core::Type_msg msg = vx_core::t_msg->vx_new_error("(new any<-anylist) - Invalid Type: " + vx_core::string_from_any(valsub));
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {msg});
@@ -1032,10 +1034,10 @@
    */
   //class Type_anylist {
     vx_core::vx_Type_listany vx_core::Class_anylist::vx_list() {
-      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
+      return this->vx_p_list;
     }
 
-    vx_core::Type_any vx_core::Class_anylist::vx_any(vx_core::Type_int index) {
+    vx_core::Type_any vx_core::Class_anylist::vx_get_any(vx_core::Type_int index) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Class_anylist* list = this;
       int iindex = index->vx_int();
@@ -1050,7 +1052,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_anylist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_anylist output;
       vx_core::Class_anylist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1059,7 +1061,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_any) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_any, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_any, valsub));
         } else if (valsubtype == vx_core::t_anylist) {
           vx_core::Type_anylist multi = vx_core::any_from_any(vx_core::t_anylist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_list());
@@ -1166,8 +1168,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_arg::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_arg::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1194,7 +1196,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_arg::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_arg output;
       vx_core::Class_arg* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_name = val->name();
       output->vx_p_argtype = val->argtype();
       output->vx_p_fn_any = val->fn_any();
@@ -1291,7 +1293,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_arg vx_core::Class_arglist::vx_arg(vx_core::Type_int index) {
+    vx_core::Type_arg vx_core::Class_arglist::vx_get_arg(vx_core::Type_int index) {
       vx_core::Type_arg output = vx_core::e_arg;
       vx_core::Class_arglist* list = this;
       int iindex = index->vx_int();
@@ -1304,15 +1306,15 @@
 
     std::vector<vx_core::Type_arg> vx_core::Class_arglist::vx_listarg() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_arglist::vx_any(vx_core::Type_int index) {
-      return this->vx_arg(index);
+    vx_core::Type_any vx_core::Class_arglist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_arg(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_arglist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_arglist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_arglist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_arglist output;
       vx_core::Class_arglist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_arg> listval = val->vx_listarg();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1321,7 +1323,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_arg) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_arg, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_arg, valsub));
         } else if (valsubtype == vx_core::t_arglist) {
           vx_core::Type_arglist multi = vx_core::any_from_any(vx_core::t_arglist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listarg());
@@ -1371,8 +1373,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_arg(key)
-    vx_core::Type_arg vx_core::Class_argmap::vx_arg(vx_core::Type_string key) {
+    // vx_get_arg(key)
+    vx_core::Type_arg vx_core::Class_argmap::vx_get_arg(vx_core::Type_string key) {
       vx_core::Type_arg output = vx_core::e_arg;
       vx_core::Class_argmap* map = this;
       std::string skey = key->vx_string();
@@ -1381,9 +1383,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_argmap::vx_any(vx_core::Type_string key) {
-      return this->vx_arg(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_argmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_arg(key);
     }
 
     // vx_maparg()
@@ -1417,7 +1419,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_argmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_argmap output;
       vx_core::Class_argmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_arg> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1489,7 +1491,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_boolean vx_core::Class_booleanlist::vx_boolean(vx_core::Type_int index) {
+    vx_core::Type_boolean vx_core::Class_booleanlist::vx_get_boolean(vx_core::Type_int index) {
       vx_core::Type_boolean output = vx_core::e_boolean;
       vx_core::Class_booleanlist* list = this;
       int iindex = index->vx_int();
@@ -1502,15 +1504,15 @@
 
     std::vector<vx_core::Type_boolean> vx_core::Class_booleanlist::vx_listboolean() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_booleanlist::vx_any(vx_core::Type_int index) {
-      return this->vx_boolean(index);
+    vx_core::Type_any vx_core::Class_booleanlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_boolean(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_booleanlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_booleanlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_booleanlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_booleanlist output;
       vx_core::Class_booleanlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_boolean> listval = val->vx_listboolean();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1519,7 +1521,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_boolean) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_boolean, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_boolean, valsub));
         } else if (valsubtype == vx_core::t_booleanlist) {
           vx_core::Type_booleanlist multi = vx_core::any_from_any(vx_core::t_booleanlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listboolean());
@@ -1671,7 +1673,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_connect vx_core::Class_connectlist::vx_connect(vx_core::Type_int index) {
+    vx_core::Type_connect vx_core::Class_connectlist::vx_get_connect(vx_core::Type_int index) {
       vx_core::Type_connect output = vx_core::e_connect;
       vx_core::Class_connectlist* list = this;
       int iindex = index->vx_int();
@@ -1684,15 +1686,15 @@
 
     std::vector<vx_core::Type_connect> vx_core::Class_connectlist::vx_listconnect() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_connectlist::vx_any(vx_core::Type_int index) {
-      return this->vx_connect(index);
+    vx_core::Type_any vx_core::Class_connectlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_connect(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_connectlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_connectlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_connectlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_connectlist output;
       vx_core::Class_connectlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_connect> listval = val->vx_listconnect();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -1701,7 +1703,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_connect) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_connect, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_connect, valsub));
         } else if (valsubtype == vx_core::t_connectlist) {
           vx_core::Type_connectlist multi = vx_core::any_from_any(vx_core::t_connectlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listconnect());
@@ -1751,8 +1753,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_connect(key)
-    vx_core::Type_connect vx_core::Class_connectmap::vx_connect(vx_core::Type_string key) {
+    // vx_get_connect(key)
+    vx_core::Type_connect vx_core::Class_connectmap::vx_get_connect(vx_core::Type_string key) {
       vx_core::Type_connect output = vx_core::e_connect;
       vx_core::Class_connectmap* map = this;
       std::string skey = key->vx_string();
@@ -1761,9 +1763,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_connectmap::vx_any(vx_core::Type_string key) {
-      return this->vx_connect(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_connectmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_connect(key);
     }
 
     // vx_mapconnect()
@@ -1797,7 +1799,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_connectmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_connectmap output;
       vx_core::Class_connectmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_connect> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1928,8 +1930,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_constdef::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_constdef::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -1956,7 +1958,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_constdef::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_constdef output;
       vx_core::Class_constdef* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_pkgname = val->pkgname();
       output->vx_p_name = val->name();
       output->vx_p_type = val->type();
@@ -2053,7 +2055,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_const vx_core::Class_constlist::vx_const(vx_core::Type_int index) {
+    vx_core::Type_const vx_core::Class_constlist::vx_get_const(vx_core::Type_int index) {
       vx_core::Type_const output = vx_core::e_const;
       vx_core::Class_constlist* list = this;
       int iindex = index->vx_int();
@@ -2066,15 +2068,15 @@
 
     std::vector<vx_core::Type_const> vx_core::Class_constlist::vx_listconst() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_constlist::vx_any(vx_core::Type_int index) {
-      return this->vx_const(index);
+    vx_core::Type_any vx_core::Class_constlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_const(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_constlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_constlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_constlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_constlist output;
       vx_core::Class_constlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_const> listval = val->vx_listconst();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -2083,7 +2085,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_const) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_const, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_const, valsub));
         } else if (valsubtype == vx_core::t_constlist) {
           vx_core::Type_constlist multi = vx_core::any_from_any(vx_core::t_constlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listconst());
@@ -2133,8 +2135,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_const(key)
-    vx_core::Type_const vx_core::Class_constmap::vx_const(vx_core::Type_string key) {
+    // vx_get_const(key)
+    vx_core::Type_const vx_core::Class_constmap::vx_get_const(vx_core::Type_string key) {
       vx_core::Type_const output = vx_core::e_const;
       vx_core::Class_constmap* map = this;
       std::string skey = key->vx_string();
@@ -2143,9 +2145,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_constmap::vx_any(vx_core::Type_string key) {
-      return this->vx_const(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_constmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_const(key);
     }
 
     // vx_mapconst()
@@ -2179,7 +2181,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_constmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_constmap output;
       vx_core::Class_constmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_const> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -2284,8 +2286,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_context::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_context::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2315,7 +2317,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_context::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_context output;
       vx_core::Class_context* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_code = val->code();
       output->vx_p_session = val->session();
       output->vx_p_setting = val->setting();
@@ -2497,8 +2499,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_funcdef::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_funcdef::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -2531,7 +2533,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_funcdef::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_funcdef output;
       vx_core::Class_funcdef* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_pkgname = val->pkgname();
       output->vx_p_name = val->name();
       output->vx_p_idx = val->idx();
@@ -2646,7 +2648,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_func vx_core::Class_funclist::vx_func(vx_core::Type_int index) {
+    vx_core::Type_func vx_core::Class_funclist::vx_get_func(vx_core::Type_int index) {
       vx_core::Type_func output = vx_core::e_func;
       vx_core::Class_funclist* list = this;
       int iindex = index->vx_int();
@@ -2659,15 +2661,15 @@
 
     std::vector<vx_core::Type_func> vx_core::Class_funclist::vx_listfunc() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_funclist::vx_any(vx_core::Type_int index) {
-      return this->vx_func(index);
+    vx_core::Type_any vx_core::Class_funclist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_func(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_funclist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_funclist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_funclist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_funclist output;
       vx_core::Class_funclist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_func> listval = val->vx_listfunc();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -2676,7 +2678,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_func) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_func, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_func, valsub));
         } else if (valsubtype == vx_core::t_funclist) {
           vx_core::Type_funclist multi = vx_core::any_from_any(vx_core::t_funclist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listfunc());
@@ -2726,8 +2728,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_func(key)
-    vx_core::Type_func vx_core::Class_funcmap::vx_func(vx_core::Type_string key) {
+    // vx_get_func(key)
+    vx_core::Type_func vx_core::Class_funcmap::vx_get_func(vx_core::Type_string key) {
       vx_core::Type_func output = vx_core::e_func;
       vx_core::Class_funcmap* map = this;
       std::string skey = key->vx_string();
@@ -2736,9 +2738,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_funcmap::vx_any(vx_core::Type_string key) {
-      return this->vx_func(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_funcmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_func(key);
     }
 
     // vx_mapfunc()
@@ -2772,7 +2774,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_funcmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_funcmap output;
       vx_core::Class_funcmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_func> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -2845,7 +2847,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_int vx_core::Class_intlist::vx_int(vx_core::Type_int index) {
+    vx_core::Type_int vx_core::Class_intlist::vx_get_int(vx_core::Type_int index) {
       vx_core::Type_int output = vx_core::e_int;
       vx_core::Class_intlist* list = this;
       int iindex = index->vx_int();
@@ -2858,15 +2860,15 @@
 
     std::vector<vx_core::Type_int> vx_core::Class_intlist::vx_listint() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_intlist::vx_any(vx_core::Type_int index) {
-      return this->vx_int(index);
+    vx_core::Type_any vx_core::Class_intlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_int(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_intlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_intlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_intlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_intlist output;
       vx_core::Class_intlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_int> listval = val->vx_listint();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -2875,7 +2877,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_int) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_int, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_int, valsub));
         } else if (valsubtype == vx_core::t_intlist) {
           vx_core::Type_intlist multi = vx_core::any_from_any(vx_core::t_intlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listint());
@@ -2925,8 +2927,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_int(key)
-    vx_core::Type_int vx_core::Class_intmap::vx_int(vx_core::Type_string key) {
+    // vx_get_int(key)
+    vx_core::Type_int vx_core::Class_intmap::vx_get_int(vx_core::Type_string key) {
       vx_core::Type_int output = vx_core::e_int;
       vx_core::Class_intmap* map = this;
       std::string skey = key->vx_string();
@@ -2935,9 +2937,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_intmap::vx_any(vx_core::Type_string key) {
-      return this->vx_int(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_intmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_int(key);
     }
 
     // vx_mapint()
@@ -2971,7 +2973,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_intmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_intmap output;
       vx_core::Class_intmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_int> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -3119,8 +3121,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_mempool::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_mempool::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3141,7 +3143,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_mempool::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_mempool output;
       vx_core::Class_mempool* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_valuepool = val->valuepool();
       std::set<std::string> validkeys;
       validkeys.insert(":valuepool");
@@ -3243,8 +3245,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_msg::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_msg::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3271,7 +3273,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_msg::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_msg output;
       vx_core::Class_msg* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_code = val->code();
       output->vx_p_severity = val->severity();
       output->vx_p_text = val->text();
@@ -3364,8 +3366,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_msgblock::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_msgblock::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3389,7 +3391,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_msgblock::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_msgblock output;
       vx_core::Class_msgblock* val = this;
-      vx_core::Class_msgblock* msgblock = this;
+      vx_core::Type_msgblock msgblock = std::make_shared<vx_core::Class_msgblock>();
       output->vx_p_msgs = val->msgs();
       output->vx_p_msgblocks = val->msgblocks();
       std::string key = "";
@@ -3409,7 +3411,7 @@
           output->vx_p_msgblocks = msgblocks;
         } else if (valsubtype == vx_core::t_msglist) {
           vx_core::Type_msglist msgs = msgblock->msgs();
-          msgs = msgs->vx_copy(vx_core::t_msgblocklist, {valsub});
+          msgs = msgs->vx_copy(vx_core::t_msglist, {valsub});
           output->vx_p_msgs = msgs;
         } else if (key == "") {
           if (valsubtype == vx_core::t_string) {
@@ -3476,7 +3478,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_msgblock vx_core::Class_msgblocklist::vx_msgblock(vx_core::Type_int index) {
+    vx_core::Type_msgblock vx_core::Class_msgblocklist::vx_get_msgblock(vx_core::Type_int index) {
       vx_core::Type_msgblock output = vx_core::e_msgblock;
       vx_core::Class_msgblocklist* list = this;
       int iindex = index->vx_int();
@@ -3489,22 +3491,22 @@
 
     std::vector<vx_core::Type_msgblock> vx_core::Class_msgblocklist::vx_listmsgblock() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_msgblocklist::vx_any(vx_core::Type_int index) {
-      return this->vx_msgblock(index);
+    vx_core::Type_any vx_core::Class_msgblocklist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_msgblock(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_msgblocklist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_msgblocklist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_msgblocklist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_msgblocklist output;
       vx_core::Class_msgblocklist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_msgblock> listval = val->vx_listmsgblock();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
         if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msgblock) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_msgblock, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_msgblock, valsub));
         } else if (valsubtype == vx_core::t_msgblocklist) {
           vx_core::Type_msgblocklist multi = vx_core::any_from_any(vx_core::t_msgblocklist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listmsgblock());
@@ -3553,7 +3555,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_msg vx_core::Class_msglist::vx_msg(vx_core::Type_int index) {
+    vx_core::Type_msg vx_core::Class_msglist::vx_get_msg(vx_core::Type_int index) {
       vx_core::Type_msg output = vx_core::e_msg;
       vx_core::Class_msglist* list = this;
       int iindex = index->vx_int();
@@ -3566,22 +3568,22 @@
 
     std::vector<vx_core::Type_msg> vx_core::Class_msglist::vx_listmsg() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_msglist::vx_any(vx_core::Type_int index) {
-      return this->vx_msg(index);
+    vx_core::Type_any vx_core::Class_msglist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_msg(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_msglist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_msglist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_msglist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_msglist output;
       vx_core::Class_msglist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_msg> listval = val->vx_listmsg();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_msg, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_msg, valsub));
         } else if (valsubtype == vx_core::t_msglist) {
           vx_core::Type_msglist multi = vx_core::any_from_any(vx_core::t_msglist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listmsg());
@@ -3700,7 +3702,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_number vx_core::Class_numberlist::vx_number(vx_core::Type_int index) {
+    vx_core::Type_number vx_core::Class_numberlist::vx_get_number(vx_core::Type_int index) {
       vx_core::Type_number output = vx_core::e_number;
       vx_core::Class_numberlist* list = this;
       int iindex = index->vx_int();
@@ -3713,15 +3715,15 @@
 
     std::vector<vx_core::Type_number> vx_core::Class_numberlist::vx_listnumber() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_numberlist::vx_any(vx_core::Type_int index) {
-      return this->vx_number(index);
+    vx_core::Type_any vx_core::Class_numberlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_number(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_numberlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_numberlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_numberlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_numberlist output;
       vx_core::Class_numberlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_number> listval = val->vx_listnumber();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -3730,7 +3732,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_number) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_number, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_number, valsub));
         } else if (valsubtype == vx_core::t_numberlist) {
           vx_core::Type_numberlist multi = vx_core::any_from_any(vx_core::t_numberlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listnumber());
@@ -3780,8 +3782,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_number(key)
-    vx_core::Type_number vx_core::Class_numbermap::vx_number(vx_core::Type_string key) {
+    // vx_get_number(key)
+    vx_core::Type_number vx_core::Class_numbermap::vx_get_number(vx_core::Type_string key) {
       vx_core::Type_number output = vx_core::e_number;
       vx_core::Class_numbermap* map = this;
       std::string skey = key->vx_string();
@@ -3790,9 +3792,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_numbermap::vx_any(vx_core::Type_string key) {
-      return this->vx_number(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_numbermap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_number(key);
     }
 
     // vx_mapnumber()
@@ -3826,7 +3828,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_numbermap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_numbermap output;
       vx_core::Class_numbermap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_number> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -3895,8 +3897,8 @@
    * (type package)
    */
   //class Type_package {
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_package::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_package::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -3914,7 +3916,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_package::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_package output;
       vx_core::Class_package* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
       }
@@ -3954,8 +3956,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_package(key)
-    vx_core::Type_package vx_core::Class_packagemap::vx_package(vx_core::Type_string key) {
+    // vx_get_package(key)
+    vx_core::Type_package vx_core::Class_packagemap::vx_get_package(vx_core::Type_string key) {
       vx_core::Type_package output = vx_core::e_package;
       vx_core::Class_packagemap* map = this;
       std::string skey = key->vx_string();
@@ -3964,9 +3966,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_packagemap::vx_any(vx_core::Type_string key) {
-      return this->vx_package(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_packagemap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_package(key);
     }
 
     // vx_mappackage()
@@ -4000,7 +4002,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_packagemap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_packagemap output;
       vx_core::Class_packagemap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_package> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -4078,8 +4080,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_permission::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_permission::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -4100,7 +4102,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_permission::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_permission output;
       vx_core::Class_permission* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_id = val->id();
       std::set<std::string> validkeys;
       validkeys.insert(":id");
@@ -4179,7 +4181,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_permission vx_core::Class_permissionlist::vx_permission(vx_core::Type_int index) {
+    vx_core::Type_permission vx_core::Class_permissionlist::vx_get_permission(vx_core::Type_int index) {
       vx_core::Type_permission output = vx_core::e_permission;
       vx_core::Class_permissionlist* list = this;
       int iindex = index->vx_int();
@@ -4192,15 +4194,15 @@
 
     std::vector<vx_core::Type_permission> vx_core::Class_permissionlist::vx_listpermission() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_permissionlist::vx_any(vx_core::Type_int index) {
-      return this->vx_permission(index);
+    vx_core::Type_any vx_core::Class_permissionlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_permission(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_permissionlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_permissionlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_permissionlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_permissionlist output;
       vx_core::Class_permissionlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_permission> listval = val->vx_listpermission();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -4209,7 +4211,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_permission) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_permission, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_permission, valsub));
         } else if (valsubtype == vx_core::t_permissionlist) {
           vx_core::Type_permissionlist multi = vx_core::any_from_any(vx_core::t_permissionlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listpermission());
@@ -4259,8 +4261,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_permission(key)
-    vx_core::Type_permission vx_core::Class_permissionmap::vx_permission(vx_core::Type_string key) {
+    // vx_get_permission(key)
+    vx_core::Type_permission vx_core::Class_permissionmap::vx_get_permission(vx_core::Type_string key) {
       vx_core::Type_permission output = vx_core::e_permission;
       vx_core::Class_permissionmap* map = this;
       std::string skey = key->vx_string();
@@ -4269,9 +4271,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_permissionmap::vx_any(vx_core::Type_string key) {
-      return this->vx_permission(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_permissionmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_permission(key);
     }
 
     // vx_mappermission()
@@ -4305,7 +4307,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_permissionmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_permissionmap output;
       vx_core::Class_permissionmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_permission> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -4392,8 +4394,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_security::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_security::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -4417,7 +4419,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_security::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_security output;
       vx_core::Class_security* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_permissions = val->permissions();
       output->vx_p_permissionmap = val->permissionmap();
       std::set<std::string> validkeys;
@@ -4528,8 +4530,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_session::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_session::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -4556,7 +4558,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_session::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_session output;
       vx_core::Class_session* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_user = val->user();
       output->vx_p_connectlist = val->connectlist();
       output->vx_p_connectmap = val->connectmap();
@@ -4658,8 +4660,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_setting::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_setting::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -4680,7 +4682,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_setting::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_setting output;
       vx_core::Class_setting* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_pathmap = val->pathmap();
       std::set<std::string> validkeys;
       validkeys.insert(":pathmap");
@@ -4759,8 +4761,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_statelistener(key)
-    vx_core::Type_statelistener vx_core::Class_state::vx_statelistener(vx_core::Type_string key) {
+    // vx_get_statelistener(key)
+    vx_core::Type_statelistener vx_core::Class_state::vx_get_statelistener(vx_core::Type_string key) {
       vx_core::Type_statelistener output = vx_core::e_statelistener;
       vx_core::Class_state* map = this;
       std::string skey = key->vx_string();
@@ -4769,9 +4771,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_state::vx_any(vx_core::Type_string key) {
-      return this->vx_statelistener(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_state::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_statelistener(key);
     }
 
     // vx_mapstatelistener()
@@ -4805,7 +4807,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_state::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_state output;
       vx_core::Class_state* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_statelistener> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -4900,8 +4902,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_statelistener::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_statelistener::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -4928,7 +4930,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_statelistener::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_statelistener output;
       vx_core::Class_statelistener* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_path = val->path();
       output->vx_p_value = val->value();
       output->vx_p_fn_boolean = val->fn_boolean();
@@ -5025,7 +5027,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_string vx_core::Class_stringlist::vx_string(vx_core::Type_int index) {
+    vx_core::Type_string vx_core::Class_stringlist::vx_get_string(vx_core::Type_int index) {
       vx_core::Type_string output = vx_core::e_string;
       vx_core::Class_stringlist* list = this;
       int iindex = index->vx_int();
@@ -5038,15 +5040,15 @@
 
     std::vector<vx_core::Type_string> vx_core::Class_stringlist::vx_liststring() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_stringlist::vx_any(vx_core::Type_int index) {
-      return this->vx_string(index);
+    vx_core::Type_any vx_core::Class_stringlist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_string(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_stringlist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_stringlist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_stringlist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_stringlist output;
       vx_core::Class_stringlist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_string> listval = val->vx_liststring();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -5055,7 +5057,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_string) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_string, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_string, valsub));
         } else if (valsubtype == vx_core::t_stringlist) {
           vx_core::Type_stringlist multi = vx_core::any_from_any(vx_core::t_stringlist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_liststring());
@@ -5105,8 +5107,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_string(key)
-    vx_core::Type_string vx_core::Class_stringmap::vx_string(vx_core::Type_string key) {
+    // vx_get_string(key)
+    vx_core::Type_string vx_core::Class_stringmap::vx_get_string(vx_core::Type_string key) {
       vx_core::Type_string output = vx_core::e_string;
       vx_core::Class_stringmap* map = this;
       std::string skey = key->vx_string();
@@ -5115,9 +5117,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_stringmap::vx_any(vx_core::Type_string key) {
-      return this->vx_string(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_stringmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_string(key);
     }
 
     // vx_mapstring()
@@ -5151,7 +5153,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_stringmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_stringmap output;
       vx_core::Class_stringmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -5264,8 +5266,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_thenelse::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_thenelse::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -5298,7 +5300,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_thenelse::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_thenelse output;
       vx_core::Class_thenelse* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_code = val->code();
       output->vx_p_value = val->value();
       output->vx_p_values = val->values();
@@ -5412,7 +5414,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_core::Type_thenelse vx_core::Class_thenelselist::vx_thenelse(vx_core::Type_int index) {
+    vx_core::Type_thenelse vx_core::Class_thenelselist::vx_get_thenelse(vx_core::Type_int index) {
       vx_core::Type_thenelse output = vx_core::e_thenelse;
       vx_core::Class_thenelselist* list = this;
       int iindex = index->vx_int();
@@ -5425,15 +5427,15 @@
 
     std::vector<vx_core::Type_thenelse> vx_core::Class_thenelselist::vx_listthenelse() {return vx_p_list;}
 
-    vx_core::Type_any vx_core::Class_thenelselist::vx_any(vx_core::Type_int index) {
-      return this->vx_thenelse(index);
+    vx_core::Type_any vx_core::Class_thenelselist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_thenelse(index);
     }
 
     template <class T> std::shared_ptr<T> vx_core::Class_thenelselist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_core::e_thenelselist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_core::Class_thenelselist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_thenelselist output;
       vx_core::Class_thenelselist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_thenelse> listval = val->vx_listthenelse();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -5442,7 +5444,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_thenelse) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_thenelse, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_thenelse, valsub));
         } else if (valsubtype == vx_core::t_thenelselist) {
           vx_core::Type_thenelselist multi = vx_core::any_from_any(vx_core::t_thenelselist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listthenelse());
@@ -5630,8 +5632,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_typedef::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_typedef::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -5685,7 +5687,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_typedef::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_typedef output;
       vx_core::Class_typedef* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_pkgname = val->pkgname();
       output->vx_p_name = val->name();
       output->vx_p_extend = val->extend();
@@ -5860,10 +5862,10 @@
    */
   //class Type_typelist {
     vx_core::vx_Type_listany vx_core::Class_typelist::vx_list() {
-      return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
+      return this->vx_p_list;
     }
 
-    vx_core::Type_any vx_core::Class_typelist::vx_any(vx_core::Type_int index) {
+    vx_core::Type_any vx_core::Class_typelist::vx_get_any(vx_core::Type_int index) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Class_typelist* list = this;
       int iindex = index->vx_int();
@@ -5878,7 +5880,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_typelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_typelist output;
       vx_core::Class_typelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -5887,7 +5889,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_core::t_any) {
-          listval->push_back(vx_core::any_from_any(vx_core::t_any, valsub));
+          listval.push_back(vx_core::any_from_any(vx_core::t_any, valsub));
         } else if (valsubtype == vx_core::t_typelist) {
           vx_core::Type_typelist multi = vx_core::any_from_any(vx_core::t_typelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_list());
@@ -5934,11 +5936,11 @@
   //class Type_typemap {
     // vx_map()
     vx_core::vx_Type_mapany vx_core::Class_typemap::vx_map() {
-      return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
+      return this->vx_p_map;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_typemap::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_typemap::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Class_typemap* map = this;
       std::string skey = key->vx_string();
@@ -5975,7 +5977,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_typemap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_typemap output;
       vx_core::Class_typemap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -6071,8 +6073,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_user::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_user::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -6099,7 +6101,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_user::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_user output;
       vx_core::Class_user* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_security = val->security();
       output->vx_p_username = val->username();
       output->vx_p_token = val->token();
@@ -6209,8 +6211,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_core::Class_value::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_core::Class_value::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -6234,7 +6236,7 @@
     template <class T> std::shared_ptr<T> vx_core::Class_value::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_core::Type_value output;
       vx_core::Class_value* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_next = val->next();
       output->vx_p_refs = val->refs();
       std::set<std::string> validkeys;
@@ -6970,13 +6972,13 @@
 
     vx_core::Type_any vx_core::Class_any_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_any_from_any(generic_any_1, value);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_any::vx_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_any::vx_f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn(value));
@@ -7047,12 +7049,12 @@
 
     vx_core::Type_any vx_core::Class_any_from_func::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_any_from_func(generic_any_1);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_any_from_func::vx_any_from_func(std::shared_ptr<T> generic_any_1) {
+    template <class T> std::shared_ptr<T> vx_core::Class_any_from_func::vx_f_any_from_func(std::shared_ptr<T> generic_any_1) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn());
@@ -7128,12 +7130,12 @@
 
     vx_core::Type_any vx_core::Class_not::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_boolean val = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean val = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_not(val);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_not::vx_not(vx_core::Type_boolean val) {
+    vx_core::Type_boolean vx_core::Class_not::vx_f_not(vx_core::Type_boolean val) {
       return vx_core::f_not(val);
     }
 
@@ -7205,12 +7207,12 @@
 
     vx_core::Type_any vx_core::Class_notempty::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_notempty(text);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_notempty::vx_notempty(vx_core::Type_string text) {
+    vx_core::Type_boolean vx_core::Class_notempty::vx_f_notempty(vx_core::Type_string text) {
       return vx_core::f_notempty(text);
     }
 
@@ -7285,12 +7287,12 @@
 
     vx_core::Type_any vx_core::Class_notempty_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_notempty_1(val);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_notempty_1::vx_notempty_1(vx_core::Type_any val) {
+    vx_core::Type_boolean vx_core::Class_notempty_1::vx_f_notempty_1(vx_core::Type_any val) {
       return vx_core::f_notempty_1(val);
     }
 
@@ -7356,13 +7358,13 @@
 
     vx_core::Type_any vx_core::Class_ne::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_ne(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_ne::vx_ne(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_ne::vx_f_ne(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_ne(val1, val2);
     }
 
@@ -7428,13 +7430,13 @@
 
     vx_core::Type_any vx_core::Class_multiply::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_multiply(num1, num2);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_multiply::vx_multiply(vx_core::Type_int num1, vx_core::Type_int num2) {
+    vx_core::Type_int vx_core::Class_multiply::vx_f_multiply(vx_core::Type_int num1, vx_core::Type_int num2) {
       return vx_core::f_multiply(num1, num2);
     }
 
@@ -7497,13 +7499,13 @@
 
     vx_core::Type_any vx_core::Class_multiply_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_multiply_1(num1, num2);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_multiply_1::vx_multiply_1(vx_core::Type_number num1, vx_core::Type_number num2) {
+    vx_core::Type_number vx_core::Class_multiply_1::vx_f_multiply_1(vx_core::Type_number num1, vx_core::Type_number num2) {
       return vx_core::f_multiply_1(num1, num2);
     }
 
@@ -7575,12 +7577,12 @@
 
     vx_core::Type_any vx_core::Class_multiply_2::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_multiply_2(nums);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_multiply_2::vx_multiply_2(vx_core::Type_intlist nums) {
+    vx_core::Type_int vx_core::Class_multiply_2::vx_f_multiply_2(vx_core::Type_intlist nums) {
       return vx_core::f_multiply_2(nums);
     }
 
@@ -7663,12 +7665,12 @@
 
     vx_core::Type_any vx_core::Class_multiply_3::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_multiply_3(nums);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_multiply_3::vx_multiply_3(vx_core::Type_numberlist nums) {
+    vx_core::Type_number vx_core::Class_multiply_3::vx_f_multiply_3(vx_core::Type_numberlist nums) {
       return vx_core::f_multiply_3(nums);
     }
 
@@ -7742,13 +7744,13 @@
 
     vx_core::Type_any vx_core::Class_plus::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_plus(num1, num2);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_plus::vx_plus(vx_core::Type_int num1, vx_core::Type_int num2) {
+    vx_core::Type_int vx_core::Class_plus::vx_f_plus(vx_core::Type_int num1, vx_core::Type_int num2) {
       return vx_core::f_plus(num1, num2);
     }
 
@@ -7811,13 +7813,13 @@
 
     vx_core::Type_any vx_core::Class_plus_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_plus_1(num1, num2);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_plus_1::vx_plus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
+    vx_core::Type_number vx_core::Class_plus_1::vx_f_plus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
       return vx_core::f_plus_1(num1, num2);
     }
 
@@ -7889,12 +7891,12 @@
 
     vx_core::Type_any vx_core::Class_plus_2::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_plus_2(nums);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_plus_2::vx_plus_2(vx_core::Type_intlist nums) {
+    vx_core::Type_int vx_core::Class_plus_2::vx_f_plus_2(vx_core::Type_intlist nums) {
       return vx_core::f_plus_2(nums);
     }
 
@@ -7977,12 +7979,12 @@
 
     vx_core::Type_any vx_core::Class_plus_3::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_plus_3(nums);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_plus_3::vx_plus_3(vx_core::Type_numberlist nums) {
+    vx_core::Type_number vx_core::Class_plus_3::vx_f_plus_3(vx_core::Type_numberlist nums) {
       return vx_core::f_plus_3(nums);
     }
 
@@ -8065,12 +8067,12 @@
 
     vx_core::Type_any vx_core::Class_plus1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int num = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int num = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_plus1(num);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_plus1::vx_plus1(vx_core::Type_int num) {
+    vx_core::Type_int vx_core::Class_plus1::vx_f_plus1(vx_core::Type_int num) {
       return vx_core::f_plus1(num);
     }
 
@@ -8133,13 +8135,13 @@
 
     vx_core::Type_any vx_core::Class_minus::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_int num1 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int num2 = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_minus(num1, num2);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_minus::vx_minus(vx_core::Type_int num1, vx_core::Type_int num2) {
+    vx_core::Type_int vx_core::Class_minus::vx_f_minus(vx_core::Type_int num1, vx_core::Type_int num2) {
       return vx_core::f_minus(num1, num2);
     }
 
@@ -8202,13 +8204,13 @@
 
     vx_core::Type_any vx_core::Class_minus_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_minus_1(num1, num2);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_minus_1::vx_minus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
+    vx_core::Type_number vx_core::Class_minus_1::vx_f_minus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
       return vx_core::f_minus_1(num1, num2);
     }
 
@@ -8280,12 +8282,12 @@
 
     vx_core::Type_any vx_core::Class_minus_2::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_intlist nums = vx_core::f_any_from_any(vx_core::t_intlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_minus_2(nums);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_minus_2::vx_minus_2(vx_core::Type_intlist nums) {
+    vx_core::Type_int vx_core::Class_minus_2::vx_f_minus_2(vx_core::Type_intlist nums) {
       return vx_core::f_minus_2(nums);
     }
 
@@ -8368,12 +8370,12 @@
 
     vx_core::Type_any vx_core::Class_minus_3::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_numberlist nums = vx_core::f_any_from_any(vx_core::t_numberlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_minus_3(nums);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_minus_3::vx_minus_3(vx_core::Type_numberlist nums) {
+    vx_core::Type_number vx_core::Class_minus_3::vx_f_minus_3(vx_core::Type_numberlist nums) {
       return vx_core::f_minus_3(nums);
     }
 
@@ -8448,14 +8450,14 @@
 
     vx_core::Type_any vx_core::Class_dotmethod::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any object = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string method = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_anylist params = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any object = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string method = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_anylist params = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_dotmethod(object, method, params);
       return output;
     }
 
-    vx_core::Type_any vx_core::Class_dotmethod::vx_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params) {
+    vx_core::Type_any vx_core::Class_dotmethod::vx_f_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params) {
       return vx_core::f_dotmethod(object, method, params);
     }
 
@@ -8518,13 +8520,13 @@
 
     vx_core::Type_any vx_core::Class_divide::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_number num1 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_number num2 = vx_core::f_any_from_any(vx_core::t_number, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_divide(num1, num2);
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_divide::vx_divide(vx_core::Type_number num1, vx_core::Type_number num2) {
+    vx_core::Type_number vx_core::Class_divide::vx_f_divide(vx_core::Type_number num1, vx_core::Type_number num2) {
       return vx_core::f_divide(num1, num2);
     }
 
@@ -8587,13 +8589,13 @@
 
     vx_core::Type_any vx_core::Class_lt::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_lt(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_lt::vx_lt(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_lt::vx_f_lt(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_lt(val1, val2);
     }
 
@@ -8682,12 +8684,12 @@
 
     vx_core::Type_any vx_core::Class_lt_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_lt_1(values);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_lt_1::vx_lt_1(vx_core::Type_anylist values) {
+    vx_core::Type_boolean vx_core::Class_lt_1::vx_f_lt_1(vx_core::Type_anylist values) {
       return vx_core::f_lt_1(values);
     }
 
@@ -8767,14 +8769,14 @@
 
     vx_core::Type_any vx_core::Class_chainfirst::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any_from_anylist fnlist = vx_core::f_any_from_any(vx_core::t_any_from_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any_from_anylist fnlist = vx_core::f_any_from_any(vx_core::t_any_from_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_chainfirst(generic_any_1, value, fnlist);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_chainfirst::vx_chainfirst(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist) {
+    template <class T> std::shared_ptr<T> vx_core::Class_chainfirst::vx_f_chainfirst(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist) {
       return vx_core::f_chainfirst(generic_any_1, value, fnlist);
     }
 
@@ -8839,14 +8841,14 @@
 
     vx_core::Type_any vx_core::Class_chainlast::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any_from_anylist fnlist = vx_core::f_any_from_any(vx_core::t_any_from_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any_from_anylist fnlist = vx_core::f_any_from_any(vx_core::t_any_from_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_chainlast(generic_any_1, value, fnlist);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_chainlast::vx_chainlast(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist) {
+    template <class T> std::shared_ptr<T> vx_core::Class_chainlast::vx_f_chainlast(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist) {
       return vx_core::f_chainlast(generic_any_1, value, fnlist);
     }
 
@@ -8909,13 +8911,13 @@
 
     vx_core::Type_any vx_core::Class_le::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_le(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_le::vx_le(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_le::vx_f_le(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_le(val1, val2);
     }
 
@@ -8990,12 +8992,12 @@
 
     vx_core::Type_any vx_core::Class_le_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist args = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist args = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_le_1(args);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_le_1::vx_le_1(vx_core::Type_anylist args) {
+    vx_core::Type_boolean vx_core::Class_le_1::vx_f_le_1(vx_core::Type_anylist args) {
       return vx_core::f_le_1(args);
     }
 
@@ -9061,13 +9063,13 @@
 
     vx_core::Type_any vx_core::Class_eq::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_eq(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_eq::vx_eq(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_eq::vx_f_eq(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_eq(val1, val2);
     }
 
@@ -9139,12 +9141,12 @@
 
     vx_core::Type_any vx_core::Class_eq_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_eq_1(values);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_eq_1::vx_eq_1(vx_core::Type_anylist values) {
+    vx_core::Type_boolean vx_core::Class_eq_1::vx_f_eq_1(vx_core::Type_anylist values) {
       return vx_core::f_eq_1(values);
     }
 
@@ -9222,13 +9224,13 @@
 
     vx_core::Type_any vx_core::Class_gt::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_gt(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_gt::vx_gt(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_gt::vx_f_gt(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_gt(val1, val2);
     }
 
@@ -9317,12 +9319,12 @@
 
     vx_core::Type_any vx_core::Class_gt_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_gt_1(values);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_gt_1::vx_gt_1(vx_core::Type_anylist values) {
+    vx_core::Type_boolean vx_core::Class_gt_1::vx_f_gt_1(vx_core::Type_anylist values) {
       return vx_core::f_gt_1(values);
     }
 
@@ -9400,13 +9402,13 @@
 
     vx_core::Type_any vx_core::Class_ge::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_ge(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_ge::vx_ge(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean vx_core::Class_ge::vx_f_ge(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_ge(val1, val2);
     }
 
@@ -9481,12 +9483,12 @@
 
     vx_core::Type_any vx_core::Class_ge_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist args = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist args = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_ge_1(args);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_ge_1::vx_ge_1(vx_core::Type_anylist args) {
+    vx_core::Type_boolean vx_core::Class_ge_1::vx_f_ge_1(vx_core::Type_anylist args) {
       return vx_core::f_ge_1(args);
     }
 
@@ -9561,12 +9563,12 @@
 
     vx_core::Type_any vx_core::Class_allowtypenames_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_allowtypenames_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_stringlist vx_core::Class_allowtypenames_from_typedef::vx_allowtypenames_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_stringlist vx_core::Class_allowtypenames_from_typedef::vx_f_allowtypenames_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_allowtypenames_from_typedef(vtypedef);
     }
 
@@ -9641,12 +9643,12 @@
 
     vx_core::Type_any vx_core::Class_allowtypes_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_allowtypes_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_typelist vx_core::Class_allowtypes_from_typedef::vx_allowtypes_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_typelist vx_core::Class_allowtypes_from_typedef::vx_f_allowtypes_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_allowtypes_from_typedef(vtypedef);
     }
 
@@ -9709,13 +9711,13 @@
 
     vx_core::Type_any vx_core::Class_and::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_boolean val1 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_boolean val2 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_boolean val1 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean val2 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_and(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_and::vx_and(vx_core::Type_boolean val1, vx_core::Type_boolean val2) {
+    vx_core::Type_boolean vx_core::Class_and::vx_f_and(vx_core::Type_boolean val1, vx_core::Type_boolean val2) {
       return vx_core::f_and(val1, val2);
     }
 
@@ -9787,12 +9789,12 @@
 
     vx_core::Type_any vx_core::Class_and_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_booleanlist values = vx_core::f_any_from_any(vx_core::t_booleanlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_booleanlist values = vx_core::f_any_from_any(vx_core::t_booleanlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_and_1(values);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_and_1::vx_and_1(vx_core::Type_booleanlist values) {
+    vx_core::Type_boolean vx_core::Class_and_1::vx_f_and_1(vx_core::Type_booleanlist values) {
       return vx_core::f_and_1(values);
     }
 
@@ -9900,14 +9902,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_any_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_any_async(generic_any_1, value);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_any_async::vx_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_any_async::vx_f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -9982,14 +9984,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_any_context::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_any_context(generic_any_1, value, context);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_any_context::vx_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_any_context::vx_f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn(value, context));
@@ -10064,15 +10066,15 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_any_context_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_any_context_async(generic_any_1, value, context);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_any_context_async::vx_any_from_any_context_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context) {
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_any_context_async::vx_f_any_from_any_context_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -10149,13 +10151,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_func_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_func_async(generic_any_1);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_func_async::vx_any_from_func_async(std::shared_ptr<T> generic_any_1) {
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_func_async::vx_f_any_from_func_async(std::shared_ptr<T> generic_any_1) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -10230,14 +10232,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_key_value::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_key_value(generic_any_1, key, val);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_key_value::vx_any_from_key_value(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_key_value::vx_f_any_from_key_value(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn(key, val));
@@ -10312,15 +10314,15 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_key_value_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_key_value_async(generic_any_1, key, val);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_key_value_async::vx_any_from_key_value_async(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val) {
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_key_value_async::vx_f_any_from_key_value_async(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -10390,14 +10392,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int index = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int index = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_list(generic_any_1, values, index);
       return output;
     }
 
-    template <class T, class X> std::shared_ptr<T> vx_core::Class_any_from_list::vx_any_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int index) {
+    template <class T, class X> std::shared_ptr<T> vx_core::Class_any_from_list::vx_f_any_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int index) {
       return vx_core::f_any_from_list(generic_any_1, values, index);
     }
 
@@ -10461,15 +10463,15 @@
 
     vx_core::Type_any vx_core::Class_any_from_list_reduce::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list list = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any valstart = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Func_any_from_reduce fn_reduce = vx_core::f_any_from_any(vx_core::t_any_from_reduce, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list list = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any valstart = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Func_any_from_reduce fn_reduce = vx_core::f_any_from_any(vx_core::t_any_from_reduce, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_any_from_list_reduce(generic_any_1, list, valstart, fn_reduce);
       return output;
     }
 
-    template <class T, class Y> std::shared_ptr<T> vx_core::Class_any_from_list_reduce::vx_any_from_list_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce fn_reduce) {
+    template <class T, class Y> std::shared_ptr<T> vx_core::Class_any_from_list_reduce::vx_f_any_from_list_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce fn_reduce) {
       return vx_core::f_any_from_list_reduce(generic_any_1, list, valstart, fn_reduce);
     }
 
@@ -10483,7 +10485,7 @@
     output = valstart;
     std::vector<vx_core::Type_any> listval = list->vx_list();
     for (vx_core::Type_any item : listval) {
-      output = fn_reduce->f_any_from_reduce(generic_any_1, output, item);
+      output = fn_reduce->vx_f_any_from_reduce(generic_any_1, output, item);
     };
     return output;
   }
@@ -10538,15 +10540,15 @@
 
     vx_core::Type_any vx_core::Class_any_from_list_reduce_next::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list list = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any valstart = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Func_any_from_reduce_next fn_reduce_next = vx_core::f_any_from_any(vx_core::t_any_from_reduce_next, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list list = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any valstart = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Func_any_from_reduce_next fn_reduce_next = vx_core::f_any_from_any(vx_core::t_any_from_reduce_next, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_any_from_list_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
       return output;
     }
 
-    template <class T, class Y> std::shared_ptr<T> vx_core::Class_any_from_list_reduce_next::vx_any_from_list_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
+    template <class T, class Y> std::shared_ptr<T> vx_core::Class_any_from_list_reduce_next::vx_f_any_from_list_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
       return vx_core::f_any_from_list_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
     }
 
@@ -10609,14 +10611,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_map::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_map(generic_any_1, valuemap, key);
       return output;
     }
 
-    template <class T, class N> std::shared_ptr<T> vx_core::Class_any_from_map::vx_any_from_map(std::shared_ptr<T> generic_any_1, std::shared_ptr<N> valuemap, vx_core::Type_string key) {
+    template <class T, class N> std::shared_ptr<T> vx_core::Class_any_from_map::vx_f_any_from_map(std::shared_ptr<T> generic_any_1, std::shared_ptr<N> valuemap, vx_core::Type_string key) {
       return vx_core::f_any_from_map(generic_any_1, valuemap, key);
     }
 
@@ -10683,12 +10685,12 @@
 
     vx_core::Type_any vx_core::Class_any_from_none::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_any_from_none(generic_any_1);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_any_from_none::vx_any_from_none(std::shared_ptr<T> generic_any_1) {
+    template <class T> std::shared_ptr<T> vx_core::Class_any_from_none::vx_f_any_from_none(std::shared_ptr<T> generic_any_1) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn());
@@ -10762,13 +10764,13 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_none_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_none_async(generic_any_1);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_none_async::vx_any_from_none_async(std::shared_ptr<T> generic_any_1) {
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_none_async::vx_f_any_from_none_async(std::shared_ptr<T> generic_any_1) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -10843,14 +10845,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_reduce::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any item = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any item = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_reduce(generic_any_1, result, item);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_reduce::vx_any_from_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_reduce::vx_f_any_from_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn(result, item));
@@ -10925,15 +10927,15 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_reduce_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any item = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any item = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_reduce_async(generic_any_1, result, item);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_reduce_async::vx_any_from_reduce_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item) {
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_reduce_async::vx_f_any_from_reduce_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -11009,15 +11011,15 @@
 
     vx_core::Type_any vx_core::Class_any_from_reduce_next::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any current = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_any next = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any current = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any next = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_any_from_reduce_next(generic_any_1, result, current, next);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_reduce_next::vx_any_from_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_any_from_reduce_next::vx_f_any_from_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next) {
       std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
       if (fn != NULL) {
         output = vx_core::f_any_from_any(generic_any_1, fn(result, current, next));
@@ -11093,16 +11095,16 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_any_from_reduce_next_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any current = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_any next = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any result = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any current = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any next = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_any_from_reduce_next_async(generic_any_1, result, current, next);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_reduce_next_async::vx_any_from_reduce_next_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next) {
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_any_from_reduce_next_async::vx_f_any_from_reduce_next_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next) {
       std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output;
       if (fn == NULL) {
         output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
@@ -11172,14 +11174,14 @@
 
     vx_core::Type_any vx_core::Class_any_from_struct::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_struct vstruct = vx_core::f_any_from_any(vx_core::t_struct, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_struct vstruct = vx_core::f_any_from_any(vx_core::t_struct, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string key = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_any_from_struct(generic_any_1, vstruct, key);
       return output;
     }
 
-    template <class T, class R> std::shared_ptr<T> vx_core::Class_any_from_struct::vx_any_from_struct(std::shared_ptr<T> generic_any_1, std::shared_ptr<R> vstruct, vx_core::Type_string key) {
+    template <class T, class R> std::shared_ptr<T> vx_core::Class_any_from_struct::vx_f_any_from_struct(std::shared_ptr<T> generic_any_1, std::shared_ptr<R> vstruct, vx_core::Type_string key) {
       return vx_core::f_any_from_struct(generic_any_1, vstruct, key);
     }
 
@@ -11251,14 +11253,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_async(generic_any_1, value);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_async::vx_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value) {
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_async::vx_f_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value) {
       return vx_core::f_async(generic_any_1, value);
     }
 
@@ -11330,12 +11332,12 @@
 
     vx_core::Type_any vx_core::Class_boolean_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_boolean_from_any(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_boolean_from_any::vx_boolean_from_any(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_core::Class_boolean_from_any::vx_f_boolean_from_any(vx_core::Type_any value) {
       return vx_core::f_boolean_from_any(value);
     }
 
@@ -11406,7 +11408,7 @@
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_boolean_from_func::vx_boolean_from_func() {
+    vx_core::Type_boolean vx_core::Class_boolean_from_func::vx_f_boolean_from_func() {
       vx_core::Type_boolean output = vx_core::c_false;
       if (fn != NULL) {
         output = vx_core::f_any_from_any(vx_core::t_boolean, fn());
@@ -11481,7 +11483,7 @@
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_boolean_from_none::vx_boolean_from_none() {
+    vx_core::Type_boolean vx_core::Class_boolean_from_none::vx_f_boolean_from_none() {
       vx_core::Type_boolean output = vx_core::c_false;
       if (fn != NULL) {
         output = vx_core::f_any_from_any(vx_core::t_boolean, fn());
@@ -11547,13 +11549,13 @@
 
     vx_core::Type_any vx_core::Class_case::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_case(values, fn_any);
       return output;
     }
 
-    vx_core::Type_thenelse vx_core::Class_case::vx_case(vx_core::Type_list values, vx_core::Func_any_from_func fn_any) {
+    vx_core::Type_thenelse vx_core::Class_case::vx_f_case(vx_core::Type_list values, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_case(values, fn_any);
     }
 
@@ -11626,13 +11628,13 @@
 
     vx_core::Type_any vx_core::Class_case_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_case_1(value, fn_any);
       return output;
     }
 
-    vx_core::Type_thenelse vx_core::Class_case_1::vx_case_1(vx_core::Type_any value, vx_core::Func_any_from_func fn_any) {
+    vx_core::Type_thenelse vx_core::Class_case_1::vx_f_case_1(vx_core::Type_any value, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_case_1(value, fn_any);
     }
 
@@ -11706,13 +11708,13 @@
 
     vx_core::Type_any vx_core::Class_compare::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any val1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val2 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_compare(val1, val2);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_compare::vx_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_int vx_core::Class_compare::vx_f_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
       return vx_core::f_compare(val1, val2);
     }
 
@@ -11775,13 +11777,13 @@
 
     vx_core::Type_any vx_core::Class_contains::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string find = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string find = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_contains(text, find);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_contains::vx_contains(vx_core::Type_string text, vx_core::Type_string find) {
+    vx_core::Type_boolean vx_core::Class_contains::vx_f_contains(vx_core::Type_string text, vx_core::Type_string find) {
       return vx_core::f_contains(text, find);
     }
 
@@ -11844,13 +11846,13 @@
 
     vx_core::Type_any vx_core::Class_contains_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any find = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any find = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_contains_1(values, find);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_contains_1::vx_contains_1(vx_core::Type_list values, vx_core::Type_any find) {
+    vx_core::Type_boolean vx_core::Class_contains_1::vx_f_contains_1(vx_core::Type_list values, vx_core::Type_any find) {
       return vx_core::f_contains_1(values, find);
     }
 
@@ -11913,13 +11915,13 @@
 
     vx_core::Type_any vx_core::Class_copy::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_copy(value, values);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_copy::vx_copy(std::shared_ptr<T> value, vx_core::Type_anylist values) {
+    template <class T> std::shared_ptr<T> vx_core::Class_copy::vx_f_copy(std::shared_ptr<T> value, vx_core::Type_anylist values) {
       return vx_core::f_copy(value, values);
     }
 
@@ -11929,6 +11931,7 @@
   vx_core::Func_copy vx_core::t_copy = std::make_shared<vx_core::Class_copy>();
 
   template <class T> std::shared_ptr<T> vx_core::f_copy(std::shared_ptr<T> value, vx_core::Type_anylist values) {
+    std::shared_ptr<T> output = vx_core::f_new(value, values);
     return output;
   }
 
@@ -11989,12 +11992,12 @@
 
     vx_core::Type_any vx_core::Class_else::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_else(fn_any);
       return output;
     }
 
-    vx_core::Type_thenelse vx_core::Class_else::vx_else(vx_core::Func_any_from_func fn_any) {
+    vx_core::Type_thenelse vx_core::Class_else::vx_f_else(vx_core::Func_any_from_func fn_any) {
       return vx_core::f_else(fn_any);
     }
 
@@ -12075,12 +12078,12 @@
 
     vx_core::Type_any vx_core::Class_empty::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_empty(type);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_empty::vx_empty(std::shared_ptr<T> type) {
+    template <class T> std::shared_ptr<T> vx_core::Class_empty::vx_f_empty(std::shared_ptr<T> type) {
       return vx_core::f_empty(type);
     }
 
@@ -12090,6 +12093,7 @@
   vx_core::Func_empty vx_core::t_empty = std::make_shared<vx_core::Class_empty>();
 
   template <class T> std::shared_ptr<T> vx_core::f_empty(std::shared_ptr<T> type) {
+    std::shared_ptr<T> output = vx_core::any_from_any(type, type->vx_empty(type));
     return output;
   }
 
@@ -12150,12 +12154,12 @@
 
     vx_core::Type_any vx_core::Class_extends_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_extends_from_any(val);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_extends_from_any::vx_extends_from_any(vx_core::Type_any val) {
+    vx_core::Type_string vx_core::Class_extends_from_any::vx_f_extends_from_any(vx_core::Type_any val) {
       return vx_core::f_extends_from_any(val);
     }
 
@@ -12230,12 +12234,12 @@
 
     vx_core::Type_any vx_core::Class_extends_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_extends_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_extends_from_typedef::vx_extends_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_string vx_core::Class_extends_from_typedef::vx_f_extends_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_extends_from_typedef(vtypedef);
     }
 
@@ -12308,13 +12312,13 @@
 
     vx_core::Type_any vx_core::Class_first_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_first_from_list(generic_any_1, values);
       return output;
     }
 
-    template <class T, class X> std::shared_ptr<T> vx_core::Class_first_from_list::vx_first_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values) {
+    template <class T, class X> std::shared_ptr<T> vx_core::Class_first_from_list::vx_f_first_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values) {
       return vx_core::f_first_from_list(generic_any_1, values);
     }
 
@@ -12378,14 +12382,14 @@
 
     vx_core::Type_any vx_core::Class_first_from_list_fn_any_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_first_from_list_fn_any_from_any(generic_any_1, values, fn_any_from_any);
       return output;
     }
 
-    template <class T, class X> std::shared_ptr<T> vx_core::Class_first_from_list_fn_any_from_any::vx_first_from_list_fn_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Func_any_from_any fn_any_from_any) {
+    template <class T, class X> std::shared_ptr<T> vx_core::Class_first_from_list_fn_any_from_any::vx_f_first_from_list_fn_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Func_any_from_any fn_any_from_any) {
       return vx_core::f_first_from_list_fn_any_from_any(generic_any_1, values, fn_any_from_any);
     }
 
@@ -12448,14 +12452,14 @@
 
     vx_core::Type_any vx_core::Class_fn::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_arglist params = vx_core::f_any_from_any(vx_core::t_arglist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_arglist params = vx_core::f_any_from_any(vx_core::t_arglist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_fn(generic_any_1, params, fn_any);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_fn::vx_fn(std::shared_ptr<T> generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any) {
+    template <class T> std::shared_ptr<T> vx_core::Class_fn::vx_f_fn(std::shared_ptr<T> generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_fn(generic_any_1, params, fn_any);
     }
 
@@ -12526,12 +12530,12 @@
 
     vx_core::Type_any vx_core::Class_funcdef_from_func::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_func val = vx_core::f_any_from_any(vx_core::t_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_func val = vx_core::f_any_from_any(vx_core::t_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_funcdef_from_func(val);
       return output;
     }
 
-    vx_core::Type_funcdef vx_core::Class_funcdef_from_func::vx_funcdef_from_func(vx_core::Type_func val) {
+    vx_core::Type_funcdef vx_core::Class_funcdef_from_func::vx_f_funcdef_from_func(vx_core::Type_func val) {
       return vx_core::f_funcdef_from_func(val);
     }
 
@@ -12603,12 +12607,12 @@
 
     vx_core::Type_any vx_core::Class_funcname_from_funcdef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_funcdef funcdef = vx_core::f_any_from_any(vx_core::t_funcdef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_funcdef funcdef = vx_core::f_any_from_any(vx_core::t_funcdef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_funcname_from_funcdef(funcdef);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_funcname_from_funcdef::vx_funcname_from_funcdef(vx_core::Type_funcdef funcdef) {
+    vx_core::Type_string vx_core::Class_funcname_from_funcdef::vx_f_funcname_from_funcdef(vx_core::Type_funcdef funcdef) {
       return vx_core::f_funcname_from_funcdef(funcdef);
     }
 
@@ -12687,12 +12691,12 @@
 
     vx_core::Type_any vx_core::Class_global_package_get::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string pkgname = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string pkgname = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_global_package_get(pkgname);
       return output;
     }
 
-    vx_core::Type_package vx_core::Class_global_package_get::vx_global_package_get(vx_core::Type_string pkgname) {
+    vx_core::Type_package vx_core::Class_global_package_get::vx_f_global_package_get(vx_core::Type_string pkgname) {
       return vx_core::f_global_package_get(pkgname);
     }
 
@@ -12754,13 +12758,13 @@
 
     vx_core::Type_any vx_core::Class_global_package_set::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string pkgname = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_package pkg = vx_core::f_any_from_any(vx_core::t_package, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string pkgname = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_package pkg = vx_core::f_any_from_any(vx_core::t_package, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       vx_core::f_global_package_set(pkgname, pkg);
       return output;
     }
 
-    void vx_core::Class_global_package_set::vx_global_package_set(vx_core::Type_string pkgname, vx_core::Type_package pkg) {vx_core::f_global_package_set(pkgname, pkg);
+    void vx_core::Class_global_package_set::vx_f_global_package_set(vx_core::Type_string pkgname, vx_core::Type_package pkg) {vx_core::f_global_package_set(pkgname, pkg);
     }
 
   //}
@@ -12820,14 +12824,14 @@
 
     vx_core::Type_any vx_core::Class_if::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_boolean clause = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any then = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean clause = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any then = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_if(generic_any_1, clause, then);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_if::vx_if(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> then) {
+    template <class T> std::shared_ptr<T> vx_core::Class_if::vx_f_if(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> then) {
       return vx_core::f_if(generic_any_1, clause, then);
     }
 
@@ -12891,15 +12895,15 @@
 
     vx_core::Type_any vx_core::Class_if_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_boolean clause = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any thenval = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_any elseval = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean clause = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any thenval = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any elseval = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_if_1(generic_any_1, clause, thenval, elseval);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_if_1::vx_if_1(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> thenval, std::shared_ptr<T> elseval) {
+    template <class T> std::shared_ptr<T> vx_core::Class_if_1::vx_f_if_1(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> thenval, std::shared_ptr<T> elseval) {
       return vx_core::f_if_1(generic_any_1, clause, thenval, elseval);
     }
 
@@ -12971,13 +12975,13 @@
 
     vx_core::Type_any vx_core::Class_if_2::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_thenelselist thenelselist = vx_core::f_any_from_any(vx_core::t_thenelselist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_thenelselist thenelselist = vx_core::f_any_from_any(vx_core::t_thenelselist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_if_2(generic_any_1, thenelselist);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_if_2::vx_if_2(std::shared_ptr<T> generic_any_1, vx_core::Type_thenelselist thenelselist) {
+    template <class T> std::shared_ptr<T> vx_core::Class_if_2::vx_f_if_2(std::shared_ptr<T> generic_any_1, vx_core::Type_thenelselist thenelselist) {
       return vx_core::f_if_2(generic_any_1, thenelselist);
     }
 
@@ -13048,7 +13052,7 @@
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_int_from_func::vx_int_from_func() {
+    vx_core::Type_int vx_core::Class_int_from_func::vx_f_int_from_func() {
       vx_core::Type_int output = vx_core::e_int;
       if (fn != NULL) {
         output = vx_core::f_any_from_any(vx_core::t_int, fn());
@@ -13124,12 +13128,12 @@
 
     vx_core::Type_any vx_core::Class_int_from_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string val = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string val = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_int_from_string(val);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_int_from_string::vx_int_from_string(vx_core::Type_string val) {
+    vx_core::Type_int vx_core::Class_int_from_string::vx_f_int_from_string(vx_core::Type_string val) {
       return vx_core::f_int_from_string(val);
     }
 
@@ -13238,12 +13242,12 @@
 
     vx_core::Type_any vx_core::Class_is_empty::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_is_empty(text);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_empty::vx_is_empty(vx_core::Type_string text) {
+    vx_core::Type_boolean vx_core::Class_is_empty::vx_f_is_empty(vx_core::Type_string text) {
       return vx_core::f_is_empty(text);
     }
 
@@ -13318,12 +13322,12 @@
 
     vx_core::Type_any vx_core::Class_is_empty_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_is_empty_1(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_empty_1::vx_is_empty_1(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_core::Class_is_empty_1::vx_f_is_empty_1(vx_core::Type_any value) {
       return vx_core::f_is_empty_1(value);
     }
 
@@ -13391,13 +13395,13 @@
 
     vx_core::Type_any vx_core::Class_is_endswith::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string find = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string find = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_is_endswith(text, find);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_endswith::vx_is_endswith(vx_core::Type_string text, vx_core::Type_string find) {
+    vx_core::Type_boolean vx_core::Class_is_endswith::vx_f_is_endswith(vx_core::Type_string text, vx_core::Type_string find) {
       return vx_core::f_is_endswith(text, find);
     }
 
@@ -13469,12 +13473,12 @@
 
     vx_core::Type_any vx_core::Class_is_func::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_is_func(val);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_func::vx_is_func(vx_core::Type_any val) {
+    vx_core::Type_boolean vx_core::Class_is_func::vx_f_is_func(vx_core::Type_any val) {
       return vx_core::f_is_func(val);
     }
 
@@ -13546,12 +13550,12 @@
 
     vx_core::Type_any vx_core::Class_is_int::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_is_int(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_int::vx_is_int(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_core::Class_is_int::vx_f_is_int(vx_core::Type_any value) {
       return vx_core::f_is_int(value);
     }
 
@@ -13623,12 +13627,12 @@
 
     vx_core::Type_any vx_core::Class_is_number::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_is_number(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_number::vx_is_number(vx_core::Type_any value) {
+    vx_core::Type_boolean vx_core::Class_is_number::vx_f_is_number(vx_core::Type_any value) {
       return vx_core::f_is_number(value);
     }
 
@@ -13725,13 +13729,13 @@
 
     vx_core::Type_any vx_core::Class_is_pass_from_permission::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_permission permission = vx_core::f_any_from_any(vx_core::t_permission, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_permission permission = vx_core::f_any_from_any(vx_core::t_permission, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_is_pass_from_permission(permission, context);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_is_pass_from_permission::vx_is_pass_from_permission(vx_core::Type_permission permission, vx_core::Type_context context) {
+    vx_core::Type_boolean vx_core::Class_is_pass_from_permission::vx_f_is_pass_from_permission(vx_core::Type_permission permission, vx_core::Type_context context) {
       return vx_core::f_is_pass_from_permission(permission, context);
     }
 
@@ -13811,13 +13815,13 @@
 
     vx_core::Type_any vx_core::Class_last_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_last_from_list(generic_any_1, values);
       return output;
     }
 
-    template <class T, class X> std::shared_ptr<T> vx_core::Class_last_from_list::vx_last_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values) {
+    template <class T, class X> std::shared_ptr<T> vx_core::Class_last_from_list::vx_f_last_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values) {
       return vx_core::f_last_from_list(generic_any_1, values);
     }
 
@@ -13830,7 +13834,7 @@
     std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
     output = vx_core::f_let(
       generic_any_1,
-      vx_core::t_any_from_func->fn_new([values]() {
+      vx_core::t_any_from_func->fn_new([values, generic_any_1]() {
         vx_core::Type_int len = vx_core::f_length_from_list(values);
         vx_core::Type_int last = vx_core::f_minus(len, vx_core::t_int->vx_new_from_int(1));
         return vx_core::f_any_from_list(generic_any_1, values, last);
@@ -13897,12 +13901,12 @@
 
     vx_core::Type_any vx_core::Class_length_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_length_from_list(values);
       return output;
     }
 
-    vx_core::Type_int vx_core::Class_length_from_list::vx_length_from_list(vx_core::Type_list values) {
+    vx_core::Type_int vx_core::Class_length_from_list::vx_f_length_from_list(vx_core::Type_list values) {
       return vx_core::f_length_from_list(values);
     }
 
@@ -13964,13 +13968,13 @@
 
     vx_core::Type_any vx_core::Class_let::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_let(generic_any_1, fn_any);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_let::vx_let(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any) {
+    template <class T> std::shared_ptr<T> vx_core::Class_let::vx_f_let(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_let(generic_any_1, fn_any);
     }
 
@@ -14035,14 +14039,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_let_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_any_async = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_any_async = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_let_async(generic_any_1, fn_any_async);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_let_async::vx_let_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any_async) {
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_let_async::vx_f_let_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any_async) {
       return vx_core::f_let_async(generic_any_1, fn_any_async);
     }
 
@@ -14105,14 +14109,14 @@
 
     vx_core::Type_any vx_core::Class_list_join_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_list_join_from_list(generic_list_1, values, fn_any_from_any);
       return output;
     }
 
-    template <class X, class Y> std::shared_ptr<X> vx_core::Class_list_join_from_list::vx_list_join_from_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any) {
+    template <class X, class Y> std::shared_ptr<X> vx_core::Class_list_join_from_list::vx_f_list_join_from_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any) {
       return vx_core::f_list_join_from_list(generic_list_1, values, fn_any_from_any);
     }
 
@@ -14175,14 +14179,14 @@
 
     vx_core::Type_any vx_core::Class_list_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_list_from_list(generic_list_1, values, fn_any_from_any);
       return output;
     }
 
-    template <class X, class Y> std::shared_ptr<X> vx_core::Class_list_from_list::vx_list_from_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any) {
+    template <class X, class Y> std::shared_ptr<X> vx_core::Class_list_from_list::vx_f_list_from_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any) {
       return vx_core::f_list_from_list(generic_list_1, values, fn_any_from_any);
     }
 
@@ -14247,15 +14251,15 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_list_from_list_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_any_async fn_any_from_any_async = vx_core::f_any_from_any(vx_core::t_any_from_any_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list values = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_any_async fn_any_from_any_async = vx_core::f_any_from_any(vx_core::t_any_from_any_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_core::Type_list>> future = vx_core::f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class X, class Y> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_core::Class_list_from_list_async::vx_list_from_list_async(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any_async fn_any_from_any_async) {
+    template <class X, class Y> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_core::Class_list_from_list_async::vx_f_list_from_list_async(std::shared_ptr<X> generic_list_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any_async fn_any_from_any_async) {
       return vx_core::f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     }
 
@@ -14318,14 +14322,14 @@
 
     vx_core::Type_any vx_core::Class_list_from_map::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_key_value fn_any_from_key_value = vx_core::f_any_from_any(vx_core::t_any_from_key_value, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_key_value fn_any_from_key_value = vx_core::f_any_from_any(vx_core::t_any_from_key_value, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_list_from_map(generic_list_1, valuemap, fn_any_from_key_value);
       return output;
     }
 
-    template <class X, class O> std::shared_ptr<X> vx_core::Class_list_from_map::vx_list_from_map(std::shared_ptr<X> generic_list_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    template <class X, class O> std::shared_ptr<X> vx_core::Class_list_from_map::vx_f_list_from_map(std::shared_ptr<X> generic_list_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
       return vx_core::f_list_from_map(generic_list_1, valuemap, fn_any_from_key_value);
     }
 
@@ -14389,15 +14393,15 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_list_from_map_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_key_value_async fn_any_from_key_value_async = vx_core::f_any_from_any(vx_core::t_any_from_key_value_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_map valuemap = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_key_value_async fn_any_from_key_value_async = vx_core::f_any_from_any(vx_core::t_any_from_key_value_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       std::shared_ptr<vx_core::Async<vx_core::Type_list>> future = vx_core::f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class X, class O> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_core::Class_list_from_map_async::vx_list_from_map_async(std::shared_ptr<X> generic_list_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async) {
+    template <class X, class O> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_core::Class_list_from_map_async::vx_f_list_from_map_async(std::shared_ptr<X> generic_list_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async) {
       return vx_core::f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
     }
 
@@ -14469,12 +14473,12 @@
 
     vx_core::Type_any vx_core::Class_list_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_list_from_type(type);
       return output;
     }
 
-    vx_core::Type_any vx_core::Class_list_from_type::vx_list_from_type(vx_core::Type_any type) {
+    vx_core::Type_any vx_core::Class_list_from_type::vx_f_list_from_type(vx_core::Type_any type) {
       return vx_core::f_list_from_type(type);
     }
 
@@ -14545,12 +14549,12 @@
 
     vx_core::Type_any vx_core::Class_log::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_log(value);
       return output;
     }
 
-    vx_core::Type_any vx_core::Class_log::vx_log(vx_core::Type_any value) {
+    vx_core::Type_any vx_core::Class_log::vx_f_log(vx_core::Type_any value) {
       return vx_core::f_log(value);
     }
 
@@ -14613,14 +14617,14 @@
 
     vx_core::Type_any vx_core::Class_map_from_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_map generic_map_1 = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list vallist = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_map generic_map_1 = vx_core::f_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list vallist = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_any fn_any_from_any = vx_core::f_any_from_any(vx_core::t_any_from_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_map_from_list(generic_map_1, vallist, fn_any_from_any);
       return output;
     }
 
-    template <class Y, class N> std::shared_ptr<N> vx_core::Class_map_from_list::vx_map_from_list(std::shared_ptr<N> generic_map_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_any_from_any) {
+    template <class Y, class N> std::shared_ptr<N> vx_core::Class_map_from_list::vx_f_map_from_list(std::shared_ptr<N> generic_map_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_any_from_any) {
       return vx_core::f_map_from_list(generic_map_1, vallist, fn_any_from_any);
     }
 
@@ -14682,12 +14686,12 @@
 
     vx_core::Type_any vx_core::Class_mempool_addref::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       vx_core::f_mempool_addref(values);
       return output;
     }
 
-    void vx_core::Class_mempool_addref::vx_mempool_addref(vx_core::Type_anylist values) {vx_core::f_mempool_addref(values);
+    void vx_core::Class_mempool_addref::vx_f_mempool_addref(vx_core::Type_anylist values) {vx_core::f_mempool_addref(values);
     }
 
   //}
@@ -14746,12 +14750,12 @@
 
     vx_core::Type_any vx_core::Class_mempool_release::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_value value = vx_core::f_any_from_any(vx_core::t_value, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_value value = vx_core::f_any_from_any(vx_core::t_value, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       vx_core::f_mempool_release(value);
       return output;
     }
 
-    void vx_core::Class_mempool_release::vx_mempool_release(vx_core::Type_value value) {vx_core::f_mempool_release(value);
+    void vx_core::Class_mempool_release::vx_f_mempool_release(vx_core::Type_value value) {vx_core::f_mempool_release(value);
     }
 
   //}
@@ -14810,12 +14814,12 @@
 
     vx_core::Type_any vx_core::Class_mempool_removeref::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       vx_core::f_mempool_removeref(values);
       return output;
     }
 
-    void vx_core::Class_mempool_removeref::vx_mempool_removeref(vx_core::Type_anylist values) {vx_core::f_mempool_removeref(values);
+    void vx_core::Class_mempool_removeref::vx_f_mempool_removeref(vx_core::Type_anylist values) {vx_core::f_mempool_removeref(values);
     }
 
   //}
@@ -14874,12 +14878,12 @@
 
     vx_core::Type_any vx_core::Class_mempool_removerefchildren::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       vx_core::f_mempool_removerefchildren(values);
       return output;
     }
 
-    void vx_core::Class_mempool_removerefchildren::vx_mempool_removerefchildren(vx_core::Type_anylist values) {vx_core::f_mempool_removerefchildren(values);
+    void vx_core::Class_mempool_removerefchildren::vx_f_mempool_removerefchildren(vx_core::Type_anylist values) {vx_core::f_mempool_removerefchildren(values);
     }
 
   //}
@@ -14941,7 +14945,7 @@
       return output;
     }
 
-    vx_core::Type_value vx_core::Class_mempool_reserve::vx_mempool_reserve() {
+    vx_core::Type_value vx_core::Class_mempool_reserve::vx_f_mempool_reserve() {
       return vx_core::f_mempool_reserve();
     }
 
@@ -15013,12 +15017,12 @@
 
     vx_core::Type_any vx_core::Class_msg_from_error::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string error = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string error = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_msg_from_error(error);
       return output;
     }
 
-    vx_core::Type_msg vx_core::Class_msg_from_error::vx_msg_from_error(vx_core::Type_string error) {
+    vx_core::Type_msg vx_core::Class_msg_from_error::vx_f_msg_from_error(vx_core::Type_string error) {
       return vx_core::f_msg_from_error(error);
     }
 
@@ -15090,13 +15094,13 @@
 
     vx_core::Type_any vx_core::Class_msgblock_from_msgblock_msg::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_msgblock origblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_msg addmsg = vx_core::f_any_from_any(vx_core::t_msg, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_msgblock origblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_msg addmsg = vx_core::f_any_from_any(vx_core::t_msg, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_msgblock_from_msgblock_msg(origblock, addmsg);
       return output;
     }
 
-    vx_core::Type_msgblock vx_core::Class_msgblock_from_msgblock_msg::vx_msgblock_from_msgblock_msg(vx_core::Type_msgblock origblock, vx_core::Type_msg addmsg) {
+    vx_core::Type_msgblock vx_core::Class_msgblock_from_msgblock_msg::vx_f_msgblock_from_msgblock_msg(vx_core::Type_msgblock origblock, vx_core::Type_msg addmsg) {
       return vx_core::f_msgblock_from_msgblock_msg(origblock, addmsg);
     }
 
@@ -15161,13 +15165,13 @@
 
     vx_core::Type_any vx_core::Class_msgblock_from_msgblock_msgblock::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_msgblock origblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_msgblock addblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_msgblock origblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_msgblock addblock = vx_core::f_any_from_any(vx_core::t_msgblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_msgblock_from_msgblock_msgblock(origblock, addblock);
       return output;
     }
 
-    vx_core::Type_msgblock vx_core::Class_msgblock_from_msgblock_msgblock::vx_msgblock_from_msgblock_msgblock(vx_core::Type_msgblock origblock, vx_core::Type_msgblock addblock) {
+    vx_core::Type_msgblock vx_core::Class_msgblock_from_msgblock_msgblock::vx_f_msgblock_from_msgblock_msgblock(vx_core::Type_msgblock origblock, vx_core::Type_msgblock addblock) {
       return vx_core::f_msgblock_from_msgblock_msgblock(origblock, addblock);
     }
 
@@ -15246,12 +15250,12 @@
 
     vx_core::Type_any vx_core::Class_name_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_name_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_name_from_typedef::vx_name_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_string vx_core::Class_name_from_typedef::vx_f_name_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_name_from_typedef(vtypedef);
     }
 
@@ -15324,13 +15328,13 @@
 
     vx_core::Type_any vx_core::Class_native::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_anylist clauses = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist clauses = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_native(generic_any_1, clauses);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_native::vx_native(std::shared_ptr<T> generic_any_1, vx_core::Type_anylist clauses) {
+    template <class T> std::shared_ptr<T> vx_core::Class_native::vx_f_native(std::shared_ptr<T> generic_any_1, vx_core::Type_anylist clauses) {
       return vx_core::f_native(generic_any_1, clauses);
     }
 
@@ -15402,12 +15406,12 @@
 
     vx_core::Type_any vx_core::Class_native_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_native_from_any(value);
       return output;
     }
 
-    vx_core::Type_any vx_core::Class_native_from_any::vx_native_from_any(vx_core::Type_any value) {
+    vx_core::Type_any vx_core::Class_native_from_any::vx_f_native_from_any(vx_core::Type_any value) {
       return vx_core::f_native_from_any(value);
     }
 
@@ -15470,13 +15474,13 @@
 
     vx_core::Type_any vx_core::Class_new::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_anylist values = vx_core::f_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_new(type, values);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_new::vx_new(std::shared_ptr<T> type, vx_core::Type_anylist values) {
+    template <class T> std::shared_ptr<T> vx_core::Class_new::vx_f_new(std::shared_ptr<T> type, vx_core::Type_anylist values) {
       return vx_core::f_new(type, values);
     }
 
@@ -15486,6 +15490,7 @@
   vx_core::Func_new vx_core::t_new = std::make_shared<vx_core::Class_new>();
 
   template <class T> std::shared_ptr<T> vx_core::f_new(std::shared_ptr<T> type, vx_core::Type_anylist values) {
+    std::shared_ptr<T> output = vx_core::f_new(type, values);
     return output;
   }
 
@@ -15540,7 +15545,7 @@
       return output;
     }
 
-    vx_core::Type_number vx_core::Class_number_from_func::vx_number_from_func() {
+    vx_core::Type_number vx_core::Class_number_from_func::vx_f_number_from_func() {
       return vx_core::f_number_from_func();
     }
 
@@ -15603,13 +15608,13 @@
 
     vx_core::Type_any vx_core::Class_or::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_boolean val1 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_boolean val2 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_boolean val1 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_boolean val2 = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_or(val1, val2);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_or::vx_or(vx_core::Type_boolean val1, vx_core::Type_boolean val2) {
+    vx_core::Type_boolean vx_core::Class_or::vx_f_or(vx_core::Type_boolean val1, vx_core::Type_boolean val2) {
       return vx_core::f_or(val1, val2);
     }
 
@@ -15681,12 +15686,12 @@
 
     vx_core::Type_any vx_core::Class_or_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_booleanlist values = vx_core::f_any_from_any(vx_core::t_booleanlist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_booleanlist values = vx_core::f_any_from_any(vx_core::t_booleanlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_or_1(values);
       return output;
     }
 
-    vx_core::Type_boolean vx_core::Class_or_1::vx_or_1(vx_core::Type_booleanlist values) {
+    vx_core::Type_boolean vx_core::Class_or_1::vx_f_or_1(vx_core::Type_booleanlist values) {
       return vx_core::f_or_1(values);
     }
 
@@ -15773,12 +15778,12 @@
 
     vx_core::Type_any vx_core::Class_packagename_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_packagename_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_packagename_from_typedef::vx_packagename_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_string vx_core::Class_packagename_from_typedef::vx_f_packagename_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_packagename_from_typedef(vtypedef);
     }
 
@@ -15851,13 +15856,13 @@
 
     vx_core::Type_any vx_core::Class_path_from_context_path::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string path = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string path = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_path_from_context_path(path, context);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_path_from_context_path::vx_path_from_context_path(vx_core::Type_string path, vx_core::Type_context context) {
+    vx_core::Type_string vx_core::Class_path_from_context_path::vx_f_path_from_context_path(vx_core::Type_string path, vx_core::Type_context context) {
       return vx_core::f_path_from_context_path(path, context);
     }
 
@@ -15924,13 +15929,13 @@
 
     vx_core::Type_any vx_core::Class_path_from_setting_path::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_setting session = vx_core::f_any_from_any(vx_core::t_setting, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string path = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_setting session = vx_core::f_any_from_any(vx_core::t_setting, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_string path = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_path_from_setting_path(session, path);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_path_from_setting_path::vx_path_from_setting_path(vx_core::Type_setting session, vx_core::Type_string path) {
+    vx_core::Type_string vx_core::Class_path_from_setting_path::vx_f_path_from_setting_path(vx_core::Type_setting session, vx_core::Type_string path) {
       return vx_core::f_path_from_setting_path(session, path);
     }
 
@@ -16002,13 +16007,13 @@
 
     vx_core::Type_any vx_core::Class_permission_from_id_context::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string id = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string id = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_permission_from_id_context(id, context);
       return output;
     }
 
-    vx_core::Type_permission vx_core::Class_permission_from_id_context::vx_permission_from_id_context(vx_core::Type_string id, vx_core::Type_context context) {
+    vx_core::Type_permission vx_core::Class_permission_from_id_context::vx_f_permission_from_id_context(vx_core::Type_string id, vx_core::Type_context context) {
       return vx_core::f_permission_from_id_context(id, context);
     }
 
@@ -16089,12 +16094,12 @@
 
     vx_core::Type_any vx_core::Class_properties_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_properties_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_argmap vx_core::Class_properties_from_typedef::vx_properties_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_argmap vx_core::Class_properties_from_typedef::vx_f_properties_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_properties_from_typedef(vtypedef);
     }
 
@@ -16167,12 +16172,12 @@
 
     vx_core::Type_any vx_core::Class_proplast_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_proplast_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_arg vx_core::Class_proplast_from_typedef::vx_proplast_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_arg vx_core::Class_proplast_from_typedef::vx_f_proplast_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_proplast_from_typedef(vtypedef);
     }
 
@@ -16244,13 +16249,13 @@
 
     vx_core::Type_any vx_core::Class_resolve::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_resolve(generic_any_1, value);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_resolve::vx_resolve(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value) {
+    template <class T> std::shared_ptr<T> vx_core::Class_resolve::vx_f_resolve(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value) {
       return vx_core::f_resolve(generic_any_1, value);
     }
 
@@ -16322,13 +16327,13 @@
 
     vx_core::Type_any vx_core::Class_resolve_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_resolve_1(generic_any_1, fn_any);
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_core::Class_resolve_1::vx_resolve_1(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any) {
+    template <class T> std::shared_ptr<T> vx_core::Class_resolve_1::vx_f_resolve_1(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_resolve_1(generic_any_1, fn_any);
     }
 
@@ -16399,14 +16404,14 @@
 
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_resolve_async::vx_repl(vx_core::Type_anylist arglist) {
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> output = vx_core::async_new_from_val(vx_core::e_any);
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func_async fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func_async fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func_async, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       std::shared_ptr<vx_core::Async<vx_core::Type_any>> future = vx_core::f_resolve_async(generic_any_1, fn_any);
       output = vx_core::async_from_async(vx_core::t_any, future);
       return output;
     }
 
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_resolve_async::vx_resolve_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any) {
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::Class_resolve_async::vx_f_resolve_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any) {
       return vx_core::f_resolve_async(generic_any_1, fn_any);
     }
 
@@ -16478,13 +16483,13 @@
 
     vx_core::Type_any vx_core::Class_resolve_first::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list clauses = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list clauses = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_resolve_first(generic_any_1, clauses);
       return output;
     }
 
-    template <class T, class X> std::shared_ptr<T> vx_core::Class_resolve_first::vx_resolve_first(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> clauses) {
+    template <class T, class X> std::shared_ptr<T> vx_core::Class_resolve_first::vx_f_resolve_first(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> clauses) {
       return vx_core::f_resolve_first(generic_any_1, clauses);
     }
 
@@ -16560,13 +16565,13 @@
 
     vx_core::Type_any vx_core::Class_resolve_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_list clauses = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list generic_list_1 = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_list clauses = vx_core::f_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_resolve_list(generic_list_1, clauses);
       return output;
     }
 
-    template <class X> std::shared_ptr<X> vx_core::Class_resolve_list::vx_resolve_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<X> clauses) {
+    template <class X> std::shared_ptr<X> vx_core::Class_resolve_list::vx_f_resolve_list(std::shared_ptr<X> generic_list_1, std::shared_ptr<X> clauses) {
       return vx_core::f_resolve_list(generic_list_1, clauses);
     }
 
@@ -16632,12 +16637,12 @@
 
     vx_core::Type_any vx_core::Class_session_from_context::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_session_from_context(context);
       return output;
     }
 
-    vx_core::Type_session vx_core::Class_session_from_context::vx_session_from_context(vx_core::Type_context context) {
+    vx_core::Type_session vx_core::Class_session_from_context::vx_f_session_from_context(vx_core::Type_context context) {
       return vx_core::f_session_from_context(context);
     }
 
@@ -16699,12 +16704,12 @@
 
     vx_core::Type_any vx_core::Class_setting_from_context::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_setting_from_context(context);
       return output;
     }
 
-    vx_core::Type_setting vx_core::Class_setting_from_context::vx_setting_from_context(vx_core::Type_context context) {
+    vx_core::Type_setting vx_core::Class_setting_from_context::vx_f_setting_from_context(vx_core::Type_context context) {
       return vx_core::f_setting_from_context(context);
     }
 
@@ -16767,13 +16772,13 @@
 
     vx_core::Type_any vx_core::Class_string_repeat::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int repeat = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int repeat = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_string_repeat(text, repeat);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_string_repeat::vx_string_repeat(vx_core::Type_string text, vx_core::Type_int repeat) {
+    vx_core::Type_string vx_core::Class_string_repeat::vx_f_string_repeat(vx_core::Type_string text, vx_core::Type_int repeat) {
       return vx_core::f_string_repeat(text, repeat);
     }
 
@@ -16845,12 +16850,12 @@
 
     vx_core::Type_any vx_core::Class_string_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_string_from_any(value);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_string_from_any::vx_string_from_any(vx_core::Type_any value) {
+    vx_core::Type_string vx_core::Class_string_from_any::vx_f_string_from_any(vx_core::Type_any value) {
       return vx_core::f_string_from_any(value);
     }
 
@@ -16919,14 +16924,14 @@
 
     vx_core::Type_any vx_core::Class_string_from_any_indent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_boolean linefeed = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_any(vx_core::t_int->vx_new_from_int(2)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_int indent = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_boolean linefeed = vx_core::f_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
       output = vx_core::f_string_from_any_indent(value, indent, linefeed);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_string_from_any_indent::vx_string_from_any_indent(vx_core::Type_any value, vx_core::Type_int indent, vx_core::Type_boolean linefeed) {
+    vx_core::Type_string vx_core::Class_string_from_any_indent::vx_f_string_from_any_indent(vx_core::Type_any value, vx_core::Type_int indent, vx_core::Type_boolean linefeed) {
       return vx_core::f_string_from_any_indent(value, indent, linefeed);
     }
 
@@ -16997,7 +17002,7 @@
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_string_from_func::vx_string_from_func() {
+    vx_core::Type_string vx_core::Class_string_from_func::vx_f_string_from_func() {
       vx_core::Type_string output = vx_core::e_string;
       if (fn != NULL) {
         output = vx_core::f_any_from_any(vx_core::t_string, fn());
@@ -17063,14 +17068,14 @@
 
     vx_core::Type_any vx_core::Class_switch::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_thenelselist thenelselist = vx_core::f_any_from_any(vx_core::t_thenelselist, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Type_any generic_any_1 = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_thenelselist thenelselist = vx_core::f_any_from_any(vx_core::t_thenelselist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_switch(generic_any_1, val, thenelselist);
       return output;
     }
 
-    template <class T, class U> std::shared_ptr<T> vx_core::Class_switch::vx_switch(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> val, vx_core::Type_thenelselist thenelselist) {
+    template <class T, class U> std::shared_ptr<T> vx_core::Class_switch::vx_f_switch(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> val, vx_core::Type_thenelselist thenelselist) {
       return vx_core::f_switch(generic_any_1, val, thenelselist);
     }
 
@@ -17132,13 +17137,13 @@
 
     vx_core::Type_any vx_core::Class_then::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Func_boolean_from_func fn_cond = vx_core::f_any_from_any(vx_core::t_boolean_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_any(vx_core::t_int->vx_new_from_int(1)));
+      vx_core::Func_boolean_from_func fn_cond = vx_core::f_any_from_any(vx_core::t_boolean_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Func_any_from_func fn_any = vx_core::f_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
       output = vx_core::f_then(fn_cond, fn_any);
       return output;
     }
 
-    vx_core::Type_thenelse vx_core::Class_then::vx_then(vx_core::Func_boolean_from_func fn_cond, vx_core::Func_any_from_func fn_any) {
+    vx_core::Type_thenelse vx_core::Class_then::vx_f_then(vx_core::Func_boolean_from_func fn_cond, vx_core::Func_any_from_func fn_any) {
       return vx_core::f_then(fn_cond, fn_any);
     }
 
@@ -17221,12 +17226,12 @@
 
     vx_core::Type_any vx_core::Class_traits_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_traits_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_typelist vx_core::Class_traits_from_typedef::vx_traits_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_typelist vx_core::Class_traits_from_typedef::vx_f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_traits_from_typedef(vtypedef);
     }
 
@@ -17298,12 +17303,12 @@
 
     vx_core::Type_any vx_core::Class_type_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_type_from_any(value);
       return output;
     }
 
-    vx_core::Type_any vx_core::Class_type_from_any::vx_type_from_any(vx_core::Type_any value) {
+    vx_core::Type_any vx_core::Class_type_from_any::vx_f_type_from_any(vx_core::Type_any value) {
       return vx_core::f_type_from_any(value);
     }
 
@@ -17374,12 +17379,12 @@
 
     vx_core::Type_any vx_core::Class_typedef_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typedef_from_any(val);
       return output;
     }
 
-    vx_core::Type_typedef vx_core::Class_typedef_from_any::vx_typedef_from_any(vx_core::Type_any val) {
+    vx_core::Type_typedef vx_core::Class_typedef_from_any::vx_f_typedef_from_any(vx_core::Type_any val) {
       return vx_core::f_typedef_from_any(val);
     }
 
@@ -17453,12 +17458,12 @@
 
     vx_core::Type_any vx_core::Class_typedef_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typedef_from_type(val);
       return output;
     }
 
-    vx_core::Type_typedef vx_core::Class_typedef_from_type::vx_typedef_from_type(vx_core::Type_any val) {
+    vx_core::Type_typedef vx_core::Class_typedef_from_type::vx_f_typedef_from_type(vx_core::Type_any val) {
       return vx_core::f_typedef_from_type(val);
     }
 
@@ -17530,12 +17535,12 @@
 
     vx_core::Type_any vx_core::Class_typename_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typename_from_any(value);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_typename_from_any::vx_typename_from_any(vx_core::Type_any value) {
+    vx_core::Type_string vx_core::Class_typename_from_any::vx_f_typename_from_any(vx_core::Type_any value) {
       return vx_core::f_typename_from_any(value);
     }
 
@@ -17610,12 +17615,12 @@
 
     vx_core::Type_any vx_core::Class_typename_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typename_from_type(type);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_typename_from_type::vx_typename_from_type(vx_core::Type_any type) {
+    vx_core::Type_string vx_core::Class_typename_from_type::vx_f_typename_from_type(vx_core::Type_any type) {
       return vx_core::f_typename_from_type(type);
     }
 
@@ -17690,12 +17695,12 @@
 
     vx_core::Type_any vx_core::Class_typename_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typename_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_string vx_core::Class_typename_from_typedef::vx_typename_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_string vx_core::Class_typename_from_typedef::vx_f_typename_from_typedef(vx_core::Type_typedef vtypedef) {
       return vx_core::f_typename_from_typedef(vtypedef);
     }
 
@@ -17775,12 +17780,12 @@
 
     vx_core::Type_any vx_core::Class_typenames_from_typelist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typelist typelist = vx_core::f_any_from_any(vx_core::t_typelist, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_typelist typelist = vx_core::f_any_from_any(vx_core::t_typelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_typenames_from_typelist(typelist);
       return output;
     }
 
-    vx_core::Type_stringlist vx_core::Class_typenames_from_typelist::vx_typenames_from_typelist(vx_core::Type_typelist typelist) {
+    vx_core::Type_stringlist vx_core::Class_typenames_from_typelist::vx_f_typenames_from_typelist(vx_core::Type_typelist typelist) {
       return vx_core::f_typenames_from_typelist(typelist);
     }
 
@@ -17850,12 +17855,12 @@
 
     vx_core::Type_any vx_core::Class_user_from_context::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_core::Type_context context = vx_core::f_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_core::f_user_from_context(context);
       return output;
     }
 
-    vx_core::Type_user vx_core::Class_user_from_context::vx_user_from_context(vx_core::Type_context context) {
+    vx_core::Type_user vx_core::Class_user_from_context::vx_f_user_from_context(vx_core::Type_context context) {
       return vx_core::f_user_from_context(context);
     }
 

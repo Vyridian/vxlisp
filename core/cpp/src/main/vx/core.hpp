@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_core_hpp
+#define vx_core_hpp
 #include <any>
 #include <exception>
 #include <functional>
@@ -893,6 +894,15 @@ namespace vx_core {
 // :header
 
 /*
+  // Virtual_any
+  class Virtual_any : std::enable_shared_from_this<Virtual_any> {
+  };
+
+
+vx_shared_from_this<T>() {
+return std::dynamic_pointer_cast<T>(Virtual_any::shared_from_this());
+}
+
   template<typename X> X func() {
          cout << "vfunc in derived class\n";
          return static_cast<X>(2);
@@ -937,7 +947,6 @@ int main()
 	return 0;
 }
 */
-
   typedef std::vector<vx_core::Type_any> vx_Type_listany;
   typedef std::map<std::string, vx_core::Type_any> vx_Type_mapany;
 
@@ -954,19 +963,19 @@ int main()
   // class Async
   template <class T> class Async {
   public:
-    std::shared_future<T>* future;
+    std::shared_ptr<std::shared_future<T>> future;
     std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent;
-    std::function<T(vx_core::Type_any)>* fn;
+    std::shared_ptr<std::function<T(vx_core::Type_any)>> fn;
   };
 
   // async_await(T, async<T>)
-  template <class T> static std::shared_ptr<vx_core::Async<T>> async_await(T generic_any_1, std::shared_ptr<vx_core::Async<T>> async);
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async);
   // async_from_async(T, async<U>)
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> async_from_async(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async);
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async);
   // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> static std::shared_ptr<vx_core::Async<T>> async_from_async_fn(T generic_any_1, std::shared_ptr<vx_core::Async<U>> async, std::function<T(U)> fn);
+  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn);
   // async_new_from_val (T)
-  template <class T> static std::shared_ptr<vx_core::Async<T>> async_new_from_val(T val);
+  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_new_from_val(std::shared_ptr<T> val);
 
   // boolean_contains_from_set_val(set<T>, val)
   template <class T> bool boolean_contains_from_set_val(std::set<T> set, T val);
@@ -982,7 +991,7 @@ int main()
   std::string string_from_any(std::any);
 
   // sync_from_async(generic_any_1, async)
-  template <class T> T sync_from_async(T generic_any_1, Async<T>* async);
+  template <class T> std::shared_ptr<T> sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async);
 
   class Class_replfunc {
   public:
@@ -996,7 +1005,7 @@ int main()
 
 
   // (type any)
-  class Class_any : public std::any {
+  class Class_any {
   public:
     int vx_iref;
     vx_core::Type_msgblock vx_p_msgblock;
@@ -1023,7 +1032,7 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     vx_core::vx_Type_listany vx_p_list;
     virtual vx_core::vx_Type_listany vx_list();
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index);
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index);
     template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
   };
 
@@ -1038,7 +1047,7 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     vx_core::vx_Type_mapany vx_p_map;
     virtual vx_core::vx_Type_mapany vx_map();
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     template <class T> std::shared_ptr<T> vx_new_from_map(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_mapany mapval);
   };
 
@@ -1052,7 +1061,7 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map();
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
   };
 
   // (type boolean)
@@ -1162,7 +1171,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
+    template <class T, class U> std::shared_ptr<T> vx_f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
   };
 
   // (func any<-func)
@@ -1178,7 +1187,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_func fn_new(vx_core::Class_any_from_func::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_any_from_func(std::shared_ptr<T> generic_any_1);
+    template <class T> std::shared_ptr<T> vx_f_any_from_func(std::shared_ptr<T> generic_any_1);
   };
 
   // (type any-async<-func)
@@ -1201,18 +1210,14 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
-    std::vector<vx_core::Func_any_from_any> vx_p_list;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
+    std::vector<vx_core::Type_any> vx_p_list;
 
-    // vx_listany_from_any()
-    virtual std::vector<vx_core::Func_any_from_any> vx_listany_from_any();
-    // vx_any_from_any(index)
-    virtual vx_core::Func_any_from_any vx_any_from_any(vx_core::Type_int index);
   };
 
   // (type anylist)
@@ -1224,12 +1229,12 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_any> vx_p_list;
 
   };
@@ -1256,8 +1261,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // name()
     vx_core::Type_string vx_p_name;
     virtual vx_core::Type_string name();
@@ -1278,18 +1283,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_arg> vx_p_list;
 
     // vx_listarg()
     virtual std::vector<vx_core::Type_arg> vx_listarg();
-    // vx_arg(index)
-    virtual vx_core::Type_arg vx_arg(vx_core::Type_int index);
+    // vx_get_arg(index)
+    virtual vx_core::Type_arg vx_get_arg(vx_core::Type_int index);
   };
 
   // (type argmap)
@@ -1301,8 +1306,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1310,8 +1315,8 @@ int main()
     std::map<std::string, vx_core::Type_arg> vx_p_map;
     // vx_maparg()
     virtual std::map<std::string, vx_core::Type_arg> vx_maparg();
-    // vx_arg(key)
-    virtual vx_core::Type_arg vx_arg(vx_core::Type_string key);
+    // vx_get_arg(key)
+    virtual vx_core::Type_arg vx_get_arg(vx_core::Type_string key);
   };
 
   // (type booleanlist)
@@ -1323,18 +1328,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_boolean> vx_p_list;
 
     // vx_listboolean()
     virtual std::vector<vx_core::Type_boolean> vx_listboolean();
-    // vx_boolean(index)
-    virtual vx_core::Type_boolean vx_boolean(vx_core::Type_int index);
+    // vx_get_boolean(index)
+    virtual vx_core::Type_boolean vx_get_boolean(vx_core::Type_int index);
   };
 
   // (type collection)
@@ -1379,18 +1384,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_connect> vx_p_list;
 
     // vx_listconnect()
     virtual std::vector<vx_core::Type_connect> vx_listconnect();
-    // vx_connect(index)
-    virtual vx_core::Type_connect vx_connect(vx_core::Type_int index);
+    // vx_get_connect(index)
+    virtual vx_core::Type_connect vx_get_connect(vx_core::Type_int index);
   };
 
   // (type connectmap)
@@ -1402,8 +1407,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1411,8 +1416,8 @@ int main()
     std::map<std::string, vx_core::Type_connect> vx_p_map;
     // vx_mapconnect()
     virtual std::map<std::string, vx_core::Type_connect> vx_mapconnect();
-    // vx_connect(key)
-    virtual vx_core::Type_connect vx_connect(vx_core::Type_string key);
+    // vx_get_connect(key)
+    virtual vx_core::Type_connect vx_get_connect(vx_core::Type_string key);
   };
 
   // (type const)
@@ -1442,8 +1447,8 @@ int main()
     );
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // pkgname()
     vx_core::Type_string vx_p_pkgname;
     virtual vx_core::Type_string pkgname();
@@ -1464,18 +1469,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_const> vx_p_list;
 
     // vx_listconst()
     virtual std::vector<vx_core::Type_const> vx_listconst();
-    // vx_const(index)
-    virtual vx_core::Type_const vx_const(vx_core::Type_int index);
+    // vx_get_const(index)
+    virtual vx_core::Type_const vx_get_const(vx_core::Type_int index);
   };
 
   // (type constmap)
@@ -1487,8 +1492,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1496,8 +1501,8 @@ int main()
     std::map<std::string, vx_core::Type_const> vx_p_map;
     // vx_mapconst()
     virtual std::map<std::string, vx_core::Type_const> vx_mapconst();
-    // vx_const(key)
-    virtual vx_core::Type_const vx_const(vx_core::Type_string key);
+    // vx_get_const(key)
+    virtual vx_core::Type_const vx_get_const(vx_core::Type_string key);
   };
 
   // (type context)
@@ -1511,8 +1516,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // code()
     vx_core::Type_string vx_p_code;
     virtual vx_core::Type_string code();
@@ -1553,19 +1558,11 @@ int main()
       int idx,
       bool async,
       vx_core::Type_any typ
-    ) {
-      vx_core::Type_funcdef output;
-      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
-      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
-      output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
-      output->vx_p_async = vx_core::t_boolean->vx_new_from_boolean(async);
-      output->vx_p_type = typ;
-      return output;
-    };
+    );
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // pkgname()
     vx_core::Type_string vx_p_pkgname;
     virtual vx_core::Type_string pkgname();
@@ -1592,18 +1589,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_func> vx_p_list;
 
     // vx_listfunc()
     virtual std::vector<vx_core::Type_func> vx_listfunc();
-    // vx_func(index)
-    virtual vx_core::Type_func vx_func(vx_core::Type_int index);
+    // vx_get_func(index)
+    virtual vx_core::Type_func vx_get_func(vx_core::Type_int index);
   };
 
   // (type funcmap)
@@ -1615,8 +1612,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1624,8 +1621,8 @@ int main()
     std::map<std::string, vx_core::Type_func> vx_p_map;
     // vx_mapfunc()
     virtual std::map<std::string, vx_core::Type_func> vx_mapfunc();
-    // vx_func(key)
-    virtual vx_core::Type_func vx_func(vx_core::Type_string key);
+    // vx_get_func(key)
+    virtual vx_core::Type_func vx_get_func(vx_core::Type_string key);
   };
 
   // (type intlist)
@@ -1637,18 +1634,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_int> vx_p_list;
 
     // vx_listint()
     virtual std::vector<vx_core::Type_int> vx_listint();
-    // vx_int(index)
-    virtual vx_core::Type_int vx_int(vx_core::Type_int index);
+    // vx_get_int(index)
+    virtual vx_core::Type_int vx_get_int(vx_core::Type_int index);
   };
 
   // (type intmap)
@@ -1660,8 +1657,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1669,8 +1666,8 @@ int main()
     std::map<std::string, vx_core::Type_int> vx_p_map;
     // vx_mapint()
     virtual std::map<std::string, vx_core::Type_int> vx_mapint();
-    // vx_int(key)
-    virtual vx_core::Type_int vx_int(vx_core::Type_string key);
+    // vx_get_int(key)
+    virtual vx_core::Type_int vx_get_int(vx_core::Type_string key);
   };
 
   // (type listtype)
@@ -1706,8 +1703,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // valuepool()
     vx_core::Type_value vx_p_valuepool;
     virtual vx_core::Type_value valuepool();
@@ -1727,8 +1724,8 @@ int main()
     virtual vx_core::Type_msg vx_new_from_exception(std::string text, std::exception err);
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // code()
     vx_core::Type_string vx_p_code;
     virtual vx_core::Type_string code();
@@ -1749,11 +1746,11 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::Type_msgblock vx_msgblock() override;
-    virtual vx_core::Type_msgblock vx_msgblock_from_copy_arrayval(vx_core::Type_any copy, vx_core::vx_Type_listany vals);
+    virtual vx_core::Type_msgblock vx_msgblock_from_copy_arrayval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals);
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // msgs()
     vx_core::Type_msglist vx_p_msgs;
     virtual vx_core::Type_msglist msgs();
@@ -1771,18 +1768,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_msgblock> vx_p_list;
 
     // vx_listmsgblock()
     virtual std::vector<vx_core::Type_msgblock> vx_listmsgblock();
-    // vx_msgblock(index)
-    virtual vx_core::Type_msgblock vx_msgblock(vx_core::Type_int index);
+    // vx_get_msgblock(index)
+    virtual vx_core::Type_msgblock vx_get_msgblock(vx_core::Type_int index);
   };
 
   // (type msglist)
@@ -1794,18 +1791,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_msg> vx_p_list;
 
     // vx_listmsg()
     virtual std::vector<vx_core::Type_msg> vx_listmsg();
-    // vx_msg(index)
-    virtual vx_core::Type_msg vx_msg(vx_core::Type_int index);
+    // vx_get_msg(index)
+    virtual vx_core::Type_msg vx_get_msg(vx_core::Type_int index);
   };
 
   // (type none)
@@ -1839,18 +1836,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_number> vx_p_list;
 
     // vx_listnumber()
     virtual std::vector<vx_core::Type_number> vx_listnumber();
-    // vx_number(index)
-    virtual vx_core::Type_number vx_number(vx_core::Type_int index);
+    // vx_get_number(index)
+    virtual vx_core::Type_number vx_get_number(vx_core::Type_int index);
   };
 
   // (type numbermap)
@@ -1862,8 +1859,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1871,8 +1868,8 @@ int main()
     std::map<std::string, vx_core::Type_number> vx_p_map;
     // vx_mapnumber()
     virtual std::map<std::string, vx_core::Type_number> vx_mapnumber();
-    // vx_number(key)
-    virtual vx_core::Type_number vx_number(vx_core::Type_string key);
+    // vx_get_number(key)
+    virtual vx_core::Type_number vx_get_number(vx_core::Type_string key);
   };
 
   // (type package)
@@ -1886,8 +1883,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
   };
 
   // (type packagemap)
@@ -1899,8 +1896,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1908,8 +1905,8 @@ int main()
     std::map<std::string, vx_core::Type_package> vx_p_map;
     // vx_mappackage()
     virtual std::map<std::string, vx_core::Type_package> vx_mappackage();
-    // vx_package(key)
-    virtual vx_core::Type_package vx_package(vx_core::Type_string key);
+    // vx_get_package(key)
+    virtual vx_core::Type_package vx_get_package(vx_core::Type_string key);
   };
 
   // (type permission)
@@ -1923,8 +1920,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // id()
     vx_core::Type_string vx_p_id;
     virtual vx_core::Type_string id();
@@ -1939,18 +1936,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_permission> vx_p_list;
 
     // vx_listpermission()
     virtual std::vector<vx_core::Type_permission> vx_listpermission();
-    // vx_permission(index)
-    virtual vx_core::Type_permission vx_permission(vx_core::Type_int index);
+    // vx_get_permission(index)
+    virtual vx_core::Type_permission vx_get_permission(vx_core::Type_int index);
   };
 
   // (type permissionmap)
@@ -1962,8 +1959,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -1971,8 +1968,8 @@ int main()
     std::map<std::string, vx_core::Type_permission> vx_p_map;
     // vx_mappermission()
     virtual std::map<std::string, vx_core::Type_permission> vx_mappermission();
-    // vx_permission(key)
-    virtual vx_core::Type_permission vx_permission(vx_core::Type_string key);
+    // vx_get_permission(key)
+    virtual vx_core::Type_permission vx_get_permission(vx_core::Type_string key);
   };
 
   // (type security)
@@ -1986,8 +1983,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // permissions()
     vx_core::Type_permissionlist vx_p_permissions;
     virtual vx_core::Type_permissionlist permissions();
@@ -2007,8 +2004,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // user()
     vx_core::Type_user vx_p_user;
     virtual vx_core::Type_user user();
@@ -2031,8 +2028,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // pathmap()
     vx_core::Type_stringmap vx_p_pathmap;
     virtual vx_core::Type_stringmap pathmap();
@@ -2047,8 +2044,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -2056,8 +2053,8 @@ int main()
     std::map<std::string, vx_core::Type_statelistener> vx_p_map;
     // vx_mapstatelistener()
     virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener();
-    // vx_statelistener(key)
-    virtual vx_core::Type_statelistener vx_statelistener(vx_core::Type_string key);
+    // vx_get_statelistener(key)
+    virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key);
   };
 
   // (type statelistener)
@@ -2071,8 +2068,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // path()
     vx_core::Type_string vx_p_path;
     virtual vx_core::Type_string path();
@@ -2093,18 +2090,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_string> vx_p_list;
 
     // vx_liststring()
     virtual std::vector<vx_core::Type_string> vx_liststring();
-    // vx_string(index)
-    virtual vx_core::Type_string vx_string(vx_core::Type_int index);
+    // vx_get_string(index)
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_int index);
   };
 
   // (type stringmap)
@@ -2116,8 +2113,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -2125,8 +2122,8 @@ int main()
     std::map<std::string, vx_core::Type_string> vx_p_map;
     // vx_mapstring()
     virtual std::map<std::string, vx_core::Type_string> vx_mapstring();
-    // vx_string(key)
-    virtual vx_core::Type_string vx_string(vx_core::Type_string key);
+    // vx_get_string(key)
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_string key);
   };
 
   // (type thenelse)
@@ -2140,8 +2137,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // code()
     vx_core::Type_string vx_p_code;
     virtual vx_core::Type_string code();
@@ -2168,18 +2165,18 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_thenelse> vx_p_list;
 
     // vx_listthenelse()
     virtual std::vector<vx_core::Type_thenelse> vx_listthenelse();
-    // vx_thenelse(index)
-    virtual vx_core::Type_thenelse vx_thenelse(vx_core::Type_int index);
+    // vx_get_thenelse(index)
+    virtual vx_core::Type_thenelse vx_get_thenelse(vx_core::Type_int index);
   };
 
   // (type type)
@@ -2217,8 +2214,8 @@ int main()
     );
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // pkgname()
     vx_core::Type_string vx_p_pkgname;
     virtual vx_core::Type_string pkgname();
@@ -2266,12 +2263,12 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_core::Type_any> vx_p_list;
 
   };
@@ -2285,8 +2282,8 @@ int main()
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -2304,8 +2301,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // security()
     vx_core::Type_security vx_p_security;
     virtual vx_core::Type_security security();
@@ -2328,8 +2325,8 @@ int main()
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // next()
     vx_core::Type_any vx_p_next;
     virtual vx_core::Type_any next();
@@ -2343,7 +2340,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_false vx_const_new();
-    bool vx_core::Class_false::vx_boolean();
+    bool vx_boolean();
   };
 
   // (const globalpackagemap)
@@ -2358,7 +2355,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_infinity vx_const_new();
-    int vx_core::Class_infinity::vx_int();
+    int vx_int();
   };
 
   // (const mempool-active)
@@ -2373,7 +2370,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_msg_error vx_const_new();
-    int vx_core::Class_msg_error::vx_int();
+    int vx_int();
   };
 
   // (const msg-info)
@@ -2381,7 +2378,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_msg_info vx_const_new();
-    int vx_core::Class_msg_info::vx_int();
+    int vx_int();
   };
 
   // (const msg-severe)
@@ -2389,7 +2386,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_msg_severe vx_const_new();
-    int vx_core::Class_msg_severe::vx_int();
+    int vx_int();
   };
 
   // (const msg-warning)
@@ -2397,7 +2394,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_msg_warning vx_const_new();
-    int vx_core::Class_msg_warning::vx_int();
+    int vx_int();
   };
 
   // (const neginfinity)
@@ -2405,7 +2402,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_neginfinity vx_const_new();
-    int vx_core::Class_neginfinity::vx_int();
+    int vx_int();
   };
 
   // (const newline)
@@ -2413,7 +2410,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_newline vx_const_new();
-    std::string vx_core::Class_newline::vx_string();
+    std::string vx_string();
   };
 
   // (const notanumber)
@@ -2421,7 +2418,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_notanumber vx_const_new();
-    int vx_core::Class_notanumber::vx_int();
+    int vx_int();
   };
 
   // (const nothing)
@@ -2429,7 +2426,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_nothing vx_const_new();
-    std::string vx_core::Class_nothing::vx_string();
+    std::string vx_string();
   };
 
   // (const quote)
@@ -2437,7 +2434,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_quote vx_const_new();
-    std::string vx_core::Class_quote::vx_string();
+    std::string vx_string();
   };
 
   // (const true)
@@ -2445,7 +2442,7 @@ int main()
   public:
     vx_core::Type_constdef vx_constdef();
     static vx_core::Const_true vx_const_new();
-    bool vx_core::Class_true::vx_boolean();
+    bool vx_boolean();
   };
 
   // (func !)
@@ -2460,7 +2457,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_not(vx_core::Type_boolean val);
+    vx_core::Type_boolean vx_f_not(vx_core::Type_boolean val);
   };
 
   // (func !-empty)
@@ -2475,7 +2472,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_notempty(vx_core::Type_string text);
+    vx_core::Type_boolean vx_f_notempty(vx_core::Type_string text);
   };
 
   // (func !-empty)
@@ -2490,7 +2487,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_notempty_1(vx_core::Type_any val);
+    vx_core::Type_boolean vx_f_notempty_1(vx_core::Type_any val);
   };
 
   // (func !=)
@@ -2503,7 +2500,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_ne(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_ne(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func *)
@@ -2516,7 +2513,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_multiply(vx_core::Type_int num1, vx_core::Type_int num2);
+    vx_core::Type_int vx_f_multiply(vx_core::Type_int num1, vx_core::Type_int num2);
   };
 
   // (func *)
@@ -2529,7 +2526,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_multiply_1(vx_core::Type_number num1, vx_core::Type_number num2);
+    vx_core::Type_number vx_f_multiply_1(vx_core::Type_number num1, vx_core::Type_number num2);
   };
 
   // (func *)
@@ -2544,7 +2541,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_multiply_2(vx_core::Type_intlist nums);
+    vx_core::Type_int vx_f_multiply_2(vx_core::Type_intlist nums);
   };
 
   // (func *)
@@ -2559,7 +2556,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_multiply_3(vx_core::Type_numberlist nums);
+    vx_core::Type_number vx_f_multiply_3(vx_core::Type_numberlist nums);
   };
 
   // (func +)
@@ -2572,7 +2569,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_plus(vx_core::Type_int num1, vx_core::Type_int num2);
+    vx_core::Type_int vx_f_plus(vx_core::Type_int num1, vx_core::Type_int num2);
   };
 
   // (func +)
@@ -2585,7 +2582,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_plus_1(vx_core::Type_number num1, vx_core::Type_number num2);
+    vx_core::Type_number vx_f_plus_1(vx_core::Type_number num1, vx_core::Type_number num2);
   };
 
   // (func +)
@@ -2600,7 +2597,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_plus_2(vx_core::Type_intlist nums);
+    vx_core::Type_int vx_f_plus_2(vx_core::Type_intlist nums);
   };
 
   // (func +)
@@ -2615,7 +2612,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_plus_3(vx_core::Type_numberlist nums);
+    vx_core::Type_number vx_f_plus_3(vx_core::Type_numberlist nums);
   };
 
   // (func +1)
@@ -2630,7 +2627,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_plus1(vx_core::Type_int num);
+    vx_core::Type_int vx_f_plus1(vx_core::Type_int num);
   };
 
   // (func -)
@@ -2643,7 +2640,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_minus(vx_core::Type_int num1, vx_core::Type_int num2);
+    vx_core::Type_int vx_f_minus(vx_core::Type_int num1, vx_core::Type_int num2);
   };
 
   // (func -)
@@ -2656,7 +2653,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_minus_1(vx_core::Type_number num1, vx_core::Type_number num2);
+    vx_core::Type_number vx_f_minus_1(vx_core::Type_number num1, vx_core::Type_number num2);
   };
 
   // (func -)
@@ -2671,7 +2668,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_minus_2(vx_core::Type_intlist nums);
+    vx_core::Type_int vx_f_minus_2(vx_core::Type_intlist nums);
   };
 
   // (func -)
@@ -2686,7 +2683,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_minus_3(vx_core::Type_numberlist nums);
+    vx_core::Type_number vx_f_minus_3(vx_core::Type_numberlist nums);
   };
 
   // (func .)
@@ -2699,7 +2696,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_any vx_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params);
+    vx_core::Type_any vx_f_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params);
   };
 
   // (func /)
@@ -2712,7 +2709,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_divide(vx_core::Type_number num1, vx_core::Type_number num2);
+    vx_core::Type_number vx_f_divide(vx_core::Type_number num1, vx_core::Type_number num2);
   };
 
   // (func <)
@@ -2725,7 +2722,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_lt(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_lt(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func <)
@@ -2740,7 +2737,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_lt_1(vx_core::Type_anylist values);
+    vx_core::Type_boolean vx_f_lt_1(vx_core::Type_anylist values);
   };
 
   // (func <-)
@@ -2753,7 +2750,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_chainfirst(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist);
+    template <class T> std::shared_ptr<T> vx_f_chainfirst(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist);
   };
 
   // (func <<-)
@@ -2766,7 +2763,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_chainlast(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist);
+    template <class T> std::shared_ptr<T> vx_f_chainlast(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value, vx_core::Type_any_from_anylist fnlist);
   };
 
   // (func <=)
@@ -2779,7 +2776,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_le(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_le(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func <=)
@@ -2794,7 +2791,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_le_1(vx_core::Type_anylist args);
+    vx_core::Type_boolean vx_f_le_1(vx_core::Type_anylist args);
   };
 
   // (func =)
@@ -2807,7 +2804,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_eq(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_eq(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func =)
@@ -2822,7 +2819,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_eq_1(vx_core::Type_anylist values);
+    vx_core::Type_boolean vx_f_eq_1(vx_core::Type_anylist values);
   };
 
   // (func >)
@@ -2835,7 +2832,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_gt(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_gt(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func >)
@@ -2850,7 +2847,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_gt_1(vx_core::Type_anylist values);
+    vx_core::Type_boolean vx_f_gt_1(vx_core::Type_anylist values);
   };
 
   // (func >=)
@@ -2863,7 +2860,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_ge(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_boolean vx_f_ge(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func >=)
@@ -2878,7 +2875,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_ge_1(vx_core::Type_anylist args);
+    vx_core::Type_boolean vx_f_ge_1(vx_core::Type_anylist args);
   };
 
   // (func allowtypenames<-typedef)
@@ -2893,7 +2890,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_stringlist vx_allowtypenames_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_stringlist vx_f_allowtypenames_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func allowtypes<-typedef)
@@ -2908,7 +2905,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typelist vx_allowtypes_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_typelist vx_f_allowtypes_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func and)
@@ -2921,7 +2918,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_and(vx_core::Type_boolean val1, vx_core::Type_boolean val2);
+    vx_core::Type_boolean vx_f_and(vx_core::Type_boolean val1, vx_core::Type_boolean val2);
   };
 
   // (func and)
@@ -2936,7 +2933,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_and_1(vx_core::Type_booleanlist values);
+    vx_core::Type_boolean vx_f_and_1(vx_core::Type_booleanlist values);
   };
 
   // (func any<-any-async)
@@ -2948,11 +2945,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>(vx_core::Type_any)> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>(vx_core::Type_any)> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
   };
 
   // (func any<-any-context)
@@ -2968,7 +2965,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
+    template <class T, class U> std::shared_ptr<T> vx_f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
   };
 
   // (func any<-any-context-async)
@@ -2980,11 +2977,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*(vx_core::Type_any, vx_core::Type_context)> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>(vx_core::Type_any, vx_core::Type_context)> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_any_context_async fn_new(vx_core::Class_any_from_any_context_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_any_context_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_any_context_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
   };
 
   // (func any<-func-async)
@@ -2996,11 +2993,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*()> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>()> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_func_async fn_new(vx_core::Class_any_from_func_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_func_async(std::shared_ptr<T> generic_any_1);
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_func_async(std::shared_ptr<T> generic_any_1);
   };
 
   // (func any<-key-value)
@@ -3016,7 +3013,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_key_value fn_new(vx_core::Class_any_from_key_value::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_any_from_key_value(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val);
+    template <class T, class U> std::shared_ptr<T> vx_f_any_from_key_value(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val);
   };
 
   // (func any<-key-value-async)
@@ -3028,11 +3025,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*(vx_core::Type_string, vx_core::Type_any)> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>(vx_core::Type_string, vx_core::Type_any)> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_key_value_async fn_new(vx_core::Class_any_from_key_value_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_key_value_async(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val);
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_key_value_async(std::shared_ptr<T> generic_any_1, vx_core::Type_string key, std::shared_ptr<U> val);
   };
 
   // (func any<-list)
@@ -3045,7 +3042,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class X> std::shared_ptr<T> vx_any_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int index);
+    template <class T, class X> std::shared_ptr<T> vx_f_any_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int index);
   };
 
   // (func any<-list-reduce)
@@ -3058,7 +3055,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class Y> std::shared_ptr<T> vx_any_from_list_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce fn_reduce);
+    template <class T, class Y> std::shared_ptr<T> vx_f_any_from_list_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce fn_reduce);
   };
 
   // (func any<-list-reduce-next)
@@ -3071,7 +3068,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class Y> std::shared_ptr<T> vx_any_from_list_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+    template <class T, class Y> std::shared_ptr<T> vx_f_any_from_list_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<Y> list, std::shared_ptr<T> valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
   };
 
   // (func any<-map)
@@ -3084,7 +3081,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class N> std::shared_ptr<T> vx_any_from_map(std::shared_ptr<T> generic_any_1, std::shared_ptr<N> valuemap, vx_core::Type_string key);
+    template <class T, class N> std::shared_ptr<T> vx_f_any_from_map(std::shared_ptr<T> generic_any_1, std::shared_ptr<N> valuemap, vx_core::Type_string key);
   };
 
   // (func any<-none)
@@ -3100,7 +3097,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_none fn_new(vx_core::Class_any_from_none::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_any_from_none(std::shared_ptr<T> generic_any_1);
+    template <class T> std::shared_ptr<T> vx_f_any_from_none(std::shared_ptr<T> generic_any_1);
   };
 
   // (func any<-none-async)
@@ -3112,11 +3109,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*()> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>()> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_none_async fn_new(vx_core::Class_any_from_none_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_none_async(std::shared_ptr<T> generic_any_1);
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_none_async(std::shared_ptr<T> generic_any_1);
   };
 
   // (func any<-reduce)
@@ -3132,7 +3129,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_reduce fn_new(vx_core::Class_any_from_reduce::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_any_from_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item);
+    template <class T, class U> std::shared_ptr<T> vx_f_any_from_reduce(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item);
   };
 
   // (func any<-reduce-async)
@@ -3144,11 +3141,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*(vx_core::Type_any, vx_core::Type_any)> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>(vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_reduce_async fn_new(vx_core::Class_any_from_reduce_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_reduce_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item);
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_reduce_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> item);
   };
 
   // (func any<-reduce-next)
@@ -3164,7 +3161,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_any_from_reduce_next fn_new(vx_core::Class_any_from_reduce_next::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_any_from_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next);
+    template <class T, class U> std::shared_ptr<T> vx_f_any_from_reduce_next(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next);
   };
 
   // (func any<-reduce-next-async)
@@ -3176,11 +3173,11 @@ int main()
     virtual vx_core::Type_typedef vx_typedef() override;
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    typedef std::function<vx_core::Async<vx_core::Type_any>*(vx_core::Type_any, vx_core::Type_any, vx_core::Type_any)> IFn;
+    typedef std::function<std::shared_ptr<vx_core::Async<vx_core::Type_any>>(vx_core::Type_any, vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
     virtual vx_core::Func_any_from_reduce_next_async fn_new(vx_core::Class_any_from_reduce_next_async::IFn fn);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_any_from_reduce_next_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next);
+    template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_any_from_reduce_next_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> result, std::shared_ptr<U> current, std::shared_ptr<U> next);
   };
 
   // (func any<-struct)
@@ -3193,7 +3190,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class R> std::shared_ptr<T> vx_any_from_struct(std::shared_ptr<T> generic_any_1, std::shared_ptr<R> vstruct, vx_core::Type_string key);
+    template <class T, class R> std::shared_ptr<T> vx_f_any_from_struct(std::shared_ptr<T> generic_any_1, std::shared_ptr<R> vstruct, vx_core::Type_string key);
   };
 
   // (func async)
@@ -3208,7 +3205,7 @@ int main()
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value);
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value);
   };
 
   // (func boolean<-any)
@@ -3223,7 +3220,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_from_any(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_boolean_from_any(vx_core::Type_any value);
   };
 
   // (func boolean<-func)
@@ -3239,7 +3236,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_boolean_from_func fn_new(vx_core::Class_any_from_func::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_from_func();
+    vx_core::Type_boolean vx_f_boolean_from_func();
   };
 
   // (func boolean<-none)
@@ -3255,7 +3252,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_boolean_from_none fn_new(vx_core::Class_any_from_func::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_boolean_from_none();
+    vx_core::Type_boolean vx_f_boolean_from_none();
   };
 
   // (func case)
@@ -3268,7 +3265,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_thenelse vx_case(vx_core::Type_list values, vx_core::Func_any_from_func fn_any);
+    vx_core::Type_thenelse vx_f_case(vx_core::Type_list values, vx_core::Func_any_from_func fn_any);
   };
 
   // (func case)
@@ -3281,7 +3278,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_thenelse vx_case_1(vx_core::Type_any value, vx_core::Func_any_from_func fn_any);
+    vx_core::Type_thenelse vx_f_case_1(vx_core::Type_any value, vx_core::Func_any_from_func fn_any);
   };
 
   // (func compare)
@@ -3294,7 +3291,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
+    vx_core::Type_int vx_f_compare(vx_core::Type_any val1, vx_core::Type_any val2);
   };
 
   // (func contains)
@@ -3307,7 +3304,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_contains(vx_core::Type_string text, vx_core::Type_string find);
+    vx_core::Type_boolean vx_f_contains(vx_core::Type_string text, vx_core::Type_string find);
   };
 
   // (func contains)
@@ -3320,7 +3317,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_contains_1(vx_core::Type_list values, vx_core::Type_any find);
+    vx_core::Type_boolean vx_f_contains_1(vx_core::Type_list values, vx_core::Type_any find);
   };
 
   // (func copy)
@@ -3333,7 +3330,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> value, vx_core::Type_anylist values);
+    template <class T> std::shared_ptr<T> vx_f_copy(std::shared_ptr<T> value, vx_core::Type_anylist values);
   };
 
   // (func else)
@@ -3348,7 +3345,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_thenelse vx_else(vx_core::Func_any_from_func fn_any);
+    vx_core::Type_thenelse vx_f_else(vx_core::Func_any_from_func fn_any);
   };
 
   // (func empty)
@@ -3363,7 +3360,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> type);
+    template <class T> std::shared_ptr<T> vx_f_empty(std::shared_ptr<T> type);
   };
 
   // (func extends<-any)
@@ -3378,7 +3375,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_extends_from_any(vx_core::Type_any val);
+    vx_core::Type_string vx_f_extends_from_any(vx_core::Type_any val);
   };
 
   // (func extends<-typedef)
@@ -3393,7 +3390,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_extends_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_string vx_f_extends_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func first<-list)
@@ -3408,7 +3405,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class X> std::shared_ptr<T> vx_first_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values);
+    template <class T, class X> std::shared_ptr<T> vx_f_first_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values);
   };
 
   // (func first<-list-fn-any<-any)
@@ -3421,7 +3418,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class X> std::shared_ptr<T> vx_first_from_list_fn_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Func_any_from_any fn_any_from_any);
+    template <class T, class X> std::shared_ptr<T> vx_f_first_from_list_fn_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values, vx_core::Func_any_from_any fn_any_from_any);
   };
 
   // (func fn)
@@ -3434,7 +3431,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_fn(std::shared_ptr<T> generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any);
+    template <class T> std::shared_ptr<T> vx_f_fn(std::shared_ptr<T> generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any);
   };
 
   // (func funcdef<-func)
@@ -3449,7 +3446,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_funcdef vx_funcdef_from_func(vx_core::Type_func val);
+    vx_core::Type_funcdef vx_f_funcdef_from_func(vx_core::Type_func val);
   };
 
   // (func funcname<-funcdef)
@@ -3464,7 +3461,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_funcname_from_funcdef(vx_core::Type_funcdef funcdef);
+    vx_core::Type_string vx_f_funcname_from_funcdef(vx_core::Type_funcdef funcdef);
   };
 
   // (func global-package-get)
@@ -3479,7 +3476,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_package vx_global_package_get(vx_core::Type_string pkgname);
+    vx_core::Type_package vx_f_global_package_get(vx_core::Type_string pkgname);
   };
 
   // (func global-package-set)
@@ -3492,7 +3489,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_global_package_set(vx_core::Type_string pkgname, vx_core::Type_package pkg);
+    void vx_f_global_package_set(vx_core::Type_string pkgname, vx_core::Type_package pkg);
   };
 
   // (func if)
@@ -3505,7 +3502,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_if(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> then);
+    template <class T> std::shared_ptr<T> vx_f_if(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> then);
   };
 
   // (func if)
@@ -3518,7 +3515,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_if_1(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> thenval, std::shared_ptr<T> elseval);
+    template <class T> std::shared_ptr<T> vx_f_if_1(std::shared_ptr<T> generic_any_1, vx_core::Type_boolean clause, std::shared_ptr<T> thenval, std::shared_ptr<T> elseval);
   };
 
   // (func if)
@@ -3533,7 +3530,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_if_2(std::shared_ptr<T> generic_any_1, vx_core::Type_thenelselist thenelselist);
+    template <class T> std::shared_ptr<T> vx_f_if_2(std::shared_ptr<T> generic_any_1, vx_core::Type_thenelselist thenelselist);
   };
 
   // (func int<-func)
@@ -3549,7 +3546,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_int_from_func fn_new(vx_core::Class_any_from_func::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_int_from_func();
+    vx_core::Type_int vx_f_int_from_func();
   };
 
   // (func int<-string)
@@ -3564,7 +3561,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_int_from_string(vx_core::Type_string val);
+    vx_core::Type_int vx_f_int_from_string(vx_core::Type_string val);
   };
 
   // (func is-empty)
@@ -3579,7 +3576,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_empty(vx_core::Type_string text);
+    vx_core::Type_boolean vx_f_is_empty(vx_core::Type_string text);
   };
 
   // (func is-empty)
@@ -3594,7 +3591,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_empty_1(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_empty_1(vx_core::Type_any value);
   };
 
   // (func is-endswith)
@@ -3607,7 +3604,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_endswith(vx_core::Type_string text, vx_core::Type_string find);
+    vx_core::Type_boolean vx_f_is_endswith(vx_core::Type_string text, vx_core::Type_string find);
   };
 
   // (func is-func)
@@ -3622,7 +3619,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_func(vx_core::Type_any val);
+    vx_core::Type_boolean vx_f_is_func(vx_core::Type_any val);
   };
 
   // (func is-int)
@@ -3637,7 +3634,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_int(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_int(vx_core::Type_any value);
   };
 
   // (func is-number)
@@ -3652,7 +3649,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_number(vx_core::Type_any value);
+    vx_core::Type_boolean vx_f_is_number(vx_core::Type_any value);
   };
 
   // (func is-pass<-permission)
@@ -3667,7 +3664,7 @@ int main()
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_is_pass_from_permission(vx_core::Type_permission permission, vx_core::Type_context context);
+    vx_core::Type_boolean vx_f_is_pass_from_permission(vx_core::Type_permission permission, vx_core::Type_context context);
   };
 
   // (func last<-list)
@@ -3682,7 +3679,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class X> std::shared_ptr<T> vx_last_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values);
+    template <class T, class X> std::shared_ptr<T> vx_f_last_from_list(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> values);
   };
 
   // (func length<-list)
@@ -3697,7 +3694,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_int vx_length_from_list(vx_core::Type_list values);
+    vx_core::Type_int vx_f_length_from_list(vx_core::Type_list values);
   };
 
   // (func let)
@@ -3710,7 +3707,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_let(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any);
+    template <class T> std::shared_ptr<T> vx_f_let(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any);
   };
 
   // (func let-async)
@@ -3723,7 +3720,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_let_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any_async);
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_let_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any_async);
   };
 
   // (func list-join<-list)
@@ -3736,7 +3733,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_list_join_from_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any);
+    template <class X, class Y> std::shared_ptr<X> vx_f_list_join_from_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any);
   };
 
   // (func list<-list)
@@ -3749,7 +3746,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_list_from_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any);
+    template <class X, class Y> std::shared_ptr<X> vx_f_list_from_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any fn_any_from_any);
   };
 
   // (func list<-list-async)
@@ -3762,7 +3759,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_list_from_list_async(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any_async fn_any_from_any_async);
+    template <class X, class Y> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_f_list_from_list_async(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> values, vx_core::Func_any_from_any_async fn_any_from_any_async);
   };
 
   // (func list<-map)
@@ -3775,7 +3772,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class O> std::shared_ptr<X> vx_list_from_map(std::shared_ptr<X> generic_any_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+    template <class X, class O> std::shared_ptr<X> vx_f_list_from_map(std::shared_ptr<X> generic_any_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
   };
 
   // (func list<-map-async)
@@ -3788,7 +3785,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class O> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_list_from_map_async(std::shared_ptr<X> generic_any_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async);
+    template <class X, class O> std::shared_ptr<vx_core::Async<std::shared_ptr<X>>> vx_f_list_from_map_async(std::shared_ptr<X> generic_any_1, std::shared_ptr<O> valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async);
   };
 
   // (func list<-type)
@@ -3803,7 +3800,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_any vx_list_from_type(vx_core::Type_any type);
+    vx_core::Type_any vx_f_list_from_type(vx_core::Type_any type);
   };
 
   // (func log)
@@ -3818,7 +3815,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_any vx_log(vx_core::Type_any value);
+    vx_core::Type_any vx_f_log(vx_core::Type_any value);
   };
 
   // (func map<-list)
@@ -3831,7 +3828,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class Y, class N> std::shared_ptr<N> vx_map_from_list(std::shared_ptr<N> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_any_from_any);
+    template <class Y, class N> std::shared_ptr<N> vx_f_map_from_list(std::shared_ptr<N> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_any_from_any);
   };
 
   // (func mempool-addref)
@@ -3844,7 +3841,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_mempool_addref(vx_core::Type_anylist values);
+    void vx_f_mempool_addref(vx_core::Type_anylist values);
   };
 
   // (func mempool-release)
@@ -3857,7 +3854,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_mempool_release(vx_core::Type_value value);
+    void vx_f_mempool_release(vx_core::Type_value value);
   };
 
   // (func mempool-removeref)
@@ -3870,7 +3867,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_mempool_removeref(vx_core::Type_anylist values);
+    void vx_f_mempool_removeref(vx_core::Type_anylist values);
   };
 
   // (func mempool-removerefchildren)
@@ -3883,7 +3880,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    void vx_mempool_removerefchildren(vx_core::Type_anylist values);
+    void vx_f_mempool_removerefchildren(vx_core::Type_anylist values);
   };
 
   // (func mempool-reserve)
@@ -3896,7 +3893,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_value vx_mempool_reserve();
+    vx_core::Type_value vx_f_mempool_reserve();
   };
 
   // (func msg<-error)
@@ -3911,7 +3908,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_msg vx_msg_from_error(vx_core::Type_string error);
+    vx_core::Type_msg vx_f_msg_from_error(vx_core::Type_string error);
   };
 
   // (func msgblock<-msgblock-msg)
@@ -3924,7 +3921,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_msgblock vx_msgblock_from_msgblock_msg(vx_core::Type_msgblock origblock, vx_core::Type_msg addmsg);
+    vx_core::Type_msgblock vx_f_msgblock_from_msgblock_msg(vx_core::Type_msgblock origblock, vx_core::Type_msg addmsg);
   };
 
   // (func msgblock<-msgblock-msgblock)
@@ -3937,7 +3934,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_msgblock vx_msgblock_from_msgblock_msgblock(vx_core::Type_msgblock origblock, vx_core::Type_msgblock addblock);
+    vx_core::Type_msgblock vx_f_msgblock_from_msgblock_msgblock(vx_core::Type_msgblock origblock, vx_core::Type_msgblock addblock);
   };
 
   // (func name<-typedef)
@@ -3952,7 +3949,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_name_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_string vx_f_name_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func native)
@@ -3967,7 +3964,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_native(std::shared_ptr<T> generic_any_1, vx_core::Type_anylist clauses);
+    template <class T> std::shared_ptr<T> vx_f_native(std::shared_ptr<T> generic_any_1, vx_core::Type_anylist clauses);
   };
 
   // (func native<-any)
@@ -3982,7 +3979,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_any vx_native_from_any(vx_core::Type_any value);
+    vx_core::Type_any vx_f_native_from_any(vx_core::Type_any value);
   };
 
   // (func new)
@@ -3995,7 +3992,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> type, vx_core::Type_anylist values);
+    template <class T> std::shared_ptr<T> vx_f_new(std::shared_ptr<T> type, vx_core::Type_anylist values);
   };
 
   // (func number<-func)
@@ -4008,7 +4005,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_number vx_number_from_func();
+    vx_core::Type_number vx_f_number_from_func();
   };
 
   // (func or)
@@ -4021,7 +4018,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_or(vx_core::Type_boolean val1, vx_core::Type_boolean val2);
+    vx_core::Type_boolean vx_f_or(vx_core::Type_boolean val1, vx_core::Type_boolean val2);
   };
 
   // (func or)
@@ -4036,7 +4033,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_or_1(vx_core::Type_booleanlist values);
+    vx_core::Type_boolean vx_f_or_1(vx_core::Type_booleanlist values);
   };
 
   // (func packagename<-typedef)
@@ -4051,7 +4048,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_packagename_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_string vx_f_packagename_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func path<-context-path)
@@ -4066,7 +4063,7 @@ int main()
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_path_from_context_path(vx_core::Type_string path, vx_core::Type_context context);
+    vx_core::Type_string vx_f_path_from_context_path(vx_core::Type_string path, vx_core::Type_context context);
   };
 
   // (func path<-setting-path)
@@ -4079,7 +4076,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_path_from_setting_path(vx_core::Type_setting session, vx_core::Type_string path);
+    vx_core::Type_string vx_f_path_from_setting_path(vx_core::Type_setting session, vx_core::Type_string path);
   };
 
   // (func permission<-id-context)
@@ -4094,7 +4091,7 @@ int main()
     virtual vx_core::Func_any_from_any_context fn_new(vx_core::Class_any_from_any_context::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any_context(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value, vx_core::Type_context context);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_permission vx_permission_from_id_context(vx_core::Type_string id, vx_core::Type_context context);
+    vx_core::Type_permission vx_f_permission_from_id_context(vx_core::Type_string id, vx_core::Type_context context);
   };
 
   // (func properties<-typedef)
@@ -4109,7 +4106,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_argmap vx_properties_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_argmap vx_f_properties_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func proplast<-typedef)
@@ -4124,7 +4121,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_arg vx_proplast_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_arg vx_f_proplast_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func resolve)
@@ -4139,7 +4136,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_resolve(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value);
+    template <class T> std::shared_ptr<T> vx_f_resolve(std::shared_ptr<T> generic_any_1, std::shared_ptr<T> value);
   };
 
   // (func resolve)
@@ -4154,7 +4151,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<T> vx_resolve_1(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any);
+    template <class T> std::shared_ptr<T> vx_f_resolve_1(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func fn_any);
   };
 
   // (func resolve-async)
@@ -4169,7 +4166,7 @@ int main()
     virtual vx_core::Func_any_from_any_async fn_new(vx_core::Class_any_from_any_async::IFn fn);
     template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> f_any_from_any_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_resolve_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any);
+    template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_f_resolve_async(std::shared_ptr<T> generic_any_1, vx_core::Func_any_from_func_async fn_any);
   };
 
   // (func resolve-first)
@@ -4184,7 +4181,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class X> std::shared_ptr<T> vx_resolve_first(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> clauses);
+    template <class T, class X> std::shared_ptr<T> vx_f_resolve_first(std::shared_ptr<T> generic_any_1, std::shared_ptr<X> clauses);
   };
 
   // (func resolve-list)
@@ -4199,7 +4196,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_resolve_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> clauses);
+    template <class X> std::shared_ptr<X> vx_f_resolve_list(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> clauses);
   };
 
   // (func session<-context)
@@ -4212,7 +4209,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_session vx_session_from_context(vx_core::Type_context context);
+    vx_core::Type_session vx_f_session_from_context(vx_core::Type_context context);
   };
 
   // (func setting<-context)
@@ -4225,7 +4222,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_setting vx_setting_from_context(vx_core::Type_context context);
+    vx_core::Type_setting vx_f_setting_from_context(vx_core::Type_context context);
   };
 
   // (func string-repeat)
@@ -4238,7 +4235,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_repeat(vx_core::Type_string text, vx_core::Type_int repeat);
+    vx_core::Type_string vx_f_string_repeat(vx_core::Type_string text, vx_core::Type_int repeat);
   };
 
   // (func string<-any)
@@ -4253,7 +4250,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_any(vx_core::Type_any value);
+    vx_core::Type_string vx_f_string_from_any(vx_core::Type_any value);
   };
 
   // (func string<-any-indent)
@@ -4266,7 +4263,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_any_indent(vx_core::Type_any value, vx_core::Type_int indent, vx_core::Type_boolean linefeed);
+    vx_core::Type_string vx_f_string_from_any_indent(vx_core::Type_any value, vx_core::Type_int indent, vx_core::Type_boolean linefeed);
   };
 
   // (func string<-func)
@@ -4282,7 +4279,7 @@ int main()
     IFn fn;
     virtual vx_core::Func_string_from_func fn_new(vx_core::Class_any_from_func::IFn fn);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_string_from_func();
+    vx_core::Type_string vx_f_string_from_func();
   };
 
   // (func switch)
@@ -4295,7 +4292,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class T, class U> std::shared_ptr<T> vx_switch(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> val, vx_core::Type_thenelselist thenelselist);
+    template <class T, class U> std::shared_ptr<T> vx_f_switch(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> val, vx_core::Type_thenelselist thenelselist);
   };
 
   // (func then)
@@ -4308,7 +4305,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_thenelse vx_then(vx_core::Func_boolean_from_func fn_cond, vx_core::Func_any_from_func fn_any);
+    vx_core::Type_thenelse vx_f_then(vx_core::Func_boolean_from_func fn_cond, vx_core::Func_any_from_func fn_any);
   };
 
   // (func traits<-typedef)
@@ -4323,7 +4320,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typelist vx_traits_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_typelist vx_f_traits_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func type<-any)
@@ -4338,7 +4335,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_any vx_type_from_any(vx_core::Type_any value);
+    vx_core::Type_any vx_f_type_from_any(vx_core::Type_any value);
   };
 
   // (func typedef<-any)
@@ -4353,7 +4350,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typedef vx_typedef_from_any(vx_core::Type_any val);
+    vx_core::Type_typedef vx_f_typedef_from_any(vx_core::Type_any val);
   };
 
   // (func typedef<-type)
@@ -4368,7 +4365,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_typedef vx_typedef_from_type(vx_core::Type_any val);
+    vx_core::Type_typedef vx_f_typedef_from_type(vx_core::Type_any val);
   };
 
   // (func typename<-any)
@@ -4383,7 +4380,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_typename_from_any(vx_core::Type_any value);
+    vx_core::Type_string vx_f_typename_from_any(vx_core::Type_any value);
   };
 
   // (func typename<-type)
@@ -4398,7 +4395,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_typename_from_type(vx_core::Type_any type);
+    vx_core::Type_string vx_f_typename_from_type(vx_core::Type_any type);
   };
 
   // (func typename<-typedef)
@@ -4413,7 +4410,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_string vx_typename_from_typedef(vx_core::Type_typedef vtypedef);
+    vx_core::Type_string vx_f_typename_from_typedef(vx_core::Type_typedef vtypedef);
   };
 
   // (func typenames<-typelist)
@@ -4428,7 +4425,7 @@ int main()
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_stringlist vx_typenames_from_typelist(vx_core::Type_typelist typelist);
+    vx_core::Type_stringlist vx_f_typenames_from_typelist(vx_core::Type_typelist typelist);
   };
 
   // (func user<-context)
@@ -4441,7 +4438,7 @@ int main()
     template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_user vx_user_from_context(vx_core::Type_context context);
+    vx_core::Type_user vx_f_user_from_context(vx_core::Type_context context);
   };
 
   // (func any<-any)
@@ -4871,3 +4868,4 @@ int main()
   vx_core::Type_user f_user_from_context(vx_core::Type_context context);
 
 }
+#endif

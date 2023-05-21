@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_state_hpp
+#define vx_state_hpp
 #include <map>
 #include <memory>
 #include <string>
@@ -30,8 +31,8 @@ namespace vx_state {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -50,7 +51,7 @@ namespace vx_state {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_change(vx_state::Type_value_map valuemap);
+    vx_core::Type_boolean vx_f_change(vx_state::Type_value_map valuemap);
   };
 
   // (func register)
@@ -65,7 +66,7 @@ namespace vx_state {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_register(vx_core::Type_statelistener listener);
+    vx_core::Type_boolean vx_f_register(vx_core::Type_statelistener listener);
   };
 
   // (func change)
@@ -75,3 +76,4 @@ namespace vx_state {
   vx_core::Type_boolean f_register(vx_core::Type_statelistener listener);
 
 }
+#endif

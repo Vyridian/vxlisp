@@ -11,25 +11,28 @@ namespace vx_test_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/test"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("file-test"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test_true(
-              vx_data_file::f_boolean_exists_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                    vx_core::t_string->vx_new_from_string(":name"),
-                    vx_core::t_string->vx_new_from_string("testsuite.vxlisp"),
-                    vx_core::t_string->vx_new_from_string(":path"),
-                    vx_core::t_string->vx_new_from_string("src/test/resources")
-                  })
-                )
-              ),
-              context
-            )
-        })
+                vx_data_file::f_boolean_exists_from_file(
+                  vx_core::f_new(
+                    vx_data_file::t_file,
+                    vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                      vx_core::t_string->vx_new_from_string(":name"),
+                      vx_core::t_string->vx_new_from_string("testsuite.vxlisp"),
+                      vx_core::t_string->vx_new_from_string(":path"),
+                      vx_core::t_string->vx_new_from_string("src/test/resources")
+                    })
+                  )
+                ),
+                context
+              )
+          })
+        }
       )
     });
     return output;
@@ -41,25 +44,28 @@ namespace vx_test_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/test"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("file-testhtml"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test_true(
-              vx_data_file::f_boolean_exists_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                    vx_core::t_string->vx_new_from_string(":name"),
-                    vx_core::t_string->vx_new_from_string("testsuite.html"),
-                    vx_core::t_string->vx_new_from_string(":path"),
-                    vx_core::t_string->vx_new_from_string("src/test/resources")
-                  })
-                )
-              ),
-              context
-            )
-        })
+                vx_data_file::f_boolean_exists_from_file(
+                  vx_core::f_new(
+                    vx_data_file::t_file,
+                    vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                      vx_core::t_string->vx_new_from_string(":name"),
+                      vx_core::t_string->vx_new_from_string("testsuite.html"),
+                      vx_core::t_string->vx_new_from_string(":path"),
+                      vx_core::t_string->vx_new_from_string("src/test/resources")
+                    })
+                  )
+                ),
+                context
+              )
+          })
+        }
       )
     });
     return output;
@@ -71,25 +77,28 @@ namespace vx_test_test {
       vx_core::t_string->vx_new_from_string(":testpkg"), vx_core::t_string->vx_new_from_string("vx/test"),
       vx_core::t_string->vx_new_from_string(":casename"), vx_core::t_string->vx_new_from_string("file-testnode"),
       vx_core::t_string->vx_new_from_string(":describelist"),
-      vx_test::t_testdescribelist->vx_new_from_list(vx_test::t_testdescribelist, 
-        vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
-          vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))"),
-          vx_core::t_string->vx_new_from_string(":testresult"),
+      vx_test::t_testdescribelist->vx_new_from_list(
+        vx_test::t_testdescribelist,
+        {
+          vx_test::t_testdescribe->vx_new(vx_test::t_testdescribe, {
+            vx_core::t_string->vx_new_from_string(":describename"), vx_core::t_string->vx_new_from_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))"),
+            vx_core::t_string->vx_new_from_string(":testresult"),
             vx_test::f_test_true(
-              vx_data_file::f_boolean_exists_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::t_anylist->vx_new(vx_core::t_anylist, {
-                    vx_core::t_string->vx_new_from_string(":name"),
-                    vx_core::t_string->vx_new_from_string("testsuitenode.vxlisp"),
-                    vx_core::t_string->vx_new_from_string(":path"),
-                    vx_core::t_string->vx_new_from_string("src/test/resources")
-                  })
-                )
-              ),
-              context
-            )
-        })
+                vx_data_file::f_boolean_exists_from_file(
+                  vx_core::f_new(
+                    vx_data_file::t_file,
+                    vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+                      vx_core::t_string->vx_new_from_string(":name"),
+                      vx_core::t_string->vx_new_from_string("testsuitenode.vxlisp"),
+                      vx_core::t_string->vx_new_from_string(":path"),
+                      vx_core::t_string->vx_new_from_string("src/test/resources")
+                    })
+                  )
+                ),
+                context
+              )
+          })
+        }
       )
     });
     return output;
@@ -97,9 +106,9 @@ namespace vx_test_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase->push_back(vx_test_test::f_file_test(context));
-    arraylisttestcase->push_back(vx_test_test::f_file_testhtml(context));
-    arraylisttestcase->push_back(vx_test_test::f_file_testnode(context));
+    arraylisttestcase.push_back(vx_test_test::f_file_test(context));
+    arraylisttestcase.push_back(vx_test_test::f_file_testhtml(context));
+    arraylisttestcase.push_back(vx_test_test::f_file_testnode(context));
     vx_test::Type_testcaselist output = vx_test::t_testcaselist->vx_new_from_list(vx_test::t_testcaselist, arraylisttestcase);
     return output;
   }

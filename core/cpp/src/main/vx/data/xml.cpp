@@ -23,8 +23,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_xml::Class_xml::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_xml::Class_xml::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -45,7 +45,7 @@
     template <class T> std::shared_ptr<T> vx_data_xml::Class_xml::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_xml::Type_xml output;
       vx_data_xml::Class_xml* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_nodes = val->nodes();
       std::set<std::string> validkeys;
       validkeys.insert(":nodes");
@@ -155,8 +155,8 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_xml::Class_xmlnode::vx_any(vx_core::Type_string key) {
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_xml::Class_xmlnode::vx_get_any(vx_core::Type_string key) {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
@@ -186,7 +186,7 @@
     template <class T> std::shared_ptr<T> vx_data_xml::Class_xmlnode::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_xml::Type_xmlnode output;
       vx_data_xml::Class_xmlnode* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       output->vx_p_nodes = val->nodes();
       output->vx_p_props = val->props();
       output->vx_p_tag = val->tag();
@@ -291,7 +291,7 @@
       return vx_core::list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    vx_data_xml::Type_xmlnode vx_data_xml::Class_xmlnodelist::vx_xmlnode(vx_core::Type_int index) {
+    vx_data_xml::Type_xmlnode vx_data_xml::Class_xmlnodelist::vx_get_xmlnode(vx_core::Type_int index) {
       vx_data_xml::Type_xmlnode output = vx_data_xml::e_xmlnode;
       vx_data_xml::Class_xmlnodelist* list = this;
       int iindex = index->vx_int();
@@ -304,15 +304,15 @@
 
     std::vector<vx_data_xml::Type_xmlnode> vx_data_xml::Class_xmlnodelist::vx_listxmlnode() {return vx_p_list;}
 
-    vx_core::Type_any vx_data_xml::Class_xmlnodelist::vx_any(vx_core::Type_int index) {
-      return this->vx_xmlnode(index);
+    vx_core::Type_any vx_data_xml::Class_xmlnodelist::vx_get_any(vx_core::Type_int index) {
+      return this->vx_get_xmlnode(index);
     }
 
     template <class T> std::shared_ptr<T> vx_data_xml::Class_xmlnodelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {return vx_data_xml::e_xmlnodelist->vx_copy(generic_any_1, vals);}
     template <class T> std::shared_ptr<T> vx_data_xml::Class_xmlnodelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_xml::Type_xmlnodelist output;
       vx_data_xml::Class_xmlnodelist* val = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(val->vx_msgblock(), vals);
       std::vector<vx_data_xml::Type_xmlnode> listval = val->vx_listxmlnode();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = vx_core::t_any->vx_type_from_any(valsub);
@@ -321,7 +321,7 @@
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = msgblock->vx_copy(vx_core::t_msgblock, {valsub});
         } else if (valsubtype == vx_data_xml::t_xmlnode) {
-          listval->push_back(vx_core::any_from_any(vx_data_xml::t_xmlnode, valsub));
+          listval.push_back(vx_core::any_from_any(vx_data_xml::t_xmlnode, valsub));
         } else if (valsubtype == vx_data_xml::t_xmlnodelist) {
           vx_data_xml::Type_xmlnodelist multi = vx_core::any_from_any(vx_data_xml::t_xmlnodelist, valsub);
           listval = vx_core::listaddall(listval, multi->vx_listxmlnode());
@@ -370,8 +370,8 @@
       return vx_core::map_from_map(vx_core::t_any, this->vx_p_map);
     }
 
-    // vx_string(key)
-    vx_core::Type_string vx_data_xml::Class_xmlpropmap::vx_string(vx_core::Type_string key) {
+    // vx_get_string(key)
+    vx_core::Type_string vx_data_xml::Class_xmlpropmap::vx_get_string(vx_core::Type_string key) {
       vx_core::Type_string output = vx_core::e_string;
       vx_data_xml::Class_xmlpropmap* map = this;
       std::string skey = key->vx_string();
@@ -380,9 +380,9 @@
       return output;
     }
 
-    // vx_any(key)
-    vx_core::Type_any vx_data_xml::Class_xmlpropmap::vx_any(vx_core::Type_string key) {
-      return this->vx_string(key);
+    // vx_get_any(key)
+    vx_core::Type_any vx_data_xml::Class_xmlpropmap::vx_get_any(vx_core::Type_string key) {
+      return this->vx_get_string(key);
     }
 
     // vx_mapstring()
@@ -416,7 +416,7 @@
     template <class T> std::shared_ptr<T> vx_data_xml::Class_xmlpropmap::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
       vx_data_xml::Type_xmlpropmap output;
       vx_data_xml::Class_xmlpropmap* valmap = this;
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap, vals);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_arrayval(valmap->vx_msgblock(), vals);
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -535,12 +535,12 @@
 
     vx_core::Type_any vx_data_xml::Class_xml_from_textblock::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_any(vx_core::t_int->vx_new_from_int(0)));
+      vx_data_textblock::Type_textblock textblock = vx_core::f_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
       output = vx_data_xml::f_xml_from_textblock(textblock);
       return output;
     }
 
-    vx_data_xml::Type_xml vx_data_xml::Class_xml_from_textblock::vx_xml_from_textblock(vx_data_textblock::Type_textblock textblock) {
+    vx_data_xml::Type_xml vx_data_xml::Class_xml_from_textblock::vx_f_xml_from_textblock(vx_data_textblock::Type_textblock textblock) {
       return vx_data_xml::f_xml_from_textblock(textblock);
     }
 

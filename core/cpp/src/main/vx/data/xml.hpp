@@ -1,4 +1,5 @@
-#pragma once
+#ifndef vx_data_xml_hpp
+#define vx_data_xml_hpp
 #include <map>
 #include <memory>
 #include <set>
@@ -43,8 +44,8 @@ namespace vx_data_xml {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // nodes()
     vx_data_xml::Type_xmlnodelist vx_p_nodes;
     virtual vx_data_xml::Type_xmlnodelist nodes();
@@ -61,8 +62,8 @@ namespace vx_data_xml {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map();
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key);
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key);
     // nodes()
     vx_data_xml::Type_xmlnode vx_p_nodes;
     virtual vx_data_xml::Type_xmlnode nodes();
@@ -86,18 +87,18 @@ namespace vx_data_xml {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(index)
-    virtual vx_core::Type_any vx_any(vx_core::Type_int index) override;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) override;
     // vx_list()
     virtual vx_core::vx_Type_listany vx_list() override;
     // vx_new_from_list(T, List<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval) override;
+    template <class T> std::shared_ptr<T> vx_new_from_list(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listany listval);
     std::vector<vx_data_xml::Type_xmlnode> vx_p_list;
 
     // vx_listxmlnode()
     virtual std::vector<vx_data_xml::Type_xmlnode> vx_listxmlnode();
-    // vx_xmlnode(index)
-    virtual vx_data_xml::Type_xmlnode vx_xmlnode(vx_core::Type_int index);
+    // vx_get_xmlnode(index)
+    virtual vx_data_xml::Type_xmlnode vx_get_xmlnode(vx_core::Type_int index);
   };
 
   // (type xmlpropmap)
@@ -109,8 +110,8 @@ namespace vx_data_xml {
     template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
     virtual vx_core::Type_typedef vx_typedef() override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_any(key)
-    virtual vx_core::Type_any vx_any(vx_core::Type_string key) override;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() override;
     // vx_new_from_map(T, Map<T>)
@@ -118,8 +119,8 @@ namespace vx_data_xml {
     std::map<std::string, vx_core::Type_string> vx_p_map;
     // vx_mapstring()
     virtual std::map<std::string, vx_core::Type_string> vx_mapstring();
-    // vx_string(key)
-    virtual vx_core::Type_string vx_string(vx_core::Type_string key);
+    // vx_get_string(key)
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_string key);
   };
 
   // (func xml<-textblock)
@@ -134,10 +135,11 @@ namespace vx_data_xml {
     virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
     template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_data_xml::Type_xml vx_xml_from_textblock(vx_data_textblock::Type_textblock textblock);
+    vx_data_xml::Type_xml vx_f_xml_from_textblock(vx_data_textblock::Type_textblock textblock);
   };
 
   // (func xml<-textblock)
   vx_data_xml::Type_xml f_xml_from_textblock(vx_data_textblock::Type_textblock textblock);
 
 }
+#endif
