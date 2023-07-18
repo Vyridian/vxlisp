@@ -1,28 +1,29 @@
 #include <iostream>
-#include "test_lib.cpp"
-#include "vx/collection_test.cpp"
-#include "vx/core_test.cpp"
-#include "vx/data/csv_test.cpp"
-#include "vx/data/db_test.cpp"
-#include "vx/data/file_test.cpp"
-#include "vx/data/table_test.cpp"
-#include "vx/data/textblock_test.cpp"
-#include "vx/data/tree_test.cpp"
-#include "vx/data/xml_test.cpp"
-#include "vx/repl_test.cpp"
-#include "vx/sample_test.cpp"
-#include "vx/state_test.cpp"
-#include "vx/test_test.cpp"
-#include "vx/type_test.cpp"
-#include "vx/web/html_test.cpp"
-#include "vx/web/http_test.cpp"
+#include "../main/vx/core.hpp"
+#include "test_lib.hpp"
+#include "vx/collection_test.hpp"
+#include "vx/core_test.hpp"
+#include "vx/data/csv_test.hpp"
+#include "vx/data/db_test.hpp"
+#include "vx/data/file_test.hpp"
+#include "vx/data/table_test.hpp"
+#include "vx/data/textblock_test.hpp"
+#include "vx/data/tree_test.hpp"
+#include "vx/data/xml_test.hpp"
+#include "vx/repl_test.hpp"
+#include "vx/sample_test.hpp"
+#include "vx/state_test.hpp"
+#include "vx/test_test.hpp"
+#include "vx/type_test.hpp"
+#include "vx/web/html_test.hpp"
+#include "vx/web/http_test.hpp"
 
 /**
  * Unit test for whole App.
  */
 namespace app_test {
 
-  vx_core::Type_context context = vx_core::t_context->vx_new(vx_core::t_context, {});
+  vx_core::Type_context context = vx_core::vx_new(vx_core::t_context(), {});
 
 
   // (package "vx/collection")
@@ -139,7 +140,7 @@ namespace app_test {
 
 	// test_writetestsuite
   vx_core::Type_boolean test_writetestsuite() {
-    vx_test::Type_testpackagelist testpackagelist = vx_test::t_testpackagelist->vx_new(vx_test::t_testpackagelist, {
+    vx_test::Type_testpackagelist testpackagelist = vx_core::vx_new(vx_test::t_testpackagelist(), {
       vx_collection_test::test_package(context),
       vx_core_test::test_package(context),
       vx_data_csv_test::test_package(context),
@@ -160,12 +161,9 @@ namespace app_test {
     return test_lib::write_testpackagelist_async(testpackagelist, context);
   }
 
-	int main(int argc, char* argv[]) {
-    std::string current_exec_name = argv[0]; // Name of the current exec program
-    std::vector<std::string> all_args;
-    if (argc > 1) {
-      all_args.assign(argv + 1, argv + argc);
-    }
+	int main(int iarglen, char* arrayarg[]) {
+		std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+    std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
     vx_core::Type_boolean writetest = test_writetestsuite();
 		vx_core::Type_string stringwritetest = vx_core::f_string_from_any(writetest);
 		std::string swritetest = stringwritetest->vx_string();

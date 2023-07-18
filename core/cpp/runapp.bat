@@ -1,2 +1,2 @@
 cls
-gradlew runapp
+build\main\app.exe

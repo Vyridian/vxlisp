@@ -1,633 +1,577 @@
-#include <memory>
 #include "../vx/core.hpp"
-#include "vx/type.hpp"
+#include "type.hpp"
 
-//namespace vx_type {
-  /**
-   * @function allowtypenames_from_type
-   * Get the name of a given type
-   * @param  {any} type
-   * @return {stringlist}
-   * (func allowtypenames<-type)
-   */
-  //class Func_allowtypenames_from_type {
+namespace vx_type {
 
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypenames_from_type::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_allowtypenames_from_type output;
-      return output;
-    }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypenames_from_type::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_allowtypenames_from_type output;
-      return output;
-    }
-
-    vx_core::Type_typedef vx_type::Class_allowtypenames_from_type::vx_typedef() {return vx_type::t_allowtypenames_from_type->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_allowtypenames_from_type::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "allowtypenames<-type", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "stringlist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_string}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypenames_from_type::vx_empty(std::shared_ptr<T> val) {return vx_type::e_allowtypenames_from_type;}
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypenames_from_type::vx_type(std::shared_ptr<T> val) {return vx_type::t_allowtypenames_from_type;}
-
-    vx_core::Func_any_from_any vx_type::Class_allowtypenames_from_type::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
-
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_allowtypenames_from_type::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_allowtypenames_from_type(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    vx_core::Type_any vx_type::Class_allowtypenames_from_type::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_type::f_allowtypenames_from_type(type);
-      return output;
-    }
-
-    vx_core::Type_stringlist vx_type::Class_allowtypenames_from_type::vx_f_allowtypenames_from_type(vx_core::Type_any type) {
-      return vx_type::f_allowtypenames_from_type(type);
-    }
-
-  //}
-
-  vx_type::Func_allowtypenames_from_type vx_type::e_allowtypenames_from_type = std::make_shared<vx_type::Class_allowtypenames_from_type>();
-  vx_type::Func_allowtypenames_from_type vx_type::t_allowtypenames_from_type = std::make_shared<vx_type::Class_allowtypenames_from_type>();
-
-  vx_core::Type_stringlist vx_type::f_allowtypenames_from_type(vx_core::Type_any type) {
-    vx_core::Type_stringlist output = vx_core::e_stringlist;
+  // (func allowtypenames<-type)
+  vx_core::Type_stringlist f_allowtypenames_from_type(vx_core::Type_any type) {
+    vx_core::Type_stringlist output = vx_core::e_stringlist();
     output = vx_core::f_typenames_from_typelist(
       vx_type::f_allowtypes_from_type(type)
     );
     return output;
   }
 
-  /**
-   * @function allowtypes_from_type
-   * Get the name of a given type
-   * @param  {any} type
-   * @return {typelist}
-   * (func allowtypes<-type)
-   */
-  //class Func_allowtypes_from_type {
+  // (func allowtypenames<-type)
+  // class Class_allowtypenames_from_type {
+    Abstract_allowtypenames_from_type::~Abstract_allowtypenames_from_type() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypes_from_type::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_allowtypes_from_type output;
+    Class_allowtypenames_from_type::Class_allowtypenames_from_type() : Abstract_allowtypenames_from_type::Abstract_allowtypenames_from_type() {
+      vx_core::refcount += 1;
+    }
+    Class_allowtypenames_from_type::~Class_allowtypenames_from_type() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_allowtypenames_from_type::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_allowtypenames_from_type output = vx_type::e_allowtypenames_from_type();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypes_from_type::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_allowtypes_from_type output;
+    vx_core::Type_any Class_allowtypenames_from_type::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_allowtypenames_from_type output = vx_type::e_allowtypenames_from_type();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_allowtypes_from_type::vx_typedef() {return vx_type::t_allowtypes_from_type->vx_typedef();}
+    vx_core::Type_typedef Class_allowtypenames_from_type::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "stringlist", // name
+        ":list", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_string()}), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_allowtypes_from_type::vx_funcdef() {
+    vx_core::Type_funcdef Class_allowtypenames_from_type::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "allowtypenames<-type", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
+
+    vx_core::Type_any Class_allowtypenames_from_type::vx_empty() const {return vx_type::e_allowtypenames_from_type();}
+    vx_core::Type_any Class_allowtypenames_from_type::vx_type() const {return vx_type::t_allowtypenames_from_type();}
+    vx_core::Type_msgblock Class_allowtypenames_from_type::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_allowtypenames_from_type::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_allowtypenames_from_type::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
+
+    vx_core::Type_any Class_allowtypenames_from_type::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_allowtypenames_from_type(inputval);
+      return output;
+    }
+
+    vx_core::Type_any Class_allowtypenames_from_type::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_allowtypenames_from_type(type);
+      return output;
+    }
+
+  //}
+
+  // (func allowtypes<-type)
+  vx_core::Type_typelist f_allowtypes_from_type(vx_core::Type_any type) {
+    vx_core::Type_typelist output = vx_core::e_typelist();
+    output = vx_core::f_typedef_from_type(type)->allowtypes();
+    return output;
+  }
+
+  // (func allowtypes<-type)
+  // class Class_allowtypes_from_type {
+    Abstract_allowtypes_from_type::~Abstract_allowtypes_from_type() {}
+
+    Class_allowtypes_from_type::Class_allowtypes_from_type() : Abstract_allowtypes_from_type::Abstract_allowtypes_from_type() {
+      vx_core::refcount += 1;
+    }
+    Class_allowtypes_from_type::~Class_allowtypes_from_type() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_allowtypes_from_type::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_allowtypes_from_type output = vx_type::e_allowtypes_from_type();
+      return output;
+    }
+
+    vx_core::Type_any Class_allowtypes_from_type::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_allowtypes_from_type output = vx_type::e_allowtypes_from_type();
+      return output;
+    }
+
+    vx_core::Type_typedef Class_allowtypes_from_type::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "typelist", // name
+        ":list", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_any()}), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
+
+    vx_core::Type_funcdef Class_allowtypes_from_type::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "allowtypes<-type", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "typelist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_any}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypes_from_type::vx_empty(std::shared_ptr<T> val) {return vx_type::e_allowtypes_from_type;}
-    template <class T> std::shared_ptr<T> vx_type::Class_allowtypes_from_type::vx_type(std::shared_ptr<T> val) {return vx_type::t_allowtypes_from_type;}
+    vx_core::Type_any Class_allowtypes_from_type::vx_empty() const {return vx_type::e_allowtypes_from_type();}
+    vx_core::Type_any Class_allowtypes_from_type::vx_type() const {return vx_type::t_allowtypes_from_type();}
+    vx_core::Type_msgblock Class_allowtypes_from_type::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_allowtypes_from_type::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_allowtypes_from_type::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_allowtypes_from_type::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_allowtypes_from_type::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_allowtypes_from_type(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_allowtypes_from_type::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_allowtypes_from_type(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_allowtypes_from_type::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_allowtypes_from_type::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_allowtypes_from_type(type);
       return output;
     }
 
-    vx_core::Type_typelist vx_type::Class_allowtypes_from_type::vx_f_allowtypes_from_type(vx_core::Type_any type) {
-      return vx_type::f_allowtypes_from_type(type);
-    }
-
   //}
 
-  vx_type::Func_allowtypes_from_type vx_type::e_allowtypes_from_type = std::make_shared<vx_type::Class_allowtypes_from_type>();
-  vx_type::Func_allowtypes_from_type vx_type::t_allowtypes_from_type = std::make_shared<vx_type::Class_allowtypes_from_type>();
-
-  vx_core::Type_typelist vx_type::f_allowtypes_from_type(vx_core::Type_any type) {
-    vx_core::Type_typelist output = vx_core::e_typelist;
-    output = vx_core::f_typedef_from_type(type)->allowtypes();
+  // (func is-boolean)
+  vx_core::Type_boolean f_is_boolean(vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
+    output = vx_core::f_eq(
+      vx_core::vx_new_string("boolean"),
+      vx_core::f_typename_from_any(value)
+    );
     return output;
   }
 
-  /**
-   * @function is_boolean
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-boolean)
-   */
-  //class Func_is_boolean {
+  // (func is-boolean)
+  // class Class_is_boolean {
+    Abstract_is_boolean::~Abstract_is_boolean() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_boolean::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_boolean output;
+    Class_is_boolean::Class_is_boolean() : Abstract_is_boolean::Abstract_is_boolean() {
+      vx_core::refcount += 1;
+    }
+    Class_is_boolean::~Class_is_boolean() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_boolean::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_boolean output = vx_type::e_is_boolean();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_boolean::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_boolean output;
+    vx_core::Type_any Class_is_boolean::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_boolean output = vx_type::e_is_boolean();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_boolean::vx_typedef() {return vx_type::t_is_boolean->vx_typedef();}
+    vx_core::Type_typedef Class_is_boolean::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_is_boolean::vx_funcdef() {
+    vx_core::Type_funcdef Class_is_boolean::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "is-boolean", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_boolean::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_boolean;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_boolean::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_boolean;}
+    vx_core::Type_any Class_is_boolean::vx_empty() const {return vx_type::e_is_boolean();}
+    vx_core::Type_any Class_is_boolean::vx_type() const {return vx_type::t_is_boolean();}
+    vx_core::Type_msgblock Class_is_boolean::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_boolean::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_is_boolean::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_is_boolean::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_is_boolean::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_is_boolean(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_is_boolean::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_is_boolean(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_is_boolean::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_is_boolean::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_is_boolean(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_boolean::vx_f_is_boolean(vx_core::Type_any value) {
-      return vx_type::f_is_boolean(value);
-    }
-
   //}
 
-  vx_type::Func_is_boolean vx_type::e_is_boolean = std::make_shared<vx_type::Class_is_boolean>();
-  vx_type::Func_is_boolean vx_type::t_is_boolean = std::make_shared<vx_type::Class_is_boolean>();
-
-  vx_core::Type_boolean vx_type::f_is_boolean(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-decimal)
+  vx_core::Type_boolean f_is_decimal(vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_eq(
-      vx_core::t_string->vx_new_from_string("boolean"),
+      vx_core::vx_new_string("decimal"),
       vx_core::f_typename_from_any(value)
     );
     return output;
   }
 
-  /**
-   * @function is_decimal
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-decimal)
-   */
-  //class Func_is_decimal {
+  // (func is-decimal)
+  // class Class_is_decimal {
+    Abstract_is_decimal::~Abstract_is_decimal() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_decimal::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_decimal output;
+    Class_is_decimal::Class_is_decimal() : Abstract_is_decimal::Abstract_is_decimal() {
+      vx_core::refcount += 1;
+    }
+    Class_is_decimal::~Class_is_decimal() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_decimal::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_decimal output = vx_type::e_is_decimal();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_decimal::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_decimal output;
+    vx_core::Type_any Class_is_decimal::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_decimal output = vx_type::e_is_decimal();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_decimal::vx_typedef() {return vx_type::t_is_decimal->vx_typedef();}
+    vx_core::Type_typedef Class_is_decimal::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_is_decimal::vx_funcdef() {
+    vx_core::Type_funcdef Class_is_decimal::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "is-decimal", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_decimal::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_decimal;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_decimal::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_decimal;}
+    vx_core::Type_any Class_is_decimal::vx_empty() const {return vx_type::e_is_decimal();}
+    vx_core::Type_any Class_is_decimal::vx_type() const {return vx_type::t_is_decimal();}
+    vx_core::Type_msgblock Class_is_decimal::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_decimal::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_is_decimal::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_is_decimal::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_is_decimal::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_is_decimal(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_is_decimal::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_is_decimal(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_is_decimal::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_is_decimal::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_is_decimal(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_decimal::vx_f_is_decimal(vx_core::Type_any value) {
-      return vx_type::f_is_decimal(value);
-    }
-
   //}
 
-  vx_type::Func_is_decimal vx_type::e_is_decimal = std::make_shared<vx_type::Class_is_decimal>();
-  vx_type::Func_is_decimal vx_type::t_is_decimal = std::make_shared<vx_type::Class_is_decimal>();
-
-  vx_core::Type_boolean vx_type::f_is_decimal(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-float)
+  vx_core::Type_boolean f_is_float(vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_eq(
-      vx_core::t_string->vx_new_from_string("decimal"),
+      vx_core::vx_new_string("float"),
       vx_core::f_typename_from_any(value)
     );
     return output;
   }
 
-  /**
-   * @function is_float
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-float)
-   */
-  //class Func_is_float {
+  // (func is-float)
+  // class Class_is_float {
+    Abstract_is_float::~Abstract_is_float() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_float::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_float output;
+    Class_is_float::Class_is_float() : Abstract_is_float::Abstract_is_float() {
+      vx_core::refcount += 1;
+    }
+    Class_is_float::~Class_is_float() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_float::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_float output = vx_type::e_is_float();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_float::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_float output;
+    vx_core::Type_any Class_is_float::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_float output = vx_type::e_is_float();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_float::vx_typedef() {return vx_type::t_is_float->vx_typedef();}
+    vx_core::Type_typedef Class_is_float::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_is_float::vx_funcdef() {
+    vx_core::Type_funcdef Class_is_float::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "is-float", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_float::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_float;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_float::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_float;}
+    vx_core::Type_any Class_is_float::vx_empty() const {return vx_type::e_is_float();}
+    vx_core::Type_any Class_is_float::vx_type() const {return vx_type::t_is_float();}
+    vx_core::Type_msgblock Class_is_float::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_float::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_is_float::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_is_float::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_is_float::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_is_float(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_is_float::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_is_float(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_is_float::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_is_float::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_is_float(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_float::vx_f_is_float(vx_core::Type_any value) {
-      return vx_type::f_is_float(value);
-    }
-
   //}
 
-  vx_type::Func_is_float vx_type::e_is_float = std::make_shared<vx_type::Class_is_float>();
-  vx_type::Func_is_float vx_type::t_is_float = std::make_shared<vx_type::Class_is_float>();
-
-  vx_core::Type_boolean vx_type::f_is_float(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-none)
+  vx_core::Type_boolean f_is_none(vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_eq(
-      vx_core::t_string->vx_new_from_string("float"),
-      vx_core::f_typename_from_any(value)
+      value,
+      vx_core::t_none()
     );
     return output;
   }
 
-  /**
-   * @function is_none
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-none)
-   */
-  //class Func_is_none {
+  // (func is-none)
+  // class Class_is_none {
+    Abstract_is_none::~Abstract_is_none() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_none::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_none output;
+    Class_is_none::Class_is_none() : Abstract_is_none::Abstract_is_none() {
+      vx_core::refcount += 1;
+    }
+    Class_is_none::~Class_is_none() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_none::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_none output = vx_type::e_is_none();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_none::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_none output;
+    vx_core::Type_any Class_is_none::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_none output = vx_type::e_is_none();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_none::vx_typedef() {return vx_type::t_is_none->vx_typedef();}
+    vx_core::Type_typedef Class_is_none::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_is_none::vx_funcdef() {
+    vx_core::Type_funcdef Class_is_none::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "is-none", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_none::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_none;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_none::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_none;}
+    vx_core::Type_any Class_is_none::vx_empty() const {return vx_type::e_is_none();}
+    vx_core::Type_any Class_is_none::vx_type() const {return vx_type::t_is_none();}
+    vx_core::Type_msgblock Class_is_none::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_none::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_is_none::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_is_none::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_is_none::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_is_none(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_is_none::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_is_none(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_is_none::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_is_none::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_is_none(value);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_none::vx_f_is_none(vx_core::Type_any value) {
-      return vx_type::f_is_none(value);
-    }
-
   //}
 
-  vx_type::Func_is_none vx_type::e_is_none = std::make_shared<vx_type::Class_is_none>();
-  vx_type::Func_is_none vx_type::t_is_none = std::make_shared<vx_type::Class_is_none>();
-
-  vx_core::Type_boolean vx_type::f_is_none(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-string)
+  vx_core::Type_boolean f_is_string(vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_eq(
-      value,
-      vx_core::t_none
-    );
-    return output;
-  }
-
-  /**
-   * @function is_string
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-string)
-   */
-  //class Func_is_string {
-
-    template <class T> std::shared_ptr<T> vx_type::Class_is_string::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_string output;
-      return output;
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_is_string::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_string output;
-      return output;
-    }
-
-    vx_core::Type_typedef vx_type::Class_is_string::vx_typedef() {return vx_type::t_is_string->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_is_string::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "is-string", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_is_string::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_string;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_string::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_string;}
-
-    vx_core::Func_any_from_any vx_type::Class_is_string::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
-
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_is_string::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_is_string(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    vx_core::Type_any vx_type::Class_is_string::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_type::f_is_string(value);
-      return output;
-    }
-
-    vx_core::Type_boolean vx_type::Class_is_string::vx_f_is_string(vx_core::Type_any value) {
-      return vx_type::f_is_string(value);
-    }
-
-  //}
-
-  vx_type::Func_is_string vx_type::e_is_string = std::make_shared<vx_type::Class_is_string>();
-  vx_type::Func_is_string vx_type::t_is_string = std::make_shared<vx_type::Class_is_string>();
-
-  vx_core::Type_boolean vx_type::f_is_string(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
-    output = vx_core::f_eq(
-      vx_core::t_string->vx_new_from_string("vx/core/string"),
+      vx_core::vx_new_string("vx/core/string"),
       vx_core::f_typename_from_any(value)
     );
     return output;
   }
 
-  /**
-   * @function is_type
-   * @param  {any} val
-   * @param  {any} type
-   * @return {boolean}
-   * (func is-type)
-   */
-  //class Func_is_type {
+  // (func is-string)
+  // class Class_is_string {
+    Abstract_is_string::~Abstract_is_string() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_type output;
+    Class_is_string::Class_is_string() : Abstract_is_string::Abstract_is_string() {
+      vx_core::refcount += 1;
+    }
+    Class_is_string::~Class_is_string() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_string::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_string output = vx_type::e_is_string();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_type output;
+    vx_core::Type_any Class_is_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_string output = vx_type::e_is_string();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_type::vx_typedef() {return vx_type::t_is_type->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_is_type::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "is-type", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+    vx_core::Type_typedef Class_is_string::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_type;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_type;}
+    vx_core::Type_funcdef Class_is_string::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "is-string", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
 
-    vx_core::Type_any vx_type::Class_is_type::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
-      output = vx_type::f_is_type(val, type);
+    vx_core::Type_any Class_is_string::vx_empty() const {return vx_type::e_is_string();}
+    vx_core::Type_any Class_is_string::vx_type() const {return vx_type::t_is_string();}
+    vx_core::Type_msgblock Class_is_string::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_string::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_is_string::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
+
+    vx_core::Type_any Class_is_string::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_is_string(inputval);
       return output;
     }
 
-    vx_core::Type_boolean vx_type::Class_is_type::vx_f_is_type(vx_core::Type_any val, vx_core::Type_any type) {
-      return vx_type::f_is_type(val, type);
+    vx_core::Type_any Class_is_string::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_is_string(value);
+      return output;
     }
 
   //}
 
-  vx_type::Func_is_type vx_type::e_is_type = std::make_shared<vx_type::Class_is_type>();
-  vx_type::Func_is_type vx_type::t_is_type = std::make_shared<vx_type::Class_is_type>();
-
-  vx_core::Type_boolean vx_type::f_is_type(vx_core::Type_any val, vx_core::Type_any type) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-type)
+  vx_core::Type_boolean f_is_type(vx_core::Type_any val, vx_core::Type_any type) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_or_1(
-      vx_core::t_booleanlist->vx_new(vx_core::t_booleanlist, {
+      vx_core::vx_new(vx_core::t_booleanlist(), {
         vx_core::f_eq(
           vx_core::f_typename_from_type(type),
           vx_core::f_typename_from_any(val)
@@ -645,79 +589,77 @@
     return output;
   }
 
-  /**
-   * @function is_type_from_any_typelist
-   * Returns true if val is any type in typelist.
-   * @param  {any} val
-   * @param  {typelist} typelist
-   * @return {boolean}
-   * (func is-type<-any-typelist)
-   */
-  //class Func_is_type_from_any_typelist {
+  // (func is-type)
+  // class Class_is_type {
+    Abstract_is_type::~Abstract_is_type() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type_from_any_typelist::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_type_from_any_typelist output;
+    Class_is_type::Class_is_type() : Abstract_is_type::Abstract_is_type() {
+      vx_core::refcount += 1;
+    }
+    Class_is_type::~Class_is_type() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_type::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_type output = vx_type::e_is_type();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type_from_any_typelist::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_is_type_from_any_typelist output;
+    vx_core::Type_any Class_is_type::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_type output = vx_type::e_is_type();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_is_type_from_any_typelist::vx_typedef() {return vx_type::t_is_type_from_any_typelist->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_is_type_from_any_typelist::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "is-type<-any-typelist", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+    vx_core::Type_typedef Class_is_type::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type_from_any_typelist::vx_empty(std::shared_ptr<T> val) {return vx_type::e_is_type_from_any_typelist;}
-    template <class T> std::shared_ptr<T> vx_type::Class_is_type_from_any_typelist::vx_type(std::shared_ptr<T> val) {return vx_type::t_is_type_from_any_typelist;}
-
-    vx_core::Type_any vx_type::Class_is_type_from_any_typelist::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_typelist typelist = vx_core::f_any_from_any(vx_core::t_typelist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
-      output = vx_type::f_is_type_from_any_typelist(val, typelist);
-      return output;
+    vx_core::Type_funcdef Class_is_type::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "is-type", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
     }
 
-    vx_core::Type_boolean vx_type::Class_is_type_from_any_typelist::vx_f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
-      return vx_type::f_is_type_from_any_typelist(val, typelist);
+    vx_core::Type_any Class_is_type::vx_empty() const {return vx_type::e_is_type();}
+    vx_core::Type_any Class_is_type::vx_type() const {return vx_type::t_is_type();}
+    vx_core::Type_msgblock Class_is_type::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_type::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_is_type::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_is_type(val, type);
+      return output;
     }
 
   //}
 
-  vx_type::Func_is_type_from_any_typelist vx_type::e_is_type_from_any_typelist = std::make_shared<vx_type::Class_is_type_from_any_typelist>();
-  vx_type::Func_is_type_from_any_typelist vx_type::t_is_type_from_any_typelist = std::make_shared<vx_type::Class_is_type_from_any_typelist>();
-
-  vx_core::Type_boolean vx_type::f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
+  // (func is-type<-any-typelist)
+  vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
+    vx_core::Type_boolean output = vx_core::e_boolean();
     output = vx_core::f_any_from_list_reduce(
-      vx_core::t_boolean,
+      vx_core::t_boolean(),
       typelist,
-      vx_core::t_boolean->vx_new_from_boolean(false),
-      vx_core::t_any_from_reduce->fn_new([val](vx_core::Type_any result_any, vx_core::Type_any type_any) {
-        vx_core::Type_boolean result = vx_core::f_any_from_any(vx_core::t_boolean, result_any);
-        vx_core::Type_any type = vx_core::f_any_from_any(vx_core::t_any, type_any);
+      vx_core::vx_new_boolean(false),
+      vx_core::t_any_from_reduce()->vx_fn_new([val](vx_core::Type_any result_any, vx_core::Type_any type_any) {
+        vx_core::Type_boolean result = vx_core::vx_any_from_any(vx_core::t_boolean(), result_any);
+        vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any(), type_any);
         return 
           vx_core::f_or(
             result,
@@ -728,184 +670,174 @@
     return output;
   }
 
-  /**
-   * @function length_from_string
-   * Returns length of a string.
-   * @param  {string} text
-   * @return {int}
-   * (func length<-string)
-   */
-  //class Func_length_from_string {
+  // (func is-type<-any-typelist)
+  // class Class_is_type_from_any_typelist {
+    Abstract_is_type_from_any_typelist::~Abstract_is_type_from_any_typelist() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_length_from_string::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_length_from_string output;
+    Class_is_type_from_any_typelist::Class_is_type_from_any_typelist() : Abstract_is_type_from_any_typelist::Abstract_is_type_from_any_typelist() {
+      vx_core::refcount += 1;
+    }
+    Class_is_type_from_any_typelist::~Class_is_type_from_any_typelist() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_is_type_from_any_typelist::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_type_from_any_typelist output = vx_type::e_is_type_from_any_typelist();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_length_from_string::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_length_from_string output;
+    vx_core::Type_any Class_is_type_from_any_typelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_is_type_from_any_typelist output = vx_type::e_is_type_from_any_typelist();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_length_from_string::vx_typedef() {return vx_type::t_length_from_string->vx_typedef();}
+    vx_core::Type_typedef Class_is_type_from_any_typelist::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean", // name
+        "", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_length_from_string::vx_funcdef() {
+    vx_core::Type_funcdef Class_is_type_from_any_typelist::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "is-type<-any-typelist", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
+
+    vx_core::Type_any Class_is_type_from_any_typelist::vx_empty() const {return vx_type::e_is_type_from_any_typelist();}
+    vx_core::Type_any Class_is_type_from_any_typelist::vx_type() const {return vx_type::t_is_type_from_any_typelist();}
+    vx_core::Type_msgblock Class_is_type_from_any_typelist::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_is_type_from_any_typelist::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_is_type_from_any_typelist::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_typelist typelist = vx_core::vx_any_from_any(vx_core::t_typelist(), arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_is_type_from_any_typelist(val, typelist);
+      return output;
+    }
+
+  //}
+
+  // (func length<-string)
+  vx_core::Type_int f_length_from_string(vx_core::Type_string text) {
+    vx_core::Type_int output = vx_core::e_int();
+    return output;
+  }
+
+  // (func length<-string)
+  // class Class_length_from_string {
+    Abstract_length_from_string::~Abstract_length_from_string() {}
+
+    Class_length_from_string::Class_length_from_string() : Abstract_length_from_string::Abstract_length_from_string() {
+      vx_core::refcount += 1;
+    }
+    Class_length_from_string::~Class_length_from_string() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_length_from_string::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_length_from_string output = vx_type::e_length_from_string();
+      return output;
+    }
+
+    vx_core::Type_any Class_length_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_length_from_string output = vx_type::e_length_from_string();
+      return output;
+    }
+
+    vx_core::Type_typedef Class_length_from_string::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "int", // name
+        "", // extends
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_number()}), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
+
+    vx_core::Type_funcdef Class_length_from_string::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "length<-string", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "int", // name
-          "", // extends
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_number}), // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_length_from_string::vx_empty(std::shared_ptr<T> val) {return vx_type::e_length_from_string;}
-    template <class T> std::shared_ptr<T> vx_type::Class_length_from_string::vx_type(std::shared_ptr<T> val) {return vx_type::t_length_from_string;}
+    vx_core::Type_any Class_length_from_string::vx_empty() const {return vx_type::e_length_from_string();}
+    vx_core::Type_any Class_length_from_string::vx_type() const {return vx_type::t_length_from_string();}
+    vx_core::Type_msgblock Class_length_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_length_from_string::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_length_from_string::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_length_from_string::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_length_from_string::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_string inputval = (vx_core::Type_string)value;
-      vx_core::Type_any outputval = vx_type::f_length_from_string(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_length_from_string::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
+      output = vx_type::f_length_from_string(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_length_from_string::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_length_from_string::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_length_from_string(text);
       return output;
     }
 
-    vx_core::Type_int vx_type::Class_length_from_string::vx_f_length_from_string(vx_core::Type_string text) {
-      return vx_type::f_length_from_string(text);
-    }
-
   //}
 
-  vx_type::Func_length_from_string vx_type::e_length_from_string = std::make_shared<vx_type::Class_length_from_string>();
-  vx_type::Func_length_from_string vx_type::t_length_from_string = std::make_shared<vx_type::Class_length_from_string>();
-
-  vx_core::Type_int vx_type::f_length_from_string(vx_core::Type_string text) {
-    vx_core::Type_int output = vx_core::e_int;
-    return output;
-  }
-
-  /**
-   * @function string_from_int
-   * Function Type converting int to string
-   * @param  {int} val
-   * @return {string}
-   * (func string<-int)
-   */
-  //class Func_string_from_int {
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_int::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_int output;
-      return output;
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_int::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_int output;
-      return output;
-    }
-
-    vx_core::Type_typedef vx_type::Class_string_from_int::vx_typedef() {return vx_type::t_string_from_int->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_string_from_int::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "string<-int", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "string", // name
-          "string", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_int::vx_empty(std::shared_ptr<T> val) {return vx_type::e_string_from_int;}
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_int::vx_type(std::shared_ptr<T> val) {return vx_type::t_string_from_int;}
-
-    vx_core::Func_any_from_any vx_type::Class_string_from_int::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
-
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_string_from_int::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_int inputval = (vx_core::Type_int)value;
-      vx_core::Type_any outputval = vx_type::f_string_from_int(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    vx_core::Type_any vx_type::Class_string_from_int::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_int val = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_type::f_string_from_int(val);
-      return output;
-    }
-
-    vx_core::Type_string vx_type::Class_string_from_int::vx_f_string_from_int(vx_core::Type_int val) {
-      return vx_type::f_string_from_int(val);
-    }
-
-  //}
-
-  vx_type::Func_string_from_int vx_type::e_string_from_int = std::make_shared<vx_type::Class_string_from_int>();
-  vx_type::Func_string_from_int vx_type::t_string_from_int = std::make_shared<vx_type::Class_string_from_int>();
-
-  vx_core::Type_string vx_type::f_string_from_int(vx_core::Type_int val) {
-    vx_core::Type_string output = vx_core::e_string;
+  // (func string<-int)
+  vx_core::Type_string f_string_from_int(vx_core::Type_int val) {
+    vx_core::Type_string output = vx_core::e_string();
     output = vx_core::f_switch(
-      vx_core::t_string,
+      vx_core::t_string(),
       val,
-      vx_core::t_thenelselist->vx_new(vx_core::t_thenelselist, {
+      vx_core::vx_new(vx_core::t_thenelselist(), {
         vx_core::f_case_1(
-          vx_core::c_infinity,
-          vx_core::t_any_from_func->fn_new([]() {
-            return vx_core::t_string->vx_new_from_string("infinity");
+          vx_core::c_infinity(),
+          vx_core::t_any_from_func()->vx_fn_new([]() {
+            return vx_core::vx_new_string("infinity");
           })
         ),
         vx_core::f_case_1(
-          vx_core::c_neginfinity,
-          vx_core::t_any_from_func->fn_new([]() {
-            return vx_core::t_string->vx_new_from_string("neginfinity");
+          vx_core::c_neginfinity(),
+          vx_core::t_any_from_func()->vx_fn_new([]() {
+            return vx_core::vx_new_string("neginfinity");
           })
         ),
         vx_core::f_case_1(
-          vx_core::c_notanumber,
-          vx_core::t_any_from_func->fn_new([]() {
-            return vx_core::t_string->vx_new_from_string("notanumber");
+          vx_core::c_notanumber(),
+          vx_core::t_any_from_func()->vx_fn_new([]() {
+            return vx_core::vx_new_string("notanumber");
           })
         ),
         vx_core::f_else(
-          vx_core::t_any_from_func->fn_new([val]() {
+          vx_core::t_any_from_func()->vx_fn_new([val]() {
             return vx_core::f_new(
-              vx_core::t_string,
-              vx_core::t_anylist->vx_new(vx_core::t_anylist, {
+              vx_core::t_string(),
+              vx_core::vx_new(vx_core::t_anylist(), {
                 val
               })
             );
@@ -916,142 +848,148 @@
     return output;
   }
 
-  /**
-   * @function string_from_string_end
-   * Returns a substring between 0 end position.
-   * @param  {string} text
-   * @param  {int} endpos
-   * @return {string}
-   * (func string<-string-end)
-   */
-  //class Func_string_from_string_end {
+  // (func string<-int)
+  // class Class_string_from_int {
+    Abstract_string_from_int::~Abstract_string_from_int() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_end::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_end output;
+    Class_string_from_int::Class_string_from_int() : Abstract_string_from_int::Abstract_string_from_int() {
+      vx_core::refcount += 1;
+    }
+    Class_string_from_int::~Class_string_from_int() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_string_from_int::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_int output = vx_type::e_string_from_int();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_end::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_end output;
+    vx_core::Type_any Class_string_from_int::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_int output = vx_type::e_string_from_int();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_string_from_string_end::vx_typedef() {return vx_type::t_string_from_string_end->vx_typedef();}
+    vx_core::Type_typedef Class_string_from_int::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_string_from_string_end::vx_funcdef() {
+    vx_core::Type_funcdef Class_string_from_int::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string<-int", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
+
+    vx_core::Type_any Class_string_from_int::vx_empty() const {return vx_type::e_string_from_int();}
+    vx_core::Type_any Class_string_from_int::vx_type() const {return vx_type::t_string_from_int();}
+    vx_core::Type_msgblock Class_string_from_int::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_int::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_from_int::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
+
+    vx_core::Type_any Class_string_from_int::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int(), val);
+      output = vx_type::f_string_from_int(inputval);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_int::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_int val = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_string_from_int(val);
+      return output;
+    }
+
+  //}
+
+  // (func string<-string-end)
+  vx_core::Type_string f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
+    vx_core::Type_string output = vx_core::e_string();
+    output = vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(0), endpos);
+    return output;
+  }
+
+  // (func string<-string-end)
+  // class Class_string_from_string_end {
+    Abstract_string_from_string_end::~Abstract_string_from_string_end() {}
+
+    Class_string_from_string_end::Class_string_from_string_end() : Abstract_string_from_string_end::Abstract_string_from_string_end() {
+      vx_core::refcount += 1;
+    }
+    Class_string_from_string_end::~Class_string_from_string_end() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_string_from_string_end::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_end output = vx_type::e_string_from_string_end();
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_string_end::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_end output = vx_type::e_string_from_string_end();
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_string_end::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
+
+    vx_core::Type_funcdef Class_string_from_string_end::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "string<-string-end", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "string", // name
-          "string", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_end::vx_empty(std::shared_ptr<T> val) {return vx_type::e_string_from_string_end;}
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_end::vx_type(std::shared_ptr<T> val) {return vx_type::t_string_from_string_end;}
+    vx_core::Type_any Class_string_from_string_end::vx_empty() const {return vx_type::e_string_from_string_end();}
+    vx_core::Type_any Class_string_from_string_end::vx_type() const {return vx_type::t_string_from_string_end();}
+    vx_core::Type_msgblock Class_string_from_string_end::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_string_end::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any vx_type::Class_string_from_string_end::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int endpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+    vx_core::Type_any Class_string_from_string_end::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int endpos = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_type::f_string_from_string_end(text, endpos);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_string_end::vx_f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
-      return vx_type::f_string_from_string_end(text, endpos);
-    }
-
   //}
 
-  vx_type::Func_string_from_string_end vx_type::e_string_from_string_end = std::make_shared<vx_type::Class_string_from_string_end>();
-  vx_type::Func_string_from_string_end vx_type::t_string_from_string_end = std::make_shared<vx_type::Class_string_from_string_end>();
-
-  vx_core::Type_string vx_type::f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
-    vx_core::Type_string output = vx_core::e_string;
-    output = vx_type::f_string_from_string_start_end(text, vx_core::t_int->vx_new_from_int(0), endpos);
-    return output;
-  }
-
-  /**
-   * @function string_from_string_start
-   * Returns a substring between start string end.
-   * @param  {string} text
-   * @param  {int} startpos
-   * @return {string}
-   * (func string<-string-start)
-   */
-  //class Func_string_from_string_start {
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_start output;
-      return output;
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_start output;
-      return output;
-    }
-
-    vx_core::Type_typedef vx_type::Class_string_from_string_start::vx_typedef() {return vx_type::t_string_from_string_start->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_string_from_string_start::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "string<-string-start", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "string", // name
-          "string", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start::vx_empty(std::shared_ptr<T> val) {return vx_type::e_string_from_string_start;}
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start::vx_type(std::shared_ptr<T> val) {return vx_type::t_string_from_string_start;}
-
-    vx_core::Type_any vx_type::Class_string_from_string_start::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int startpos = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
-      output = vx_type::f_string_from_string_start(text, startpos);
-      return output;
-    }
-
-    vx_core::Type_string vx_type::Class_string_from_string_start::vx_f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
-      return vx_type::f_string_from_string_start(text, startpos);
-    }
-
-  //}
-
-  vx_type::Func_string_from_string_start vx_type::e_string_from_string_start = std::make_shared<vx_type::Class_string_from_string_start>();
-  vx_type::Func_string_from_string_start vx_type::t_string_from_string_start = std::make_shared<vx_type::Class_string_from_string_start>();
-
-  vx_core::Type_string vx_type::f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
-    vx_core::Type_string output = vx_core::e_string;
+  // (func string<-string-start)
+  vx_core::Type_string f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
+    vx_core::Type_string output = vx_core::e_string();
     output = vx_type::f_string_from_string_start_end(
       text,
       startpos,
@@ -1060,382 +998,800 @@
     return output;
   }
 
-  /**
-   * @function string_from_string_start_end
-   * Returns a substring between start and end positions.
-   * @param  {string} text
-   * @param  {int} start
-   * @param  {int} end
-   * @return {string}
-   * (func string<-string-start-end)
-   */
-  //class Func_string_from_string_start_end {
+  // (func string<-string-start)
+  // class Class_string_from_string_start {
+    Abstract_string_from_string_start::~Abstract_string_from_string_start() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start_end::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_start_end output;
+    Class_string_from_string_start::Class_string_from_string_start() : Abstract_string_from_string_start::Abstract_string_from_string_start() {
+      vx_core::refcount += 1;
+    }
+    Class_string_from_string_start::~Class_string_from_string_start() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_string_from_string_start::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_start output = vx_type::e_string_from_string_start();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start_end::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_string_start_end output;
+    vx_core::Type_any Class_string_from_string_start::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_start output = vx_type::e_string_from_string_start();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_string_from_string_start_end::vx_typedef() {return vx_type::t_string_from_string_start_end->vx_typedef();}
+    vx_core::Type_typedef Class_string_from_string_start::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_string_from_string_start_end::vx_funcdef() {
+    vx_core::Type_funcdef Class_string_from_string_start::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string<-string-start", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
+
+    vx_core::Type_any Class_string_from_string_start::vx_empty() const {return vx_type::e_string_from_string_start();}
+    vx_core::Type_any Class_string_from_string_start::vx_type() const {return vx_type::t_string_from_string_start();}
+    vx_core::Type_msgblock Class_string_from_string_start::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_string_start::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_string_from_string_start::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int startpos = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_string_from_string_start(text, startpos);
+      return output;
+    }
+
+  //}
+
+  // (func string<-string-start-end)
+  vx_core::Type_string f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
+    vx_core::Type_string output = vx_core::e_string();
+    return output;
+  }
+
+  // (func string<-string-start-end)
+  // class Class_string_from_string_start_end {
+    Abstract_string_from_string_start_end::~Abstract_string_from_string_start_end() {}
+
+    Class_string_from_string_start_end::Class_string_from_string_start_end() : Abstract_string_from_string_start_end::Abstract_string_from_string_start_end() {
+      vx_core::refcount += 1;
+    }
+    Class_string_from_string_start_end::~Class_string_from_string_start_end() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_string_from_string_start_end::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_start_end output = vx_type::e_string_from_string_start_end();
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_string_start_end::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_string_start_end output = vx_type::e_string_from_string_start_end();
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_string_start_end::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
+
+    vx_core::Type_funcdef Class_string_from_string_start_end::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "string<-string-start-end", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "string", // name
-          "string", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start_end::vx_empty(std::shared_ptr<T> val) {return vx_type::e_string_from_string_start_end;}
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_string_start_end::vx_type(std::shared_ptr<T> val) {return vx_type::t_string_from_string_start_end;}
+    vx_core::Type_any Class_string_from_string_start_end::vx_empty() const {return vx_type::e_string_from_string_start_end();}
+    vx_core::Type_any Class_string_from_string_start_end::vx_type() const {return vx_type::t_string_from_string_start_end();}
+    vx_core::Type_msgblock Class_string_from_string_start_end::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_string_start_end::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any vx_type::Class_string_from_string_start_end::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string text = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_int start = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
-      vx_core::Type_int end = vx_core::f_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(2)));
+    vx_core::Type_any Class_string_from_string_start_end::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int start = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
+      vx_core::Type_int end = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(2)));
       output = vx_type::f_string_from_string_start_end(text, start, end);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_string_start_end::vx_f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
-      return vx_type::f_string_from_string_start_end(text, start, end);
-    }
-
   //}
 
-  vx_type::Func_string_from_string_start_end vx_type::e_string_from_string_start_end = std::make_shared<vx_type::Class_string_from_string_start_end>();
-  vx_type::Func_string_from_string_start_end vx_type::t_string_from_string_start_end = std::make_shared<vx_type::Class_string_from_string_start_end>();
-
-  vx_core::Type_string vx_type::f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
-    vx_core::Type_string output = vx_core::e_string;
+  // (func string<-stringlist-join)
+  vx_core::Type_string f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
+    vx_core::Type_string output = vx_core::e_string();
     return output;
   }
 
-  /**
-   * @function string_from_stringlist_join
-   * @param  {stringlist} vals
-   * @param  {string} delim
-   * @return {string}
-   * (func string<-stringlist-join)
-   */
-  //class Func_string_from_stringlist_join {
+  // (func string<-stringlist-join)
+  // class Class_string_from_stringlist_join {
+    Abstract_string_from_stringlist_join::~Abstract_string_from_stringlist_join() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_stringlist_join::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_stringlist_join output;
+    Class_string_from_stringlist_join::Class_string_from_stringlist_join() : Abstract_string_from_stringlist_join::Abstract_string_from_stringlist_join() {
+      vx_core::refcount += 1;
+    }
+    Class_string_from_stringlist_join::~Class_string_from_stringlist_join() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_string_from_stringlist_join::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_stringlist_join output = vx_type::e_string_from_stringlist_join();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_stringlist_join::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_string_from_stringlist_join output;
+    vx_core::Type_any Class_string_from_stringlist_join::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_from_stringlist_join output = vx_type::e_string_from_stringlist_join();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_string_from_stringlist_join::vx_typedef() {return vx_type::t_string_from_stringlist_join->vx_typedef();}
+    vx_core::Type_typedef Class_string_from_stringlist_join::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string", // name
+        "string", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::e_typelist(), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_string_from_stringlist_join::vx_funcdef() {
+    vx_core::Type_funcdef Class_string_from_stringlist_join::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "string<-stringlist-join", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "string", // name
-          "string", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_stringlist_join::vx_empty(std::shared_ptr<T> val) {return vx_type::e_string_from_stringlist_join;}
-    template <class T> std::shared_ptr<T> vx_type::Class_string_from_stringlist_join::vx_type(std::shared_ptr<T> val) {return vx_type::t_string_from_stringlist_join;}
+    vx_core::Type_any Class_string_from_stringlist_join::vx_empty() const {return vx_type::e_string_from_stringlist_join();}
+    vx_core::Type_any Class_string_from_stringlist_join::vx_type() const {return vx_type::t_string_from_stringlist_join();}
+    vx_core::Type_msgblock Class_string_from_stringlist_join::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_stringlist_join::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any vx_type::Class_string_from_stringlist_join::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_stringlist vals = vx_core::f_any_from_any(vx_core::t_stringlist, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      vx_core::Type_string delim = vx_core::f_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(1)));
+    vx_core::Type_any Class_string_from_stringlist_join::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_stringlist vals = vx_core::vx_any_from_any(vx_core::t_stringlist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string delim = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_type::f_string_from_stringlist_join(vals, delim);
       return output;
     }
 
-    vx_core::Type_string vx_type::Class_string_from_stringlist_join::vx_f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
-      return vx_type::f_string_from_stringlist_join(vals, delim);
-    }
-
   //}
 
-  vx_type::Func_string_from_stringlist_join vx_type::e_string_from_stringlist_join = std::make_shared<vx_type::Class_string_from_stringlist_join>();
-  vx_type::Func_string_from_stringlist_join vx_type::t_string_from_stringlist_join = std::make_shared<vx_type::Class_string_from_stringlist_join>();
-
-  vx_core::Type_string vx_type::f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
-    vx_core::Type_string output = vx_core::e_string;
-    return output;
-  }
-
-  /**
-   * @function traitnames_from_any
-   * Get the trait names of a given type
-   * @param  {any} val
-   * @return {stringlist}
-   * (func traitnames<-any)
-   */
-  //class Func_traitnames_from_any {
-
-    template <class T> std::shared_ptr<T> vx_type::Class_traitnames_from_any::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traitnames_from_any output;
-      return output;
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_traitnames_from_any::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traitnames_from_any output;
-      return output;
-    }
-
-    vx_core::Type_typedef vx_type::Class_traitnames_from_any::vx_typedef() {return vx_type::t_traitnames_from_any->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_traitnames_from_any::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "traitnames<-any", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "stringlist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_string}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    template <class T> std::shared_ptr<T> vx_type::Class_traitnames_from_any::vx_empty(std::shared_ptr<T> val) {return vx_type::e_traitnames_from_any;}
-    template <class T> std::shared_ptr<T> vx_type::Class_traitnames_from_any::vx_type(std::shared_ptr<T> val) {return vx_type::t_traitnames_from_any;}
-
-    vx_core::Func_any_from_any vx_type::Class_traitnames_from_any::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
-
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_traitnames_from_any::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_traitnames_from_any(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    vx_core::Type_any vx_type::Class_traitnames_from_any::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_type::f_traitnames_from_any(val);
-      return output;
-    }
-
-    vx_core::Type_stringlist vx_type::Class_traitnames_from_any::vx_f_traitnames_from_any(vx_core::Type_any val) {
-      return vx_type::f_traitnames_from_any(val);
-    }
-
-  //}
-
-  vx_type::Func_traitnames_from_any vx_type::e_traitnames_from_any = std::make_shared<vx_type::Class_traitnames_from_any>();
-  vx_type::Func_traitnames_from_any vx_type::t_traitnames_from_any = std::make_shared<vx_type::Class_traitnames_from_any>();
-
-  vx_core::Type_stringlist vx_type::f_traitnames_from_any(vx_core::Type_any val) {
-    vx_core::Type_stringlist output = vx_core::e_stringlist;
+  // (func traitnames<-any)
+  vx_core::Type_stringlist f_traitnames_from_any(vx_core::Type_any val) {
+    vx_core::Type_stringlist output = vx_core::e_stringlist();
     output = vx_core::f_typenames_from_typelist(
       vx_type::f_traits_from_any(val)
     );
     return output;
   }
 
-  /**
-   * @function traits_from_any
-   * Get the traits of a given value
-   * @param  {any} val
-   * @return {typelist}
-   * (func traits<-any)
-   */
-  //class Func_traits_from_any {
+  // (func traitnames<-any)
+  // class Class_traitnames_from_any {
+    Abstract_traitnames_from_any::~Abstract_traitnames_from_any() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_any::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traits_from_any output;
+    Class_traitnames_from_any::Class_traitnames_from_any() : Abstract_traitnames_from_any::Abstract_traitnames_from_any() {
+      vx_core::refcount += 1;
+    }
+    Class_traitnames_from_any::~Class_traitnames_from_any() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_traitnames_from_any::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traitnames_from_any output = vx_type::e_traitnames_from_any();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_any::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traits_from_any output;
+    vx_core::Type_any Class_traitnames_from_any::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traitnames_from_any output = vx_type::e_traitnames_from_any();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_traits_from_any::vx_typedef() {return vx_type::t_traits_from_any->vx_typedef();}
-
-    vx_core::Type_funcdef vx_type::Class_traits_from_any::vx_funcdef() {
-      return vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "traits<-any", // name
-        0, // idx
-        false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "typelist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_any}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+    vx_core::Type_typedef Class_traitnames_from_any::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "stringlist", // name
+        ":list", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_string()}), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_any::vx_empty(std::shared_ptr<T> val) {return vx_type::e_traits_from_any;}
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_any::vx_type(std::shared_ptr<T> val) {return vx_type::t_traits_from_any;}
+    vx_core::Type_funcdef Class_traitnames_from_any::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "traitnames<-any", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
 
-    vx_core::Func_any_from_any vx_type::Class_traits_from_any::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Type_any Class_traitnames_from_any::vx_empty() const {return vx_type::e_traitnames_from_any();}
+    vx_core::Type_any Class_traitnames_from_any::vx_type() const {return vx_type::t_traitnames_from_any();}
+    vx_core::Type_msgblock Class_traitnames_from_any::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_traitnames_from_any::vx_dispose() {return vx_core::emptylistany;}
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_traits_from_any::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_any inputval = (vx_core::Type_any)value;
-      vx_core::Type_any outputval = vx_type::f_traits_from_any(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Func_any_from_any Class_traitnames_from_any::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
+
+    vx_core::Type_any Class_traitnames_from_any::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_traitnames_from_any(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_traits_from_any::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::f_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
-      output = vx_type::f_traits_from_any(val);
+    vx_core::Type_any Class_traitnames_from_any::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_traitnames_from_any(val);
       return output;
-    }
-
-    vx_core::Type_typelist vx_type::Class_traits_from_any::vx_f_traits_from_any(vx_core::Type_any val) {
-      return vx_type::f_traits_from_any(val);
     }
 
   //}
 
-  vx_type::Func_traits_from_any vx_type::e_traits_from_any = std::make_shared<vx_type::Class_traits_from_any>();
-  vx_type::Func_traits_from_any vx_type::t_traits_from_any = std::make_shared<vx_type::Class_traits_from_any>();
-
-  vx_core::Type_typelist vx_type::f_traits_from_any(vx_core::Type_any val) {
-    vx_core::Type_typelist output = vx_core::e_typelist;
+  // (func traits<-any)
+  vx_core::Type_typelist f_traits_from_any(vx_core::Type_any val) {
+    vx_core::Type_typelist output = vx_core::e_typelist();
     output = vx_core::f_traits_from_typedef(
       vx_core::f_typedef_from_any(val)
     );
     return output;
   }
 
-  /**
-   * @function traits_from_typedef
-   * Get the traits of a given typedef
-   * @param  {typedef} vtypedef
-   * @return {typelist}
-   * (func traits<-typedef)
-   */
-  //class Func_traits_from_typedef {
+  // (func traits<-any)
+  // class Class_traits_from_any {
+    Abstract_traits_from_any::~Abstract_traits_from_any() {}
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_typedef::vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traits_from_typedef output;
+    Class_traits_from_any::Class_traits_from_any() : Abstract_traits_from_any::Abstract_traits_from_any() {
+      vx_core::refcount += 1;
+    }
+    Class_traits_from_any::~Class_traits_from_any() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_traits_from_any::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traits_from_any output = vx_type::e_traits_from_any();
       return output;
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_typedef::vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals) {
-      vx_type::Func_traits_from_typedef output;
+    vx_core::Type_any Class_traits_from_any::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traits_from_any output = vx_type::e_traits_from_any();
       return output;
     }
 
-    vx_core::Type_typedef vx_type::Class_traits_from_typedef::vx_typedef() {return vx_type::t_traits_from_typedef->vx_typedef();}
+    vx_core::Type_typedef Class_traits_from_any::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "typelist", // name
+        ":list", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_any()}), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
 
-    vx_core::Type_funcdef vx_type::Class_traits_from_typedef::vx_funcdef() {
+    vx_core::Type_funcdef Class_traits_from_any::vx_funcdef() const {
+      return vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "traits<-any", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+    }
+
+    vx_core::Type_any Class_traits_from_any::vx_empty() const {return vx_type::e_traits_from_any();}
+    vx_core::Type_any Class_traits_from_any::vx_type() const {return vx_type::t_traits_from_any();}
+    vx_core::Type_msgblock Class_traits_from_any::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_traits_from_any::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_traits_from_any::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
+
+    vx_core::Type_any Class_traits_from_any::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any(), val);
+      output = vx_type::f_traits_from_any(inputval);
+      return output;
+    }
+
+    vx_core::Type_any Class_traits_from_any::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_traits_from_any(val);
+      return output;
+    }
+
+  //}
+
+  // (func traits<-typedef)
+  vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
+    vx_core::Type_typelist output = vx_core::e_typelist();
+    output = vtypedef->traits();
+    return output;
+  }
+
+  // (func traits<-typedef)
+  // class Class_traits_from_typedef {
+    Abstract_traits_from_typedef::~Abstract_traits_from_typedef() {}
+
+    Class_traits_from_typedef::Class_traits_from_typedef() : Abstract_traits_from_typedef::Abstract_traits_from_typedef() {
+      vx_core::refcount += 1;
+    }
+    Class_traits_from_typedef::~Class_traits_from_typedef() {
+      vx_core::refcount -= 1;
+    }
+    vx_core::Type_any Class_traits_from_typedef::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traits_from_typedef output = vx_type::e_traits_from_typedef();
+      return output;
+    }
+
+    vx_core::Type_any Class_traits_from_typedef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_traits_from_typedef output = vx_type::e_traits_from_typedef();
+      return output;
+    }
+
+    vx_core::Type_typedef Class_traits_from_typedef::vx_typedef() const {
+      return vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "typelist", // name
+        ":list", // extends
+        vx_core::e_typelist(), // traits
+        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_any()}), // allowtypes
+        vx_core::e_typelist(), // disallowtypes
+        vx_core::e_funclist(), // allowfuncs
+        vx_core::e_funclist(), // disallowfuncs
+        vx_core::e_anylist(), // allowvalues
+        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_argmap() // properties
+      );
+    }
+
+    vx_core::Type_funcdef Class_traits_from_typedef::vx_funcdef() const {
       return vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
         "traits<-typedef", // name
         0, // idx
         false, // async
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "typelist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::t_typelist->vx_new(vx_core::t_typelist, {vx_core::t_any}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        ) // typedef
+        this->vx_typedef() // typedef
       );
     }
 
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_typedef::vx_empty(std::shared_ptr<T> val) {return vx_type::e_traits_from_typedef;}
-    template <class T> std::shared_ptr<T> vx_type::Class_traits_from_typedef::vx_type(std::shared_ptr<T> val) {return vx_type::t_traits_from_typedef;}
+    vx_core::Type_any Class_traits_from_typedef::vx_empty() const {return vx_type::e_traits_from_typedef();}
+    vx_core::Type_any Class_traits_from_typedef::vx_type() const {return vx_type::t_traits_from_typedef();}
+    vx_core::Type_msgblock Class_traits_from_typedef::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_traits_from_typedef::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any vx_type::Class_traits_from_typedef::fn_new(vx_core::Class_any_from_any::IFn fn) {return vx_core::e_any_from_any;}
+    vx_core::Func_any_from_any Class_traits_from_typedef::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any();
+    }
 
-    template <class T, class U> std::shared_ptr<T> vx_type::Class_traits_from_typedef::f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-      std::shared_ptr<T> output = vx_core::f_empty(generic_any_1);
-      vx_core::Type_typedef inputval = (vx_core::Type_typedef)value;
-      vx_core::Type_any outputval = vx_type::f_traits_from_typedef(inputval);
-      output = vx_core::f_any_from_any(generic_any_1, outputval);
+    vx_core::Type_any Class_traits_from_typedef::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_typedef inputval = vx_core::vx_any_from_any(vx_core::t_typedef(), val);
+      output = vx_type::f_traits_from_typedef(inputval);
       return output;
     }
 
-    vx_core::Type_any vx_type::Class_traits_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_typedef vtypedef = vx_core::f_any_from_any(vx_core::t_typedef, arglist->vx_get_any(vx_core::t_int->vx_new_from_int(0)));
+    vx_core::Type_any Class_traits_from_typedef::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_typedef vtypedef = vx_core::vx_any_from_any(vx_core::t_typedef(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_traits_from_typedef(vtypedef);
       return output;
     }
 
-    vx_core::Type_typelist vx_type::Class_traits_from_typedef::vx_f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
-      return vx_type::f_traits_from_typedef(vtypedef);
-    }
-
   //}
 
-  vx_type::Func_traits_from_typedef vx_type::e_traits_from_typedef = std::make_shared<vx_type::Class_traits_from_typedef>();
-  vx_type::Func_traits_from_typedef vx_type::t_traits_from_typedef = std::make_shared<vx_type::Class_traits_from_typedef>();
+  vx_type::vx_Class_package* vx_package = new vx_type::vx_Class_package();
 
-  vx_core::Type_typelist vx_type::f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
-    vx_core::Type_typelist output = vx_core::e_typelist;
-    output = vtypedef->traits();
+  // (func allowtypenames<-type)
+  vx_type::Func_allowtypenames_from_type e_allowtypenames_from_type() {
+    vx_type::Func_allowtypenames_from_type output = vx_type::vx_package->e_allowtypenames_from_type;
+    if (output == NULL) {
+      output = new vx_type::Class_allowtypenames_from_type();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_allowtypenames_from_type = output;
+    }
+    return output;
+  }
+  vx_type::Func_allowtypenames_from_type t_allowtypenames_from_type() {
+    vx_type::Func_allowtypenames_from_type output = vx_type::vx_package->t_allowtypenames_from_type;
+    if (output == NULL) {
+      output = new vx_type::Class_allowtypenames_from_type();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_allowtypenames_from_type = output;
+    }
     return output;
   }
 
+  // (func allowtypes<-type)
+  vx_type::Func_allowtypes_from_type e_allowtypes_from_type() {
+    vx_type::Func_allowtypes_from_type output = vx_type::vx_package->e_allowtypes_from_type;
+    if (output == NULL) {
+      output = new vx_type::Class_allowtypes_from_type();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_allowtypes_from_type = output;
+    }
+    return output;
+  }
+  vx_type::Func_allowtypes_from_type t_allowtypes_from_type() {
+    vx_type::Func_allowtypes_from_type output = vx_type::vx_package->t_allowtypes_from_type;
+    if (output == NULL) {
+      output = new vx_type::Class_allowtypes_from_type();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_allowtypes_from_type = output;
+    }
+    return output;
+  }
 
-//}
+  // (func is-boolean)
+  vx_type::Func_is_boolean e_is_boolean() {
+    vx_type::Func_is_boolean output = vx_type::vx_package->e_is_boolean;
+    if (output == NULL) {
+      output = new vx_type::Class_is_boolean();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_boolean = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_boolean t_is_boolean() {
+    vx_type::Func_is_boolean output = vx_type::vx_package->t_is_boolean;
+    if (output == NULL) {
+      output = new vx_type::Class_is_boolean();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_boolean = output;
+    }
+    return output;
+  }
+
+  // (func is-decimal)
+  vx_type::Func_is_decimal e_is_decimal() {
+    vx_type::Func_is_decimal output = vx_type::vx_package->e_is_decimal;
+    if (output == NULL) {
+      output = new vx_type::Class_is_decimal();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_decimal = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_decimal t_is_decimal() {
+    vx_type::Func_is_decimal output = vx_type::vx_package->t_is_decimal;
+    if (output == NULL) {
+      output = new vx_type::Class_is_decimal();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_decimal = output;
+    }
+    return output;
+  }
+
+  // (func is-float)
+  vx_type::Func_is_float e_is_float() {
+    vx_type::Func_is_float output = vx_type::vx_package->e_is_float;
+    if (output == NULL) {
+      output = new vx_type::Class_is_float();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_float = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_float t_is_float() {
+    vx_type::Func_is_float output = vx_type::vx_package->t_is_float;
+    if (output == NULL) {
+      output = new vx_type::Class_is_float();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_float = output;
+    }
+    return output;
+  }
+
+  // (func is-none)
+  vx_type::Func_is_none e_is_none() {
+    vx_type::Func_is_none output = vx_type::vx_package->e_is_none;
+    if (output == NULL) {
+      output = new vx_type::Class_is_none();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_none = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_none t_is_none() {
+    vx_type::Func_is_none output = vx_type::vx_package->t_is_none;
+    if (output == NULL) {
+      output = new vx_type::Class_is_none();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_none = output;
+    }
+    return output;
+  }
+
+  // (func is-string)
+  vx_type::Func_is_string e_is_string() {
+    vx_type::Func_is_string output = vx_type::vx_package->e_is_string;
+    if (output == NULL) {
+      output = new vx_type::Class_is_string();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_string = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_string t_is_string() {
+    vx_type::Func_is_string output = vx_type::vx_package->t_is_string;
+    if (output == NULL) {
+      output = new vx_type::Class_is_string();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_string = output;
+    }
+    return output;
+  }
+
+  // (func is-type)
+  vx_type::Func_is_type e_is_type() {
+    vx_type::Func_is_type output = vx_type::vx_package->e_is_type;
+    if (output == NULL) {
+      output = new vx_type::Class_is_type();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_type = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_type t_is_type() {
+    vx_type::Func_is_type output = vx_type::vx_package->t_is_type;
+    if (output == NULL) {
+      output = new vx_type::Class_is_type();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_type = output;
+    }
+    return output;
+  }
+
+  // (func is-type<-any-typelist)
+  vx_type::Func_is_type_from_any_typelist e_is_type_from_any_typelist() {
+    vx_type::Func_is_type_from_any_typelist output = vx_type::vx_package->e_is_type_from_any_typelist;
+    if (output == NULL) {
+      output = new vx_type::Class_is_type_from_any_typelist();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_is_type_from_any_typelist = output;
+    }
+    return output;
+  }
+  vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist() {
+    vx_type::Func_is_type_from_any_typelist output = vx_type::vx_package->t_is_type_from_any_typelist;
+    if (output == NULL) {
+      output = new vx_type::Class_is_type_from_any_typelist();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_is_type_from_any_typelist = output;
+    }
+    return output;
+  }
+
+  // (func length<-string)
+  vx_type::Func_length_from_string e_length_from_string() {
+    vx_type::Func_length_from_string output = vx_type::vx_package->e_length_from_string;
+    if (output == NULL) {
+      output = new vx_type::Class_length_from_string();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_length_from_string = output;
+    }
+    return output;
+  }
+  vx_type::Func_length_from_string t_length_from_string() {
+    vx_type::Func_length_from_string output = vx_type::vx_package->t_length_from_string;
+    if (output == NULL) {
+      output = new vx_type::Class_length_from_string();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_length_from_string = output;
+    }
+    return output;
+  }
+
+  // (func string<-int)
+  vx_type::Func_string_from_int e_string_from_int() {
+    vx_type::Func_string_from_int output = vx_type::vx_package->e_string_from_int;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_int();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_string_from_int = output;
+    }
+    return output;
+  }
+  vx_type::Func_string_from_int t_string_from_int() {
+    vx_type::Func_string_from_int output = vx_type::vx_package->t_string_from_int;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_int();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_string_from_int = output;
+    }
+    return output;
+  }
+
+  // (func string<-string-end)
+  vx_type::Func_string_from_string_end e_string_from_string_end() {
+    vx_type::Func_string_from_string_end output = vx_type::vx_package->e_string_from_string_end;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_end();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_string_from_string_end = output;
+    }
+    return output;
+  }
+  vx_type::Func_string_from_string_end t_string_from_string_end() {
+    vx_type::Func_string_from_string_end output = vx_type::vx_package->t_string_from_string_end;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_end();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_string_from_string_end = output;
+    }
+    return output;
+  }
+
+  // (func string<-string-start)
+  vx_type::Func_string_from_string_start e_string_from_string_start() {
+    vx_type::Func_string_from_string_start output = vx_type::vx_package->e_string_from_string_start;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_start();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_string_from_string_start = output;
+    }
+    return output;
+  }
+  vx_type::Func_string_from_string_start t_string_from_string_start() {
+    vx_type::Func_string_from_string_start output = vx_type::vx_package->t_string_from_string_start;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_start();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_string_from_string_start = output;
+    }
+    return output;
+  }
+
+  // (func string<-string-start-end)
+  vx_type::Func_string_from_string_start_end e_string_from_string_start_end() {
+    vx_type::Func_string_from_string_start_end output = vx_type::vx_package->e_string_from_string_start_end;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_start_end();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_string_from_string_start_end = output;
+    }
+    return output;
+  }
+  vx_type::Func_string_from_string_start_end t_string_from_string_start_end() {
+    vx_type::Func_string_from_string_start_end output = vx_type::vx_package->t_string_from_string_start_end;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_string_start_end();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_string_from_string_start_end = output;
+    }
+    return output;
+  }
+
+  // (func string<-stringlist-join)
+  vx_type::Func_string_from_stringlist_join e_string_from_stringlist_join() {
+    vx_type::Func_string_from_stringlist_join output = vx_type::vx_package->e_string_from_stringlist_join;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_stringlist_join();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_string_from_stringlist_join = output;
+    }
+    return output;
+  }
+  vx_type::Func_string_from_stringlist_join t_string_from_stringlist_join() {
+    vx_type::Func_string_from_stringlist_join output = vx_type::vx_package->t_string_from_stringlist_join;
+    if (output == NULL) {
+      output = new vx_type::Class_string_from_stringlist_join();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_string_from_stringlist_join = output;
+    }
+    return output;
+  }
+
+  // (func traitnames<-any)
+  vx_type::Func_traitnames_from_any e_traitnames_from_any() {
+    vx_type::Func_traitnames_from_any output = vx_type::vx_package->e_traitnames_from_any;
+    if (output == NULL) {
+      output = new vx_type::Class_traitnames_from_any();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_traitnames_from_any = output;
+    }
+    return output;
+  }
+  vx_type::Func_traitnames_from_any t_traitnames_from_any() {
+    vx_type::Func_traitnames_from_any output = vx_type::vx_package->t_traitnames_from_any;
+    if (output == NULL) {
+      output = new vx_type::Class_traitnames_from_any();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_traitnames_from_any = output;
+    }
+    return output;
+  }
+
+  // (func traits<-any)
+  vx_type::Func_traits_from_any e_traits_from_any() {
+    vx_type::Func_traits_from_any output = vx_type::vx_package->e_traits_from_any;
+    if (output == NULL) {
+      output = new vx_type::Class_traits_from_any();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_traits_from_any = output;
+    }
+    return output;
+  }
+  vx_type::Func_traits_from_any t_traits_from_any() {
+    vx_type::Func_traits_from_any output = vx_type::vx_package->t_traits_from_any;
+    if (output == NULL) {
+      output = new vx_type::Class_traits_from_any();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_traits_from_any = output;
+    }
+    return output;
+  }
+
+  // (func traits<-typedef)
+  vx_type::Func_traits_from_typedef e_traits_from_typedef() {
+    vx_type::Func_traits_from_typedef output = vx_type::vx_package->e_traits_from_typedef;
+    if (output == NULL) {
+      output = new vx_type::Class_traits_from_typedef();
+      vx_core::vx_reserve_empty(output);
+      vx_type::vx_package->e_traits_from_typedef = output;
+    }
+    return output;
+  }
+  vx_type::Func_traits_from_typedef t_traits_from_typedef() {
+    vx_type::Func_traits_from_typedef output = vx_type::vx_package->t_traits_from_typedef;
+    if (output == NULL) {
+      output = new vx_type::Class_traits_from_typedef();
+      vx_core::vx_reserve_type(output);
+      vx_type::vx_package->t_traits_from_typedef = output;
+    }
+    return output;
+  }
+
+}

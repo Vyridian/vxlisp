@@ -1,0 +1,41 @@
+// :headerfirst
+// :headertype
+// :headerfunc
+// :header
+// :body
+
+//vx_core::Type_string Class_file::string_read_from_path(std::string path) {
+//  vx_core::Type_string output = vx_core::e_string();
+//  std::ifstream filestream (path);
+//  if (filestream.is_open()) {
+//    std::string text;
+//    std::string line;
+//    while (std::getline(filestream, line)) {
+//      text += line + '\n';
+//    }
+//    filestream.close();
+//    output = vx_core::vx_new_string_from_text(text);
+//  } else {
+//    msg = vx_core::t_msg()->vx_new_from_errortext("File not found:" + path);
+//    output = vx_core::vx_new(vx_core::t_string(), {msg});
+//  }
+//  return output;
+//}
+
+//vx_core::Type_boolean Class_file::boolean_write_from_path_text(std::string path, std::string text) {
+//  vx_core::Type_boolean output = vx_core::c_false();
+//  std::ofstream filestream;
+//  if (filestream.is_open()) {
+//    filestream.open(path);
+//    filestream << text;
+//    filestream.close();
+//  } else {
+//    msg = vx_core::t_msg()->vx_new_from_errortext("File not found:" + path);
+//    output = vx_core::vx_copy(vx_core::c_false(), {msg});
+//  }
+//  return output;
+//}
+/*
+#include <iostream>
+#include <fstream>
+*/

@@ -28,36 +28,39 @@ namespace test_lib {
 
   // Blocking
   vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testresult>> async_testresult = vx_test::f_resolve_testresult(testresult);
-    vx_test::Type_testresult testresult_resolved = vx_core::sync_from_async(vx_test::t_testresult, async_testresult);
-    return run_testresult(testpkg, testname, message, testresult_resolved);
+    vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
+    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
+    return test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
   }
 
   vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe describe) {
     vx_core::Type_string testcode = describe->describename();
     std::string message = testcode->vx_string();
     vx_test::Type_testresult testresult = describe->testresult();
-    vx_test::Type_testresult testresultresolved = run_testresult(testpkg, casename, message, testresult);
-    vx_test::Type_testdescribe output = describe->vx_copy(vx_test::t_testdescribe, {vx_core::t_string->vx_new_from_string(":testresult"), testresultresolved});
+    vx_test::Type_testresult testresultresolved = test_lib::run_testresult(testpkg, casename, message, testresult);
+    vx_test::Type_testdescribe output = vx_core::vx_copy(describe, {vx_core::vx_new_string(":testresult"), testresultresolved});
 		return output;
   }
 
   // Blocking
   // Only use if running a single testdescribe
   vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testdescribe>> async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
-    vx_test::Type_testdescribe testdescribe_resolved = vx_core::sync_from_async(vx_test::t_testdescribe, async_testdescribe);
+    vx_core::vx_Type_async async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
+    vx_test::Type_testdescribe testdescribe_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribe(), async_testdescribe);
     return run_testdescribe(testpkg, casename, testdescribe_resolved);
   }
 
   vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
     std::vector<vx_test::Type_testdescribe> listtestdescribe = testdescribelist->vx_listtestdescribe();
-    std::vector<vx_test::Type_testdescribe> listtestdescribe_resolved;
+    vx_core::vx_Type_listany listtestdescribe_resolved;
     for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
       vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
 			listtestdescribe_resolved.push_back(testdescribe_resolved);
     }
-		vx_test::Type_testdescribelist output = testdescribelist->vx_copy(vx_test::t_testdescribelist, listtestdescribe_resolved);
+		vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
+			vx_test::t_testdescribelist(),
+			testdescribelist->vx_new_from_list(listtestdescribe_resolved)
+		);
     return output;
   }
 
@@ -66,68 +69,74 @@ namespace test_lib {
     std::string casename = testcase->casename()->vx_string();
     vx_test::Type_testdescribelist testdescribelist = testcase->describelist();
     vx_test::Type_testdescribelist testdescribelist_resolved = run_testdescribelist(testpkg, casename, testdescribelist);
-		vx_test::Type_testcase output = testcase->vx_copy(vx_test::t_testcase, {vx_core::t_string->vx_new_from_string(":describelist"), testdescribelist_resolved});
+		vx_test::Type_testcase output = vx_core::vx_copy(testcase, {vx_core::vx_new_string(":describelist"), testdescribelist_resolved});
 		return output;
   }
 
   // Blocking
   // Only use if running a single testcase
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testcase>> async_testcase = vx_test::f_resolve_testcase(testcase);
-    vx_test::Type_testcase testcase_resolved = vx_core::sync_from_async(vx_test::t_testcase, async_testcase);
+    vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase(), async_testcase);
     return run_testcase(testcase_resolved);
   }
 
 	vx_test::Type_testcaselist run_testcaselist(vx_test::Type_testcaselist testcaselist) {
     std::vector<vx_test::Type_testcase> listtestcase = testcaselist->vx_listtestcase();
-    std::vector<vx_test::Type_testcase> listtestcase_resolved;
+    vx_core::vx_Type_listany listtestcase_resolved;
     for (vx_test::Type_testcase testcase : listtestcase) {
       vx_test::Type_testcase testcase_resolved = run_testcase(testcase);
 			listtestcase_resolved.push_back(testcase_resolved);
     }
-		vx_test::Type_testcaselist output = testcaselist->vx_copy(&listtestcase_resolved);
+		vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
+			vx_test::t_testcaselist(),
+			testcaselist->vx_new_from_list(listtestcase_resolved)
+		);
     return output;
   }
 
   vx_test::Type_testpackage run_testpackage(vx_test::Type_testpackage testpackage) {
     vx_test::Type_testcaselist testcaselist = testpackage->caselist();
     vx_test::Type_testcaselist testcaselist_resolved = run_testcaselist(testcaselist);
-		vx_test::Type_testpackage output = testpackage->vx_copy(vx_test::t_testpackage, {vx_core::t_string->vx_new_from_string(":caselist"), testcaselist_resolved});
+		vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {vx_core::vx_new_string(":caselist"), testcaselist_resolved});
 		return output;
   }
 
   vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
     std::vector<vx_test::Type_testpackage> listtestpackage = testpackagelist->vx_listtestpackage();
-    std::vector<vx_test::Type_testpackage> listtestpackage_resolved;
+    vx_core::vx_Type_listany listtestpackage_resolved;
     for (vx_test::Type_testpackage testpackage : listtestpackage) {
       vx_test::Type_testpackage testpackage_resolved = run_testpackage(testpackage);
 			listtestpackage_resolved.push_back(testpackage_resolved);
     }
-		vx_test::Type_testpackagelist output = testpackagelist->vx_copy(&listtestpackage_resolved);
+		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
+			vx_test::t_testpackagelist(),
+			testpackagelist->vx_new_from_list(listtestpackage_resolved)
+		);
     return output;
   }
 
   // Blocking
   // This is the preferred way of calling test (1 block per package)
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testpackage>> async_testpackage = vx_test::f_resolve_testpackage(testpackage);
-    vx_test::Type_testpackage testpackage_resolved = vx_core::sync_from_async(vx_test::t_testpackage, async_testpackage);
+    vx_core::vx_Type_async async_testpackage = vx_test::f_resolve_testpackage(testpackage);
+    vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage(), async_testpackage);
     return run_testpackage(testpackage_resolved);
   }
 
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
-    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
+    vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
     return run_testpackagelist(testpackagelist_resolved);
   }
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
-    std::shared_ptr<vx_core::Async<vx_test::Type_testpackagelist>> async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
-    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
+    vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
     vx_data_file::Type_file filetest = vx_test::f_file_test();
     vx_core::Type_boolean booleanwritetest = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
@@ -137,7 +146,7 @@ namespace test_lib {
     vx_data_file::Type_file filehtml = vx_test::f_file_testhtml();
     vx_core::Type_string shtml = vx_web_html::f_string_from_html(htmlnode);
     vx_core::Type_boolean booleanwritehtml = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
-    vx_core::Type_boolean output = vx_core::t_boolean->vx_new(vx_core::t_boolean, {booleanwritetest, booleanwritenode, booleanwritehtml});
+    vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean(), {booleanwritetest, booleanwritenode, booleanwritehtml});
     return output;
   }
 

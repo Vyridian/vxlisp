@@ -1,11 +1,14 @@
 // :headerfirst
-  int refcount = 0;
 
 // :headertype
 any
 list
 map
 struct
+msg
+msglist
+msgblock
+msgblocklist
 boolean
 number
 decimal
@@ -13,67 +16,56 @@ float
 int
 string
 func
+typedef
+funcdef
 
 // :headerfunc
 any<-any
+any<-any-async
+any<-any-context
+any<-any-context-async
 any<-func
+any<-func-async
+any<-key-value
+any<-key-value-async
+any<-list
+any<-list-reduce
+any<-list-reduce-next
+any<-map
+any<-none
+any<-none-async
+any<-reduce
+any<-reduce-async
+any<-reduce-next
+any<-reduce-next-async
+any<-struct
+async
+boolean<-any
+boolean<-func
+boolean<-none
+empty
+new
+copy
+is-empty
+!
+!-empty
+=
+!=
+then
+else
+if
+case
+switch
+length<-list
+and
+or
+let
+let-async
 
 // :header
 
-/*
-  // Virtual_any
-  class Virtual_any : std::enable_shared_from_this<Virtual_any> {
-  };
+  extern long refcount;
 
-
-vx_shared_from_this<T>() {
-return std::dynamic_pointer_cast<T>(Virtual_any::shared_from_this());
-}
-
-  template<typename X> X func() {
-         cout << "vfunc in derived class\n";
-         return static_cast<X>(2);
-      }  
-;    
-
-int main()
-
-   derived *bptr = new derived;
-   cout << bptr->func<int>() << endl;
-   cout << dynamic_cast<base*>(bptr)->func<int>() << endl;
-
-  virtual template<class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-
-#include <iostream>
-#include <string_view>
-
-class Base
-{
-public:
-	// This version of getThis() returns a pointer to a Base class
-	virtual Base* getThis() { std::cout << "called Base::getThis()\n"; return this; }
-	void printType() { std::cout << "returned a Base\n"; }
-};
-
-class Derived : public Base
-{
-public:
-	// Normally override functions have to return objects of the same type as the base function
-	// However, because Derived is derived from Base, it's okay to return Derived* instead of Base*
-	Derived* getThis() override { std::cout << "called Derived::getThis()\n";  return this; }
-	void printType() { std::cout << "returned a Derived\n"; }
-};
-
-int main()
-{
-	Derived d{};
-	Base* b{ &d };
-	d.getThis()->printType(); // calls Derived::getThis(), returns a Derived*, calls Derived::printType
-	b->getThis()->printType(); // calls Derived::getThis(), returns a Base*, calls Base::printType
-
-	return 0;
-}
-*/
   typedef std::vector<vx_core::Type_any> vx_Type_listany;
   typedef std::map<std::string, vx_core::Type_any> vx_Type_mapany;
 
@@ -82,68 +74,109 @@ int main()
   extern vx_Type_listany emptylistany;
   extern vx_Type_mapany emptymapany;
 
-  // any_from_any(T, U)
-  template <class T, class U> std::shared_ptr<T> any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
-  // any_from_map(T, T)
-  template <class T> std::shared_ptr<T> any_from_map(const std::map<std::string, std::shared_ptr<T>> &map, const std::string key, const std::shared_ptr<T> defaultval);
+  // vx_boolean_from_string_ends(string, string)
+  bool vx_boolean_from_string_ends(std::string text, std::string ends);
 
-  // class Async
-  template <class T> class Async {
+  // vx_boolean_from_string_find(string, string)
+  bool vx_boolean_from_string_find(std::string text, std::string find);
+
+  // vx_boolean_from_string_starts(string, string)
+  bool vx_boolean_from_string_starts(std::string text, std::string starts);
+
+  // vx_debug(text)
+  void vx_debug(std::string sval);
+
+  // vx_debug(any)
+  void vx_debug(vx_core::Type_any val);
+
+  // vx_list_from_array(arrayval)
+  vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
+
+  // vx_liststring_from_arraystring(long, array<string>)
+  std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
+
+  // vx_new_boolean(boolean)
+  vx_core::Type_boolean vx_new_boolean(bool isval);
+
+  // vx_new_decimal_from_float(float)
+  vx_core::Type_decimal vx_new_decimal_from_float(float fval);
+
+  // vx_new_decimal_from_string(string)
+  vx_core::Type_decimal vx_new_decimal_from_string(std::string sval);
+
+  // vx_new_float(float)
+  vx_core::Type_float vx_new_float(float fval);
+
+  // vx_new_int(long)
+  vx_core::Type_int vx_new_int(long ival);
+
+  // vx_new_string(string)
+  vx_core::Type_string vx_new_string(std::string text);
+
+  // vx_release(any)
+  void vx_release(vx_core::Type_any any);
+
+  // vx_release(any...)
+  void vx_release(vx_core::vx_Type_listany listany);
+
+  // vx_release_one(any)
+  void vx_release_one(vx_core::Type_any any);
+
+  // vx_release_one(any...)
+  void vx_release_one(vx_core::vx_Type_listany listany);
+
+  // vx_release_one(map<string, any>)
+  void vx_release_one(vx_core::vx_Type_mapany mapany);
+
+  // vx_reserve(any)
+  void vx_reserve(vx_core::Type_any any);
+
+  // vx_reserve_empty(any)
+  void vx_reserve_empty(vx_core::Type_any any);
+
+  // vx_reserve_type(any)
+  void vx_reserve_type(vx_core::Type_any any);
+
+  // vx_string_from_any(value)
+  std::string vx_string_from_any(vx_core::Type_any value);
+
+  // vx_string_from_any_indent(any, int, boolean)
+  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed);
+
+  // vx_string_from_liststring_pos(list<string>, long)
+  std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
+
+  // vx_string_from_string_find_replace(string, string, string)
+  std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace);
+
+  // vx_string_from_string_find_replacefirst(string, string, string)
+  std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst);
+
+  // vx_string_from_string_repeat(string, int)
+  std::string vx_string_from_string_repeat(std::string text, long repeat);
+
+  // vx_string_from_string_start_end(string, int, int)
+  std::string vx_string_from_string_start_end(std::string text, long start, long end);
+
+  // class vx_Class_async
+  class vx_Class_async {
   public:
-    std::shared_ptr<std::shared_future<T>> future;
-    std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent;
-    std::shared_ptr<std::function<T(vx_core::Type_any)>> fn;
+    std::shared_future<vx_core::Type_any> future;
+    vx_core::vx_Class_async* async_parent;
+    std::function<vx_core::Type_any(vx_core::Type_any)> fn;
   };
 
-  // async_await(T, async<T>)
-  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async);
-  // async_from_async(T, async<U>)
-  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async);
-  // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn);
-  // async_new_from_val (T)
-  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async_new_from_val(std::shared_ptr<T> val);
+  typedef vx_core::vx_Class_async* vx_Type_async;
 
-  // boolean_contains_from_set_val(set<T>, val)
-  template <class T> bool boolean_contains_from_set_val(std::set<T> set, T val);
-  // keyset_from_map(map)
-  template <class T> std::set<T> keyset_from_map(std::map<std::string, T> map);
-  // list_from_list(T, list<U>)
-  template <class T, class U> std::vector<std::shared_ptr<T>> list_from_list(std::shared_ptr<T> generic_any_1, std::vector<std::shared_ptr<U>> list);
-  // listaddall(list, listadd)
-  template <class T> std::vector<std::shared_ptr<T>> listaddall(std::vector<std::shared_ptr<T>> listtarget, std::vector<std::shared_ptr<T>> listadd);
-  // map_from_map(T, map<U>)
-  template <class T, class U> std::map<std::string, std::shared_ptr<T>> map_from_map(std::shared_ptr<T> generic_any_1, std::map<std::string, std::shared_ptr<U>> map);
-  // string_from_any(val)
-  std::string string_from_any(std::any);
-
-  // sync_from_async(generic_any_1, async)
-  template <class T> std::shared_ptr<T> sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async);
-
-  class Class_replfunc {
-  public:
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-  };
-
-  class Class_replfunc_async {
-  public:
-    virtual std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_repl(vx_core::Type_anylist arglist);
-  };
-
-// :body
-
-  vx_core::vx_Type_listany vx_core::emptylistany;
-  vx_core::vx_Type_mapany vx_core::emptymapany;
-
-  // any_from_any(T, U)
-  template <class T, class U> std::shared_ptr<T> vx_core::any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value) {
-    std::shared_ptr<T> output = std::dynamic_pointer_cast<T>(value);
+  // vx_any_from_any(T, val)
+  template <class T> static T* vx_any_from_any(T* generic_any_1, vx_core::Type_any val) {
+    T* output = dynamic_cast<T*>(val);
     return output;
   }
 
-  // any_from_map(T, key, defaultval)
-  template <class T> std::shared_ptr<T> vx_core::any_from_map(const std::map<std::string, std::shared_ptr<T>> &map, const std::string key, const std::shared_ptr<T> defaultval) {
-    std::shared_ptr<T> output = defaultval;
+  // vx_any_from_map(T, key, defaultval)
+  template <class T> static T* vx_any_from_map(const std::map<std::string, T*> &map, const std::string key, T* defaultval) {
+    T* output = defaultval;
     auto iter = map.find(key);
     if (iter != map.end()) {
       output = iter->second;
@@ -151,232 +184,620 @@ int main()
     return output;
   }
 
-  // async_await(T, async<T>)
-  template <class T> std::shared_ptr<T> vx_core::async_await(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> async) {
-    std::shared_future<T> futureT = async->future;
-    std::shared_ptr<vx_core::Async<vx_core::Type_any>> async_parent = async->async_parent;
-    T valueT;
-    if (async_parent == NULL) {
-      valueT = futureT.await();
-    } else {
-      vx_core::Type_any parentval = vx_core::async_await(generic_any_1, async_parent);
-      std::function<std::shared_ptr<T>(vx_core::Type_any)> fn = async->fn;
-      valueT = fn(parentval);
-    }
-    std::shared_ptr<T> output = std::make_shared<T>(valueT);
-    return output;
-  }
-
-  // async_from_async(T, async<U>)
-  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async) {
-    std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = vx_core::async_new_from_val(vx_core::f_empty(generic_any_1));
-    return output;
-  }
-
-  // async_from_async_fn(T, async<U>, fn<T>(U))
-  template <class T, class U> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_from_async_fn(std::shared_ptr<T> generic_any_1, std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> async, std::function<std::shared_ptr<T>(std::shared_ptr<U>)> fn) {
-    //std::shared_ptr<std::shared_future<T>>> futureT = async->future;
-    std::shared_ptr<vx_core::Async<std::shared_ptr<U>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>();
-    //output->future = futureU;
+  // vx_async_from_async_fn(async, fn<any>(any))
+  static vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, std::function<vx_core::Type_any(vx_core::Type_any)> fn) {
+    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
     output->async_parent = async;
-    output->fn = fn;
+    output->fn = std::function<vx_core::Type_any(vx_core::Type_any)>(fn);
     return output;
   }
 
-  // async_new_from_val(T)
-  template <class T> std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> vx_core::async_new_from_val(std::shared_ptr<T> val) {
-    std::promise<std::shared_ptr<T>> promise;
+  // vx_async_new_from_val(any)
+  static vx_core::vx_Type_async vx_async_new_from_val(vx_core::Type_any val) {
+    std::promise<vx_core::Type_any> promise;
     promise.set_value(val);
-    std::shared_future<std::shared_ptr<T>> sharedfuture = promise.get_future();
-    std::shared_ptr<std::shared_future<std::shared_ptr<T>>> psharedfuture = std::make_shared<std::shared_future<std::shared_ptr<T>>>(sharedfuture);
-    vx_core::Async<std::shared_ptr<T>> async;
-    async.future = psharedfuture;
-    std::shared_ptr<vx_core::Async<std::shared_ptr<T>>> output = std::make_shared<vx_core::Async<std::shared_ptr<T>>>(async);
+    std::shared_future<vx_core::Type_any> sharedfuture = promise.get_future();
+    std::shared_future<vx_core::Type_any>* psharedfuture = new std::shared_future<vx_core::Type_any>(sharedfuture);
+    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
+    output->future = *psharedfuture;
     return output;
   }
 
-  // boolean_contains_from_set_val(set<T>, val)
-  template <class T> bool vx_core::boolean_contains_from_set_val(std::set<T> set, T val) {
-    const bool output = set.find(val) != set.end();
+  // vx_copy(T, args)
+  template <class T> static T* vx_copy(T* copyval, vx_core::vx_Type_listany vals) {
+    T* output;
+    vx_core::Type_any val = copyval->vx_copy(copyval, vals);
+    output = vx_core::vx_any_from_any(copyval, val);
     return output;
   }
 
-  // keyset_from_map(map)
-  template <class T> std::set<T> vx_core::keyset_from_map(std::map<std::string, T> map) {
-    std::set<T> output;
-    for (auto iter = map.begin(); iter != map.end(); ++iter) {
-      output.push_back(iter->first);
-    }
+  // vx_empty(T)
+  template <class T> static T* vx_empty(T* generic_any_1) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_empty();
+    output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
 
-  // list_from_list(T, list<U>)
-  template <class T, class U> std::vector<std::shared_ptr<T>> vx_core::list_from_list(std::shared_ptr<T> generic_any_1, std::vector<std::shared_ptr<U>> list) {
-    std::vector<std::shared_ptr<T>> output;
-    int len = list.size();
+  // vx_listaddall(list, listadd)
+  template <class T> static std::vector<T*> vx_listaddall(std::vector<T*> listtarget, std::vector<T*> listadd) {
+    std::vector<T*> list;
+    list.insert(list.end(), listadd.begin(), listadd.end());
+    return list;
+  }
+
+  // vx_list_from_list(T, list<U>)
+  template <class T, class U> static std::vector<T*> vx_list_from_list(T* generic_any_1, std::vector<U*> list) {
+    std::vector<T*> output;
+    long len = list.size();
     for (int i = 0; i < len; ++i) {
-      std::shared_ptr<U> itemu = list[i];
-      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
+      U* itemu = list[i];
+      T* itemt = static_cast<T*>(itemu);
       output.push_back(itemt);
     }
     return output;
   }
 
-  // listaddall(list, listadd)
-  template <class T> std::vector<std::shared_ptr<T>> vx_core::listaddall(std::vector<std::shared_ptr<T>> list, std::vector<std::shared_ptr<T>> listadd) {
-    list.insert(list.end(), listadd.begin(), listadd.end());
-    return list;
-  }
-
-  // map_from_map(T, map<U>)
-  template <class T, class U> std::map<std::string, std::shared_ptr<T>> vx_core::map_from_map(std::shared_ptr<T> generic_any_1, std::map<std::string, std::shared_ptr<U>> map) {
-    std::map<std::string, std::shared_ptr<T>> output;
-//    int len = .size();
-//    for (int i = 0; i < len; ++i) {
-//      std::shared_ptr<U> itemu = list[i];
-//      std::shared_ptr<T> itemt = std::dynamic_pointer_cast<T>(itemu);
-//      output.push_back(itemt);
-//    }
+  // vx_map_from_map(T, map<U>)
+  template <class T, class U> static std::map<std::string, T*> vx_map_from_map(T* generic_any_1, std::map<std::string, U*> map) {
+    std::map<std::string, T*> output;
+    for (auto const& [key, itemu] : map) {
+      T* itemt = static_cast<T*>(itemu);
+      output[key] = itemu;
+    }
     return output;
-
   }
 
-  // string_from_any(val)
-  std::string vx_core::string_from_any(std::any) {
+  // vx_new(T, args)
+  template <class T> static T* vx_new(T* generic_any_1, vx_core::vx_Type_listany vals) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_new(vals);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_new_from_list(T, List<any>)
+  template <class T> static T* vx_new_from_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_new_from_list(listval);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_new_from_map(T, Map<string, any>)
+  template <class T> static T* vx_new_from_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_new_from_map(mapval);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_sync_from_async(async)
+  template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
+    std::shared_future<vx_core::Type_any> future = async->future;
+    vx_core::vx_Type_async async_parent = async->async_parent;
+    vx_core::Type_any value;
+    if (async_parent == NULL) {
+      future.wait();
+      value = future.get();
+    } else {
+      vx_core::Type_any parentval = vx_core::vx_sync_from_async(generic_any_1, async_parent);
+      std::function<vx_core::Type_any(vx_core::Type_any)> fn = async->fn;
+      value = fn(parentval);
+    }
+    T* output = vx_core::vx_any_from_any(generic_any_1, value);
+    return output;
+  }
+
+  // vx_type(T)
+  template <class T> static T* vx_type(T* generic_any_1) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_type();
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  class Abstract_replfunc {
+  public:
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
+  };
+
+  class Abstract_replfunc_async {
+  public:
+    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
+  };
+
+// :body
+
+  long refcount = 0;
+
+  vx_core::vx_Type_listany emptylistany;
+  vx_core::vx_Type_mapany emptymapany;
+
+  // vx_boolean_contains_from_set_val(set<T>, val)
+  template <class T> static bool vx_boolean_contains_from_set_val(std::set<T> set, T val) {
+    const bool output = set.find(val) != set.end();
+    return output;
+  }
+
+  // vx_boolean_from_string_ends(string, string)
+  bool vx_boolean_from_string_ends(std::string text, std::string ends) {
+    bool output = false;
+    if (text.length() < ends.length()) {
+    } else {
+      output = text.substr(text.length() - ends.length()) == ends;
+    }
+    return output;
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  bool vx_boolean_from_string_find(std::string text, std::string find) {
+    bool output = false;
+    if (text.find(find) != std::string::npos) {
+      output = true;
+    }
+    return output;
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  bool vx_boolean_from_string_starts(std::string text, std::string starts) {
+    bool output = false;
+    if (text.rfind(starts, 0) == 0) {
+      output = true;
+    }
+    return output;
+  }
+
+  // vx_debug(text)
+  void vx_debug(std::string sval) {
+    std::cout << sval << std::endl;
+  }
+
+  // vx_debug(any)
+  void vx_debug(vx_core::Type_any val) {
+    if (val == NULL) {
+      vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any(val);
+      vx_debug(sval);
+    }
+  }
+
+  // vx_list_from_array(arrayval)
+  vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals) {
+    vx_core::vx_Type_listany output;
+    output = vx_core::vx_Type_listany{vals};
+    return output;
+  }
+
+  // vx_liststring_from_arraystring(long, array<string>)
+  std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]) {
+    std::vector<std::string> output;
+    output.reserve(ilen);
+    if (ilen > 0) {
+      output.assign(arraystring, arraystring + ilen);
+    }
+    return output;
+  }
+
+  // vx_new_boolean(boolean)
+  vx_core::Type_boolean vx_new_boolean(bool isval) {
+    vx_core::Type_boolean output = vx_core::c_false();
+    if (isval) {
+      output = vx_core::c_true();
+    }
+    return output;
+  }
+
+  // vx_new_decimal_from_float(float)
+  vx_core::Type_decimal vx_new_decimal_from_float(float fval) {
+    vx_core::Type_decimal output = new vx_core::Class_decimal();
+    output->vx_p_decimal = std::to_string(fval);
+    return output;
+  }
+
+  // vx_new_decimal_from_string(string)
+  vx_core::Type_decimal vx_new_decimal_from_string(std::string sval) {
+    vx_core::Type_decimal output = new vx_core::Class_decimal();
+    output->vx_p_decimal = sval;
+    return output;
+  }
+
+  // vx_new_float(float)
+  vx_core::Type_float vx_new_float(float fval) {
+    vx_core::Type_float output = new vx_core::Class_float();
+    output->vx_p_float = fval;
+    return output;
+  }
+
+  // vx_new_int(long)
+  vx_core::Type_int vx_new_int(long ival) {
+    vx_core::Type_int output = new vx_core::Class_int();
+    output->vx_p_int = ival;
+    return output;
+  }
+
+  // vx_new_string(string)
+  vx_core::Type_string vx_new_string(std::string text) {
+    vx_core::Type_string output;
+    if (text == "") {
+      output = vx_core::e_string();
+    } else {
+      output = new vx_core::Class_string();
+      output->vx_p_string = text;
+    }
+    return output;
+  }
+
+  // vx_release(any)
+  void vx_release(vx_core::Type_any any) {
+    if (any == NULL) {
+    } else if (any->vx_p_iref == 0) {
+      delete any;
+    }
+  }
+
+  // vx_release(any...)
+  void vx_release(vx_core::vx_Type_listany listany) {
+    for (vx_core::Type_any any : listany) {
+      vx_core::vx_release(any);
+    }
+  }
+
+  // vx_release_one(any)
+  void vx_release_one(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref -= 1;
+        any->vx_p_iref = iref;
+        if (iref == 0) {
+          delete any;
+        }
+      }
+    }
+  }
+
+  // vx_release_one(any...)
+  void vx_release_one(vx_core::vx_Type_listany listany) {
+    for (vx_core::Type_any any : listany) {
+      vx_release_one(any);
+    }
+  }
+
+  // vx_release_one(map<string, any>)
+  void vx_release_one(vx_core::vx_Type_mapany mapany) {
+    for (auto const& [key, any] : mapany) {
+      vx_release_one(any);
+    }
+  }
+
+  // vx_reserve(any)
+  void vx_reserve(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref += 1;
+        any->vx_p_iref = iref;
+      }
+    }
+  }
+
+  // vx_reserve_empty(any)
+  void vx_reserve_empty(vx_core::Type_any any) {
+    if (any->vx_p_iref == 0) {
+      any->vx_p_iref = -2;
+      vx_core::refcount -= 1;
+    }
+  }
+
+  // vx_reserve_type(any)
+  void vx_reserve_type(vx_core::Type_any any) {
+    if (any->vx_p_iref == 0) {
+      any->vx_p_iref = -1;
+      vx_core::refcount -= 1;
+    }
+  }
+
+  // vx_string_from_any(val)
+  std::string vx_string_from_any(vx_core::Type_any value) {
+    return vx_core::vx_string_from_any_indent(value, 0, true);
+  }
+
+  // vx_string_from_any_indent(val, indent, linefeed)
+  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed) {
     std::string output = "";
-    return output;
-  }
-
-  // sync_from_async(generic_any_1, async)
-  template <class T> std::shared_ptr<T> vx_core::sync_from_async(std::shared_ptr<T> generic_any_1, std::shared_ptr<Async<std::shared_ptr<T>>> async) {
-    std::future<T> future = async->future;
-    T valuet = future->wait();
-    std::shared_ptr<T> output = std::make_shared<T>(valuet);
-    return output;
-  }
-
-  //class Class_replfunc {
-    vx_core::Type_any vx_core::Class_replfunc::vx_repl(vx_core::Type_anylist arglist) {return vx_core::t_any;}
-  //};
-
-  //class Class_replfunc_async {
-    std::shared_ptr<vx_core::Async<vx_core::Type_any>> vx_core::Class_replfunc_async::vx_repl(vx_core::Type_anylist arglist) {
-      return vx_core::async_new_from_val(vx_core::t_any);
-    }
-  //};
-
-  //class Type_any {
-
-    vx_core::Type_any vx_core::Class_any::vx_type_from_any(vx_core::Type_any val) {
-      return val->vx_type(val);
-    }
-
-    vx_core::vx_Type_listany vx_core::Class_any::vx_dispose() {
-      this->vx_iref = 0;
-      return vx_core::emptylistany;
-    }
-
-    bool vx_core::Class_any::vx_release() {
-      bool output = false;
-      if (this->vx_iref < 0) {
-      } else if (vx_iref == 0) {
-        vx_iref = -1;
-        output = true;
+    std::string indenttext = vx_core::vx_string_from_string_repeat(" ", indent);
+    std::string text = "";
+    vx_core::Type_any type = value->vx_type();
+    if (indent > 50) {
+      text = "Error: Max Depth Exceeded";
+    } else if (value == NULL) {
+      text = "null";
+    } else if (value == type) {
+      vx_core::Type_typedef typdef = value->vx_typedef();
+      text = typdef->pkgname()->vx_string() + "/" + typdef->name()->vx_string();
+    } else if (type == vx_core::t_boolean()) {
+      vx_core::Type_boolean valbool = vx_core::vx_any_from_any(vx_core::t_boolean(), value);
+      if (valbool->vx_boolean()) {
+        text = "true";
       } else {
-        vx_iref -= 1;
+        text = "false";
       }
-      return output;
-    }
-
-    void vx_core::Class_any::vx_reserve() {this->vx_iref += 1;}
-
-  //};
-
-  //class Type_boolean {
-
-    bool vx_core::Class_boolean::vx_boolean() {return this->vx_p_boolean;}
-
-    vx_core::Type_boolean vx_core::Class_boolean::vx_new_from_boolean(bool isval) {
-      vx_core::Type_boolean output = vx_core::c_false;
-      if (isval) {
-        output = vx_core::c_true;
+    } else if (type == vx_core::t_decimal()) {
+      vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal(), value);
+      text = valdec->vx_string();
+    } else if (type == vx_core::t_float()) {
+      vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float(), value);
+      text = std::to_string(valfloat->vx_float());
+      if (vx_core::vx_boolean_from_string_ends(text, ".0")) {
+        text = vx_core::vx_string_from_string_start_end(text, 0, text.length() - 2);
       }
-      return output;
+    } else if (type == vx_core::t_int()) {
+      if (value == vx_core::c_notanumber()) {
+        text = "notanumber";
+      } else if (value == vx_core::c_infinity()) {
+        text = "infinity";
+      } else if (value == vx_core::c_neginfinity()) {
+        text = "neginfinity";
+      } else {
+        vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int(), value);
+        text = std::to_string(valint->vx_int());
+      }
+    } else if (type == vx_core::t_string()) {
+      vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), value);
+      text = "\"" + valstring->vx_string() + "\"";
+    } else if (value == type->vx_empty()) {
+      vx_core::Type_typedef typdef = type->vx_typedef();
+      text = "(" + typdef->name()->vx_string() + ")";
+    } else {
+      vx_core::Type_typedef typdef = value->vx_typedef();
+      std::string extend = typdef->extend()->vx_string();
+      if (extend == ":list") {
+        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
+        vx_core::Type_string typedefname = typdef->name();
+        long indentint = indent;
+        indentint += 1;
+        std::vector<vx_core::Type_any> listval = vallist->vx_list();
+        for (vx_core::Type_any valsub : listval) {
+          std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+          text += "\n " + indenttext + ssub;
+        }
+        if (vallist->vx_msgblock() != NULL) {
+          std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed);
+          text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        }
+        text = "(" + typedefname->vx_string() + text + ")";
+      } else if (extend == ":map") {
+        vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map(), value);
+        vx_core::Type_string typedefname = typdef->name();
+        long indentint = indent;
+        indentint += 2;
+        vx_core::vx_Type_mapany mapval = valmap->vx_map();
+        for (auto const& [ckey, valsub] : mapval) {
+          std::string key = ckey;
+          if (!vx_boolean_from_string_starts(key, ":")) {
+            key = ":" + key;
+          }
+          std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+          if (vx_boolean_from_string_find(strval, "\n")) {
+            strval = "\n  " + indenttext + strval;
+          } else {
+            strval = " " + strval;
+          }
+          text += "\n" + indenttext + " " + key + strval;
+        }
+        if (valmap->vx_msgblock() != NULL) {
+          std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed);
+          text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        }
+        text = "(" + typedefname->vx_string() + text + ")";
+      } else if (extend == ":struct") {
+        vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct(), value);
+        vx_core::Type_string typedefname = typdef->name();
+        vx_core::vx_Type_mapany mapval = valstruct->vx_map();
+        long indentint = indent;
+        indentint += 2;
+        for (auto const& [ckey, valsub] : mapval) {
+          std::string key = ckey;
+          if (!vx_boolean_from_string_starts(key, ":")) {
+            key = ":" + key;
+          }
+          std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+          if (vx_boolean_from_string_find(strval, "\n")) {
+            strval = "\n  " + indenttext + strval;
+          } else {
+            strval = " " + strval;
+          }
+          text += "\n" + indenttext + " " + key + strval;
+        }
+        if (valstruct->vx_msgblock() != NULL) {
+          std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed);
+          text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        }
+        text = "(" + typedefname->vx_string() + text + ")";
+      } else if (extend == ":func") {
+        vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func(), value);
+        vx_core::Type_funcdef funcdef = valfunc->vx_funcdef();
+        text = funcdef->pkgname()->vx_string() + "/" + funcdef->name()->vx_string();
+        if (valfunc->vx_msgblock() != NULL) {
+          text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed);
+          text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
+        }
+        text = "(" + text + ")";
+      }
     }
+    output = text;
+    return output;
+  }
 
-  //};
+  // vx_string_from_liststring_pos(list<string>, long)
+  std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos) {
+    std::string output = "";
+    if ((unsigned)pos < liststring.size()) {
+      output = liststring[pos];
+    }
+    return output;
+  }
 
-  //class Type_constdef {
-    vx_core::Type_constdef vx_core::Class_constdef::vx_constdef_new(
+  // vx_string_from_string_find_replace(string, string, string)
+  std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace) {
+    std::string output = text;
+    if (!find.empty()) {
+      size_t start_pos = 0;
+      while((start_pos = text.find(find, start_pos)) != std::string::npos) {
+        output.replace(start_pos, find.length(), replace);
+        start_pos += replace.length();
+      }
+    }
+    return output;
+  }
+
+  // vx_string_from_string_find_replacefirst(string, string, string)
+  std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst) {
+    std::string output = text;
+    size_t start_pos = output.find(find);
+    if (start_pos != std::string::npos) {
+      output.replace(start_pos, find.length(), replacefirst);
+    }
+    return output;
+  }
+
+  // vx_string_from_string_repeat(string, int)
+  std::string vx_string_from_string_repeat(std::string text, long repeat) {
+    std::string output = "";
+    for (int i = 0; i < repeat; i++) {
+      output += text;
+    }
+    return output;
+  }
+
+  // vx_string_from_string_start_end(string, int, int)
+  std::string vx_string_from_string_start_end(std::string text, long start, long end) {
+    std::string output = text.substr(start, end);
+    return output;
+  }
+
+  //class Abstract_replfunc {
+    vx_core::Type_any Abstract_replfunc::vx_repl(vx_core::Type_anylist arglist) {return vx_core::t_any();}
+  //}
+
+  //class Abstract_replfunc_async {
+    vx_core::vx_Type_async Abstract_replfunc_async::vx_repl(vx_core::Type_anylist arglist) {
+      return vx_core::vx_async_new_from_val(vx_core::t_any());
+    }
+  //}
+
+  //class Class_boolean {
+
+    bool Class_boolean::vx_boolean() const {return this->vx_p_boolean;}
+
+  //}
+
+  //class Class_constdef {
+    vx_core::Type_constdef Class_constdef::vx_constdef_new(
       std::string pkgname,
       std::string name,
       vx_core::Type_typedef typ
     ) {
-      vx_core::Type_constdef output = std::make_shared<Class_constdef>();
-      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
-      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
+      vx_core::Type_constdef output = new vx_core::Class_constdef();
+      output->vx_p_pkgname = vx_core::vx_new_string(pkgname);
+      output->vx_p_name = vx_core::vx_new_string(name);
       output->vx_p_type = typ;
       return output;
     }
-  //};
+  //}
 
-  //class Type_float {
-    float vx_core::Class_float::vx_float() {return vx_p_float;}
+  //class Class_decimal {
+    float Class_decimal::vx_float() const {return std::stof(vx_p_decimal);}
 
-    vx_core::Type_float vx_core::Class_float::vx_new_from_float(float fval) {
-      vx_core::Type_float output = std::make_shared<vx_core::Class_float>();
-      output->vx_p_float = fval;
-      return output;
-    }
-  //};
+    std::string Class_decimal::vx_string() const {return vx_p_decimal;}
+  //}
 
-  //class Type_funcdef {
-    vx_core::Type_funcdef vx_core::Class_funcdef::vx_funcdef_new(
+  //class Class_float {
+    float Class_float::vx_float() const {return vx_p_float;}
+  //}
+
+  //class Class_funcdef {
+    vx_core::Type_funcdef Class_funcdef::vx_funcdef_new(
       std::string pkgname,
       std::string name,
-      int idx,
+      long idx,
       bool async,
       vx_core::Type_any typ
     ) {
-      vx_core::Type_funcdef output = std::make_shared<vx_core::Class_funcdef>();
-      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
-      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
-      output->vx_p_idx = vx_core::t_int->vx_new_from_int(idx);
-      output->vx_p_async = vx_core::t_boolean->vx_new_from_boolean(async);
+      vx_core::Type_funcdef output = new vx_core::Class_funcdef();
+      output->vx_p_pkgname = vx_core::vx_new_string(pkgname);
+      output->vx_p_name = vx_core::vx_new_string(name);
+      output->vx_p_idx = vx_core::vx_new_int(idx);
+      output->vx_p_async = vx_core::vx_new_boolean(async);
       output->vx_p_type = typ;
       return output;
     }
-  //};
+  //}
 
-  //class Type_int {
-    int vx_core::Class_int::vx_int() {return vx_p_int;}
+  //class Class_int {
+    long Class_int::vx_int() const {return vx_p_int;}
+  //}
 
-    vx_core::Type_int vx_core::Class_int::vx_new_from_int(int ival) {
-      vx_core::Type_int output = std::make_shared<vx_core::Class_int>();
-      output->vx_p_int = ival;
+  //class Class_msg {
+    vx_core::Type_msg Class_msg::vx_msg_from_errortext(const std::string errortext) const {
+      vx_core::Type_msg output = new vx_core::Class_msg();
+      output->vx_p_text = vx_core::vx_new_string(errortext);
+      output->vx_p_severity = vx_core::c_msg_severe();
       return output;
     }
-  //};
 
-  //class Type_string {
-    std::string vx_core::Class_string::vx_string() {
-      return vx_p_string;
+    vx_core::Type_msg Class_msg::vx_msg_from_exception(const std::string text, std::exception err) const {
+      vx_core::Type_msg output = new vx_core::Class_msg();
+      output->vx_p_text = vx_core::vx_new_string(text);
+      output->vx_p_severity = vx_core::c_msg_severe();
+      output->err = err;
+      return output;
     }
+  //}
 
-    vx_core::Type_string vx_core::Class_string::vx_new_from_string(std::string text) {
-      vx_core::Type_string output;
-      if (text == "" && vx_core::e_string != NULL) {
-        output = vx_core::e_string;
-      } else {
-        output = std::make_shared<vx_core::Class_string>();
-        output->vx_p_string = text;
+  //class Class_msgblock {
+    vx_core::Type_msgblock Class_msgblock::vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_msgblock output = vx_core::e_msgblock();
+      std::vector<vx_core::Type_msgblock> listmsgblock;
+      if (msgblock != NULL) {
+        vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
+        if (origmsgblock != NULL) {
+          std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
+          listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
+        }
+      }
+      for (vx_core::Type_any subval : vals) {
+        vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
+        if (submsgblock != NULL) {
+          listmsgblock.push_back(submsgblock);
+        }
+      }
+      vx_core::Type_msgblocklist msgblocks;
+      if (listmsgblock.size() > 0) {
+        msgblocks = new vx_core::Class_msgblocklist();
+        msgblocks->vx_p_list = listmsgblock;
+        if (msgblock == NULL) {
+          output = vx_core::vx_new(vx_core::t_msgblock(), {msgblocks});
+        } else {
+          output = vx_core::vx_copy(msgblock, {msgblocks});
+        }
+      } else if (msgblock != NULL) {
+        output = vx_core::vx_copy(msgblock, {});
       }
       return output;
     }
-  //};
+  //}
 
-  //class Type_typedef {
-    vx_core::Type_typedef vx_core::Class_typedef::vx_typedef_new(
+  //class Class_string {
+    std::string Class_string::vx_string() const {
+      return this->vx_p_string;
+    }
+  //}
+
+  //class Class_typedef {
+    vx_core::Type_typedef Class_typedef::vx_typedef_new(
       std::string pkgname,
       std::string name,
       std::string extend,
@@ -389,10 +810,10 @@ int main()
       vx_core::Type_anylist disallowvalues,
       vx_core::Type_argmap properties
     ) {
-      vx_core::Type_typedef output = std::make_shared<vx_core::Class_typedef>();
-      output->vx_p_pkgname = vx_core::t_string->vx_new_from_string(pkgname);
-      output->vx_p_name = vx_core::t_string->vx_new_from_string(name);
-      output->vx_p_extend = vx_core::t_string->vx_new_from_string(extend);
+      vx_core::Type_typedef output = new vx_core::Class_typedef();
+      output->vx_p_pkgname = vx_core::vx_new_string(pkgname);
+      output->vx_p_name = vx_core::vx_new_string(name);
+      output->vx_p_extend = vx_core::vx_new_string(extend);
       output->vx_p_traits = traits;
       output->vx_p_allowtypes = allowtypes;
       output->vx_p_disallowtypes = disallowtypes;

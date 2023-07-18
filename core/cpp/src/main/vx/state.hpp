@@ -1,79 +1,119 @@
 #ifndef vx_state_hpp
 #define vx_state_hpp
-#include <map>
-#include <memory>
-#include <string>
 #include "../vx/core.hpp"
 
 namespace vx_state {
 
   // forward declarations
-  class Class_value_map;
-  typedef std::shared_ptr<Class_value_map> Type_value_map;
-  extern Type_value_map e_value_map;
-  extern Type_value_map t_value_map;
-  class Class_change;
-  typedef std::shared_ptr<Class_change> Func_change;
-  extern Func_change e_change;
-  extern Func_change t_change;
-  class Class_register;
-  typedef std::shared_ptr<Class_register> Func_register;
-  extern Func_register e_register;
-  extern Func_register t_register;
+  class Abstract_value_map;
+  typedef Abstract_value_map* Type_value_map;
+  extern Type_value_map e_value_map();
+  extern Type_value_map t_value_map();
+  class Abstract_change;
+  typedef Abstract_change* Func_change;
+  extern Func_change e_change();
+  extern Func_change t_change();
+  class Abstract_register;
+  typedef Abstract_register* Func_register;
+  extern Func_register e_register();
+  extern Func_register t_register();
 
-
-  // (type value-map)
-  class Class_value_map : public virtual vx_core::Class_map {
+  class vx_Class_package {
   public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_typedef vx_typedef() override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) override;
-    // vx_map()
-    virtual vx_core::vx_Type_mapany vx_map() override;
-    // vx_new_from_map(T, Map<T>)
-    template <class T> std::shared_ptr<T> vx_new_from_map(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_mapany mapval);
+    vx_state::Type_value_map e_value_map;
+    vx_state::Type_value_map t_value_map;
+    vx_state::Func_change e_change;
+    vx_state::Func_change t_change;
+    vx_state::Func_register e_register;
+    vx_state::Func_register t_register;
   };
 
-  // (func change)
-  class Class_change : public vx_core::Class_any_from_any, public virtual vx_core::Class_replfunc {
-  public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
-    template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_f_change(vx_state::Type_value_map valuemap);
-  };
-
-  // (func register)
-  class Class_register : public vx_core::Class_any_from_any, public virtual vx_core::Class_replfunc {
-  public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
-    template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_f_register(vx_core::Type_statelistener listener);
-  };
 
   // (func change)
   vx_core::Type_boolean f_change(vx_state::Type_value_map valuemap);
 
   // (func register)
   vx_core::Type_boolean f_register(vx_core::Type_statelistener listener);
+
+  // (type value-map)
+  class Abstract_value_map : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_value_map() {};
+    virtual ~Abstract_value_map() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+  };
+  class Class_value_map : public virtual Abstract_value_map {
+  public:
+    Class_value_map();
+    virtual ~Class_value_map() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+  };
+
+  // (func change)
+  class Abstract_change : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_change() {};
+    virtual ~Abstract_change() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_change : public virtual Abstract_change {
+  public:
+    Class_change();
+    virtual ~Class_change() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func register)
+  class Abstract_register : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_register() {};
+    virtual ~Abstract_register() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_register : public virtual Abstract_register {
+  public:
+    Class_register();
+    virtual ~Class_register() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
 
 }
 #endif

@@ -11,7 +11,7 @@
   (native
    :cpp
     "// :header
-     virtual vx_core::Type_any vx_type_from_any(vx_core::Type_any value);")
+     vx_core::Type_any vx_type_from_any(vx_core::Type_any value) const;")
  :doc "Any Value for Variant Type")
 
 (type any-async<-func
@@ -57,8 +57,7 @@
    :cpp
     "// :header
      bool vx_p_boolean = false;
-     bool vx_boolean();
-     vx_core::Type_boolean vx_new_from_boolean(bool isval);"
+     bool vx_boolean() const;"
    :java
     "protected boolean vxboolean = false;
 
@@ -149,9 +148,8 @@
    :cpp
     "// :header
      std::string vx_p_decimal = “0.0”;
-     float vx_float();
-     std::string vx_string();
-     vx_core::Type_decimal vx_new_from_string(std::string sval);"
+     float vx_float() const;
+     std::string vx_string() const;"
    :java
     "protected String vxdecimal = “0.0”;
 
@@ -182,8 +180,7 @@
    :cpp
     "// :header
      float vx_p_float = 0;
-     float vx_float();
-     vx_core::Type_float vx_new_from_float(float fval);"
+     float vx_float() const;"
    :java
     "protected float vxfloat = 0;
 
@@ -201,7 +198,12 @@
 
 (type func
  :extends :func
- :doc     "Original Function Class.")
+ :create
+  (native
+   :cpp
+    "// :header
+     vx_core::Type_funcdef vx_funcdef() const;")
+ :doc "Original Function Class.")
 
 (type funcdef
  :extends :struct
@@ -217,7 +219,7 @@
      static vx_core::Type_funcdef vx_funcdef_new(
        std::string pkgname,
        std::string name,
-       int idx,
+       long idx,
        bool async,
        vx_core::Type_any typ
      );")
@@ -241,9 +243,8 @@
   (native
    :cpp
     "// :header
-     int vx_p_int = 0;
-     int vx_int();
-     vx_core::Type_int vx_new_from_int(int ival);"
+     long vx_p_int = 0;
+     long vx_int() const;"
    :java
     "protected int vxint = 0;
 
@@ -256,14 +257,14 @@
        output.vxint = ival;
        return output;
      }")
- :test        (test-true  (is-int 4))
-              (test-true  (is-int "4"))
-              (test-true  (is-int infinity))
-              (test-true  (is-int neginfinity))
-              (test-true  (is-int notanumber))
-              (test-false (is-int "a"))
-              (test-false (is-int 5.5))
- :doc         "A simple integer.")
+ :test (test-true  (is-int 4))
+       (test-true  (is-int "4"))
+       (test-true  (is-int infinity))
+       (test-true  (is-int neginfinity))
+       (test-true  (is-int notanumber))
+       (test-false (is-int "a"))
+       (test-false (is-int 5.5))
+ :doc  "A simple integer.")
 
 (type intlist
  :extends    :list
@@ -278,7 +279,15 @@
 (type list
  :extends    :list
  :allowtypes [any]
- :doc        "A simple untyped list.")
+ :create
+  (native
+   :cpp
+    "// :header
+     vx_core::vx_Type_listany vx_p_list;
+		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
+     vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;")
+ :doc "A simple untyped list.")
 
 (type listtype
  :extends :type
@@ -287,7 +296,15 @@
 (type map
  :extends    :map
  :allowtypes [any]
- :doc        "A simple untyped map.")
+ :create
+  (native
+   :cpp
+    "// :header
+     vx_core::vx_Type_mapany vx_p_map;
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
+     vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;")
+ :doc "A simple untyped map.")
 
 (type maptype
  :extends :type
@@ -358,7 +375,9 @@
   (native
    :cpp
     "// :header
-     std::exception* err;"
+     std::exception err;
+     vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) const;
+     vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) const;"
    :java
     "public Exception err = null;
 
@@ -385,6 +404,9 @@
               msgblocks : msgblocklist]
  :create
   (native
+   :cpp
+    "// :header
+     vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const;"
    :java
     "public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
        Core.Type_msgblock output = Core.e_msgblock;
@@ -520,8 +542,7 @@
    :cpp
     "// :header
      std::string vx_p_string = “”;
-     std::string vx_string();
-     vx_core::Type_string vx_new_from_string(std::string text);"
+     std::string vx_string() const;"
    :java
     "protected String vxstring = “”;
 
@@ -558,7 +579,13 @@
 
 (type struct
  :extends :struct
- :doc     "Struct is the type of all structures/objects with properties.")
+ :create
+  (native
+   :cpp
+    "// :header
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;")
+ :doc "Struct is the type of all structures/objects with properties.")
 
 (type thenelse
  :extends    :struct
@@ -702,6 +729,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   "long result = num1->vx_int() + num2->vx_int();
+    output = vx_core::vx_new_int(result);"
   :js
    "num1 + num2"
   :java
@@ -757,6 +787,9 @@
 (func +1 : int
  [num : int]
  (native
+  :cpp
+   "long result = num->vx_int() + 1;
+    output = vx_core::vx_new_int(result);"
   :js
    "num + 1"
   :java
@@ -771,6 +804,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   "long result = num1->vx_int() - num2->vx_int();
+    output = vx_core::vx_new_int(result);"
   :js
    "num1 - num2"
   :java
@@ -827,6 +863,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   "long result = num1->vx_int() * num2->vx_int();
+    output = vx_core::vx_new_int(result);"
   :js
    "num1 * num2"
   :java
@@ -908,6 +947,18 @@
  [val1 : any
   val2 : any]
  (native
+  :cpp
+   "bool isequal = false;
+    if (val1 == val2) {
+      isequal = true;
+    } else {
+      std::string str1 = vx_core::vx_string_from_any(val1);
+      std::string str2 = vx_core::vx_string_from_any(val2);
+      if (str1 == str2) {
+        isequal = true;
+      }
+    }
+    output = vx_core::vx_new_boolean(isequal);"
   :js
    "const native1 = " (native<-any val1) "
     const native2 = " (native<-any val2) "
@@ -1043,6 +1094,7 @@
 (func ! : boolean
  [val : boolean :doc "Thing to not"]
  (native
+  :cpp  "vx_core::vx_new_boolean(!val->vx_boolean());"
   :js   "!val"
   :java "Core.t_boolean.vx_new_from_boolean(!val.vx_boolean());")
  :alias "not"
@@ -1245,6 +1297,8 @@
 (func any<-any : any-1
  [value : any-2]
  (native
+  :cpp
+   "output = vx_core::vx_any_from_any(generic_any_1, value);"
   :js
    "value"
   :java
@@ -1318,11 +1372,12 @@
   fn-reduce : any<-reduce]
  (native
   :cpp
-   "output = valstart;
+   "vx_core::Type_any work = valstart;
     std::vector<vx_core::Type_any> listval = list->vx_list();
     for (vx_core::Type_any item : listval) {
-      output = fn_reduce->vx_f_any_from_reduce(generic_any_1, output, item);
-    }"
+      work = fn_reduce->vx_any_from_reduce(work, item);
+    };
+    output = vx_core::vx_any_from_any(generic_any_1, work);"
   :js
    "output = valstart
     const fn = fn_reduce['vx_value']
@@ -1570,7 +1625,7 @@
   values : anylist :...]
  (native
   :cpp
-   "std::shared_ptr<T> output = vx_core::f_new(value, values);"
+   "T* output = vx_core::vx_copy(value, values->vx_list());"
   :js
    "vx_core.f_new(value, ...values)"
   :java
@@ -1590,7 +1645,7 @@
  [type : any-1]
  (native
   :cpp
-   "std::shared_ptr<T> output = vx_core::any_from_any(type, type->vx_empty(type));"
+   "T* output = vx_core::vx_any_from_any(type, type->vx_empty());"
   :js
    "const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
@@ -1803,13 +1858,13 @@
    (native
     :cpp
      "// :capture val
-      vx_core::Type_int intresult = vx_core::e_int;
+      vx_core::Type_int intresult = vx_core::e_int();
       try {
         std::string sval = val->vx_string();
-        int ival = std::stoi(sval);
-        intresult = vx_core::t_int->vx_new_from_int(ival);
+        long ival = std::stoll(sval);
+        intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
-        intresult = vx_core::c_notanumber;
+        intresult = vx_core::c_notanumber();
       }
       return intresult;"
     :js
@@ -1840,7 +1895,7 @@
  (native
   :cpp
    "if (text->vx_string().length() == 0) {
-     output = vx_core::c_true;
+     output = vx_core::c_true();
     }"
   :js
    "if (text.length == 0) {
@@ -1856,10 +1911,8 @@
  [value : any]
  (native
   :cpp
-   "if (value == value->vx_empty(value)) {
-      output = vx_core::c_true;
-    } else {
-      output = vx_core::c_false;
+   "if (value == value->vx_empty()) {
+      output = vx_core::c_true();
     }"
   :js
    "const type = vx_core.f_type_from_any(value)
@@ -2342,7 +2395,7 @@
   values : anylist :...]
  (native
   :cpp
-   "std::shared_ptr<T> output = vx_core::f_new(type, values);"
+   "T* output = vx_core::vx_new(type, values->vx_list());"
   :js
    "const typedef = vx_core.f_typedef_from_any(type)
     const copy = type
@@ -3190,6 +3243,9 @@
   indent   : int
   linefeed : boolean]
  (native
+  :cpp
+   "std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean());
+    output = vx_core::vx_new_string(soutput);"
   :js
    "const indenttext = ' '.repeat(indent)
     let text = ''

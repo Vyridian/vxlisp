@@ -1,135 +1,103 @@
 #ifndef vx_collection_hpp
 #define vx_collection_hpp
-#include <memory>
 #include "../vx/core.hpp"
 #include "../vx/type.hpp"
 
 namespace vx_collection {
 
   // forward declarations
-  class Class_is_list;
-  typedef std::shared_ptr<Class_is_list> Func_is_list;
-  extern Func_is_list e_is_list;
-  extern Func_is_list t_is_list;
-  class Class_is_map;
-  typedef std::shared_ptr<Class_is_map> Func_is_map;
-  extern Func_is_map e_is_map;
-  extern Func_is_map t_is_map;
-  class Class_list_from_list_end;
-  typedef std::shared_ptr<Class_list_from_list_end> Func_list_from_list_end;
-  extern Func_list_from_list_end e_list_from_list_end;
-  extern Func_list_from_list_end t_list_from_list_end;
-  class Class_list_from_list_filtertypes;
-  typedef std::shared_ptr<Class_list_from_list_filtertypes> Func_list_from_list_filtertypes;
-  extern Func_list_from_list_filtertypes e_list_from_list_filtertypes;
-  extern Func_list_from_list_filtertypes t_list_from_list_filtertypes;
-  class Class_list_from_list_fn_filter;
-  typedef std::shared_ptr<Class_list_from_list_fn_filter> Func_list_from_list_fn_filter;
-  extern Func_list_from_list_fn_filter e_list_from_list_fn_filter;
-  extern Func_list_from_list_fn_filter t_list_from_list_fn_filter;
-  class Class_list_from_list_start;
-  typedef std::shared_ptr<Class_list_from_list_start> Func_list_from_list_start;
-  extern Func_list_from_list_start e_list_from_list_start;
-  extern Func_list_from_list_start t_list_from_list_start;
-  class Class_list_from_list_start_end;
-  typedef std::shared_ptr<Class_list_from_list_start_end> Func_list_from_list_start_end;
-  extern Func_list_from_list_start_end e_list_from_list_start_end;
-  extern Func_list_from_list_start_end t_list_from_list_start_end;
+  class Abstract_is_list;
+  typedef Abstract_is_list* Func_is_list;
+  extern Func_is_list e_is_list();
+  extern Func_is_list t_is_list();
+  class Abstract_is_map;
+  typedef Abstract_is_map* Func_is_map;
+  extern Func_is_map e_is_map();
+  extern Func_is_map t_is_map();
+  class Abstract_list_from_list_end;
+  typedef Abstract_list_from_list_end* Func_list_from_list_end;
+  extern Func_list_from_list_end e_list_from_list_end();
+  extern Func_list_from_list_end t_list_from_list_end();
+  class Abstract_list_from_list_filtertypes;
+  typedef Abstract_list_from_list_filtertypes* Func_list_from_list_filtertypes;
+  extern Func_list_from_list_filtertypes e_list_from_list_filtertypes();
+  extern Func_list_from_list_filtertypes t_list_from_list_filtertypes();
+  class Abstract_list_from_list_fn_filter;
+  typedef Abstract_list_from_list_fn_filter* Func_list_from_list_fn_filter;
+  extern Func_list_from_list_fn_filter e_list_from_list_fn_filter();
+  extern Func_list_from_list_fn_filter t_list_from_list_fn_filter();
+  class Abstract_list_from_list_start;
+  typedef Abstract_list_from_list_start* Func_list_from_list_start;
+  extern Func_list_from_list_start e_list_from_list_start();
+  extern Func_list_from_list_start t_list_from_list_start();
+  class Abstract_list_from_list_start_end;
+  typedef Abstract_list_from_list_start_end* Func_list_from_list_start_end;
+  extern Func_list_from_list_start_end e_list_from_list_start_end();
+  extern Func_list_from_list_start_end t_list_from_list_start_end();
 
-
-  // (func is-list)
-  class Class_is_list : public vx_core::Class_any_from_any, public virtual vx_core::Class_replfunc {
+  class vx_Class_package {
   public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
-    template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_f_is_list(vx_core::Type_any val);
+    vx_collection::Func_list_from_list_fn_filter e_list_from_list_fn_filter;
+    vx_collection::Func_list_from_list_fn_filter t_list_from_list_fn_filter;
+    vx_collection::Func_list_from_list_start_end e_list_from_list_start_end;
+    vx_collection::Func_list_from_list_start_end t_list_from_list_start_end;
+    vx_collection::Func_is_list e_is_list;
+    vx_collection::Func_is_list t_is_list;
+    vx_collection::Func_is_map e_is_map;
+    vx_collection::Func_is_map t_is_map;
+    vx_collection::Func_list_from_list_end e_list_from_list_end;
+    vx_collection::Func_list_from_list_end t_list_from_list_end;
+    vx_collection::Func_list_from_list_filtertypes e_list_from_list_filtertypes;
+    vx_collection::Func_list_from_list_filtertypes t_list_from_list_filtertypes;
+    vx_collection::Func_list_from_list_start e_list_from_list_start;
+    vx_collection::Func_list_from_list_start t_list_from_list_start;
   };
 
-  // (func is-map)
-  class Class_is_map : public vx_core::Class_any_from_any, public virtual vx_core::Class_replfunc {
-  public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Func_any_from_any fn_new(vx_core::Class_any_from_any::IFn fn);
-    template <class T, class U> std::shared_ptr<T> f_any_from_any(std::shared_ptr<T> generic_any_1, std::shared_ptr<U> value);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    vx_core::Type_boolean vx_f_is_map(vx_core::Type_any val);
-  };
-
-  // (func list<-list-end)
-  class Class_list_from_list_end : public vx_core::Class_func, public virtual vx_core::Class_replfunc {
-  public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_f_list_from_list_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int end);
-  };
-
-  // (func list<-list-filtertypes)
-  class Class_list_from_list_filtertypes : public vx_core::Class_func, public virtual vx_core::Class_replfunc {
-  public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_f_list_from_list_filtertypes(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Type_typelist filtertypes);
-  };
+// :headerfirst
+// :header
 
   // (func list<-list-fn-filter)
-  class Class_list_from_list_fn_filter : public vx_core::Class_func, public virtual vx_core::Class_replfunc {
+  class Abstract_list_from_list_fn_filter : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X, class Y> std::shared_ptr<X> vx_f_list_from_list_fn_filter(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_filter);
+    Abstract_list_from_list_fn_filter() {};
+    virtual ~Abstract_list_from_list_fn_filter() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-
-  // (func list<-list-start)
-  class Class_list_from_list_start : public vx_core::Class_func, public virtual vx_core::Class_replfunc {
+  class Class_list_from_list_fn_filter : public virtual Abstract_list_from_list_fn_filter {
   public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_f_list_from_list_start(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start);
+    Class_list_from_list_fn_filter();
+    virtual ~Class_list_from_list_fn_filter() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func list<-list-start-end)
-  class Class_list_from_list_start_end : public vx_core::Class_func, public virtual vx_core::Class_replfunc {
+  class Abstract_list_from_list_start_end : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    template <class T> std::shared_ptr<T> vx_new(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    template <class T> std::shared_ptr<T> vx_copy(std::shared_ptr<T> generic_any_1, vx_core::vx_Type_listarg vals);
-    virtual vx_core::Type_funcdef vx_funcdef();
-    virtual vx_core::Type_typedef vx_typedef() override;
-    template <class T> std::shared_ptr<T> vx_empty(std::shared_ptr<T> val);
-    template <class T> std::shared_ptr<T> vx_type(std::shared_ptr<T> val);
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-    template <class X> std::shared_ptr<X> vx_f_list_from_list_start_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start, vx_core::Type_int end);
+    Abstract_list_from_list_start_end() {};
+    virtual ~Abstract_list_from_list_start_end() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_list_from_list_start_end : public virtual Abstract_list_from_list_start_end {
+  public:
+    Class_list_from_list_start_end();
+    virtual ~Class_list_from_list_start_end() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func is-list)
@@ -138,20 +106,173 @@ namespace vx_collection {
   // (func is-map)
   vx_core::Type_boolean f_is_map(vx_core::Type_any val);
 
+  // (func is-list)
+  class Abstract_is_list : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_is_list() {};
+    virtual ~Abstract_is_list() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_is_list : public virtual Abstract_is_list {
+  public:
+    Class_is_list();
+    virtual ~Class_is_list() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func is-map)
+  class Abstract_is_map : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_is_map() {};
+    virtual ~Abstract_is_map() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_is_map : public virtual Abstract_is_map {
+  public:
+    Class_is_map();
+    virtual ~Class_is_map() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func list<-list-end)
-  template <class X> std::shared_ptr<X> f_list_from_list_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int end);
+  class Abstract_list_from_list_end : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_list_from_list_end() {};
+    virtual ~Abstract_list_from_list_end() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_list_from_list_end : public virtual Abstract_list_from_list_end {
+  public:
+    Class_list_from_list_end();
+    virtual ~Class_list_from_list_end() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
 
   // (func list<-list-filtertypes)
-  template <class X, class Y> std::shared_ptr<X> f_list_from_list_filtertypes(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Type_typelist filtertypes);
-
-  // (func list<-list-fn-filter)
-  template <class X, class Y> std::shared_ptr<X> f_list_from_list_fn_filter(std::shared_ptr<X> generic_any_1, std::shared_ptr<Y> vallist, vx_core::Func_any_from_any fn_filter);
+  class Abstract_list_from_list_filtertypes : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_list_from_list_filtertypes() {};
+    virtual ~Abstract_list_from_list_filtertypes() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_list_from_list_filtertypes : public virtual Abstract_list_from_list_filtertypes {
+  public:
+    Class_list_from_list_filtertypes();
+    virtual ~Class_list_from_list_filtertypes() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
 
   // (func list<-list-start)
-  template <class X> std::shared_ptr<X> f_list_from_list_start(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start);
+  class Abstract_list_from_list_start : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_list_from_list_start() {};
+    virtual ~Abstract_list_from_list_start() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_list_from_list_start : public virtual Abstract_list_from_list_start {
+  public:
+    Class_list_from_list_start();
+    virtual ~Class_list_from_list_start() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func list<-list-fn-filter)
+  template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    return output;
+  }
 
   // (func list<-list-start-end)
-  template <class X> std::shared_ptr<X> f_list_from_list_start_end(std::shared_ptr<X> generic_any_1, std::shared_ptr<X> values, vx_core::Type_int start, vx_core::Type_int end);
+  template <class X> X* f_list_from_list_start_end(X* generic_list_1, X* values, vx_core::Type_int start, vx_core::Type_int end) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    return output;
+  }
+
+  // (func list<-list-end)
+  template <class X> X* f_list_from_list_end(X* generic_list_1, X* values, vx_core::Type_int end) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(0), end);
+    return output;
+  }
+
+  // (func list<-list-filtertypes)
+  template <class X, class Y> X* f_list_from_list_filtertypes(X* generic_list_1, Y* vallist, vx_core::Type_typelist filtertypes) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    output = vx_collection::f_list_from_list_fn_filter(
+      generic_list_1,
+      vallist,
+      vx_core::t_any_from_any()->vx_fn_new([filtertypes](vx_core::Type_any val_any) {
+        vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), val_any);
+        return 
+          vx_core::f_if(
+            vx_core::t_any(),
+            vx_type::f_is_type_from_any_typelist(val, filtertypes),
+            val
+          );
+      })
+    );
+    return output;
+  }
+
+  // (func list<-list-start)
+  template <class X> X* f_list_from_list_start(X* generic_list_1, X* values, vx_core::Type_int start) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    output = vx_collection::f_list_from_list_start_end(
+      generic_list_1,
+      values,
+      start,
+      vx_core::f_length_from_list(values)
+    );
+    return output;
+  }
 
 }
 #endif
