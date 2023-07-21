@@ -15,6 +15,9 @@ namespace vx_data_db {
     }
     Class_db::~Class_db() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_dbid
+      });
     }
     // dbid()
     vx_core::Type_string Class_db::dbid() const {
@@ -33,6 +36,7 @@ namespace vx_data_db {
       } else if (skey == ":dbid") {
         output = this->dbid();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -89,9 +93,13 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_db();
       output->vx_p_dbid = vx_p_dbid;
+      vx_core::vx_reserve(vx_p_dbid);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -101,7 +109,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_db::vx_type() const {return vx_data_db::t_db();}
 
     vx_core::Type_typedef Class_db::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "db", // name
         ":struct", // extends
@@ -114,6 +122,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -127,6 +136,13 @@ namespace vx_data_db {
     }
     Class_dbcell::~Class_dbcell() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_dbcellid,
+        this->vx_p_dbcellmap,
+        this->vx_p_dbfieldmap,
+        this->vx_p_dbparent,
+        this->vx_p_dbtable
+      });
     }
     // dbcellid()
     vx_core::Type_string Class_dbcell::dbcellid() const {
@@ -189,6 +205,7 @@ namespace vx_data_db {
       } else if (skey == ":dbtable") {
         output = this->dbtable();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -289,13 +306,21 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbcell();
       output->vx_p_dbcellid = vx_p_dbcellid;
+      vx_core::vx_reserve(vx_p_dbcellid);
       output->vx_p_dbcellmap = vx_p_dbcellmap;
+      vx_core::vx_reserve(vx_p_dbcellmap);
       output->vx_p_dbfieldmap = vx_p_dbfieldmap;
+      vx_core::vx_reserve(vx_p_dbfieldmap);
       output->vx_p_dbparent = vx_p_dbparent;
+      vx_core::vx_reserve(vx_p_dbparent);
       output->vx_p_dbtable = vx_p_dbtable;
+      vx_core::vx_reserve(vx_p_dbtable);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -305,7 +330,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcell::vx_type() const {return vx_data_db::t_dbcell();}
 
     vx_core::Type_typedef Class_dbcell::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "dbcell", // name
         ":struct", // extends
@@ -318,6 +343,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -331,6 +357,9 @@ namespace vx_data_db {
     }
     Class_dbcellmap::~Class_dbcellmap() {
       vx_core::refcount -= 1;
+      for (auto const& [key, val] : this->vx_p_map) {
+        vx_core::vx_release_one(val);
+      }
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_dbcellmap::vx_map() const {
@@ -346,6 +375,7 @@ namespace vx_data_db {
       std::string skey = key->vx_string();
       std::map<std::string, vx_data_db::Type_dbcell> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_data_db::e_dbcell());
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -376,8 +406,15 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbcellmap();
       output->vx_p_map = map;
+      for (auto const& [key, val] : map) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_release(val);
       }
       return output;
     }
@@ -423,9 +460,15 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbcellmap();
       output->vx_p_map = mapval;
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -435,7 +478,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcellmap::vx_type() const {return vx_data_db::t_dbcellmap();}
 
     vx_core::Type_typedef Class_dbcellmap::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "dbcellmap", // name
         ":map", // extends
@@ -448,6 +491,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -461,6 +505,11 @@ namespace vx_data_db {
     }
     Class_dbfield::~Class_dbfield() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_dbfieldid,
+        this->vx_p_type,
+        this->vx_p_value
+      });
     }
     // dbfieldid()
     vx_core::Type_string Class_dbfield::dbfieldid() const {
@@ -501,6 +550,7 @@ namespace vx_data_db {
       } else if (skey == ":value") {
         output = this->value();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -557,19 +607,9 @@ namespace vx_data_db {
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":type") {
-            if (valsubtype == vx_core::t_any()) {
-              vx_p_type = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
-            } else {
-              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new dbfield :type " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
-              msgblock = vx_core::vx_copy(msgblock, {msg});
-            }
+            vx_p_type = valsub;
           } else if (key == ":value") {
-            if (valsubtype == vx_core::t_any()) {
-              vx_p_value = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
-            } else {
-              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new dbfield :value " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
-              msgblock = vx_core::vx_copy(msgblock, {msg});
-            }
+            vx_p_value = valsub;
           } else {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new dbfield) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -579,11 +619,17 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbfield();
       output->vx_p_dbfieldid = vx_p_dbfieldid;
+      vx_core::vx_reserve(vx_p_dbfieldid);
       output->vx_p_type = vx_p_type;
+      vx_core::vx_reserve(vx_p_type);
       output->vx_p_value = vx_p_value;
+      vx_core::vx_reserve(vx_p_value);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -593,7 +639,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfield::vx_type() const {return vx_data_db::t_dbfield();}
 
     vx_core::Type_typedef Class_dbfield::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "dbfield", // name
         ":struct", // extends
@@ -606,6 +652,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -619,6 +666,9 @@ namespace vx_data_db {
     }
     Class_dbfieldmap::~Class_dbfieldmap() {
       vx_core::refcount -= 1;
+      for (auto const& [key, val] : this->vx_p_map) {
+        vx_core::vx_release_one(val);
+      }
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_dbfieldmap::vx_map() const {
@@ -634,6 +684,7 @@ namespace vx_data_db {
       std::string skey = key->vx_string();
       std::map<std::string, vx_data_db::Type_dbfield> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_data_db::e_dbfield());
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -664,8 +715,15 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbfieldmap();
       output->vx_p_map = map;
+      for (auto const& [key, val] : map) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_release(val);
       }
       return output;
     }
@@ -711,9 +769,15 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbfieldmap();
       output->vx_p_map = mapval;
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -723,7 +787,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfieldmap::vx_type() const {return vx_data_db::t_dbfieldmap();}
 
     vx_core::Type_typedef Class_dbfieldmap::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "dbfieldmap", // name
         ":map", // extends
@@ -736,6 +800,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -749,6 +814,12 @@ namespace vx_data_db {
     }
     Class_dbtable::~Class_dbtable() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_dbtableid,
+        this->vx_p_db,
+        this->vx_p_dbcellmap,
+        this->vx_p_dbfieldmap
+      });
     }
     // dbtableid()
     vx_core::Type_string Class_dbtable::dbtableid() const {
@@ -800,6 +871,7 @@ namespace vx_data_db {
       } else if (skey == ":dbfieldmap") {
         output = this->dbfieldmap();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -889,12 +961,19 @@ namespace vx_data_db {
       }
       output = new vx_data_db::Class_dbtable();
       output->vx_p_dbtableid = vx_p_dbtableid;
+      vx_core::vx_reserve(vx_p_dbtableid);
       output->vx_p_db = vx_p_db;
+      vx_core::vx_reserve(vx_p_db);
       output->vx_p_dbcellmap = vx_p_dbcellmap;
+      vx_core::vx_reserve(vx_p_dbcellmap);
       output->vx_p_dbfieldmap = vx_p_dbfieldmap;
+      vx_core::vx_reserve(vx_p_dbfieldmap);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -904,7 +983,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbtable::vx_type() const {return vx_data_db::t_dbtable();}
 
     vx_core::Type_typedef Class_dbtable::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/db", // pkgname
         "dbtable", // name
         ":struct", // extends
@@ -917,6 +996,7 @@ namespace vx_data_db {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}

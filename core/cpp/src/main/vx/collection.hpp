@@ -227,12 +227,14 @@ namespace vx_collection {
   // (func list<-list-fn-filter)
   template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_release({vallist, fn_filter});
     return output;
   }
 
   // (func list<-list-start-end)
   template <class X> X* f_list_from_list_start_end(X* generic_list_1, X* values, vx_core::Type_int start, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_release({values, start, end});
     return output;
   }
 
@@ -240,6 +242,7 @@ namespace vx_collection {
   template <class X> X* f_list_from_list_end(X* generic_list_1, X* values, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
     output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(0), end);
+    vx_core::vx_release({values, end});
     return output;
   }
 
@@ -259,6 +262,7 @@ namespace vx_collection {
           );
       })
     );
+    vx_core::vx_release({vallist, filtertypes});
     return output;
   }
 
@@ -271,6 +275,7 @@ namespace vx_collection {
       start,
       vx_core::f_length_from_list(values)
     );
+    vx_core::vx_release({values, start});
     return output;
   }
 

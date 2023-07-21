@@ -8,10 +8,10 @@
 namespace vx_web_http_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
+    vx_core::vx_Type_listany listtestcase;
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }

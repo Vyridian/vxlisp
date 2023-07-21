@@ -18,6 +18,10 @@ namespace vx_web_http {
     }
     Class_response::~Class_response() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_ok,
+        this->vx_p_status
+      });
     }
     // ok()
     vx_core::Type_boolean Class_response::ok() const {
@@ -47,6 +51,7 @@ namespace vx_web_http {
       } else if (skey == ":status") {
         output = this->status();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -114,10 +119,15 @@ namespace vx_web_http {
       }
       output = new vx_web_http::Class_response();
       output->vx_p_ok = vx_p_ok;
+      vx_core::vx_reserve(vx_p_ok);
       output->vx_p_status = vx_p_status;
+      vx_core::vx_reserve(vx_p_status);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -127,7 +137,7 @@ namespace vx_web_http {
     vx_core::Type_any Class_response::vx_type() const {return vx_web_http::t_response();}
 
     vx_core::Type_typedef Class_response::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/http", // pkgname
         "response", // name
         ":struct", // extends
@@ -140,6 +150,7 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -159,6 +170,7 @@ namespace vx_web_http {
         return output;
       })
     );
+    vx_core::vx_release(url);
     return output;
   }
 
@@ -174,16 +186,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_csv_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_csv_from_httpget output = vx_web_http::e_csv_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_csv_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_csv_from_httpget output = vx_web_http::e_csv_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_csv_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/csv", // pkgname
         "csv", // name
         ":struct", // extends
@@ -196,16 +210,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_csv_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "csv<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_csv_from_httpget::vx_empty() const {return vx_web_http::e_csv_from_httpget();}
@@ -220,6 +236,7 @@ namespace vx_web_http {
     vx_core::vx_Type_async Class_csv_from_httpget::vx_any_from_any_async(vx_core::Type_any val) const {
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       vx_core::vx_Type_async output = vx_web_http::f_csv_from_httpget(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -227,6 +244,7 @@ namespace vx_web_http {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_csv_from_httpget(url);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -247,6 +265,7 @@ namespace vx_web_http {
         return output;
       })
     );
+    vx_core::vx_release(url);
     return output;
   }
 
@@ -262,16 +281,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_json_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_json_from_httpget output = vx_web_http::e_json_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_json_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_json_from_httpget output = vx_web_http::e_json_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_json_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/http", // pkgname
         "response", // name
         ":struct", // extends
@@ -284,16 +305,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_json_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "json<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_json_from_httpget::vx_empty() const {return vx_web_http::e_json_from_httpget();}
@@ -308,6 +331,7 @@ namespace vx_web_http {
     vx_core::vx_Type_async Class_json_from_httpget::vx_any_from_any_async(vx_core::Type_any val) const {
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       vx_core::vx_Type_async output = vx_web_http::f_json_from_httpget(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -315,6 +339,7 @@ namespace vx_web_http {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_json_from_httpget(url);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -323,6 +348,7 @@ namespace vx_web_http {
   // (func response<-httpget)
   vx_core::vx_Type_async f_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
     vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_web_http::e_response());
+    vx_core::vx_release({url, contenttype});
     return output;
   }
 
@@ -338,16 +364,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_response_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_response_from_httpget output = vx_web_http::e_response_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_response_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_response_from_httpget output = vx_web_http::e_response_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_response_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/http", // pkgname
         "response", // name
         ":struct", // extends
@@ -360,16 +388,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_response_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "response<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_response_from_httpget::vx_empty() const {return vx_web_http::e_response_from_httpget();}
@@ -382,6 +412,7 @@ namespace vx_web_http {
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string contenttype = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_http::f_response_from_httpget(url, contenttype);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -402,6 +433,7 @@ namespace vx_web_http {
         return output;
       })
     );
+    vx_core::vx_release(url);
     return output;
   }
 
@@ -417,16 +449,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_text_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_httpget output = vx_web_http::e_text_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_text_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_httpget output = vx_web_http::e_text_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_text_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -439,16 +473,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_text_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "text<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_text_from_httpget::vx_empty() const {return vx_web_http::e_text_from_httpget();}
@@ -463,6 +499,7 @@ namespace vx_web_http {
     vx_core::vx_Type_async Class_text_from_httpget::vx_any_from_any_async(vx_core::Type_any val) const {
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       vx_core::vx_Type_async output = vx_web_http::f_text_from_httpget(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -470,6 +507,7 @@ namespace vx_web_http {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_text_from_httpget(url);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -478,6 +516,7 @@ namespace vx_web_http {
   // (func text<-response)
   vx_core::Type_string f_text_from_response(vx_web_http::Type_response response) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_release(response);
     return output;
   }
 
@@ -493,16 +532,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_text_from_response::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_response output = vx_web_http::e_text_from_response();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_text_from_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_response output = vx_web_http::e_text_from_response();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_text_from_response::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -515,16 +556,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_text_from_response::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "text<-response", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_text_from_response::vx_empty() const {return vx_web_http::e_text_from_response();}
@@ -540,6 +583,7 @@ namespace vx_web_http {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_http::Type_response inputval = vx_core::vx_any_from_any(vx_web_http::t_response(), val);
       output = vx_web_http::f_text_from_response(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -547,6 +591,7 @@ namespace vx_web_http {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_text_from_response(response);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -567,6 +612,7 @@ namespace vx_web_http {
         return output;
       })
     );
+    vx_core::vx_release({url, contenttype});
     return output;
   }
 
@@ -582,16 +628,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_textblock_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_httpget output = vx_web_http::e_textblock_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_textblock_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_httpget output = vx_web_http::e_textblock_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_textblock_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/textblock", // pkgname
         "textblock", // name
         ":struct", // extends
@@ -604,16 +652,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_textblock_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_textblock_from_httpget::vx_empty() const {return vx_web_http::e_textblock_from_httpget();}
@@ -626,6 +676,7 @@ namespace vx_web_http {
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string contenttype = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_http::f_textblock_from_httpget(url, contenttype);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -641,6 +692,7 @@ namespace vx_web_http {
         vx_web_http::f_text_from_response(response)
       })
     );
+    vx_core::vx_release(response);
     return output;
   }
 
@@ -656,16 +708,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_textblock_from_response::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_response output = vx_web_http::e_textblock_from_response();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_textblock_from_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_response output = vx_web_http::e_textblock_from_response();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_textblock_from_response::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/textblock", // pkgname
         "textblock", // name
         ":struct", // extends
@@ -678,16 +732,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_textblock_from_response::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-response", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_textblock_from_response::vx_empty() const {return vx_web_http::e_textblock_from_response();}
@@ -703,6 +759,7 @@ namespace vx_web_http {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_http::Type_response inputval = vx_core::vx_any_from_any(vx_web_http::t_response(), val);
       output = vx_web_http::f_textblock_from_response(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -710,6 +767,7 @@ namespace vx_web_http {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_textblock_from_response(response);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -730,6 +788,7 @@ namespace vx_web_http {
         return output;
       })
     );
+    vx_core::vx_release(url);
     return output;
   }
 
@@ -745,16 +804,18 @@ namespace vx_web_http {
     }
     vx_core::Type_any Class_xml_from_httpget::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_xml_from_httpget output = vx_web_http::e_xml_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_xml_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_xml_from_httpget output = vx_web_http::e_xml_from_httpget();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_xml_from_httpget::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/xml", // pkgname
         "xml", // name
         ":struct", // extends
@@ -767,16 +828,18 @@ namespace vx_web_http {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_xml_from_httpget::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
         "xml<-httpget", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_xml_from_httpget::vx_empty() const {return vx_web_http::e_xml_from_httpget();}
@@ -791,6 +854,7 @@ namespace vx_web_http {
     vx_core::vx_Type_async Class_xml_from_httpget::vx_any_from_any_async(vx_core::Type_any val) const {
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       vx_core::vx_Type_async output = vx_web_http::f_xml_from_httpget(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -798,6 +862,7 @@ namespace vx_web_http {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_xml_from_httpget(url);
+      vx_core::vx_release(arglist);
       return output;
     }
 

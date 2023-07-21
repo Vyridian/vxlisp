@@ -52,6 +52,13 @@ namespace vx_data_file {
     }
     Class_file::~Class_file() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_name,
+        this->vx_p_format,
+        this->vx_p_path,
+        this->vx_p_permission,
+        this->vx_p_text
+      });
     }
     // name()
     vx_core::Type_string Class_file::name() const {
@@ -114,6 +121,7 @@ namespace vx_data_file {
       } else if (skey == ":text") {
         output = this->text();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -214,13 +222,21 @@ namespace vx_data_file {
       }
       output = new vx_data_file::Class_file();
       output->vx_p_name = vx_p_name;
+      vx_core::vx_reserve(vx_p_name);
       output->vx_p_format = vx_p_format;
+      vx_core::vx_reserve(vx_p_format);
       output->vx_p_path = vx_p_path;
+      vx_core::vx_reserve(vx_p_path);
       output->vx_p_permission = vx_p_permission;
+      vx_core::vx_reserve(vx_p_permission);
       output->vx_p_text = vx_p_text;
+      vx_core::vx_reserve(vx_p_text);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -230,7 +246,7 @@ namespace vx_data_file {
     vx_core::Type_any Class_file::vx_type() const {return vx_data_file::t_file();}
 
     vx_core::Type_typedef Class_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/file", // pkgname
         "file", // name
         ":struct", // extends
@@ -243,6 +259,7 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -262,6 +279,8 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_fileformat::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_fileformat output = vx_data_file::e_fileformat();
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -271,7 +290,7 @@ namespace vx_data_file {
     vx_core::Type_any Class_fileformat::vx_type() const {return vx_data_file::t_fileformat();}
 
     vx_core::Type_typedef Class_fileformat::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/file", // pkgname
         "fileformat", // name
         ":string", // extends
@@ -284,6 +303,7 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -291,6 +311,7 @@ namespace vx_data_file {
   // (func boolean-exists<-file)
   vx_core::Type_boolean f_boolean_exists_from_file(vx_data_file::Type_file file) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -306,16 +327,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_boolean_exists_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_exists_from_file output = vx_data_file::e_boolean_exists_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_boolean_exists_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_exists_from_file output = vx_data_file::e_boolean_exists_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_boolean_exists_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -328,16 +351,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_boolean_exists_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "boolean-exists<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_boolean_exists_from_file::vx_empty() const {return vx_data_file::e_boolean_exists_from_file();}
@@ -353,6 +378,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_boolean_exists_from_file(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -360,6 +386,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_file::f_boolean_exists_from_file(file);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -373,6 +400,7 @@ namespace vx_data_file {
       vx_core::f_string_from_any(val),
       context
     );
+    vx_core::vx_release({file, val});
     return output;
   }
 
@@ -388,16 +416,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_boolean_write_from_file_any::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_write_from_file_any output = vx_data_file::e_boolean_write_from_file_any();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_boolean_write_from_file_any::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_write_from_file_any output = vx_data_file::e_boolean_write_from_file_any();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_boolean_write_from_file_any::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -410,16 +440,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_boolean_write_from_file_any::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "boolean-write<-file-any", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_boolean_write_from_file_any::vx_empty() const {return vx_data_file::e_boolean_write_from_file_any();}
@@ -433,6 +465,7 @@ namespace vx_data_file {
       vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context(), arglist->vx_get_any(vx_core::vx_new_int(2)));
       output = vx_data_file::f_boolean_write_from_file_any(file, val, context);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -446,6 +479,7 @@ namespace vx_data_file {
       vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_exception("boolean-write<-file-string", err);
       output = vx_core::vx_copy(vx_core::t_boolean(), {msg});
     }
+    vx_core::vx_release({file, text});
     return output;
   }
 
@@ -461,16 +495,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_boolean_write_from_file_string::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_write_from_file_string output = vx_data_file::e_boolean_write_from_file_string();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_boolean_write_from_file_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_boolean_write_from_file_string output = vx_data_file::e_boolean_write_from_file_string();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_boolean_write_from_file_string::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -483,16 +519,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_boolean_write_from_file_string::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "boolean-write<-file-string", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_boolean_write_from_file_string::vx_empty() const {return vx_data_file::e_boolean_write_from_file_string();}
@@ -506,6 +544,7 @@ namespace vx_data_file {
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context(), arglist->vx_get_any(vx_core::vx_new_int(2)));
       output = vx_data_file::f_boolean_write_from_file_string(file, text, context);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -521,6 +560,7 @@ namespace vx_data_file {
         vx_data_file::f_string_read_from_file(file, context)
       })
     );
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -536,16 +576,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_file_read_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_file_read_from_file output = vx_data_file::e_file_read_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_file_read_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_file_read_from_file output = vx_data_file::e_file_read_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_file_read_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/file", // pkgname
         "file", // name
         ":struct", // extends
@@ -558,16 +600,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_file_read_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "file-read<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_file_read_from_file::vx_empty() const {return vx_data_file::e_file_read_from_file();}
@@ -583,6 +627,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_file_read_from_file(inputval, context);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -591,6 +636,7 @@ namespace vx_data_file {
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_data_file::f_file_read_from_file(file, context);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -600,6 +646,7 @@ namespace vx_data_file {
   vx_core::Type_string f_name_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
     output = file->name();
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -615,16 +662,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_name_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_name_from_file output = vx_data_file::e_name_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_name_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_name_from_file output = vx_data_file::e_name_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_name_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -637,16 +686,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_name_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "name<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_name_from_file::vx_empty() const {return vx_data_file::e_name_from_file();}
@@ -662,6 +713,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_name_from_file(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -669,6 +721,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_file::f_name_from_file(file);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -678,6 +731,7 @@ namespace vx_data_file {
   vx_core::Type_string f_path_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
     output = file->path();
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -693,16 +747,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_path_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_path_from_file output = vx_data_file::e_path_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_path_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_path_from_file output = vx_data_file::e_path_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_path_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -715,16 +771,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_path_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "path<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_path_from_file::vx_empty() const {return vx_data_file::e_path_from_file();}
@@ -740,6 +798,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_path_from_file(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -747,6 +806,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_file::f_path_from_file(file);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -770,16 +830,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_pathcurrent_from_os::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_pathcurrent_from_os output = vx_data_file::e_pathcurrent_from_os();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_pathcurrent_from_os::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_pathcurrent_from_os output = vx_data_file::e_pathcurrent_from_os();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_pathcurrent_from_os::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -792,16 +854,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_pathcurrent_from_os::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "pathcurrent<-os", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_pathcurrent_from_os::vx_empty() const {return vx_data_file::e_pathcurrent_from_os();}
@@ -812,6 +876,7 @@ namespace vx_data_file {
     vx_core::Type_any Class_pathcurrent_from_os::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any();
       output = vx_data_file::f_pathcurrent_from_os();
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -820,21 +885,23 @@ namespace vx_data_file {
   // (func pathfull<-file)
   vx_core::Type_string f_pathfull_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
-    output = vx_core::f_let(
+    vx_core::f_let(
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new([file]() {
         vx_core::Type_string path = vx_data_file::f_path_from_file(file);
         vx_core::Type_string name = vx_data_file::f_name_from_file(file);
-        return vx_core::f_new(
+        vx_core::Type_string output = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             path,
             vx_core::vx_new_string("/"),
             name
           })
-        );
+        );vx_core::vx_release({path, name});
+        return output;
       })
     );
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -850,16 +917,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_pathfull_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_pathfull_from_file output = vx_data_file::e_pathfull_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_pathfull_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_pathfull_from_file output = vx_data_file::e_pathfull_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_pathfull_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -872,16 +941,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_pathfull_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "pathfull<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_pathfull_from_file::vx_empty() const {return vx_data_file::e_pathfull_from_file();}
@@ -897,6 +968,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_pathfull_from_file(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -904,6 +976,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_file::f_pathfull_from_file(file);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -917,6 +990,7 @@ namespace vx_data_file {
       vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_exception("string-read<-file", err);
       output = vx_core::vx_copy(vx_core::t_string(), {msg});
     }
+    vx_core::vx_release(file);
     return output;
   }
 
@@ -932,16 +1006,18 @@ namespace vx_data_file {
     }
     vx_core::Type_any Class_string_read_from_file::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_string_read_from_file output = vx_data_file::e_string_read_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_string_read_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Func_string_read_from_file output = vx_data_file::e_string_read_from_file();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_string_read_from_file::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
         "string", // extends
@@ -954,16 +1030,18 @@ namespace vx_data_file {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_string_read_from_file::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/file", // pkgname
         "string-read<-file", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_string_read_from_file::vx_empty() const {return vx_data_file::e_string_read_from_file();}
@@ -979,6 +1057,7 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file(), val);
       output = vx_data_file::f_string_read_from_file(inputval, context);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -987,6 +1066,7 @@ namespace vx_data_file {
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_data_file::f_string_read_from_file(file, context);
+      vx_core::vx_release(arglist);
       return output;
     }
 

@@ -56,6 +56,7 @@ namespace test_lib {
     for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
       vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
 			listtestdescribe_resolved.push_back(testdescribe_resolved);
+			vx_core::vx_reserve(testdescribe_resolved);
     }
 		vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
 			vx_test::t_testdescribelist(),
@@ -78,7 +79,8 @@ namespace test_lib {
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase) {
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase(), async_testcase);
-    return run_testcase(testcase_resolved);
+    vx_test::Type_testcase output = run_testcase(testcase_resolved);
+		return output;
   }
 
 	vx_test::Type_testcaselist run_testcaselist(vx_test::Type_testcaselist testcaselist) {
@@ -87,6 +89,7 @@ namespace test_lib {
     for (vx_test::Type_testcase testcase : listtestcase) {
       vx_test::Type_testcase testcase_resolved = run_testcase(testcase);
 			listtestcase_resolved.push_back(testcase_resolved);
+			vx_core::vx_reserve(testcase_resolved);
     }
 		vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
 			vx_test::t_testcaselist(),
@@ -108,6 +111,7 @@ namespace test_lib {
     for (vx_test::Type_testpackage testpackage : listtestpackage) {
       vx_test::Type_testpackage testpackage_resolved = run_testpackage(testpackage);
 			listtestpackage_resolved.push_back(testpackage_resolved);
+			vx_core::vx_reserve(testpackage_resolved);
     }
 		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
 			vx_test::t_testpackagelist(),
@@ -121,7 +125,8 @@ namespace test_lib {
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage) {
     vx_core::vx_Type_async async_testpackage = vx_test::f_resolve_testpackage(testpackage);
     vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage(), async_testpackage);
-    return run_testpackage(testpackage_resolved);
+    vx_test::Type_testpackage output = run_testpackage(testpackage_resolved);
+		return output;
   }
 
   // Blocking
@@ -129,7 +134,8 @@ namespace test_lib {
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
     vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
-    return run_testpackagelist(testpackagelist_resolved);
+    vx_test::Type_testpackagelist output = run_testpackagelist(testpackagelist_resolved);
+		return output;
   }
 
   // Blocking

@@ -180,15 +180,15 @@ namespace vx_data_file_test {
   }
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase.push_back(vx_data_file_test::f_boolean_exists_from_file(context));
-    arraylisttestcase.push_back(vx_data_file_test::f_boolean_write_from_file_string(context));
-    arraylisttestcase.push_back(vx_data_file_test::f_file_read_from_file(context));
-    arraylisttestcase.push_back(vx_data_file_test::f_pathcurrent_from_os(context));
-    arraylisttestcase.push_back(vx_data_file_test::f_string_read_from_file(context));
+    vx_core::vx_Type_listany listtestcase;
+    listtestcase.push_back(vx_data_file_test::f_boolean_exists_from_file(context));
+    listtestcase.push_back(vx_data_file_test::f_boolean_write_from_file_string(context));
+    listtestcase.push_back(vx_data_file_test::f_file_read_from_file(context));
+    listtestcase.push_back(vx_data_file_test::f_pathcurrent_from_os(context));
+    listtestcase.push_back(vx_data_file_test::f_string_read_from_file(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }

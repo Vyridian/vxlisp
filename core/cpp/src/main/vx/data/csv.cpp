@@ -18,6 +18,10 @@ namespace vx_data_csv {
     }
     Class_csv::~Class_csv() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one({
+        this->vx_p_headers,
+        this->vx_p_rows
+      });
     }
     // headers()
     vx_core::Type_stringlist Class_csv::headers() const {
@@ -47,6 +51,7 @@ namespace vx_data_csv {
       } else if (skey == ":rows") {
         output = this->rows();
       }
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -114,10 +119,15 @@ namespace vx_data_csv {
       }
       output = new vx_data_csv::Class_csv();
       output->vx_p_headers = vx_p_headers;
+      vx_core::vx_reserve(vx_p_headers);
       output->vx_p_rows = vx_p_rows;
+      vx_core::vx_reserve(vx_p_rows);
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -127,7 +137,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csv::vx_type() const {return vx_data_csv::t_csv();}
 
     vx_core::Type_typedef Class_csv::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/csv", // pkgname
         "csv", // name
         ":struct", // extends
@@ -140,6 +150,7 @@ namespace vx_data_csv {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -153,6 +164,9 @@ namespace vx_data_csv {
     }
     Class_csvrows::~Class_csvrows() {
       vx_core::refcount -= 1;
+      for (vx_core::Type_any any : this->vx_p_list) {
+        vx_core::vx_release_one(any);
+      }
     }
     // vx_list()
     vx_core::vx_Type_listany Class_csvrows::vx_list() const {
@@ -166,6 +180,7 @@ namespace vx_data_csv {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
+      vx_core::vx_release(index);
       return output;
     }
 
@@ -180,20 +195,27 @@ namespace vx_data_csv {
       vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows();
       vx_core::Type_msgblock msgblock = vx_core::e_msgblock();
       std::vector<vx_core::Type_stringlist> list;
-      for (auto const& val : listval) {
-        vx_core::Type_any valtype = val->vx_type();
+      for (auto const& valsub : listval) {
+        vx_core::Type_any valtype = valsub->vx_type();
         if (valtype == vx_core::t_stringlist()) {
-          vx_core::Type_stringlist castval = vx_core::vx_any_from_any(vx_core::t_stringlist(), val);
+          vx_core::Type_stringlist castval = vx_core::vx_any_from_any(vx_core::t_stringlist(), valsub);
           list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(csvrows) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(csvrows) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
       output = new vx_data_csv::Class_csvrows();
       output->vx_p_list = list;
+      for (vx_core::Type_any valadd : list) {
+        vx_core::vx_reserve(valadd);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      for (vx_core::Type_any val : listval) {
+        vx_core::vx_release(val);
       }
       return output;
     }
@@ -224,9 +246,15 @@ namespace vx_data_csv {
       }
       output = new vx_data_csv::Class_csvrows();
       output->vx_p_list = listval;
+      for (vx_core::Type_any valadd : listval) {
+        vx_core::vx_reserve(valadd);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -236,7 +264,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csvrows::vx_type() const {return vx_data_csv::t_csvrows();}
 
     vx_core::Type_typedef Class_csvrows::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/csv", // pkgname
         "csvrows", // name
         ":list", // extends
@@ -249,6 +277,7 @@ namespace vx_data_csv {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -283,13 +312,13 @@ namespace vx_data_csv {
   // (func csv<-textblock)
   vx_data_csv::Type_csv f_csv_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_data_csv::Type_csv output = vx_data_csv::e_csv();
-    output = vx_core::f_let(
+    vx_core::f_let(
       vx_data_csv::t_csv(),
       vx_core::t_any_from_func()->vx_fn_new([textblock]() {
         vx_data_csv::Type_csvrows allrows = vx_data_csv::f_csvrows_from_textblock(textblock);
         vx_core::Type_stringlist headers = vx_core::f_any_from_list(vx_core::t_stringlist(), allrows, vx_core::vx_new_int(0));
         vx_data_csv::Type_csvrows rows = vx_collection::f_list_from_list_end(vx_data_csv::t_csvrows(), allrows, vx_core::vx_new_int(1));
-        return vx_core::f_new(
+        vx_data_csv::Type_csv output = vx_core::f_new(
           vx_data_csv::t_csv(),
           vx_core::vx_new(vx_core::t_anylist(), {
             vx_core::vx_new_string(":headers"),
@@ -297,9 +326,11 @@ namespace vx_data_csv {
             vx_core::vx_new_string(":rows"),
             rows
           })
-        );
+        );vx_core::vx_release({allrows, headers, rows});
+        return output;
       })
     );
+    vx_core::vx_release(textblock);
     return output;
   }
 
@@ -315,16 +346,18 @@ namespace vx_data_csv {
     }
     vx_core::Type_any Class_csv_from_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_csv::Func_csv_from_textblock output = vx_data_csv::e_csv_from_textblock();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_csv_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Func_csv_from_textblock output = vx_data_csv::e_csv_from_textblock();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_csv_from_textblock::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/csv", // pkgname
         "csv", // name
         ":struct", // extends
@@ -337,16 +370,18 @@ namespace vx_data_csv {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_csv_from_textblock::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/csv", // pkgname
         "csv<-textblock", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_csv_from_textblock::vx_empty() const {return vx_data_csv::e_csv_from_textblock();}
@@ -362,6 +397,7 @@ namespace vx_data_csv {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), val);
       output = vx_data_csv::f_csv_from_textblock(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -369,6 +405,7 @@ namespace vx_data_csv {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_csv::f_csv_from_textblock(textblock);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -377,7 +414,7 @@ namespace vx_data_csv {
   // (func csvrows<-textblock)
   vx_data_csv::Type_csvrows f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows();
-    output = vx_core::f_let(
+    vx_core::f_let(
       vx_data_csv::t_csvrows(),
       vx_core::t_any_from_func()->vx_fn_new([textblock]() {
         vx_data_textblock::Type_textblock parsedtb = vx_data_textblock::f_parse(
@@ -386,14 +423,16 @@ namespace vx_data_csv {
         );
         vx_data_textblock::Type_textblocklist childtbs = vx_data_textblock::f_textblocks_from_textblock(parsedtb);
         vx_core::Type_stringlist strings = vx_data_textblock::f_stringlist_from_textblocklist(childtbs);
-        return vx_core::f_new(
+        vx_data_csv::Type_csvrows output = vx_core::f_new(
           vx_data_csv::t_csvrows(),
           vx_core::vx_new(vx_core::t_anylist(), {
             strings
           })
-        );
+        );vx_core::vx_release({parsedtb, childtbs, strings});
+        return output;
       })
     );
+    vx_core::vx_release(textblock);
     return output;
   }
 
@@ -409,16 +448,18 @@ namespace vx_data_csv {
     }
     vx_core::Type_any Class_csvrows_from_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_csv::Func_csvrows_from_textblock output = vx_data_csv::e_csvrows_from_textblock();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_csvrows_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Func_csvrows_from_textblock output = vx_data_csv::e_csvrows_from_textblock();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_csvrows_from_textblock::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/csv", // pkgname
         "csvrows", // name
         ":list", // extends
@@ -431,16 +472,18 @@ namespace vx_data_csv {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_csvrows_from_textblock::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/csv", // pkgname
         "csvrows<-textblock", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_csvrows_from_textblock::vx_empty() const {return vx_data_csv::e_csvrows_from_textblock();}
@@ -456,6 +499,7 @@ namespace vx_data_csv {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), val);
       output = vx_data_csv::f_csvrows_from_textblock(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -463,6 +507,7 @@ namespace vx_data_csv {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_csv::f_csvrows_from_textblock(textblock);
+      vx_core::vx_release(arglist);
       return output;
     }
 

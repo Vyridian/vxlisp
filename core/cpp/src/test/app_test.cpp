@@ -158,17 +158,31 @@ namespace app_test {
       vx_web_html_test::test_package(context),
       vx_web_http_test::test_package(context)
     });
-    return test_lib::write_testpackagelist_async(testpackagelist, context);
+    vx_core::Type_boolean output = test_lib::write_testpackagelist_async(testpackagelist, context);
+		return output;
   }
 
-	int main(int iarglen, char* arrayarg[]) {
-		std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-    std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
-    vx_core::Type_boolean writetest = test_writetestsuite();
-		vx_core::Type_string stringwritetest = vx_core::f_string_from_any(writetest);
-		std::string swritetest = stringwritetest->vx_string();
-		std::cout << swritetest;
-    return 0;
+  int main(int iarglen, char* arrayarg[]) {
+    int output = 0;
+    try {
+      std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+      std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
+      vx_core::Type_boolean writetest = test_writetestsuite();
+      vx_core::Type_string stringwritetest = vx_core::f_string_from_any(writetest);
+      std::string swritetest = stringwritetest->vx_string();
+      std::cout << swritetest;
+			vx_core::vx_release(stringwritetest);
+      if (vx_core::refcount != 0) {
+        vx_core::vx_debug("memory leaks:" + std::to_string(vx_core::refcount));
+      }
+		} catch (std::exception& e) {
+      std::cerr << e.what() << std::endl;
+      output = -1;
+    } catch (...) {
+      std::cerr << "Untrapped Error!" << std::endl;
+      output = -1;
+    }
+    return output;
   }
 
 }

@@ -15,6 +15,9 @@ namespace vx_state {
     }
     Class_value_map::~Class_value_map() {
       vx_core::refcount -= 1;
+      for (auto const& [key, val] : this->vx_p_map) {
+        vx_core::vx_release_one(val);
+      }
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_value_map::vx_map() const {
@@ -30,6 +33,7 @@ namespace vx_state {
       std::string skey = key->vx_string();
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any());
+      vx_core::vx_release(key);
       return output;
     }
 
@@ -52,8 +56,15 @@ namespace vx_state {
       }
       output = new vx_state::Class_value_map();
       output->vx_p_map = map;
+      for (auto const& [key, val] : map) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_release(val);
       }
       return output;
     }
@@ -99,9 +110,15 @@ namespace vx_state {
       }
       output = new vx_state::Class_value_map();
       output->vx_p_map = mapval;
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_reserve(val);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
+      vx_core::vx_release(copyval);
+      vx_core::vx_release(vals);
       return output;
     }
 
@@ -111,7 +128,7 @@ namespace vx_state {
     vx_core::Type_any Class_value_map::vx_type() const {return vx_state::t_value_map();}
 
     vx_core::Type_typedef Class_value_map::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/state", // pkgname
         "value-map", // name
         ":map", // extends
@@ -124,6 +141,7 @@ namespace vx_state {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
   //}
@@ -131,6 +149,7 @@ namespace vx_state {
   // (func change)
   vx_core::Type_boolean f_change(vx_state::Type_value_map valuemap) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_release(valuemap);
     return output;
   }
 
@@ -146,16 +165,18 @@ namespace vx_state {
     }
     vx_core::Type_any Class_change::vx_new(vx_core::vx_Type_listany vals) const {
       vx_state::Func_change output = vx_state::e_change();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_change::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_change output = vx_state::e_change();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_change::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -168,16 +189,18 @@ namespace vx_state {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_change::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/state", // pkgname
         "change", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_change::vx_empty() const {return vx_state::e_change();}
@@ -193,6 +216,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_state::Type_value_map inputval = vx_core::vx_any_from_any(vx_state::t_value_map(), val);
       output = vx_state::f_change(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -200,6 +224,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_state::Type_value_map valuemap = vx_core::vx_any_from_any(vx_state::t_value_map(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_state::f_change(valuemap);
+      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -208,6 +233,7 @@ namespace vx_state {
   // (func register)
   vx_core::Type_boolean f_register(vx_core::Type_statelistener listener) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_release(listener);
     return output;
   }
 
@@ -223,16 +249,18 @@ namespace vx_state {
     }
     vx_core::Type_any Class_register::vx_new(vx_core::vx_Type_listany vals) const {
       vx_state::Func_register output = vx_state::e_register();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_register::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_register output = vx_state::e_register();
+      vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_register::vx_typedef() const {
-      return vx_core::Class_typedef::vx_typedef_new(
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -245,16 +273,18 @@ namespace vx_state {
         vx_core::e_anylist(), // disallowvalues
         vx_core::e_argmap() // properties
       );
+      return output;
     }
 
     vx_core::Type_funcdef Class_register::vx_funcdef() const {
-      return vx_core::Class_funcdef::vx_funcdef_new(
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/state", // pkgname
         "register", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
       );
+      return output;
     }
 
     vx_core::Type_any Class_register::vx_empty() const {return vx_state::e_register();}
@@ -270,6 +300,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_statelistener inputval = vx_core::vx_any_from_any(vx_core::t_statelistener(), val);
       output = vx_state::f_register(inputval);
+      vx_core::vx_release(val);
       return output;
     }
 
@@ -277,6 +308,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_statelistener listener = vx_core::vx_any_from_any(vx_core::t_statelistener(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_state::f_register(listener);
+      vx_core::vx_release(arglist);
       return output;
     }
 

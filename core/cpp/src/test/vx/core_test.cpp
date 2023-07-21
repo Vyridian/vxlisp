@@ -1924,7 +1924,8 @@ namespace vx_core_test {
                 vx_core::t_any_from_func()->vx_fn_new([]() {
                   vx_core::Type_int v1 = vx_core::vx_new_int(2);
                   vx_core::Type_int v2 = vx_core::f_plus(v1, vx_core::vx_new_int(3));
-                  return vx_core::f_plus(v1, v2);
+                  vx_core::Type_int output = vx_core::f_plus(v1, v2);vx_core::vx_release({v1, v2});
+                  return output;
                 })
               ),
               context
@@ -2586,73 +2587,73 @@ namespace vx_core_test {
   }
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase.push_back(vx_core_test::t_boolean(context));
-    arraylisttestcase.push_back(vx_core_test::t_float(context));
-    arraylisttestcase.push_back(vx_core_test::t_int(context));
-    arraylisttestcase.push_back(vx_core_test::t_string(context));
-    arraylisttestcase.push_back(vx_core_test::c_false(context));
-    arraylisttestcase.push_back(vx_core_test::c_true(context));
-    arraylisttestcase.push_back(vx_core_test::f_not(context));
-    arraylisttestcase.push_back(vx_core_test::f_ne(context));
-    arraylisttestcase.push_back(vx_core_test::f_multiply(context));
-    arraylisttestcase.push_back(vx_core_test::f_multiply_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_multiply_2(context));
-    arraylisttestcase.push_back(vx_core_test::f_multiply_3(context));
-    arraylisttestcase.push_back(vx_core_test::f_plus(context));
-    arraylisttestcase.push_back(vx_core_test::f_plus_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_plus1(context));
-    arraylisttestcase.push_back(vx_core_test::f_minus(context));
-    arraylisttestcase.push_back(vx_core_test::f_minus_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_divide(context));
-    arraylisttestcase.push_back(vx_core_test::f_lt(context));
-    arraylisttestcase.push_back(vx_core_test::f_lt_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_chainfirst(context));
-    arraylisttestcase.push_back(vx_core_test::f_chainlast(context));
-    arraylisttestcase.push_back(vx_core_test::f_le(context));
-    arraylisttestcase.push_back(vx_core_test::f_le_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_eq(context));
-    arraylisttestcase.push_back(vx_core_test::f_eq_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_gt(context));
-    arraylisttestcase.push_back(vx_core_test::f_gt_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_ge(context));
-    arraylisttestcase.push_back(vx_core_test::f_ge_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_and(context));
-    arraylisttestcase.push_back(vx_core_test::f_and_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_any_from_list(context));
-    arraylisttestcase.push_back(vx_core_test::f_any_from_list_reduce(context));
-    arraylisttestcase.push_back(vx_core_test::f_any_from_map(context));
-    arraylisttestcase.push_back(vx_core_test::f_compare(context));
-    arraylisttestcase.push_back(vx_core_test::f_contains(context));
-    arraylisttestcase.push_back(vx_core_test::f_contains_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_empty(context));
-    arraylisttestcase.push_back(vx_core_test::f_first_from_list(context));
-    arraylisttestcase.push_back(vx_core_test::f_first_from_list_fn_any_from_any(context));
-    arraylisttestcase.push_back(vx_core_test::f_if(context));
-    arraylisttestcase.push_back(vx_core_test::f_if_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_if_2(context));
-    arraylisttestcase.push_back(vx_core_test::f_int_from_string(context));
-    arraylisttestcase.push_back(vx_core_test::f_is_empty_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_is_number(context));
-    arraylisttestcase.push_back(vx_core_test::f_last_from_list(context));
-    arraylisttestcase.push_back(vx_core_test::f_length_from_list(context));
-    arraylisttestcase.push_back(vx_core_test::f_let(context));
-    arraylisttestcase.push_back(vx_core_test::f_list_from_map(context));
-    arraylisttestcase.push_back(vx_core_test::f_map_from_list(context));
-    arraylisttestcase.push_back(vx_core_test::f_new(context));
-    arraylisttestcase.push_back(vx_core_test::f_or(context));
-    arraylisttestcase.push_back(vx_core_test::f_or_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_resolve(context));
-    arraylisttestcase.push_back(vx_core_test::f_resolve_1(context));
-    arraylisttestcase.push_back(vx_core_test::f_resolve_async(context));
-    arraylisttestcase.push_back(vx_core_test::f_string_repeat(context));
-    arraylisttestcase.push_back(vx_core_test::f_string_from_any(context));
-    arraylisttestcase.push_back(vx_core_test::f_switch(context));
-    arraylisttestcase.push_back(vx_core_test::f_type_from_any(context));
-    arraylisttestcase.push_back(vx_core_test::f_typename_from_any(context));
+    vx_core::vx_Type_listany listtestcase;
+    listtestcase.push_back(vx_core_test::t_boolean(context));
+    listtestcase.push_back(vx_core_test::t_float(context));
+    listtestcase.push_back(vx_core_test::t_int(context));
+    listtestcase.push_back(vx_core_test::t_string(context));
+    listtestcase.push_back(vx_core_test::c_false(context));
+    listtestcase.push_back(vx_core_test::c_true(context));
+    listtestcase.push_back(vx_core_test::f_not(context));
+    listtestcase.push_back(vx_core_test::f_ne(context));
+    listtestcase.push_back(vx_core_test::f_multiply(context));
+    listtestcase.push_back(vx_core_test::f_multiply_1(context));
+    listtestcase.push_back(vx_core_test::f_multiply_2(context));
+    listtestcase.push_back(vx_core_test::f_multiply_3(context));
+    listtestcase.push_back(vx_core_test::f_plus(context));
+    listtestcase.push_back(vx_core_test::f_plus_1(context));
+    listtestcase.push_back(vx_core_test::f_plus1(context));
+    listtestcase.push_back(vx_core_test::f_minus(context));
+    listtestcase.push_back(vx_core_test::f_minus_1(context));
+    listtestcase.push_back(vx_core_test::f_divide(context));
+    listtestcase.push_back(vx_core_test::f_lt(context));
+    listtestcase.push_back(vx_core_test::f_lt_1(context));
+    listtestcase.push_back(vx_core_test::f_chainfirst(context));
+    listtestcase.push_back(vx_core_test::f_chainlast(context));
+    listtestcase.push_back(vx_core_test::f_le(context));
+    listtestcase.push_back(vx_core_test::f_le_1(context));
+    listtestcase.push_back(vx_core_test::f_eq(context));
+    listtestcase.push_back(vx_core_test::f_eq_1(context));
+    listtestcase.push_back(vx_core_test::f_gt(context));
+    listtestcase.push_back(vx_core_test::f_gt_1(context));
+    listtestcase.push_back(vx_core_test::f_ge(context));
+    listtestcase.push_back(vx_core_test::f_ge_1(context));
+    listtestcase.push_back(vx_core_test::f_and(context));
+    listtestcase.push_back(vx_core_test::f_and_1(context));
+    listtestcase.push_back(vx_core_test::f_any_from_list(context));
+    listtestcase.push_back(vx_core_test::f_any_from_list_reduce(context));
+    listtestcase.push_back(vx_core_test::f_any_from_map(context));
+    listtestcase.push_back(vx_core_test::f_compare(context));
+    listtestcase.push_back(vx_core_test::f_contains(context));
+    listtestcase.push_back(vx_core_test::f_contains_1(context));
+    listtestcase.push_back(vx_core_test::f_empty(context));
+    listtestcase.push_back(vx_core_test::f_first_from_list(context));
+    listtestcase.push_back(vx_core_test::f_first_from_list_fn_any_from_any(context));
+    listtestcase.push_back(vx_core_test::f_if(context));
+    listtestcase.push_back(vx_core_test::f_if_1(context));
+    listtestcase.push_back(vx_core_test::f_if_2(context));
+    listtestcase.push_back(vx_core_test::f_int_from_string(context));
+    listtestcase.push_back(vx_core_test::f_is_empty_1(context));
+    listtestcase.push_back(vx_core_test::f_is_number(context));
+    listtestcase.push_back(vx_core_test::f_last_from_list(context));
+    listtestcase.push_back(vx_core_test::f_length_from_list(context));
+    listtestcase.push_back(vx_core_test::f_let(context));
+    listtestcase.push_back(vx_core_test::f_list_from_map(context));
+    listtestcase.push_back(vx_core_test::f_map_from_list(context));
+    listtestcase.push_back(vx_core_test::f_new(context));
+    listtestcase.push_back(vx_core_test::f_or(context));
+    listtestcase.push_back(vx_core_test::f_or_1(context));
+    listtestcase.push_back(vx_core_test::f_resolve(context));
+    listtestcase.push_back(vx_core_test::f_resolve_1(context));
+    listtestcase.push_back(vx_core_test::f_resolve_async(context));
+    listtestcase.push_back(vx_core_test::f_string_repeat(context));
+    listtestcase.push_back(vx_core_test::f_string_from_any(context));
+    listtestcase.push_back(vx_core_test::f_switch(context));
+    listtestcase.push_back(vx_core_test::f_type_from_any(context));
+    listtestcase.push_back(vx_core_test::f_typename_from_any(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }

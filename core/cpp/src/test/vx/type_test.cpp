@@ -448,19 +448,19 @@ namespace vx_type_test {
   }
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase.push_back(vx_type_test::f_is_string(context));
-    arraylisttestcase.push_back(vx_type_test::f_is_type(context));
-    arraylisttestcase.push_back(vx_type_test::f_is_type_from_any_typelist(context));
-    arraylisttestcase.push_back(vx_type_test::f_length_from_string(context));
-    arraylisttestcase.push_back(vx_type_test::f_string_from_int(context));
-    arraylisttestcase.push_back(vx_type_test::f_string_from_string_end(context));
-    arraylisttestcase.push_back(vx_type_test::f_string_from_string_start(context));
-    arraylisttestcase.push_back(vx_type_test::f_string_from_string_start_end(context));
-    arraylisttestcase.push_back(vx_type_test::f_string_from_stringlist_join(context));
+    vx_core::vx_Type_listany listtestcase;
+    listtestcase.push_back(vx_type_test::f_is_string(context));
+    listtestcase.push_back(vx_type_test::f_is_type(context));
+    listtestcase.push_back(vx_type_test::f_is_type_from_any_typelist(context));
+    listtestcase.push_back(vx_type_test::f_length_from_string(context));
+    listtestcase.push_back(vx_type_test::f_string_from_int(context));
+    listtestcase.push_back(vx_type_test::f_string_from_string_end(context));
+    listtestcase.push_back(vx_type_test::f_string_from_string_start(context));
+    listtestcase.push_back(vx_type_test::f_string_from_string_start_end(context));
+    listtestcase.push_back(vx_type_test::f_string_from_stringlist_join(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }

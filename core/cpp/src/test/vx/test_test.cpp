@@ -105,13 +105,13 @@ namespace vx_test_test {
   }
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase.push_back(vx_test_test::f_file_test(context));
-    arraylisttestcase.push_back(vx_test_test::f_file_testhtml(context));
-    arraylisttestcase.push_back(vx_test_test::f_file_testnode(context));
+    vx_core::vx_Type_listany listtestcase;
+    listtestcase.push_back(vx_test_test::f_file_test(context));
+    listtestcase.push_back(vx_test_test::f_file_testhtml(context));
+    listtestcase.push_back(vx_test_test::f_file_testnode(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }

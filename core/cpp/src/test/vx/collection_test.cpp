@@ -256,15 +256,15 @@ namespace vx_collection_test {
   }
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
-    vx_core::vx_Type_listany arraylisttestcase;
-    arraylisttestcase.push_back(vx_collection_test::f_list_from_list_end(context));
-    arraylisttestcase.push_back(vx_collection_test::f_list_from_list_filtertypes(context));
-    arraylisttestcase.push_back(vx_collection_test::f_list_from_list_fn_filter(context));
-    arraylisttestcase.push_back(vx_collection_test::f_list_from_list_start(context));
-    arraylisttestcase.push_back(vx_collection_test::f_list_from_list_start_end(context));
+    vx_core::vx_Type_listany listtestcase;
+    listtestcase.push_back(vx_collection_test::f_list_from_list_end(context));
+    listtestcase.push_back(vx_collection_test::f_list_from_list_filtertypes(context));
+    listtestcase.push_back(vx_collection_test::f_list_from_list_fn_filter(context));
+    listtestcase.push_back(vx_collection_test::f_list_from_list_start(context));
+    listtestcase.push_back(vx_collection_test::f_list_from_list_start_end(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list(arraylisttestcase)
+      vx_test::t_testcaselist()->vx_new_from_list(listtestcase)
     );
     return output;
   }
