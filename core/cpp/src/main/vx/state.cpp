@@ -171,15 +171,16 @@ namespace vx_state {
 
     vx_core::Type_any Class_change::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_change output = vx_state::e_change();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_change::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "boolean", // name
-        "", // extends
+        "vx/state", // pkgname
+        "change", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -255,15 +256,16 @@ namespace vx_state {
 
     vx_core::Type_any Class_register::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_register output = vx_state::e_register();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_register::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "boolean", // name
-        "", // extends
+        "vx/state", // pkgname
+        "register", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes

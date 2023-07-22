@@ -168,10 +168,8 @@ namespace app_test {
       std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
       std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
       vx_core::Type_boolean writetest = test_writetestsuite();
-      vx_core::Type_string stringwritetest = vx_core::f_string_from_any(writetest);
-      std::string swritetest = stringwritetest->vx_string();
+      std::string swritetest = vx_core::vx_string_from_any(writetest);
       std::cout << swritetest;
-			vx_core::vx_release(stringwritetest);
       if (vx_core::refcount != 0) {
         vx_core::vx_debug("memory leaks:" + std::to_string(vx_core::refcount));
       }

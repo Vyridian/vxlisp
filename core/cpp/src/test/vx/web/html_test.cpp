@@ -16,6 +16,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<body></body>\"\n (string<-body-indent (body) 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<body></body>"),
@@ -30,6 +31,7 @@ namespace vx_web_html_test {
           }),
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<body>\n  <div></div>\n</body>"),
@@ -47,8 +49,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -64,6 +66,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<div></div>\"\n (string<-div-indent (div) 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<div></div>"),
@@ -78,6 +81,7 @@ namespace vx_web_html_test {
           }),
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<div id=\"myid\"></div>"),
@@ -94,8 +98,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -111,6 +115,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<head></head>\"\n (string<-head-indent (head) 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<head></head>"),
@@ -123,8 +128,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -140,6 +145,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
@@ -161,8 +167,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -178,6 +184,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<meta charset=\"utf-8\" />"),
@@ -194,8 +201,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -211,6 +218,7 @@ namespace vx_web_html_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<p>data</p>"),
@@ -229,6 +237,7 @@ namespace vx_web_html_test {
           }),
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("<p id=\"myid\">data</p>"),
@@ -247,8 +256,8 @@ namespace vx_web_html_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }

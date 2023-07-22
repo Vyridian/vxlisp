@@ -16,6 +16,7 @@ namespace vx_collection_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  3))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
@@ -42,8 +43,8 @@ namespace vx_collection_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -59,6 +60,7 @@ namespace vx_collection_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (list \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list \"a\" 1 \"b\" \"c\" 4.5)\n  string int))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
@@ -90,8 +92,8 @@ namespace vx_collection_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -107,6 +109,7 @@ namespace vx_collection_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-fn-filter : stringlist\n  (list \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
@@ -163,8 +166,8 @@ namespace vx_collection_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -180,6 +183,7 @@ namespace vx_collection_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
@@ -206,8 +210,8 @@ namespace vx_collection_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -223,6 +227,7 @@ namespace vx_collection_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"b\" \"c\")\n (list<-list-start-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1 3))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
@@ -249,8 +254,8 @@ namespace vx_collection_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }

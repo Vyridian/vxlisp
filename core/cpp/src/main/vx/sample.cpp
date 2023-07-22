@@ -154,6 +154,14 @@ namespace vx_sample {
   // (const myconst)
   // class Class_myconst {
 
+    // vx_const_new()
+    vx_sample::Const_myconst vx_sample::Class_myconst::vx_const_new() {
+      vx_sample::Const_myconst output = new vx_sample::Class_myconst();
+      output->vx_p_int = 4;
+      vx_core::vx_reserve_type(output);
+      return output;
+    }
+
     // vx_constdef()
     vx_core::Type_constdef vx_sample::Class_myconst::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -175,8 +183,7 @@ namespace vx_sample {
       );
     }
 
-    long vx_sample::Class_myconst::vx_int() {
-      this->vx_p_int = 4;
+    long vx_sample::Class_myconst::vx_int() const {
       return this->vx_p_int;
     }
 
@@ -205,15 +212,16 @@ namespace vx_sample {
 
     vx_core::Type_any Class_main::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Func_main output = vx_sample::e_main();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_main::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "none", // name
-        "", // extends
+        "vx/sample", // pkgname
+        "main", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -280,16 +288,17 @@ namespace vx_sample {
 
     vx_core::Type_any Class_myfunc::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Func_myfunc output = vx_sample::e_myfunc();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_myfunc::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "int", // name
-        "", // extends
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_number()}), // traits
+        "vx/sample", // pkgname
+        "myfunc", // name
+        ":func", // extends
+        vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
@@ -364,8 +373,7 @@ namespace vx_sample {
   vx_sample::Const_myconst c_myconst() {
     vx_sample::Const_myconst output = vx_sample::vx_package->c_myconst;
     if (output == NULL) {
-      output = new vx_sample::Class_myconst();
-      vx_core::vx_reserve_type(output);
+      output = vx_sample::Class_myconst::vx_const_new();
       vx_sample::vx_package->c_myconst = output;
     }
     return output;

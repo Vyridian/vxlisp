@@ -192,15 +192,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_csv_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_csv_from_httpget output = vx_web_http::e_csv_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_csv_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/data/csv", // pkgname
-        "csv", // name
-        ":struct", // extends
+        "vx/web/http", // pkgname
+        "csv<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -287,6 +288,7 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_json_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_json_from_httpget output = vx_web_http::e_json_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
@@ -294,8 +296,8 @@ namespace vx_web_http {
     vx_core::Type_typedef Class_json_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/http", // pkgname
-        "response", // name
-        ":struct", // extends
+        "json<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -370,6 +372,7 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_response_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_response_from_httpget output = vx_web_http::e_response_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
@@ -377,8 +380,8 @@ namespace vx_web_http {
     vx_core::Type_typedef Class_response_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/http", // pkgname
-        "response", // name
-        ":struct", // extends
+        "response<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -455,15 +458,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_text_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_httpget output = vx_web_http::e_text_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_text_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "string", // name
-        "string", // extends
+        "vx/web/http", // pkgname
+        "text<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -538,15 +542,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_text_from_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_text_from_response output = vx_web_http::e_text_from_response();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_text_from_response::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "string", // name
-        "string", // extends
+        "vx/web/http", // pkgname
+        "text<-response", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -634,15 +639,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_textblock_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_httpget output = vx_web_http::e_textblock_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_textblock_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/data/textblock", // pkgname
-        "textblock", // name
-        ":struct", // extends
+        "vx/web/http", // pkgname
+        "textblock<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -714,15 +720,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_textblock_from_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_textblock_from_response output = vx_web_http::e_textblock_from_response();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_textblock_from_response::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/data/textblock", // pkgname
-        "textblock", // name
-        ":struct", // extends
+        "vx/web/http", // pkgname
+        "textblock<-response", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -810,15 +817,16 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_xml_from_httpget::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Func_xml_from_httpget output = vx_web_http::e_xml_from_httpget();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_xml_from_httpget::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/data/xml", // pkgname
-        "xml", // name
-        ":struct", // extends
+        "vx/web/http", // pkgname
+        "xml<-httpget", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes

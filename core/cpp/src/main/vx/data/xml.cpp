@@ -628,6 +628,7 @@ namespace vx_data_xml {
 
     vx_core::Type_any Class_xml_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Func_xml_from_textblock output = vx_data_xml::e_xml_from_textblock();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
@@ -635,8 +636,8 @@ namespace vx_data_xml {
     vx_core::Type_typedef Class_xml_from_textblock::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/xml", // pkgname
-        "xml", // name
-        ":struct", // extends
+        "xml<-textblock", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes

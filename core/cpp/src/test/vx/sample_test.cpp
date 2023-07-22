@@ -15,6 +15,7 @@ namespace vx_sample_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4 myconst)"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/sample"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_int(4),
@@ -22,8 +23,8 @@ namespace vx_sample_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -39,6 +40,7 @@ namespace vx_sample_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 5 (myfunc 1))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/sample"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_int(5),
@@ -46,8 +48,8 @@ namespace vx_sample_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }

@@ -576,6 +576,7 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_parse::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_parse output = vx_data_textblock::e_parse();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
@@ -583,8 +584,8 @@ namespace vx_data_textblock {
     vx_core::Type_typedef Class_parse::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/textblock", // pkgname
-        "textblock", // name
-        ":struct", // extends
+        "parse", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -654,17 +655,18 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_stringlist_from_textblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_stringlist_from_textblocklist output = vx_data_textblock::e_stringlist_from_textblocklist();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_stringlist_from_textblocklist::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "stringlist", // name
-        ":list", // extends
+        "vx/data/textblock", // pkgname
+        "stringlist<-textblocklist", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_string()}), // allowtypes
+        vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -739,15 +741,16 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_text_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_text_from_textblock output = vx_data_textblock::e_text_from_textblock();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_typedef Class_text_from_textblock::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "string", // name
-        "string", // extends
+        "vx/data/textblock", // pkgname
+        "text<-textblock", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
@@ -824,6 +827,7 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_textblocks_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_textblocks_from_textblock output = vx_data_textblock::e_textblocks_from_textblock();
+      vx_core::vx_release(copyval);
       vx_core::vx_release(vals);
       return output;
     }
@@ -831,10 +835,10 @@ namespace vx_data_textblock {
     vx_core::Type_typedef Class_textblocks_from_textblock::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/data/textblock", // pkgname
-        "textblocklist", // name
-        ":list", // extends
+        "textblocks<-textblock", // name
+        ":func", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_textblock::t_textblock()}), // allowtypes
+        vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs

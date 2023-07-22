@@ -77,7 +77,7 @@ namespace vx_sample {
   public:
     static vx_sample::Const_myconst vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (func main)

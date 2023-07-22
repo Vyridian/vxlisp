@@ -1895,7 +1895,7 @@
  (native
   :cpp
    "if (text->vx_string().length() == 0) {
-     output = vx_core::c_true();
+      output = vx_core::c_true();
     }"
   :js
    "if (text.length == 0) {

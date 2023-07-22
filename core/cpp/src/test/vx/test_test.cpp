@@ -16,6 +16,7 @@ namespace vx_test_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_data_file::f_boolean_exists_from_file(
@@ -32,8 +33,8 @@ namespace vx_test_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -49,6 +50,7 @@ namespace vx_test_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_data_file::f_boolean_exists_from_file(
@@ -65,8 +67,8 @@ namespace vx_test_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }
@@ -82,6 +84,7 @@ namespace vx_test_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_data_file::f_boolean_exists_from_file(
@@ -98,8 +101,8 @@ namespace vx_test_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }

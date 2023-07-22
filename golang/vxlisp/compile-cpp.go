@@ -440,7 +440,6 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 	fullclassname := pkgname + "::Class_" + cnstname
 	fullconstname := pkgname + "::Const_" + cnstname
 	initval := ""
-	const_new := ""
 	cnstval := StringValueFromValue(cnst.value)
 	headerextras := ""
 	switch NameFromType(cnsttype) {
@@ -453,52 +452,47 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 				cnstval = "false"
 			}
 		}
-		cnstval = "\n      this->vx_p_boolean = " + cnstval + ";"
-		headerextras += "\n    bool vx_boolean();"
+		cnstval = "\n      output->vx_p_boolean = " + cnstval + ";"
+		headerextras += "\n    bool vx_boolean() const override;"
 		initval = "" +
-			"\n    bool " + fullclassname + "::vx_boolean() {" +
-			cnstval +
+			"\n    bool " + fullclassname + "::vx_boolean() const {" +
 			"\n      return this->vx_p_boolean;" +
 			"\n    }"
 	case "vx/core/decimal":
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this->vx_p_decimal = " + cnstval + ";"
-		headerextras += "\n    std::string vx_decimal();"
+		cnstval = "\n      output->vx_p_decimal = " + cnstval + ";"
+		headerextras += "\n    std::string vx_decimal() const override;"
 		initval = "" +
-			"\n    std::string " + fullclassname + "::vx_decimal() {" +
-			cnstval +
+			"\n    std::string " + fullclassname + "::vx_decimal() const {" +
 			"\n      return this->vx_p_decimal;" +
 			"\n    }"
 	case "vx/core/float":
 		if cnstval == "" {
 			cnstval = "f0"
 		}
-		cnstval = "\n      this->vx_p_float = " + cnstval + ";"
-		headerextras += "\n    float vx_float();"
+		cnstval = "\n      output->vx_p_float = " + cnstval + ";"
+		headerextras += "\n    float vx_float() const override;"
 		initval = "" +
-			"\n    float " + fullclassname + "::vx_float() {" +
-			cnstval +
+			"\n    float " + fullclassname + "::vx_float() const {" +
 			"\n      return this->vx_p_float;" +
 			"\n    }"
 	case "vx/core/int":
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this->vx_p_int = " + cnstval + ";"
-		headerextras += "\n    long vx_int();"
+		cnstval = "\n      output->vx_p_int = " + cnstval + ";"
+		headerextras += "\n    long vx_int() const override;"
 		initval = "" +
-			"\n    long " + fullclassname + "::vx_int() {" +
-			cnstval +
+			"\n    long " + fullclassname + "::vx_int() const {" +
 			"\n      return this->vx_p_int;" +
 			"\n    }"
 	case "vx/core/string":
-		cnstval = "\n      this->vx_p_string = " + cnstval + ";"
-		headerextras += "\n    std::string vx_string();"
+		cnstval = "\n      output->vx_p_string = " + cnstval + ";"
+		headerextras += "\n    std::string vx_string() const override;"
 		initval = "" +
-			"\n    std::string " + fullclassname + "::vx_string() {" +
-			cnstval +
+			"\n    std::string " + fullclassname + "::vx_string() const {" +
 			"\n      return this->vx_p_string;" +
 			"\n    }"
 	default:
@@ -511,7 +505,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 				if listtypename == "any" {
 					listtypename = ""
 				}
-				const_new += "" +
+				cnstval = "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
 					"\n      output->vx_p_list" + listtypename + " = val->vx_list" + listtypename + "();"
 			}
@@ -523,7 +517,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 				if maptypename == "any" {
 					maptypename = ""
 				}
-				const_new += "" +
+				cnstval = "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
 					"\n      output->vx_p_map" + maptypename + " = val->vx_map" + maptypename + "();"
 			}
@@ -531,10 +525,10 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "      ", true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
-				const_new += "" +
+				cnstval = "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";"
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
-					const_new += "" +
+					cnstval += "" +
 						"\n      output->vx_p_" + CppFromName(prop.name) + " = val->" + CppFromName(prop.name) + "();"
 				}
 			}
@@ -573,6 +567,14 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 		"\n  // (const " + cnst.name + ")" +
 		"\n  // class " + cnstclassname + " {" +
 		"\n" +
+		"\n    // vx_const_new()" +
+		"\n    " + fullconstname + " " + fullclassname + "::vx_const_new() {" +
+		"\n      " + fullconstname + " output = new " + fullclassname + "();" +
+		cnstval +
+		"\n      vx_core::vx_reserve_type(output);" +
+		"\n      return output;" +
+		"\n    }" +
+		"\n" +
 		"\n    // vx_constdef()" +
 		"\n    vx_core::Type_constdef " + fullclassname + "::vx_constdef() const {" +
 		"\n      return vx_core::Class_constdef::vx_constdef_new(" +
@@ -591,9 +593,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 		"\n  " + fullconstname + " c_" + cnstname + "() {" +
 		"\n    " + fullconstname + " output = " + pkgname + "::vx_package->c_" + cnstname + ";" +
 		"\n    if (output == NULL) {" +
-		"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-		"\n      vx_core::vx_reserve_type(output);" +
-		const_new +
+		"\n      output = " + fullclassname + "::vx_const_new();" +
 		"\n      " + pkgname + "::vx_package->c_" + cnstname + " = output;" +
 		"\n    }" +
 		"\n    return output;" +
@@ -997,12 +997,13 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 		"\n" +
 		"\n    vx_core::Type_any " + classname + "::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {" +
 		"\n      " + pkgname + "::Func_" + funcname + " output = " + fullename + ";" +
+		"\n      vx_core::vx_release(copyval);" +
 		"\n      vx_core::vx_release(vals);" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
 		"\n    vx_core::Type_typedef " + classname + "::vx_typedef() const {" +
-		"\n      vx_core::Type_typedef output = " + CppTypeDefFromType(fnc.vxtype, "      ") + ";" +
+		"\n      vx_core::Type_typedef output = " + CppTypeDefFromFunc(fnc, "      ") + ";" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
@@ -1445,11 +1446,15 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          booleanval = booleanval || valboolean->vx_boolean();" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-			"\n      output->vx_p_boolean = booleanval;" +
 			"\n      if (msgblock != vx_core::e_msgblock()) {" +
+			"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
+			"\n        output->vx_p_boolean = booleanval;" +
 			"\n        output->vx_p_msgblock = msgblock;" +
 			"\n        vx_core::vx_reserve(msgblock);" +
+			"\n      } else if (booleanval) {" +
+			"\n        output = vx_core::c_true();" +
+			"\n      } else {" +
+			"\n        output = vx_core::c_false();" +
 			"\n      }"
 	case "vx/core/decimal":
 		valcopy = "" +
@@ -2175,12 +2180,21 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		"\n      return output;" +
 		"\n    }" +
 		"\n"
+	specialempty := ""
+	switch NameFromType(typ) {
+	case "vx/core/boolean":
+		specialempty = "" +
+			"\n      output = vx_core::c_false();"
+	default:
+		specialempty = "" +
+			"\n      output = new " + classname + "();" +
+			"\n      vx_core::vx_reserve_empty(output);"
+	}
 	footer := "" +
 		"\n  " + fulltypename + " e_" + typename + "() {" +
 		"\n    " + fulltypename + " output = " + pkgname + "::vx_package->e_" + typename + ";" +
 		"\n    if (output == NULL) {" +
-		"\n      output = new " + classname + "();" +
-		"\n      vx_core::vx_reserve_empty(output);" +
+		specialempty +
 		"\n      " + pkgname + "::vx_package->e_" + typename + " = output;" +
 		"\n    }" +
 		"\n    return output;" +
@@ -3685,6 +3699,7 @@ func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcase
 			desctext := "" +
 				"\n          vx_core::vx_new(vx_test::t_testdescribe(), {" +
 				"\n            vx_core::vx_new_string(\":describename\"), vx_core::vx_new_string(\"" + CppTestFromValue(testvalue) + "\")," +
+				"\n            vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + testpkg + "\")," +
 				"\n            vx_core::vx_new_string(\":testresult\")," +
 				"\n            " + descvaluetext +
 				"\n          })"
@@ -3702,8 +3717,8 @@ func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcase
 			"\n        vx_test::t_testdescribelist()," +
 			"\n        vx_test::t_testdescribelist()->vx_new_from_list({" +
 			describelist +
-			"\n        }" +
-			"\n      ))" +
+			"\n        })" +
+			"\n      )" +
 			"\n    });" +
 			"\n    return output;" +
 			"\n  }" +
@@ -3976,6 +3991,33 @@ func CppTypeCoverageNumsValNew(pct int, tests int, total int) string {
 		"\n      })"
 }
 
+func CppTypeDefFromFunc(fnc *vxfunc, indent string) string {
+	lineindent := "\n" + indent
+	allowtypes := "vx_core::e_typelist()"
+	disallowtypes := "vx_core::e_typelist()"
+	allowfuncs := "vx_core::e_funclist()"
+	disallowfuncs := "vx_core::e_funclist()"
+	allowvalues := "vx_core::e_anylist()"
+	disallowvalues := "vx_core::e_anylist()"
+	properties := "vx_core::e_argmap()"
+	traits := "vx_core::e_typelist()"
+	output := "" +
+		"vx_core::Class_typedef::vx_typedef_new(" +
+		lineindent + "  \"" + fnc.pkgname + "\", // pkgname" +
+		lineindent + "  \"" + fnc.name + "\", // name" +
+		lineindent + "  \":func\", // extends" +
+		lineindent + "  " + traits + ", // traits" +
+		lineindent + "  " + allowtypes + ", // allowtypes" +
+		lineindent + "  " + disallowtypes + ", // disallowtypes" +
+		lineindent + "  " + allowfuncs + ", // allowfuncs" +
+		lineindent + "  " + disallowfuncs + ", // disallowfuncs" +
+		lineindent + "  " + allowvalues + ", // allowvalues" +
+		lineindent + "  " + disallowvalues + ", // disallowvalues" +
+		lineindent + "  " + properties + " // properties" +
+		lineindent + ")"
+	return output
+}
+
 func CppTypeDefFromType(typ *vxtype, indent string) string {
 	lineindent := "\n" + indent
 	allowtypes := CppTypeListFromListType(typ.allowtypes)
@@ -4146,10 +4188,8 @@ namespace app_test {
       std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
       std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
       vx_core::Type_boolean writetest = test_writetestsuite();
-      vx_core::Type_string stringwritetest = vx_core::f_string_from_any(writetest);
-      std::string swritetest = stringwritetest->vx_string();
+      std::string swritetest = vx_core::vx_string_from_any(writetest);
       std::cout << swritetest;
-			vx_core::vx_release(stringwritetest);
       if (vx_core::refcount != 0) {
         vx_core::vx_debug("memory leaks:" + std::to_string(vx_core::refcount));
       }
@@ -4209,13 +4249,13 @@ namespace test_lib {
 
 namespace test_lib {
 
-  vx_test::Type_testresult run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
+	vx_test::Type_testresult run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
     vx_core::Type_any valexpected = testresult->expected();
     vx_core::Type_any valactual = testresult->actual();
     bool passfail = testresult->passfail()->vx_boolean();
     std::string code = testresult->code()->vx_string();
-    std::string expected = vx_core::f_string_from_any(valexpected)->vx_string();
-    std::string actual = vx_core::f_string_from_any(valactual)->vx_string();
+    std::string expected = vx_core::vx_string_from_any(valexpected);
+    std::string actual = vx_core::vx_string_from_any(valactual);
     std::string msg = testpkg + "/" + testname + " " + message;
     if (!passfail) {
 //      System.out.println(msg);
@@ -4228,6 +4268,7 @@ namespace test_lib {
 //    } else {
 //      assertEquals(expected, actual, msg);
 //    }
+    vx_core::vx_release(testresult);
     return testresult;
   }
 
@@ -4235,15 +4276,17 @@ namespace test_lib {
   vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
-    return test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
+    vx_test::Type_testresult output = test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
+		return output;
   }
 
-  vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe describe) {
-    vx_core::Type_string testcode = describe->describename();
+  vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
+    vx_core::Type_string testcode = testdescribe->describename();
     std::string message = testcode->vx_string();
-    vx_test::Type_testresult testresult = describe->testresult();
+    vx_test::Type_testresult testresult = testdescribe->testresult();
     vx_test::Type_testresult testresultresolved = test_lib::run_testresult(testpkg, casename, message, testresult);
-    vx_test::Type_testdescribe output = vx_core::vx_copy(describe, {vx_core::vx_new_string(":testresult"), testresultresolved});
+    vx_test::Type_testdescribe output = vx_core::vx_copy(testdescribe, {vx_core::vx_new_string(":testresult"), testresultresolved});
+    vx_core::vx_release(testdescribe);
 		return output;
   }
 
@@ -4252,21 +4295,22 @@ namespace test_lib {
   vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
     vx_core::vx_Type_async async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
     vx_test::Type_testdescribe testdescribe_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribe(), async_testdescribe);
-    return run_testdescribe(testpkg, casename, testdescribe_resolved);
+    vx_test::Type_testdescribe output = test_lib::run_testdescribe(testpkg, casename, testdescribe_resolved);
+		return output;
   }
 
   vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
     std::vector<vx_test::Type_testdescribe> listtestdescribe = testdescribelist->vx_listtestdescribe();
     vx_core::vx_Type_listany listtestdescribe_resolved;
     for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
-      vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe(testpkg, casename, testdescribe);
+      vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe(testpkg, casename, testdescribe);
 			listtestdescribe_resolved.push_back(testdescribe_resolved);
-			vx_core::vx_reserve(testdescribe_resolved);
     }
 		vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
 			vx_test::t_testdescribelist(),
 			testdescribelist->vx_new_from_list(listtestdescribe_resolved)
 		);
+    vx_core::vx_release(testdescribelist);
     return output;
   }
 
@@ -4274,7 +4318,7 @@ namespace test_lib {
     std::string testpkg = testcase->testpkg()->vx_string();
     std::string casename = testcase->casename()->vx_string();
     vx_test::Type_testdescribelist testdescribelist = testcase->describelist();
-    vx_test::Type_testdescribelist testdescribelist_resolved = run_testdescribelist(testpkg, casename, testdescribelist);
+    vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist(testpkg, casename, testdescribelist);
 		vx_test::Type_testcase output = vx_core::vx_copy(testcase, {vx_core::vx_new_string(":describelist"), testdescribelist_resolved});
 		return output;
   }
@@ -4284,7 +4328,8 @@ namespace test_lib {
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase) {
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase(), async_testcase);
-    vx_test::Type_testcase output = run_testcase(testcase_resolved);
+    vx_test::Type_testcase output = test_lib::run_testcase(testcase_resolved);
+    vx_core::vx_release(testcase);
 		return output;
   }
 
@@ -4292,21 +4337,22 @@ namespace test_lib {
     std::vector<vx_test::Type_testcase> listtestcase = testcaselist->vx_listtestcase();
     vx_core::vx_Type_listany listtestcase_resolved;
     for (vx_test::Type_testcase testcase : listtestcase) {
-      vx_test::Type_testcase testcase_resolved = run_testcase(testcase);
+      vx_test::Type_testcase testcase_resolved = test_lib::run_testcase(testcase);
 			listtestcase_resolved.push_back(testcase_resolved);
-			vx_core::vx_reserve(testcase_resolved);
     }
 		vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
 			vx_test::t_testcaselist(),
 			testcaselist->vx_new_from_list(listtestcase_resolved)
 		);
+    vx_core::vx_release(testcaselist);
     return output;
   }
 
   vx_test::Type_testpackage run_testpackage(vx_test::Type_testpackage testpackage) {
     vx_test::Type_testcaselist testcaselist = testpackage->caselist();
-    vx_test::Type_testcaselist testcaselist_resolved = run_testcaselist(testcaselist);
+    vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist(testcaselist);
 		vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {vx_core::vx_new_string(":caselist"), testcaselist_resolved});
+    vx_core::vx_release(testpackage);
 		return output;
   }
 
@@ -4314,14 +4360,14 @@ namespace test_lib {
     std::vector<vx_test::Type_testpackage> listtestpackage = testpackagelist->vx_listtestpackage();
     vx_core::vx_Type_listany listtestpackage_resolved;
     for (vx_test::Type_testpackage testpackage : listtestpackage) {
-      vx_test::Type_testpackage testpackage_resolved = run_testpackage(testpackage);
+      vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
 			listtestpackage_resolved.push_back(testpackage_resolved);
-			vx_core::vx_reserve(testpackage_resolved);
     }
 		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
 			vx_test::t_testpackagelist(),
 			testpackagelist->vx_new_from_list(listtestpackage_resolved)
 		);
+    vx_core::vx_release(testpackagelist);
     return output;
   }
 
@@ -4330,7 +4376,7 @@ namespace test_lib {
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage) {
     vx_core::vx_Type_async async_testpackage = vx_test::f_resolve_testpackage(testpackage);
     vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage(), async_testpackage);
-    vx_test::Type_testpackage output = run_testpackage(testpackage_resolved);
+    vx_test::Type_testpackage output = test_lib::run_testpackage(testpackage_resolved);
 		return output;
   }
 
@@ -4339,7 +4385,7 @@ namespace test_lib {
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
     vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
-    vx_test::Type_testpackagelist output = run_testpackagelist(testpackagelist_resolved);
+    vx_test::Type_testpackagelist output = test_lib::run_testpackagelist(testpackagelist_resolved);
 		return output;
   }
 
@@ -4348,16 +4394,20 @@ namespace test_lib {
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
     vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
+    vx_core::vx_reserve(testpackagelist_resolved);
     vx_data_file::Type_file filetest = vx_test::f_file_test();
     vx_core::Type_boolean booleanwritetest = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
     vx_web_html::Type_html htmlnode = vx_test::f_html_from_divtest(divtest);
+    vx_core::vx_reserve(htmlnode);
+    vx_core::Type_string shtml = vx_web_html::f_string_from_html(htmlnode);
     vx_data_file::Type_file filenode = vx_test::f_file_testnode();
     vx_core::Type_boolean booleanwritenode = vx_data_file::f_boolean_write_from_file_any(filenode, htmlnode, context);
+    vx_core::vx_release(htmlnode);
     vx_data_file::Type_file filehtml = vx_test::f_file_testhtml();
-    vx_core::Type_string shtml = vx_web_html::f_string_from_html(htmlnode);
     vx_core::Type_boolean booleanwritehtml = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
     vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean(), {booleanwritetest, booleanwritenode, booleanwritehtml});
+    vx_core::vx_release(testpackagelist_resolved);
     return output;
   }
 

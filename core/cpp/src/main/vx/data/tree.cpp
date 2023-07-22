@@ -890,6 +890,13 @@ namespace vx_data_tree {
   // (const brancharrow-down)
   // class Class_brancharrow_down {
 
+    // vx_const_new()
+    vx_data_tree::Const_brancharrow_down vx_data_tree::Class_brancharrow_down::vx_const_new() {
+      vx_data_tree::Const_brancharrow_down output = new vx_data_tree::Class_brancharrow_down();
+      vx_core::vx_reserve_type(output);
+      return output;
+    }
+
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_down::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -917,6 +924,13 @@ namespace vx_data_tree {
   // (const brancharrow-up)
   // class Class_brancharrow_up {
 
+    // vx_const_new()
+    vx_data_tree::Const_brancharrow_up vx_data_tree::Class_brancharrow_up::vx_const_new() {
+      vx_data_tree::Const_brancharrow_up output = new vx_data_tree::Class_brancharrow_up();
+      vx_core::vx_reserve_type(output);
+      return output;
+    }
+
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_up::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -943,6 +957,13 @@ namespace vx_data_tree {
 
   // (const brancharrow-updown)
   // class Class_brancharrow_updown {
+
+    // vx_const_new()
+    vx_data_tree::Const_brancharrow_updown vx_data_tree::Class_brancharrow_updown::vx_const_new() {
+      vx_data_tree::Const_brancharrow_updown output = new vx_data_tree::Class_brancharrow_updown();
+      vx_core::vx_reserve_type(output);
+      return output;
+    }
 
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_updown::vx_constdef() const {
@@ -1088,8 +1109,7 @@ namespace vx_data_tree {
   vx_data_tree::Const_brancharrow_down c_brancharrow_down() {
     vx_data_tree::Const_brancharrow_down output = vx_data_tree::vx_package->c_brancharrow_down;
     if (output == NULL) {
-      output = new vx_data_tree::Class_brancharrow_down();
-      vx_core::vx_reserve_type(output);
+      output = vx_data_tree::Class_brancharrow_down::vx_const_new();
       vx_data_tree::vx_package->c_brancharrow_down = output;
     }
     return output;
@@ -1099,8 +1119,7 @@ namespace vx_data_tree {
   vx_data_tree::Const_brancharrow_up c_brancharrow_up() {
     vx_data_tree::Const_brancharrow_up output = vx_data_tree::vx_package->c_brancharrow_up;
     if (output == NULL) {
-      output = new vx_data_tree::Class_brancharrow_up();
-      vx_core::vx_reserve_type(output);
+      output = vx_data_tree::Class_brancharrow_up::vx_const_new();
       vx_data_tree::vx_package->c_brancharrow_up = output;
     }
     return output;
@@ -1110,8 +1129,7 @@ namespace vx_data_tree {
   vx_data_tree::Const_brancharrow_updown c_brancharrow_updown() {
     vx_data_tree::Const_brancharrow_updown output = vx_data_tree::vx_package->c_brancharrow_updown;
     if (output == NULL) {
-      output = new vx_data_tree::Class_brancharrow_updown();
-      vx_core::vx_reserve_type(output);
+      output = vx_data_tree::Class_brancharrow_updown::vx_const_new();
       vx_data_tree::vx_package->c_brancharrow_updown = output;
     }
     return output;

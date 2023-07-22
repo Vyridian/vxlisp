@@ -16,6 +16,7 @@ namespace vx_repl_test {
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_string("HelloWorld"),
@@ -54,6 +55,7 @@ namespace vx_repl_test {
           }),
           vx_core::vx_new(vx_test::t_testdescribe(), {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_int(5),
@@ -90,8 +92,8 @@ namespace vx_repl_test {
               context
             )
           })
-        }
-      ))
+        })
+      )
     });
     return output;
   }

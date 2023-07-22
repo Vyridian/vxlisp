@@ -5127,7 +5127,7 @@ namespace vx_core {
   public:
     static vx_core::Const_false vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    bool vx_boolean();
+    bool vx_boolean() const override;
   };
 
   // (const globalpackagemap)
@@ -5142,7 +5142,7 @@ namespace vx_core {
   public:
     static vx_core::Const_infinity vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const mempool-active)
@@ -5157,7 +5157,7 @@ namespace vx_core {
   public:
     static vx_core::Const_msg_error vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const msg-info)
@@ -5165,7 +5165,7 @@ namespace vx_core {
   public:
     static vx_core::Const_msg_info vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const msg-severe)
@@ -5173,7 +5173,7 @@ namespace vx_core {
   public:
     static vx_core::Const_msg_severe vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const msg-warning)
@@ -5181,7 +5181,7 @@ namespace vx_core {
   public:
     static vx_core::Const_msg_warning vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const neginfinity)
@@ -5189,7 +5189,7 @@ namespace vx_core {
   public:
     static vx_core::Const_neginfinity vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const newline)
@@ -5197,7 +5197,7 @@ namespace vx_core {
   public:
     static vx_core::Const_newline vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    std::string vx_string();
+    std::string vx_string() const override;
   };
 
   // (const notanumber)
@@ -5205,7 +5205,7 @@ namespace vx_core {
   public:
     static vx_core::Const_notanumber vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    long vx_int();
+    long vx_int() const override;
   };
 
   // (const nothing)
@@ -5213,7 +5213,7 @@ namespace vx_core {
   public:
     static vx_core::Const_nothing vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    std::string vx_string();
+    std::string vx_string() const override;
   };
 
   // (const quote)
@@ -5221,7 +5221,7 @@ namespace vx_core {
   public:
     static vx_core::Const_quote vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    std::string vx_string();
+    std::string vx_string() const override;
   };
 
   // (const true)
@@ -5229,7 +5229,7 @@ namespace vx_core {
   public:
     static vx_core::Const_true vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
-    bool vx_boolean();
+    bool vx_boolean() const override;
   };
 
   // (func *)
