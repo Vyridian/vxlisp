@@ -5,6 +5,8 @@
 #include "../../../main/vx/data/textblock.hpp"
 #include "../../../main/vx/data/xml.hpp"
 
+#include "http_test.hpp"
+
 namespace vx_web_http_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {

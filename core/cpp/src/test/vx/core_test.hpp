@@ -1,3 +1,5 @@
+#ifndef vx_core_test
+#define vx_core_test
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 
@@ -73,3 +75,4 @@ namespace vx_core_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+#endif

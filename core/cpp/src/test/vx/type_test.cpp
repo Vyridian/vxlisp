@@ -2,6 +2,8 @@
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 
+#include "type_test.hpp"
+
 namespace vx_type_test {
 
   vx_test::Type_testcase f_is_string(vx_core::Type_context context) {

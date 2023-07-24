@@ -4,6 +4,7 @@
 #include <functional>
 #include <future>
 #include <map>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -1333,6 +1334,31 @@ namespace vx_core {
   extern vx_Type_listany emptylistany;
   extern vx_Type_mapany emptymapany;
 
+  // class vx_Class_async
+  class vx_Class_async {
+  public:
+    long vx_p_iref = 0;
+    vx_core::Type_any type = NULL;
+    vx_core::Type_any value = NULL;
+    std::future<vx_core::Type_any>* future = NULL;
+    vx_core::vx_Class_async* async_parent = NULL;
+    std::function<vx_core::Type_any(vx_core::Type_any)> fn = NULL;
+    void vx_create();
+    void vx_dispose();
+    vx_core::Type_any sync_value();
+  };
+
+  typedef vx_Class_async* vx_Type_async;
+
+  // vx_async_from_async_fn(async, type, fn<any>(any))
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, std::function<vx_core::Type_any(vx_core::Type_any)> fn);
+
+  // vx_async_new_from_future(T, future<T>)
+  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, std::future<vx_core::Type_any>* future);
+
+  // vx_async_new_from_value(any)
+  vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
+
   // vx_boolean_from_string_ends(string, string)
   bool vx_boolean_from_string_ends(std::string text, std::string ends);
 
@@ -1381,17 +1407,26 @@ namespace vx_core {
   // vx_release(any...)
   void vx_release(vx_core::vx_Type_listany listany);
 
+  // vx_release_async(async)
+  void vx_release_async(vx_core::vx_Type_async async);
+
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any);
 
   // vx_release_one(any...)
   void vx_release_one(vx_core::vx_Type_listany listany);
 
+  // vx_release_one_async(async)
+  void vx_release_one_async(vx_core::vx_Type_async async);
+
   // vx_reserve(any)
   void vx_reserve(vx_core::Type_any any);
 
   // vx_reserve(any...)
   void vx_reserve(vx_core::vx_Type_listany listany);
+
+  // vx_reserve_async(async)
+  void vx_reserve_async(vx_core::vx_Type_async async);
 
   // vx_reserve_empty(any)
   void vx_reserve_empty(vx_core::Type_any any);
@@ -1404,6 +1439,12 @@ namespace vx_core {
 
   // vx_string_from_any_indent(any, int, boolean)
   std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed);
+
+  // vx_string_from_async(async)
+  std::string vx_string_from_async(vx_core::vx_Type_async async);
+
+  // vx_string_from_async_indent(async, indent, linefeed)
+  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed);
 
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
@@ -1419,16 +1460,6 @@ namespace vx_core {
 
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end);
-
-  // class vx_Class_async
-  class vx_Class_async {
-  public:
-    std::shared_future<vx_core::Type_any> future;
-    vx_core::vx_Class_async* async_parent;
-    std::function<vx_core::Type_any(vx_core::Type_any)> fn;
-  };
-
-  typedef vx_core::vx_Class_async* vx_Type_async;
 
   // vx_any_from_any(T, val)
   template <class T> static T* vx_any_from_any(T* generic_any_1, vx_core::Type_any val) {
@@ -1446,22 +1477,9 @@ namespace vx_core {
     return output;
   }
 
-  // vx_async_from_async_fn(async, fn<any>(any))
-  static vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, std::function<vx_core::Type_any(vx_core::Type_any)> fn) {
-    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
-    output->async_parent = async;
-    output->fn = std::function<vx_core::Type_any(vx_core::Type_any)>(fn);
-    return output;
-  }
-
-  // vx_async_new_from_val(any)
-  static vx_core::vx_Type_async vx_async_new_from_val(vx_core::Type_any val) {
-    std::promise<vx_core::Type_any> promise;
-    promise.set_value(val);
-    std::shared_future<vx_core::Type_any> sharedfuture = promise.get_future();
-    std::shared_future<vx_core::Type_any>* psharedfuture = new std::shared_future<vx_core::Type_any>(sharedfuture);
-    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
-    output->future = *psharedfuture;
+  // vx_boolean_contains_from_set_val(set<T>, val)
+  template <class T> static bool vx_boolean_contains_from_set_val(std::set<T> set, T val) {
+    const bool output = set.find(val) != set.end();
     return output;
   }
 
@@ -1536,17 +1554,7 @@ namespace vx_core {
 
   // vx_sync_from_async(async)
   template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
-    std::shared_future<vx_core::Type_any> future = async->future;
-    vx_core::vx_Type_async async_parent = async->async_parent;
-    vx_core::Type_any value;
-    if (async_parent == NULL) {
-      future.wait();
-      value = future.get();
-    } else {
-      vx_core::Type_any parentval = vx_core::vx_sync_from_async(generic_any_1, async_parent);
-      std::function<vx_core::Type_any(vx_core::Type_any)> fn = async->fn;
-      value = fn(parentval);
-    }
+    vx_core::Type_any value = async->sync_value();
     T* output = vx_core::vx_any_from_any(generic_any_1, value);
     return output;
   }
@@ -7500,7 +7508,7 @@ namespace vx_core {
 
   // (func any<-any-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_any_async(T* generic_any_1, U* value) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release(value);
     return output;
   }
@@ -7514,7 +7522,7 @@ namespace vx_core {
 
   // (func any<-any-context-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_any_context_async(T* generic_any_1, U* value, vx_core::Type_context context) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release(value);
     return output;
   }
@@ -7527,7 +7535,7 @@ namespace vx_core {
 
   // (func any<-func-async)
   template <class T> vx_core::vx_Type_async f_any_from_func_async(T* generic_any_1) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     return output;
   }
 
@@ -7540,7 +7548,7 @@ namespace vx_core {
 
   // (func any<-key-value-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_key_value_async(T* generic_any_1, vx_core::Type_string key, U* val) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release({key, val});
     return output;
   }
@@ -7587,7 +7595,7 @@ namespace vx_core {
 
   // (func any<-none-async)
   template <class T> vx_core::vx_Type_async f_any_from_none_async(T* generic_any_1) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     return output;
   }
 
@@ -7600,7 +7608,7 @@ namespace vx_core {
 
   // (func any<-reduce-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_reduce_async(T* generic_any_1, T* result, U* item) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release({result, item});
     return output;
   }
@@ -7614,7 +7622,7 @@ namespace vx_core {
 
   // (func any<-reduce-next-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_reduce_next_async(T* generic_any_1, T* result, U* current, U* next) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release({result, current, next});
     return output;
   }
@@ -7628,7 +7636,7 @@ namespace vx_core {
 
   // (func async)
   template <class T> vx_core::vx_Type_async f_async(T* generic_any_1, T* value) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release(value);
     return output;
   }
@@ -7691,7 +7699,7 @@ namespace vx_core {
 
   // (func let-async)
   template <class T> vx_core::vx_Type_async f_let_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any_async) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release(fn_any_async);
     return output;
   }
@@ -7764,7 +7772,7 @@ namespace vx_core {
 
   // (func list<-list-async)
   template <class X, class Y> vx_core::vx_Type_async f_list_from_list_async(X* generic_list_1, Y* values, vx_core::Func_any_from_any_async fn_any_from_any_async) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_list_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_list_1));
     vx_core::vx_release({values, fn_any_from_any_async});
     return output;
   }
@@ -7778,7 +7786,7 @@ namespace vx_core {
 
   // (func list<-map-async)
   template <class X, class O> vx_core::vx_Type_async f_list_from_map_async(X* generic_list_1, O* valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_list_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_list_1));
     vx_core::vx_release({valuemap, fn_any_from_key_value_async});
     return output;
   }
@@ -7814,7 +7822,7 @@ namespace vx_core {
 
   // (func resolve-async)
   template <class T> vx_core::vx_Type_async f_resolve_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     vx_core::vx_release(fn_any);
     return output;
   }

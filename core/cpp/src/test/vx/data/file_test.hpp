@@ -1,3 +1,5 @@
+#ifndef vx_data_file_test
+#define vx_data_file_test
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 
@@ -15,3 +17,4 @@ namespace vx_data_file_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+#endif

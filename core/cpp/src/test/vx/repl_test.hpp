@@ -1,3 +1,5 @@
+#ifndef vx_repl_test
+#define vx_repl_test
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 
@@ -11,3 +13,4 @@ namespace vx_repl_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+#endif

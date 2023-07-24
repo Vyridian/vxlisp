@@ -2,6 +2,8 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 
+#include "textblock_test.hpp"
+
 namespace vx_data_textblock_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {

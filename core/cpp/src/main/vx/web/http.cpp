@@ -157,7 +157,7 @@ namespace vx_web_http {
 
   // (func csv<-httpget)
   vx_core::vx_Type_async f_csv_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_data_csv::e_csv());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_csv::e_csv());
     vx_core::f_let_async(
       vx_data_csv::t_csv(),
       vx_core::t_any_from_func_async()->vx_fn_new([url]() {
@@ -166,7 +166,7 @@ namespace vx_web_http {
           vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), any_textblock);
           return vx_data_csv::f_csv_from_textblock(textblock);
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_textblock, fn_any_any_textblock);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_textblock, vx_data_textblock::t_textblock(), fn_any_any_textblock);
         return output;
       })
     );
@@ -242,7 +242,7 @@ namespace vx_web_http {
     }
 
     vx_core::vx_Type_async Class_csv_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_csv_from_httpget(url);
       vx_core::vx_release(arglist);
@@ -253,7 +253,7 @@ namespace vx_web_http {
 
   // (func json<-httpget)
   vx_core::vx_Type_async f_json_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_web_http::e_response());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
     vx_core::f_let_async(
       vx_web_http::t_response(),
       vx_core::t_any_from_func_async()->vx_fn_new([url]() {
@@ -262,7 +262,7 @@ namespace vx_web_http {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
           return response;
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, fn_any_any_response);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), fn_any_any_response);
         return output;
       })
     );
@@ -338,7 +338,7 @@ namespace vx_web_http {
     }
 
     vx_core::vx_Type_async Class_json_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_json_from_httpget(url);
       vx_core::vx_release(arglist);
@@ -349,7 +349,7 @@ namespace vx_web_http {
 
   // (func response<-httpget)
   vx_core::vx_Type_async f_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_web_http::e_response());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
     vx_core::vx_release({url, contenttype});
     return output;
   }
@@ -411,7 +411,7 @@ namespace vx_web_http {
     vx_core::vx_Type_listany Class_response_from_httpget::vx_dispose() {return vx_core::emptylistany;}
 
     vx_core::vx_Type_async Class_response_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string contenttype = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_http::f_response_from_httpget(url, contenttype);
@@ -423,7 +423,7 @@ namespace vx_web_http {
 
   // (func text<-httpget)
   vx_core::vx_Type_async f_text_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_string());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_string());
     vx_core::f_let_async(
       vx_core::t_string(),
       vx_core::t_any_from_func_async()->vx_fn_new([url]() {
@@ -432,7 +432,7 @@ namespace vx_web_http {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
           return vx_web_http::f_text_from_response(response);
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, fn_any_any_response);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), fn_any_any_response);
         return output;
       })
     );
@@ -508,7 +508,7 @@ namespace vx_web_http {
     }
 
     vx_core::vx_Type_async Class_text_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_text_from_httpget(url);
       vx_core::vx_release(arglist);
@@ -604,7 +604,7 @@ namespace vx_web_http {
 
   // (func textblock<-httpget)
   vx_core::vx_Type_async f_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_data_textblock::e_textblock());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_textblock::e_textblock());
     vx_core::f_let_async(
       vx_data_textblock::t_textblock(),
       vx_core::t_any_from_func_async()->vx_fn_new([url, contenttype]() {
@@ -613,7 +613,7 @@ namespace vx_web_http {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
           return vx_web_http::f_textblock_from_response(response);
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, fn_any_any_response);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), fn_any_any_response);
         return output;
       })
     );
@@ -678,7 +678,7 @@ namespace vx_web_http {
     vx_core::vx_Type_listany Class_textblock_from_httpget::vx_dispose() {return vx_core::emptylistany;}
 
     vx_core::vx_Type_async Class_textblock_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string contenttype = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_http::f_textblock_from_httpget(url, contenttype);
@@ -782,7 +782,7 @@ namespace vx_web_http {
 
   // (func xml<-httpget)
   vx_core::vx_Type_async f_xml_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_data_xml::e_xml());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_xml::e_xml());
     vx_core::f_let_async(
       vx_data_xml::t_xml(),
       vx_core::t_any_from_func_async()->vx_fn_new([url]() {
@@ -791,7 +791,7 @@ namespace vx_web_http {
           vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), any_textblock);
           return vx_data_xml::f_xml_from_textblock(textblock);
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_textblock, fn_any_any_textblock);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_textblock, vx_data_textblock::t_textblock(), fn_any_any_textblock);
         return output;
       })
     );
@@ -867,7 +867,7 @@ namespace vx_web_http {
     }
 
     vx_core::vx_Type_async Class_xml_from_httpget::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_core::Type_string url = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_http::f_xml_from_httpget(url);
       vx_core::vx_release(arglist);

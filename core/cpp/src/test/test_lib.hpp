@@ -1,3 +1,5 @@
+#ifndef test_lib_hpp
+#define test_lib_hpp
 #include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"
@@ -29,3 +31,4 @@ namespace test_lib {
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
 }
+#endif

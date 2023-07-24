@@ -3,6 +3,8 @@
 #include "../../main/vx/test.hpp"
 #include "../../main/vx/data/textblock.hpp"
 
+#include "repl_test.hpp"
+
 namespace vx_repl_test {
 
   vx_test::Type_testcase f_any_from_repl(vx_core::Type_context context) {

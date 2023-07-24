@@ -5,6 +5,8 @@
 #include "../../../main/vx/type.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 
+#include "csv_test.hpp"
+
 namespace vx_data_csv_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {

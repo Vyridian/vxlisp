@@ -3,6 +3,8 @@
 #include "../../main/vx/test.hpp"
 #include "../../main/vx/type.hpp"
 
+#include "collection_test.hpp"
+
 namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_end(vx_core::Type_context context) {

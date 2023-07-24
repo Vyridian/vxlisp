@@ -738,7 +738,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 			"\n    }" +
 			"\n" +
 			"\n    vx_core::vx_Type_async " + classname + "::vx_" + funcname + "(" + simpleargtext + ") const {" +
-			"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());" +
+			"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
@@ -795,7 +795,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 					if issamegeneric {
 						// both generics are the same
 						asyncbody += "" +
-							"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(val);"
+							"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(val);"
 					} else {
 						asyncbody += "" +
 							"\n      " + CppNameTypeFromType(arg.vxtype) + " inputval = vx_core::vx_any_from_any(" + CppNameTFromType(arg.vxtype) + ", val);" +
@@ -892,7 +892,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 		returnvalue += "" +
 			"\n      vx_core::vx_Type_async output;" +
 			"\n      if (fn == NULL) {" +
-			"\n        output = vx_core::vx_async_new_from_val(vx_core::vx_empty(generic_any_1));" +
+			"\n        output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));" +
 			"\n      } else {" +
 			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
 			"\n      }" +
@@ -947,7 +947,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 	default:
 		if fnc.vxtype.name == "none" {
 		} else if fnc.async {
-			defaultvalue = lineindent + "vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(" + CppNameEFromType(fnc.vxtype) + ");"
+			defaultvalue = lineindent + "vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(" + CppNameEFromType(fnc.vxtype) + ");"
 		} else if fnc.generictype != nil {
 			defaultvalue = lineindent + returntype + " output = vx_core::vx_empty(" + CppNameTFromTypeGeneric(fnc.generictype) + ");"
 		} else {
@@ -1798,9 +1798,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		vxmap := ""
 		if allowname == "any" {
 			allowname = ""
-			vxmap = "\n      return this->vx_p_map;"
+			vxmap = "this->vx_p_map;"
 		} else {
-			vxmap = "\n      return vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);"
+			vxmap = "vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);"
 			allowcode += "" +
 				"\n    // vx_get_any(key)" +
 				"\n    vx_core::Type_any " + classname + "::vx_get_any(vx_core::Type_string key) const {" +
@@ -1814,8 +1814,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		instancefuncs += "" +
 			"\n    // vx_map()" +
 			"\n    vx_core::vx_Type_mapany " + classname + "::vx_map() const {" +
-			"\n      vx_core::vx_Type_mapany output;" +
-			vxmap +
+			"\n      vx_core::vx_Type_mapany output = " + vxmap +
 			"\n      return output;" +
 			"\n    }" +
 			"\n" +
@@ -2515,8 +2514,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent string
 												arglineindent + "  " + lambdatypename + " " + lambdaargname + " = vx_core::vx_any_from_any(" + CppNameTFromType(lambdaarg.vxtype) + ", any_" + lambdaargname + ");"
 											aftertext += "" +
 												arglineindent + "};" +
-												arglineindent + "vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_" + lambdaargname + ", fn_any_any_" + lambdaargname + ");" +
-												arglineindent + "return output;"
+												arglineindent + "vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_" + lambdaargname + ", " + CppNameTFromType(lambdaarg.vxtype) + ", fn_any_any_" + lambdaargname + ");" + arglineindent + "return output;"
 											argindent += "  "
 										} else {
 											lambdavaluetext, msgs := CppFromValue(lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
@@ -2837,7 +2835,7 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 	if BooleanFromStringContains(body, " std::function<") {
 		output += "#include <functional>\n"
 	}
-	if BooleanFromStringContains(body, " std::shared_future<") {
+	if BooleanFromStringContains(body, " std::future<") {
 		output += "#include <future>\n"
 	}
 	if BooleanFromStringContains(body, " std::cout ") {
@@ -3658,7 +3656,7 @@ func CppReplFromFunc(fnc *vxfunc) string {
 	if fnc.async {
 		output = "" +
 			"\n    vx_core::vx_Type_async " + classname + "::vx_repl(vx_core::Type_anylist arglist) {" +
-			"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());" +
+			"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());" +
 			replparams +
 			"\n      output = " + pkgname + "::f_" + funcname + "(" + strings.Join(listargname, ", ") + ");" +
 			"\n      vx_core::vx_release(arglist);" +
@@ -3937,8 +3935,15 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 	imports := CppImportsFromPackage(pkg, "", body, true)
 	slashcount := IntFromStringCount(pkg.name, "/")
 	slashprefix := StringRepeat("../", slashcount)
+	simplename := pkg.name
+	ipos := IntFromStringFindLast(simplename, "/")
+	if ipos >= 0 {
+		simplename = simplename[ipos+1:]
+	}
 	headertext := "" +
-		"#include \"" + slashprefix + "../main/vx/core.hpp\"" +
+		"#ifndef " + pkgname + "_test" +
+		"\n#define " + pkgname + "_test" +
+		"\n#include \"" + slashprefix + "../main/vx/core.hpp\"" +
 		"\n#include \"" + slashprefix + "../main/vx/test.hpp\"" +
 		"\n" +
 		"\nnamespace " + pkgname + "_test {" +
@@ -3953,9 +3958,12 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		"\n  vx_test::Type_testpackage test_package(vx_core::Type_context context);" +
 		"\n" +
 		"\n}" +
+		"\n#endif" +
 		"\n"
 	output := "" +
 		imports +
+		"\n#include \"" + simplename + "_test.hpp\"" +
+		"\n" +
 		"\nnamespace " + pkgname + "_test {" +
 		"\n" +
 		body +
@@ -4210,7 +4218,9 @@ namespace app_test {
 
 func CppTestLib() (string, string) {
 	header := "" +
-		`#include "../main/vx/core.hpp"
+		`#ifndef test_lib_hpp
+#define test_lib_hpp
+#include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"
 	
@@ -4241,6 +4251,7 @@ namespace test_lib {
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
 }
+#endif
 `
 	body := "" +
 		`#include "../main/vx/core.hpp"

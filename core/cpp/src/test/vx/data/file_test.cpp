@@ -3,6 +3,8 @@
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 
+#include "file_test.hpp"
+
 namespace vx_data_file_test {
 
   vx_test::Type_testcase f_boolean_exists_from_file(vx_core::Type_context context) {

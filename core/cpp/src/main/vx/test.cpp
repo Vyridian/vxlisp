@@ -3596,7 +3596,7 @@ namespace vx_test {
 
   // (func resolve-testcase)
   vx_core::vx_Type_async f_resolve_testcase(vx_test::Type_testcase testcase) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testcase());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testcase());
     vx_core::f_let_async(
       vx_test::t_testcase(),
       vx_core::t_any_from_func_async()->vx_fn_new([testcase]() {
@@ -3631,7 +3631,7 @@ namespace vx_test {
             })
           );
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolvedlist, fn_any_any_resolvedlist);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolvedlist, vx_test::t_testdescribelist(), fn_any_any_resolvedlist);
         return output;
       })
     );
@@ -3707,7 +3707,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testcase::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testcase testcase = vx_core::vx_any_from_any(vx_test::t_testcase(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testcase(testcase);
       vx_core::vx_release(arglist);
@@ -3718,7 +3718,7 @@ namespace vx_test {
 
   // (func resolve-testcaselist)
   vx_core::vx_Type_async f_resolve_testcaselist(vx_test::Type_testcaselist testcaselist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testcaselist());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testcaselist());
     output = vx_core::f_list_from_list_async(
       vx_test::t_testcaselist(),
       testcaselist,
@@ -3796,7 +3796,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testcaselist::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testcaselist testcaselist = vx_core::vx_any_from_any(vx_test::t_testcaselist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testcaselist(testcaselist);
       vx_core::vx_release(arglist);
@@ -3807,7 +3807,7 @@ namespace vx_test {
 
   // (func resolve-testdescribe)
   vx_core::vx_Type_async f_resolve_testdescribe(vx_test::Type_testdescribe testdescribe) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testdescribe());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testdescribe());
     vx_core::f_let_async(
       vx_test::t_testdescribe(),
       vx_core::t_any_from_func_async()->vx_fn_new([testdescribe]() {
@@ -3823,7 +3823,7 @@ namespace vx_test {
             })
           );
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolved, fn_any_any_resolved);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolved, vx_test::t_testresult(), fn_any_any_resolved);
         return output;
       })
     );
@@ -3899,7 +3899,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testdescribe::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testdescribe testdescribe = vx_core::vx_any_from_any(vx_test::t_testdescribe(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testdescribe(testdescribe);
       vx_core::vx_release(arglist);
@@ -3910,7 +3910,7 @@ namespace vx_test {
 
   // (func resolve-testdescribelist)
   vx_core::vx_Type_async f_resolve_testdescribelist(vx_test::Type_testdescribelist testdescribelist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testdescribelist());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testdescribelist());
     output = vx_core::f_list_from_list_async(
       vx_test::t_testdescribelist(),
       testdescribelist,
@@ -3988,7 +3988,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testdescribelist::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testdescribelist testdescribelist = vx_core::vx_any_from_any(vx_test::t_testdescribelist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testdescribelist(testdescribelist);
       vx_core::vx_release(arglist);
@@ -3999,7 +3999,7 @@ namespace vx_test {
 
   // (func resolve-testpackage)
   vx_core::vx_Type_async f_resolve_testpackage(vx_test::Type_testpackage testpackage) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testpackage());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testpackage());
     vx_core::f_let_async(
       vx_test::t_testpackage(),
       vx_core::t_any_from_func_async()->vx_fn_new([testpackage]() {
@@ -4027,7 +4027,7 @@ namespace vx_test {
             })
           );
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolvedlist, fn_any_any_resolvedlist);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_resolvedlist, vx_test::t_testcaselist(), fn_any_any_resolvedlist);
         return output;
       })
     );
@@ -4103,7 +4103,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testpackage::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testpackage testpackage = vx_core::vx_any_from_any(vx_test::t_testpackage(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testpackage(testpackage);
       vx_core::vx_release(arglist);
@@ -4114,7 +4114,7 @@ namespace vx_test {
 
   // (func resolve-testpackagelist)
   vx_core::vx_Type_async f_resolve_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testpackagelist());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testpackagelist());
     output = vx_core::f_list_from_list_async(
       vx_test::t_testpackagelist(),
       testpackagelist,
@@ -4192,7 +4192,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testpackagelist::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testpackagelist testpackagelist = vx_core::vx_any_from_any(vx_test::t_testpackagelist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testpackagelist(testpackagelist);
       vx_core::vx_release(arglist);
@@ -4203,7 +4203,7 @@ namespace vx_test {
 
   // (func resolve-testresult)
   vx_core::vx_Type_async f_resolve_testresult(vx_test::Type_testresult testresult) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_test::e_testresult());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testresult());
     vx_core::f_let_async(
       vx_test::t_testresult(),
       vx_core::t_any_from_func_async()->vx_fn_new([testresult]() {
@@ -4246,7 +4246,7 @@ namespace vx_test {
             })
           );
         };
-        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_actual, fn_any_any_actual);
+        vx_core::vx_Type_async output = vx_core::vx_async_from_async_fn(future_actual, vx_core::t_any(), fn_any_any_actual);
         return output;
       })
     );
@@ -4322,7 +4322,7 @@ namespace vx_test {
     }
 
     vx_core::vx_Type_async Class_resolve_testresult::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_test::Type_testresult testresult = vx_core::vx_any_from_any(vx_test::t_testresult(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_test::f_resolve_testresult(testresult);
       vx_core::vx_release(arglist);

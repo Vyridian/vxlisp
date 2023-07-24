@@ -2649,8 +2649,7 @@ namespace vx_web_html {
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_propmap::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
       return output;
     }
 
@@ -3070,8 +3069,7 @@ namespace vx_web_html {
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_stylemap::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
       return output;
     }
 
@@ -4849,7 +4847,7 @@ namespace vx_web_html {
 
   // (func boolean-write<-stylesheet)
   vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_boolean());
+    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_boolean());
     vx_core::vx_release(stylesheet);
     return output;
   }
@@ -4922,7 +4920,7 @@ namespace vx_web_html {
     }
 
     vx_core::vx_Type_async Class_boolean_write_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_val(vx_core::e_any());
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any());
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_boolean_write_from_stylesheet(stylesheet);
       vx_core::vx_release(arglist);

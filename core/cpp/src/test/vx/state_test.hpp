@@ -1,3 +1,5 @@
+#ifndef vx_state_test
+#define vx_state_test
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 
@@ -10,3 +12,4 @@ namespace vx_state_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+#endif

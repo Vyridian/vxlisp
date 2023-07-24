@@ -21,8 +21,7 @@ namespace vx_state {
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_value_map::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return this->vx_p_map;
+      vx_core::vx_Type_mapany output = this->vx_p_map;
       return output;
     }
 

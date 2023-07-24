@@ -290,8 +290,7 @@ namespace vx_data_table {
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_cellmap::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
       return output;
     }
 
@@ -1327,8 +1326,7 @@ namespace vx_data_table {
     }
     // vx_map()
     vx_core::vx_Type_mapany Class_rowmap::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
       return output;
     }
 

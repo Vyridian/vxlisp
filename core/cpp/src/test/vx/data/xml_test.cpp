@@ -3,6 +3,8 @@
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 
+#include "xml_test.hpp"
+
 namespace vx_data_xml_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {

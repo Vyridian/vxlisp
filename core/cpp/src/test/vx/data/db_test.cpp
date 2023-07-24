@@ -2,6 +2,8 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 
+#include "db_test.hpp"
+
 namespace vx_data_db_test {
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
