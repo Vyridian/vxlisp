@@ -2728,7 +2728,7 @@ namespace vx_web_html {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_string valany;
+          vx_core::Type_string valany = NULL;
           if (valsubtype == vx_core::t_string()) {
             valany = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
           } else if (valsubtype == vx_core::t_string()) {
@@ -3148,7 +3148,7 @@ namespace vx_web_html {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_web_html::Type_style valany;
+          vx_web_html::Type_style valany = NULL;
           if (valsubtype == vx_web_html::t_style()) {
             valany = vx_core::vx_any_from_any(vx_web_html::t_style(), valsub);
           } else if (valsubtype == vx_web_html::t_style()) {

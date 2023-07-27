@@ -1,5 +1,5 @@
-#ifndef vx_web_html_hpp
-#define vx_web_html_hpp
+#ifndef VX_WEB_HTML_HPP
+#define VX_WEB_HTML_HPP
 #include <map>
 #include <string>
 #include <vector>

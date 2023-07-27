@@ -74,15 +74,18 @@ let-async
   extern vx_Type_listany emptylistany;
   extern vx_Type_mapany emptymapany;
 
+  typedef std::future<vx_core::Type_any>* vx_Type_future;
+  typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
+
   // class vx_Class_async
   class vx_Class_async {
   public:
     long vx_p_iref = 0;
     vx_core::Type_any type = NULL;
     vx_core::Type_any value = NULL;
-    std::future<vx_core::Type_any>* future = NULL;
+    vx_core::vx_Type_future future = NULL;
     vx_core::vx_Class_async* async_parent = NULL;
-    std::function<vx_core::Type_any(vx_core::Type_any)> fn = NULL;
+    vx_core::vx_Type_fn_any_from_any fn = NULL;
     void vx_create();
     void vx_dispose();
     vx_core::Type_any sync_value();
@@ -91,10 +94,10 @@ let-async
   typedef vx_Class_async* vx_Type_async;
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, std::function<vx_core::Type_any(vx_core::Type_any)> fn);
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
-  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, std::future<vx_core::Type_any>* future);
+  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
 
   // vx_async_new_from_value(any)
   vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
@@ -116,6 +119,9 @@ let-async
 
   // vx_debug(any)
   void vx_debug(vx_core::Type_any val);
+
+  // vx_debug(async)
+  void vx_debug(vx_core::vx_Type_async async);
 
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
@@ -140,6 +146,12 @@ let-async
 
   // vx_new_string(string)
   vx_core::Type_string vx_new_string(std::string text);
+
+  // vx_ref_minus(any)
+  void vx_ref_minus(vx_core::Type_any any);
+
+  // vx_ref_plus(any)
+  void vx_ref_plus(vx_core::Type_any any);
 
   // vx_release(any)
   void vx_release(vx_core::Type_any any);
@@ -295,6 +307,9 @@ let-async
   // vx_sync_from_async(async)
   template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
     vx_core::Type_any value = async->sync_value();
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_async(async);
+    vx_core::vx_ref_minus(value);
     T* output = vx_core::vx_any_from_any(generic_any_1, value);
     return output;
   }
@@ -331,38 +346,46 @@ let-async
     void vx_Class_async::vx_dispose() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one(this->value);
-      vx_core::vx_release_one_async(async_parent);
+      this->value = NULL;
+      vx_core::vx_release_one_async(this->async_parent);
+      this->async_parent = NULL;
       if (this->future != NULL) {
         delete this->future;
+        this->future = NULL;
       }
     }
     vx_core::Type_any vx_Class_async::sync_value() {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_any value = this->value;
       if (value == NULL) {
-        std::future<vx_core::Type_any>* future = this->future;
+        vx_core::vx_Type_future future = this->future;
         if (future != NULL) {
           future->wait();
           value = future->get();
           delete future;
+          this->future = NULL;
         } else {
           vx_core::vx_Type_async async_parent = this->async_parent;
           if (async_parent != NULL) {
             vx_core::Type_any parentvalue = async_parent->sync_value();
-            vx_core::vx_release_one_async(async_parent);
             if (parentvalue != NULL) {
-              std::function<vx_core::Type_any(vx_core::Type_any)> fn = this->fn;
+              vx_core::vx_Type_fn_any_from_any fn = this->fn;
               if (fn == NULL) {
                 value = parentvalue;
+                vx_core::vx_reserve(value);
               } else {
                 value = fn(parentvalue);
-                vx_core::vx_release(parentvalue);
+                vx_core::vx_reserve(value);
+                this->fn = NULL;
               }
             }
+            vx_core::vx_release_one_async(async_parent);
+            this->async_parent = NULL;
           }
         }
       }
       if (value != NULL) {
+        this->value = value;
         output = value;
       }
       return output;
@@ -370,17 +393,18 @@ let-async
   // }
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, std::function<vx_core::Type_any(vx_core::Type_any)> fn) {
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
+    output->vx_create();
     output->type = type;
     output->async_parent = async;
-    output->fn = std::function<vx_core::Type_any(vx_core::Type_any)>(fn);
+    output->fn = fn;
     vx_core::vx_reserve_async(async);
     return output;
   }
 
   // vx_async_new_from_future(T, future<T>)
-  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, std::future<vx_core::Type_any>* future) {
+  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
     output->vx_create();
     output->type = generic_any_1;
@@ -442,6 +466,16 @@ let-async
       vx_debug("null");
     } else {
       std::string sval = vx_core::vx_string_from_any(val);
+      vx_debug(sval);
+    }
+  }
+
+  // vx_debug(async)
+  void vx_debug(vx_core::vx_Type_async async) {
+    if (async == NULL) {
+      vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async(async);
       vx_debug(sval);
     }
   }
@@ -512,6 +546,37 @@ let-async
     return output;
   }
 
+  // vx_ref(any)
+  long vx_ref(vx_core::Type_any any) {
+    long output = 0;
+    if (any != NULL) {
+      output = any->vx_p_iref;
+    }
+    return output;
+  }
+
+  // vx_ref_minus(any)
+  void vx_ref_minus(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref -= 1;
+        any->vx_p_iref = iref;
+      }
+    }
+  }
+
+  // vx_ref_plus(any)
+  void vx_ref_plus(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref >= 0) {
+        iref += 1;
+        any->vx_p_iref = iref;
+      }
+    }
+  }
+
   // vx_release(any)
   void vx_release(vx_core::Type_any any) {
     if (any == NULL) {
@@ -570,6 +635,17 @@ let-async
         } else {
           async->vx_p_iref = iref;
         }
+      }
+    }
+  }
+
+  // vx_release_ref(any)
+  void vx_release_ref(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref -= 1;
+        any->vx_p_iref = iref;
       }
     }
   }
@@ -784,6 +860,19 @@ let-async
       if (val != NULL) {
         std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed);
         output += "\n " + indenttext + ":value " + text;
+      }
+      vx_core::vx_Type_future future = async->future;
+      if (future != NULL) {
+        output += "\n " + indenttext + ":future future";
+      }
+      vx_core::vx_Type_fn_any_from_any fn = async->fn;
+      if (fn != NULL) {
+        output += "\n " + indenttext + ":fn fn";
+      }
+      vx_core::vx_Type_async asyncparent = async->async_parent;
+      if (asyncparent != NULL) {
+        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed);
+        output += "\n " + indenttext + ":async_parent\n" + text;
       }
       output += ")";
     }

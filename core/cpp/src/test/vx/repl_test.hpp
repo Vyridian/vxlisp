@@ -1,5 +1,5 @@
-#ifndef vx_repl_test
-#define vx_repl_test
+#ifndef VX_REPL_TEST_HPP
+#define VX_REPL_TEST_HPP
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 

@@ -442,7 +442,7 @@ namespace vx_data_db {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_data_db::Type_dbcell valany;
+          vx_data_db::Type_dbcell valany = NULL;
           if (valsubtype == vx_data_db::t_dbcell()) {
             valany = vx_core::vx_any_from_any(vx_data_db::t_dbcell(), valsub);
           } else if (valsubtype == vx_data_db::t_dbcell()) {
@@ -750,7 +750,7 @@ namespace vx_data_db {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_data_db::Type_dbfield valany;
+          vx_data_db::Type_dbfield valany = NULL;
           if (valsubtype == vx_data_db::t_dbfield()) {
             valany = vx_core::vx_any_from_any(vx_data_db::t_dbfield(), valsub);
           } else if (valsubtype == vx_data_db::t_dbfield()) {

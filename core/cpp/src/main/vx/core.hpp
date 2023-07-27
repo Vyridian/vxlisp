@@ -1,5 +1,5 @@
-#ifndef vx_core_hpp
-#define vx_core_hpp
+#ifndef VX_CORE_HPP
+#define VX_CORE_HPP
 #include <exception>
 #include <functional>
 #include <future>
@@ -1334,15 +1334,18 @@ namespace vx_core {
   extern vx_Type_listany emptylistany;
   extern vx_Type_mapany emptymapany;
 
+  typedef std::future<vx_core::Type_any>* vx_Type_future;
+  typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
+
   // class vx_Class_async
   class vx_Class_async {
   public:
     long vx_p_iref = 0;
     vx_core::Type_any type = NULL;
     vx_core::Type_any value = NULL;
-    std::future<vx_core::Type_any>* future = NULL;
+    vx_core::vx_Type_future future = NULL;
     vx_core::vx_Class_async* async_parent = NULL;
-    std::function<vx_core::Type_any(vx_core::Type_any)> fn = NULL;
+    vx_core::vx_Type_fn_any_from_any fn = NULL;
     void vx_create();
     void vx_dispose();
     vx_core::Type_any sync_value();
@@ -1351,10 +1354,10 @@ namespace vx_core {
   typedef vx_Class_async* vx_Type_async;
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, std::function<vx_core::Type_any(vx_core::Type_any)> fn);
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
-  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, std::future<vx_core::Type_any>* future);
+  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
 
   // vx_async_new_from_value(any)
   vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
@@ -1376,6 +1379,9 @@ namespace vx_core {
 
   // vx_debug(any)
   void vx_debug(vx_core::Type_any val);
+
+  // vx_debug(async)
+  void vx_debug(vx_core::vx_Type_async async);
 
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
@@ -1400,6 +1406,12 @@ namespace vx_core {
 
   // vx_new_string(string)
   vx_core::Type_string vx_new_string(std::string text);
+
+  // vx_ref_minus(any)
+  void vx_ref_minus(vx_core::Type_any any);
+
+  // vx_ref_plus(any)
+  void vx_ref_plus(vx_core::Type_any any);
 
   // vx_release(any)
   void vx_release(vx_core::Type_any any);
@@ -1555,6 +1567,9 @@ namespace vx_core {
   // vx_sync_from_async(async)
   template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
     vx_core::Type_any value = async->sync_value();
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_async(async);
+    vx_core::vx_ref_minus(value);
     T* output = vx_core::vx_any_from_any(generic_any_1, value);
     return output;
   }

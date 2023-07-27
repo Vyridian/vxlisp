@@ -1,5 +1,5 @@
-#ifndef vx_collection_hpp
-#define vx_collection_hpp
+#ifndef VX_COLLECTION_HPP
+#define VX_COLLECTION_HPP
 #include "../vx/core.hpp"
 #include "../vx/type.hpp"
 

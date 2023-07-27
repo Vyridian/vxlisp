@@ -1,5 +1,5 @@
-#ifndef vx_data_xml_hpp
-#define vx_data_xml_hpp
+#ifndef VX_DATA_XML_HPP
+#define VX_DATA_XML_HPP
 #include <map>
 #include <string>
 #include <vector>

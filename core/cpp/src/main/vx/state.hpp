@@ -1,5 +1,5 @@
-#ifndef vx_state_hpp
-#define vx_state_hpp
+#ifndef VX_STATE_HPP
+#define VX_STATE_HPP
 #include "../vx/core.hpp"
 
 namespace vx_state {

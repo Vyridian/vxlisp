@@ -1,6 +1,4 @@
 #include <exception>
-#include <functional>
-#include <future>
 #include <iostream>
 #include <map>
 #include <string>
@@ -22,38 +20,46 @@ namespace vx_core {
     void vx_Class_async::vx_dispose() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one(this->value);
-      vx_core::vx_release_one_async(async_parent);
+      this->value = NULL;
+      vx_core::vx_release_one_async(this->async_parent);
+      this->async_parent = NULL;
       if (this->future != NULL) {
         delete this->future;
+        this->future = NULL;
       }
     }
     vx_core::Type_any vx_Class_async::sync_value() {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_any value = this->value;
       if (value == NULL) {
-        std::future<vx_core::Type_any>* future = this->future;
+        vx_core::vx_Type_future future = this->future;
         if (future != NULL) {
           future->wait();
           value = future->get();
           delete future;
+          this->future = NULL;
         } else {
           vx_core::vx_Type_async async_parent = this->async_parent;
           if (async_parent != NULL) {
             vx_core::Type_any parentvalue = async_parent->sync_value();
-            vx_core::vx_release_one_async(async_parent);
             if (parentvalue != NULL) {
-              std::function<vx_core::Type_any(vx_core::Type_any)> fn = this->fn;
+              vx_core::vx_Type_fn_any_from_any fn = this->fn;
               if (fn == NULL) {
                 value = parentvalue;
+                vx_core::vx_reserve(value);
               } else {
                 value = fn(parentvalue);
-                vx_core::vx_release(parentvalue);
+                vx_core::vx_reserve(value);
+                this->fn = NULL;
               }
             }
+            vx_core::vx_release_one_async(async_parent);
+            this->async_parent = NULL;
           }
         }
       }
       if (value != NULL) {
+        this->value = value;
         output = value;
       }
       return output;
@@ -61,17 +67,18 @@ namespace vx_core {
   // }
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, std::function<vx_core::Type_any(vx_core::Type_any)> fn) {
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
+    output->vx_create();
     output->type = type;
     output->async_parent = async;
-    output->fn = std::function<vx_core::Type_any(vx_core::Type_any)>(fn);
+    output->fn = fn;
     vx_core::vx_reserve_async(async);
     return output;
   }
 
   // vx_async_new_from_future(T, future<T>)
-  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, std::future<vx_core::Type_any>* future) {
+  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
     output->vx_create();
     output->type = generic_any_1;
@@ -133,6 +140,16 @@ namespace vx_core {
       vx_debug("null");
     } else {
       std::string sval = vx_core::vx_string_from_any(val);
+      vx_debug(sval);
+    }
+  }
+
+  // vx_debug(async)
+  void vx_debug(vx_core::vx_Type_async async) {
+    if (async == NULL) {
+      vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async(async);
       vx_debug(sval);
     }
   }
@@ -203,6 +220,37 @@ namespace vx_core {
     return output;
   }
 
+  // vx_ref(any)
+  long vx_ref(vx_core::Type_any any) {
+    long output = 0;
+    if (any != NULL) {
+      output = any->vx_p_iref;
+    }
+    return output;
+  }
+
+  // vx_ref_minus(any)
+  void vx_ref_minus(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref -= 1;
+        any->vx_p_iref = iref;
+      }
+    }
+  }
+
+  // vx_ref_plus(any)
+  void vx_ref_plus(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref >= 0) {
+        iref += 1;
+        any->vx_p_iref = iref;
+      }
+    }
+  }
+
   // vx_release(any)
   void vx_release(vx_core::Type_any any) {
     if (any == NULL) {
@@ -261,6 +309,17 @@ namespace vx_core {
         } else {
           async->vx_p_iref = iref;
         }
+      }
+    }
+  }
+
+  // vx_release_ref(any)
+  void vx_release_ref(vx_core::Type_any any) {
+    if (any != NULL) {
+      long iref = any->vx_p_iref;
+      if (iref > 0) {
+        iref -= 1;
+        any->vx_p_iref = iref;
       }
     }
   }
@@ -475,6 +534,19 @@ namespace vx_core {
       if (val != NULL) {
         std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed);
         output += "\n " + indenttext + ":value " + text;
+      }
+      vx_core::vx_Type_future future = async->future;
+      if (future != NULL) {
+        output += "\n " + indenttext + ":future future";
+      }
+      vx_core::vx_Type_fn_any_from_any fn = async->fn;
+      if (fn != NULL) {
+        output += "\n " + indenttext + ":fn fn";
+      }
+      vx_core::vx_Type_async asyncparent = async->async_parent;
+      if (asyncparent != NULL) {
+        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed);
+        output += "\n " + indenttext + ":async_parent\n" + text;
       }
       output += ")";
     }
@@ -952,7 +1024,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_any valany;
+          vx_core::Type_any valany = NULL;
           if (valsubtype == vx_core::t_any()) {
             valany = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
           } else if (valsubtype == vx_core::t_any()) {
@@ -3373,7 +3445,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_arg valany;
+          vx_core::Type_arg valany = NULL;
           if (valsubtype == vx_core::t_arg()) {
             valany = vx_core::vx_any_from_any(vx_core::t_arg(), valsub);
           } else if (valsubtype == vx_core::t_arg()) {
@@ -3906,7 +3978,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_connect valany;
+          vx_core::Type_connect valany = NULL;
           if (valsubtype == vx_core::t_connect()) {
             valany = vx_core::vx_any_from_any(vx_core::t_connect(), valsub);
           } else if (valsubtype == vx_core::t_connect()) {
@@ -4390,7 +4462,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_const valany;
+          vx_core::Type_const valany = NULL;
           if (valsubtype == vx_core::t_const()) {
             valany = vx_core::vx_any_from_any(vx_core::t_const(), valsub);
           } else if (valsubtype == vx_core::t_const()) {
@@ -4904,7 +4976,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_func valany;
+          vx_core::Type_func valany = NULL;
           if (valsubtype == vx_core::t_func()) {
             valany = vx_core::vx_any_from_any(vx_core::t_func(), valsub);
           } else if (valsubtype == vx_core::t_func()) {
@@ -5178,7 +5250,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_int valany;
+          vx_core::Type_int valany = NULL;
           if (valsubtype == vx_core::t_int()) {
             valany = vx_core::vx_any_from_any(vx_core::t_int(), valsub);
           } else if (valsubtype == vx_core::t_int()) {
@@ -5749,7 +5821,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_number valany;
+          vx_core::Type_number valany = NULL;
           if (valsubtype == vx_core::t_number()) {
             valany = vx_core::vx_any_from_any(vx_core::t_number(), valsub);
           } else if (valsubtype == vx_core::t_number()) {
@@ -5965,7 +6037,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_package valany;
+          vx_core::Type_package valany = NULL;
           if (valsubtype == vx_core::t_package()) {
             valany = vx_core::vx_any_from_any(vx_core::t_package(), valsub);
           } else if (valsubtype == vx_core::t_package()) {
@@ -6360,7 +6432,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_permission valany;
+          vx_core::Type_permission valany = NULL;
           if (valsubtype == vx_core::t_permission()) {
             valany = vx_core::vx_any_from_any(vx_core::t_permission(), valsub);
           } else if (valsubtype == vx_core::t_permission()) {
@@ -6945,7 +7017,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_statelistener valany;
+          vx_core::Type_statelistener valany = NULL;
           if (valsubtype == vx_core::t_statelistener()) {
             valany = vx_core::vx_any_from_any(vx_core::t_statelistener(), valsub);
           } else if (valsubtype == vx_core::t_statelistener()) {
@@ -7385,7 +7457,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_string valany;
+          vx_core::Type_string valany = NULL;
           if (valsubtype == vx_core::t_string()) {
             valany = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
           } else if (valsubtype == vx_core::t_string()) {
@@ -8025,7 +8097,7 @@ namespace vx_core {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_any valany;
+          vx_core::Type_any valany = NULL;
           if (valsubtype == vx_core::t_any()) {
             valany = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
           } else if (valsubtype == vx_core::t_any()) {

@@ -1,5 +1,5 @@
-#ifndef vx_sample_hpp
-#define vx_sample_hpp
+#ifndef VX_SAMPLE_HPP
+#define VX_SAMPLE_HPP
 #include "../vx/core.hpp"
 
 namespace vx_sample {

@@ -1,5 +1,5 @@
-#ifndef vx_type_hpp
-#define vx_type_hpp
+#ifndef VX_TYPE_HPP
+#define VX_TYPE_HPP
 #include "../vx/core.hpp"
 
 namespace vx_type {

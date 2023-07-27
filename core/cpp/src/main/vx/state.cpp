@@ -92,7 +92,7 @@ namespace vx_state {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_any valany;
+          vx_core::Type_any valany = NULL;
           if (valsubtype == vx_core::t_any()) {
             valany = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
           } else if (valsubtype == vx_core::t_any()) {

@@ -1,5 +1,5 @@
-#ifndef vx_type_test
-#define vx_type_test
+#ifndef VX_TYPE_TEST_HPP
+#define VX_TYPE_TEST_HPP
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
 

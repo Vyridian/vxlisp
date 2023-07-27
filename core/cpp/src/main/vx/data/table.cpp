@@ -369,7 +369,7 @@ namespace vx_data_table {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_data_table::Type_cell valany;
+          vx_data_table::Type_cell valany = NULL;
           if (valsubtype == vx_data_table::t_cell()) {
             valany = vx_core::vx_any_from_any(vx_data_table::t_cell(), valsub);
           } else if (valsubtype == vx_data_table::t_cell()) {
@@ -1405,7 +1405,7 @@ namespace vx_data_table {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_data_table::Type_row valany;
+          vx_data_table::Type_row valany = NULL;
           if (valsubtype == vx_data_table::t_row()) {
             valany = vx_core::vx_any_from_any(vx_data_table::t_row(), valsub);
           } else if (valsubtype == vx_data_table::t_row()) {

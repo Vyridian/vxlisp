@@ -1,5 +1,5 @@
-#ifndef vx_test_hpp
-#define vx_test_hpp
+#ifndef VX_TEST_HPP
+#define VX_TEST_HPP
 #include <vector>
 #include "../vx/core.hpp"
 #include "../vx/data/file.hpp"

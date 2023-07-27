@@ -1,5 +1,5 @@
-#ifndef vx_web_http_test
-#define vx_web_http_test
+#ifndef VX_WEB_HTTP_TEST_HPP
+#define VX_WEB_HTTP_TEST_HPP
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 

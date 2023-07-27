@@ -1,5 +1,5 @@
-#ifndef test_lib_hpp
-#define test_lib_hpp
+#ifndef TEST_LIB_HPP
+#define TEST_LIB_HPP
 #include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"

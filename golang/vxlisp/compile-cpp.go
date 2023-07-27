@@ -1282,8 +1282,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		funcstaticbody
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
 	headeroutput := "" +
-		"#ifndef " + pkgname + "_hpp" +
-		"\n#define " + pkgname + "_hpp" +
+		"#ifndef " + StringUCase(pkgname+"_hpp") +
+		"\n#define " + StringUCase(pkgname+"_hpp") +
 		"\n" +
 		headerimports +
 		"\nnamespace " + pkgname + " {" +
@@ -1872,7 +1872,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n            msgblock = vx_core::vx_copy(msgblock, {msg});" +
 			"\n          }" +
 			"\n        } else {" +
-			"\n          " + allowclass + " valany;" +
+			"\n          " + allowclass + " valany = NULL;" +
 			"\n          if (valsubtype == " + allowttype + ") {" +
 			"\n            valany = vx_core::vx_any_from_any(" + allowttype + ", valsub);"
 		for _, allowedtype := range typ.allowtypes {
@@ -3941,8 +3941,8 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		simplename = simplename[ipos+1:]
 	}
 	headertext := "" +
-		"#ifndef " + pkgname + "_test" +
-		"\n#define " + pkgname + "_test" +
+		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
+		"\n#define " + StringUCase(pkgname+"_test_hpp") +
 		"\n#include \"" + slashprefix + "../main/vx/core.hpp\"" +
 		"\n#include \"" + slashprefix + "../main/vx/test.hpp\"" +
 		"\n" +
@@ -4218,8 +4218,8 @@ namespace app_test {
 
 func CppTestLib() (string, string) {
 	header := "" +
-		`#ifndef test_lib_hpp
-#define test_lib_hpp
+		`#ifndef TEST_LIB_HPP
+#define TEST_LIB_HPP
 #include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"

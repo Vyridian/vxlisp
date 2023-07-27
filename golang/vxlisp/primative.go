@@ -322,6 +322,14 @@ func StringTrim(str string) string {
 	return strings.TrimSpace(str)
 }
 
+func StringUCase(str string) string {
+	output := ""
+	if len(str) > 0 {
+		output = strings.ToUpper(str)
+	}
+	return output
+}
+
 func StringUCaseFirst(str string) string {
 	output := ""
 	if len(str) > 0 {

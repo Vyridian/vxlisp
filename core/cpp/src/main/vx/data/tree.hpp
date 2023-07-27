@@ -1,5 +1,5 @@
-#ifndef vx_data_tree_hpp
-#define vx_data_tree_hpp
+#ifndef VX_DATA_TREE_HPP
+#define VX_DATA_TREE_HPP
 #include <vector>
 #include "../../vx/core.hpp"
 

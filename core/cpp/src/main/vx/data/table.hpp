@@ -1,5 +1,5 @@
-#ifndef vx_data_table_hpp
-#define vx_data_table_hpp
+#ifndef VX_DATA_TABLE_HPP
+#define VX_DATA_TABLE_HPP
 #include <map>
 #include <string>
 #include <vector>

@@ -1,5 +1,5 @@
-#ifndef vx_data_textblock_test
-#define vx_data_textblock_test
+#ifndef VX_DATA_TEXTBLOCK_TEST_HPP
+#define VX_DATA_TEXTBLOCK_TEST_HPP
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef vx_data_db_hpp
-#define vx_data_db_hpp
+#ifndef VX_DATA_DB_HPP
+#define VX_DATA_DB_HPP
 #include <map>
 #include <string>
 #include "../../vx/core.hpp"

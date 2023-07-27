@@ -546,7 +546,7 @@ namespace vx_data_xml {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_string valany;
+          vx_core::Type_string valany = NULL;
           if (valsubtype == vx_core::t_string()) {
             valany = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
           } else if (valsubtype == vx_core::t_string()) {

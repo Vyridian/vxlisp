@@ -1,5 +1,5 @@
-#ifndef vx_data_textblock_hpp
-#define vx_data_textblock_hpp
+#ifndef VX_DATA_TEXTBLOCK_HPP
+#define VX_DATA_TEXTBLOCK_HPP
 #include <vector>
 #include "../../vx/core.hpp"
 

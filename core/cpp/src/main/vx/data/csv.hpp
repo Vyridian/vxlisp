@@ -1,5 +1,5 @@
-#ifndef vx_data_csv_hpp
-#define vx_data_csv_hpp
+#ifndef VX_DATA_CSV_HPP
+#define VX_DATA_CSV_HPP
 #include <vector>
 #include "../../vx/core.hpp"
 #include "../../vx/collection.hpp"
