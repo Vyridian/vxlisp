@@ -141,28 +141,31 @@ namespace vx_collection_test {
                     vx_core::vx_new_string("d")
                   })
                 ),
-                vx_core::t_any_from_any()->vx_fn_new([](vx_core::Type_any val_any) {
+                vx_core::t_any_from_any()->vx_fn_new({}, [](vx_core::Type_any val_any) {
                   vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), val_any);
-                  return 
+                  vx_core::Type_any output_1 = 
                     vx_core::f_if_2(
                       vx_core::t_string(),
                       vx_core::vx_new(vx_core::t_thenelselist(), {
                         vx_core::f_then(
-                          vx_core::t_boolean_from_func()->vx_fn_new([val]() {
-                            return vx_type::f_is_string(val);
+                          vx_core::t_boolean_from_func()->vx_fn_new({val}, [val]() {
+                            vx_core::Type_boolean output_1 = vx_type::f_is_string(val);
+                            return output_1;
                           }),
-                          vx_core::t_any_from_func()->vx_fn_new([val]() {
-                            return vx_core::f_new(
+                          vx_core::t_any_from_func()->vx_fn_new({val}, [val]() {
+                            vx_core::Type_string output_1 = vx_core::f_new(
                               vx_core::t_string(),
                               vx_core::vx_new(vx_core::t_anylist(), {
                                 val,
                                 vx_core::vx_new_string("1")
                               })
                             );
+                            return output_1;
                           })
                         )
                       })
                     );
+                  return output_1;
                 })
               ),
               context

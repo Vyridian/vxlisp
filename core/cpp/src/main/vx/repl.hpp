@@ -276,7 +276,7 @@ namespace vx_repl {
   public:
     Abstract_any_from_repl() {};
     virtual ~Abstract_any_from_repl() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -292,7 +292,7 @@ namespace vx_repl {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -302,8 +302,8 @@ namespace vx_repl {
   public:
     Abstract_any_from_repl_async() {};
     virtual ~Abstract_any_from_repl_async() = 0;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::Abstract_any_from_any_context_async::IFn fn) const override = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any val, vx_core::Type_context context) const override = 0;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_context context) const override = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_repl_async : public virtual Abstract_any_from_repl_async {
@@ -318,8 +318,8 @@ namespace vx_repl {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::Abstract_any_from_any_context_async::IFn fn) const override;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any val, vx_core::Type_context context) const override;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_context context) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -328,7 +328,7 @@ namespace vx_repl {
   public:
     Abstract_anylist_from_repllist() {};
     virtual ~Abstract_anylist_from_repllist() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -344,7 +344,7 @@ namespace vx_repl {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };

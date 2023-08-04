@@ -1345,7 +1345,10 @@ namespace vx_core {
     vx_core::Type_any value = NULL;
     vx_core::vx_Type_future future = NULL;
     vx_core::vx_Class_async* async_parent = NULL;
+    std::vector<vx_core::vx_Class_async*>* list_async = NULL;
+    std::map<std::string, vx_core::vx_Class_async*>* map_async = NULL;
     vx_core::vx_Type_fn_any_from_any fn = NULL;
+    vx_core::vx_Type_listany lambdavars;
     void vx_create();
     void vx_dispose();
     vx_core::Type_any sync_value();
@@ -1354,7 +1357,7 @@ namespace vx_core {
   typedef vx_Class_async* vx_Type_async;
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn);
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
   vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
@@ -1383,11 +1386,26 @@ namespace vx_core {
   // vx_debug(async)
   void vx_debug(vx_core::vx_Type_async async);
 
+  // vx_debug(list<any>)
+  void vx_debug(vx_core::vx_Type_listany listany);
+
+  // vx_if_thenelselist(type, thenelselist)
+  vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
+
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
 
   // vx_liststring_from_arraystring(long, array<string>)
   std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
+
+  // vx_map_from_list(listany)
+  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany);
+
+  // vx_memory_leak_test()
+  bool vx_memory_leak_test();
+
+  // vx_memory_leak_test(string, int)
+  bool vx_memory_leak_test(std::string id, long initialcount);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);
@@ -1407,11 +1425,14 @@ namespace vx_core {
   // vx_new_string(string)
   vx_core::Type_string vx_new_string(std::string text);
 
+  // vx_ref(any)
+  long vx_ref(vx_core::Type_any any);
+
   // vx_ref_minus(any)
-  void vx_ref_minus(vx_core::Type_any any);
+  long vx_ref_minus(vx_core::Type_any any);
 
   // vx_ref_plus(any)
-  void vx_ref_plus(vx_core::Type_any any);
+  long vx_ref_plus(vx_core::Type_any any);
 
   // vx_release(any)
   void vx_release(vx_core::Type_any any);
@@ -1422,6 +1443,12 @@ namespace vx_core {
   // vx_release_async(async)
   void vx_release_async(vx_core::vx_Type_async async);
 
+  // vx_release_except(any, except)
+  void vx_release_except(vx_core::Type_any any, vx_core::Type_any except);
+
+  // vx_release_except(any..., except)
+  void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
+
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any);
 
@@ -1430,6 +1457,12 @@ namespace vx_core {
 
   // vx_release_one_async(async)
   void vx_release_one_async(vx_core::vx_Type_async async);
+
+  // vx_release_one_except(any, except)
+  void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except);
+
+  // vx_release_one_except(any..., except)
+  void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
 
   // vx_reserve(any)
   void vx_reserve(vx_core::Type_any any);
@@ -1457,6 +1490,9 @@ namespace vx_core {
 
   // vx_string_from_async_indent(async, indent, linefeed)
   std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed);
+
+  // vx_string_from_int(long)
+  std::string vx_string_from_int(long value);
 
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
@@ -2140,7 +2176,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_any() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2156,7 +2193,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2168,8 +2205,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_any_async() = 0;
     typedef std::function<vx_core::vx_Type_async(vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any value) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any value) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_any_async : public virtual Abstract_any_from_any_async {
@@ -2184,8 +2222,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any value) const;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any value) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2196,7 +2234,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_any_context() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_context)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2212,7 +2251,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2224,8 +2263,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_any_context_async() = 0;
     typedef std::function<vx_core::vx_Type_async(vx_core::Type_any, vx_core::Type_context)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::Abstract_any_from_any_context_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any value, vx_core::Type_context context) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any value, vx_core::Type_context context) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_any_context_async : public virtual Abstract_any_from_any_context_async {
@@ -2240,8 +2280,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::Abstract_any_from_any_context_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any value, vx_core::Type_context context) const;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any value, vx_core::Type_context context) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2252,7 +2292,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_func() = 0;
     typedef std::function<vx_core::Type_any()> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_func::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_func() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2268,7 +2309,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const;
+    virtual vx_core::Func_any_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_func::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_func() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2280,8 +2321,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_func_async() = 0;
     typedef std::function<vx_core::vx_Type_async()> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_func_async vx_fn_new(vx_core::Abstract_any_from_func_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_func_async() const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_func_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_func_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_func_async(vx_core::Type_any generic_any_1) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_func_async : public virtual Abstract_any_from_func_async {
@@ -2296,8 +2338,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_func_async vx_fn_new(vx_core::Abstract_any_from_func_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_func_async() const;
+    virtual vx_core::Func_any_from_func_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_func_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_func_async(vx_core::Type_any generic_any_1) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2308,7 +2350,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_key_value() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_string, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::Abstract_any_from_key_value::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any val) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2324,7 +2367,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::Abstract_any_from_key_value::IFn fn) const;
+    virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any val) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2336,8 +2379,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_key_value_async() = 0;
     typedef std::function<vx_core::vx_Type_async(vx_core::Type_string, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::Abstract_any_from_key_value_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_string key, vx_core::Type_any val) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any val) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_key_value_async : public virtual Abstract_any_from_key_value_async {
@@ -2352,8 +2396,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::Abstract_any_from_key_value_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_string key, vx_core::Type_any val) const;
+    virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any val) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2452,7 +2496,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_none() = 0;
     typedef std::function<vx_core::Type_any()> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_none vx_fn_new(vx_core::Abstract_any_from_none::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_none vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_none::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_none() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2468,7 +2513,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_none vx_fn_new(vx_core::Abstract_any_from_none::IFn fn) const;
+    virtual vx_core::Func_any_from_none vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_none::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_none() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2480,8 +2525,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_none_async() = 0;
     typedef std::function<vx_core::vx_Type_async()> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_none_async vx_fn_new(vx_core::Abstract_any_from_none_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_none_async() const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_none_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_none_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_none_async(vx_core::Type_any generic_any_1) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_none_async : public virtual Abstract_any_from_none_async {
@@ -2496,8 +2542,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_none_async vx_fn_new(vx_core::Abstract_any_from_none_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_none_async() const;
+    virtual vx_core::Func_any_from_none_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_none_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_none_async(vx_core::Type_any generic_any_1) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2508,7 +2554,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_reduce() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_reduce vx_fn_new(vx_core::Abstract_any_from_reduce::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_reduce(vx_core::Type_any result, vx_core::Type_any item) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2524,7 +2571,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_reduce vx_fn_new(vx_core::Abstract_any_from_reduce::IFn fn) const;
+    virtual vx_core::Func_any_from_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_reduce(vx_core::Type_any result, vx_core::Type_any item) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2536,8 +2583,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_reduce_async() = 0;
     typedef std::function<vx_core::vx_Type_async(vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_reduce_async vx_fn_new(vx_core::Abstract_any_from_reduce_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_reduce_async(vx_core::Type_any result, vx_core::Type_any item) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_reduce_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_reduce_async(vx_core::Type_any generic_any_1, vx_core::Type_any result, vx_core::Type_any item) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_reduce_async : public virtual Abstract_any_from_reduce_async {
@@ -2552,8 +2600,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_reduce_async vx_fn_new(vx_core::Abstract_any_from_reduce_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_reduce_async(vx_core::Type_any result, vx_core::Type_any item) const;
+    virtual vx_core::Func_any_from_reduce_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_reduce_async(vx_core::Type_any generic_any_1, vx_core::Type_any result, vx_core::Type_any item) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2564,7 +2612,8 @@ namespace vx_core {
     virtual ~Abstract_any_from_reduce_next() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_reduce_next vx_fn_new(vx_core::Abstract_any_from_reduce_next::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_next::IFn fn) const = 0;
     virtual vx_core::Type_any vx_any_from_reduce_next(vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2580,7 +2629,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_reduce_next vx_fn_new(vx_core::Abstract_any_from_reduce_next::IFn fn) const;
+    virtual vx_core::Func_any_from_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_next::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_reduce_next(vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2592,8 +2641,9 @@ namespace vx_core {
     virtual ~Abstract_any_from_reduce_next_async() = 0;
     typedef std::function<vx_core::vx_Type_async(vx_core::Type_any, vx_core::Type_any, vx_core::Type_any)> IFn;
     IFn fn;
-    virtual vx_core::Func_any_from_reduce_next_async vx_fn_new(vx_core::Abstract_any_from_reduce_next_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_reduce_next_async(vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_reduce_next_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_next_async::IFn fn) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_reduce_next_async(vx_core::Type_any generic_any_1, vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_reduce_next_async : public virtual Abstract_any_from_reduce_next_async {
@@ -2608,8 +2658,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_reduce_next_async vx_fn_new(vx_core::Abstract_any_from_reduce_next_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_reduce_next_async(vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const;
+    virtual vx_core::Func_any_from_reduce_next_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_reduce_next_async::IFn fn) const;
+    virtual vx_core::vx_Type_async vx_any_from_reduce_next_async(vx_core::Type_any generic_any_1, vx_core::Type_any result, vx_core::Type_any current, vx_core::Type_any next) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2640,8 +2690,8 @@ namespace vx_core {
   public:
     Abstract_async() {};
     virtual ~Abstract_async() = 0;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any val) const override = 0;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_async : public virtual Abstract_async {
@@ -2656,8 +2706,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const override;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any val) const override;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2666,7 +2716,7 @@ namespace vx_core {
   public:
     Abstract_boolean_from_any() {};
     virtual ~Abstract_boolean_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2682,7 +2732,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2692,9 +2742,10 @@ namespace vx_core {
   public:
     Abstract_boolean_from_func() {};
     virtual ~Abstract_boolean_from_func() = 0;
-    typedef std::function<vx_core::Type_any()> IFn;
+    typedef std::function<vx_core::Type_boolean()> IFn;
     IFn fn;
-    virtual vx_core::Func_boolean_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_boolean_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_func::IFn fn) const = 0;
     virtual vx_core::Type_boolean vx_boolean_from_func() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2710,7 +2761,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_boolean_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const;
+    virtual vx_core::Func_boolean_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_func::IFn fn) const;
     virtual vx_core::Type_boolean vx_boolean_from_func() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2720,9 +2771,10 @@ namespace vx_core {
   public:
     Abstract_boolean_from_none() {};
     virtual ~Abstract_boolean_from_none() = 0;
-    typedef std::function<vx_core::Type_any()> IFn;
+    typedef std::function<vx_core::Type_boolean()> IFn;
     IFn fn;
-    virtual vx_core::Func_boolean_from_none vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_boolean_from_none vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_func::IFn fn) const = 0;
     virtual vx_core::Type_boolean vx_boolean_from_none() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2738,7 +2790,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_boolean_from_none vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const;
+    virtual vx_core::Func_boolean_from_none vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_func::IFn fn) const;
     virtual vx_core::Type_boolean vx_boolean_from_none() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2748,7 +2800,7 @@ namespace vx_core {
   public:
     Abstract_empty() {};
     virtual ~Abstract_empty() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2764,7 +2816,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2818,7 +2870,7 @@ namespace vx_core {
   public:
     Abstract_is_empty() {};
     virtual ~Abstract_is_empty() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2834,7 +2886,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2844,7 +2896,7 @@ namespace vx_core {
   public:
     Abstract_is_empty_1() {};
     virtual ~Abstract_is_empty_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2860,7 +2912,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2870,7 +2922,7 @@ namespace vx_core {
   public:
     Abstract_not() {};
     virtual ~Abstract_not() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2886,7 +2938,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2896,7 +2948,7 @@ namespace vx_core {
   public:
     Abstract_notempty() {};
     virtual ~Abstract_notempty() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2912,7 +2964,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2922,7 +2974,7 @@ namespace vx_core {
   public:
     Abstract_notempty_1() {};
     virtual ~Abstract_notempty_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2938,7 +2990,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -2970,7 +3022,7 @@ namespace vx_core {
   public:
     Abstract_eq_1() {};
     virtual ~Abstract_eq_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -2986,7 +3038,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -3040,7 +3092,7 @@ namespace vx_core {
   public:
     Abstract_else() {};
     virtual ~Abstract_else() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -3056,7 +3108,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -3110,7 +3162,7 @@ namespace vx_core {
   public:
     Abstract_if_2() {};
     virtual ~Abstract_if_2() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -3126,7 +3178,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -3202,7 +3254,7 @@ namespace vx_core {
   public:
     Abstract_length_from_list() {};
     virtual ~Abstract_length_from_list() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -3218,7 +3270,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -3250,7 +3302,7 @@ namespace vx_core {
   public:
     Abstract_and_1() {};
     virtual ~Abstract_and_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -3266,7 +3318,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -3298,7 +3350,7 @@ namespace vx_core {
   public:
     Abstract_or_1() {};
     virtual ~Abstract_or_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -3314,7 +3366,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5304,7 +5356,7 @@ namespace vx_core {
   public:
     Abstract_multiply_2() {};
     virtual ~Abstract_multiply_2() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5320,7 +5372,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5330,7 +5382,7 @@ namespace vx_core {
   public:
     Abstract_multiply_3() {};
     virtual ~Abstract_multiply_3() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5346,7 +5398,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5400,7 +5452,7 @@ namespace vx_core {
   public:
     Abstract_plus_2() {};
     virtual ~Abstract_plus_2() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5416,7 +5468,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5426,7 +5478,7 @@ namespace vx_core {
   public:
     Abstract_plus_3() {};
     virtual ~Abstract_plus_3() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5442,7 +5494,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5452,7 +5504,7 @@ namespace vx_core {
   public:
     Abstract_plus1() {};
     virtual ~Abstract_plus1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5468,7 +5520,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5522,7 +5574,7 @@ namespace vx_core {
   public:
     Abstract_minus_2() {};
     virtual ~Abstract_minus_2() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5538,7 +5590,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5548,7 +5600,7 @@ namespace vx_core {
   public:
     Abstract_minus_3() {};
     virtual ~Abstract_minus_3() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5564,7 +5616,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5640,7 +5692,7 @@ namespace vx_core {
   public:
     Abstract_lt_1() {};
     virtual ~Abstract_lt_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5656,7 +5708,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5732,7 +5784,7 @@ namespace vx_core {
   public:
     Abstract_le_1() {};
     virtual ~Abstract_le_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5748,7 +5800,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5780,7 +5832,7 @@ namespace vx_core {
   public:
     Abstract_gt_1() {};
     virtual ~Abstract_gt_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5796,7 +5848,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5828,7 +5880,7 @@ namespace vx_core {
   public:
     Abstract_ge_1() {};
     virtual ~Abstract_ge_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5844,7 +5896,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5854,7 +5906,7 @@ namespace vx_core {
   public:
     Abstract_allowtypenames_from_typedef() {};
     virtual ~Abstract_allowtypenames_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5870,7 +5922,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5880,7 +5932,7 @@ namespace vx_core {
   public:
     Abstract_allowtypes_from_typedef() {};
     virtual ~Abstract_allowtypes_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5896,7 +5948,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5972,7 +6024,7 @@ namespace vx_core {
   public:
     Abstract_extends_from_any() {};
     virtual ~Abstract_extends_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -5988,7 +6040,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -5998,7 +6050,7 @@ namespace vx_core {
   public:
     Abstract_extends_from_typedef() {};
     virtual ~Abstract_extends_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6014,7 +6066,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6024,7 +6076,7 @@ namespace vx_core {
   public:
     Abstract_first_from_list() {};
     virtual ~Abstract_first_from_list() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6040,7 +6092,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6094,7 +6146,7 @@ namespace vx_core {
   public:
     Abstract_funcdef_from_func() {};
     virtual ~Abstract_funcdef_from_func() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6110,7 +6162,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6120,7 +6172,7 @@ namespace vx_core {
   public:
     Abstract_funcname_from_funcdef() {};
     virtual ~Abstract_funcname_from_funcdef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6136,7 +6188,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6146,7 +6198,7 @@ namespace vx_core {
   public:
     Abstract_global_package_get() {};
     virtual ~Abstract_global_package_get() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6162,7 +6214,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6194,9 +6246,10 @@ namespace vx_core {
   public:
     Abstract_int_from_func() {};
     virtual ~Abstract_int_from_func() = 0;
-    typedef std::function<vx_core::Type_any()> IFn;
+    typedef std::function<vx_core::Type_int()> IFn;
     IFn fn;
-    virtual vx_core::Func_int_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_int_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_int_from_func::IFn fn) const = 0;
     virtual vx_core::Type_int vx_int_from_func() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6212,7 +6265,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_int_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const;
+    virtual vx_core::Func_int_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_int_from_func::IFn fn) const;
     virtual vx_core::Type_int vx_int_from_func() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6222,7 +6275,7 @@ namespace vx_core {
   public:
     Abstract_int_from_string() {};
     virtual ~Abstract_int_from_string() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6238,7 +6291,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6270,7 +6323,7 @@ namespace vx_core {
   public:
     Abstract_is_func() {};
     virtual ~Abstract_is_func() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6286,7 +6339,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6296,7 +6349,7 @@ namespace vx_core {
   public:
     Abstract_is_int() {};
     virtual ~Abstract_is_int() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6312,7 +6365,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6322,7 +6375,7 @@ namespace vx_core {
   public:
     Abstract_is_number() {};
     virtual ~Abstract_is_number() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6338,7 +6391,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6348,7 +6401,7 @@ namespace vx_core {
   public:
     Abstract_is_pass_from_permission() {};
     virtual ~Abstract_is_pass_from_permission() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6364,7 +6417,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6374,7 +6427,7 @@ namespace vx_core {
   public:
     Abstract_last_from_list() {};
     virtual ~Abstract_last_from_list() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6390,7 +6443,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6510,7 +6563,7 @@ namespace vx_core {
   public:
     Abstract_list_from_type() {};
     virtual ~Abstract_list_from_type() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6526,7 +6579,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6536,7 +6589,7 @@ namespace vx_core {
   public:
     Abstract_log() {};
     virtual ~Abstract_log() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6552,7 +6605,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6694,7 +6747,7 @@ namespace vx_core {
   public:
     Abstract_msg_from_error() {};
     virtual ~Abstract_msg_from_error() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6710,7 +6763,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6764,7 +6817,7 @@ namespace vx_core {
   public:
     Abstract_name_from_typedef() {};
     virtual ~Abstract_name_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6780,7 +6833,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6790,7 +6843,7 @@ namespace vx_core {
   public:
     Abstract_native() {};
     virtual ~Abstract_native() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6806,7 +6859,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6816,7 +6869,7 @@ namespace vx_core {
   public:
     Abstract_native_from_any() {};
     virtual ~Abstract_native_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6832,7 +6885,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6864,7 +6917,7 @@ namespace vx_core {
   public:
     Abstract_packagename_from_typedef() {};
     virtual ~Abstract_packagename_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6880,7 +6933,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6890,7 +6943,7 @@ namespace vx_core {
   public:
     Abstract_path_from_context_path() {};
     virtual ~Abstract_path_from_context_path() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6906,7 +6959,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6938,7 +6991,7 @@ namespace vx_core {
   public:
     Abstract_permission_from_id_context() {};
     virtual ~Abstract_permission_from_id_context() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6954,7 +7007,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6964,7 +7017,7 @@ namespace vx_core {
   public:
     Abstract_properties_from_typedef() {};
     virtual ~Abstract_properties_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -6980,7 +7033,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -6990,7 +7043,7 @@ namespace vx_core {
   public:
     Abstract_proplast_from_typedef() {};
     virtual ~Abstract_proplast_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7006,7 +7059,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7016,7 +7069,7 @@ namespace vx_core {
   public:
     Abstract_resolve() {};
     virtual ~Abstract_resolve() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7032,7 +7085,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7042,7 +7095,7 @@ namespace vx_core {
   public:
     Abstract_resolve_1() {};
     virtual ~Abstract_resolve_1() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7058,7 +7111,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7068,8 +7121,8 @@ namespace vx_core {
   public:
     Abstract_resolve_async() {};
     virtual ~Abstract_resolve_async() = 0;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any val) const override = 0;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_resolve_async : public virtual Abstract_resolve_async {
@@ -7084,8 +7137,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const override;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any val) const override;
+    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
+    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -7094,7 +7147,7 @@ namespace vx_core {
   public:
     Abstract_resolve_first() {};
     virtual ~Abstract_resolve_first() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7110,7 +7163,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7120,7 +7173,7 @@ namespace vx_core {
   public:
     Abstract_resolve_list() {};
     virtual ~Abstract_resolve_list() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7136,7 +7189,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7212,7 +7265,7 @@ namespace vx_core {
   public:
     Abstract_string_from_any() {};
     virtual ~Abstract_string_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7228,7 +7281,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7260,9 +7313,10 @@ namespace vx_core {
   public:
     Abstract_string_from_func() {};
     virtual ~Abstract_string_from_func() = 0;
-    typedef std::function<vx_core::Type_any()> IFn;
+    typedef std::function<vx_core::Type_string()> IFn;
     IFn fn;
-    virtual vx_core::Func_string_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const = 0;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_string_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_string_from_func::IFn fn) const = 0;
     virtual vx_core::Type_string vx_string_from_func() const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7278,7 +7332,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_string_from_func vx_fn_new(vx_core::Abstract_any_from_func::IFn fn) const;
+    virtual vx_core::Func_string_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_string_from_func::IFn fn) const;
     virtual vx_core::Type_string vx_string_from_func() const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7288,7 +7342,7 @@ namespace vx_core {
   public:
     Abstract_traits_from_typedef() {};
     virtual ~Abstract_traits_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7304,7 +7358,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7314,7 +7368,7 @@ namespace vx_core {
   public:
     Abstract_type_from_any() {};
     virtual ~Abstract_type_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7330,7 +7384,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7340,7 +7394,7 @@ namespace vx_core {
   public:
     Abstract_typedef_from_any() {};
     virtual ~Abstract_typedef_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7356,7 +7410,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7366,7 +7420,7 @@ namespace vx_core {
   public:
     Abstract_typedef_from_type() {};
     virtual ~Abstract_typedef_from_type() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7382,7 +7436,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7392,7 +7446,7 @@ namespace vx_core {
   public:
     Abstract_typename_from_any() {};
     virtual ~Abstract_typename_from_any() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7408,7 +7462,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7418,7 +7472,7 @@ namespace vx_core {
   public:
     Abstract_typename_from_type() {};
     virtual ~Abstract_typename_from_type() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7434,7 +7488,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7444,7 +7498,7 @@ namespace vx_core {
   public:
     Abstract_typename_from_typedef() {};
     virtual ~Abstract_typename_from_typedef() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7460,7 +7514,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7470,7 +7524,7 @@ namespace vx_core {
   public:
     Abstract_typenames_from_typelist() {};
     virtual ~Abstract_typenames_from_typelist() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -7486,7 +7540,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -7517,7 +7571,7 @@ namespace vx_core {
   template <class T, class U> T* f_any_from_any(T* generic_any_1, U* value) {
     T* output = vx_core::vx_empty(generic_any_1);
     output = vx_core::vx_any_from_any(generic_any_1, value);
-    vx_core::vx_release(value);
+    vx_core::vx_release_except(value, output);
     return output;
   }
 
@@ -7531,7 +7585,7 @@ namespace vx_core {
   // (func any<-any-context)
   template <class T, class U> T* f_any_from_any_context(T* generic_any_1, U* value, vx_core::Type_context context) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release(value);
+    vx_core::vx_release_except(value, output);
     return output;
   }
 
@@ -7557,7 +7611,7 @@ namespace vx_core {
   // (func any<-key-value)
   template <class T, class U> T* f_any_from_key_value(T* generic_any_1, vx_core::Type_string key, U* val) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({key, val});
+    vx_core::vx_release_except({key, val}, output);
     return output;
   }
 
@@ -7571,7 +7625,7 @@ namespace vx_core {
   // (func any<-list)
   template <class T, class X> T* f_any_from_list(T* generic_any_1, X* values, vx_core::Type_int index) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({values, index});
+    vx_core::vx_release_except({values, index}, output);
     return output;
   }
 
@@ -7584,21 +7638,21 @@ namespace vx_core {
       work = fn_reduce->vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);
-    vx_core::vx_release({list, valstart, fn_reduce});
+    vx_core::vx_release_except({list, valstart, fn_reduce}, output);
     return output;
   }
 
   // (func any<-list-reduce-next)
   template <class T, class Y> T* f_any_from_list_reduce_next(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({list, valstart, fn_reduce_next});
+    vx_core::vx_release_except({list, valstart, fn_reduce_next}, output);
     return output;
   }
 
   // (func any<-map)
   template <class T, class N> T* f_any_from_map(T* generic_any_1, N* valuemap, vx_core::Type_string key) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({valuemap, key});
+    vx_core::vx_release_except({valuemap, key}, output);
     return output;
   }
 
@@ -7617,7 +7671,7 @@ namespace vx_core {
   // (func any<-reduce)
   template <class T, class U> T* f_any_from_reduce(T* generic_any_1, T* result, U* item) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({result, item});
+    vx_core::vx_release_except({result, item}, output);
     return output;
   }
 
@@ -7631,7 +7685,7 @@ namespace vx_core {
   // (func any<-reduce-next)
   template <class T, class U> T* f_any_from_reduce_next(T* generic_any_1, T* result, U* current, U* next) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({result, current, next});
+    vx_core::vx_release_except({result, current, next}, output);
     return output;
   }
 
@@ -7645,7 +7699,7 @@ namespace vx_core {
   // (func any<-struct)
   template <class T, class R> T* f_any_from_struct(T* generic_any_1, R* vstruct, vx_core::Type_string key) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({vstruct, key});
+    vx_core::vx_release_except({vstruct, key}, output);
     return output;
   }
 
@@ -7659,62 +7713,75 @@ namespace vx_core {
   // (func empty)
   template <class T> T* f_empty(T* type) {
     T* output = vx_core::vx_any_from_any(type, type->vx_empty());
-    vx_core::vx_release(type);
+    vx_core::vx_release_except(type, output);
     return output;
   }
 
   // (func new)
   template <class T> T* f_new(T* type, vx_core::Type_anylist values) {
     T* output = vx_core::vx_new(type, values->vx_list());
-    vx_core::vx_release({type, values});
+    vx_core::vx_release_except({type, values}, output);
     return output;
   }
 
   // (func copy)
   template <class T> T* f_copy(T* value, vx_core::Type_anylist values) {
     T* output = vx_core::vx_copy(value, values->vx_list());
-    vx_core::vx_release({value, values});
+    vx_core::vx_release_except({value, values}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if(T* generic_any_1, vx_core::Type_boolean clause, T* then) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({clause, then});
+    if (clause->vx_boolean()) {
+      output = then;
+    };
+    vx_core::vx_release_except({clause, then}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if_1(T* generic_any_1, vx_core::Type_boolean clause, T* thenval, T* elseval) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({clause, thenval, elseval});
+    if (clause->vx_boolean()) {
+      output = thenval;
+    } else {
+      output = elseval;
+    };
+    vx_core::vx_release_except({clause, thenval, elseval}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if_2(T* generic_any_1, vx_core::Type_thenelselist thenelselist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release(thenelselist);
+    vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);
+    vx_core::vx_release_except(thenelselist, output);
     return output;
   }
 
   // (func switch)
   template <class T, class U> T* f_switch(T* generic_any_1, U* val, vx_core::Type_thenelselist thenelselist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({val, thenelselist});
+    vx_core::vx_release_except({val, thenelselist}, output);
     return output;
   }
 
   // (func let)
   template <class T> T* f_let(T* generic_any_1, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release(fn_any);
+    vx_core::Type_any any = fn_any->vx_any_from_func();
+    output = vx_core::vx_any_from_any(generic_any_1, any);
+    vx_core::vx_release_except(fn_any, output);
     return output;
   }
 
   // (func let-async)
   template <class T> vx_core::vx_Type_async f_let_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any_async) {
     vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
+    output = fn_any_async->vx_any_from_func_async(generic_any_1);
     vx_core::vx_release(fn_any_async);
     return output;
   }
@@ -7722,14 +7789,14 @@ namespace vx_core {
   // (func <-)
   template <class T> T* f_chainfirst(T* generic_any_1, T* value, vx_core::Type_any_from_anylist fnlist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({value, fnlist});
+    vx_core::vx_release_except({value, fnlist}, output);
     return output;
   }
 
   // (func <<-)
   template <class T> T* f_chainlast(T* generic_any_1, T* value, vx_core::Type_any_from_anylist fnlist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({value, fnlist});
+    vx_core::vx_release_except({value, fnlist}, output);
     return output;
   }
 
@@ -7737,51 +7804,52 @@ namespace vx_core {
   template <class T, class X> T* f_first_from_list(T* generic_any_1, X* values) {
     T* output = vx_core::vx_empty(generic_any_1);
     output = vx_core::f_any_from_list(generic_any_1, values, vx_core::vx_new_int(0));
-    vx_core::vx_release(values);
+    vx_core::vx_release_except(values, output);
     return output;
   }
 
   // (func first<-list-fn-any<-any)
   template <class T, class X> T* f_first_from_list_fn_any_from_any(T* generic_any_1, X* values, vx_core::Func_any_from_any fn_any_from_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({values, fn_any_from_any});
+    vx_core::vx_release_except({values, fn_any_from_any}, output);
     return output;
   }
 
   // (func fn)
   template <class T> T* f_fn(T* generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release({params, fn_any});
+    vx_core::vx_release_except({params, fn_any}, output);
     return output;
   }
 
   // (func last<-list)
   template <class T, class X> T* f_last_from_list(T* generic_any_1, X* values) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::f_let(
+    output = vx_core::f_let(
       generic_any_1,
-      vx_core::t_any_from_func()->vx_fn_new([values, generic_any_1]() {
+      vx_core::t_any_from_func()->vx_fn_new({values, generic_any_1}, [values, generic_any_1]() {
         vx_core::Type_int len = vx_core::f_length_from_list(values);
         vx_core::Type_int last = vx_core::f_minus(len, vx_core::vx_new_int(1));
-        vx_core::Type_any output = vx_core::f_any_from_list(generic_any_1, values, last);vx_core::vx_release({len, last});
-        return output;
+        vx_core::Type_any output_1 = vx_core::f_any_from_list(generic_any_1, values, last);
+        vx_core::vx_release_except({len, last}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release(values);
+    vx_core::vx_release_except(values, output);
     return output;
   }
 
   // (func list-join<-list)
   template <class X, class Y> X* f_list_join_from_list(X* generic_list_1, Y* values, vx_core::Func_any_from_any fn_any_from_any) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release({values, fn_any_from_any});
+    vx_core::vx_release_except({values, fn_any_from_any}, output);
     return output;
   }
 
   // (func list<-list)
   template <class X, class Y> X* f_list_from_list(X* generic_list_1, Y* values, vx_core::Func_any_from_any fn_any_from_any) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release({values, fn_any_from_any});
+    vx_core::vx_release_except({values, fn_any_from_any}, output);
     return output;
   }
 
@@ -7795,7 +7863,7 @@ namespace vx_core {
   // (func list<-map)
   template <class X, class O> X* f_list_from_map(X* generic_list_1, O* valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release({valuemap, fn_any_from_key_value});
+    vx_core::vx_release_except({valuemap, fn_any_from_key_value}, output);
     return output;
   }
 
@@ -7809,14 +7877,17 @@ namespace vx_core {
   // (func map<-list)
   template <class Y, class N> N* f_map_from_list(N* generic_map_1, Y* vallist, vx_core::Func_any_from_any fn_any_from_any) {
     N* output = vx_core::vx_empty(generic_map_1);
-    vx_core::vx_release({vallist, fn_any_from_any});
+    vx_core::vx_Type_listany listval = vallist->vx_list();
+    vx_core::vx_Type_mapany mapval = vx_core::vx_map_from_list(listval);
+    output = vx_core::vx_new_from_map(generic_map_1, mapval);
+    vx_core::vx_release_except({vallist, fn_any_from_any}, output);
     return output;
   }
 
   // (func native)
   template <class T> T* f_native(T* generic_any_1, vx_core::Type_anylist clauses) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release(clauses);
+    vx_core::vx_release_except(clauses, output);
     return output;
   }
 
@@ -7824,20 +7895,27 @@ namespace vx_core {
   template <class T> T* f_resolve(T* generic_any_1, T* value) {
     T* output = vx_core::vx_empty(generic_any_1);
     output = value;
-    vx_core::vx_release(value);
+    vx_core::vx_release_except(value, output);
     return output;
   }
 
   // (func resolve)
   template <class T> T* f_resolve_1(T* generic_any_1, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release(fn_any);
+    if (fn_any) {
+      vx_core::Type_any any = fn_any->vx_any_from_func();
+      output = vx_core::vx_any_from_any(generic_any_1, any);
+    };
+    vx_core::vx_release_except(fn_any, output);
     return output;
   }
 
   // (func resolve-async)
   template <class T> vx_core::vx_Type_async f_resolve_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any) {
     vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
+    if (fn_any) {
+      output = fn_any->vx_any_from_func_async(generic_any_1);
+    };
     vx_core::vx_release(fn_any);
     return output;
   }
@@ -7850,7 +7928,7 @@ namespace vx_core {
       clauses,
       vx_core::t_resolve()
     );
-    vx_core::vx_release(clauses);
+    vx_core::vx_release_except(clauses, output);
     return output;
   }
 
@@ -7862,7 +7940,7 @@ namespace vx_core {
       clauses,
       vx_core::t_resolve()
     );
-    vx_core::vx_release(clauses);
+    vx_core::vx_release_except(clauses, output);
     return output;
   }
 

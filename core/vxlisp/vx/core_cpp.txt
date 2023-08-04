@@ -85,7 +85,10 @@ let-async
     vx_core::Type_any value = NULL;
     vx_core::vx_Type_future future = NULL;
     vx_core::vx_Class_async* async_parent = NULL;
+    std::vector<vx_core::vx_Class_async*>* list_async = NULL;
+    std::map<std::string, vx_core::vx_Class_async*>* map_async = NULL;
     vx_core::vx_Type_fn_any_from_any fn = NULL;
+    vx_core::vx_Type_listany lambdavars;
     void vx_create();
     void vx_dispose();
     vx_core::Type_any sync_value();
@@ -94,7 +97,7 @@ let-async
   typedef vx_Class_async* vx_Type_async;
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn);
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
   vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
@@ -123,11 +126,26 @@ let-async
   // vx_debug(async)
   void vx_debug(vx_core::vx_Type_async async);
 
+  // vx_debug(list<any>)
+  void vx_debug(vx_core::vx_Type_listany listany);
+
+  // vx_if_thenelselist(type, thenelselist)
+  vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
+
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
 
   // vx_liststring_from_arraystring(long, array<string>)
   std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
+
+  // vx_map_from_list(listany)
+  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany);
+
+  // vx_memory_leak_test()
+  bool vx_memory_leak_test();
+
+  // vx_memory_leak_test(string, int)
+  bool vx_memory_leak_test(std::string id, long initialcount);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);
@@ -147,11 +165,14 @@ let-async
   // vx_new_string(string)
   vx_core::Type_string vx_new_string(std::string text);
 
+  // vx_ref(any)
+  long vx_ref(vx_core::Type_any any);
+
   // vx_ref_minus(any)
-  void vx_ref_minus(vx_core::Type_any any);
+  long vx_ref_minus(vx_core::Type_any any);
 
   // vx_ref_plus(any)
-  void vx_ref_plus(vx_core::Type_any any);
+  long vx_ref_plus(vx_core::Type_any any);
 
   // vx_release(any)
   void vx_release(vx_core::Type_any any);
@@ -162,6 +183,12 @@ let-async
   // vx_release_async(async)
   void vx_release_async(vx_core::vx_Type_async async);
 
+  // vx_release_except(any, except)
+  void vx_release_except(vx_core::Type_any any, vx_core::Type_any except);
+
+  // vx_release_except(any..., except)
+  void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
+
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any);
 
@@ -170,6 +197,12 @@ let-async
 
   // vx_release_one_async(async)
   void vx_release_one_async(vx_core::vx_Type_async async);
+
+  // vx_release_one_except(any, except)
+  void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except);
+
+  // vx_release_one_except(any..., except)
+  void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
 
   // vx_reserve(any)
   void vx_reserve(vx_core::Type_any any);
@@ -197,6 +230,9 @@ let-async
 
   // vx_string_from_async_indent(async, indent, linefeed)
   std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed);
+
+  // vx_string_from_int(long)
+  std::string vx_string_from_int(long value);
 
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
@@ -345,11 +381,12 @@ let-async
     }
     void vx_Class_async::vx_dispose() {
       vx_core::refcount -= 1;
+      vx_core::vx_release_one(this->lambdavars);
       vx_core::vx_release_one(this->value);
       this->value = NULL;
       vx_core::vx_release_one_async(this->async_parent);
       this->async_parent = NULL;
-      if (this->future != NULL) {
+      if (this->future) {
         delete this->future;
         this->future = NULL;
       }
@@ -357,20 +394,20 @@ let-async
     vx_core::Type_any vx_Class_async::sync_value() {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_any value = this->value;
-      if (value == NULL) {
+      if (!value) {
         vx_core::vx_Type_future future = this->future;
-        if (future != NULL) {
+        if (future) {
           future->wait();
           value = future->get();
           delete future;
           this->future = NULL;
         } else {
           vx_core::vx_Type_async async_parent = this->async_parent;
-          if (async_parent != NULL) {
+          if (async_parent) {
             vx_core::Type_any parentvalue = async_parent->sync_value();
-            if (parentvalue != NULL) {
+            if (parentvalue) {
               vx_core::vx_Type_fn_any_from_any fn = this->fn;
-              if (fn == NULL) {
+              if (!fn) {
                 value = parentvalue;
                 vx_core::vx_reserve(value);
               } else {
@@ -384,7 +421,7 @@ let-async
           }
         }
       }
-      if (value != NULL) {
+      if (value) {
         this->value = value;
         output = value;
       }
@@ -392,13 +429,15 @@ let-async
     }
   // }
 
-  // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_fn_any_from_any fn) {
+  // vx_async_from_async_fn(async, type, lambdavars, fn<any>(any))
+  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambdavars, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
     output->vx_create();
     output->type = type;
     output->async_parent = async;
     output->fn = fn;
+    output->lambdavars = lambdavars;
+    vx_core::vx_reserve(lambdavars);
     vx_core::vx_reserve_async(async);
     return output;
   }
@@ -462,7 +501,7 @@ let-async
 
   // vx_debug(any)
   void vx_debug(vx_core::Type_any val) {
-    if (val == NULL) {
+    if (!val) {
       vx_debug("null");
     } else {
       std::string sval = vx_core::vx_string_from_any(val);
@@ -472,12 +511,49 @@ let-async
 
   // vx_debug(async)
   void vx_debug(vx_core::vx_Type_async async) {
-    if (async == NULL) {
+    if (!async) {
       vx_debug("null");
     } else {
       std::string sval = vx_core::vx_string_from_async(async);
       vx_debug(sval);
     }
+  }
+
+  // vx_debug(list<any>)
+  void vx_debug(vx_core::vx_Type_listany listany) {
+    for (vx_core::Type_any any : listany) {
+      vx_core::vx_debug(any);
+    }
+  }
+
+  // vx_if_thenelselist(type, thenelselist)
+  vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
+    vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
+    std::vector<vx_core::Type_thenelse> listthenelse = thenelselist->vx_listthenelse();
+    vx_core::Func_any_from_func fn_any = vx_core::e_any_from_func();
+    for (vx_core::Type_thenelse thenelse : listthenelse) {
+      vx_core::Type_string code = thenelse->code();
+      std::string scode = code->vx_string();
+      if (scode == ":then") {
+        vx_core::Func_boolean_from_func fn_cond = thenelse->fn_cond();
+        vx_core::Type_boolean cond = fn_cond->vx_boolean_from_func();
+        bool iscond = cond->vx_boolean();
+        vx_core::vx_release(cond);
+        if (iscond) {
+          fn_any = thenelse->fn_any();
+          break;
+        }
+      } else if (scode == ":else") {
+        fn_any = thenelse->fn_any();
+        break;
+      }
+    }
+    if (fn_any == vx_core::e_any_from_func()) {
+    } else if (fn_any == fn_any->vx_empty()) {
+    } else {
+      output = fn_any->vx_any_from_func();
+    }
+    return output;
   }
 
   // vx_list_from_array(arrayval)
@@ -493,6 +569,43 @@ let-async
     output.reserve(ilen);
     if (ilen > 0) {
       output.assign(arraystring, arraystring + ilen);
+    }
+    return output;
+  }
+
+  // vx_map_from_list(listany)
+  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany) {
+    vx_core::vx_Type_mapany output;
+    std::string key = "";
+    for (vx_core::Type_any item : listany) {
+      if (key == "") {
+        key = vx_core::vx_string_from_any(item);
+        if (vx_core::vx_boolean_from_string_starts(key, "\"") && vx_core::vx_boolean_from_string_ends(key, "\n")) {
+          key = vx_core::vx_string_from_string_start_end(key, 2, key.length() - 1);
+        }
+      } else {
+        output.insert({key, item});
+      }
+    }
+    return output;
+  }
+
+  // vx_memory_leak_test()
+  bool vx_memory_leak_test() {
+    bool output = true;
+    if (vx_core::refcount > 0) {
+      vx_core::vx_debug("Error: Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      output = false;
+    }
+    return output;
+  }
+
+  // vx_memory_leak_test(string, int)
+  bool vx_memory_leak_test(std::string id, long initialcount) {
+    bool output = true;
+    if (vx_core::refcount - initialcount != 0) {
+      vx_core::vx_debug("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      output = false;
     }
     return output;
   }
@@ -549,37 +662,41 @@ let-async
   // vx_ref(any)
   long vx_ref(vx_core::Type_any any) {
     long output = 0;
-    if (any != NULL) {
+    if (any) {
       output = any->vx_p_iref;
     }
     return output;
   }
 
   // vx_ref_minus(any)
-  void vx_ref_minus(vx_core::Type_any any) {
-    if (any != NULL) {
-      long iref = any->vx_p_iref;
-      if (iref > 0) {
-        iref -= 1;
-        any->vx_p_iref = iref;
+  long vx_ref_minus(vx_core::Type_any any) {
+    long output = -1;
+    if (any) {
+      output = any->vx_p_iref;
+      if (output > 0) {
+        output -= 1;
+        any->vx_p_iref = output;
       }
     }
+    return output;
   }
 
   // vx_ref_plus(any)
-  void vx_ref_plus(vx_core::Type_any any) {
-    if (any != NULL) {
-      long iref = any->vx_p_iref;
-      if (iref >= 0) {
-        iref += 1;
-        any->vx_p_iref = iref;
+  long vx_ref_plus(vx_core::Type_any any) {
+    long output = -1;
+    if (any) {
+      output = any->vx_p_iref;
+      if (output >= 0) {
+        output += 1;
+        any->vx_p_iref = output;
       }
     }
+    return output;
   }
 
   // vx_release(any)
   void vx_release(vx_core::Type_any any) {
-    if (any == NULL) {
+    if (!any) {
     } else if (any->vx_p_iref == 0) {
       delete any;
     }
@@ -594,24 +711,33 @@ let-async
 
   // vx_release_async(async)
   void vx_release_async(vx_core::vx_Type_async async) {
-    if (async == NULL) {
+    if (!async) {
     } else if (async->vx_p_iref == 0) {
       async->vx_dispose();
       delete async;
     }
   }
 
+  // vx_release_except(any, except)
+  void vx_release_except(vx_core::Type_any any, vx_core::Type_any except) {
+    vx_core::vx_ref_plus(except);
+    vx_core::vx_release(any);
+    vx_core::vx_ref_minus(except);
+  }
+
+  // vx_release_except(any..., except)
+  void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except) {
+    vx_core::vx_ref_plus(except);
+    vx_core::vx_release(listany);
+    vx_core::vx_ref_minus(except);
+  }
+
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any) {
-    if (any != NULL) {
-      long iref = any->vx_p_iref;
-      if (iref > 0) {
-        iref -= 1;
-        if (iref == 0) {
-          delete any;
-        } else {
-          any->vx_p_iref = iref;
-        }
+    if (any) {
+      long iref = vx_core::vx_ref_minus(any);
+      if (iref == 0) {
+        delete any;
       }
     }
   }
@@ -619,13 +745,13 @@ let-async
   // vx_release_one(any...)
   void vx_release_one(vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
-      vx_release_one(any);
+      vx_core::vx_release_one(any);
     }
   }
 
   // vx_release_one_async(async)
   void vx_release_one_async(vx_core::vx_Type_async async) {
-    if (async != NULL) {
+    if (async) {
       long iref = async->vx_p_iref;
       if (iref > 0) {
         iref -= 1;
@@ -639,38 +765,37 @@ let-async
     }
   }
 
-  // vx_release_ref(any)
-  void vx_release_ref(vx_core::Type_any any) {
-    if (any != NULL) {
-      long iref = any->vx_p_iref;
-      if (iref > 0) {
-        iref -= 1;
-        any->vx_p_iref = iref;
-      }
-    }
+  // vx_release_one_except(any, except)
+  void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except) {
+    vx_core::vx_ref_plus(except);
+    vx_core::vx_release_one(any);
+    vx_core::vx_ref_minus(except);
+  }
+
+  // vx_release_one_except(any..., except)
+  void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except) {
+    vx_core::vx_ref_plus(except);
+    vx_core::vx_release_one(listany);
+    vx_core::vx_ref_minus(except);
   }
 
   // vx_reserve(any)
   void vx_reserve(vx_core::Type_any any) {
-    if (any != NULL) {
-      long iref = any->vx_p_iref;
-      if (iref >= 0) {
-        iref += 1;
-        any->vx_p_iref = iref;
-      }
+    if (any) {
+      vx_core::vx_ref_plus(any);
     }
   }
 
   // vx_reserve(any...)
   void vx_reserve(vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
-      vx_reserve(any);
+      vx_core::vx_ref_plus(any);
     }
   }
 
   // vx_reserve_async(async)
   void vx_reserve_async(vx_core::vx_Type_async async) {
-    if (async != NULL) {
+    if (async) {
       long iref = async->vx_p_iref;
       if (iref >= 0) {
         iref += 1;
@@ -706,7 +831,7 @@ let-async
     std::string text = "";
     if (indent > 50) {
       text = "Error: Max Depth Exceeded";
-    } else if (value == NULL) {
+    } else if (!value) {
       text = "null";
     } else {
       std::string indenttext = vx_core::vx_string_from_string_repeat(" ", indent);
@@ -763,7 +888,7 @@ let-async
             std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
             text += "\n " + indenttext + ssub;
           }
-          if (vallist->vx_msgblock() != NULL) {
+          if (vallist->vx_msgblock()) {
             std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
@@ -786,7 +911,7 @@ let-async
             }
             text += "\n" + indenttext + " " + key + strval;
           }
-          if (valmap->vx_msgblock() != NULL) {
+          if (valmap->vx_msgblock()) {
             std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
@@ -797,19 +922,21 @@ let-async
           long indentint = indent;
           indentint += 2;
           for (auto const& [ckey, valsub] : mapval) {
-            std::string key = ckey;
-            if (!vx_boolean_from_string_starts(key, ":")) {
-              key = ":" + key;
+            if (valsub != valsub->vx_empty()) {
+              std::string key = ckey;
+              if (!vx_boolean_from_string_starts(key, ":")) {
+                key = ":" + key;
+              }
+              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+              if (vx_boolean_from_string_find(strval, "\n")) {
+                strval = "\n  " + indenttext + strval;
+              } else {
+                strval = " " + strval;
+              }
+              text += "\n" + indenttext + " " + key + strval;
             }
-            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
-            if (vx_boolean_from_string_find(strval, "\n")) {
-              strval = "\n  " + indenttext + strval;
-            } else {
-              strval = " " + strval;
-            }
-            text += "\n" + indenttext + " " + key + strval;
           }
-          if (valstruct->vx_msgblock() != NULL) {
+          if (valstruct->vx_msgblock()) {
             std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
@@ -817,7 +944,7 @@ let-async
         } else if (extend == ":func") {
           vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func(), value);
           text = typedefname;
-          if (valfunc->vx_msgblock() != NULL) {
+          if (valfunc->vx_msgblock()) {
             text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
           }
@@ -839,13 +966,13 @@ let-async
     std::string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
-    } else if (async == NULL) {
+    } else if (!async) {
       output = "null";
     } else {
       std::string indenttext = vx_core::vx_string_from_string_repeat(" ", indent);
       output = indenttext + "(async";
       vx_core::Type_any type = async->type;
-      if (type != NULL) {
+      if (type) {
         vx_core::Type_typedef typdef = type->vx_typedef();
         std::string typedefname = typdef->name()->vx_string();
         std::string pkgname = typdef->pkgname()->vx_string();
@@ -857,26 +984,31 @@ let-async
         output += "\n " + indenttext + ":type " + typedefname;
       }
       vx_core::Type_any val = async->value;
-      if (val != NULL) {
+      if (val) {
         std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed);
         output += "\n " + indenttext + ":value " + text;
       }
       vx_core::vx_Type_future future = async->future;
-      if (future != NULL) {
+      if (future) {
         output += "\n " + indenttext + ":future future";
       }
       vx_core::vx_Type_fn_any_from_any fn = async->fn;
-      if (fn != NULL) {
+      if (fn) {
         output += "\n " + indenttext + ":fn fn";
       }
       vx_core::vx_Type_async asyncparent = async->async_parent;
-      if (asyncparent != NULL) {
+      if (asyncparent) {
         std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed);
         output += "\n " + indenttext + ":async_parent\n" + text;
       }
       output += ")";
     }
     return output;
+  }
+
+  // vx_string_from_int(long)
+  std::string vx_string_from_int(long value) {
+    return std::to_string(value);
   }
 
   // vx_string_from_liststring_pos(list<string>, long)
@@ -1009,16 +1141,16 @@ let-async
     vx_core::Type_msgblock Class_msgblock::vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msgblock output = vx_core::e_msgblock();
       std::vector<vx_core::Type_msgblock> listmsgblock;
-      if (msgblock != NULL) {
+      if (msgblock) {
         vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
-        if (origmsgblock != NULL) {
+        if (origmsgblock) {
           std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
           listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
         }
       }
       for (vx_core::Type_any subval : vals) {
         vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
-        if (submsgblock != NULL) {
+        if (submsgblock) {
           listmsgblock.push_back(submsgblock);
         }
       }
@@ -1026,12 +1158,12 @@ let-async
       if (listmsgblock.size() > 0) {
         msgblocks = new vx_core::Class_msgblocklist();
         msgblocks->vx_p_list = listmsgblock;
-        if (msgblock == NULL) {
+        if (!msgblock) {
           output = vx_core::vx_new(vx_core::t_msgblock(), {msgblocks});
         } else {
           output = vx_core::vx_copy(msgblock, {msgblocks});
         }
-      } else if (msgblock != NULL) {
+      } else if (msgblock) {
         output = vx_core::vx_copy(msgblock, {});
       }
       return output;

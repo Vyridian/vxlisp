@@ -25,7 +25,7 @@ namespace vx_data_textblock {
     // start()
     vx_core::Type_stringlist Class_delimset::start() const {
       vx_core::Type_stringlist output = this->vx_p_start;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_stringlist();
       }
       return output;
@@ -34,7 +34,7 @@ namespace vx_data_textblock {
     // end()
     vx_core::Type_stringlist Class_delimset::end() const {
       vx_core::Type_stringlist output = this->vx_p_end;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_stringlist();
       }
       return output;
@@ -43,7 +43,7 @@ namespace vx_data_textblock {
     // split()
     vx_core::Type_stringlist Class_delimset::split() const {
       vx_core::Type_stringlist output = this->vx_p_split;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_stringlist();
       }
       return output;
@@ -52,7 +52,7 @@ namespace vx_data_textblock {
     // subset()
     vx_data_textblock::Type_delimset Class_delimset::subset() const {
       vx_data_textblock::Type_delimset output = this->vx_p_subset;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_textblock::e_delimset();
       }
       return output;
@@ -72,7 +72,7 @@ namespace vx_data_textblock {
       } else if (skey == ":subset") {
         output = this->subset();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -173,8 +173,8 @@ namespace vx_data_textblock {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -222,7 +222,7 @@ namespace vx_data_textblock {
     // name()
     vx_core::Type_string Class_textblock::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -231,7 +231,7 @@ namespace vx_data_textblock {
     // text()
     vx_core::Type_string Class_textblock::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -240,7 +240,7 @@ namespace vx_data_textblock {
     // line()
     vx_core::Type_int Class_textblock::line() const {
       vx_core::Type_int output = this->vx_p_line;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_int();
       }
       return output;
@@ -249,7 +249,7 @@ namespace vx_data_textblock {
     // column()
     vx_core::Type_int Class_textblock::column() const {
       vx_core::Type_int output = this->vx_p_column;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_int();
       }
       return output;
@@ -258,7 +258,7 @@ namespace vx_data_textblock {
     // textblocks()
     vx_data_textblock::Type_textblocklist Class_textblock::textblocks() const {
       vx_data_textblock::Type_textblocklist output = this->vx_p_textblocks;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_textblock::e_textblocklist();
       }
       return output;
@@ -280,7 +280,7 @@ namespace vx_data_textblock {
       } else if (skey == ":textblocks") {
         output = this->textblocks();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -394,8 +394,8 @@ namespace vx_data_textblock {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -448,7 +448,7 @@ namespace vx_data_textblock {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -482,9 +482,7 @@ namespace vx_data_textblock {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -521,8 +519,8 @@ namespace vx_data_textblock {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -554,7 +552,7 @@ namespace vx_data_textblock {
   vx_data_textblock::Type_textblock f_parse(vx_data_textblock::Type_textblock block, vx_data_textblock::Type_delimset delimpairlist) {
     vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock();
     output = block;
-    vx_core::vx_release({block, delimpairlist});
+    vx_core::vx_release_except({block, delimpairlist}, output);
     return output;
   }
 
@@ -565,9 +563,14 @@ namespace vx_data_textblock {
     Class_parse::Class_parse() : Abstract_parse::Abstract_parse() {
       vx_core::refcount += 1;
     }
+
     Class_parse::~Class_parse() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_parse::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_parse output = vx_data_textblock::e_parse();
       vx_core::vx_release(vals);
@@ -576,8 +579,8 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_parse::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_parse output = vx_data_textblock::e_parse();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -619,7 +622,7 @@ namespace vx_data_textblock {
       vx_data_textblock::Type_textblock block = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_data_textblock::Type_delimset delimpairlist = vx_core::vx_any_from_any(vx_data_textblock::t_delimset(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_data_textblock::f_parse(block, delimpairlist);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -633,7 +636,7 @@ namespace vx_data_textblock {
       textblocks,
       vx_data_textblock::t_text_from_textblock()
     );
-    vx_core::vx_release(textblocks);
+    vx_core::vx_release_except(textblocks, output);
     return output;
   }
 
@@ -644,9 +647,14 @@ namespace vx_data_textblock {
     Class_stringlist_from_textblocklist::Class_stringlist_from_textblocklist() : Abstract_stringlist_from_textblocklist::Abstract_stringlist_from_textblocklist() {
       vx_core::refcount += 1;
     }
+
     Class_stringlist_from_textblocklist::~Class_stringlist_from_textblocklist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_stringlist_from_textblocklist::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_stringlist_from_textblocklist output = vx_data_textblock::e_stringlist_from_textblocklist();
       vx_core::vx_release(vals);
@@ -655,8 +663,8 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_stringlist_from_textblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_stringlist_from_textblocklist output = vx_data_textblock::e_stringlist_from_textblocklist();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -693,7 +701,7 @@ namespace vx_data_textblock {
     vx_core::Type_msgblock Class_stringlist_from_textblocklist::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_stringlist_from_textblocklist::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_stringlist_from_textblocklist::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_stringlist_from_textblocklist::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -701,7 +709,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblocklist inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist(), val);
       output = vx_data_textblock::f_stringlist_from_textblocklist(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -709,7 +717,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblocklist textblocks = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_textblock::f_stringlist_from_textblocklist(textblocks);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -719,7 +727,7 @@ namespace vx_data_textblock {
   vx_core::Type_string f_text_from_textblock(vx_data_textblock::Type_textblock block) {
     vx_core::Type_string output = vx_core::e_string();
     output = block->text();
-    vx_core::vx_release(block);
+    vx_core::vx_release_except(block, output);
     return output;
   }
 
@@ -730,9 +738,14 @@ namespace vx_data_textblock {
     Class_text_from_textblock::Class_text_from_textblock() : Abstract_text_from_textblock::Abstract_text_from_textblock() {
       vx_core::refcount += 1;
     }
+
     Class_text_from_textblock::~Class_text_from_textblock() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_text_from_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_text_from_textblock output = vx_data_textblock::e_text_from_textblock();
       vx_core::vx_release(vals);
@@ -741,8 +754,8 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_text_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_text_from_textblock output = vx_data_textblock::e_text_from_textblock();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -779,7 +792,7 @@ namespace vx_data_textblock {
     vx_core::Type_msgblock Class_text_from_textblock::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_text_from_textblock::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_text_from_textblock::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_text_from_textblock::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -787,7 +800,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), val);
       output = vx_data_textblock::f_text_from_textblock(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -795,7 +808,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock block = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_textblock::f_text_from_textblock(block);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -805,7 +818,7 @@ namespace vx_data_textblock {
   vx_data_textblock::Type_textblocklist f_textblocks_from_textblock(vx_data_textblock::Type_textblock block) {
     vx_data_textblock::Type_textblocklist output = vx_data_textblock::e_textblocklist();
     output = block->textblocks();
-    vx_core::vx_release(block);
+    vx_core::vx_release_except(block, output);
     return output;
   }
 
@@ -816,9 +829,14 @@ namespace vx_data_textblock {
     Class_textblocks_from_textblock::Class_textblocks_from_textblock() : Abstract_textblocks_from_textblock::Abstract_textblocks_from_textblock() {
       vx_core::refcount += 1;
     }
+
     Class_textblocks_from_textblock::~Class_textblocks_from_textblock() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_textblocks_from_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_textblocks_from_textblock output = vx_data_textblock::e_textblocks_from_textblock();
       vx_core::vx_release(vals);
@@ -827,8 +845,8 @@ namespace vx_data_textblock {
 
     vx_core::Type_any Class_textblocks_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Func_textblocks_from_textblock output = vx_data_textblock::e_textblocks_from_textblock();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -865,7 +883,7 @@ namespace vx_data_textblock {
     vx_core::Type_msgblock Class_textblocks_from_textblock::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_textblocks_from_textblock::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_textblocks_from_textblock::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_textblocks_from_textblock::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -873,7 +891,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), val);
       output = vx_data_textblock::f_textblocks_from_textblock(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -881,7 +899,7 @@ namespace vx_data_textblock {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock block = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_textblock::f_textblocks_from_textblock(block);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -891,7 +909,7 @@ namespace vx_data_textblock {
 
   vx_data_textblock::Type_delimset e_delimset() {
     vx_data_textblock::Type_delimset output = vx_data_textblock::vx_package->e_delimset;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_delimset();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_delimset = output;
@@ -900,7 +918,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Type_delimset t_delimset() {
     vx_data_textblock::Type_delimset output = vx_data_textblock::vx_package->t_delimset;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_delimset();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_delimset = output;
@@ -910,7 +928,7 @@ namespace vx_data_textblock {
 
   vx_data_textblock::Type_textblock e_textblock() {
     vx_data_textblock::Type_textblock output = vx_data_textblock::vx_package->e_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_textblock();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_textblock = output;
@@ -919,7 +937,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Type_textblock t_textblock() {
     vx_data_textblock::Type_textblock output = vx_data_textblock::vx_package->t_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_textblock();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_textblock = output;
@@ -929,7 +947,7 @@ namespace vx_data_textblock {
 
   vx_data_textblock::Type_textblocklist e_textblocklist() {
     vx_data_textblock::Type_textblocklist output = vx_data_textblock::vx_package->e_textblocklist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_textblocklist();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_textblocklist = output;
@@ -938,7 +956,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Type_textblocklist t_textblocklist() {
     vx_data_textblock::Type_textblocklist output = vx_data_textblock::vx_package->t_textblocklist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_textblocklist();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_textblocklist = output;
@@ -949,7 +967,7 @@ namespace vx_data_textblock {
   // (func parse)
   vx_data_textblock::Func_parse e_parse() {
     vx_data_textblock::Func_parse output = vx_data_textblock::vx_package->e_parse;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_parse();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_parse = output;
@@ -958,7 +976,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Func_parse t_parse() {
     vx_data_textblock::Func_parse output = vx_data_textblock::vx_package->t_parse;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_parse();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_parse = output;
@@ -969,7 +987,7 @@ namespace vx_data_textblock {
   // (func stringlist<-textblocklist)
   vx_data_textblock::Func_stringlist_from_textblocklist e_stringlist_from_textblocklist() {
     vx_data_textblock::Func_stringlist_from_textblocklist output = vx_data_textblock::vx_package->e_stringlist_from_textblocklist;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_stringlist_from_textblocklist();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_stringlist_from_textblocklist = output;
@@ -978,7 +996,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Func_stringlist_from_textblocklist t_stringlist_from_textblocklist() {
     vx_data_textblock::Func_stringlist_from_textblocklist output = vx_data_textblock::vx_package->t_stringlist_from_textblocklist;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_stringlist_from_textblocklist();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_stringlist_from_textblocklist = output;
@@ -989,7 +1007,7 @@ namespace vx_data_textblock {
   // (func text<-textblock)
   vx_data_textblock::Func_text_from_textblock e_text_from_textblock() {
     vx_data_textblock::Func_text_from_textblock output = vx_data_textblock::vx_package->e_text_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_text_from_textblock();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_text_from_textblock = output;
@@ -998,7 +1016,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Func_text_from_textblock t_text_from_textblock() {
     vx_data_textblock::Func_text_from_textblock output = vx_data_textblock::vx_package->t_text_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_text_from_textblock();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_text_from_textblock = output;
@@ -1009,7 +1027,7 @@ namespace vx_data_textblock {
   // (func textblocks<-textblock)
   vx_data_textblock::Func_textblocks_from_textblock e_textblocks_from_textblock() {
     vx_data_textblock::Func_textblocks_from_textblock output = vx_data_textblock::vx_package->e_textblocks_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_textblocks_from_textblock();
       vx_core::vx_reserve_empty(output);
       vx_data_textblock::vx_package->e_textblocks_from_textblock = output;
@@ -1018,7 +1036,7 @@ namespace vx_data_textblock {
   }
   vx_data_textblock::Func_textblocks_from_textblock t_textblocks_from_textblock() {
     vx_data_textblock::Func_textblocks_from_textblock output = vx_data_textblock::vx_package->t_textblocks_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_textblock::Class_textblocks_from_textblock();
       vx_core::vx_reserve_type(output);
       vx_data_textblock::vx_package->t_textblocks_from_textblock = output;

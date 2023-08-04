@@ -32,7 +32,7 @@ namespace vx_state {
       std::string skey = key->vx_string();
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -63,7 +63,7 @@ namespace vx_state {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -101,7 +101,7 @@ namespace vx_state {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -116,8 +116,8 @@ namespace vx_state {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -148,7 +148,7 @@ namespace vx_state {
   // (func change)
   vx_core::Type_boolean f_change(vx_state::Type_value_map valuemap) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release(valuemap);
+    vx_core::vx_release_except(valuemap, output);
     return output;
   }
 
@@ -159,9 +159,14 @@ namespace vx_state {
     Class_change::Class_change() : Abstract_change::Abstract_change() {
       vx_core::refcount += 1;
     }
+
     Class_change::~Class_change() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_change::vx_new(vx_core::vx_Type_listany vals) const {
       vx_state::Func_change output = vx_state::e_change();
       vx_core::vx_release(vals);
@@ -170,8 +175,8 @@ namespace vx_state {
 
     vx_core::Type_any Class_change::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_change output = vx_state::e_change();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -208,7 +213,7 @@ namespace vx_state {
     vx_core::Type_msgblock Class_change::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_change::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_change::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_change::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -216,7 +221,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_state::Type_value_map inputval = vx_core::vx_any_from_any(vx_state::t_value_map(), val);
       output = vx_state::f_change(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -224,7 +229,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_state::Type_value_map valuemap = vx_core::vx_any_from_any(vx_state::t_value_map(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_state::f_change(valuemap);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -233,7 +238,7 @@ namespace vx_state {
   // (func register)
   vx_core::Type_boolean f_register(vx_core::Type_statelistener listener) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release(listener);
+    vx_core::vx_release_except(listener, output);
     return output;
   }
 
@@ -244,9 +249,14 @@ namespace vx_state {
     Class_register::Class_register() : Abstract_register::Abstract_register() {
       vx_core::refcount += 1;
     }
+
     Class_register::~Class_register() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_register::vx_new(vx_core::vx_Type_listany vals) const {
       vx_state::Func_register output = vx_state::e_register();
       vx_core::vx_release(vals);
@@ -255,8 +265,8 @@ namespace vx_state {
 
     vx_core::Type_any Class_register::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Func_register output = vx_state::e_register();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -293,7 +303,7 @@ namespace vx_state {
     vx_core::Type_msgblock Class_register::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_register::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_register::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_register::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -301,7 +311,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_statelistener inputval = vx_core::vx_any_from_any(vx_core::t_statelistener(), val);
       output = vx_state::f_register(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -309,7 +319,7 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_statelistener listener = vx_core::vx_any_from_any(vx_core::t_statelistener(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_state::f_register(listener);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -319,7 +329,7 @@ namespace vx_state {
 
   vx_state::Type_value_map e_value_map() {
     vx_state::Type_value_map output = vx_state::vx_package->e_value_map;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_value_map();
       vx_core::vx_reserve_empty(output);
       vx_state::vx_package->e_value_map = output;
@@ -328,7 +338,7 @@ namespace vx_state {
   }
   vx_state::Type_value_map t_value_map() {
     vx_state::Type_value_map output = vx_state::vx_package->t_value_map;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_value_map();
       vx_core::vx_reserve_type(output);
       vx_state::vx_package->t_value_map = output;
@@ -339,7 +349,7 @@ namespace vx_state {
   // (func change)
   vx_state::Func_change e_change() {
     vx_state::Func_change output = vx_state::vx_package->e_change;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_state::Class_change();
       vx_core::vx_reserve_empty(output);
       vx_state::vx_package->e_change = output;
@@ -348,7 +358,7 @@ namespace vx_state {
   }
   vx_state::Func_change t_change() {
     vx_state::Func_change output = vx_state::vx_package->t_change;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_state::Class_change();
       vx_core::vx_reserve_type(output);
       vx_state::vx_package->t_change = output;
@@ -359,7 +369,7 @@ namespace vx_state {
   // (func register)
   vx_state::Func_register e_register() {
     vx_state::Func_register output = vx_state::vx_package->e_register;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_state::Class_register();
       vx_core::vx_reserve_empty(output);
       vx_state::vx_package->e_register = output;
@@ -368,7 +378,7 @@ namespace vx_state {
   }
   vx_state::Func_register t_register() {
     vx_state::Func_register output = vx_state::vx_package->t_register;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_state::Class_register();
       vx_core::vx_reserve_type(output);
       vx_state::vx_package->t_register = output;

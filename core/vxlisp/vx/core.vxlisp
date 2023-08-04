@@ -1602,6 +1602,17 @@
  [values : list-2 :doc "Any list"
   find   : any    :doc "Any value"]
  (native
+  :cpp
+   "bool booleanresult = false;
+    vx_core::vx_Type_listany listvalues = values->vx_list();
+    for (vx_core::Type_any item : listvalues) {
+      vx_core::Type_boolean iseq = vx_core::f_eq(item, find);
+      if (iseq->vx_boolean()) {
+        booleanresult = true;
+        break;
+      }
+    }
+    output = vx_core::vx_new_boolean(booleanresult);"
   :js
    "values.includes(find)"
   :java
@@ -1726,6 +1737,8 @@
 (func funcdef<-func : funcdef
  [val : func]
  (native
+  :cpp
+   "val->vx_funcdef();"
   :java
    "val.vx_funcdef();"))
 
@@ -1752,6 +1765,10 @@
  [clause : boolean
   then   : any-1]
  (native
+  :cpp
+   "if (clause->vx_boolean()) {
+      output = then;
+    }"
   :js
    "if (clause) {
       output = then
@@ -1769,6 +1786,12 @@
   thenval : any-1
   elseval : any-1]
  (native
+  :cpp
+   "if (clause->vx_boolean()) {
+      output = thenval;
+    } else {
+      output = elseval;
+    }"
   :js
    "if (clause) {
       output = thenval
@@ -1788,6 +1811,9 @@
 (func if : any-1
  [thenelselist : thenelselist :...]
  (native
+  :cpp
+   "vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);"
   :js
    "let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -1936,6 +1962,12 @@
  [text : string
   find : string]
  (native
+  :cpp
+   "std::string stext = text->vx_string();
+    std::string sfind = find->vx_string();
+    if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
+      output = vx_core::c_true();
+    }"
   :js
    "if (text.endsWith(find)) {
       output = vx_core.c_true
@@ -1951,6 +1983,11 @@
 (func is-func : boolean
  [val : any]
  (native
+  :cpp
+   "vx_core::Type_string extend = " (extends<-any val) ";
+    if (extend->vx_string() == “:func”) {
+      output = vx_core::c_true();
+    }"
   :js
    "const extend = " (extends<-any val) "
     if (extend == ':func') {
@@ -2066,6 +2103,11 @@
 (func length<-list : int
  [values : list-1]
  (native
+  :cpp
+   "int len = values->vx_p_list.size();
+    if (len > 0) {
+      output = vx_core::vx_new_int(len);
+    }"
   :js "values.length"
   :java
    "int intresult = values.vx_list().size();
@@ -2077,12 +2119,16 @@
  [args   : arglist
   fn-any : any<-func :: any-1]
  (native
+  :cpp
+   "vx_core::Type_any any = fn_any->vx_any_from_func();
+    output = vx_core::vx_any_from_any(generic_any_1, any);"
   :js
    "const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
     }"
-  :java "fn_any.f_any_from_func(generic_any_1);")
+  :java
+   "fn_any.f_any_from_func(generic_any_1);")
  :test (test
         7
         (let
@@ -2094,12 +2140,15 @@
  [args         : arglist
   fn-any-async : any<-func-async]
  (native
+  :cpp
+   "fn_any_async->vx_any_from_func_async(generic_any_1);"
   :js
    "const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
     }"
-  :java "fn_any_async.f_any_from_func_async(generic_any_1);")
+  :java
+   "fn_any_async.f_any_from_func_async(generic_any_1);")
  :doc "Same as normal let but returns async values.")
 
 (func list<-list : list-1
@@ -2212,6 +2261,9 @@
 (func log : any
  [value : any]
  (native
+  :cpp
+   "vx_core::vx_debug(value);
+    output = value;"
   :js
    "const text = vx_core.f_string_from_any(value)
     console.log(text)
@@ -2226,6 +2278,10 @@
  [vallist      : list-2
   fn-any<-any  : any<-any :: string]
  (native
+  :cpp
+   "vx_core::vx_Type_listany listval = vallist->vx_list();
+    vx_core::vx_Type_mapany mapval = vx_core::vx_map_from_list(listval);
+    output = vx_core::vx_new_from_map(generic_map_1, mapval);"
   :js
    "const valmap = {}
     vallist.map(value => {
@@ -3066,6 +3122,12 @@
  [val1 : boolean
   val2 : boolean]
  (native
+  :cpp
+   "if (val1->vx_boolean() || val2->vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    }"
   :js
    "if (val1 || val2) {
       output = true
@@ -3144,6 +3206,11 @@
 (func resolve : any-1
  [fn-any : any<-func]
  (native
+  :cpp
+   "if (fn_any) {
+      vx_core::Type_any any = fn_any->vx_any_from_func();
+      output = vx_core::vx_any_from_any(generic_any_1, any);
+    }"
   :js
    "const typedef = " (typedef<-any fn-any) "
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -3167,6 +3234,10 @@
 (func resolve-async : any-1 :async
  [fn-any : any<-func-async]
  (native
+  :cpp
+   "if (fn_any) {
+      output = fn_any->vx_any_from_func_async(generic_any_1);
+    }"
   :js
    "const typedef = " (typedef<-any fn-any) "
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -3210,6 +3281,9 @@
  [text   : string
   repeat : int]
  (native
+  :cpp
+   "std::string stringtext = vx_core::vx_string_from_string_repeat(text->vx_string(), repeat->vx_int());
+    output = vx_core::vx_new_string(stringtext);"
   :js "text.repeat(repeat)"
   :java
    "String stringtext = text.vx_string();
@@ -3539,6 +3613,8 @@
 (func traits<-typedef : typelist
  [vtypedef : typedef]
  (native
+  :cpp
+   "vtypedef->traits();"
   :js
    "vtypedef['vx_value']['traits']"
   :java
@@ -3548,6 +3624,8 @@
 (func type<-any : any
  [value : any-1]
  (native
+  :cpp
+   "value->vx_type();"
   :js
    "switch (typeof value) {
     case 'boolean':
@@ -3597,6 +3675,8 @@
 (func typedef<-type : typedef
  [val : any]
  (native
+  :cpp
+   "val->vx_typedef();"
   :js
    "output = val"
   :java

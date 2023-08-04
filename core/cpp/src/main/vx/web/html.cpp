@@ -26,7 +26,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_node::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -35,7 +35,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_node::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -51,7 +51,7 @@ namespace vx_web_html {
       } else if (skey == ":style") {
         output = this->style();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -126,8 +126,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -174,7 +174,7 @@ namespace vx_web_html {
       std::string skey = key->vx_string();
       if (false) {
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -195,8 +195,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -240,7 +240,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_divchildlist Class_body::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -254,7 +254,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -294,7 +294,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_divchild()) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::vx_any_from_any(vx_web_html::t_divchild(), valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_divchildlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_divchildlist(), {valdefault});
@@ -327,8 +327,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -375,7 +375,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_details::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -384,7 +384,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_details::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -393,7 +393,7 @@ namespace vx_web_html {
     // summary()
     vx_web_html::Type_divchildlist Class_details::summary() const {
       vx_web_html::Type_divchildlist output = this->vx_p_summary;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -402,7 +402,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_divchildlist Class_details::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -422,7 +422,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -523,8 +523,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -570,7 +570,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_div::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -579,7 +579,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_div::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -588,7 +588,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_divchildlist Class_div::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -606,7 +606,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -654,7 +654,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_divchild()) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::vx_any_from_any(vx_web_html::t_divchild(), valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_divchildlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_divchildlist(), {valdefault});
@@ -705,8 +705,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -759,7 +759,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -793,9 +793,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -832,8 +830,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -886,7 +884,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -920,9 +918,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -959,8 +955,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1004,7 +1000,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_divchildlist Class_footer::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -1018,7 +1014,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1058,7 +1054,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_divchild()) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::vx_any_from_any(vx_web_html::t_divchild(), valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_divchildlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_divchildlist(), {valdefault});
@@ -1091,8 +1087,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1138,7 +1134,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_h1::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1147,7 +1143,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_h1::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -1156,7 +1152,7 @@ namespace vx_web_html {
     // text()
     vx_core::Type_string Class_h1::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1174,7 +1170,7 @@ namespace vx_web_html {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1264,8 +1260,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1311,7 +1307,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_h2::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1320,7 +1316,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_h2::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -1329,7 +1325,7 @@ namespace vx_web_html {
     // text()
     vx_core::Type_string Class_h2::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1347,7 +1343,7 @@ namespace vx_web_html {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1437,8 +1433,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1484,7 +1480,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_h3::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1493,7 +1489,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_h3::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -1502,7 +1498,7 @@ namespace vx_web_html {
     // text()
     vx_core::Type_string Class_h3::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1520,7 +1516,7 @@ namespace vx_web_html {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1610,8 +1606,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1655,7 +1651,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_headchildlist Class_head::nodes() const {
       vx_web_html::Type_headchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_headchildlist();
       }
       return output;
@@ -1669,7 +1665,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1709,7 +1705,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_headchild()) { // default property
             vx_web_html::Type_headchild valdefault = vx_core::vx_any_from_any(vx_web_html::t_headchild(), valsub);
             vx_web_html::Type_headchildlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_headchildlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_headchildlist(), {valdefault});
@@ -1742,8 +1738,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1790,7 +1786,7 @@ namespace vx_web_html {
       std::string skey = key->vx_string();
       if (false) {
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1811,8 +1807,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1865,7 +1861,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -1899,9 +1895,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -1938,8 +1932,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1986,7 +1980,7 @@ namespace vx_web_html {
     // lang()
     vx_core::Type_string Class_html::lang() const {
       vx_core::Type_string output = this->vx_p_lang;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1995,7 +1989,7 @@ namespace vx_web_html {
     // head()
     vx_web_html::Type_head Class_html::head() const {
       vx_web_html::Type_head output = this->vx_p_head;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_head();
       }
       return output;
@@ -2004,7 +1998,7 @@ namespace vx_web_html {
     // body()
     vx_web_html::Type_body Class_html::body() const {
       vx_web_html::Type_body output = this->vx_p_body;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_body();
       }
       return output;
@@ -2013,7 +2007,7 @@ namespace vx_web_html {
     // footer()
     vx_web_html::Type_footer Class_html::footer() const {
       vx_web_html::Type_footer output = this->vx_p_footer;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_footer();
       }
       return output;
@@ -2033,7 +2027,7 @@ namespace vx_web_html {
       } else if (skey == ":footer") {
         output = this->footer();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -2134,8 +2128,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2181,7 +2175,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_meta::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -2190,7 +2184,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_meta::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -2199,7 +2193,7 @@ namespace vx_web_html {
     // charset()
     vx_core::Type_string Class_meta::charset() const {
       vx_core::Type_string output = this->vx_p_charset;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -2217,7 +2211,7 @@ namespace vx_web_html {
       } else if (skey == ":charset") {
         output = this->charset();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -2305,8 +2299,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2359,7 +2353,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -2393,9 +2387,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -2432,8 +2424,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2479,7 +2471,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_p::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -2488,7 +2480,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_p::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -2497,7 +2489,7 @@ namespace vx_web_html {
     // text()
     vx_core::Type_string Class_p::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -2515,7 +2507,7 @@ namespace vx_web_html {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -2605,8 +2597,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2660,7 +2652,7 @@ namespace vx_web_html {
       std::string skey = key->vx_string();
       std::map<std::string, vx_core::Type_string> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_string());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -2699,7 +2691,7 @@ namespace vx_web_html {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -2737,7 +2729,7 @@ namespace vx_web_html {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -2752,8 +2744,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2798,7 +2790,7 @@ namespace vx_web_html {
     // name()
     vx_core::Type_string Class_style::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -2807,7 +2799,7 @@ namespace vx_web_html {
     // props()
     vx_web_html::Type_propmap Class_style::props() const {
       vx_web_html::Type_propmap output = this->vx_p_props;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_propmap();
       }
       return output;
@@ -2823,7 +2815,7 @@ namespace vx_web_html {
       } else if (skey == ":props") {
         output = this->props();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -2898,8 +2890,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -2952,7 +2944,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -2986,9 +2978,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -3025,8 +3015,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -3080,7 +3070,7 @@ namespace vx_web_html {
       std::string skey = key->vx_string();
       std::map<std::string, vx_web_html::Type_style> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_web_html::e_style());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -3119,7 +3109,7 @@ namespace vx_web_html {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -3157,7 +3147,7 @@ namespace vx_web_html {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -3172,8 +3162,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -3221,7 +3211,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_stylesheet::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -3230,7 +3220,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_stylesheet::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -3239,7 +3229,7 @@ namespace vx_web_html {
     // name()
     vx_core::Type_string Class_stylesheet::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -3248,7 +3238,7 @@ namespace vx_web_html {
     // styles()
     vx_web_html::Type_stylelist Class_stylesheet::styles() const {
       vx_web_html::Type_stylelist output = this->vx_p_styles;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_stylelist();
       }
       return output;
@@ -3257,7 +3247,7 @@ namespace vx_web_html {
     // stylemap()
     vx_web_html::Type_stylemap Class_stylesheet::stylemap() const {
       vx_web_html::Type_stylemap output = this->vx_p_stylemap;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_stylemap();
       }
       return output;
@@ -3279,7 +3269,7 @@ namespace vx_web_html {
       } else if (skey == ":stylemap") {
         output = this->stylemap();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -3393,8 +3383,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -3441,7 +3431,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_table::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -3450,7 +3440,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_table::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -3459,7 +3449,7 @@ namespace vx_web_html {
     // tbody()
     vx_web_html::Type_tbody Class_table::tbody() const {
       vx_web_html::Type_tbody output = this->vx_p_tbody;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_tbody();
       }
       return output;
@@ -3468,7 +3458,7 @@ namespace vx_web_html {
     // thead()
     vx_web_html::Type_thead Class_table::thead() const {
       vx_web_html::Type_thead output = this->vx_p_thead;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_thead();
       }
       return output;
@@ -3488,7 +3478,7 @@ namespace vx_web_html {
       } else if (skey == ":thead") {
         output = this->thead();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -3589,8 +3579,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -3636,7 +3626,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_tbody::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -3645,7 +3635,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_tbody::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -3654,7 +3644,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_trlist Class_tbody::nodes() const {
       vx_web_html::Type_trlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_trlist();
       }
       return output;
@@ -3672,7 +3662,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -3720,7 +3710,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_tr()) { // default property
             vx_web_html::Type_tr valdefault = vx_core::vx_any_from_any(vx_web_html::t_tr(), valsub);
             vx_web_html::Type_trlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_trlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_trlist(), {valdefault});
@@ -3771,8 +3761,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -3818,7 +3808,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_td::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -3827,7 +3817,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_td::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -3836,7 +3826,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_divchildlist Class_td::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_divchildlist();
       }
       return output;
@@ -3854,7 +3844,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -3902,7 +3892,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_divchild()) { // default property
             vx_web_html::Type_divchild valdefault = vx_core::vx_any_from_any(vx_web_html::t_divchild(), valsub);
             vx_web_html::Type_divchildlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_divchildlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_divchildlist(), {valdefault});
@@ -3953,8 +3943,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4007,7 +3997,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -4041,9 +4031,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -4080,8 +4068,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4127,7 +4115,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_thead::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -4136,7 +4124,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_thead::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -4145,7 +4133,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_trlist Class_thead::nodes() const {
       vx_web_html::Type_trlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_trlist();
       }
       return output;
@@ -4163,7 +4151,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -4211,7 +4199,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_tr()) { // default property
             vx_web_html::Type_tr valdefault = vx_core::vx_any_from_any(vx_web_html::t_tr(), valsub);
             vx_web_html::Type_trlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_trlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_trlist(), {valdefault});
@@ -4262,8 +4250,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4309,7 +4297,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_title::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -4318,7 +4306,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_title::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -4327,7 +4315,7 @@ namespace vx_web_html {
     // text()
     vx_core::Type_string Class_title::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -4345,7 +4333,7 @@ namespace vx_web_html {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -4433,8 +4421,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4480,7 +4468,7 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string Class_tr::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -4489,7 +4477,7 @@ namespace vx_web_html {
     // style()
     vx_web_html::Type_style Class_tr::style() const {
       vx_web_html::Type_style output = this->vx_p_style;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_style();
       }
       return output;
@@ -4498,7 +4486,7 @@ namespace vx_web_html {
     // nodes()
     vx_web_html::Type_tdlist Class_tr::nodes() const {
       vx_web_html::Type_tdlist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_web_html::e_tdlist();
       }
       return output;
@@ -4516,7 +4504,7 @@ namespace vx_web_html {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -4564,7 +4552,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_td()) { // default property
             vx_web_html::Type_td valdefault = vx_core::vx_any_from_any(vx_web_html::t_td(), valsub);
             vx_web_html::Type_tdlist vallist = output->vx_p_nodes;
-            if (vallist == NULL) {
+            if (!vallist) {
               vallist = vx_core::vx_new(vx_web_html::t_tdlist(), {valdefault});
             } else {
               vallist = vx_core::vx_copy(vx_web_html::t_tdlist(), {valdefault});
@@ -4615,8 +4603,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4669,7 +4657,7 @@ namespace vx_web_html {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -4703,9 +4691,7 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -4742,8 +4728,8 @@ namespace vx_web_html {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4774,7 +4760,7 @@ namespace vx_web_html {
   // (func boolean-write<-id-htmltext)
   vx_core::Type_boolean f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release({id, htmltext});
+    vx_core::vx_release_except({id, htmltext}, output);
     return output;
   }
 
@@ -4785,9 +4771,14 @@ namespace vx_web_html {
     Class_boolean_write_from_id_htmltext::Class_boolean_write_from_id_htmltext() : Abstract_boolean_write_from_id_htmltext::Abstract_boolean_write_from_id_htmltext() {
       vx_core::refcount += 1;
     }
+
     Class_boolean_write_from_id_htmltext::~Class_boolean_write_from_id_htmltext() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::e_boolean_write_from_id_htmltext();
       vx_core::vx_release(vals);
@@ -4796,8 +4787,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::e_boolean_write_from_id_htmltext();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4839,7 +4830,7 @@ namespace vx_web_html {
       vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string htmltext = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_boolean_write_from_id_htmltext(id, htmltext);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -4859,9 +4850,14 @@ namespace vx_web_html {
     Class_boolean_write_from_stylesheet::Class_boolean_write_from_stylesheet() : Abstract_boolean_write_from_stylesheet::Abstract_boolean_write_from_stylesheet() {
       vx_core::refcount += 1;
     }
+
     Class_boolean_write_from_stylesheet::~Class_boolean_write_from_stylesheet() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_boolean_write_from_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::e_boolean_write_from_stylesheet();
       vx_core::vx_release(vals);
@@ -4870,8 +4866,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_boolean_write_from_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::e_boolean_write_from_stylesheet();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4908,11 +4904,11 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_boolean_write_from_stylesheet::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_boolean_write_from_stylesheet::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any_async Class_boolean_write_from_stylesheet::vx_fn_new(vx_core::Abstract_any_from_any_async::IFn fn) const {
+    vx_core::Func_any_from_any_async Class_boolean_write_from_stylesheet::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const {
       return vx_core::e_any_from_any_async();
     }
 
-    vx_core::vx_Type_async Class_boolean_write_from_stylesheet::vx_any_from_any_async(vx_core::Type_any val) const {
+    vx_core::vx_Type_async Class_boolean_write_from_stylesheet::vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const {
       vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), val);
       vx_core::vx_Type_async output = vx_web_html::f_boolean_write_from_stylesheet(inputval);
       vx_core::vx_release(val);
@@ -4932,7 +4928,7 @@ namespace vx_web_html {
   // (func htmlstring<-string)
   vx_core::Type_string f_htmlstring_from_string(vx_core::Type_string text) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::vx_release(text);
+    vx_core::vx_release_except(text, output);
     return output;
   }
 
@@ -4943,9 +4939,14 @@ namespace vx_web_html {
     Class_htmlstring_from_string::Class_htmlstring_from_string() : Abstract_htmlstring_from_string::Abstract_htmlstring_from_string() {
       vx_core::refcount += 1;
     }
+
     Class_htmlstring_from_string::~Class_htmlstring_from_string() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_htmlstring_from_string::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_htmlstring_from_string output = vx_web_html::e_htmlstring_from_string();
       vx_core::vx_release(vals);
@@ -4954,8 +4955,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_htmlstring_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_htmlstring_from_string output = vx_web_html::e_htmlstring_from_string();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -4992,7 +4993,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_htmlstring_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_htmlstring_from_string::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_htmlstring_from_string::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_htmlstring_from_string::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -5000,7 +5001,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       output = vx_web_html::f_htmlstring_from_string(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -5008,7 +5009,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_htmlstring_from_string(text);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5018,7 +5019,7 @@ namespace vx_web_html {
   vx_core::Type_string f_string_indent(vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
     output = vx_core::f_string_repeat(vx_core::vx_new_string("  "), indent);
-    vx_core::vx_release(indent);
+    vx_core::vx_release_except(indent, output);
     return output;
   }
 
@@ -5029,9 +5030,14 @@ namespace vx_web_html {
     Class_string_indent::Class_string_indent() : Abstract_string_indent::Abstract_string_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_indent::~Class_string_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_indent output = vx_web_html::e_string_indent();
       vx_core::vx_release(vals);
@@ -5040,8 +5046,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_indent output = vx_web_html::e_string_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5078,7 +5084,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_string_indent::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_string_indent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_string_indent::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_string_indent::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -5086,7 +5092,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int(), val);
       output = vx_web_html::f_string_indent(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -5094,7 +5100,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_string_indent(indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5103,15 +5109,16 @@ namespace vx_web_html {
   // (func string<-body-indent)
   vx_core::Type_string f_string_from_body_indent(vx_web_html::Type_body body, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([body, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({body, indent}, [body, indent]() {
         vx_web_html::Type_divchildlist nodes = body->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("body"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("body"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({body, indent});
+    vx_core::vx_release_except({body, indent}, output);
     return output;
   }
 
@@ -5122,9 +5129,14 @@ namespace vx_web_html {
     Class_string_from_body_indent::Class_string_from_body_indent() : Abstract_string_from_body_indent::Abstract_string_from_body_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_body_indent::~Class_string_from_body_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_body_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_body_indent output = vx_web_html::e_string_from_body_indent();
       vx_core::vx_release(vals);
@@ -5133,8 +5145,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_body_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_body_indent output = vx_web_html::e_string_from_body_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5176,7 +5188,7 @@ namespace vx_web_html {
       vx_web_html::Type_body body = vx_core::vx_any_from_any(vx_web_html::t_body(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_body_indent(body, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5185,9 +5197,9 @@ namespace vx_web_html {
   // (func string<-details-indent)
   vx_core::Type_string f_string_from_details_indent(vx_web_html::Type_details details, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, details]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, details}, [indent, details]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_web_html::Type_divchildlist summary = details->summary();
         vx_web_html::Type_divchildlist nodes = details->nodes();
@@ -5199,7 +5211,7 @@ namespace vx_web_html {
           nodes,
           vx_core::f_plus(indent, vx_core::vx_new_int(1))
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -5213,11 +5225,12 @@ namespace vx_web_html {
             sindent,
             vx_core::vx_new_string("</details>")
           })
-        );vx_core::vx_release({sindent, summary, nodes, ssummary, snodes});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, summary, nodes, ssummary, snodes}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({details, indent});
+    vx_core::vx_release_except({details, indent}, output);
     return output;
   }
 
@@ -5228,9 +5241,14 @@ namespace vx_web_html {
     Class_string_from_details_indent::Class_string_from_details_indent() : Abstract_string_from_details_indent::Abstract_string_from_details_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_details_indent::~Class_string_from_details_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_details_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_details_indent output = vx_web_html::e_string_from_details_indent();
       vx_core::vx_release(vals);
@@ -5239,8 +5257,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_details_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_details_indent output = vx_web_html::e_string_from_details_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5282,7 +5300,7 @@ namespace vx_web_html {
       vx_web_html::Type_details details = vx_core::vx_any_from_any(vx_web_html::t_details(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_details_indent(details, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5291,9 +5309,9 @@ namespace vx_web_html {
   // (func string<-div-indent)
   vx_core::Type_string f_string_from_div_indent(vx_web_html::Type_div div, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([div, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({div, indent}, [div, indent]() {
         vx_web_html::Type_divchildlist nodes = div->nodes();
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
@@ -5302,7 +5320,7 @@ namespace vx_web_html {
         vx_core::Type_string sstyle = vx_web_html::f_string_from_propstyle(
           div->style()
         );
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(
           nodes,
           vx_core::vx_new_string("div"),
           vx_core::f_new(
@@ -5313,11 +5331,12 @@ namespace vx_web_html {
             })
           ),
           indent
-        );vx_core::vx_release({nodes, sid, sstyle});
-        return output;
+        );
+        vx_core::vx_release_except({nodes, sid, sstyle}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({div, indent});
+    vx_core::vx_release_except({div, indent}, output);
     return output;
   }
 
@@ -5328,9 +5347,14 @@ namespace vx_web_html {
     Class_string_from_div_indent::Class_string_from_div_indent() : Abstract_string_from_div_indent::Abstract_string_from_div_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_div_indent::~Class_string_from_div_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_div_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_div_indent output = vx_web_html::e_string_from_div_indent();
       vx_core::vx_release(vals);
@@ -5339,8 +5363,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_div_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_div_indent output = vx_web_html::e_string_from_div_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5382,7 +5406,7 @@ namespace vx_web_html {
       vx_web_html::Type_div div = vx_core::vx_any_from_any(vx_web_html::t_div(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_div_indent(div, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5391,15 +5415,16 @@ namespace vx_web_html {
   // (func string<-footer-indent)
   vx_core::Type_string f_string_from_footer_indent(vx_web_html::Type_footer footer, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([footer, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({footer, indent}, [footer, indent]() {
         vx_web_html::Type_divchildlist nodes = footer->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("footer"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("footer"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({footer, indent});
+    vx_core::vx_release_except({footer, indent}, output);
     return output;
   }
 
@@ -5410,9 +5435,14 @@ namespace vx_web_html {
     Class_string_from_footer_indent::Class_string_from_footer_indent() : Abstract_string_from_footer_indent::Abstract_string_from_footer_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_footer_indent::~Class_string_from_footer_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_footer_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_footer_indent output = vx_web_html::e_string_from_footer_indent();
       vx_core::vx_release(vals);
@@ -5421,8 +5451,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_footer_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_footer_indent output = vx_web_html::e_string_from_footer_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5464,7 +5494,7 @@ namespace vx_web_html {
       vx_web_html::Type_footer footer = vx_core::vx_any_from_any(vx_web_html::t_footer(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_footer_indent(footer, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5473,16 +5503,16 @@ namespace vx_web_html {
   // (func string<-h1-indent)
   vx_core::Type_string f_string_from_h1_indent(vx_web_html::Type_h1 h1, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, h1]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, h1}, [indent, h1]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string text = h1->text();
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h1->id()
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -5492,11 +5522,12 @@ namespace vx_web_html {
             text,
             vx_core::vx_new_string("</h1>")
           })
-        );vx_core::vx_release({sindent, text, sid});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, text, sid}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({h1, indent});
+    vx_core::vx_release_except({h1, indent}, output);
     return output;
   }
 
@@ -5507,9 +5538,14 @@ namespace vx_web_html {
     Class_string_from_h1_indent::Class_string_from_h1_indent() : Abstract_string_from_h1_indent::Abstract_string_from_h1_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_h1_indent::~Class_string_from_h1_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_h1_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h1_indent output = vx_web_html::e_string_from_h1_indent();
       vx_core::vx_release(vals);
@@ -5518,8 +5554,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_h1_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h1_indent output = vx_web_html::e_string_from_h1_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5561,7 +5597,7 @@ namespace vx_web_html {
       vx_web_html::Type_h1 h1 = vx_core::vx_any_from_any(vx_web_html::t_h1(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_h1_indent(h1, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5570,16 +5606,16 @@ namespace vx_web_html {
   // (func string<-h2-indent)
   vx_core::Type_string f_string_from_h2_indent(vx_web_html::Type_h2 h2, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([h2, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({h2, indent}, [h2, indent]() {
         vx_core::Type_string text = h2->text();
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h2->id()
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -5589,11 +5625,12 @@ namespace vx_web_html {
             text,
             vx_core::vx_new_string("</h2>")
           })
-        );vx_core::vx_release({text, sindent, sid});
-        return output;
+        );
+        vx_core::vx_release_except({text, sindent, sid}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({h2, indent});
+    vx_core::vx_release_except({h2, indent}, output);
     return output;
   }
 
@@ -5604,9 +5641,14 @@ namespace vx_web_html {
     Class_string_from_h2_indent::Class_string_from_h2_indent() : Abstract_string_from_h2_indent::Abstract_string_from_h2_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_h2_indent::~Class_string_from_h2_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_h2_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h2_indent output = vx_web_html::e_string_from_h2_indent();
       vx_core::vx_release(vals);
@@ -5615,8 +5657,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_h2_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h2_indent output = vx_web_html::e_string_from_h2_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5658,7 +5700,7 @@ namespace vx_web_html {
       vx_web_html::Type_h2 h2 = vx_core::vx_any_from_any(vx_web_html::t_h2(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_h2_indent(h2, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5667,16 +5709,16 @@ namespace vx_web_html {
   // (func string<-h3-indent)
   vx_core::Type_string f_string_from_h3_indent(vx_web_html::Type_h3 h3, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([h3, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({h3, indent}, [h3, indent]() {
         vx_core::Type_string text = h3->text();
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h3->id()
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -5686,11 +5728,12 @@ namespace vx_web_html {
             text,
             vx_core::vx_new_string("</h3>")
           })
-        );vx_core::vx_release({text, sindent, sid});
-        return output;
+        );
+        vx_core::vx_release_except({text, sindent, sid}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({h3, indent});
+    vx_core::vx_release_except({h3, indent}, output);
     return output;
   }
 
@@ -5701,9 +5744,14 @@ namespace vx_web_html {
     Class_string_from_h3_indent::Class_string_from_h3_indent() : Abstract_string_from_h3_indent::Abstract_string_from_h3_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_h3_indent::~Class_string_from_h3_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_h3_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h3_indent output = vx_web_html::e_string_from_h3_indent();
       vx_core::vx_release(vals);
@@ -5712,8 +5760,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_h3_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_h3_indent output = vx_web_html::e_string_from_h3_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5755,7 +5803,7 @@ namespace vx_web_html {
       vx_web_html::Type_h3 h3 = vx_core::vx_any_from_any(vx_web_html::t_h3(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_h3_indent(h3, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5764,15 +5812,16 @@ namespace vx_web_html {
   // (func string<-head-indent)
   vx_core::Type_string f_string_from_head_indent(vx_web_html::Type_head head, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([head, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({head, indent}, [head, indent]() {
         vx_web_html::Type_headchildlist nodes = head->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("head"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("head"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({head, indent});
+    vx_core::vx_release_except({head, indent}, output);
     return output;
   }
 
@@ -5783,9 +5832,14 @@ namespace vx_web_html {
     Class_string_from_head_indent::Class_string_from_head_indent() : Abstract_string_from_head_indent::Abstract_string_from_head_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_head_indent::~Class_string_from_head_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_head_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_head_indent output = vx_web_html::e_string_from_head_indent();
       vx_core::vx_release(vals);
@@ -5794,8 +5848,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_head_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_head_indent output = vx_web_html::e_string_from_head_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5837,7 +5891,7 @@ namespace vx_web_html {
       vx_web_html::Type_head head = vx_core::vx_any_from_any(vx_web_html::t_head(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_head_indent(head, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5846,9 +5900,9 @@ namespace vx_web_html {
   // (func string<-html)
   vx_core::Type_string f_string_from_html(vx_web_html::Type_html html) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([html]() {
+      vx_core::t_any_from_func()->vx_fn_new({html}, [html]() {
         vx_core::Type_string lang = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("lang"),
           html->lang()
@@ -5859,7 +5913,7 @@ namespace vx_web_html {
         vx_core::Type_string shead = vx_web_html::f_string_from_head_indent(head, vx_core::vx_new_int(1));
         vx_core::Type_string sbody = vx_web_html::f_string_from_body_indent(body, vx_core::vx_new_int(1));
         vx_core::Type_string sfooter = vx_web_html::f_string_from_footer_indent(footer, vx_core::vx_new_int(1));
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             vx_core::vx_new_string("<!DOCTYPE html>"),
@@ -5873,11 +5927,12 @@ namespace vx_web_html {
             vx_core::c_newline(),
             vx_core::vx_new_string("</html>")
           })
-        );vx_core::vx_release({lang, head, body, footer, shead, sbody, sfooter});
-        return output;
+        );
+        vx_core::vx_release_except({lang, head, body, footer, shead, sbody, sfooter}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release(html);
+    vx_core::vx_release_except(html, output);
     return output;
   }
 
@@ -5888,9 +5943,14 @@ namespace vx_web_html {
     Class_string_from_html::Class_string_from_html() : Abstract_string_from_html::Abstract_string_from_html() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_html::~Class_string_from_html() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_html::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_html output = vx_web_html::e_string_from_html();
       vx_core::vx_release(vals);
@@ -5899,8 +5959,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_html::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_html output = vx_web_html::e_string_from_html();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -5937,7 +5997,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_string_from_html::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_string_from_html::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_string_from_html::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_string_from_html::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -5945,7 +6005,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_html inputval = vx_core::vx_any_from_any(vx_web_html::t_html(), val);
       output = vx_web_html::f_string_from_html(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -5953,7 +6013,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_html html = vx_core::vx_any_from_any(vx_web_html::t_html(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_string_from_html(html);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -5974,7 +6034,7 @@ namespace vx_web_html {
         })
       )
     );
-    vx_core::vx_release(indent);
+    vx_core::vx_release_except(indent, output);
     return output;
   }
 
@@ -5985,9 +6045,14 @@ namespace vx_web_html {
     Class_string_from_indent::Class_string_from_indent() : Abstract_string_from_indent::Abstract_string_from_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_indent::~Class_string_from_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_indent output = vx_web_html::e_string_from_indent();
       vx_core::vx_release(vals);
@@ -5996,8 +6061,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_indent output = vx_web_html::e_string_from_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6034,7 +6099,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_string_from_indent::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_string_from_indent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_string_from_indent::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_string_from_indent::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -6042,7 +6107,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int(), val);
       output = vx_web_html::f_string_from_indent(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -6050,7 +6115,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_string_from_indent(indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6059,15 +6124,15 @@ namespace vx_web_html {
   // (func string<-meta-indent)
   vx_core::Type_string f_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, meta]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, meta}, [indent, meta]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string charset = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("charset"),
           meta->charset()
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -6075,11 +6140,12 @@ namespace vx_web_html {
             charset,
             vx_core::vx_new_string(" />")
           })
-        );vx_core::vx_release({sindent, charset});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, charset}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({meta, indent});
+    vx_core::vx_release_except({meta, indent}, output);
     return output;
   }
 
@@ -6090,9 +6156,14 @@ namespace vx_web_html {
     Class_string_from_meta_indent::Class_string_from_meta_indent() : Abstract_string_from_meta_indent::Abstract_string_from_meta_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_meta_indent::~Class_string_from_meta_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_meta_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_meta_indent output = vx_web_html::e_string_from_meta_indent();
       vx_core::vx_release(vals);
@@ -6101,8 +6172,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_meta_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_meta_indent output = vx_web_html::e_string_from_meta_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6144,7 +6215,7 @@ namespace vx_web_html {
       vx_web_html::Type_meta meta = vx_core::vx_any_from_any(vx_web_html::t_meta(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_meta_indent(meta, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6159,160 +6230,177 @@ namespace vx_web_html {
       vx_core::vx_new(vx_core::t_thenelselist(), {
         vx_core::f_case_1(
           vx_web_html::t_body(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_body_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_body_indent(
               vx_core::f_any_from_any(vx_web_html::t_body(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_details(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_details_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_details_indent(
               vx_core::f_any_from_any(vx_web_html::t_details(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_div(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_div_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_div_indent(
               vx_core::f_any_from_any(vx_web_html::t_div(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_h1(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_h1_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_h1_indent(
               vx_core::f_any_from_any(vx_web_html::t_h1(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_h2(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_h2_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_h2_indent(
               vx_core::f_any_from_any(vx_web_html::t_h2(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_h3(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_h3_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_h3_indent(
               vx_core::f_any_from_any(vx_web_html::t_h3(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_head(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_head_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_head_indent(
               vx_core::f_any_from_any(vx_web_html::t_head(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_footer(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_footer_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_footer_indent(
               vx_core::f_any_from_any(vx_web_html::t_footer(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_meta(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_meta_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_meta_indent(
               vx_core::f_any_from_any(vx_web_html::t_meta(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_p(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_p_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_p_indent(
               vx_core::f_any_from_any(vx_web_html::t_p(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_stylesheet(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_stylesheet_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_stylesheet_indent(
               vx_core::f_any_from_any(vx_web_html::t_stylesheet(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_table(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_table_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_table_indent(
               vx_core::f_any_from_any(vx_web_html::t_table(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_title(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_title_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_title_indent(
               vx_core::f_any_from_any(vx_web_html::t_title(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_tbody(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_tbody_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_tbody_indent(
               vx_core::f_any_from_any(vx_web_html::t_tbody(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_thead(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_thead_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_thead_indent(
               vx_core::f_any_from_any(vx_web_html::t_thead(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_td(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_td_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_td_indent(
               vx_core::f_any_from_any(vx_web_html::t_td(), node),
               indent
             );
+            return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_web_html::t_tr(),
-          vx_core::t_any_from_func()->vx_fn_new([node, indent]() {
-            return vx_web_html::f_string_from_tr_indent(
+          vx_core::t_any_from_func()->vx_fn_new({node, indent}, [node, indent]() {
+            vx_core::Type_string output_1 = vx_web_html::f_string_from_tr_indent(
               vx_core::f_any_from_any(vx_web_html::t_tr(), node),
               indent
             );
+            return output_1;
           })
         )
       })
     );
-    vx_core::vx_release({node, indent});
+    vx_core::vx_release_except({node, indent}, output);
     return output;
   }
 
@@ -6323,9 +6411,14 @@ namespace vx_web_html {
     Class_string_from_node_indent::Class_string_from_node_indent() : Abstract_string_from_node_indent::Abstract_string_from_node_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_node_indent::~Class_string_from_node_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_node_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_node_indent output = vx_web_html::e_string_from_node_indent();
       vx_core::vx_release(vals);
@@ -6334,8 +6427,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_node_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_node_indent output = vx_web_html::e_string_from_node_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6377,7 +6470,7 @@ namespace vx_web_html {
       vx_core::Type_any node = vx_core::vx_any_from_any(vx_core::t_any(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_node_indent(node, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6386,23 +6479,25 @@ namespace vx_web_html {
   // (func string<-nodelist-indent)
   vx_core::Type_string f_string_from_nodelist_indent(vx_core::Type_list nodelist, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([nodelist, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({nodelist, indent}, [nodelist, indent]() {
         vx_core::Type_stringlist textlist = vx_core::f_list_from_list(
           vx_core::t_stringlist(),
           nodelist,
-          vx_core::t_any_from_any()->vx_fn_new([indent](vx_core::Type_any node_any) {
+          vx_core::t_any_from_any()->vx_fn_new({indent}, [indent](vx_core::Type_any node_any) {
             vx_web_html::Type_node node = vx_core::vx_any_from_any(vx_web_html::t_node(), node_any);
-            return 
+            vx_core::Type_any output_1 = 
               vx_web_html::f_string_from_node_indent(node, indent);
+            return output_1;
           })
         );
-        vx_core::Type_string output = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));vx_core::vx_release(textlist);
-        return output;
+        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));
+        vx_core::vx_release_except(textlist, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({nodelist, indent});
+    vx_core::vx_release_except({nodelist, indent}, output);
     return output;
   }
 
@@ -6413,9 +6508,14 @@ namespace vx_web_html {
     Class_string_from_nodelist_indent::Class_string_from_nodelist_indent() : Abstract_string_from_nodelist_indent::Abstract_string_from_nodelist_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_nodelist_indent::~Class_string_from_nodelist_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_nodelist_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_nodelist_indent output = vx_web_html::e_string_from_nodelist_indent();
       vx_core::vx_release(vals);
@@ -6424,8 +6524,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_nodelist_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_nodelist_indent output = vx_web_html::e_string_from_nodelist_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6467,7 +6567,7 @@ namespace vx_web_html {
       vx_core::Type_list nodelist = vx_core::vx_any_from_any(vx_core::t_list(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_nodelist_indent(nodelist, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6476,9 +6576,9 @@ namespace vx_web_html {
   // (func string<-nodelist-tag-prop-indent)
   vx_core::Type_string f_string_from_nodelist_tag_prop_indent(vx_core::Type_list nodes, vx_core::Type_string tag, vx_core::Type_string prop, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([nodes, indent, tag, prop]() {
+      vx_core::t_any_from_func()->vx_fn_new({nodes, indent, tag, prop}, [nodes, indent, tag, prop]() {
         vx_core::Type_string text = vx_web_html::f_string_from_nodelist_indent(
           nodes,
           vx_core::f_plus1(indent)
@@ -6488,29 +6588,34 @@ namespace vx_web_html {
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_thenelselist(), {
             vx_core::f_then(
-              vx_core::t_boolean_from_func()->vx_fn_new([text]() {
-                return vx_core::f_is_empty(text);
+              vx_core::t_boolean_from_func()->vx_fn_new({text}, [text]() {
+                vx_core::Type_boolean output_1 = vx_core::f_is_empty(text);
+                return output_1;
               }),
-              vx_core::t_any_from_func()->vx_fn_new([]() {
-                return vx_core::vx_new_string("");
+              vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                vx_core::Type_string output_1 = vx_core::vx_new_string("");
+                return output_1;
               })
             ),
             vx_core::f_then(
-              vx_core::t_boolean_from_func()->vx_fn_new([sindent]() {
-                return vx_core::f_is_empty(sindent);
+              vx_core::t_boolean_from_func()->vx_fn_new({sindent}, [sindent]() {
+                vx_core::Type_boolean output_1 = vx_core::f_is_empty(sindent);
+                return output_1;
               }),
-              vx_core::t_any_from_func()->vx_fn_new([]() {
-                return vx_core::c_newline();
+              vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                vx_core::Type_string output_1 = vx_core::c_newline();
+                return output_1;
               })
             ),
             vx_core::f_else(
-              vx_core::t_any_from_func()->vx_fn_new([sindent]() {
-                return sindent;
+              vx_core::t_any_from_func()->vx_fn_new({sindent}, [sindent]() {
+                vx_core::Type_any output_1 = sindent;
+                return output_1;
               })
             )
           })
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -6524,11 +6629,12 @@ namespace vx_web_html {
             tag,
             vx_core::vx_new_string(">")
           })
-        );vx_core::vx_release({text, sindent, eindent});
-        return output;
+        );
+        vx_core::vx_release_except({text, sindent, eindent}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({nodes, tag, prop, indent});
+    vx_core::vx_release_except({nodes, tag, prop, indent}, output);
     return output;
   }
 
@@ -6539,9 +6645,14 @@ namespace vx_web_html {
     Class_string_from_nodelist_tag_prop_indent::Class_string_from_nodelist_tag_prop_indent() : Abstract_string_from_nodelist_tag_prop_indent::Abstract_string_from_nodelist_tag_prop_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_nodelist_tag_prop_indent::~Class_string_from_nodelist_tag_prop_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_nodelist_tag_prop_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_nodelist_tag_prop_indent output = vx_web_html::e_string_from_nodelist_tag_prop_indent();
       vx_core::vx_release(vals);
@@ -6550,8 +6661,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_nodelist_tag_prop_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_nodelist_tag_prop_indent output = vx_web_html::e_string_from_nodelist_tag_prop_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6595,7 +6706,7 @@ namespace vx_web_html {
       vx_core::Type_string prop = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(2)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(3)));
       output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6604,9 +6715,9 @@ namespace vx_web_html {
   // (func string<-p-indent)
   vx_core::Type_string f_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, p]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, p}, [indent, p]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string text = vx_web_html::f_htmlstring_from_string(
           p->text()
@@ -6618,7 +6729,7 @@ namespace vx_web_html {
         vx_core::Type_string sstyle = vx_web_html::f_string_from_propstyle(
           p->style()
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -6629,11 +6740,12 @@ namespace vx_web_html {
             text,
             vx_core::vx_new_string("</p>")
           })
-        );vx_core::vx_release({sindent, text, sid, sstyle});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, text, sid, sstyle}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({p, indent});
+    vx_core::vx_release_except({p, indent}, output);
     return output;
   }
 
@@ -6644,9 +6756,14 @@ namespace vx_web_html {
     Class_string_from_p_indent::Class_string_from_p_indent() : Abstract_string_from_p_indent::Abstract_string_from_p_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_p_indent::~Class_string_from_p_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_p_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_p_indent output = vx_web_html::e_string_from_p_indent();
       vx_core::vx_release(vals);
@@ -6655,8 +6772,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_p_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_p_indent output = vx_web_html::e_string_from_p_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6698,7 +6815,7 @@ namespace vx_web_html {
       vx_web_html::Type_p p = vx_core::vx_any_from_any(vx_web_html::t_p(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_p_indent(p, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6722,7 +6839,7 @@ namespace vx_web_html {
         })
       )
     );
-    vx_core::vx_release({key, val});
+    vx_core::vx_release_except({key, val}, output);
     return output;
   }
 
@@ -6733,9 +6850,14 @@ namespace vx_web_html {
     Class_string_from_propname_val::Class_string_from_propname_val() : Abstract_string_from_propname_val::Abstract_string_from_propname_val() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_propname_val::~Class_string_from_propname_val() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_propname_val::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_propname_val output = vx_web_html::e_string_from_propname_val();
       vx_core::vx_release(vals);
@@ -6744,8 +6866,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_propname_val::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_propname_val output = vx_web_html::e_string_from_propname_val();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6787,7 +6909,7 @@ namespace vx_web_html {
       vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_propname_val(key, val);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6812,7 +6934,7 @@ namespace vx_web_html {
         })
       )
     );
-    vx_core::vx_release(style);
+    vx_core::vx_release_except(style, output);
     return output;
   }
 
@@ -6823,9 +6945,14 @@ namespace vx_web_html {
     Class_string_from_propstyle::Class_string_from_propstyle() : Abstract_string_from_propstyle::Abstract_string_from_propstyle() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_propstyle::~Class_string_from_propstyle() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_propstyle::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_propstyle output = vx_web_html::e_string_from_propstyle();
       vx_core::vx_release(vals);
@@ -6834,8 +6961,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_propstyle::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_propstyle output = vx_web_html::e_string_from_propstyle();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6872,7 +6999,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_string_from_propstyle::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_string_from_propstyle::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_string_from_propstyle::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_string_from_propstyle::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -6880,7 +7007,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_style inputval = vx_core::vx_any_from_any(vx_web_html::t_style(), val);
       output = vx_web_html::f_string_from_propstyle(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -6888,7 +7015,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_style style = vx_core::vx_any_from_any(vx_web_html::t_style(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_string_from_propstyle(style);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6897,9 +7024,9 @@ namespace vx_web_html {
   // (func string<-style-indent)
   vx_core::Type_string f_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, style]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, style}, [indent, style]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string name = style->name();
         vx_web_html::Type_propmap propmap = style->props();
@@ -6907,7 +7034,7 @@ namespace vx_web_html {
           propmap,
           vx_core::f_plus1(indent)
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -6917,11 +7044,12 @@ namespace vx_web_html {
             sindent,
             vx_core::vx_new_string("}")
           })
-        );vx_core::vx_release({sindent, name, propmap, stext});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, name, propmap, stext}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({style, indent});
+    vx_core::vx_release_except({style, indent}, output);
     return output;
   }
 
@@ -6932,9 +7060,14 @@ namespace vx_web_html {
     Class_string_from_style_indent::Class_string_from_style_indent() : Abstract_string_from_style_indent::Abstract_string_from_style_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_style_indent::~Class_string_from_style_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_style_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_style_indent output = vx_web_html::e_string_from_style_indent();
       vx_core::vx_release(vals);
@@ -6943,8 +7076,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_style_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_style_indent output = vx_web_html::e_string_from_style_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -6986,7 +7119,7 @@ namespace vx_web_html {
       vx_web_html::Type_style style = vx_core::vx_any_from_any(vx_web_html::t_style(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_style_indent(style, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -6995,23 +7128,25 @@ namespace vx_web_html {
   // (func string<-stylelist-indent)
   vx_core::Type_string f_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([stylelist, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({stylelist, indent}, [stylelist, indent]() {
         vx_core::Type_stringlist sstyles = vx_core::f_list_from_list(
           vx_core::t_stringlist(),
           stylelist,
-          vx_core::t_any_from_any()->vx_fn_new([indent](vx_core::Type_any substyle_any) {
+          vx_core::t_any_from_any()->vx_fn_new({indent}, [indent](vx_core::Type_any substyle_any) {
             vx_web_html::Type_style substyle = vx_core::vx_any_from_any(vx_web_html::t_style(), substyle_any);
-            return 
+            vx_core::Type_any output_1 = 
               vx_web_html::f_string_from_style_indent(substyle, indent);
+            return output_1;
           })
         );
-        vx_core::Type_string output = vx_type::f_string_from_stringlist_join(sstyles, vx_core::vx_new_string(""));vx_core::vx_release(sstyles);
-        return output;
+        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(sstyles, vx_core::vx_new_string(""));
+        vx_core::vx_release_except(sstyles, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({stylelist, indent});
+    vx_core::vx_release_except({stylelist, indent}, output);
     return output;
   }
 
@@ -7022,9 +7157,14 @@ namespace vx_web_html {
     Class_string_from_stylelist_indent::Class_string_from_stylelist_indent() : Abstract_string_from_stylelist_indent::Abstract_string_from_stylelist_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_stylelist_indent::~Class_string_from_stylelist_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_stylelist_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylelist_indent output = vx_web_html::e_string_from_stylelist_indent();
       vx_core::vx_release(vals);
@@ -7033,8 +7173,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_stylelist_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylelist_indent output = vx_web_html::e_string_from_stylelist_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7076,7 +7216,7 @@ namespace vx_web_html {
       vx_web_html::Type_stylelist stylelist = vx_core::vx_any_from_any(vx_web_html::t_stylelist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_stylelist_indent(stylelist, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7085,17 +7225,17 @@ namespace vx_web_html {
   // (func string<-stylepropmap-indent)
   vx_core::Type_string f_string_from_stylepropmap_indent(vx_web_html::Type_propmap propmap, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, propmap]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, propmap}, [indent, propmap]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_stringlist sprops = vx_core::f_list_from_map(
           vx_core::t_stringlist(),
           propmap,
-          vx_core::t_any_from_key_value()->vx_fn_new([sindent](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+          vx_core::t_any_from_key_value()->vx_fn_new({sindent}, [sindent](vx_core::Type_any key_any, vx_core::Type_any val_any) {
             vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string(), key_any);
             vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string(), val_any);
-            return 
+            vx_core::Type_any output_1 = 
               vx_core::f_new(
                 vx_core::t_string(),
                 vx_core::vx_new(vx_core::t_anylist(), {
@@ -7106,13 +7246,15 @@ namespace vx_web_html {
                   vx_core::vx_new_string(";")
                 })
               );
+            return output_1;
           })
         );
-        vx_core::Type_string output = vx_type::f_string_from_stringlist_join(sprops, vx_core::vx_new_string(""));vx_core::vx_release({sindent, sprops});
-        return output;
+        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(sprops, vx_core::vx_new_string(""));
+        vx_core::vx_release_except({sindent, sprops}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({propmap, indent});
+    vx_core::vx_release_except({propmap, indent}, output);
     return output;
   }
 
@@ -7123,9 +7265,14 @@ namespace vx_web_html {
     Class_string_from_stylepropmap_indent::Class_string_from_stylepropmap_indent() : Abstract_string_from_stylepropmap_indent::Abstract_string_from_stylepropmap_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_stylepropmap_indent::~Class_string_from_stylepropmap_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_stylepropmap_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylepropmap_indent output = vx_web_html::e_string_from_stylepropmap_indent();
       vx_core::vx_release(vals);
@@ -7134,8 +7281,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_stylepropmap_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylepropmap_indent output = vx_web_html::e_string_from_stylepropmap_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7177,7 +7324,7 @@ namespace vx_web_html {
       vx_web_html::Type_propmap propmap = vx_core::vx_any_from_any(vx_web_html::t_propmap(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_stylepropmap_indent(propmap, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7186,9 +7333,9 @@ namespace vx_web_html {
   // (func string<-stylesheet-indent)
   vx_core::Type_string f_string_from_stylesheet_indent(vx_web_html::Type_stylesheet stylesheet, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([stylesheet, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({stylesheet, indent}, [stylesheet, indent]() {
         vx_core::Type_string text = vx_web_html::f_string_from_stylelist_indent(
           stylesheet->styles(),
           vx_core::f_plus1(indent)
@@ -7199,7 +7346,7 @@ namespace vx_web_html {
           vx_core::f_notempty(text),
           sindent
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -7208,11 +7355,12 @@ namespace vx_web_html {
             eindent,
             vx_core::vx_new_string("</style>")
           })
-        );vx_core::vx_release({text, sindent, eindent});
-        return output;
+        );
+        vx_core::vx_release_except({text, sindent, eindent}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({stylesheet, indent});
+    vx_core::vx_release_except({stylesheet, indent}, output);
     return output;
   }
 
@@ -7223,9 +7371,14 @@ namespace vx_web_html {
     Class_string_from_stylesheet_indent::Class_string_from_stylesheet_indent() : Abstract_string_from_stylesheet_indent::Abstract_string_from_stylesheet_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_stylesheet_indent::~Class_string_from_stylesheet_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_stylesheet_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylesheet_indent output = vx_web_html::e_string_from_stylesheet_indent();
       vx_core::vx_release(vals);
@@ -7234,8 +7387,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_stylesheet_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_stylesheet_indent output = vx_web_html::e_string_from_stylesheet_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7277,7 +7430,7 @@ namespace vx_web_html {
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_stylesheet_indent(stylesheet, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7286,9 +7439,9 @@ namespace vx_web_html {
   // (func string<-table-indent)
   vx_core::Type_string f_string_from_table_indent(vx_web_html::Type_table table, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, table]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, table}, [indent, table]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
@@ -7304,7 +7457,7 @@ namespace vx_web_html {
           tbody,
           vx_core::f_plus1(indent)
         );
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -7316,11 +7469,12 @@ namespace vx_web_html {
             sindent,
             vx_core::vx_new_string("</table>")
           })
-        );vx_core::vx_release({sindent, sid, thead, tbody, shead, sbody});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, sid, thead, tbody, shead, sbody}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({table, indent});
+    vx_core::vx_release_except({table, indent}, output);
     return output;
   }
 
@@ -7331,9 +7485,14 @@ namespace vx_web_html {
     Class_string_from_table_indent::Class_string_from_table_indent() : Abstract_string_from_table_indent::Abstract_string_from_table_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_table_indent::~Class_string_from_table_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_table_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_table_indent output = vx_web_html::e_string_from_table_indent();
       vx_core::vx_release(vals);
@@ -7342,8 +7501,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_table_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_table_indent output = vx_web_html::e_string_from_table_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7385,7 +7544,7 @@ namespace vx_web_html {
       vx_web_html::Type_table table = vx_core::vx_any_from_any(vx_web_html::t_table(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_table_indent(table, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7394,15 +7553,16 @@ namespace vx_web_html {
   // (func string<-tbody-indent)
   vx_core::Type_string f_string_from_tbody_indent(vx_web_html::Type_tbody tbody, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([tbody, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({tbody, indent}, [tbody, indent]() {
         vx_web_html::Type_trlist nodes = tbody->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tbody"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tbody"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({tbody, indent});
+    vx_core::vx_release_except({tbody, indent}, output);
     return output;
   }
 
@@ -7413,9 +7573,14 @@ namespace vx_web_html {
     Class_string_from_tbody_indent::Class_string_from_tbody_indent() : Abstract_string_from_tbody_indent::Abstract_string_from_tbody_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_tbody_indent::~Class_string_from_tbody_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_tbody_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_tbody_indent output = vx_web_html::e_string_from_tbody_indent();
       vx_core::vx_release(vals);
@@ -7424,8 +7589,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_tbody_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_tbody_indent output = vx_web_html::e_string_from_tbody_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7467,7 +7632,7 @@ namespace vx_web_html {
       vx_web_html::Type_tbody tbody = vx_core::vx_any_from_any(vx_web_html::t_tbody(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_tbody_indent(tbody, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7476,15 +7641,16 @@ namespace vx_web_html {
   // (func string<-td-indent)
   vx_core::Type_string f_string_from_td_indent(vx_web_html::Type_td td, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([td, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({td, indent}, [td, indent]() {
         vx_web_html::Type_divchildlist nodes = td->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("td"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("td"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({td, indent});
+    vx_core::vx_release_except({td, indent}, output);
     return output;
   }
 
@@ -7495,9 +7661,14 @@ namespace vx_web_html {
     Class_string_from_td_indent::Class_string_from_td_indent() : Abstract_string_from_td_indent::Abstract_string_from_td_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_td_indent::~Class_string_from_td_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_td_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_td_indent output = vx_web_html::e_string_from_td_indent();
       vx_core::vx_release(vals);
@@ -7506,8 +7677,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_td_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_td_indent output = vx_web_html::e_string_from_td_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7549,7 +7720,7 @@ namespace vx_web_html {
       vx_web_html::Type_td td = vx_core::vx_any_from_any(vx_web_html::t_td(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_td_indent(td, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7558,15 +7729,16 @@ namespace vx_web_html {
   // (func string<-thead-indent)
   vx_core::Type_string f_string_from_thead_indent(vx_web_html::Type_thead thead, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([thead, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({thead, indent}, [thead, indent]() {
         vx_web_html::Type_trlist nodes = thead->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("thead"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("thead"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({thead, indent});
+    vx_core::vx_release_except({thead, indent}, output);
     return output;
   }
 
@@ -7577,9 +7749,14 @@ namespace vx_web_html {
     Class_string_from_thead_indent::Class_string_from_thead_indent() : Abstract_string_from_thead_indent::Abstract_string_from_thead_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_thead_indent::~Class_string_from_thead_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_thead_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_thead_indent output = vx_web_html::e_string_from_thead_indent();
       vx_core::vx_release(vals);
@@ -7588,8 +7765,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_thead_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_thead_indent output = vx_web_html::e_string_from_thead_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7631,7 +7808,7 @@ namespace vx_web_html {
       vx_web_html::Type_thead thead = vx_core::vx_any_from_any(vx_web_html::t_thead(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_thead_indent(thead, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7640,12 +7817,12 @@ namespace vx_web_html {
   // (func string<-title-indent)
   vx_core::Type_string f_string_from_title_indent(vx_web_html::Type_title title, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([indent, title]() {
+      vx_core::t_any_from_func()->vx_fn_new({indent, title}, [indent, title]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::Type_string text = title->text();
-        vx_core::Type_string output = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
             sindent,
@@ -7653,11 +7830,12 @@ namespace vx_web_html {
             text,
             vx_core::vx_new_string("</title>")
           })
-        );vx_core::vx_release({sindent, text});
-        return output;
+        );
+        vx_core::vx_release_except({sindent, text}, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({title, indent});
+    vx_core::vx_release_except({title, indent}, output);
     return output;
   }
 
@@ -7668,9 +7846,14 @@ namespace vx_web_html {
     Class_string_from_title_indent::Class_string_from_title_indent() : Abstract_string_from_title_indent::Abstract_string_from_title_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_title_indent::~Class_string_from_title_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_title_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_title_indent output = vx_web_html::e_string_from_title_indent();
       vx_core::vx_release(vals);
@@ -7679,8 +7862,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_title_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_title_indent output = vx_web_html::e_string_from_title_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7722,7 +7905,7 @@ namespace vx_web_html {
       vx_web_html::Type_title title = vx_core::vx_any_from_any(vx_web_html::t_title(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_title_indent(title, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7731,15 +7914,16 @@ namespace vx_web_html {
   // (func string<-tr-indent)
   vx_core::Type_string f_string_from_tr_indent(vx_web_html::Type_tr tr, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::f_let(
+    output = vx_core::f_let(
       vx_core::t_string(),
-      vx_core::t_any_from_func()->vx_fn_new([tr, indent]() {
+      vx_core::t_any_from_func()->vx_fn_new({tr, indent}, [tr, indent]() {
         vx_web_html::Type_tdlist nodes = tr->nodes();
-        vx_core::Type_string output = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tr"), vx_core::vx_new_string(""), indent);vx_core::vx_release(nodes);
-        return output;
+        vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tr"), vx_core::vx_new_string(""), indent);
+        vx_core::vx_release_except(nodes, output_1);
+        return output_1;
       })
     );
-    vx_core::vx_release({tr, indent});
+    vx_core::vx_release_except({tr, indent}, output);
     return output;
   }
 
@@ -7750,9 +7934,14 @@ namespace vx_web_html {
     Class_string_from_tr_indent::Class_string_from_tr_indent() : Abstract_string_from_tr_indent::Abstract_string_from_tr_indent() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_tr_indent::~Class_string_from_tr_indent() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_tr_indent::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_tr_indent output = vx_web_html::e_string_from_tr_indent();
       vx_core::vx_release(vals);
@@ -7761,8 +7950,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_tr_indent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_tr_indent output = vx_web_html::e_string_from_tr_indent();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7804,7 +7993,7 @@ namespace vx_web_html {
       vx_web_html::Type_tr tr = vx_core::vx_any_from_any(vx_web_html::t_tr(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_tr_indent(tr, indent);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7813,7 +8002,7 @@ namespace vx_web_html {
   // (func string<-uri)
   vx_core::Type_string f_string_from_uri(vx_core::Type_string uri) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::vx_release(uri);
+    vx_core::vx_release_except(uri, output);
     return output;
   }
 
@@ -7824,9 +8013,14 @@ namespace vx_web_html {
     Class_string_from_uri::Class_string_from_uri() : Abstract_string_from_uri::Abstract_string_from_uri() {
       vx_core::refcount += 1;
     }
+
     Class_string_from_uri::~Class_string_from_uri() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_string_from_uri::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_uri output = vx_web_html::e_string_from_uri();
       vx_core::vx_release(vals);
@@ -7835,8 +8029,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_string_from_uri::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_string_from_uri output = vx_web_html::e_string_from_uri();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7873,7 +8067,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_string_from_uri::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_string_from_uri::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_string_from_uri::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_string_from_uri::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -7881,7 +8075,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       output = vx_web_html::f_string_from_uri(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -7889,7 +8083,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string uri = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_string_from_uri(uri);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7903,7 +8097,7 @@ namespace vx_web_html {
       vx_web_html::f_stylemap_from_stylesheet(stylesheet),
       name
     );
-    vx_core::vx_release({stylesheet, name});
+    vx_core::vx_release_except({stylesheet, name}, output);
     return output;
   }
 
@@ -7914,9 +8108,14 @@ namespace vx_web_html {
     Class_style_from_stylesheet_name::Class_style_from_stylesheet_name() : Abstract_style_from_stylesheet_name::Abstract_style_from_stylesheet_name() {
       vx_core::refcount += 1;
     }
+
     Class_style_from_stylesheet_name::~Class_style_from_stylesheet_name() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_style_from_stylesheet_name::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_style_from_stylesheet_name output = vx_web_html::e_style_from_stylesheet_name();
       vx_core::vx_release(vals);
@@ -7925,8 +8124,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_style_from_stylesheet_name::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_style_from_stylesheet_name output = vx_web_html::e_style_from_stylesheet_name();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -7968,7 +8167,7 @@ namespace vx_web_html {
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string name = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_style_from_stylesheet_name(stylesheet, name);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -7980,13 +8179,14 @@ namespace vx_web_html {
     output = vx_core::f_map_from_list(
       vx_web_html::t_stylemap(),
       stylelist,
-      vx_core::t_any_from_any()->vx_fn_new([](vx_core::Type_any style_any) {
+      vx_core::t_any_from_any()->vx_fn_new({}, [](vx_core::Type_any style_any) {
         vx_web_html::Type_style style = vx_core::vx_any_from_any(vx_web_html::t_style(), style_any);
-        return 
+        vx_core::Type_any output_1 = 
           style->name();
+        return output_1;
       })
     );
-    vx_core::vx_release(stylelist);
+    vx_core::vx_release_except(stylelist, output);
     return output;
   }
 
@@ -7997,9 +8197,14 @@ namespace vx_web_html {
     Class_stylemap_from_stylelist::Class_stylemap_from_stylelist() : Abstract_stylemap_from_stylelist::Abstract_stylemap_from_stylelist() {
       vx_core::refcount += 1;
     }
+
     Class_stylemap_from_stylelist::~Class_stylemap_from_stylelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_stylemap_from_stylelist::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylemap_from_stylelist output = vx_web_html::e_stylemap_from_stylelist();
       vx_core::vx_release(vals);
@@ -8008,8 +8213,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_stylemap_from_stylelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylemap_from_stylelist output = vx_web_html::e_stylemap_from_stylelist();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -8046,7 +8251,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_stylemap_from_stylelist::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_stylemap_from_stylelist::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_stylemap_from_stylelist::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_stylemap_from_stylelist::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -8054,7 +8259,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylelist inputval = vx_core::vx_any_from_any(vx_web_html::t_stylelist(), val);
       output = vx_web_html::f_stylemap_from_stylelist(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -8062,7 +8267,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylelist stylelist = vx_core::vx_any_from_any(vx_web_html::t_stylelist(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_stylemap_from_stylelist(stylelist);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -8072,7 +8277,7 @@ namespace vx_web_html {
   vx_web_html::Type_stylemap f_stylemap_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
     vx_web_html::Type_stylemap output = vx_web_html::e_stylemap();
     output = stylesheet->stylemap();
-    vx_core::vx_release(stylesheet);
+    vx_core::vx_release_except(stylesheet, output);
     return output;
   }
 
@@ -8083,9 +8288,14 @@ namespace vx_web_html {
     Class_stylemap_from_stylesheet::Class_stylemap_from_stylesheet() : Abstract_stylemap_from_stylesheet::Abstract_stylemap_from_stylesheet() {
       vx_core::refcount += 1;
     }
+
     Class_stylemap_from_stylesheet::~Class_stylemap_from_stylesheet() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_stylemap_from_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylemap_from_stylesheet output = vx_web_html::e_stylemap_from_stylesheet();
       vx_core::vx_release(vals);
@@ -8094,8 +8304,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_stylemap_from_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylemap_from_stylesheet output = vx_web_html::e_stylemap_from_stylesheet();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -8132,7 +8342,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_stylemap_from_stylesheet::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_stylemap_from_stylesheet::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_stylemap_from_stylesheet::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_stylemap_from_stylesheet::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -8140,7 +8350,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), val);
       output = vx_web_html::f_stylemap_from_stylesheet(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -8148,7 +8358,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_stylemap_from_stylesheet(stylesheet);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -8158,7 +8368,7 @@ namespace vx_web_html {
   vx_web_html::Type_stylelist f_styles_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
     vx_web_html::Type_stylelist output = vx_web_html::e_stylelist();
     output = stylesheet->styles();
-    vx_core::vx_release(stylesheet);
+    vx_core::vx_release_except(stylesheet, output);
     return output;
   }
 
@@ -8169,9 +8379,14 @@ namespace vx_web_html {
     Class_styles_from_stylesheet::Class_styles_from_stylesheet() : Abstract_styles_from_stylesheet::Abstract_styles_from_stylesheet() {
       vx_core::refcount += 1;
     }
+
     Class_styles_from_stylesheet::~Class_styles_from_stylesheet() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_styles_from_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_styles_from_stylesheet output = vx_web_html::e_styles_from_stylesheet();
       vx_core::vx_release(vals);
@@ -8180,8 +8395,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_styles_from_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_styles_from_stylesheet output = vx_web_html::e_styles_from_stylesheet();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -8218,7 +8433,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_styles_from_stylesheet::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_styles_from_stylesheet::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_styles_from_stylesheet::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_styles_from_stylesheet::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -8226,7 +8441,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), val);
       output = vx_web_html::f_styles_from_stylesheet(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -8234,7 +8449,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_styles_from_stylesheet(stylesheet);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -8252,7 +8467,7 @@ namespace vx_web_html {
         )
       })
     );
-    vx_core::vx_release(stylesheet);
+    vx_core::vx_release_except(stylesheet, output);
     return output;
   }
 
@@ -8263,9 +8478,14 @@ namespace vx_web_html {
     Class_stylesheet_loadmap::Class_stylesheet_loadmap() : Abstract_stylesheet_loadmap::Abstract_stylesheet_loadmap() {
       vx_core::refcount += 1;
     }
+
     Class_stylesheet_loadmap::~Class_stylesheet_loadmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_stylesheet_loadmap::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylesheet_loadmap output = vx_web_html::e_stylesheet_loadmap();
       vx_core::vx_release(vals);
@@ -8274,8 +8494,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_stylesheet_loadmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_stylesheet_loadmap output = vx_web_html::e_stylesheet_loadmap();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -8312,7 +8532,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_stylesheet_loadmap::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_stylesheet_loadmap::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_stylesheet_loadmap::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_stylesheet_loadmap::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -8320,7 +8540,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), val);
       output = vx_web_html::f_stylesheet_loadmap(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -8328,7 +8548,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_stylesheet_loadmap(stylesheet);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -8337,7 +8557,7 @@ namespace vx_web_html {
   // (func uri<-string)
   vx_core::Type_string f_uri_from_string(vx_core::Type_string text) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::vx_release(text);
+    vx_core::vx_release_except(text, output);
     return output;
   }
 
@@ -8348,9 +8568,14 @@ namespace vx_web_html {
     Class_uri_from_string::Class_uri_from_string() : Abstract_uri_from_string::Abstract_uri_from_string() {
       vx_core::refcount += 1;
     }
+
     Class_uri_from_string::~Class_uri_from_string() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_uri_from_string::vx_new(vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_uri_from_string output = vx_web_html::e_uri_from_string();
       vx_core::vx_release(vals);
@@ -8359,8 +8584,8 @@ namespace vx_web_html {
 
     vx_core::Type_any Class_uri_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Func_uri_from_string output = vx_web_html::e_uri_from_string();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -8397,7 +8622,7 @@ namespace vx_web_html {
     vx_core::Type_msgblock Class_uri_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_uri_from_string::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_uri_from_string::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_uri_from_string::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -8405,7 +8630,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string(), val);
       output = vx_web_html::f_uri_from_string(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -8413,7 +8638,7 @@ namespace vx_web_html {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_web_html::f_uri_from_string(text);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -8423,7 +8648,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_node e_node() {
     vx_web_html::Type_node output = vx_web_html::vx_package->e_node;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_node();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_node = output;
@@ -8432,7 +8657,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_node t_node() {
     vx_web_html::Type_node output = vx_web_html::vx_package->t_node;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_node();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_node = output;
@@ -8442,7 +8667,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_divchild e_divchild() {
     vx_web_html::Type_divchild output = vx_web_html::vx_package->e_divchild;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divchild();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_divchild = output;
@@ -8451,7 +8676,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_divchild t_divchild() {
     vx_web_html::Type_divchild output = vx_web_html::vx_package->t_divchild;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divchild();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_divchild = output;
@@ -8461,7 +8686,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_body e_body() {
     vx_web_html::Type_body output = vx_web_html::vx_package->e_body;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_body();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_body = output;
@@ -8470,7 +8695,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_body t_body() {
     vx_web_html::Type_body output = vx_web_html::vx_package->t_body;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_body();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_body = output;
@@ -8480,7 +8705,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_details e_details() {
     vx_web_html::Type_details output = vx_web_html::vx_package->e_details;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_details();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_details = output;
@@ -8489,7 +8714,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_details t_details() {
     vx_web_html::Type_details output = vx_web_html::vx_package->t_details;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_details();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_details = output;
@@ -8499,7 +8724,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_div e_div() {
     vx_web_html::Type_div output = vx_web_html::vx_package->e_div;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_div();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_div = output;
@@ -8508,7 +8733,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_div t_div() {
     vx_web_html::Type_div output = vx_web_html::vx_package->t_div;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_div();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_div = output;
@@ -8518,7 +8743,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_divchildlist e_divchildlist() {
     vx_web_html::Type_divchildlist output = vx_web_html::vx_package->e_divchildlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divchildlist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_divchildlist = output;
@@ -8527,7 +8752,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_divchildlist t_divchildlist() {
     vx_web_html::Type_divchildlist output = vx_web_html::vx_package->t_divchildlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divchildlist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_divchildlist = output;
@@ -8537,7 +8762,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_divlist e_divlist() {
     vx_web_html::Type_divlist output = vx_web_html::vx_package->e_divlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divlist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_divlist = output;
@@ -8546,7 +8771,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_divlist t_divlist() {
     vx_web_html::Type_divlist output = vx_web_html::vx_package->t_divlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_divlist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_divlist = output;
@@ -8556,7 +8781,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_footer e_footer() {
     vx_web_html::Type_footer output = vx_web_html::vx_package->e_footer;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_footer();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_footer = output;
@@ -8565,7 +8790,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_footer t_footer() {
     vx_web_html::Type_footer output = vx_web_html::vx_package->t_footer;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_footer();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_footer = output;
@@ -8575,7 +8800,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_h1 e_h1() {
     vx_web_html::Type_h1 output = vx_web_html::vx_package->e_h1;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h1();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_h1 = output;
@@ -8584,7 +8809,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_h1 t_h1() {
     vx_web_html::Type_h1 output = vx_web_html::vx_package->t_h1;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h1();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_h1 = output;
@@ -8594,7 +8819,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_h2 e_h2() {
     vx_web_html::Type_h2 output = vx_web_html::vx_package->e_h2;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h2();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_h2 = output;
@@ -8603,7 +8828,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_h2 t_h2() {
     vx_web_html::Type_h2 output = vx_web_html::vx_package->t_h2;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h2();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_h2 = output;
@@ -8613,7 +8838,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_h3 e_h3() {
     vx_web_html::Type_h3 output = vx_web_html::vx_package->e_h3;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h3();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_h3 = output;
@@ -8622,7 +8847,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_h3 t_h3() {
     vx_web_html::Type_h3 output = vx_web_html::vx_package->t_h3;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_h3();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_h3 = output;
@@ -8632,7 +8857,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_head e_head() {
     vx_web_html::Type_head output = vx_web_html::vx_package->e_head;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_head();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_head = output;
@@ -8641,7 +8866,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_head t_head() {
     vx_web_html::Type_head output = vx_web_html::vx_package->t_head;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_head();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_head = output;
@@ -8651,7 +8876,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_headchild e_headchild() {
     vx_web_html::Type_headchild output = vx_web_html::vx_package->e_headchild;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_headchild();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_headchild = output;
@@ -8660,7 +8885,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_headchild t_headchild() {
     vx_web_html::Type_headchild output = vx_web_html::vx_package->t_headchild;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_headchild();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_headchild = output;
@@ -8670,7 +8895,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_headchildlist e_headchildlist() {
     vx_web_html::Type_headchildlist output = vx_web_html::vx_package->e_headchildlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_headchildlist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_headchildlist = output;
@@ -8679,7 +8904,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_headchildlist t_headchildlist() {
     vx_web_html::Type_headchildlist output = vx_web_html::vx_package->t_headchildlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_headchildlist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_headchildlist = output;
@@ -8689,7 +8914,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_html e_html() {
     vx_web_html::Type_html output = vx_web_html::vx_package->e_html;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_html();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_html = output;
@@ -8698,7 +8923,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_html t_html() {
     vx_web_html::Type_html output = vx_web_html::vx_package->t_html;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_html();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_html = output;
@@ -8708,7 +8933,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_meta e_meta() {
     vx_web_html::Type_meta output = vx_web_html::vx_package->e_meta;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_meta();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_meta = output;
@@ -8717,7 +8942,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_meta t_meta() {
     vx_web_html::Type_meta output = vx_web_html::vx_package->t_meta;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_meta();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_meta = output;
@@ -8727,7 +8952,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_nodelist e_nodelist() {
     vx_web_html::Type_nodelist output = vx_web_html::vx_package->e_nodelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_nodelist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_nodelist = output;
@@ -8736,7 +8961,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_nodelist t_nodelist() {
     vx_web_html::Type_nodelist output = vx_web_html::vx_package->t_nodelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_nodelist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_nodelist = output;
@@ -8746,7 +8971,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_p e_p() {
     vx_web_html::Type_p output = vx_web_html::vx_package->e_p;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_p();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_p = output;
@@ -8755,7 +8980,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_p t_p() {
     vx_web_html::Type_p output = vx_web_html::vx_package->t_p;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_p();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_p = output;
@@ -8765,7 +8990,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_propmap e_propmap() {
     vx_web_html::Type_propmap output = vx_web_html::vx_package->e_propmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_propmap();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_propmap = output;
@@ -8774,7 +8999,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_propmap t_propmap() {
     vx_web_html::Type_propmap output = vx_web_html::vx_package->t_propmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_propmap();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_propmap = output;
@@ -8784,7 +9009,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_style e_style() {
     vx_web_html::Type_style output = vx_web_html::vx_package->e_style;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_style();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_style = output;
@@ -8793,7 +9018,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_style t_style() {
     vx_web_html::Type_style output = vx_web_html::vx_package->t_style;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_style();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_style = output;
@@ -8803,7 +9028,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_stylelist e_stylelist() {
     vx_web_html::Type_stylelist output = vx_web_html::vx_package->e_stylelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylelist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylelist = output;
@@ -8812,7 +9037,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_stylelist t_stylelist() {
     vx_web_html::Type_stylelist output = vx_web_html::vx_package->t_stylelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylelist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylelist = output;
@@ -8822,7 +9047,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_stylemap e_stylemap() {
     vx_web_html::Type_stylemap output = vx_web_html::vx_package->e_stylemap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylemap();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylemap = output;
@@ -8831,7 +9056,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_stylemap t_stylemap() {
     vx_web_html::Type_stylemap output = vx_web_html::vx_package->t_stylemap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylemap();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylemap = output;
@@ -8841,7 +9066,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_stylesheet e_stylesheet() {
     vx_web_html::Type_stylesheet output = vx_web_html::vx_package->e_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylesheet();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylesheet = output;
@@ -8850,7 +9075,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_stylesheet t_stylesheet() {
     vx_web_html::Type_stylesheet output = vx_web_html::vx_package->t_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_stylesheet();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylesheet = output;
@@ -8860,7 +9085,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_table e_table() {
     vx_web_html::Type_table output = vx_web_html::vx_package->e_table;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_table();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_table = output;
@@ -8869,7 +9094,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_table t_table() {
     vx_web_html::Type_table output = vx_web_html::vx_package->t_table;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_table();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_table = output;
@@ -8879,7 +9104,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_tbody e_tbody() {
     vx_web_html::Type_tbody output = vx_web_html::vx_package->e_tbody;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tbody();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_tbody = output;
@@ -8888,7 +9113,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_tbody t_tbody() {
     vx_web_html::Type_tbody output = vx_web_html::vx_package->t_tbody;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tbody();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_tbody = output;
@@ -8898,7 +9123,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_td e_td() {
     vx_web_html::Type_td output = vx_web_html::vx_package->e_td;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_td();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_td = output;
@@ -8907,7 +9132,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_td t_td() {
     vx_web_html::Type_td output = vx_web_html::vx_package->t_td;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_td();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_td = output;
@@ -8917,7 +9142,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_tdlist e_tdlist() {
     vx_web_html::Type_tdlist output = vx_web_html::vx_package->e_tdlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tdlist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_tdlist = output;
@@ -8926,7 +9151,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_tdlist t_tdlist() {
     vx_web_html::Type_tdlist output = vx_web_html::vx_package->t_tdlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tdlist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_tdlist = output;
@@ -8936,7 +9161,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_thead e_thead() {
     vx_web_html::Type_thead output = vx_web_html::vx_package->e_thead;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_thead();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_thead = output;
@@ -8945,7 +9170,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_thead t_thead() {
     vx_web_html::Type_thead output = vx_web_html::vx_package->t_thead;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_thead();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_thead = output;
@@ -8955,7 +9180,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_title e_title() {
     vx_web_html::Type_title output = vx_web_html::vx_package->e_title;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_title();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_title = output;
@@ -8964,7 +9189,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_title t_title() {
     vx_web_html::Type_title output = vx_web_html::vx_package->t_title;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_title();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_title = output;
@@ -8974,7 +9199,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_tr e_tr() {
     vx_web_html::Type_tr output = vx_web_html::vx_package->e_tr;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tr();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_tr = output;
@@ -8983,7 +9208,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_tr t_tr() {
     vx_web_html::Type_tr output = vx_web_html::vx_package->t_tr;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tr();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_tr = output;
@@ -8993,7 +9218,7 @@ namespace vx_web_html {
 
   vx_web_html::Type_trlist e_trlist() {
     vx_web_html::Type_trlist output = vx_web_html::vx_package->e_trlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_trlist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_trlist = output;
@@ -9002,7 +9227,7 @@ namespace vx_web_html {
   }
   vx_web_html::Type_trlist t_trlist() {
     vx_web_html::Type_trlist output = vx_web_html::vx_package->t_trlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_trlist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_trlist = output;
@@ -9013,7 +9238,7 @@ namespace vx_web_html {
   // (func boolean-write<-id-htmltext)
   vx_web_html::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext() {
     vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::vx_package->e_boolean_write_from_id_htmltext;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_boolean_write_from_id_htmltext();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_boolean_write_from_id_htmltext = output;
@@ -9022,7 +9247,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext() {
     vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::vx_package->t_boolean_write_from_id_htmltext;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_boolean_write_from_id_htmltext();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_boolean_write_from_id_htmltext = output;
@@ -9033,7 +9258,7 @@ namespace vx_web_html {
   // (func boolean-write<-stylesheet)
   vx_web_html::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet() {
     vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::vx_package->e_boolean_write_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_boolean_write_from_stylesheet();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_boolean_write_from_stylesheet = output;
@@ -9042,7 +9267,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet() {
     vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::vx_package->t_boolean_write_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_boolean_write_from_stylesheet();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_boolean_write_from_stylesheet = output;
@@ -9053,7 +9278,7 @@ namespace vx_web_html {
   // (func htmlstring<-string)
   vx_web_html::Func_htmlstring_from_string e_htmlstring_from_string() {
     vx_web_html::Func_htmlstring_from_string output = vx_web_html::vx_package->e_htmlstring_from_string;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_htmlstring_from_string();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_htmlstring_from_string = output;
@@ -9062,7 +9287,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_htmlstring_from_string t_htmlstring_from_string() {
     vx_web_html::Func_htmlstring_from_string output = vx_web_html::vx_package->t_htmlstring_from_string;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_htmlstring_from_string();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_htmlstring_from_string = output;
@@ -9073,7 +9298,7 @@ namespace vx_web_html {
   // (func string-indent)
   vx_web_html::Func_string_indent e_string_indent() {
     vx_web_html::Func_string_indent output = vx_web_html::vx_package->e_string_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_indent = output;
@@ -9082,7 +9307,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_indent t_string_indent() {
     vx_web_html::Func_string_indent output = vx_web_html::vx_package->t_string_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_indent = output;
@@ -9093,7 +9318,7 @@ namespace vx_web_html {
   // (func string<-body-indent)
   vx_web_html::Func_string_from_body_indent e_string_from_body_indent() {
     vx_web_html::Func_string_from_body_indent output = vx_web_html::vx_package->e_string_from_body_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_body_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_body_indent = output;
@@ -9102,7 +9327,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_body_indent t_string_from_body_indent() {
     vx_web_html::Func_string_from_body_indent output = vx_web_html::vx_package->t_string_from_body_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_body_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_body_indent = output;
@@ -9113,7 +9338,7 @@ namespace vx_web_html {
   // (func string<-details-indent)
   vx_web_html::Func_string_from_details_indent e_string_from_details_indent() {
     vx_web_html::Func_string_from_details_indent output = vx_web_html::vx_package->e_string_from_details_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_details_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_details_indent = output;
@@ -9122,7 +9347,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_details_indent t_string_from_details_indent() {
     vx_web_html::Func_string_from_details_indent output = vx_web_html::vx_package->t_string_from_details_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_details_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_details_indent = output;
@@ -9133,7 +9358,7 @@ namespace vx_web_html {
   // (func string<-div-indent)
   vx_web_html::Func_string_from_div_indent e_string_from_div_indent() {
     vx_web_html::Func_string_from_div_indent output = vx_web_html::vx_package->e_string_from_div_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_div_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_div_indent = output;
@@ -9142,7 +9367,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_div_indent t_string_from_div_indent() {
     vx_web_html::Func_string_from_div_indent output = vx_web_html::vx_package->t_string_from_div_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_div_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_div_indent = output;
@@ -9153,7 +9378,7 @@ namespace vx_web_html {
   // (func string<-footer-indent)
   vx_web_html::Func_string_from_footer_indent e_string_from_footer_indent() {
     vx_web_html::Func_string_from_footer_indent output = vx_web_html::vx_package->e_string_from_footer_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_footer_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_footer_indent = output;
@@ -9162,7 +9387,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_footer_indent t_string_from_footer_indent() {
     vx_web_html::Func_string_from_footer_indent output = vx_web_html::vx_package->t_string_from_footer_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_footer_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_footer_indent = output;
@@ -9173,7 +9398,7 @@ namespace vx_web_html {
   // (func string<-h1-indent)
   vx_web_html::Func_string_from_h1_indent e_string_from_h1_indent() {
     vx_web_html::Func_string_from_h1_indent output = vx_web_html::vx_package->e_string_from_h1_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h1_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_h1_indent = output;
@@ -9182,7 +9407,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_h1_indent t_string_from_h1_indent() {
     vx_web_html::Func_string_from_h1_indent output = vx_web_html::vx_package->t_string_from_h1_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h1_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_h1_indent = output;
@@ -9193,7 +9418,7 @@ namespace vx_web_html {
   // (func string<-h2-indent)
   vx_web_html::Func_string_from_h2_indent e_string_from_h2_indent() {
     vx_web_html::Func_string_from_h2_indent output = vx_web_html::vx_package->e_string_from_h2_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h2_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_h2_indent = output;
@@ -9202,7 +9427,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_h2_indent t_string_from_h2_indent() {
     vx_web_html::Func_string_from_h2_indent output = vx_web_html::vx_package->t_string_from_h2_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h2_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_h2_indent = output;
@@ -9213,7 +9438,7 @@ namespace vx_web_html {
   // (func string<-h3-indent)
   vx_web_html::Func_string_from_h3_indent e_string_from_h3_indent() {
     vx_web_html::Func_string_from_h3_indent output = vx_web_html::vx_package->e_string_from_h3_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h3_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_h3_indent = output;
@@ -9222,7 +9447,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_h3_indent t_string_from_h3_indent() {
     vx_web_html::Func_string_from_h3_indent output = vx_web_html::vx_package->t_string_from_h3_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_h3_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_h3_indent = output;
@@ -9233,7 +9458,7 @@ namespace vx_web_html {
   // (func string<-head-indent)
   vx_web_html::Func_string_from_head_indent e_string_from_head_indent() {
     vx_web_html::Func_string_from_head_indent output = vx_web_html::vx_package->e_string_from_head_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_head_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_head_indent = output;
@@ -9242,7 +9467,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_head_indent t_string_from_head_indent() {
     vx_web_html::Func_string_from_head_indent output = vx_web_html::vx_package->t_string_from_head_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_head_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_head_indent = output;
@@ -9253,7 +9478,7 @@ namespace vx_web_html {
   // (func string<-html)
   vx_web_html::Func_string_from_html e_string_from_html() {
     vx_web_html::Func_string_from_html output = vx_web_html::vx_package->e_string_from_html;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_html();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_html = output;
@@ -9262,7 +9487,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_html t_string_from_html() {
     vx_web_html::Func_string_from_html output = vx_web_html::vx_package->t_string_from_html;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_html();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_html = output;
@@ -9273,7 +9498,7 @@ namespace vx_web_html {
   // (func string<-indent)
   vx_web_html::Func_string_from_indent e_string_from_indent() {
     vx_web_html::Func_string_from_indent output = vx_web_html::vx_package->e_string_from_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_indent = output;
@@ -9282,7 +9507,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_indent t_string_from_indent() {
     vx_web_html::Func_string_from_indent output = vx_web_html::vx_package->t_string_from_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_indent = output;
@@ -9293,7 +9518,7 @@ namespace vx_web_html {
   // (func string<-meta-indent)
   vx_web_html::Func_string_from_meta_indent e_string_from_meta_indent() {
     vx_web_html::Func_string_from_meta_indent output = vx_web_html::vx_package->e_string_from_meta_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_meta_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_meta_indent = output;
@@ -9302,7 +9527,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_meta_indent t_string_from_meta_indent() {
     vx_web_html::Func_string_from_meta_indent output = vx_web_html::vx_package->t_string_from_meta_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_meta_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_meta_indent = output;
@@ -9313,7 +9538,7 @@ namespace vx_web_html {
   // (func string<-node-indent)
   vx_web_html::Func_string_from_node_indent e_string_from_node_indent() {
     vx_web_html::Func_string_from_node_indent output = vx_web_html::vx_package->e_string_from_node_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_node_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_node_indent = output;
@@ -9322,7 +9547,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_node_indent t_string_from_node_indent() {
     vx_web_html::Func_string_from_node_indent output = vx_web_html::vx_package->t_string_from_node_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_node_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_node_indent = output;
@@ -9333,7 +9558,7 @@ namespace vx_web_html {
   // (func string<-nodelist-indent)
   vx_web_html::Func_string_from_nodelist_indent e_string_from_nodelist_indent() {
     vx_web_html::Func_string_from_nodelist_indent output = vx_web_html::vx_package->e_string_from_nodelist_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_nodelist_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_nodelist_indent = output;
@@ -9342,7 +9567,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_nodelist_indent t_string_from_nodelist_indent() {
     vx_web_html::Func_string_from_nodelist_indent output = vx_web_html::vx_package->t_string_from_nodelist_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_nodelist_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_nodelist_indent = output;
@@ -9353,7 +9578,7 @@ namespace vx_web_html {
   // (func string<-nodelist-tag-prop-indent)
   vx_web_html::Func_string_from_nodelist_tag_prop_indent e_string_from_nodelist_tag_prop_indent() {
     vx_web_html::Func_string_from_nodelist_tag_prop_indent output = vx_web_html::vx_package->e_string_from_nodelist_tag_prop_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_nodelist_tag_prop_indent = output;
@@ -9362,7 +9587,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_nodelist_tag_prop_indent t_string_from_nodelist_tag_prop_indent() {
     vx_web_html::Func_string_from_nodelist_tag_prop_indent output = vx_web_html::vx_package->t_string_from_nodelist_tag_prop_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_nodelist_tag_prop_indent = output;
@@ -9373,7 +9598,7 @@ namespace vx_web_html {
   // (func string<-p-indent)
   vx_web_html::Func_string_from_p_indent e_string_from_p_indent() {
     vx_web_html::Func_string_from_p_indent output = vx_web_html::vx_package->e_string_from_p_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_p_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_p_indent = output;
@@ -9382,7 +9607,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_p_indent t_string_from_p_indent() {
     vx_web_html::Func_string_from_p_indent output = vx_web_html::vx_package->t_string_from_p_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_p_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_p_indent = output;
@@ -9393,7 +9618,7 @@ namespace vx_web_html {
   // (func string<-propname-val)
   vx_web_html::Func_string_from_propname_val e_string_from_propname_val() {
     vx_web_html::Func_string_from_propname_val output = vx_web_html::vx_package->e_string_from_propname_val;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_propname_val();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_propname_val = output;
@@ -9402,7 +9627,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_propname_val t_string_from_propname_val() {
     vx_web_html::Func_string_from_propname_val output = vx_web_html::vx_package->t_string_from_propname_val;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_propname_val();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_propname_val = output;
@@ -9413,7 +9638,7 @@ namespace vx_web_html {
   // (func string<-propstyle)
   vx_web_html::Func_string_from_propstyle e_string_from_propstyle() {
     vx_web_html::Func_string_from_propstyle output = vx_web_html::vx_package->e_string_from_propstyle;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_propstyle();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_propstyle = output;
@@ -9422,7 +9647,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_propstyle t_string_from_propstyle() {
     vx_web_html::Func_string_from_propstyle output = vx_web_html::vx_package->t_string_from_propstyle;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_propstyle();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_propstyle = output;
@@ -9433,7 +9658,7 @@ namespace vx_web_html {
   // (func string<-style-indent)
   vx_web_html::Func_string_from_style_indent e_string_from_style_indent() {
     vx_web_html::Func_string_from_style_indent output = vx_web_html::vx_package->e_string_from_style_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_style_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_style_indent = output;
@@ -9442,7 +9667,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_style_indent t_string_from_style_indent() {
     vx_web_html::Func_string_from_style_indent output = vx_web_html::vx_package->t_string_from_style_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_style_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_style_indent = output;
@@ -9453,7 +9678,7 @@ namespace vx_web_html {
   // (func string<-stylelist-indent)
   vx_web_html::Func_string_from_stylelist_indent e_string_from_stylelist_indent() {
     vx_web_html::Func_string_from_stylelist_indent output = vx_web_html::vx_package->e_string_from_stylelist_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylelist_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_stylelist_indent = output;
@@ -9462,7 +9687,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_stylelist_indent t_string_from_stylelist_indent() {
     vx_web_html::Func_string_from_stylelist_indent output = vx_web_html::vx_package->t_string_from_stylelist_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylelist_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_stylelist_indent = output;
@@ -9473,7 +9698,7 @@ namespace vx_web_html {
   // (func string<-stylepropmap-indent)
   vx_web_html::Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent() {
     vx_web_html::Func_string_from_stylepropmap_indent output = vx_web_html::vx_package->e_string_from_stylepropmap_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylepropmap_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_stylepropmap_indent = output;
@@ -9482,7 +9707,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_stylepropmap_indent t_string_from_stylepropmap_indent() {
     vx_web_html::Func_string_from_stylepropmap_indent output = vx_web_html::vx_package->t_string_from_stylepropmap_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylepropmap_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_stylepropmap_indent = output;
@@ -9493,7 +9718,7 @@ namespace vx_web_html {
   // (func string<-stylesheet-indent)
   vx_web_html::Func_string_from_stylesheet_indent e_string_from_stylesheet_indent() {
     vx_web_html::Func_string_from_stylesheet_indent output = vx_web_html::vx_package->e_string_from_stylesheet_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylesheet_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_stylesheet_indent = output;
@@ -9502,7 +9727,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_stylesheet_indent t_string_from_stylesheet_indent() {
     vx_web_html::Func_string_from_stylesheet_indent output = vx_web_html::vx_package->t_string_from_stylesheet_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_stylesheet_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_stylesheet_indent = output;
@@ -9513,7 +9738,7 @@ namespace vx_web_html {
   // (func string<-table-indent)
   vx_web_html::Func_string_from_table_indent e_string_from_table_indent() {
     vx_web_html::Func_string_from_table_indent output = vx_web_html::vx_package->e_string_from_table_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_table_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_table_indent = output;
@@ -9522,7 +9747,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_table_indent t_string_from_table_indent() {
     vx_web_html::Func_string_from_table_indent output = vx_web_html::vx_package->t_string_from_table_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_table_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_table_indent = output;
@@ -9533,7 +9758,7 @@ namespace vx_web_html {
   // (func string<-tbody-indent)
   vx_web_html::Func_string_from_tbody_indent e_string_from_tbody_indent() {
     vx_web_html::Func_string_from_tbody_indent output = vx_web_html::vx_package->e_string_from_tbody_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_tbody_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_tbody_indent = output;
@@ -9542,7 +9767,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_tbody_indent t_string_from_tbody_indent() {
     vx_web_html::Func_string_from_tbody_indent output = vx_web_html::vx_package->t_string_from_tbody_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_tbody_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_tbody_indent = output;
@@ -9553,7 +9778,7 @@ namespace vx_web_html {
   // (func string<-td-indent)
   vx_web_html::Func_string_from_td_indent e_string_from_td_indent() {
     vx_web_html::Func_string_from_td_indent output = vx_web_html::vx_package->e_string_from_td_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_td_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_td_indent = output;
@@ -9562,7 +9787,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_td_indent t_string_from_td_indent() {
     vx_web_html::Func_string_from_td_indent output = vx_web_html::vx_package->t_string_from_td_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_td_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_td_indent = output;
@@ -9573,7 +9798,7 @@ namespace vx_web_html {
   // (func string<-thead-indent)
   vx_web_html::Func_string_from_thead_indent e_string_from_thead_indent() {
     vx_web_html::Func_string_from_thead_indent output = vx_web_html::vx_package->e_string_from_thead_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_thead_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_thead_indent = output;
@@ -9582,7 +9807,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_thead_indent t_string_from_thead_indent() {
     vx_web_html::Func_string_from_thead_indent output = vx_web_html::vx_package->t_string_from_thead_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_thead_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_thead_indent = output;
@@ -9593,7 +9818,7 @@ namespace vx_web_html {
   // (func string<-title-indent)
   vx_web_html::Func_string_from_title_indent e_string_from_title_indent() {
     vx_web_html::Func_string_from_title_indent output = vx_web_html::vx_package->e_string_from_title_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_title_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_title_indent = output;
@@ -9602,7 +9827,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_title_indent t_string_from_title_indent() {
     vx_web_html::Func_string_from_title_indent output = vx_web_html::vx_package->t_string_from_title_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_title_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_title_indent = output;
@@ -9613,7 +9838,7 @@ namespace vx_web_html {
   // (func string<-tr-indent)
   vx_web_html::Func_string_from_tr_indent e_string_from_tr_indent() {
     vx_web_html::Func_string_from_tr_indent output = vx_web_html::vx_package->e_string_from_tr_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_tr_indent();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_tr_indent = output;
@@ -9622,7 +9847,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_tr_indent t_string_from_tr_indent() {
     vx_web_html::Func_string_from_tr_indent output = vx_web_html::vx_package->t_string_from_tr_indent;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_tr_indent();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_tr_indent = output;
@@ -9633,7 +9858,7 @@ namespace vx_web_html {
   // (func string<-uri)
   vx_web_html::Func_string_from_uri e_string_from_uri() {
     vx_web_html::Func_string_from_uri output = vx_web_html::vx_package->e_string_from_uri;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_uri();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_string_from_uri = output;
@@ -9642,7 +9867,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_string_from_uri t_string_from_uri() {
     vx_web_html::Func_string_from_uri output = vx_web_html::vx_package->t_string_from_uri;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_string_from_uri();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_string_from_uri = output;
@@ -9653,7 +9878,7 @@ namespace vx_web_html {
   // (func style<-stylesheet-name)
   vx_web_html::Func_style_from_stylesheet_name e_style_from_stylesheet_name() {
     vx_web_html::Func_style_from_stylesheet_name output = vx_web_html::vx_package->e_style_from_stylesheet_name;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_style_from_stylesheet_name();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_style_from_stylesheet_name = output;
@@ -9662,7 +9887,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_style_from_stylesheet_name t_style_from_stylesheet_name() {
     vx_web_html::Func_style_from_stylesheet_name output = vx_web_html::vx_package->t_style_from_stylesheet_name;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_style_from_stylesheet_name();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_style_from_stylesheet_name = output;
@@ -9673,7 +9898,7 @@ namespace vx_web_html {
   // (func stylemap<-stylelist)
   vx_web_html::Func_stylemap_from_stylelist e_stylemap_from_stylelist() {
     vx_web_html::Func_stylemap_from_stylelist output = vx_web_html::vx_package->e_stylemap_from_stylelist;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylemap_from_stylelist();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylemap_from_stylelist = output;
@@ -9682,7 +9907,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_stylemap_from_stylelist t_stylemap_from_stylelist() {
     vx_web_html::Func_stylemap_from_stylelist output = vx_web_html::vx_package->t_stylemap_from_stylelist;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylemap_from_stylelist();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylemap_from_stylelist = output;
@@ -9693,7 +9918,7 @@ namespace vx_web_html {
   // (func stylemap<-stylesheet)
   vx_web_html::Func_stylemap_from_stylesheet e_stylemap_from_stylesheet() {
     vx_web_html::Func_stylemap_from_stylesheet output = vx_web_html::vx_package->e_stylemap_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylemap_from_stylesheet();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylemap_from_stylesheet = output;
@@ -9702,7 +9927,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_stylemap_from_stylesheet t_stylemap_from_stylesheet() {
     vx_web_html::Func_stylemap_from_stylesheet output = vx_web_html::vx_package->t_stylemap_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylemap_from_stylesheet();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylemap_from_stylesheet = output;
@@ -9713,7 +9938,7 @@ namespace vx_web_html {
   // (func styles<-stylesheet)
   vx_web_html::Func_styles_from_stylesheet e_styles_from_stylesheet() {
     vx_web_html::Func_styles_from_stylesheet output = vx_web_html::vx_package->e_styles_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_styles_from_stylesheet();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_styles_from_stylesheet = output;
@@ -9722,7 +9947,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_styles_from_stylesheet t_styles_from_stylesheet() {
     vx_web_html::Func_styles_from_stylesheet output = vx_web_html::vx_package->t_styles_from_stylesheet;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_styles_from_stylesheet();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_styles_from_stylesheet = output;
@@ -9733,7 +9958,7 @@ namespace vx_web_html {
   // (func stylesheet-loadmap)
   vx_web_html::Func_stylesheet_loadmap e_stylesheet_loadmap() {
     vx_web_html::Func_stylesheet_loadmap output = vx_web_html::vx_package->e_stylesheet_loadmap;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylesheet_loadmap();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_stylesheet_loadmap = output;
@@ -9742,7 +9967,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_stylesheet_loadmap t_stylesheet_loadmap() {
     vx_web_html::Func_stylesheet_loadmap output = vx_web_html::vx_package->t_stylesheet_loadmap;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_stylesheet_loadmap();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_stylesheet_loadmap = output;
@@ -9753,7 +9978,7 @@ namespace vx_web_html {
   // (func uri<-string)
   vx_web_html::Func_uri_from_string e_uri_from_string() {
     vx_web_html::Func_uri_from_string output = vx_web_html::vx_package->e_uri_from_string;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_uri_from_string();
       vx_core::vx_reserve_empty(output);
       vx_web_html::vx_package->e_uri_from_string = output;
@@ -9762,7 +9987,7 @@ namespace vx_web_html {
   }
   vx_web_html::Func_uri_from_string t_uri_from_string() {
     vx_web_html::Func_uri_from_string output = vx_web_html::vx_package->t_uri_from_string;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_web_html::Class_uri_from_string();
       vx_core::vx_reserve_type(output);
       vx_web_html::vx_package->t_uri_from_string = output;

@@ -165,21 +165,32 @@ namespace app_test {
   int main(int iarglen, char* arrayarg[]) {
     int output = 0;
     try {
-      std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+			vx_core::vx_debug("Test Start");
+			std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+			vx_core::Type_context context = vx_core::e_context();
+			test_lib::test_helloworld();
+			test_lib::test_async_new_from_value();
+			test_lib::test_async_from_async_fn();
+			test_lib::test_run_testresult(context);
+			test_lib::test_run_testdescribe(context);
+			test_lib::test_resolve_testresult_anyfromfunc(context);
+			test_lib::test_resolve_testresult_then(context);
+			test_lib::test_resolve_testresult_thenelselist(context);
+		/*	
       std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
       vx_core::Type_boolean writetest = test_writetestsuite();
       std::string swritetest = vx_core::vx_string_from_any(writetest);
       std::cout << swritetest;
-      if (vx_core::refcount != 0) {
-        vx_core::vx_debug("memory leaks:" + std::to_string(vx_core::refcount));
-      }
+*/
+			vx_core::vx_memory_leak_test();
+			vx_core::vx_debug("Test End");
 		} catch (std::exception& e) {
-      std::cerr << e.what() << std::endl;
-      output = -1;
-    } catch (...) {
-      std::cerr << "Untrapped Error!" << std::endl;
-      output = -1;
-    }
+			std::cerr << e.what() << std::endl;
+			output = -1;
+		} catch (...) {
+			vx_core::vx_debug("Unexpected error");
+			output = -1;
+		}
     return output;
   }
 

@@ -24,7 +24,7 @@ namespace vx_data_xml {
     // nodes()
     vx_data_xml::Type_xmlnodelist Class_xml::nodes() const {
       vx_data_xml::Type_xmlnodelist output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_xml::e_xmlnodelist();
       }
       return output;
@@ -38,7 +38,7 @@ namespace vx_data_xml {
       } else if (skey == ":nodes") {
         output = this->nodes();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -100,8 +100,8 @@ namespace vx_data_xml {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -148,7 +148,7 @@ namespace vx_data_xml {
     // nodes()
     vx_data_xml::Type_xmlnode Class_xmlnode::nodes() const {
       vx_data_xml::Type_xmlnode output = this->vx_p_nodes;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_xml::e_xmlnode();
       }
       return output;
@@ -157,7 +157,7 @@ namespace vx_data_xml {
     // props()
     vx_data_xml::Type_xmlpropmap Class_xmlnode::props() const {
       vx_data_xml::Type_xmlpropmap output = this->vx_p_props;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_xml::e_xmlpropmap();
       }
       return output;
@@ -166,7 +166,7 @@ namespace vx_data_xml {
     // tag()
     vx_core::Type_string Class_xmlnode::tag() const {
       vx_core::Type_string output = this->vx_p_tag;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -175,7 +175,7 @@ namespace vx_data_xml {
     // text()
     vx_core::Type_string Class_xmlnode::text() const {
       vx_core::Type_string output = this->vx_p_text;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -195,7 +195,7 @@ namespace vx_data_xml {
       } else if (skey == ":text") {
         output = this->text();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -296,8 +296,8 @@ namespace vx_data_xml {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -350,7 +350,7 @@ namespace vx_data_xml {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -384,9 +384,7 @@ namespace vx_data_xml {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -423,8 +421,8 @@ namespace vx_data_xml {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -478,7 +476,7 @@ namespace vx_data_xml {
       std::string skey = key->vx_string();
       std::map<std::string, vx_core::Type_string> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_string());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -517,7 +515,7 @@ namespace vx_data_xml {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -555,7 +553,7 @@ namespace vx_data_xml {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -570,8 +568,8 @@ namespace vx_data_xml {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -605,7 +603,7 @@ namespace vx_data_xml {
     output = vx_core::f_empty(
       vx_data_xml::t_xml()
     );
-    vx_core::vx_release(textblock);
+    vx_core::vx_release_except(textblock, output);
     return output;
   }
 
@@ -616,9 +614,14 @@ namespace vx_data_xml {
     Class_xml_from_textblock::Class_xml_from_textblock() : Abstract_xml_from_textblock::Abstract_xml_from_textblock() {
       vx_core::refcount += 1;
     }
+
     Class_xml_from_textblock::~Class_xml_from_textblock() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_xml_from_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       vx_data_xml::Func_xml_from_textblock output = vx_data_xml::e_xml_from_textblock();
       vx_core::vx_release(vals);
@@ -627,8 +630,8 @@ namespace vx_data_xml {
 
     vx_core::Type_any Class_xml_from_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Func_xml_from_textblock output = vx_data_xml::e_xml_from_textblock();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -665,7 +668,7 @@ namespace vx_data_xml {
     vx_core::Type_msgblock Class_xml_from_textblock::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_xml_from_textblock::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_xml_from_textblock::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_xml_from_textblock::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -673,7 +676,7 @@ namespace vx_data_xml {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock inputval = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), val);
       output = vx_data_xml::f_xml_from_textblock(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -681,7 +684,7 @@ namespace vx_data_xml {
       vx_core::Type_any output = vx_core::e_any();
       vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_data_xml::f_xml_from_textblock(textblock);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -691,7 +694,7 @@ namespace vx_data_xml {
 
   vx_data_xml::Type_xml e_xml() {
     vx_data_xml::Type_xml output = vx_data_xml::vx_package->e_xml;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xml();
       vx_core::vx_reserve_empty(output);
       vx_data_xml::vx_package->e_xml = output;
@@ -700,7 +703,7 @@ namespace vx_data_xml {
   }
   vx_data_xml::Type_xml t_xml() {
     vx_data_xml::Type_xml output = vx_data_xml::vx_package->t_xml;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xml();
       vx_core::vx_reserve_type(output);
       vx_data_xml::vx_package->t_xml = output;
@@ -710,7 +713,7 @@ namespace vx_data_xml {
 
   vx_data_xml::Type_xmlnode e_xmlnode() {
     vx_data_xml::Type_xmlnode output = vx_data_xml::vx_package->e_xmlnode;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlnode();
       vx_core::vx_reserve_empty(output);
       vx_data_xml::vx_package->e_xmlnode = output;
@@ -719,7 +722,7 @@ namespace vx_data_xml {
   }
   vx_data_xml::Type_xmlnode t_xmlnode() {
     vx_data_xml::Type_xmlnode output = vx_data_xml::vx_package->t_xmlnode;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlnode();
       vx_core::vx_reserve_type(output);
       vx_data_xml::vx_package->t_xmlnode = output;
@@ -729,7 +732,7 @@ namespace vx_data_xml {
 
   vx_data_xml::Type_xmlnodelist e_xmlnodelist() {
     vx_data_xml::Type_xmlnodelist output = vx_data_xml::vx_package->e_xmlnodelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlnodelist();
       vx_core::vx_reserve_empty(output);
       vx_data_xml::vx_package->e_xmlnodelist = output;
@@ -738,7 +741,7 @@ namespace vx_data_xml {
   }
   vx_data_xml::Type_xmlnodelist t_xmlnodelist() {
     vx_data_xml::Type_xmlnodelist output = vx_data_xml::vx_package->t_xmlnodelist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlnodelist();
       vx_core::vx_reserve_type(output);
       vx_data_xml::vx_package->t_xmlnodelist = output;
@@ -748,7 +751,7 @@ namespace vx_data_xml {
 
   vx_data_xml::Type_xmlpropmap e_xmlpropmap() {
     vx_data_xml::Type_xmlpropmap output = vx_data_xml::vx_package->e_xmlpropmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlpropmap();
       vx_core::vx_reserve_empty(output);
       vx_data_xml::vx_package->e_xmlpropmap = output;
@@ -757,7 +760,7 @@ namespace vx_data_xml {
   }
   vx_data_xml::Type_xmlpropmap t_xmlpropmap() {
     vx_data_xml::Type_xmlpropmap output = vx_data_xml::vx_package->t_xmlpropmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_xmlpropmap();
       vx_core::vx_reserve_type(output);
       vx_data_xml::vx_package->t_xmlpropmap = output;
@@ -768,7 +771,7 @@ namespace vx_data_xml {
   // (func xml<-textblock)
   vx_data_xml::Func_xml_from_textblock e_xml_from_textblock() {
     vx_data_xml::Func_xml_from_textblock output = vx_data_xml::vx_package->e_xml_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_xml::Class_xml_from_textblock();
       vx_core::vx_reserve_empty(output);
       vx_data_xml::vx_package->e_xml_from_textblock = output;
@@ -777,7 +780,7 @@ namespace vx_data_xml {
   }
   vx_data_xml::Func_xml_from_textblock t_xml_from_textblock() {
     vx_data_xml::Func_xml_from_textblock output = vx_data_xml::vx_package->t_xml_from_textblock;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_data_xml::Class_xml_from_textblock();
       vx_core::vx_reserve_type(output);
       vx_data_xml::vx_package->t_xml_from_textblock = output;

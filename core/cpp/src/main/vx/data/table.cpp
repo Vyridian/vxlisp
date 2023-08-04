@@ -24,7 +24,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_cell::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -33,7 +33,7 @@ namespace vx_data_table {
     // value()
     vx_core::Type_any Class_cell::value() const {
       vx_core::Type_any output = this->vx_p_value;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_any();
       }
       return output;
@@ -49,7 +49,7 @@ namespace vx_data_table {
       } else if (skey == ":value") {
         output = this->value();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -119,8 +119,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -173,7 +173,7 @@ namespace vx_data_table {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -207,9 +207,7 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -246,8 +244,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -301,7 +299,7 @@ namespace vx_data_table {
       std::string skey = key->vx_string();
       std::map<std::string, vx_data_table::Type_cell> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_data_table::e_cell());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -340,7 +338,7 @@ namespace vx_data_table {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -378,7 +376,7 @@ namespace vx_data_table {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -393,8 +391,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -440,7 +438,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_field::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -449,7 +447,7 @@ namespace vx_data_table {
     // name()
     vx_core::Type_string Class_field::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -458,7 +456,7 @@ namespace vx_data_table {
     // fldtype()
     vx_core::Type_any Class_field::fldtype() const {
       vx_core::Type_any output = this->vx_p_fldtype;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_any();
       }
       return output;
@@ -476,7 +474,7 @@ namespace vx_data_table {
       } else if (skey == ":fldtype") {
         output = this->fldtype();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -559,8 +557,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -613,7 +611,7 @@ namespace vx_data_table {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -647,9 +645,7 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -686,8 +682,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -740,7 +736,7 @@ namespace vx_data_table {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -774,9 +770,7 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -813,8 +807,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -860,7 +854,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_filter::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -869,7 +863,7 @@ namespace vx_data_table {
     // name()
     vx_core::Type_string Class_filter::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -878,7 +872,7 @@ namespace vx_data_table {
     // idlist()
     vx_core::Type_stringlist Class_filter::idlist() const {
       vx_core::Type_stringlist output = this->vx_p_idlist;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_stringlist();
       }
       return output;
@@ -896,7 +890,7 @@ namespace vx_data_table {
       } else if (skey == ":idlist") {
         output = this->idlist();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -984,8 +978,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1031,7 +1025,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_row::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1040,7 +1034,7 @@ namespace vx_data_table {
     // cellmap()
     vx_data_table::Type_cellmap Class_row::cellmap() const {
       vx_data_table::Type_cellmap output = this->vx_p_cellmap;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_cellmap();
       }
       return output;
@@ -1049,7 +1043,7 @@ namespace vx_data_table {
     // cellsort()
     vx_data_table::Type_sort Class_row::cellsort() const {
       vx_data_table::Type_sort output = this->vx_p_cellsort;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_sort();
       }
       return output;
@@ -1067,7 +1061,7 @@ namespace vx_data_table {
       } else if (skey == ":cellsort") {
         output = this->cellsort();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1155,8 +1149,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1209,7 +1203,7 @@ namespace vx_data_table {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -1243,9 +1237,7 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -1282,8 +1274,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1337,7 +1329,7 @@ namespace vx_data_table {
       std::string skey = key->vx_string();
       std::map<std::string, vx_data_table::Type_row> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_data_table::e_row());
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1376,7 +1368,7 @@ namespace vx_data_table {
         vx_core::vx_reserve(msgblock);
       }
       for (auto const& [key, val] : mapval) {
-        vx_core::vx_release(val);
+        vx_core::vx_release_except(val, output);
       }
       return output;
     }
@@ -1414,7 +1406,7 @@ namespace vx_data_table {
             vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany != NULL) {
+          if (valany) {
             mapval[key] = valany;
             key = "";
           }
@@ -1429,8 +1421,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1476,7 +1468,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_sort::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1485,7 +1477,7 @@ namespace vx_data_table {
     // name()
     vx_core::Type_string Class_sort::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1494,7 +1486,7 @@ namespace vx_data_table {
     // idlist()
     vx_core::Type_stringlist Class_sort::idlist() const {
       vx_core::Type_stringlist output = this->vx_p_idlist;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_stringlist();
       }
       return output;
@@ -1512,7 +1504,7 @@ namespace vx_data_table {
       } else if (skey == ":idlist") {
         output = this->idlist();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1600,8 +1592,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1651,7 +1643,7 @@ namespace vx_data_table {
     // id()
     vx_core::Type_string Class_table::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1660,7 +1652,7 @@ namespace vx_data_table {
     // name()
     vx_core::Type_string Class_table::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -1669,7 +1661,7 @@ namespace vx_data_table {
     // fieldmap()
     vx_data_table::Type_fieldmap Class_table::fieldmap() const {
       vx_data_table::Type_fieldmap output = this->vx_p_fieldmap;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_fieldmap();
       }
       return output;
@@ -1678,7 +1670,7 @@ namespace vx_data_table {
     // fieldsort()
     vx_data_table::Type_sort Class_table::fieldsort() const {
       vx_data_table::Type_sort output = this->vx_p_fieldsort;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_sort();
       }
       return output;
@@ -1687,7 +1679,7 @@ namespace vx_data_table {
     // rowmap()
     vx_data_table::Type_rowmap Class_table::rowmap() const {
       vx_data_table::Type_rowmap output = this->vx_p_rowmap;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_rowmap();
       }
       return output;
@@ -1696,7 +1688,7 @@ namespace vx_data_table {
     // rowfilter()
     vx_data_table::Type_filter Class_table::rowfilter() const {
       vx_data_table::Type_filter output = this->vx_p_rowfilter;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_filter();
       }
       return output;
@@ -1705,7 +1697,7 @@ namespace vx_data_table {
     // rowsort()
     vx_data_table::Type_sort Class_table::rowsort() const {
       vx_data_table::Type_sort output = this->vx_p_rowsort;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_table::e_sort();
       }
       return output;
@@ -1731,7 +1723,7 @@ namespace vx_data_table {
       } else if (skey == ":rowsort") {
         output = this->rowsort();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -1871,8 +1863,8 @@ namespace vx_data_table {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -1904,7 +1896,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_cell e_cell() {
     vx_data_table::Type_cell output = vx_data_table::vx_package->e_cell;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_cell();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_cell = output;
@@ -1913,7 +1905,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_cell t_cell() {
     vx_data_table::Type_cell output = vx_data_table::vx_package->t_cell;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_cell();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_cell = output;
@@ -1923,7 +1915,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_celllist e_celllist() {
     vx_data_table::Type_celllist output = vx_data_table::vx_package->e_celllist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_celllist();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_celllist = output;
@@ -1932,7 +1924,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_celllist t_celllist() {
     vx_data_table::Type_celllist output = vx_data_table::vx_package->t_celllist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_celllist();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_celllist = output;
@@ -1942,7 +1934,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_cellmap e_cellmap() {
     vx_data_table::Type_cellmap output = vx_data_table::vx_package->e_cellmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_cellmap();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_cellmap = output;
@@ -1951,7 +1943,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_cellmap t_cellmap() {
     vx_data_table::Type_cellmap output = vx_data_table::vx_package->t_cellmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_cellmap();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_cellmap = output;
@@ -1961,7 +1953,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_field e_field() {
     vx_data_table::Type_field output = vx_data_table::vx_package->e_field;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_field();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_field = output;
@@ -1970,7 +1962,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_field t_field() {
     vx_data_table::Type_field output = vx_data_table::vx_package->t_field;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_field();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_field = output;
@@ -1980,7 +1972,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_fieldlist e_fieldlist() {
     vx_data_table::Type_fieldlist output = vx_data_table::vx_package->e_fieldlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_fieldlist();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_fieldlist = output;
@@ -1989,7 +1981,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_fieldlist t_fieldlist() {
     vx_data_table::Type_fieldlist output = vx_data_table::vx_package->t_fieldlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_fieldlist();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_fieldlist = output;
@@ -1999,7 +1991,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_fieldmap e_fieldmap() {
     vx_data_table::Type_fieldmap output = vx_data_table::vx_package->e_fieldmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_fieldmap();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_fieldmap = output;
@@ -2008,7 +2000,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_fieldmap t_fieldmap() {
     vx_data_table::Type_fieldmap output = vx_data_table::vx_package->t_fieldmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_fieldmap();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_fieldmap = output;
@@ -2018,7 +2010,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_filter e_filter() {
     vx_data_table::Type_filter output = vx_data_table::vx_package->e_filter;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_filter();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_filter = output;
@@ -2027,7 +2019,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_filter t_filter() {
     vx_data_table::Type_filter output = vx_data_table::vx_package->t_filter;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_filter();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_filter = output;
@@ -2037,7 +2029,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_row e_row() {
     vx_data_table::Type_row output = vx_data_table::vx_package->e_row;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_row();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_row = output;
@@ -2046,7 +2038,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_row t_row() {
     vx_data_table::Type_row output = vx_data_table::vx_package->t_row;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_row();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_row = output;
@@ -2056,7 +2048,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_rowlist e_rowlist() {
     vx_data_table::Type_rowlist output = vx_data_table::vx_package->e_rowlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_rowlist();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_rowlist = output;
@@ -2065,7 +2057,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_rowlist t_rowlist() {
     vx_data_table::Type_rowlist output = vx_data_table::vx_package->t_rowlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_rowlist();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_rowlist = output;
@@ -2075,7 +2067,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_rowmap e_rowmap() {
     vx_data_table::Type_rowmap output = vx_data_table::vx_package->e_rowmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_rowmap();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_rowmap = output;
@@ -2084,7 +2076,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_rowmap t_rowmap() {
     vx_data_table::Type_rowmap output = vx_data_table::vx_package->t_rowmap;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_rowmap();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_rowmap = output;
@@ -2094,7 +2086,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_sort e_sort() {
     vx_data_table::Type_sort output = vx_data_table::vx_package->e_sort;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_sort();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_sort = output;
@@ -2103,7 +2095,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_sort t_sort() {
     vx_data_table::Type_sort output = vx_data_table::vx_package->t_sort;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_sort();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_sort = output;
@@ -2113,7 +2105,7 @@ namespace vx_data_table {
 
   vx_data_table::Type_table e_table() {
     vx_data_table::Type_table output = vx_data_table::vx_package->e_table;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_table();
       vx_core::vx_reserve_empty(output);
       vx_data_table::vx_package->e_table = output;
@@ -2122,7 +2114,7 @@ namespace vx_data_table {
   }
   vx_data_table::Type_table t_table() {
     vx_data_table::Type_table output = vx_data_table::vx_package->t_table;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_table();
       vx_core::vx_reserve_type(output);
       vx_data_table::vx_package->t_table = output;

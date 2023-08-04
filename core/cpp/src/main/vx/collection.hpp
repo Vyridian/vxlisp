@@ -111,7 +111,7 @@ namespace vx_collection {
   public:
     Abstract_is_list() {};
     virtual ~Abstract_is_list() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -127,7 +127,7 @@ namespace vx_collection {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -137,7 +137,7 @@ namespace vx_collection {
   public:
     Abstract_is_map() {};
     virtual ~Abstract_is_map() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
@@ -153,7 +153,7 @@ namespace vx_collection {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
@@ -227,14 +227,14 @@ namespace vx_collection {
   // (func list<-list-fn-filter)
   template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release({vallist, fn_filter});
+    vx_core::vx_release_except({vallist, fn_filter}, output);
     return output;
   }
 
   // (func list<-list-start-end)
   template <class X> X* f_list_from_list_start_end(X* generic_list_1, X* values, vx_core::Type_int start, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release({values, start, end});
+    vx_core::vx_release_except({values, start, end}, output);
     return output;
   }
 
@@ -242,7 +242,7 @@ namespace vx_collection {
   template <class X> X* f_list_from_list_end(X* generic_list_1, X* values, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
     output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(0), end);
-    vx_core::vx_release({values, end});
+    vx_core::vx_release_except({values, end}, output);
     return output;
   }
 
@@ -252,17 +252,18 @@ namespace vx_collection {
     output = vx_collection::f_list_from_list_fn_filter(
       generic_list_1,
       vallist,
-      vx_core::t_any_from_any()->vx_fn_new([filtertypes](vx_core::Type_any val_any) {
+      vx_core::t_any_from_any()->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val_any) {
         vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), val_any);
-        return 
+        vx_core::Type_any output_1 = 
           vx_core::f_if(
             vx_core::t_any(),
             vx_type::f_is_type_from_any_typelist(val, filtertypes),
             val
           );
+        return output_1;
       })
     );
-    vx_core::vx_release({vallist, filtertypes});
+    vx_core::vx_release_except({vallist, filtertypes}, output);
     return output;
   }
 
@@ -275,7 +276,7 @@ namespace vx_collection {
       start,
       vx_core::f_length_from_list(values)
     );
-    vx_core::vx_release({values, start});
+    vx_core::vx_release_except({values, start}, output);
     return output;
   }
 

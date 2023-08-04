@@ -22,7 +22,7 @@ namespace vx_sample {
     // mynum()
     vx_core::Type_int Class_mytype::mynum() const {
       vx_core::Type_int output = this->vx_p_mynum;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_int();
       }
       return output;
@@ -31,7 +31,7 @@ namespace vx_sample {
     // mystr()
     vx_core::Type_string Class_mytype::mystr() const {
       vx_core::Type_string output = this->vx_p_mystr;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -47,7 +47,7 @@ namespace vx_sample {
       } else if (skey == ":mystr") {
         output = this->mystr();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -122,8 +122,8 @@ namespace vx_sample {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -201,9 +201,14 @@ namespace vx_sample {
     Class_main::Class_main() : Abstract_main::Abstract_main() {
       vx_core::refcount += 1;
     }
+
     Class_main::~Class_main() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_main::vx_new(vx_core::vx_Type_listany vals) const {
       vx_sample::Func_main output = vx_sample::e_main();
       vx_core::vx_release(vals);
@@ -212,8 +217,8 @@ namespace vx_sample {
 
     vx_core::Type_any Class_main::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Func_main output = vx_sample::e_main();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -253,7 +258,7 @@ namespace vx_sample {
     vx_core::Type_any Class_main::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any();
       vx_sample::f_main();
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -266,7 +271,7 @@ namespace vx_sample {
       vx_sample::c_myconst(),
       myarg
     );
-    vx_core::vx_release(myarg);
+    vx_core::vx_release_except(myarg, output);
     return output;
   }
 
@@ -277,9 +282,14 @@ namespace vx_sample {
     Class_myfunc::Class_myfunc() : Abstract_myfunc::Abstract_myfunc() {
       vx_core::refcount += 1;
     }
+
     Class_myfunc::~Class_myfunc() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
+
     vx_core::Type_any Class_myfunc::vx_new(vx_core::vx_Type_listany vals) const {
       vx_sample::Func_myfunc output = vx_sample::e_myfunc();
       vx_core::vx_release(vals);
@@ -288,8 +298,8 @@ namespace vx_sample {
 
     vx_core::Type_any Class_myfunc::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Func_myfunc output = vx_sample::e_myfunc();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -326,7 +336,7 @@ namespace vx_sample {
     vx_core::Type_msgblock Class_myfunc::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_myfunc::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_myfunc::vx_fn_new(vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_myfunc::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any();
     }
 
@@ -334,7 +344,7 @@ namespace vx_sample {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int(), val);
       output = vx_sample::f_myfunc(inputval);
-      vx_core::vx_release(val);
+      vx_core::vx_release_except(val, output);
       return output;
     }
 
@@ -342,7 +352,7 @@ namespace vx_sample {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_int myarg = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_sample::f_myfunc(myarg);
-      vx_core::vx_release(arglist);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -352,7 +362,7 @@ namespace vx_sample {
 
   vx_sample::Type_mytype e_mytype() {
     vx_sample::Type_mytype output = vx_sample::vx_package->e_mytype;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_mytype();
       vx_core::vx_reserve_empty(output);
       vx_sample::vx_package->e_mytype = output;
@@ -361,7 +371,7 @@ namespace vx_sample {
   }
   vx_sample::Type_mytype t_mytype() {
     vx_sample::Type_mytype output = vx_sample::vx_package->t_mytype;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_mytype();
       vx_core::vx_reserve_type(output);
       vx_sample::vx_package->t_mytype = output;
@@ -382,7 +392,7 @@ namespace vx_sample {
   // (func main)
   vx_sample::Func_main e_main() {
     vx_sample::Func_main output = vx_sample::vx_package->e_main;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_sample::Class_main();
       vx_core::vx_reserve_empty(output);
       vx_sample::vx_package->e_main = output;
@@ -391,7 +401,7 @@ namespace vx_sample {
   }
   vx_sample::Func_main t_main() {
     vx_sample::Func_main output = vx_sample::vx_package->t_main;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_sample::Class_main();
       vx_core::vx_reserve_type(output);
       vx_sample::vx_package->t_main = output;
@@ -402,7 +412,7 @@ namespace vx_sample {
   // (func myfunc)
   vx_sample::Func_myfunc e_myfunc() {
     vx_sample::Func_myfunc output = vx_sample::vx_package->e_myfunc;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_sample::Class_myfunc();
       vx_core::vx_reserve_empty(output);
       vx_sample::vx_package->e_myfunc = output;
@@ -411,7 +421,7 @@ namespace vx_sample {
   }
   vx_sample::Func_myfunc t_myfunc() {
     vx_sample::Func_myfunc output = vx_sample::vx_package->t_myfunc;
-    if (output == NULL) {
+    if (!output) {
       output = new vx_sample::Class_myfunc();
       vx_core::vx_reserve_type(output);
       vx_sample::vx_package->t_myfunc = output;

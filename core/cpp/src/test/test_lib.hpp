@@ -30,5 +30,29 @@ namespace test_lib {
   // This is the preferred way of writing testsuite (1 block per testsuite)
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
+	bool test(std::string testname, std::string expected, std::string actual);
+
+  bool test_helloworld();
+
+  bool test_async_new_from_value();
+
+  bool test_async_from_async_fn();
+
+  bool test_run_testresult(vx_core::Type_context context);
+
+  bool test_run_testdescribe(vx_core::Type_context context);
+
+  bool test_resolve_testresult_anyfromfunc(vx_core::Type_context context);
+
+  bool test_resolve_testresult_if(vx_core::Type_context context);
+
+  bool test_resolve_testresult_then(vx_core::Type_context context);
+
+  bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
+
+  bool test_run_testresult_async(vx_core::Type_context context);
+
+  bool test_run_testdescribe_async(vx_core::Type_context context);
+
 }
 #endif

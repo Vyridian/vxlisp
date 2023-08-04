@@ -1309,11 +1309,12 @@ namespace vx_core_test {
                   })
                 ),
                 vx_core::vx_new_int(1),
-                vx_core::t_any_from_reduce()->vx_fn_new([](vx_core::Type_any total_any, vx_core::Type_any num_any) {
+                vx_core::t_any_from_reduce()->vx_fn_new({}, [](vx_core::Type_any total_any, vx_core::Type_any num_any) {
                   vx_core::Type_int total = vx_core::vx_any_from_any(vx_core::t_int(), total_any);
                   vx_core::Type_int num = vx_core::vx_any_from_any(vx_core::t_int(), num_any);
-                  return 
+                  vx_core::Type_any output_1 = 
                     vx_core::f_multiply(total, num);
+                  return output_1;
                 })
               ),
               context
@@ -1735,26 +1736,31 @@ namespace vx_core_test {
                 vx_core::t_any(),
                 vx_core::vx_new(vx_core::t_thenelselist(), {
                   vx_core::f_then(
-                    vx_core::t_boolean_from_func()->vx_fn_new([]() {
-                      return vx_core::f_eq(vx_core::vx_new_int(2), vx_core::vx_new_int(3));
+                    vx_core::t_boolean_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_boolean output_1 = vx_core::f_eq(vx_core::vx_new_int(2), vx_core::vx_new_int(3));
+                      return output_1;
                     }),
-                    vx_core::t_any_from_func()->vx_fn_new([]() {
-                      return vx_core::vx_new_boolean(false);
+                    vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_boolean output_1 = vx_core::vx_new_boolean(false);
+                      return output_1;
                     })
                   ),
                   vx_core::f_then(
-                    vx_core::t_boolean_from_func()->vx_fn_new([]() {
-                      return vx_core::f_ne(vx_core::vx_new_int(3), vx_core::vx_new_int(3));
+                    vx_core::t_boolean_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_int(3), vx_core::vx_new_int(3));
+                      return output_1;
                     }),
-                    vx_core::t_any_from_func()->vx_fn_new([]() {
-                      return vx_core::vx_new_boolean(false);
+                    vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_boolean output_1 = vx_core::vx_new_boolean(false);
+                      return output_1;
                     })
                   ),
                   vx_core::f_else(
-                    vx_core::t_any_from_func()->vx_fn_new([]() {
-                      return vx_core::f_not(
+                    vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_boolean output_1 = vx_core::f_not(
                         vx_core::vx_new_boolean(false)
                       );
+                      return output_1;
                     })
                   )
                 })
@@ -2020,11 +2026,12 @@ namespace vx_core_test {
               vx_core::vx_new_int(7),
               vx_core::f_let(
                 vx_core::t_int(),
-                vx_core::t_any_from_func()->vx_fn_new([]() {
+                vx_core::t_any_from_func()->vx_fn_new({}, []() {
                   vx_core::Type_int v1 = vx_core::vx_new_int(2);
                   vx_core::Type_int v2 = vx_core::f_plus(v1, vx_core::vx_new_int(3));
-                  vx_core::Type_int output = vx_core::f_plus(v1, v2);vx_core::vx_release({v1, v2});
-                  return output;
+                  vx_core::Type_int output_1 = vx_core::f_plus(v1, v2);
+                  vx_core::vx_release_except({v1, v2}, output_1);
+                  return output_1;
                 })
               ),
               context
@@ -2068,10 +2075,10 @@ namespace vx_core_test {
                     vx_core::vx_new_string("2")
                   })
                 ),
-                vx_core::t_any_from_key_value()->vx_fn_new([](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+                vx_core::t_any_from_key_value()->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
                   vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string(), key_any);
                   vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string(), val_any);
-                  return 
+                  vx_core::Type_any output_1 = 
                     vx_core::f_new(
                       vx_core::t_string(),
                       vx_core::vx_new(vx_core::t_anylist(), {
@@ -2079,6 +2086,7 @@ namespace vx_core_test {
                         val
                       })
                     );
+                  return output_1;
                 })
               ),
               context
@@ -2122,10 +2130,10 @@ namespace vx_core_test {
                     vx_core::vx_new_string("2")
                   })
                 ),
-                vx_core::t_any_from_key_value()->vx_fn_new([](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+                vx_core::t_any_from_key_value()->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
                   vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string(), key_any);
                   vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string(), val_any);
-                  return 
+                  vx_core::Type_any output_1 = 
                     vx_core::f_new(
                       vx_core::t_string(),
                       vx_core::vx_new(vx_core::t_anylist(), {
@@ -2133,6 +2141,7 @@ namespace vx_core_test {
                         val
                       })
                     );
+                  return output_1;
                 })
               ),
               context
@@ -2407,9 +2416,10 @@ namespace vx_core_test {
               vx_core::vx_new_int(4),
               vx_core::f_resolve_1(
                 vx_core::t_int(),
-                vx_core::t_any_from_func()->vx_fn_new([]() {
-                  return 
+                vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                  vx_core::Type_any output_1 = 
                     vx_core::f_plus(vx_core::vx_new_int(1), vx_core::vx_new_int(3));
+                  return output_1;
                 })
               ),
               context
@@ -2438,9 +2448,10 @@ namespace vx_core_test {
               vx_core::vx_new_int(4),
               vx_core::f_resolve_1(
                 vx_core::t_int(),
-                vx_core::t_any_from_func()->vx_fn_new([]() {
-                  return 
+                vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                  vx_core::Type_any output_1 = 
                     vx_core::f_plus(vx_core::vx_new_int(1), vx_core::vx_new_int(3));
+                  return output_1;
                 })
               ),
               context
@@ -2601,13 +2612,15 @@ namespace vx_core_test {
                         vx_core::vx_new_string("d")
                       })
                     ),
-                    vx_core::t_any_from_func()->vx_fn_new([]() {
-                      return vx_core::vx_new_int(1);
+                    vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_int output_1 = vx_core::vx_new_int(1);
+                      return output_1;
                     })
                   ),
                   vx_core::f_else(
-                    vx_core::t_any_from_func()->vx_fn_new([]() {
-                      return vx_core::vx_new_int(2);
+                    vx_core::t_any_from_func()->vx_fn_new({}, []() {
+                      vx_core::Type_int output_1 = vx_core::vx_new_int(2);
+                      return output_1;
                     })
                   )
                 })

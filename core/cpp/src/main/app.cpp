@@ -11,9 +11,7 @@ int main(int iarglen, char* arrayarg[]) {
     std::cout << output->vx_string() << std::endl;
 		vx_core::vx_release(output);
 		//vx_core::vx_release(context);
-	  if (vx_core::refcount != 0) {
-		  vx_core::vx_debug("memory leaks:" + std::to_string(vx_core::refcount));
-	  }
+	  vx_core::vx_memory_leak_test();
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
     output = -1;

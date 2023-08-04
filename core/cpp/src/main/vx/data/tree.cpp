@@ -27,7 +27,7 @@ namespace vx_data_tree {
     // id()
     vx_core::Type_string Class_branch::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -36,7 +36,7 @@ namespace vx_data_tree {
     // brancharrow()
     vx_data_tree::Type_brancharrow Class_branch::brancharrow() const {
       vx_data_tree::Type_brancharrow output = this->vx_p_brancharrow;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_brancharrow();
       }
       return output;
@@ -45,7 +45,7 @@ namespace vx_data_tree {
     // branchlist()
     vx_data_tree::Type_branchlist Class_branch::branchlist() const {
       vx_data_tree::Type_branchlist output = this->vx_p_branchlist;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_branchlist();
       }
       return output;
@@ -54,7 +54,7 @@ namespace vx_data_tree {
     // leaflist()
     vx_data_tree::Type_leaflist Class_branch::leaflist() const {
       vx_data_tree::Type_leaflist output = this->vx_p_leaflist;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_leaflist();
       }
       return output;
@@ -63,7 +63,7 @@ namespace vx_data_tree {
     // parentbranch()
     vx_data_tree::Type_branch Class_branch::parentbranch() const {
       vx_data_tree::Type_branch output = this->vx_p_parentbranch;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_branch();
       }
       return output;
@@ -72,7 +72,7 @@ namespace vx_data_tree {
     // tree()
     vx_data_tree::Type_tree Class_branch::tree() const {
       vx_data_tree::Type_tree output = this->vx_p_tree;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_tree();
       }
       return output;
@@ -96,7 +96,7 @@ namespace vx_data_tree {
       } else if (skey == ":tree") {
         output = this->tree();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -223,8 +223,8 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -267,8 +267,8 @@ namespace vx_data_tree {
     }
     vx_core::Type_any Class_brancharrow::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_brancharrow output = vx_data_tree::e_brancharrow();
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -321,7 +321,7 @@ namespace vx_data_tree {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -355,9 +355,7 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -394,8 +392,8 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -441,7 +439,7 @@ namespace vx_data_tree {
     // id()
     vx_core::Type_string Class_leaf::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -450,7 +448,7 @@ namespace vx_data_tree {
     // name()
     vx_core::Type_string Class_leaf::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -459,7 +457,7 @@ namespace vx_data_tree {
     // value()
     vx_core::Type_any Class_leaf::value() const {
       vx_core::Type_any output = this->vx_p_value;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_any();
       }
       return output;
@@ -477,7 +475,7 @@ namespace vx_data_tree {
       } else if (skey == ":value") {
         output = this->value();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -560,8 +558,8 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -614,7 +612,7 @@ namespace vx_data_tree {
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
-      vx_core::vx_release(index);
+      vx_core::vx_release_except(index, output);
       return output;
     }
 
@@ -648,9 +646,7 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      for (vx_core::Type_any val : listval) {
-        vx_core::vx_release(val);
-      }
+      vx_core::vx_release_except(listval, output);
       return output;
     }
 
@@ -687,8 +683,8 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -734,7 +730,7 @@ namespace vx_data_tree {
     // id()
     vx_core::Type_string Class_tree::id() const {
       vx_core::Type_string output = this->vx_p_id;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -743,7 +739,7 @@ namespace vx_data_tree {
     // name()
     vx_core::Type_string Class_tree::name() const {
       vx_core::Type_string output = this->vx_p_name;
-      if (output == NULL) {
+      if (!output) {
         output = vx_core::e_string();
       }
       return output;
@@ -752,7 +748,7 @@ namespace vx_data_tree {
     // branch()
     vx_data_tree::Type_branch Class_tree::branch() const {
       vx_data_tree::Type_branch output = this->vx_p_branch;
-      if (output == NULL) {
+      if (!output) {
         output = vx_data_tree::e_branch();
       }
       return output;
@@ -770,7 +766,7 @@ namespace vx_data_tree {
       } else if (skey == ":branch") {
         output = this->branch();
       }
-      vx_core::vx_release(key);
+      vx_core::vx_release_except(key, output);
       return output;
     }
 
@@ -858,8 +854,8 @@ namespace vx_data_tree {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
-      vx_core::vx_release(copyval);
-      vx_core::vx_release(vals);
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
       return output;
     }
 
@@ -993,7 +989,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_branch e_branch() {
     vx_data_tree::Type_branch output = vx_data_tree::vx_package->e_branch;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_branch();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_branch = output;
@@ -1002,7 +998,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_branch t_branch() {
     vx_data_tree::Type_branch output = vx_data_tree::vx_package->t_branch;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_branch();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_branch = output;
@@ -1012,7 +1008,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_brancharrow e_brancharrow() {
     vx_data_tree::Type_brancharrow output = vx_data_tree::vx_package->e_brancharrow;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_brancharrow();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_brancharrow = output;
@@ -1021,7 +1017,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_brancharrow t_brancharrow() {
     vx_data_tree::Type_brancharrow output = vx_data_tree::vx_package->t_brancharrow;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_brancharrow();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_brancharrow = output;
@@ -1031,7 +1027,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_branchlist e_branchlist() {
     vx_data_tree::Type_branchlist output = vx_data_tree::vx_package->e_branchlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_branchlist();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_branchlist = output;
@@ -1040,7 +1036,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_branchlist t_branchlist() {
     vx_data_tree::Type_branchlist output = vx_data_tree::vx_package->t_branchlist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_branchlist();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_branchlist = output;
@@ -1050,7 +1046,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_leaf e_leaf() {
     vx_data_tree::Type_leaf output = vx_data_tree::vx_package->e_leaf;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_leaf();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_leaf = output;
@@ -1059,7 +1055,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_leaf t_leaf() {
     vx_data_tree::Type_leaf output = vx_data_tree::vx_package->t_leaf;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_leaf();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_leaf = output;
@@ -1069,7 +1065,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_leaflist e_leaflist() {
     vx_data_tree::Type_leaflist output = vx_data_tree::vx_package->e_leaflist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_leaflist();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_leaflist = output;
@@ -1078,7 +1074,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_leaflist t_leaflist() {
     vx_data_tree::Type_leaflist output = vx_data_tree::vx_package->t_leaflist;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_leaflist();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_leaflist = output;
@@ -1088,7 +1084,7 @@ namespace vx_data_tree {
 
   vx_data_tree::Type_tree e_tree() {
     vx_data_tree::Type_tree output = vx_data_tree::vx_package->e_tree;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tree();
       vx_core::vx_reserve_empty(output);
       vx_data_tree::vx_package->e_tree = output;
@@ -1097,7 +1093,7 @@ namespace vx_data_tree {
   }
   vx_data_tree::Type_tree t_tree() {
     vx_data_tree::Type_tree output = vx_data_tree::vx_package->t_tree;
-    if (output == NULL) {
+    if (!output) {
       output = new Class_tree();
       vx_core::vx_reserve_type(output);
       vx_data_tree::vx_package->t_tree = output;
