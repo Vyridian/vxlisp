@@ -50,6 +50,7 @@ namespace vx_data_file {
     Class_file::Class_file() : Abstract_file::Abstract_file() {
       vx_core::refcount += 1;
     }
+
     Class_file::~Class_file() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -60,6 +61,7 @@ namespace vx_data_file {
         this->vx_p_text
       });
     }
+
     // name()
     vx_core::Type_string Class_file::name() const {
       vx_core::Type_string output = this->vx_p_name;
@@ -139,6 +141,7 @@ namespace vx_data_file {
     vx_core::Type_any Class_file::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_file::e_file(), vals);
     }
+
     vx_core::Type_any Class_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_file output = vx_data_file::e_file();
       vx_data_file::Type_file val = vx_core::vx_any_from_any(vx_data_file::t_file(), copyval);
@@ -221,16 +224,41 @@ namespace vx_data_file {
         }
       }
       output = new vx_data_file::Class_file();
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_format = vx_p_format;
-      vx_core::vx_reserve(vx_p_format);
-      output->vx_p_path = vx_p_path;
-      vx_core::vx_reserve(vx_p_path);
-      output->vx_p_permission = vx_p_permission;
-      vx_core::vx_reserve(vx_p_permission);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_format != vx_p_format) {
+        if (output->vx_p_format) {
+          vx_core::vx_release_one(output->vx_p_format);
+        }
+        output->vx_p_format = vx_p_format;
+        vx_core::vx_reserve(vx_p_format);
+      }
+      if (output->vx_p_path != vx_p_path) {
+        if (output->vx_p_path) {
+          vx_core::vx_release_one(output->vx_p_path);
+        }
+        output->vx_p_path = vx_p_path;
+        vx_core::vx_reserve(vx_p_path);
+      }
+      if (output->vx_p_permission != vx_p_permission) {
+        if (output->vx_p_permission) {
+          vx_core::vx_release_one(output->vx_p_permission);
+        }
+        output->vx_p_permission = vx_p_permission;
+        vx_core::vx_reserve(vx_p_permission);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -271,12 +299,15 @@ namespace vx_data_file {
     Class_fileformat::Class_fileformat() : Abstract_fileformat::Abstract_fileformat() {
       vx_core::refcount += 1;
     }
+
     Class_fileformat::~Class_fileformat() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_fileformat::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_file::e_fileformat(), vals);
     }
+
     vx_core::Type_any Class_fileformat::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_fileformat output = vx_data_file::e_fileformat();
       vx_core::vx_release_except(copyval, output);
@@ -931,7 +962,9 @@ namespace vx_data_file {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({file}, [file]() {
         vx_core::Type_string path = vx_data_file::f_path_from_file(file);
+        vx_core::vx_ref_plus(path);
         vx_core::Type_string name = vx_data_file::f_name_from_file(file);
+        vx_core::vx_ref_plus(name);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -940,7 +973,7 @@ namespace vx_data_file {
             name
           })
         );
-        vx_core::vx_release_except({path, name}, output_1);
+        vx_core::vx_release_one_except({path, name}, output_1);
         return output_1;
       })
     );

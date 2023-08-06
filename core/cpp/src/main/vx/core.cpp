@@ -164,6 +164,33 @@ namespace vx_core {
     }
   }
 
+  // vx_debug_refcount()
+  void vx_debug_refcount() {
+    vx_core::vx_debug(vx_core::refcount);
+  }
+
+  // vx_debug_refcount(any)
+  void vx_debug_refcount(vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any_refcount(val);
+      vx_core::vx_debug(sval);
+      vx_core::vx_debug_refcount();
+    }
+  }
+
+  // vx_debug_refcount(async)
+  void vx_debug_refcount(vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async_refcount(async);
+      vx_debug(sval);
+    }
+    vx_core::vx_debug_refcount();
+  }
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
@@ -460,11 +487,11 @@ namespace vx_core {
 
   // vx_string_from_any(val)
   std::string vx_string_from_any(vx_core::Type_any value) {
-    return vx_core::vx_string_from_any_indent(value, 0, true);
+    return vx_core::vx_string_from_any_indent(value, 0, true, false);
   }
 
-  // vx_string_from_any_indent(val, indent, linefeed)
-  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed) {
+  // vx_string_from_any_indent(val, indent, linefeed, refcount)
+  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed, bool refcount) {
     std::string output = "";
     std::string text = "";
     if (indent > 50) {
@@ -523,12 +550,15 @@ namespace vx_core {
           indentint += 1;
           std::vector<vx_core::Type_any> listval = vallist->vx_list();
           for (vx_core::Type_any valsub : listval) {
-            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
           }
           if (vallist->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vallist->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":map") {
@@ -541,7 +571,7 @@ namespace vx_core {
             if (!vx_boolean_from_string_starts(key, ":")) {
               key = ":" + key;
             }
-            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             if (vx_boolean_from_string_find(strval, "\n")) {
               strval = "\n  " + indenttext + strval;
             } else {
@@ -550,8 +580,11 @@ namespace vx_core {
             text += "\n" + indenttext + " " + key + strval;
           }
           if (valmap->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valmap->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":struct") {
@@ -565,7 +598,7 @@ namespace vx_core {
               if (!vx_boolean_from_string_starts(key, ":")) {
                 key = ":" + key;
               }
-              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
               } else {
@@ -575,16 +608,22 @@ namespace vx_core {
             }
           }
           if (valstruct->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valstruct->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":func") {
           vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func(), value);
           text = typedefname;
           if (valfunc->vx_msgblock()) {
-            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed);
+            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valfunc->vx_p_iref);
           }
           text = "(" + text + ")";
         }
@@ -594,13 +633,18 @@ namespace vx_core {
     return output;
   }
 
-  // vx_string_from_async(async)
-  std::string vx_string_from_async(vx_core::vx_Type_async async) {
-    return vx_core::vx_string_from_async_indent(async, 0, true);
+  // vx_string_from_any_refcount(val)
+  std::string vx_string_from_any_refcount(vx_core::Type_any value) {
+    return vx_core::vx_string_from_any_indent(value, 0, true, true);
   }
 
-  // vx_string_from_async_indent(val, indent, linefeed)
-  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed) {
+  // vx_string_from_async(async)
+  std::string vx_string_from_async(vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(async, 0, true, false);
+  }
+
+  // vx_string_from_async_indent(async, indent, linefeed, refcount)
+  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed, bool refcount) {
     std::string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
@@ -623,7 +667,7 @@ namespace vx_core {
       }
       vx_core::Type_any val = async->value;
       if (val) {
-        std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed);
+        std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed, refcount);
         output += "\n " + indenttext + ":value " + text;
       }
       vx_core::vx_Type_future future = async->future;
@@ -636,12 +680,20 @@ namespace vx_core {
       }
       vx_core::vx_Type_async asyncparent = async->async_parent;
       if (asyncparent) {
-        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed);
+        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed, refcount);
         output += "\n " + indenttext + ":async_parent\n" + text;
+      }
+      if (refcount) {
+        output += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(async->vx_p_iref);
       }
       output += ")";
     }
     return output;
+  }
+
+  // vx_string_from_async_refcount(async)
+  std::string vx_string_from_async_refcount(vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(async, 0, true, true);
   }
 
   // vx_string_from_int(long)
@@ -869,12 +921,15 @@ namespace vx_core {
     Class_any::Class_any() : Abstract_any::Abstract_any() {
       vx_core::refcount += 1;
     }
+
     Class_any::~Class_any() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_any::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_any(), vals);
     }
+
     vx_core::Type_any Class_any::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_any output = vx_core::e_any();
       vx_core::Type_msgblock msgblock = vx_core::e_msgblock();
@@ -927,12 +982,14 @@ namespace vx_core {
     Class_list::Class_list() : Abstract_list::Abstract_list() {
       vx_core::refcount += 1;
     }
+
     Class_list::~Class_list() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_list::vx_list() const {
       return this->vx_p_list;
@@ -974,6 +1031,7 @@ namespace vx_core {
     vx_core::Type_any Class_list::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_list(), vals);
     }
+
     vx_core::Type_any Class_list::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_list output = vx_core::e_list();
       vx_core::Type_list val = vx_core::vx_any_from_any(vx_core::t_list(), copyval);
@@ -1039,12 +1097,14 @@ namespace vx_core {
     Class_map::Class_map() : Abstract_map::Abstract_map() {
       vx_core::refcount += 1;
     }
+
     Class_map::~Class_map() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_map::vx_map() const {
       vx_core::vx_Type_mapany output = this->vx_p_map;
@@ -1097,6 +1157,7 @@ namespace vx_core {
     vx_core::Type_any Class_map::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_map(), vals);
     }
+
     vx_core::Type_any Class_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_map output = vx_core::e_map();
       vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map(), copyval);
@@ -1178,12 +1239,14 @@ namespace vx_core {
     Class_struct::Class_struct() : Abstract_struct::Abstract_struct() {
       vx_core::refcount += 1;
     }
+
     Class_struct::~Class_struct() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         
       });
     }
+
     // vx_get_any(key)
     vx_core::Type_any Class_struct::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any();
@@ -1203,6 +1266,7 @@ namespace vx_core {
     vx_core::Type_any Class_struct::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_struct(), vals);
     }
+
     vx_core::Type_any Class_struct::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_struct output = vx_core::e_struct();
       vx_core::Type_struct val = vx_core::vx_any_from_any(vx_core::t_struct(), copyval);
@@ -1247,6 +1311,7 @@ namespace vx_core {
     Class_msg::Class_msg() : Abstract_msg::Abstract_msg() {
       vx_core::refcount += 1;
     }
+
     Class_msg::~Class_msg() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1255,6 +1320,7 @@ namespace vx_core {
         this->vx_p_text
       });
     }
+
     // code()
     vx_core::Type_string Class_msg::code() const {
       vx_core::Type_string output = this->vx_p_code;
@@ -1310,6 +1376,7 @@ namespace vx_core {
     vx_core::Type_any Class_msg::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_msg(), vals);
     }
+
     vx_core::Type_any Class_msg::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msg output = vx_core::e_msg();
       vx_core::Type_msg val = vx_core::vx_any_from_any(vx_core::t_msg(), copyval);
@@ -1396,12 +1463,14 @@ namespace vx_core {
     Class_msglist::Class_msglist() : Abstract_msglist::Abstract_msglist() {
       vx_core::refcount += 1;
     }
+
     Class_msglist::~Class_msglist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_msglist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1455,6 +1524,7 @@ namespace vx_core {
     vx_core::Type_any Class_msglist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_msglist(), vals);
     }
+
     vx_core::Type_any Class_msglist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msglist output = vx_core::e_msglist();
       vx_core::Type_msglist val = vx_core::vx_any_from_any(vx_core::t_msglist(), copyval);
@@ -1519,6 +1589,7 @@ namespace vx_core {
     Class_msgblock::Class_msgblock() : Abstract_msgblock::Abstract_msgblock() {
       vx_core::refcount += 1;
     }
+
     Class_msgblock::~Class_msgblock() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1526,6 +1597,7 @@ namespace vx_core {
         this->vx_p_msgblocks
       });
     }
+
     // msgs()
     vx_core::Type_msglist Class_msgblock::msgs() const {
       vx_core::Type_msglist output = this->vx_p_msgs;
@@ -1569,6 +1641,7 @@ namespace vx_core {
     vx_core::Type_any Class_msgblock::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_msgblock(), vals);
     }
+
     vx_core::Type_any Class_msgblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msgblock output = vx_core::e_msgblock();
       vx_core::Type_msgblock val = vx_core::e_msgblock();
@@ -1664,12 +1737,14 @@ namespace vx_core {
     Class_msgblocklist::Class_msgblocklist() : Abstract_msgblocklist::Abstract_msgblocklist() {
       vx_core::refcount += 1;
     }
+
     Class_msgblocklist::~Class_msgblocklist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_msgblocklist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1723,6 +1798,7 @@ namespace vx_core {
     vx_core::Type_any Class_msgblocklist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_msgblocklist(), vals);
     }
+
     vx_core::Type_any Class_msgblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msgblocklist output = vx_core::e_msgblocklist();
       vx_core::Type_msgblocklist val = vx_core::vx_any_from_any(vx_core::t_msgblocklist(), copyval);
@@ -1787,12 +1863,15 @@ namespace vx_core {
     Class_boolean::Class_boolean() : Abstract_boolean::Abstract_boolean() {
       vx_core::refcount += 1;
     }
+
     Class_boolean::~Class_boolean() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_boolean::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_boolean(), vals);
     }
+
     vx_core::Type_any Class_boolean::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_boolean output = vx_core::e_boolean();
       vx_core::Type_boolean val = vx_core::vx_any_from_any(vx_core::t_boolean(), copyval);
@@ -1855,12 +1934,15 @@ namespace vx_core {
     Class_number::Class_number() : Abstract_number::Abstract_number() {
       vx_core::refcount += 1;
     }
+
     Class_number::~Class_number() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_number::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_number(), vals);
     }
+
     vx_core::Type_any Class_number::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_number output = vx_core::e_number();
       vx_core::vx_release_except(copyval, output);
@@ -1899,12 +1981,15 @@ namespace vx_core {
     Class_decimal::Class_decimal() : Abstract_decimal::Abstract_decimal() {
       vx_core::refcount += 1;
     }
+
     Class_decimal::~Class_decimal() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_decimal::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_decimal(), vals);
     }
+
     vx_core::Type_any Class_decimal::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_decimal output = vx_core::e_decimal();
       vx_core::Type_decimal val = vx_core::vx_any_from_any(vx_core::t_decimal(), copyval);
@@ -1963,12 +2048,15 @@ namespace vx_core {
     Class_float::Class_float() : Abstract_float::Abstract_float() {
       vx_core::refcount += 1;
     }
+
     Class_float::~Class_float() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_float::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_float(), vals);
     }
+
     vx_core::Type_any Class_float::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_float output = vx_core::e_float();
       vx_core::Type_float val = vx_core::vx_any_from_any(vx_core::t_float(), copyval);
@@ -2036,12 +2124,15 @@ namespace vx_core {
     Class_int::Class_int() : Abstract_int::Abstract_int() {
       vx_core::refcount += 1;
     }
+
     Class_int::~Class_int() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_int::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_int(), vals);
     }
+
     vx_core::Type_any Class_int::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_int output = vx_core::e_int();
       vx_core::Type_int val = vx_core::vx_any_from_any(vx_core::t_int(), copyval);
@@ -2100,12 +2191,15 @@ namespace vx_core {
     Class_string::Class_string() : Abstract_string::Abstract_string() {
       vx_core::refcount += 1;
     }
+
     Class_string::~Class_string() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_string::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_string(), vals);
     }
+
     vx_core::Type_any Class_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_string output = vx_core::e_string();
       vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string(), copyval);
@@ -2176,15 +2270,18 @@ namespace vx_core {
     Class_func::Class_func() : Abstract_func::Abstract_func() {
       vx_core::refcount += 1;
     }
+
     Class_func::~Class_func() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_funcdef Class_func::vx_funcdef() const {
       return vx_core::e_funcdef();
     }
     vx_core::Type_any Class_func::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_func(), vals);
     }
+
     vx_core::Type_any Class_func::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_func output = vx_core::e_func();
       vx_core::vx_release_except(copyval, output);
@@ -2223,6 +2320,7 @@ namespace vx_core {
     Class_typedef::Class_typedef() : Abstract_typedef::Abstract_typedef() {
       vx_core::refcount += 1;
     }
+
     Class_typedef::~Class_typedef() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -2240,6 +2338,7 @@ namespace vx_core {
         this->vx_p_traits
       });
     }
+
     // pkgname()
     vx_core::Type_string Class_typedef::pkgname() const {
       vx_core::Type_string output = this->vx_p_pkgname;
@@ -2403,6 +2502,7 @@ namespace vx_core {
     vx_core::Type_any Class_typedef::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_typedef(), vals);
     }
+
     vx_core::Type_any Class_typedef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typedef output = vx_core::e_typedef();
       vx_core::Type_typedef val = vx_core::vx_any_from_any(vx_core::t_typedef(), copyval);
@@ -2555,30 +2655,90 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_typedef();
-      output->vx_p_pkgname = vx_p_pkgname;
-      vx_core::vx_reserve(vx_p_pkgname);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_extend = vx_p_extend;
-      vx_core::vx_reserve(vx_p_extend);
-      output->vx_p_allowfuncs = vx_p_allowfuncs;
-      vx_core::vx_reserve(vx_p_allowfuncs);
-      output->vx_p_allowtypes = vx_p_allowtypes;
-      vx_core::vx_reserve(vx_p_allowtypes);
-      output->vx_p_allowvalues = vx_p_allowvalues;
-      vx_core::vx_reserve(vx_p_allowvalues);
-      output->vx_p_disallowfuncs = vx_p_disallowfuncs;
-      vx_core::vx_reserve(vx_p_disallowfuncs);
-      output->vx_p_disallowtypes = vx_p_disallowtypes;
-      vx_core::vx_reserve(vx_p_disallowtypes);
-      output->vx_p_disallowvalues = vx_p_disallowvalues;
-      vx_core::vx_reserve(vx_p_disallowvalues);
-      output->vx_p_properties = vx_p_properties;
-      vx_core::vx_reserve(vx_p_properties);
-      output->vx_p_proplast = vx_p_proplast;
-      vx_core::vx_reserve(vx_p_proplast);
-      output->vx_p_traits = vx_p_traits;
-      vx_core::vx_reserve(vx_p_traits);
+      if (output->vx_p_pkgname != vx_p_pkgname) {
+        if (output->vx_p_pkgname) {
+          vx_core::vx_release_one(output->vx_p_pkgname);
+        }
+        output->vx_p_pkgname = vx_p_pkgname;
+        vx_core::vx_reserve(vx_p_pkgname);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_extend != vx_p_extend) {
+        if (output->vx_p_extend) {
+          vx_core::vx_release_one(output->vx_p_extend);
+        }
+        output->vx_p_extend = vx_p_extend;
+        vx_core::vx_reserve(vx_p_extend);
+      }
+      if (output->vx_p_allowfuncs != vx_p_allowfuncs) {
+        if (output->vx_p_allowfuncs) {
+          vx_core::vx_release_one(output->vx_p_allowfuncs);
+        }
+        output->vx_p_allowfuncs = vx_p_allowfuncs;
+        vx_core::vx_reserve(vx_p_allowfuncs);
+      }
+      if (output->vx_p_allowtypes != vx_p_allowtypes) {
+        if (output->vx_p_allowtypes) {
+          vx_core::vx_release_one(output->vx_p_allowtypes);
+        }
+        output->vx_p_allowtypes = vx_p_allowtypes;
+        vx_core::vx_reserve(vx_p_allowtypes);
+      }
+      if (output->vx_p_allowvalues != vx_p_allowvalues) {
+        if (output->vx_p_allowvalues) {
+          vx_core::vx_release_one(output->vx_p_allowvalues);
+        }
+        output->vx_p_allowvalues = vx_p_allowvalues;
+        vx_core::vx_reserve(vx_p_allowvalues);
+      }
+      if (output->vx_p_disallowfuncs != vx_p_disallowfuncs) {
+        if (output->vx_p_disallowfuncs) {
+          vx_core::vx_release_one(output->vx_p_disallowfuncs);
+        }
+        output->vx_p_disallowfuncs = vx_p_disallowfuncs;
+        vx_core::vx_reserve(vx_p_disallowfuncs);
+      }
+      if (output->vx_p_disallowtypes != vx_p_disallowtypes) {
+        if (output->vx_p_disallowtypes) {
+          vx_core::vx_release_one(output->vx_p_disallowtypes);
+        }
+        output->vx_p_disallowtypes = vx_p_disallowtypes;
+        vx_core::vx_reserve(vx_p_disallowtypes);
+      }
+      if (output->vx_p_disallowvalues != vx_p_disallowvalues) {
+        if (output->vx_p_disallowvalues) {
+          vx_core::vx_release_one(output->vx_p_disallowvalues);
+        }
+        output->vx_p_disallowvalues = vx_p_disallowvalues;
+        vx_core::vx_reserve(vx_p_disallowvalues);
+      }
+      if (output->vx_p_properties != vx_p_properties) {
+        if (output->vx_p_properties) {
+          vx_core::vx_release_one(output->vx_p_properties);
+        }
+        output->vx_p_properties = vx_p_properties;
+        vx_core::vx_reserve(vx_p_properties);
+      }
+      if (output->vx_p_proplast != vx_p_proplast) {
+        if (output->vx_p_proplast) {
+          vx_core::vx_release_one(output->vx_p_proplast);
+        }
+        output->vx_p_proplast = vx_p_proplast;
+        vx_core::vx_reserve(vx_p_proplast);
+      }
+      if (output->vx_p_traits != vx_p_traits) {
+        if (output->vx_p_traits) {
+          vx_core::vx_release_one(output->vx_p_traits);
+        }
+        output->vx_p_traits = vx_p_traits;
+        vx_core::vx_reserve(vx_p_traits);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2619,6 +2779,7 @@ namespace vx_core {
     Class_funcdef::Class_funcdef() : Abstract_funcdef::Abstract_funcdef() {
       vx_core::refcount += 1;
     }
+
     Class_funcdef::~Class_funcdef() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -2629,6 +2790,7 @@ namespace vx_core {
         this->vx_p_async
       });
     }
+
     // pkgname()
     vx_core::Type_string Class_funcdef::pkgname() const {
       vx_core::Type_string output = this->vx_p_pkgname;
@@ -2708,6 +2870,7 @@ namespace vx_core {
     vx_core::Type_any Class_funcdef::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_funcdef(), vals);
     }
+
     vx_core::Type_any Class_funcdef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funcdef output = vx_core::e_funcdef();
       vx_core::Type_funcdef val = vx_core::vx_any_from_any(vx_core::t_funcdef(), copyval);
@@ -2785,16 +2948,41 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_funcdef();
-      output->vx_p_pkgname = vx_p_pkgname;
-      vx_core::vx_reserve(vx_p_pkgname);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_idx = vx_p_idx;
-      vx_core::vx_reserve(vx_p_idx);
-      output->vx_p_type = vx_p_type;
-      vx_core::vx_reserve(vx_p_type);
-      output->vx_p_async = vx_p_async;
-      vx_core::vx_reserve(vx_p_async);
+      if (output->vx_p_pkgname != vx_p_pkgname) {
+        if (output->vx_p_pkgname) {
+          vx_core::vx_release_one(output->vx_p_pkgname);
+        }
+        output->vx_p_pkgname = vx_p_pkgname;
+        vx_core::vx_reserve(vx_p_pkgname);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_idx != vx_p_idx) {
+        if (output->vx_p_idx) {
+          vx_core::vx_release_one(output->vx_p_idx);
+        }
+        output->vx_p_idx = vx_p_idx;
+        vx_core::vx_reserve(vx_p_idx);
+      }
+      if (output->vx_p_type != vx_p_type) {
+        if (output->vx_p_type) {
+          vx_core::vx_release_one(output->vx_p_type);
+        }
+        output->vx_p_type = vx_p_type;
+        vx_core::vx_reserve(vx_p_type);
+      }
+      if (output->vx_p_async != vx_p_async) {
+        if (output->vx_p_async) {
+          vx_core::vx_release_one(output->vx_p_async);
+        }
+        output->vx_p_async = vx_p_async;
+        vx_core::vx_reserve(vx_p_async);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2835,12 +3023,15 @@ namespace vx_core {
     Class_any_async_from_func::Class_any_async_from_func() : Abstract_any_async_from_func::Abstract_any_async_from_func() {
       vx_core::refcount += 1;
     }
+
     Class_any_async_from_func::~Class_any_async_from_func() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_any_async_from_func::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_any_async_from_func(), vals);
     }
+
     vx_core::Type_any Class_any_async_from_func::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_any_async_from_func output = vx_core::e_any_async_from_func();
       vx_core::vx_release_except(copyval, output);
@@ -2879,12 +3070,14 @@ namespace vx_core {
     Class_any_from_anylist::Class_any_from_anylist() : Abstract_any_from_anylist::Abstract_any_from_anylist() {
       vx_core::refcount += 1;
     }
+
     Class_any_from_anylist::~Class_any_from_anylist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_any_from_anylist::vx_list() const {
       return this->vx_p_list;
@@ -2926,6 +3119,7 @@ namespace vx_core {
     vx_core::Type_any Class_any_from_anylist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_any_from_anylist(), vals);
     }
+
     vx_core::Type_any Class_any_from_anylist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_any_from_anylist output = vx_core::e_any_from_anylist();
       vx_core::Type_any_from_anylist val = vx_core::vx_any_from_any(vx_core::t_any_from_anylist(), copyval);
@@ -2990,12 +3184,14 @@ namespace vx_core {
     Class_anylist::Class_anylist() : Abstract_anylist::Abstract_anylist() {
       vx_core::refcount += 1;
     }
+
     Class_anylist::~Class_anylist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_anylist::vx_list() const {
       return this->vx_p_list;
@@ -3037,6 +3233,7 @@ namespace vx_core {
     vx_core::Type_any Class_anylist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_anylist(), vals);
     }
+
     vx_core::Type_any Class_anylist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_anylist output = vx_core::e_anylist();
       vx_core::Type_anylist val = vx_core::vx_any_from_any(vx_core::t_anylist(), copyval);
@@ -3102,12 +3299,15 @@ namespace vx_core {
     Class_anytype::Class_anytype() : Abstract_anytype::Abstract_anytype() {
       vx_core::refcount += 1;
     }
+
     Class_anytype::~Class_anytype() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_anytype::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_anytype(), vals);
     }
+
     vx_core::Type_any Class_anytype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_anytype output = vx_core::e_anytype();
       vx_core::vx_release_except(copyval, output);
@@ -3146,6 +3346,7 @@ namespace vx_core {
     Class_arg::Class_arg() : Abstract_arg::Abstract_arg() {
       vx_core::refcount += 1;
     }
+
     Class_arg::~Class_arg() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -3154,6 +3355,7 @@ namespace vx_core {
         this->vx_p_fn_any
       });
     }
+
     // name()
     vx_core::Type_string Class_arg::name() const {
       vx_core::Type_string output = this->vx_p_name;
@@ -3209,6 +3411,7 @@ namespace vx_core {
     vx_core::Type_any Class_arg::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_arg(), vals);
     }
+
     vx_core::Type_any Class_arg::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_arg output = vx_core::e_arg();
       vx_core::Type_arg val = vx_core::vx_any_from_any(vx_core::t_arg(), copyval);
@@ -3271,12 +3474,27 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_arg();
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_argtype = vx_p_argtype;
-      vx_core::vx_reserve(vx_p_argtype);
-      output->vx_p_fn_any = vx_p_fn_any;
-      vx_core::vx_reserve(vx_p_fn_any);
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_argtype != vx_p_argtype) {
+        if (output->vx_p_argtype) {
+          vx_core::vx_release_one(output->vx_p_argtype);
+        }
+        output->vx_p_argtype = vx_p_argtype;
+        vx_core::vx_reserve(vx_p_argtype);
+      }
+      if (output->vx_p_fn_any != vx_p_fn_any) {
+        if (output->vx_p_fn_any) {
+          vx_core::vx_release_one(output->vx_p_fn_any);
+        }
+        output->vx_p_fn_any = vx_p_fn_any;
+        vx_core::vx_reserve(vx_p_fn_any);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -3317,12 +3535,14 @@ namespace vx_core {
     Class_arglist::Class_arglist() : Abstract_arglist::Abstract_arglist() {
       vx_core::refcount += 1;
     }
+
     Class_arglist::~Class_arglist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_arglist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -3376,6 +3596,7 @@ namespace vx_core {
     vx_core::Type_any Class_arglist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_arglist(), vals);
     }
+
     vx_core::Type_any Class_arglist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_arglist output = vx_core::e_arglist();
       vx_core::Type_arglist val = vx_core::vx_any_from_any(vx_core::t_arglist(), copyval);
@@ -3442,12 +3663,14 @@ namespace vx_core {
     Class_argmap::Class_argmap() : Abstract_argmap::Abstract_argmap() {
       vx_core::refcount += 1;
     }
+
     Class_argmap::~Class_argmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_argmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -3508,6 +3731,7 @@ namespace vx_core {
     vx_core::Type_any Class_argmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_argmap(), vals);
     }
+
     vx_core::Type_any Class_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_argmap output = vx_core::e_argmap();
       vx_core::Type_argmap valmap = vx_core::vx_any_from_any(vx_core::t_argmap(), copyval);
@@ -3589,12 +3813,14 @@ namespace vx_core {
     Class_booleanlist::Class_booleanlist() : Abstract_booleanlist::Abstract_booleanlist() {
       vx_core::refcount += 1;
     }
+
     Class_booleanlist::~Class_booleanlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_booleanlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -3648,6 +3874,7 @@ namespace vx_core {
     vx_core::Type_any Class_booleanlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_booleanlist(), vals);
     }
+
     vx_core::Type_any Class_booleanlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_booleanlist output = vx_core::e_booleanlist();
       vx_core::Type_booleanlist val = vx_core::vx_any_from_any(vx_core::t_booleanlist(), copyval);
@@ -3714,12 +3941,15 @@ namespace vx_core {
     Class_collection::Class_collection() : Abstract_collection::Abstract_collection() {
       vx_core::refcount += 1;
     }
+
     Class_collection::~Class_collection() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_collection::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_collection(), vals);
     }
+
     vx_core::Type_any Class_collection::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_collection output = vx_core::e_collection();
       vx_core::vx_release_except(copyval, output);
@@ -3758,12 +3988,15 @@ namespace vx_core {
     Class_compilelanguages::Class_compilelanguages() : Abstract_compilelanguages::Abstract_compilelanguages() {
       vx_core::refcount += 1;
     }
+
     Class_compilelanguages::~Class_compilelanguages() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_compilelanguages::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_compilelanguages(), vals);
     }
+
     vx_core::Type_any Class_compilelanguages::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_compilelanguages output = vx_core::e_compilelanguages();
       vx_core::vx_release_except(copyval, output);
@@ -3802,12 +4035,15 @@ namespace vx_core {
     Class_connect::Class_connect() : Abstract_connect::Abstract_connect() {
       vx_core::refcount += 1;
     }
+
     Class_connect::~Class_connect() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_connect::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_connect(), vals);
     }
+
     vx_core::Type_any Class_connect::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_connect output = vx_core::e_connect();
       vx_core::vx_release_except(copyval, output);
@@ -3846,12 +4082,14 @@ namespace vx_core {
     Class_connectlist::Class_connectlist() : Abstract_connectlist::Abstract_connectlist() {
       vx_core::refcount += 1;
     }
+
     Class_connectlist::~Class_connectlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_connectlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -3905,6 +4143,7 @@ namespace vx_core {
     vx_core::Type_any Class_connectlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_connectlist(), vals);
     }
+
     vx_core::Type_any Class_connectlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_connectlist output = vx_core::e_connectlist();
       vx_core::Type_connectlist val = vx_core::vx_any_from_any(vx_core::t_connectlist(), copyval);
@@ -3971,12 +4210,14 @@ namespace vx_core {
     Class_connectmap::Class_connectmap() : Abstract_connectmap::Abstract_connectmap() {
       vx_core::refcount += 1;
     }
+
     Class_connectmap::~Class_connectmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_connectmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -4037,6 +4278,7 @@ namespace vx_core {
     vx_core::Type_any Class_connectmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_connectmap(), vals);
     }
+
     vx_core::Type_any Class_connectmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_connectmap output = vx_core::e_connectmap();
       vx_core::Type_connectmap valmap = vx_core::vx_any_from_any(vx_core::t_connectmap(), copyval);
@@ -4118,12 +4360,15 @@ namespace vx_core {
     Class_const::Class_const() : Abstract_const::Abstract_const() {
       vx_core::refcount += 1;
     }
+
     Class_const::~Class_const() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_const::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_const(), vals);
     }
+
     vx_core::Type_any Class_const::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_const output = vx_core::e_const();
       vx_core::vx_release_except(copyval, output);
@@ -4162,6 +4407,7 @@ namespace vx_core {
     Class_constdef::Class_constdef() : Abstract_constdef::Abstract_constdef() {
       vx_core::refcount += 1;
     }
+
     Class_constdef::~Class_constdef() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -4170,6 +4416,7 @@ namespace vx_core {
         this->vx_p_type
       });
     }
+
     // pkgname()
     vx_core::Type_string Class_constdef::pkgname() const {
       vx_core::Type_string output = this->vx_p_pkgname;
@@ -4225,6 +4472,7 @@ namespace vx_core {
     vx_core::Type_any Class_constdef::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_constdef(), vals);
     }
+
     vx_core::Type_any Class_constdef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constdef output = vx_core::e_constdef();
       vx_core::Type_constdef val = vx_core::vx_any_from_any(vx_core::t_constdef(), copyval);
@@ -4282,12 +4530,27 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_constdef();
-      output->vx_p_pkgname = vx_p_pkgname;
-      vx_core::vx_reserve(vx_p_pkgname);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_type = vx_p_type;
-      vx_core::vx_reserve(vx_p_type);
+      if (output->vx_p_pkgname != vx_p_pkgname) {
+        if (output->vx_p_pkgname) {
+          vx_core::vx_release_one(output->vx_p_pkgname);
+        }
+        output->vx_p_pkgname = vx_p_pkgname;
+        vx_core::vx_reserve(vx_p_pkgname);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_type != vx_p_type) {
+        if (output->vx_p_type) {
+          vx_core::vx_release_one(output->vx_p_type);
+        }
+        output->vx_p_type = vx_p_type;
+        vx_core::vx_reserve(vx_p_type);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -4328,12 +4591,14 @@ namespace vx_core {
     Class_constlist::Class_constlist() : Abstract_constlist::Abstract_constlist() {
       vx_core::refcount += 1;
     }
+
     Class_constlist::~Class_constlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_constlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -4387,6 +4652,7 @@ namespace vx_core {
     vx_core::Type_any Class_constlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_constlist(), vals);
     }
+
     vx_core::Type_any Class_constlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constlist output = vx_core::e_constlist();
       vx_core::Type_constlist val = vx_core::vx_any_from_any(vx_core::t_constlist(), copyval);
@@ -4453,12 +4719,14 @@ namespace vx_core {
     Class_constmap::Class_constmap() : Abstract_constmap::Abstract_constmap() {
       vx_core::refcount += 1;
     }
+
     Class_constmap::~Class_constmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_constmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -4519,6 +4787,7 @@ namespace vx_core {
     vx_core::Type_any Class_constmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_constmap(), vals);
     }
+
     vx_core::Type_any Class_constmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constmap output = vx_core::e_constmap();
       vx_core::Type_constmap valmap = vx_core::vx_any_from_any(vx_core::t_constmap(), copyval);
@@ -4600,6 +4869,7 @@ namespace vx_core {
     Class_context::Class_context() : Abstract_context::Abstract_context() {
       vx_core::refcount += 1;
     }
+
     Class_context::~Class_context() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -4609,6 +4879,7 @@ namespace vx_core {
         this->vx_p_state
       });
     }
+
     // code()
     vx_core::Type_string Class_context::code() const {
       vx_core::Type_string output = this->vx_p_code;
@@ -4676,6 +4947,7 @@ namespace vx_core {
     vx_core::Type_any Class_context::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_context(), vals);
     }
+
     vx_core::Type_any Class_context::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_context output = vx_core::e_context();
       vx_core::Type_context val = vx_core::vx_any_from_any(vx_core::t_context(), copyval);
@@ -4748,14 +5020,34 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_context();
-      output->vx_p_code = vx_p_code;
-      vx_core::vx_reserve(vx_p_code);
-      output->vx_p_session = vx_p_session;
-      vx_core::vx_reserve(vx_p_session);
-      output->vx_p_setting = vx_p_setting;
-      vx_core::vx_reserve(vx_p_setting);
-      output->vx_p_state = vx_p_state;
-      vx_core::vx_reserve(vx_p_state);
+      if (output->vx_p_code != vx_p_code) {
+        if (output->vx_p_code) {
+          vx_core::vx_release_one(output->vx_p_code);
+        }
+        output->vx_p_code = vx_p_code;
+        vx_core::vx_reserve(vx_p_code);
+      }
+      if (output->vx_p_session != vx_p_session) {
+        if (output->vx_p_session) {
+          vx_core::vx_release_one(output->vx_p_session);
+        }
+        output->vx_p_session = vx_p_session;
+        vx_core::vx_reserve(vx_p_session);
+      }
+      if (output->vx_p_setting != vx_p_setting) {
+        if (output->vx_p_setting) {
+          vx_core::vx_release_one(output->vx_p_setting);
+        }
+        output->vx_p_setting = vx_p_setting;
+        vx_core::vx_reserve(vx_p_setting);
+      }
+      if (output->vx_p_state != vx_p_state) {
+        if (output->vx_p_state) {
+          vx_core::vx_release_one(output->vx_p_state);
+        }
+        output->vx_p_state = vx_p_state;
+        vx_core::vx_reserve(vx_p_state);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -4796,12 +5088,15 @@ namespace vx_core {
     Class_error::Class_error() : Abstract_error::Abstract_error() {
       vx_core::refcount += 1;
     }
+
     Class_error::~Class_error() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_error::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_error(), vals);
     }
+
     vx_core::Type_any Class_error::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_error output = vx_core::e_error();
       vx_core::vx_release_except(copyval, output);
@@ -4840,12 +5135,14 @@ namespace vx_core {
     Class_funclist::Class_funclist() : Abstract_funclist::Abstract_funclist() {
       vx_core::refcount += 1;
     }
+
     Class_funclist::~Class_funclist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_funclist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -4899,6 +5196,7 @@ namespace vx_core {
     vx_core::Type_any Class_funclist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_funclist(), vals);
     }
+
     vx_core::Type_any Class_funclist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funclist output = vx_core::e_funclist();
       vx_core::Type_funclist val = vx_core::vx_any_from_any(vx_core::t_funclist(), copyval);
@@ -4965,12 +5263,14 @@ namespace vx_core {
     Class_funcmap::Class_funcmap() : Abstract_funcmap::Abstract_funcmap() {
       vx_core::refcount += 1;
     }
+
     Class_funcmap::~Class_funcmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_funcmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -5031,6 +5331,7 @@ namespace vx_core {
     vx_core::Type_any Class_funcmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_funcmap(), vals);
     }
+
     vx_core::Type_any Class_funcmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funcmap output = vx_core::e_funcmap();
       vx_core::Type_funcmap valmap = vx_core::vx_any_from_any(vx_core::t_funcmap(), copyval);
@@ -5112,12 +5413,14 @@ namespace vx_core {
     Class_intlist::Class_intlist() : Abstract_intlist::Abstract_intlist() {
       vx_core::refcount += 1;
     }
+
     Class_intlist::~Class_intlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_intlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -5171,6 +5474,7 @@ namespace vx_core {
     vx_core::Type_any Class_intlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_intlist(), vals);
     }
+
     vx_core::Type_any Class_intlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_intlist output = vx_core::e_intlist();
       vx_core::Type_intlist val = vx_core::vx_any_from_any(vx_core::t_intlist(), copyval);
@@ -5237,12 +5541,14 @@ namespace vx_core {
     Class_intmap::Class_intmap() : Abstract_intmap::Abstract_intmap() {
       vx_core::refcount += 1;
     }
+
     Class_intmap::~Class_intmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_intmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -5303,6 +5609,7 @@ namespace vx_core {
     vx_core::Type_any Class_intmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_intmap(), vals);
     }
+
     vx_core::Type_any Class_intmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_intmap output = vx_core::e_intmap();
       vx_core::Type_intmap valmap = vx_core::vx_any_from_any(vx_core::t_intmap(), copyval);
@@ -5384,12 +5691,15 @@ namespace vx_core {
     Class_listtype::Class_listtype() : Abstract_listtype::Abstract_listtype() {
       vx_core::refcount += 1;
     }
+
     Class_listtype::~Class_listtype() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_listtype::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_listtype(), vals);
     }
+
     vx_core::Type_any Class_listtype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_listtype output = vx_core::e_listtype();
       vx_core::vx_release_except(copyval, output);
@@ -5428,12 +5738,15 @@ namespace vx_core {
     Class_maptype::Class_maptype() : Abstract_maptype::Abstract_maptype() {
       vx_core::refcount += 1;
     }
+
     Class_maptype::~Class_maptype() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_maptype::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_maptype(), vals);
     }
+
     vx_core::Type_any Class_maptype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_maptype output = vx_core::e_maptype();
       vx_core::vx_release_except(copyval, output);
@@ -5472,12 +5785,14 @@ namespace vx_core {
     Class_mempool::Class_mempool() : Abstract_mempool::Abstract_mempool() {
       vx_core::refcount += 1;
     }
+
     Class_mempool::~Class_mempool() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_valuepool
       });
     }
+
     // valuepool()
     vx_core::Type_value Class_mempool::valuepool() const {
       vx_core::Type_value output = this->vx_p_valuepool;
@@ -5509,6 +5824,7 @@ namespace vx_core {
     vx_core::Type_any Class_mempool::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_mempool(), vals);
     }
+
     vx_core::Type_any Class_mempool::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_mempool output = vx_core::e_mempool();
       vx_core::Type_mempool val = vx_core::vx_any_from_any(vx_core::t_mempool(), copyval);
@@ -5551,8 +5867,13 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_mempool();
-      output->vx_p_valuepool = vx_p_valuepool;
-      vx_core::vx_reserve(vx_p_valuepool);
+      if (output->vx_p_valuepool != vx_p_valuepool) {
+        if (output->vx_p_valuepool) {
+          vx_core::vx_release_one(output->vx_p_valuepool);
+        }
+        output->vx_p_valuepool = vx_p_valuepool;
+        vx_core::vx_reserve(vx_p_valuepool);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -5593,12 +5914,15 @@ namespace vx_core {
     Class_none::Class_none() : Abstract_none::Abstract_none() {
       vx_core::refcount += 1;
     }
+
     Class_none::~Class_none() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_none::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_none(), vals);
     }
+
     vx_core::Type_any Class_none::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_none output = vx_core::e_none();
       vx_core::vx_release_except(copyval, output);
@@ -5637,12 +5961,15 @@ namespace vx_core {
     Class_notype::Class_notype() : Abstract_notype::Abstract_notype() {
       vx_core::refcount += 1;
     }
+
     Class_notype::~Class_notype() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_notype::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_notype(), vals);
     }
+
     vx_core::Type_any Class_notype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_notype output = vx_core::e_notype();
       vx_core::vx_release_except(copyval, output);
@@ -5681,12 +6008,14 @@ namespace vx_core {
     Class_numberlist::Class_numberlist() : Abstract_numberlist::Abstract_numberlist() {
       vx_core::refcount += 1;
     }
+
     Class_numberlist::~Class_numberlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_numberlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -5740,6 +6069,7 @@ namespace vx_core {
     vx_core::Type_any Class_numberlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_numberlist(), vals);
     }
+
     vx_core::Type_any Class_numberlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_numberlist output = vx_core::e_numberlist();
       vx_core::Type_numberlist val = vx_core::vx_any_from_any(vx_core::t_numberlist(), copyval);
@@ -5806,12 +6136,14 @@ namespace vx_core {
     Class_numbermap::Class_numbermap() : Abstract_numbermap::Abstract_numbermap() {
       vx_core::refcount += 1;
     }
+
     Class_numbermap::~Class_numbermap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_numbermap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -5872,6 +6204,7 @@ namespace vx_core {
     vx_core::Type_any Class_numbermap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_numbermap(), vals);
     }
+
     vx_core::Type_any Class_numbermap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_numbermap output = vx_core::e_numbermap();
       vx_core::Type_numbermap valmap = vx_core::vx_any_from_any(vx_core::t_numbermap(), copyval);
@@ -5953,12 +6286,14 @@ namespace vx_core {
     Class_package::Class_package() : Abstract_package::Abstract_package() {
       vx_core::refcount += 1;
     }
+
     Class_package::~Class_package() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         
       });
     }
+
     // vx_get_any(key)
     vx_core::Type_any Class_package::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any();
@@ -5978,6 +6313,7 @@ namespace vx_core {
     vx_core::Type_any Class_package::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_package(), vals);
     }
+
     vx_core::Type_any Class_package::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_package output = vx_core::e_package();
       vx_core::Type_package val = vx_core::vx_any_from_any(vx_core::t_package(), copyval);
@@ -6022,12 +6358,14 @@ namespace vx_core {
     Class_packagemap::Class_packagemap() : Abstract_packagemap::Abstract_packagemap() {
       vx_core::refcount += 1;
     }
+
     Class_packagemap::~Class_packagemap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_packagemap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -6088,6 +6426,7 @@ namespace vx_core {
     vx_core::Type_any Class_packagemap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_packagemap(), vals);
     }
+
     vx_core::Type_any Class_packagemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_packagemap output = vx_core::e_packagemap();
       vx_core::Type_packagemap valmap = vx_core::vx_any_from_any(vx_core::t_packagemap(), copyval);
@@ -6169,12 +6508,14 @@ namespace vx_core {
     Class_permission::Class_permission() : Abstract_permission::Abstract_permission() {
       vx_core::refcount += 1;
     }
+
     Class_permission::~Class_permission() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_id
       });
     }
+
     // id()
     vx_core::Type_string Class_permission::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -6206,6 +6547,7 @@ namespace vx_core {
     vx_core::Type_any Class_permission::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_permission(), vals);
     }
+
     vx_core::Type_any Class_permission::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permission output = vx_core::e_permission();
       vx_core::Type_permission val = vx_core::vx_any_from_any(vx_core::t_permission(), copyval);
@@ -6248,8 +6590,13 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_permission();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -6290,12 +6637,14 @@ namespace vx_core {
     Class_permissionlist::Class_permissionlist() : Abstract_permissionlist::Abstract_permissionlist() {
       vx_core::refcount += 1;
     }
+
     Class_permissionlist::~Class_permissionlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_permissionlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -6349,6 +6698,7 @@ namespace vx_core {
     vx_core::Type_any Class_permissionlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_permissionlist(), vals);
     }
+
     vx_core::Type_any Class_permissionlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permissionlist output = vx_core::e_permissionlist();
       vx_core::Type_permissionlist val = vx_core::vx_any_from_any(vx_core::t_permissionlist(), copyval);
@@ -6415,12 +6765,14 @@ namespace vx_core {
     Class_permissionmap::Class_permissionmap() : Abstract_permissionmap::Abstract_permissionmap() {
       vx_core::refcount += 1;
     }
+
     Class_permissionmap::~Class_permissionmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_permissionmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -6481,6 +6833,7 @@ namespace vx_core {
     vx_core::Type_any Class_permissionmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_permissionmap(), vals);
     }
+
     vx_core::Type_any Class_permissionmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permissionmap output = vx_core::e_permissionmap();
       vx_core::Type_permissionmap valmap = vx_core::vx_any_from_any(vx_core::t_permissionmap(), copyval);
@@ -6562,6 +6915,7 @@ namespace vx_core {
     Class_security::Class_security() : Abstract_security::Abstract_security() {
       vx_core::refcount += 1;
     }
+
     Class_security::~Class_security() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -6569,6 +6923,7 @@ namespace vx_core {
         this->vx_p_permissionmap
       });
     }
+
     // permissions()
     vx_core::Type_permissionlist Class_security::permissions() const {
       vx_core::Type_permissionlist output = this->vx_p_permissions;
@@ -6612,6 +6967,7 @@ namespace vx_core {
     vx_core::Type_any Class_security::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_security(), vals);
     }
+
     vx_core::Type_any Class_security::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_security output = vx_core::e_security();
       vx_core::Type_security val = vx_core::vx_any_from_any(vx_core::t_security(), copyval);
@@ -6664,10 +7020,20 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_security();
-      output->vx_p_permissions = vx_p_permissions;
-      vx_core::vx_reserve(vx_p_permissions);
-      output->vx_p_permissionmap = vx_p_permissionmap;
-      vx_core::vx_reserve(vx_p_permissionmap);
+      if (output->vx_p_permissions != vx_p_permissions) {
+        if (output->vx_p_permissions) {
+          vx_core::vx_release_one(output->vx_p_permissions);
+        }
+        output->vx_p_permissions = vx_p_permissions;
+        vx_core::vx_reserve(vx_p_permissions);
+      }
+      if (output->vx_p_permissionmap != vx_p_permissionmap) {
+        if (output->vx_p_permissionmap) {
+          vx_core::vx_release_one(output->vx_p_permissionmap);
+        }
+        output->vx_p_permissionmap = vx_p_permissionmap;
+        vx_core::vx_reserve(vx_p_permissionmap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -6708,6 +7074,7 @@ namespace vx_core {
     Class_session::Class_session() : Abstract_session::Abstract_session() {
       vx_core::refcount += 1;
     }
+
     Class_session::~Class_session() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -6716,6 +7083,7 @@ namespace vx_core {
         this->vx_p_connectmap
       });
     }
+
     // user()
     vx_core::Type_user Class_session::user() const {
       vx_core::Type_user output = this->vx_p_user;
@@ -6771,6 +7139,7 @@ namespace vx_core {
     vx_core::Type_any Class_session::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_session(), vals);
     }
+
     vx_core::Type_any Class_session::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_session output = vx_core::e_session();
       vx_core::Type_session val = vx_core::vx_any_from_any(vx_core::t_session(), copyval);
@@ -6833,12 +7202,27 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_session();
-      output->vx_p_user = vx_p_user;
-      vx_core::vx_reserve(vx_p_user);
-      output->vx_p_connectlist = vx_p_connectlist;
-      vx_core::vx_reserve(vx_p_connectlist);
-      output->vx_p_connectmap = vx_p_connectmap;
-      vx_core::vx_reserve(vx_p_connectmap);
+      if (output->vx_p_user != vx_p_user) {
+        if (output->vx_p_user) {
+          vx_core::vx_release_one(output->vx_p_user);
+        }
+        output->vx_p_user = vx_p_user;
+        vx_core::vx_reserve(vx_p_user);
+      }
+      if (output->vx_p_connectlist != vx_p_connectlist) {
+        if (output->vx_p_connectlist) {
+          vx_core::vx_release_one(output->vx_p_connectlist);
+        }
+        output->vx_p_connectlist = vx_p_connectlist;
+        vx_core::vx_reserve(vx_p_connectlist);
+      }
+      if (output->vx_p_connectmap != vx_p_connectmap) {
+        if (output->vx_p_connectmap) {
+          vx_core::vx_release_one(output->vx_p_connectmap);
+        }
+        output->vx_p_connectmap = vx_p_connectmap;
+        vx_core::vx_reserve(vx_p_connectmap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -6879,12 +7263,14 @@ namespace vx_core {
     Class_setting::Class_setting() : Abstract_setting::Abstract_setting() {
       vx_core::refcount += 1;
     }
+
     Class_setting::~Class_setting() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_pathmap
       });
     }
+
     // pathmap()
     vx_core::Type_stringmap Class_setting::pathmap() const {
       vx_core::Type_stringmap output = this->vx_p_pathmap;
@@ -6916,6 +7302,7 @@ namespace vx_core {
     vx_core::Type_any Class_setting::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_setting(), vals);
     }
+
     vx_core::Type_any Class_setting::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_setting output = vx_core::e_setting();
       vx_core::Type_setting val = vx_core::vx_any_from_any(vx_core::t_setting(), copyval);
@@ -6958,8 +7345,13 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_setting();
-      output->vx_p_pathmap = vx_p_pathmap;
-      vx_core::vx_reserve(vx_p_pathmap);
+      if (output->vx_p_pathmap != vx_p_pathmap) {
+        if (output->vx_p_pathmap) {
+          vx_core::vx_release_one(output->vx_p_pathmap);
+        }
+        output->vx_p_pathmap = vx_p_pathmap;
+        vx_core::vx_reserve(vx_p_pathmap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -7000,12 +7392,14 @@ namespace vx_core {
     Class_state::Class_state() : Abstract_state::Abstract_state() {
       vx_core::refcount += 1;
     }
+
     Class_state::~Class_state() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_state::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -7066,6 +7460,7 @@ namespace vx_core {
     vx_core::Type_any Class_state::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_state(), vals);
     }
+
     vx_core::Type_any Class_state::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_state output = vx_core::e_state();
       vx_core::Type_state valmap = vx_core::vx_any_from_any(vx_core::t_state(), copyval);
@@ -7147,6 +7542,7 @@ namespace vx_core {
     Class_statelistener::Class_statelistener() : Abstract_statelistener::Abstract_statelistener() {
       vx_core::refcount += 1;
     }
+
     Class_statelistener::~Class_statelistener() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -7155,6 +7551,7 @@ namespace vx_core {
         this->vx_p_fn_boolean
       });
     }
+
     // path()
     vx_core::Type_string Class_statelistener::path() const {
       vx_core::Type_string output = this->vx_p_path;
@@ -7210,6 +7607,7 @@ namespace vx_core {
     vx_core::Type_any Class_statelistener::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_statelistener(), vals);
     }
+
     vx_core::Type_any Class_statelistener::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_statelistener output = vx_core::e_statelistener();
       vx_core::Type_statelistener val = vx_core::vx_any_from_any(vx_core::t_statelistener(), copyval);
@@ -7267,12 +7665,27 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_statelistener();
-      output->vx_p_path = vx_p_path;
-      vx_core::vx_reserve(vx_p_path);
-      output->vx_p_value = vx_p_value;
-      vx_core::vx_reserve(vx_p_value);
-      output->vx_p_fn_boolean = vx_p_fn_boolean;
-      vx_core::vx_reserve(vx_p_fn_boolean);
+      if (output->vx_p_path != vx_p_path) {
+        if (output->vx_p_path) {
+          vx_core::vx_release_one(output->vx_p_path);
+        }
+        output->vx_p_path = vx_p_path;
+        vx_core::vx_reserve(vx_p_path);
+      }
+      if (output->vx_p_value != vx_p_value) {
+        if (output->vx_p_value) {
+          vx_core::vx_release_one(output->vx_p_value);
+        }
+        output->vx_p_value = vx_p_value;
+        vx_core::vx_reserve(vx_p_value);
+      }
+      if (output->vx_p_fn_boolean != vx_p_fn_boolean) {
+        if (output->vx_p_fn_boolean) {
+          vx_core::vx_release_one(output->vx_p_fn_boolean);
+        }
+        output->vx_p_fn_boolean = vx_p_fn_boolean;
+        vx_core::vx_reserve(vx_p_fn_boolean);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -7313,12 +7726,14 @@ namespace vx_core {
     Class_stringlist::Class_stringlist() : Abstract_stringlist::Abstract_stringlist() {
       vx_core::refcount += 1;
     }
+
     Class_stringlist::~Class_stringlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_stringlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -7372,6 +7787,7 @@ namespace vx_core {
     vx_core::Type_any Class_stringlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_stringlist(), vals);
     }
+
     vx_core::Type_any Class_stringlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_stringlist output = vx_core::e_stringlist();
       vx_core::Type_stringlist val = vx_core::vx_any_from_any(vx_core::t_stringlist(), copyval);
@@ -7438,12 +7854,14 @@ namespace vx_core {
     Class_stringmap::Class_stringmap() : Abstract_stringmap::Abstract_stringmap() {
       vx_core::refcount += 1;
     }
+
     Class_stringmap::~Class_stringmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_stringmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -7504,6 +7922,7 @@ namespace vx_core {
     vx_core::Type_any Class_stringmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_stringmap(), vals);
     }
+
     vx_core::Type_any Class_stringmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_stringmap output = vx_core::e_stringmap();
       vx_core::Type_stringmap valmap = vx_core::vx_any_from_any(vx_core::t_stringmap(), copyval);
@@ -7585,6 +8004,7 @@ namespace vx_core {
     Class_thenelse::Class_thenelse() : Abstract_thenelse::Abstract_thenelse() {
       vx_core::refcount += 1;
     }
+
     Class_thenelse::~Class_thenelse() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -7595,6 +8015,7 @@ namespace vx_core {
         this->vx_p_fn_any
       });
     }
+
     // code()
     vx_core::Type_string Class_thenelse::code() const {
       vx_core::Type_string output = this->vx_p_code;
@@ -7674,6 +8095,7 @@ namespace vx_core {
     vx_core::Type_any Class_thenelse::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_thenelse(), vals);
     }
+
     vx_core::Type_any Class_thenelse::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_thenelse output = vx_core::e_thenelse();
       vx_core::Type_thenelse val = vx_core::vx_any_from_any(vx_core::t_thenelse(), copyval);
@@ -7751,16 +8173,41 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_thenelse();
-      output->vx_p_code = vx_p_code;
-      vx_core::vx_reserve(vx_p_code);
-      output->vx_p_value = vx_p_value;
-      vx_core::vx_reserve(vx_p_value);
-      output->vx_p_values = vx_p_values;
-      vx_core::vx_reserve(vx_p_values);
-      output->vx_p_fn_cond = vx_p_fn_cond;
-      vx_core::vx_reserve(vx_p_fn_cond);
-      output->vx_p_fn_any = vx_p_fn_any;
-      vx_core::vx_reserve(vx_p_fn_any);
+      if (output->vx_p_code != vx_p_code) {
+        if (output->vx_p_code) {
+          vx_core::vx_release_one(output->vx_p_code);
+        }
+        output->vx_p_code = vx_p_code;
+        vx_core::vx_reserve(vx_p_code);
+      }
+      if (output->vx_p_value != vx_p_value) {
+        if (output->vx_p_value) {
+          vx_core::vx_release_one(output->vx_p_value);
+        }
+        output->vx_p_value = vx_p_value;
+        vx_core::vx_reserve(vx_p_value);
+      }
+      if (output->vx_p_values != vx_p_values) {
+        if (output->vx_p_values) {
+          vx_core::vx_release_one(output->vx_p_values);
+        }
+        output->vx_p_values = vx_p_values;
+        vx_core::vx_reserve(vx_p_values);
+      }
+      if (output->vx_p_fn_cond != vx_p_fn_cond) {
+        if (output->vx_p_fn_cond) {
+          vx_core::vx_release_one(output->vx_p_fn_cond);
+        }
+        output->vx_p_fn_cond = vx_p_fn_cond;
+        vx_core::vx_reserve(vx_p_fn_cond);
+      }
+      if (output->vx_p_fn_any != vx_p_fn_any) {
+        if (output->vx_p_fn_any) {
+          vx_core::vx_release_one(output->vx_p_fn_any);
+        }
+        output->vx_p_fn_any = vx_p_fn_any;
+        vx_core::vx_reserve(vx_p_fn_any);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -7801,12 +8248,14 @@ namespace vx_core {
     Class_thenelselist::Class_thenelselist() : Abstract_thenelselist::Abstract_thenelselist() {
       vx_core::refcount += 1;
     }
+
     Class_thenelselist::~Class_thenelselist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_thenelselist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -7860,6 +8309,7 @@ namespace vx_core {
     vx_core::Type_any Class_thenelselist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_thenelselist(), vals);
     }
+
     vx_core::Type_any Class_thenelselist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_thenelselist output = vx_core::e_thenelselist();
       vx_core::Type_thenelselist val = vx_core::vx_any_from_any(vx_core::t_thenelselist(), copyval);
@@ -7926,12 +8376,15 @@ namespace vx_core {
     Class_type::Class_type() : Abstract_type::Abstract_type() {
       vx_core::refcount += 1;
     }
+
     Class_type::~Class_type() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_type::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_type(), vals);
     }
+
     vx_core::Type_any Class_type::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_type output = vx_core::e_type();
       vx_core::vx_release_except(copyval, output);
@@ -7970,12 +8423,14 @@ namespace vx_core {
     Class_typelist::Class_typelist() : Abstract_typelist::Abstract_typelist() {
       vx_core::refcount += 1;
     }
+
     Class_typelist::~Class_typelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_typelist::vx_list() const {
       return this->vx_p_list;
@@ -8017,6 +8472,7 @@ namespace vx_core {
     vx_core::Type_any Class_typelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_typelist(), vals);
     }
+
     vx_core::Type_any Class_typelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typelist output = vx_core::e_typelist();
       vx_core::Type_typelist val = vx_core::vx_any_from_any(vx_core::t_typelist(), copyval);
@@ -8082,12 +8538,14 @@ namespace vx_core {
     Class_typemap::Class_typemap() : Abstract_typemap::Abstract_typemap() {
       vx_core::refcount += 1;
     }
+
     Class_typemap::~Class_typemap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_typemap::vx_map() const {
       vx_core::vx_Type_mapany output = this->vx_p_map;
@@ -8140,6 +8598,7 @@ namespace vx_core {
     vx_core::Type_any Class_typemap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_typemap(), vals);
     }
+
     vx_core::Type_any Class_typemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typemap output = vx_core::e_typemap();
       vx_core::Type_typemap valmap = vx_core::vx_any_from_any(vx_core::t_typemap(), copyval);
@@ -8221,6 +8680,7 @@ namespace vx_core {
     Class_user::Class_user() : Abstract_user::Abstract_user() {
       vx_core::refcount += 1;
     }
+
     Class_user::~Class_user() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -8229,6 +8689,7 @@ namespace vx_core {
         this->vx_p_token
       });
     }
+
     // security()
     vx_core::Type_security Class_user::security() const {
       vx_core::Type_security output = this->vx_p_security;
@@ -8284,6 +8745,7 @@ namespace vx_core {
     vx_core::Type_any Class_user::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_user(), vals);
     }
+
     vx_core::Type_any Class_user::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_user output = vx_core::e_user();
       vx_core::Type_user val = vx_core::vx_any_from_any(vx_core::t_user(), copyval);
@@ -8346,12 +8808,27 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_user();
-      output->vx_p_security = vx_p_security;
-      vx_core::vx_reserve(vx_p_security);
-      output->vx_p_username = vx_p_username;
-      vx_core::vx_reserve(vx_p_username);
-      output->vx_p_token = vx_p_token;
-      vx_core::vx_reserve(vx_p_token);
+      if (output->vx_p_security != vx_p_security) {
+        if (output->vx_p_security) {
+          vx_core::vx_release_one(output->vx_p_security);
+        }
+        output->vx_p_security = vx_p_security;
+        vx_core::vx_reserve(vx_p_security);
+      }
+      if (output->vx_p_username != vx_p_username) {
+        if (output->vx_p_username) {
+          vx_core::vx_release_one(output->vx_p_username);
+        }
+        output->vx_p_username = vx_p_username;
+        vx_core::vx_reserve(vx_p_username);
+      }
+      if (output->vx_p_token != vx_p_token) {
+        if (output->vx_p_token) {
+          vx_core::vx_release_one(output->vx_p_token);
+        }
+        output->vx_p_token = vx_p_token;
+        vx_core::vx_reserve(vx_p_token);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -8392,6 +8869,7 @@ namespace vx_core {
     Class_value::Class_value() : Abstract_value::Abstract_value() {
       vx_core::refcount += 1;
     }
+
     Class_value::~Class_value() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -8399,6 +8877,7 @@ namespace vx_core {
         this->vx_p_refs
       });
     }
+
     // next()
     vx_core::Type_any Class_value::next() const {
       vx_core::Type_any output = this->vx_p_next;
@@ -8442,6 +8921,7 @@ namespace vx_core {
     vx_core::Type_any Class_value::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_core::e_value(), vals);
     }
+
     vx_core::Type_any Class_value::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_value output = vx_core::e_value();
       vx_core::Type_value val = vx_core::vx_any_from_any(vx_core::t_value(), copyval);
@@ -8489,10 +8969,20 @@ namespace vx_core {
         }
       }
       output = new vx_core::Class_value();
-      output->vx_p_next = vx_p_next;
-      vx_core::vx_reserve(vx_p_next);
-      output->vx_p_refs = vx_p_refs;
-      vx_core::vx_reserve(vx_p_refs);
+      if (output->vx_p_next != vx_p_next) {
+        if (output->vx_p_next) {
+          vx_core::vx_release_one(output->vx_p_next);
+        }
+        output->vx_p_next = vx_p_next;
+        vx_core::vx_reserve(vx_p_next);
+      }
+      if (output->vx_p_refs != vx_p_refs) {
+        if (output->vx_p_refs) {
+          vx_core::vx_release_one(output->vx_p_refs);
+        }
+        output->vx_p_refs = vx_p_refs;
+        vx_core::vx_reserve(vx_p_refs);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -17389,9 +17879,11 @@ namespace vx_core {
       vx_core::t_boolean(),
       vx_core::t_any_from_func()->vx_fn_new({permission, context}, [permission, context]() {
         vx_core::Type_string id = permission->id();
+        vx_core::vx_ref_plus(id);
         vx_core::Type_permission lookup = vx_core::f_permission_from_id_context(id, context);
+        vx_core::vx_ref_plus(lookup);
         vx_core::Type_boolean output_1 = vx_core::f_eq(lookup, permission);
-        vx_core::vx_release_except({id, lookup}, output_1);
+        vx_core::vx_release_one_except({id, lookup}, output_1);
         return output_1;
       })
     );
@@ -19446,10 +19938,13 @@ namespace vx_core {
       vx_core::t_permission(),
       vx_core::t_any_from_func()->vx_fn_new({context}, [context]() {
         vx_core::Type_user user = vx_core::f_user_from_context(context);
+        vx_core::vx_ref_plus(user);
         vx_core::Type_security security = user->security();
+        vx_core::vx_ref_plus(security);
         vx_core::Type_permissionmap permissionmap = security->permissionmap();
+        vx_core::vx_ref_plus(permissionmap);
         vx_core::Type_permission output_1 = vx_core::f_any_from_map(vx_core::t_permission(), permissionmap, vx_core::vx_new_string(":id"));
-        vx_core::vx_release_except({user, security, permissionmap}, output_1);
+        vx_core::vx_release_one_except({user, security, permissionmap}, output_1);
         return output_1;
       })
     );
@@ -20476,7 +20971,7 @@ namespace vx_core {
   // (func string<-any-indent)
   vx_core::Type_string f_string_from_any_indent(vx_core::Type_any value, vx_core::Type_int indent, vx_core::Type_boolean linefeed) {
     vx_core::Type_string output = vx_core::e_string();
-    std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean());
+    std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean(), false);
     output = vx_core::vx_new_string(soutput);
     vx_core::vx_release_except({value, indent, linefeed}, output);
     return output;

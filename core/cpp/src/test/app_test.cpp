@@ -176,7 +176,10 @@ namespace app_test {
 			test_lib::test_resolve_testresult_anyfromfunc(context);
 			test_lib::test_resolve_testresult_then(context);
 			test_lib::test_resolve_testresult_thenelselist(context);
-		/*	
+			test_lib::test_resolve_testresult_if(context);
+			test_lib::test_run_testresult_async(context);
+			test_lib::test_run_testdescribe_async(context);
+	/*	
       std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
       vx_core::Type_boolean writetest = test_writetestsuite();
       std::string swritetest = vx_core::vx_string_from_any(writetest);

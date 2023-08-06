@@ -5,7 +5,7 @@ DIRS_SUB=vx vx/data vx/web
 DIRS_INC=$(DIR_ROOT)/include/
 
 CC=g++
-OPT=-O0
+OPT=-O3
 DEPFLAGS=-MP -MD
 CFLAGS=-lstdc++ -Wextra -g $(foreach DIR,$(DIRS_INC),-I$(DIR) $(OPT) $(DEPFLAGS))
 

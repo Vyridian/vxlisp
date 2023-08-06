@@ -13,12 +13,14 @@ namespace vx_data_db {
     Class_db::Class_db() : Abstract_db::Abstract_db() {
       vx_core::refcount += 1;
     }
+
     Class_db::~Class_db() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_dbid
       });
     }
+
     // dbid()
     vx_core::Type_string Class_db::dbid() const {
       vx_core::Type_string output = this->vx_p_dbid;
@@ -50,6 +52,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_db::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_db(), vals);
     }
+
     vx_core::Type_any Class_db::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_db output = vx_data_db::e_db();
       vx_data_db::Type_db val = vx_core::vx_any_from_any(vx_data_db::t_db(), copyval);
@@ -92,8 +95,13 @@ namespace vx_data_db {
         }
       }
       output = new vx_data_db::Class_db();
-      output->vx_p_dbid = vx_p_dbid;
-      vx_core::vx_reserve(vx_p_dbid);
+      if (output->vx_p_dbid != vx_p_dbid) {
+        if (output->vx_p_dbid) {
+          vx_core::vx_release_one(output->vx_p_dbid);
+        }
+        output->vx_p_dbid = vx_p_dbid;
+        vx_core::vx_reserve(vx_p_dbid);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -134,6 +142,7 @@ namespace vx_data_db {
     Class_dbcell::Class_dbcell() : Abstract_dbcell::Abstract_dbcell() {
       vx_core::refcount += 1;
     }
+
     Class_dbcell::~Class_dbcell() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -144,6 +153,7 @@ namespace vx_data_db {
         this->vx_p_dbtable
       });
     }
+
     // dbcellid()
     vx_core::Type_string Class_dbcell::dbcellid() const {
       vx_core::Type_string output = this->vx_p_dbcellid;
@@ -223,6 +233,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcell::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_dbcell(), vals);
     }
+
     vx_core::Type_any Class_dbcell::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbcell output = vx_data_db::e_dbcell();
       vx_data_db::Type_dbcell val = vx_core::vx_any_from_any(vx_data_db::t_dbcell(), copyval);
@@ -305,16 +316,41 @@ namespace vx_data_db {
         }
       }
       output = new vx_data_db::Class_dbcell();
-      output->vx_p_dbcellid = vx_p_dbcellid;
-      vx_core::vx_reserve(vx_p_dbcellid);
-      output->vx_p_dbcellmap = vx_p_dbcellmap;
-      vx_core::vx_reserve(vx_p_dbcellmap);
-      output->vx_p_dbfieldmap = vx_p_dbfieldmap;
-      vx_core::vx_reserve(vx_p_dbfieldmap);
-      output->vx_p_dbparent = vx_p_dbparent;
-      vx_core::vx_reserve(vx_p_dbparent);
-      output->vx_p_dbtable = vx_p_dbtable;
-      vx_core::vx_reserve(vx_p_dbtable);
+      if (output->vx_p_dbcellid != vx_p_dbcellid) {
+        if (output->vx_p_dbcellid) {
+          vx_core::vx_release_one(output->vx_p_dbcellid);
+        }
+        output->vx_p_dbcellid = vx_p_dbcellid;
+        vx_core::vx_reserve(vx_p_dbcellid);
+      }
+      if (output->vx_p_dbcellmap != vx_p_dbcellmap) {
+        if (output->vx_p_dbcellmap) {
+          vx_core::vx_release_one(output->vx_p_dbcellmap);
+        }
+        output->vx_p_dbcellmap = vx_p_dbcellmap;
+        vx_core::vx_reserve(vx_p_dbcellmap);
+      }
+      if (output->vx_p_dbfieldmap != vx_p_dbfieldmap) {
+        if (output->vx_p_dbfieldmap) {
+          vx_core::vx_release_one(output->vx_p_dbfieldmap);
+        }
+        output->vx_p_dbfieldmap = vx_p_dbfieldmap;
+        vx_core::vx_reserve(vx_p_dbfieldmap);
+      }
+      if (output->vx_p_dbparent != vx_p_dbparent) {
+        if (output->vx_p_dbparent) {
+          vx_core::vx_release_one(output->vx_p_dbparent);
+        }
+        output->vx_p_dbparent = vx_p_dbparent;
+        vx_core::vx_reserve(vx_p_dbparent);
+      }
+      if (output->vx_p_dbtable != vx_p_dbtable) {
+        if (output->vx_p_dbtable) {
+          vx_core::vx_release_one(output->vx_p_dbtable);
+        }
+        output->vx_p_dbtable = vx_p_dbtable;
+        vx_core::vx_reserve(vx_p_dbtable);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -355,12 +391,14 @@ namespace vx_data_db {
     Class_dbcellmap::Class_dbcellmap() : Abstract_dbcellmap::Abstract_dbcellmap() {
       vx_core::refcount += 1;
     }
+
     Class_dbcellmap::~Class_dbcellmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_dbcellmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -421,6 +459,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcellmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_dbcellmap(), vals);
     }
+
     vx_core::Type_any Class_dbcellmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbcellmap output = vx_data_db::e_dbcellmap();
       vx_data_db::Type_dbcellmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbcellmap(), copyval);
@@ -502,6 +541,7 @@ namespace vx_data_db {
     Class_dbfield::Class_dbfield() : Abstract_dbfield::Abstract_dbfield() {
       vx_core::refcount += 1;
     }
+
     Class_dbfield::~Class_dbfield() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -510,6 +550,7 @@ namespace vx_data_db {
         this->vx_p_value
       });
     }
+
     // dbfieldid()
     vx_core::Type_string Class_dbfield::dbfieldid() const {
       vx_core::Type_string output = this->vx_p_dbfieldid;
@@ -565,6 +606,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfield::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_dbfield(), vals);
     }
+
     vx_core::Type_any Class_dbfield::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbfield output = vx_data_db::e_dbfield();
       vx_data_db::Type_dbfield val = vx_core::vx_any_from_any(vx_data_db::t_dbfield(), copyval);
@@ -617,12 +659,27 @@ namespace vx_data_db {
         }
       }
       output = new vx_data_db::Class_dbfield();
-      output->vx_p_dbfieldid = vx_p_dbfieldid;
-      vx_core::vx_reserve(vx_p_dbfieldid);
-      output->vx_p_type = vx_p_type;
-      vx_core::vx_reserve(vx_p_type);
-      output->vx_p_value = vx_p_value;
-      vx_core::vx_reserve(vx_p_value);
+      if (output->vx_p_dbfieldid != vx_p_dbfieldid) {
+        if (output->vx_p_dbfieldid) {
+          vx_core::vx_release_one(output->vx_p_dbfieldid);
+        }
+        output->vx_p_dbfieldid = vx_p_dbfieldid;
+        vx_core::vx_reserve(vx_p_dbfieldid);
+      }
+      if (output->vx_p_type != vx_p_type) {
+        if (output->vx_p_type) {
+          vx_core::vx_release_one(output->vx_p_type);
+        }
+        output->vx_p_type = vx_p_type;
+        vx_core::vx_reserve(vx_p_type);
+      }
+      if (output->vx_p_value != vx_p_value) {
+        if (output->vx_p_value) {
+          vx_core::vx_release_one(output->vx_p_value);
+        }
+        output->vx_p_value = vx_p_value;
+        vx_core::vx_reserve(vx_p_value);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -663,12 +720,14 @@ namespace vx_data_db {
     Class_dbfieldmap::Class_dbfieldmap() : Abstract_dbfieldmap::Abstract_dbfieldmap() {
       vx_core::refcount += 1;
     }
+
     Class_dbfieldmap::~Class_dbfieldmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_dbfieldmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -729,6 +788,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfieldmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_dbfieldmap(), vals);
     }
+
     vx_core::Type_any Class_dbfieldmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbfieldmap output = vx_data_db::e_dbfieldmap();
       vx_data_db::Type_dbfieldmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbfieldmap(), copyval);
@@ -810,6 +870,7 @@ namespace vx_data_db {
     Class_dbtable::Class_dbtable() : Abstract_dbtable::Abstract_dbtable() {
       vx_core::refcount += 1;
     }
+
     Class_dbtable::~Class_dbtable() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -819,6 +880,7 @@ namespace vx_data_db {
         this->vx_p_dbfieldmap
       });
     }
+
     // dbtableid()
     vx_core::Type_string Class_dbtable::dbtableid() const {
       vx_core::Type_string output = this->vx_p_dbtableid;
@@ -886,6 +948,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbtable::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_db::e_dbtable(), vals);
     }
+
     vx_core::Type_any Class_dbtable::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbtable output = vx_data_db::e_dbtable();
       vx_data_db::Type_dbtable val = vx_core::vx_any_from_any(vx_data_db::t_dbtable(), copyval);
@@ -958,14 +1021,34 @@ namespace vx_data_db {
         }
       }
       output = new vx_data_db::Class_dbtable();
-      output->vx_p_dbtableid = vx_p_dbtableid;
-      vx_core::vx_reserve(vx_p_dbtableid);
-      output->vx_p_db = vx_p_db;
-      vx_core::vx_reserve(vx_p_db);
-      output->vx_p_dbcellmap = vx_p_dbcellmap;
-      vx_core::vx_reserve(vx_p_dbcellmap);
-      output->vx_p_dbfieldmap = vx_p_dbfieldmap;
-      vx_core::vx_reserve(vx_p_dbfieldmap);
+      if (output->vx_p_dbtableid != vx_p_dbtableid) {
+        if (output->vx_p_dbtableid) {
+          vx_core::vx_release_one(output->vx_p_dbtableid);
+        }
+        output->vx_p_dbtableid = vx_p_dbtableid;
+        vx_core::vx_reserve(vx_p_dbtableid);
+      }
+      if (output->vx_p_db != vx_p_db) {
+        if (output->vx_p_db) {
+          vx_core::vx_release_one(output->vx_p_db);
+        }
+        output->vx_p_db = vx_p_db;
+        vx_core::vx_reserve(vx_p_db);
+      }
+      if (output->vx_p_dbcellmap != vx_p_dbcellmap) {
+        if (output->vx_p_dbcellmap) {
+          vx_core::vx_release_one(output->vx_p_dbcellmap);
+        }
+        output->vx_p_dbcellmap = vx_p_dbcellmap;
+        vx_core::vx_reserve(vx_p_dbcellmap);
+      }
+      if (output->vx_p_dbfieldmap != vx_p_dbfieldmap) {
+        if (output->vx_p_dbfieldmap) {
+          vx_core::vx_release_one(output->vx_p_dbfieldmap);
+        }
+        output->vx_p_dbfieldmap = vx_p_dbfieldmap;
+        vx_core::vx_reserve(vx_p_dbfieldmap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);

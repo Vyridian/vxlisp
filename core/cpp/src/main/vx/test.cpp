@@ -16,6 +16,7 @@ namespace vx_test {
     Class_testcase::Class_testcase() : Abstract_testcase::Abstract_testcase() {
       vx_core::refcount += 1;
     }
+
     Class_testcase::~Class_testcase() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -25,6 +26,7 @@ namespace vx_test {
         this->vx_p_describelist
       });
     }
+
     // passfail()
     vx_core::Type_boolean Class_testcase::passfail() const {
       vx_core::Type_boolean output = this->vx_p_passfail;
@@ -92,6 +94,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcase::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testcase(), vals);
     }
+
     vx_core::Type_any Class_testcase::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcase output = vx_test::e_testcase();
       vx_test::Type_testcase val = vx_core::vx_any_from_any(vx_test::t_testcase(), copyval);
@@ -164,14 +167,34 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testcase();
-      output->vx_p_passfail = vx_p_passfail;
-      vx_core::vx_reserve(vx_p_passfail);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
-      output->vx_p_casename = vx_p_casename;
-      vx_core::vx_reserve(vx_p_casename);
-      output->vx_p_describelist = vx_p_describelist;
-      vx_core::vx_reserve(vx_p_describelist);
+      if (output->vx_p_passfail != vx_p_passfail) {
+        if (output->vx_p_passfail) {
+          vx_core::vx_release_one(output->vx_p_passfail);
+        }
+        output->vx_p_passfail = vx_p_passfail;
+        vx_core::vx_reserve(vx_p_passfail);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
+      if (output->vx_p_casename != vx_p_casename) {
+        if (output->vx_p_casename) {
+          vx_core::vx_release_one(output->vx_p_casename);
+        }
+        output->vx_p_casename = vx_p_casename;
+        vx_core::vx_reserve(vx_p_casename);
+      }
+      if (output->vx_p_describelist != vx_p_describelist) {
+        if (output->vx_p_describelist) {
+          vx_core::vx_release_one(output->vx_p_describelist);
+        }
+        output->vx_p_describelist = vx_p_describelist;
+        vx_core::vx_reserve(vx_p_describelist);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -212,12 +235,14 @@ namespace vx_test {
     Class_testcaselist::Class_testcaselist() : Abstract_testcaselist::Abstract_testcaselist() {
       vx_core::refcount += 1;
     }
+
     Class_testcaselist::~Class_testcaselist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_testcaselist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -271,6 +296,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcaselist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testcaselist(), vals);
     }
+
     vx_core::Type_any Class_testcaselist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcaselist output = vx_test::e_testcaselist();
       vx_test::Type_testcaselist val = vx_core::vx_any_from_any(vx_test::t_testcaselist(), copyval);
@@ -337,6 +363,7 @@ namespace vx_test {
     Class_testcoveragedetail::Class_testcoveragedetail() : Abstract_testcoveragedetail::Abstract_testcoveragedetail() {
       vx_core::refcount += 1;
     }
+
     Class_testcoveragedetail::~Class_testcoveragedetail() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -346,6 +373,7 @@ namespace vx_test {
         this->vx_p_typemap
       });
     }
+
     // constmap()
     vx_core::Type_intmap Class_testcoveragedetail::constmap() const {
       vx_core::Type_intmap output = this->vx_p_constmap;
@@ -413,6 +441,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragedetail::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testcoveragedetail(), vals);
     }
+
     vx_core::Type_any Class_testcoveragedetail::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragedetail output = vx_test::e_testcoveragedetail();
       vx_test::Type_testcoveragedetail val = vx_core::vx_any_from_any(vx_test::t_testcoveragedetail(), copyval);
@@ -485,14 +514,34 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testcoveragedetail();
-      output->vx_p_constmap = vx_p_constmap;
-      vx_core::vx_reserve(vx_p_constmap);
-      output->vx_p_funcmap = vx_p_funcmap;
-      vx_core::vx_reserve(vx_p_funcmap);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
-      output->vx_p_typemap = vx_p_typemap;
-      vx_core::vx_reserve(vx_p_typemap);
+      if (output->vx_p_constmap != vx_p_constmap) {
+        if (output->vx_p_constmap) {
+          vx_core::vx_release_one(output->vx_p_constmap);
+        }
+        output->vx_p_constmap = vx_p_constmap;
+        vx_core::vx_reserve(vx_p_constmap);
+      }
+      if (output->vx_p_funcmap != vx_p_funcmap) {
+        if (output->vx_p_funcmap) {
+          vx_core::vx_release_one(output->vx_p_funcmap);
+        }
+        output->vx_p_funcmap = vx_p_funcmap;
+        vx_core::vx_reserve(vx_p_funcmap);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
+      if (output->vx_p_typemap != vx_p_typemap) {
+        if (output->vx_p_typemap) {
+          vx_core::vx_release_one(output->vx_p_typemap);
+        }
+        output->vx_p_typemap = vx_p_typemap;
+        vx_core::vx_reserve(vx_p_typemap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -533,6 +582,7 @@ namespace vx_test {
     Class_testcoveragenums::Class_testcoveragenums() : Abstract_testcoveragenums::Abstract_testcoveragenums() {
       vx_core::refcount += 1;
     }
+
     Class_testcoveragenums::~Class_testcoveragenums() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -542,6 +592,7 @@ namespace vx_test {
         this->vx_p_total
       });
     }
+
     // pct()
     vx_core::Type_int Class_testcoveragenums::pct() const {
       vx_core::Type_int output = this->vx_p_pct;
@@ -609,6 +660,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragenums::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testcoveragenums(), vals);
     }
+
     vx_core::Type_any Class_testcoveragenums::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragenums output = vx_test::e_testcoveragenums();
       vx_test::Type_testcoveragenums val = vx_core::vx_any_from_any(vx_test::t_testcoveragenums(), copyval);
@@ -681,14 +733,34 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testcoveragenums();
-      output->vx_p_pct = vx_p_pct;
-      vx_core::vx_reserve(vx_p_pct);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
-      output->vx_p_tests = vx_p_tests;
-      vx_core::vx_reserve(vx_p_tests);
-      output->vx_p_total = vx_p_total;
-      vx_core::vx_reserve(vx_p_total);
+      if (output->vx_p_pct != vx_p_pct) {
+        if (output->vx_p_pct) {
+          vx_core::vx_release_one(output->vx_p_pct);
+        }
+        output->vx_p_pct = vx_p_pct;
+        vx_core::vx_reserve(vx_p_pct);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
+      if (output->vx_p_tests != vx_p_tests) {
+        if (output->vx_p_tests) {
+          vx_core::vx_release_one(output->vx_p_tests);
+        }
+        output->vx_p_tests = vx_p_tests;
+        vx_core::vx_reserve(vx_p_tests);
+      }
+      if (output->vx_p_total != vx_p_total) {
+        if (output->vx_p_total) {
+          vx_core::vx_release_one(output->vx_p_total);
+        }
+        output->vx_p_total = vx_p_total;
+        vx_core::vx_reserve(vx_p_total);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -729,6 +801,7 @@ namespace vx_test {
     Class_testcoveragesummary::Class_testcoveragesummary() : Abstract_testcoveragesummary::Abstract_testcoveragesummary() {
       vx_core::refcount += 1;
     }
+
     Class_testcoveragesummary::~Class_testcoveragesummary() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -742,6 +815,7 @@ namespace vx_test {
         this->vx_p_typenums
       });
     }
+
     // bigospacenums()
     vx_test::Type_testcoveragenums Class_testcoveragesummary::bigospacenums() const {
       vx_test::Type_testcoveragenums output = this->vx_p_bigospacenums;
@@ -857,6 +931,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragesummary::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testcoveragesummary(), vals);
     }
+
     vx_core::Type_any Class_testcoveragesummary::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragesummary output = vx_test::e_testcoveragesummary();
       vx_test::Type_testcoveragesummary val = vx_core::vx_any_from_any(vx_test::t_testcoveragesummary(), copyval);
@@ -969,22 +1044,62 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testcoveragesummary();
-      output->vx_p_bigospacenums = vx_p_bigospacenums;
-      vx_core::vx_reserve(vx_p_bigospacenums);
-      output->vx_p_bigotimenums = vx_p_bigotimenums;
-      vx_core::vx_reserve(vx_p_bigotimenums);
-      output->vx_p_constnums = vx_p_constnums;
-      vx_core::vx_reserve(vx_p_constnums);
-      output->vx_p_docnums = vx_p_docnums;
-      vx_core::vx_reserve(vx_p_docnums);
-      output->vx_p_funcnums = vx_p_funcnums;
-      vx_core::vx_reserve(vx_p_funcnums);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
-      output->vx_p_totalnums = vx_p_totalnums;
-      vx_core::vx_reserve(vx_p_totalnums);
-      output->vx_p_typenums = vx_p_typenums;
-      vx_core::vx_reserve(vx_p_typenums);
+      if (output->vx_p_bigospacenums != vx_p_bigospacenums) {
+        if (output->vx_p_bigospacenums) {
+          vx_core::vx_release_one(output->vx_p_bigospacenums);
+        }
+        output->vx_p_bigospacenums = vx_p_bigospacenums;
+        vx_core::vx_reserve(vx_p_bigospacenums);
+      }
+      if (output->vx_p_bigotimenums != vx_p_bigotimenums) {
+        if (output->vx_p_bigotimenums) {
+          vx_core::vx_release_one(output->vx_p_bigotimenums);
+        }
+        output->vx_p_bigotimenums = vx_p_bigotimenums;
+        vx_core::vx_reserve(vx_p_bigotimenums);
+      }
+      if (output->vx_p_constnums != vx_p_constnums) {
+        if (output->vx_p_constnums) {
+          vx_core::vx_release_one(output->vx_p_constnums);
+        }
+        output->vx_p_constnums = vx_p_constnums;
+        vx_core::vx_reserve(vx_p_constnums);
+      }
+      if (output->vx_p_docnums != vx_p_docnums) {
+        if (output->vx_p_docnums) {
+          vx_core::vx_release_one(output->vx_p_docnums);
+        }
+        output->vx_p_docnums = vx_p_docnums;
+        vx_core::vx_reserve(vx_p_docnums);
+      }
+      if (output->vx_p_funcnums != vx_p_funcnums) {
+        if (output->vx_p_funcnums) {
+          vx_core::vx_release_one(output->vx_p_funcnums);
+        }
+        output->vx_p_funcnums = vx_p_funcnums;
+        vx_core::vx_reserve(vx_p_funcnums);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
+      if (output->vx_p_totalnums != vx_p_totalnums) {
+        if (output->vx_p_totalnums) {
+          vx_core::vx_release_one(output->vx_p_totalnums);
+        }
+        output->vx_p_totalnums = vx_p_totalnums;
+        vx_core::vx_reserve(vx_p_totalnums);
+      }
+      if (output->vx_p_typenums != vx_p_typenums) {
+        if (output->vx_p_typenums) {
+          vx_core::vx_release_one(output->vx_p_typenums);
+        }
+        output->vx_p_typenums = vx_p_typenums;
+        vx_core::vx_reserve(vx_p_typenums);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1025,6 +1140,7 @@ namespace vx_test {
     Class_testdescribe::Class_testdescribe() : Abstract_testdescribe::Abstract_testdescribe() {
       vx_core::refcount += 1;
     }
+
     Class_testdescribe::~Class_testdescribe() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1033,6 +1149,7 @@ namespace vx_test {
         this->vx_p_testresult
       });
     }
+
     // describename()
     vx_core::Type_string Class_testdescribe::describename() const {
       vx_core::Type_string output = this->vx_p_describename;
@@ -1088,6 +1205,7 @@ namespace vx_test {
     vx_core::Type_any Class_testdescribe::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testdescribe(), vals);
     }
+
     vx_core::Type_any Class_testdescribe::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testdescribe output = vx_test::e_testdescribe();
       vx_test::Type_testdescribe val = vx_core::vx_any_from_any(vx_test::t_testdescribe(), copyval);
@@ -1150,12 +1268,27 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testdescribe();
-      output->vx_p_describename = vx_p_describename;
-      vx_core::vx_reserve(vx_p_describename);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
-      output->vx_p_testresult = vx_p_testresult;
-      vx_core::vx_reserve(vx_p_testresult);
+      if (output->vx_p_describename != vx_p_describename) {
+        if (output->vx_p_describename) {
+          vx_core::vx_release_one(output->vx_p_describename);
+        }
+        output->vx_p_describename = vx_p_describename;
+        vx_core::vx_reserve(vx_p_describename);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
+      if (output->vx_p_testresult != vx_p_testresult) {
+        if (output->vx_p_testresult) {
+          vx_core::vx_release_one(output->vx_p_testresult);
+        }
+        output->vx_p_testresult = vx_p_testresult;
+        vx_core::vx_reserve(vx_p_testresult);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1196,12 +1329,14 @@ namespace vx_test {
     Class_testdescribelist::Class_testdescribelist() : Abstract_testdescribelist::Abstract_testdescribelist() {
       vx_core::refcount += 1;
     }
+
     Class_testdescribelist::~Class_testdescribelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_testdescribelist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1255,6 +1390,7 @@ namespace vx_test {
     vx_core::Type_any Class_testdescribelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testdescribelist(), vals);
     }
+
     vx_core::Type_any Class_testdescribelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testdescribelist output = vx_test::e_testdescribelist();
       vx_test::Type_testdescribelist val = vx_core::vx_any_from_any(vx_test::t_testdescribelist(), copyval);
@@ -1321,6 +1457,7 @@ namespace vx_test {
     Class_testpackage::Class_testpackage() : Abstract_testpackage::Abstract_testpackage() {
       vx_core::refcount += 1;
     }
+
     Class_testpackage::~Class_testpackage() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1331,6 +1468,7 @@ namespace vx_test {
         this->vx_p_testpkg
       });
     }
+
     // caselist()
     vx_test::Type_testcaselist Class_testpackage::caselist() const {
       vx_test::Type_testcaselist output = this->vx_p_caselist;
@@ -1410,6 +1548,7 @@ namespace vx_test {
     vx_core::Type_any Class_testpackage::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testpackage(), vals);
     }
+
     vx_core::Type_any Class_testpackage::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testpackage output = vx_test::e_testpackage();
       vx_test::Type_testpackage val = vx_core::vx_any_from_any(vx_test::t_testpackage(), copyval);
@@ -1492,16 +1631,41 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testpackage();
-      output->vx_p_caselist = vx_p_caselist;
-      vx_core::vx_reserve(vx_p_caselist);
-      output->vx_p_coveragedetail = vx_p_coveragedetail;
-      vx_core::vx_reserve(vx_p_coveragedetail);
-      output->vx_p_coveragesummary = vx_p_coveragesummary;
-      vx_core::vx_reserve(vx_p_coveragesummary);
-      output->vx_p_passfail = vx_p_passfail;
-      vx_core::vx_reserve(vx_p_passfail);
-      output->vx_p_testpkg = vx_p_testpkg;
-      vx_core::vx_reserve(vx_p_testpkg);
+      if (output->vx_p_caselist != vx_p_caselist) {
+        if (output->vx_p_caselist) {
+          vx_core::vx_release_one(output->vx_p_caselist);
+        }
+        output->vx_p_caselist = vx_p_caselist;
+        vx_core::vx_reserve(vx_p_caselist);
+      }
+      if (output->vx_p_coveragedetail != vx_p_coveragedetail) {
+        if (output->vx_p_coveragedetail) {
+          vx_core::vx_release_one(output->vx_p_coveragedetail);
+        }
+        output->vx_p_coveragedetail = vx_p_coveragedetail;
+        vx_core::vx_reserve(vx_p_coveragedetail);
+      }
+      if (output->vx_p_coveragesummary != vx_p_coveragesummary) {
+        if (output->vx_p_coveragesummary) {
+          vx_core::vx_release_one(output->vx_p_coveragesummary);
+        }
+        output->vx_p_coveragesummary = vx_p_coveragesummary;
+        vx_core::vx_reserve(vx_p_coveragesummary);
+      }
+      if (output->vx_p_passfail != vx_p_passfail) {
+        if (output->vx_p_passfail) {
+          vx_core::vx_release_one(output->vx_p_passfail);
+        }
+        output->vx_p_passfail = vx_p_passfail;
+        vx_core::vx_reserve(vx_p_passfail);
+      }
+      if (output->vx_p_testpkg != vx_p_testpkg) {
+        if (output->vx_p_testpkg) {
+          vx_core::vx_release_one(output->vx_p_testpkg);
+        }
+        output->vx_p_testpkg = vx_p_testpkg;
+        vx_core::vx_reserve(vx_p_testpkg);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1542,12 +1706,14 @@ namespace vx_test {
     Class_testpackagelist::Class_testpackagelist() : Abstract_testpackagelist::Abstract_testpackagelist() {
       vx_core::refcount += 1;
     }
+
     Class_testpackagelist::~Class_testpackagelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_testpackagelist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1601,6 +1767,7 @@ namespace vx_test {
     vx_core::Type_any Class_testpackagelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testpackagelist(), vals);
     }
+
     vx_core::Type_any Class_testpackagelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testpackagelist output = vx_test::e_testpackagelist();
       vx_test::Type_testpackagelist val = vx_core::vx_any_from_any(vx_test::t_testpackagelist(), copyval);
@@ -1667,6 +1834,7 @@ namespace vx_test {
     Class_testresult::Class_testresult() : Abstract_testresult::Abstract_testresult() {
       vx_core::refcount += 1;
     }
+
     Class_testresult::~Class_testresult() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1677,6 +1845,7 @@ namespace vx_test {
         this->vx_p_fn_actual
       });
     }
+
     // code()
     vx_core::Type_string Class_testresult::code() const {
       vx_core::Type_string output = this->vx_p_code;
@@ -1756,6 +1925,7 @@ namespace vx_test {
     vx_core::Type_any Class_testresult::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testresult(), vals);
     }
+
     vx_core::Type_any Class_testresult::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testresult output = vx_test::e_testresult();
       vx_test::Type_testresult val = vx_core::vx_any_from_any(vx_test::t_testresult(), copyval);
@@ -1828,16 +1998,41 @@ namespace vx_test {
         }
       }
       output = new vx_test::Class_testresult();
-      output->vx_p_code = vx_p_code;
-      vx_core::vx_reserve(vx_p_code);
-      output->vx_p_passfail = vx_p_passfail;
-      vx_core::vx_reserve(vx_p_passfail);
-      output->vx_p_expected = vx_p_expected;
-      vx_core::vx_reserve(vx_p_expected);
-      output->vx_p_actual = vx_p_actual;
-      vx_core::vx_reserve(vx_p_actual);
-      output->vx_p_fn_actual = vx_p_fn_actual;
-      vx_core::vx_reserve(vx_p_fn_actual);
+      if (output->vx_p_code != vx_p_code) {
+        if (output->vx_p_code) {
+          vx_core::vx_release_one(output->vx_p_code);
+        }
+        output->vx_p_code = vx_p_code;
+        vx_core::vx_reserve(vx_p_code);
+      }
+      if (output->vx_p_passfail != vx_p_passfail) {
+        if (output->vx_p_passfail) {
+          vx_core::vx_release_one(output->vx_p_passfail);
+        }
+        output->vx_p_passfail = vx_p_passfail;
+        vx_core::vx_reserve(vx_p_passfail);
+      }
+      if (output->vx_p_expected != vx_p_expected) {
+        if (output->vx_p_expected) {
+          vx_core::vx_release_one(output->vx_p_expected);
+        }
+        output->vx_p_expected = vx_p_expected;
+        vx_core::vx_reserve(vx_p_expected);
+      }
+      if (output->vx_p_actual != vx_p_actual) {
+        if (output->vx_p_actual) {
+          vx_core::vx_release_one(output->vx_p_actual);
+        }
+        output->vx_p_actual = vx_p_actual;
+        vx_core::vx_reserve(vx_p_actual);
+      }
+      if (output->vx_p_fn_actual != vx_p_fn_actual) {
+        if (output->vx_p_fn_actual) {
+          vx_core::vx_release_one(output->vx_p_fn_actual);
+        }
+        output->vx_p_fn_actual = vx_p_fn_actual;
+        vx_core::vx_reserve(vx_p_fn_actual);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1878,12 +2073,14 @@ namespace vx_test {
     Class_testresultlist::Class_testresultlist() : Abstract_testresultlist::Abstract_testresultlist() {
       vx_core::refcount += 1;
     }
+
     Class_testresultlist::~Class_testresultlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_testresultlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1937,6 +2134,7 @@ namespace vx_test {
     vx_core::Type_any Class_testresultlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_test::e_testresultlist(), vals);
     }
+
     vx_core::Type_any Class_testresultlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testresultlist output = vx_test::e_testresultlist();
       vx_test::Type_testresultlist val = vx_core::vx_any_from_any(vx_test::t_testresultlist(), copyval);
@@ -2552,21 +2750,29 @@ namespace vx_test {
       vx_web_html::t_div(),
       vx_core::t_any_from_func()->vx_fn_new({testpackage}, [testpackage]() {
         vx_test::Type_testcoveragesummary testcoveragesummary = testpackage->coveragesummary();
+        vx_core::vx_ref_plus(testcoveragesummary);
         vx_core::Type_string pkgname = testpackage->testpkg();
+        vx_core::vx_ref_plus(pkgname);
         vx_test::Type_testcaselist caselist = testpackage->caselist();
+        vx_core::vx_ref_plus(caselist);
         vx_core::Type_boolean passfail = testpackage->passfail();
+        vx_core::vx_ref_plus(passfail);
         vx_web_html::Type_style pkgnamestyle = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".pkgname")
         );
+        vx_core::vx_ref_plus(pkgnamestyle);
         vx_web_html::Type_div node = vx_test::f_div_from_testcaselist(caselist);
+        vx_core::vx_ref_plus(node);
         vx_web_html::Type_divchildlist nodes = vx_core::f_new(
           vx_web_html::t_divchildlist(),
           vx_core::vx_new(vx_core::t_anylist(), {
             node
           })
         );
+        vx_core::vx_ref_plus(nodes);
         vx_web_html::Type_p p_passfail = vx_test::f_p_from_passfail(passfail);
+        vx_core::vx_ref_plus(p_passfail);
         vx_web_html::Type_p p_pkgname = vx_core::f_new(
           vx_web_html::t_p(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -2576,27 +2782,35 @@ namespace vx_test {
             pkgname
           })
         );
+        vx_core::vx_ref_plus(p_pkgname);
         vx_web_html::Type_p p_totalnums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->totalnums()
         );
+        vx_core::vx_ref_plus(p_totalnums);
         vx_web_html::Type_p p_coveragenums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->typenums()
         );
+        vx_core::vx_ref_plus(p_coveragenums);
         vx_web_html::Type_p p_constnums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->constnums()
         );
+        vx_core::vx_ref_plus(p_constnums);
         vx_web_html::Type_p p_funcnums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->funcnums()
         );
+        vx_core::vx_ref_plus(p_funcnums);
         vx_web_html::Type_p p_docnums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->docnums()
         );
+        vx_core::vx_ref_plus(p_docnums);
         vx_web_html::Type_p p_bigospacenums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->bigospacenums()
         );
+        vx_core::vx_ref_plus(p_bigospacenums);
         vx_web_html::Type_p p_bigotimenums = vx_test::f_p_from_testcoveragenums(
           testcoveragesummary->bigotimenums()
         );
+        vx_core::vx_ref_plus(p_bigotimenums);
         vx_web_html::Type_divchildlist summary = vx_core::f_new(
           vx_web_html::t_divchildlist(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -2611,6 +2825,7 @@ namespace vx_test {
             p_bigotimenums
           })
         );
+        vx_core::vx_ref_plus(summary);
         vx_web_html::Type_details details = vx_core::f_new(
           vx_web_html::t_details(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -2620,13 +2835,14 @@ namespace vx_test {
             nodes
           })
         );
+        vx_core::vx_ref_plus(details);
         vx_web_html::Type_div output_1 = vx_core::f_new(
           vx_web_html::t_div(),
           vx_core::vx_new(vx_core::t_anylist(), {
             details
           })
         );
-        vx_core::vx_release_except({testcoveragesummary, pkgname, caselist, passfail, pkgnamestyle, node, nodes, p_passfail, p_pkgname, p_totalnums, p_coveragenums, p_constnums, p_funcnums, p_docnums, p_bigospacenums, p_bigotimenums, summary, details}, output_1);
+        vx_core::vx_release_one_except({testcoveragesummary, pkgname, caselist, passfail, pkgnamestyle, node, nodes, p_passfail, p_pkgname, p_totalnums, p_coveragenums, p_constnums, p_funcnums, p_docnums, p_bigospacenums, p_bigotimenums, summary, details}, output_1);
         return output_1;
       })
     );
@@ -2727,18 +2943,22 @@ namespace vx_test {
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".passfail")
         );
+        vx_core::vx_ref_plus(stylepassfail);
         vx_web_html::Type_style stylepkgname = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".pkgname")
         );
+        vx_core::vx_ref_plus(stylepkgname);
         vx_web_html::Type_style stylepkgheader = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".pkgheader")
         );
+        vx_core::vx_ref_plus(stylepkgheader);
         vx_web_html::Type_style stylecoveragenum = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".coveragenums")
         );
+        vx_core::vx_ref_plus(stylecoveragenum);
         vx_web_html::Type_div output_1 = vx_core::f_new(
           vx_web_html::t_div(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -2838,7 +3058,7 @@ namespace vx_test {
             )
           })
         );
-        vx_core::vx_release_except({stylepassfail, stylepkgname, stylepkgheader, stylecoveragenum}, output_1);
+        vx_core::vx_release_one_except({stylepassfail, stylepkgname, stylepkgheader, stylecoveragenum}, output_1);
         return output_1;
       })
     );
@@ -3422,11 +3642,14 @@ namespace vx_test {
       vx_web_html::t_p(),
       vx_core::t_any_from_func()->vx_fn_new({passfail}, [passfail]() {
         vx_core::Type_string text = vx_core::f_if_1(vx_core::t_string(), passfail, vx_core::vx_new_string("Pass"), vx_core::vx_new_string("Fail"));
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string stylename = vx_core::f_if_1(vx_core::t_string(), passfail, vx_core::vx_new_string(".passflag"), vx_core::vx_new_string(".failflag"));
+        vx_core::vx_ref_plus(stylename);
         vx_web_html::Type_style style = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           stylename
         );
+        vx_core::vx_ref_plus(style);
         vx_web_html::Type_p output_1 = vx_core::f_new(
           vx_web_html::t_p(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -3436,7 +3659,7 @@ namespace vx_test {
             text
           })
         );
-        vx_core::vx_release_except({text, stylename, style}, output_1);
+        vx_core::vx_release_one_except({text, stylename, style}, output_1);
         return output_1;
       })
     );
@@ -3640,14 +3863,16 @@ namespace vx_test {
 
   // (func resolve-testcase)
   vx_core::vx_Type_async f_resolve_testcase(vx_test::Type_testcase testcase) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testcase());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_test::t_testcase(),
       vx_core::t_any_from_func_async()->vx_fn_new({testcase}, [testcase]() {
         vx_test::Type_testdescribelist describelist = testcase->describelist();
+        vx_core::vx_ref_plus(describelist);
         vx_core::vx_Type_async future_resolvedlist = vx_test::f_resolve_testdescribelist(describelist);
         vx_core::vx_Type_fn_any_from_any fn_any_any_resolvedlist = [testcase](vx_core::Type_any any_resolvedlist) {
           vx_test::Type_testdescribelist resolvedlist = vx_core::vx_any_from_any(vx_test::t_testdescribelist(), any_resolvedlist);
+          vx_core::vx_ref_plus(resolvedlist);
           vx_core::Type_booleanlist passfaillist = vx_core::f_list_from_list(
             vx_core::t_booleanlist(),
             resolvedlist,
@@ -3658,15 +3883,18 @@ namespace vx_test {
                   vx_core::t_boolean(),
                   vx_core::t_any_from_func()->vx_fn_new({testdescribe}, [testdescribe]() {
                     vx_test::Type_testresult testresult = testdescribe->testresult();
+                    vx_core::vx_ref_plus(testresult);
                     vx_core::Type_boolean output_1 = testresult->passfail();
-                    vx_core::vx_release_except(testresult, output_1);
+                    vx_core::vx_release_one_except(testresult, output_1);
                     return output_1;
                   })
                 );
               return output_1;
             })
           );
+          vx_core::vx_ref_plus(passfaillist);
           vx_core::Type_boolean passfail = vx_core::f_and_1(passfaillist);
+          vx_core::vx_ref_plus(passfail);
           vx_core::Type_any output_2 = vx_core::f_copy(
             testcase,
             vx_core::vx_new(vx_core::t_anylist(), {
@@ -3676,13 +3904,18 @@ namespace vx_test {
               resolvedlist
             })
           );
+          vx_core::vx_release_one_except({resolvedlist, passfaillist, passfail}, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_resolvedlist, vx_test::t_testdescribelist(), {testcase}, fn_any_any_resolvedlist);
+        vx_core::vx_release_one(describelist);
         return output_1;
       })
     );
     vx_core::vx_release(testcase);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testcase());
+    }
     return output;
   }
 
@@ -3770,13 +4003,16 @@ namespace vx_test {
 
   // (func resolve-testcaselist)
   vx_core::vx_Type_async f_resolve_testcaselist(vx_test::Type_testcaselist testcaselist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testcaselist());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_list_from_list_async(
       vx_test::t_testcaselist(),
       testcaselist,
       vx_test::t_resolve_testcase()
     );
     vx_core::vx_release(testcaselist);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testcaselist());
+    }
     return output;
   }
 
@@ -3864,14 +4100,16 @@ namespace vx_test {
 
   // (func resolve-testdescribe)
   vx_core::vx_Type_async f_resolve_testdescribe(vx_test::Type_testdescribe testdescribe) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testdescribe());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_test::t_testdescribe(),
       vx_core::t_any_from_func_async()->vx_fn_new({testdescribe}, [testdescribe]() {
         vx_test::Type_testresult testresult = testdescribe->testresult();
+        vx_core::vx_ref_plus(testresult);
         vx_core::vx_Type_async future_resolved = vx_test::f_resolve_testresult(testresult);
         vx_core::vx_Type_fn_any_from_any fn_any_any_resolved = [testdescribe](vx_core::Type_any any_resolved) {
           vx_test::Type_testresult resolved = vx_core::vx_any_from_any(vx_test::t_testresult(), any_resolved);
+          vx_core::vx_ref_plus(resolved);
           vx_core::Type_any output_2 = vx_core::f_copy(
             testdescribe,
             vx_core::vx_new(vx_core::t_anylist(), {
@@ -3879,13 +4117,18 @@ namespace vx_test {
               resolved
             })
           );
+          vx_core::vx_release_one_except(resolved, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_resolved, vx_test::t_testresult(), {testdescribe}, fn_any_any_resolved);
+        vx_core::vx_release_one(testresult);
         return output_1;
       })
     );
     vx_core::vx_release(testdescribe);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testdescribe());
+    }
     return output;
   }
 
@@ -3973,13 +4216,16 @@ namespace vx_test {
 
   // (func resolve-testdescribelist)
   vx_core::vx_Type_async f_resolve_testdescribelist(vx_test::Type_testdescribelist testdescribelist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testdescribelist());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_list_from_list_async(
       vx_test::t_testdescribelist(),
       testdescribelist,
       vx_test::t_resolve_testdescribe()
     );
     vx_core::vx_release(testdescribelist);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testdescribelist());
+    }
     return output;
   }
 
@@ -4067,14 +4313,16 @@ namespace vx_test {
 
   // (func resolve-testpackage)
   vx_core::vx_Type_async f_resolve_testpackage(vx_test::Type_testpackage testpackage) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testpackage());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_test::t_testpackage(),
       vx_core::t_any_from_func_async()->vx_fn_new({testpackage}, [testpackage]() {
         vx_test::Type_testcaselist testcaselist = testpackage->caselist();
+        vx_core::vx_ref_plus(testcaselist);
         vx_core::vx_Type_async future_resolvedlist = vx_test::f_resolve_testcaselist(testcaselist);
         vx_core::vx_Type_fn_any_from_any fn_any_any_resolvedlist = [testpackage](vx_core::Type_any any_resolvedlist) {
           vx_test::Type_testcaselist resolvedlist = vx_core::vx_any_from_any(vx_test::t_testcaselist(), any_resolvedlist);
+          vx_core::vx_ref_plus(resolvedlist);
           vx_core::Type_booleanlist passfaillist = vx_core::f_list_from_list(
             vx_core::t_booleanlist(),
             resolvedlist,
@@ -4085,7 +4333,9 @@ namespace vx_test {
               return output_1;
             })
           );
+          vx_core::vx_ref_plus(passfaillist);
           vx_core::Type_boolean passfail = vx_core::f_and_1(passfaillist);
+          vx_core::vx_ref_plus(passfail);
           vx_core::Type_any output_2 = vx_core::f_copy(
             testpackage,
             vx_core::vx_new(vx_core::t_anylist(), {
@@ -4095,13 +4345,18 @@ namespace vx_test {
               resolvedlist
             })
           );
+          vx_core::vx_release_one_except({resolvedlist, passfaillist, passfail}, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_resolvedlist, vx_test::t_testcaselist(), {testpackage}, fn_any_any_resolvedlist);
+        vx_core::vx_release_one(testcaselist);
         return output_1;
       })
     );
     vx_core::vx_release(testpackage);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testpackage());
+    }
     return output;
   }
 
@@ -4189,13 +4444,16 @@ namespace vx_test {
 
   // (func resolve-testpackagelist)
   vx_core::vx_Type_async f_resolve_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testpackagelist());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_list_from_list_async(
       vx_test::t_testpackagelist(),
       testpackagelist,
       vx_test::t_resolve_testpackage()
     );
     vx_core::vx_release(testpackagelist);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testpackagelist());
+    }
     return output;
   }
 
@@ -4283,15 +4541,18 @@ namespace vx_test {
 
   // (func resolve-testresult)
   vx_core::vx_Type_async f_resolve_testresult(vx_test::Type_testresult testresult) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_test::e_testresult());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_test::t_testresult(),
       vx_core::t_any_from_func_async()->vx_fn_new({testresult}, [testresult]() {
         vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
+        vx_core::vx_ref_plus(fn_actual);
         vx_core::Type_any expected = testresult->expected();
+        vx_core::vx_ref_plus(expected);
         vx_core::vx_Type_async future_actual = vx_core::f_resolve_async(vx_core::t_any(), fn_actual);
         vx_core::vx_Type_fn_any_from_any fn_any_any_actual = [fn_actual, testresult, expected](vx_core::Type_any any_actual) {
           vx_core::Type_any actual = vx_core::vx_any_from_any(vx_core::t_any(), any_actual);
+          vx_core::vx_ref_plus(actual);
           vx_core::Type_any output_2 = vx_core::f_if_2(
             vx_test::t_testresult(),
             vx_core::vx_new(vx_core::t_thenelselist(), {
@@ -4311,6 +4572,7 @@ namespace vx_test {
                     vx_test::t_testresult(),
                     vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
                       vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
+                      vx_core::vx_ref_plus(passfail);
                       vx_test::Type_testresult output_1 = vx_core::f_copy(
                         testresult,
                         vx_core::vx_new(vx_core::t_anylist(), {
@@ -4320,7 +4582,7 @@ namespace vx_test {
                           actual
                         })
                       );
-                      vx_core::vx_release_except(passfail, output_1);
+                      vx_core::vx_release_one_except(passfail, output_1);
                       return output_1;
                     })
                   );
@@ -4329,13 +4591,18 @@ namespace vx_test {
               )
             })
           );
+          vx_core::vx_release_one_except(actual, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_actual, vx_core::t_any(), {fn_actual, testresult, expected}, fn_any_any_actual);
+        vx_core::vx_release_one({fn_actual, expected});
         return output_1;
       })
     );
     vx_core::vx_release(testresult);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_test::e_testresult());
+    }
     return output;
   }
 
@@ -5643,18 +5910,24 @@ namespace vx_test {
       vx_web_html::t_tr(),
       vx_core::t_any_from_func()->vx_fn_new({testdescribe, casename}, [testdescribe, casename]() {
         vx_core::Type_string describename = testdescribe->describename();
+        vx_core::vx_ref_plus(describename);
         vx_test::Type_testresult result = testdescribe->testresult();
+        vx_core::vx_ref_plus(result);
         vx_core::Type_boolean passfail = result->passfail();
+        vx_core::vx_ref_plus(passfail);
         vx_core::Type_string expected = vx_core::f_string_from_any(
           result->expected()
         );
+        vx_core::vx_ref_plus(expected);
         vx_core::Type_string actual = vx_core::f_string_from_any(
           result->actual()
         );
+        vx_core::vx_ref_plus(actual);
         vx_web_html::Type_style prestyle = vx_web_html::f_style_from_stylesheet_name(
           vx_test::c_stylesheet_test(),
           vx_core::vx_new_string(".preformatted")
         );
+        vx_core::vx_ref_plus(prestyle);
         vx_web_html::Type_tr output_1 = vx_core::f_new(
           vx_web_html::t_tr(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5722,7 +5995,7 @@ namespace vx_test {
             )
           })
         );
-        vx_core::vx_release_except({describename, result, passfail, expected, actual, prestyle}, output_1);
+        vx_core::vx_release_one_except({describename, result, passfail, expected, actual, prestyle}, output_1);
         return output_1;
       })
     );
@@ -5809,7 +6082,9 @@ namespace vx_test {
       vx_web_html::t_trlist(),
       vx_core::t_any_from_func()->vx_fn_new({testcase}, [testcase]() {
         vx_test::Type_testdescribelist describelist = testcase->describelist();
+        vx_core::vx_ref_plus(describelist);
         vx_core::Type_string casename = testcase->casename();
+        vx_core::vx_ref_plus(casename);
         vx_web_html::Type_trlist output_1 = vx_core::f_list_from_list(
           vx_web_html::t_trlist(),
           describelist,
@@ -5820,7 +6095,7 @@ namespace vx_test {
             return output_1;
           })
         );
-        vx_core::vx_release_except({describelist, casename}, output_1);
+        vx_core::vx_release_one_except({describelist, casename}, output_1);
         return output_1;
       })
     );

@@ -12,6 +12,7 @@ namespace vx_sample {
     Class_mytype::Class_mytype() : Abstract_mytype::Abstract_mytype() {
       vx_core::refcount += 1;
     }
+
     Class_mytype::~Class_mytype() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -19,6 +20,7 @@ namespace vx_sample {
         this->vx_p_mystr
       });
     }
+
     // mynum()
     vx_core::Type_int Class_mytype::mynum() const {
       vx_core::Type_int output = this->vx_p_mynum;
@@ -62,6 +64,7 @@ namespace vx_sample {
     vx_core::Type_any Class_mytype::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_sample::e_mytype(), vals);
     }
+
     vx_core::Type_any Class_mytype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Type_mytype output = vx_sample::e_mytype();
       vx_sample::Type_mytype val = vx_core::vx_any_from_any(vx_sample::t_mytype(), copyval);
@@ -114,10 +117,20 @@ namespace vx_sample {
         }
       }
       output = new vx_sample::Class_mytype();
-      output->vx_p_mynum = vx_p_mynum;
-      vx_core::vx_reserve(vx_p_mynum);
-      output->vx_p_mystr = vx_p_mystr;
-      vx_core::vx_reserve(vx_p_mystr);
+      if (output->vx_p_mynum != vx_p_mynum) {
+        if (output->vx_p_mynum) {
+          vx_core::vx_release_one(output->vx_p_mynum);
+        }
+        output->vx_p_mynum = vx_p_mynum;
+        vx_core::vx_reserve(vx_p_mynum);
+      }
+      if (output->vx_p_mystr != vx_p_mystr) {
+        if (output->vx_p_mystr) {
+          vx_core::vx_release_one(output->vx_p_mystr);
+        }
+        output->vx_p_mystr = vx_p_mystr;
+        vx_core::vx_reserve(vx_p_mystr);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);

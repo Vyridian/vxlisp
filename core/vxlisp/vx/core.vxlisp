@@ -3318,7 +3318,7 @@
   linefeed : boolean]
  (native
   :cpp
-   "std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean());
+   "std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean(), false);
     output = vx_core::vx_new_string(soutput);"
   :js
    "const indenttext = ' '.repeat(indent)

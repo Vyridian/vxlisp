@@ -16,6 +16,7 @@ namespace vx_web_html {
     Class_node::Class_node() : Abstract_node::Abstract_node() {
       vx_core::refcount += 1;
     }
+
     Class_node::~Class_node() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -23,6 +24,7 @@ namespace vx_web_html {
         this->vx_p_style
       });
     }
+
     // id()
     vx_core::Type_string Class_node::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -66,6 +68,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_node::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_node(), vals);
     }
+
     vx_core::Type_any Class_node::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_node output = vx_web_html::e_node();
       vx_web_html::Type_node val = vx_core::vx_any_from_any(vx_web_html::t_node(), copyval);
@@ -118,10 +121,20 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_node();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -162,12 +175,14 @@ namespace vx_web_html {
     Class_divchild::Class_divchild() : Abstract_divchild::Abstract_divchild() {
       vx_core::refcount += 1;
     }
+
     Class_divchild::~Class_divchild() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         
       });
     }
+
     // vx_get_any(key)
     vx_core::Type_any Class_divchild::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any();
@@ -187,6 +202,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divchild::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_divchild(), vals);
     }
+
     vx_core::Type_any Class_divchild::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divchild output = vx_web_html::e_divchild();
       vx_web_html::Type_divchild val = vx_core::vx_any_from_any(vx_web_html::t_divchild(), copyval);
@@ -231,12 +247,14 @@ namespace vx_web_html {
     Class_body::Class_body() : Abstract_body::Abstract_body() {
       vx_core::refcount += 1;
     }
+
     Class_body::~Class_body() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
     }
+
     // nodes()
     vx_web_html::Type_divchildlist Class_body::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
@@ -268,6 +286,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_body::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_body(), vals);
     }
+
     vx_core::Type_any Class_body::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_body output = vx_web_html::e_body();
       vx_web_html::Type_body val = vx_core::vx_any_from_any(vx_web_html::t_body(), copyval);
@@ -321,8 +340,13 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_body();
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -363,6 +387,7 @@ namespace vx_web_html {
     Class_details::Class_details() : Abstract_details::Abstract_details() {
       vx_core::refcount += 1;
     }
+
     Class_details::~Class_details() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -372,6 +397,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_details::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -439,6 +465,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_details::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_details(), vals);
     }
+
     vx_core::Type_any Class_details::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_details output = vx_web_html::e_details();
       vx_web_html::Type_details val = vx_core::vx_any_from_any(vx_web_html::t_details(), copyval);
@@ -511,14 +538,34 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_details();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_summary = vx_p_summary;
-      vx_core::vx_reserve(vx_p_summary);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_summary != vx_p_summary) {
+        if (output->vx_p_summary) {
+          vx_core::vx_release_one(output->vx_p_summary);
+        }
+        output->vx_p_summary = vx_p_summary;
+        vx_core::vx_reserve(vx_p_summary);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -559,6 +606,7 @@ namespace vx_web_html {
     Class_div::Class_div() : Abstract_div::Abstract_div() {
       vx_core::refcount += 1;
     }
+
     Class_div::~Class_div() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -567,6 +615,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_div::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -622,6 +671,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_div::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_div(), vals);
     }
+
     vx_core::Type_any Class_div::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_div output = vx_web_html::e_div();
       vx_web_html::Type_div val = vx_core::vx_any_from_any(vx_web_html::t_div(), copyval);
@@ -695,12 +745,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_div();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -741,12 +806,14 @@ namespace vx_web_html {
     Class_divchildlist::Class_divchildlist() : Abstract_divchildlist::Abstract_divchildlist() {
       vx_core::refcount += 1;
     }
+
     Class_divchildlist::~Class_divchildlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_divchildlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -800,6 +867,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divchildlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_divchildlist(), vals);
     }
+
     vx_core::Type_any Class_divchildlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divchildlist output = vx_web_html::e_divchildlist();
       vx_web_html::Type_divchildlist val = vx_core::vx_any_from_any(vx_web_html::t_divchildlist(), copyval);
@@ -866,12 +934,14 @@ namespace vx_web_html {
     Class_divlist::Class_divlist() : Abstract_divlist::Abstract_divlist() {
       vx_core::refcount += 1;
     }
+
     Class_divlist::~Class_divlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_divlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -925,6 +995,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_divlist(), vals);
     }
+
     vx_core::Type_any Class_divlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divlist output = vx_web_html::e_divlist();
       vx_web_html::Type_divlist val = vx_core::vx_any_from_any(vx_web_html::t_divlist(), copyval);
@@ -991,12 +1062,14 @@ namespace vx_web_html {
     Class_footer::Class_footer() : Abstract_footer::Abstract_footer() {
       vx_core::refcount += 1;
     }
+
     Class_footer::~Class_footer() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
     }
+
     // nodes()
     vx_web_html::Type_divchildlist Class_footer::nodes() const {
       vx_web_html::Type_divchildlist output = this->vx_p_nodes;
@@ -1028,6 +1101,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_footer::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_footer(), vals);
     }
+
     vx_core::Type_any Class_footer::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_footer output = vx_web_html::e_footer();
       vx_web_html::Type_footer val = vx_core::vx_any_from_any(vx_web_html::t_footer(), copyval);
@@ -1081,8 +1155,13 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_footer();
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1123,6 +1202,7 @@ namespace vx_web_html {
     Class_h1::Class_h1() : Abstract_h1::Abstract_h1() {
       vx_core::refcount += 1;
     }
+
     Class_h1::~Class_h1() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1131,6 +1211,7 @@ namespace vx_web_html {
         this->vx_p_text
       });
     }
+
     // id()
     vx_core::Type_string Class_h1::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1186,6 +1267,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h1::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_h1(), vals);
     }
+
     vx_core::Type_any Class_h1::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h1 output = vx_web_html::e_h1();
       vx_web_html::Type_h1 val = vx_core::vx_any_from_any(vx_web_html::t_h1(), copyval);
@@ -1250,12 +1332,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_h1();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1296,6 +1393,7 @@ namespace vx_web_html {
     Class_h2::Class_h2() : Abstract_h2::Abstract_h2() {
       vx_core::refcount += 1;
     }
+
     Class_h2::~Class_h2() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1304,6 +1402,7 @@ namespace vx_web_html {
         this->vx_p_text
       });
     }
+
     // id()
     vx_core::Type_string Class_h2::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1359,6 +1458,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h2::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_h2(), vals);
     }
+
     vx_core::Type_any Class_h2::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h2 output = vx_web_html::e_h2();
       vx_web_html::Type_h2 val = vx_core::vx_any_from_any(vx_web_html::t_h2(), copyval);
@@ -1423,12 +1523,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_h2();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1469,6 +1584,7 @@ namespace vx_web_html {
     Class_h3::Class_h3() : Abstract_h3::Abstract_h3() {
       vx_core::refcount += 1;
     }
+
     Class_h3::~Class_h3() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1477,6 +1593,7 @@ namespace vx_web_html {
         this->vx_p_text
       });
     }
+
     // id()
     vx_core::Type_string Class_h3::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1532,6 +1649,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h3::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_h3(), vals);
     }
+
     vx_core::Type_any Class_h3::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h3 output = vx_web_html::e_h3();
       vx_web_html::Type_h3 val = vx_core::vx_any_from_any(vx_web_html::t_h3(), copyval);
@@ -1596,12 +1714,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_h3();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1642,12 +1775,14 @@ namespace vx_web_html {
     Class_head::Class_head() : Abstract_head::Abstract_head() {
       vx_core::refcount += 1;
     }
+
     Class_head::~Class_head() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
     }
+
     // nodes()
     vx_web_html::Type_headchildlist Class_head::nodes() const {
       vx_web_html::Type_headchildlist output = this->vx_p_nodes;
@@ -1679,6 +1814,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_head::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_head(), vals);
     }
+
     vx_core::Type_any Class_head::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_head output = vx_web_html::e_head();
       vx_web_html::Type_head val = vx_core::vx_any_from_any(vx_web_html::t_head(), copyval);
@@ -1732,8 +1868,13 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_head();
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1774,12 +1915,14 @@ namespace vx_web_html {
     Class_headchild::Class_headchild() : Abstract_headchild::Abstract_headchild() {
       vx_core::refcount += 1;
     }
+
     Class_headchild::~Class_headchild() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         
       });
     }
+
     // vx_get_any(key)
     vx_core::Type_any Class_headchild::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any();
@@ -1799,6 +1942,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_headchild::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_headchild(), vals);
     }
+
     vx_core::Type_any Class_headchild::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_headchild output = vx_web_html::e_headchild();
       vx_web_html::Type_headchild val = vx_core::vx_any_from_any(vx_web_html::t_headchild(), copyval);
@@ -1843,12 +1987,14 @@ namespace vx_web_html {
     Class_headchildlist::Class_headchildlist() : Abstract_headchildlist::Abstract_headchildlist() {
       vx_core::refcount += 1;
     }
+
     Class_headchildlist::~Class_headchildlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_headchildlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1902,6 +2048,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_headchildlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_headchildlist(), vals);
     }
+
     vx_core::Type_any Class_headchildlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_headchildlist output = vx_web_html::e_headchildlist();
       vx_web_html::Type_headchildlist val = vx_core::vx_any_from_any(vx_web_html::t_headchildlist(), copyval);
@@ -1968,6 +2115,7 @@ namespace vx_web_html {
     Class_html::Class_html() : Abstract_html::Abstract_html() {
       vx_core::refcount += 1;
     }
+
     Class_html::~Class_html() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1977,6 +2125,7 @@ namespace vx_web_html {
         this->vx_p_footer
       });
     }
+
     // lang()
     vx_core::Type_string Class_html::lang() const {
       vx_core::Type_string output = this->vx_p_lang;
@@ -2044,6 +2193,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_html::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_html(), vals);
     }
+
     vx_core::Type_any Class_html::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_html output = vx_web_html::e_html();
       vx_web_html::Type_html val = vx_core::vx_any_from_any(vx_web_html::t_html(), copyval);
@@ -2116,14 +2266,34 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_html();
-      output->vx_p_lang = vx_p_lang;
-      vx_core::vx_reserve(vx_p_lang);
-      output->vx_p_head = vx_p_head;
-      vx_core::vx_reserve(vx_p_head);
-      output->vx_p_body = vx_p_body;
-      vx_core::vx_reserve(vx_p_body);
-      output->vx_p_footer = vx_p_footer;
-      vx_core::vx_reserve(vx_p_footer);
+      if (output->vx_p_lang != vx_p_lang) {
+        if (output->vx_p_lang) {
+          vx_core::vx_release_one(output->vx_p_lang);
+        }
+        output->vx_p_lang = vx_p_lang;
+        vx_core::vx_reserve(vx_p_lang);
+      }
+      if (output->vx_p_head != vx_p_head) {
+        if (output->vx_p_head) {
+          vx_core::vx_release_one(output->vx_p_head);
+        }
+        output->vx_p_head = vx_p_head;
+        vx_core::vx_reserve(vx_p_head);
+      }
+      if (output->vx_p_body != vx_p_body) {
+        if (output->vx_p_body) {
+          vx_core::vx_release_one(output->vx_p_body);
+        }
+        output->vx_p_body = vx_p_body;
+        vx_core::vx_reserve(vx_p_body);
+      }
+      if (output->vx_p_footer != vx_p_footer) {
+        if (output->vx_p_footer) {
+          vx_core::vx_release_one(output->vx_p_footer);
+        }
+        output->vx_p_footer = vx_p_footer;
+        vx_core::vx_reserve(vx_p_footer);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2164,6 +2334,7 @@ namespace vx_web_html {
     Class_meta::Class_meta() : Abstract_meta::Abstract_meta() {
       vx_core::refcount += 1;
     }
+
     Class_meta::~Class_meta() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -2172,6 +2343,7 @@ namespace vx_web_html {
         this->vx_p_charset
       });
     }
+
     // id()
     vx_core::Type_string Class_meta::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -2227,6 +2399,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_meta::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_meta(), vals);
     }
+
     vx_core::Type_any Class_meta::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_meta output = vx_web_html::e_meta();
       vx_web_html::Type_meta val = vx_core::vx_any_from_any(vx_web_html::t_meta(), copyval);
@@ -2289,12 +2462,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_meta();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_charset = vx_p_charset;
-      vx_core::vx_reserve(vx_p_charset);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_charset != vx_p_charset) {
+        if (output->vx_p_charset) {
+          vx_core::vx_release_one(output->vx_p_charset);
+        }
+        output->vx_p_charset = vx_p_charset;
+        vx_core::vx_reserve(vx_p_charset);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2335,12 +2523,14 @@ namespace vx_web_html {
     Class_nodelist::Class_nodelist() : Abstract_nodelist::Abstract_nodelist() {
       vx_core::refcount += 1;
     }
+
     Class_nodelist::~Class_nodelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_nodelist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -2394,6 +2584,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_nodelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_nodelist(), vals);
     }
+
     vx_core::Type_any Class_nodelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_nodelist output = vx_web_html::e_nodelist();
       vx_web_html::Type_nodelist val = vx_core::vx_any_from_any(vx_web_html::t_nodelist(), copyval);
@@ -2460,6 +2651,7 @@ namespace vx_web_html {
     Class_p::Class_p() : Abstract_p::Abstract_p() {
       vx_core::refcount += 1;
     }
+
     Class_p::~Class_p() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -2468,6 +2660,7 @@ namespace vx_web_html {
         this->vx_p_text
       });
     }
+
     // id()
     vx_core::Type_string Class_p::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -2523,6 +2716,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_p::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_p(), vals);
     }
+
     vx_core::Type_any Class_p::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_p output = vx_web_html::e_p();
       vx_web_html::Type_p val = vx_core::vx_any_from_any(vx_web_html::t_p(), copyval);
@@ -2587,12 +2781,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_p();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2633,12 +2842,14 @@ namespace vx_web_html {
     Class_propmap::Class_propmap() : Abstract_propmap::Abstract_propmap() {
       vx_core::refcount += 1;
     }
+
     Class_propmap::~Class_propmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_propmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -2699,6 +2910,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_propmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_propmap(), vals);
     }
+
     vx_core::Type_any Class_propmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_propmap output = vx_web_html::e_propmap();
       vx_web_html::Type_propmap valmap = vx_core::vx_any_from_any(vx_web_html::t_propmap(), copyval);
@@ -2780,6 +2992,7 @@ namespace vx_web_html {
     Class_style::Class_style() : Abstract_style::Abstract_style() {
       vx_core::refcount += 1;
     }
+
     Class_style::~Class_style() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -2787,6 +3000,7 @@ namespace vx_web_html {
         this->vx_p_props
       });
     }
+
     // name()
     vx_core::Type_string Class_style::name() const {
       vx_core::Type_string output = this->vx_p_name;
@@ -2830,6 +3044,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_style::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_style(), vals);
     }
+
     vx_core::Type_any Class_style::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_style output = vx_web_html::e_style();
       vx_web_html::Type_style val = vx_core::vx_any_from_any(vx_web_html::t_style(), copyval);
@@ -2882,10 +3097,20 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_style();
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_props = vx_p_props;
-      vx_core::vx_reserve(vx_p_props);
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_props != vx_p_props) {
+        if (output->vx_p_props) {
+          vx_core::vx_release_one(output->vx_p_props);
+        }
+        output->vx_p_props = vx_p_props;
+        vx_core::vx_reserve(vx_p_props);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2926,12 +3151,14 @@ namespace vx_web_html {
     Class_stylelist::Class_stylelist() : Abstract_stylelist::Abstract_stylelist() {
       vx_core::refcount += 1;
     }
+
     Class_stylelist::~Class_stylelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_stylelist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -2985,6 +3212,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_stylelist(), vals);
     }
+
     vx_core::Type_any Class_stylelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylelist output = vx_web_html::e_stylelist();
       vx_web_html::Type_stylelist val = vx_core::vx_any_from_any(vx_web_html::t_stylelist(), copyval);
@@ -3051,12 +3279,14 @@ namespace vx_web_html {
     Class_stylemap::Class_stylemap() : Abstract_stylemap::Abstract_stylemap() {
       vx_core::refcount += 1;
     }
+
     Class_stylemap::~Class_stylemap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_stylemap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -3117,6 +3347,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylemap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_stylemap(), vals);
     }
+
     vx_core::Type_any Class_stylemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylemap output = vx_web_html::e_stylemap();
       vx_web_html::Type_stylemap valmap = vx_core::vx_any_from_any(vx_web_html::t_stylemap(), copyval);
@@ -3198,6 +3429,7 @@ namespace vx_web_html {
     Class_stylesheet::Class_stylesheet() : Abstract_stylesheet::Abstract_stylesheet() {
       vx_core::refcount += 1;
     }
+
     Class_stylesheet::~Class_stylesheet() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -3208,6 +3440,7 @@ namespace vx_web_html {
         this->vx_p_stylemap
       });
     }
+
     // id()
     vx_core::Type_string Class_stylesheet::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -3287,6 +3520,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_stylesheet(), vals);
     }
+
     vx_core::Type_any Class_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylesheet output = vx_web_html::e_stylesheet();
       vx_web_html::Type_stylesheet val = vx_core::vx_any_from_any(vx_web_html::t_stylesheet(), copyval);
@@ -3369,16 +3603,41 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_stylesheet();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_styles = vx_p_styles;
-      vx_core::vx_reserve(vx_p_styles);
-      output->vx_p_stylemap = vx_p_stylemap;
-      vx_core::vx_reserve(vx_p_stylemap);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_styles != vx_p_styles) {
+        if (output->vx_p_styles) {
+          vx_core::vx_release_one(output->vx_p_styles);
+        }
+        output->vx_p_styles = vx_p_styles;
+        vx_core::vx_reserve(vx_p_styles);
+      }
+      if (output->vx_p_stylemap != vx_p_stylemap) {
+        if (output->vx_p_stylemap) {
+          vx_core::vx_release_one(output->vx_p_stylemap);
+        }
+        output->vx_p_stylemap = vx_p_stylemap;
+        vx_core::vx_reserve(vx_p_stylemap);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -3419,6 +3678,7 @@ namespace vx_web_html {
     Class_table::Class_table() : Abstract_table::Abstract_table() {
       vx_core::refcount += 1;
     }
+
     Class_table::~Class_table() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -3428,6 +3688,7 @@ namespace vx_web_html {
         this->vx_p_thead
       });
     }
+
     // id()
     vx_core::Type_string Class_table::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -3495,6 +3756,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_table::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_table(), vals);
     }
+
     vx_core::Type_any Class_table::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_table output = vx_web_html::e_table();
       vx_web_html::Type_table val = vx_core::vx_any_from_any(vx_web_html::t_table(), copyval);
@@ -3567,14 +3829,34 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_table();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_tbody = vx_p_tbody;
-      vx_core::vx_reserve(vx_p_tbody);
-      output->vx_p_thead = vx_p_thead;
-      vx_core::vx_reserve(vx_p_thead);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_tbody != vx_p_tbody) {
+        if (output->vx_p_tbody) {
+          vx_core::vx_release_one(output->vx_p_tbody);
+        }
+        output->vx_p_tbody = vx_p_tbody;
+        vx_core::vx_reserve(vx_p_tbody);
+      }
+      if (output->vx_p_thead != vx_p_thead) {
+        if (output->vx_p_thead) {
+          vx_core::vx_release_one(output->vx_p_thead);
+        }
+        output->vx_p_thead = vx_p_thead;
+        vx_core::vx_reserve(vx_p_thead);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -3615,6 +3897,7 @@ namespace vx_web_html {
     Class_tbody::Class_tbody() : Abstract_tbody::Abstract_tbody() {
       vx_core::refcount += 1;
     }
+
     Class_tbody::~Class_tbody() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -3623,6 +3906,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_tbody::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -3678,6 +3962,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tbody::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_tbody(), vals);
     }
+
     vx_core::Type_any Class_tbody::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tbody output = vx_web_html::e_tbody();
       vx_web_html::Type_tbody val = vx_core::vx_any_from_any(vx_web_html::t_tbody(), copyval);
@@ -3751,12 +4036,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_tbody();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -3797,6 +4097,7 @@ namespace vx_web_html {
     Class_td::Class_td() : Abstract_td::Abstract_td() {
       vx_core::refcount += 1;
     }
+
     Class_td::~Class_td() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -3805,6 +4106,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_td::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -3860,6 +4162,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_td::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_td(), vals);
     }
+
     vx_core::Type_any Class_td::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_td output = vx_web_html::e_td();
       vx_web_html::Type_td val = vx_core::vx_any_from_any(vx_web_html::t_td(), copyval);
@@ -3933,12 +4236,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_td();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -3979,12 +4297,14 @@ namespace vx_web_html {
     Class_tdlist::Class_tdlist() : Abstract_tdlist::Abstract_tdlist() {
       vx_core::refcount += 1;
     }
+
     Class_tdlist::~Class_tdlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_tdlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -4038,6 +4358,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tdlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_tdlist(), vals);
     }
+
     vx_core::Type_any Class_tdlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tdlist output = vx_web_html::e_tdlist();
       vx_web_html::Type_tdlist val = vx_core::vx_any_from_any(vx_web_html::t_tdlist(), copyval);
@@ -4104,6 +4425,7 @@ namespace vx_web_html {
     Class_thead::Class_thead() : Abstract_thead::Abstract_thead() {
       vx_core::refcount += 1;
     }
+
     Class_thead::~Class_thead() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -4112,6 +4434,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_thead::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -4167,6 +4490,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_thead::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_thead(), vals);
     }
+
     vx_core::Type_any Class_thead::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_thead output = vx_web_html::e_thead();
       vx_web_html::Type_thead val = vx_core::vx_any_from_any(vx_web_html::t_thead(), copyval);
@@ -4240,12 +4564,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_thead();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -4286,6 +4625,7 @@ namespace vx_web_html {
     Class_title::Class_title() : Abstract_title::Abstract_title() {
       vx_core::refcount += 1;
     }
+
     Class_title::~Class_title() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -4294,6 +4634,7 @@ namespace vx_web_html {
         this->vx_p_text
       });
     }
+
     // id()
     vx_core::Type_string Class_title::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -4349,6 +4690,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_title::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_title(), vals);
     }
+
     vx_core::Type_any Class_title::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_title output = vx_web_html::e_title();
       vx_web_html::Type_title val = vx_core::vx_any_from_any(vx_web_html::t_title(), copyval);
@@ -4411,12 +4753,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_title();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -4457,6 +4814,7 @@ namespace vx_web_html {
     Class_tr::Class_tr() : Abstract_tr::Abstract_tr() {
       vx_core::refcount += 1;
     }
+
     Class_tr::~Class_tr() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -4465,6 +4823,7 @@ namespace vx_web_html {
         this->vx_p_nodes
       });
     }
+
     // id()
     vx_core::Type_string Class_tr::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -4520,6 +4879,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tr::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_tr(), vals);
     }
+
     vx_core::Type_any Class_tr::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tr output = vx_web_html::e_tr();
       vx_web_html::Type_tr val = vx_core::vx_any_from_any(vx_web_html::t_tr(), copyval);
@@ -4593,12 +4953,27 @@ namespace vx_web_html {
         }
       }
       output = new vx_web_html::Class_tr();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_style = vx_p_style;
-      vx_core::vx_reserve(vx_p_style);
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_style != vx_p_style) {
+        if (output->vx_p_style) {
+          vx_core::vx_release_one(output->vx_p_style);
+        }
+        output->vx_p_style = vx_p_style;
+        vx_core::vx_reserve(vx_p_style);
+      }
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -4639,12 +5014,14 @@ namespace vx_web_html {
     Class_trlist::Class_trlist() : Abstract_trlist::Abstract_trlist() {
       vx_core::refcount += 1;
     }
+
     Class_trlist::~Class_trlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_trlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -4698,6 +5075,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_trlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_html::e_trlist(), vals);
     }
+
     vx_core::Type_any Class_trlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_trlist output = vx_web_html::e_trlist();
       vx_web_html::Type_trlist val = vx_core::vx_any_from_any(vx_web_html::t_trlist(), copyval);
@@ -4838,8 +5216,11 @@ namespace vx_web_html {
 
   // (func boolean-write<-stylesheet)
   vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_boolean());
+    vx_core::vx_Type_async output = NULL;
     vx_core::vx_release(stylesheet);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_core::e_boolean());
+    }
     return output;
   }
 
@@ -5113,8 +5494,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({body, indent}, [body, indent]() {
         vx_web_html::Type_divchildlist nodes = body->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("body"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -5201,16 +5583,21 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, details}, [indent, details]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_web_html::Type_divchildlist summary = details->summary();
+        vx_core::vx_ref_plus(summary);
         vx_web_html::Type_divchildlist nodes = details->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string ssummary = vx_web_html::f_string_from_nodelist_indent(
           summary,
           vx_core::f_plus(indent, vx_core::vx_new_int(2))
         );
+        vx_core::vx_ref_plus(ssummary);
         vx_core::Type_string snodes = vx_web_html::f_string_from_nodelist_indent(
           nodes,
           vx_core::f_plus(indent, vx_core::vx_new_int(1))
         );
+        vx_core::vx_ref_plus(snodes);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5226,7 +5613,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</details>")
           })
         );
-        vx_core::vx_release_except({sindent, summary, nodes, ssummary, snodes}, output_1);
+        vx_core::vx_release_one_except({sindent, summary, nodes, ssummary, snodes}, output_1);
         return output_1;
       })
     );
@@ -5313,13 +5700,16 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({div, indent}, [div, indent]() {
         vx_web_html::Type_divchildlist nodes = div->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           div->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_core::Type_string sstyle = vx_web_html::f_string_from_propstyle(
           div->style()
         );
+        vx_core::vx_ref_plus(sstyle);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(
           nodes,
           vx_core::vx_new_string("div"),
@@ -5332,7 +5722,7 @@ namespace vx_web_html {
           ),
           indent
         );
-        vx_core::vx_release_except({nodes, sid, sstyle}, output_1);
+        vx_core::vx_release_one_except({nodes, sid, sstyle}, output_1);
         return output_1;
       })
     );
@@ -5419,8 +5809,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({footer, indent}, [footer, indent]() {
         vx_web_html::Type_divchildlist nodes = footer->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("footer"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -5507,11 +5898,14 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, h1}, [indent, h1]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string text = h1->text();
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h1->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5523,7 +5917,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</h1>")
           })
         );
-        vx_core::vx_release_except({sindent, text, sid}, output_1);
+        vx_core::vx_release_one_except({sindent, text, sid}, output_1);
         return output_1;
       })
     );
@@ -5610,11 +6004,14 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({h2, indent}, [h2, indent]() {
         vx_core::Type_string text = h2->text();
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h2->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5626,7 +6023,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</h2>")
           })
         );
-        vx_core::vx_release_except({text, sindent, sid}, output_1);
+        vx_core::vx_release_one_except({text, sindent, sid}, output_1);
         return output_1;
       })
     );
@@ -5713,11 +6110,14 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({h3, indent}, [h3, indent]() {
         vx_core::Type_string text = h3->text();
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           h3->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5729,7 +6129,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</h3>")
           })
         );
-        vx_core::vx_release_except({text, sindent, sid}, output_1);
+        vx_core::vx_release_one_except({text, sindent, sid}, output_1);
         return output_1;
       })
     );
@@ -5816,8 +6216,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({head, indent}, [head, indent]() {
         vx_web_html::Type_headchildlist nodes = head->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("head"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -5907,12 +6308,19 @@ namespace vx_web_html {
           vx_core::vx_new_string("lang"),
           html->lang()
         );
+        vx_core::vx_ref_plus(lang);
         vx_web_html::Type_head head = html->head();
+        vx_core::vx_ref_plus(head);
         vx_web_html::Type_body body = html->body();
+        vx_core::vx_ref_plus(body);
         vx_web_html::Type_footer footer = html->footer();
+        vx_core::vx_ref_plus(footer);
         vx_core::Type_string shead = vx_web_html::f_string_from_head_indent(head, vx_core::vx_new_int(1));
+        vx_core::vx_ref_plus(shead);
         vx_core::Type_string sbody = vx_web_html::f_string_from_body_indent(body, vx_core::vx_new_int(1));
+        vx_core::vx_ref_plus(sbody);
         vx_core::Type_string sfooter = vx_web_html::f_string_from_footer_indent(footer, vx_core::vx_new_int(1));
+        vx_core::vx_ref_plus(sfooter);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -5928,7 +6336,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</html>")
           })
         );
-        vx_core::vx_release_except({lang, head, body, footer, shead, sbody, sfooter}, output_1);
+        vx_core::vx_release_one_except({lang, head, body, footer, shead, sbody, sfooter}, output_1);
         return output_1;
       })
     );
@@ -6128,10 +6536,12 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, meta}, [indent, meta]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string charset = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("charset"),
           meta->charset()
         );
+        vx_core::vx_ref_plus(charset);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -6141,7 +6551,7 @@ namespace vx_web_html {
             vx_core::vx_new_string(" />")
           })
         );
-        vx_core::vx_release_except({sindent, charset}, output_1);
+        vx_core::vx_release_one_except({sindent, charset}, output_1);
         return output_1;
       })
     );
@@ -6492,8 +6902,9 @@ namespace vx_web_html {
             return output_1;
           })
         );
+        vx_core::vx_ref_plus(textlist);
         vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));
-        vx_core::vx_release_except(textlist, output_1);
+        vx_core::vx_release_one_except(textlist, output_1);
         return output_1;
       })
     );
@@ -6583,7 +6994,9 @@ namespace vx_web_html {
           nodes,
           vx_core::f_plus1(indent)
         );
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string eindent = vx_core::f_if_2(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_thenelselist(), {
@@ -6615,6 +7028,7 @@ namespace vx_web_html {
             )
           })
         );
+        vx_core::vx_ref_plus(eindent);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -6630,7 +7044,7 @@ namespace vx_web_html {
             vx_core::vx_new_string(">")
           })
         );
-        vx_core::vx_release_except({text, sindent, eindent}, output_1);
+        vx_core::vx_release_one_except({text, sindent, eindent}, output_1);
         return output_1;
       })
     );
@@ -6719,16 +7133,20 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, p}, [indent, p]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string text = vx_web_html::f_htmlstring_from_string(
           p->text()
         );
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           p->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_core::Type_string sstyle = vx_web_html::f_string_from_propstyle(
           p->style()
         );
+        vx_core::vx_ref_plus(sstyle);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -6741,7 +7159,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</p>")
           })
         );
-        vx_core::vx_release_except({sindent, text, sid, sstyle}, output_1);
+        vx_core::vx_release_one_except({sindent, text, sid, sstyle}, output_1);
         return output_1;
       })
     );
@@ -7028,12 +7446,16 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, style}, [indent, style]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string name = style->name();
+        vx_core::vx_ref_plus(name);
         vx_web_html::Type_propmap propmap = style->props();
+        vx_core::vx_ref_plus(propmap);
         vx_core::Type_string stext = vx_web_html::f_string_from_stylepropmap_indent(
           propmap,
           vx_core::f_plus1(indent)
         );
+        vx_core::vx_ref_plus(stext);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -7045,7 +7467,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("}")
           })
         );
-        vx_core::vx_release_except({sindent, name, propmap, stext}, output_1);
+        vx_core::vx_release_one_except({sindent, name, propmap, stext}, output_1);
         return output_1;
       })
     );
@@ -7141,8 +7563,9 @@ namespace vx_web_html {
             return output_1;
           })
         );
+        vx_core::vx_ref_plus(sstyles);
         vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(sstyles, vx_core::vx_new_string(""));
-        vx_core::vx_release_except(sstyles, output_1);
+        vx_core::vx_release_one_except(sstyles, output_1);
         return output_1;
       })
     );
@@ -7229,6 +7652,7 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, propmap}, [indent, propmap]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_stringlist sprops = vx_core::f_list_from_map(
           vx_core::t_stringlist(),
           propmap,
@@ -7249,8 +7673,9 @@ namespace vx_web_html {
             return output_1;
           })
         );
+        vx_core::vx_ref_plus(sprops);
         vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(sprops, vx_core::vx_new_string(""));
-        vx_core::vx_release_except({sindent, sprops}, output_1);
+        vx_core::vx_release_one_except({sindent, sprops}, output_1);
         return output_1;
       })
     );
@@ -7340,12 +7765,15 @@ namespace vx_web_html {
           stylesheet->styles(),
           vx_core::f_plus1(indent)
         );
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string eindent = vx_core::f_if(
           vx_core::t_string(),
           vx_core::f_notempty(text),
           sindent
         );
+        vx_core::vx_ref_plus(eindent);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -7356,7 +7784,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</style>")
           })
         );
-        vx_core::vx_release_except({text, sindent, eindent}, output_1);
+        vx_core::vx_release_one_except({text, sindent, eindent}, output_1);
         return output_1;
       })
     );
@@ -7443,20 +7871,26 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, table}, [indent, table]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string sid = vx_web_html::f_string_from_propname_val(
           vx_core::vx_new_string("id"),
           table->id()
         );
+        vx_core::vx_ref_plus(sid);
         vx_web_html::Type_thead thead = table->thead();
+        vx_core::vx_ref_plus(thead);
         vx_web_html::Type_tbody tbody = table->tbody();
+        vx_core::vx_ref_plus(tbody);
         vx_core::Type_string shead = vx_web_html::f_string_from_thead_indent(
           thead,
           vx_core::f_plus1(indent)
         );
+        vx_core::vx_ref_plus(shead);
         vx_core::Type_string sbody = vx_web_html::f_string_from_tbody_indent(
           tbody,
           vx_core::f_plus1(indent)
         );
+        vx_core::vx_ref_plus(sbody);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -7470,7 +7904,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</table>")
           })
         );
-        vx_core::vx_release_except({sindent, sid, thead, tbody, shead, sbody}, output_1);
+        vx_core::vx_release_one_except({sindent, sid, thead, tbody, shead, sbody}, output_1);
         return output_1;
       })
     );
@@ -7557,8 +7991,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({tbody, indent}, [tbody, indent]() {
         vx_web_html::Type_trlist nodes = tbody->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tbody"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -7645,8 +8080,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({td, indent}, [td, indent]() {
         vx_web_html::Type_divchildlist nodes = td->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("td"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -7733,8 +8169,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({thead, indent}, [thead, indent]() {
         vx_web_html::Type_trlist nodes = thead->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("thead"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );
@@ -7821,7 +8258,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({indent, title}, [indent, title]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
+        vx_core::vx_ref_plus(sindent);
         vx_core::Type_string text = title->text();
+        vx_core::vx_ref_plus(text);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string(),
           vx_core::vx_new(vx_core::t_anylist(), {
@@ -7831,7 +8270,7 @@ namespace vx_web_html {
             vx_core::vx_new_string("</title>")
           })
         );
-        vx_core::vx_release_except({sindent, text}, output_1);
+        vx_core::vx_release_one_except({sindent, text}, output_1);
         return output_1;
       })
     );
@@ -7918,8 +8357,9 @@ namespace vx_web_html {
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({tr, indent}, [tr, indent]() {
         vx_web_html::Type_tdlist nodes = tr->nodes();
+        vx_core::vx_ref_plus(nodes);
         vx_core::Type_string output_1 = vx_web_html::f_string_from_nodelist_tag_prop_indent(nodes, vx_core::vx_new_string("tr"), vx_core::vx_new_string(""), indent);
-        vx_core::vx_release_except(nodes, output_1);
+        vx_core::vx_release_one_except(nodes, output_1);
         return output_1;
       })
     );

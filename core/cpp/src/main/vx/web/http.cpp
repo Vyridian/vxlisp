@@ -15,6 +15,7 @@ namespace vx_web_http {
     Class_response::Class_response() : Abstract_response::Abstract_response() {
       vx_core::refcount += 1;
     }
+
     Class_response::~Class_response() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -22,6 +23,7 @@ namespace vx_web_http {
         this->vx_p_status
       });
     }
+
     // ok()
     vx_core::Type_boolean Class_response::ok() const {
       vx_core::Type_boolean output = this->vx_p_ok;
@@ -65,6 +67,7 @@ namespace vx_web_http {
     vx_core::Type_any Class_response::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_web_http::e_response(), vals);
     }
+
     vx_core::Type_any Class_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Type_response output = vx_web_http::e_response();
       vx_web_http::Type_response val = vx_core::vx_any_from_any(vx_web_http::t_response(), copyval);
@@ -117,10 +120,20 @@ namespace vx_web_http {
         }
       }
       output = new vx_web_http::Class_response();
-      output->vx_p_ok = vx_p_ok;
-      vx_core::vx_reserve(vx_p_ok);
-      output->vx_p_status = vx_p_status;
-      vx_core::vx_reserve(vx_p_status);
+      if (output->vx_p_ok != vx_p_ok) {
+        if (output->vx_p_ok) {
+          vx_core::vx_release_one(output->vx_p_ok);
+        }
+        output->vx_p_ok = vx_p_ok;
+        vx_core::vx_reserve(vx_p_ok);
+      }
+      if (output->vx_p_status != vx_p_status) {
+        if (output->vx_p_status) {
+          vx_core::vx_release_one(output->vx_p_status);
+        }
+        output->vx_p_status = vx_p_status;
+        vx_core::vx_reserve(vx_p_status);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -156,14 +169,16 @@ namespace vx_web_http {
 
   // (func csv<-httpget)
   vx_core::vx_Type_async f_csv_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_csv::e_csv());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_data_csv::t_csv(),
       vx_core::t_any_from_func_async()->vx_fn_new({url}, [url]() {
         vx_core::vx_Type_async future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::vx_new_string("text/csv"));
         vx_core::vx_Type_fn_any_from_any fn_any_any_textblock = [](vx_core::Type_any any_textblock) {
           vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), any_textblock);
+          vx_core::vx_ref_plus(textblock);
           vx_core::Type_any output_2 = vx_data_csv::f_csv_from_textblock(textblock);
+          vx_core::vx_release_one_except(textblock, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_textblock, vx_data_textblock::t_textblock(), {}, fn_any_any_textblock);
@@ -171,6 +186,9 @@ namespace vx_web_http {
       })
     );
     vx_core::vx_release(url);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_data_csv::e_csv());
+    }
     return output;
   }
 
@@ -258,14 +276,16 @@ namespace vx_web_http {
 
   // (func json<-httpget)
   vx_core::vx_Type_async f_json_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_web_http::t_response(),
       vx_core::t_any_from_func_async()->vx_fn_new({url}, [url]() {
         vx_core::vx_Type_async future_response = vx_web_http::f_response_from_httpget(url, vx_core::vx_new_string("application/json"));
         vx_core::vx_Type_fn_any_from_any fn_any_any_response = [](vx_core::Type_any any_response) {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
+          vx_core::vx_ref_plus(response);
           vx_core::Type_any output_2 = response;
+          vx_core::vx_release_one_except(response, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), {}, fn_any_any_response);
@@ -273,6 +293,9 @@ namespace vx_web_http {
       })
     );
     vx_core::vx_release(url);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
+    }
     return output;
   }
 
@@ -360,8 +383,11 @@ namespace vx_web_http {
 
   // (func response<-httpget)
   vx_core::vx_Type_async f_response_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
+    vx_core::vx_Type_async output = NULL;
     vx_core::vx_release({url, contenttype});
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_web_http::e_response());
+    }
     return output;
   }
 
@@ -439,14 +465,16 @@ namespace vx_web_http {
 
   // (func text<-httpget)
   vx_core::vx_Type_async f_text_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_string());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_core::t_string(),
       vx_core::t_any_from_func_async()->vx_fn_new({url}, [url]() {
         vx_core::vx_Type_async future_response = vx_web_http::f_response_from_httpget(url, vx_core::vx_new_string("text/plain"));
         vx_core::vx_Type_fn_any_from_any fn_any_any_response = [](vx_core::Type_any any_response) {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
+          vx_core::vx_ref_plus(response);
           vx_core::Type_any output_2 = vx_web_http::f_text_from_response(response);
+          vx_core::vx_release_one_except(response, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), {}, fn_any_any_response);
@@ -454,6 +482,9 @@ namespace vx_web_http {
       })
     );
     vx_core::vx_release(url);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_core::e_string());
+    }
     return output;
   }
 
@@ -631,14 +662,16 @@ namespace vx_web_http {
 
   // (func textblock<-httpget)
   vx_core::vx_Type_async f_textblock_from_httpget(vx_core::Type_string url, vx_core::Type_string contenttype) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_textblock::e_textblock());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_data_textblock::t_textblock(),
       vx_core::t_any_from_func_async()->vx_fn_new({url, contenttype}, [url, contenttype]() {
         vx_core::vx_Type_async future_response = vx_web_http::f_response_from_httpget(url, contenttype);
         vx_core::vx_Type_fn_any_from_any fn_any_any_response = [](vx_core::Type_any any_response) {
           vx_web_http::Type_response response = vx_core::vx_any_from_any(vx_web_http::t_response(), any_response);
+          vx_core::vx_ref_plus(response);
           vx_core::Type_any output_2 = vx_web_http::f_textblock_from_response(response);
+          vx_core::vx_release_one_except(response, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_response, vx_web_http::t_response(), {}, fn_any_any_response);
@@ -646,6 +679,9 @@ namespace vx_web_http {
       })
     );
     vx_core::vx_release({url, contenttype});
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_data_textblock::e_textblock());
+    }
     return output;
   }
 
@@ -820,14 +856,16 @@ namespace vx_web_http {
 
   // (func xml<-httpget)
   vx_core::vx_Type_async f_xml_from_httpget(vx_core::Type_string url) {
-    vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_data_xml::e_xml());
+    vx_core::vx_Type_async output = NULL;
     output = vx_core::f_let_async(
       vx_data_xml::t_xml(),
       vx_core::t_any_from_func_async()->vx_fn_new({url}, [url]() {
         vx_core::vx_Type_async future_textblock = vx_web_http::f_textblock_from_httpget(url, vx_core::vx_new_string("text/xml"));
         vx_core::vx_Type_fn_any_from_any fn_any_any_textblock = [](vx_core::Type_any any_textblock) {
           vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), any_textblock);
+          vx_core::vx_ref_plus(textblock);
           vx_core::Type_any output_2 = vx_data_xml::f_xml_from_textblock(textblock);
+          vx_core::vx_release_one_except(textblock, output_2);
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_textblock, vx_data_textblock::t_textblock(), {}, fn_any_any_textblock);
@@ -835,6 +873,9 @@ namespace vx_web_http {
       })
     );
     vx_core::vx_release(url);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_data_xml::e_xml());
+    }
     return output;
   }
 

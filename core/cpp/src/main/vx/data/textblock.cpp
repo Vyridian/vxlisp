@@ -13,6 +13,7 @@ namespace vx_data_textblock {
     Class_delimset::Class_delimset() : Abstract_delimset::Abstract_delimset() {
       vx_core::refcount += 1;
     }
+
     Class_delimset::~Class_delimset() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -22,6 +23,7 @@ namespace vx_data_textblock {
         this->vx_p_subset
       });
     }
+
     // start()
     vx_core::Type_stringlist Class_delimset::start() const {
       vx_core::Type_stringlist output = this->vx_p_start;
@@ -89,6 +91,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_delimset::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_textblock::e_delimset(), vals);
     }
+
     vx_core::Type_any Class_delimset::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_delimset output = vx_data_textblock::e_delimset();
       vx_data_textblock::Type_delimset val = vx_core::vx_any_from_any(vx_data_textblock::t_delimset(), copyval);
@@ -161,14 +164,34 @@ namespace vx_data_textblock {
         }
       }
       output = new vx_data_textblock::Class_delimset();
-      output->vx_p_start = vx_p_start;
-      vx_core::vx_reserve(vx_p_start);
-      output->vx_p_end = vx_p_end;
-      vx_core::vx_reserve(vx_p_end);
-      output->vx_p_split = vx_p_split;
-      vx_core::vx_reserve(vx_p_split);
-      output->vx_p_subset = vx_p_subset;
-      vx_core::vx_reserve(vx_p_subset);
+      if (output->vx_p_start != vx_p_start) {
+        if (output->vx_p_start) {
+          vx_core::vx_release_one(output->vx_p_start);
+        }
+        output->vx_p_start = vx_p_start;
+        vx_core::vx_reserve(vx_p_start);
+      }
+      if (output->vx_p_end != vx_p_end) {
+        if (output->vx_p_end) {
+          vx_core::vx_release_one(output->vx_p_end);
+        }
+        output->vx_p_end = vx_p_end;
+        vx_core::vx_reserve(vx_p_end);
+      }
+      if (output->vx_p_split != vx_p_split) {
+        if (output->vx_p_split) {
+          vx_core::vx_release_one(output->vx_p_split);
+        }
+        output->vx_p_split = vx_p_split;
+        vx_core::vx_reserve(vx_p_split);
+      }
+      if (output->vx_p_subset != vx_p_subset) {
+        if (output->vx_p_subset) {
+          vx_core::vx_release_one(output->vx_p_subset);
+        }
+        output->vx_p_subset = vx_p_subset;
+        vx_core::vx_reserve(vx_p_subset);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -209,6 +232,7 @@ namespace vx_data_textblock {
     Class_textblock::Class_textblock() : Abstract_textblock::Abstract_textblock() {
       vx_core::refcount += 1;
     }
+
     Class_textblock::~Class_textblock() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -219,6 +243,7 @@ namespace vx_data_textblock {
         this->vx_p_textblocks
       });
     }
+
     // name()
     vx_core::Type_string Class_textblock::name() const {
       vx_core::Type_string output = this->vx_p_name;
@@ -298,6 +323,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_textblock::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_textblock::e_textblock(), vals);
     }
+
     vx_core::Type_any Class_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock();
       vx_data_textblock::Type_textblock val = vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), copyval);
@@ -380,16 +406,41 @@ namespace vx_data_textblock {
         }
       }
       output = new vx_data_textblock::Class_textblock();
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
-      output->vx_p_line = vx_p_line;
-      vx_core::vx_reserve(vx_p_line);
-      output->vx_p_column = vx_p_column;
-      vx_core::vx_reserve(vx_p_column);
-      output->vx_p_textblocks = vx_p_textblocks;
-      vx_core::vx_reserve(vx_p_textblocks);
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
+      if (output->vx_p_line != vx_p_line) {
+        if (output->vx_p_line) {
+          vx_core::vx_release_one(output->vx_p_line);
+        }
+        output->vx_p_line = vx_p_line;
+        vx_core::vx_reserve(vx_p_line);
+      }
+      if (output->vx_p_column != vx_p_column) {
+        if (output->vx_p_column) {
+          vx_core::vx_release_one(output->vx_p_column);
+        }
+        output->vx_p_column = vx_p_column;
+        vx_core::vx_reserve(vx_p_column);
+      }
+      if (output->vx_p_textblocks != vx_p_textblocks) {
+        if (output->vx_p_textblocks) {
+          vx_core::vx_release_one(output->vx_p_textblocks);
+        }
+        output->vx_p_textblocks = vx_p_textblocks;
+        vx_core::vx_reserve(vx_p_textblocks);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -430,12 +481,14 @@ namespace vx_data_textblock {
     Class_textblocklist::Class_textblocklist() : Abstract_textblocklist::Abstract_textblocklist() {
       vx_core::refcount += 1;
     }
+
     Class_textblocklist::~Class_textblocklist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_textblocklist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -489,6 +542,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_textblocklist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_textblock::e_textblocklist(), vals);
     }
+
     vx_core::Type_any Class_textblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_textblocklist output = vx_data_textblock::e_textblocklist();
       vx_data_textblock::Type_textblocklist val = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist(), copyval);

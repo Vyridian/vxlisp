@@ -129,6 +129,15 @@ let-async
   // vx_debug(list<any>)
   void vx_debug(vx_core::vx_Type_listany listany);
 
+  // vx_debug_refcount()
+  void vx_debug_refcount();
+
+  // vx_debug_refcount(any)
+  void vx_debug_refcount(vx_core::Type_any val);
+
+  // vx_debug_refcount(async)
+  void vx_debug_refcount(vx_core::vx_Type_async async);
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
 
@@ -222,14 +231,20 @@ let-async
   // vx_string_from_any(value)
   std::string vx_string_from_any(vx_core::Type_any value);
 
-  // vx_string_from_any_indent(any, int, boolean)
-  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed);
+  // vx_string_from_any_indent(any, int, boolean, boolean)
+  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed, bool refcount);
+
+  // vx_string_from_any_refcount(value)
+  std::string vx_string_from_any_refcount(vx_core::Type_any value);
 
   // vx_string_from_async(async)
   std::string vx_string_from_async(vx_core::vx_Type_async async);
 
-  // vx_string_from_async_indent(async, indent, linefeed)
-  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed);
+  // vx_string_from_async_indent(async, indent, linefeed, refcount)
+  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed, bool refcount);
+
+  // vx_string_from_async_refcount(async)
+  std::string vx_string_from_async_refcount(vx_core::vx_Type_async async);
 
   // vx_string_from_int(long)
   std::string vx_string_from_int(long value);
@@ -524,6 +539,33 @@ let-async
     for (vx_core::Type_any any : listany) {
       vx_core::vx_debug(any);
     }
+  }
+
+  // vx_debug_refcount()
+  void vx_debug_refcount() {
+    vx_core::vx_debug(vx_core::refcount);
+  }
+
+  // vx_debug_refcount(any)
+  void vx_debug_refcount(vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any_refcount(val);
+      vx_core::vx_debug(sval);
+      vx_core::vx_debug_refcount();
+    }
+  }
+
+  // vx_debug_refcount(async)
+  void vx_debug_refcount(vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_debug("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async_refcount(async);
+      vx_debug(sval);
+    }
+    vx_core::vx_debug_refcount();
   }
 
   // vx_if_thenelselist(type, thenelselist)
@@ -822,11 +864,11 @@ let-async
 
   // vx_string_from_any(val)
   std::string vx_string_from_any(vx_core::Type_any value) {
-    return vx_core::vx_string_from_any_indent(value, 0, true);
+    return vx_core::vx_string_from_any_indent(value, 0, true, false);
   }
 
-  // vx_string_from_any_indent(val, indent, linefeed)
-  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed) {
+  // vx_string_from_any_indent(val, indent, linefeed, refcount)
+  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed, bool refcount) {
     std::string output = "";
     std::string text = "";
     if (indent > 50) {
@@ -885,12 +927,15 @@ let-async
           indentint += 1;
           std::vector<vx_core::Type_any> listval = vallist->vx_list();
           for (vx_core::Type_any valsub : listval) {
-            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
           }
           if (vallist->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vallist->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":map") {
@@ -903,7 +948,7 @@ let-async
             if (!vx_boolean_from_string_starts(key, ":")) {
               key = ":" + key;
             }
-            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             if (vx_boolean_from_string_find(strval, "\n")) {
               strval = "\n  " + indenttext + strval;
             } else {
@@ -912,8 +957,11 @@ let-async
             text += "\n" + indenttext + " " + key + strval;
           }
           if (valmap->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valmap->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":struct") {
@@ -927,7 +975,7 @@ let-async
               if (!vx_boolean_from_string_starts(key, ":")) {
                 key = ":" + key;
               }
-              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed);
+              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
               } else {
@@ -937,16 +985,22 @@ let-async
             }
           }
           if (valstruct->vx_msgblock()) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed);
+            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valstruct->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":func") {
           vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func(), value);
           text = typedefname;
           if (valfunc->vx_msgblock()) {
-            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed);
+            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
+          }
+          if (refcount) {
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valfunc->vx_p_iref);
           }
           text = "(" + text + ")";
         }
@@ -956,13 +1010,18 @@ let-async
     return output;
   }
 
-  // vx_string_from_async(async)
-  std::string vx_string_from_async(vx_core::vx_Type_async async) {
-    return vx_core::vx_string_from_async_indent(async, 0, true);
+  // vx_string_from_any_refcount(val)
+  std::string vx_string_from_any_refcount(vx_core::Type_any value) {
+    return vx_core::vx_string_from_any_indent(value, 0, true, true);
   }
 
-  // vx_string_from_async_indent(val, indent, linefeed)
-  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed) {
+  // vx_string_from_async(async)
+  std::string vx_string_from_async(vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(async, 0, true, false);
+  }
+
+  // vx_string_from_async_indent(async, indent, linefeed, refcount)
+  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed, bool refcount) {
     std::string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
@@ -985,7 +1044,7 @@ let-async
       }
       vx_core::Type_any val = async->value;
       if (val) {
-        std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed);
+        std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed, refcount);
         output += "\n " + indenttext + ":value " + text;
       }
       vx_core::vx_Type_future future = async->future;
@@ -998,12 +1057,20 @@ let-async
       }
       vx_core::vx_Type_async asyncparent = async->async_parent;
       if (asyncparent) {
-        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed);
+        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed, refcount);
         output += "\n " + indenttext + ":async_parent\n" + text;
+      }
+      if (refcount) {
+        output += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(async->vx_p_iref);
       }
       output += ")";
     }
     return output;
+  }
+
+  // vx_string_from_async_refcount(async)
+  std::string vx_string_from_async_refcount(vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(async, 0, true, true);
   }
 
   // vx_string_from_int(long)

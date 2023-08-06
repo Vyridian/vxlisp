@@ -23,6 +23,7 @@ namespace test_lib {
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
     vx_test::Type_testresult output = test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
+    vx_core::vx_release_except(testresult_resolved, output);
 		return output;
   }
 
@@ -30,8 +31,8 @@ namespace test_lib {
     vx_core::Type_string testcode = testdescribe->describename();
     std::string message = testcode->vx_string();
     vx_test::Type_testresult testresult = testdescribe->testresult();
-    vx_test::Type_testresult testresultresolved = test_lib::run_testresult(testpkg, casename, message, testresult);
-    vx_test::Type_testdescribe output = vx_core::vx_copy(testdescribe, {vx_core::vx_new_string(":testresult"), testresultresolved});
+    vx_test::Type_testresult testresult_resolved = test_lib::run_testresult(testpkg, casename, message, testresult);
+    vx_test::Type_testdescribe output = vx_core::vx_copy(testdescribe, {vx_core::vx_new_string(":testresult"), testresult_resolved});
 		return output;
   }
 
@@ -156,15 +157,15 @@ namespace test_lib {
     return output;
   }
 
-	bool test(std::string testname, std::string expected, std::string actual) {
+  bool test(std::string testname, std::string expected, std::string actual) {
     bool output = false;
     if (expected == actual) {
       vx_core::vx_debug("Test Pass: " + testname);
       output = true;
     } else {
       vx_core::vx_debug("Test Fail: " + testname);
-      vx_core::vx_debug("Expected : " + expected);
-      vx_core::vx_debug("Actual   : " + actual);
+      vx_core::vx_debug("Expected:\n" + expected);
+      vx_core::vx_debug("Actual:\n" + actual);
     }
     return output;
   }
@@ -175,7 +176,7 @@ namespace test_lib {
     vx_core::Type_string helloworld = vx_core::vx_new_string("Hello World");
     std::string expected = "Hello World";
     std::string actual = helloworld->vx_string();
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     vx_core::vx_release(helloworld);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
@@ -190,7 +191,7 @@ namespace test_lib {
     std::string expected = "Hello World";
     std::string actual = sync->vx_string();
     vx_core::vx_release(sync);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -212,7 +213,7 @@ namespace test_lib {
     std::string expected = "Hello World";
     std::string actual = sync->vx_string();
     vx_core::vx_release(sync);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -233,7 +234,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -260,7 +261,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(anyfromfunc);
-    bool output = test(testname, expected1, actual1);
+    bool output = test_lib::test(testname, expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -293,7 +294,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(thenelse);
-    bool output = test(testname, expected1, actual1);
+    bool output = test_lib::test(testname, expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -325,6 +326,7 @@ namespace test_lib {
             vx_test::t_testresult(),
             vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
               vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
+              vx_core::vx_ref_plus(passfail);
               vx_test::Type_testresult output_1 = vx_core::f_copy(
                 testresult,
                 vx_core::vx_new(vx_core::t_anylist(), {
@@ -334,7 +336,7 @@ namespace test_lib {
                   actual
                 })
               );
-              vx_core::vx_release(passfail);
+              vx_core::vx_release_one_except(passfail, output_1);
               return output_1;
             })
           );
@@ -350,7 +352,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(thenelselist);
-    bool output = test(testname, expected1, actual1);
+    bool output = test_lib::test(testname, expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -384,6 +386,7 @@ namespace test_lib {
               vx_test::t_testresult(),
               vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
                 vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
+                vx_core::vx_ref_plus(passfail);
                 vx_test::Type_testresult output_1 = vx_core::f_copy(
                   testresult,
                   vx_core::vx_new(vx_core::t_anylist(), {
@@ -393,7 +396,7 @@ namespace test_lib {
                     actual
                   })
                 );
-                vx_core::vx_release(passfail);
+                vx_core::vx_release_one_except(passfail, output_1);
                 return output_1;
               })
             );
@@ -410,7 +413,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual1 = vx_core::vx_string_from_any(output_2);
     vx_core::vx_release(output_2);
-    bool output = test(testname, expected1, actual1);
+    bool output = test_lib::test(testname, expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -422,7 +425,7 @@ namespace test_lib {
       vx_core::vx_new_boolean(true),
       context
     );
-    vx_test::Type_testresult testresult_resolved = run_testresult_async("vx/core", "boolean", "", testresult);
+    vx_test::Type_testresult testresult_resolved = test_lib::run_testresult_async("vx/core", "boolean", "", testresult);
     std::string expected =
       "(vx/test/testresult"
       "\n :actual true"
@@ -431,7 +434,7 @@ namespace test_lib {
       "\n :passfail true)";
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
@@ -448,7 +451,7 @@ namespace test_lib {
         context
       )
     });
-    vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe("vx/core", "boolean", testdescribe);
+    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe("vx/core", "boolean", testdescribe);
     std::string expected =
       "(vx/test/testdescribe"
       "\n :describename \"(test-true true)\""
@@ -461,13 +464,13 @@ namespace test_lib {
       "\n   :passfail true))";
     std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
     vx_core::vx_release(testdescribe_resolved);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
 
   bool test_run_testdescribe_async(vx_core::Type_context context) {
-    std::string testname = "run_testdescribe_async";
+    std::string testname = "test_run_testdescribe_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testdescribe testdescribe = vx_core::vx_new(vx_test::t_testdescribe(), {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
@@ -478,7 +481,9 @@ namespace test_lib {
         context
       )
     });
-    vx_test::Type_testdescribe testdescribe_resolved = run_testdescribe_async("vx/core", "boolean", testdescribe);
+    //vx_core::vx_debug("test-run-testdescribe-async-1:should be 5");
+    //vx_core::vx_debug(vx_core::refcount);
+    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe_async("vx/core", "boolean", testdescribe);
     std::string expected =
       "(vx/test/testdescribe"
       "\n :describename \"(test-true true)\""
@@ -491,7 +496,7 @@ namespace test_lib {
       "\n   :passfail true))";
     std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
     vx_core::vx_release(testdescribe_resolved);
-    bool output = test(testname, expected, actual);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }

@@ -14,6 +14,7 @@ namespace vx_data_table {
     Class_cell::Class_cell() : Abstract_cell::Abstract_cell() {
       vx_core::refcount += 1;
     }
+
     Class_cell::~Class_cell() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -21,6 +22,7 @@ namespace vx_data_table {
         this->vx_p_value
       });
     }
+
     // id()
     vx_core::Type_string Class_cell::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -64,6 +66,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cell::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_cell(), vals);
     }
+
     vx_core::Type_any Class_cell::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cell output = vx_data_table::e_cell();
       vx_data_table::Type_cell val = vx_core::vx_any_from_any(vx_data_table::t_cell(), copyval);
@@ -111,10 +114,20 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_cell();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_value = vx_p_value;
-      vx_core::vx_reserve(vx_p_value);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_value != vx_p_value) {
+        if (output->vx_p_value) {
+          vx_core::vx_release_one(output->vx_p_value);
+        }
+        output->vx_p_value = vx_p_value;
+        vx_core::vx_reserve(vx_p_value);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -155,12 +168,14 @@ namespace vx_data_table {
     Class_celllist::Class_celllist() : Abstract_celllist::Abstract_celllist() {
       vx_core::refcount += 1;
     }
+
     Class_celllist::~Class_celllist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_celllist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -214,6 +229,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_celllist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_celllist(), vals);
     }
+
     vx_core::Type_any Class_celllist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_celllist output = vx_data_table::e_celllist();
       vx_data_table::Type_celllist val = vx_core::vx_any_from_any(vx_data_table::t_celllist(), copyval);
@@ -280,12 +296,14 @@ namespace vx_data_table {
     Class_cellmap::Class_cellmap() : Abstract_cellmap::Abstract_cellmap() {
       vx_core::refcount += 1;
     }
+
     Class_cellmap::~Class_cellmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_cellmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -346,6 +364,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cellmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_cellmap(), vals);
     }
+
     vx_core::Type_any Class_cellmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cellmap output = vx_data_table::e_cellmap();
       vx_data_table::Type_cellmap valmap = vx_core::vx_any_from_any(vx_data_table::t_cellmap(), copyval);
@@ -427,6 +446,7 @@ namespace vx_data_table {
     Class_field::Class_field() : Abstract_field::Abstract_field() {
       vx_core::refcount += 1;
     }
+
     Class_field::~Class_field() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -435,6 +455,7 @@ namespace vx_data_table {
         this->vx_p_fldtype
       });
     }
+
     // id()
     vx_core::Type_string Class_field::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -490,6 +511,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_field::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_field(), vals);
     }
+
     vx_core::Type_any Class_field::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_field output = vx_data_table::e_field();
       vx_data_table::Type_field val = vx_core::vx_any_from_any(vx_data_table::t_field(), copyval);
@@ -547,12 +569,27 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_field();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_fldtype = vx_p_fldtype;
-      vx_core::vx_reserve(vx_p_fldtype);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_fldtype != vx_p_fldtype) {
+        if (output->vx_p_fldtype) {
+          vx_core::vx_release_one(output->vx_p_fldtype);
+        }
+        output->vx_p_fldtype = vx_p_fldtype;
+        vx_core::vx_reserve(vx_p_fldtype);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -593,12 +630,14 @@ namespace vx_data_table {
     Class_fieldlist::Class_fieldlist() : Abstract_fieldlist::Abstract_fieldlist() {
       vx_core::refcount += 1;
     }
+
     Class_fieldlist::~Class_fieldlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_fieldlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -652,6 +691,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_fieldlist(), vals);
     }
+
     vx_core::Type_any Class_fieldlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldlist output = vx_data_table::e_fieldlist();
       vx_data_table::Type_fieldlist val = vx_core::vx_any_from_any(vx_data_table::t_fieldlist(), copyval);
@@ -718,12 +758,14 @@ namespace vx_data_table {
     Class_fieldmap::Class_fieldmap() : Abstract_fieldmap::Abstract_fieldmap() {
       vx_core::refcount += 1;
     }
+
     Class_fieldmap::~Class_fieldmap() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_fieldmap::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -777,6 +819,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_fieldmap(), vals);
     }
+
     vx_core::Type_any Class_fieldmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldmap output = vx_data_table::e_fieldmap();
       vx_data_table::Type_fieldmap val = vx_core::vx_any_from_any(vx_data_table::t_fieldmap(), copyval);
@@ -843,6 +886,7 @@ namespace vx_data_table {
     Class_filter::Class_filter() : Abstract_filter::Abstract_filter() {
       vx_core::refcount += 1;
     }
+
     Class_filter::~Class_filter() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -851,6 +895,7 @@ namespace vx_data_table {
         this->vx_p_idlist
       });
     }
+
     // id()
     vx_core::Type_string Class_filter::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -906,6 +951,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_filter::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_filter(), vals);
     }
+
     vx_core::Type_any Class_filter::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_filter output = vx_data_table::e_filter();
       vx_data_table::Type_filter val = vx_core::vx_any_from_any(vx_data_table::t_filter(), copyval);
@@ -968,12 +1014,27 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_filter();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_idlist = vx_p_idlist;
-      vx_core::vx_reserve(vx_p_idlist);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_idlist != vx_p_idlist) {
+        if (output->vx_p_idlist) {
+          vx_core::vx_release_one(output->vx_p_idlist);
+        }
+        output->vx_p_idlist = vx_p_idlist;
+        vx_core::vx_reserve(vx_p_idlist);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1014,6 +1075,7 @@ namespace vx_data_table {
     Class_row::Class_row() : Abstract_row::Abstract_row() {
       vx_core::refcount += 1;
     }
+
     Class_row::~Class_row() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1022,6 +1084,7 @@ namespace vx_data_table {
         this->vx_p_cellsort
       });
     }
+
     // id()
     vx_core::Type_string Class_row::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1077,6 +1140,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_row::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_row(), vals);
     }
+
     vx_core::Type_any Class_row::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_row output = vx_data_table::e_row();
       vx_data_table::Type_row val = vx_core::vx_any_from_any(vx_data_table::t_row(), copyval);
@@ -1139,12 +1203,27 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_row();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_cellmap = vx_p_cellmap;
-      vx_core::vx_reserve(vx_p_cellmap);
-      output->vx_p_cellsort = vx_p_cellsort;
-      vx_core::vx_reserve(vx_p_cellsort);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_cellmap != vx_p_cellmap) {
+        if (output->vx_p_cellmap) {
+          vx_core::vx_release_one(output->vx_p_cellmap);
+        }
+        output->vx_p_cellmap = vx_p_cellmap;
+        vx_core::vx_reserve(vx_p_cellmap);
+      }
+      if (output->vx_p_cellsort != vx_p_cellsort) {
+        if (output->vx_p_cellsort) {
+          vx_core::vx_release_one(output->vx_p_cellsort);
+        }
+        output->vx_p_cellsort = vx_p_cellsort;
+        vx_core::vx_reserve(vx_p_cellsort);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1185,12 +1264,14 @@ namespace vx_data_table {
     Class_rowlist::Class_rowlist() : Abstract_rowlist::Abstract_rowlist() {
       vx_core::refcount += 1;
     }
+
     Class_rowlist::~Class_rowlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_rowlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -1244,6 +1325,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_rowlist(), vals);
     }
+
     vx_core::Type_any Class_rowlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowlist output = vx_data_table::e_rowlist();
       vx_data_table::Type_rowlist val = vx_core::vx_any_from_any(vx_data_table::t_rowlist(), copyval);
@@ -1310,12 +1392,14 @@ namespace vx_data_table {
     Class_rowmap::Class_rowmap() : Abstract_rowmap::Abstract_rowmap() {
       vx_core::refcount += 1;
     }
+
     Class_rowmap::~Class_rowmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_rowmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -1376,6 +1460,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_rowmap(), vals);
     }
+
     vx_core::Type_any Class_rowmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowmap output = vx_data_table::e_rowmap();
       vx_data_table::Type_rowmap valmap = vx_core::vx_any_from_any(vx_data_table::t_rowmap(), copyval);
@@ -1457,6 +1542,7 @@ namespace vx_data_table {
     Class_sort::Class_sort() : Abstract_sort::Abstract_sort() {
       vx_core::refcount += 1;
     }
+
     Class_sort::~Class_sort() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1465,6 +1551,7 @@ namespace vx_data_table {
         this->vx_p_idlist
       });
     }
+
     // id()
     vx_core::Type_string Class_sort::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1520,6 +1607,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_sort::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_sort(), vals);
     }
+
     vx_core::Type_any Class_sort::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_sort output = vx_data_table::e_sort();
       vx_data_table::Type_sort val = vx_core::vx_any_from_any(vx_data_table::t_sort(), copyval);
@@ -1582,12 +1670,27 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_sort();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_idlist = vx_p_idlist;
-      vx_core::vx_reserve(vx_p_idlist);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_idlist != vx_p_idlist) {
+        if (output->vx_p_idlist) {
+          vx_core::vx_release_one(output->vx_p_idlist);
+        }
+        output->vx_p_idlist = vx_p_idlist;
+        vx_core::vx_reserve(vx_p_idlist);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1628,6 +1731,7 @@ namespace vx_data_table {
     Class_table::Class_table() : Abstract_table::Abstract_table() {
       vx_core::refcount += 1;
     }
+
     Class_table::~Class_table() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -1640,6 +1744,7 @@ namespace vx_data_table {
         this->vx_p_rowsort
       });
     }
+
     // id()
     vx_core::Type_string Class_table::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -1743,6 +1848,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_table::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_table::e_table(), vals);
     }
+
     vx_core::Type_any Class_table::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_table output = vx_data_table::e_table();
       vx_data_table::Type_table val = vx_core::vx_any_from_any(vx_data_table::t_table(), copyval);
@@ -1845,20 +1951,55 @@ namespace vx_data_table {
         }
       }
       output = new vx_data_table::Class_table();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_fieldmap = vx_p_fieldmap;
-      vx_core::vx_reserve(vx_p_fieldmap);
-      output->vx_p_fieldsort = vx_p_fieldsort;
-      vx_core::vx_reserve(vx_p_fieldsort);
-      output->vx_p_rowmap = vx_p_rowmap;
-      vx_core::vx_reserve(vx_p_rowmap);
-      output->vx_p_rowfilter = vx_p_rowfilter;
-      vx_core::vx_reserve(vx_p_rowfilter);
-      output->vx_p_rowsort = vx_p_rowsort;
-      vx_core::vx_reserve(vx_p_rowsort);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_fieldmap != vx_p_fieldmap) {
+        if (output->vx_p_fieldmap) {
+          vx_core::vx_release_one(output->vx_p_fieldmap);
+        }
+        output->vx_p_fieldmap = vx_p_fieldmap;
+        vx_core::vx_reserve(vx_p_fieldmap);
+      }
+      if (output->vx_p_fieldsort != vx_p_fieldsort) {
+        if (output->vx_p_fieldsort) {
+          vx_core::vx_release_one(output->vx_p_fieldsort);
+        }
+        output->vx_p_fieldsort = vx_p_fieldsort;
+        vx_core::vx_reserve(vx_p_fieldsort);
+      }
+      if (output->vx_p_rowmap != vx_p_rowmap) {
+        if (output->vx_p_rowmap) {
+          vx_core::vx_release_one(output->vx_p_rowmap);
+        }
+        output->vx_p_rowmap = vx_p_rowmap;
+        vx_core::vx_reserve(vx_p_rowmap);
+      }
+      if (output->vx_p_rowfilter != vx_p_rowfilter) {
+        if (output->vx_p_rowfilter) {
+          vx_core::vx_release_one(output->vx_p_rowfilter);
+        }
+        output->vx_p_rowfilter = vx_p_rowfilter;
+        vx_core::vx_reserve(vx_p_rowfilter);
+      }
+      if (output->vx_p_rowsort != vx_p_rowsort) {
+        if (output->vx_p_rowsort) {
+          vx_core::vx_release_one(output->vx_p_rowsort);
+        }
+        output->vx_p_rowsort = vx_p_rowsort;
+        vx_core::vx_reserve(vx_p_rowsort);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);

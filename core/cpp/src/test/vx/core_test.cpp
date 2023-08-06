@@ -2028,9 +2028,11 @@ namespace vx_core_test {
                 vx_core::t_int(),
                 vx_core::t_any_from_func()->vx_fn_new({}, []() {
                   vx_core::Type_int v1 = vx_core::vx_new_int(2);
+                  vx_core::vx_ref_plus(v1);
                   vx_core::Type_int v2 = vx_core::f_plus(v1, vx_core::vx_new_int(3));
+                  vx_core::vx_ref_plus(v2);
                   vx_core::Type_int output_1 = vx_core::f_plus(v1, v2);
-                  vx_core::vx_release_except({v1, v2}, output_1);
+                  vx_core::vx_release_one_except({v1, v2}, output_1);
                   return output_1;
                 })
               ),

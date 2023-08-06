@@ -15,12 +15,14 @@ namespace vx_data_xml {
     Class_xml::Class_xml() : Abstract_xml::Abstract_xml() {
       vx_core::refcount += 1;
     }
+
     Class_xml::~Class_xml() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
     }
+
     // nodes()
     vx_data_xml::Type_xmlnodelist Class_xml::nodes() const {
       vx_data_xml::Type_xmlnodelist output = this->vx_p_nodes;
@@ -52,6 +54,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xml::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_xml::e_xml(), vals);
     }
+
     vx_core::Type_any Class_xml::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xml output = vx_data_xml::e_xml();
       vx_data_xml::Type_xml val = vx_core::vx_any_from_any(vx_data_xml::t_xml(), copyval);
@@ -94,8 +97,13 @@ namespace vx_data_xml {
         }
       }
       output = new vx_data_xml::Class_xml();
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -136,6 +144,7 @@ namespace vx_data_xml {
     Class_xmlnode::Class_xmlnode() : Abstract_xmlnode::Abstract_xmlnode() {
       vx_core::refcount += 1;
     }
+
     Class_xmlnode::~Class_xmlnode() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -145,6 +154,7 @@ namespace vx_data_xml {
         this->vx_p_text
       });
     }
+
     // nodes()
     vx_data_xml::Type_xmlnode Class_xmlnode::nodes() const {
       vx_data_xml::Type_xmlnode output = this->vx_p_nodes;
@@ -212,6 +222,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnode::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_xml::e_xmlnode(), vals);
     }
+
     vx_core::Type_any Class_xmlnode::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnode output = vx_data_xml::e_xmlnode();
       vx_data_xml::Type_xmlnode val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode(), copyval);
@@ -284,14 +295,34 @@ namespace vx_data_xml {
         }
       }
       output = new vx_data_xml::Class_xmlnode();
-      output->vx_p_nodes = vx_p_nodes;
-      vx_core::vx_reserve(vx_p_nodes);
-      output->vx_p_props = vx_p_props;
-      vx_core::vx_reserve(vx_p_props);
-      output->vx_p_tag = vx_p_tag;
-      vx_core::vx_reserve(vx_p_tag);
-      output->vx_p_text = vx_p_text;
-      vx_core::vx_reserve(vx_p_text);
+      if (output->vx_p_nodes != vx_p_nodes) {
+        if (output->vx_p_nodes) {
+          vx_core::vx_release_one(output->vx_p_nodes);
+        }
+        output->vx_p_nodes = vx_p_nodes;
+        vx_core::vx_reserve(vx_p_nodes);
+      }
+      if (output->vx_p_props != vx_p_props) {
+        if (output->vx_p_props) {
+          vx_core::vx_release_one(output->vx_p_props);
+        }
+        output->vx_p_props = vx_p_props;
+        vx_core::vx_reserve(vx_p_props);
+      }
+      if (output->vx_p_tag != vx_p_tag) {
+        if (output->vx_p_tag) {
+          vx_core::vx_release_one(output->vx_p_tag);
+        }
+        output->vx_p_tag = vx_p_tag;
+        vx_core::vx_reserve(vx_p_tag);
+      }
+      if (output->vx_p_text != vx_p_text) {
+        if (output->vx_p_text) {
+          vx_core::vx_release_one(output->vx_p_text);
+        }
+        output->vx_p_text = vx_p_text;
+        vx_core::vx_reserve(vx_p_text);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -332,12 +363,14 @@ namespace vx_data_xml {
     Class_xmlnodelist::Class_xmlnodelist() : Abstract_xmlnodelist::Abstract_xmlnodelist() {
       vx_core::refcount += 1;
     }
+
     Class_xmlnodelist::~Class_xmlnodelist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_xmlnodelist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -391,6 +424,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnodelist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_xml::e_xmlnodelist(), vals);
     }
+
     vx_core::Type_any Class_xmlnodelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnodelist output = vx_data_xml::e_xmlnodelist();
       vx_data_xml::Type_xmlnodelist val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist(), copyval);
@@ -457,12 +491,14 @@ namespace vx_data_xml {
     Class_xmlpropmap::Class_xmlpropmap() : Abstract_xmlpropmap::Abstract_xmlpropmap() {
       vx_core::refcount += 1;
     }
+
     Class_xmlpropmap::~Class_xmlpropmap() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_xmlpropmap::vx_map() const {
       vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any(), this->vx_p_map);
@@ -523,6 +559,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlpropmap::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_xml::e_xmlpropmap(), vals);
     }
+
     vx_core::Type_any Class_xmlpropmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlpropmap output = vx_data_xml::e_xmlpropmap();
       vx_data_xml::Type_xmlpropmap valmap = vx_core::vx_any_from_any(vx_data_xml::t_xmlpropmap(), copyval);

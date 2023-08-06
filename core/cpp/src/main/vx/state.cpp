@@ -13,12 +13,14 @@ namespace vx_state {
     Class_value_map::Class_value_map() : Abstract_value_map::Abstract_value_map() {
       vx_core::refcount += 1;
     }
+
     Class_value_map::~Class_value_map() {
       vx_core::refcount -= 1;
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
     }
+
     // vx_map()
     vx_core::vx_Type_mapany Class_value_map::vx_map() const {
       vx_core::vx_Type_mapany output = this->vx_p_map;
@@ -71,6 +73,7 @@ namespace vx_state {
     vx_core::Type_any Class_value_map::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_state::e_value_map(), vals);
     }
+
     vx_core::Type_any Class_value_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Type_value_map output = vx_state::e_value_map();
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map(), copyval);

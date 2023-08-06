@@ -13,6 +13,7 @@ namespace vx_data_tree {
     Class_branch::Class_branch() : Abstract_branch::Abstract_branch() {
       vx_core::refcount += 1;
     }
+
     Class_branch::~Class_branch() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -24,6 +25,7 @@ namespace vx_data_tree {
         this->vx_p_tree
       });
     }
+
     // id()
     vx_core::Type_string Class_branch::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -115,6 +117,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_branch::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_branch(), vals);
     }
+
     vx_core::Type_any Class_branch::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branch output = vx_data_tree::e_branch();
       vx_data_tree::Type_branch val = vx_core::vx_any_from_any(vx_data_tree::t_branch(), copyval);
@@ -207,18 +210,48 @@ namespace vx_data_tree {
         }
       }
       output = new vx_data_tree::Class_branch();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_brancharrow = vx_p_brancharrow;
-      vx_core::vx_reserve(vx_p_brancharrow);
-      output->vx_p_branchlist = vx_p_branchlist;
-      vx_core::vx_reserve(vx_p_branchlist);
-      output->vx_p_leaflist = vx_p_leaflist;
-      vx_core::vx_reserve(vx_p_leaflist);
-      output->vx_p_parentbranch = vx_p_parentbranch;
-      vx_core::vx_reserve(vx_p_parentbranch);
-      output->vx_p_tree = vx_p_tree;
-      vx_core::vx_reserve(vx_p_tree);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_brancharrow != vx_p_brancharrow) {
+        if (output->vx_p_brancharrow) {
+          vx_core::vx_release_one(output->vx_p_brancharrow);
+        }
+        output->vx_p_brancharrow = vx_p_brancharrow;
+        vx_core::vx_reserve(vx_p_brancharrow);
+      }
+      if (output->vx_p_branchlist != vx_p_branchlist) {
+        if (output->vx_p_branchlist) {
+          vx_core::vx_release_one(output->vx_p_branchlist);
+        }
+        output->vx_p_branchlist = vx_p_branchlist;
+        vx_core::vx_reserve(vx_p_branchlist);
+      }
+      if (output->vx_p_leaflist != vx_p_leaflist) {
+        if (output->vx_p_leaflist) {
+          vx_core::vx_release_one(output->vx_p_leaflist);
+        }
+        output->vx_p_leaflist = vx_p_leaflist;
+        vx_core::vx_reserve(vx_p_leaflist);
+      }
+      if (output->vx_p_parentbranch != vx_p_parentbranch) {
+        if (output->vx_p_parentbranch) {
+          vx_core::vx_release_one(output->vx_p_parentbranch);
+        }
+        output->vx_p_parentbranch = vx_p_parentbranch;
+        vx_core::vx_reserve(vx_p_parentbranch);
+      }
+      if (output->vx_p_tree != vx_p_tree) {
+        if (output->vx_p_tree) {
+          vx_core::vx_release_one(output->vx_p_tree);
+        }
+        output->vx_p_tree = vx_p_tree;
+        vx_core::vx_reserve(vx_p_tree);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -259,12 +292,15 @@ namespace vx_data_tree {
     Class_brancharrow::Class_brancharrow() : Abstract_brancharrow::Abstract_brancharrow() {
       vx_core::refcount += 1;
     }
+
     Class_brancharrow::~Class_brancharrow() {
       vx_core::refcount -= 1;
     }
+
     vx_core::Type_any Class_brancharrow::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_brancharrow(), vals);
     }
+
     vx_core::Type_any Class_brancharrow::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_brancharrow output = vx_data_tree::e_brancharrow();
       vx_core::vx_release_except(copyval, output);
@@ -303,12 +339,14 @@ namespace vx_data_tree {
     Class_branchlist::Class_branchlist() : Abstract_branchlist::Abstract_branchlist() {
       vx_core::refcount += 1;
     }
+
     Class_branchlist::~Class_branchlist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_branchlist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -362,6 +400,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_branchlist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_branchlist(), vals);
     }
+
     vx_core::Type_any Class_branchlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branchlist output = vx_data_tree::e_branchlist();
       vx_data_tree::Type_branchlist val = vx_core::vx_any_from_any(vx_data_tree::t_branchlist(), copyval);
@@ -428,6 +467,7 @@ namespace vx_data_tree {
     Class_leaf::Class_leaf() : Abstract_leaf::Abstract_leaf() {
       vx_core::refcount += 1;
     }
+
     Class_leaf::~Class_leaf() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -436,6 +476,7 @@ namespace vx_data_tree {
         this->vx_p_value
       });
     }
+
     // id()
     vx_core::Type_string Class_leaf::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -491,6 +532,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_leaf::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_leaf(), vals);
     }
+
     vx_core::Type_any Class_leaf::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaf output = vx_data_tree::e_leaf();
       vx_data_tree::Type_leaf val = vx_core::vx_any_from_any(vx_data_tree::t_leaf(), copyval);
@@ -548,12 +590,27 @@ namespace vx_data_tree {
         }
       }
       output = new vx_data_tree::Class_leaf();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_value = vx_p_value;
-      vx_core::vx_reserve(vx_p_value);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_value != vx_p_value) {
+        if (output->vx_p_value) {
+          vx_core::vx_release_one(output->vx_p_value);
+        }
+        output->vx_p_value = vx_p_value;
+        vx_core::vx_reserve(vx_p_value);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -594,12 +651,14 @@ namespace vx_data_tree {
     Class_leaflist::Class_leaflist() : Abstract_leaflist::Abstract_leaflist() {
       vx_core::refcount += 1;
     }
+
     Class_leaflist::~Class_leaflist() {
       vx_core::refcount -= 1;
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
     }
+
     // vx_list()
     vx_core::vx_Type_listany Class_leaflist::vx_list() const {
       return vx_core::vx_list_from_list(vx_core::t_any(), this->vx_p_list);
@@ -653,6 +712,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_leaflist::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_leaflist(), vals);
     }
+
     vx_core::Type_any Class_leaflist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaflist output = vx_data_tree::e_leaflist();
       vx_data_tree::Type_leaflist val = vx_core::vx_any_from_any(vx_data_tree::t_leaflist(), copyval);
@@ -719,6 +779,7 @@ namespace vx_data_tree {
     Class_tree::Class_tree() : Abstract_tree::Abstract_tree() {
       vx_core::refcount += 1;
     }
+
     Class_tree::~Class_tree() {
       vx_core::refcount -= 1;
       vx_core::vx_release_one({
@@ -727,6 +788,7 @@ namespace vx_data_tree {
         this->vx_p_branch
       });
     }
+
     // id()
     vx_core::Type_string Class_tree::id() const {
       vx_core::Type_string output = this->vx_p_id;
@@ -782,6 +844,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_tree::vx_new(vx_core::vx_Type_listany vals) const {
       return this->vx_copy(vx_data_tree::e_tree(), vals);
     }
+
     vx_core::Type_any Class_tree::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_tree output = vx_data_tree::e_tree();
       vx_data_tree::Type_tree val = vx_core::vx_any_from_any(vx_data_tree::t_tree(), copyval);
@@ -844,12 +907,27 @@ namespace vx_data_tree {
         }
       }
       output = new vx_data_tree::Class_tree();
-      output->vx_p_id = vx_p_id;
-      vx_core::vx_reserve(vx_p_id);
-      output->vx_p_name = vx_p_name;
-      vx_core::vx_reserve(vx_p_name);
-      output->vx_p_branch = vx_p_branch;
-      vx_core::vx_reserve(vx_p_branch);
+      if (output->vx_p_id != vx_p_id) {
+        if (output->vx_p_id) {
+          vx_core::vx_release_one(output->vx_p_id);
+        }
+        output->vx_p_id = vx_p_id;
+        vx_core::vx_reserve(vx_p_id);
+      }
+      if (output->vx_p_name != vx_p_name) {
+        if (output->vx_p_name) {
+          vx_core::vx_release_one(output->vx_p_name);
+        }
+        output->vx_p_name = vx_p_name;
+        vx_core::vx_reserve(vx_p_name);
+      }
+      if (output->vx_p_branch != vx_p_branch) {
+        if (output->vx_p_branch) {
+          vx_core::vx_release_one(output->vx_p_branch);
+        }
+        output->vx_p_branch = vx_p_branch;
+        vx_core::vx_reserve(vx_p_branch);
+      }
       if (msgblock != vx_core::e_msgblock()) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
