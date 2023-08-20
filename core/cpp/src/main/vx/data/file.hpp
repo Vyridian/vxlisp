@@ -1,5 +1,6 @@
 #ifndef VX_DATA_FILE_HPP
 #define VX_DATA_FILE_HPP
+#include <string>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
 
@@ -79,6 +80,19 @@ namespace vx_data_file {
 
 // :headerfirst
 // :header
+
+  vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file);
+
+  vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text);
+
+  vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text);
+
+  vx_core::Type_string vx_string_read_from_file(vx_data_file::Type_file file);
+
+  vx_core::Type_string vx_string_read_from_path(std::string path);
+
+  vx_core::Type_string vx_pathcurrent_from_os();
+
 
   // (func boolean-exists<-file)
   vx_core::Type_boolean f_boolean_exists_from_file(vx_data_file::Type_file file);

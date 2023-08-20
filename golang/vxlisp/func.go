@@ -70,14 +70,6 @@ func NewMapFuncMap() map[string][]*vxfunc {
 	return make(map[string][]*vxfunc)
 }
 
-func FuncSetType(fnc *vxfunc, typ *vxtype) *vxfunc {
-	fnc.vxtype = typ
-	if fnc.generictype != nil {
-		fnc.mapgeneric = MapTypeSetType(fnc.mapgeneric, fnc.generictype.name, typ)
-	}
-	return fnc
-}
-
 func FuncFnGetArgList(fnc *vxfunc) []vxarg {
 	var output []vxarg
 	switch NameFromFunc(fnc) {
@@ -351,6 +343,14 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 		fnc.listtestvalue = testvalues
 	}
 	return fnc, msgblock
+}
+
+func FuncSetType(fnc *vxfunc, typ *vxtype) *vxfunc {
+	fnc.vxtype = typ
+	if fnc.generictype != nil {
+		fnc.mapgeneric = MapTypeSetType(fnc.mapgeneric, fnc.generictype.name, typ)
+	}
+	return fnc
 }
 
 func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfunc, *vxmsgblock) {

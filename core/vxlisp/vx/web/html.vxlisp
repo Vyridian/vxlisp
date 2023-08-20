@@ -209,6 +209,13 @@
 (func htmlstring<-string : string
  [text : string]
  (native
+  :cpp
+   "std::string str = text->vx_string();
+    str = vx_core::vx_string_from_string_find_replace(str, “&”, “&amp;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “'”, “\'”);
+    str = vx_core::vx_string_from_string_find_replace(str, “>”, “&gt;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “<”, “&lt;”);
+    output = vx_core::vx_new_string(str);"
   :js
    "const str = “” + text
     output = str

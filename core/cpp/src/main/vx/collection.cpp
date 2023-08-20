@@ -156,11 +156,12 @@ namespace vx_collection {
   // (func is-list)
   vx_core::Type_boolean f_is_list(vx_core::Type_any val) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(val);
     output = vx_core::f_eq(
       vx_core::vx_new_string(":list"),
       vx_core::f_extends_from_any(val)
     );
-    vx_core::vx_release_except(val, output);
+    vx_core::vx_release_one_except(val, output);
     return output;
   }
 
@@ -250,11 +251,12 @@ namespace vx_collection {
   // (func is-map)
   vx_core::Type_boolean f_is_map(vx_core::Type_any val) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(val);
     output = vx_core::f_eq(
       vx_core::vx_new_string(":map"),
       vx_core::f_extends_from_any(val)
     );
-    vx_core::vx_release_except(val, output);
+    vx_core::vx_release_one_except(val, output);
     return output;
   }
 

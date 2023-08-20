@@ -1,4 +1,7 @@
 #include <exception>
+#include <iostream>
+#include <filesystem>
+#include <fstream>
 #include <string>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
@@ -7,41 +10,77 @@
 namespace vx_data_file {
 // :body
 
-//vx_core::Type_string Class_file::string_read_from_path(std::string path) {
-//  vx_core::Type_string output = vx_core::e_string();
-//  std::ifstream filestream (path);
-//  if (filestream.is_open()) {
-//    std::string text;
-//    std::string line;
-//    while (std::getline(filestream, line)) {
-//      text += line + '\n';
-//    }
-//    filestream.close();
-//    output = vx_core::vx_new_string_from_text(text);
-//  } else {
-//    msg = vx_core::t_msg()->vx_new_from_errortext("File not found:" + path);
-//    output = vx_core::vx_new(vx_core::t_string(), {msg});
-//  }
-//  return output;
-//}
+  vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file) {
+    vx_core::Type_boolean output = vx_core::c_false();
+		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+		std::ifstream f(path->vx_string());
+    if (f.good()) {
+      output = vx_core::c_true();
+		}
+    return output;
+	}
 
-//vx_core::Type_boolean Class_file::boolean_write_from_path_text(std::string path, std::string text) {
-//  vx_core::Type_boolean output = vx_core::c_false();
-//  std::ofstream filestream;
-//  if (filestream.is_open()) {
-//    filestream.open(path);
-//    filestream << text;
-//    filestream.close();
-//  } else {
-//    msg = vx_core::t_msg()->vx_new_from_errortext("File not found:" + path);
-//    output = vx_core::vx_copy(vx_core::c_false(), {msg});
-//  }
-//  return output;
-//}
-/*
-#include <iostream>
-#include <fstream>
-*/
+  vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text) {
+    vx_core::Type_boolean output = vx_core::c_false();
+		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+    output = vx_data_file::vx_boolean_write_from_path_text(path->vx_string(), text->vx_string());
+    vx_core::vx_release({path, text});
+    return output;
+	}
+
+  vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text) {
+    vx_core::Type_boolean output = vx_core::c_false();
+    std::ofstream filestream(path);
+    if (filestream.is_open()) {
+      filestream << text;
+      filestream.close();
+      output = vx_core::c_true();
+    } else {
+      vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("File not found:" + path);
+      output = vx_core::vx_copy(vx_core::c_false(), {msg});
+    }
+    return output;
+  }
+
+  vx_core::Type_string vx_string_read_from_file(vx_data_file::Type_file file) {
+    vx_core::Type_string output = vx_core::e_string();
+		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+		output = vx_data_file::vx_string_read_from_path(path->vx_string());
+    vx_core::vx_release(path);
+		return output;
+	}
+
+  vx_core::Type_string vx_string_read_from_path(std::string path) {
+    vx_core::Type_string output = vx_core::e_string();
+    std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
+    if (filestream.is_open()) {
+      bool isfirst = true;
+      std::string text;
+      std::string line;
+      while (std::getline(filestream, line)) {
+        if (isfirst) {
+          text = line;
+          isfirst = false;
+        } else {
+          text += "\n" + line;
+        }
+      }
+      filestream.close();
+      output = vx_core::vx_new_string(text);
+    } else {
+      vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("File not found:" + path);
+      output = vx_core::vx_new(vx_core::t_string(), {msg});
+    }
+    return output;
+  }
+
+  vx_core::Type_string vx_pathcurrent_from_os() {
+    vx_core::Type_string output = vx_core::e_string();
+		std::string path = std::filesystem::current_path().string();
+		output = vx_core::vx_new_string(path);
+    return output;
+	}
+
 
   // (type file)
   // class Class_file {
@@ -342,7 +381,9 @@ namespace vx_data_file {
   // (func boolean-exists<-file)
   vx_core::Type_boolean f_boolean_exists_from_file(vx_data_file::Type_file file) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_reserve(file);
+    output = vx_data_file::vx_boolean_exists_from_file(file);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 
@@ -432,12 +473,13 @@ namespace vx_data_file {
   // (func boolean-write<-file-any)
   vx_core::Type_boolean f_boolean_write_from_file_any(vx_data_file::Type_file file, vx_core::Type_any val, vx_core::Type_context context) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve({file, val});
     output = vx_data_file::f_boolean_write_from_file_string(
       file,
       vx_core::f_string_from_any(val),
       context
     );
-    vx_core::vx_release_except({file, val}, output);
+    vx_core::vx_release_one_except({file, val}, output);
     return output;
   }
 
@@ -517,12 +559,14 @@ namespace vx_data_file {
   // (func boolean-write<-file-string)
   vx_core::Type_boolean f_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text, vx_core::Type_context context) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve({file, text});
     try {
+      output = vx_data_file::vx_boolean_write_from_file_string(file, text);
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_exception("boolean-write<-file-string", err);
       output = vx_core::vx_copy(vx_core::t_boolean(), {msg});
     }
-    vx_core::vx_release_except({file, text}, output);
+    vx_core::vx_release_one_except({file, text}, output);
     return output;
   }
 
@@ -602,6 +646,7 @@ namespace vx_data_file {
   // (func file-read<-file)
   vx_data_file::Type_file f_file_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context) {
     vx_data_file::Type_file output = vx_data_file::e_file();
+    vx_core::vx_reserve(file);
     output = vx_core::f_copy(
       file,
       vx_core::vx_new(vx_core::t_anylist(), {
@@ -609,7 +654,7 @@ namespace vx_data_file {
         vx_data_file::f_string_read_from_file(file, context)
       })
     );
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 
@@ -700,8 +745,9 @@ namespace vx_data_file {
   // (func name<-file)
   vx_core::Type_string f_name_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(file);
     output = file->name();
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 
@@ -791,8 +837,9 @@ namespace vx_data_file {
   // (func path<-file)
   vx_core::Type_string f_path_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(file);
     output = file->path();
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 
@@ -882,6 +929,7 @@ namespace vx_data_file {
   // (func pathcurrent<-os)
   vx_core::Type_string f_pathcurrent_from_os() {
     vx_core::Type_string output = vx_core::e_string();
+    output = vx_data_file::vx_pathcurrent_from_os();
     return output;
   }
 
@@ -958,6 +1006,7 @@ namespace vx_data_file {
   // (func pathfull<-file)
   vx_core::Type_string f_pathfull_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(file);
     output = vx_core::f_let(
       vx_core::t_string(),
       vx_core::t_any_from_func()->vx_fn_new({file}, [file]() {
@@ -977,7 +1026,7 @@ namespace vx_data_file {
         return output_1;
       })
     );
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 
@@ -1067,12 +1116,14 @@ namespace vx_data_file {
   // (func string-read<-file)
   vx_core::Type_string f_string_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(file);
     try {
+      output = vx_data_file::vx_string_read_from_file(file);
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_exception("string-read<-file", err);
       output = vx_core::vx_copy(vx_core::t_string(), {msg});
     }
-    vx_core::vx_release_except(file, output);
+    vx_core::vx_release_one_except(file, output);
     return output;
   }
 

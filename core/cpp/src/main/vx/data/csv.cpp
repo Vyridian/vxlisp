@@ -250,6 +250,8 @@ namespace vx_data_csv {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_stringlist()) {
           listval.push_back(vx_core::vx_any_from_any(vx_core::t_stringlist(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_stringlist())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_core::t_stringlist(), valsub));
         } else if (valsubtype == vx_data_csv::t_csvrows()) {
           vx_data_csv::Type_csvrows multi = vx_core::vx_any_from_any(vx_data_csv::t_csvrows(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststringlist());
@@ -283,7 +285,7 @@ namespace vx_data_csv {
         "csvrows", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_stringlist()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_core::t_stringlist()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -302,6 +304,7 @@ namespace vx_data_csv {
     // vx_const_new()
     vx_data_csv::Const_delims vx_data_csv::Class_delims::vx_const_new() {
       vx_data_csv::Const_delims output = new vx_data_csv::Class_delims();
+      long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delimset val = vx_core::f_new(
         vx_data_textblock::t_delimset(),
         vx_core::vx_new(vx_core::t_anylist(), {
@@ -348,9 +351,15 @@ namespace vx_data_csv {
         })
       );
       output->vx_p_start = val->start();
+      vx_core::vx_reserve(output->vx_p_start);
       output->vx_p_end = val->end();
+      vx_core::vx_reserve(output->vx_p_end);
       output->vx_p_split = val->split();
+      vx_core::vx_reserve(output->vx_p_split);
       output->vx_p_subset = val->subset();
+      vx_core::vx_reserve(output->vx_p_subset);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
       return output;
     }
@@ -382,6 +391,7 @@ namespace vx_data_csv {
   // (func csv<-textblock)
   vx_data_csv::Type_csv f_csv_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_data_csv::Type_csv output = vx_data_csv::e_csv();
+    vx_core::vx_reserve(textblock);
     output = vx_core::f_let(
       vx_data_csv::t_csv(),
       vx_core::t_any_from_func()->vx_fn_new({textblock}, [textblock]() {
@@ -404,7 +414,7 @@ namespace vx_data_csv {
         return output_1;
       })
     );
-    vx_core::vx_release_except(textblock, output);
+    vx_core::vx_release_one_except(textblock, output);
     return output;
   }
 
@@ -494,6 +504,7 @@ namespace vx_data_csv {
   // (func csvrows<-textblock)
   vx_data_csv::Type_csvrows f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows();
+    vx_core::vx_reserve(textblock);
     output = vx_core::f_let(
       vx_data_csv::t_csvrows(),
       vx_core::t_any_from_func()->vx_fn_new({textblock}, [textblock]() {
@@ -516,7 +527,7 @@ namespace vx_data_csv {
         return output_1;
       })
     );
-    vx_core::vx_release_except(textblock, output);
+    vx_core::vx_release_one_except(textblock, output);
     return output;
   }
 

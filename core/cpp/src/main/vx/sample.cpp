@@ -184,7 +184,7 @@ namespace vx_sample {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_number()}), // traits
+          vx_core::vx_typelist_from_listany({vx_core::t_number()}), // traits
           vx_core::e_typelist(), // allowtypes
           vx_core::e_typelist(), // disallowtypes
           vx_core::e_funclist(), // allowfuncs
@@ -280,11 +280,12 @@ namespace vx_sample {
   // (func myfunc)
   vx_core::Type_int f_myfunc(vx_core::Type_int myarg) {
     vx_core::Type_int output = vx_core::e_int();
+    vx_core::vx_reserve(myarg);
     output = vx_core::f_plus(
       vx_sample::c_myconst(),
       myarg
     );
-    vx_core::vx_release_except(myarg, output);
+    vx_core::vx_release_one_except(myarg, output);
     return output;
   }
 

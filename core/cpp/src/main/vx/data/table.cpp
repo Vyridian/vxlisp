@@ -243,6 +243,8 @@ namespace vx_data_table {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_cell()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_cell(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_table::t_cell())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_cell(), valsub));
         } else if (valsubtype == vx_data_table::t_celllist()) {
           vx_data_table::Type_celllist multi = vx_core::vx_any_from_any(vx_data_table::t_celllist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listcell());
@@ -276,7 +278,7 @@ namespace vx_data_table {
         "celllist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_cell()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_cell()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -369,6 +371,7 @@ namespace vx_data_table {
       vx_data_table::Type_cellmap output = vx_data_table::e_cellmap();
       vx_data_table::Type_cellmap valmap = vx_core::vx_any_from_any(vx_data_table::t_cellmap(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_data_table::Type_cell> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -397,11 +400,13 @@ namespace vx_data_table {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_data_table::Class_cellmap();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -426,7 +431,7 @@ namespace vx_data_table {
         "cellmap", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_cell()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_cell()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -705,6 +710,8 @@ namespace vx_data_table {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_field()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_field(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_table::t_field())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_field(), valsub));
         } else if (valsubtype == vx_data_table::t_fieldlist()) {
           vx_data_table::Type_fieldlist multi = vx_core::vx_any_from_any(vx_data_table::t_fieldlist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listfield());
@@ -738,7 +745,7 @@ namespace vx_data_table {
         "fieldlist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_field()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_field()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -833,6 +840,8 @@ namespace vx_data_table {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_field()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_field(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_table::t_field())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_field(), valsub));
         } else if (valsubtype == vx_data_table::t_fieldmap()) {
           vx_data_table::Type_fieldmap multi = vx_core::vx_any_from_any(vx_data_table::t_fieldmap(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listfield());
@@ -866,7 +875,7 @@ namespace vx_data_table {
         "fieldmap", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_field()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_field()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -1339,6 +1348,8 @@ namespace vx_data_table {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_table::t_row()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_row(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_table::t_row())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_table::t_row(), valsub));
         } else if (valsubtype == vx_data_table::t_rowlist()) {
           vx_data_table::Type_rowlist multi = vx_core::vx_any_from_any(vx_data_table::t_rowlist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listrow());
@@ -1372,7 +1383,7 @@ namespace vx_data_table {
         "rowlist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_row()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_row()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -1465,6 +1476,7 @@ namespace vx_data_table {
       vx_data_table::Type_rowmap output = vx_data_table::e_rowmap();
       vx_data_table::Type_rowmap valmap = vx_core::vx_any_from_any(vx_data_table::t_rowmap(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_data_table::Type_row> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1493,11 +1505,13 @@ namespace vx_data_table {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_data_table::Class_rowmap();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -1522,7 +1536,7 @@ namespace vx_data_table {
         "rowmap", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_table::t_row()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_table::t_row()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs

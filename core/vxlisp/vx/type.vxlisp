@@ -74,6 +74,9 @@
 (func length<-string : int
  [text : string]
  (native
+  :cpp
+   "long len = text->vx_string().length();
+    output = vx_core::vx_new_int(len);"
   :js
    "text.length"
   :java
@@ -118,6 +121,9 @@
   start : int
   end   : int]
  (native
+  :cpp
+   "std::string str = vx_core::vx_string_from_string_start_end(text->vx_string(), start->vx_int(), end->vx_int());
+    output = vx_core::vx_new_string(str);"
   :js "text.substring(start, end)"
   :java
    "String stext = text.vx_string();
@@ -141,9 +147,23 @@
  :doc "Returns a substring between start and end positions.")
 
 (func string<-stringlist-join : string
- [vals      : stringlist
+ [vals  : stringlist
   delim : string]
  (native
+  :cpp
+   "bool isfirst = true;
+    std::string str = “”;
+    std::string sdelim = delim->vx_string();
+    for (vx_core::Type_string substr : vals->vx_p_list) {
+      std::string ssub = substr->vx_string();
+      if (isfirst) {
+        str = ssub;
+      } else {
+        str += sdelim + ssub;
+      }
+      isfirst = false;
+    }
+    output = vx_core::vx_new_string(str);"
   :js "vals.join(delim)"
   :java
    "List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {

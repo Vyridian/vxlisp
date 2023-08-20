@@ -526,11 +526,16 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				cnstval = "" +
+					"\n      long irefcount = vx_core::refcount;" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";"
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					cnstval += "" +
-						"\n      output->vx_p_" + CppFromName(prop.name) + " = val->" + CppFromName(prop.name) + "();"
+						"\n      output->vx_p_" + CppFromName(prop.name) + " = val->" + CppFromName(prop.name) + "();" +
+						"\n      vx_core::vx_reserve(output->vx_p_" + CppFromName(prop.name) + ");"
 				}
+				cnstval += "" +
+					"\n      vx_core::vx_release(val);" +
+					"\n      vx_core::refcount = irefcount;"
 			}
 			/*
 				clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "        ", true, false, path)
@@ -762,10 +767,10 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 			"\n      vx_core::vx_Type_async output = NULL;" +
 			"\n      if (fn) {" +
 			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
+			"\n        output->type = generic_any_1;" +
 			"\n      } else {" +
 			"\n        output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));" +
 			"\n      }" +
-			"\n      output->type = generic_any_1;" +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
@@ -967,24 +972,24 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 	switch len(listreleasename) {
 	case 0:
 	case 1:
-		//		reserve = "" +
-		//			lineindent + "vx_core::vx_reserve(" + StringFromListStringJoin(listreleasename, ", ") + ");"
+		reserve = "" +
+			lineindent + "vx_core::vx_reserve(" + StringFromListStringJoin(listreleasename, ", ") + ");"
 		if fnc.async || fnc.vxtype.name == "none" {
 			release = "" +
-				lineindent + "vx_core::vx_release(" + StringFromListStringJoin(listreleasename, ", ") + ");"
+				lineindent + "vx_core::vx_release_one(" + StringFromListStringJoin(listreleasename, ", ") + ");"
 		} else {
 			release = "" +
-				lineindent + "vx_core::vx_release_except(" + StringFromListStringJoin(listreleasename, ", ") + ", output);"
+				lineindent + "vx_core::vx_release_one_except(" + StringFromListStringJoin(listreleasename, ", ") + ", output);"
 		}
 	default:
-		//		reserve = "" +
-		//			lineindent + "vx_core::vx_reserve({" + StringFromListStringJoin(listreleasename, ", ") + "});"
+		reserve = "" +
+			lineindent + "vx_core::vx_reserve({" + StringFromListStringJoin(listreleasename, ", ") + "});"
 		if fnc.async || fnc.vxtype.name == "none" {
 			release = "" +
-				lineindent + "vx_core::vx_release({" + StringFromListStringJoin(listreleasename, ", ") + "});"
+				lineindent + "vx_core::vx_release_one({" + StringFromListStringJoin(listreleasename, ", ") + "});"
 		} else {
 			release = "" +
-				lineindent + "vx_core::vx_release_except({" + StringFromListStringJoin(listreleasename, ", ") + "}, output);"
+				lineindent + "vx_core::vx_release_one_except({" + StringFromListStringJoin(listreleasename, ", ") + "}, output);"
 		}
 	}
 	defaultvalue := ""
@@ -1796,6 +1801,8 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			if allowedtypename != "" {
 				valnew += "" +
 					"\n        } else if (valsubtype == " + allowedtypename + ") {" +
+					"\n          listval.push_back(" + castval + ");" +
+					"\n        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + allowedtypename + ")) {" +
 					"\n          listval.push_back(" + castval + ");"
 			}
 		}
@@ -1909,6 +1916,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n      " + fulltypename + " valmap = vx_core::vx_any_from_any(" + fulltname + ", copyval);" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);"
 		valnew = "" +
+			"\n      std::vector<std::string> keys;" +
 			"\n      std::map<std::string, " + allowclass + "> mapval;" +
 			"\n      std::string key = \"\";" +
 			"\n      for (vx_core::Type_any valsub : vals) {" +
@@ -1963,11 +1971,13 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          }" +
 			"\n          if (valany) {" +
 			"\n            mapval[key] = valany;" +
+			"\n            keys.push_back(key);" +
 			"\n            key = \"\";" +
 			"\n          }" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
+			"\n      output->vx_p_keys = keys;" +
 			"\n      output->vx_p_map = mapval;" +
 			"\n      for (auto const& [key, val] : mapval) {" +
 			"\n        vx_core::vx_reserve(val);" +
@@ -1984,6 +1994,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		vx_map := ""
 		valcopy = ""
 		switch NameFromType(typ) {
+		case "vx/core/msg":
+			valcopy += "" +
+				"\n      vx_core::Type_msg val = vx_core::vx_any_from_any(" + fulltname + ", copyval);"
 		case "vx/core/msgblock":
 			valcopy += "" +
 				"\n      vx_core::Type_msgblock val = vx_core::e_msgblock();" +
@@ -2028,18 +2041,26 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 				argetype := CppNameEFromType(arg.vxtype)
 				valnewswitch += "" +
 					"\n          } else if (key == \":" + arg.name + "\") {"
-				switch NameFromType(arg.vxtype) {
-				case "vx/core/any":
-					valnewswitch += "" +
-						"\n            vx_p_" + argname + " = valsub;"
-				default:
+				switch NameFromType(typ) {
+				case "vx/core/msg", "vx/core/msgblock":
 					valnewswitch += "" +
 						"\n            if (valsubtype == " + argttype + ") {" +
 						"\n              vx_p_" + argname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
-						"\n            } else {" +
-						"\n              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext(\"(new " + typ.name + " :" + arg.name + " \" + vx_core::vx_string_from_any(valsub) + \") - Invalid Value\");" +
-						"\n              msgblock = vx_core::vx_copy(msgblock, {msg});" +
 						"\n            }"
+				default:
+					switch NameFromType(arg.vxtype) {
+					case "vx/core/any":
+						valnewswitch += "" +
+							"\n            vx_p_" + argname + " = valsub;"
+					default:
+						valnewswitch += "" +
+							"\n            if (valsubtype == " + argttype + ") {" +
+							"\n              vx_p_" + argname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
+							"\n            } else {" +
+							"\n              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext(\"(new " + typ.name + " :" + arg.name + " \" + vx_core::vx_string_from_any(valsub) + \") - Invalid Value\");" +
+							"\n              msgblock = vx_core::vx_copy(msgblock, {msg});" +
+							"\n            }"
+					}
 				}
 				instancefuncs += "" +
 					"\n    // " + argname + "()" +
@@ -2056,10 +2077,12 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			lastarg := props[len(props)-1]
 			if lastarg.isdefault {
 				lastargname := CppFromName(lastarg.name)
-				argclassname := CppNameTypeFromType(lastarg.vxtype)
+				//argclassname := CppNameTypeFromType(lastarg.vxtype)
 				argttype := CppNameTFromType(lastarg.vxtype)
 				defaultkey += "" +
 					"\n          } else if (valsubtype == " + argttype + ") { // default property" +
+					"\n            vx_p_" + lastargname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
+					"\n          } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + argttype + ")) { // default property" +
 					"\n            vx_p_" + lastargname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);"
 				/*
 					switch NameFromType(lastarg.vxtype) {
@@ -2083,18 +2106,21 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 				*/
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
-						subargclassname := CppNameTypeFromType(allowtype)
+						//subargclassname := CppNameTypeFromType(allowtype)
 						subargttype := CppNameTFromType(allowtype)
 						defaultkey += "" +
 							"\n          } else if (valsubtype == " + subargttype + ") { // default property" +
-							"\n            " + subargclassname + " valdefault = vx_core::vx_any_from_any(" + subargttype + ", valsub);" +
-							"\n            " + argclassname + " vallist = output->vx_p_" + lastargname + ";" +
-							"\n            if (!vallist) {" +
-							"\n              vallist = vx_core::vx_new(" + CppNameTFromType(lastarg.vxtype) + ", {valdefault});" +
-							"\n            } else {" +
-							"\n              vallist = vx_core::vx_copy(" + CppNameTFromType(lastarg.vxtype) + ", {valdefault});" +
-							"\n            }" +
-							"\n            vx_p_" + lastargname + " = vallist;"
+							"\n            vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});" +
+							"\n          } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + subargttype + ")) { // default property" +
+							"\n            vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});"
+						//							"\n            " + subargclassname + " valdefault = vx_core::vx_any_from_any(" + subargttype + ", valsub);" +
+						//							"\n            " + argclassname + " vallist = output->vx_p_" + lastargname + ";" +
+						//							"\n            if (!vallist) {" +
+						//							"\n              vallist = vx_core::vx_new(" + CppNameTFromType(lastarg.vxtype) + ", {valdefault});" +
+						//							"\n            } else {" +
+						//							"\n              vallist = vx_core::vx_copy(" + CppNameTFromType(lastarg.vxtype) + ", {valdefault});" +
+						//							"\n            }" +
+						//							"\n            vx_p_" + lastargname + " = vallist;"
 					}
 				}
 			}
@@ -2108,9 +2134,6 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          if (valsubtype == vx_core::t_string()) {" +
 					"\n            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string(), valsub);" +
 					"\n            key = valstr->vx_string();" +
-					"\n          } else {" +
-					"\n            vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext(\"(new " + typ.name + ") - Invalid Key Type: \" + vx_core::vx_string_from_any(valsub));" +
-					"\n            msgblock = vx_core::vx_copy(msgblock, {msg});" +
 					"\n          }" +
 					"\n        } else {" +
 					"\n          if (false) {" +
@@ -2139,9 +2162,6 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          if (valsubtype == vx_core::t_string()) {" +
 					"\n            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string(), valsub);" +
 					"\n            key = valstr->vx_string();" +
-					"\n          } else {" +
-					"\n            vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext(\"(new " + typ.name + ") - Invalid Key Type: \" + vx_core::vx_string_from_any(valsub));" +
-					"\n            msgs = vx_core::vx_copy(msgs, {msg});" +
 					"\n          }" +
 					"\n        } else {" +
 					"\n          if (false) {" +
@@ -2191,11 +2211,16 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					argassign
 			}
 		}
-		valnew += "" +
-			"\n      if (msgblock != vx_core::e_msgblock()) {" +
-			"\n        output->vx_p_msgblock = msgblock;" +
-			"\n        vx_core::vx_reserve(msgblock);" +
-			"\n      }"
+		switch NameFromType(typ) {
+		case "vx/core/msg":
+		case "vx/core/msgblock":
+		default:
+			valnew += "" +
+				"\n      if (msgblock != vx_core::e_msgblock()) {" +
+				"\n        output->vx_p_msgblock = msgblock;" +
+				"\n        vx_core::vx_reserve(msgblock);" +
+				"\n      }"
+		}
 		instancefuncs += "" +
 			"\n    // vx_get_any(key)" +
 			"\n    vx_core::Type_any " + classname + "::vx_get_any(vx_core::Type_string key) const {" +
@@ -2939,6 +2964,18 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 	}
 	if BooleanFromStringContains(body, " std::cout ") {
 		output += "#include <iostream>\n"
+	} else if BooleanFromStringContains(body, " std::ifstream ") {
+		output += "#include <iostream>\n"
+	} else if BooleanFromStringContains(body, " std::ofstream ") {
+		output += "#include <iostream>\n"
+	}
+	if BooleanFromStringContains(body, " std::filesystem::") {
+		output += "#include <filesystem>\n"
+	}
+	if BooleanFromStringContains(body, " std::ifstream ") {
+		output += "#include <fstream>\n"
+	} else if BooleanFromStringContains(body, " std::ofstream ") {
+		output += "#include <fstream>\n"
 	}
 	if BooleanFromStringContains(body, "std::map<") {
 		output += "#include <map>\n"
@@ -4022,20 +4059,21 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		"\n  }" +
 		"\n" +
 		"\n  vx_test::Type_testcoveragesummary test_coveragesummary() {" +
-		"\n    return vx_core::vx_new(vx_test::t_testcoveragesummary(), {" +
+		"\n    vx_test::Type_testcoveragesummary output = vx_core::vx_new(vx_test::t_testcoveragesummary(), {" +
 		"\n      vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + pkg.name + "\")," +
 		"\n      vx_core::vx_new_string(\":constnums\"), " + CppTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + "," +
 		"\n      vx_core::vx_new_string(\":docnums\"), " + CppTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + "," +
 		"\n      vx_core::vx_new_string(\":funcnums\"), " + CppTypeCoverageNumsValNew(coverfuncpct, coverfunccnt, coverfunctotal) + "," +
-		"\n      vx_core::vx_new_string(\":ospacenums\"), " + CppTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + "," +
-		"\n      vx_core::vx_new_string(\":otimenums\"), " + CppTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + "," +
+		"\n      vx_core::vx_new_string(\":bigospacenums\"), " + CppTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + "," +
+		"\n      vx_core::vx_new_string(\":bigotimenums\"), " + CppTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + "," +
 		"\n      vx_core::vx_new_string(\":totalnums\"), " + CppTypeCoverageNumsValNew(coverpct, covercnt, covertotal) + "," +
 		"\n      vx_core::vx_new_string(\":typenums\"), " + CppTypeCoverageNumsValNew(covertypepct, covertypecnt, covertypetotal) +
 		"\n    });" +
+		"\n    return output;" +
 		"\n  }" +
 		"\n" +
 		"\n  vx_test::Type_testcoveragedetail test_coveragedetail() {" +
-		"\n    return vx_core::vx_new(vx_test::t_testcoveragedetail(), {" +
+		"\n    vx_test::Type_testcoveragedetail output = vx_core::vx_new(vx_test::t_testcoveragedetail(), {" +
 		"\n      vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + pkg.name + "\")," +
 		"\n      vx_core::vx_new_string(\":typemap\"), vx_core::vx_new(vx_core::t_intmap(), {" +
 		"\n        " + strings.Join(covertype, ",\n        ") +
@@ -4047,15 +4085,18 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		"\n        " + strings.Join(coverfunc, ",\n        ") +
 		"\n      })" +
 		"\n    });" +
+		"\n    return output;" +
 		"\n  }" +
 		"\n" +
 		"\n  vx_test::Type_testpackage test_package(vx_core::Type_context context) {" +
-		"\n    vx_test::Type_testcaselist testcaselist = test_cases(context);" +
+		"\n    vx_test::Type_testcaselist testcaselist = " + pkgname + "_test::test_cases(context);" +
+		"\n    vx_test::Type_testcoveragesummary testcoveragesummary = " + pkgname + "_test::test_coveragesummary();" +
+		"\n    vx_test::Type_testcoveragedetail testcoveragedetail = " + pkgname + "_test::test_coveragedetail();" +
 		"\n    vx_test::Type_testpackage output = vx_core::vx_new(vx_test::t_testpackage(), {" +
-		"\n      vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + pkg.name + "\"), " +
+		"\n      vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + pkg.name + "\")," +
 		"\n      vx_core::vx_new_string(\":caselist\"), testcaselist," +
-		"\n      vx_core::vx_new_string(\":coveragesummary\"), test_coveragesummary()," +
-		"\n      vx_core::vx_new_string(\":coveragedetail\"), test_coveragedetail()" +
+		"\n      vx_core::vx_new_string(\":coveragesummary\"), testcoveragesummary," +
+		"\n      vx_core::vx_new_string(\":coveragedetail\"), testcoveragedetail" +
 		"\n    });" +
 		"\n    return output;" +
 		"\n  }" +
@@ -4211,7 +4252,7 @@ func CppTypeListFromListType(listtype []*vxtype) string {
 			typetext := CppNameTFromType(typ)
 			listtext = append(listtext, typetext)
 		}
-		output = "vx_core::vx_new(vx_core::t_typelist(), {" + StringFromListStringJoin(listtext, ", ") + "})"
+		output = "vx_core::vx_typelist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
 	}
 	return output
 }
@@ -4273,84 +4314,91 @@ int main(int iarglen, char* arrayarg[]) {
 func CppAppTest(prj *vxproject) string {
 	listpackage := prj.listpackage
 	var listtestpackage []string
-	tests := ""
 	imports := "" +
 		"#include <iostream>" +
+		"\n#include <stdexcept>" +
 		"\n#include \"../main/vx/core.hpp\"" +
+		"\n#include \"../main/vx/test.hpp\"" +
 		"\n#include \"test_lib.hpp\"" +
 		"\n"
 	for _, pkg := range listpackage {
 		pkgname := StringFromStringFindReplace(pkg.name, "/", "_")
-		testpackage := "\n      " + pkgname + "_test::test_package(context)"
+		testpackage := pkgname + "_test::test_package(context)"
 		listtestpackage = append(listtestpackage, testpackage)
 		importline := "#include \"" + pkg.name + "_test.hpp\"\n"
 		imports += importline
-		tests += "" +
-			`
-  // (package "` + pkg.name + `")
-  vx_test::Type_testpackage test_` + pkgname + `() {
-	  vx_test::Type_testpackage testpackage = ` + pkgname + `_test::test_package(context);
-	  return test_lib::run_testpackage_async(testpackage);
-  }
-
-`
 	}
-	testpackages := StringFromListStringJoin(listtestpackage, ",")
+	testpackages := StringFromListStringJoin(listtestpackage, ",\n    ")
 	output := "" +
 		imports + `
 /**
  * Unit test for whole App.
  */
-namespace app_test {
 
-  vx_core::Type_context context = vx_core::vx_new(vx_core::t_context(), {});
+vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
+  vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
+    ` + testpackages + `
+  });
+  return output;
+}
 
-` + tests + `
-	// test_writetestsuite
-  vx_core::Type_boolean test_writetestsuite() {
-    vx_test::Type_testpackagelist testpackagelist = vx_core::vx_new(vx_test::t_testpackagelist(), {` +
-		testpackages +
-		`
-    });
-    vx_core::Type_boolean output = test_lib::write_testpackagelist_async(testpackagelist, context);
-		return output;
+int main(int iarglen, char* arrayarg[]) {
+  int output = 0;
+  try {
+    vx_core::vx_debug("Test Start");
+    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+    vx_core::Type_context context = vx_core::e_context();
+    test_lib::test_helloworld();
+    test_lib::test_async_new_from_value();
+    test_lib::test_async_from_async_fn();
+    test_lib::test_run_testresult(context);
+    test_lib::test_run_testdescribe(context);
+    test_lib::test_run_testdescribelist(context);
+    test_lib::test_run_testcase(context);
+    test_lib::test_run_testcaselist(context);
+    test_lib::test_run_testpackage(context);
+    test_lib::test_run_testpackagelist(context);
+    test_lib::test_resolve_testresult_anyfromfunc(context);
+    test_lib::test_resolve_testresult_then(context);
+    test_lib::test_resolve_testresult_thenelselist(context);
+    test_lib::test_resolve_testresult_if(context);
+    test_lib::test_resolve_testresult_f_resolve_testresult_async(context);
+    test_lib::test_resolve_testresult_f_resolve_testresult(context);
+    test_lib::test_run_testresult_async(context);
+    test_lib::test_run_testdescribe_async(context);
+    test_lib::test_run_testdescribelist_async_f_list_from_list_async(context);
+    test_lib::test_run_testdescribelist_async(context);
+    test_lib::test_run_testcase_async_f_resolvetestcase(context);
+    test_lib::test_run_testcase_async_syncvalue(context);
+    test_lib::test_run_testcase_async(context);
+    test_lib::test_run_testcaselist_async(context);
+    test_lib::test_run_testpackage_async(context);
+    test_lib::test_run_testpackagelist_async(context);
+    test_lib::test_pathfull_from_file(context);
+    test_lib::test_read_file(context);
+    test_lib::test_write_file(context);
+    test_lib::test_node_from_testpackagelist(context);
+    test_lib::test_html_from_testpackagelist(context);
+    test_lib::test_write_testpackagelist(context);
+    test_lib::test_write_node(context);
+    test_lib::test_write_html(context);
+    test_lib::test_write_testpackagelist_async(context);
+    vx_test::Type_testpackagelist testpackagelist = testsuite(context);
+    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(issuccess);
+    bool output = test_lib::test("Full Test Suite", expected, actual);
+    vx_core::vx_release({issuccess, context});
+    vx_core::vx_memory_leak_test();
+    vx_core::vx_debug("Test End");
+  } catch (std::exception& e) {
+    std::cerr << e.what() << std::endl;
+    output = -1;
+  } catch (...) {
+    vx_core::vx_debug("Unexpected error");
+    output = -1;
   }
-
-  int main(int iarglen, char* arrayarg[]) {
-    int output = 0;
-    try {
-			vx_core::vx_debug("Test Start");
-			std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-			vx_core::Type_context context = vx_core::e_context();
-			test_lib::test_helloworld();
-			test_lib::test_async_new_from_value();
-			test_lib::test_async_from_async_fn();
-			test_lib::test_run_testresult(context);
-			test_lib::test_run_testdescribe(context);
-			test_lib::test_resolve_testresult_anyfromfunc(context);
-			test_lib::test_resolve_testresult_then(context);
-			test_lib::test_resolve_testresult_thenelselist(context);
-			test_lib::test_resolve_testresult_if(context);
-			test_lib::test_run_testresult_async(context);
-			test_lib::test_run_testdescribe_async(context);
-	/*	
-      std::string current_exec_name = vx_core::vx_string_from_liststring_pos(listarg, 0); // Name of the current exec program
-      vx_core::Type_boolean writetest = test_writetestsuite();
-      std::string swritetest = vx_core::vx_string_from_any(writetest);
-      std::cout << swritetest;
-*/
-			vx_core::vx_memory_leak_test();
-			vx_core::vx_debug("Test End");
-		} catch (std::exception& e) {
-			std::cerr << e.what() << std::endl;
-			output = -1;
-		} catch (...) {
-			vx_core::vx_debug("Unexpected error");
-			output = -1;
-		}
-    return output;
-  }
-
+  return output;
 }
 `
 	return output
@@ -4363,34 +4411,54 @@ func CppTestLib() (string, string) {
 #include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"
-	
+
 namespace test_lib {
-	
-  vx_test::Type_testresult run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult);
-	// Blocking
-  vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult);
-  vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe describe);
-  // Only use if running a single testdescribe
-  vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe);
-  vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist);
+
   vx_test::Type_testcase run_testcase(vx_test::Type_testcase testcase);
+
   // Blocking
   // Only use if running a single testcase
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase);
+
   vx_test::Type_testcaselist run_testcaselist(vx_test::Type_testcaselist testcaselist);
+
+  // Blocking
+  // Only use if running a single testcaselist
+  vx_test::Type_testcaselist run_testcaselist_async(vx_test::Type_testcaselist testcaselist);
+
+  vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe describe);
+
+  // Only use if running a single testdescribe
+  vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe);
+
+  vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist);
+
+  // Blocking
+  // Only use if running a single testdescribelist
+  vx_test::Type_testdescribelist run_testdescribelist_async(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist);
+
   vx_test::Type_testpackage run_testpackage(vx_test::Type_testpackage testpackage);
-  vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist);
+
   // Blocking
   // This is the preferred way of calling test (1 block per package)
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage);
+
+  vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist);
+
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist);
+
+  vx_test::Type_testresult run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult);
+
+	// Blocking
+  vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult);
+
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
-	bool test(std::string testname, std::string expected, std::string actual);
+  bool test(std::string testname, std::string expected, std::string actual);
 
   bool test_helloworld();
 
@@ -4398,11 +4466,19 @@ namespace test_lib {
 
   bool test_async_from_async_fn();
 
-  bool test_run_testresult(vx_core::Type_context context);
+  bool test_html_from_testpackagelist(vx_core::Type_context context);
 
-  bool test_run_testdescribe(vx_core::Type_context context);
+  bool test_node_from_testpackagelist(vx_core::Type_context context);
+
+  bool test_pathfull_from_file(vx_core::Type_context context);
+
+  bool test_read_file(vx_core::Type_context context);
 
   bool test_resolve_testresult_anyfromfunc(vx_core::Type_context context);
+
+  bool test_resolve_testresult_f_resolve_testresult(vx_core::Type_context context);
+
+  bool test_resolve_testresult_f_resolve_testresult_async(vx_core::Type_context context);
 
   bool test_resolve_testresult_if(vx_core::Type_context context);
 
@@ -4410,9 +4486,49 @@ namespace test_lib {
 
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
 
-  bool test_run_testresult_async(vx_core::Type_context context);
+  bool test_run_testcase(vx_core::Type_context context);
+
+  bool test_run_testcase_async(vx_core::Type_context context);
+
+  bool test_run_testcase_async_f_resolvetestcase(vx_core::Type_context context);
+
+  bool test_run_testcase_async_syncvalue(vx_core::Type_context context);
+
+  bool test_run_testcaselist(vx_core::Type_context context);
+
+  bool test_run_testcaselist_async(vx_core::Type_context context);
+
+  bool test_run_testdescribe(vx_core::Type_context context);
 
   bool test_run_testdescribe_async(vx_core::Type_context context);
+
+  bool test_run_testdescribelist(vx_core::Type_context context);
+
+  bool test_run_testdescribelist_async(vx_core::Type_context context);
+
+  bool test_run_testdescribelist_async_f_list_from_list_async(vx_core::Type_context context);
+
+  bool test_run_testpackage(vx_core::Type_context context);
+
+  bool test_run_testpackage_async(vx_core::Type_context context);
+
+  bool test_run_testpackagelist(vx_core::Type_context context);
+
+  bool test_run_testpackagelist_async(vx_core::Type_context context);
+
+  bool test_run_testresult(vx_core::Type_context context);
+
+  bool test_run_testresult_async(vx_core::Type_context context);
+
+  bool test_write_file(vx_core::Type_context context);
+
+  bool test_write_node(vx_core::Type_context context);
+
+  bool test_write_html(vx_core::Type_context context);
+
+  bool test_write_testpackagelist(vx_core::Type_context context);
+
+  bool test_write_testpackagelist_async(vx_core::Type_context context);
 
 }
 #endif
@@ -4421,8 +4537,313 @@ namespace test_lib {
 		`#include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "../main/vx/data/file.hpp"
+#include "../main/vx/web/html.hpp"
 
 namespace test_lib {
+
+  vx_test::Type_testresult sample_testresult(vx_core::Type_context context) {
+    vx_test::Type_testresult output;
+    long irefcount = vx_core::refcount;
+    output = vx_test::f_test_true(
+      vx_core::vx_new_boolean(true),
+      context
+    );
+    vx_core::vx_memory_leak_test("sample_testresult", irefcount, 2);
+    return output;
+  }
+
+  std::string sample_testresult_text() {
+    std::string output =
+      "(vx/test/testresult"
+      "\n :actual true"
+      "\n :code \":true\""
+      "\n :expected true"
+      "\n :passfail true)";
+    return output;
+  }
+
+  vx_test::Type_testdescribe sample_testdescribe(vx_core::Type_context context) {
+    vx_test::Type_testdescribe output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_new(vx_test::t_testdescribe(), {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"),
+      sample_testresult(context)
+    });
+    vx_core::vx_memory_leak_test("sample_testdescribe", irefcount, 5);
+    return output;
+  }
+
+  std::string sample_testdescribe_text() {
+    std::string output =
+      "(vx/test/testdescribe"
+      "\n :describename \"(test-true true)\""
+      "\n :testpkg \"vx/core\""
+      "\n :testresult"
+      "\n  (vx/test/testresult"
+      "\n   :actual true"
+      "\n   :code \":true\""
+      "\n   :expected true"
+      "\n   :passfail true))";
+    return output;
+  }
+
+  vx_test::Type_testdescribelist sample_testdescribelist(vx_core::Type_context context) {
+    vx_test::Type_testdescribelist output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_any_from_any(
+      vx_test::t_testdescribelist(),
+      vx_test::t_testdescribelist()->vx_new_from_list({
+        sample_testdescribe(context)
+      })
+    );
+    vx_core::vx_memory_leak_test("sample_testdescribelist", irefcount, 6);
+    return output;
+  }
+
+  std::string sample_testdescribelist_text() {
+    std::string output =
+      "(vx/test/testdescribelist"
+      "\n (vx/test/testdescribe"
+      "\n  :describename \"(test-true true)\""
+      "\n  :testpkg \"vx/core\""
+      "\n  :testresult"
+      "\n   (vx/test/testresult"
+      "\n    :actual true"
+      "\n    :code \":true\""
+      "\n    :expected true"
+      "\n    :passfail true)))";
+    return output;
+  }
+
+  vx_test::Type_testcase sample_testcase(vx_core::Type_context context) {
+    vx_test::Type_testcase output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_new(vx_test::t_testcase(), {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
+      vx_core::vx_new_string(":describelist"), sample_testdescribelist(context)
+    });
+    vx_core::vx_memory_leak_test("sample_testcase", irefcount, 9);
+    return output;
+  }
+
+  std::string sample_testcase_text() {
+    std::string output =
+      "(vx/test/testcase"
+      "\n :casename \"boolean\""
+      "\n :describelist"
+      "\n  (vx/test/testdescribelist"
+      "\n   (vx/test/testdescribe"
+      "\n    :describename \"(test-true true)\""
+      "\n    :testpkg \"vx/core\""
+      "\n    :testresult"
+      "\n     (vx/test/testresult"
+      "\n      :actual true"
+      "\n      :code \":true\""
+      "\n      :expected true"
+      "\n      :passfail true)))"
+      "\n :testpkg \"vx/core\")";
+    return output;
+  }
+
+  std::string sample_testcase_resolved_text() {
+    std::string output =
+      "(vx/test/testcase"
+      "\n :casename \"boolean\""
+      "\n :describelist"
+      "\n  (vx/test/testdescribelist"
+      "\n   (vx/test/testdescribe"
+      "\n    :describename \"(test-true true)\""
+      "\n    :testpkg \"vx/core\""
+      "\n    :testresult"
+      "\n     (vx/test/testresult"
+      "\n      :actual true"
+      "\n      :code \":true\""
+      "\n      :expected true"
+      "\n      :passfail true)))"
+      "\n :passfail true"
+      "\n :testpkg \"vx/core\")";
+    return output;
+  }
+
+  vx_test::Type_testcaselist sample_testcaselist(vx_core::Type_context context) {
+    vx_test::Type_testcaselist output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_any_from_any(
+      vx_test::t_testcaselist(),
+      vx_test::t_testcaselist()->vx_new_from_list({
+        sample_testcase(context)
+      })
+    );
+    vx_core::vx_memory_leak_test("sample_testcaselist", irefcount, 10);
+    return output;
+  }
+
+  std::string sample_testcaselist_text() {
+    std::string output =
+      "(vx/test/testcaselist"
+      "\n (vx/test/testcase"
+      "\n  :casename \"boolean\""
+      "\n  :describelist"
+      "\n   (vx/test/testdescribelist"
+      "\n    (vx/test/testdescribe"
+      "\n     :describename \"(test-true true)\""
+      "\n     :testpkg \"vx/core\""
+      "\n     :testresult"
+      "\n      (vx/test/testresult"
+      "\n       :actual true"
+      "\n       :code \":true\""
+      "\n       :expected true"
+      "\n       :passfail true)))"
+      "\n  :testpkg \"vx/core\"))";
+    return output;
+  }
+
+  std::string sample_testcaselist_resolved_text() {
+    std::string output =
+      "(vx/test/testcaselist"
+      "\n (vx/test/testcase"
+      "\n  :casename \"boolean\""
+      "\n  :describelist"
+      "\n   (vx/test/testdescribelist"
+      "\n    (vx/test/testdescribe"
+      "\n     :describename \"(test-true true)\""
+      "\n     :testpkg \"vx/core\""
+      "\n     :testresult"
+      "\n      (vx/test/testresult"
+      "\n       :actual true"
+      "\n       :code \":true\""
+      "\n       :expected true"
+      "\n       :passfail true)))"
+      "\n  :passfail true"
+      "\n  :testpkg \"vx/core\"))";
+    return output;
+  }
+
+  vx_test::Type_testpackage sample_testpackage(vx_core::Type_context context) {
+    vx_test::Type_testpackage output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_new(vx_test::t_testpackage(), {
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":caselist"), sample_testcaselist(context)
+    });
+    vx_core::vx_memory_leak_test("sample_testpackage", irefcount, 12);
+    return output;
+  }
+
+  std::string sample_testpackage_text() {
+    std::string output =
+      "(vx/test/testpackage"
+      "\n :caselist"
+      "\n  (vx/test/testcaselist"
+      "\n   (vx/test/testcase"
+      "\n    :casename \"boolean\""
+      "\n    :describelist"
+      "\n     (vx/test/testdescribelist"
+      "\n      (vx/test/testdescribe"
+      "\n       :describename \"(test-true true)\""
+      "\n       :testpkg \"vx/core\""
+      "\n       :testresult"
+      "\n        (vx/test/testresult"
+      "\n         :actual true"
+      "\n         :code \":true\""
+      "\n         :expected true"
+      "\n         :passfail true)))"
+      "\n    :testpkg \"vx/core\"))"
+      "\n :testpkg \"vx/core\")";
+    return output;
+  }
+
+  std::string sample_testpackage_resolved_text() {
+    std::string output =
+      "(vx/test/testpackage"
+      "\n :caselist"
+      "\n  (vx/test/testcaselist"
+      "\n   (vx/test/testcase"
+      "\n    :casename \"boolean\""
+      "\n    :describelist"
+      "\n     (vx/test/testdescribelist"
+      "\n      (vx/test/testdescribe"
+      "\n       :describename \"(test-true true)\""
+      "\n       :testpkg \"vx/core\""
+      "\n       :testresult"
+      "\n        (vx/test/testresult"
+      "\n         :actual true"
+      "\n         :code \":true\""
+      "\n         :expected true"
+      "\n         :passfail true)))"
+      "\n    :passfail true"
+      "\n    :testpkg \"vx/core\"))"
+      "\n :passfail true"
+      "\n :testpkg \"vx/core\")";
+    return output;
+  }
+
+  vx_test::Type_testpackagelist sample_testpackagelist(vx_core::Type_context context) {
+    vx_test::Type_testpackagelist output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_any_from_any(
+      vx_test::t_testpackagelist(),
+      vx_test::t_testpackagelist()->vx_new_from_list({
+        sample_testpackage(context)
+      })
+    );
+    vx_core::vx_memory_leak_test("sample_testpackagelist", irefcount, 13);
+    return output;
+  }
+
+  std::string sample_testpackagelist_text() {
+    std::string output =
+      "(vx/test/testpackagelist"
+      "\n (vx/test/testpackage"
+      "\n  :caselist"
+      "\n   (vx/test/testcaselist"
+      "\n    (vx/test/testcase"
+      "\n     :casename \"boolean\""
+      "\n     :describelist"
+      "\n      (vx/test/testdescribelist"
+      "\n       (vx/test/testdescribe"
+      "\n        :describename \"(test-true true)\""
+      "\n        :testpkg \"vx/core\""
+      "\n        :testresult"
+      "\n         (vx/test/testresult"
+      "\n          :actual true"
+      "\n          :code \":true\""
+      "\n          :expected true"
+      "\n          :passfail true)))"
+      "\n     :testpkg \"vx/core\"))"
+      "\n  :testpkg \"vx/core\"))";
+    return output;
+  }
+
+  std::string sample_testpackagelist_resolved_text() {
+    std::string output =
+      "(vx/test/testpackagelist"
+      "\n (vx/test/testpackage"
+      "\n  :caselist"
+      "\n   (vx/test/testcaselist"
+      "\n    (vx/test/testcase"
+      "\n     :casename \"boolean\""
+      "\n     :describelist"
+      "\n      (vx/test/testdescribelist"
+      "\n       (vx/test/testdescribe"
+      "\n        :describename \"(test-true true)\""
+      "\n        :testpkg \"vx/core\""
+      "\n        :testresult"
+      "\n         (vx/test/testresult"
+      "\n          :actual true"
+      "\n          :code \":true\""
+      "\n          :expected true"
+      "\n          :passfail true)))"
+      "\n     :passfail true"
+      "\n     :testpkg \"vx/core\"))"
+      "\n  :passfail true"
+      "\n  :testpkg \"vx/core\"))";
+    return output;
+  }
 
 	vx_test::Type_testresult run_testresult(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
     vx_core::Type_any valexpected = testresult->expected();
@@ -4448,11 +4869,15 @@ namespace test_lib {
   }
 
   vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
+    vx_core::vx_reserve(testdescribe);
     vx_core::Type_string testcode = testdescribe->describename();
     std::string message = testcode->vx_string();
     vx_test::Type_testresult testresult = testdescribe->testresult();
     vx_test::Type_testresult testresult_resolved = test_lib::run_testresult(testpkg, casename, message, testresult);
-    vx_test::Type_testdescribe output = vx_core::vx_copy(testdescribe, {vx_core::vx_new_string(":testresult"), testresult_resolved});
+    vx_test::Type_testdescribe output = vx_core::vx_copy(testdescribe, {
+      vx_core::vx_new_string(":testresult"), testresult_resolved
+    });
+    vx_core::vx_release_one_except(testdescribe, output);
 		return output;
   }
 
@@ -4466,6 +4891,7 @@ namespace test_lib {
   }
 
   vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
+    vx_core::vx_reserve(testdescribelist);
     std::vector<vx_test::Type_testdescribe> listtestdescribe = testdescribelist->vx_listtestdescribe();
     vx_core::vx_Type_listany listtestdescribe_resolved;
     for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
@@ -4476,16 +4902,29 @@ namespace test_lib {
 			vx_test::t_testdescribelist(),
 			testdescribelist->vx_new_from_list(listtestdescribe_resolved)
 		);
-    vx_core::vx_release_except(testdescribelist, output);
+    vx_core::vx_release_one_except(testdescribelist, output);
     return output;
   }
 
-	vx_test::Type_testcase run_testcase(vx_test::Type_testcase testcase) {
+  // Blocking
+  // Only use if running a single testdescribelist
+  vx_test::Type_testdescribelist run_testdescribelist_async(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
+    vx_core::vx_Type_async async_testdescribelist = vx_test::f_resolve_testdescribelist(testdescribelist);
+    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist(), async_testdescribelist);
+    vx_test::Type_testdescribelist output = test_lib::run_testdescribelist(testpkg, casename, testdescribelist_resolved);
+    return output;
+  }
+
+  vx_test::Type_testcase run_testcase(vx_test::Type_testcase testcase) {
+    vx_core::vx_reserve(testcase);
     std::string testpkg = testcase->testpkg()->vx_string();
     std::string casename = testcase->casename()->vx_string();
     vx_test::Type_testdescribelist testdescribelist = testcase->describelist();
     vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist(testpkg, casename, testdescribelist);
-		vx_test::Type_testcase output = vx_core::vx_copy(testcase, {vx_core::vx_new_string(":describelist"), testdescribelist_resolved});
+    vx_test::Type_testcase output = vx_core::vx_copy(testcase, {
+      vx_core::vx_new_string(":describelist"), testdescribelist_resolved
+    });
+    vx_core::vx_release_one_except(testcase, output);
 		return output;
   }
 
@@ -4495,11 +4934,11 @@ namespace test_lib {
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase(), async_testcase);
     vx_test::Type_testcase output = test_lib::run_testcase(testcase_resolved);
-    vx_core::vx_release_except(testcase_resolved, output);
 		return output;
   }
 
 	vx_test::Type_testcaselist run_testcaselist(vx_test::Type_testcaselist testcaselist) {
+    vx_core::vx_reserve(testcaselist);
     std::vector<vx_test::Type_testcase> listtestcase = testcaselist->vx_listtestcase();
     vx_core::vx_Type_listany listtestcase_resolved;
     for (vx_test::Type_testcase testcase : listtestcase) {
@@ -4510,31 +4949,28 @@ namespace test_lib {
 			vx_test::t_testcaselist(),
 			testcaselist->vx_new_from_list(listtestcase_resolved)
 		);
-    vx_core::vx_release_except(testcaselist, output);
+    vx_core::vx_release_one_except(testcaselist, output);
+    return output;
+  }
+
+  // Blocking
+  // Only use if running a single testcaselist
+  vx_test::Type_testcaselist run_testcaselist_async(vx_test::Type_testcaselist testcaselist) {
+    vx_core::vx_Type_async async_testcaselist = vx_test::f_resolve_testcaselist(testcaselist);
+    vx_test::Type_testcaselist testcaselist_resolved = vx_core::vx_sync_from_async(vx_test::t_testcaselist(), async_testcaselist);
+    vx_test::Type_testcaselist output = test_lib::run_testcaselist(testcaselist_resolved);
     return output;
   }
 
   vx_test::Type_testpackage run_testpackage(vx_test::Type_testpackage testpackage) {
+    vx_core::vx_reserve(testpackage);
     vx_test::Type_testcaselist testcaselist = testpackage->caselist();
     vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist(testcaselist);
-		vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {vx_core::vx_new_string(":caselist"), testcaselist_resolved});
-    vx_core::vx_release_except(testpackage, output);
+		vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {
+      vx_core::vx_new_string(":caselist"), testcaselist_resolved
+    });
+    vx_core::vx_release_one_except(testpackage, output);
 		return output;
-  }
-
-  vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
-    std::vector<vx_test::Type_testpackage> listtestpackage = testpackagelist->vx_listtestpackage();
-    vx_core::vx_Type_listany listtestpackage_resolved;
-    for (vx_test::Type_testpackage testpackage : listtestpackage) {
-      vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
-			listtestpackage_resolved.push_back(testpackage_resolved);
-    }
-		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
-			vx_test::t_testpackagelist(),
-			testpackagelist->vx_new_from_list(listtestpackage_resolved)
-		);
-    vx_core::vx_release_except(testpackagelist, output);
-    return output;
   }
 
   // Blocking
@@ -4546,6 +4982,22 @@ namespace test_lib {
 		return output;
   }
 
+  vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
+    vx_core::vx_reserve(testpackagelist);
+    std::vector<vx_test::Type_testpackage> listtestpackage = testpackagelist->vx_listtestpackage();
+    vx_core::vx_Type_listany listtestpackage_resolved;
+    for (vx_test::Type_testpackage testpackage : listtestpackage) {
+      vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
+			listtestpackage_resolved.push_back(testpackage_resolved);
+    }
+		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
+			vx_test::t_testpackagelist(),
+			testpackagelist->vx_new_from_list(listtestpackage_resolved)
+		);
+    vx_core::vx_release_one_except(testpackagelist, output);
+    return output;
+  }
+
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
@@ -4555,25 +5007,45 @@ namespace test_lib {
 		return output;
   }
 
+  vx_core::Type_boolean write_html(vx_web_html::Type_html htmlnode) {
+    vx_core::Type_string string_html = vx_web_html::f_string_from_html(htmlnode);
+    vx_data_file::Type_file file = vx_test::f_file_testhtml();
+    vx_core::Type_boolean output = vx_data_file::vx_boolean_write_from_file_string(file, string_html);
+    return output;
+  }
+
+  vx_core::Type_boolean write_node(vx_web_html::Type_html htmlnode) {
+    vx_core::Type_string string_node = vx_core::f_string_from_any(htmlnode);
+    vx_data_file::Type_file file = vx_test::f_file_testnode();
+    vx_core::Type_boolean output = vx_data_file::vx_boolean_write_from_file_string(file, string_node);
+    return output;
+  }
+
+  vx_core::Type_boolean write_testpackagelist(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+    vx_core::Type_string string_node = vx_core::f_string_from_any(testpackagelist);
+    vx_data_file::Type_file file = vx_test::f_file_test();
+    vx_core::Type_boolean output = vx_data_file::vx_boolean_write_from_file_string(file, string_node);
+    return output;
+  }
+
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
   vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
-    vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
-    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
     vx_core::vx_reserve(testpackagelist_resolved);
-    vx_data_file::Type_file filetest = vx_test::f_file_test();
-    vx_core::Type_boolean booleanwritetest = vx_data_file::f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
+    vx_core::Type_boolean write_testpackagelist = test_lib::write_testpackagelist(testpackagelist_resolved, context);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
+    vx_core::vx_release_one(testpackagelist_resolved);
     vx_web_html::Type_html htmlnode = vx_test::f_html_from_divtest(divtest);
     vx_core::vx_reserve(htmlnode);
-    vx_core::Type_string shtml = vx_web_html::f_string_from_html(htmlnode);
-    vx_data_file::Type_file filenode = vx_test::f_file_testnode();
-    vx_core::Type_boolean booleanwritenode = vx_data_file::f_boolean_write_from_file_any(filenode, htmlnode, context);
-    vx_core::vx_release(htmlnode);
-    vx_data_file::Type_file filehtml = vx_test::f_file_testhtml();
-    vx_core::Type_boolean booleanwritehtml = vx_data_file::f_boolean_write_from_file_string(filehtml, shtml, context);
-    vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean(), {booleanwritetest, booleanwritenode, booleanwritehtml});
-    vx_core::vx_release_except(testpackagelist_resolved, output);
+    vx_core::Type_boolean write_node = test_lib::write_node(htmlnode);
+    vx_core::Type_boolean write_html = test_lib::write_html(htmlnode);
+    vx_core::vx_release_one(htmlnode);
+    vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean(), {
+      write_testpackagelist,
+      write_node,
+      write_html
+    });
     return output;
   }
 
@@ -4591,7 +5063,7 @@ namespace test_lib {
   }
 
   bool test_helloworld() {
-    std::string testname = "helloworld";
+    std::string testname = "test_helloworld";
     long irefcount = vx_core::refcount;
     vx_core::Type_string helloworld = vx_core::vx_new_string("Hello World");
     std::string expected = "Hello World";
@@ -4603,7 +5075,7 @@ namespace test_lib {
   }
 
   bool test_async_new_from_value() {
-    std::string testname = "async_new_from_value";
+    std::string testname = "test_async_new_from_value";
     long irefcount = vx_core::refcount;
     vx_core::Type_string helloworld = vx_core::vx_new_string("Hello World");
     vx_core::vx_Type_async async = vx_core::vx_async_new_from_value(helloworld);
@@ -4617,7 +5089,7 @@ namespace test_lib {
   }
 
   bool test_async_from_async_fn() {
-    std::string testname = "async_from_async_fn";
+    std::string testname = "test_async_from_async_fn";
     long irefcount = vx_core::refcount;
     vx_core::Type_string helloworld = vx_core::vx_new_string("Hello World");
     vx_core::vx_Type_async async = vx_core::vx_async_new_from_value(helloworld);
@@ -4638,20 +5110,587 @@ namespace test_lib {
     return output;
   }
 
-  bool test_run_testresult(vx_core::Type_context context) {
-    std::string testname = "run_testresult";
+  bool test_html_from_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_html_from_testpackagelist";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
-    );
-    vx_test::Type_testresult testresult_resolved = run_testresult("vx/core", "boolean", "", testresult);
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
+    vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
     std::string expected =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
+      "<!DOCTYPE html>"
+      "\n<html lang=\"en\">"
+      "\n  <head>"
+      "\n    <meta charset=\"utf-8\" />"
+      "\n    <title>Test Suite</title>"
+      "\n    <style>"
+      "\n      details summary {"
+      "\n      }"
+      "\n      table {"
+      "\n      }"
+      "\n      thead tr {"
+      "\n      }"
+      "\n      td {"
+      "\n      }"
+      "\n      tbody tr {"
+      "\n      }"
+      "\n      tbody tr:nth-of-type(even) {"
+      "\n      }"
+      "\n      tbody tr:last-of-type {"
+      "\n      }"
+      "\n      tbody tr.active-row {"
+      "\n      }"
+      "\n      .failflag {"
+      "\n      }"
+      "\n      .passflag {"
+      "\n      }"
+      "\n      .coveragenums {"
+      "\n      }"
+      "\n      .coveragepct {"
+      "\n      }"
+      "\n      .coveragepctgreen {"
+      "\n      }"
+      "\n      .coveragepctred {"
+      "\n      }"
+      "\n      .pkgheader {"
+      "\n      }"
+      "\n      .pkgname {"
+      "\n      }"
+      "\n      .preformatted {"
+      "\n      }"
+      "\n    </style>"
+      "\n  </head>"
+      "\n  <body>"
+      "\n    <div>"
+      "\n      <h1>Test Suite</h1>"
+      "\n    </div>"
+      "\n    <div>"
+      "\n      <table>"
+      "\n        <thead>"
+      "\n          <tr>"
+      "\n            <td>"
+      "\n              <p>Pass?</p>"
+      "\n            </td>"
+      "\n            <td>"
+      "\n              <p>Name</p>"
+      "\n            </td>"
+      "\n            <td>"
+      "\n              <p>Test</p>"
+      "\n            </td>"
+      "\n            <td>"
+      "\n              <p>Expected</p>"
+      "\n            </td>"
+      "\n            <td>"
+      "\n              <p>Actual</p>"
+      "\n            </td>"
+      "\n          </tr>"
+      "\n        </thead>"
+      "\n        <tbody></tbody>"
+      "\n      </table>"
+      "\n    </div>"
+      "\n  </body>"
+      "\n  <footer></footer>"
+      "\n</html>";
+    std::string actual = string_html->vx_string();
+    vx_core::vx_release(string_html);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_from_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_node_from_testpackagelist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
+    std::string expected =
+"(vx/web/html/html"
+"\n :body"
+"\n  (vx/web/html/body"
+"\n   :nodes"
+"\n    (vx/web/html/divchildlist"
+"\n     (vx/web/html/div"
+"\n      :nodes"
+"\n       (vx/web/html/divchildlist"
+"\n        (vx/web/html/h1"
+"\n         :text \"Test Suite\")))"
+"\n     (vx/web/html/div"
+"\n      :nodes"
+"\n       (vx/web/html/divchildlist"
+"\n        (vx/web/html/table"
+"\n         :tbody (vx/web/html/tbody)"
+"\n         :thead"
+"\n          (vx/web/html/thead"
+"\n           :nodes"
+"\n            (vx/web/html/trlist"
+"\n             (vx/web/html/tr"
+"\n              :nodes"
+"\n               (vx/web/html/tdlist"
+"\n                (vx/web/html/td"
+"\n                 :nodes"
+"\n                  (vx/web/html/divchildlist"
+"\n                   (vx/web/html/p"
+"\n                    :text \"Pass?\")))"
+"\n                (vx/web/html/td"
+"\n                 :nodes"
+"\n                  (vx/web/html/divchildlist"
+"\n                   (vx/web/html/p"
+"\n                    :text \"Name\")))"
+"\n                (vx/web/html/td"
+"\n                 :nodes"
+"\n                  (vx/web/html/divchildlist"
+"\n                   (vx/web/html/p"
+"\n                    :text \"Test\")))"
+"\n                (vx/web/html/td"
+"\n                 :nodes"
+"\n                  (vx/web/html/divchildlist"
+"\n                   (vx/web/html/p"
+"\n                    :text \"Expected\")))"
+"\n                (vx/web/html/td"
+"\n                 :nodes"
+"\n                  (vx/web/html/divchildlist"
+"\n                   (vx/web/html/p"
+"\n                    :text \"Actual\"))))))))))))"
+"\n :head"
+"\n  (vx/web/html/head"
+"\n   :nodes"
+"\n    (vx/web/html/headchildlist"
+"\n     (vx/web/html/meta"
+"\n      :charset \"utf-8\")"
+"\n     (vx/web/html/title"
+"\n      :text \"Test Suite\")"
+"\n     (vx/web/html/stylesheet"
+"\n      :name \"Test Suite\""
+"\n      :stylemap"
+"\n       (vx/web/html/stylemap"
+"\n        :(vx/web/html/style"
+"\n :name \"details summary\""
+"\n :props"
+"\n  (vx/web/html/propmap"
+"\n   :cursor \"pointer\""
+"\n   :display \"inline-flex\""
+"\n   :gap \"10px\"))"
+"\n         (vx/web/html/style"
+"\n          :name \"table\""
+"\n          :props"
+"\n           (vx/web/html/propmap"
+"\n            :border-collapse \"collapse\""
+"\n            :box-shadow \"0 0 20px rgba(0, 0, 0, 0.15)\""
+"\n            :font-family \"sans-serif\""
+"\n            :font-size \"0.9em\""
+"\n            :margin \"25px 0\""
+"\n            :min-width \"400px\""
+"\n            :vertical-align \"top\")))"
+"\n      :styles"
+"\n       (vx/web/html/stylelist"
+"\n        (vx/web/html/style"
+"\n         :name \"details summary\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :cursor \"pointer\""
+"\n           :display \"inline-flex\""
+"\n           :gap \"10px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"table\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :border-collapse \"collapse\""
+"\n           :box-shadow \"0 0 20px rgba(0, 0, 0, 0.15)\""
+"\n           :font-family \"sans-serif\""
+"\n           :font-size \"0.9em\""
+"\n           :margin \"25px 0\""
+"\n           :min-width \"400px\""
+"\n           :vertical-align \"top\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"thead tr\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"#009879\""
+"\n           :color \"#ffffff\""
+"\n           :text-align \"left\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"td\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :padding \"10px 10px\""
+"\n           :vertical-align \"top\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"tbody tr\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :border-bottom \"1px solid #dddddd\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"tbody tr:nth-of-type(even)\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"#f3f3f3\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"tbody tr:last-of-type\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :border-bottom \"2px solid #009879\"))"
+"\n        (vx/web/html/style"
+"\n         :name \"tbody tr.active-row\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :color \"#009879\""
+"\n           :font-weight \"bold\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".failflag\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"red\""
+"\n           :color \"white\""
+"\n           :padding-bottom \"1px\""
+"\n           :padding-left \"4px\""
+"\n           :padding-right \"4px\""
+"\n           :padding-top \"1px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".passflag\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"green\""
+"\n           :color \"white\""
+"\n           :padding-bottom \"1px\""
+"\n           :padding-left \"4px\""
+"\n           :padding-right \"4px\""
+"\n           :padding-top \"1px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".coveragenums\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :width \"90px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".coveragepct\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :text-align \"right\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".coveragepctgreen\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"green\""
+"\n           :color \"white\""
+"\n           :text-align \"right\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".coveragepctred\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :background-color \"red\""
+"\n           :color \"white\""
+"\n           :text-align \"right\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".pkgheader\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :display \"inline-flex\""
+"\n           :gap \"10px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".pkgname\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :font-weight \"bold\""
+"\n           :width \"180px\"))"
+"\n        (vx/web/html/style"
+"\n         :name \".preformatted\""
+"\n         :props"
+"\n          (vx/web/html/propmap"
+"\n           :display \"block\""
+"\n           :font-family \"monospace\""
+"\n           :unicode-bidi \"embed\""
+"\n           :white-space \"pre\"))))))"
+"\n :lang \"en\")";
+    std::string actual = vx_core::vx_string_from_any(html);
+    vx_core::vx_release(html);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcase(vx_core::Type_context context) {
+    std::string testname = "test_run_testcase";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_test::Type_testcase testcase_resolved = test_lib::run_testcase(testcase);
+    std::string expected = sample_testcase_text();
+    std::string actual = vx_core::vx_string_from_any(testcase_resolved);
+    vx_core::vx_release(testcase_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcase_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testcase_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 9);
+    vx_test::Type_testcase testcase_resolved = test_lib::run_testcase_async(testcase);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 9);
+    std::string expected = sample_testcase_resolved_text();
+    std::string actual = vx_core::vx_string_from_any(testcase_resolved);
+    vx_core::vx_release(testcase_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcase_async_f_resolvetestcase(vx_core::Type_context context) {
+    std::string testname = "test_run_testcase_async_f_resolvetestcase";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_core::vx_memory_leak_test(testname, irefcount, 14);
+    std::string expected =
+      "(async"
+      "\n :type vx/test/testcase"
+      "\n :lambdavars ("
+      "\n  (vx/test/testcase"
+      "\n   :casename \"boolean\""
+      "\n   :describelist"
+      "\n    (vx/test/testdescribelist"
+      "\n     (vx/test/testdescribe"
+      "\n      :describename \"(test-true true)\""
+      "\n      :testpkg \"vx/core\""
+      "\n      :testresult"
+      "\n       (vx/test/testresult"
+      "\n        :actual true"
+      "\n        :code \":true\""
+      "\n        :expected true"
+      "\n        :passfail true)))"
+      "\n   :testpkg \"vx/core\"))"
+      "\n :fn fn"
+      "\n :async_parent"
+      "\n  (async"
+      "\n   :type vx/test/testdescribelist"
+      "\n   :listasync ("
+      "\n    (async"
+      "\n     :type vx/test/testdescribe"
+      "\n     :lambdavars ("
+      "\n      (vx/test/testdescribe"
+      "\n       :describename \"(test-true true)\""
+      "\n       :testpkg \"vx/core\""
+      "\n       :testresult"
+      "\n        (vx/test/testresult"
+      "\n         :actual true"
+      "\n         :code \":true\""
+      "\n         :expected true"
+      "\n         :passfail true)))"
+      "\n     :fn fn"
+      "\n     :async_parent"
+      "\n      (async"
+      "\n       :type vx/test/testresult"
+      "\n       :lambdavars ("
+      "\n        (any<-func-async)"
+      "\n        (vx/test/testresult"
+      "\n         :actual true"
+      "\n         :code \":true\""
+      "\n         :expected true"
+      "\n         :passfail true)"
+      "\n        true)"
+      "\n       :fn fn"
+      "\n       :async_parent"
+      "\n        (async"
+      "\n         :type any"
+      "\n         :value (any)))))))";
+    std::string actual = vx_core::vx_string_from_async(async_testcase);
+    vx_core::vx_release_async(async_testcase);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcase_async_syncvalue(vx_core::Type_context context) {
+    std::string testname = "test_run_testcase_async_syncvalue";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_core::vx_memory_leak_test(testname, irefcount, 9);
+    vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_core::vx_memory_leak_test(testname, irefcount, 14);
+    vx_core::vx_Type_async async_testdescribelist = async_testcase->async_parent;
+    vx_core::vx_Type_listasync list_async_testdescribe = async_testdescribelist->listasync;
+    vx_core::vx_Type_async async_testdescribe = list_async_testdescribe[0];
+    vx_core::vx_Type_async async_testresult = async_testdescribe->async_parent;
+    vx_core::vx_Type_async async_any = async_testresult->async_parent;
+    vx_core::Type_any any = async_any->sync_value();
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 14);
+    vx_core::Type_any testresult_resolved = async_testresult->sync_value();
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
+    vx_core::Type_any testdescribe_resolved = async_testdescribe->sync_value();
+    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 13);
+    vx_core::Type_any testdescribelist_resolved = async_testdescribelist->sync_value();
+    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 13);
+    vx_core::Type_any testcase_resolved = async_testcase->sync_value();
+    vx_core::vx_memory_leak_test(testname + "-5", irefcount, 10);
+    std::string expected = sample_testcase_resolved_text();
+    std::string actual = vx_core::vx_string_from_any(testcase_resolved);
+    vx_core::vx_release_async(async_testcase);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcaselist(vx_core::Type_context context) {
+    std::string testname = "test_run_testcaselist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist(testcaselist);
+    std::string expected = sample_testcaselist_text();
+    std::string actual = vx_core::vx_string_from_any(testcaselist_resolved);
+    vx_core::vx_release(testcaselist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testcaselist_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testcaselist_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist_async(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 10);
+    std::string expected = sample_testcaselist_resolved_text();
+    std::string actual = vx_core::vx_string_from_any(testcaselist_resolved);
+    vx_core::vx_release(testcaselist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testdescribe(vx_core::Type_context context) {
+    std::string testname = "test_run_testdescribe";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testdescribe testdescribe = sample_testdescribe(context);
+    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe("vx/core", "boolean", testdescribe);
+    std::string expected = sample_testdescribe_text();
+    std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
+    vx_core::vx_release(testdescribe_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testdescribe_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testdescribe_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testdescribe testdescribe = sample_testdescribe(context);
+    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe_async("vx/core", "boolean", testdescribe);
+    std::string expected = sample_testdescribe_text();
+    std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
+    vx_core::vx_release(testdescribe_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testdescribelist(vx_core::Type_context context) {
+    std::string testname = "test_run_testdescribelist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
+    vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist("vx/core", "boolean", testdescribelist);
+    std::string expected = sample_testdescribelist_text();
+    std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
+    vx_core::vx_release(testdescribelist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testdescribelist_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testdescribelist_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
+    vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist_async("vx/core", "boolean", testdescribelist);
+    std::string expected = sample_testdescribelist_text();
+    std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
+    vx_core::vx_release(testdescribelist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testdescribelist_async_f_list_from_list_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testdescribelist_async_f_list_from_list_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
+    vx_core::vx_Type_async async_testdescribelist = vx_core::f_list_from_list_async(
+      vx_test::t_testdescribelist(),
+      testdescribelist,
+      vx_test::t_resolve_testdescribe()
+    );
+    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist(), async_testdescribelist);
+    std::string expected = sample_testdescribelist_text();
+    std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
+    vx_core::vx_release(testdescribelist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testpackage(vx_core::Type_context context) {
+    std::string testname = "test_run_testpackage";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackage testpackage = sample_testpackage(context);
+    vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
+    std::string expected = sample_testpackage_text();
+    std::string actual = vx_core::vx_string_from_any(testpackage_resolved);
+    vx_core::vx_release(testpackage_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testpackage_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testpackage_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackage testpackage = sample_testpackage(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 12);
+    vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage_async(testpackage);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 12);
+    std::string expected = sample_testpackage_resolved_text();
+    std::string actual = vx_core::vx_string_from_any(testpackage_resolved);
+    vx_core::vx_release(testpackage_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_run_testpackagelist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist(testpackagelist);
+    std::string expected = sample_testpackagelist_text();
+    std::string actual = vx_core::vx_string_from_any(testpackagelist_resolved);
+    vx_core::vx_release(testpackagelist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testpackagelist_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testpackagelist_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
+    std::string expected = sample_testpackagelist_resolved_text();
+    std::string actual = vx_core::vx_string_from_any(testpackagelist_resolved);
+    vx_core::vx_release(testpackagelist_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_testresult(vx_core::Type_context context) {
+    std::string testname = "test_run_testresult";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult_resolved = run_testresult("vx/core", "boolean", "", testresult);
+    std::string expected = sample_testresult_text();
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -4660,12 +5699,9 @@ namespace test_lib {
   }
 
   bool test_resolve_testresult_anyfromfunc(vx_core::Type_context context) {
-    std::string testname = "resolve_testresult_anyfromfunc";
+    std::string testname = "test_resolve_testresult_anyfromfunc";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
-    );
+    vx_test::Type_testresult testresult = sample_testresult(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -4673,12 +5709,7 @@ namespace test_lib {
       vx_core::Type_any output_1 = testresult;
       return output_1;
     });
-    std::string expected1 =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
+    std::string expected1 = sample_testresult_text();
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(anyfromfunc);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -4686,104 +5717,70 @@ namespace test_lib {
     return output;
   }
 
-  bool test_resolve_testresult_then(vx_core::Type_context context) {
-    std::string testname = "resolve_testresult_then";
+  bool test_run_testresult_async(vx_core::Type_context context) {
+    std::string testname = "test_run_testresult_async";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
-    );
-    vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
-    vx_core::Type_any expected = testresult->expected();
-    vx_core::Type_any actual = testresult->actual();
-    vx_core::Type_thenelse thenelse = vx_core::f_then(
-      vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
-        vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
-        return output_1;
-      }),
-      vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
-        vx_core::Type_any output_1 = testresult;
-        return output_1;
-      })
-    );
-    std::string expected1 =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
-    std::string actual1 = vx_core::vx_string_from_any(testresult);
-    vx_core::vx_release(thenelse);
-    bool output = test_lib::test(testname, expected1, actual1);
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult_resolved = test_lib::run_testresult_async("vx/core", "boolean", "", testresult);
+    std::string expected = sample_testresult_text();
+    std::string actual = vx_core::vx_string_from_any(testresult_resolved);
+    vx_core::vx_release(testresult_resolved);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
 
-  bool test_resolve_testresult_thenelselist(vx_core::Type_context context) {
-    std::string testname = "resolve_testresult_thenelselist";
+  bool test_resolve_testresult_f_resolve_testresult(vx_core::Type_context context) {
+    std::string testname = "test_resolve_testresult_f_resolve_testresult";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
-    );
-    vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
-    vx_core::Type_any expected = testresult->expected();
-    vx_core::Type_any actual = testresult->actual();
-    vx_core::Type_thenelselist thenelselist = vx_core::vx_new(vx_core::t_thenelselist(), {
-      vx_core::f_then(
-        vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
-          vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
-          return output_1;
-        }),
-        vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
-          vx_core::Type_any output_1 = testresult;
-          return output_1;
-        })
-      ),
-      vx_core::f_else(
-        vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
-          vx_test::Type_testresult output_1 = vx_core::f_let(
-            vx_test::t_testresult(),
-            vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
-              vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
-              vx_core::vx_ref_plus(passfail);
-              vx_test::Type_testresult output_1 = vx_core::f_copy(
-                testresult,
-                vx_core::vx_new(vx_core::t_anylist(), {
-                  vx_core::vx_new_string(":passfail"),
-                  passfail,
-                  vx_core::vx_new_string(":actual"),
-                  actual
-                })
-              );
-              vx_core::vx_release_one_except(passfail, output_1);
-              return output_1;
-            })
-          );
-          return output_1;
-        })
-      )
-    });
-    std::string expected1 =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
-    std::string actual1 = vx_core::vx_string_from_any(testresult);
-    vx_core::vx_release(thenelselist);
-    bool output = test_lib::test(testname, expected1, actual1);
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 2);
+    vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 4);
+    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
+    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 2);
+    std::string expected = sample_testresult_text();
+    std::string actual = vx_core::vx_string_from_any(testresult_resolved);
+    vx_core::vx_release(testresult_resolved);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_resolve_testresult_f_resolve_testresult_async(vx_core::Type_context context) {
+    std::string testname = "test_resolve_testresult_f_resolve_testresult_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 2);
+    vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 4);
+    std::string expected = 
+      "(async"
+      "\n :type vx/test/testresult"
+      "\n :lambdavars ("
+      "\n  (any<-func-async)"
+      "\n  (vx/test/testresult"
+      "\n   :actual true"
+      "\n   :code \":true\""
+      "\n   :expected true"
+      "\n   :passfail true)"
+      "\n  true)"
+      "\n :fn fn"
+      "\n :async_parent"
+      "\n  (async"
+      "\n   :type any"
+      "\n   :value (any)))";
+    std::string actual = vx_core::vx_string_from_async(async_testresult);
+    vx_core::vx_release_async(async_testresult);
+    bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
 
   bool test_resolve_testresult_if(vx_core::Type_context context) {
-    std::string testname = "resolve_testresult_if";
+    std::string testname = "test_resolve_testresult_if";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
-    );
+    vx_test::Type_testresult testresult = sample_testresult(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -4825,12 +5822,7 @@ namespace test_lib {
         )
       })
     );
-    std::string expected1 =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
+    std::string expected1 = sample_testresult_text();
     std::string actual1 = vx_core::vx_string_from_any(output_2);
     vx_core::vx_release(output_2);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -4838,85 +5830,201 @@ namespace test_lib {
     return output;
   }
 
-  bool test_run_testresult_async(vx_core::Type_context context) {
-    std::string testname = "run_testresult_async";
+  bool test_resolve_testresult_then(vx_core::Type_context context) {
+    std::string testname = "test_resolve_testresult_then";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
+    vx_core::Type_any expected = testresult->expected();
+    vx_core::Type_any actual = testresult->actual();
+    vx_core::Type_thenelse thenelse = vx_core::f_then(
+      vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
+        vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
+        return output_1;
+      }),
+      vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+        vx_core::Type_any output_1 = testresult;
+        return output_1;
+      })
     );
-    vx_test::Type_testresult testresult_resolved = test_lib::run_testresult_async("vx/core", "boolean", "", testresult);
-    std::string expected =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
-    std::string actual = vx_core::vx_string_from_any(testresult_resolved);
-    vx_core::vx_release(testresult_resolved);
+    std::string expected1 = sample_testresult_text();
+    std::string actual1 = vx_core::vx_string_from_any(testresult);
+    vx_core::vx_release(thenelse);
+    bool output = test_lib::test(testname, expected1, actual1);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_resolve_testresult_thenelselist(vx_core::Type_context context) {
+    std::string testname = "test_resolve_testresult_thenelselist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
+    vx_core::Type_any expected = testresult->expected();
+    vx_core::Type_any actual = testresult->actual();
+    vx_core::Type_thenelselist thenelselist = vx_core::vx_new(vx_core::t_thenelselist(), {
+      vx_core::f_then(
+        vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
+          vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
+          return output_1;
+        }),
+        vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+          vx_core::Type_any output_1 = testresult;
+          return output_1;
+        })
+      ),
+      vx_core::f_else(
+        vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+          vx_test::Type_testresult output_1 = vx_core::f_let(
+            vx_test::t_testresult(),
+            vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+              vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
+              vx_core::vx_ref_plus(passfail);
+              vx_test::Type_testresult output_1 = vx_core::f_copy(
+                testresult,
+                vx_core::vx_new(vx_core::t_anylist(), {
+                  vx_core::vx_new_string(":passfail"),
+                  passfail,
+                  vx_core::vx_new_string(":actual"),
+                  actual
+                })
+              );
+              vx_core::vx_release_one_except(passfail, output_1);
+              return output_1;
+            })
+          );
+          return output_1;
+        })
+      )
+    });
+    std::string expected1 = sample_testresult_text();
+    std::string actual1 = vx_core::vx_string_from_any(testresult);
+    vx_core::vx_release(thenelselist);
+    bool output = test_lib::test(testname, expected1, actual1);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_pathfull_from_file(vx_core::Type_context context) {
+    std::string testname = "test_pathfull_from_file";
+    long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string("string_read_from_file.txt")
+    });
+    vx_core::Type_string string_path = vx_data_file::f_pathfull_from_file(file);
+    std::string expected = "src/test/resources/vx/string_read_from_file.txt";
+    std::string actual = string_path->vx_string();
+    vx_core::vx_release(string_path);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
 
-  bool test_run_testdescribe(vx_core::Type_context context) {
-    std::string testname = "run_testdescribe";
+  bool test_read_file(vx_core::Type_context context) {
+    std::string testname = "test_read_file";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testdescribe testdescribe = vx_core::vx_new(vx_test::t_testdescribe(), {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
-      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
-      vx_core::vx_new_string(":testresult"),
-      vx_test::f_test_true(
-        vx_core::vx_new_boolean(true),
-        context
-      )
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string("string_read_from_file.txt")
     });
-    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe("vx/core", "boolean", testdescribe);
-    std::string expected =
-      "(vx/test/testdescribe"
-      "\n :describename \"(test-true true)\""
-      "\n :testpkg \"vx/core\""
-      "\n :testresult"
-      "\n  (vx/test/testresult"
-      "\n   :actual true"
-      "\n   :code \":true\""
-      "\n   :expected true"
-      "\n   :passfail true))";
-    std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
-    vx_core::vx_release(testdescribe_resolved);
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = "testdata";
+    std::string actual = string_file->vx_string();
+    vx_core::vx_release(string_file);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }
 
-  bool test_run_testdescribe_async(vx_core::Type_context context) {
-    std::string testname = "test_run_testdescribe_async";
+  bool test_write_file(vx_core::Type_context context) {
+    std::string testname = "test_write_file";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testdescribe testdescribe = vx_core::vx_new(vx_test::t_testdescribe(), {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
-      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
-      vx_core::vx_new_string(":testresult"),
-      vx_test::f_test_true(
-        vx_core::vx_new_boolean(true),
-        context
-      )
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string("boolean_write_from_file_string.txt")
     });
-    //vx_core::vx_debug("test-run-testdescribe-async-1:should be 5");
-    //vx_core::vx_debug(vx_core::refcount);
-    vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe_async("vx/core", "boolean", testdescribe);
-    std::string expected =
-      "(vx/test/testdescribe"
-      "\n :describename \"(test-true true)\""
-      "\n :testpkg \"vx/core\""
-      "\n :testresult"
-      "\n  (vx/test/testresult"
-      "\n   :actual true"
-      "\n   :code \":true\""
-      "\n   :expected true"
-      "\n   :passfail true))";
-    std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
-    vx_core::vx_release(testdescribe_resolved);
+    vx_core::Type_string string_file = vx_core::vx_new_string("writetext");
+    vx_core::Type_boolean boolean_write = vx_data_file::vx_boolean_write_from_file_string(file, string_file);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(boolean_write);
+    vx_core::vx_release(boolean_write);
     bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_write_node(vx_core::Type_context context) {
+    std::string testname = "test_write_node";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_core::Type_string string_node = vx_core::f_string_from_any(testpackagelist);
+    vx_data_file::Type_file file = vx_test::f_file_testnode();
+    vx_core::Type_boolean boolean_write = vx_data_file::vx_boolean_write_from_file_string(file, string_node);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(boolean_write);
+    vx_core::vx_release(boolean_write);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_write_html(vx_core::Type_context context) {
+    std::string testname = "test_write_html";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist);
+    vx_web_html::Type_html html = vx_test::f_html_from_divtest(divtest);
+    vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
+    vx_data_file::Type_file file_html = vx_test::f_file_testhtml();
+    vx_core::Type_boolean boolean_write = vx_data_file::vx_boolean_write_from_file_string(file_html, string_html);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(boolean_write);
+    vx_core::vx_release(boolean_write);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_write_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_write_testpackagelist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_core::Type_string string_vxlsp = vx_core::f_string_from_any(testpackagelist);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 1);
+    vx_data_file::Type_file file = vx_test::f_file_test();
+    vx_core::Type_boolean boolean_write = vx_data_file::vx_boolean_write_from_file_string(file, string_vxlsp);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(boolean_write);
+    bool output = test_lib::test(testname, expected, actual);
+    vx_core::vx_release(boolean_write);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_write_testpackagelist_async(vx_core::Type_context context) {
+    std::string testname = "test_write_testpackagelist_async";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
+    std::string snode = vx_core::vx_string_from_any(testpackagelist_resolved);
+    vx_core::Type_string string_node = vx_core::vx_new_string(snode);
+    vx_data_file::Type_file file_node = vx_test::f_file_testnode();
+    vx_core::Type_boolean boolean_writenode = vx_data_file::vx_boolean_write_from_file_string(file_node, string_node);
+    std::string expected = vx_core::vx_string_from_any(boolean_writenode);
+    std::string actual = "true";
+    bool output = test_lib::test(testname + "-1", expected, actual);
+    vx_data_file::Type_file file_html = vx_test::f_file_testhtml();
+    vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
+    vx_web_html::Type_html html = vx_test::f_html_from_divtest(divtest);
+    vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
+    vx_core::Type_boolean boolean_writehtml = vx_data_file::vx_boolean_write_from_file_string(file_html, string_html);
+    std::string expected1 = vx_core::vx_string_from_any(boolean_writehtml);
+    std::string actual1 = "true";
+    output = output && test_lib::test(testname + "-2", expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
   }

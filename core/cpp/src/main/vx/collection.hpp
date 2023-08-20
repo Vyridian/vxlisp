@@ -227,28 +227,32 @@ namespace vx_collection {
   // (func list<-list-fn-filter)
   template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release_except({vallist, fn_filter}, output);
+    vx_core::vx_reserve({vallist, fn_filter});
+    vx_core::vx_release_one_except({vallist, fn_filter}, output);
     return output;
   }
 
   // (func list<-list-start-end)
   template <class X> X* f_list_from_list_start_end(X* generic_list_1, X* values, vx_core::Type_int start, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release_except({values, start, end}, output);
+    vx_core::vx_reserve({values, start, end});
+    vx_core::vx_release_one_except({values, start, end}, output);
     return output;
   }
 
   // (func list<-list-end)
   template <class X> X* f_list_from_list_end(X* generic_list_1, X* values, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_reserve({values, end});
     output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(0), end);
-    vx_core::vx_release_except({values, end}, output);
+    vx_core::vx_release_one_except({values, end}, output);
     return output;
   }
 
   // (func list<-list-filtertypes)
   template <class X, class Y> X* f_list_from_list_filtertypes(X* generic_list_1, Y* vallist, vx_core::Type_typelist filtertypes) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_reserve({vallist, filtertypes});
     output = vx_collection::f_list_from_list_fn_filter(
       generic_list_1,
       vallist,
@@ -263,20 +267,21 @@ namespace vx_collection {
         return output_1;
       })
     );
-    vx_core::vx_release_except({vallist, filtertypes}, output);
+    vx_core::vx_release_one_except({vallist, filtertypes}, output);
     return output;
   }
 
   // (func list<-list-start)
   template <class X> X* f_list_from_list_start(X* generic_list_1, X* values, vx_core::Type_int start) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_reserve({values, start});
     output = vx_collection::f_list_from_list_start_end(
       generic_list_1,
       values,
       start,
       vx_core::f_length_from_list(values)
     );
-    vx_core::vx_release_except({values, start}, output);
+    vx_core::vx_release_one_except({values, start}, output);
     return output;
   }
 

@@ -1,3 +1,4 @@
+#include <string>
 #include "../vx/core.hpp"
 #include "type.hpp"
 
@@ -7,10 +8,11 @@ namespace vx_type {
   // (func allowtypenames<-type)
   vx_core::Type_stringlist f_allowtypenames_from_type(vx_core::Type_any type) {
     vx_core::Type_stringlist output = vx_core::e_stringlist();
+    vx_core::vx_reserve(type);
     output = vx_core::f_typenames_from_typelist(
       vx_type::f_allowtypes_from_type(type)
     );
-    vx_core::vx_release_except(type, output);
+    vx_core::vx_release_one_except(type, output);
     return output;
   }
 
@@ -100,8 +102,9 @@ namespace vx_type {
   // (func allowtypes<-type)
   vx_core::Type_typelist f_allowtypes_from_type(vx_core::Type_any type) {
     vx_core::Type_typelist output = vx_core::e_typelist();
+    vx_core::vx_reserve(type);
     output = vx_core::f_typedef_from_type(type)->allowtypes();
-    vx_core::vx_release_except(type, output);
+    vx_core::vx_release_one_except(type, output);
     return output;
   }
 
@@ -191,11 +194,12 @@ namespace vx_type {
   // (func is-boolean)
   vx_core::Type_boolean f_is_boolean(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string("boolean"),
       vx_core::f_typename_from_any(value)
     );
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
@@ -285,11 +289,12 @@ namespace vx_type {
   // (func is-decimal)
   vx_core::Type_boolean f_is_decimal(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string("decimal"),
       vx_core::f_typename_from_any(value)
     );
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
@@ -379,11 +384,12 @@ namespace vx_type {
   // (func is-float)
   vx_core::Type_boolean f_is_float(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string("float"),
       vx_core::f_typename_from_any(value)
     );
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
@@ -473,11 +479,12 @@ namespace vx_type {
   // (func is-none)
   vx_core::Type_boolean f_is_none(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       value,
       vx_core::t_none()
     );
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
@@ -567,11 +574,12 @@ namespace vx_type {
   // (func is-string)
   vx_core::Type_boolean f_is_string(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string("vx/core/string"),
       vx_core::f_typename_from_any(value)
     );
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
@@ -661,6 +669,7 @@ namespace vx_type {
   // (func is-type)
   vx_core::Type_boolean f_is_type(vx_core::Type_any val, vx_core::Type_any type) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve({val, type});
     output = vx_core::f_or_1(
       vx_core::vx_new(vx_core::t_booleanlist(), {
         vx_core::f_eq(
@@ -677,7 +686,7 @@ namespace vx_type {
         )
       })
     );
-    vx_core::vx_release_except({val, type}, output);
+    vx_core::vx_release_one_except({val, type}, output);
     return output;
   }
 
@@ -756,6 +765,7 @@ namespace vx_type {
   // (func is-type<-any-typelist)
   vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
     vx_core::Type_boolean output = vx_core::e_boolean();
+    vx_core::vx_reserve({val, typelist});
     output = vx_core::f_any_from_list_reduce(
       vx_core::t_boolean(),
       typelist,
@@ -771,7 +781,7 @@ namespace vx_type {
         return output_1;
       })
     );
-    vx_core::vx_release_except({val, typelist}, output);
+    vx_core::vx_release_one_except({val, typelist}, output);
     return output;
   }
 
@@ -850,7 +860,10 @@ namespace vx_type {
   // (func length<-string)
   vx_core::Type_int f_length_from_string(vx_core::Type_string text) {
     vx_core::Type_int output = vx_core::e_int();
-    vx_core::vx_release_except(text, output);
+    vx_core::vx_reserve(text);
+    long len = text->vx_string().length();
+    output = vx_core::vx_new_int(len);
+    vx_core::vx_release_one_except(text, output);
     return output;
   }
 
@@ -940,6 +953,7 @@ namespace vx_type {
   // (func string<-int)
   vx_core::Type_string f_string_from_int(vx_core::Type_int val) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(val);
     output = vx_core::f_switch(
       vx_core::t_string(),
       val,
@@ -978,7 +992,7 @@ namespace vx_type {
         )
       })
     );
-    vx_core::vx_release_except(val, output);
+    vx_core::vx_release_one_except(val, output);
     return output;
   }
 
@@ -1068,8 +1082,9 @@ namespace vx_type {
   // (func string<-string-end)
   vx_core::Type_string f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve({text, endpos});
     output = vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(0), endpos);
-    vx_core::vx_release_except({text, endpos}, output);
+    vx_core::vx_release_one_except({text, endpos}, output);
     return output;
   }
 
@@ -1148,12 +1163,13 @@ namespace vx_type {
   // (func string<-string-start)
   vx_core::Type_string f_string_from_string_start(vx_core::Type_string text, vx_core::Type_int startpos) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve({text, startpos});
     output = vx_type::f_string_from_string_start_end(
       text,
       startpos,
       vx_type::f_length_from_string(text)
     );
-    vx_core::vx_release_except({text, startpos}, output);
+    vx_core::vx_release_one_except({text, startpos}, output);
     return output;
   }
 
@@ -1232,7 +1248,10 @@ namespace vx_type {
   // (func string<-string-start-end)
   vx_core::Type_string f_string_from_string_start_end(vx_core::Type_string text, vx_core::Type_int start, vx_core::Type_int end) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::vx_release_except({text, start, end}, output);
+    vx_core::vx_reserve({text, start, end});
+    std::string str = vx_core::vx_string_from_string_start_end(text->vx_string(), start->vx_int(), end->vx_int());
+    output = vx_core::vx_new_string(str);
+    vx_core::vx_release_one_except({text, start, end}, output);
     return output;
   }
 
@@ -1312,7 +1331,21 @@ namespace vx_type {
   // (func string<-stringlist-join)
   vx_core::Type_string f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
     vx_core::Type_string output = vx_core::e_string();
-    vx_core::vx_release_except({vals, delim}, output);
+    vx_core::vx_reserve({vals, delim});
+    bool isfirst = true;
+    std::string str = "";
+    std::string sdelim = delim->vx_string();
+    for (vx_core::Type_string substr : vals->vx_p_list) {
+      std::string ssub = substr->vx_string();
+      if (isfirst) {
+        str = ssub;
+      } else {
+        str += sdelim + ssub;
+      }
+      isfirst = false;
+    }
+    output = vx_core::vx_new_string(str);
+    vx_core::vx_release_one_except({vals, delim}, output);
     return output;
   }
 
@@ -1391,10 +1424,11 @@ namespace vx_type {
   // (func traitnames<-any)
   vx_core::Type_stringlist f_traitnames_from_any(vx_core::Type_any val) {
     vx_core::Type_stringlist output = vx_core::e_stringlist();
+    vx_core::vx_reserve(val);
     output = vx_core::f_typenames_from_typelist(
       vx_type::f_traits_from_any(val)
     );
-    vx_core::vx_release_except(val, output);
+    vx_core::vx_release_one_except(val, output);
     return output;
   }
 
@@ -1484,10 +1518,11 @@ namespace vx_type {
   // (func traits<-any)
   vx_core::Type_typelist f_traits_from_any(vx_core::Type_any val) {
     vx_core::Type_typelist output = vx_core::e_typelist();
+    vx_core::vx_reserve(val);
     output = vx_core::f_traits_from_typedef(
       vx_core::f_typedef_from_any(val)
     );
-    vx_core::vx_release_except(val, output);
+    vx_core::vx_release_one_except(val, output);
     return output;
   }
 
@@ -1577,8 +1612,9 @@ namespace vx_type {
   // (func traits<-typedef)
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
     vx_core::Type_typelist output = vx_core::e_typelist();
+    vx_core::vx_reserve(vtypedef);
     output = vtypedef->traits();
-    vx_core::vx_release_except(vtypedef, output);
+    vx_core::vx_release_one_except(vtypedef, output);
     return output;
   }
 

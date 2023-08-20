@@ -1,5 +1,6 @@
 #include <map>
 #include <string>
+#include <vector>
 #include "../vx/core.hpp"
 #include "state.hpp"
 
@@ -78,6 +79,7 @@ namespace vx_state {
       vx_state::Type_value_map output = vx_state::e_value_map();
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -106,11 +108,13 @@ namespace vx_state {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_state::Class_value_map();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -135,7 +139,7 @@ namespace vx_state {
         "value-map", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_any()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_core::t_any()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -151,7 +155,8 @@ namespace vx_state {
   // (func change)
   vx_core::Type_boolean f_change(vx_state::Type_value_map valuemap) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release_except(valuemap, output);
+    vx_core::vx_reserve(valuemap);
+    vx_core::vx_release_one_except(valuemap, output);
     return output;
   }
 
@@ -241,7 +246,8 @@ namespace vx_state {
   // (func register)
   vx_core::Type_boolean f_register(vx_core::Type_statelistener listener) {
     vx_core::Type_boolean output = vx_core::e_boolean();
-    vx_core::vx_release_except(listener, output);
+    vx_core::vx_reserve(listener);
+    vx_core::vx_release_one_except(listener, output);
     return output;
   }
 

@@ -89,6 +89,8 @@ namespace vx_repl {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_string()) {
           listval.push_back(vx_core::vx_any_from_any(vx_core::t_string(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_string())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_core::t_string(), valsub));
         } else if (valsubtype == vx_repl::t_liblist()) {
           vx_repl::Type_liblist multi = vx_core::vx_any_from_any(vx_repl::t_liblist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststring());
@@ -122,7 +124,7 @@ namespace vx_repl {
         "liblist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_string()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_core::t_string()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -426,6 +428,8 @@ namespace vx_repl {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_repl::t_repl()) {
           listval.push_back(vx_core::vx_any_from_any(vx_repl::t_repl(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_repl::t_repl())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_repl::t_repl(), valsub));
         } else if (valsubtype == vx_repl::t_repllist()) {
           vx_repl::Type_repllist multi = vx_core::vx_any_from_any(vx_repl::t_repllist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listrepl());
@@ -459,7 +463,7 @@ namespace vx_repl {
         "repllist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_repl::t_repl()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_repl::t_repl()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -475,7 +479,8 @@ namespace vx_repl {
   // (func any-repl<-functype-args)
   vx_core::Type_any f_any_repl_from_functype_args(vx_core::Type_any type, vx_core::Type_anylist args) {
     vx_core::Type_any output = vx_core::e_any();
-    vx_core::vx_release_except({type, args}, output);
+    vx_core::vx_reserve({type, args});
+    vx_core::vx_release_one_except({type, args}, output);
     return output;
   }
 
@@ -554,6 +559,7 @@ namespace vx_repl {
   // (func any<-liblist-string)
   vx_core::Type_any f_any_from_liblist_string(vx_repl::Type_liblist liblist, vx_core::Type_string text, vx_core::Type_context context) {
     vx_core::Type_any output = vx_core::e_any();
+    vx_core::vx_reserve({liblist, text});
     output = vx_core::f_let(
       vx_core::t_any(),
       vx_core::t_any_from_func()->vx_fn_new({liblist, text, context}, [liblist, text, context]() {
@@ -564,7 +570,7 @@ namespace vx_repl {
         return output_1;
       })
     );
-    vx_core::vx_release_except({liblist, text}, output);
+    vx_core::vx_release_one_except({liblist, text}, output);
     return output;
   }
 
@@ -644,6 +650,7 @@ namespace vx_repl {
   // (func any<-liblist-string-async)
   vx_core::vx_Type_async f_any_from_liblist_string_async(vx_repl::Type_liblist liblist, vx_core::Type_string text, vx_core::Type_context context) {
     vx_core::vx_Type_async output = NULL;
+    vx_core::vx_reserve({liblist, text});
     output = vx_core::f_let_async(
       vx_core::t_any(),
       vx_core::t_any_from_func_async()->vx_fn_new({liblist, text, context}, [liblist, text, context]() {
@@ -662,7 +669,7 @@ namespace vx_repl {
         return output_1;
       })
     );
-    vx_core::vx_release({liblist, text});
+    vx_core::vx_release_one({liblist, text});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::e_any());
     }
@@ -745,6 +752,7 @@ namespace vx_repl {
   // (func any<-repl)
   vx_core::Type_any f_any_from_repl(vx_repl::Type_repl repl, vx_core::Type_context context) {
     vx_core::Type_any output = vx_core::e_any();
+    vx_core::vx_reserve(repl);
     output = vx_core::f_let(
       vx_core::t_any(),
       vx_core::t_any_from_func()->vx_fn_new({repl, context}, [repl, context]() {
@@ -791,7 +799,7 @@ namespace vx_repl {
         return output_1;
       })
     );
-    vx_core::vx_release_except(repl, output);
+    vx_core::vx_release_one_except(repl, output);
     return output;
   }
 
@@ -882,7 +890,8 @@ namespace vx_repl {
   // (func any<-repl-async)
   vx_core::vx_Type_async f_any_from_repl_async(vx_repl::Type_repl repl, vx_core::Type_context context) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release(repl);
+    vx_core::vx_reserve(repl);
+    vx_core::vx_release_one(repl);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::e_any());
     }
@@ -975,6 +984,7 @@ namespace vx_repl {
   // (func anylist<-repllist)
   vx_core::Type_anylist f_anylist_from_repllist(vx_repl::Type_repllist repllist, vx_core::Type_context context) {
     vx_core::Type_anylist output = vx_core::e_anylist();
+    vx_core::vx_reserve(repllist);
     output = vx_core::f_list_from_list(
       vx_core::t_anylist(),
       repllist,
@@ -985,7 +995,7 @@ namespace vx_repl {
         return output_1;
       })
     );
-    vx_core::vx_release_except(repllist, output);
+    vx_core::vx_release_one_except(repllist, output);
     return output;
   }
 
@@ -1076,7 +1086,8 @@ namespace vx_repl {
   // (func repl<-liblist-string)
   vx_repl::Type_repl f_repl_from_liblist_string(vx_repl::Type_liblist liblist, vx_core::Type_string text) {
     vx_repl::Type_repl output = vx_repl::e_repl();
-    vx_core::vx_release_except({liblist, text}, output);
+    vx_core::vx_reserve({liblist, text});
+    vx_core::vx_release_one_except({liblist, text}, output);
     return output;
   }
 

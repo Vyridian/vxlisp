@@ -1340,27 +1340,39 @@ namespace vx_core {
   // class vx_Class_async
   class vx_Class_async {
   public:
+    vx_Class_async() {
+      vx_core::refcount += 1;
+    }
+    ~vx_Class_async() {
+      vx_core::refcount -= 1;
+      vx_dispose();
+    }
     long vx_p_iref = 0;
     vx_core::Type_any type = NULL;
     vx_core::Type_any value = NULL;
     vx_core::vx_Type_future future = NULL;
     vx_core::vx_Class_async* async_parent = NULL;
-    std::vector<vx_core::vx_Class_async*>* list_async = NULL;
-    std::map<std::string, vx_core::vx_Class_async*>* map_async = NULL;
+    std::vector<vx_core::vx_Class_async*> listasync;
+    std::map<std::string, vx_core::vx_Class_async*> mapasync;
     vx_core::vx_Type_fn_any_from_any fn = NULL;
     vx_core::vx_Type_listany lambdavars;
-    void vx_create();
     void vx_dispose();
     vx_core::Type_any sync_value();
   };
 
   typedef vx_Class_async* vx_Type_async;
+  typedef std::vector<vx_Type_async> vx_Type_listasync;
+  typedef std::map<std::string, vx_Type_async> vx_Type_mapasync;
+  typedef std::function<vx_core::vx_Type_async(vx_core::Type_any)> vx_Type_fn_async_from_any;
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
   vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
+
+  // vx_async_new_from_listasync(T, List<async>)
+  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_any_1, vx_core::vx_Type_listasync listasync);
 
   // vx_async_new_from_value(any)
   vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
@@ -1373,6 +1385,12 @@ namespace vx_core {
 
   // vx_boolean_from_string_starts(string, string)
   bool vx_boolean_from_string_starts(std::string text, std::string starts);
+
+  // vx_boolean_from_type_trait(type, type)
+  bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait);
+
+  // vx_debug()
+  void vx_debug();
 
   // vx_debug(int)
   void vx_debug(long ival);
@@ -1389,20 +1407,26 @@ namespace vx_core {
   // vx_debug(list<any>)
   void vx_debug(vx_core::vx_Type_listany listany);
 
-  // vx_debug_refcount()
-  void vx_debug_refcount();
+  // vx_debug(string, string)
+  void vx_debug(std::string code, std::string text);
 
-  // vx_debug_refcount(any)
-  void vx_debug_refcount(vx_core::Type_any val);
+  // vx_debug(string, any)
+  void vx_debug(std::string code, vx_core::Type_any val);
 
-  // vx_debug_refcount(async)
-  void vx_debug_refcount(vx_core::vx_Type_async async);
+  // vx_debug(string, async)
+  void vx_debug(std::string code, vx_core::vx_Type_async async);
 
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
 
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
+
+  // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
+  vx_core::vx_Type_listany vx_listany_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_any_from_any fn);
+
+  // vx_listasync_from_listany_fn(List<any>, (Function (any) : any))
+  vx_core::vx_Type_listasync vx_listasync_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_async_from_any fn);
 
   // vx_liststring_from_arraystring(long, array<string>)
   std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
@@ -1415,6 +1439,9 @@ namespace vx_core {
 
   // vx_memory_leak_test(string, int)
   bool vx_memory_leak_test(std::string id, long initialcount);
+
+  // vx_memory_leak_test(string, int, int)
+  bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);
@@ -1458,6 +1485,9 @@ namespace vx_core {
   // vx_release_except(any..., except)
   void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
 
+  // vx_release_except_async(async, except)
+  void vx_release_except_async(vx_core::vx_Type_async async, vx_core::Type_any except);
+
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any);
 
@@ -1467,11 +1497,20 @@ namespace vx_core {
   // vx_release_one_async(async)
   void vx_release_one_async(vx_core::vx_Type_async async);
 
+  // vx_release_one_async(async...)
+  void vx_release_one_async(vx_core::vx_Type_listasync listasync);
+
   // vx_release_one_except(any, except)
   void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except);
 
   // vx_release_one_except(any..., except)
   void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
+
+  // vx_release_one_except_async(async, except)
+  void vx_release_one_except_async(vx_core::vx_Type_async async, vx_core::Type_any except);
+
+  // vx_release_one_except_async(async..., except)
+  void vx_release_one_except_async(vx_core::vx_Type_listasync listasync, vx_core::Type_any except);
 
   // vx_reserve(any)
   void vx_reserve(vx_core::Type_any any);
@@ -1481,6 +1520,9 @@ namespace vx_core {
 
   // vx_reserve_async(async)
   void vx_reserve_async(vx_core::vx_Type_async async);
+
+  // vx_reserve_async(listasync)
+  void vx_reserve_async(vx_core::vx_Type_listasync listasync);
 
   // vx_reserve_empty(any)
   void vx_reserve_empty(vx_core::Type_any any);
@@ -1523,6 +1565,12 @@ namespace vx_core {
 
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end);
+
+  // vx_switch(type, val, thenelselist)
+  vx_core::Type_any vx_switch(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_thenelselist thenelselist);
+
+  // vx_typelist_from_listany(list<any>)
+  vx_core::Type_typelist vx_typelist_from_listany(vx_core::vx_Type_listany listany);
 
   // vx_any_from_any(T, val)
   template <class T> static T* vx_any_from_any(T* generic_any_1, vx_core::Type_any val) {
@@ -1618,9 +1666,7 @@ namespace vx_core {
   // vx_sync_from_async(async)
   template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
     vx_core::Type_any value = async->sync_value();
-    vx_core::vx_reserve(value);
-    vx_core::vx_release_async(async);
-    vx_core::vx_ref_minus(value);
+    vx_core::vx_release_except_async(async, value);
     T* output = vx_core::vx_any_from_any(generic_any_1, value);
     return output;
   }
@@ -1703,6 +1749,7 @@ namespace vx_core {
   public:
     Abstract_map() {};
     virtual ~Abstract_map() = 0;
+    std::vector<std::string> vx_p_keys;
     vx_core::vx_Type_mapany vx_p_map;
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
@@ -7585,15 +7632,17 @@ namespace vx_core {
   // (func any<-any)
   template <class T, class U> T* f_any_from_any(T* generic_any_1, U* value) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(value);
     output = vx_core::vx_any_from_any(generic_any_1, value);
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
   // (func any<-any-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_any_async(T* generic_any_1, U* value) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release(value);
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_one(value);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7603,14 +7652,16 @@ namespace vx_core {
   // (func any<-any-context)
   template <class T, class U> T* f_any_from_any_context(T* generic_any_1, U* value, vx_core::Type_context context) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
   // (func any<-any-context-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_any_context_async(T* generic_any_1, U* value, vx_core::Type_context context) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release(value);
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_one(value);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7635,14 +7686,16 @@ namespace vx_core {
   // (func any<-key-value)
   template <class T, class U> T* f_any_from_key_value(T* generic_any_1, vx_core::Type_string key, U* val) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({key, val}, output);
+    vx_core::vx_reserve({key, val});
+    vx_core::vx_release_one_except({key, val}, output);
     return output;
   }
 
   // (func any<-key-value-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_key_value_async(T* generic_any_1, vx_core::Type_string key, U* val) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release({key, val});
+    vx_core::vx_reserve({key, val});
+    vx_core::vx_release_one({key, val});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7652,34 +7705,45 @@ namespace vx_core {
   // (func any<-list)
   template <class T, class X> T* f_any_from_list(T* generic_any_1, X* values, vx_core::Type_int index) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({values, index}, output);
+    vx_core::vx_reserve({values, index});
+    long intindex = index->vx_int();
+    vx_core::vx_Type_listany listvalue = values->vx_list();
+    int intsize = listvalue.size();
+    if (intindex < intsize) {
+      vx_core::Type_any value = listvalue[intindex];
+      output = vx_core::vx_any_from_any(generic_any_1, value);
+    };
+    vx_core::vx_release_one_except({values, index}, output);
     return output;
   }
 
   // (func any<-list-reduce)
   template <class T, class Y> T* f_any_from_list_reduce(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce fn_reduce) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({list, valstart, fn_reduce});
     vx_core::Type_any work = valstart;
     std::vector<vx_core::Type_any> listval = list->vx_list();
     for (vx_core::Type_any item : listval) {
       work = fn_reduce->vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);
-    vx_core::vx_release_except({list, valstart, fn_reduce}, output);
+    vx_core::vx_release_one_except({list, valstart, fn_reduce}, output);
     return output;
   }
 
   // (func any<-list-reduce-next)
   template <class T, class Y> T* f_any_from_list_reduce_next(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({list, valstart, fn_reduce_next}, output);
+    vx_core::vx_reserve({list, valstart, fn_reduce_next});
+    vx_core::vx_release_one_except({list, valstart, fn_reduce_next}, output);
     return output;
   }
 
   // (func any<-map)
   template <class T, class N> T* f_any_from_map(T* generic_any_1, N* valuemap, vx_core::Type_string key) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({valuemap, key}, output);
+    vx_core::vx_reserve({valuemap, key});
+    vx_core::vx_release_one_except({valuemap, key}, output);
     return output;
   }
 
@@ -7701,14 +7765,16 @@ namespace vx_core {
   // (func any<-reduce)
   template <class T, class U> T* f_any_from_reduce(T* generic_any_1, T* result, U* item) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({result, item}, output);
+    vx_core::vx_reserve({result, item});
+    vx_core::vx_release_one_except({result, item}, output);
     return output;
   }
 
   // (func any<-reduce-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_reduce_async(T* generic_any_1, T* result, U* item) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release({result, item});
+    vx_core::vx_reserve({result, item});
+    vx_core::vx_release_one({result, item});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7718,14 +7784,16 @@ namespace vx_core {
   // (func any<-reduce-next)
   template <class T, class U> T* f_any_from_reduce_next(T* generic_any_1, T* result, U* current, U* next) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({result, current, next}, output);
+    vx_core::vx_reserve({result, current, next});
+    vx_core::vx_release_one_except({result, current, next}, output);
     return output;
   }
 
   // (func any<-reduce-next-async)
   template <class T, class U> vx_core::vx_Type_async f_any_from_reduce_next_async(T* generic_any_1, T* result, U* current, U* next) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release({result, current, next});
+    vx_core::vx_reserve({result, current, next});
+    vx_core::vx_release_one({result, current, next});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7735,14 +7803,16 @@ namespace vx_core {
   // (func any<-struct)
   template <class T, class R> T* f_any_from_struct(T* generic_any_1, R* vstruct, vx_core::Type_string key) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({vstruct, key}, output);
+    vx_core::vx_reserve({vstruct, key});
+    vx_core::vx_release_one_except({vstruct, key}, output);
     return output;
   }
 
   // (func async)
   template <class T> vx_core::vx_Type_async f_async(T* generic_any_1, T* value) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release(value);
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_one(value);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7751,77 +7821,88 @@ namespace vx_core {
 
   // (func empty)
   template <class T> T* f_empty(T* type) {
+    vx_core::vx_reserve(type);
     T* output = vx_core::vx_any_from_any(type, type->vx_empty());
-    vx_core::vx_release_except(type, output);
+    vx_core::vx_release_one_except(type, output);
     return output;
   }
 
   // (func new)
   template <class T> T* f_new(T* type, vx_core::Type_anylist values) {
+    vx_core::vx_reserve({type, values});
     T* output = vx_core::vx_new(type, values->vx_list());
-    vx_core::vx_release_except({type, values}, output);
+    vx_core::vx_release_one_except({type, values}, output);
     return output;
   }
 
   // (func copy)
   template <class T> T* f_copy(T* value, vx_core::Type_anylist values) {
+    vx_core::vx_reserve({value, values});
     T* output = vx_core::vx_copy(value, values->vx_list());
-    vx_core::vx_release_except({value, values}, output);
+    vx_core::vx_release_one_except({value, values}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if(T* generic_any_1, vx_core::Type_boolean clause, T* then) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({clause, then});
     if (clause->vx_boolean()) {
       output = then;
     };
-    vx_core::vx_release_except({clause, then}, output);
+    vx_core::vx_release_one_except({clause, then}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if_1(T* generic_any_1, vx_core::Type_boolean clause, T* thenval, T* elseval) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({clause, thenval, elseval});
     if (clause->vx_boolean()) {
       output = thenval;
     } else {
       output = elseval;
     };
-    vx_core::vx_release_except({clause, thenval, elseval}, output);
+    vx_core::vx_release_one_except({clause, thenval, elseval}, output);
     return output;
   }
 
   // (func if)
   template <class T> T* f_if_2(T* generic_any_1, vx_core::Type_thenelselist thenelselist) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(thenelselist);
     vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);
-    vx_core::vx_release_except(thenelselist, output);
+    vx_core::vx_release_one_except(thenelselist, output);
     return output;
   }
 
   // (func switch)
   template <class T, class U> T* f_switch(T* generic_any_1, U* val, vx_core::Type_thenelselist thenelselist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({val, thenelselist}, output);
+    vx_core::vx_reserve({val, thenelselist});
+    vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);
+    vx_core::vx_release_one_except({val, thenelselist}, output);
     return output;
   }
 
   // (func let)
   template <class T> T* f_let(T* generic_any_1, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(fn_any);
     vx_core::Type_any any = fn_any->vx_any_from_func();
     output = vx_core::vx_any_from_any(generic_any_1, any);
-    vx_core::vx_release_except(fn_any, output);
+    vx_core::vx_release_one_except(fn_any, output);
     return output;
   }
 
   // (func let-async)
   template <class T> vx_core::vx_Type_async f_let_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any_async) {
     vx_core::vx_Type_async output = NULL;
+    vx_core::vx_reserve(fn_any_async);
     output = fn_any_async->vx_any_from_func_async(generic_any_1);
-    vx_core::vx_release(fn_any_async);
+    vx_core::vx_release_one(fn_any_async);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7831,42 +7912,56 @@ namespace vx_core {
   // (func <-)
   template <class T> T* f_chainfirst(T* generic_any_1, T* value, vx_core::Type_any_from_anylist fnlist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({value, fnlist}, output);
+    vx_core::vx_reserve({value, fnlist});
+    vx_core::vx_release_one_except({value, fnlist}, output);
     return output;
   }
 
   // (func <<-)
   template <class T> T* f_chainlast(T* generic_any_1, T* value, vx_core::Type_any_from_anylist fnlist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({value, fnlist}, output);
+    vx_core::vx_reserve({value, fnlist});
+    vx_core::vx_release_one_except({value, fnlist}, output);
     return output;
   }
 
   // (func first<-list)
   template <class T, class X> T* f_first_from_list(T* generic_any_1, X* values) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(values);
     output = vx_core::f_any_from_list(generic_any_1, values, vx_core::vx_new_int(0));
-    vx_core::vx_release_except(values, output);
+    vx_core::vx_release_one_except(values, output);
     return output;
   }
 
   // (func first<-list-fn-any<-any)
   template <class T, class X> T* f_first_from_list_fn_any_from_any(T* generic_any_1, X* values, vx_core::Func_any_from_any fn_any_from_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({values, fn_any_from_any}, output);
+    vx_core::vx_reserve({values, fn_any_from_any});
+    std::vector<vx_core::Type_any> listvalue = values->vx_list();
+    for (vx_core::Type_any value : listvalue) {
+      if (value != vx_core::c_nothing()) {
+        vx_core::Type_any any = fn_any_from_any->vx_any_from_any(value);
+        output = vx_core::vx_any_from_any(generic_any_1, any);
+        break;
+      }
+    };
+    vx_core::vx_release_one_except({values, fn_any_from_any}, output);
     return output;
   }
 
   // (func fn)
   template <class T> T* f_fn(T* generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except({params, fn_any}, output);
+    vx_core::vx_reserve({params, fn_any});
+    vx_core::vx_release_one_except({params, fn_any}, output);
     return output;
   }
 
   // (func last<-list)
   template <class T, class X> T* f_last_from_list(T* generic_any_1, X* values) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(values);
     output = vx_core::f_let(
       generic_any_1,
       vx_core::t_any_from_func()->vx_fn_new({values, generic_any_1}, [values, generic_any_1]() {
@@ -7879,28 +7974,42 @@ namespace vx_core {
         return output_1;
       })
     );
-    vx_core::vx_release_except(values, output);
+    vx_core::vx_release_one_except(values, output);
     return output;
   }
 
   // (func list-join<-list)
   template <class X, class Y> X* f_list_join_from_list(X* generic_list_1, Y* values, vx_core::Func_any_from_any fn_any_from_any) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release_except({values, fn_any_from_any}, output);
+    vx_core::vx_reserve({values, fn_any_from_any});
+    vx_core::vx_release_one_except({values, fn_any_from_any}, output);
     return output;
   }
 
   // (func list<-list)
   template <class X, class Y> X* f_list_from_list(X* generic_list_1, Y* values, vx_core::Func_any_from_any fn_any_from_any) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release_except({values, fn_any_from_any}, output);
+    vx_core::vx_reserve({values, fn_any_from_any});
+    vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listany list_result = vx_core::vx_listany_from_listany_fn(list_value, [fn_any_from_any](vx_core::Type_any val) {
+      return fn_any_from_any->vx_any_from_any(val);
+    });
+    vx_core::Type_any anylist = generic_list_1->vx_new(list_result);
+    output = vx_core::vx_any_from_any(generic_list_1, anylist);
+    vx_core::vx_release_one_except({values, fn_any_from_any}, output);
     return output;
   }
 
   // (func list<-list-async)
   template <class X, class Y> vx_core::vx_Type_async f_list_from_list_async(X* generic_list_1, Y* values, vx_core::Func_any_from_any_async fn_any_from_any_async) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release({values, fn_any_from_any_async});
+    vx_core::vx_reserve({values, fn_any_from_any_async});
+    vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
+      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any(), val);
+    });
+    output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);
+    vx_core::vx_release_one({values, fn_any_from_any_async});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_list_1));
     }
@@ -7910,14 +8019,16 @@ namespace vx_core {
   // (func list<-map)
   template <class X, class O> X* f_list_from_map(X* generic_list_1, O* valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
     X* output = vx_core::vx_empty(generic_list_1);
-    vx_core::vx_release_except({valuemap, fn_any_from_key_value}, output);
+    vx_core::vx_reserve({valuemap, fn_any_from_key_value});
+    vx_core::vx_release_one_except({valuemap, fn_any_from_key_value}, output);
     return output;
   }
 
   // (func list<-map-async)
   template <class X, class O> vx_core::vx_Type_async f_list_from_map_async(X* generic_list_1, O* valuemap, vx_core::Func_any_from_key_value_async fn_any_from_key_value_async) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_release({valuemap, fn_any_from_key_value_async});
+    vx_core::vx_reserve({valuemap, fn_any_from_key_value_async});
+    vx_core::vx_release_one({valuemap, fn_any_from_key_value_async});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_list_1));
     }
@@ -7927,46 +8038,51 @@ namespace vx_core {
   // (func map<-list)
   template <class Y, class N> N* f_map_from_list(N* generic_map_1, Y* vallist, vx_core::Func_any_from_any fn_any_from_any) {
     N* output = vx_core::vx_empty(generic_map_1);
+    vx_core::vx_reserve({vallist, fn_any_from_any});
     vx_core::vx_Type_listany listval = vallist->vx_list();
     vx_core::vx_Type_mapany mapval = vx_core::vx_map_from_list(listval);
     output = vx_core::vx_new_from_map(generic_map_1, mapval);
-    vx_core::vx_release_except({vallist, fn_any_from_any}, output);
+    vx_core::vx_release_one_except({vallist, fn_any_from_any}, output);
     return output;
   }
 
   // (func native)
   template <class T> T* f_native(T* generic_any_1, vx_core::Type_anylist clauses) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_release_except(clauses, output);
+    vx_core::vx_reserve(clauses);
+    vx_core::vx_release_one_except(clauses, output);
     return output;
   }
 
   // (func resolve)
   template <class T> T* f_resolve(T* generic_any_1, T* value) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(value);
     output = value;
-    vx_core::vx_release_except(value, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 
   // (func resolve)
   template <class T> T* f_resolve_1(T* generic_any_1, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(fn_any);
     if (fn_any) {
       vx_core::Type_any any = fn_any->vx_any_from_func();
       output = vx_core::vx_any_from_any(generic_any_1, any);
     };
-    vx_core::vx_release_except(fn_any, output);
+    vx_core::vx_release_one_except(fn_any, output);
     return output;
   }
 
   // (func resolve-async)
   template <class T> vx_core::vx_Type_async f_resolve_async(T* generic_any_1, vx_core::Func_any_from_func_async fn_any) {
     vx_core::vx_Type_async output = NULL;
+    vx_core::vx_reserve(fn_any);
     if (fn_any) {
       output = fn_any->vx_any_from_func_async(generic_any_1);
     };
-    vx_core::vx_release(fn_any);
+    vx_core::vx_release_one(fn_any);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -7976,24 +8092,26 @@ namespace vx_core {
   // (func resolve-first)
   template <class T, class X> T* f_resolve_first(T* generic_any_1, X* clauses) {
     T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(clauses);
     output = vx_core::f_first_from_list_fn_any_from_any(
       generic_any_1,
       clauses,
       vx_core::t_resolve()
     );
-    vx_core::vx_release_except(clauses, output);
+    vx_core::vx_release_one_except(clauses, output);
     return output;
   }
 
   // (func resolve-list)
   template <class X> X* f_resolve_list(X* generic_list_1, X* clauses) {
     X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_reserve(clauses);
     output = vx_core::f_list_from_list(
       generic_list_1,
       clauses,
       vx_core::t_resolve()
     );
-    vx_core::vx_release_except(clauses, output);
+    vx_core::vx_release_one_except(clauses, output);
     return output;
   }
 

@@ -438,6 +438,8 @@ namespace vx_data_xml {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_xml::t_xmlnode()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_xml::t_xmlnode(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_xml::t_xmlnode())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_xml::t_xmlnode(), valsub));
         } else if (valsubtype == vx_data_xml::t_xmlnodelist()) {
           vx_data_xml::Type_xmlnodelist multi = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listxmlnode());
@@ -471,7 +473,7 @@ namespace vx_data_xml {
         "xmlnodelist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_xml::t_xmlnode()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_xml::t_xmlnode()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -564,6 +566,7 @@ namespace vx_data_xml {
       vx_data_xml::Type_xmlpropmap output = vx_data_xml::e_xmlpropmap();
       vx_data_xml::Type_xmlpropmap valmap = vx_core::vx_any_from_any(vx_data_xml::t_xmlpropmap(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -592,11 +595,13 @@ namespace vx_data_xml {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_data_xml::Class_xmlpropmap();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -621,7 +626,7 @@ namespace vx_data_xml {
         "xmlpropmap", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_core::t_string()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_core::t_string()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -637,10 +642,11 @@ namespace vx_data_xml {
   // (func xml<-textblock)
   vx_data_xml::Type_xml f_xml_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_data_xml::Type_xml output = vx_data_xml::e_xml();
+    vx_core::vx_reserve(textblock);
     output = vx_core::f_empty(
       vx_data_xml::t_xml()
     );
-    vx_core::vx_release_except(textblock, output);
+    vx_core::vx_release_one_except(textblock, output);
     return output;
   }
 

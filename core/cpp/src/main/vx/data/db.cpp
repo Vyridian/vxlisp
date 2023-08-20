@@ -1,5 +1,6 @@
 #include <map>
 #include <string>
+#include <vector>
 #include "../../vx/core.hpp"
 #include "db.hpp"
 
@@ -464,6 +465,7 @@ namespace vx_data_db {
       vx_data_db::Type_dbcellmap output = vx_data_db::e_dbcellmap();
       vx_data_db::Type_dbcellmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbcellmap(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_data_db::Type_dbcell> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -492,11 +494,13 @@ namespace vx_data_db {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_data_db::Class_dbcellmap();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -521,7 +525,7 @@ namespace vx_data_db {
         "dbcellmap", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_db::t_dbcell()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_db::t_dbcell()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -793,6 +797,7 @@ namespace vx_data_db {
       vx_data_db::Type_dbfieldmap output = vx_data_db::e_dbfieldmap();
       vx_data_db::Type_dbfieldmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbfieldmap(), copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::vector<std::string> keys;
       std::map<std::string, vx_data_db::Type_dbfield> mapval;
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -821,11 +826,13 @@ namespace vx_data_db {
           }
           if (valany) {
             mapval[key] = valany;
+            keys.push_back(key);
             key = "";
           }
         }
       }
       output = new vx_data_db::Class_dbfieldmap();
+      output->vx_p_keys = keys;
       output->vx_p_map = mapval;
       for (auto const& [key, val] : mapval) {
         vx_core::vx_reserve(val);
@@ -850,7 +857,7 @@ namespace vx_data_db {
         "dbfieldmap", // name
         ":map", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_db::t_dbfield()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_db::t_dbfield()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs

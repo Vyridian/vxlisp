@@ -300,6 +300,7 @@
   (native
    :cpp
     "// :header
+     std::vector<std::string> vx_p_keys;
      vx_core::vx_Type_mapany vx_p_map;
      vx_core::vx_Type_mapany vx_map() const;
      vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
@@ -1346,6 +1347,14 @@
  [values : list-1
   index  : int]
  (native
+  :cpp
+   "long intindex = index->vx_int();
+    vx_core::vx_Type_listany listvalue = values->vx_list();
+    int intsize = listvalue.size();
+    if (intindex < intsize) {
+      vx_core::Type_any value = listvalue[intindex];
+      output = vx_core::vx_any_from_any(generic_any_1, value);
+    }"
   :js
    "if (index < values.length) {
       output = values[index]
@@ -1586,6 +1595,9 @@
  [text : string
   find : string]
  (native
+  :cpp
+   "bool booleanresult = vx_boolean_from_string_find(text->vx_string(), find->vx_string());
+    output = vx_core::vx_new_boolean(booleanresult);"
   :js
    "text.includes(find)"
   :java
@@ -1690,6 +1702,15 @@
  [values      : list-1
   fn-any<-any : any<-any]
  (native
+  :cpp
+   "std::vector<vx_core::Type_any> listvalue = values->vx_list();
+    for (vx_core::Type_any value : listvalue) {
+      if (value != vx_core::c_nothing()) {
+        vx_core::Type_any any = fn_any_from_any->vx_any_from_any(value);
+        output = vx_core::vx_any_from_any(generic_any_1, any);
+        break;
+      }
+    }"
   :js
    "output = " nothing "
     const fn = fn_any_from_any['vx_value']
@@ -2104,7 +2125,7 @@
  [values : list-1]
  (native
   :cpp
-   "int len = values->vx_p_list.size();
+   "long len = (long)(values->vx_p_list.size());
     if (len > 0) {
       output = vx_core::vx_new_int(len);
     }"
@@ -2155,6 +2176,13 @@
  [values      : list-2
   fn-any<-any : any<-any]
  (native
+  :cpp
+   "vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listany list_result = vx_core::vx_listany_from_listany_fn(list_value, [fn_any_from_any](vx_core::Type_any val) {
+      return fn_any_from_any->vx_any_from_any(val);
+    });
+    vx_core::Type_any anylist = generic_list_1->vx_new(list_result);
+    output = vx_core::vx_any_from_any(generic_list_1, anylist);"
   :js
    "const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -2173,6 +2201,12 @@
  [values                : list-2
   fn-any<-any-async : any<-any-async]
  (native
+  :cpp
+   "vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
+      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any(), val);
+    });
+    output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);"
   :js
    "const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -2249,6 +2283,20 @@
 (func list<-map-async : list-1 :async
  [valuemap                : map-2
   fn-any<-key-value-async : any<-key-value-async])
+
+/*
+(func any<-start-end-fn : any-1
+ [start : int
+  end   : int
+  fn-any<-int-any : any<-int-any ::any-1]
+ :doc "Returns a list by for-nexting from start to end.")
+
+(func list<-start-end-fn : list-1
+ [start : int
+  end   : int
+  fn-any<-int : any<-int ::any-1]
+ :doc "Returns a list by for-nexting from start to end.")
+*/
 
 (func list<-type : any
  [type : any]
@@ -3526,6 +3574,9 @@
  [val          : any-2
   thenelselist : thenelselist :...]
  (native
+  :cpp
+   "vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);"
   :js
    "let fn_any = null
     if (thenelselist.length > 0) {

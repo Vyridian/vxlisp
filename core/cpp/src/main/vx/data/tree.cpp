@@ -414,6 +414,8 @@ namespace vx_data_tree {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_tree::t_branch()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_branch(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_tree::t_branch())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_branch(), valsub));
         } else if (valsubtype == vx_data_tree::t_branchlist()) {
           vx_data_tree::Type_branchlist multi = vx_core::vx_any_from_any(vx_data_tree::t_branchlist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listbranch());
@@ -447,7 +449,7 @@ namespace vx_data_tree {
         "branchlist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_tree::t_branch()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_tree::t_branch()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -726,6 +728,8 @@ namespace vx_data_tree {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_tree::t_leaf()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_leaf(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_tree::t_leaf())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_leaf(), valsub));
         } else if (valsubtype == vx_data_tree::t_leaflist()) {
           vx_data_tree::Type_leaflist multi = vx_core::vx_any_from_any(vx_data_tree::t_leaflist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listleaf());
@@ -759,7 +763,7 @@ namespace vx_data_tree {
         "leaflist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_tree::t_leaf()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_tree::t_leaf()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs

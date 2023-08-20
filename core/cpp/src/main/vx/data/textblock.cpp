@@ -556,6 +556,8 @@ namespace vx_data_textblock {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_textblock::t_textblock()) {
           listval.push_back(vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_textblock::t_textblock())) {
+          listval.push_back(vx_core::vx_any_from_any(vx_data_textblock::t_textblock(), valsub));
         } else if (valsubtype == vx_data_textblock::t_textblocklist()) {
           vx_data_textblock::Type_textblocklist multi = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtextblock());
@@ -589,7 +591,7 @@ namespace vx_data_textblock {
         "textblocklist", // name
         ":list", // extends
         vx_core::e_typelist(), // traits
-        vx_core::vx_new(vx_core::t_typelist(), {vx_data_textblock::t_textblock()}), // allowtypes
+        vx_core::vx_typelist_from_listany({vx_data_textblock::t_textblock()}), // allowtypes
         vx_core::e_typelist(), // disallowtypes
         vx_core::e_funclist(), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
@@ -605,8 +607,9 @@ namespace vx_data_textblock {
   // (func parse)
   vx_data_textblock::Type_textblock f_parse(vx_data_textblock::Type_textblock block, vx_data_textblock::Type_delimset delimpairlist) {
     vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock();
+    vx_core::vx_reserve({block, delimpairlist});
     output = block;
-    vx_core::vx_release_except({block, delimpairlist}, output);
+    vx_core::vx_release_one_except({block, delimpairlist}, output);
     return output;
   }
 
@@ -685,12 +688,13 @@ namespace vx_data_textblock {
   // (func stringlist<-textblocklist)
   vx_core::Type_stringlist f_stringlist_from_textblocklist(vx_data_textblock::Type_textblocklist textblocks) {
     vx_core::Type_stringlist output = vx_core::e_stringlist();
+    vx_core::vx_reserve(textblocks);
     output = vx_core::f_list_from_list(
       vx_core::t_stringlist(),
       textblocks,
       vx_data_textblock::t_text_from_textblock()
     );
-    vx_core::vx_release_except(textblocks, output);
+    vx_core::vx_release_one_except(textblocks, output);
     return output;
   }
 
@@ -780,8 +784,9 @@ namespace vx_data_textblock {
   // (func text<-textblock)
   vx_core::Type_string f_text_from_textblock(vx_data_textblock::Type_textblock block) {
     vx_core::Type_string output = vx_core::e_string();
+    vx_core::vx_reserve(block);
     output = block->text();
-    vx_core::vx_release_except(block, output);
+    vx_core::vx_release_one_except(block, output);
     return output;
   }
 
@@ -871,8 +876,9 @@ namespace vx_data_textblock {
   // (func textblocks<-textblock)
   vx_data_textblock::Type_textblocklist f_textblocks_from_textblock(vx_data_textblock::Type_textblock block) {
     vx_data_textblock::Type_textblocklist output = vx_data_textblock::e_textblocklist();
+    vx_core::vx_reserve(block);
     output = block->textblocks();
-    vx_core::vx_release_except(block, output);
+    vx_core::vx_release_one_except(block, output);
     return output;
   }
 
