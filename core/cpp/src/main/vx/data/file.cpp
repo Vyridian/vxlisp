@@ -30,7 +30,7 @@ namespace vx_data_file {
 
   vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text) {
     vx_core::Type_boolean output = vx_core::c_false();
-    std::ofstream filestream(path);
+    std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
     if (filestream.is_open()) {
       filestream << text;
       filestream.close();
@@ -52,7 +52,7 @@ namespace vx_data_file {
 
   vx_core::Type_string vx_string_read_from_path(std::string path) {
     vx_core::Type_string output = vx_core::e_string();
-    std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
+    std::ifstream filestream(path);
     if (filestream.is_open()) {
       bool isfirst = true;
       std::string text;
@@ -92,6 +92,9 @@ namespace vx_data_file {
 
     Class_file::~Class_file() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_name,
         this->vx_p_format,
@@ -341,6 +344,9 @@ namespace vx_data_file {
 
     Class_fileformat::~Class_fileformat() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
 
     vx_core::Type_any Class_fileformat::vx_new(vx_core::vx_Type_listany vals) const {

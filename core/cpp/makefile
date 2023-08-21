@@ -7,7 +7,7 @@ DIRS_INC=$(DIR_ROOT)/include/
 CC=g++
 OPT=-O3
 DEPFLAGS=-MP -MD
-CFLAGS=-lstdc++ -Wextra -g $(foreach DIR,$(DIRS_INC),-I$(DIR) $(OPT) $(DEPFLAGS))
+CFLAGS=-lstdc++ -Wextra $(foreach DIR,$(DIRS_INC),-I$(DIR) $(OPT) $(DEPFLAGS))
 
 DIR_MAINCPP=$(DIR_ROOT)/src/$(DIR_MAIN)
 DIR_MAINDEP=$(DIR_ROOT)/deps/$(DIR_MAIN)
@@ -16,8 +16,8 @@ DIR_TESTCPP=$(DIR_ROOT)/src/$(DIR_TEST)
 DIR_TESTDEP=$(DIR_ROOT)/deps/$(DIR_TEST)
 DIR_TESTOBJ=$(DIR_ROOT)/build/$(DIR_TEST)
 
-FILE_MAINAPP=$(DIR_MAINOBJ)/app.exe
-FILE_TESTAPP=$(DIR_TESTOBJ)/app_test.exe
+FILE_MAINAPP=app.exe
+FILE_TESTAPP=app_test.exe
 
 FILE_MAINOBJAPP=$(DIR_MAINOBJ)/app.o
 FILE_MAINDEPAPP=$(DIR_MAINDEP)/app.d
@@ -35,21 +35,21 @@ all:
 	appmain
 	apptest
 
-appmain: $(FILES_MAINOBJ) $(FILE_MAINOBJAPP)
+appmain: $(FILE_MAINOBJAPP) $(FILES_MAINOBJ)
 	$(CC) -o $(FILE_MAINAPP) $^
 
-apptest: $(FILES_TESTOBJ) $(FILE_TESTOBJAPP)
-	$(CC) -o $(FILE_TESTAPP) $^ $(FILES_MAINOBJ)
-
-clean:
-	cleanmain
-	cleantest
+apptest: $(FILE_TESTOBJAPP) $(FILES_MAINOBJ) $(FILES_TESTOBJ)
+	$(CC) -o $(FILE_TESTAPP) $^
 
 cleanmain:
 	rm -rf $(FILE_MAINAPP) $(FILE_MAINOBJAPP) $(FILE_MAINDEPAPP) $(FILES_MAINOBJ) $(FILES_MAINDEP)
 
 cleantest:
 	rm -rf $(FILE_TESTAPP) $(FILES_TESTOBJ) $(FILES_TESTDEP)
+
+clean:
+	cleanmain
+	cleantest
 
 echomaincpp:
 	echo $(DIR_MAINCPP)

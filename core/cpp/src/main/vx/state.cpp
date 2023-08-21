@@ -17,6 +17,9 @@ namespace vx_state {
 
     Class_value_map::~Class_value_map() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -47,14 +50,7 @@ namespace vx_state {
       for (auto const& iter : mapval) {
         std::string key = iter.first;
         vx_core::Type_any val = iter.second;
-        vx_core::Type_any valtype = val->vx_type();
-        if (valtype == vx_core::t_any()) {
-          vx_core::Type_any castval = vx_core::vx_any_from_any(vx_core::t_any(), val);
-          map[key] = castval;
-        } else {
-          vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(value_map) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
-          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
-        }
+        map[key] = val;
       }
       output = new vx_state::Class_value_map();
       output->vx_p_map = map;
@@ -97,15 +93,7 @@ namespace vx_state {
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_any valany = NULL;
-          if (valsubtype == vx_core::t_any()) {
-            valany = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
-          } else if (valsubtype == vx_core::t_any()) {
-            valany = vx_core::vx_any_from_any(vx_core::t_any(), valsub);
-          } else {
-            vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
-            msgblock = vx_core::vx_copy(msgblock, {msg});
-          }
+          vx_core::Type_any valany = valsub;
           if (valany) {
             mapval[key] = valany;
             keys.push_back(key);

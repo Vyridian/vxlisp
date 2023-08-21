@@ -17,6 +17,9 @@ namespace vx_repl {
 
     Class_liblist::~Class_liblist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -147,6 +150,9 @@ namespace vx_repl {
 
     Class_repl::~Class_repl() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_type,
         this->vx_p_repllist,
@@ -356,6 +362,9 @@ namespace vx_repl {
 
     Class_repllist::~Class_repllist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }

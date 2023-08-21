@@ -19,6 +19,9 @@ namespace vx_data_csv {
 
     Class_csv::~Class_csv() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_headers,
         this->vx_p_rows
@@ -178,6 +181,9 @@ namespace vx_data_csv {
 
     Class_csvrows::~Class_csvrows() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }

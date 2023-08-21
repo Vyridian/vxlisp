@@ -15,6 +15,9 @@ namespace vx_sample {
 
     Class_mytype::~Class_mytype() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_mynum,
         this->vx_p_mystr

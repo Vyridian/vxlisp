@@ -17,6 +17,9 @@ namespace vx_data_table {
 
     Class_cell::~Class_cell() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_value
@@ -171,6 +174,9 @@ namespace vx_data_table {
 
     Class_celllist::~Class_celllist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -301,6 +307,9 @@ namespace vx_data_table {
 
     Class_cellmap::~Class_cellmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -454,6 +463,9 @@ namespace vx_data_table {
 
     Class_field::~Class_field() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,
@@ -638,6 +650,9 @@ namespace vx_data_table {
 
     Class_fieldlist::~Class_fieldlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -768,6 +783,9 @@ namespace vx_data_table {
 
     Class_fieldmap::~Class_fieldmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -898,6 +916,9 @@ namespace vx_data_table {
 
     Class_filter::~Class_filter() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,
@@ -1087,6 +1108,9 @@ namespace vx_data_table {
 
     Class_row::~Class_row() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_cellmap,
@@ -1276,6 +1300,9 @@ namespace vx_data_table {
 
     Class_rowlist::~Class_rowlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -1406,6 +1433,9 @@ namespace vx_data_table {
 
     Class_rowmap::~Class_rowmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -1559,6 +1589,9 @@ namespace vx_data_table {
 
     Class_sort::~Class_sort() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,
@@ -1748,6 +1781,9 @@ namespace vx_data_table {
 
     Class_table::~Class_table() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,

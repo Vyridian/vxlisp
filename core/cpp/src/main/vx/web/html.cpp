@@ -19,6 +19,9 @@ namespace vx_web_html {
 
     Class_node::~Class_node() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style
@@ -178,6 +181,9 @@ namespace vx_web_html {
 
     Class_divchild::~Class_divchild() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         
       });
@@ -250,6 +256,9 @@ namespace vx_web_html {
 
     Class_body::~Class_body() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
@@ -387,6 +396,9 @@ namespace vx_web_html {
 
     Class_details::~Class_details() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -606,6 +618,9 @@ namespace vx_web_html {
 
     Class_div::~Class_div() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -803,6 +818,9 @@ namespace vx_web_html {
 
     Class_divchildlist::~Class_divchildlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -933,6 +951,9 @@ namespace vx_web_html {
 
     Class_divlist::~Class_divlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -1063,6 +1084,9 @@ namespace vx_web_html {
 
     Class_footer::~Class_footer() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
@@ -1200,6 +1224,9 @@ namespace vx_web_html {
 
     Class_h1::~Class_h1() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -1393,6 +1420,9 @@ namespace vx_web_html {
 
     Class_h2::~Class_h2() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -1586,6 +1616,9 @@ namespace vx_web_html {
 
     Class_h3::~Class_h3() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -1779,6 +1812,9 @@ namespace vx_web_html {
 
     Class_head::~Class_head() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
@@ -1916,6 +1952,9 @@ namespace vx_web_html {
 
     Class_headchild::~Class_headchild() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         
       });
@@ -1988,6 +2027,9 @@ namespace vx_web_html {
 
     Class_headchildlist::~Class_headchildlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -2118,6 +2160,9 @@ namespace vx_web_html {
 
     Class_html::~Class_html() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_lang,
         this->vx_p_head,
@@ -2337,6 +2382,9 @@ namespace vx_web_html {
 
     Class_meta::~Class_meta() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -2526,6 +2574,9 @@ namespace vx_web_html {
 
     Class_nodelist::~Class_nodelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -2656,6 +2707,9 @@ namespace vx_web_html {
 
     Class_p::~Class_p() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -2849,6 +2903,9 @@ namespace vx_web_html {
 
     Class_propmap::~Class_propmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -3002,6 +3059,9 @@ namespace vx_web_html {
 
     Class_style::~Class_style() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_name,
         this->vx_p_props
@@ -3161,6 +3221,9 @@ namespace vx_web_html {
 
     Class_stylelist::~Class_stylelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -3291,6 +3354,9 @@ namespace vx_web_html {
 
     Class_stylemap::~Class_stylemap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -3444,6 +3510,9 @@ namespace vx_web_html {
 
     Class_stylesheet::~Class_stylesheet() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -3693,6 +3762,9 @@ namespace vx_web_html {
 
     Class_table::~Class_table() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -3912,6 +3984,9 @@ namespace vx_web_html {
 
     Class_tbody::~Class_tbody() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -4109,6 +4184,9 @@ namespace vx_web_html {
 
     Class_td::~Class_td() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -4306,6 +4384,9 @@ namespace vx_web_html {
 
     Class_tdlist::~Class_tdlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -4436,6 +4517,9 @@ namespace vx_web_html {
 
     Class_thead::~Class_thead() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -4633,6 +4717,9 @@ namespace vx_web_html {
 
     Class_title::~Class_title() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -4822,6 +4909,9 @@ namespace vx_web_html {
 
     Class_tr::~Class_tr() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
@@ -5019,6 +5109,9 @@ namespace vx_web_html {
 
     Class_trlist::~Class_trlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }

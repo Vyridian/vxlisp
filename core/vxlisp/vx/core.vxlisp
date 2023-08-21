@@ -1452,6 +1452,9 @@
  [valuemap : map-1
   key      : string]
  (native
+  :cpp
+   "vx_core::Type_any val = valuemap->vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);"
   :js
    "if (key.startsWith(':')) {
       key = key.substring(1)
@@ -1941,7 +1944,7 @@
  [text : string]
  (native
   :cpp
-   "if (text->vx_string().length() == 0) {
+   "if (text->vx_p_iref == -2) {
       output = vx_core::c_true();
     }"
   :js
@@ -2023,6 +2026,9 @@
 (func is-int : boolean
  [value : any]
  (native
+  :cpp
+   "bool result = vx_core::vx_is_int(value);
+    output = vx_core::vx_new_boolean(result);"
   :js
    "output = false
     switch (value) {

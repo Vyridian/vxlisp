@@ -18,6 +18,9 @@ namespace vx_data_xml {
 
     Class_xml::~Class_xml() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_nodes
       });
@@ -147,6 +150,9 @@ namespace vx_data_xml {
 
     Class_xmlnode::~Class_xmlnode() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_nodes,
         this->vx_p_props,
@@ -366,6 +372,9 @@ namespace vx_data_xml {
 
     Class_xmlnodelist::~Class_xmlnodelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -496,6 +505,9 @@ namespace vx_data_xml {
 
     Class_xmlpropmap::~Class_xmlpropmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }

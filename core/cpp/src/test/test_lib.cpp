@@ -313,12 +313,16 @@ namespace test_lib {
     vx_core::Type_any valexpected = testresult->expected();
     vx_core::Type_any valactual = testresult->actual();
     bool passfail = testresult->passfail()->vx_boolean();
-    std::string code = testresult->code()->vx_string();
-    std::string expected = vx_core::vx_string_from_any(valexpected);
-    std::string actual = vx_core::vx_string_from_any(valactual);
-    std::string msg = testpkg + "/" + testname + " " + message;
     if (!passfail) {
-      vx_core::f_log(testresult);
+      //std::string code = testresult->code()->vx_string();
+      std::string expected = vx_core::vx_string_from_any(valexpected);
+      std::string actual = vx_core::vx_string_from_any(valactual);
+      std::string msg = testpkg + "/" + testname + "\n" + message;
+      vx_core::vx_debug("--Test Result Fail-- " + msg);
+      vx_core::vx_debug("---Expected---\n" + expected);
+      vx_core::vx_debug("---Actual---\n" + actual);
+      //vx_core::vx_debug(testresult);
+      vx_core::vx_debug("");
     }
     return testresult;
   }

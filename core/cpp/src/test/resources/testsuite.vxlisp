@@ -3,6 +3,179 @@
   :caselist
    (vx/test/testcaselist
     (vx/test/testcase
+     :casename "list<-list-end"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"a\" \"b\" \"c\")
+ (list<-list-end
+  (stringlist \"a\" \"b\" \"c\" \"d\")
+  3))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c"))))
+     :passfail true
+     :testpkg "vx/collection")
+    (vx/test/testcase
+     :casename "list<-list-filtertypes"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (list \"a\" 1 \"b\" \"c\")
+ (list<-list-filtertypes : list
+  (list \"a\" 1 \"b\" \"c\" 4.5)
+  string int))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected
+           (list
+            "a"
+            1
+            "b"
+            "c"))))
+     :passfail true
+     :testpkg "vx/collection")
+    (vx/test/testcase
+     :casename "list<-list-fn-filter"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"a1\" \"b1\" \"c1\" \"d1\")
+ (list<-list-fn-filter : stringlist
+  (list \"a\" 4 \"b\" (list) \"c\" (map) \"d\")
+  (fn : string
+   [val : any]
+   (if
+    (then
+     (is-string val)
+     (string val \"1\"))))))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected
+           (stringlist
+            "a1"
+            "b1"
+            "c1"
+            "d1"))))
+     :passfail true
+     :testpkg "vx/collection")
+    (vx/test/testcase
+     :casename "list<-list-start"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"b\" \"c\" \"d\")
+ (list<-list-start
+  (stringlist \"a\" \"b\" \"c\" \"d\")
+  1))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected
+           (stringlist
+            "b"
+            "c"
+            "d"))))
+     :passfail true
+     :testpkg "vx/collection")
+    (vx/test/testcase
+     :casename "list<-list-start-end"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"b\" \"c\")
+ (list<-list-start-end
+  (stringlist \"a\" \"b\" \"c\" \"d\")
+  1 3))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected
+           (stringlist
+            "b"
+            "c"))))
+     :passfail true
+     :testpkg "vx/collection"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :is-list 0
+      :is-map 0
+      :list<-list-end 1
+      :list<-list-filtertypes 1
+      :list<-list-fn-filter 1
+      :list<-list-start 1
+      :list<-list-start-end 1)
+    :testpkg "vx/collection"
+    :typemap (intmap))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 7
+      :total 7)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 71
+      :tests 5
+      :total 7)
+    :testpkg "vx/collection"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 71
+      :tests 5
+      :total 7)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/collection")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
      :casename "boolean"
      :describelist
       (vx/test/testdescribelist
@@ -49,9 +222,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
-          :actual 4.500000
+          :actual 4.5
           :code ":eq"
-          :expected 4.5)))
+          :expected 4.5
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -63,38 +237,48 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
-        :describename "(test-true  (is-int "4"))"
+        :describename "(test-true  (is-int \"4\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true  (is-int infinity))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true  (is-int neginfinity))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true  (is-int notanumber))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
-        :describename "(test-false (is-int "a"))"
+        :describename "(test-false (is-int \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -114,7 +298,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "a" (string "a"))"
+        :describename "(test \"a\" (string \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -123,7 +307,7 @@
           :expected "a"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "ab" (string "a" "b"))"
+        :describename "(test \"ab\" (string \"a\" \"b\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -194,7 +378,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-ne "a" "b")"
+        :describename "(test-ne \"a\" \"b\")"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -461,7 +645,7 @@
           :code ":true"
           :expected true))
        (vx/test/testdescribe
-        :describename "(test-true (< "b" "d" "z"))"
+        :describename "(test-true (< \"b\" \"d\" \"z\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -537,7 +721,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true (<= "b" "d" "z"))"
+        :describename "(test-true (<= \"b\" \"d\" \"z\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -570,7 +754,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-true (= "a" "a"))"
+        :describename "(test-true (= \"a\" \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -579,7 +763,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-true (= (stringlist "a" "b" "c") (new stringlist "a" "b" "c")))"
+        :describename "(test-true (= (stringlist \"a\" \"b\" \"c\") (new stringlist \"a\" \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -588,7 +772,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-true (= (stringmap :a "1" :b "2") (new stringmap :a "1" :b "2")))"
+        :describename "(test-true (= (stringmap :a \"1\" :b \"2\") (new stringmap :a \"1\" :b \"2\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -629,7 +813,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true (> "z" "y" "b"))"
+        :describename "(test-true (> \"z\" \"y\" \"b\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -657,7 +841,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true (>= "z" "b" "b"))"
+        :describename "(test-true (>= \"z\" \"b\" \"b\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -716,8 +900,8 @@
        (vx/test/testdescribe
         :describename
          "(test
- "b"
- (any<-list (list "a" "b" "c") 1))"
+ \"b\"
+ (any<-list (list \"a\" \"b\" \"c\") 1))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -728,8 +912,8 @@
        (vx/test/testdescribe
         :describename
          "(test
- "b"
- (:1 (stringlist "a" "b" "c")))"
+ \"b\"
+ (:1 (stringlist \"a\" \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -771,13 +955,15 @@
        (vx/test/testdescribe
         :describename
          "(test
- "v2"
- (any<-map (map :a "v1" :b "v2" :c "v3") :b))"
+ \"v2\"
+ (any<-map (map :a \"v1\" :b \"v2\" :c \"v3\") :b))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual "v2"
           :code ":eq"
-          :expected "v2")))
+          :expected "v2"
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -792,7 +978,7 @@
           :code ":eq"
           :expected 1))
        (vx/test/testdescribe
-        :describename "(test 1 (compare "z" "a"))"
+        :describename "(test 1 (compare \"z\" \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -805,7 +991,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true  (contains "abcde" "cd"))"
+        :describename "(test-true  (contains \"abcde\" \"cd\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -814,7 +1000,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-false (contains "abcde" "dc"))"
+        :describename "(test-false (contains \"abcde\" \"dc\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -827,7 +1013,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true  (contains (stringlist "1" "2" "3") "2"))"
+        :describename "(test-true  (contains (stringlist \"1\" \"2\" \"3\") \"2\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -845,7 +1031,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-false (contains (list 1 "2" 3) 2))"
+        :describename "(test-false (contains (list 1 \"2\" 3) 2))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -858,7 +1044,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test ""     (empty string))"
+        :describename "(test \"\"     (empty string))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -885,7 +1071,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "b" (first<-list (stringlist "b" "c")))"
+        :describename "(test \"b\" (first<-list (stringlist \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -900,7 +1086,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "b" (first<-list-fn-any<-any (list nothing "b" "c") resolve))"
+        :describename "(test \"b\" (first<-list-fn-any<-any (list nothing \"b\" \"c\") resolve))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -915,7 +1101,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "a" (if (= 2 2) "a"))"
+        :describename "(test \"a\" (if (= 2 2) \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -924,7 +1110,7 @@
           :expected "a"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test ""  (if : string (= 1 2) "a"))"
+        :describename "(test \"\"  (if : string (= 1 2) \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -937,7 +1123,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "a" (if (= 2 2) "a" "b"))"
+        :describename "(test \"a\" (if (= 2 2) \"a\" \"b\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -946,7 +1132,7 @@
           :expected "a"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "b"  (if (= 1 2) "a" "b"))"
+        :describename "(test \"b\"  (if (= 1 2) \"a\" \"b\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -981,7 +1167,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test 4 (int<-string "4"))"
+        :describename "(test 4 (int<-string \"4\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -990,7 +1176,7 @@
           :expected 4
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test 5 (int<-string "5.4"))"
+        :describename "(test 5 (int<-string \"5.4\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -999,7 +1185,7 @@
           :expected 5
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test 5 (int<-string "5.9"))"
+        :describename "(test 5 (int<-string \"5.9\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1008,7 +1194,7 @@
           :expected 5
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test notanumber  (int<-string "notanumber"))"
+        :describename "(test notanumber  (int<-string \"notanumber\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1017,7 +1203,7 @@
           :expected notanumber
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test infinity    (int<-string "infinity"))"
+        :describename "(test infinity    (int<-string \"infinity\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1026,7 +1212,7 @@
           :expected infinity
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test neginfinity (int<-string "neginfinity"))"
+        :describename "(test neginfinity (int<-string \"neginfinity\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1041,7 +1227,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test-true (is-empty ""))"
+        :describename "(test-true (is-empty \"\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1092,7 +1278,7 @@
           :expected true
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test-false (is-number "a"))"
+        :describename "(test-false (is-number \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1105,7 +1291,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "c" (last<-list (list "b" "c")))"
+        :describename "(test \"c\" (last<-list (list \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1120,7 +1306,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test 3 (length<-list (stringlist "a" "b" "c")))"
+        :describename "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1156,9 +1342,9 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringlist "a1" "b2")
+ (stringlist \"a1\" \"b2\")
  (list<-map : stringlist
-  (stringmap "a" "1" "b" "2")
+  (stringmap \"a\" \"1\" \"b\" \"2\")
   (fn : string
    [key : string
     val : string]
@@ -1180,9 +1366,9 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringlist "a1" "b2")
+ (stringlist \"a1\" \"b2\")
  (list<-map : stringlist
-  (stringmap "a" "1" "b" "2")
+  (stringmap \"a\" \"1\" \"b\" \"2\")
   (fn : string
    [key : string
     val : string]
@@ -1224,11 +1410,12 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
-          :actual 5.400000
+          :actual 5.4
           :code ":eq"
-          :expected 5.4))
+          :expected 5.4
+          :passfail true))
        (vx/test/testdescribe
-        :describename "(test "a" (new string "a"))"
+        :describename "(test \"a\" (new string \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1239,8 +1426,8 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringlist "a" "b" "c")
- (new stringlist "a" "b" "c"))"
+ (stringlist \"a\" \"b\" \"c\")
+ (new stringlist \"a\" \"b\" \"c\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1259,8 +1446,8 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringmap :a "1" :b "2")
- (new stringmap :a "1" :b "2"))"
+ (stringmap :a \"1\" :b \"2\")
+ (new stringmap :a \"1\" :b \"2\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1332,7 +1519,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "a" (resolve "a"))"
+        :describename "(test \"a\" (resolve \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1377,7 +1564,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "abab" (string-repeat "ab" 2))"
+        :describename "(test \"abab\" (string-repeat \"ab\" 2))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1392,7 +1579,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "true"  (string<-any true))"
+        :describename "(test \"true\"  (string<-any true))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1401,7 +1588,7 @@
           :expected "true"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "4"     (string<-any 4))"
+        :describename "(test \"4\"     (string<-any 4))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1410,7 +1597,7 @@
           :expected "4"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "5.4"   (string<-any 5.4))"
+        :describename "(test \"5.4\"   (string<-any 5.4))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1419,56 +1606,56 @@
           :expected "5.4"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "\"a\"" (string<-any "a"))"
+        :describename "(test \"\\"a\\"\" (string<-any \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
-          :actual ""a""
+          :actual "\"a\""
           :code ":eq"
-          :expected ""a""
+          :expected "\"a\""
           :passfail true))
        (vx/test/testdescribe
         :describename
          "(test
- "(stringlist
-   \"a\"
-   \"b\"
-   \"c\")"
- (string<-any (stringlist "a" "b" "c")))"
+ \"(stringlist
+   \\"a\\"
+   \\"b\\"
+   \\"c\\")\"
+ (string<-any (stringlist \"a\" \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
           :actual
            "(stringlist
- "a"
- "b"
- "c")"
+ \"a\"
+ \"b\"
+ \"c\")"
           :code ":eq"
           :expected
            "(stringlist
- "a"
- "b"
- "c")"
+ \"a\"
+ \"b\"
+ \"c\")"
           :passfail true))
        (vx/test/testdescribe
         :describename
          "(test
- "(stringmap
-   :a \"1\"
-   :b \"2\")"
- (string<-any (stringmap :a "1" :b "2")))"
+ \"(stringmap
+   :a \\"1\\"
+   :b \\"2\\")\"
+ (string<-any (stringmap :a \"1\" :b \"2\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
           :actual
            "(stringmap
- :a "1"
- :b "2")"
+ :a \"1\"
+ :b \"2\")"
           :code ":eq"
           :expected
            "(stringmap
- :a "1"
- :b "2")"
+ :a \"1\"
+ :b \"2\")"
           :passfail true)))
      :passfail true
      :testpkg "vx/core")
@@ -1480,8 +1667,8 @@
         :describename
          "(test 1
  (switch : int
-  "d"
-  (case (list "b" "c" "d") 1)
+  \"d\"
+  (case (list \"b\" \"c\" \"d\") 1)
   (else 2)))"
         :testpkg "vx/core"
         :testresult
@@ -1515,7 +1702,7 @@
           :expected int
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test string (type<-any "a"))"
+        :describename "(test string (type<-any \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1530,7 +1717,7 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test "vx/core/boolean" (typename<-any false))"
+        :describename "(test \"vx/core/boolean\" (typename<-any false))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1539,7 +1726,7 @@
           :expected "vx/core/boolean"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "vx/core/int"     (typename<-any 5))"
+        :describename "(test \"vx/core/int\"     (typename<-any 5))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1548,7 +1735,7 @@
           :expected "vx/core/int"
           :passfail true))
        (vx/test/testdescribe
-        :describename "(test "vx/core/string"  (typename<-any "a"))"
+        :describename "(test \"vx/core/string\"  (typename<-any \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1828,4 +2015,1173 @@
       :tests 4
       :total 66))
   :passfail true
-  :testpkg "vx/core"))
+  :testpkg "vx/core")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "boolean-exists<-file"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (boolean-exists<-file
+  (file
+   :name \"boolean_exists_from_file.txt\"
+   :path \"src/test/resources/vx\")))"
+        :testpkg "vx/data/file"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/data/file")
+    (vx/test/testcase
+     :casename "boolean-write<-file-string"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (boolean-write<-file-string
+  (file
+   :name \"boolean_write_from_file_string.txt\"
+   :path \"src/test/resources/vx\")
+  \"writetext\"))"
+        :testpkg "vx/data/file"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/data/file")
+    (vx/test/testcase
+     :casename "file-read<-file"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (file
+  :name \"string_read_from_file.txt\"
+  :path \"src/test/resources/vx\"
+  :text \"testdata\")
+ (file-read<-file
+  (file
+   :name \"string_read_from_file.txt\"
+   :path \"src/test/resources/vx\")))"
+        :testpkg "vx/data/file"
+        :testresult
+         (vx/test/testresult
+          :actual
+           (vx/data/file/file
+            :name "string_read_from_file.txt"
+            :path "src/test/resources/vx"
+            :text "testdata")
+          :code ":eq"
+          :expected
+           (vx/data/file/file
+            :name "string_read_from_file.txt"
+            :path "src/test/resources/vx"
+            :text "testdata")
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/data/file")
+    (vx/test/testcase
+     :casename "pathcurrent<-os"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-endswith (pathcurrent<-os) \"\java\"))"
+        :testpkg "vx/data/file"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true)))
+     :passfail true
+     :testpkg "vx/data/file")
+    (vx/test/testcase
+     :casename "string-read<-file"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"testdata\"
+ (string-read<-file
+  (file
+   :name \"string_read_from_file.txt\"
+   :path \"src/test/resources/vx\")))"
+        :testpkg "vx/data/file"
+        :testresult
+         (vx/test/testresult
+          :actual "testdata"
+          :code ":eq"
+          :expected "testdata"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/data/file"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :boolean-exists<-file 1
+      :boolean-write<-file-any 0
+      :boolean-write<-file-string 1
+      :file-read<-file 1
+      :name<-file 0
+      :path<-file 0
+      :pathcurrent<-os 1
+      :pathfull<-file 0
+      :string-read<-file 1)
+    :testpkg "vx/data/file"
+    :typemap
+     (intmap
+      :file 0
+      :fileformat 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 90
+      :tests 10
+      :total 11)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 55
+      :tests 5
+      :total 9)
+    :testpkg "vx/data/file"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 45
+      :tests 5
+      :total 11)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2))
+  :passfail true
+  :testpkg "vx/data/file")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "any<-repl"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"HelloWorld\"
+ (any<-repl
+  (repl
+   :type string
+   :repllist
+    (repllist
+     (repl :val \"Hello\")
+     (repl :val \"World\")
+    ))))"
+        :testpkg "vx/repl"
+        :testresult
+         (vx/test/testresult
+          :actual "HelloWorld"
+          :code ":eq"
+          :expected "HelloWorld"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 5
+ (any<-repl
+  (repl
+   :type +
+   :repllist
+    (repllist
+     (repl :val 2)
+     (repl :val 3)
+    ))))"
+        :testpkg "vx/repl"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :expected 5)))
+     :passfail true
+     :testpkg "vx/repl"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :any-repl<-functype-args 0
+      :any<-liblist-string 0
+      :any<-liblist-string-async 0
+      :any<-repl 2
+      :any<-repl-async 0
+      :anylist<-repllist 0
+      :repl<-liblist-string 0)
+    :testpkg "vx/repl"
+    :typemap
+     (intmap
+      :liblist 0
+      :repl 0
+      :repllist 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 10
+      :total 10)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 14
+      :tests 1
+      :total 7)
+    :testpkg "vx/repl"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 10
+      :tests 1
+      :total 10)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3))
+  :passfail true
+  :testpkg "vx/repl")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "myconst"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test 4 myconst)"
+        :testpkg "vx/sample"
+        :testresult
+         (vx/test/testresult
+          :actual 4
+          :code ":eq"
+          :expected 4
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/sample")
+    (vx/test/testcase
+     :casename "myfunc"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test 5 (myfunc 1))"
+        :testpkg "vx/sample"
+        :testresult
+         (vx/test/testresult
+          :actual 5
+          :code ":eq"
+          :expected 5
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/sample"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :myconst 1)
+    :funcmap
+     (intmap
+      :main 0
+      :myfunc 1)
+    :testpkg "vx/sample"
+    :typemap
+     (intmap
+      :mytype 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 1
+      :total 1)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 2
+      :total 4)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :testpkg "vx/sample"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 2
+      :total 4)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1))
+  :passfail true
+  :testpkg "vx/sample")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "file-test"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (boolean-exists<-file
+  (file
+   :name \"testsuite.vxlisp\"
+   :path \"src/test/resources\")))"
+        :testpkg "vx/test"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/test")
+    (vx/test/testcase
+     :casename "file-testhtml"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (boolean-exists<-file
+  (file
+   :name \"testsuite.html\"
+   :path \"src/test/resources\")))"
+        :testpkg "vx/test"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/test")
+    (vx/test/testcase
+     :casename "file-testnode"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (boolean-exists<-file
+  (file
+   :name \"testsuitenode.vxlisp\"
+   :path \"src/test/resources\")))"
+        :testpkg "vx/test"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/test"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :stylesheet-test 0)
+    :funcmap
+     (intmap
+      :div<-testcaselist 0
+      :div<-testpackage 0
+      :div<-testpackagelist 0
+      :divchildlist<-testpackagelist 0
+      :file-test 1
+      :file-testhtml 1
+      :file-testnode 1
+      :html<-divtest 0
+      :p<-passfail 0
+      :p<-testcoveragenums 0
+      :resolve-testcase 0
+      :resolve-testcaselist 0
+      :resolve-testdescribe 0
+      :resolve-testdescribelist 0
+      :resolve-testpackage 0
+      :resolve-testpackagelist 0
+      :resolve-testresult 0
+      :test 0
+      :test-false 0
+      :test-false_1 0
+      :test-gt 0
+      :test-gt_1 0
+      :test-ne 0
+      :test-ne_1 0
+      :test-string 0
+      :test-string_1 0
+      :test-true 0
+      :test-true_1 0
+      :test_1 0
+      :tr<-testdescribe-casename 0
+      :trlist<-testcase 0
+      :trlist<-testcaselist 0)
+    :testpkg "vx/test"
+    :typemap
+     (intmap
+      :testcase 0
+      :testcaselist 0
+      :testcoveragedetail 0
+      :testcoveragenums 0
+      :testcoveragesummary 0
+      :testdescribe 0
+      :testdescribelist 0
+      :testpackage 0
+      :testpackagelist 0
+      :testresult 0
+      :testresultlist 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 32)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 32)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 93
+      :tests 41
+      :total 44)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 11
+      :tests 3
+      :total 26)
+    :testpkg "vx/test"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 7
+      :tests 3
+      :total 38)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11))
+  :passfail true
+  :testpkg "vx/test")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "is-string"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test-true  (is-string \"\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test-true  (is-string \"a\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual true
+          :code ":true"
+          :expected true
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test-false (is-string 5))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":false"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test-false (is-string (list)))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":false"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "is-type"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test-true (is-type false boolean))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename "(test-true (is-type \"a\"   string))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename "(test-true (is-type 5.5   number))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename "(test-true (is-type 4     int))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "is-type<-any-typelist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  false (typelist int boolean)))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  \"a\"   (typelist number string)))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  5.5   (typelist string number)))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true))
+       (vx/test/testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  4     (typelist string int)))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":true"
+          :expected true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "length<-string"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test 4 (length<-string \"abcd\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual 4
+          :code ":eq"
+          :expected 4
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test 0 (length<-string \"\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual 0
+          :code ":eq"
+          :expected 0
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "string<-int"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test \"4\"           (string<-int 4))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual ""
+          :code ":eq"
+          :expected "4"))
+       (vx/test/testdescribe
+        :describename "(test \"51\"          (string<-int 51))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "3"
+          :code ":eq"
+          :expected "51"))
+       (vx/test/testdescribe
+        :describename "(test \"notanumber\"  (string<-int notanumber))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "notanumber"
+          :code ":eq"
+          :expected "notanumber"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"infinity\"    (string<-int infinity))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "infinity"
+          :code ":eq"
+          :expected "infinity"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"neginfinity\" (string<-int neginfinity))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "neginfinity"
+          :code ":eq"
+          :expected "neginfinity"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "string<-string-end"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test \"abc\" (string<-string-end \"abcd\" 3))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "abc"
+          :code ":eq"
+          :expected "abc"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"ab\"  (string<-string-end \"abcd\" 2))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "ab"
+          :code ":eq"
+          :expected "ab"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "string<-string-start"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test \"abcd\" (string<-string-start \"abcd\" 0))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "abcd"
+          :code ":eq"
+          :expected "abcd"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"bcd\"  (string<-string-start \"abcd\" 1))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "bcd"
+          :code ":eq"
+          :expected "bcd"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "string<-string-start-end"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test \"abc\" (string<-string-start-end \"abcd\" 0 3))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "abc"
+          :code ":eq"
+          :expected "abc"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"bc\"  (string<-string-start-end \"abcd\" 1 3))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "bcd"
+          :code ":eq"
+          :expected "bc"))
+       (vx/test/testdescribe
+        :describename "(test \"\"    (string<-string-start-end \"abcd\" 5 6))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename "(test \"bcd\" (string<-string-start-end \"abcd\" 1 5))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "bcd"
+          :code ":eq"
+          :expected "bcd"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type")
+    (vx/test/testcase
+     :casename "string<-stringlist-join"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename "(test \"a$b$c\" (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :actual "a$b$c"
+          :code ":eq"
+          :expected "a$b$c"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/type"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :allowtypenames<-type 0
+      :allowtypes<-type 0
+      :is-boolean 0
+      :is-decimal 0
+      :is-float 0
+      :is-none 0
+      :is-string 4
+      :is-type 4
+      :is-type<-any-typelist 4
+      :length<-string 2
+      :string<-int 5
+      :string<-string-end 2
+      :string<-string-start 2
+      :string<-string-start-end 4
+      :string<-stringlist-join 1
+      :traitnames<-any 0
+      :traits<-any 0
+      :traits<-typedef 0)
+    :testpkg "vx/type"
+    :typemap (intmap))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 18)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 18)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 61
+      :tests 11
+      :total 18)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 9
+      :total 18)
+    :testpkg "vx/type"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 9
+      :total 18)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/type")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :casename "string<-body-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<body></body>\"
+ (string<-body-indent (body) 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<body></body>"
+          :code ":eq"
+          :expected "<body></body>"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<body>
+  <div></div>
+</body>\"
+ (string<-body-indent (body (div)) 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual
+           "<body>
+  <div></div>
+</body>"
+          :code ":eq"
+          :expected
+           "<body>
+  <div></div>
+</body>"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html")
+    (vx/test/testcase
+     :casename "string<-div-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<div></div>\"
+ (string<-div-indent (div) 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<div></div>"
+          :code ":eq"
+          :expected "<div></div>"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<div id=\\"myid\\"></div>\"
+ (string<-div-indent
+  (div :id \"myid\") 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<div id=\"myid\"></div>"
+          :code ":eq"
+          :expected "<div id=\"myid\"></div>"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html")
+    (vx/test/testcase
+     :casename "string<-head-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<head></head>\"
+ (string<-head-indent (head) 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<head></head>"
+          :code ":eq"
+          :expected "<head></head>"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html")
+    (vx/test/testcase
+     :casename "string<-html"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>\"
+ (string<-html
+  (html :head (head) :body (body))))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual
+           "<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>"
+          :code ":eq"
+          :expected
+           "<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html")
+    (vx/test/testcase
+     :casename "string<-meta-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<meta charset=\\"utf-8\\" />\"
+ (string<-meta-indent (meta :charset \"utf-8\") 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<meta charset=\"utf-8\" />"
+          :code ":eq"
+          :expected "<meta charset=\"utf-8\" />"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html")
+    (vx/test/testcase
+     :casename "string<-p-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<p>data</p>\"
+ (string<-p-indent (p :text \"data\") 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<p>data</p>"
+          :code ":eq"
+          :expected "<p>data</p>"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<p id=\\"myid\\">data</p>\"
+ (string<-p-indent
+  (p :id \"myid\" :text \"data\") 0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :actual "<p id=\"myid\">data</p>"
+          :code ":eq"
+          :expected "<p id=\"myid\">data</p>"
+          :passfail true)))
+     :passfail true
+     :testpkg "vx/web/html"))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :boolean-write<-id-htmltext 0
+      :boolean-write<-stylesheet 0
+      :htmlstring<-string 0
+      :string-indent 0
+      :string<-body-indent 2
+      :string<-details-indent 0
+      :string<-div-indent 2
+      :string<-footer-indent 0
+      :string<-h1-indent 0
+      :string<-h2-indent 0
+      :string<-h3-indent 0
+      :string<-head-indent 1
+      :string<-html 1
+      :string<-indent 0
+      :string<-meta-indent 1
+      :string<-node-indent 0
+      :string<-nodelist-indent 0
+      :string<-nodelist-tag-prop-indent 0
+      :string<-p-indent 2
+      :string<-propname-val 0
+      :string<-propstyle 0
+      :string<-style-indent 0
+      :string<-stylelist-indent 0
+      :string<-stylepropmap-indent 0
+      :string<-stylesheet-indent 0
+      :string<-table-indent 0
+      :string<-tbody-indent 0
+      :string<-td-indent 0
+      :string<-thead-indent 0
+      :string<-title-indent 0
+      :string<-tr-indent 0
+      :string<-uri 0
+      :style<-stylesheet-name 0
+      :stylemap<-stylelist 0
+      :stylemap<-stylesheet 0
+      :styles<-stylesheet 0
+      :stylesheet-loadmap 0
+      :uri<-string 0)
+    :testpkg "vx/web/html"
+    :typemap
+     (intmap
+      :body 0
+      :details 0
+      :div 0
+      :divchild 0
+      :divchildlist 0
+      :divlist 0
+      :footer 0
+      :h1 0
+      :h2 0
+      :h3 0
+      :head 0
+      :headchild 0
+      :headchildlist 0
+      :html 0
+      :meta 0
+      :node 0
+      :nodelist 0
+      :p 0
+      :propmap 0
+      :style 0
+      :stylelist 0
+      :stylemap 0
+      :stylesheet 0
+      :table 0
+      :tbody 0
+      :td 0
+      :tdlist 0
+      :thead 0
+      :title 0
+      :tr 0
+      :trlist 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 38)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 38)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 98
+      :tests 68
+      :total 69)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 15
+      :tests 6
+      :total 38)
+    :testpkg "vx/web/html"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 8
+      :tests 6
+      :total 69)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 31))
+  :passfail true
+  :testpkg "vx/web/html"))

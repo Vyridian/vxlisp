@@ -1,4 +1,6 @@
 cls
-make cleantest
+rem make cleanmain
+rem make cleantest
+del app_test.exe
 make apptest
-build\test\app_test.exe
+app_test.exe

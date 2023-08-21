@@ -1,4 +1,4 @@
 cls
-make cleanmain
+rem make cleanmain
 make appmain
-build\main\app.exe
+app.exe

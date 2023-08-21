@@ -37,7 +37,7 @@
 
   vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text) {
     vx_core::Type_boolean output = vx_core::c_false();
-    std::ofstream filestream(path);
+    std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
     if (filestream.is_open()) {
       filestream << text;
       filestream.close();
@@ -59,7 +59,7 @@
 
   vx_core::Type_string vx_string_read_from_path(std::string path) {
     vx_core::Type_string output = vx_core::e_string();
-    std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
+    std::ifstream filestream(path);
     if (filestream.is_open()) {
       bool isfirst = true;
       std::string text;

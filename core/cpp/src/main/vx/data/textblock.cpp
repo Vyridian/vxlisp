@@ -16,6 +16,9 @@ namespace vx_data_textblock {
 
     Class_delimset::~Class_delimset() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_start,
         this->vx_p_end,
@@ -235,6 +238,9 @@ namespace vx_data_textblock {
 
     Class_textblock::~Class_textblock() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_name,
         this->vx_p_text,
@@ -484,6 +490,9 @@ namespace vx_data_textblock {
 
     Class_textblocklist::~Class_textblocklist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }

@@ -1419,6 +1419,12 @@ namespace vx_core {
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
 
+  // vx_is_int(string)
+  bool vx_is_int(std::string value);
+
+  // vx_is_int(any)
+  bool vx_is_int(vx_core::Type_any value);
+
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
 
@@ -1550,6 +1556,9 @@ namespace vx_core {
 
   // vx_string_from_int(long)
   std::string vx_string_from_int(long value);
+
+  // vx_string_from_float(float)
+  std::string vx_string_from_float(float value);
 
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
@@ -7743,6 +7752,8 @@ namespace vx_core {
   template <class T, class N> T* f_any_from_map(T* generic_any_1, N* valuemap, vx_core::Type_string key) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve({valuemap, key});
+    vx_core::Type_any val = valuemap->vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
     vx_core::vx_release_one_except({valuemap, key}, output);
     return output;
   }

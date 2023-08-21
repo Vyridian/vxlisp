@@ -16,6 +16,9 @@ namespace vx_data_tree {
 
     Class_branch::~Class_branch() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_brancharrow,
@@ -295,6 +298,9 @@ namespace vx_data_tree {
 
     Class_brancharrow::~Class_brancharrow() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
     }
 
     vx_core::Type_any Class_brancharrow::vx_new(vx_core::vx_Type_listany vals) const {
@@ -342,6 +348,9 @@ namespace vx_data_tree {
 
     Class_branchlist::~Class_branchlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -472,6 +481,9 @@ namespace vx_data_tree {
 
     Class_leaf::~Class_leaf() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,
@@ -656,6 +668,9 @@ namespace vx_data_tree {
 
     Class_leaflist::~Class_leaflist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -786,6 +801,9 @@ namespace vx_data_tree {
 
     Class_tree::~Class_tree() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_name,

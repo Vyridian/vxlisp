@@ -19,6 +19,9 @@ namespace vx_test {
 
     Class_testcase::~Class_testcase() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_passfail,
         this->vx_p_testpkg,
@@ -238,6 +241,9 @@ namespace vx_test {
 
     Class_testcaselist::~Class_testcaselist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -368,6 +374,9 @@ namespace vx_test {
 
     Class_testcoveragedetail::~Class_testcoveragedetail() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_constmap,
         this->vx_p_funcmap,
@@ -587,6 +596,9 @@ namespace vx_test {
 
     Class_testcoveragenums::~Class_testcoveragenums() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_pct,
         this->vx_p_testpkg,
@@ -806,6 +818,9 @@ namespace vx_test {
 
     Class_testcoveragesummary::~Class_testcoveragesummary() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_bigospacenums,
         this->vx_p_bigotimenums,
@@ -1145,6 +1160,9 @@ namespace vx_test {
 
     Class_testdescribe::~Class_testdescribe() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_describename,
         this->vx_p_testpkg,
@@ -1334,6 +1352,9 @@ namespace vx_test {
 
     Class_testdescribelist::~Class_testdescribelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -1464,6 +1485,9 @@ namespace vx_test {
 
     Class_testpackage::~Class_testpackage() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_caselist,
         this->vx_p_coveragedetail,
@@ -1713,6 +1737,9 @@ namespace vx_test {
 
     Class_testpackagelist::~Class_testpackagelist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }
@@ -1843,6 +1870,9 @@ namespace vx_test {
 
     Class_testresult::~Class_testresult() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_code,
         this->vx_p_passfail,
@@ -2082,6 +2112,9 @@ namespace vx_test {
 
     Class_testresultlist::~Class_testresultlist() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (vx_core::Type_any any : this->vx_p_list) {
         vx_core::vx_release_one(any);
       }

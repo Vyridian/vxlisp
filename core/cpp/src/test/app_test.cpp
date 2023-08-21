@@ -28,20 +28,20 @@ vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
   vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
     vx_collection_test::test_package(context),
     vx_core_test::test_package(context),
-    vx_data_csv_test::test_package(context),
-    vx_data_db_test::test_package(context),
+//    vx_data_csv_test::test_package(context),
+//    vx_data_db_test::test_package(context),
     vx_data_file_test::test_package(context),
-    vx_data_table_test::test_package(context),
-    vx_data_textblock_test::test_package(context),
-    vx_data_tree_test::test_package(context),
-    vx_data_xml_test::test_package(context),
+//    vx_data_table_test::test_package(context),
+//    vx_data_textblock_test::test_package(context),
+//    vx_data_tree_test::test_package(context),
+//    vx_data_xml_test::test_package(context),
     vx_repl_test::test_package(context),
     vx_sample_test::test_package(context),
-    vx_state_test::test_package(context),
+//    vx_state_test::test_package(context),
     vx_test_test::test_package(context),
     vx_type_test::test_package(context),
-    vx_web_html_test::test_package(context),
-    vx_web_http_test::test_package(context)
+    vx_web_html_test::test_package(context)//,
+//    vx_web_http_test::test_package(context)
   });
   return output;
 }

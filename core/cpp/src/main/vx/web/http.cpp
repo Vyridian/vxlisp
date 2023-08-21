@@ -18,6 +18,9 @@ namespace vx_web_http {
 
     Class_response::~Class_response() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_ok,
         this->vx_p_status

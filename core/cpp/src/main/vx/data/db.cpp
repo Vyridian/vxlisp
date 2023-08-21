@@ -17,6 +17,9 @@ namespace vx_data_db {
 
     Class_db::~Class_db() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_dbid
       });
@@ -146,6 +149,9 @@ namespace vx_data_db {
 
     Class_dbcell::~Class_dbcell() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_dbcellid,
         this->vx_p_dbcellmap,
@@ -395,6 +401,9 @@ namespace vx_data_db {
 
     Class_dbcellmap::~Class_dbcellmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -548,6 +557,9 @@ namespace vx_data_db {
 
     Class_dbfield::~Class_dbfield() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_dbfieldid,
         this->vx_p_type,
@@ -727,6 +739,9 @@ namespace vx_data_db {
 
     Class_dbfieldmap::~Class_dbfieldmap() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       for (auto const& [key, val] : this->vx_p_map) {
         vx_core::vx_release_one(val);
       }
@@ -880,6 +895,9 @@ namespace vx_data_db {
 
     Class_dbtable::~Class_dbtable() {
       vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
       vx_core::vx_release_one({
         this->vx_p_dbtableid,
         this->vx_p_db,
