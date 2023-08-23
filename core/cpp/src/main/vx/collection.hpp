@@ -56,6 +56,13 @@ namespace vx_collection {
 // :headerfirst
 // :header
 
+  // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_from_list_fn_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
+
+  // vx_list_from_list_start_end(generic_list_1, list, int, int)
+  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end);
+
+
   // (func list<-list-fn-filter)
   class Abstract_list_from_list_fn_filter : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -228,6 +235,8 @@ namespace vx_collection {
   template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
     X* output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_reserve({vallist, fn_filter});
+    vx_core::Type_any list = vx_collection::vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+    output = vx_core::vx_any_from_any(generic_list_1, list);
     vx_core::vx_release_one_except({vallist, fn_filter}, output);
     return output;
   }
@@ -236,6 +245,8 @@ namespace vx_collection {
   template <class X> X* f_list_from_list_start_end(X* generic_list_1, X* values, vx_core::Type_int start, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_reserve({values, start, end});
+    vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
+    output = vx_core::vx_any_from_any(generic_list_1, any);
     vx_core::vx_release_one_except({values, start, end}, output);
     return output;
   }

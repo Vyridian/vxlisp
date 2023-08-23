@@ -46,6 +46,9 @@
  [vallist   : list-2
   fn-filter : any<-any]
  (native
+  :cpp
+   "vx_core::Type_any list = vx_collection::vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
   :js
    "const fn = fn_filter['vx_value']
     if (fn) {
@@ -99,6 +102,9 @@
   start  : int
   end    : int]
  (native
+  :cpp
+   "vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
+    output = vx_core::vx_any_from_any(generic_list_1, any);"
   :js
    "let istart = start
     let iend = end

@@ -105,6 +105,9 @@ let-async
   typedef std::map<std::string, vx_Type_async> vx_Type_mapasync;
   typedef std::function<vx_core::vx_Type_async(vx_core::Type_any)> vx_Type_fn_async_from_any;
 
+  // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
+  vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+
   // vx_async_from_async_fn(async, type, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
@@ -112,7 +115,7 @@ let-async
   vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
 
   // vx_async_new_from_listasync(T, List<async>)
-  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_any_1, vx_core::vx_Type_listasync listasync);
+  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_list_1, vx_core::vx_Type_listasync listasync);
 
   // vx_async_new_from_value(any)
   vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
@@ -128,6 +131,9 @@ let-async
 
   // vx_boolean_from_type_trait(type, type)
   bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait);
+
+  // vx_compare(any, any)
+  long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
 
   // vx_debug()
   void vx_debug();
@@ -156,8 +162,14 @@ let-async
   // vx_debug(string, async)
   void vx_debug(std::string code, vx_core::vx_Type_async async);
 
+  // vx_float_from_number(number)
+  float vx_float_from_number(vx_core::Type_number num);
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
+
+  // vx_int_from_sizet(size_t)
+  long vx_int_from_sizet(std::size_t size);
 
   // vx_is_int(string)
   bool vx_is_int(std::string value);
@@ -167,6 +179,12 @@ let-async
 
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
+
+  // vx_list_from_map_fn(generic_list_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_list_from_map_fn(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+
+  // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any);
 
   // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
   vx_core::vx_Type_listany vx_listany_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_any_from_any fn);
@@ -369,7 +387,7 @@ let-async
   // vx_list_from_list(T, list<U>)
   template <class T, class U> static std::vector<T*> vx_list_from_list(T* generic_any_1, std::vector<U*> list) {
     std::vector<T*> output;
-    long len = list.size();
+    long len = vx_core::vx_int_from_sizet(list.size());
     for (int i = 0; i < len; ++i) {
       U* itemu = list[i];
       T* itemt = static_cast<T*>(itemu);
@@ -399,7 +417,7 @@ let-async
   // vx_new_from_list(T, List<any>)
   template <class T> static T* vx_new_from_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
     T* output;
-    vx_core::Type_any val = generic_any_1->vx_new_from_list(listval);
+    vx_core::Type_any val = generic_any_1->vx_new(listval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
@@ -518,6 +536,23 @@ let-async
     }
   // }
 
+  // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
+  vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
+    vx_core::Type_any output = valstart;
+    vx_core::vx_Type_listany listval = list->vx_list();
+    vx_core::Type_any current = vx_core::e_any();
+    bool first = true;
+    for (vx_core::Type_any next : listval) {
+      if (first) {
+        first = false;
+      } else {
+        output = fn_reduce_next->vx_any_from_reduce_next(output, current, next);
+      }
+      current = next;
+    }
+    return output;
+  }
+
   // vx_async_from_async_fn(async, type, lambdavars, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambdavars, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
@@ -539,11 +574,16 @@ let-async
   }
 
   // vx_async_new_from_listasync(T, List<async>)
-  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_any_1, vx_core::vx_Type_listasync listasync) {
-    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
-    output->type = generic_any_1;
-    output->listasync = listasync;
-    vx_core::vx_reserve_async(listasync);
+  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_list_1, vx_core::vx_Type_listasync listasync) {
+    vx_core::vx_Type_async output;
+    if (listasync.size() == 0) {
+      output = vx_core::vx_async_new_from_value(generic_list_1->vx_empty());
+    } else {
+      output = new vx_core::vx_Class_async();
+      output->type = generic_list_1;
+      output->listasync = listasync;
+      vx_core::vx_reserve_async(listasync);
+    }
     return output;
   }
 
@@ -591,6 +631,35 @@ let-async
     vx_core::vx_Type_listany list = traits->vx_list();
     bool output = (std::find(list.begin(), list.end(), trait) != list.end());
     vx_core::vx_release(typdef);
+    return output;
+  }
+
+  // vx_compare(any, any)
+  long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
+    long output = 0;
+    vx_core::Type_boolean isnumber1 = vx_core::f_is_number(val1);
+    vx_core::Type_boolean isnumber2 = vx_core::f_is_number(val2);
+    if (isnumber1->vx_boolean() && isnumber2->vx_boolean()) {
+      vx_core::Type_number num1 = vx_core::vx_any_from_any(vx_core::t_number(), val1);
+      vx_core::Type_number num2 = vx_core::vx_any_from_any(vx_core::t_number(), val2);
+      float float1 = vx_core::vx_float_from_number(num1);
+      float float2 = vx_core::vx_float_from_number(num2);
+      if (float1 < float2) {
+        output = -1;
+      } else if (float1 > float2) {
+        output = 1;
+      }
+    } else {
+      std::string stringval1 = vx_core::vx_string_from_any(val1);
+      std::string stringval2 = vx_core::vx_string_from_any(val2);
+      int compare = stringval1.compare(stringval2);
+      if (compare > 0) {
+        output = 1;
+      } else if (compare < 0) {
+        output = -1;
+      }
+    }
+    vx_core::vx_release({isnumber1, isnumber2});
     return output;
   }
 
@@ -661,6 +730,23 @@ let-async
     }
   }
 
+  // vx_float_from_number(number)
+  float vx_float_from_number(vx_core::Type_number num) {
+    float output = 0;
+    vx_core::Type_any type = num->vx_type();
+    if (type == vx_core::t_float()) {
+      vx_core::Type_float floatval = vx_core::vx_any_from_any(vx_core::t_float(), num);
+      output = floatval->vx_float();
+    } else if (type == vx_core::t_int()) {
+      vx_core::Type_int intval = vx_core::vx_any_from_any(vx_core::t_int(), num);
+      output = intval->vx_int();
+    } else if (type == vx_core::t_decimal()) {
+      vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal(), num);
+      output = decval->vx_float();
+    }
+    return output;
+  }
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
@@ -687,6 +773,17 @@ let-async
     } else if (fn_any == fn_any->vx_empty()) {
     } else {
       output = fn_any->vx_any_from_func();
+    }
+    return output;
+  }
+
+  // vx_int_from_sizet(size_t)
+  long vx_int_from_sizet(std::size_t size) {
+    long output = 0;
+    if (size > 100000000) {
+      output = 100000000;
+    } else {
+      output = static_cast<long>(size);
     }
     return output;
   }
@@ -738,11 +835,45 @@ let-async
     return output;
   }
 
-
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals) {
     vx_core::vx_Type_listany output;
     output = vx_core::vx_Type_listany{vals};
+    return output;
+  }
+
+  // vx_list_from_map_fn(generic_list_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_list_from_map_fn(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    vx_core::vx_Type_mapany map_value = valuemap->vx_map();
+    vx_core::vx_Type_listany list_result;
+    for (auto const& [key, val] : map_value) {
+      vx_core::Type_string valkey = vx_core::vx_new_string(key);
+      vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
+      list_result.push_back(result);
+    }
+    vx_core::Type_any output = generic_list_1->vx_new(list_result);
+    vx_core::vx_release_except(valuemap, output);
+    return output;
+  }
+
+  // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any) {
+    vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listany list_result;
+    for (vx_core::Type_any val : list_value) {
+      vx_core::Type_any listoflist = fn_any_from_any->vx_any_from_any(val);
+      vx_core::vx_reserve(listoflist);
+      vx_core::Type_string extends = vx_core::f_extends_from_any(listoflist);
+      if (extends->vx_string() == ":list") {
+        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
+        vx_core::vx_Type_listany listval = vallist->vx_list();
+        vx_core::vx_reserve(listval);
+        list_result.assign(listval.begin(), listval.end());
+      }
+      vx_core::vx_release_one(listoflist);
+    }
+    vx_core::Type_any output = vx_core::vx_new_from_list(generic_list_1, list_result);
+    vx_core::vx_release_except(values, output);
     return output;
   }
 
@@ -1142,7 +1273,7 @@ let-async
           vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
           long indentint = indent;
           indentint += 1;
-          std::vector<vx_core::Type_any> listval = vallist->vx_list();
+          vx_core::vx_Type_listany listval = vallist->vx_list();
           for (vx_core::Type_any valsub : listval) {
             std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
@@ -1323,7 +1454,7 @@ let-async
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos) {
     std::string output = "";
-    if ((unsigned)pos < liststring.size()) {
+    if (pos < vx_core::vx_int_from_sizet(liststring.size())) {
       output = liststring[pos];
     }
     return output;
@@ -1364,13 +1495,16 @@ let-async
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end) {
     std::string output = "";
-    int len = text.length();
-    if (start >= len) {
-    } else if (end <= start) {
-    } else if (end >= len) {
-      output = text.substr(start, len);
+    int maxlen = text.length();
+    if (start < 0) {
+    } else if (start >= end) {
+    } else if (start >= maxlen) {
     } else {
-      output = text.substr(start, end);
+      if (end >= maxlen) {
+        end = maxlen;
+      }
+      int len = end-start;
+      output = text.substr(start, len);
     }
     return output;
   }

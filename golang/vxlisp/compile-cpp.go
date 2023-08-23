@@ -1615,10 +1615,10 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          sb += valstring->vx_string();" +
 			"\n        } else if (valsubtype == vx_core::t_int()) {" +
 			"\n          vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int(), valsub);" +
-			"\n          sb += valint->vx_int();" +
+			"\n          sb += vx_core::vx_string_from_int(valint->vx_int());" +
 			"\n        } else if (valsubtype == vx_core::t_float()) {" +
 			"\n          vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float(), valsub);" +
-			"\n          sb += valfloat->vx_float();" +
+			"\n          sb += vx_core::vx_string_from_int(valfloat->vx_float());" +
 			"\n        } else if (valsubtype == vx_core::t_decimal()) {" +
 			"\n          vx_core::Type_decimal valdecimal = vx_core::vx_any_from_any(vx_core::t_decimal(), valsub);" +
 			"\n          sb += valdecimal->vx_string();" +
@@ -4392,7 +4392,7 @@ int main(int iarglen, char* arrayarg[]) {
     vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
     std::string expected = "true";
     std::string actual = vx_core::vx_string_from_any(issuccess);
-    bool output = test_lib::test("Full Test Suite", expected, actual);
+    output = test_lib::test("Full Test Suite", expected, actual);
     vx_core::vx_release({issuccess, context});
     vx_core::vx_memory_leak_test();
     vx_core::vx_debug("Test End");

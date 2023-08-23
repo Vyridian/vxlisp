@@ -4,4 +4,51 @@
 list<-list-fn-filter
 list<-list-start-end
 // :header
+
+  // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_from_list_fn_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
+
+  // vx_list_from_list_start_end(generic_list_1, list, int, int)
+  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end);
+
 // :body
+
+  // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_from_list_fn_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter) {
+		vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_Type_listany listval = vallist->vx_list();
+    vx_core::vx_Type_listany items;
+    for (vx_core::Type_any val : listval) {
+      vx_core::Type_any newval = fn_filter->vx_any_from_any(val);
+      vx_core::Type_boolean isempty = vx_core::f_is_empty_1(newval);
+      if (!isempty->vx_boolean()) {
+        items.push_back(newval);
+      }
+      vx_core::vx_release(isempty);
+    }
+    output = generic_list_1->vx_new(items);
+    vx_core::vx_release_except({vallist, fn_filter}, output);
+		return output;
+	}
+
+  // vx_list_from_list_start_end(generic_list_1, list, int, int)
+  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end) {
+		vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+    long istart = start->vx_int();
+    long iend = end->vx_int();
+    vx_core::vx_Type_listany listval = values->vx_list();
+    long isize = vx_core::vx_int_from_sizet(listval.size());
+    if (isize > 0) {
+      if (istart < 0) {
+        istart = 0;
+      }
+      if (iend > isize) {
+        iend = isize;
+      }
+			auto first = listval.begin() + istart;
+      auto last = listval.begin() + iend + 1;
+      vx_core::vx_Type_listany listsub = std::vector(first, last);
+      output = generic_list_1->vx_new(listsub);
+    }
+		return output;
+	}

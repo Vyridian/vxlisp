@@ -28,20 +28,20 @@ vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
   vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
     vx_collection_test::test_package(context),
     vx_core_test::test_package(context),
-//    vx_data_csv_test::test_package(context),
-//    vx_data_db_test::test_package(context),
+    vx_data_csv_test::test_package(context),
+    vx_data_db_test::test_package(context),
     vx_data_file_test::test_package(context),
-//    vx_data_table_test::test_package(context),
-//    vx_data_textblock_test::test_package(context),
-//    vx_data_tree_test::test_package(context),
-//    vx_data_xml_test::test_package(context),
+    vx_data_table_test::test_package(context),
+    vx_data_textblock_test::test_package(context),
+    vx_data_tree_test::test_package(context),
+    vx_data_xml_test::test_package(context),
     vx_repl_test::test_package(context),
     vx_sample_test::test_package(context),
-//    vx_state_test::test_package(context),
+    vx_state_test::test_package(context),
     vx_test_test::test_package(context),
     vx_type_test::test_package(context),
-    vx_web_html_test::test_package(context)//,
-//    vx_web_http_test::test_package(context)
+    vx_web_html_test::test_package(context),
+    vx_web_http_test::test_package(context)
   });
   return output;
 }
@@ -91,7 +91,7 @@ int main(int iarglen, char* arrayarg[]) {
     vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
     std::string expected = "true";
     std::string actual = vx_core::vx_string_from_any(issuccess);
-    bool output = test_lib::test("Full Test Suite", expected, actual);
+    output = test_lib::test("Full Test Suite", expected, actual);
     vx_core::vx_release({issuccess, context});
     vx_core::vx_memory_leak_test();
     vx_core::vx_debug("Test End");

@@ -87,6 +87,23 @@ namespace vx_core {
     }
   // }
 
+  // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
+  vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
+    vx_core::Type_any output = valstart;
+    vx_core::vx_Type_listany listval = list->vx_list();
+    vx_core::Type_any current = vx_core::e_any();
+    bool first = true;
+    for (vx_core::Type_any next : listval) {
+      if (first) {
+        first = false;
+      } else {
+        output = fn_reduce_next->vx_any_from_reduce_next(output, current, next);
+      }
+      current = next;
+    }
+    return output;
+  }
+
   // vx_async_from_async_fn(async, type, lambdavars, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambdavars, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
@@ -108,11 +125,16 @@ namespace vx_core {
   }
 
   // vx_async_new_from_listasync(T, List<async>)
-  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_any_1, vx_core::vx_Type_listasync listasync) {
-    vx_core::vx_Type_async output = new vx_core::vx_Class_async();
-    output->type = generic_any_1;
-    output->listasync = listasync;
-    vx_core::vx_reserve_async(listasync);
+  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_list_1, vx_core::vx_Type_listasync listasync) {
+    vx_core::vx_Type_async output;
+    if (listasync.size() == 0) {
+      output = vx_core::vx_async_new_from_value(generic_list_1->vx_empty());
+    } else {
+      output = new vx_core::vx_Class_async();
+      output->type = generic_list_1;
+      output->listasync = listasync;
+      vx_core::vx_reserve_async(listasync);
+    }
     return output;
   }
 
@@ -160,6 +182,35 @@ namespace vx_core {
     vx_core::vx_Type_listany list = traits->vx_list();
     bool output = (std::find(list.begin(), list.end(), trait) != list.end());
     vx_core::vx_release(typdef);
+    return output;
+  }
+
+  // vx_compare(any, any)
+  long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
+    long output = 0;
+    vx_core::Type_boolean isnumber1 = vx_core::f_is_number(val1);
+    vx_core::Type_boolean isnumber2 = vx_core::f_is_number(val2);
+    if (isnumber1->vx_boolean() && isnumber2->vx_boolean()) {
+      vx_core::Type_number num1 = vx_core::vx_any_from_any(vx_core::t_number(), val1);
+      vx_core::Type_number num2 = vx_core::vx_any_from_any(vx_core::t_number(), val2);
+      float float1 = vx_core::vx_float_from_number(num1);
+      float float2 = vx_core::vx_float_from_number(num2);
+      if (float1 < float2) {
+        output = -1;
+      } else if (float1 > float2) {
+        output = 1;
+      }
+    } else {
+      std::string stringval1 = vx_core::vx_string_from_any(val1);
+      std::string stringval2 = vx_core::vx_string_from_any(val2);
+      int compare = stringval1.compare(stringval2);
+      if (compare > 0) {
+        output = 1;
+      } else if (compare < 0) {
+        output = -1;
+      }
+    }
+    vx_core::vx_release({isnumber1, isnumber2});
     return output;
   }
 
@@ -230,6 +281,23 @@ namespace vx_core {
     }
   }
 
+  // vx_float_from_number(number)
+  float vx_float_from_number(vx_core::Type_number num) {
+    float output = 0;
+    vx_core::Type_any type = num->vx_type();
+    if (type == vx_core::t_float()) {
+      vx_core::Type_float floatval = vx_core::vx_any_from_any(vx_core::t_float(), num);
+      output = floatval->vx_float();
+    } else if (type == vx_core::t_int()) {
+      vx_core::Type_int intval = vx_core::vx_any_from_any(vx_core::t_int(), num);
+      output = intval->vx_int();
+    } else if (type == vx_core::t_decimal()) {
+      vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal(), num);
+      output = decval->vx_float();
+    }
+    return output;
+  }
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
@@ -256,6 +324,17 @@ namespace vx_core {
     } else if (fn_any == fn_any->vx_empty()) {
     } else {
       output = fn_any->vx_any_from_func();
+    }
+    return output;
+  }
+
+  // vx_int_from_sizet(size_t)
+  long vx_int_from_sizet(std::size_t size) {
+    long output = 0;
+    if (size > 100000000) {
+      output = 100000000;
+    } else {
+      output = static_cast<long>(size);
     }
     return output;
   }
@@ -307,11 +386,45 @@ namespace vx_core {
     return output;
   }
 
-
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals) {
     vx_core::vx_Type_listany output;
     output = vx_core::vx_Type_listany{vals};
+    return output;
+  }
+
+  // vx_list_from_map_fn(generic_list_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_list_from_map_fn(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    vx_core::vx_Type_mapany map_value = valuemap->vx_map();
+    vx_core::vx_Type_listany list_result;
+    for (auto const& [key, val] : map_value) {
+      vx_core::Type_string valkey = vx_core::vx_new_string(key);
+      vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
+      list_result.push_back(result);
+    }
+    vx_core::Type_any output = generic_list_1->vx_new(list_result);
+    vx_core::vx_release_except(valuemap, output);
+    return output;
+  }
+
+  // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any) {
+    vx_core::vx_Type_listany list_value = values->vx_list();
+    vx_core::vx_Type_listany list_result;
+    for (vx_core::Type_any val : list_value) {
+      vx_core::Type_any listoflist = fn_any_from_any->vx_any_from_any(val);
+      vx_core::vx_reserve(listoflist);
+      vx_core::Type_string extends = vx_core::f_extends_from_any(listoflist);
+      if (extends->vx_string() == ":list") {
+        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
+        vx_core::vx_Type_listany listval = vallist->vx_list();
+        vx_core::vx_reserve(listval);
+        list_result.assign(listval.begin(), listval.end());
+      }
+      vx_core::vx_release_one(listoflist);
+    }
+    vx_core::Type_any output = vx_core::vx_new_from_list(generic_list_1, list_result);
+    vx_core::vx_release_except(values, output);
     return output;
   }
 
@@ -711,7 +824,7 @@ namespace vx_core {
           vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
           long indentint = indent;
           indentint += 1;
-          std::vector<vx_core::Type_any> listval = vallist->vx_list();
+          vx_core::vx_Type_listany listval = vallist->vx_list();
           for (vx_core::Type_any valsub : listval) {
             std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
@@ -892,7 +1005,7 @@ namespace vx_core {
   // vx_string_from_liststring_pos(list<string>, long)
   std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos) {
     std::string output = "";
-    if ((unsigned)pos < liststring.size()) {
+    if (pos < vx_core::vx_int_from_sizet(liststring.size())) {
       output = liststring[pos];
     }
     return output;
@@ -933,13 +1046,16 @@ namespace vx_core {
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end) {
     std::string output = "";
-    int len = text.length();
-    if (start >= len) {
-    } else if (end <= start) {
-    } else if (end >= len) {
-      output = text.substr(start, len);
+    int maxlen = text.length();
+    if (start < 0) {
+    } else if (start >= end) {
+    } else if (start >= maxlen) {
     } else {
-      output = text.substr(start, end);
+      if (end >= maxlen) {
+        end = maxlen;
+      }
+      int len = end-start;
+      output = text.substr(start, len);
     }
     return output;
   }
@@ -2465,10 +2581,10 @@ namespace vx_core {
           sb += valstring->vx_string();
         } else if (valsubtype == vx_core::t_int()) {
           vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int(), valsub);
-          sb += valint->vx_int();
+          sb += vx_core::vx_string_from_int(valint->vx_int());
         } else if (valsubtype == vx_core::t_float()) {
           vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float(), valsub);
-          sb += valfloat->vx_float();
+          sb += vx_core::vx_string_from_int(valfloat->vx_float());
         } else if (valsubtype == vx_core::t_decimal()) {
           vx_core::Type_decimal valdecimal = vx_core::vx_any_from_any(vx_core::t_decimal(), valsub);
           sb += valdecimal->vx_string();
@@ -13643,7 +13759,7 @@ namespace vx_core {
   vx_core::Type_int f_length_from_list(vx_core::Type_list values) {
     vx_core::Type_int output = vx_core::e_int();
     vx_core::vx_reserve(values);
-    long len = (long)(values->vx_p_list.size());
+    long len = vx_core::vx_int_from_sizet(values->vx_list().size());
     if (len > 0) {
       output = vx_core::vx_new_int(len);
     };
@@ -13738,6 +13854,11 @@ namespace vx_core {
   vx_core::Type_boolean f_and(vx_core::Type_boolean val1, vx_core::Type_boolean val2) {
     vx_core::Type_boolean output = vx_core::e_boolean();
     vx_core::vx_reserve({val1, val2});
+    if (val1->vx_boolean() && val2->vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    };
     vx_core::vx_release_one_except({val1, val2}, output);
     return output;
   }
@@ -14368,6 +14489,8 @@ namespace vx_core {
   vx_core::Type_number f_multiply_1(vx_core::Type_number num1, vx_core::Type_number num2) {
     vx_core::Type_number output = vx_core::e_number();
     vx_core::vx_reserve({num1, num2});
+    float result = vx_core::vx_float_from_number(num1) * vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);
     vx_core::vx_release_one_except({num1, num2}, output);
     return output;
   }
@@ -14736,6 +14859,8 @@ namespace vx_core {
   vx_core::Type_number f_plus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
     vx_core::Type_number output = vx_core::e_number();
     vx_core::vx_reserve({num1, num2});
+    float result = vx_core::vx_float_from_number(num1) + vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);
     vx_core::vx_release_one_except({num1, num2}, output);
     return output;
   }
@@ -15197,6 +15322,8 @@ namespace vx_core {
   vx_core::Type_number f_minus_1(vx_core::Type_number num1, vx_core::Type_number num2) {
     vx_core::Type_number output = vx_core::e_number();
     vx_core::vx_reserve({num1, num2});
+    float result = vx_core::vx_float_from_number(num1) - vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);
     vx_core::vx_release_one_except({num1, num2}, output);
     return output;
   }
@@ -15564,6 +15691,15 @@ namespace vx_core {
   vx_core::Type_number f_divide(vx_core::Type_number num1, vx_core::Type_number num2) {
     vx_core::Type_number output = vx_core::e_number();
     vx_core::vx_reserve({num1, num2});
+    float float1 = vx_core::vx_float_from_number(num1);
+    float float2 = vx_core::vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = vx_core::c_notanumber();
+    } else {
+      float result = float1 / float2;
+      output = vx_core::vx_new_float(result);
+    };
     vx_core::vx_release_one_except({num1, num2}, output);
     return output;
   }
@@ -16650,6 +16786,7 @@ namespace vx_core {
   vx_core::Type_typelist f_allowtypes_from_typedef(vx_core::Type_typedef vtypedef) {
     vx_core::Type_typelist output = vx_core::e_typelist();
     vx_core::vx_reserve(vtypedef);
+    output = vtypedef->allowtypes();
     vx_core::vx_release_one_except(vtypedef, output);
     return output;
   }
@@ -16741,6 +16878,8 @@ namespace vx_core {
   vx_core::Type_int f_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
     vx_core::Type_int output = vx_core::e_int();
     vx_core::vx_reserve({val1, val2});
+    long intresult = vx_core::vx_compare(val1, val2);
+    output = vx_core::vx_new_int(intresult);
     vx_core::vx_release_one_except({val1, val2}, output);
     return output;
   }
