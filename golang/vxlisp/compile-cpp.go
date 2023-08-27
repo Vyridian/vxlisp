@@ -4382,18 +4382,17 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_pathfull_from_file(context);
     test_lib::test_read_file(context);
     test_lib::test_write_file(context);
+    test_lib::test_node_f_trlist_from_testcase(context);
+    test_lib::test_node_f_trlist_from_testcaselist(context);
+    test_lib::test_node_f_div_from_testcaselist(context);
     test_lib::test_node_from_testpackagelist(context);
     test_lib::test_html_from_testpackagelist(context);
     test_lib::test_write_testpackagelist(context);
     test_lib::test_write_node(context);
     test_lib::test_write_html(context);
     test_lib::test_write_testpackagelist_async(context);
-    vx_test::Type_testpackagelist testpackagelist = testsuite(context);
-    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
-    std::string expected = "true";
-    std::string actual = vx_core::vx_string_from_any(issuccess);
-    output = test_lib::test("Full Test Suite", expected, actual);
-    vx_core::vx_release({issuccess, context});
+    test_lib::test_run_all(testsuite(context), context);
+    vx_core::vx_release(context);
     vx_core::vx_memory_leak_test();
     vx_core::vx_debug("Test End");
   } catch (std::exception& e) {
@@ -4473,6 +4472,12 @@ namespace test_lib {
 
   bool test_html_from_testpackagelist(vx_core::Type_context context);
 
+  bool test_node_f_div_from_testcaselist(vx_core::Type_context context);
+
+  bool test_node_f_trlist_from_testcase(vx_core::Type_context context);
+
+  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context);
+
   bool test_node_from_testpackagelist(vx_core::Type_context context);
 
   bool test_pathfull_from_file(vx_core::Type_context context);
@@ -4490,6 +4495,8 @@ namespace test_lib {
   bool test_resolve_testresult_then(vx_core::Type_context context);
 
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
+
+  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
   bool test_run_testcase(vx_core::Type_context context);
 
@@ -5122,84 +5129,17 @@ namespace test_lib {
   bool test_html_from_testpackagelist(vx_core::Type_context context) {
     std::string testname = "test_html_from_testpackagelist";
     long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".html")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
     vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
-    std::string expected =
-      "<!DOCTYPE html>"
-      "\n<html lang=\"en\">"
-      "\n  <head>"
-      "\n    <meta charset=\"utf-8\" />"
-      "\n    <title>Test Suite</title>"
-      "\n    <style>"
-      "\n      details summary {"
-      "\n      }"
-      "\n      table {"
-      "\n      }"
-      "\n      thead tr {"
-      "\n      }"
-      "\n      td {"
-      "\n      }"
-      "\n      tbody tr {"
-      "\n      }"
-      "\n      tbody tr:nth-of-type(even) {"
-      "\n      }"
-      "\n      tbody tr:last-of-type {"
-      "\n      }"
-      "\n      tbody tr.active-row {"
-      "\n      }"
-      "\n      .failflag {"
-      "\n      }"
-      "\n      .passflag {"
-      "\n      }"
-      "\n      .coveragenums {"
-      "\n      }"
-      "\n      .coveragepct {"
-      "\n      }"
-      "\n      .coveragepctgreen {"
-      "\n      }"
-      "\n      .coveragepctred {"
-      "\n      }"
-      "\n      .pkgheader {"
-      "\n      }"
-      "\n      .pkgname {"
-      "\n      }"
-      "\n      .preformatted {"
-      "\n      }"
-      "\n    </style>"
-      "\n  </head>"
-      "\n  <body>"
-      "\n    <div>"
-      "\n      <h1>Test Suite</h1>"
-      "\n    </div>"
-      "\n    <div>"
-      "\n      <table>"
-      "\n        <thead>"
-      "\n          <tr>"
-      "\n            <td>"
-      "\n              <p>Pass?</p>"
-      "\n            </td>"
-      "\n            <td>"
-      "\n              <p>Name</p>"
-      "\n            </td>"
-      "\n            <td>"
-      "\n              <p>Test</p>"
-      "\n            </td>"
-      "\n            <td>"
-      "\n              <p>Expected</p>"
-      "\n            </td>"
-      "\n            <td>"
-      "\n              <p>Actual</p>"
-      "\n            </td>"
-      "\n          </tr>"
-      "\n        </thead>"
-      "\n        <tbody></tbody>"
-      "\n      </table>"
-      "\n    </div>"
-      "\n  </body>"
-      "\n  <footer></footer>"
-      "\n</html>";
     std::string actual = string_html->vx_string();
     vx_core::vx_release(string_html);
     bool output = test_lib::test(testname, expected, actual);
@@ -5210,210 +5150,117 @@ namespace test_lib {
   bool test_node_from_testpackagelist(vx_core::Type_context context) {
     std::string testname = "test_node_from_testpackagelist";
     long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
     vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 52);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
-    std::string expected =
-"(vx/web/html/html"
-"\n :body"
-"\n  (vx/web/html/body"
-"\n   :nodes"
-"\n    (vx/web/html/divchildlist"
-"\n     (vx/web/html/div"
-"\n      :nodes"
-"\n       (vx/web/html/divchildlist"
-"\n        (vx/web/html/h1"
-"\n         :text \"Test Suite\")))"
-"\n     (vx/web/html/div"
-"\n      :nodes"
-"\n       (vx/web/html/divchildlist"
-"\n        (vx/web/html/table"
-"\n         :tbody (vx/web/html/tbody)"
-"\n         :thead"
-"\n          (vx/web/html/thead"
-"\n           :nodes"
-"\n            (vx/web/html/trlist"
-"\n             (vx/web/html/tr"
-"\n              :nodes"
-"\n               (vx/web/html/tdlist"
-"\n                (vx/web/html/td"
-"\n                 :nodes"
-"\n                  (vx/web/html/divchildlist"
-"\n                   (vx/web/html/p"
-"\n                    :text \"Pass?\")))"
-"\n                (vx/web/html/td"
-"\n                 :nodes"
-"\n                  (vx/web/html/divchildlist"
-"\n                   (vx/web/html/p"
-"\n                    :text \"Name\")))"
-"\n                (vx/web/html/td"
-"\n                 :nodes"
-"\n                  (vx/web/html/divchildlist"
-"\n                   (vx/web/html/p"
-"\n                    :text \"Test\")))"
-"\n                (vx/web/html/td"
-"\n                 :nodes"
-"\n                  (vx/web/html/divchildlist"
-"\n                   (vx/web/html/p"
-"\n                    :text \"Expected\")))"
-"\n                (vx/web/html/td"
-"\n                 :nodes"
-"\n                  (vx/web/html/divchildlist"
-"\n                   (vx/web/html/p"
-"\n                    :text \"Actual\"))))))))))))"
-"\n :head"
-"\n  (vx/web/html/head"
-"\n   :nodes"
-"\n    (vx/web/html/headchildlist"
-"\n     (vx/web/html/meta"
-"\n      :charset \"utf-8\")"
-"\n     (vx/web/html/title"
-"\n      :text \"Test Suite\")"
-"\n     (vx/web/html/stylesheet"
-"\n      :name \"Test Suite\""
-"\n      :stylemap"
-"\n       (vx/web/html/stylemap"
-"\n        :(vx/web/html/style"
-"\n :name \"details summary\""
-"\n :props"
-"\n  (vx/web/html/propmap"
-"\n   :cursor \"pointer\""
-"\n   :display \"inline-flex\""
-"\n   :gap \"10px\"))"
-"\n         (vx/web/html/style"
-"\n          :name \"table\""
-"\n          :props"
-"\n           (vx/web/html/propmap"
-"\n            :border-collapse \"collapse\""
-"\n            :box-shadow \"0 0 20px rgba(0, 0, 0, 0.15)\""
-"\n            :font-family \"sans-serif\""
-"\n            :font-size \"0.9em\""
-"\n            :margin \"25px 0\""
-"\n            :min-width \"400px\""
-"\n            :vertical-align \"top\")))"
-"\n      :styles"
-"\n       (vx/web/html/stylelist"
-"\n        (vx/web/html/style"
-"\n         :name \"details summary\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :cursor \"pointer\""
-"\n           :display \"inline-flex\""
-"\n           :gap \"10px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"table\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :border-collapse \"collapse\""
-"\n           :box-shadow \"0 0 20px rgba(0, 0, 0, 0.15)\""
-"\n           :font-family \"sans-serif\""
-"\n           :font-size \"0.9em\""
-"\n           :margin \"25px 0\""
-"\n           :min-width \"400px\""
-"\n           :vertical-align \"top\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"thead tr\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"#009879\""
-"\n           :color \"#ffffff\""
-"\n           :text-align \"left\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"td\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :padding \"10px 10px\""
-"\n           :vertical-align \"top\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"tbody tr\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :border-bottom \"1px solid #dddddd\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"tbody tr:nth-of-type(even)\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"#f3f3f3\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"tbody tr:last-of-type\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :border-bottom \"2px solid #009879\"))"
-"\n        (vx/web/html/style"
-"\n         :name \"tbody tr.active-row\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :color \"#009879\""
-"\n           :font-weight \"bold\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".failflag\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"red\""
-"\n           :color \"white\""
-"\n           :padding-bottom \"1px\""
-"\n           :padding-left \"4px\""
-"\n           :padding-right \"4px\""
-"\n           :padding-top \"1px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".passflag\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"green\""
-"\n           :color \"white\""
-"\n           :padding-bottom \"1px\""
-"\n           :padding-left \"4px\""
-"\n           :padding-right \"4px\""
-"\n           :padding-top \"1px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".coveragenums\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :width \"90px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".coveragepct\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :text-align \"right\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".coveragepctgreen\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"green\""
-"\n           :color \"white\""
-"\n           :text-align \"right\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".coveragepctred\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :background-color \"red\""
-"\n           :color \"white\""
-"\n           :text-align \"right\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".pkgheader\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :display \"inline-flex\""
-"\n           :gap \"10px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".pkgname\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :font-weight \"bold\""
-"\n           :width \"180px\"))"
-"\n        (vx/web/html/style"
-"\n         :name \".preformatted\""
-"\n         :props"
-"\n          (vx/web/html/propmap"
-"\n           :display \"block\""
-"\n           :font-family \"monospace\""
-"\n           :unicode-bidi \"embed\""
-"\n           :white-space \"pre\"))))))"
-"\n :lang \"en\")";
     std::string actual = vx_core::vx_string_from_any(html);
     vx_core::vx_release(html);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_f_div_from_testcaselist(vx_core::Type_context context) {
+    std::string testname = "test_node_f_div_from_testcaselist";
+    long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 52);
+    std::string actual = vx_core::vx_string_from_any(div);
+    vx_core::vx_release(div);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_f_trlist_from_testcase(vx_core::Type_context context) {
+    std::string testname = "test_node_f_trlist_from_testcase";
+    long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 9);
+    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcase(testcase);
+    std::string actual = vx_core::vx_string_from_any(trlist);
+    vx_core::vx_release(trlist);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context) {
+    std::string testname = "test_node_f_trlist_from_testcaselist";
+    long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_core::vx_reserve(testcaselist);
+
+    vx_core::Func_any_from_any fn_any_from_any = vx_test::t_trlist_from_testcase();
+    vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(vx_web_html::t_trlist(), testcaselist, fn_any_from_any);
+
+    vx_core::vx_release_one_except(testcaselist, list);
+    std::string actual = vx_core::vx_string_from_any(list);
+    vx_core::vx_release(list);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_f_trlist_from_testcaselist1(vx_core::Type_context context) {
+    std::string testname = "test_node_f_trlist_from_testcaselist";
+    long irefcount = vx_core::refcount;
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string expected = string_file->vx_string();
+    vx_core::vx_release(string_file);
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
+    std::string actual = vx_core::vx_string_from_any(trlist);
+    vx_core::vx_release(trlist);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(issuccess);
+    bool output = test_lib::test("Full Test Suite", expected, actual);
+    vx_core::vx_release(issuccess);
     return output;
   }
 

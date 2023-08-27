@@ -1,0 +1,160 @@
+(vx/web/html/html
+ :body
+  (vx/web/html/body
+   :nodes
+    (vx/web/html/divchildlist
+     (vx/web/html/div
+      :nodes
+       (vx/web/html/divchildlist
+        (vx/web/html/h1
+         :text "Test Suite")))
+     (vx/web/html/h1)))
+ :head
+  (vx/web/html/head
+   :nodes
+    (vx/web/html/headchildlist
+     (vx/web/html/meta
+      :charset "utf-8")
+     (vx/web/html/title
+      :text "Test Suite")
+     (vx/web/html/stylesheet
+      :name "Test Suite"
+      :stylemap
+       (vx/web/html/stylemap
+        :(vx/web/html/style
+ :name "details summary"
+ :props
+  (vx/web/html/propmap
+   :cursor "pointer"
+   :display "inline-flex"
+   :gap "10px"))
+         (vx/web/html/style
+          :name "table"
+          :props
+           (vx/web/html/propmap
+            :border-collapse "collapse"
+            :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
+            :font-family "sans-serif"
+            :font-size "0.9em"
+            :margin "25px 0"
+            :min-width "400px"
+            :vertical-align "top")))
+      :styles
+       (vx/web/html/stylelist
+        (vx/web/html/style
+         :name "details summary"
+         :props
+          (vx/web/html/propmap
+           :cursor "pointer"
+           :display "inline-flex"
+           :gap "10px"))
+        (vx/web/html/style
+         :name "table"
+         :props
+          (vx/web/html/propmap
+           :border-collapse "collapse"
+           :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
+           :font-family "sans-serif"
+           :font-size "0.9em"
+           :margin "25px 0"
+           :min-width "400px"
+           :vertical-align "top"))
+        (vx/web/html/style
+         :name "thead tr"
+         :props
+          (vx/web/html/propmap
+           :background-color "#009879"
+           :color "#ffffff"
+           :text-align "left"))
+        (vx/web/html/style
+         :name "td"
+         :props
+          (vx/web/html/propmap
+           :padding "10px 10px"
+           :vertical-align "top"))
+        (vx/web/html/style
+         :name "tbody tr"
+         :props
+          (vx/web/html/propmap
+           :border-bottom "1px solid #dddddd"))
+        (vx/web/html/style
+         :name "tbody tr:nth-of-type(even)"
+         :props
+          (vx/web/html/propmap
+           :background-color "#f3f3f3"))
+        (vx/web/html/style
+         :name "tbody tr:last-of-type"
+         :props
+          (vx/web/html/propmap
+           :border-bottom "2px solid #009879"))
+        (vx/web/html/style
+         :name "tbody tr.active-row"
+         :props
+          (vx/web/html/propmap
+           :color "#009879"
+           :font-weight "bold"))
+        (vx/web/html/style
+         :name ".failflag"
+         :props
+          (vx/web/html/propmap
+           :background-color "red"
+           :color "white"
+           :padding-bottom "1px"
+           :padding-left "4px"
+           :padding-right "4px"
+           :padding-top "1px"))
+        (vx/web/html/style
+         :name ".passflag"
+         :props
+          (vx/web/html/propmap
+           :background-color "green"
+           :color "white"
+           :padding-bottom "1px"
+           :padding-left "4px"
+           :padding-right "4px"
+           :padding-top "1px"))
+        (vx/web/html/style
+         :name ".coveragenums"
+         :props
+          (vx/web/html/propmap
+           :width "90px"))
+        (vx/web/html/style
+         :name ".coveragepct"
+         :props
+          (vx/web/html/propmap
+           :text-align "right"))
+        (vx/web/html/style
+         :name ".coveragepctgreen"
+         :props
+          (vx/web/html/propmap
+           :background-color "green"
+           :color "white"
+           :text-align "right"))
+        (vx/web/html/style
+         :name ".coveragepctred"
+         :props
+          (vx/web/html/propmap
+           :background-color "red"
+           :color "white"
+           :text-align "right"))
+        (vx/web/html/style
+         :name ".pkgheader"
+         :props
+          (vx/web/html/propmap
+           :display "inline-flex"
+           :gap "10px"))
+        (vx/web/html/style
+         :name ".pkgname"
+         :props
+          (vx/web/html/propmap
+           :font-weight "bold"
+           :width "180px"))
+        (vx/web/html/style
+         :name ".preformatted"
+         :props
+          (vx/web/html/propmap
+           :display "block"
+           :font-family "monospace"
+           :unicode-bidi "embed"
+           :white-space "pre"))))))
+ :lang "en")

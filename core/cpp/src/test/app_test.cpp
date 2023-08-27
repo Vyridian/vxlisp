@@ -81,18 +81,17 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_pathfull_from_file(context);
     test_lib::test_read_file(context);
     test_lib::test_write_file(context);
+    test_lib::test_node_f_trlist_from_testcase(context);
+    test_lib::test_node_f_trlist_from_testcaselist(context);
+    test_lib::test_node_f_div_from_testcaselist(context);
     test_lib::test_node_from_testpackagelist(context);
     test_lib::test_html_from_testpackagelist(context);
     test_lib::test_write_testpackagelist(context);
     test_lib::test_write_node(context);
     test_lib::test_write_html(context);
     test_lib::test_write_testpackagelist_async(context);
-    vx_test::Type_testpackagelist testpackagelist = testsuite(context);
-    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
-    std::string expected = "true";
-    std::string actual = vx_core::vx_string_from_any(issuccess);
-    output = test_lib::test("Full Test Suite", expected, actual);
-    vx_core::vx_release({issuccess, context});
+    test_lib::test_run_all(testsuite(context), context);
+    vx_core::vx_release(context);
     vx_core::vx_memory_leak_test();
     vx_core::vx_debug("Test End");
   } catch (std::exception& e) {

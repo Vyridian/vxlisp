@@ -12,7 +12,9 @@ namespace vx_collection {
     vx_core::vx_Type_listany items;
     for (vx_core::Type_any val : listval) {
       vx_core::Type_any newval = fn_filter->vx_any_from_any(val);
+      vx_core::vx_ref_plus(newval);
       vx_core::Type_boolean isempty = vx_core::f_is_empty_1(newval);
+      vx_core::vx_ref_minus(newval);
       if (!isempty->vx_boolean()) {
         items.push_back(newval);
       }
@@ -38,7 +40,7 @@ namespace vx_collection {
         iend = isize;
       }
 			auto first = listval.begin() + istart;
-      auto last = listval.begin() + iend + 1;
+      auto last = listval.begin() + iend;
       vx_core::vx_Type_listany listsub = std::vector(first, last);
       output = generic_list_1->vx_new(listsub);
     }

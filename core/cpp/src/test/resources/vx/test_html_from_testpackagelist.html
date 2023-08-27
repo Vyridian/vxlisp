@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Suite</title>
+    <style>
+      details summary {
+        cursor: pointer;
+        display: inline-flex;
+        gap: 10px;
+      }
+      table {
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        font-family: sans-serif;
+        font-size: 0.9em;
+        margin: 25px 0;
+        min-width: 400px;
+        vertical-align: top;
+      }
+      thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+      }
+      td {
+        padding: 10px 10px;
+        vertical-align: top;
+      }
+      tbody tr {
+        border-bottom: 1px solid #dddddd;
+      }
+      tbody tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+      tbody tr:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+      tbody tr.active-row {
+        color: #009879;
+        font-weight: bold;
+      }
+      .failflag {
+        background-color: red;
+        color: white;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 1px;
+      }
+      .passflag {
+        background-color: green;
+        color: white;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 1px;
+      }
+      .coveragenums {
+        width: 90px;
+      }
+      .coveragepct {
+        text-align: right;
+      }
+      .coveragepctgreen {
+        background-color: green;
+        color: white;
+        text-align: right;
+      }
+      .coveragepctred {
+        background-color: red;
+        color: white;
+        text-align: right;
+      }
+      .pkgheader {
+        display: inline-flex;
+        gap: 10px;
+      }
+      .pkgname {
+        font-weight: bold;
+        width: 180px;
+      }
+      .preformatted {
+        display: block;
+        font-family: monospace;
+        unicode-bidi: embed;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Test Suite</h1>
+    </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <td>
+              <p>Pass?</p>
+            </td>
+            <td>
+              <p>Name</p>
+            </td>
+            <td>
+              <p>Test</p>
+            </td>
+            <td>
+              <p>Expected</p>
+            </td>
+            <td>
+              <p>Actual</p>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>Pass</p>
+            </td>
+            <td>
+              <p>boolean</p>
+            </td>
+            <td>
+              <p>(test-true true)</p>
+            </td>
+            <td>
+              <p>true</p>
+            </td>
+            <td>
+              <p>true</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <footer></footer>
+</html>

@@ -60,6 +60,12 @@ namespace test_lib {
 
   bool test_html_from_testpackagelist(vx_core::Type_context context);
 
+  bool test_node_f_div_from_testcaselist(vx_core::Type_context context);
+
+  bool test_node_f_trlist_from_testcase(vx_core::Type_context context);
+
+  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context);
+
   bool test_node_from_testpackagelist(vx_core::Type_context context);
 
   bool test_pathfull_from_file(vx_core::Type_context context);
@@ -77,6 +83,8 @@ namespace test_lib {
   bool test_resolve_testresult_then(vx_core::Type_context context);
 
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
+
+  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
 
   bool test_run_testcase(vx_core::Type_context context);
 

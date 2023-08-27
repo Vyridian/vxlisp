@@ -16,12 +16,18 @@
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c")
           :code ":eq"
           :expected
            (stringlist
             "a"
             "b"
-            "c"))))
+            "c")
+          :passfail true)))
      :passfail true
      :testpkg "vx/collection")
     (vx/test/testcase
@@ -38,13 +44,20 @@
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
+          :actual
+           (list
+            "a"
+            1
+            "b"
+            "c")
           :code ":eq"
           :expected
            (list
             "a"
             1
             "b"
-            "c"))))
+            "c")
+          :passfail true)))
      :passfail true
      :testpkg "vx/collection")
     (vx/test/testcase
@@ -66,6 +79,10 @@
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringlist
+            "c1"
+            "d1")
           :code ":eq"
           :expected
            (stringlist
@@ -73,7 +90,6 @@
             "b1"
             "c1"
             "d1"))))
-     :passfail true
      :testpkg "vx/collection")
     (vx/test/testcase
      :casename "list<-list-start"
@@ -89,12 +105,18 @@
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringlist
+            "b"
+            "c"
+            "d")
           :code ":eq"
           :expected
            (stringlist
             "b"
             "c"
-            "d"))))
+            "d")
+          :passfail true)))
      :passfail true
      :testpkg "vx/collection")
     (vx/test/testcase
@@ -111,11 +133,16 @@
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringlist
+            "b"
+            "c")
           :code ":eq"
           :expected
            (stringlist
             "b"
-            "c"))))
+            "c")
+          :passfail true)))
      :passfail true
      :testpkg "vx/collection"))
   :coveragedetail
@@ -170,7 +197,6 @@
       :pct 100
       :tests 0
       :total 0))
-  :passfail true
   :testpkg "vx/collection")
  (vx/test/testpackage
   :caselist
@@ -421,15 +447,19 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual 6.4
           :code ":eq"
-          :expected 6.4))
+          :expected 6.4
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test -10.2 (* 5.1 -2))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual -10.2
           :code ":eq"
-          :expected -10.2)))
+          :expected -10.2
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -609,15 +639,19 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual 3
           :code ":eq"
-          :expected 3))
+          :expected 3
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test -5 (/ 10 -2))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual -5
           :code ":eq"
-          :expected -5)))
+          :expected -5
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -629,8 +663,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -642,15 +678,19 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true (< \"b\" \"d\" \"z\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -804,8 +844,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -817,8 +859,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -860,8 +904,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-false (and true false))"
         :testpkg "vx/core"
@@ -889,8 +935,8 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
-          :actual true
-          :code ":false")))
+          :code ":false"
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -975,15 +1021,19 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual 1
           :code ":eq"
-          :expected 1))
+          :expected 1
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test 1 (compare \"z\" \"a\"))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual 1
           :code ":eq"
-          :expected 1)))
+          :expected 1
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -1310,8 +1360,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual 3
           :code ":eq"
-          :expected 3)))
+          :expected 3
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -1352,11 +1404,16 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringlist
+            "a1"
+            "b2")
           :code ":eq"
           :expected
            (stringlist
             "a1"
-            "b2"))))
+            "b2")
+          :passfail true)))
      :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
@@ -1366,22 +1423,23 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringlist \"a1\" \"b2\")
- (list<-map : stringlist
-  (stringmap \"a\" \"1\" \"b\" \"2\")
+ (stringmap \"a\" \"az\" \"b\" \"bz\")
+ (map<-list : stringmap
+  (stringlist \"a\" \"b\")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))"
+   [val : string]
+   (string val \"z\"))))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual
+           (stringmap
+            :"a" "b")
           :code ":eq"
           :expected
-           (stringlist
-            "a1"
-            "b2"))))
-     :passfail true
+           (stringmap
+            :a "az"
+            :b "bz"))))
      :testpkg "vx/core")
     (vx/test/testcase
      :casename "new"
@@ -1503,8 +1561,10 @@
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-false (or false false false))"
         :testpkg "vx/core"
@@ -2014,8 +2074,118 @@
       :pct 6
       :tests 4
       :total 66))
-  :passfail true
   :testpkg "vx/core")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :delims 0)
+    :funcmap
+     (intmap
+      :csv<-textblock 0
+      :csvrows<-textblock 0)
+    :testpkg "vx/data/csv"
+    :typemap
+     (intmap
+      :csv 0
+      :csvrows 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 5)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :testpkg "vx/data/csv"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 5)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2))
+  :passfail true
+  :testpkg "vx/data/csv")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap (intmap)
+    :testpkg "vx/data/db"
+    :typemap
+     (intmap
+      :db 0
+      :dbcell 0
+      :dbcellmap 0
+      :dbfield 0
+      :dbfieldmap 0
+      :dbtable 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 6
+      :total 6)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :testpkg "vx/data/db"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 6)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 6))
+  :passfail true
+  :testpkg "vx/data/db")
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
@@ -2105,7 +2275,6 @@
          (vx/test/testresult
           :code ":true"
           :expected true)))
-     :passfail true
      :testpkg "vx/data/file")
     (vx/test/testcase
      :casename "string-read<-file"
@@ -2185,8 +2354,239 @@
       :pct 0
       :tests 0
       :total 2))
-  :passfail true
   :testpkg "vx/data/file")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap (intmap)
+    :testpkg "vx/data/table"
+    :typemap
+     (intmap
+      :cell 0
+      :celllist 0
+      :cellmap 0
+      :field 0
+      :fieldlist 0
+      :fieldmap 0
+      :filter 0
+      :row 0
+      :rowlist 0
+      :rowmap 0
+      :sort 0
+      :table 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :testpkg "vx/data/table"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12))
+  :passfail true
+  :testpkg "vx/data/table")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :parse 0
+      :stringlist<-textblocklist 0
+      :text<-textblock 0
+      :textblocks<-textblock 0)
+    :testpkg "vx/data/textblock"
+    :typemap
+     (intmap
+      :delimset 0
+      :textblock 0
+      :textblocklist 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 42
+      :tests 3
+      :total 7)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :testpkg "vx/data/textblock"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3))
+  :passfail true
+  :testpkg "vx/data/textblock")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :brancharrow-down 0
+      :brancharrow-up 0
+      :brancharrow-updown 0)
+    :funcmap (intmap)
+    :testpkg "vx/data/tree"
+    :typemap
+     (intmap
+      :branch 0
+      :brancharrow 0
+      :branchlist 0
+      :leaf 0
+      :leaflist 0
+      :tree 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :testpkg "vx/data/tree"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 6))
+  :passfail true
+  :testpkg "vx/data/tree")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :xml<-textblock 0)
+    :testpkg "vx/data/xml"
+    :typemap
+     (intmap
+      :xml 0
+      :xmlnode 0
+      :xmlnodelist 0
+      :xmlpropmap 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 5)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :testpkg "vx/data/xml"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 5)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4))
+  :passfail true
+  :testpkg "vx/data/xml")
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
@@ -2230,7 +2630,6 @@
          (vx/test/testresult
           :code ":eq"
           :expected 5)))
-     :passfail true
      :testpkg "vx/repl"))
   :coveragedetail
    (vx/test/testcoveragedetail
@@ -2288,7 +2687,6 @@
       :pct 0
       :tests 0
       :total 3))
-  :passfail true
   :testpkg "vx/repl")
  (vx/test/testpackage
   :caselist
@@ -2376,6 +2774,59 @@
       :total 1))
   :passfail true
   :testpkg "vx/sample")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :change 0
+      :register 0)
+    :testpkg "vx/state"
+    :typemap
+     (intmap
+      :value-map 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 33
+      :tests 1
+      :total 3)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :testpkg "vx/state"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1))
+  :passfail true
+  :testpkg "vx/state")
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
@@ -2582,29 +3033,37 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true (is-type \"a\"   string))"
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true (is-type 5.5   number))"
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test-true (is-type 4     int))"
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/type")
     (vx/test/testcase
@@ -2619,8 +3078,10 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename
          "(test-true
@@ -2629,8 +3090,10 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename
          "(test-true
@@ -2639,8 +3102,10 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true))
+          :expected true
+          :passfail true))
        (vx/test/testdescribe
         :describename
          "(test-true
@@ -2649,8 +3114,10 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
+          :actual true
           :code ":true"
-          :expected true)))
+          :expected true
+          :passfail true)))
      :passfail true
      :testpkg "vx/type")
     (vx/test/testcase
@@ -2686,17 +3153,19 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
-          :actual ""
+          :actual "4"
           :code ":eq"
-          :expected "4"))
+          :expected "4"
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test \"51\"          (string<-int 51))"
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
-          :actual "3"
+          :actual "51"
           :code ":eq"
-          :expected "51"))
+          :expected "51"
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test \"notanumber\"  (string<-int notanumber))"
         :testpkg "vx/type"
@@ -2792,9 +3261,10 @@
         :testpkg "vx/type"
         :testresult
          (vx/test/testresult
-          :actual "bcd"
+          :actual "bc"
           :code ":eq"
-          :expected "bc"))
+          :expected "bc"
+          :passfail true))
        (vx/test/testdescribe
         :describename "(test \"\"    (string<-string-start-end \"abcd\" 5 6))"
         :testpkg "vx/type"
@@ -3184,4 +3654,63 @@
       :tests 0
       :total 31))
   :passfail true
-  :testpkg "vx/web/html"))
+  :testpkg "vx/web/html")
+ (vx/test/testpackage
+  :caselist (vx/test/testcaselist)
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap (intmap)
+    :funcmap
+     (intmap
+      :csv<-httpget 0
+      :json<-httpget 0
+      :response<-httpget 0
+      :text<-httpget 0
+      :text<-response 0
+      :textblock<-httpget 0
+      :textblock<-response 0
+      :xml<-httpget 0)
+    :testpkg "vx/web/http"
+    :typemap
+     (intmap
+      :response 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 8)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 8)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 88
+      :tests 8
+      :total 9)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 8)
+    :testpkg "vx/web/http"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1))
+  :passfail true
+  :testpkg "vx/web/http"))
