@@ -8,7 +8,74 @@
        (vx/web/html/divchildlist
         (vx/web/html/h1
          :text "Test Suite")))
-     (vx/web/html/h1)))
+     (vx/web/html/div
+      :nodes
+       (vx/web/html/divchildlist
+        (vx/web/html/table
+         :tbody
+          (vx/web/html/tbody
+           :nodes
+            (vx/web/html/trlist
+             (vx/web/html/tr
+              :nodes
+               (vx/web/html/tdlist
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Pass")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "boolean")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "(test-true true)")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "true")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "true")))))))
+         :thead
+          (vx/web/html/thead
+           :nodes
+            (vx/web/html/trlist
+             (vx/web/html/tr
+              :nodes
+               (vx/web/html/tdlist
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Pass?")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Name")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Test")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Expected")))
+                (vx/web/html/td
+                 :nodes
+                  (vx/web/html/divchildlist
+                   (vx/web/html/p
+                    :text "Actual"))))))))))))
  :head
   (vx/web/html/head
    :nodes

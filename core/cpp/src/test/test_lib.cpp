@@ -5,6 +5,17 @@
 
 namespace test_lib {
 
+  std::string read_test_file(std::string path, std::string filename) {
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+      vx_core::vx_new_string(":path"), vx_core::vx_new_string(path),
+      vx_core::vx_new_string(":name"), vx_core::vx_new_string(filename)
+    });
+    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
+    std::string output = string_file->vx_string();
+    vx_core::vx_release(string_file);
+    return output;
+  }
+
   vx_test::Type_testresult sample_testresult(vx_core::Type_context context) {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
@@ -581,13 +592,7 @@ namespace test_lib {
   bool test_html_from_testpackagelist(vx_core::Type_context context) {
     std::string testname = "test_html_from_testpackagelist";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".html")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".html");
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
@@ -599,42 +604,14 @@ namespace test_lib {
     return output;
   }
 
-  bool test_node_from_testpackagelist(vx_core::Type_context context) {
-    std::string testname = "test_node_from_testpackagelist";
-    long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
-    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
-    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 52);
-    vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
-    std::string actual = vx_core::vx_string_from_any(html);
-    vx_core::vx_release(html);
-    bool output = test_lib::test(testname, expected, actual);
-    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
-    return output;
-  }
-
   bool test_node_f_div_from_testcaselist(vx_core::Type_context context) {
     std::string testname = "test_node_f_div_from_testcaselist";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
     vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 52);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 51);
     std::string actual = vx_core::vx_string_from_any(div);
     vx_core::vx_release(div);
     bool output = test_lib::test(testname, expected, actual);
@@ -645,13 +622,7 @@ namespace test_lib {
   bool test_node_f_trlist_from_testcase(vx_core::Type_context context) {
     std::string testname = "test_node_f_trlist_from_testcase";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
     vx_test::Type_testcase testcase = sample_testcase(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 9);
     vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcase(testcase);
@@ -665,23 +636,12 @@ namespace test_lib {
   bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context) {
     std::string testname = "test_node_f_trlist_from_testcaselist";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
-    vx_core::vx_reserve(testcaselist);
-
-    vx_core::Func_any_from_any fn_any_from_any = vx_test::t_trlist_from_testcase();
-    vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(vx_web_html::t_trlist(), testcaselist, fn_any_from_any);
-
-    vx_core::vx_release_one_except(testcaselist, list);
-    std::string actual = vx_core::vx_string_from_any(list);
-    vx_core::vx_release(list);
+    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
+    std::string actual = vx_core::vx_string_from_any(trlist);
+    vx_core::vx_release(trlist);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
@@ -690,18 +650,28 @@ namespace test_lib {
   bool test_node_f_trlist_from_testcaselist1(vx_core::Type_context context) {
     std::string testname = "test_node_f_trlist_from_testcaselist";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string(testname + ".vxlisp")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
-    std::string expected = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
     vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
     std::string actual = vx_core::vx_string_from_any(trlist);
     vx_core::vx_release(trlist);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_node_from_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_node_from_testpackagelist";
+    long irefcount = vx_core::refcount;
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 51);
+    vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
+    std::string actual = vx_core::vx_string_from_any(html);
+    vx_core::vx_release(html);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
@@ -1232,14 +1202,8 @@ namespace test_lib {
   bool test_read_file(vx_core::Type_context context) {
     std::string testname = "test_read_file";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
-      vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
-      vx_core::vx_new_string(":name"), vx_core::vx_new_string("string_read_from_file.txt")
-    });
-    vx_core::Type_string string_file = vx_data_file::vx_string_read_from_file(file);
     std::string expected = "testdata";
-    std::string actual = string_file->vx_string();
-    vx_core::vx_release(string_file);
+    std::string actual = read_test_file("src/test/resources/vx", "string_read_from_file.txt");
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;

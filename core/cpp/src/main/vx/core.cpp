@@ -415,7 +415,9 @@ namespace vx_core {
       vx_core::Type_any listoflist = fn_any_from_any->vx_any_from_any(val);
       vx_core::vx_reserve(listoflist);
       vx_core::Type_string extends = vx_core::f_extends_from_any(listoflist);
-      if (extends->vx_string() == ":list") {
+      std::string sextends = extends->vx_string();
+      vx_core::vx_release(extends);
+      if (sextends == ":list") {
         vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
         vx_core::vx_Type_listany listval = vallist->vx_list();
         vx_core::vx_reserve(listval);
@@ -424,6 +426,7 @@ namespace vx_core {
       vx_core::vx_release_one(listoflist);
     }
     vx_core::Type_any output = vx_core::vx_new_from_list(generic_list_1, list_result);
+    vx_core::vx_release_one(list_result);
     vx_core::vx_release_except(values, output);
     return output;
   }
