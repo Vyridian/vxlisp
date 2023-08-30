@@ -1,0 +1,27 @@
+// :headerfirst
+// :headertype
+// :headerfunc
+// :header
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
+
+// :body
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
+    bool isfirst = true;
+    std::string str = "";
+    std::string sdelim = delim->vx_string();
+    for (vx_core::Type_string substr : vals->vx_p_list) {
+      std::string ssub = substr->vx_string();
+      if (isfirst) {
+        str = ssub;
+      } else {
+        str += sdelim + ssub;
+      }
+      isfirst = false;
+    }
+    vx_core::Type_string output = vx_core::vx_new_string(str);
+    return output;
+	}

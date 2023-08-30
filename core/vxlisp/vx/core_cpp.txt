@@ -870,7 +870,9 @@ let-async
         vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
         vx_core::vx_Type_listany listval = vallist->vx_list();
         vx_core::vx_reserve(listval);
-        list_result.assign(listval.begin(), listval.end());
+        for (vx_core::Type_any val : listval) {
+          list_result.push_back(val);
+        }
       }
       vx_core::vx_release_one(listoflist);
     }

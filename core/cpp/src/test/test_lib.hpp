@@ -58,13 +58,13 @@ namespace test_lib {
 
   bool test_async_from_async_fn();
 
+  bool test_div_from_testcaselist(vx_core::Type_context context);
+
+  bool test_div_from_testpackage(vx_core::Type_context context);
+
+  bool test_div_from_testpackagelist(vx_core::Type_context context);
+
   bool test_html_from_testpackagelist(vx_core::Type_context context);
-
-  bool test_node_f_div_from_testcaselist(vx_core::Type_context context);
-
-  bool test_node_f_trlist_from_testcase(vx_core::Type_context context);
-
-  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context);
 
   bool test_node_from_testpackagelist(vx_core::Type_context context);
 
@@ -119,6 +119,12 @@ namespace test_lib {
   bool test_run_testresult(vx_core::Type_context context);
 
   bool test_run_testresult_async(vx_core::Type_context context);
+
+  bool test_tr_from_testdescribe_casename(vx_core::Type_context context);
+
+  bool test_trlist_from_testcase(vx_core::Type_context context);
+
+  bool test_trlist_from_testcaselist(vx_core::Type_context context);
 
   bool test_write_file(vx_core::Type_context context);
 

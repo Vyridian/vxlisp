@@ -421,7 +421,9 @@ namespace vx_core {
         vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
         vx_core::vx_Type_listany listval = vallist->vx_list();
         vx_core::vx_reserve(listval);
-        list_result.assign(listval.begin(), listval.end());
+        for (vx_core::Type_any val : listval) {
+          list_result.push_back(val);
+        }
       }
       vx_core::vx_release_one(listoflist);
     }
@@ -21307,7 +21309,11 @@ namespace vx_core {
   // (func session<-context)
   vx_core::Type_session f_session_from_context(vx_core::Type_context context) {
     vx_core::Type_session output = vx_core::e_session();
-    output = vx_core::t_context()->session();
+    output = vx_core::f_any_from_struct(
+      vx_core::t_session(),
+      vx_core::t_context(),
+      vx_core::vx_new_string(":session")
+    );
     return output;
   }
 
@@ -21385,7 +21391,11 @@ namespace vx_core {
   // (func setting<-context)
   vx_core::Type_setting f_setting_from_context(vx_core::Type_context context) {
     vx_core::Type_setting output = vx_core::e_setting();
-    output = vx_core::t_context()->setting();
+    output = vx_core::f_any_from_struct(
+      vx_core::t_setting(),
+      vx_core::t_context(),
+      vx_core::vx_new_string(":setting")
+    );
     return output;
   }
 
@@ -22575,7 +22585,11 @@ namespace vx_core {
   // (func user<-context)
   vx_core::Type_user f_user_from_context(vx_core::Type_context context) {
     vx_core::Type_user output = vx_core::e_user();
-    output = vx_core::f_session_from_context(context)->user();
+    output = vx_core::f_any_from_struct(
+      vx_core::t_user(),
+      vx_core::f_session_from_context(context),
+      vx_core::vx_new_string(":user")
+    );
     return output;
   }
 

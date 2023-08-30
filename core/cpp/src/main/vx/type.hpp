@@ -118,6 +118,12 @@ namespace vx_type {
     vx_type::Func_traits_from_typedef t_traits_from_typedef;
   };
 
+// :headerfirst
+// :header
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
+
 
   // (func allowtypenames<-type)
   vx_core::Type_stringlist f_allowtypenames_from_type(vx_core::Type_any type);

@@ -151,19 +151,7 @@
   delim : string]
  (native
   :cpp
-   "bool isfirst = true;
-    std::string str = “”;
-    std::string sdelim = delim->vx_string();
-    for (vx_core::Type_string substr : vals->vx_p_list) {
-      std::string ssub = substr->vx_string();
-      if (isfirst) {
-        str = ssub;
-      } else {
-        str += sdelim + ssub;
-      }
-      isfirst = false;
-    }
-    output = vx_core::vx_new_string(str);"
+   "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
   :js "vals.join(delim)"
   :java
    "List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {

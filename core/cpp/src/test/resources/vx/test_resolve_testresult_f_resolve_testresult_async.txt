@@ -1,0 +1,15 @@
+(async
+ :type vx/test/testresult
+ :lambdavars (
+  (any<-func-async)
+  (vx/test/testresult
+   :actual true
+   :code ":true"
+   :expected true
+   :passfail true)
+  true)
+ :fn fn
+ :async_parent
+  (async
+   :type any
+   :value (any)))

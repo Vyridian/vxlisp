@@ -81,9 +81,12 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_pathfull_from_file(context);
     test_lib::test_read_file(context);
     test_lib::test_write_file(context);
-    test_lib::test_node_f_trlist_from_testcase(context);
-    test_lib::test_node_f_trlist_from_testcaselist(context);
-    test_lib::test_node_f_div_from_testcaselist(context);
+    test_lib::test_tr_from_testdescribe_casename(context);
+    test_lib::test_trlist_from_testcase(context);
+    test_lib::test_trlist_from_testcaselist(context);
+    test_lib::test_div_from_testcaselist(context);
+    test_lib::test_div_from_testpackage(context);
+    test_lib::test_div_from_testpackagelist(context);
     test_lib::test_node_from_testpackagelist(context);
     test_lib::test_html_from_testpackagelist(context);
     test_lib::test_write_testpackagelist(context);

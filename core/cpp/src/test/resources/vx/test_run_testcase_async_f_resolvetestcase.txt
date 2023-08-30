@@ -1,0 +1,83 @@
+(async
+ :type vx/test/testcase
+ :lambdavars (
+  (vx/test/testcase
+   :casename "boolean"
+   :describelist
+    (vx/test/testdescribelist
+     (vx/test/testdescribe
+      :describename "(test-true true)"
+      :testpkg "vx/core"
+      :testresult
+       (vx/test/testresult
+        :actual true
+        :code ":true"
+        :expected true
+        :passfail true))
+     (vx/test/testdescribe
+      :describename "(test-false false)"
+      :testpkg "vx/core"
+      :testresult
+       (vx/test/testresult
+        :code ":false"
+        :passfail true)))
+   :testpkg "vx/core"))
+ :fn fn
+ :async_parent
+  (async
+   :type vx/test/testdescribelist
+   :listasync (
+    (async
+     :type vx/test/testdescribe
+     :lambdavars (
+      (vx/test/testdescribe
+       :describename "(test-true true)"
+       :testpkg "vx/core"
+       :testresult
+        (vx/test/testresult
+         :actual true
+         :code ":true"
+         :expected true
+         :passfail true)))
+     :fn fn
+     :async_parent
+      (async
+       :type vx/test/testresult
+       :lambdavars (
+        (any<-func-async)
+        (vx/test/testresult
+         :actual true
+         :code ":true"
+         :expected true
+         :passfail true)
+        true)
+       :fn fn
+       :async_parent
+        (async
+         :type any
+         :value (any))))
+    (async
+     :type vx/test/testdescribe
+     :lambdavars (
+      (vx/test/testdescribe
+       :describename "(test-false false)"
+       :testpkg "vx/core"
+       :testresult
+        (vx/test/testresult
+         :code ":false"
+         :passfail true)))
+     :fn fn
+     :async_parent
+      (async
+       :type vx/test/testresult
+       :lambdavars (
+        (any<-func-async)
+        (vx/test/testresult
+         :code ":false"
+         :passfail true)
+        false)
+       :fn fn
+       :async_parent
+        (async
+         :type any
+         :value (any)))))))

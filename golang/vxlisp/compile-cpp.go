@@ -2421,19 +2421,25 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 			multiflag := false
 			switch funcname {
 			case "vx/core/any<-struct":
-				propvalue := funcargs[1].value
-				switch propvalue.code {
-				case "string":
-					propname := StringValueFromValue(propvalue)
-					if BooleanFromStringStarts(propname, ":") {
-						propname = propname[1:]
+				targetvalue := funcargs[0].value
+				switch targetvalue.code {
+				case ":arg":
+					propvalue := funcargs[1].value
+					switch propvalue.code {
+					case "string":
+						propname := StringValueFromValue(propvalue)
+						if BooleanFromStringStarts(propname, ":") {
+							propname = propname[1:]
+						}
+						structvalue := funcargs[0].value
+						work, msgs := CppFromValue(structvalue, pkgname, fnc, 0, true, test, subpath)
+						msgblock = MsgblockAddBlock(msgblock, msgs)
+						work = work + "->" + CppFromName(propname) + "()"
+						argtexts = append(argtexts, work)
+						isskip = true
 					}
-					structvalue := funcargs[0].value
-					work, msgs := CppFromValue(structvalue, pkgname, fnc, 0, true, test, subpath)
-					msgblock = MsgblockAddBlock(msgblock, msgs)
-					work = work + "->" + CppFromName(propname) + "()"
-					argtexts = append(argtexts, work)
-					isskip = true
+				default:
+					output += CppNameFromPkgName(fnc.pkgname) + "::f_" + CppNameFromFunc(fnc) + "("
 				}
 			case "vx/core/fn":
 			case "vx/core/let":
@@ -4382,9 +4388,12 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_pathfull_from_file(context);
     test_lib::test_read_file(context);
     test_lib::test_write_file(context);
-    test_lib::test_node_f_trlist_from_testcase(context);
-    test_lib::test_node_f_trlist_from_testcaselist(context);
-    test_lib::test_node_f_div_from_testcaselist(context);
+    test_lib::test_tr_from_testdescribe_casename(context);
+    test_lib::test_trlist_from_testcase(context);
+    test_lib::test_trlist_from_testcaselist(context);
+    test_lib::test_div_from_testcaselist(context);
+    test_lib::test_div_from_testpackage(context);
+    test_lib::test_div_from_testpackagelist(context);
     test_lib::test_node_from_testpackagelist(context);
     test_lib::test_html_from_testpackagelist(context);
     test_lib::test_write_testpackagelist(context);
@@ -4470,13 +4479,13 @@ namespace test_lib {
 
   bool test_async_from_async_fn();
 
+  bool test_div_from_testcaselist(vx_core::Type_context context);
+
+  bool test_div_from_testpackage(vx_core::Type_context context);
+
+  bool test_div_from_testpackagelist(vx_core::Type_context context);
+
   bool test_html_from_testpackagelist(vx_core::Type_context context);
-
-  bool test_node_f_div_from_testcaselist(vx_core::Type_context context);
-
-  bool test_node_f_trlist_from_testcase(vx_core::Type_context context);
-
-  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context);
 
   bool test_node_from_testpackagelist(vx_core::Type_context context);
 
@@ -4532,6 +4541,12 @@ namespace test_lib {
 
   bool test_run_testresult_async(vx_core::Type_context context);
 
+  bool test_tr_from_testdescribe_casename(vx_core::Type_context context);
+
+  bool test_trlist_from_testcase(vx_core::Type_context context);
+
+  bool test_trlist_from_testcaselist(vx_core::Type_context context);
+
   bool test_write_file(vx_core::Type_context context);
 
   bool test_write_node(vx_core::Type_context context);
@@ -4564,51 +4579,51 @@ namespace test_lib {
     return output;
   }
 
-  vx_test::Type_testresult sample_testresult(vx_core::Type_context context) {
+  vx_test::Type_testresult sample_testresult1(vx_core::Type_context context) {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
     output = vx_test::f_test_true(
       vx_core::vx_new_boolean(true),
       context
     );
-    vx_core::vx_memory_leak_test("sample_testresult", irefcount, 2);
+    vx_core::vx_memory_leak_test("sample_testresult1", irefcount, 2);
     return output;
   }
 
-  std::string sample_testresult_text() {
-    std::string output =
-      "(vx/test/testresult"
-      "\n :actual true"
-      "\n :code \":true\""
-      "\n :expected true"
-      "\n :passfail true)";
+  vx_test::Type_testresult sample_testresult2(vx_core::Type_context context) {
+    vx_test::Type_testresult output;
+    long irefcount = vx_core::refcount;
+    output = vx_test::f_test_false(
+      vx_core::vx_new_boolean(false),
+      context
+    );
+    vx_core::vx_memory_leak_test("sample_testresult2", irefcount, 2);
     return output;
   }
 
-  vx_test::Type_testdescribe sample_testdescribe(vx_core::Type_context context) {
+  vx_test::Type_testdescribe sample_testdescribe1(vx_core::Type_context context) {
     vx_test::Type_testdescribe output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_new(vx_test::t_testdescribe(), {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"),
-      sample_testresult(context)
+      sample_testresult1(context)
     });
-    vx_core::vx_memory_leak_test("sample_testdescribe", irefcount, 5);
+    vx_core::vx_memory_leak_test("sample_testdescribe1", irefcount, 5);
     return output;
   }
 
-  std::string sample_testdescribe_text() {
-    std::string output =
-      "(vx/test/testdescribe"
-      "\n :describename \"(test-true true)\""
-      "\n :testpkg \"vx/core\""
-      "\n :testresult"
-      "\n  (vx/test/testresult"
-      "\n   :actual true"
-      "\n   :code \":true\""
-      "\n   :expected true"
-      "\n   :passfail true))";
+  vx_test::Type_testdescribe sample_testdescribe2(vx_core::Type_context context) {
+    vx_test::Type_testdescribe output;
+    long irefcount = vx_core::refcount;
+    output = vx_core::vx_new(vx_test::t_testdescribe(), {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false false)"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"),
+      sample_testresult2(context)
+    });
+    vx_core::vx_memory_leak_test("sample_testdescribe2", irefcount, 5);
     return output;
   }
 
@@ -4618,25 +4633,11 @@ namespace test_lib {
     output = vx_core::vx_any_from_any(
       vx_test::t_testdescribelist(),
       vx_test::t_testdescribelist()->vx_new_from_list({
-        sample_testdescribe(context)
+        sample_testdescribe1(context),
+        sample_testdescribe2(context)
       })
     );
-    vx_core::vx_memory_leak_test("sample_testdescribelist", irefcount, 6);
-    return output;
-  }
-
-  std::string sample_testdescribelist_text() {
-    std::string output =
-      "(vx/test/testdescribelist"
-      "\n (vx/test/testdescribe"
-      "\n  :describename \"(test-true true)\""
-      "\n  :testpkg \"vx/core\""
-      "\n  :testresult"
-      "\n   (vx/test/testresult"
-      "\n    :actual true"
-      "\n    :code \":true\""
-      "\n    :expected true"
-      "\n    :passfail true)))";
+    vx_core::vx_memory_leak_test("sample_testdescribelist", irefcount, 11);
     return output;
   }
 
@@ -4649,46 +4650,37 @@ namespace test_lib {
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
       vx_core::vx_new_string(":describelist"), sample_testdescribelist(context)
     });
-    vx_core::vx_memory_leak_test("sample_testcase", irefcount, 9);
+    vx_core::vx_memory_leak_test("sample_testcase", irefcount, 14);
     return output;
   }
 
-  std::string sample_testcase_text() {
-    std::string output =
-      "(vx/test/testcase"
-      "\n :casename \"boolean\""
-      "\n :describelist"
-      "\n  (vx/test/testdescribelist"
-      "\n   (vx/test/testdescribe"
-      "\n    :describename \"(test-true true)\""
-      "\n    :testpkg \"vx/core\""
-      "\n    :testresult"
-      "\n     (vx/test/testresult"
-      "\n      :actual true"
-      "\n      :code \":true\""
-      "\n      :expected true"
-      "\n      :passfail true)))"
-      "\n :testpkg \"vx/core\")";
-    return output;
-  }
-
-  std::string sample_testcase_resolved_text() {
-    std::string output =
-      "(vx/test/testcase"
-      "\n :casename \"boolean\""
-      "\n :describelist"
-      "\n  (vx/test/testdescribelist"
-      "\n   (vx/test/testdescribe"
-      "\n    :describename \"(test-true true)\""
-      "\n    :testpkg \"vx/core\""
-      "\n    :testresult"
-      "\n     (vx/test/testresult"
-      "\n      :actual true"
-      "\n      :code \":true\""
-      "\n      :expected true"
-      "\n      :passfail true)))"
-      "\n :passfail true"
-      "\n :testpkg \"vx/core\")";
+  vx_test::Type_testcase sample_testcase2(vx_core::Type_context context) {
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase(), {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("float"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist(),
+        vx_test::t_testdescribelist()->vx_new_from_list({
+          vx_core::vx_new(vx_test::t_testdescribe(), {
+            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4.5 (float 4.5))"),
+            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+            vx_core::vx_new_string(":testresult"),
+            vx_test::f_test(
+              vx_core::vx_new_decimal_from_string("4.5"),
+              vx_core::f_new(
+                vx_core::t_float(),
+                vx_core::vx_new(vx_core::t_anylist(), {
+                  vx_core::vx_new_decimal_from_string("4.5")
+                })
+              ),
+              context
+            )
+          })
+        })
+      )
+    });
     return output;
   }
 
@@ -4698,51 +4690,11 @@ namespace test_lib {
     output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
       vx_test::t_testcaselist()->vx_new_from_list({
-        sample_testcase(context)
+        sample_testcase(context),
+        sample_testcase2(context)
       })
     );
-    vx_core::vx_memory_leak_test("sample_testcaselist", irefcount, 10);
-    return output;
-  }
-
-  std::string sample_testcaselist_text() {
-    std::string output =
-      "(vx/test/testcaselist"
-      "\n (vx/test/testcase"
-      "\n  :casename \"boolean\""
-      "\n  :describelist"
-      "\n   (vx/test/testdescribelist"
-      "\n    (vx/test/testdescribe"
-      "\n     :describename \"(test-true true)\""
-      "\n     :testpkg \"vx/core\""
-      "\n     :testresult"
-      "\n      (vx/test/testresult"
-      "\n       :actual true"
-      "\n       :code \":true\""
-      "\n       :expected true"
-      "\n       :passfail true)))"
-      "\n  :testpkg \"vx/core\"))";
-    return output;
-  }
-
-  std::string sample_testcaselist_resolved_text() {
-    std::string output =
-      "(vx/test/testcaselist"
-      "\n (vx/test/testcase"
-      "\n  :casename \"boolean\""
-      "\n  :describelist"
-      "\n   (vx/test/testdescribelist"
-      "\n    (vx/test/testdescribe"
-      "\n     :describename \"(test-true true)\""
-      "\n     :testpkg \"vx/core\""
-      "\n     :testresult"
-      "\n      (vx/test/testresult"
-      "\n       :actual true"
-      "\n       :code \":true\""
-      "\n       :expected true"
-      "\n       :passfail true)))"
-      "\n  :passfail true"
-      "\n  :testpkg \"vx/core\"))";
+    vx_core::vx_memory_leak_test("sample_testcaselist", irefcount, 26);
     return output;
   }
 
@@ -4753,55 +4705,7 @@ namespace test_lib {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":caselist"), sample_testcaselist(context)
     });
-    vx_core::vx_memory_leak_test("sample_testpackage", irefcount, 12);
-    return output;
-  }
-
-  std::string sample_testpackage_text() {
-    std::string output =
-      "(vx/test/testpackage"
-      "\n :caselist"
-      "\n  (vx/test/testcaselist"
-      "\n   (vx/test/testcase"
-      "\n    :casename \"boolean\""
-      "\n    :describelist"
-      "\n     (vx/test/testdescribelist"
-      "\n      (vx/test/testdescribe"
-      "\n       :describename \"(test-true true)\""
-      "\n       :testpkg \"vx/core\""
-      "\n       :testresult"
-      "\n        (vx/test/testresult"
-      "\n         :actual true"
-      "\n         :code \":true\""
-      "\n         :expected true"
-      "\n         :passfail true)))"
-      "\n    :testpkg \"vx/core\"))"
-      "\n :testpkg \"vx/core\")";
-    return output;
-  }
-
-  std::string sample_testpackage_resolved_text() {
-    std::string output =
-      "(vx/test/testpackage"
-      "\n :caselist"
-      "\n  (vx/test/testcaselist"
-      "\n   (vx/test/testcase"
-      "\n    :casename \"boolean\""
-      "\n    :describelist"
-      "\n     (vx/test/testdescribelist"
-      "\n      (vx/test/testdescribe"
-      "\n       :describename \"(test-true true)\""
-      "\n       :testpkg \"vx/core\""
-      "\n       :testresult"
-      "\n        (vx/test/testresult"
-      "\n         :actual true"
-      "\n         :code \":true\""
-      "\n         :expected true"
-      "\n         :passfail true)))"
-      "\n    :passfail true"
-      "\n    :testpkg \"vx/core\"))"
-      "\n :passfail true"
-      "\n :testpkg \"vx/core\")";
+    vx_core::vx_memory_leak_test("sample_testpackage", irefcount, 28);
     return output;
   }
 
@@ -4814,57 +4718,7 @@ namespace test_lib {
         sample_testpackage(context)
       })
     );
-    vx_core::vx_memory_leak_test("sample_testpackagelist", irefcount, 13);
-    return output;
-  }
-
-  std::string sample_testpackagelist_text() {
-    std::string output =
-      "(vx/test/testpackagelist"
-      "\n (vx/test/testpackage"
-      "\n  :caselist"
-      "\n   (vx/test/testcaselist"
-      "\n    (vx/test/testcase"
-      "\n     :casename \"boolean\""
-      "\n     :describelist"
-      "\n      (vx/test/testdescribelist"
-      "\n       (vx/test/testdescribe"
-      "\n        :describename \"(test-true true)\""
-      "\n        :testpkg \"vx/core\""
-      "\n        :testresult"
-      "\n         (vx/test/testresult"
-      "\n          :actual true"
-      "\n          :code \":true\""
-      "\n          :expected true"
-      "\n          :passfail true)))"
-      "\n     :testpkg \"vx/core\"))"
-      "\n  :testpkg \"vx/core\"))";
-    return output;
-  }
-
-  std::string sample_testpackagelist_resolved_text() {
-    std::string output =
-      "(vx/test/testpackagelist"
-      "\n (vx/test/testpackage"
-      "\n  :caselist"
-      "\n   (vx/test/testcaselist"
-      "\n    (vx/test/testcase"
-      "\n     :casename \"boolean\""
-      "\n     :describelist"
-      "\n      (vx/test/testdescribelist"
-      "\n       (vx/test/testdescribe"
-      "\n        :describename \"(test-true true)\""
-      "\n        :testpkg \"vx/core\""
-      "\n        :testresult"
-      "\n         (vx/test/testresult"
-      "\n          :actual true"
-      "\n          :code \":true\""
-      "\n          :expected true"
-      "\n          :passfail true)))"
-      "\n     :passfail true"
-      "\n     :testpkg \"vx/core\"))"
-      "\n  :passfail true"
-      "\n  :testpkg \"vx/core\"))";
+    vx_core::vx_memory_leak_test("sample_testpackagelist", irefcount, 29);
     return output;
   }
 
@@ -5137,6 +4991,47 @@ namespace test_lib {
     return output;
   }
 
+  bool test_div_from_testcaselist(vx_core::Type_context context) {
+    std::string testname = "test_div_from_testcaselist";
+    long irefcount = vx_core::refcount;
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 26);
+    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 94);
+    std::string actual = vx_core::vx_string_from_any(div);
+    vx_core::vx_release(div);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_div_from_testpackage(vx_core::Type_context context) {
+    std::string testname = "test_div_from_testpackage";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackage testpackage = sample_testpackage(context);
+    vx_web_html::Type_div div = vx_test::f_div_from_testpackage(testpackage);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    std::string actual = vx_core::vx_string_from_any(div);
+    vx_core::vx_release(div);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_div_from_testpackagelist(vx_core::Type_context context) {
+    std::string testname = "test_div_from_testpackagelist";
+    long irefcount = vx_core::refcount;
+    vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
+    vx_web_html::Type_div div = vx_test::f_div_from_testpackagelist(testpackagelist);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    std::string actual = vx_core::vx_string_from_any(div);
+    vx_core::vx_release(div);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
   bool test_html_from_testpackagelist(vx_core::Type_context context) {
     std::string testname = "test_html_from_testpackagelist";
     long irefcount = vx_core::refcount;
@@ -5152,71 +5047,14 @@ namespace test_lib {
     return output;
   }
 
-  bool test_node_f_div_from_testcaselist(vx_core::Type_context context) {
-    std::string testname = "test_node_f_div_from_testcaselist";
-    long irefcount = vx_core::refcount;
-    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
-    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
-    vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 51);
-    std::string actual = vx_core::vx_string_from_any(div);
-    vx_core::vx_release(div);
-    bool output = test_lib::test(testname, expected, actual);
-    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
-    return output;
-  }
-
-  bool test_node_f_trlist_from_testcase(vx_core::Type_context context) {
-    std::string testname = "test_node_f_trlist_from_testcase";
-    long irefcount = vx_core::refcount;
-    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
-    vx_test::Type_testcase testcase = sample_testcase(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 9);
-    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcase(testcase);
-    std::string actual = vx_core::vx_string_from_any(trlist);
-    vx_core::vx_release(trlist);
-    bool output = test_lib::test(testname, expected, actual);
-    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
-    return output;
-  }
-
-  bool test_node_f_trlist_from_testcaselist(vx_core::Type_context context) {
-    std::string testname = "test_node_f_trlist_from_testcaselist";
-    long irefcount = vx_core::refcount;
-    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
-    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
-    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
-    std::string actual = vx_core::vx_string_from_any(trlist);
-    vx_core::vx_release(trlist);
-    bool output = test_lib::test(testname, expected, actual);
-    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
-    return output;
-  }
-
-  bool test_node_f_trlist_from_testcaselist1(vx_core::Type_context context) {
-    std::string testname = "test_node_f_trlist_from_testcaselist";
-    long irefcount = vx_core::refcount;
-    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
-    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
-    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
-    std::string actual = vx_core::vx_string_from_any(trlist);
-    vx_core::vx_release(trlist);
-    bool output = test_lib::test(testname, expected, actual);
-    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
-    return output;
-  }
-
   bool test_node_from_testpackagelist(vx_core::Type_context context) {
     std::string testname = "test_node_from_testpackagelist";
     long irefcount = vx_core::refcount;
-    std::string expected = read_test_file("src/test/resources/vx", testname + ".vxlisp");
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 26);
     vx_web_html::Type_div div = vx_test::f_div_from_testcaselist(testcaselist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 51);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 94);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(div);
     std::string actual = vx_core::vx_string_from_any(html);
     vx_core::vx_release(html);
@@ -5229,8 +5067,8 @@ namespace test_lib {
     vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
     std::string expected = "true";
     std::string actual = vx_core::vx_string_from_any(issuccess);
-    bool output = test_lib::test("Full Test Suite", expected, actual);
     vx_core::vx_release(issuccess);
+    bool output = test_lib::test("Full Test Suite", expected, actual);
     return output;
   }
 
@@ -5239,7 +5077,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testcase testcase = sample_testcase(context);
     vx_test::Type_testcase testcase_resolved = test_lib::run_testcase(testcase);
-    std::string expected = sample_testcase_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testcase_resolved);
     vx_core::vx_release(testcase_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5251,10 +5089,10 @@ namespace test_lib {
     std::string testname = "test_run_testcase_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testcase testcase = sample_testcase(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 9);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 14);
     vx_test::Type_testcase testcase_resolved = test_lib::run_testcase_async(testcase);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 9);
-    std::string expected = sample_testcase_resolved_text();
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 14);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testcase_resolved);
     vx_core::vx_release(testcase_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5267,59 +5105,8 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testcase testcase = sample_testcase(context);
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
-    vx_core::vx_memory_leak_test(testname, irefcount, 14);
-    std::string expected =
-      "(async"
-      "\n :type vx/test/testcase"
-      "\n :lambdavars ("
-      "\n  (vx/test/testcase"
-      "\n   :casename \"boolean\""
-      "\n   :describelist"
-      "\n    (vx/test/testdescribelist"
-      "\n     (vx/test/testdescribe"
-      "\n      :describename \"(test-true true)\""
-      "\n      :testpkg \"vx/core\""
-      "\n      :testresult"
-      "\n       (vx/test/testresult"
-      "\n        :actual true"
-      "\n        :code \":true\""
-      "\n        :expected true"
-      "\n        :passfail true)))"
-      "\n   :testpkg \"vx/core\"))"
-      "\n :fn fn"
-      "\n :async_parent"
-      "\n  (async"
-      "\n   :type vx/test/testdescribelist"
-      "\n   :listasync ("
-      "\n    (async"
-      "\n     :type vx/test/testdescribe"
-      "\n     :lambdavars ("
-      "\n      (vx/test/testdescribe"
-      "\n       :describename \"(test-true true)\""
-      "\n       :testpkg \"vx/core\""
-      "\n       :testresult"
-      "\n        (vx/test/testresult"
-      "\n         :actual true"
-      "\n         :code \":true\""
-      "\n         :expected true"
-      "\n         :passfail true)))"
-      "\n     :fn fn"
-      "\n     :async_parent"
-      "\n      (async"
-      "\n       :type vx/test/testresult"
-      "\n       :lambdavars ("
-      "\n        (any<-func-async)"
-      "\n        (vx/test/testresult"
-      "\n         :actual true"
-      "\n         :code \":true\""
-      "\n         :expected true"
-      "\n         :passfail true)"
-      "\n        true)"
-      "\n       :fn fn"
-      "\n       :async_parent"
-      "\n        (async"
-      "\n         :type any"
-      "\n         :value (any)))))))";
+    vx_core::vx_memory_leak_test(testname, irefcount, 22);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_async(async_testcase);
     vx_core::vx_release_async(async_testcase);
     bool output = test_lib::test(testname, expected, actual);
@@ -5331,25 +5118,25 @@ namespace test_lib {
     std::string testname = "test_run_testcase_async_syncvalue";
     long irefcount = vx_core::refcount;
     vx_test::Type_testcase testcase = sample_testcase(context);
-    vx_core::vx_memory_leak_test(testname, irefcount, 9);
-    vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_core::vx_memory_leak_test(testname, irefcount, 14);
+    vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
+    vx_core::vx_memory_leak_test(testname, irefcount, 22);
     vx_core::vx_Type_async async_testdescribelist = async_testcase->async_parent;
     vx_core::vx_Type_listasync list_async_testdescribe = async_testdescribelist->listasync;
     vx_core::vx_Type_async async_testdescribe = list_async_testdescribe[0];
     vx_core::vx_Type_async async_testresult = async_testdescribe->async_parent;
     vx_core::vx_Type_async async_any = async_testresult->async_parent;
     vx_core::Type_any any = async_any->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 14);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 22);
     vx_core::Type_any testresult_resolved = async_testresult->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 21);
     vx_core::Type_any testdescribe_resolved = async_testdescribe->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 21);
     vx_core::Type_any testdescribelist_resolved = async_testdescribelist->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 19);
     vx_core::Type_any testcase_resolved = async_testcase->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-5", irefcount, 10);
-    std::string expected = sample_testcase_resolved_text();
+    vx_core::vx_memory_leak_test(testname + "-5", irefcount, 15);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testcase_resolved);
     vx_core::vx_release_async(async_testcase);
     bool output = test_lib::test(testname, expected, actual);
@@ -5362,7 +5149,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
     vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist(testcaselist);
-    std::string expected = sample_testcaselist_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testcaselist_resolved);
     vx_core::vx_release(testcaselist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5374,10 +5161,10 @@ namespace test_lib {
     std::string testname = "test_run_testcaselist_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 10);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 26);
     vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist_async(testcaselist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 10);
-    std::string expected = sample_testcaselist_resolved_text();
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 26);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testcaselist_resolved);
     vx_core::vx_release(testcaselist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5388,9 +5175,9 @@ namespace test_lib {
   bool test_run_testdescribe(vx_core::Type_context context) {
     std::string testname = "test_run_testdescribe";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testdescribe testdescribe = sample_testdescribe(context);
+    vx_test::Type_testdescribe testdescribe = sample_testdescribe1(context);
     vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe("vx/core", "boolean", testdescribe);
-    std::string expected = sample_testdescribe_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
     vx_core::vx_release(testdescribe_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5401,9 +5188,9 @@ namespace test_lib {
   bool test_run_testdescribe_async(vx_core::Type_context context) {
     std::string testname = "test_run_testdescribe_async";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testdescribe testdescribe = sample_testdescribe(context);
+    vx_test::Type_testdescribe testdescribe = sample_testdescribe1(context);
     vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe_async("vx/core", "boolean", testdescribe);
-    std::string expected = sample_testdescribe_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribe_resolved);
     vx_core::vx_release(testdescribe_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5416,7 +5203,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
     vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist("vx/core", "boolean", testdescribelist);
-    std::string expected = sample_testdescribelist_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
     vx_core::vx_release(testdescribelist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5429,7 +5216,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
     vx_test::Type_testdescribelist testdescribelist_resolved = test_lib::run_testdescribelist_async("vx/core", "boolean", testdescribelist);
-    std::string expected = sample_testdescribelist_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
     vx_core::vx_release(testdescribelist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5447,7 +5234,7 @@ namespace test_lib {
       vx_test::t_resolve_testdescribe()
     );
     vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist(), async_testdescribelist);
-    std::string expected = sample_testdescribelist_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
     vx_core::vx_release(testdescribelist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5460,7 +5247,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackage testpackage = sample_testpackage(context);
     vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
-    std::string expected = sample_testpackage_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testpackage_resolved);
     vx_core::vx_release(testpackage_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5472,10 +5259,10 @@ namespace test_lib {
     std::string testname = "test_run_testpackage_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackage testpackage = sample_testpackage(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 12);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 28);
     vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage_async(testpackage);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 12);
-    std::string expected = sample_testpackage_resolved_text();
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 28);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testpackage_resolved);
     vx_core::vx_release(testpackage_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5488,7 +5275,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
     vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist(testpackagelist);
-    std::string expected = sample_testpackagelist_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testpackagelist_resolved);
     vx_core::vx_release(testpackagelist_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5500,12 +5287,12 @@ namespace test_lib {
     std::string testname = "test_run_testpackagelist_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 29);
     vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
-    std::string expected = sample_testpackagelist_resolved_text();
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 29);
     std::string actual = vx_core::vx_string_from_any(testpackagelist_resolved);
     vx_core::vx_release(testpackagelist_resolved);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
@@ -5514,9 +5301,9 @@ namespace test_lib {
   bool test_run_testresult(vx_core::Type_context context) {
     std::string testname = "test_run_testresult";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_test::Type_testresult testresult_resolved = run_testresult("vx/core", "boolean", "", testresult);
-    std::string expected = sample_testresult_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5527,7 +5314,7 @@ namespace test_lib {
   bool test_resolve_testresult_anyfromfunc(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_anyfromfunc";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -5535,7 +5322,7 @@ namespace test_lib {
       vx_core::Type_any output_1 = testresult;
       return output_1;
     });
-    std::string expected1 = sample_testresult_text();
+    std::string expected1 = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(anyfromfunc);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -5546,9 +5333,9 @@ namespace test_lib {
   bool test_run_testresult_async(vx_core::Type_context context) {
     std::string testname = "test_run_testresult_async";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_test::Type_testresult testresult_resolved = test_lib::run_testresult_async("vx/core", "boolean", "", testresult);
-    std::string expected = sample_testresult_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5559,13 +5346,13 @@ namespace test_lib {
   bool test_resolve_testresult_f_resolve_testresult(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_f_resolve_testresult";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 2);
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_core::vx_memory_leak_test(testname + "-2", irefcount, 4);
     vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
     vx_core::vx_memory_leak_test(testname + "-3", irefcount, 2);
-    std::string expected = sample_testresult_text();
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
     vx_core::vx_release(testresult_resolved);
     bool output = test_lib::test(testname, expected, actual);
@@ -5576,26 +5363,11 @@ namespace test_lib {
   bool test_resolve_testresult_f_resolve_testresult_async(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_f_resolve_testresult_async";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 2);
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_core::vx_memory_leak_test(testname + "-2", irefcount, 4);
-    std::string expected = 
-      "(async"
-      "\n :type vx/test/testresult"
-      "\n :lambdavars ("
-      "\n  (any<-func-async)"
-      "\n  (vx/test/testresult"
-      "\n   :actual true"
-      "\n   :code \":true\""
-      "\n   :expected true"
-      "\n   :passfail true)"
-      "\n  true)"
-      "\n :fn fn"
-      "\n :async_parent"
-      "\n  (async"
-      "\n   :type any"
-      "\n   :value (any)))";
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_async(async_testresult);
     vx_core::vx_release_async(async_testresult);
     bool output = test_lib::test(testname, expected, actual);
@@ -5606,7 +5378,7 @@ namespace test_lib {
   bool test_resolve_testresult_if(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_if";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -5648,7 +5420,7 @@ namespace test_lib {
         )
       })
     );
-    std::string expected1 = sample_testresult_text();
+    std::string expected1 = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual1 = vx_core::vx_string_from_any(output_2);
     vx_core::vx_release(output_2);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -5659,7 +5431,7 @@ namespace test_lib {
   bool test_resolve_testresult_then(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_then";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -5673,7 +5445,7 @@ namespace test_lib {
         return output_1;
       })
     );
-    std::string expected1 = sample_testresult_text();
+    std::string expected1 = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(thenelse);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -5684,7 +5456,7 @@ namespace test_lib {
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context) {
     std::string testname = "test_resolve_testresult_thenelselist";
     long irefcount = vx_core::refcount;
-    vx_test::Type_testresult testresult = sample_testresult(context);
+    vx_test::Type_testresult testresult = sample_testresult1(context);
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
@@ -5723,7 +5495,7 @@ namespace test_lib {
         })
       )
     });
-    std::string expected1 = sample_testresult_text();
+    std::string expected1 = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual1 = vx_core::vx_string_from_any(testresult);
     vx_core::vx_release(thenelselist);
     bool output = test_lib::test(testname, expected1, actual1);
@@ -5752,6 +5524,52 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     std::string expected = "testdata";
     std::string actual = read_test_file("src/test/resources/vx", "string_read_from_file.txt");
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_tr_from_testdescribe_casename(vx_core::Type_context context) {
+    std::string testname = "test_tr_from_testdescribe_casename";
+    long irefcount = vx_core::refcount;
+    vx_core::Type_string casename = vx_core::vx_new_string("vx/core/boolean");
+    vx_test::Type_testdescribe testdescribe = sample_testdescribe1(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 6);
+    vx_web_html::Type_tr tr = vx_test::f_tr_from_testdescribe_casename(testdescribe, casename);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 22);
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    std::string actual = vx_core::vx_string_from_any(tr);
+    vx_core::vx_release(tr);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_trlist_from_testcase(vx_core::Type_context context) {
+    std::string testname = "test_trlist_from_testcase";
+    long irefcount = vx_core::refcount;
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    vx_test::Type_testcase testcase = sample_testcase(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 14);
+    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcase(testcase);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 44);
+    std::string actual = vx_core::vx_string_from_any(trlist);
+    vx_core::vx_release(trlist);
+    bool output = test_lib::test(testname, expected, actual);
+    output = output && vx_core::vx_memory_leak_test(testname, irefcount);
+    return output;
+  }
+
+  bool test_trlist_from_testcaselist(vx_core::Type_context context) {
+    std::string testname = "test_trlist_from_testcaselist";
+    long irefcount = vx_core::refcount;
+    std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
+    vx_test::Type_testcaselist testcaselist = sample_testcaselist(context);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 26);
+    vx_web_html::Type_trlist trlist = vx_test::f_trlist_from_testcaselist(testcaselist);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 66);
+    std::string actual = vx_core::vx_string_from_any(trlist);
+    vx_core::vx_release(trlist);
     bool output = test_lib::test(testname, expected, actual);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;
@@ -5793,7 +5611,7 @@ namespace test_lib {
     std::string testname = "test_write_html";
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 29);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(divtest);
     vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
@@ -5827,23 +5645,23 @@ namespace test_lib {
     std::string testname = "test_write_testpackagelist_async";
     long irefcount = vx_core::refcount;
     vx_test::Type_testpackagelist testpackagelist = sample_testpackagelist(context);
-    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-1", irefcount, 29);
     vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
-    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 13);
+    vx_core::vx_memory_leak_test(testname + "-2", irefcount, 29);
     std::string snode = vx_core::vx_string_from_any(testpackagelist_resolved);
     vx_core::Type_string string_node = vx_core::vx_new_string(snode);
     vx_data_file::Type_file file_node = vx_test::f_file_testnode();
     vx_core::Type_boolean boolean_writenode = vx_data_file::vx_boolean_write_from_file_string(file_node, string_node);
-    std::string expected = vx_core::vx_string_from_any(boolean_writenode);
-    std::string actual = "true";
+    std::string expected = "true";
+    std::string actual = vx_core::vx_string_from_any(boolean_writenode);
     bool output = test_lib::test(testname + "-1", expected, actual);
     vx_data_file::Type_file file_html = vx_test::f_file_testhtml();
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
     vx_web_html::Type_html html = vx_test::f_html_from_divtest(divtest);
     vx_core::Type_string string_html = vx_web_html::f_string_from_html(html);
     vx_core::Type_boolean boolean_writehtml = vx_data_file::vx_boolean_write_from_file_string(file_html, string_html);
-    std::string expected1 = vx_core::vx_string_from_any(boolean_writehtml);
-    std::string actual1 = "true";
+    std::string expected1 = "true";
+    std::string actual1 = vx_core::vx_string_from_any(boolean_writehtml);
     output = output && test_lib::test(testname + "-2", expected1, actual1);
     output = output && vx_core::vx_memory_leak_test(testname, irefcount);
     return output;

@@ -3,6 +3,25 @@
 #include "type.hpp"
 
 namespace vx_type {
+// :body
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
+    bool isfirst = true;
+    std::string str = "";
+    std::string sdelim = delim->vx_string();
+    for (vx_core::Type_string substr : vals->vx_p_list) {
+      std::string ssub = substr->vx_string();
+      if (isfirst) {
+        str = ssub;
+      } else {
+        str += sdelim + ssub;
+      }
+      isfirst = false;
+    }
+    vx_core::Type_string output = vx_core::vx_new_string(str);
+    return output;
+	}
 
 
   // (func allowtypenames<-type)
@@ -103,7 +122,11 @@ namespace vx_type {
   vx_core::Type_typelist f_allowtypes_from_type(vx_core::Type_any type) {
     vx_core::Type_typelist output = vx_core::e_typelist();
     vx_core::vx_reserve(type);
-    output = vx_core::f_typedef_from_type(type)->allowtypes();
+    output = vx_core::f_any_from_struct(
+      vx_core::t_typelist(),
+      vx_core::f_typedef_from_type(type),
+      vx_core::vx_new_string(":allowtypes")
+    );
     vx_core::vx_release_one_except(type, output);
     return output;
   }
@@ -1332,19 +1355,7 @@ namespace vx_type {
   vx_core::Type_string f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
     vx_core::Type_string output = vx_core::e_string();
     vx_core::vx_reserve({vals, delim});
-    bool isfirst = true;
-    std::string str = "";
-    std::string sdelim = delim->vx_string();
-    for (vx_core::Type_string substr : vals->vx_p_list) {
-      std::string ssub = substr->vx_string();
-      if (isfirst) {
-        str = ssub;
-      } else {
-        str += sdelim + ssub;
-      }
-      isfirst = false;
-    }
-    output = vx_core::vx_new_string(str);
+    output = vx_type::vx_string_from_stringlist_join(vals, delim);
     vx_core::vx_release_one_except({vals, delim}, output);
     return output;
   }
