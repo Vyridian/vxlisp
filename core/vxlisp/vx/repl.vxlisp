@@ -46,6 +46,9 @@
  [type : any
   args : anylist]
  (native
+  :cpp
+   "vx_core::Type_replfunc replfunc = dynamic_cast<vx_core::Type_replfunc>(type);
+    output = replfunc->vx_repl(args);"
   :js
    "const vxvalue = type['vx_value']
     if (vxvalue != undefined) {

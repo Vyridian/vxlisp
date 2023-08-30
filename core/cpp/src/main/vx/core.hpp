@@ -1710,11 +1710,13 @@ namespace vx_core {
   public:
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
   };
-
+  typedef Abstract_replfunc* Type_replfunc;
+  
   class Abstract_replfunc_async {
   public:
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
   };
+  typedef Abstract_replfunc_async* Type_replfunc_async;
 
 
   // (type any)

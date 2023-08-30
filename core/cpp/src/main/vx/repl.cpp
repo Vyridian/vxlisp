@@ -489,6 +489,8 @@ namespace vx_repl {
   vx_core::Type_any f_any_repl_from_functype_args(vx_core::Type_any type, vx_core::Type_anylist args) {
     vx_core::Type_any output = vx_core::e_any();
     vx_core::vx_reserve({type, args});
+    vx_core::Type_replfunc replfunc = dynamic_cast<vx_core::Type_replfunc>(type);
+    output = replfunc->vx_repl(args);
     vx_core::vx_release_one_except({type, args}, output);
     return output;
   }

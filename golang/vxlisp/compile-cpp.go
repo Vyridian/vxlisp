@@ -1443,46 +1443,6 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	case "vx/core/anytype":
 	case "vx/core/const":
 	case "vx/core/list":
-		/*
-			instancefuncs += "" +
-				"\n" +
-				"\n    template <class T> std::vector<T> " + fulltypename + "::vx_get_any(T generic_any_1) {" +
-				"\n      return vx_core::arraylist_from_arraylist(generic_any_1, this->vx_list());" +
-				"\n    }" +
-				"\n" +
-				"\n    template <class T> T " + fulltypename + "::vx_any_from_list(T generic_any_1, long index) {" +
-				"\n      return vx_any_from_list(generic_any_1, this->vx_list(), index);" +
-				"\n    }" +
-				"\n"
-			staticfuncs = "" +
-				"\n    template <class T> std::vector<T> " + fulltypename + "::list_new(T generic_any_1, vx_core::Type_any vals...) {" +
-				"\n      std::vector<vx_core::Type_any> listval = Arrays.asList(vals);" +
-				"\n      return vx_core::arraylist_from_arraylist(generic_any_1, listval);" +
-				"\n    }" +
-				"\n" +
-				"\n    template <class T> T " + fulltypename + "::vx_any_from_list(T generic_any_1, std::vector<vx_core::Type_any> list, long index) {" +
-				"\n      T output = vx_core::vx_empty(generic_any_1);" +
-				"\n      if (list.size() > index) {" +
-				"\n        output = vx_core::vx_any_from_any(generic_any_1, list[index]);" +
-				"\n      }" +
-				"\n      return output;" +
-				"\n    }" +
-				"\n" +
-				"\n    template <class T> T " + fulltypename + "::vx_any_first_from_list_fn(T generic_any_1, vx_core::Type_list list, std::function<vx_core::Type_any(T)> fn_any) {" +
-				"\n      T output = vx_core::vx_empty(generic_any_1);" +
-				"\n      vx_core::vx_Type_listany listany = list->vx_list();" +
-				"\n      for (vx_core::Type_any any : listany) {" +
-				"\n        T tany = vx_core::vx_any_from_any(generic_any_1, any);" +
-				"\n        T val = fn_any->apply(tany);" +
-				"\n        if (val) {" +
-				"\n          output = val;" +
-				"\n          break;" +
-				"\n        }" +
-				"\n      }" +
-				"\n      return output;" +
-				"\n    }" +
-				"\n"
-		*/
 	case "vx/core/map":
 	case "vx/core/struct":
 	case "vx/core/func":
@@ -1801,7 +1761,10 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 				}
 				//}
 			*/
-			if allowedtypename != "" {
+			switch NameFromType(allowedtype) {
+			case "":
+			case "vx/core/any":
+			default:
 				valnew += "" +
 					"\n        } else if (valsubtype == " + allowedtypename + ") {" +
 					"\n          listval.push_back(" + castval + ");" +
@@ -1809,10 +1772,15 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          listval.push_back(" + castval + ");"
 			}
 		}
+		switch NameFromType(typ) {
+		case "vx/core/list":
+		default:
+			valnew += "" +
+				"\n        } else if (valsubtype == " + fulltname + ") {" +
+				"\n          " + fulltypename + " multi = vx_core::vx_any_from_any(" + fulltname + ", valsub);" +
+				"\n          listval = vx_core::vx_listaddall(listval, multi->vx_list" + allowname + "());"
+		}
 		valnew += "" +
-			"\n        } else if (valsubtype == " + fulltname + ") {" +
-			"\n          " + fulltypename + " multi = vx_core::vx_any_from_any(" + fulltname + ", valsub);" +
-			"\n          listval = vx_core::vx_listaddall(listval, multi->vx_list" + allowname + "());" +
 			"\n        } else {" +
 			valnewelse +
 			"\n        }" +

@@ -1415,13 +1415,6 @@ namespace vx_core {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg()) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (valsubtype == vx_core::t_any()) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
-        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_any())) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
-        } else if (valsubtype == vx_core::t_list()) {
-          vx_core::Type_list multi = vx_core::vx_any_from_any(vx_core::t_list(), valsub);
-          listval = vx_core::vx_listaddall(listval, multi->vx_list());
         } else {
           listval.push_back(valsub);
         }
@@ -3636,10 +3629,6 @@ namespace vx_core {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg()) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (valsubtype == vx_core::t_any()) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
-        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_any())) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
         } else if (valsubtype == vx_core::t_anylist()) {
           vx_core::Type_anylist multi = vx_core::vx_any_from_any(vx_core::t_anylist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_list());
@@ -9056,10 +9045,6 @@ namespace vx_core {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg()) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (valsubtype == vx_core::t_any()) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
-        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_any())) {
-          listval.push_back(vx_core::vx_any_from_any(vx_core::t_any(), valsub));
         } else if (valsubtype == vx_core::t_typelist()) {
           vx_core::Type_typelist multi = vx_core::vx_any_from_any(vx_core::t_typelist(), valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_list());

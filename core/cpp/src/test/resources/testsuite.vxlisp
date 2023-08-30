@@ -81,6 +81,8 @@
          (vx/test/testresult
           :actual
            (stringlist
+            "a1"
+            "b1"
             "c1"
             "d1")
           :code ":eq"
@@ -89,7 +91,9 @@
             "a1"
             "b1"
             "c1"
-            "d1"))))
+            "d1")
+          :passfail true)))
+     :passfail true
      :testpkg "vx/collection")
     (vx/test/testcase
      :casename "list<-list-start"
@@ -197,6 +201,7 @@
       :pct 100
       :tests 0
       :total 0))
+  :passfail true
   :testpkg "vx/collection")
  (vx/test/testpackage
   :caselist
@@ -2621,8 +2626,11 @@
         :testpkg "vx/repl"
         :testresult
          (vx/test/testresult
+          :actual 5
           :code ":eq"
-          :expected 5)))
+          :expected 5
+          :passfail true)))
+     :passfail true
      :testpkg "vx/repl"))
   :coveragedetail
    (vx/test/testcoveragedetail
@@ -2680,6 +2688,7 @@
       :pct 0
       :tests 0
       :total 3))
+  :passfail true
   :testpkg "vx/repl")
  (vx/test/testpackage
   :caselist
