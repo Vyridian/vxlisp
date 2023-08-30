@@ -2377,9 +2377,9 @@
   fn-any<-any  : any<-any :: string]
  (native
   :cpp
-   "vx_core::vx_Type_listany listval = vallist->vx_list();
-    vx_core::vx_Type_mapany mapval = vx_core::vx_map_from_list(listval);
-    output = vx_core::vx_new_from_map(generic_map_1, mapval);"
+   "vx_core::vx_Type_listany listany = vallist->vx_list();
+    vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
+    output = vx_core::vx_new_from_map(generic_map_1, mapany);"
   :js
    "const valmap = {}
     vallist.map(value => {
@@ -2400,12 +2400,14 @@
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));")
  :test (test
-        (stringmap "a" "az" "b" "bz")
+        (stringmap
+         "keya" "a"
+         "keyb" "b")
         (map<-list : stringmap
          (stringlist "a" "b")
          (fn : string
           [val : string]
-          (string val "z"))))
+          (string "key" val))))
  :doc "Returns a map from a list by applying a function to each key value.")
 
 (func mempool-addref : none

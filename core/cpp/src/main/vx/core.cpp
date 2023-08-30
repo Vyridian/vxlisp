@@ -463,17 +463,20 @@ namespace vx_core {
     return output;
   }
 
-  // vx_map_from_list(listany)
-  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany) {
+  // vx_map_from_list(listany, any<-any)
+  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_mapany output;
-    std::string key = "";
     for (vx_core::Type_any item : listany) {
-      if (key == "") {
-        key = vx_core::vx_string_from_any(item);
-        if (vx_core::vx_boolean_from_string_starts(key, "\"") && vx_core::vx_boolean_from_string_ends(key, "\n")) {
-          key = vx_core::vx_string_from_string_start_end(key, 2, key.length() - 1);
-        }
+      vx_core::Type_any keyany = fn_any_from_any->vx_any_from_any(item);
+      std::string key = "";
+      if (keyany->vx_type() == vx_core::t_string()) {
+        vx_core::Type_string keystring = vx_core::vx_any_from_any(vx_core::t_string(), keyany);
+        key = keystring->vx_string();
       } else {
+        key = vx_core::vx_string_from_any(item);
+      }
+      vx_core::vx_release(keyany);
+      if (key != "") {
         output.insert({key, item});
       }
     }

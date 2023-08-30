@@ -1455,8 +1455,8 @@ namespace vx_core {
   // vx_liststring_from_arraystring(long, array<string>)
   std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
 
-  // vx_map_from_list(listany)
-  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany);
+  // vx_map_from_list(listany, any<-any)
+  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any);
 
   // vx_memory_leak_test()
   bool vx_memory_leak_test();
@@ -8076,9 +8076,9 @@ namespace vx_core {
   template <class Y, class N> N* f_map_from_list(N* generic_map_1, Y* vallist, vx_core::Func_any_from_any fn_any_from_any) {
     N* output = vx_core::vx_empty(generic_map_1);
     vx_core::vx_reserve({vallist, fn_any_from_any});
-    vx_core::vx_Type_listany listval = vallist->vx_list();
-    vx_core::vx_Type_mapany mapval = vx_core::vx_map_from_list(listval);
-    output = vx_core::vx_new_from_map(generic_map_1, mapval);
+    vx_core::vx_Type_listany listany = vallist->vx_list();
+    vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
+    output = vx_core::vx_new_from_map(generic_map_1, mapany);
     vx_core::vx_release_one_except({vallist, fn_any_from_any}, output);
     return output;
   }

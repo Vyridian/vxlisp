@@ -1423,23 +1423,28 @@
        (vx/test/testdescribe
         :describename
          "(test
- (stringmap \"a\" \"az\" \"b\" \"bz\")
+ (stringmap
+  \"keya\" \"a\"
+  \"keyb\" \"b\")
  (map<-list : stringmap
   (stringlist \"a\" \"b\")
   (fn : string
    [val : string]
-   (string val \"z\"))))"
+   (string \"key\" val))))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
           :actual
            (stringmap
-            :"a" "b")
+            :keya "a"
+            :keyb "b")
           :code ":eq"
           :expected
            (stringmap
-            :a "az"
-            :b "bz"))))
+            :keya "a"
+            :keyb "b")
+          :passfail true)))
+     :passfail true
      :testpkg "vx/core")
     (vx/test/testcase
      :casename "new"
@@ -2074,6 +2079,7 @@
       :pct 6
       :tests 4
       :total 66))
+  :passfail true
   :testpkg "vx/core")
  (vx/test/testpackage
   :caselist (vx/test/testcaselist)

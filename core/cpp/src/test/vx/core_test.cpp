@@ -2110,17 +2110,17 @@ namespace vx_core_test {
         vx_test::t_testdescribelist(),
         vx_test::t_testdescribelist()->vx_new_from_list({
           vx_core::vx_new(vx_test::t_testdescribe(), {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap \"a\" \"az\" \"b\" \"bz\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string val \"z\"))))"),
+            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))"),
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::f_new(
                 vx_core::t_stringmap(),
                 vx_core::vx_new(vx_core::t_anylist(), {
+                  vx_core::vx_new_string("keya"),
                   vx_core::vx_new_string("a"),
-                  vx_core::vx_new_string("az"),
-                  vx_core::vx_new_string("b"),
-                  vx_core::vx_new_string("bz")
+                  vx_core::vx_new_string("keyb"),
+                  vx_core::vx_new_string("b")
                 })
               ),
               vx_core::f_map_from_list(
@@ -2138,8 +2138,8 @@ namespace vx_core_test {
                     vx_core::f_new(
                       vx_core::t_string(),
                       vx_core::vx_new(vx_core::t_anylist(), {
-                        val,
-                        vx_core::vx_new_string("z")
+                        vx_core::vx_new_string("key"),
+                        val
                       })
                     );
                   return output_1;
