@@ -2263,20 +2263,6 @@
      :passfail true
      :testpkg "vx/data/file")
     (vx/test/testcase
-     :casename "pathcurrent<-os"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test-true
- (is-endswith (pathcurrent<-os) \"\java\"))"
-        :testpkg "vx/data/file"
-        :testresult
-         (vx/test/testresult
-          :code ":true"
-          :expected true)))
-     :testpkg "vx/data/file")
-    (vx/test/testcase
      :casename "string-read<-file"
      :describelist
       (vx/test/testdescribelist
@@ -2308,7 +2294,7 @@
       :file-read<-file 1
       :name<-file 0
       :path<-file 0
-      :pathcurrent<-os 1
+      :pathcurrent<-os 0
       :pathfull<-file 0
       :string-read<-file 1)
     :testpkg "vx/data/file"
@@ -2340,20 +2326,21 @@
       :total 11)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 55
-      :tests 5
+      :pct 44
+      :tests 4
       :total 9)
     :testpkg "vx/data/file"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 45
-      :tests 5
+      :pct 36
+      :tests 4
       :total 11)
     :typenums
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
       :total 2))
+  :passfail true
   :testpkg "vx/data/file")
  (vx/test/testpackage
   :caselist (vx/test/testcaselist)

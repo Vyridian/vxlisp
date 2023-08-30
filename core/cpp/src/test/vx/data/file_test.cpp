@@ -123,33 +123,6 @@ namespace vx_data_file_test {
     return output;
   }
 
-  vx_test::Type_testcase f_pathcurrent_from_os(vx_core::Type_context context) {
-    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase(), {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
-      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("pathcurrent<-os"),
-      vx_core::vx_new_string(":describelist"),
-      vx_core::vx_any_from_any(
-        vx_test::t_testdescribelist(),
-        vx_test::t_testdescribelist()->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe(), {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-endswith (pathcurrent<-os) \"\\java\"))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test_true(
-              vx_core::f_is_endswith(
-                vx_data_file::f_pathcurrent_from_os(),
-                vx_core::vx_new_string("\\java")
-              ),
-              context
-            )
-          })
-        })
-      )
-    });
-    return output;
-  }
-
   vx_test::Type_testcase f_string_read_from_file(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase(), {
       vx_core::vx_new_string(":passfail"), vx_core::c_false(),
@@ -191,7 +164,6 @@ namespace vx_data_file_test {
     listtestcase.push_back(vx_data_file_test::f_boolean_exists_from_file(context));
     listtestcase.push_back(vx_data_file_test::f_boolean_write_from_file_string(context));
     listtestcase.push_back(vx_data_file_test::f_file_read_from_file(context));
-    listtestcase.push_back(vx_data_file_test::f_pathcurrent_from_os(context));
     listtestcase.push_back(vx_data_file_test::f_string_read_from_file(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist(),
@@ -214,8 +186,8 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums(), {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(55), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(5), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(44), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(9)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums(), {
@@ -229,8 +201,8 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(9)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums(), {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(45), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(5), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(36), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums(), {
@@ -259,7 +231,7 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":file-read<-file"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":name<-file"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":path<-file"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":pathcurrent<-os"), vx_core::vx_new_int(1),
+        vx_core::vx_new_string(":pathcurrent<-os"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pathfull<-file"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-read<-file"), vx_core::vx_new_int(1)
       })

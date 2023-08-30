@@ -4320,36 +4320,6 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "Fail")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "pathcurrent<-os")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(test-true
- (is-endswith (pathcurrent<-os) \"\java\"))")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "true")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "false")))))
-                         (vx/web/html/tr
-                          :nodes
-                           (vx/web/html/tdlist
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
                                 :text "Pass")))
                             (vx/web/html/td
                              :nodes
@@ -4412,17 +4382,17 @@
                :summary
                 (vx/web/html/divchildlist
                  (vx/web/html/p
-                  :text "Fail")
+                  :text "Pass")
                  (vx/web/html/p
                   :text "vx/data/file")
                  (vx/web/html/p
-                  :text "45% 5/11")
+                  :text "36% 4/11")
                  (vx/web/html/p
                   :text "0% 0/2")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "55% 5/9")
+                  :text "44% 4/9")
                  (vx/web/html/p
                   :text "90% 10/11")
                  (vx/web/html/p

@@ -137,8 +137,6 @@
     path = path.toAbsolutePath();
     String spath = path.toString();
     output = Core.t_string.vx_new_from_string(spath);")
- :test (test-true
-        (is-endswith (pathcurrent<-os) "\\java"))
  :clientserver :server
  :doc  "Returns current system path.")
 

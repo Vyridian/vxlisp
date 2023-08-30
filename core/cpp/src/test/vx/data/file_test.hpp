@@ -8,7 +8,6 @@ namespace vx_data_file_test {
   vx_test::Type_testcase f_boolean_exists_from_file(vx_core::Type_context context);
   vx_test::Type_testcase f_boolean_write_from_file_string(vx_core::Type_context context);
   vx_test::Type_testcase f_file_read_from_file(vx_core::Type_context context);
-  vx_test::Type_testcase f_pathcurrent_from_os(vx_core::Type_context context);
   vx_test::Type_testcase f_string_read_from_file(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);

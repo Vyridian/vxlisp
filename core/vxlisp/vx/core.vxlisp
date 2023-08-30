@@ -2045,7 +2045,9 @@
  (native
   :cpp
    "vx_core::Type_string extend = " (extends<-any val) ";
-    if (extend->vx_string() == “:func”) {
+    std::string sextend = extend->vx_string();
+    vx_core::vx_release(extend);
+    if (sextend == “:func”) {
       output = vx_core::c_true();
     }"
   :js

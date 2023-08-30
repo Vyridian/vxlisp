@@ -20,7 +20,9 @@
   vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file) {
     vx_core::Type_boolean output = vx_core::c_false();
 		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
-		std::ifstream f(path->vx_string());
+    std::string spath = path->vx_string();
+    vx_core::vx_release(path);
+		std::ifstream f(spath);
     if (f.good()) {
       output = vx_core::c_true();
 		}
@@ -30,8 +32,10 @@
   vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text) {
     vx_core::Type_boolean output = vx_core::c_false();
 		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
-    output = vx_data_file::vx_boolean_write_from_path_text(path->vx_string(), text->vx_string());
-    vx_core::vx_release({path, text});
+    std::string spath = path->vx_string();
+    std::string stext = text->vx_string();
+    vx_core::vx_release({text, path});
+    output = vx_data_file::vx_boolean_write_from_path_text(spath, stext);
     return output;
 	}
 
@@ -52,8 +56,9 @@
   vx_core::Type_string vx_string_read_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string();
 		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
-		output = vx_data_file::vx_string_read_from_path(path->vx_string());
+    std::string spath = path->vx_string();
     vx_core::vx_release(path);
+		output = vx_data_file::vx_string_read_from_path(spath);
 		return output;
 	}
 

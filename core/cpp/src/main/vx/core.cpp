@@ -18223,7 +18223,9 @@ namespace vx_core {
     vx_core::Type_boolean output = vx_core::e_boolean();
     vx_core::vx_reserve(val);
     vx_core::Type_string extend = vx_core::f_extends_from_any(val);
-    if (extend->vx_string() == ":func") {
+    std::string sextend = extend->vx_string();
+    vx_core::vx_release(extend);
+    if (sextend == ":func") {
       output = vx_core::c_true();
     };
     vx_core::vx_release_one_except(val, output);
