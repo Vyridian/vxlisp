@@ -132,7 +132,12 @@ namespace vx_data_db {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "dbid", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -384,7 +389,28 @@ namespace vx_data_db {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "dbcellid", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbcellmap", // name
+            vx_data_db::t_dbcellmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbfieldmap", // name
+            vx_data_db::t_dbfieldmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbparent", // name
+            vx_data_db::t_dbcell() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbtable", // name
+            vx_data_db::t_dbtable() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -722,7 +748,20 @@ namespace vx_data_db {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "dbfieldid", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "type", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "value", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1100,7 +1139,24 @@ namespace vx_data_db {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "dbtableid", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "db", // name
+            vx_data_db::t_db() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbcellmap", // name
+            vx_data_db::t_dbcellmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "dbfieldmap", // name
+            vx_data_db::t_dbfieldmap() // type
+          )
+        }) // properties
       );
       return output;
     }

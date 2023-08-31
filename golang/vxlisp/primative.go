@@ -258,6 +258,11 @@ func StringFromStringFromTo(text string, from string, to string) string {
 	return output
 }
 
+func StringFromStringIndent2(str string, indent int) string {
+	output := StringFromStringFindReplace(str, "\n", "\n"+StringRepeat("  ", indent))
+	return output
+}
+
 func StringFromStringIndent(str string, indent string) string {
 	output := StringFromStringFindReplace(str, "\n", "\n"+indent)
 	return output

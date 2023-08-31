@@ -332,7 +332,28 @@ namespace vx_data_file {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "format", // name
+            vx_data_file::t_fileformat() // type
+          ),
+          vx_core::vx_new_arg(
+            "path", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "permission", // name
+            vx_core::t_permission() // type
+          ),
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }

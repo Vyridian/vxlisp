@@ -281,7 +281,32 @@ namespace vx_data_tree {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "brancharrow", // name
+            vx_data_tree::t_brancharrow() // type
+          ),
+          vx_core::vx_new_arg(
+            "branchlist", // name
+            vx_data_tree::t_branchlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "leaflist", // name
+            vx_data_tree::t_leaflist() // type
+          ),
+          vx_core::vx_new_arg(
+            "parentbranch", // name
+            vx_data_tree::t_branch() // type
+          ),
+          vx_core::vx_new_arg(
+            "tree", // name
+            vx_data_tree::t_tree() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -651,7 +676,20 @@ namespace vx_data_tree {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "value", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -976,7 +1014,20 @@ namespace vx_data_tree {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "branch", // name
+            vx_data_tree::t_branch() // type
+          )
+        }) // properties
       );
       return output;
     }

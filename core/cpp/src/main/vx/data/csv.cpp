@@ -164,7 +164,16 @@ namespace vx_data_csv {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "headers", // name
+            vx_core::t_stringlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "rows", // name
+            vx_data_csv::t_csvrows() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -386,7 +395,24 @@ namespace vx_data_csv {
           vx_core::e_funclist(), // disallowfuncs
           vx_core::e_anylist(), // allowvalues
           vx_core::e_anylist(), // disallowvalues
-          vx_core::e_argmap() // properties
+          vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "start", // name
+            vx_core::t_stringlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "end", // name
+            vx_core::t_stringlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "split", // name
+            vx_core::t_stringlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "subset", // name
+            vx_data_textblock::t_delimset() // type
+          )
+        }) // properties
         )
       );
     }

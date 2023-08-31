@@ -104,6 +104,22 @@ namespace vx_core {
     return output;
   }
 
+  // vx_argmap_from_listarg(List<arg>)
+  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg) {
+    std::vector<std::string> listkey;
+    std::map<std::string, vx_core::Type_arg> maparg;
+    for (vx_core::Type_arg arg : listarg) {
+      std::string name = arg->name()->vx_string();
+      std::string key = ":" + name;
+      listkey.push_back(key);
+      maparg[name] = arg;
+    }
+    vx_core::Type_argmap output = new vx_core::Class_argmap();
+    output->vx_p_keys = listkey;
+    output->vx_p_map = maparg;
+    return output;
+  }
+
   // vx_async_from_async_fn(async, type, lambdavars, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambdavars, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
@@ -295,6 +311,16 @@ namespace vx_core {
       vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal(), num);
       output = decval->vx_float();
     }
+    return output;
+  }
+
+  // vx_funclist_from_listfunc(List<func>)
+  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc) {
+    for (vx_core::Type_func fnc : listfunc) {
+      vx_core::vx_reserve(fnc);
+    }
+    vx_core::Type_funclist output = new vx_core::Class_funclist();
+    output->vx_p_list = listfunc;
     return output;
   }
 
@@ -511,6 +537,15 @@ namespace vx_core {
       vx_core::vx_debug("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
       output = false;
     }
+    return output;
+  }
+
+  // vx_new_arg(string, type, bool, bool)
+  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type) {
+    vx_core::Type_string namestring = vx_core::vx_new_string(name);
+    vx_core::vx_reserve({namestring});
+    vx_core::Type_arg output = new vx_core::Class_arg();
+    output->vx_p_name = namestring;
     return output;
   }
 
@@ -776,8 +811,6 @@ namespace vx_core {
       vx_core::Type_typedef typdef = type->vx_typedef();
       std::string typedefname = typdef->name()->vx_string();
       std::string pkgname = typdef->pkgname()->vx_string();
-      std::string extend = typdef->extend()->vx_string();
-      vx_core::vx_release(typdef);
       if (pkgname != "vx/core") {
         typedefname = pkgname + "/" + typedefname;
       }
@@ -828,6 +861,7 @@ namespace vx_core {
       } else if (value == type->vx_empty()) {
         text = "(" + typedefname + ")";
       } else {
+        std::string extend = typdef->extend()->vx_string();
         if (extend == ":list") {
           vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
           long indentint = indent;
@@ -874,14 +908,14 @@ namespace vx_core {
         } else if (extend == ":struct") {
           vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct(), value);
           vx_core::vx_Type_mapany mapval = valstruct->vx_map();
+          vx_core::Type_argmap properties = typdef->properties();
+          std::vector<std::string> keys = properties->vx_p_keys;
           long indentint = indent;
           indentint += 2;
-          for (auto const& [ckey, valsub] : mapval) {
-            if (valsub != valsub->vx_empty()) {
-              std::string key = ckey;
-              if (!vx_boolean_from_string_starts(key, ":")) {
-                key = ":" + key;
-              }
+          for (std::string key : keys) {
+            vx_core::Type_any valsub = mapval[key];
+            if (!valsub) {
+            } else if (valsub != valsub->vx_empty()) {
               std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
@@ -912,6 +946,7 @@ namespace vx_core {
           text = "(" + text + ")";
         }
       }
+      vx_core::vx_release(typdef);
     }
     output = text;
     return output;
@@ -1796,7 +1831,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "code", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "severity", // name
+            vx_core::t_int() // type
+          ),
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2066,7 +2114,16 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "msgs", // name
+            vx_core::t_msglist() // type
+          ),
+          vx_core::vx_new_arg(
+            "msgblocks", // name
+            vx_core::t_msgblocklist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3137,7 +3194,56 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "pkgname", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "extends", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "allowfuncs", // name
+            vx_core::t_funclist() // type
+          ),
+          vx_core::vx_new_arg(
+            "allowtypes", // name
+            vx_core::t_typelist() // type
+          ),
+          vx_core::vx_new_arg(
+            "allowvalues", // name
+            vx_core::t_anylist() // type
+          ),
+          vx_core::vx_new_arg(
+            "disallowfuncs", // name
+            vx_core::t_funclist() // type
+          ),
+          vx_core::vx_new_arg(
+            "disallowtypes", // name
+            vx_core::t_typelist() // type
+          ),
+          vx_core::vx_new_arg(
+            "disallowvalues", // name
+            vx_core::t_anylist() // type
+          ),
+          vx_core::vx_new_arg(
+            "properties", // name
+            vx_core::t_argmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "proplast", // name
+            vx_core::t_arg() // type
+          ),
+          vx_core::vx_new_arg(
+            "traits", // name
+            vx_core::t_typelist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3384,7 +3490,28 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "pkgname", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "idx", // name
+            vx_core::t_int() // type
+          ),
+          vx_core::vx_new_arg(
+            "type", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "async", // name
+            vx_core::t_boolean() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3430,7 +3557,7 @@ namespace vx_core {
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
-        vx_core::e_funclist(), // allowfuncs
+        vx_core::vx_funclist_from_listfunc({vx_core::t_any_from_func(), vx_core::t_any_from_func_async()}), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
@@ -3547,7 +3674,7 @@ namespace vx_core {
         vx_core::e_typelist(), // traits
         vx_core::e_typelist(), // allowtypes
         vx_core::e_typelist(), // disallowtypes
-        vx_core::e_funclist(), // allowfuncs
+        vx_core::vx_funclist_from_listfunc({vx_core::t_any_from_any()}), // allowfuncs
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
@@ -3909,7 +4036,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "argtype", // name
+            vx_core::t_type() // type
+          ),
+          vx_core::vx_new_arg(
+            "fn-any", // name
+            vx_core::t_any_from_func() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -5007,7 +5147,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "pkgname", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "type", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -5518,7 +5671,24 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "code", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "session", // name
+            vx_core::t_session() // type
+          ),
+          vx_core::vx_new_arg(
+            "setting", // name
+            vx_core::t_setting() // type
+          ),
+          vx_core::vx_new_arg(
+            "state", // name
+            vx_core::t_state() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -6378,7 +6548,12 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "valuepool", // name
+            vx_core::t_value() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -7130,7 +7305,12 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -7581,7 +7761,16 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "permissions", // name
+            vx_core::t_permissionlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "permissionmap", // name
+            vx_core::t_permissionmap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -7773,7 +7962,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "user", // name
+            vx_core::t_user() // type
+          ),
+          vx_core::vx_new_arg(
+            "connectlist", // name
+            vx_core::t_connectlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "connectmap", // name
+            vx_core::t_connectmap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -7905,7 +8107,12 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "pathmap", // name
+            vx_core::t_stringmap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -8248,7 +8455,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "path", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "value", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "fn-boolean", // name
+            vx_core::t_boolean_from_none() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -8784,7 +9004,28 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "code", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "value", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "values", // name
+            vx_core::t_list() // type
+          ),
+          vx_core::vx_new_arg(
+            "fn-cond", // name
+            vx_core::t_boolean_from_func() // type
+          ),
+          vx_core::vx_new_arg(
+            "fn-any", // name
+            vx_core::t_any_from_func() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -9408,7 +9649,20 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "security", // name
+            vx_core::t_security() // type
+          ),
+          vx_core::vx_new_arg(
+            "username", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "token", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -9565,7 +9819,16 @@ namespace vx_core {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "next", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "refs", // name
+            vx_core::t_int() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -9708,7 +9971,12 @@ namespace vx_core {
           vx_core::e_funclist(), // disallowfuncs
           vx_core::e_anylist(), // allowvalues
           vx_core::e_anylist(), // disallowvalues
-          vx_core::e_argmap() // properties
+          vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "valuepool", // name
+            vx_core::t_value() // type
+          )
+        }) // properties
         )
       );
     }

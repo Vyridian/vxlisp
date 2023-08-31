@@ -1,5 +1,7 @@
 (vx/test/testcaselist
  (vx/test/testcase
+  :passfail true
+  :testpkg "vx/core"
   :casename "boolean"
   :describelist
    (vx/test/testdescribelist
@@ -8,20 +10,20 @@
      :testpkg "vx/core"
      :testresult
       (vx/test/testresult
-       :actual true
        :code ":true"
+       :passfail true
        :expected true
-       :passfail true))
+       :actual true))
     (vx/test/testdescribe
      :describename "(test-false false)"
      :testpkg "vx/core"
      :testresult
       (vx/test/testresult
        :code ":false"
-       :passfail true)))
-  :passfail true
-  :testpkg "vx/core")
+       :passfail true))))
  (vx/test/testcase
+  :passfail true
+  :testpkg "vx/core"
   :casename "float"
   :describelist
    (vx/test/testdescribelist
@@ -30,9 +32,7 @@
      :testpkg "vx/core"
      :testresult
       (vx/test/testresult
-       :actual 4.5
        :code ":eq"
+       :passfail true
        :expected 4.5
-       :passfail true)))
-  :passfail true
-  :testpkg "vx/core"))
+       :actual 4.5)))))

@@ -2,6 +2,7 @@
  :type vx/test/testcase
  :lambdavars (
   (vx/test/testcase
+   :testpkg "vx/core"
    :casename "boolean"
    :describelist
     (vx/test/testdescribelist
@@ -10,18 +11,17 @@
       :testpkg "vx/core"
       :testresult
        (vx/test/testresult
-        :actual true
         :code ":true"
+        :passfail true
         :expected true
-        :passfail true))
+        :actual true))
      (vx/test/testdescribe
       :describename "(test-false false)"
       :testpkg "vx/core"
       :testresult
        (vx/test/testresult
         :code ":false"
-        :passfail true)))
-   :testpkg "vx/core"))
+        :passfail true)))))
  :fn fn
  :async_parent
   (async
@@ -35,10 +35,10 @@
        :testpkg "vx/core"
        :testresult
         (vx/test/testresult
-         :actual true
          :code ":true"
+         :passfail true
          :expected true
-         :passfail true)))
+         :actual true)))
      :fn fn
      :async_parent
       (async
@@ -46,10 +46,10 @@
        :lambdavars (
         (any<-func-async)
         (vx/test/testresult
-         :actual true
          :code ":true"
+         :passfail true
          :expected true
-         :passfail true)
+         :actual true)
         true)
        :fn fn
        :async_parent

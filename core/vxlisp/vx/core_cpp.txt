@@ -108,6 +108,9 @@ let-async
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
 
+  // vx_argmap_from_listarg(List<arg>)
+  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg);
+
   // vx_async_from_async_fn(async, type, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
@@ -165,6 +168,9 @@ let-async
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
 
+  // vx_funclist_from_listfunc(List<func>)
+  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc);
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
 
@@ -206,6 +212,9 @@ let-async
 
   // vx_memory_leak_test(string, int, int)
   bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount);
+
+  // vx_new_arg(string, type)
+  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);
@@ -555,6 +564,22 @@ let-async
     return output;
   }
 
+  // vx_argmap_from_listarg(List<arg>)
+  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg) {
+    std::vector<std::string> listkey;
+    std::map<std::string, vx_core::Type_arg> maparg;
+    for (vx_core::Type_arg arg : listarg) {
+      std::string name = arg->name()->vx_string();
+      std::string key = ":" + name;
+      listkey.push_back(key);
+      maparg[name] = arg;
+    }
+    vx_core::Type_argmap output = new vx_core::Class_argmap();
+    output->vx_p_keys = listkey;
+    output->vx_p_map = maparg;
+    return output;
+  }
+
   // vx_async_from_async_fn(async, type, lambdavars, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambdavars, vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_async output = new vx_core::vx_Class_async();
@@ -746,6 +771,16 @@ let-async
       vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal(), num);
       output = decval->vx_float();
     }
+    return output;
+  }
+
+  // vx_funclist_from_listfunc(List<func>)
+  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc) {
+    for (vx_core::Type_func fnc : listfunc) {
+      vx_core::vx_reserve(fnc);
+    }
+    vx_core::Type_funclist output = new vx_core::Class_funclist();
+    output->vx_p_list = listfunc;
     return output;
   }
 
@@ -962,6 +997,15 @@ let-async
       vx_core::vx_debug("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
       output = false;
     }
+    return output;
+  }
+
+  // vx_new_arg(string, type, bool, bool)
+  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type) {
+    vx_core::Type_string namestring = vx_core::vx_new_string(name);
+    vx_core::vx_reserve({namestring});
+    vx_core::Type_arg output = new vx_core::Class_arg();
+    output->vx_p_name = namestring;
     return output;
   }
 
@@ -1227,8 +1271,6 @@ let-async
       vx_core::Type_typedef typdef = type->vx_typedef();
       std::string typedefname = typdef->name()->vx_string();
       std::string pkgname = typdef->pkgname()->vx_string();
-      std::string extend = typdef->extend()->vx_string();
-      vx_core::vx_release(typdef);
       if (pkgname != "vx/core") {
         typedefname = pkgname + "/" + typedefname;
       }
@@ -1279,6 +1321,7 @@ let-async
       } else if (value == type->vx_empty()) {
         text = "(" + typedefname + ")";
       } else {
+        std::string extend = typdef->extend()->vx_string();
         if (extend == ":list") {
           vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
           long indentint = indent;
@@ -1325,14 +1368,14 @@ let-async
         } else if (extend == ":struct") {
           vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct(), value);
           vx_core::vx_Type_mapany mapval = valstruct->vx_map();
+          vx_core::Type_argmap properties = typdef->properties();
+          std::vector<std::string> keys = properties->vx_p_keys;
           long indentint = indent;
           indentint += 2;
-          for (auto const& [ckey, valsub] : mapval) {
-            if (valsub != valsub->vx_empty()) {
-              std::string key = ckey;
-              if (!vx_boolean_from_string_starts(key, ":")) {
-                key = ":" + key;
-              }
+          for (std::string key : keys) {
+            vx_core::Type_any valsub = mapval[key];
+            if (!valsub) {
+            } else if (valsub != valsub->vx_empty()) {
               std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
@@ -1363,6 +1406,7 @@ let-async
           text = "(" + text + ")";
         }
       }
+      vx_core::vx_release(typdef);
     }
     output = text;
     return output;

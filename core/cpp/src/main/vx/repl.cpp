@@ -345,7 +345,24 @@ namespace vx_repl {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "type", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "repllist", // name
+            vx_repl::t_repllist() // type
+          ),
+          vx_core::vx_new_arg(
+            "async", // name
+            vx_core::t_boolean() // type
+          ),
+          vx_core::vx_new_arg(
+            "val", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }

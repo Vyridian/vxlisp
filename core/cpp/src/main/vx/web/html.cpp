@@ -164,7 +164,16 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "style", // name
+            vx_web_html::t_style() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -379,7 +388,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_divchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -601,7 +615,16 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "summary", // name
+            vx_web_html::t_divchildlist() // type
+          ),
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_divchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -801,7 +824,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_divchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1207,7 +1235,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_divchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1403,7 +1436,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1599,7 +1637,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1795,7 +1838,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1935,7 +1983,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_headchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2365,7 +2418,24 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "lang", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "head", // name
+            vx_web_html::t_head() // type
+          ),
+          vx_core::vx_new_arg(
+            "body", // name
+            vx_web_html::t_body() // type
+          ),
+          vx_core::vx_new_arg(
+            "footer", // name
+            vx_web_html::t_footer() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2557,7 +2627,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "charset", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2886,7 +2961,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3204,7 +3284,16 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "props", // name
+            vx_web_html::t_propmap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3745,7 +3834,20 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "styles", // name
+            vx_web_html::t_stylelist() // type
+          ),
+          vx_core::vx_new_arg(
+            "stylemap", // name
+            vx_web_html::t_stylemap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -3967,7 +4069,16 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "tbody", // name
+            vx_web_html::t_tbody() // type
+          ),
+          vx_core::vx_new_arg(
+            "thead", // name
+            vx_web_html::t_thead() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -4167,7 +4278,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_trlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -4367,7 +4483,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_divchildlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -4700,7 +4821,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_trlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -4892,7 +5018,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -5092,7 +5223,12 @@ namespace vx_web_html {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_web_html::t_tdlist() // type
+          )
+        }) // properties
       );
       return output;
     }

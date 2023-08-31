@@ -13,73 +13,26 @@
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".passflag"
-                 :props
-                  (vx/web/html/propmap
-                   :background-color "green"
-                   :color "white"
-                   :padding-bottom "1px"
-                   :padding-left "4px"
-                   :padding-right "4px"
-                   :padding-top "1px"))
                :text "Pass")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "boolean")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "(test-true true)")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "true")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "true")))))
         (vx/web/html/tr
          :nodes
@@ -88,73 +41,26 @@
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".passflag"
-                 :props
-                  (vx/web/html/propmap
-                   :background-color "green"
-                   :color "white"
-                   :padding-bottom "1px"
-                   :padding-left "4px"
-                   :padding-right "4px"
-                   :padding-top "1px"))
                :text "Pass")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "boolean")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "(test-false false)")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "false")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "false")))))
         (vx/web/html/tr
          :nodes
@@ -163,73 +69,26 @@
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".passflag"
-                 :props
-                  (vx/web/html/propmap
-                   :background-color "green"
-                   :color "white"
-                   :padding-bottom "1px"
-                   :padding-left "4px"
-                   :padding-right "4px"
-                   :padding-top "1px"))
                :text "Pass")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "float")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "(test 4.5 (float 4.5))")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "4.5")))
            (vx/web/html/td
             :nodes
              (vx/web/html/divchildlist
               (vx/web/html/p
-               :style
-                (vx/web/html/style
-                 :name ".preformatted"
-                 :props
-                  (vx/web/html/propmap
-                   :display "block"
-                   :font-family "monospace"
-                   :unicode-bidi "embed"
-                   :white-space "pre"))
                :text "4.5")))))))
     :thead
      (vx/web/html/thead

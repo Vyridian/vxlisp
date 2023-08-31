@@ -1368,6 +1368,9 @@ namespace vx_core {
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
 
+  // vx_argmap_from_listarg(List<arg>)
+  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg);
+
   // vx_async_from_async_fn(async, type, fn<any>(any))
   vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
 
@@ -1425,6 +1428,9 @@ namespace vx_core {
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
 
+  // vx_funclist_from_listfunc(List<func>)
+  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc);
+
   // vx_if_thenelselist(type, thenelselist)
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
 
@@ -1466,6 +1472,9 @@ namespace vx_core {
 
   // vx_memory_leak_test(string, int, int)
   bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount);
+
+  // vx_new_arg(string, type)
+  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);

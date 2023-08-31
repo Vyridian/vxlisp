@@ -4,10 +4,10 @@
   :testpkg "vx/core"
   :testresult
    (vx/test/testresult
-    :actual true
     :code ":true"
+    :passfail true
     :expected true
-    :passfail true))
+    :actual true))
  (vx/test/testdescribe
   :describename "(test-false false)"
   :testpkg "vx/core"

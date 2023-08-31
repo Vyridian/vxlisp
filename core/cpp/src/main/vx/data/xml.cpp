@@ -133,7 +133,12 @@ namespace vx_data_xml {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_data_xml::t_xmlnodelist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -355,7 +360,24 @@ namespace vx_data_xml {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "nodes", // name
+            vx_data_xml::t_xmlnode() // type
+          ),
+          vx_core::vx_new_arg(
+            "props", // name
+            vx_data_xml::t_xmlpropmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "tag", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "text", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }

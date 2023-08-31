@@ -200,6 +200,20 @@ func CppAbstractInterfaceFromInterface(typename string, interfaces string) (stri
 	return abstractinterfaces, classinterfaces
 }
 
+func CppArgMapFromListArg(listarg []vxarg, indent int) string {
+	output := "vx_core::e_argmap()"
+	if len(listarg) > 0 {
+		var listtext []string
+		for _, arg := range listarg {
+			argtext := CppFromArg(arg, indent+1)
+			listtext = append(listtext, argtext)
+		}
+		lineindent := "\n" + StringRepeat("  ", indent)
+		output = "vx_core::vx_argmap_from_listarg({" + lineindent + "  " + StringFromListStringJoin(listtext, ","+lineindent+"  ") + lineindent + "})"
+	}
+	return output
+}
+
 func CppCaptureFromFunc(fnc *vxfunc, path string) string {
 	var listinnerarg []string
 	var listcapturetext []string = ListCaptureFromFunc(fnc, listinnerarg, path)
@@ -417,6 +431,24 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 		}
 	}
 	return files, msgblock
+}
+
+func CppFromArg(arg vxarg, indent int) string {
+	lineindent := "\n" + StringRepeat("  ", indent)
+	output := "" +
+		"vx_core::vx_new_arg(" +
+		lineindent + "  \"" + arg.name + "\", // name" +
+		lineindent + "  " + CppNameTFromType(arg.vxtype) + " // type" +
+		lineindent + ")"
+	return output
+}
+
+func CppFromBoolean(istrue bool) string {
+	output := "false"
+	if istrue {
+		output = "true"
+	}
+	return output
 }
 
 func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsgblock) {
@@ -1112,6 +1144,19 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 		"\n  }" +
 		"\n"
 	return output, staticfunction, footer, msgblock
+}
+
+func CppConstListFromListConst(listconst []*vxconst) string {
+	output := "vx_core::e_anylist()"
+	if len(listconst) > 0 {
+		var listtext []string
+		for _, cnst := range listconst {
+			typetext := CppNameFromConst(cnst)
+			listtext = append(listtext, typetext)
+		}
+		output = "vx_core::vx_anylist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
+	}
+	return output
 }
 
 func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
@@ -2847,6 +2892,19 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 	return output, msgblock
 }
 
+func CppFuncListFromListFunc(listfunc []*vxfunc) string {
+	output := "vx_core::e_funclist()"
+	if len(listfunc) > 0 {
+		var listtext []string
+		for _, fnc := range listfunc {
+			typetext := CppNameTFromFunc(fnc)
+			listtext = append(listtext, typetext)
+		}
+		output = "vx_core::vx_funclist_from_listfunc({" + StringFromListStringJoin(listtext, ", ") + "})"
+	}
+	return output
+}
+
 func CppGenericDefinitionFromFunc(fnc *vxfunc) string {
 	output := ""
 	var mapgeneric = make(map[string]string)
@@ -4178,11 +4236,11 @@ func CppTypeDefFromType(typ *vxtype, indent string) string {
 	lineindent := "\n" + indent
 	allowtypes := CppTypeListFromListType(typ.allowtypes)
 	disallowtypes := CppTypeListFromListType(typ.disallowtypes)
-	allowfuncs := "vx_core::e_funclist()"
-	disallowfuncs := "vx_core::e_funclist()"
-	allowvalues := "vx_core::e_anylist()"
-	disallowvalues := "vx_core::e_anylist()"
-	properties := "vx_core::e_argmap()"
+	allowfuncs := CppFuncListFromListFunc(typ.allowfuncs)
+	disallowfuncs := CppFuncListFromListFunc(typ.disallowfuncs)
+	allowvalues := CppConstListFromListConst(typ.allowvalues)
+	disallowvalues := CppConstListFromListConst(typ.disallowvalues)
+	properties := CppArgMapFromListArg(typ.properties, 4)
 	traits := CppTypeListFromListType(typ.traits)
 	output := "" +
 		"vx_core::Class_typedef::vx_typedef_new(" +
@@ -4254,7 +4312,7 @@ func CppWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 		if ipos > 0 {
 			targetpath = targetpath[0:ipos]
 		}
-		targetpath += "/resources"
+		targetpath += "/test/resources"
 		msgs := CppFolderCopyTestdataFromProjectPath(prj, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}

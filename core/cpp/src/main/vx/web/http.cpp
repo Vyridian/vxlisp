@@ -163,7 +163,16 @@ namespace vx_web_http {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "ok", // name
+            vx_core::t_boolean() // type
+          ),
+          vx_core::vx_new_arg(
+            "status", // name
+            vx_core::t_int() // type
+          )
+        }) // properties
       );
       return output;
     }

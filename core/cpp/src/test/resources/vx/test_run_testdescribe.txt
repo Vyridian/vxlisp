@@ -3,7 +3,7 @@
  :testpkg "vx/core"
  :testresult
   (vx/test/testresult
-   :actual true
    :code ":true"
+   :passfail true
    :expected true
-   :passfail true))
+   :actual true))

@@ -157,7 +157,16 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "value", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -633,7 +642,20 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "fldtype", // name
+            vx_core::t_any() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1091,7 +1113,20 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "idlist", // name
+            vx_core::t_stringlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1283,7 +1318,20 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "cellmap", // name
+            vx_data_table::t_cellmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "cellsort", // name
+            vx_data_table::t_sort() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1764,7 +1812,20 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "idlist", // name
+            vx_core::t_stringlist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2076,7 +2137,36 @@ namespace vx_data_table {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "id", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "fieldmap", // name
+            vx_data_table::t_fieldmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "fieldsort", // name
+            vx_data_table::t_sort() // type
+          ),
+          vx_core::vx_new_arg(
+            "rowmap", // name
+            vx_data_table::t_rowmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "rowfilter", // name
+            vx_data_table::t_filter() // type
+          ),
+          vx_core::vx_new_arg(
+            "rowsort", // name
+            vx_data_table::t_sort() // type
+          )
+        }) // properties
       );
       return output;
     }

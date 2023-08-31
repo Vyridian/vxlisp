@@ -224,7 +224,24 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "passfail", // name
+            vx_core::t_boolean() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "casename", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "describelist", // name
+            vx_test::t_testdescribelist() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -579,7 +596,24 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "constmap", // name
+            vx_core::t_intmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "funcmap", // name
+            vx_core::t_intmap() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "typemap", // name
+            vx_core::t_intmap() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -801,7 +835,24 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "pct", // name
+            vx_core::t_int() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "tests", // name
+            vx_core::t_int() // type
+          ),
+          vx_core::vx_new_arg(
+            "total", // name
+            vx_core::t_int() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1143,7 +1194,40 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "bigospacenums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "bigotimenums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "constnums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "docnums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "funcnums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "totalnums", // name
+            vx_test::t_testcoveragenums() // type
+          ),
+          vx_core::vx_new_arg(
+            "typenums", // name
+            vx_test::t_testcoveragenums() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1335,7 +1419,20 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "describename", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "testresult", // name
+            vx_test::t_testresult() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -1720,7 +1817,28 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "caselist", // name
+            vx_test::t_testcaselist() // type
+          ),
+          vx_core::vx_new_arg(
+            "coveragedetail", // name
+            vx_test::t_testcoveragedetail() // type
+          ),
+          vx_core::vx_new_arg(
+            "coveragesummary", // name
+            vx_test::t_testcoveragesummary() // type
+          ),
+          vx_core::vx_new_arg(
+            "passfail", // name
+            vx_core::t_boolean() // type
+          ),
+          vx_core::vx_new_arg(
+            "testpkg", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2095,7 +2213,28 @@ namespace vx_test {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "code", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "passfail", // name
+            vx_core::t_boolean() // type
+          ),
+          vx_core::vx_new_arg(
+            "expected", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "actual", // name
+            vx_core::t_any() // type
+          ),
+          vx_core::vx_new_arg(
+            "fn-actual", // name
+            vx_core::t_any_from_func_async() // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -2606,7 +2745,20 @@ namespace vx_test {
           vx_core::e_funclist(), // disallowfuncs
           vx_core::e_anylist(), // allowvalues
           vx_core::e_anylist(), // disallowvalues
-          vx_core::e_argmap() // properties
+          vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string() // type
+          ),
+          vx_core::vx_new_arg(
+            "styles", // name
+            vx_web_html::t_stylelist() // type
+          ),
+          vx_core::vx_new_arg(
+            "stylemap", // name
+            vx_web_html::t_stylemap() // type
+          )
+        }) // properties
         )
       );
     }

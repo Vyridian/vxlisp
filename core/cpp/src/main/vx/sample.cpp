@@ -160,7 +160,16 @@ namespace vx_sample {
         vx_core::e_funclist(), // disallowfuncs
         vx_core::e_anylist(), // allowvalues
         vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "mynum", // name
+            vx_core::t_int() // type
+          ),
+          vx_core::vx_new_arg(
+            "mystr", // name
+            vx_core::t_string() // type
+          )
+        }) // properties
       );
       return output;
     }
