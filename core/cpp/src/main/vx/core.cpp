@@ -314,6 +314,12 @@ namespace vx_core {
     return output;
   }
 
+  // vx_float_from_string(string)
+  float vx_float_from_string(std::string text) {
+    float output = std::stof(text);
+    return output;
+  }
+
   // vx_funclist_from_listfunc(List<func>)
   vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc) {
     for (vx_core::Type_func fnc : listfunc) {
@@ -361,6 +367,34 @@ namespace vx_core {
       output = 100000000;
     } else {
       output = static_cast<long>(size);
+    }
+    return output;
+  }
+
+  // vx_int_from_string(string)
+  int vx_int_from_string(std::string text) {
+    int output = std::stoi(text);
+    return output;
+  }
+
+  // vx_is_float(string)
+  bool vx_is_float(std::string value) {
+    bool output = true;
+    bool isfirst = true;
+    bool isdecimal = false;
+    for (char c : value) {
+      if (('0' <= c) && (c <= '9')) {
+      } else if ((c == '-') && isfirst) {
+      } else if (c == '.') {
+        if (isdecimal) {
+          output = false;
+        } else {
+          isdecimal = true;
+        }
+      } else {
+        output = false;
+      }
+      isfirst = false;
     }
     return output;
   }
@@ -1175,7 +1209,7 @@ namespace vx_core {
   //}
 
   //class Class_decimal {
-    float Class_decimal::vx_float() const {return std::stof(vx_p_decimal);}
+    float Class_decimal::vx_float() const {return vx_core::vx_float_from_string(vx_p_decimal);}
 
     std::string Class_decimal::vx_string() const {return vx_p_decimal;}
   //}
@@ -2496,7 +2530,7 @@ namespace vx_core {
           floatval += valnum->vx_int();
         } else if (valsubtype == vx_core::t_string()) {
           vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
-          floatval += std::stof(valstring->vx_string());
+          floatval += vx_core::vx_float_from_string(valstring->vx_string());
         }
       }
       output = new vx_core::Class_float();
@@ -2567,6 +2601,9 @@ namespace vx_core {
         } else if (valsubtype == vx_core::t_int()) {
           vx_core::Type_int valnum = vx_core::vx_any_from_any(vx_core::t_int(), valsub);
           intval += valnum->vx_int();
+        } else if (valsubtype == vx_core::t_string()) {
+          vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
+          intval += vx_core::vx_int_from_string(valstring->vx_string());
         }
       }
       output = new vx_core::Class_int();

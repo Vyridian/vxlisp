@@ -1428,6 +1428,9 @@ namespace vx_core {
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
 
+  // vx_float_from_string(string)
+  float vx_float_from_string(std::string text);
+
   // vx_funclist_from_listfunc(List<func>)
   vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc);
 
@@ -1436,6 +1439,12 @@ namespace vx_core {
 
   // vx_int_from_sizet(size_t)
   long vx_int_from_sizet(std::size_t size);
+
+  // vx_int_from_string(string)
+  int vx_int_from_string(std::string text);
+
+  // vx_is_float(string)
+  bool vx_is_float(std::string value);
 
   // vx_is_int(string)
   bool vx_is_int(std::string value);

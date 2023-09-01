@@ -13,12 +13,20 @@
     std::string output = "";
     std::vector<vx_core::Type_any> listrepl;
     bool isfirst = true;
-    for (std::string arg : listarg) {
+    for (std::string sarg : listarg) {
       if (isfirst) {
         isfirst = false;
       } else {
+        vx_core::Type_any replval;
+        if (vx_core::vx_is_int(sarg)) {
+          replval = vx_core::vx_new_int(vx_core::vx_int_from_string(sarg));
+        } else if (vx_core::vx_is_float(sarg)) {
+          replval = vx_core::vx_new_float(vx_core::vx_float_from_string(sarg));
+        } else {
+          replval = vx_core::vx_new_string(sarg);
+        }
         vx_repl::Type_repl argrepl = vx_core::vx_new(vx_repl::t_repl(), {
-          vx_core::vx_new_string(":val"), vx_core::vx_new_string(arg)
+          vx_core::vx_new_string(":val"), replval
         });
         listrepl.push_back(argrepl);
       }

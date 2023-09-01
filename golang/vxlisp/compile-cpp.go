@@ -1569,7 +1569,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          floatval += valnum->vx_int();" +
 			"\n        } else if (valsubtype == vx_core::t_string()) {" +
 			"\n          vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), valsub);" +
-			"\n          floatval += std::stof(valstring->vx_string());" +
+			"\n          floatval += vx_core::vx_float_from_string(valstring->vx_string());" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
@@ -1593,6 +1593,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        } else if (valsubtype == vx_core::t_int()) {" +
 			"\n          vx_core::Type_int valnum = vx_core::vx_any_from_any(vx_core::t_int(), valsub);" +
 			"\n          intval += valnum->vx_int();" +
+			"\n        } else if (valsubtype == vx_core::t_string()) {" +
+			"\n          vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), valsub);" +
+			"\n          intval += vx_core::vx_int_from_string(valstring->vx_string());" +
 			"\n        }" +
 			"\n      }" +
 			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
