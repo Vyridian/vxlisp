@@ -1,5 +1,6 @@
 #ifndef VX_REPL_HPP
 #define VX_REPL_HPP
+#include <string>
 #include <vector>
 #include "../vx/core.hpp"
 #include "../vx/data/textblock.hpp"
@@ -71,6 +72,12 @@ namespace vx_repl {
     vx_repl::Func_repl_from_liblist_string e_repl_from_liblist_string;
     vx_repl::Func_repl_from_liblist_string t_repl_from_liblist_string;
   };
+
+// :headerfirst
+// :header
+
+  // vx_string_from_listarg(type, liststring, context)
+  std::string vx_string_from_listarg(vx_core::Type_any type, std::vector<std::string> listarg, vx_core::Type_context context);
 
 
   // (func any-repl<-functype-args)

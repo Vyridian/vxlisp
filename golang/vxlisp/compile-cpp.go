@@ -371,7 +371,7 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 		file := NewFile()
 		file.name = "app.cpp"
 		file.path = cmdpath
-		file.text = CppApp(project)
+		file.text = CppApp(project, command)
 		files = append(files, file)
 	case ":test":
 		file := NewFile()
@@ -4319,21 +4319,88 @@ func CppWriteFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	return msgblock
 }
 
-func CppApp(prj *vxproject) string {
+func CppApp(project *vxproject, cmd *vxcommand) string {
+	contextfunc := "vx_core::e_context();"
+	prjcontext := cmd.context
+	if prjcontext != "" {
+		isfound := false
+		pos := IntFromStringFindLast(prjcontext, "/")
+		if pos > 0 {
+			packagename := prjcontext[0:pos]
+			contextname := prjcontext[pos+1:]
+			pkg, ok := PackageFromProjectName(project, packagename)
+			if ok {
+				fncs, ok := pkg.mapfunc[contextname]
+				if ok {
+					fnc := fncs[0]
+					contextfunc = CppFromName(fnc.pkgname) + "::f_" + CppFromName(fnc.alias) + "();"
+					isfound = true
+				}
+			}
+		}
+		if !isfound {
+			MsgLog("Error! Context Not Found: (project (cmd :context " + prjcontext + "))")
+		}
+	}
+	replhpp := ""
+	mainfunc := `
+    vx_core::Type_string output = vx_core::vx_new_string("Hello World");
+		vx_core::vx_release(output);`
+	prjmain := cmd.main
+	MsgLog("CppApp:main:" + prjmain)
+	if prjmain != "" {
+		isfound := false
+		pos := IntFromStringFindLast(prjmain, "/")
+		repltype := ""
+		if pos > 0 {
+			packagename := prjmain[0:pos]
+			mainname := prjmain[pos+1:]
+			pkg, ok := PackageFromProjectName(project, packagename)
+			if ok {
+				typ, ok := pkg.maptype[mainname]
+				if ok {
+					repltype = CppNameTFromType(typ)
+					isfound = true
+				}
+				if !isfound {
+					cnst, ok := pkg.mapconst[mainname]
+					if ok {
+						repltype = CppNameFromConst(cnst)
+						isfound = true
+					}
+				}
+				if !isfound {
+					fncs, ok := pkg.mapfunc[mainname]
+					if ok {
+						fnc := fncs[0]
+						repltype = CppNameTFromFunc(fnc)
+						isfound = true
+					}
+				}
+			}
+		}
+		if isfound {
+			replhpp = "\n#include \"vx/repl.hpp\""
+			mainfunc = `
+    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+    std::string output = vx_repl::vx_string_from_listarg(` + repltype + `, listarg, context);`
+		} else {
+			MsgLog("Error! Main Not Found: (project (cmd :main " + prjmain + "))")
+		}
+	}
 	output := "" +
 		`
 #include <iostream>
-#include "vx/core.hpp"
+#include "vx/core.hpp"` +
+		replhpp + `
 
 int main(int iarglen, char* arrayarg[]) {
   int output = 0;
 	try {
-    //vx_core::Type_context context = vx_core::e_context();
-    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-    vx_core::Type_string output = vx_core::vx_new_string("Hello World");
-    std::cout << output->vx_string() << std::endl;
-		vx_core::vx_release(output);
-		//vx_core::vx_release(context);
+		vx_core::Type_context context = ` + contextfunc +
+		mainfunc + `
+    std::cout << output << std::endl;
+		vx_core::vx_release(context);
 	  vx_core::vx_memory_leak_test();
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
@@ -4366,26 +4433,10 @@ func CppAppTest(prj *vxproject) string {
 		imports += importline
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",\n    ")
-	output := "" +
-		imports + `
-/**
- * Unit test for whole App.
- */
-
-vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
-  vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
-    ` + testpackages + `
-  });
-  return output;
-}
-
-int main(int iarglen, char* arrayarg[]) {
-  int output = 0;
-  try {
-    vx_core::vx_debug("Test Start");
-    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-    vx_core::Type_context context = vx_core::e_context();
-    test_lib::test_helloworld();
+	tests := ""
+	if prj.name == "core" {
+		tests += "" + `
+		test_lib::test_helloworld();
     test_lib::test_async_new_from_value();
     test_lib::test_async_from_async_fn();
     test_lib::test_run_testresult(context);
@@ -4426,6 +4477,28 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_write_node(context);
     test_lib::test_write_html(context);
     test_lib::test_write_testpackagelist_async(context);
+`
+	}
+	output := "" +
+		imports + `
+/**
+ * Unit test for whole App.
+ */
+
+vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
+  vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
+    ` + testpackages + `
+  });
+  return output;
+}
+
+int main(int iarglen, char* arrayarg[]) {
+  int output = 0;
+  try {
+    vx_core::vx_debug("Test Start");
+    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
+    vx_core::Type_context context = vx_core::e_context();
+` + tests + `
     test_lib::test_run_all(testsuite(context), context);
     vx_core::vx_release(context);
     vx_core::vx_memory_leak_test();

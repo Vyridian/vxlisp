@@ -10,7 +10,9 @@
 
 * ./rundoc - This command builds the documenation html.
 
-* ./runbuildall - This command builds doc, js, and java source and test files.
+* ./runbuildall - This command builds doc, cpp, js, and java source and test files.
+
+* ./runbuildcpp - This command builds c++ source and test files.
 
 * ./runbuildjava - This command builds java source and test files.
 

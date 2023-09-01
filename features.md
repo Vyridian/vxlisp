@@ -26,7 +26,7 @@ vxlisp (and all lisps) always put the verb first.
      [arg1 : string
       arg2 : string])
 
-* Keywords : (colon) - Any word starting with : is considered a keyword. 
+* Keywords : (colon) - Any word starting with : is considered a keyword.
 
 : - Colon by itself is a type declaration. e.g. (func foo : string)
 

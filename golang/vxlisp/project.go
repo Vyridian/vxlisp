@@ -1,12 +1,15 @@
 package vxlisp
 
 type vxcommand struct {
-	name string
-	code string
-	doc  string
-	lang string
-	path string
-	port int
+	name    string
+	code    string
+	doc     string
+	lang    string
+	path    string
+	port    int
+	config  string
+	context string
+	main    string
 }
 
 type vxpath struct {
@@ -41,8 +44,10 @@ func NewCmd() *vxcommand {
 func NewCmdCopy(cmd *vxcommand) *vxcommand {
 	output := NewCmd()
 	output.code = cmd.code
+	output.context = cmd.context
 	output.doc = cmd.doc
 	output.lang = cmd.lang
+	output.main = cmd.main
 	output.name = cmd.name
 	output.path = cmd.path
 	output.port = cmd.port
@@ -83,7 +88,7 @@ func CmdFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
 					default:
 						if BooleanFromStringStarts(prop, ":") {
 							switch prop {
-							case ":code", ":doc", ":lang", ":name", ":path", ":port":
+							case ":code", ":config", ":context", ":doc", ":lang", ":main", ":name", ":path", ":port":
 								lastprop = prop
 							default:
 								msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", prop)
@@ -98,10 +103,16 @@ func CmdFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
 					switch lastprop {
 					case ":code":
 						cmd.code = prop
+					case ":config":
+						cmd.config = prop
+					case ":context":
+						cmd.context = prop
 					case ":doc":
 						cmd.doc = prop
 					case ":lang":
 						cmd.lang = prop
+					case ":main":
+						cmd.main = prop
 					case ":path":
 						cmd.path = prop
 					case ":port":
@@ -223,6 +234,19 @@ func ListPackageFromProject(project *vxproject) []*vxpackage {
 	}
 	output = append(output, project.listpackage...)
 	return output
+}
+
+func PackageFromProjectName(project *vxproject, name string) (*vxpackage, bool) {
+	var output *vxpackage
+	isfound := false
+	listpackage := ListPackageFromProject(project)
+	for _, pkg := range listpackage {
+		if pkg.name == name {
+			output = pkg
+			isfound = true
+		}
+	}
+	return output, isfound
 }
 
 func PathFromProjectCmd(project *vxproject, command *vxcommand) string {

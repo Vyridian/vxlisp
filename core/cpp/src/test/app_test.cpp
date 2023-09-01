@@ -52,7 +52,8 @@ int main(int iarglen, char* arrayarg[]) {
     vx_core::vx_debug("Test Start");
     std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
     vx_core::Type_context context = vx_core::e_context();
-    test_lib::test_helloworld();
+
+		test_lib::test_helloworld();
     test_lib::test_async_new_from_value();
     test_lib::test_async_from_async_fn();
     test_lib::test_run_testresult(context);
@@ -93,6 +94,7 @@ int main(int iarglen, char* arrayarg[]) {
     test_lib::test_write_node(context);
     test_lib::test_write_html(context);
     test_lib::test_write_testpackagelist_async(context);
+
     test_lib::test_run_all(testsuite(context), context);
     vx_core::vx_release(context);
     vx_core::vx_memory_leak_test();
