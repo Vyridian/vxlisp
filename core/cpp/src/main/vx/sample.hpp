@@ -7,29 +7,23 @@ namespace vx_sample {
   // forward declarations
   class Abstract_mytype;
   typedef Abstract_mytype* Type_mytype;
-  extern Type_mytype e_mytype();
-  extern Type_mytype t_mytype();
+  extern Type_mytype e_mytype;
+  extern Type_mytype t_mytype;
   class Class_myconst;
   typedef Class_myconst* Const_myconst;
   extern Const_myconst c_myconst();
   class Abstract_main;
   typedef Abstract_main* Func_main;
-  extern Func_main e_main();
-  extern Func_main t_main();
+  extern Func_main e_main;
+  extern Func_main t_main;
   class Abstract_myfunc;
   typedef Abstract_myfunc* Func_myfunc;
-  extern Func_myfunc e_myfunc();
-  extern Func_myfunc t_myfunc();
+  extern Func_myfunc e_myfunc;
+  extern Func_myfunc t_myfunc;
 
   class vx_Class_package {
   public:
-    vx_sample::Type_mytype e_mytype;
-    vx_sample::Type_mytype t_mytype;
     vx_sample::Const_myconst c_myconst;
-    vx_sample::Func_main e_main;
-    vx_sample::Func_main t_main;
-    vx_sample::Func_myfunc e_myfunc;
-    vx_sample::Func_myfunc t_myfunc;
   };
 
 

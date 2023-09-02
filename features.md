@@ -7,7 +7,7 @@ It's pretty simple.
 * Open Source = Good
 * Closed Source = Bad
 
-## Compact consistent syntax
+## Concise consistent syntax
 
 * Parenthesis - Lisps contains each idea in a list. A function foo(1, 2) would be written as (foo 1 2). Note: empty parentheses () are invalid in vxlisp.
 
@@ -81,9 +81,9 @@ Languages change all the time and yesterday's tools may be incompatible with new
 
 ## Type-safety and Generics
 
-vxlisp is strongly-type and supports generics (without erasures).
+vxlisp is strongly-typed and supports generics (without erasures).
 
-I have gone back and forth on the importance of type-safety. Type-safety should be a good thing, but if you spend a lot of time on type-safety, you might have been better off making more test cases. My conclusion is that type-safety is good, but many languages (I'm looking at you Java) are so cumbersome that the benefit is unclear. JavaScript and Clojure are not type-safe. Java has a sloppy, incomplete type-erasure system. C# and Typescript are better, but generics are still hard for laymen. Hopefully, you will find vxlisp to be more elegant.
+I have gone back and forth on the importance of type-safety. Type-safety should be a good thing, but if you spend a lot of time on type-safety, you might have been better off making more test cases. My conclusion is that type-safety is good, but many languages (I'm looking at you Java and C++) are so cumbersome that the benefit is unclear. JavaScript and Clojure are not type-safe. Java and C++ have a sloppy, incomplete type-erasure system. C# and Typescript are better, but generics are still hard for laymen. Hopefully, you will find vxlisp to be more elegant.
 
 ### Mixing Types
 
@@ -313,6 +313,10 @@ Typedef and Funcdef information is available from any object, so you can call (t
 
 Every object in vxlisp (including user defined ones) have a direct serialization and deserialization path. This is especially useful for debugging, testing, state-management, and client-server transit. (string<-any myobject) will get the string result.
 
+## Memory Leak prevention
+
+Javascript and Java obviously do their own garbage collection, but C++ does not. vxlisp generated C++ code always immediately deconstructs and deletes any object that is no longer referenced. Memory leaks should only be possible if you write native code.
+
 ## Memory Pooling
 
 ## State Management
@@ -321,7 +325,11 @@ Every object in vxlisp (including user defined ones) have a direct serialization
 
 ## Repl
 
+A read–eval–print loop (REPL) is a sort of internal command line to stich together functions at runtime. All vxlisp functions support REPL execution by creating (type repl) objects and then running them. In the future, I will add the parsing logic so this can be executed using only text.
+
 ## Programmatic Html/Xml generation
+
+vxlisp has a package for Html generation which allows programmatic and strongly-typed html and css generation using objects instead of loose text to produce pristine code every time. This can be used for dynamic html (client or server) or to write static html.
 
 ## Few restricted characters
 
@@ -343,4 +351,4 @@ When the C++ compiler is complete, WebAssembly code should be manageable and it 
 
 ## Potential to simultaneously write native android and IOS without middleware like flutter or react native
 
-Since vxlisp compiles to JavaScript, it should already support react native integration. If I compile to Dart, flutter could be supported. Alternatively, we could be very agressive and compile native android and IOS Swift code. Hmm...
+Since vxlisp compiles to JavaScript, it should already support react native integration. If I compile to Dart, flutter could be supported. Alternatively, we could be very agressive and compile native android Kotlin and IOS Swift code. Hmm...

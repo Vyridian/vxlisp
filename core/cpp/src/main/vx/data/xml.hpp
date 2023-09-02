@@ -11,37 +11,27 @@ namespace vx_data_xml {
   // forward declarations
   class Abstract_xml;
   typedef Abstract_xml* Type_xml;
-  extern Type_xml e_xml();
-  extern Type_xml t_xml();
+  extern Type_xml e_xml;
+  extern Type_xml t_xml;
   class Abstract_xmlnode;
   typedef Abstract_xmlnode* Type_xmlnode;
-  extern Type_xmlnode e_xmlnode();
-  extern Type_xmlnode t_xmlnode();
+  extern Type_xmlnode e_xmlnode;
+  extern Type_xmlnode t_xmlnode;
   class Abstract_xmlnodelist;
   typedef Abstract_xmlnodelist* Type_xmlnodelist;
-  extern Type_xmlnodelist e_xmlnodelist();
-  extern Type_xmlnodelist t_xmlnodelist();
+  extern Type_xmlnodelist e_xmlnodelist;
+  extern Type_xmlnodelist t_xmlnodelist;
   class Abstract_xmlpropmap;
   typedef Abstract_xmlpropmap* Type_xmlpropmap;
-  extern Type_xmlpropmap e_xmlpropmap();
-  extern Type_xmlpropmap t_xmlpropmap();
+  extern Type_xmlpropmap e_xmlpropmap;
+  extern Type_xmlpropmap t_xmlpropmap;
   class Abstract_xml_from_textblock;
   typedef Abstract_xml_from_textblock* Func_xml_from_textblock;
-  extern Func_xml_from_textblock e_xml_from_textblock();
-  extern Func_xml_from_textblock t_xml_from_textblock();
+  extern Func_xml_from_textblock e_xml_from_textblock;
+  extern Func_xml_from_textblock t_xml_from_textblock;
 
   class vx_Class_package {
   public:
-    vx_data_xml::Type_xml e_xml;
-    vx_data_xml::Type_xml t_xml;
-    vx_data_xml::Type_xmlnode e_xmlnode;
-    vx_data_xml::Type_xmlnode t_xmlnode;
-    vx_data_xml::Type_xmlnodelist e_xmlnodelist;
-    vx_data_xml::Type_xmlnodelist t_xmlnodelist;
-    vx_data_xml::Type_xmlpropmap e_xmlpropmap;
-    vx_data_xml::Type_xmlpropmap t_xmlpropmap;
-    vx_data_xml::Func_xml_from_textblock e_xml_from_textblock;
-    vx_data_xml::Func_xml_from_textblock t_xml_from_textblock;
   };
 
 

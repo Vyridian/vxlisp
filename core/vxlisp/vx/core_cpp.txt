@@ -503,7 +503,7 @@ let-async
     }
     // sync_value
     vx_core::Type_any vx_Class_async::sync_value() {
-      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any value = this->value;
       if (!value) {
         vx_core::vx_Type_future future = this->future;
@@ -560,7 +560,7 @@ let-async
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     vx_core::Type_any output = valstart;
     vx_core::vx_Type_listany listval = list->vx_list();
-    vx_core::Type_any current = vx_core::e_any();
+    vx_core::Type_any current = vx_core::e_any;
     bool first = true;
     for (vx_core::Type_any next : listval) {
       if (first) {
@@ -676,8 +676,8 @@ let-async
     vx_core::Type_boolean isnumber1 = vx_core::f_is_number(val1);
     vx_core::Type_boolean isnumber2 = vx_core::f_is_number(val2);
     if (isnumber1->vx_boolean() && isnumber2->vx_boolean()) {
-      vx_core::Type_number num1 = vx_core::vx_any_from_any(vx_core::t_number(), val1);
-      vx_core::Type_number num2 = vx_core::vx_any_from_any(vx_core::t_number(), val2);
+      vx_core::Type_number num1 = vx_core::vx_any_from_any(vx_core::t_number, val1);
+      vx_core::Type_number num2 = vx_core::vx_any_from_any(vx_core::t_number, val2);
       float float1 = vx_core::vx_float_from_number(num1);
       float float2 = vx_core::vx_float_from_number(num2);
       if (float1 < float2) {
@@ -770,14 +770,14 @@ let-async
   float vx_float_from_number(vx_core::Type_number num) {
     float output = 0;
     vx_core::Type_any type = num->vx_type();
-    if (type == vx_core::t_float()) {
-      vx_core::Type_float floatval = vx_core::vx_any_from_any(vx_core::t_float(), num);
+    if (type == vx_core::t_float) {
+      vx_core::Type_float floatval = vx_core::vx_any_from_any(vx_core::t_float, num);
       output = floatval->vx_float();
-    } else if (type == vx_core::t_int()) {
-      vx_core::Type_int intval = vx_core::vx_any_from_any(vx_core::t_int(), num);
+    } else if (type == vx_core::t_int) {
+      vx_core::Type_int intval = vx_core::vx_any_from_any(vx_core::t_int, num);
       output = intval->vx_int();
-    } else if (type == vx_core::t_decimal()) {
-      vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal(), num);
+    } else if (type == vx_core::t_decimal) {
+      vx_core::Type_decimal decval = vx_core::vx_any_from_any(vx_core::t_decimal, num);
       output = decval->vx_float();
     }
     return output;
@@ -803,7 +803,7 @@ let-async
   vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
     std::vector<vx_core::Type_thenelse> listthenelse = thenelselist->vx_listthenelse();
-    vx_core::Func_any_from_func fn_any = vx_core::e_any_from_func();
+    vx_core::Func_any_from_func fn_any = vx_core::e_any_from_func;
     for (vx_core::Type_thenelse thenelse : listthenelse) {
       vx_core::Type_string code = thenelse->code();
       std::string scode = code->vx_string();
@@ -821,7 +821,7 @@ let-async
         break;
       }
     }
-    if (fn_any == vx_core::e_any_from_func()) {
+    if (fn_any == vx_core::e_any_from_func) {
     } else if (fn_any == fn_any->vx_empty()) {
     } else {
       output = fn_any->vx_any_from_func();
@@ -894,20 +894,20 @@ let-async
       output = true;
     } else {
       vx_core::Type_any type = value->vx_type();
-      if (type == vx_core::t_int()) {
+      if (type == vx_core::t_int) {
         output = true;
-      } else if (type == vx_core::t_float()) {
-        vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float(), value);
+      } else if (type == vx_core::t_float) {
+        vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float, value);
         float floatval = valfloat->vx_float();
         if ((int)floatval == floatval) {
           output = true;
         }
-      } else if (type == vx_core::t_decimal()) {
-        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal(), value);
+      } else if (type == vx_core::t_decimal) {
+        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal, value);
         std::string strval = valdec->vx_string();
         output = vx_core::vx_is_int(strval);
-      } else if (type == vx_core::t_string()) {
-        vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string(), value);
+      } else if (type == vx_core::t_string) {
+        vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string, value);
         std::string strval = valstr->vx_string();
         output = vx_core::vx_is_int(strval);
       }
@@ -947,7 +947,7 @@ let-async
       std::string sextends = extends->vx_string();
       vx_core::vx_release(extends);
       if (sextends == ":list") {
-        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), listoflist);
+        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, listoflist);
         vx_core::vx_Type_listany listval = vallist->vx_list();
         vx_core::vx_reserve(listval);
         for (vx_core::Type_any val : listval) {
@@ -998,8 +998,8 @@ let-async
     for (vx_core::Type_any item : listany) {
       vx_core::Type_any keyany = fn_any_from_any->vx_any_from_any(item);
       std::string key = "";
-      if (keyany->vx_type() == vx_core::t_string()) {
-        vx_core::Type_string keystring = vx_core::vx_any_from_any(vx_core::t_string(), keyany);
+      if (keyany->vx_type() == vx_core::t_string) {
+        vx_core::Type_string keystring = vx_core::vx_any_from_any(vx_core::t_string, keyany);
         key = keystring->vx_string();
       } else {
         key = vx_core::vx_string_from_any(item);
@@ -1093,7 +1093,7 @@ let-async
   vx_core::Type_string vx_new_string(std::string text) {
     vx_core::Type_string output;
     if (text == "") {
-      output = vx_core::e_string();
+      output = vx_core::e_string;
     } else {
       output = new vx_core::Class_string();
       output->vx_p_string = text;
@@ -1319,23 +1319,23 @@ let-async
       }
       if (value == type) {
         text = typedefname;
-      } else if (type == vx_core::t_boolean()) {
-        vx_core::Type_boolean valbool = vx_core::vx_any_from_any(vx_core::t_boolean(), value);
+      } else if (type == vx_core::t_boolean) {
+        vx_core::Type_boolean valbool = vx_core::vx_any_from_any(vx_core::t_boolean, value);
         if (valbool->vx_boolean()) {
           text = "true";
         } else {
           text = "false";
         }
-      } else if (type == vx_core::t_decimal()) {
-        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal(), value);
+      } else if (type == vx_core::t_decimal) {
+        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal, value);
         text = valdec->vx_string();
-      } else if (type == vx_core::t_float()) {
-        vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float(), value);
+      } else if (type == vx_core::t_float) {
+        vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float, value);
         text = vx_core::vx_string_from_float(valfloat->vx_float());
         if (vx_core::vx_boolean_from_string_ends(text, ".0")) {
           text = vx_core::vx_string_from_string_start_end(text, 0, text.length() - 2);
         }
-      } else if (type == vx_core::t_int()) {
+      } else if (type == vx_core::t_int) {
         if (value == vx_core::c_notanumber()) {
           text = "notanumber";
         } else if (value == vx_core::c_infinity()) {
@@ -1343,11 +1343,11 @@ let-async
         } else if (value == vx_core::c_neginfinity()) {
           text = "neginfinity";
         } else {
-          vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int(), value);
+          vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int, value);
           text = std::to_string(valint->vx_int());
         }
-      } else if (type == vx_core::t_string()) {
-        vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string(), value);
+      } else if (type == vx_core::t_string) {
+        vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, value);
         std::string sval = valstring->vx_string();
         sval = vx_core::vx_string_from_string_find_replace(sval, "\"", "\\\"");
         if (refcount) {
@@ -1366,7 +1366,7 @@ let-async
       } else {
         std::string extend = typdef->extend()->vx_string();
         if (extend == ":list") {
-          vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list(), value);
+          vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, value);
           long indentint = indent;
           indentint += 1;
           vx_core::vx_Type_listany listval = vallist->vx_list();
@@ -1383,7 +1383,7 @@ let-async
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":map") {
-          vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map(), value);
+          vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map, value);
           long indentint = indent;
           indentint += 2;
           vx_core::vx_Type_mapany mapval = valmap->vx_map();
@@ -1409,7 +1409,7 @@ let-async
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":struct") {
-          vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct(), value);
+          vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct, value);
           vx_core::vx_Type_mapany mapval = valstruct->vx_map();
           vx_core::Type_argmap properties = typdef->properties();
           std::vector<std::string> keys = properties->vx_p_keys;
@@ -1437,7 +1437,7 @@ let-async
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":func") {
-          vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func(), value);
+          vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func, value);
           text = typedefname;
           if (valfunc->vx_p_msgblock) {
             text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
@@ -1648,12 +1648,12 @@ let-async
   }
 
   //class Abstract_replfunc {
-    vx_core::Type_any Abstract_replfunc::vx_repl(vx_core::Type_anylist arglist) {return vx_core::e_any();}
+    vx_core::Type_any Abstract_replfunc::vx_repl(vx_core::Type_anylist arglist) {return vx_core::e_any;}
   //}
 
   //class Abstract_replfunc_async {
     vx_core::vx_Type_async Abstract_replfunc_async::vx_repl(vx_core::Type_anylist arglist) {
-      return vx_core::vx_async_new_from_value(vx_core::e_any());
+      return vx_core::vx_async_new_from_value(vx_core::e_any);
     }
   //}
 
@@ -1730,7 +1730,7 @@ let-async
 
   //class Class_msgblock {
     vx_core::Type_msgblock Class_msgblock::vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const {
-      vx_core::Type_msgblock output = vx_core::e_msgblock();
+      vx_core::Type_msgblock output = vx_core::e_msgblock;
       std::vector<vx_core::Type_msgblock> listmsgblock;
       if (msgblock) {
         vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
@@ -1753,7 +1753,7 @@ let-async
         msgblocks = new vx_core::Class_msgblocklist();
         msgblocks->vx_p_list = listmsgblock;
         if (!msgblock) {
-          output = vx_core::vx_new(vx_core::t_msgblock(), {msgblocks});
+          output = vx_core::vx_new(vx_core::t_msgblock, {msgblocks});
         } else {
           output = vx_core::vx_copy(msgblock, {msgblocks});
         }

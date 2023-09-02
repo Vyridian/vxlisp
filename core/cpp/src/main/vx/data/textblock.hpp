@@ -8,49 +8,35 @@ namespace vx_data_textblock {
   // forward declarations
   class Abstract_delimset;
   typedef Abstract_delimset* Type_delimset;
-  extern Type_delimset e_delimset();
-  extern Type_delimset t_delimset();
+  extern Type_delimset e_delimset;
+  extern Type_delimset t_delimset;
   class Abstract_textblock;
   typedef Abstract_textblock* Type_textblock;
-  extern Type_textblock e_textblock();
-  extern Type_textblock t_textblock();
+  extern Type_textblock e_textblock;
+  extern Type_textblock t_textblock;
   class Abstract_textblocklist;
   typedef Abstract_textblocklist* Type_textblocklist;
-  extern Type_textblocklist e_textblocklist();
-  extern Type_textblocklist t_textblocklist();
+  extern Type_textblocklist e_textblocklist;
+  extern Type_textblocklist t_textblocklist;
   class Abstract_parse;
   typedef Abstract_parse* Func_parse;
-  extern Func_parse e_parse();
-  extern Func_parse t_parse();
+  extern Func_parse e_parse;
+  extern Func_parse t_parse;
   class Abstract_stringlist_from_textblocklist;
   typedef Abstract_stringlist_from_textblocklist* Func_stringlist_from_textblocklist;
-  extern Func_stringlist_from_textblocklist e_stringlist_from_textblocklist();
-  extern Func_stringlist_from_textblocklist t_stringlist_from_textblocklist();
+  extern Func_stringlist_from_textblocklist e_stringlist_from_textblocklist;
+  extern Func_stringlist_from_textblocklist t_stringlist_from_textblocklist;
   class Abstract_text_from_textblock;
   typedef Abstract_text_from_textblock* Func_text_from_textblock;
-  extern Func_text_from_textblock e_text_from_textblock();
-  extern Func_text_from_textblock t_text_from_textblock();
+  extern Func_text_from_textblock e_text_from_textblock;
+  extern Func_text_from_textblock t_text_from_textblock;
   class Abstract_textblocks_from_textblock;
   typedef Abstract_textblocks_from_textblock* Func_textblocks_from_textblock;
-  extern Func_textblocks_from_textblock e_textblocks_from_textblock();
-  extern Func_textblocks_from_textblock t_textblocks_from_textblock();
+  extern Func_textblocks_from_textblock e_textblocks_from_textblock;
+  extern Func_textblocks_from_textblock t_textblocks_from_textblock;
 
   class vx_Class_package {
   public:
-    vx_data_textblock::Type_delimset e_delimset;
-    vx_data_textblock::Type_delimset t_delimset;
-    vx_data_textblock::Type_textblock e_textblock;
-    vx_data_textblock::Type_textblock t_textblock;
-    vx_data_textblock::Type_textblocklist e_textblocklist;
-    vx_data_textblock::Type_textblocklist t_textblocklist;
-    vx_data_textblock::Func_parse e_parse;
-    vx_data_textblock::Func_parse t_parse;
-    vx_data_textblock::Func_stringlist_from_textblocklist e_stringlist_from_textblocklist;
-    vx_data_textblock::Func_stringlist_from_textblocklist t_stringlist_from_textblocklist;
-    vx_data_textblock::Func_text_from_textblock e_text_from_textblock;
-    vx_data_textblock::Func_text_from_textblock t_text_from_textblock;
-    vx_data_textblock::Func_textblocks_from_textblock e_textblocks_from_textblock;
-    vx_data_textblock::Func_textblocks_from_textblock t_textblocks_from_textblock;
   };
 
 

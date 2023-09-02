@@ -7,25 +7,19 @@ namespace vx_state {
   // forward declarations
   class Abstract_value_map;
   typedef Abstract_value_map* Type_value_map;
-  extern Type_value_map e_value_map();
-  extern Type_value_map t_value_map();
+  extern Type_value_map e_value_map;
+  extern Type_value_map t_value_map;
   class Abstract_change;
   typedef Abstract_change* Func_change;
-  extern Func_change e_change();
-  extern Func_change t_change();
+  extern Func_change e_change;
+  extern Func_change t_change;
   class Abstract_register;
   typedef Abstract_register* Func_register;
-  extern Func_register e_register();
-  extern Func_register t_register();
+  extern Func_register e_register;
+  extern Func_register t_register;
 
   class vx_Class_package {
   public:
-    vx_state::Type_value_map e_value_map;
-    vx_state::Type_value_map t_value_map;
-    vx_state::Func_change e_change;
-    vx_state::Func_change t_change;
-    vx_state::Func_register e_register;
-    vx_state::Func_register t_register;
   };
 
 

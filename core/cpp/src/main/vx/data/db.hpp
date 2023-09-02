@@ -9,43 +9,31 @@ namespace vx_data_db {
   // forward declarations
   class Abstract_db;
   typedef Abstract_db* Type_db;
-  extern Type_db e_db();
-  extern Type_db t_db();
+  extern Type_db e_db;
+  extern Type_db t_db;
   class Abstract_dbcell;
   typedef Abstract_dbcell* Type_dbcell;
-  extern Type_dbcell e_dbcell();
-  extern Type_dbcell t_dbcell();
+  extern Type_dbcell e_dbcell;
+  extern Type_dbcell t_dbcell;
   class Abstract_dbcellmap;
   typedef Abstract_dbcellmap* Type_dbcellmap;
-  extern Type_dbcellmap e_dbcellmap();
-  extern Type_dbcellmap t_dbcellmap();
+  extern Type_dbcellmap e_dbcellmap;
+  extern Type_dbcellmap t_dbcellmap;
   class Abstract_dbfield;
   typedef Abstract_dbfield* Type_dbfield;
-  extern Type_dbfield e_dbfield();
-  extern Type_dbfield t_dbfield();
+  extern Type_dbfield e_dbfield;
+  extern Type_dbfield t_dbfield;
   class Abstract_dbfieldmap;
   typedef Abstract_dbfieldmap* Type_dbfieldmap;
-  extern Type_dbfieldmap e_dbfieldmap();
-  extern Type_dbfieldmap t_dbfieldmap();
+  extern Type_dbfieldmap e_dbfieldmap;
+  extern Type_dbfieldmap t_dbfieldmap;
   class Abstract_dbtable;
   typedef Abstract_dbtable* Type_dbtable;
-  extern Type_dbtable e_dbtable();
-  extern Type_dbtable t_dbtable();
+  extern Type_dbtable e_dbtable;
+  extern Type_dbtable t_dbtable;
 
   class vx_Class_package {
   public:
-    vx_data_db::Type_db e_db;
-    vx_data_db::Type_db t_db;
-    vx_data_db::Type_dbcell e_dbcell;
-    vx_data_db::Type_dbcell t_dbcell;
-    vx_data_db::Type_dbcellmap e_dbcellmap;
-    vx_data_db::Type_dbcellmap t_dbcellmap;
-    vx_data_db::Type_dbfield e_dbfield;
-    vx_data_db::Type_dbfield t_dbfield;
-    vx_data_db::Type_dbfieldmap e_dbfieldmap;
-    vx_data_db::Type_dbfieldmap t_dbfieldmap;
-    vx_data_db::Type_dbtable e_dbtable;
-    vx_data_db::Type_dbtable t_dbtable;
   };
 
 

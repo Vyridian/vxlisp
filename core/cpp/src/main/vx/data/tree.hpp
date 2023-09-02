@@ -8,28 +8,28 @@ namespace vx_data_tree {
   // forward declarations
   class Abstract_branch;
   typedef Abstract_branch* Type_branch;
-  extern Type_branch e_branch();
-  extern Type_branch t_branch();
+  extern Type_branch e_branch;
+  extern Type_branch t_branch;
   class Abstract_brancharrow;
   typedef Abstract_brancharrow* Type_brancharrow;
-  extern Type_brancharrow e_brancharrow();
-  extern Type_brancharrow t_brancharrow();
+  extern Type_brancharrow e_brancharrow;
+  extern Type_brancharrow t_brancharrow;
   class Abstract_branchlist;
   typedef Abstract_branchlist* Type_branchlist;
-  extern Type_branchlist e_branchlist();
-  extern Type_branchlist t_branchlist();
+  extern Type_branchlist e_branchlist;
+  extern Type_branchlist t_branchlist;
   class Abstract_leaf;
   typedef Abstract_leaf* Type_leaf;
-  extern Type_leaf e_leaf();
-  extern Type_leaf t_leaf();
+  extern Type_leaf e_leaf;
+  extern Type_leaf t_leaf;
   class Abstract_leaflist;
   typedef Abstract_leaflist* Type_leaflist;
-  extern Type_leaflist e_leaflist();
-  extern Type_leaflist t_leaflist();
+  extern Type_leaflist e_leaflist;
+  extern Type_leaflist t_leaflist;
   class Abstract_tree;
   typedef Abstract_tree* Type_tree;
-  extern Type_tree e_tree();
-  extern Type_tree t_tree();
+  extern Type_tree e_tree;
+  extern Type_tree t_tree;
   class Class_brancharrow_down;
   typedef Class_brancharrow_down* Const_brancharrow_down;
   extern Const_brancharrow_down c_brancharrow_down();
@@ -42,18 +42,6 @@ namespace vx_data_tree {
 
   class vx_Class_package {
   public:
-    vx_data_tree::Type_branch e_branch;
-    vx_data_tree::Type_branch t_branch;
-    vx_data_tree::Type_brancharrow e_brancharrow;
-    vx_data_tree::Type_brancharrow t_brancharrow;
-    vx_data_tree::Type_branchlist e_branchlist;
-    vx_data_tree::Type_branchlist t_branchlist;
-    vx_data_tree::Type_leaf e_leaf;
-    vx_data_tree::Type_leaf t_leaf;
-    vx_data_tree::Type_leaflist e_leaflist;
-    vx_data_tree::Type_leaflist t_leaflist;
-    vx_data_tree::Type_tree e_tree;
-    vx_data_tree::Type_tree t_tree;
     vx_data_tree::Const_brancharrow_down c_brancharrow_down;
     vx_data_tree::Const_brancharrow_up c_brancharrow_up;
     vx_data_tree::Const_brancharrow_updown c_brancharrow_updown;

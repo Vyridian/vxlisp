@@ -8,49 +8,35 @@ namespace vx_collection {
   // forward declarations
   class Abstract_is_list;
   typedef Abstract_is_list* Func_is_list;
-  extern Func_is_list e_is_list();
-  extern Func_is_list t_is_list();
+  extern Func_is_list e_is_list;
+  extern Func_is_list t_is_list;
   class Abstract_is_map;
   typedef Abstract_is_map* Func_is_map;
-  extern Func_is_map e_is_map();
-  extern Func_is_map t_is_map();
+  extern Func_is_map e_is_map;
+  extern Func_is_map t_is_map;
   class Abstract_list_from_list_end;
   typedef Abstract_list_from_list_end* Func_list_from_list_end;
-  extern Func_list_from_list_end e_list_from_list_end();
-  extern Func_list_from_list_end t_list_from_list_end();
+  extern Func_list_from_list_end e_list_from_list_end;
+  extern Func_list_from_list_end t_list_from_list_end;
   class Abstract_list_from_list_filtertypes;
   typedef Abstract_list_from_list_filtertypes* Func_list_from_list_filtertypes;
-  extern Func_list_from_list_filtertypes e_list_from_list_filtertypes();
-  extern Func_list_from_list_filtertypes t_list_from_list_filtertypes();
+  extern Func_list_from_list_filtertypes e_list_from_list_filtertypes;
+  extern Func_list_from_list_filtertypes t_list_from_list_filtertypes;
   class Abstract_list_from_list_fn_filter;
   typedef Abstract_list_from_list_fn_filter* Func_list_from_list_fn_filter;
-  extern Func_list_from_list_fn_filter e_list_from_list_fn_filter();
-  extern Func_list_from_list_fn_filter t_list_from_list_fn_filter();
+  extern Func_list_from_list_fn_filter e_list_from_list_fn_filter;
+  extern Func_list_from_list_fn_filter t_list_from_list_fn_filter;
   class Abstract_list_from_list_start;
   typedef Abstract_list_from_list_start* Func_list_from_list_start;
-  extern Func_list_from_list_start e_list_from_list_start();
-  extern Func_list_from_list_start t_list_from_list_start();
+  extern Func_list_from_list_start e_list_from_list_start;
+  extern Func_list_from_list_start t_list_from_list_start;
   class Abstract_list_from_list_start_end;
   typedef Abstract_list_from_list_start_end* Func_list_from_list_start_end;
-  extern Func_list_from_list_start_end e_list_from_list_start_end();
-  extern Func_list_from_list_start_end t_list_from_list_start_end();
+  extern Func_list_from_list_start_end e_list_from_list_start_end;
+  extern Func_list_from_list_start_end t_list_from_list_start_end;
 
   class vx_Class_package {
   public:
-    vx_collection::Func_list_from_list_fn_filter e_list_from_list_fn_filter;
-    vx_collection::Func_list_from_list_fn_filter t_list_from_list_fn_filter;
-    vx_collection::Func_list_from_list_start_end e_list_from_list_start_end;
-    vx_collection::Func_list_from_list_start_end t_list_from_list_start_end;
-    vx_collection::Func_is_list e_is_list;
-    vx_collection::Func_is_list t_is_list;
-    vx_collection::Func_is_map e_is_map;
-    vx_collection::Func_is_map t_is_map;
-    vx_collection::Func_list_from_list_end e_list_from_list_end;
-    vx_collection::Func_list_from_list_end t_list_from_list_end;
-    vx_collection::Func_list_from_list_filtertypes e_list_from_list_filtertypes;
-    vx_collection::Func_list_from_list_filtertypes t_list_from_list_filtertypes;
-    vx_collection::Func_list_from_list_start e_list_from_list_start;
-    vx_collection::Func_list_from_list_start t_list_from_list_start;
   };
 
 // :headerfirst
@@ -267,11 +253,11 @@ namespace vx_collection {
     output = vx_collection::f_list_from_list_fn_filter(
       generic_list_1,
       vallist,
-      vx_core::t_any_from_any()->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val_any) {
-        vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any(), val_any);
+      vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val_any) {
+        vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, val_any);
         vx_core::Type_any output_1 = 
           vx_core::f_if(
-            vx_core::t_any(),
+            vx_core::t_any,
             vx_type::f_is_type_from_any_typelist(val, filtertypes),
             val
           );

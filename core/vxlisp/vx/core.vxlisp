@@ -1944,7 +1944,7 @@
    (native
     :cpp
      "// :capture val
-      vx_core::Type_int intresult = vx_core::e_int();
+      vx_core::Type_int intresult = vx_core::e_int;
       try {
         std::string sval = val->vx_string();
         long ival = std::stoll(sval);
@@ -2248,7 +2248,7 @@
   :cpp
    "vx_core::vx_Type_listany list_value = values->vx_list();
     vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
-      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any(), val);
+      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any, val);
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);"
   :js

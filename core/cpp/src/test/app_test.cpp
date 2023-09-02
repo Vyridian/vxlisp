@@ -25,7 +25,7 @@
  */
 
 vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
-  vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist(), {
+  vx_test::Type_testpackagelist output = vx_core::vx_new(vx_test::t_testpackagelist, {
     vx_collection_test::test_package(context),
     vx_core_test::test_package(context),
     vx_data_csv_test::test_package(context),
@@ -51,7 +51,7 @@ int main(int iarglen, char* arrayarg[]) {
   try {
     vx_core::vx_debug("Test Start");
     std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-    vx_core::Type_context context = vx_core::e_context();
+    vx_core::Type_context context = vx_core::e_context;
 
 		test_lib::test_helloworld();
     test_lib::test_async_new_from_value();

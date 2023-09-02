@@ -28,7 +28,7 @@ namespace vx_sample {
     vx_core::Type_int Class_mytype::mynum() const {
       vx_core::Type_int output = this->vx_p_mynum;
       if (!output) {
-        output = vx_core::e_int();
+        output = vx_core::e_int;
       }
       return output;
     }
@@ -37,14 +37,14 @@ namespace vx_sample {
     vx_core::Type_string Class_mytype::mystr() const {
       vx_core::Type_string output = this->vx_p_mystr;
       if (!output) {
-        output = vx_core::e_string();
+        output = vx_core::e_string;
       }
       return output;
     }
 
     // vx_get_any(key)
     vx_core::Type_any Class_mytype::vx_get_any(vx_core::Type_string key) const {
-      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
       } else if (skey == ":mynum") {
@@ -65,26 +65,26 @@ namespace vx_sample {
     }
 
     vx_core::Type_any Class_mytype::vx_new(vx_core::vx_Type_listany vals) const {
-      return this->vx_copy(vx_sample::e_mytype(), vals);
+      return this->vx_copy(vx_sample::e_mytype, vals);
     }
 
     vx_core::Type_any Class_mytype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_sample::Type_mytype output = vx_sample::e_mytype();
-      vx_sample::Type_mytype val = vx_core::vx_any_from_any(vx_sample::t_mytype(), copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock()->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_sample::Type_mytype output = vx_sample::e_mytype;
+      vx_sample::Type_mytype val = vx_core::vx_any_from_any(vx_sample::t_mytype, copyval);
+      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_int vx_p_mynum = val->mynum();
       vx_core::Type_string vx_p_mystr = val->mystr();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
-        if (valsubtype == vx_core::t_msgblock()) {
+        if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (valsubtype == vx_core::t_msg()) {
+        } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (key == "") {
           std::string testkey = "";
-          if (valsubtype == vx_core::t_string()) {
-            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             testkey = valstr->vx_string();
           }
           if (false) {
@@ -93,27 +93,27 @@ namespace vx_sample {
           } else if (testkey == ":mystr") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new mytype) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mytype) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
           if (false) {
           } else if (key == ":mynum") {
-            if (valsubtype == vx_core::t_int()) {
-              vx_p_mynum = vx_core::vx_any_from_any(vx_core::t_int(), valsub);
+            if (valsubtype == vx_core::t_int) {
+              vx_p_mynum = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new mytype :mynum " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mytype :mynum " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":mystr") {
-            if (valsubtype == vx_core::t_string()) {
-              vx_p_mystr = vx_core::vx_any_from_any(vx_core::t_string(), valsub);
+            if (valsubtype == vx_core::t_string) {
+              vx_p_mystr = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new mytype :mystr " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mytype :mystr " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg()->vx_msg_from_errortext("(new mytype) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mytype) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -134,7 +134,7 @@ namespace vx_sample {
         output->vx_p_mystr = vx_p_mystr;
         vx_core::vx_reserve(vx_p_mystr);
       }
-      if (msgblock != vx_core::e_msgblock()) {
+      if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       }
@@ -145,29 +145,29 @@ namespace vx_sample {
 
     vx_core::Type_msgblock Class_mytype::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany vx_sample::Class_mytype::vx_dispose() {return vx_core::emptylistany;}
-    vx_core::Type_any Class_mytype::vx_empty() const {return vx_sample::e_mytype();}
-    vx_core::Type_any Class_mytype::vx_type() const {return vx_sample::t_mytype();}
+    vx_core::Type_any Class_mytype::vx_empty() const {return vx_sample::e_mytype;}
+    vx_core::Type_any Class_mytype::vx_type() const {return vx_sample::t_mytype;}
 
     vx_core::Type_typedef Class_mytype::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/sample", // pkgname
         "mytype", // name
         ":struct", // extends
-        vx_core::e_typelist(), // traits
-        vx_core::e_typelist(), // allowtypes
-        vx_core::e_typelist(), // disallowtypes
-        vx_core::e_funclist(), // allowfuncs
-        vx_core::e_funclist(), // disallowfuncs
-        vx_core::e_anylist(), // allowvalues
-        vx_core::e_anylist(), // disallowvalues
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
         vx_core::vx_argmap_from_listarg({
           vx_core::vx_new_arg(
             "mynum", // name
-            vx_core::t_int() // type
+            vx_core::t_int // type
           ),
           vx_core::vx_new_arg(
             "mystr", // name
-            vx_core::t_string() // type
+            vx_core::t_string // type
           )
         }) // properties
       );
@@ -196,14 +196,14 @@ namespace vx_sample {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          vx_core::vx_typelist_from_listany({vx_core::t_number()}), // traits
-          vx_core::e_typelist(), // allowtypes
-          vx_core::e_typelist(), // disallowtypes
-          vx_core::e_funclist(), // allowfuncs
-          vx_core::e_funclist(), // disallowfuncs
-          vx_core::e_anylist(), // allowvalues
-          vx_core::e_anylist(), // disallowvalues
-          vx_core::e_argmap() // properties
+          vx_core::vx_typelist_from_listany({vx_core::t_number}), // traits
+          vx_core::e_typelist, // allowtypes
+          vx_core::e_typelist, // disallowtypes
+          vx_core::e_funclist, // allowfuncs
+          vx_core::e_funclist, // disallowfuncs
+          vx_core::e_anylist, // allowvalues
+          vx_core::e_anylist, // disallowvalues
+          vx_core::e_argmap // properties
         )
       );
     }
@@ -235,13 +235,13 @@ namespace vx_sample {
     }
 
     vx_core::Type_any Class_main::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_sample::Func_main output = vx_sample::e_main();
+      vx_sample::Func_main output = vx_sample::e_main;
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_main::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_sample::Func_main output = vx_sample::e_main();
+      vx_sample::Func_main output = vx_sample::e_main;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
@@ -252,14 +252,14 @@ namespace vx_sample {
         "vx/sample", // pkgname
         "main", // name
         ":func", // extends
-        vx_core::e_typelist(), // traits
-        vx_core::e_typelist(), // allowtypes
-        vx_core::e_typelist(), // disallowtypes
-        vx_core::e_funclist(), // allowfuncs
-        vx_core::e_funclist(), // disallowfuncs
-        vx_core::e_anylist(), // allowvalues
-        vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
       );
       return output;
     }
@@ -275,13 +275,13 @@ namespace vx_sample {
       return output;
     }
 
-    vx_core::Type_any Class_main::vx_empty() const {return vx_sample::e_main();}
-    vx_core::Type_any Class_main::vx_type() const {return vx_sample::t_main();}
+    vx_core::Type_any Class_main::vx_empty() const {return vx_sample::e_main;}
+    vx_core::Type_any Class_main::vx_type() const {return vx_sample::t_main;}
     vx_core::Type_msgblock Class_main::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_main::vx_dispose() {return vx_core::emptylistany;}
 
     vx_core::Type_any Class_main::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any();
+      vx_core::Type_any output = vx_core::e_any;
       vx_sample::f_main();
       vx_core::vx_release_except(arglist, output);
       return output;
@@ -291,7 +291,7 @@ namespace vx_sample {
 
   // (func myfunc)
   vx_core::Type_int f_myfunc(vx_core::Type_int myarg) {
-    vx_core::Type_int output = vx_core::e_int();
+    vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve(myarg);
     output = vx_core::f_plus(
       vx_sample::c_myconst(),
@@ -317,13 +317,13 @@ namespace vx_sample {
     }
 
     vx_core::Type_any Class_myfunc::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_sample::Func_myfunc output = vx_sample::e_myfunc();
+      vx_sample::Func_myfunc output = vx_sample::e_myfunc;
       vx_core::vx_release(vals);
       return output;
     }
 
     vx_core::Type_any Class_myfunc::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_sample::Func_myfunc output = vx_sample::e_myfunc();
+      vx_sample::Func_myfunc output = vx_sample::e_myfunc;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
@@ -334,14 +334,14 @@ namespace vx_sample {
         "vx/sample", // pkgname
         "myfunc", // name
         ":func", // extends
-        vx_core::e_typelist(), // traits
-        vx_core::e_typelist(), // allowtypes
-        vx_core::e_typelist(), // disallowtypes
-        vx_core::e_funclist(), // allowfuncs
-        vx_core::e_funclist(), // disallowfuncs
-        vx_core::e_anylist(), // allowvalues
-        vx_core::e_anylist(), // disallowvalues
-        vx_core::e_argmap() // properties
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
       );
       return output;
     }
@@ -357,26 +357,26 @@ namespace vx_sample {
       return output;
     }
 
-    vx_core::Type_any Class_myfunc::vx_empty() const {return vx_sample::e_myfunc();}
-    vx_core::Type_any Class_myfunc::vx_type() const {return vx_sample::t_myfunc();}
+    vx_core::Type_any Class_myfunc::vx_empty() const {return vx_sample::e_myfunc;}
+    vx_core::Type_any Class_myfunc::vx_type() const {return vx_sample::t_myfunc;}
     vx_core::Type_msgblock Class_myfunc::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_myfunc::vx_dispose() {return vx_core::emptylistany;}
 
     vx_core::Func_any_from_any Class_myfunc::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
-      return vx_core::e_any_from_any();
+      return vx_core::e_any_from_any;
     }
 
     vx_core::Type_any Class_myfunc::vx_any_from_any(vx_core::Type_any val) const {
-      vx_core::Type_any output = vx_core::e_any();
-      vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int(), val);
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int, val);
       output = vx_sample::f_myfunc(inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_myfunc::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any();
-      vx_core::Type_int myarg = vx_core::vx_any_from_any(vx_core::t_int(), arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_int myarg = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_sample::f_myfunc(myarg);
       vx_core::vx_release_except(arglist, output);
       return output;
@@ -386,24 +386,19 @@ namespace vx_sample {
 
   vx_sample::vx_Class_package* vx_package = new vx_sample::vx_Class_package();
 
-  vx_sample::Type_mytype e_mytype() {
-    vx_sample::Type_mytype output = vx_sample::vx_package->e_mytype;
-    if (!output) {
+  vx_sample::Type_mytype vx_e_mytype() {
+    vx_sample::Type_mytype output;
       output = new Class_mytype();
       vx_core::vx_reserve_empty(output);
-      vx_sample::vx_package->e_mytype = output;
-    }
     return output;
   }
-  vx_sample::Type_mytype t_mytype() {
-    vx_sample::Type_mytype output = vx_sample::vx_package->t_mytype;
-    if (!output) {
-      output = new Class_mytype();
-      vx_core::vx_reserve_type(output);
-      vx_sample::vx_package->t_mytype = output;
-    }
+  vx_sample::Type_mytype vx_t_mytype() {
+    vx_sample::Type_mytype output = new Class_mytype();
+    vx_core::vx_reserve_type(output);
     return output;
   }
+  vx_sample::Type_mytype e_mytype = vx_e_mytype();
+  vx_sample::Type_mytype t_mytype = vx_t_mytype();
 
   // (const myconst)
   vx_sample::Const_myconst c_myconst() {
@@ -416,43 +411,31 @@ namespace vx_sample {
   }
 
   // (func main)
-  vx_sample::Func_main e_main() {
-    vx_sample::Func_main output = vx_sample::vx_package->e_main;
-    if (!output) {
-      output = new vx_sample::Class_main();
-      vx_core::vx_reserve_empty(output);
-      vx_sample::vx_package->e_main = output;
-    }
+  vx_sample::Func_main vx_e_main() {
+    vx_sample::Func_main output = new vx_sample::Class_main();
+    vx_core::vx_reserve_empty(output);
     return output;
   }
-  vx_sample::Func_main t_main() {
-    vx_sample::Func_main output = vx_sample::vx_package->t_main;
-    if (!output) {
-      output = new vx_sample::Class_main();
-      vx_core::vx_reserve_type(output);
-      vx_sample::vx_package->t_main = output;
-    }
+  vx_sample::Func_main vx_t_main() {
+    vx_sample::Func_main output = new vx_sample::Class_main();
+    vx_core::vx_reserve_type(output);
     return output;
   }
+  vx_sample::Func_main e_main = vx_e_main();
+  vx_sample::Func_main t_main = vx_t_main();
 
   // (func myfunc)
-  vx_sample::Func_myfunc e_myfunc() {
-    vx_sample::Func_myfunc output = vx_sample::vx_package->e_myfunc;
-    if (!output) {
-      output = new vx_sample::Class_myfunc();
-      vx_core::vx_reserve_empty(output);
-      vx_sample::vx_package->e_myfunc = output;
-    }
+  vx_sample::Func_myfunc vx_e_myfunc() {
+    vx_sample::Func_myfunc output = new vx_sample::Class_myfunc();
+    vx_core::vx_reserve_empty(output);
     return output;
   }
-  vx_sample::Func_myfunc t_myfunc() {
-    vx_sample::Func_myfunc output = vx_sample::vx_package->t_myfunc;
-    if (!output) {
-      output = new vx_sample::Class_myfunc();
-      vx_core::vx_reserve_type(output);
-      vx_sample::vx_package->t_myfunc = output;
-    }
+  vx_sample::Func_myfunc vx_t_myfunc() {
+    vx_sample::Func_myfunc output = new vx_sample::Class_myfunc();
+    vx_core::vx_reserve_type(output);
     return output;
   }
+  vx_sample::Func_myfunc e_myfunc = vx_e_myfunc();
+  vx_sample::Func_myfunc t_myfunc = vx_t_myfunc();
 
 }

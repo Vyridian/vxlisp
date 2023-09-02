@@ -11,35 +11,27 @@ namespace vx_data_csv {
   // forward declarations
   class Abstract_csv;
   typedef Abstract_csv* Type_csv;
-  extern Type_csv e_csv();
-  extern Type_csv t_csv();
+  extern Type_csv e_csv;
+  extern Type_csv t_csv;
   class Abstract_csvrows;
   typedef Abstract_csvrows* Type_csvrows;
-  extern Type_csvrows e_csvrows();
-  extern Type_csvrows t_csvrows();
+  extern Type_csvrows e_csvrows;
+  extern Type_csvrows t_csvrows;
   class Class_delims;
   typedef Class_delims* Const_delims;
   extern Const_delims c_delims();
   class Abstract_csv_from_textblock;
   typedef Abstract_csv_from_textblock* Func_csv_from_textblock;
-  extern Func_csv_from_textblock e_csv_from_textblock();
-  extern Func_csv_from_textblock t_csv_from_textblock();
+  extern Func_csv_from_textblock e_csv_from_textblock;
+  extern Func_csv_from_textblock t_csv_from_textblock;
   class Abstract_csvrows_from_textblock;
   typedef Abstract_csvrows_from_textblock* Func_csvrows_from_textblock;
-  extern Func_csvrows_from_textblock e_csvrows_from_textblock();
-  extern Func_csvrows_from_textblock t_csvrows_from_textblock();
+  extern Func_csvrows_from_textblock e_csvrows_from_textblock;
+  extern Func_csvrows_from_textblock t_csvrows_from_textblock;
 
   class vx_Class_package {
   public:
-    vx_data_csv::Type_csv e_csv;
-    vx_data_csv::Type_csv t_csv;
-    vx_data_csv::Type_csvrows e_csvrows;
-    vx_data_csv::Type_csvrows t_csvrows;
     vx_data_csv::Const_delims c_delims;
-    vx_data_csv::Func_csv_from_textblock e_csv_from_textblock;
-    vx_data_csv::Func_csv_from_textblock t_csv_from_textblock;
-    vx_data_csv::Func_csvrows_from_textblock e_csvrows_from_textblock;
-    vx_data_csv::Func_csvrows_from_textblock t_csvrows_from_textblock;
   };
 
 

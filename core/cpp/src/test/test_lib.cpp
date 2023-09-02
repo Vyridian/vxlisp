@@ -6,7 +6,7 @@
 namespace test_lib {
 
   std::string read_test_file(std::string path, std::string filename) {
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file, {
       vx_core::vx_new_string(":path"), vx_core::vx_new_string(path),
       vx_core::vx_new_string(":name"), vx_core::vx_new_string(filename)
     });
@@ -41,7 +41,7 @@ namespace test_lib {
   vx_test::Type_testdescribe sample_testdescribe1(vx_core::Type_context context) {
     vx_test::Type_testdescribe output;
     long irefcount = vx_core::refcount;
-    output = vx_core::vx_new(vx_test::t_testdescribe(), {
+    output = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true true)"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"),
@@ -54,7 +54,7 @@ namespace test_lib {
   vx_test::Type_testdescribe sample_testdescribe2(vx_core::Type_context context) {
     vx_test::Type_testdescribe output;
     long irefcount = vx_core::refcount;
-    output = vx_core::vx_new(vx_test::t_testdescribe(), {
+    output = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false false)"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"),
@@ -68,8 +68,8 @@ namespace test_lib {
     vx_test::Type_testdescribelist output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_any_from_any(
-      vx_test::t_testdescribelist(),
-      vx_test::t_testdescribelist()->vx_new_from_list({
+      vx_test::t_testdescribelist,
+      vx_test::t_testdescribelist->vx_new_from_list({
         sample_testdescribe1(context),
         sample_testdescribe2(context)
       })
@@ -81,7 +81,7 @@ namespace test_lib {
   vx_test::Type_testcase sample_testcase(vx_core::Type_context context) {
     vx_test::Type_testcase output;
     long irefcount = vx_core::refcount;
-    output = vx_core::vx_new(vx_test::t_testcase(), {
+    output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false(),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
@@ -92,23 +92,23 @@ namespace test_lib {
   }
 
   vx_test::Type_testcase sample_testcase2(vx_core::Type_context context) {
-    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase(), {
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false(),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("float"),
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
-        vx_test::t_testdescribelist(),
-        vx_test::t_testdescribelist()->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe(), {
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list({
+          vx_core::vx_new(vx_test::t_testdescribe, {
             vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4.5 (float 4.5))"),
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_decimal_from_string("4.5"),
               vx_core::f_new(
-                vx_core::t_float(),
-                vx_core::vx_new(vx_core::t_anylist(), {
+                vx_core::t_float,
+                vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_decimal_from_string("4.5")
                 })
               ),
@@ -125,8 +125,8 @@ namespace test_lib {
     vx_test::Type_testcaselist output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_any_from_any(
-      vx_test::t_testcaselist(),
-      vx_test::t_testcaselist()->vx_new_from_list({
+      vx_test::t_testcaselist,
+      vx_test::t_testcaselist->vx_new_from_list({
         sample_testcase(context),
         sample_testcase2(context)
       })
@@ -138,7 +138,7 @@ namespace test_lib {
   vx_test::Type_testpackage sample_testpackage(vx_core::Type_context context) {
     vx_test::Type_testpackage output;
     long irefcount = vx_core::refcount;
-    output = vx_core::vx_new(vx_test::t_testpackage(), {
+    output = vx_core::vx_new(vx_test::t_testpackage, {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":caselist"), sample_testcaselist(context)
     });
@@ -150,8 +150,8 @@ namespace test_lib {
     vx_test::Type_testpackagelist output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_any_from_any(
-      vx_test::t_testpackagelist(),
-      vx_test::t_testpackagelist()->vx_new_from_list({
+      vx_test::t_testpackagelist,
+      vx_test::t_testpackagelist->vx_new_from_list({
         sample_testpackage(context)
       })
     );
@@ -180,7 +180,7 @@ namespace test_lib {
   // Blocking
   vx_test::Type_testresult run_testresult_async(std::string testpkg, std::string testname, std::string message, vx_test::Type_testresult testresult) {
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
-    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
+    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult, async_testresult);
     vx_test::Type_testresult output = test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
     vx_core::vx_release_except(testresult_resolved, output);
 		return output;
@@ -203,7 +203,7 @@ namespace test_lib {
   // Only use if running a single testdescribe
   vx_test::Type_testdescribe run_testdescribe_async(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
     vx_core::vx_Type_async async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
-    vx_test::Type_testdescribe testdescribe_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribe(), async_testdescribe);
+    vx_test::Type_testdescribe testdescribe_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribe, async_testdescribe);
     vx_test::Type_testdescribe output = test_lib::run_testdescribe(testpkg, casename, testdescribe_resolved);
 		return output;
   }
@@ -217,7 +217,7 @@ namespace test_lib {
 			listtestdescribe_resolved.push_back(testdescribe_resolved);
     }
 		vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
-			vx_test::t_testdescribelist(),
+			vx_test::t_testdescribelist,
 			testdescribelist->vx_new_from_list(listtestdescribe_resolved)
 		);
     vx_core::vx_release_one_except(testdescribelist, output);
@@ -228,7 +228,7 @@ namespace test_lib {
   // Only use if running a single testdescribelist
   vx_test::Type_testdescribelist run_testdescribelist_async(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
     vx_core::vx_Type_async async_testdescribelist = vx_test::f_resolve_testdescribelist(testdescribelist);
-    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist(), async_testdescribelist);
+    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist, async_testdescribelist);
     vx_test::Type_testdescribelist output = test_lib::run_testdescribelist(testpkg, casename, testdescribelist_resolved);
     return output;
   }
@@ -250,7 +250,7 @@ namespace test_lib {
   // Only use if running a single testcase
   vx_test::Type_testcase run_testcase_async(vx_test::Type_testcase testcase) {
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
-    vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase(), async_testcase);
+    vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase, async_testcase);
     vx_test::Type_testcase output = test_lib::run_testcase(testcase_resolved);
 		return output;
   }
@@ -264,7 +264,7 @@ namespace test_lib {
 			listtestcase_resolved.push_back(testcase_resolved);
     }
 		vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
-			vx_test::t_testcaselist(),
+			vx_test::t_testcaselist,
 			testcaselist->vx_new_from_list(listtestcase_resolved)
 		);
     vx_core::vx_release_one_except(testcaselist, output);
@@ -275,7 +275,7 @@ namespace test_lib {
   // Only use if running a single testcaselist
   vx_test::Type_testcaselist run_testcaselist_async(vx_test::Type_testcaselist testcaselist) {
     vx_core::vx_Type_async async_testcaselist = vx_test::f_resolve_testcaselist(testcaselist);
-    vx_test::Type_testcaselist testcaselist_resolved = vx_core::vx_sync_from_async(vx_test::t_testcaselist(), async_testcaselist);
+    vx_test::Type_testcaselist testcaselist_resolved = vx_core::vx_sync_from_async(vx_test::t_testcaselist, async_testcaselist);
     vx_test::Type_testcaselist output = test_lib::run_testcaselist(testcaselist_resolved);
     return output;
   }
@@ -295,7 +295,7 @@ namespace test_lib {
   // This is the preferred way of calling test (1 block per package)
   vx_test::Type_testpackage run_testpackage_async(vx_test::Type_testpackage testpackage) {
     vx_core::vx_Type_async async_testpackage = vx_test::f_resolve_testpackage(testpackage);
-    vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage(), async_testpackage);
+    vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage, async_testpackage);
     vx_test::Type_testpackage output = test_lib::run_testpackage(testpackage_resolved);
 		return output;
   }
@@ -309,7 +309,7 @@ namespace test_lib {
 			listtestpackage_resolved.push_back(testpackage_resolved);
     }
 		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
-			vx_test::t_testpackagelist(),
+			vx_test::t_testpackagelist,
 			testpackagelist->vx_new_from_list(listtestpackage_resolved)
 		);
     vx_core::vx_release_one_except(testpackagelist, output);
@@ -320,7 +320,7 @@ namespace test_lib {
   // This is the preferred way of calling testsuite (1 block per testsuite)
   vx_test::Type_testpackagelist run_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist) {
     vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
-    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist(), async_testpackagelist);
+    vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     vx_test::Type_testpackagelist output = test_lib::run_testpackagelist(testpackagelist_resolved);
 		return output;
   }
@@ -359,7 +359,7 @@ namespace test_lib {
     vx_core::Type_boolean write_node = test_lib::write_node(htmlnode);
     vx_core::Type_boolean write_html = test_lib::write_html(htmlnode);
     vx_core::vx_release_one(htmlnode);
-    vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean(), {
+    vx_core::Type_boolean output = vx_core::vx_new(vx_core::t_boolean, {
       write_testpackagelist,
       write_node,
       write_html
@@ -397,7 +397,7 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_core::Type_string helloworld = vx_core::vx_new_string("Hello World");
     vx_core::vx_Type_async async = vx_core::vx_async_new_from_value(helloworld);
-    vx_core::Type_string sync = vx_core::vx_sync_from_async(vx_core::t_string(), async);
+    vx_core::Type_string sync = vx_core::vx_sync_from_async(vx_core::t_string, async);
     std::string expected = "Hello World";
     std::string actual = sync->vx_string();
     vx_core::vx_release(sync);
@@ -413,13 +413,13 @@ namespace test_lib {
     vx_core::vx_Type_async async = vx_core::vx_async_new_from_value(helloworld);
     vx_core::vx_Type_async async1 = vx_core::vx_async_from_async_fn(
       async,
-      vx_core::t_string(),
+      vx_core::t_string,
       {},
       [](vx_core::Type_any any) {
         return any;
       }
     );
-    vx_core::Type_string sync = vx_core::vx_sync_from_async(vx_core::t_string(), async1);
+    vx_core::Type_string sync = vx_core::vx_sync_from_async(vx_core::t_string, async1);
     std::string expected = "Hello World";
     std::string actual = sync->vx_string();
     vx_core::vx_release(sync);
@@ -666,11 +666,11 @@ namespace test_lib {
     long irefcount = vx_core::refcount;
     vx_test::Type_testdescribelist testdescribelist = sample_testdescribelist(context);
     vx_core::vx_Type_async async_testdescribelist = vx_core::f_list_from_list_async(
-      vx_test::t_testdescribelist(),
+      vx_test::t_testdescribelist,
       testdescribelist,
-      vx_test::t_resolve_testdescribe()
+      vx_test::t_resolve_testdescribe
     );
-    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist(), async_testdescribelist);
+    vx_test::Type_testdescribelist testdescribelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribelist, async_testdescribelist);
     std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testdescribelist_resolved);
     vx_core::vx_release(testdescribelist_resolved);
@@ -755,7 +755,7 @@ namespace test_lib {
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
-    vx_core::Func_any_from_func anyfromfunc = vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+    vx_core::Func_any_from_func anyfromfunc = vx_core::t_any_from_func->vx_fn_new({testresult}, [testresult]() {
       vx_core::Type_any output_1 = testresult;
       return output_1;
     });
@@ -787,7 +787,7 @@ namespace test_lib {
     vx_core::vx_memory_leak_test(testname + "-1", irefcount, 2);
     vx_core::vx_Type_async async_testresult = vx_test::f_resolve_testresult(testresult);
     vx_core::vx_memory_leak_test(testname + "-2", irefcount, 4);
-    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult(), async_testresult);
+    vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult, async_testresult);
     vx_core::vx_memory_leak_test(testname + "-3", irefcount, 2);
     std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");
     std::string actual = vx_core::vx_string_from_any(testresult_resolved);
@@ -820,28 +820,28 @@ namespace test_lib {
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
     vx_core::Type_any output_2 = vx_core::f_if_2(
-      vx_test::t_testresult(),
-      vx_core::vx_new(vx_core::t_thenelselist(), {
+      vx_test::t_testresult,
+      vx_core::vx_new(vx_core::t_thenelselist, {
         vx_core::f_then(
-          vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
+          vx_core::t_boolean_from_func->vx_fn_new({fn_actual}, [fn_actual]() {
             vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
             return output_1;
           }),
-          vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+          vx_core::t_any_from_func->vx_fn_new({testresult}, [testresult]() {
             vx_core::Type_any output_1 = testresult;
             return output_1;
           })
         ),
         vx_core::f_else(
-          vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+          vx_core::t_any_from_func->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
             vx_test::Type_testresult output_1 = vx_core::f_let(
-              vx_test::t_testresult(),
-              vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+              vx_test::t_testresult,
+              vx_core::t_any_from_func->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
                 vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
                 vx_core::vx_ref_plus(passfail);
                 vx_test::Type_testresult output_1 = vx_core::f_copy(
                   testresult,
-                  vx_core::vx_new(vx_core::t_anylist(), {
+                  vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":passfail"),
                     passfail,
                     vx_core::vx_new_string(":actual"),
@@ -873,11 +873,11 @@ namespace test_lib {
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
     vx_core::Type_thenelse thenelse = vx_core::f_then(
-      vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
+      vx_core::t_boolean_from_func->vx_fn_new({fn_actual}, [fn_actual]() {
         vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
         return output_1;
       }),
-      vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+      vx_core::t_any_from_func->vx_fn_new({testresult}, [testresult]() {
         vx_core::Type_any output_1 = testresult;
         return output_1;
       })
@@ -897,27 +897,27 @@ namespace test_lib {
     vx_core::Func_any_from_func_async fn_actual = testresult->fn_actual();
     vx_core::Type_any expected = testresult->expected();
     vx_core::Type_any actual = testresult->actual();
-    vx_core::Type_thenelselist thenelselist = vx_core::vx_new(vx_core::t_thenelselist(), {
+    vx_core::Type_thenelselist thenelselist = vx_core::vx_new(vx_core::t_thenelselist, {
       vx_core::f_then(
-        vx_core::t_boolean_from_func()->vx_fn_new({fn_actual}, [fn_actual]() {
+        vx_core::t_boolean_from_func->vx_fn_new({fn_actual}, [fn_actual]() {
           vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(fn_actual);
           return output_1;
         }),
-        vx_core::t_any_from_func()->vx_fn_new({testresult}, [testresult]() {
+        vx_core::t_any_from_func->vx_fn_new({testresult}, [testresult]() {
           vx_core::Type_any output_1 = testresult;
           return output_1;
         })
       ),
       vx_core::f_else(
-        vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+        vx_core::t_any_from_func->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
           vx_test::Type_testresult output_1 = vx_core::f_let(
-            vx_test::t_testresult(),
-            vx_core::t_any_from_func()->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
+            vx_test::t_testresult,
+            vx_core::t_any_from_func->vx_fn_new({expected, actual, testresult}, [expected, actual, testresult]() {
               vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
               vx_core::vx_ref_plus(passfail);
               vx_test::Type_testresult output_1 = vx_core::f_copy(
                 testresult,
-                vx_core::vx_new(vx_core::t_anylist(), {
+                vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_string(":passfail"),
                   passfail,
                   vx_core::vx_new_string(":actual"),
@@ -943,7 +943,7 @@ namespace test_lib {
   bool test_pathfull_from_file(vx_core::Type_context context) {
     std::string testname = "test_pathfull_from_file";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file, {
       vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
       vx_core::vx_new_string(":name"), vx_core::vx_new_string("string_read_from_file.txt")
     });
@@ -1015,7 +1015,7 @@ namespace test_lib {
   bool test_write_file(vx_core::Type_context context) {
     std::string testname = "test_write_file";
     long irefcount = vx_core::refcount;
-    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file(), {
+    vx_data_file::Type_file file = vx_core::vx_new(vx_data_file::t_file, {
       vx_core::vx_new_string(":path"), vx_core::vx_new_string("src/test/resources/vx"),
       vx_core::vx_new_string(":name"), vx_core::vx_new_string("boolean_write_from_file_string.txt")
     });
