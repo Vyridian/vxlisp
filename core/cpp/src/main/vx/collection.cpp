@@ -1,3 +1,5 @@
+#include <map>
+#include <string>
 #include "../vx/core.hpp"
 #include "../vx/type.hpp"
 #include "collection.hpp"
@@ -604,104 +606,68 @@ namespace vx_collection {
 
   //}
 
-  vx_collection::vx_Class_package* vx_package = new vx_collection::vx_Class_package();
+  vx_collection::Func_list_from_list_fn_filter e_list_from_list_fn_filter = NULL;
+  vx_collection::Func_list_from_list_fn_filter t_list_from_list_fn_filter = NULL;
+  vx_collection::Func_list_from_list_start_end e_list_from_list_start_end = NULL;
+  vx_collection::Func_list_from_list_start_end t_list_from_list_start_end = NULL;
+  vx_collection::Func_is_list e_is_list = NULL;
+  vx_collection::Func_is_list t_is_list = NULL;
+  vx_collection::Func_is_map e_is_map = NULL;
+  vx_collection::Func_is_map t_is_map = NULL;
+  vx_collection::Func_list_from_list_end e_list_from_list_end = NULL;
+  vx_collection::Func_list_from_list_end t_list_from_list_end = NULL;
+  vx_collection::Func_list_from_list_filtertypes e_list_from_list_filtertypes = NULL;
+  vx_collection::Func_list_from_list_filtertypes t_list_from_list_filtertypes = NULL;
+  vx_collection::Func_list_from_list_start e_list_from_list_start = NULL;
+  vx_collection::Func_list_from_list_start t_list_from_list_start = NULL;
 
-  // (func list<-list-fn-filter)
-  vx_collection::Func_list_from_list_fn_filter vx_e_list_from_list_fn_filter() {
-    vx_collection::Func_list_from_list_fn_filter output = new vx_collection::Class_list_from_list_fn_filter();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_fn_filter vx_t_list_from_list_fn_filter() {
-    vx_collection::Func_list_from_list_fn_filter output = new vx_collection::Class_list_from_list_fn_filter();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_fn_filter e_list_from_list_fn_filter = vx_e_list_from_list_fn_filter();
-  vx_collection::Func_list_from_list_fn_filter t_list_from_list_fn_filter = vx_t_list_from_list_fn_filter();
-
-  // (func list<-list-start-end)
-  vx_collection::Func_list_from_list_start_end vx_e_list_from_list_start_end() {
-    vx_collection::Func_list_from_list_start_end output = new vx_collection::Class_list_from_list_start_end();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_start_end vx_t_list_from_list_start_end() {
-    vx_collection::Func_list_from_list_start_end output = new vx_collection::Class_list_from_list_start_end();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_start_end e_list_from_list_start_end = vx_e_list_from_list_start_end();
-  vx_collection::Func_list_from_list_start_end t_list_from_list_start_end = vx_t_list_from_list_start_end();
-
-  // (func is-list)
-  vx_collection::Func_is_list vx_e_is_list() {
-    vx_collection::Func_is_list output = new vx_collection::Class_is_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_is_list vx_t_is_list() {
-    vx_collection::Func_is_list output = new vx_collection::Class_is_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_is_list e_is_list = vx_e_is_list();
-  vx_collection::Func_is_list t_is_list = vx_t_is_list();
-
-  // (func is-map)
-  vx_collection::Func_is_map vx_e_is_map() {
-    vx_collection::Func_is_map output = new vx_collection::Class_is_map();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_is_map vx_t_is_map() {
-    vx_collection::Func_is_map output = new vx_collection::Class_is_map();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_is_map e_is_map = vx_e_is_map();
-  vx_collection::Func_is_map t_is_map = vx_t_is_map();
-
-  // (func list<-list-end)
-  vx_collection::Func_list_from_list_end vx_e_list_from_list_end() {
-    vx_collection::Func_list_from_list_end output = new vx_collection::Class_list_from_list_end();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_end vx_t_list_from_list_end() {
-    vx_collection::Func_list_from_list_end output = new vx_collection::Class_list_from_list_end();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_end e_list_from_list_end = vx_e_list_from_list_end();
-  vx_collection::Func_list_from_list_end t_list_from_list_end = vx_t_list_from_list_end();
-
-  // (func list<-list-filtertypes)
-  vx_collection::Func_list_from_list_filtertypes vx_e_list_from_list_filtertypes() {
-    vx_collection::Func_list_from_list_filtertypes output = new vx_collection::Class_list_from_list_filtertypes();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_filtertypes vx_t_list_from_list_filtertypes() {
-    vx_collection::Func_list_from_list_filtertypes output = new vx_collection::Class_list_from_list_filtertypes();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_filtertypes e_list_from_list_filtertypes = vx_e_list_from_list_filtertypes();
-  vx_collection::Func_list_from_list_filtertypes t_list_from_list_filtertypes = vx_t_list_from_list_filtertypes();
-
-  // (func list<-list-start)
-  vx_collection::Func_list_from_list_start vx_e_list_from_list_start() {
-    vx_collection::Func_list_from_list_start output = new vx_collection::Class_list_from_list_start();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_start vx_t_list_from_list_start() {
-    vx_collection::Func_list_from_list_start output = new vx_collection::Class_list_from_list_start();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_collection::Func_list_from_list_start e_list_from_list_start = vx_e_list_from_list_start();
-  vx_collection::Func_list_from_list_start t_list_from_list_start = vx_t_list_from_list_start();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_collection::e_list_from_list_fn_filter = new vx_collection::Class_list_from_list_fn_filter();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_fn_filter);
+      vx_collection::t_list_from_list_fn_filter = new vx_collection::Class_list_from_list_fn_filter();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_fn_filter);
+      vx_collection::e_list_from_list_start_end = new vx_collection::Class_list_from_list_start_end();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start_end);
+      vx_collection::t_list_from_list_start_end = new vx_collection::Class_list_from_list_start_end();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_start_end);
+      vx_collection::e_is_list = new vx_collection::Class_is_list();
+      vx_core::vx_reserve_empty(vx_collection::e_is_list);
+      vx_collection::t_is_list = new vx_collection::Class_is_list();
+      vx_core::vx_reserve_type(vx_collection::t_is_list);
+      vx_collection::e_is_map = new vx_collection::Class_is_map();
+      vx_core::vx_reserve_empty(vx_collection::e_is_map);
+      vx_collection::t_is_map = new vx_collection::Class_is_map();
+      vx_core::vx_reserve_type(vx_collection::t_is_map);
+      vx_collection::e_list_from_list_end = new vx_collection::Class_list_from_list_end();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_end);
+      vx_collection::t_list_from_list_end = new vx_collection::Class_list_from_list_end();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_end);
+      vx_collection::e_list_from_list_filtertypes = new vx_collection::Class_list_from_list_filtertypes();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_filtertypes);
+      vx_collection::t_list_from_list_filtertypes = new vx_collection::Class_list_from_list_filtertypes();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_filtertypes);
+      vx_collection::e_list_from_list_start = new vx_collection::Class_list_from_list_start();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start);
+      vx_collection::t_list_from_list_start = new vx_collection::Class_list_from_list_start();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_start);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

@@ -50,13 +50,7 @@ namespace vx_data_file {
   class Abstract_string_read_from_file;
   typedef Abstract_string_read_from_file* Func_string_read_from_file;
   extern Func_string_read_from_file e_string_read_from_file;
-  extern Func_string_read_from_file t_string_read_from_file;
-
-  class vx_Class_package {
-  public:
-  };
-
-// :headerfirst
+  extern Func_string_read_from_file t_string_read_from_file;// :headerfirst
 // :header
 
   vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file);
@@ -384,6 +378,16 @@ namespace vx_data_file {
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

@@ -277,46 +277,46 @@ namespace vx_core {
   extern Type_value t_value;
   class Class_false;
   typedef Class_false* Const_false;
-  extern Const_false c_false();
+  extern Const_false c_false;
   class Class_globalpackagemap;
   typedef Class_globalpackagemap* Const_globalpackagemap;
-  extern Const_globalpackagemap c_globalpackagemap();
+  extern Const_globalpackagemap c_globalpackagemap;
   class Class_infinity;
   typedef Class_infinity* Const_infinity;
-  extern Const_infinity c_infinity();
+  extern Const_infinity c_infinity;
   class Class_mempool_active;
   typedef Class_mempool_active* Const_mempool_active;
-  extern Const_mempool_active c_mempool_active();
+  extern Const_mempool_active c_mempool_active;
   class Class_msg_error;
   typedef Class_msg_error* Const_msg_error;
-  extern Const_msg_error c_msg_error();
+  extern Const_msg_error c_msg_error;
   class Class_msg_info;
   typedef Class_msg_info* Const_msg_info;
-  extern Const_msg_info c_msg_info();
+  extern Const_msg_info c_msg_info;
   class Class_msg_severe;
   typedef Class_msg_severe* Const_msg_severe;
-  extern Const_msg_severe c_msg_severe();
+  extern Const_msg_severe c_msg_severe;
   class Class_msg_warning;
   typedef Class_msg_warning* Const_msg_warning;
-  extern Const_msg_warning c_msg_warning();
+  extern Const_msg_warning c_msg_warning;
   class Class_neginfinity;
   typedef Class_neginfinity* Const_neginfinity;
-  extern Const_neginfinity c_neginfinity();
+  extern Const_neginfinity c_neginfinity;
   class Class_newline;
   typedef Class_newline* Const_newline;
-  extern Const_newline c_newline();
+  extern Const_newline c_newline;
   class Class_notanumber;
   typedef Class_notanumber* Const_notanumber;
-  extern Const_notanumber c_notanumber();
+  extern Const_notanumber c_notanumber;
   class Class_nothing;
   typedef Class_nothing* Const_nothing;
-  extern Const_nothing c_nothing();
+  extern Const_nothing c_nothing;
   class Class_quote;
   typedef Class_quote* Const_quote;
-  extern Const_quote c_quote();
+  extern Const_quote c_quote;
   class Class_true;
   typedef Class_true* Const_true;
-  extern Const_true c_true();
+  extern Const_true c_true;
   class Abstract_not;
   typedef Abstract_not* Func_not;
   extern Func_not e_not;
@@ -884,61 +884,7 @@ namespace vx_core {
   class Abstract_user_from_context;
   typedef Abstract_user_from_context* Func_user_from_context;
   extern Func_user_from_context e_user_from_context;
-  extern Func_user_from_context t_user_from_context;
-
-  class vx_Class_package {
-  public:
-    vx_core::Type_any e_any;
-    vx_core::Type_any t_any;
-    vx_core::Type_list e_list;
-    vx_core::Type_list t_list;
-    vx_core::Type_map e_map;
-    vx_core::Type_map t_map;
-    vx_core::Type_struct e_struct;
-    vx_core::Type_struct t_struct;
-    vx_core::Type_msg e_msg;
-    vx_core::Type_msg t_msg;
-    vx_core::Type_msglist e_msglist;
-    vx_core::Type_msglist t_msglist;
-    vx_core::Type_msgblock e_msgblock;
-    vx_core::Type_msgblock t_msgblock;
-    vx_core::Type_msgblocklist e_msgblocklist;
-    vx_core::Type_msgblocklist t_msgblocklist;
-    vx_core::Type_boolean e_boolean;
-    vx_core::Type_boolean t_boolean;
-    vx_core::Type_number e_number;
-    vx_core::Type_number t_number;
-    vx_core::Type_decimal e_decimal;
-    vx_core::Type_decimal t_decimal;
-    vx_core::Type_float e_float;
-    vx_core::Type_float t_float;
-    vx_core::Type_int e_int;
-    vx_core::Type_int t_int;
-    vx_core::Type_string e_string;
-    vx_core::Type_string t_string;
-    vx_core::Type_func e_func;
-    vx_core::Type_func t_func;
-    vx_core::Type_typedef e_typedef;
-    vx_core::Type_typedef t_typedef;
-    vx_core::Type_funcdef e_funcdef;
-    vx_core::Type_funcdef t_funcdef;
-    vx_core::Const_false c_false;
-    vx_core::Const_globalpackagemap c_globalpackagemap;
-    vx_core::Const_infinity c_infinity;
-    vx_core::Const_mempool_active c_mempool_active;
-    vx_core::Const_msg_error c_msg_error;
-    vx_core::Const_msg_info c_msg_info;
-    vx_core::Const_msg_severe c_msg_severe;
-    vx_core::Const_msg_warning c_msg_warning;
-    vx_core::Const_neginfinity c_neginfinity;
-    vx_core::Const_newline c_newline;
-    vx_core::Const_notanumber c_notanumber;
-    vx_core::Const_nothing c_nothing;
-    vx_core::Const_quote c_quote;
-    vx_core::Const_true c_true;
-  };
-
-// :headerfirst
+  extern Func_user_from_context t_user_from_context;// :headerfirst
 
 // :header
 
@@ -946,6 +892,7 @@ namespace vx_core {
 
   typedef std::vector<vx_core::Type_any> vx_Type_listany;
   typedef std::map<std::string, vx_core::Type_any> vx_Type_mapany;
+  typedef std::map<std::string, vx_core::Type_func> vx_Type_mapfunc;
 
   typedef std::initializer_list<Type_any> vx_Type_listarg;
 
@@ -954,6 +901,14 @@ namespace vx_core {
 
   typedef std::future<vx_core::Type_any>* vx_Type_future;
   typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
+
+  // class vx_Abstract_package
+  class vx_Abstract_package {
+  public:
+    virtual vx_core::vx_Type_mapany maptype() = 0;
+    virtual vx_core::vx_Type_mapany mapconst() = 0;
+    virtual vx_core::vx_Type_mapfunc mapfunc() = 0;
+  };
 
   // class vx_Class_async
   class vx_Class_async {
@@ -7611,7 +7566,7 @@ namespace vx_core {
     vx_core::vx_reserve({values, fn_any_from_any});
     std::vector<vx_core::Type_any> listvalue = values->vx_list();
     for (vx_core::Type_any value : listvalue) {
-      if (value != vx_core::c_nothing()) {
+      if (value != vx_core::c_nothing) {
         vx_core::Type_any any = fn_any_from_any->vx_any_from_any(value);
         output = vx_core::vx_any_from_any(generic_any_1, any);
         break;
@@ -7789,6 +7744,16 @@ namespace vx_core {
     vx_core::vx_release_one_except(clauses, output);
     return output;
   }
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

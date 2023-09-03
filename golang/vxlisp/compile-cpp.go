@@ -476,13 +476,11 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 	headerextras := ""
 	switch NameFromType(cnsttype) {
 	case "vx/core/boolean":
+		if cnst.name == "true" {
+			cnstval = "true"
+		}
 		if cnstval == "" {
-			switch NameFromConst(cnst) {
-			case "vx/core/true":
-				cnstval = "true"
-			default:
-				cnstval = "false"
-			}
+			cnstval = "false"
 		}
 		cnstval = "\n      output->vx_p_boolean = " + cnstval + ";"
 		headerextras += "\n    bool vx_boolean() const override;"
@@ -569,22 +567,6 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 					"\n      vx_core::vx_release(val);" +
 					"\n      vx_core::refcount = irefcount;"
 			}
-			/*
-				clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, "        ", true, false, path)
-				msgblock = MsgBlockAddBlock(msgblock, msgs)
-				if clstext != "" {
-					cnstval = "" +
-						"\n      if ((!this->vx_p_map) || (this->vx_p_map.size() == 0)) {" +
-						"\n        " + cnsttypeclassname + " orig = " + clstext + ";" +
-						"\n        this->vx_p_map = orig->vx_map();" +
-						"\n      }"
-					initval = "" +
-						"\n    std::map<std::string, vx_core::Type_any> vx_map() {" +
-						cnstval +
-						"\n      return this->vx_p_map;" +
-						"\n    }"
-				}
-			*/
 		}
 	}
 	extends := CppNameClassFullFromType(cnsttype)
@@ -625,17 +607,9 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, *vxmsg
 		"\n" +
 		"\n  //}" +
 		"\n"
+	cname := pkgname + "::c_" + cnstname
 	bodyfooter := "" +
-		"\n  // (const " + cnst.name + ")" +
-		"\n  " + fullconstname + " c_" + cnstname + "() {" +
-		"\n    " + fullconstname + " output = " + pkgname + "::vx_package->c_" + cnstname + ";" +
-		"\n    if (output == NULL) {" +
-		"\n      output = " + fullclassname + "::vx_const_new();" +
-		"\n      " + pkgname + "::vx_package->c_" + cnstname + " = output;" +
-		"\n    }" +
-		"\n    return output;" +
-		"\n  }" +
-		"\n"
+		"\n      " + cname + " = " + fullclassname + "::vx_const_new();"
 	return output, headers, bodyfooter, msgblock
 }
 
@@ -971,7 +945,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 	} else {
 		if BooleanFromStringStarts(fnc.name, "boolean<-") {
 			returnvalue += "" +
-				"\n      vx_core::Type_boolean output = vx_core::c_false();" +
+				"\n      vx_core::Type_boolean output = vx_core::c_false;" +
 				"\n      if (fn) {" +
 				"\n        output = vx_core::vx_any_from_any(vx_core::t_boolean, fn(" + StringFromListStringJoin(listargname, ", ") + "));" +
 				"\n      }"
@@ -1122,41 +1096,13 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 		instancefuncs +
 		"\n  //}" +
 		"\n"
+	ename := pkgname + "::e_" + funcname
+	tname := pkgname + "::t_" + funcname
 	footer := "" +
-		"\n  // (func " + fnc.name + ")" +
-		/*
-			"\n  " + fullfuncname + " e_" + funcname + "() {" +
-			"\n    " + fullfuncname + " output = " + pkgname + "::vx_package->e_" + funcname + ";" +
-			"\n    if (!output) {" +
-			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-			"\n      vx_core::vx_reserve_empty(output);" +
-			"\n      " + pkgname + "::vx_package->e_" + funcname + " = output;" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-			"\n  " + fullfuncname + " t_" + funcname + "() {" +
-			"\n    " + fullfuncname + " output = " + pkgname + "::vx_package->t_" + funcname + ";" +
-			"\n    if (!output) {" +
-			"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-			"\n      vx_core::vx_reserve_type(output);" +
-			"\n      " + pkgname + "::vx_package->t_" + funcname + " = output;" +
-			"\n    }" +
-			"\n    return output;" +
-			"\n  }" +
-		*/
-		"\n  " + fullfuncname + " vx_e_" + funcname + "() {" +
-		"\n    " + fullfuncname + " output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-		"\n    vx_core::vx_reserve_empty(output);" +
-		"\n    return output;" +
-		"\n  }" +
-		"\n  " + fullfuncname + " vx_t_" + funcname + "() {" +
-		"\n    " + fullfuncname + " output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-		"\n    vx_core::vx_reserve_type(output);" +
-		"\n    return output;" +
-		"\n  }" +
-		"\n  " + fullfuncname + " e_" + funcname + " = vx_e_" + funcname + "();" +
-		"\n  " + fullfuncname + " t_" + funcname + " = vx_t_" + funcname + "();" +
-		"\n"
+		"\n      " + ename + " = " + CppPointerNewFromClassName(fullclassname) + ";" +
+		"\n      vx_core::vx_reserve_empty(" + ename + ");" +
+		"\n      " + tname + " = " + CppPointerNewFromClassName(fullclassname) + ";" +
+		"\n      vx_core::vx_reserve_type(" + tname + ");"
 	return output, staticfunction, footer, msgblock
 }
 
@@ -1249,8 +1195,6 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		forwardheader += "" +
 			"\n  class Abstract_" + typename + ";" +
 			"\n  typedef " + CppPointerDefFromClassName("Abstract_"+typename) + " Type_" + typename + ";" +
-			//			"\n  extern Type_" + typename + " e_" + typename + "();" +
-			//			"\n  extern Type_" + typename + " t_" + typename + "();" +
 			"\n  extern Type_" + typename + " e_" + typename + ";" +
 			"\n  extern Type_" + typename + " t_" + typename + ";"
 	}
@@ -1260,7 +1204,7 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		forwardheader += "" +
 			"\n  class Class_" + constname + ";" +
 			"\n  typedef " + CppPointerDefFromClassName("Class_"+constname) + " Const_" + constname + ";" +
-			"\n  extern Const_" + constname + " c_" + constname + "();"
+			"\n  extern Const_" + constname + " c_" + constname + ";"
 	}
 	for _, funcid := range fnckeys {
 		fncs := pkg.mapfunc[funcid]
@@ -1294,8 +1238,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 				specialheader += typeheader
 			}
 			packageheader += "" +
-				"\n    " + CppNameTypeFullFromType(typ) + " e_" + CppNameFromType(typ) + ";" +
-				"\n    " + CppNameTypeFullFromType(typ) + " t_" + CppNameFromType(typ) + ";"
+				"\n  " + CppNameTypeFullFromType(typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
+				"\n  " + CppNameTypeFullFromType(typ) + " t_" + CppNameFromType(typ) + " = NULL;"
 		}
 	}
 	remainingkeys := ListStringFromListStringNotMatch(typkeys, specialtypeorder)
@@ -1307,19 +1251,30 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		typebodys += typebody
 		typeheaders += typeheader
 		typebodyfooters += typebodyfooter
+		packageheader += "" +
+			"\n  " + CppNameTypeFullFromType(typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
+			"\n  " + CppNameTypeFullFromType(typ) + " t_" + CppNameFromType(typ) + " = NULL;"
 	}
 	constheaders := ""
 	constbodys := ""
 	constbodyfooters := ""
+	constbodyfootersearly := ""
+	constbodyfooterslate := ""
 	for _, cnstid := range cnstkeys {
 		cnst := pkg.mapconst[cnstid]
 		constbody, constheader, constbodyfooter, msgs := CppFromConst(cnst, pkg)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		constbodys += constbody
 		constheaders += constheader
-		constbodyfooters += constbodyfooter
+		if cnst.pkgname == "vx/core" && cnst.name == "false" {
+			constbodyfootersearly += constbodyfooter
+		} else if cnst.value.code == ":func" && cnst.value.name != "native" {
+			constbodyfooterslate += constbodyfooter
+		} else {
+			constbodyfooters += constbodyfooter
+		}
 		packageheader += "" +
-			"\n    " + CppNameTypeFullFromConst(cnst) + " c_" + CppNameFromConst(cnst) + ";"
+			"\n  " + CppNameTypeFullFromConst(cnst) + " c_" + CppNameFromConst(cnst) + " = NULL;"
 	}
 	funcheaders := ""
 	funcstaticdeclaration := ""
@@ -1342,6 +1297,9 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 					funcbodys += fncbody
 					funcbodyfooters += fncbodyfooter
 					funcstaticbody += staticfunction
+					packageheader += "" +
+						"\n  " + CppNameTypeFullFromFunc(fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
+						"\n  " + CppNameTypeFullFromFunc(fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
 				}
 			}
 		}
@@ -1358,6 +1316,9 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 			funcheaders += fncheader
 			funcstaticdeclaration += fncheaderfooter
 			funcstaticbody += staticfunction
+			packageheader += "" +
+				"\n  " + CppNameTypeFullFromFunc(fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
+				"\n  " + CppNameTypeFullFromFunc(fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
 		}
 	}
 	headerfilename := pkg.name
@@ -1371,28 +1332,53 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		typebodys +
 		constbodys +
 		funcbodys +
-		"\n  " + pkgname + "::vx_Class_package* vx_package = new " + pkgname + "::vx_Class_package();" +
-		"\n" +
+		packageheader + `
+
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {` +
+		constbodyfootersearly +
 		typebodyfooters +
 		constbodyfooters +
-		funcbodyfooters
-		//		emptytypes
+		funcbodyfooters +
+		constbodyfooterslate + `
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
+`
 	header := "" +
 		forwardheader +
-		"\n" +
-		"\n  class vx_Class_package {" +
-		"\n  public:" +
-		packageheader +
-		"\n  };" +
-		"\n" +
-		"\n" +
 		specialfirst +
 		specialheader +
 		funcstaticdeclaration +
 		typeheaders +
 		constheaders +
 		funcheaders +
-		funcstaticbody
+		funcstaticbody + `
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
+`
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
@@ -1528,9 +1514,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        output->vx_p_msgblock = msgblock;" +
 			"\n        vx_core::vx_reserve(msgblock);" +
 			"\n      } else if (booleanval) {" +
-			"\n        output = vx_core::c_true();" +
+			"\n        output = vx_core::c_true;" +
 			"\n      } else {" +
-			"\n        output = vx_core::c_false();" +
+			"\n        output = vx_core::c_false;" +
 			"\n      }"
 	case "vx/core/decimal":
 		valcopy = "" +
@@ -2243,49 +2229,22 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		"\n      return output;" +
 		"\n    }" +
 		"\n"
-	specialempty := ""
+	tname := pkgname + "::t_" + typename
+	ename := pkgname + "::e_" + typename
+	emptyvalue := ""
 	switch NameFromType(typ) {
 	case "vx/core/boolean":
-		specialempty = "" +
-			"\n      output = vx_core::c_false();"
+		emptyvalue = "" +
+			"\n      " + ename + " = vx_core::c_false;"
 	default:
-		specialempty = "" +
-			"\n      output = new " + classname + "();" +
-			"\n      vx_core::vx_reserve_empty(output);"
+		emptyvalue = "" +
+			"\n      " + ename + " = new " + classname + "();" +
+			"\n      vx_core::vx_reserve_empty(" + ename + ");"
 	}
 	footer := "" +
-		/*
-			  "\n  " + fulltypename + " e_" + typename + "() {" +
-				"\n    " + fulltypename + " output = " + pkgname + "::vx_package->e_" + typename + ";" +
-				"\n    if (!output) {" +
-				specialempty +
-				"\n      " + pkgname + "::vx_package->e_" + typename + " = output;" +
-				"\n    }" +
-				"\n    return output;" +
-				"\n  }" +
-				"\n  " + fulltypename + " t_" + typename + "() {" +
-				"\n    " + fulltypename + " output = " + pkgname + "::vx_package->t_" + typename + ";" +
-				"\n    if (!output) {" +
-				"\n      output = new " + classname + "();" +
-				"\n      vx_core::vx_reserve_type(output);" +
-				"\n      " + pkgname + "::vx_package->t_" + typename + " = output;" +
-				"\n    }" +
-				"\n    return output;" +
-				"\n  }" +
-		*/
-		"\n  " + fulltypename + " vx_e_" + typename + "() {" +
-		"\n    " + fulltypename + " output;" +
-		specialempty +
-		"\n    return output;" +
-		"\n  }" +
-		"\n  " + fulltypename + " vx_t_" + typename + "() {" +
-		"\n    " + fulltypename + " output = new " + classname + "();" +
-		"\n    vx_core::vx_reserve_type(output);" +
-		"\n    return output;" +
-		"\n  }" +
-		"\n  " + fulltypename + " e_" + typename + " = vx_e_" + typename + "();" +
-		"\n  " + fulltypename + " t_" + typename + " = vx_t_" + typename + "();" +
-		"\n"
+		emptyvalue +
+		"\n      " + tname + " = new " + classname + "();" +
+		"\n      vx_core::vx_reserve_type(" + tname + ");"
 	output := "" +
 		//"\n  /**" +
 		//"\n   * " + StringFromStringIndent(doc, "   * ") +
@@ -2348,7 +2307,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 				valstr = CppFromName(value.name)
 			} else {
 				valconst := ConstFromValue(value)
-				valstr = CppNameFromPkgName(valconst.pkgname) + "::c_" + CppFromName(valconst.alias) + "()"
+				valstr = CppNameFromPkgName(valconst.pkgname) + "::c_" + CppFromName(valconst.alias)
 			}
 		}
 		output = valstr
@@ -3886,7 +3845,7 @@ func CppTestCase(testvalues []vxvalue, testpkg string, testname string, testcase
 		output = "" +
 			"\n  vx_test::Type_testcase " + testcasename + "(vx_core::Type_context context) {" +
 			"\n    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {" +
-			"\n      vx_core::vx_new_string(\":passfail\"), vx_core::c_false()," +
+			"\n      vx_core::vx_new_string(\":passfail\"), vx_core::c_false," +
 			"\n      vx_core::vx_new_string(\":testpkg\"), vx_core::vx_new_string(\"" + testpkg + "\")," +
 			"\n      vx_core::vx_new_string(\":casename\"), vx_core::vx_new_string(\"" + testname + "\")," +
 			"\n      vx_core::vx_new_string(\":describelist\")," +
@@ -4324,7 +4283,6 @@ func CppApp(project *vxproject, cmd *vxcommand) string {
     vx_core::Type_string output = vx_core::vx_new_string("Hello World");
 		vx_core::vx_release(output);`
 	prjmain := cmd.main
-	MsgLog("CppApp:main:" + prjmain)
 	if prjmain != "" {
 		isfound := false
 		pos := IntFromStringFindLast(prjmain, "/")
@@ -4721,7 +4679,7 @@ namespace test_lib {
     vx_test::Type_testcase output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
       vx_core::vx_new_string(":describelist"), sample_testdescribelist(context)
@@ -4732,7 +4690,7 @@ namespace test_lib {
 
   vx_test::Type_testcase sample_testcase2(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("float"),
       vx_core::vx_new_string(":describelist"),

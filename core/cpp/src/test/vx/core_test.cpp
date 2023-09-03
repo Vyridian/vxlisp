@@ -7,7 +7,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase t_boolean(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
       vx_core::vx_new_string(":describelist"),
@@ -68,7 +68,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase t_float(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("float"),
       vx_core::vx_new_string(":describelist"),
@@ -98,7 +98,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase t_int(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("int"),
       vx_core::vx_new_string(":describelist"),
@@ -129,7 +129,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_core::f_is_int(
-                vx_core::c_infinity()
+                vx_core::c_infinity
               ),
               context
             )
@@ -140,7 +140,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_core::f_is_int(
-                vx_core::c_neginfinity()
+                vx_core::c_neginfinity
               ),
               context
             )
@@ -151,7 +151,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test_true(
               vx_core::f_is_int(
-                vx_core::c_notanumber()
+                vx_core::c_notanumber
               ),
               context
             )
@@ -182,7 +182,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase t_string(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string"),
       vx_core::vx_new_string(":describelist"),
@@ -228,7 +228,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase c_false(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("false"),
       vx_core::vx_new_string(":describelist"),
@@ -252,7 +252,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase c_true(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("true"),
       vx_core::vx_new_string(":describelist"),
@@ -276,7 +276,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_not(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("!"),
       vx_core::vx_new_string(":describelist"),
@@ -311,7 +311,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_ne(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("!="),
       vx_core::vx_new_string(":describelist"),
@@ -342,7 +342,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_multiply(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("*"),
       vx_core::vx_new_string(":describelist"),
@@ -377,7 +377,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_multiply_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("*_1"),
       vx_core::vx_new_string(":describelist"),
@@ -412,7 +412,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_multiply_2(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("*_2"),
       vx_core::vx_new_string(":describelist"),
@@ -459,7 +459,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_multiply_3(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("*_3"),
       vx_core::vx_new_string(":describelist"),
@@ -506,7 +506,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_plus(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("+"),
       vx_core::vx_new_string(":describelist"),
@@ -541,7 +541,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_plus_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("+_1"),
       vx_core::vx_new_string(":describelist"),
@@ -576,7 +576,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_plus1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("+1"),
       vx_core::vx_new_string(":describelist"),
@@ -611,7 +611,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_minus(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("-"),
       vx_core::vx_new_string(":describelist"),
@@ -646,7 +646,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_minus_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("-_1"),
       vx_core::vx_new_string(":describelist"),
@@ -681,7 +681,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_divide(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("/"),
       vx_core::vx_new_string(":describelist"),
@@ -716,7 +716,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_lt(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<"),
       vx_core::vx_new_string(":describelist"),
@@ -740,7 +740,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_lt_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<_1"),
       vx_core::vx_new_string(":describelist"),
@@ -779,7 +779,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_chainfirst(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<-"),
       vx_core::vx_new_string(":describelist"),
@@ -816,7 +816,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_chainlast(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<<-"),
       vx_core::vx_new_string(":describelist"),
@@ -853,7 +853,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_le(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<="),
       vx_core::vx_new_string(":describelist"),
@@ -877,7 +877,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_le_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("<=_1"),
       vx_core::vx_new_string(":describelist"),
@@ -907,7 +907,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_eq(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("="),
       vx_core::vx_new_string(":describelist"),
@@ -1006,7 +1006,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_eq_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("=_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1036,7 +1036,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_gt(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string(">"),
       vx_core::vx_new_string(":describelist"),
@@ -1060,7 +1060,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_gt_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string(">_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1090,7 +1090,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_ge(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string(">="),
       vx_core::vx_new_string(":describelist"),
@@ -1114,7 +1114,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_ge_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string(">=_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1144,7 +1144,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_and(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("and"),
       vx_core::vx_new_string(":describelist"),
@@ -1183,7 +1183,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_and_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("and_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1228,7 +1228,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_any_from_list(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("any<-list"),
       vx_core::vx_new_string(":describelist"),
@@ -1285,7 +1285,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_any_from_list_reduce(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("any<-list-reduce"),
       vx_core::vx_new_string(":describelist"),
@@ -1328,7 +1328,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_any_from_map(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("any<-map"),
       vx_core::vx_new_string(":describelist"),
@@ -1367,7 +1367,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_compare(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("compare"),
       vx_core::vx_new_string(":describelist"),
@@ -1402,7 +1402,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_contains(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("contains"),
       vx_core::vx_new_string(":describelist"),
@@ -1435,7 +1435,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_contains_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("contains_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1507,7 +1507,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_empty(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("empty"),
       vx_core::vx_new_string(":describelist"),
@@ -1562,7 +1562,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_first_from_list(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("first<-list"),
       vx_core::vx_new_string(":describelist"),
@@ -1596,7 +1596,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_first_from_list_fn_any_from_any(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("first<-list-fn-any<-any"),
       vx_core::vx_new_string(":describelist"),
@@ -1614,7 +1614,7 @@ namespace vx_core_test {
                 vx_core::f_new(
                   vx_core::t_list,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::c_nothing(),
+                    vx_core::c_nothing,
                     vx_core::vx_new_string("b"),
                     vx_core::vx_new_string("c")
                   })
@@ -1632,7 +1632,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_if(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("if"),
       vx_core::vx_new_string(":describelist"),
@@ -1675,7 +1675,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_if_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("if_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1720,7 +1720,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_if_2(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("if_2"),
       vx_core::vx_new_string(":describelist"),
@@ -1776,7 +1776,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_int_from_string(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("int<-string"),
       vx_core::vx_new_string(":describelist"),
@@ -1818,7 +1818,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
-              vx_core::c_notanumber(),
+              vx_core::c_notanumber,
               vx_core::f_int_from_string(vx_core::vx_new_string("notanumber")),
               context
             )
@@ -1828,7 +1828,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
-              vx_core::c_infinity(),
+              vx_core::c_infinity,
               vx_core::f_int_from_string(vx_core::vx_new_string("infinity")),
               context
             )
@@ -1838,7 +1838,7 @@ namespace vx_core_test {
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
-              vx_core::c_neginfinity(),
+              vx_core::c_neginfinity,
               vx_core::f_int_from_string(vx_core::vx_new_string("neginfinity")),
               context
             )
@@ -1851,7 +1851,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_is_empty_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("is-empty_1"),
       vx_core::vx_new_string(":describelist"),
@@ -1901,7 +1901,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_is_number(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("is-number"),
       vx_core::vx_new_string(":describelist"),
@@ -1943,7 +1943,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_last_from_list(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("last<-list"),
       vx_core::vx_new_string(":describelist"),
@@ -1977,7 +1977,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_length_from_list(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("length<-list"),
       vx_core::vx_new_string(":describelist"),
@@ -2011,7 +2011,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_let(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("let"),
       vx_core::vx_new_string(":describelist"),
@@ -2047,7 +2047,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_list_from_map(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-map"),
       vx_core::vx_new_string(":describelist"),
@@ -2102,7 +2102,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_map_from_list(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("map<-list"),
       vx_core::vx_new_string(":describelist"),
@@ -2156,7 +2156,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_new(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("new"),
       vx_core::vx_new_string(":describelist"),
@@ -2281,7 +2281,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_or(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("or"),
       vx_core::vx_new_string(":describelist"),
@@ -2332,7 +2332,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_or_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("or_1"),
       vx_core::vx_new_string(":describelist"),
@@ -2377,7 +2377,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_resolve(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("resolve"),
       vx_core::vx_new_string(":describelist"),
@@ -2402,7 +2402,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_resolve_1(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("resolve_1"),
       vx_core::vx_new_string(":describelist"),
@@ -2434,7 +2434,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_resolve_async(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("resolve-async"),
       vx_core::vx_new_string(":describelist"),
@@ -2466,7 +2466,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_string_repeat(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string-repeat"),
       vx_core::vx_new_string(":describelist"),
@@ -2491,7 +2491,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_string_from_any(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-any"),
       vx_core::vx_new_string(":describelist"),
@@ -2587,7 +2587,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_switch(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("switch"),
       vx_core::vx_new_string(":describelist"),
@@ -2637,7 +2637,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_type_from_any(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("type<-any"),
       vx_core::vx_new_string(":describelist"),
@@ -2684,7 +2684,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase f_typename_from_any(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("typename<-any"),
       vx_core::vx_new_string(":describelist"),

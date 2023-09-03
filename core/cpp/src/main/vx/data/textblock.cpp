@@ -1,3 +1,4 @@
+#include <map>
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
@@ -1012,104 +1013,68 @@ namespace vx_data_textblock {
 
   //}
 
-  vx_data_textblock::vx_Class_package* vx_package = new vx_data_textblock::vx_Class_package();
+  vx_data_textblock::Type_delimset e_delimset = NULL;
+  vx_data_textblock::Type_delimset t_delimset = NULL;
+  vx_data_textblock::Type_textblock e_textblock = NULL;
+  vx_data_textblock::Type_textblock t_textblock = NULL;
+  vx_data_textblock::Type_textblocklist e_textblocklist = NULL;
+  vx_data_textblock::Type_textblocklist t_textblocklist = NULL;
+  vx_data_textblock::Func_parse e_parse = NULL;
+  vx_data_textblock::Func_parse t_parse = NULL;
+  vx_data_textblock::Func_stringlist_from_textblocklist e_stringlist_from_textblocklist = NULL;
+  vx_data_textblock::Func_stringlist_from_textblocklist t_stringlist_from_textblocklist = NULL;
+  vx_data_textblock::Func_text_from_textblock e_text_from_textblock = NULL;
+  vx_data_textblock::Func_text_from_textblock t_text_from_textblock = NULL;
+  vx_data_textblock::Func_textblocks_from_textblock e_textblocks_from_textblock = NULL;
+  vx_data_textblock::Func_textblocks_from_textblock t_textblocks_from_textblock = NULL;
 
-  vx_data_textblock::Type_delimset vx_e_delimset() {
-    vx_data_textblock::Type_delimset output;
-      output = new Class_delimset();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Type_delimset vx_t_delimset() {
-    vx_data_textblock::Type_delimset output = new Class_delimset();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Type_delimset e_delimset = vx_e_delimset();
-  vx_data_textblock::Type_delimset t_delimset = vx_t_delimset();
-
-  vx_data_textblock::Type_textblock vx_e_textblock() {
-    vx_data_textblock::Type_textblock output;
-      output = new Class_textblock();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Type_textblock vx_t_textblock() {
-    vx_data_textblock::Type_textblock output = new Class_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Type_textblock e_textblock = vx_e_textblock();
-  vx_data_textblock::Type_textblock t_textblock = vx_t_textblock();
-
-  vx_data_textblock::Type_textblocklist vx_e_textblocklist() {
-    vx_data_textblock::Type_textblocklist output;
-      output = new Class_textblocklist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Type_textblocklist vx_t_textblocklist() {
-    vx_data_textblock::Type_textblocklist output = new Class_textblocklist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Type_textblocklist e_textblocklist = vx_e_textblocklist();
-  vx_data_textblock::Type_textblocklist t_textblocklist = vx_t_textblocklist();
-
-  // (func parse)
-  vx_data_textblock::Func_parse vx_e_parse() {
-    vx_data_textblock::Func_parse output = new vx_data_textblock::Class_parse();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Func_parse vx_t_parse() {
-    vx_data_textblock::Func_parse output = new vx_data_textblock::Class_parse();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Func_parse e_parse = vx_e_parse();
-  vx_data_textblock::Func_parse t_parse = vx_t_parse();
-
-  // (func stringlist<-textblocklist)
-  vx_data_textblock::Func_stringlist_from_textblocklist vx_e_stringlist_from_textblocklist() {
-    vx_data_textblock::Func_stringlist_from_textblocklist output = new vx_data_textblock::Class_stringlist_from_textblocklist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Func_stringlist_from_textblocklist vx_t_stringlist_from_textblocklist() {
-    vx_data_textblock::Func_stringlist_from_textblocklist output = new vx_data_textblock::Class_stringlist_from_textblocklist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Func_stringlist_from_textblocklist e_stringlist_from_textblocklist = vx_e_stringlist_from_textblocklist();
-  vx_data_textblock::Func_stringlist_from_textblocklist t_stringlist_from_textblocklist = vx_t_stringlist_from_textblocklist();
-
-  // (func text<-textblock)
-  vx_data_textblock::Func_text_from_textblock vx_e_text_from_textblock() {
-    vx_data_textblock::Func_text_from_textblock output = new vx_data_textblock::Class_text_from_textblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Func_text_from_textblock vx_t_text_from_textblock() {
-    vx_data_textblock::Func_text_from_textblock output = new vx_data_textblock::Class_text_from_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Func_text_from_textblock e_text_from_textblock = vx_e_text_from_textblock();
-  vx_data_textblock::Func_text_from_textblock t_text_from_textblock = vx_t_text_from_textblock();
-
-  // (func textblocks<-textblock)
-  vx_data_textblock::Func_textblocks_from_textblock vx_e_textblocks_from_textblock() {
-    vx_data_textblock::Func_textblocks_from_textblock output = new vx_data_textblock::Class_textblocks_from_textblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_textblock::Func_textblocks_from_textblock vx_t_textblocks_from_textblock() {
-    vx_data_textblock::Func_textblocks_from_textblock output = new vx_data_textblock::Class_textblocks_from_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_textblock::Func_textblocks_from_textblock e_textblocks_from_textblock = vx_e_textblocks_from_textblock();
-  vx_data_textblock::Func_textblocks_from_textblock t_textblocks_from_textblock = vx_t_textblocks_from_textblock();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_data_textblock::e_delimset = new Class_delimset();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_delimset);
+      vx_data_textblock::t_delimset = new Class_delimset();
+      vx_core::vx_reserve_type(vx_data_textblock::t_delimset);
+      vx_data_textblock::e_textblock = new Class_textblock();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_textblock);
+      vx_data_textblock::t_textblock = new Class_textblock();
+      vx_core::vx_reserve_type(vx_data_textblock::t_textblock);
+      vx_data_textblock::e_textblocklist = new Class_textblocklist();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_textblocklist);
+      vx_data_textblock::t_textblocklist = new Class_textblocklist();
+      vx_core::vx_reserve_type(vx_data_textblock::t_textblocklist);
+      vx_data_textblock::e_parse = new vx_data_textblock::Class_parse();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_parse);
+      vx_data_textblock::t_parse = new vx_data_textblock::Class_parse();
+      vx_core::vx_reserve_type(vx_data_textblock::t_parse);
+      vx_data_textblock::e_stringlist_from_textblocklist = new vx_data_textblock::Class_stringlist_from_textblocklist();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_stringlist_from_textblocklist);
+      vx_data_textblock::t_stringlist_from_textblocklist = new vx_data_textblock::Class_stringlist_from_textblocklist();
+      vx_core::vx_reserve_type(vx_data_textblock::t_stringlist_from_textblocklist);
+      vx_data_textblock::e_text_from_textblock = new vx_data_textblock::Class_text_from_textblock();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_text_from_textblock);
+      vx_data_textblock::t_text_from_textblock = new vx_data_textblock::Class_text_from_textblock();
+      vx_core::vx_reserve_type(vx_data_textblock::t_text_from_textblock);
+      vx_data_textblock::e_textblocks_from_textblock = new vx_data_textblock::Class_textblocks_from_textblock();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_textblocks_from_textblock);
+      vx_data_textblock::t_textblocks_from_textblock = new vx_data_textblock::Class_textblocks_from_textblock();
+      vx_core::vx_reserve_type(vx_data_textblock::t_textblocks_from_textblock);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

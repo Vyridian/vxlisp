@@ -19,7 +19,7 @@ namespace vx_data_csv {
   extern Type_csvrows t_csvrows;
   class Class_delims;
   typedef Class_delims* Const_delims;
-  extern Const_delims c_delims();
+  extern Const_delims c_delims;
   class Abstract_csv_from_textblock;
   typedef Abstract_csv_from_textblock* Func_csv_from_textblock;
   extern Func_csv_from_textblock e_csv_from_textblock;
@@ -28,13 +28,6 @@ namespace vx_data_csv {
   typedef Abstract_csvrows_from_textblock* Func_csvrows_from_textblock;
   extern Func_csvrows_from_textblock e_csvrows_from_textblock;
   extern Func_csvrows_from_textblock t_csvrows_from_textblock;
-
-  class vx_Class_package {
-  public:
-    vx_data_csv::Const_delims c_delims;
-  };
-
-
   // (func csv<-textblock)
   vx_data_csv::Type_csv f_csv_from_textblock(vx_data_textblock::Type_textblock textblock);
 
@@ -167,6 +160,16 @@ namespace vx_data_csv {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

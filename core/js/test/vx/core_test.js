@@ -22,7 +22,7 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 179, ":total", 222), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 81, ":tests", 180, ":total", 222), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 57, ":total", 119), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -2179,27 +2179,27 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+            ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
             ":testresult",
             vx_test.f_test(
               vx_core.f_new(
-                vx_core.t_stringlist,
-                "a1",
-                "b2"
+                vx_core.t_stringmap,
+                "keya",
+                "a",
+                "keyb",
+                "b"
               ),
-              vx_core.f_list_from_map(
-                {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "list-1": vx_core.t_stringlist, "map-2": vx_core.t_stringmap},
+              vx_core.f_map_from_list(
+                {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "list-2": vx_core.t_stringlist, "map-1": vx_core.t_stringmap},
                 vx_core.f_new(
-                  vx_core.t_stringmap,
+                  vx_core.t_stringlist,
                   "a",
-                  "1",
-                  "b",
-                  "2"
+                  "b"
                 ),
-                vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+                vx_core.f_new(vx_core.t_any_from_any, (val) => 
                   vx_core.f_new(
                     vx_core.t_string,
-                    key,
+                    "key",
                     val
                   ))
               ),

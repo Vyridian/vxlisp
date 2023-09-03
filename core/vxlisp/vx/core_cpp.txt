@@ -68,6 +68,7 @@ let-async
 
   typedef std::vector<vx_core::Type_any> vx_Type_listany;
   typedef std::map<std::string, vx_core::Type_any> vx_Type_mapany;
+  typedef std::map<std::string, vx_core::Type_func> vx_Type_mapfunc;
 
   typedef std::initializer_list<Type_any> vx_Type_listarg;
 
@@ -76,6 +77,14 @@ let-async
 
   typedef std::future<vx_core::Type_any>* vx_Type_future;
   typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
+
+  // class vx_Abstract_package
+  class vx_Abstract_package {
+  public:
+    virtual vx_core::vx_Type_mapany maptype() = 0;
+    virtual vx_core::vx_Type_mapany mapconst() = 0;
+    virtual vx_core::vx_Type_mapfunc mapfunc() = 0;
+  };
 
   // class vx_Class_async
   class vx_Class_async {
@@ -886,11 +895,11 @@ let-async
   // vx_is_int(any)
   bool vx_is_int(vx_core::Type_any value) {
     bool output = false;
-    if (value == vx_core::c_infinity()) {
+    if (value == vx_core::c_infinity) {
       output = true;
-    } else if (value == vx_core::c_neginfinity()) {
+    } else if (value == vx_core::c_neginfinity) {
       output = true;
-    } else if (value == vx_core::c_notanumber()) {
+    } else if (value == vx_core::c_notanumber) {
       output = true;
     } else {
       vx_core::Type_any type = value->vx_type();
@@ -1054,9 +1063,9 @@ let-async
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval) {
-    vx_core::Type_boolean output = vx_core::c_false();
+    vx_core::Type_boolean output = vx_core::c_false;
     if (isval) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }
     return output;
   }
@@ -1336,11 +1345,11 @@ let-async
           text = vx_core::vx_string_from_string_start_end(text, 0, text.length() - 2);
         }
       } else if (type == vx_core::t_int) {
-        if (value == vx_core::c_notanumber()) {
+        if (value == vx_core::c_notanumber) {
           text = "notanumber";
-        } else if (value == vx_core::c_infinity()) {
+        } else if (value == vx_core::c_infinity) {
           text = "infinity";
-        } else if (value == vx_core::c_neginfinity()) {
+        } else if (value == vx_core::c_neginfinity) {
           text = "neginfinity";
         } else {
           vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int, value);
@@ -1715,14 +1724,14 @@ let-async
       vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
       vx_core::vx_reserve(string_error);
       output->vx_p_text = string_error;
-      output->vx_p_severity = vx_core::c_msg_severe();
+      output->vx_p_severity = vx_core::c_msg_severe;
       return output;
     }
 
     vx_core::Type_msg Class_msg::vx_msg_from_exception(const std::string text, std::exception err) const {
       vx_core::Type_msg output = new vx_core::Class_msg();
       output->vx_p_text = vx_core::vx_new_string(text);
-      output->vx_p_severity = vx_core::c_msg_severe();
+      output->vx_p_severity = vx_core::c_msg_severe;
       output->err = err;
       return output;
     }

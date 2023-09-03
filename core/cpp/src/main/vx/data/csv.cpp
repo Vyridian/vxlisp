@@ -1,3 +1,4 @@
+#include <map>
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
@@ -542,7 +543,7 @@ namespace vx_data_csv {
       vx_core::t_any_from_func->vx_fn_new({textblock}, [textblock]() {
         vx_data_textblock::Type_textblock parsedtb = vx_data_textblock::f_parse(
           textblock,
-          vx_data_csv::c_delims()
+          vx_data_csv::c_delims
         );
         vx_core::vx_ref_plus(parsedtb);
         vx_data_textblock::Type_textblocklist childtbs = vx_data_textblock::f_textblocks_from_textblock(parsedtb);
@@ -646,72 +647,52 @@ namespace vx_data_csv {
 
   //}
 
-  vx_data_csv::vx_Class_package* vx_package = new vx_data_csv::vx_Class_package();
+  vx_data_csv::Type_csv e_csv = NULL;
+  vx_data_csv::Type_csv t_csv = NULL;
+  vx_data_csv::Type_csvrows e_csvrows = NULL;
+  vx_data_csv::Type_csvrows t_csvrows = NULL;
+  vx_data_csv::Const_delims c_delims = NULL;
+  vx_data_csv::Func_csv_from_textblock e_csv_from_textblock = NULL;
+  vx_data_csv::Func_csv_from_textblock t_csv_from_textblock = NULL;
+  vx_data_csv::Func_csvrows_from_textblock e_csvrows_from_textblock = NULL;
+  vx_data_csv::Func_csvrows_from_textblock t_csvrows_from_textblock = NULL;
 
-  vx_data_csv::Type_csv vx_e_csv() {
-    vx_data_csv::Type_csv output;
-      output = new Class_csv();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_csv::Type_csv vx_t_csv() {
-    vx_data_csv::Type_csv output = new Class_csv();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_csv::Type_csv e_csv = vx_e_csv();
-  vx_data_csv::Type_csv t_csv = vx_t_csv();
-
-  vx_data_csv::Type_csvrows vx_e_csvrows() {
-    vx_data_csv::Type_csvrows output;
-      output = new Class_csvrows();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_csv::Type_csvrows vx_t_csvrows() {
-    vx_data_csv::Type_csvrows output = new Class_csvrows();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_csv::Type_csvrows e_csvrows = vx_e_csvrows();
-  vx_data_csv::Type_csvrows t_csvrows = vx_t_csvrows();
-
-  // (const delims)
-  vx_data_csv::Const_delims c_delims() {
-    vx_data_csv::Const_delims output = vx_data_csv::vx_package->c_delims;
-    if (output == NULL) {
-      output = vx_data_csv::Class_delims::vx_const_new();
-      vx_data_csv::vx_package->c_delims = output;
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
     }
-    return output;
-  }
-
-  // (func csv<-textblock)
-  vx_data_csv::Func_csv_from_textblock vx_e_csv_from_textblock() {
-    vx_data_csv::Func_csv_from_textblock output = new vx_data_csv::Class_csv_from_textblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_csv::Func_csv_from_textblock vx_t_csv_from_textblock() {
-    vx_data_csv::Func_csv_from_textblock output = new vx_data_csv::Class_csv_from_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_csv::Func_csv_from_textblock e_csv_from_textblock = vx_e_csv_from_textblock();
-  vx_data_csv::Func_csv_from_textblock t_csv_from_textblock = vx_t_csv_from_textblock();
-
-  // (func csvrows<-textblock)
-  vx_data_csv::Func_csvrows_from_textblock vx_e_csvrows_from_textblock() {
-    vx_data_csv::Func_csvrows_from_textblock output = new vx_data_csv::Class_csvrows_from_textblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_csv::Func_csvrows_from_textblock vx_t_csvrows_from_textblock() {
-    vx_data_csv::Func_csvrows_from_textblock output = new vx_data_csv::Class_csvrows_from_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_csv::Func_csvrows_from_textblock e_csvrows_from_textblock = vx_e_csvrows_from_textblock();
-  vx_data_csv::Func_csvrows_from_textblock t_csvrows_from_textblock = vx_t_csvrows_from_textblock();
+    void vx_Class_package::init() {
+      vx_data_csv::e_csv = new Class_csv();
+      vx_core::vx_reserve_empty(vx_data_csv::e_csv);
+      vx_data_csv::t_csv = new Class_csv();
+      vx_core::vx_reserve_type(vx_data_csv::t_csv);
+      vx_data_csv::e_csvrows = new Class_csvrows();
+      vx_core::vx_reserve_empty(vx_data_csv::e_csvrows);
+      vx_data_csv::t_csvrows = new Class_csvrows();
+      vx_core::vx_reserve_type(vx_data_csv::t_csvrows);
+      vx_data_csv::e_csv_from_textblock = new vx_data_csv::Class_csv_from_textblock();
+      vx_core::vx_reserve_empty(vx_data_csv::e_csv_from_textblock);
+      vx_data_csv::t_csv_from_textblock = new vx_data_csv::Class_csv_from_textblock();
+      vx_core::vx_reserve_type(vx_data_csv::t_csv_from_textblock);
+      vx_data_csv::e_csvrows_from_textblock = new vx_data_csv::Class_csvrows_from_textblock();
+      vx_core::vx_reserve_empty(vx_data_csv::e_csvrows_from_textblock);
+      vx_data_csv::t_csvrows_from_textblock = new vx_data_csv::Class_csvrows_from_textblock();
+      vx_core::vx_reserve_type(vx_data_csv::t_csvrows_from_textblock);
+      vx_data_csv::c_delims = vx_data_csv::Class_delims::vx_const_new();
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

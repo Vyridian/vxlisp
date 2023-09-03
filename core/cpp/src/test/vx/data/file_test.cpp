@@ -9,7 +9,7 @@ namespace vx_data_file_test {
 
   vx_test::Type_testcase f_boolean_exists_from_file(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean-exists<-file"),
       vx_core::vx_new_string(":describelist"),
@@ -43,7 +43,7 @@ namespace vx_data_file_test {
 
   vx_test::Type_testcase f_boolean_write_from_file_string(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean-write<-file-string"),
       vx_core::vx_new_string(":describelist"),
@@ -79,7 +79,7 @@ namespace vx_data_file_test {
 
   vx_test::Type_testcase f_file_read_from_file(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("file-read<-file"),
       vx_core::vx_new_string(":describelist"),
@@ -125,7 +125,7 @@ namespace vx_data_file_test {
 
   vx_test::Type_testcase f_string_read_from_file(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string-read<-file"),
       vx_core::vx_new_string(":describelist"),

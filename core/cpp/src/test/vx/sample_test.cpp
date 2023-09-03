@@ -8,7 +8,7 @@ namespace vx_sample_test {
 
   vx_test::Type_testcase c_myconst(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/sample"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("myconst"),
       vx_core::vx_new_string(":describelist"),
@@ -21,7 +21,7 @@ namespace vx_sample_test {
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
               vx_core::vx_new_int(4),
-              vx_sample::c_myconst(),
+              vx_sample::c_myconst,
               context
             )
           })
@@ -33,7 +33,7 @@ namespace vx_sample_test {
 
   vx_test::Type_testcase f_myfunc(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/sample"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("myfunc"),
       vx_core::vx_new_string(":describelist"),

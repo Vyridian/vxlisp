@@ -34,12 +34,6 @@ namespace vx_data_textblock {
   typedef Abstract_textblocks_from_textblock* Func_textblocks_from_textblock;
   extern Func_textblocks_from_textblock e_textblocks_from_textblock;
   extern Func_textblocks_from_textblock t_textblocks_from_textblock;
-
-  class vx_Class_package {
-  public:
-  };
-
-
   // (func parse)
   vx_data_textblock::Type_textblock f_parse(vx_data_textblock::Type_textblock block, vx_data_textblock::Type_delimset delimpairlist);
 
@@ -272,6 +266,16 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

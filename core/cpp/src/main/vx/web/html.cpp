@@ -6577,14 +6577,14 @@ namespace vx_web_html {
           vx_core::t_string,
           vx_core::vx_new(vx_core::t_anylist, {
             vx_core::vx_new_string("<!DOCTYPE html>"),
-            vx_core::c_newline(),
+            vx_core::c_newline,
             vx_core::vx_new_string("<html"),
             lang,
             vx_core::vx_new_string(">"),
             shead,
             sbody,
             sfooter,
-            vx_core::c_newline(),
+            vx_core::c_newline,
             vx_core::vx_new_string("</html>")
           })
         );
@@ -6690,7 +6690,7 @@ namespace vx_web_html {
       vx_core::f_new(
         vx_core::t_string,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::c_newline(),
+          vx_core::c_newline,
           vx_web_html::f_string_indent(indent)
         })
       )
@@ -7273,7 +7273,7 @@ namespace vx_web_html {
                 return output_1;
               }),
               vx_core::t_any_from_func->vx_fn_new({}, []() {
-                vx_core::Type_string output_1 = vx_core::c_newline();
+                vx_core::Type_string output_1 = vx_core::c_newline;
                 return output_1;
               })
             ),
@@ -7510,9 +7510,9 @@ namespace vx_web_html {
           vx_core::vx_new_string(" "),
           key,
           vx_core::vx_new_string("="),
-          vx_core::c_quote(),
+          vx_core::c_quote,
           val,
-          vx_core::c_quote()
+          vx_core::c_quote
         })
       )
     );
@@ -7603,12 +7603,12 @@ namespace vx_web_html {
         vx_core::t_string,
         vx_core::vx_new(vx_core::t_anylist, {
           vx_core::vx_new_string(" class="),
-          vx_core::c_quote(),
+          vx_core::c_quote,
           vx_type::f_string_from_string_start(
             style->name(),
             vx_core::vx_new_int(1)
           ),
-          vx_core::c_quote()
+          vx_core::c_quote
         })
       )
     );
@@ -9361,972 +9361,440 @@ namespace vx_web_html {
 
   //}
 
-  vx_web_html::vx_Class_package* vx_package = new vx_web_html::vx_Class_package();
-
-  vx_web_html::Type_node vx_e_node() {
-    vx_web_html::Type_node output;
-      output = new Class_node();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_node vx_t_node() {
-    vx_web_html::Type_node output = new Class_node();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_node e_node = vx_e_node();
-  vx_web_html::Type_node t_node = vx_t_node();
-
-  vx_web_html::Type_divchild vx_e_divchild() {
-    vx_web_html::Type_divchild output;
-      output = new Class_divchild();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_divchild vx_t_divchild() {
-    vx_web_html::Type_divchild output = new Class_divchild();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_divchild e_divchild = vx_e_divchild();
-  vx_web_html::Type_divchild t_divchild = vx_t_divchild();
-
-  vx_web_html::Type_body vx_e_body() {
-    vx_web_html::Type_body output;
-      output = new Class_body();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_body vx_t_body() {
-    vx_web_html::Type_body output = new Class_body();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_body e_body = vx_e_body();
-  vx_web_html::Type_body t_body = vx_t_body();
-
-  vx_web_html::Type_details vx_e_details() {
-    vx_web_html::Type_details output;
-      output = new Class_details();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_details vx_t_details() {
-    vx_web_html::Type_details output = new Class_details();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_details e_details = vx_e_details();
-  vx_web_html::Type_details t_details = vx_t_details();
-
-  vx_web_html::Type_div vx_e_div() {
-    vx_web_html::Type_div output;
-      output = new Class_div();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_div vx_t_div() {
-    vx_web_html::Type_div output = new Class_div();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_div e_div = vx_e_div();
-  vx_web_html::Type_div t_div = vx_t_div();
-
-  vx_web_html::Type_divchildlist vx_e_divchildlist() {
-    vx_web_html::Type_divchildlist output;
-      output = new Class_divchildlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_divchildlist vx_t_divchildlist() {
-    vx_web_html::Type_divchildlist output = new Class_divchildlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_divchildlist e_divchildlist = vx_e_divchildlist();
-  vx_web_html::Type_divchildlist t_divchildlist = vx_t_divchildlist();
-
-  vx_web_html::Type_divlist vx_e_divlist() {
-    vx_web_html::Type_divlist output;
-      output = new Class_divlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_divlist vx_t_divlist() {
-    vx_web_html::Type_divlist output = new Class_divlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_divlist e_divlist = vx_e_divlist();
-  vx_web_html::Type_divlist t_divlist = vx_t_divlist();
-
-  vx_web_html::Type_footer vx_e_footer() {
-    vx_web_html::Type_footer output;
-      output = new Class_footer();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_footer vx_t_footer() {
-    vx_web_html::Type_footer output = new Class_footer();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_footer e_footer = vx_e_footer();
-  vx_web_html::Type_footer t_footer = vx_t_footer();
-
-  vx_web_html::Type_h1 vx_e_h1() {
-    vx_web_html::Type_h1 output;
-      output = new Class_h1();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_h1 vx_t_h1() {
-    vx_web_html::Type_h1 output = new Class_h1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_h1 e_h1 = vx_e_h1();
-  vx_web_html::Type_h1 t_h1 = vx_t_h1();
-
-  vx_web_html::Type_h2 vx_e_h2() {
-    vx_web_html::Type_h2 output;
-      output = new Class_h2();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_h2 vx_t_h2() {
-    vx_web_html::Type_h2 output = new Class_h2();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_h2 e_h2 = vx_e_h2();
-  vx_web_html::Type_h2 t_h2 = vx_t_h2();
-
-  vx_web_html::Type_h3 vx_e_h3() {
-    vx_web_html::Type_h3 output;
-      output = new Class_h3();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_h3 vx_t_h3() {
-    vx_web_html::Type_h3 output = new Class_h3();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_h3 e_h3 = vx_e_h3();
-  vx_web_html::Type_h3 t_h3 = vx_t_h3();
-
-  vx_web_html::Type_head vx_e_head() {
-    vx_web_html::Type_head output;
-      output = new Class_head();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_head vx_t_head() {
-    vx_web_html::Type_head output = new Class_head();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_head e_head = vx_e_head();
-  vx_web_html::Type_head t_head = vx_t_head();
-
-  vx_web_html::Type_headchild vx_e_headchild() {
-    vx_web_html::Type_headchild output;
-      output = new Class_headchild();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_headchild vx_t_headchild() {
-    vx_web_html::Type_headchild output = new Class_headchild();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_headchild e_headchild = vx_e_headchild();
-  vx_web_html::Type_headchild t_headchild = vx_t_headchild();
-
-  vx_web_html::Type_headchildlist vx_e_headchildlist() {
-    vx_web_html::Type_headchildlist output;
-      output = new Class_headchildlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_headchildlist vx_t_headchildlist() {
-    vx_web_html::Type_headchildlist output = new Class_headchildlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_headchildlist e_headchildlist = vx_e_headchildlist();
-  vx_web_html::Type_headchildlist t_headchildlist = vx_t_headchildlist();
-
-  vx_web_html::Type_html vx_e_html() {
-    vx_web_html::Type_html output;
-      output = new Class_html();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_html vx_t_html() {
-    vx_web_html::Type_html output = new Class_html();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_html e_html = vx_e_html();
-  vx_web_html::Type_html t_html = vx_t_html();
-
-  vx_web_html::Type_meta vx_e_meta() {
-    vx_web_html::Type_meta output;
-      output = new Class_meta();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_meta vx_t_meta() {
-    vx_web_html::Type_meta output = new Class_meta();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_meta e_meta = vx_e_meta();
-  vx_web_html::Type_meta t_meta = vx_t_meta();
-
-  vx_web_html::Type_nodelist vx_e_nodelist() {
-    vx_web_html::Type_nodelist output;
-      output = new Class_nodelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_nodelist vx_t_nodelist() {
-    vx_web_html::Type_nodelist output = new Class_nodelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_nodelist e_nodelist = vx_e_nodelist();
-  vx_web_html::Type_nodelist t_nodelist = vx_t_nodelist();
-
-  vx_web_html::Type_p vx_e_p() {
-    vx_web_html::Type_p output;
-      output = new Class_p();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_p vx_t_p() {
-    vx_web_html::Type_p output = new Class_p();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_p e_p = vx_e_p();
-  vx_web_html::Type_p t_p = vx_t_p();
-
-  vx_web_html::Type_propmap vx_e_propmap() {
-    vx_web_html::Type_propmap output;
-      output = new Class_propmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_propmap vx_t_propmap() {
-    vx_web_html::Type_propmap output = new Class_propmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_propmap e_propmap = vx_e_propmap();
-  vx_web_html::Type_propmap t_propmap = vx_t_propmap();
-
-  vx_web_html::Type_style vx_e_style() {
-    vx_web_html::Type_style output;
-      output = new Class_style();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_style vx_t_style() {
-    vx_web_html::Type_style output = new Class_style();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_style e_style = vx_e_style();
-  vx_web_html::Type_style t_style = vx_t_style();
-
-  vx_web_html::Type_stylelist vx_e_stylelist() {
-    vx_web_html::Type_stylelist output;
-      output = new Class_stylelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_stylelist vx_t_stylelist() {
-    vx_web_html::Type_stylelist output = new Class_stylelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_stylelist e_stylelist = vx_e_stylelist();
-  vx_web_html::Type_stylelist t_stylelist = vx_t_stylelist();
-
-  vx_web_html::Type_stylemap vx_e_stylemap() {
-    vx_web_html::Type_stylemap output;
-      output = new Class_stylemap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_stylemap vx_t_stylemap() {
-    vx_web_html::Type_stylemap output = new Class_stylemap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_stylemap e_stylemap = vx_e_stylemap();
-  vx_web_html::Type_stylemap t_stylemap = vx_t_stylemap();
-
-  vx_web_html::Type_stylesheet vx_e_stylesheet() {
-    vx_web_html::Type_stylesheet output;
-      output = new Class_stylesheet();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_stylesheet vx_t_stylesheet() {
-    vx_web_html::Type_stylesheet output = new Class_stylesheet();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_stylesheet e_stylesheet = vx_e_stylesheet();
-  vx_web_html::Type_stylesheet t_stylesheet = vx_t_stylesheet();
-
-  vx_web_html::Type_table vx_e_table() {
-    vx_web_html::Type_table output;
-      output = new Class_table();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_table vx_t_table() {
-    vx_web_html::Type_table output = new Class_table();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_table e_table = vx_e_table();
-  vx_web_html::Type_table t_table = vx_t_table();
-
-  vx_web_html::Type_tbody vx_e_tbody() {
-    vx_web_html::Type_tbody output;
-      output = new Class_tbody();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_tbody vx_t_tbody() {
-    vx_web_html::Type_tbody output = new Class_tbody();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_tbody e_tbody = vx_e_tbody();
-  vx_web_html::Type_tbody t_tbody = vx_t_tbody();
-
-  vx_web_html::Type_td vx_e_td() {
-    vx_web_html::Type_td output;
-      output = new Class_td();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_td vx_t_td() {
-    vx_web_html::Type_td output = new Class_td();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_td e_td = vx_e_td();
-  vx_web_html::Type_td t_td = vx_t_td();
-
-  vx_web_html::Type_tdlist vx_e_tdlist() {
-    vx_web_html::Type_tdlist output;
-      output = new Class_tdlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_tdlist vx_t_tdlist() {
-    vx_web_html::Type_tdlist output = new Class_tdlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_tdlist e_tdlist = vx_e_tdlist();
-  vx_web_html::Type_tdlist t_tdlist = vx_t_tdlist();
-
-  vx_web_html::Type_thead vx_e_thead() {
-    vx_web_html::Type_thead output;
-      output = new Class_thead();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_thead vx_t_thead() {
-    vx_web_html::Type_thead output = new Class_thead();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_thead e_thead = vx_e_thead();
-  vx_web_html::Type_thead t_thead = vx_t_thead();
-
-  vx_web_html::Type_title vx_e_title() {
-    vx_web_html::Type_title output;
-      output = new Class_title();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_title vx_t_title() {
-    vx_web_html::Type_title output = new Class_title();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_title e_title = vx_e_title();
-  vx_web_html::Type_title t_title = vx_t_title();
-
-  vx_web_html::Type_tr vx_e_tr() {
-    vx_web_html::Type_tr output;
-      output = new Class_tr();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_tr vx_t_tr() {
-    vx_web_html::Type_tr output = new Class_tr();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_tr e_tr = vx_e_tr();
-  vx_web_html::Type_tr t_tr = vx_t_tr();
-
-  vx_web_html::Type_trlist vx_e_trlist() {
-    vx_web_html::Type_trlist output;
-      output = new Class_trlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Type_trlist vx_t_trlist() {
-    vx_web_html::Type_trlist output = new Class_trlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Type_trlist e_trlist = vx_e_trlist();
-  vx_web_html::Type_trlist t_trlist = vx_t_trlist();
-
-  // (func boolean-write<-id-htmltext)
-  vx_web_html::Func_boolean_write_from_id_htmltext vx_e_boolean_write_from_id_htmltext() {
-    vx_web_html::Func_boolean_write_from_id_htmltext output = new vx_web_html::Class_boolean_write_from_id_htmltext();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_boolean_write_from_id_htmltext vx_t_boolean_write_from_id_htmltext() {
-    vx_web_html::Func_boolean_write_from_id_htmltext output = new vx_web_html::Class_boolean_write_from_id_htmltext();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = vx_e_boolean_write_from_id_htmltext();
-  vx_web_html::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = vx_t_boolean_write_from_id_htmltext();
-
-  // (func boolean-write<-stylesheet)
-  vx_web_html::Func_boolean_write_from_stylesheet vx_e_boolean_write_from_stylesheet() {
-    vx_web_html::Func_boolean_write_from_stylesheet output = new vx_web_html::Class_boolean_write_from_stylesheet();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_boolean_write_from_stylesheet vx_t_boolean_write_from_stylesheet() {
-    vx_web_html::Func_boolean_write_from_stylesheet output = new vx_web_html::Class_boolean_write_from_stylesheet();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = vx_e_boolean_write_from_stylesheet();
-  vx_web_html::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = vx_t_boolean_write_from_stylesheet();
-
-  // (func htmlstring<-string)
-  vx_web_html::Func_htmlstring_from_string vx_e_htmlstring_from_string() {
-    vx_web_html::Func_htmlstring_from_string output = new vx_web_html::Class_htmlstring_from_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_htmlstring_from_string vx_t_htmlstring_from_string() {
-    vx_web_html::Func_htmlstring_from_string output = new vx_web_html::Class_htmlstring_from_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_htmlstring_from_string e_htmlstring_from_string = vx_e_htmlstring_from_string();
-  vx_web_html::Func_htmlstring_from_string t_htmlstring_from_string = vx_t_htmlstring_from_string();
-
-  // (func string-indent)
-  vx_web_html::Func_string_indent vx_e_string_indent() {
-    vx_web_html::Func_string_indent output = new vx_web_html::Class_string_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_indent vx_t_string_indent() {
-    vx_web_html::Func_string_indent output = new vx_web_html::Class_string_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_indent e_string_indent = vx_e_string_indent();
-  vx_web_html::Func_string_indent t_string_indent = vx_t_string_indent();
-
-  // (func string<-body-indent)
-  vx_web_html::Func_string_from_body_indent vx_e_string_from_body_indent() {
-    vx_web_html::Func_string_from_body_indent output = new vx_web_html::Class_string_from_body_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_body_indent vx_t_string_from_body_indent() {
-    vx_web_html::Func_string_from_body_indent output = new vx_web_html::Class_string_from_body_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_body_indent e_string_from_body_indent = vx_e_string_from_body_indent();
-  vx_web_html::Func_string_from_body_indent t_string_from_body_indent = vx_t_string_from_body_indent();
-
-  // (func string<-details-indent)
-  vx_web_html::Func_string_from_details_indent vx_e_string_from_details_indent() {
-    vx_web_html::Func_string_from_details_indent output = new vx_web_html::Class_string_from_details_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_details_indent vx_t_string_from_details_indent() {
-    vx_web_html::Func_string_from_details_indent output = new vx_web_html::Class_string_from_details_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_details_indent e_string_from_details_indent = vx_e_string_from_details_indent();
-  vx_web_html::Func_string_from_details_indent t_string_from_details_indent = vx_t_string_from_details_indent();
-
-  // (func string<-div-indent)
-  vx_web_html::Func_string_from_div_indent vx_e_string_from_div_indent() {
-    vx_web_html::Func_string_from_div_indent output = new vx_web_html::Class_string_from_div_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_div_indent vx_t_string_from_div_indent() {
-    vx_web_html::Func_string_from_div_indent output = new vx_web_html::Class_string_from_div_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_div_indent e_string_from_div_indent = vx_e_string_from_div_indent();
-  vx_web_html::Func_string_from_div_indent t_string_from_div_indent = vx_t_string_from_div_indent();
-
-  // (func string<-footer-indent)
-  vx_web_html::Func_string_from_footer_indent vx_e_string_from_footer_indent() {
-    vx_web_html::Func_string_from_footer_indent output = new vx_web_html::Class_string_from_footer_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_footer_indent vx_t_string_from_footer_indent() {
-    vx_web_html::Func_string_from_footer_indent output = new vx_web_html::Class_string_from_footer_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_footer_indent e_string_from_footer_indent = vx_e_string_from_footer_indent();
-  vx_web_html::Func_string_from_footer_indent t_string_from_footer_indent = vx_t_string_from_footer_indent();
-
-  // (func string<-h1-indent)
-  vx_web_html::Func_string_from_h1_indent vx_e_string_from_h1_indent() {
-    vx_web_html::Func_string_from_h1_indent output = new vx_web_html::Class_string_from_h1_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h1_indent vx_t_string_from_h1_indent() {
-    vx_web_html::Func_string_from_h1_indent output = new vx_web_html::Class_string_from_h1_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h1_indent e_string_from_h1_indent = vx_e_string_from_h1_indent();
-  vx_web_html::Func_string_from_h1_indent t_string_from_h1_indent = vx_t_string_from_h1_indent();
-
-  // (func string<-h2-indent)
-  vx_web_html::Func_string_from_h2_indent vx_e_string_from_h2_indent() {
-    vx_web_html::Func_string_from_h2_indent output = new vx_web_html::Class_string_from_h2_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h2_indent vx_t_string_from_h2_indent() {
-    vx_web_html::Func_string_from_h2_indent output = new vx_web_html::Class_string_from_h2_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h2_indent e_string_from_h2_indent = vx_e_string_from_h2_indent();
-  vx_web_html::Func_string_from_h2_indent t_string_from_h2_indent = vx_t_string_from_h2_indent();
-
-  // (func string<-h3-indent)
-  vx_web_html::Func_string_from_h3_indent vx_e_string_from_h3_indent() {
-    vx_web_html::Func_string_from_h3_indent output = new vx_web_html::Class_string_from_h3_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h3_indent vx_t_string_from_h3_indent() {
-    vx_web_html::Func_string_from_h3_indent output = new vx_web_html::Class_string_from_h3_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_h3_indent e_string_from_h3_indent = vx_e_string_from_h3_indent();
-  vx_web_html::Func_string_from_h3_indent t_string_from_h3_indent = vx_t_string_from_h3_indent();
-
-  // (func string<-head-indent)
-  vx_web_html::Func_string_from_head_indent vx_e_string_from_head_indent() {
-    vx_web_html::Func_string_from_head_indent output = new vx_web_html::Class_string_from_head_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_head_indent vx_t_string_from_head_indent() {
-    vx_web_html::Func_string_from_head_indent output = new vx_web_html::Class_string_from_head_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_head_indent e_string_from_head_indent = vx_e_string_from_head_indent();
-  vx_web_html::Func_string_from_head_indent t_string_from_head_indent = vx_t_string_from_head_indent();
-
-  // (func string<-html)
-  vx_web_html::Func_string_from_html vx_e_string_from_html() {
-    vx_web_html::Func_string_from_html output = new vx_web_html::Class_string_from_html();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_html vx_t_string_from_html() {
-    vx_web_html::Func_string_from_html output = new vx_web_html::Class_string_from_html();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_html e_string_from_html = vx_e_string_from_html();
-  vx_web_html::Func_string_from_html t_string_from_html = vx_t_string_from_html();
-
-  // (func string<-indent)
-  vx_web_html::Func_string_from_indent vx_e_string_from_indent() {
-    vx_web_html::Func_string_from_indent output = new vx_web_html::Class_string_from_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_indent vx_t_string_from_indent() {
-    vx_web_html::Func_string_from_indent output = new vx_web_html::Class_string_from_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_indent e_string_from_indent = vx_e_string_from_indent();
-  vx_web_html::Func_string_from_indent t_string_from_indent = vx_t_string_from_indent();
-
-  // (func string<-meta-indent)
-  vx_web_html::Func_string_from_meta_indent vx_e_string_from_meta_indent() {
-    vx_web_html::Func_string_from_meta_indent output = new vx_web_html::Class_string_from_meta_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_meta_indent vx_t_string_from_meta_indent() {
-    vx_web_html::Func_string_from_meta_indent output = new vx_web_html::Class_string_from_meta_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_meta_indent e_string_from_meta_indent = vx_e_string_from_meta_indent();
-  vx_web_html::Func_string_from_meta_indent t_string_from_meta_indent = vx_t_string_from_meta_indent();
-
-  // (func string<-node-indent)
-  vx_web_html::Func_string_from_node_indent vx_e_string_from_node_indent() {
-    vx_web_html::Func_string_from_node_indent output = new vx_web_html::Class_string_from_node_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_node_indent vx_t_string_from_node_indent() {
-    vx_web_html::Func_string_from_node_indent output = new vx_web_html::Class_string_from_node_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_node_indent e_string_from_node_indent = vx_e_string_from_node_indent();
-  vx_web_html::Func_string_from_node_indent t_string_from_node_indent = vx_t_string_from_node_indent();
-
-  // (func string<-nodelist-indent)
-  vx_web_html::Func_string_from_nodelist_indent vx_e_string_from_nodelist_indent() {
-    vx_web_html::Func_string_from_nodelist_indent output = new vx_web_html::Class_string_from_nodelist_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_nodelist_indent vx_t_string_from_nodelist_indent() {
-    vx_web_html::Func_string_from_nodelist_indent output = new vx_web_html::Class_string_from_nodelist_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_nodelist_indent e_string_from_nodelist_indent = vx_e_string_from_nodelist_indent();
-  vx_web_html::Func_string_from_nodelist_indent t_string_from_nodelist_indent = vx_t_string_from_nodelist_indent();
-
-  // (func string<-nodelist-tag-prop-indent)
-  vx_web_html::Func_string_from_nodelist_tag_prop_indent vx_e_string_from_nodelist_tag_prop_indent() {
-    vx_web_html::Func_string_from_nodelist_tag_prop_indent output = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_nodelist_tag_prop_indent vx_t_string_from_nodelist_tag_prop_indent() {
-    vx_web_html::Func_string_from_nodelist_tag_prop_indent output = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_nodelist_tag_prop_indent e_string_from_nodelist_tag_prop_indent = vx_e_string_from_nodelist_tag_prop_indent();
-  vx_web_html::Func_string_from_nodelist_tag_prop_indent t_string_from_nodelist_tag_prop_indent = vx_t_string_from_nodelist_tag_prop_indent();
-
-  // (func string<-p-indent)
-  vx_web_html::Func_string_from_p_indent vx_e_string_from_p_indent() {
-    vx_web_html::Func_string_from_p_indent output = new vx_web_html::Class_string_from_p_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_p_indent vx_t_string_from_p_indent() {
-    vx_web_html::Func_string_from_p_indent output = new vx_web_html::Class_string_from_p_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_p_indent e_string_from_p_indent = vx_e_string_from_p_indent();
-  vx_web_html::Func_string_from_p_indent t_string_from_p_indent = vx_t_string_from_p_indent();
-
-  // (func string<-propname-val)
-  vx_web_html::Func_string_from_propname_val vx_e_string_from_propname_val() {
-    vx_web_html::Func_string_from_propname_val output = new vx_web_html::Class_string_from_propname_val();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_propname_val vx_t_string_from_propname_val() {
-    vx_web_html::Func_string_from_propname_val output = new vx_web_html::Class_string_from_propname_val();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_propname_val e_string_from_propname_val = vx_e_string_from_propname_val();
-  vx_web_html::Func_string_from_propname_val t_string_from_propname_val = vx_t_string_from_propname_val();
-
-  // (func string<-propstyle)
-  vx_web_html::Func_string_from_propstyle vx_e_string_from_propstyle() {
-    vx_web_html::Func_string_from_propstyle output = new vx_web_html::Class_string_from_propstyle();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_propstyle vx_t_string_from_propstyle() {
-    vx_web_html::Func_string_from_propstyle output = new vx_web_html::Class_string_from_propstyle();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_propstyle e_string_from_propstyle = vx_e_string_from_propstyle();
-  vx_web_html::Func_string_from_propstyle t_string_from_propstyle = vx_t_string_from_propstyle();
-
-  // (func string<-style-indent)
-  vx_web_html::Func_string_from_style_indent vx_e_string_from_style_indent() {
-    vx_web_html::Func_string_from_style_indent output = new vx_web_html::Class_string_from_style_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_style_indent vx_t_string_from_style_indent() {
-    vx_web_html::Func_string_from_style_indent output = new vx_web_html::Class_string_from_style_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_style_indent e_string_from_style_indent = vx_e_string_from_style_indent();
-  vx_web_html::Func_string_from_style_indent t_string_from_style_indent = vx_t_string_from_style_indent();
-
-  // (func string<-stylelist-indent)
-  vx_web_html::Func_string_from_stylelist_indent vx_e_string_from_stylelist_indent() {
-    vx_web_html::Func_string_from_stylelist_indent output = new vx_web_html::Class_string_from_stylelist_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylelist_indent vx_t_string_from_stylelist_indent() {
-    vx_web_html::Func_string_from_stylelist_indent output = new vx_web_html::Class_string_from_stylelist_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylelist_indent e_string_from_stylelist_indent = vx_e_string_from_stylelist_indent();
-  vx_web_html::Func_string_from_stylelist_indent t_string_from_stylelist_indent = vx_t_string_from_stylelist_indent();
-
-  // (func string<-stylepropmap-indent)
-  vx_web_html::Func_string_from_stylepropmap_indent vx_e_string_from_stylepropmap_indent() {
-    vx_web_html::Func_string_from_stylepropmap_indent output = new vx_web_html::Class_string_from_stylepropmap_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylepropmap_indent vx_t_string_from_stylepropmap_indent() {
-    vx_web_html::Func_string_from_stylepropmap_indent output = new vx_web_html::Class_string_from_stylepropmap_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent = vx_e_string_from_stylepropmap_indent();
-  vx_web_html::Func_string_from_stylepropmap_indent t_string_from_stylepropmap_indent = vx_t_string_from_stylepropmap_indent();
-
-  // (func string<-stylesheet-indent)
-  vx_web_html::Func_string_from_stylesheet_indent vx_e_string_from_stylesheet_indent() {
-    vx_web_html::Func_string_from_stylesheet_indent output = new vx_web_html::Class_string_from_stylesheet_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylesheet_indent vx_t_string_from_stylesheet_indent() {
-    vx_web_html::Func_string_from_stylesheet_indent output = new vx_web_html::Class_string_from_stylesheet_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_stylesheet_indent e_string_from_stylesheet_indent = vx_e_string_from_stylesheet_indent();
-  vx_web_html::Func_string_from_stylesheet_indent t_string_from_stylesheet_indent = vx_t_string_from_stylesheet_indent();
-
-  // (func string<-table-indent)
-  vx_web_html::Func_string_from_table_indent vx_e_string_from_table_indent() {
-    vx_web_html::Func_string_from_table_indent output = new vx_web_html::Class_string_from_table_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_table_indent vx_t_string_from_table_indent() {
-    vx_web_html::Func_string_from_table_indent output = new vx_web_html::Class_string_from_table_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_table_indent e_string_from_table_indent = vx_e_string_from_table_indent();
-  vx_web_html::Func_string_from_table_indent t_string_from_table_indent = vx_t_string_from_table_indent();
-
-  // (func string<-tbody-indent)
-  vx_web_html::Func_string_from_tbody_indent vx_e_string_from_tbody_indent() {
-    vx_web_html::Func_string_from_tbody_indent output = new vx_web_html::Class_string_from_tbody_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_tbody_indent vx_t_string_from_tbody_indent() {
-    vx_web_html::Func_string_from_tbody_indent output = new vx_web_html::Class_string_from_tbody_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_tbody_indent e_string_from_tbody_indent = vx_e_string_from_tbody_indent();
-  vx_web_html::Func_string_from_tbody_indent t_string_from_tbody_indent = vx_t_string_from_tbody_indent();
-
-  // (func string<-td-indent)
-  vx_web_html::Func_string_from_td_indent vx_e_string_from_td_indent() {
-    vx_web_html::Func_string_from_td_indent output = new vx_web_html::Class_string_from_td_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_td_indent vx_t_string_from_td_indent() {
-    vx_web_html::Func_string_from_td_indent output = new vx_web_html::Class_string_from_td_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_td_indent e_string_from_td_indent = vx_e_string_from_td_indent();
-  vx_web_html::Func_string_from_td_indent t_string_from_td_indent = vx_t_string_from_td_indent();
-
-  // (func string<-thead-indent)
-  vx_web_html::Func_string_from_thead_indent vx_e_string_from_thead_indent() {
-    vx_web_html::Func_string_from_thead_indent output = new vx_web_html::Class_string_from_thead_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_thead_indent vx_t_string_from_thead_indent() {
-    vx_web_html::Func_string_from_thead_indent output = new vx_web_html::Class_string_from_thead_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_thead_indent e_string_from_thead_indent = vx_e_string_from_thead_indent();
-  vx_web_html::Func_string_from_thead_indent t_string_from_thead_indent = vx_t_string_from_thead_indent();
-
-  // (func string<-title-indent)
-  vx_web_html::Func_string_from_title_indent vx_e_string_from_title_indent() {
-    vx_web_html::Func_string_from_title_indent output = new vx_web_html::Class_string_from_title_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_title_indent vx_t_string_from_title_indent() {
-    vx_web_html::Func_string_from_title_indent output = new vx_web_html::Class_string_from_title_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_title_indent e_string_from_title_indent = vx_e_string_from_title_indent();
-  vx_web_html::Func_string_from_title_indent t_string_from_title_indent = vx_t_string_from_title_indent();
-
-  // (func string<-tr-indent)
-  vx_web_html::Func_string_from_tr_indent vx_e_string_from_tr_indent() {
-    vx_web_html::Func_string_from_tr_indent output = new vx_web_html::Class_string_from_tr_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_tr_indent vx_t_string_from_tr_indent() {
-    vx_web_html::Func_string_from_tr_indent output = new vx_web_html::Class_string_from_tr_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_tr_indent e_string_from_tr_indent = vx_e_string_from_tr_indent();
-  vx_web_html::Func_string_from_tr_indent t_string_from_tr_indent = vx_t_string_from_tr_indent();
-
-  // (func string<-uri)
-  vx_web_html::Func_string_from_uri vx_e_string_from_uri() {
-    vx_web_html::Func_string_from_uri output = new vx_web_html::Class_string_from_uri();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_uri vx_t_string_from_uri() {
-    vx_web_html::Func_string_from_uri output = new vx_web_html::Class_string_from_uri();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_string_from_uri e_string_from_uri = vx_e_string_from_uri();
-  vx_web_html::Func_string_from_uri t_string_from_uri = vx_t_string_from_uri();
-
-  // (func style<-stylesheet-name)
-  vx_web_html::Func_style_from_stylesheet_name vx_e_style_from_stylesheet_name() {
-    vx_web_html::Func_style_from_stylesheet_name output = new vx_web_html::Class_style_from_stylesheet_name();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_style_from_stylesheet_name vx_t_style_from_stylesheet_name() {
-    vx_web_html::Func_style_from_stylesheet_name output = new vx_web_html::Class_style_from_stylesheet_name();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_style_from_stylesheet_name e_style_from_stylesheet_name = vx_e_style_from_stylesheet_name();
-  vx_web_html::Func_style_from_stylesheet_name t_style_from_stylesheet_name = vx_t_style_from_stylesheet_name();
-
-  // (func stylemap<-stylelist)
-  vx_web_html::Func_stylemap_from_stylelist vx_e_stylemap_from_stylelist() {
-    vx_web_html::Func_stylemap_from_stylelist output = new vx_web_html::Class_stylemap_from_stylelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_stylemap_from_stylelist vx_t_stylemap_from_stylelist() {
-    vx_web_html::Func_stylemap_from_stylelist output = new vx_web_html::Class_stylemap_from_stylelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_stylemap_from_stylelist e_stylemap_from_stylelist = vx_e_stylemap_from_stylelist();
-  vx_web_html::Func_stylemap_from_stylelist t_stylemap_from_stylelist = vx_t_stylemap_from_stylelist();
-
-  // (func stylemap<-stylesheet)
-  vx_web_html::Func_stylemap_from_stylesheet vx_e_stylemap_from_stylesheet() {
-    vx_web_html::Func_stylemap_from_stylesheet output = new vx_web_html::Class_stylemap_from_stylesheet();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_stylemap_from_stylesheet vx_t_stylemap_from_stylesheet() {
-    vx_web_html::Func_stylemap_from_stylesheet output = new vx_web_html::Class_stylemap_from_stylesheet();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_stylemap_from_stylesheet e_stylemap_from_stylesheet = vx_e_stylemap_from_stylesheet();
-  vx_web_html::Func_stylemap_from_stylesheet t_stylemap_from_stylesheet = vx_t_stylemap_from_stylesheet();
-
-  // (func styles<-stylesheet)
-  vx_web_html::Func_styles_from_stylesheet vx_e_styles_from_stylesheet() {
-    vx_web_html::Func_styles_from_stylesheet output = new vx_web_html::Class_styles_from_stylesheet();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_styles_from_stylesheet vx_t_styles_from_stylesheet() {
-    vx_web_html::Func_styles_from_stylesheet output = new vx_web_html::Class_styles_from_stylesheet();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_styles_from_stylesheet e_styles_from_stylesheet = vx_e_styles_from_stylesheet();
-  vx_web_html::Func_styles_from_stylesheet t_styles_from_stylesheet = vx_t_styles_from_stylesheet();
-
-  // (func stylesheet-loadmap)
-  vx_web_html::Func_stylesheet_loadmap vx_e_stylesheet_loadmap() {
-    vx_web_html::Func_stylesheet_loadmap output = new vx_web_html::Class_stylesheet_loadmap();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_stylesheet_loadmap vx_t_stylesheet_loadmap() {
-    vx_web_html::Func_stylesheet_loadmap output = new vx_web_html::Class_stylesheet_loadmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_stylesheet_loadmap e_stylesheet_loadmap = vx_e_stylesheet_loadmap();
-  vx_web_html::Func_stylesheet_loadmap t_stylesheet_loadmap = vx_t_stylesheet_loadmap();
-
-  // (func uri<-string)
-  vx_web_html::Func_uri_from_string vx_e_uri_from_string() {
-    vx_web_html::Func_uri_from_string output = new vx_web_html::Class_uri_from_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_web_html::Func_uri_from_string vx_t_uri_from_string() {
-    vx_web_html::Func_uri_from_string output = new vx_web_html::Class_uri_from_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_web_html::Func_uri_from_string e_uri_from_string = vx_e_uri_from_string();
-  vx_web_html::Func_uri_from_string t_uri_from_string = vx_t_uri_from_string();
+  vx_web_html::Type_node e_node = NULL;
+  vx_web_html::Type_node t_node = NULL;
+  vx_web_html::Type_divchild e_divchild = NULL;
+  vx_web_html::Type_divchild t_divchild = NULL;
+  vx_web_html::Type_body e_body = NULL;
+  vx_web_html::Type_body t_body = NULL;
+  vx_web_html::Type_details e_details = NULL;
+  vx_web_html::Type_details t_details = NULL;
+  vx_web_html::Type_div e_div = NULL;
+  vx_web_html::Type_div t_div = NULL;
+  vx_web_html::Type_divchildlist e_divchildlist = NULL;
+  vx_web_html::Type_divchildlist t_divchildlist = NULL;
+  vx_web_html::Type_divlist e_divlist = NULL;
+  vx_web_html::Type_divlist t_divlist = NULL;
+  vx_web_html::Type_footer e_footer = NULL;
+  vx_web_html::Type_footer t_footer = NULL;
+  vx_web_html::Type_h1 e_h1 = NULL;
+  vx_web_html::Type_h1 t_h1 = NULL;
+  vx_web_html::Type_h2 e_h2 = NULL;
+  vx_web_html::Type_h2 t_h2 = NULL;
+  vx_web_html::Type_h3 e_h3 = NULL;
+  vx_web_html::Type_h3 t_h3 = NULL;
+  vx_web_html::Type_head e_head = NULL;
+  vx_web_html::Type_head t_head = NULL;
+  vx_web_html::Type_headchild e_headchild = NULL;
+  vx_web_html::Type_headchild t_headchild = NULL;
+  vx_web_html::Type_headchildlist e_headchildlist = NULL;
+  vx_web_html::Type_headchildlist t_headchildlist = NULL;
+  vx_web_html::Type_html e_html = NULL;
+  vx_web_html::Type_html t_html = NULL;
+  vx_web_html::Type_meta e_meta = NULL;
+  vx_web_html::Type_meta t_meta = NULL;
+  vx_web_html::Type_nodelist e_nodelist = NULL;
+  vx_web_html::Type_nodelist t_nodelist = NULL;
+  vx_web_html::Type_p e_p = NULL;
+  vx_web_html::Type_p t_p = NULL;
+  vx_web_html::Type_propmap e_propmap = NULL;
+  vx_web_html::Type_propmap t_propmap = NULL;
+  vx_web_html::Type_style e_style = NULL;
+  vx_web_html::Type_style t_style = NULL;
+  vx_web_html::Type_stylelist e_stylelist = NULL;
+  vx_web_html::Type_stylelist t_stylelist = NULL;
+  vx_web_html::Type_stylemap e_stylemap = NULL;
+  vx_web_html::Type_stylemap t_stylemap = NULL;
+  vx_web_html::Type_stylesheet e_stylesheet = NULL;
+  vx_web_html::Type_stylesheet t_stylesheet = NULL;
+  vx_web_html::Type_table e_table = NULL;
+  vx_web_html::Type_table t_table = NULL;
+  vx_web_html::Type_tbody e_tbody = NULL;
+  vx_web_html::Type_tbody t_tbody = NULL;
+  vx_web_html::Type_td e_td = NULL;
+  vx_web_html::Type_td t_td = NULL;
+  vx_web_html::Type_tdlist e_tdlist = NULL;
+  vx_web_html::Type_tdlist t_tdlist = NULL;
+  vx_web_html::Type_thead e_thead = NULL;
+  vx_web_html::Type_thead t_thead = NULL;
+  vx_web_html::Type_title e_title = NULL;
+  vx_web_html::Type_title t_title = NULL;
+  vx_web_html::Type_tr e_tr = NULL;
+  vx_web_html::Type_tr t_tr = NULL;
+  vx_web_html::Type_trlist e_trlist = NULL;
+  vx_web_html::Type_trlist t_trlist = NULL;
+  vx_web_html::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = NULL;
+  vx_web_html::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = NULL;
+  vx_web_html::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = NULL;
+  vx_web_html::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = NULL;
+  vx_web_html::Func_htmlstring_from_string e_htmlstring_from_string = NULL;
+  vx_web_html::Func_htmlstring_from_string t_htmlstring_from_string = NULL;
+  vx_web_html::Func_string_indent e_string_indent = NULL;
+  vx_web_html::Func_string_indent t_string_indent = NULL;
+  vx_web_html::Func_string_from_body_indent e_string_from_body_indent = NULL;
+  vx_web_html::Func_string_from_body_indent t_string_from_body_indent = NULL;
+  vx_web_html::Func_string_from_details_indent e_string_from_details_indent = NULL;
+  vx_web_html::Func_string_from_details_indent t_string_from_details_indent = NULL;
+  vx_web_html::Func_string_from_div_indent e_string_from_div_indent = NULL;
+  vx_web_html::Func_string_from_div_indent t_string_from_div_indent = NULL;
+  vx_web_html::Func_string_from_footer_indent e_string_from_footer_indent = NULL;
+  vx_web_html::Func_string_from_footer_indent t_string_from_footer_indent = NULL;
+  vx_web_html::Func_string_from_h1_indent e_string_from_h1_indent = NULL;
+  vx_web_html::Func_string_from_h1_indent t_string_from_h1_indent = NULL;
+  vx_web_html::Func_string_from_h2_indent e_string_from_h2_indent = NULL;
+  vx_web_html::Func_string_from_h2_indent t_string_from_h2_indent = NULL;
+  vx_web_html::Func_string_from_h3_indent e_string_from_h3_indent = NULL;
+  vx_web_html::Func_string_from_h3_indent t_string_from_h3_indent = NULL;
+  vx_web_html::Func_string_from_head_indent e_string_from_head_indent = NULL;
+  vx_web_html::Func_string_from_head_indent t_string_from_head_indent = NULL;
+  vx_web_html::Func_string_from_html e_string_from_html = NULL;
+  vx_web_html::Func_string_from_html t_string_from_html = NULL;
+  vx_web_html::Func_string_from_indent e_string_from_indent = NULL;
+  vx_web_html::Func_string_from_indent t_string_from_indent = NULL;
+  vx_web_html::Func_string_from_meta_indent e_string_from_meta_indent = NULL;
+  vx_web_html::Func_string_from_meta_indent t_string_from_meta_indent = NULL;
+  vx_web_html::Func_string_from_node_indent e_string_from_node_indent = NULL;
+  vx_web_html::Func_string_from_node_indent t_string_from_node_indent = NULL;
+  vx_web_html::Func_string_from_nodelist_indent e_string_from_nodelist_indent = NULL;
+  vx_web_html::Func_string_from_nodelist_indent t_string_from_nodelist_indent = NULL;
+  vx_web_html::Func_string_from_nodelist_tag_prop_indent e_string_from_nodelist_tag_prop_indent = NULL;
+  vx_web_html::Func_string_from_nodelist_tag_prop_indent t_string_from_nodelist_tag_prop_indent = NULL;
+  vx_web_html::Func_string_from_p_indent e_string_from_p_indent = NULL;
+  vx_web_html::Func_string_from_p_indent t_string_from_p_indent = NULL;
+  vx_web_html::Func_string_from_propname_val e_string_from_propname_val = NULL;
+  vx_web_html::Func_string_from_propname_val t_string_from_propname_val = NULL;
+  vx_web_html::Func_string_from_propstyle e_string_from_propstyle = NULL;
+  vx_web_html::Func_string_from_propstyle t_string_from_propstyle = NULL;
+  vx_web_html::Func_string_from_style_indent e_string_from_style_indent = NULL;
+  vx_web_html::Func_string_from_style_indent t_string_from_style_indent = NULL;
+  vx_web_html::Func_string_from_stylelist_indent e_string_from_stylelist_indent = NULL;
+  vx_web_html::Func_string_from_stylelist_indent t_string_from_stylelist_indent = NULL;
+  vx_web_html::Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent = NULL;
+  vx_web_html::Func_string_from_stylepropmap_indent t_string_from_stylepropmap_indent = NULL;
+  vx_web_html::Func_string_from_stylesheet_indent e_string_from_stylesheet_indent = NULL;
+  vx_web_html::Func_string_from_stylesheet_indent t_string_from_stylesheet_indent = NULL;
+  vx_web_html::Func_string_from_table_indent e_string_from_table_indent = NULL;
+  vx_web_html::Func_string_from_table_indent t_string_from_table_indent = NULL;
+  vx_web_html::Func_string_from_tbody_indent e_string_from_tbody_indent = NULL;
+  vx_web_html::Func_string_from_tbody_indent t_string_from_tbody_indent = NULL;
+  vx_web_html::Func_string_from_td_indent e_string_from_td_indent = NULL;
+  vx_web_html::Func_string_from_td_indent t_string_from_td_indent = NULL;
+  vx_web_html::Func_string_from_thead_indent e_string_from_thead_indent = NULL;
+  vx_web_html::Func_string_from_thead_indent t_string_from_thead_indent = NULL;
+  vx_web_html::Func_string_from_title_indent e_string_from_title_indent = NULL;
+  vx_web_html::Func_string_from_title_indent t_string_from_title_indent = NULL;
+  vx_web_html::Func_string_from_tr_indent e_string_from_tr_indent = NULL;
+  vx_web_html::Func_string_from_tr_indent t_string_from_tr_indent = NULL;
+  vx_web_html::Func_string_from_uri e_string_from_uri = NULL;
+  vx_web_html::Func_string_from_uri t_string_from_uri = NULL;
+  vx_web_html::Func_style_from_stylesheet_name e_style_from_stylesheet_name = NULL;
+  vx_web_html::Func_style_from_stylesheet_name t_style_from_stylesheet_name = NULL;
+  vx_web_html::Func_stylemap_from_stylelist e_stylemap_from_stylelist = NULL;
+  vx_web_html::Func_stylemap_from_stylelist t_stylemap_from_stylelist = NULL;
+  vx_web_html::Func_stylemap_from_stylesheet e_stylemap_from_stylesheet = NULL;
+  vx_web_html::Func_stylemap_from_stylesheet t_stylemap_from_stylesheet = NULL;
+  vx_web_html::Func_styles_from_stylesheet e_styles_from_stylesheet = NULL;
+  vx_web_html::Func_styles_from_stylesheet t_styles_from_stylesheet = NULL;
+  vx_web_html::Func_stylesheet_loadmap e_stylesheet_loadmap = NULL;
+  vx_web_html::Func_stylesheet_loadmap t_stylesheet_loadmap = NULL;
+  vx_web_html::Func_uri_from_string e_uri_from_string = NULL;
+  vx_web_html::Func_uri_from_string t_uri_from_string = NULL;
+
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_web_html::e_node = new Class_node();
+      vx_core::vx_reserve_empty(vx_web_html::e_node);
+      vx_web_html::t_node = new Class_node();
+      vx_core::vx_reserve_type(vx_web_html::t_node);
+      vx_web_html::e_divchild = new Class_divchild();
+      vx_core::vx_reserve_empty(vx_web_html::e_divchild);
+      vx_web_html::t_divchild = new Class_divchild();
+      vx_core::vx_reserve_type(vx_web_html::t_divchild);
+      vx_web_html::e_body = new Class_body();
+      vx_core::vx_reserve_empty(vx_web_html::e_body);
+      vx_web_html::t_body = new Class_body();
+      vx_core::vx_reserve_type(vx_web_html::t_body);
+      vx_web_html::e_details = new Class_details();
+      vx_core::vx_reserve_empty(vx_web_html::e_details);
+      vx_web_html::t_details = new Class_details();
+      vx_core::vx_reserve_type(vx_web_html::t_details);
+      vx_web_html::e_div = new Class_div();
+      vx_core::vx_reserve_empty(vx_web_html::e_div);
+      vx_web_html::t_div = new Class_div();
+      vx_core::vx_reserve_type(vx_web_html::t_div);
+      vx_web_html::e_divchildlist = new Class_divchildlist();
+      vx_core::vx_reserve_empty(vx_web_html::e_divchildlist);
+      vx_web_html::t_divchildlist = new Class_divchildlist();
+      vx_core::vx_reserve_type(vx_web_html::t_divchildlist);
+      vx_web_html::e_divlist = new Class_divlist();
+      vx_core::vx_reserve_empty(vx_web_html::e_divlist);
+      vx_web_html::t_divlist = new Class_divlist();
+      vx_core::vx_reserve_type(vx_web_html::t_divlist);
+      vx_web_html::e_footer = new Class_footer();
+      vx_core::vx_reserve_empty(vx_web_html::e_footer);
+      vx_web_html::t_footer = new Class_footer();
+      vx_core::vx_reserve_type(vx_web_html::t_footer);
+      vx_web_html::e_h1 = new Class_h1();
+      vx_core::vx_reserve_empty(vx_web_html::e_h1);
+      vx_web_html::t_h1 = new Class_h1();
+      vx_core::vx_reserve_type(vx_web_html::t_h1);
+      vx_web_html::e_h2 = new Class_h2();
+      vx_core::vx_reserve_empty(vx_web_html::e_h2);
+      vx_web_html::t_h2 = new Class_h2();
+      vx_core::vx_reserve_type(vx_web_html::t_h2);
+      vx_web_html::e_h3 = new Class_h3();
+      vx_core::vx_reserve_empty(vx_web_html::e_h3);
+      vx_web_html::t_h3 = new Class_h3();
+      vx_core::vx_reserve_type(vx_web_html::t_h3);
+      vx_web_html::e_head = new Class_head();
+      vx_core::vx_reserve_empty(vx_web_html::e_head);
+      vx_web_html::t_head = new Class_head();
+      vx_core::vx_reserve_type(vx_web_html::t_head);
+      vx_web_html::e_headchild = new Class_headchild();
+      vx_core::vx_reserve_empty(vx_web_html::e_headchild);
+      vx_web_html::t_headchild = new Class_headchild();
+      vx_core::vx_reserve_type(vx_web_html::t_headchild);
+      vx_web_html::e_headchildlist = new Class_headchildlist();
+      vx_core::vx_reserve_empty(vx_web_html::e_headchildlist);
+      vx_web_html::t_headchildlist = new Class_headchildlist();
+      vx_core::vx_reserve_type(vx_web_html::t_headchildlist);
+      vx_web_html::e_html = new Class_html();
+      vx_core::vx_reserve_empty(vx_web_html::e_html);
+      vx_web_html::t_html = new Class_html();
+      vx_core::vx_reserve_type(vx_web_html::t_html);
+      vx_web_html::e_meta = new Class_meta();
+      vx_core::vx_reserve_empty(vx_web_html::e_meta);
+      vx_web_html::t_meta = new Class_meta();
+      vx_core::vx_reserve_type(vx_web_html::t_meta);
+      vx_web_html::e_nodelist = new Class_nodelist();
+      vx_core::vx_reserve_empty(vx_web_html::e_nodelist);
+      vx_web_html::t_nodelist = new Class_nodelist();
+      vx_core::vx_reserve_type(vx_web_html::t_nodelist);
+      vx_web_html::e_p = new Class_p();
+      vx_core::vx_reserve_empty(vx_web_html::e_p);
+      vx_web_html::t_p = new Class_p();
+      vx_core::vx_reserve_type(vx_web_html::t_p);
+      vx_web_html::e_propmap = new Class_propmap();
+      vx_core::vx_reserve_empty(vx_web_html::e_propmap);
+      vx_web_html::t_propmap = new Class_propmap();
+      vx_core::vx_reserve_type(vx_web_html::t_propmap);
+      vx_web_html::e_style = new Class_style();
+      vx_core::vx_reserve_empty(vx_web_html::e_style);
+      vx_web_html::t_style = new Class_style();
+      vx_core::vx_reserve_type(vx_web_html::t_style);
+      vx_web_html::e_stylelist = new Class_stylelist();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylelist);
+      vx_web_html::t_stylelist = new Class_stylelist();
+      vx_core::vx_reserve_type(vx_web_html::t_stylelist);
+      vx_web_html::e_stylemap = new Class_stylemap();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylemap);
+      vx_web_html::t_stylemap = new Class_stylemap();
+      vx_core::vx_reserve_type(vx_web_html::t_stylemap);
+      vx_web_html::e_stylesheet = new Class_stylesheet();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylesheet);
+      vx_web_html::t_stylesheet = new Class_stylesheet();
+      vx_core::vx_reserve_type(vx_web_html::t_stylesheet);
+      vx_web_html::e_table = new Class_table();
+      vx_core::vx_reserve_empty(vx_web_html::e_table);
+      vx_web_html::t_table = new Class_table();
+      vx_core::vx_reserve_type(vx_web_html::t_table);
+      vx_web_html::e_tbody = new Class_tbody();
+      vx_core::vx_reserve_empty(vx_web_html::e_tbody);
+      vx_web_html::t_tbody = new Class_tbody();
+      vx_core::vx_reserve_type(vx_web_html::t_tbody);
+      vx_web_html::e_td = new Class_td();
+      vx_core::vx_reserve_empty(vx_web_html::e_td);
+      vx_web_html::t_td = new Class_td();
+      vx_core::vx_reserve_type(vx_web_html::t_td);
+      vx_web_html::e_tdlist = new Class_tdlist();
+      vx_core::vx_reserve_empty(vx_web_html::e_tdlist);
+      vx_web_html::t_tdlist = new Class_tdlist();
+      vx_core::vx_reserve_type(vx_web_html::t_tdlist);
+      vx_web_html::e_thead = new Class_thead();
+      vx_core::vx_reserve_empty(vx_web_html::e_thead);
+      vx_web_html::t_thead = new Class_thead();
+      vx_core::vx_reserve_type(vx_web_html::t_thead);
+      vx_web_html::e_title = new Class_title();
+      vx_core::vx_reserve_empty(vx_web_html::e_title);
+      vx_web_html::t_title = new Class_title();
+      vx_core::vx_reserve_type(vx_web_html::t_title);
+      vx_web_html::e_tr = new Class_tr();
+      vx_core::vx_reserve_empty(vx_web_html::e_tr);
+      vx_web_html::t_tr = new Class_tr();
+      vx_core::vx_reserve_type(vx_web_html::t_tr);
+      vx_web_html::e_trlist = new Class_trlist();
+      vx_core::vx_reserve_empty(vx_web_html::e_trlist);
+      vx_web_html::t_trlist = new Class_trlist();
+      vx_core::vx_reserve_type(vx_web_html::t_trlist);
+      vx_web_html::e_boolean_write_from_id_htmltext = new vx_web_html::Class_boolean_write_from_id_htmltext();
+      vx_core::vx_reserve_empty(vx_web_html::e_boolean_write_from_id_htmltext);
+      vx_web_html::t_boolean_write_from_id_htmltext = new vx_web_html::Class_boolean_write_from_id_htmltext();
+      vx_core::vx_reserve_type(vx_web_html::t_boolean_write_from_id_htmltext);
+      vx_web_html::e_boolean_write_from_stylesheet = new vx_web_html::Class_boolean_write_from_stylesheet();
+      vx_core::vx_reserve_empty(vx_web_html::e_boolean_write_from_stylesheet);
+      vx_web_html::t_boolean_write_from_stylesheet = new vx_web_html::Class_boolean_write_from_stylesheet();
+      vx_core::vx_reserve_type(vx_web_html::t_boolean_write_from_stylesheet);
+      vx_web_html::e_htmlstring_from_string = new vx_web_html::Class_htmlstring_from_string();
+      vx_core::vx_reserve_empty(vx_web_html::e_htmlstring_from_string);
+      vx_web_html::t_htmlstring_from_string = new vx_web_html::Class_htmlstring_from_string();
+      vx_core::vx_reserve_type(vx_web_html::t_htmlstring_from_string);
+      vx_web_html::e_string_indent = new vx_web_html::Class_string_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_indent);
+      vx_web_html::t_string_indent = new vx_web_html::Class_string_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_indent);
+      vx_web_html::e_string_from_body_indent = new vx_web_html::Class_string_from_body_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_body_indent);
+      vx_web_html::t_string_from_body_indent = new vx_web_html::Class_string_from_body_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_body_indent);
+      vx_web_html::e_string_from_details_indent = new vx_web_html::Class_string_from_details_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_details_indent);
+      vx_web_html::t_string_from_details_indent = new vx_web_html::Class_string_from_details_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_details_indent);
+      vx_web_html::e_string_from_div_indent = new vx_web_html::Class_string_from_div_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_div_indent);
+      vx_web_html::t_string_from_div_indent = new vx_web_html::Class_string_from_div_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_div_indent);
+      vx_web_html::e_string_from_footer_indent = new vx_web_html::Class_string_from_footer_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_footer_indent);
+      vx_web_html::t_string_from_footer_indent = new vx_web_html::Class_string_from_footer_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_footer_indent);
+      vx_web_html::e_string_from_h1_indent = new vx_web_html::Class_string_from_h1_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_h1_indent);
+      vx_web_html::t_string_from_h1_indent = new vx_web_html::Class_string_from_h1_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_h1_indent);
+      vx_web_html::e_string_from_h2_indent = new vx_web_html::Class_string_from_h2_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_h2_indent);
+      vx_web_html::t_string_from_h2_indent = new vx_web_html::Class_string_from_h2_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_h2_indent);
+      vx_web_html::e_string_from_h3_indent = new vx_web_html::Class_string_from_h3_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_h3_indent);
+      vx_web_html::t_string_from_h3_indent = new vx_web_html::Class_string_from_h3_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_h3_indent);
+      vx_web_html::e_string_from_head_indent = new vx_web_html::Class_string_from_head_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_head_indent);
+      vx_web_html::t_string_from_head_indent = new vx_web_html::Class_string_from_head_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_head_indent);
+      vx_web_html::e_string_from_html = new vx_web_html::Class_string_from_html();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_html);
+      vx_web_html::t_string_from_html = new vx_web_html::Class_string_from_html();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_html);
+      vx_web_html::e_string_from_indent = new vx_web_html::Class_string_from_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_indent);
+      vx_web_html::t_string_from_indent = new vx_web_html::Class_string_from_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_indent);
+      vx_web_html::e_string_from_meta_indent = new vx_web_html::Class_string_from_meta_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_meta_indent);
+      vx_web_html::t_string_from_meta_indent = new vx_web_html::Class_string_from_meta_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_meta_indent);
+      vx_web_html::e_string_from_node_indent = new vx_web_html::Class_string_from_node_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_node_indent);
+      vx_web_html::t_string_from_node_indent = new vx_web_html::Class_string_from_node_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_node_indent);
+      vx_web_html::e_string_from_nodelist_indent = new vx_web_html::Class_string_from_nodelist_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_nodelist_indent);
+      vx_web_html::t_string_from_nodelist_indent = new vx_web_html::Class_string_from_nodelist_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_nodelist_indent);
+      vx_web_html::e_string_from_nodelist_tag_prop_indent = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_nodelist_tag_prop_indent);
+      vx_web_html::t_string_from_nodelist_tag_prop_indent = new vx_web_html::Class_string_from_nodelist_tag_prop_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_nodelist_tag_prop_indent);
+      vx_web_html::e_string_from_p_indent = new vx_web_html::Class_string_from_p_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_p_indent);
+      vx_web_html::t_string_from_p_indent = new vx_web_html::Class_string_from_p_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_p_indent);
+      vx_web_html::e_string_from_propname_val = new vx_web_html::Class_string_from_propname_val();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_propname_val);
+      vx_web_html::t_string_from_propname_val = new vx_web_html::Class_string_from_propname_val();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_propname_val);
+      vx_web_html::e_string_from_propstyle = new vx_web_html::Class_string_from_propstyle();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_propstyle);
+      vx_web_html::t_string_from_propstyle = new vx_web_html::Class_string_from_propstyle();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_propstyle);
+      vx_web_html::e_string_from_style_indent = new vx_web_html::Class_string_from_style_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_style_indent);
+      vx_web_html::t_string_from_style_indent = new vx_web_html::Class_string_from_style_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_style_indent);
+      vx_web_html::e_string_from_stylelist_indent = new vx_web_html::Class_string_from_stylelist_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_stylelist_indent);
+      vx_web_html::t_string_from_stylelist_indent = new vx_web_html::Class_string_from_stylelist_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_stylelist_indent);
+      vx_web_html::e_string_from_stylepropmap_indent = new vx_web_html::Class_string_from_stylepropmap_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_stylepropmap_indent);
+      vx_web_html::t_string_from_stylepropmap_indent = new vx_web_html::Class_string_from_stylepropmap_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_stylepropmap_indent);
+      vx_web_html::e_string_from_stylesheet_indent = new vx_web_html::Class_string_from_stylesheet_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_stylesheet_indent);
+      vx_web_html::t_string_from_stylesheet_indent = new vx_web_html::Class_string_from_stylesheet_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_stylesheet_indent);
+      vx_web_html::e_string_from_table_indent = new vx_web_html::Class_string_from_table_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_table_indent);
+      vx_web_html::t_string_from_table_indent = new vx_web_html::Class_string_from_table_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_table_indent);
+      vx_web_html::e_string_from_tbody_indent = new vx_web_html::Class_string_from_tbody_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_tbody_indent);
+      vx_web_html::t_string_from_tbody_indent = new vx_web_html::Class_string_from_tbody_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_tbody_indent);
+      vx_web_html::e_string_from_td_indent = new vx_web_html::Class_string_from_td_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_td_indent);
+      vx_web_html::t_string_from_td_indent = new vx_web_html::Class_string_from_td_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_td_indent);
+      vx_web_html::e_string_from_thead_indent = new vx_web_html::Class_string_from_thead_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_thead_indent);
+      vx_web_html::t_string_from_thead_indent = new vx_web_html::Class_string_from_thead_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_thead_indent);
+      vx_web_html::e_string_from_title_indent = new vx_web_html::Class_string_from_title_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_title_indent);
+      vx_web_html::t_string_from_title_indent = new vx_web_html::Class_string_from_title_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_title_indent);
+      vx_web_html::e_string_from_tr_indent = new vx_web_html::Class_string_from_tr_indent();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_tr_indent);
+      vx_web_html::t_string_from_tr_indent = new vx_web_html::Class_string_from_tr_indent();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_tr_indent);
+      vx_web_html::e_string_from_uri = new vx_web_html::Class_string_from_uri();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_uri);
+      vx_web_html::t_string_from_uri = new vx_web_html::Class_string_from_uri();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_uri);
+      vx_web_html::e_style_from_stylesheet_name = new vx_web_html::Class_style_from_stylesheet_name();
+      vx_core::vx_reserve_empty(vx_web_html::e_style_from_stylesheet_name);
+      vx_web_html::t_style_from_stylesheet_name = new vx_web_html::Class_style_from_stylesheet_name();
+      vx_core::vx_reserve_type(vx_web_html::t_style_from_stylesheet_name);
+      vx_web_html::e_stylemap_from_stylelist = new vx_web_html::Class_stylemap_from_stylelist();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylemap_from_stylelist);
+      vx_web_html::t_stylemap_from_stylelist = new vx_web_html::Class_stylemap_from_stylelist();
+      vx_core::vx_reserve_type(vx_web_html::t_stylemap_from_stylelist);
+      vx_web_html::e_stylemap_from_stylesheet = new vx_web_html::Class_stylemap_from_stylesheet();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylemap_from_stylesheet);
+      vx_web_html::t_stylemap_from_stylesheet = new vx_web_html::Class_stylemap_from_stylesheet();
+      vx_core::vx_reserve_type(vx_web_html::t_stylemap_from_stylesheet);
+      vx_web_html::e_styles_from_stylesheet = new vx_web_html::Class_styles_from_stylesheet();
+      vx_core::vx_reserve_empty(vx_web_html::e_styles_from_stylesheet);
+      vx_web_html::t_styles_from_stylesheet = new vx_web_html::Class_styles_from_stylesheet();
+      vx_core::vx_reserve_type(vx_web_html::t_styles_from_stylesheet);
+      vx_web_html::e_stylesheet_loadmap = new vx_web_html::Class_stylesheet_loadmap();
+      vx_core::vx_reserve_empty(vx_web_html::e_stylesheet_loadmap);
+      vx_web_html::t_stylesheet_loadmap = new vx_web_html::Class_stylesheet_loadmap();
+      vx_core::vx_reserve_type(vx_web_html::t_stylesheet_loadmap);
+      vx_web_html::e_uri_from_string = new vx_web_html::Class_uri_from_string();
+      vx_core::vx_reserve_empty(vx_web_html::e_uri_from_string);
+      vx_web_html::t_uri_from_string = new vx_web_html::Class_uri_from_string();
+      vx_core::vx_reserve_type(vx_web_html::t_uri_from_string);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

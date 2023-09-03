@@ -1,3 +1,4 @@
+#include <map>
 #include <string>
 #include "../vx/core.hpp"
 #include "type.hpp"
@@ -982,21 +983,21 @@ namespace vx_type {
       val,
       vx_core::vx_new(vx_core::t_thenelselist, {
         vx_core::f_case_1(
-          vx_core::c_infinity(),
+          vx_core::c_infinity,
           vx_core::t_any_from_func->vx_fn_new({}, []() {
             vx_core::Type_string output_1 = vx_core::vx_new_string("infinity");
             return output_1;
           })
         ),
         vx_core::f_case_1(
-          vx_core::c_neginfinity(),
+          vx_core::c_neginfinity,
           vx_core::t_any_from_func->vx_fn_new({}, []() {
             vx_core::Type_string output_1 = vx_core::vx_new_string("neginfinity");
             return output_1;
           })
         ),
         vx_core::f_case_1(
-          vx_core::c_notanumber(),
+          vx_core::c_notanumber,
           vx_core::t_any_from_func->vx_fn_new({}, []() {
             vx_core::Type_string output_1 = vx_core::vx_new_string("notanumber");
             return output_1;
@@ -1712,258 +1713,134 @@ namespace vx_type {
 
   //}
 
-  vx_type::vx_Class_package* vx_package = new vx_type::vx_Class_package();
+  vx_type::Func_allowtypenames_from_type e_allowtypenames_from_type = NULL;
+  vx_type::Func_allowtypenames_from_type t_allowtypenames_from_type = NULL;
+  vx_type::Func_allowtypes_from_type e_allowtypes_from_type = NULL;
+  vx_type::Func_allowtypes_from_type t_allowtypes_from_type = NULL;
+  vx_type::Func_is_boolean e_is_boolean = NULL;
+  vx_type::Func_is_boolean t_is_boolean = NULL;
+  vx_type::Func_is_decimal e_is_decimal = NULL;
+  vx_type::Func_is_decimal t_is_decimal = NULL;
+  vx_type::Func_is_float e_is_float = NULL;
+  vx_type::Func_is_float t_is_float = NULL;
+  vx_type::Func_is_none e_is_none = NULL;
+  vx_type::Func_is_none t_is_none = NULL;
+  vx_type::Func_is_string e_is_string = NULL;
+  vx_type::Func_is_string t_is_string = NULL;
+  vx_type::Func_is_type e_is_type = NULL;
+  vx_type::Func_is_type t_is_type = NULL;
+  vx_type::Func_is_type_from_any_typelist e_is_type_from_any_typelist = NULL;
+  vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist = NULL;
+  vx_type::Func_length_from_string e_length_from_string = NULL;
+  vx_type::Func_length_from_string t_length_from_string = NULL;
+  vx_type::Func_string_from_int e_string_from_int = NULL;
+  vx_type::Func_string_from_int t_string_from_int = NULL;
+  vx_type::Func_string_from_string_end e_string_from_string_end = NULL;
+  vx_type::Func_string_from_string_end t_string_from_string_end = NULL;
+  vx_type::Func_string_from_string_start e_string_from_string_start = NULL;
+  vx_type::Func_string_from_string_start t_string_from_string_start = NULL;
+  vx_type::Func_string_from_string_start_end e_string_from_string_start_end = NULL;
+  vx_type::Func_string_from_string_start_end t_string_from_string_start_end = NULL;
+  vx_type::Func_string_from_stringlist_join e_string_from_stringlist_join = NULL;
+  vx_type::Func_string_from_stringlist_join t_string_from_stringlist_join = NULL;
+  vx_type::Func_traitnames_from_any e_traitnames_from_any = NULL;
+  vx_type::Func_traitnames_from_any t_traitnames_from_any = NULL;
+  vx_type::Func_traits_from_any e_traits_from_any = NULL;
+  vx_type::Func_traits_from_any t_traits_from_any = NULL;
+  vx_type::Func_traits_from_typedef e_traits_from_typedef = NULL;
+  vx_type::Func_traits_from_typedef t_traits_from_typedef = NULL;
 
-  // (func allowtypenames<-type)
-  vx_type::Func_allowtypenames_from_type vx_e_allowtypenames_from_type() {
-    vx_type::Func_allowtypenames_from_type output = new vx_type::Class_allowtypenames_from_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_allowtypenames_from_type vx_t_allowtypenames_from_type() {
-    vx_type::Func_allowtypenames_from_type output = new vx_type::Class_allowtypenames_from_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_allowtypenames_from_type e_allowtypenames_from_type = vx_e_allowtypenames_from_type();
-  vx_type::Func_allowtypenames_from_type t_allowtypenames_from_type = vx_t_allowtypenames_from_type();
-
-  // (func allowtypes<-type)
-  vx_type::Func_allowtypes_from_type vx_e_allowtypes_from_type() {
-    vx_type::Func_allowtypes_from_type output = new vx_type::Class_allowtypes_from_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_allowtypes_from_type vx_t_allowtypes_from_type() {
-    vx_type::Func_allowtypes_from_type output = new vx_type::Class_allowtypes_from_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_allowtypes_from_type e_allowtypes_from_type = vx_e_allowtypes_from_type();
-  vx_type::Func_allowtypes_from_type t_allowtypes_from_type = vx_t_allowtypes_from_type();
-
-  // (func is-boolean)
-  vx_type::Func_is_boolean vx_e_is_boolean() {
-    vx_type::Func_is_boolean output = new vx_type::Class_is_boolean();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_boolean vx_t_is_boolean() {
-    vx_type::Func_is_boolean output = new vx_type::Class_is_boolean();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_boolean e_is_boolean = vx_e_is_boolean();
-  vx_type::Func_is_boolean t_is_boolean = vx_t_is_boolean();
-
-  // (func is-decimal)
-  vx_type::Func_is_decimal vx_e_is_decimal() {
-    vx_type::Func_is_decimal output = new vx_type::Class_is_decimal();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_decimal vx_t_is_decimal() {
-    vx_type::Func_is_decimal output = new vx_type::Class_is_decimal();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_decimal e_is_decimal = vx_e_is_decimal();
-  vx_type::Func_is_decimal t_is_decimal = vx_t_is_decimal();
-
-  // (func is-float)
-  vx_type::Func_is_float vx_e_is_float() {
-    vx_type::Func_is_float output = new vx_type::Class_is_float();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_float vx_t_is_float() {
-    vx_type::Func_is_float output = new vx_type::Class_is_float();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_float e_is_float = vx_e_is_float();
-  vx_type::Func_is_float t_is_float = vx_t_is_float();
-
-  // (func is-none)
-  vx_type::Func_is_none vx_e_is_none() {
-    vx_type::Func_is_none output = new vx_type::Class_is_none();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_none vx_t_is_none() {
-    vx_type::Func_is_none output = new vx_type::Class_is_none();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_none e_is_none = vx_e_is_none();
-  vx_type::Func_is_none t_is_none = vx_t_is_none();
-
-  // (func is-string)
-  vx_type::Func_is_string vx_e_is_string() {
-    vx_type::Func_is_string output = new vx_type::Class_is_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_string vx_t_is_string() {
-    vx_type::Func_is_string output = new vx_type::Class_is_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_string e_is_string = vx_e_is_string();
-  vx_type::Func_is_string t_is_string = vx_t_is_string();
-
-  // (func is-type)
-  vx_type::Func_is_type vx_e_is_type() {
-    vx_type::Func_is_type output = new vx_type::Class_is_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_type vx_t_is_type() {
-    vx_type::Func_is_type output = new vx_type::Class_is_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_type e_is_type = vx_e_is_type();
-  vx_type::Func_is_type t_is_type = vx_t_is_type();
-
-  // (func is-type<-any-typelist)
-  vx_type::Func_is_type_from_any_typelist vx_e_is_type_from_any_typelist() {
-    vx_type::Func_is_type_from_any_typelist output = new vx_type::Class_is_type_from_any_typelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_is_type_from_any_typelist vx_t_is_type_from_any_typelist() {
-    vx_type::Func_is_type_from_any_typelist output = new vx_type::Class_is_type_from_any_typelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_is_type_from_any_typelist e_is_type_from_any_typelist = vx_e_is_type_from_any_typelist();
-  vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist = vx_t_is_type_from_any_typelist();
-
-  // (func length<-string)
-  vx_type::Func_length_from_string vx_e_length_from_string() {
-    vx_type::Func_length_from_string output = new vx_type::Class_length_from_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_length_from_string vx_t_length_from_string() {
-    vx_type::Func_length_from_string output = new vx_type::Class_length_from_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_length_from_string e_length_from_string = vx_e_length_from_string();
-  vx_type::Func_length_from_string t_length_from_string = vx_t_length_from_string();
-
-  // (func string<-int)
-  vx_type::Func_string_from_int vx_e_string_from_int() {
-    vx_type::Func_string_from_int output = new vx_type::Class_string_from_int();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_string_from_int vx_t_string_from_int() {
-    vx_type::Func_string_from_int output = new vx_type::Class_string_from_int();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_string_from_int e_string_from_int = vx_e_string_from_int();
-  vx_type::Func_string_from_int t_string_from_int = vx_t_string_from_int();
-
-  // (func string<-string-end)
-  vx_type::Func_string_from_string_end vx_e_string_from_string_end() {
-    vx_type::Func_string_from_string_end output = new vx_type::Class_string_from_string_end();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_end vx_t_string_from_string_end() {
-    vx_type::Func_string_from_string_end output = new vx_type::Class_string_from_string_end();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_end e_string_from_string_end = vx_e_string_from_string_end();
-  vx_type::Func_string_from_string_end t_string_from_string_end = vx_t_string_from_string_end();
-
-  // (func string<-string-start)
-  vx_type::Func_string_from_string_start vx_e_string_from_string_start() {
-    vx_type::Func_string_from_string_start output = new vx_type::Class_string_from_string_start();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_start vx_t_string_from_string_start() {
-    vx_type::Func_string_from_string_start output = new vx_type::Class_string_from_string_start();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_start e_string_from_string_start = vx_e_string_from_string_start();
-  vx_type::Func_string_from_string_start t_string_from_string_start = vx_t_string_from_string_start();
-
-  // (func string<-string-start-end)
-  vx_type::Func_string_from_string_start_end vx_e_string_from_string_start_end() {
-    vx_type::Func_string_from_string_start_end output = new vx_type::Class_string_from_string_start_end();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_start_end vx_t_string_from_string_start_end() {
-    vx_type::Func_string_from_string_start_end output = new vx_type::Class_string_from_string_start_end();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_string_from_string_start_end e_string_from_string_start_end = vx_e_string_from_string_start_end();
-  vx_type::Func_string_from_string_start_end t_string_from_string_start_end = vx_t_string_from_string_start_end();
-
-  // (func string<-stringlist-join)
-  vx_type::Func_string_from_stringlist_join vx_e_string_from_stringlist_join() {
-    vx_type::Func_string_from_stringlist_join output = new vx_type::Class_string_from_stringlist_join();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_string_from_stringlist_join vx_t_string_from_stringlist_join() {
-    vx_type::Func_string_from_stringlist_join output = new vx_type::Class_string_from_stringlist_join();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_string_from_stringlist_join e_string_from_stringlist_join = vx_e_string_from_stringlist_join();
-  vx_type::Func_string_from_stringlist_join t_string_from_stringlist_join = vx_t_string_from_stringlist_join();
-
-  // (func traitnames<-any)
-  vx_type::Func_traitnames_from_any vx_e_traitnames_from_any() {
-    vx_type::Func_traitnames_from_any output = new vx_type::Class_traitnames_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_traitnames_from_any vx_t_traitnames_from_any() {
-    vx_type::Func_traitnames_from_any output = new vx_type::Class_traitnames_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_traitnames_from_any e_traitnames_from_any = vx_e_traitnames_from_any();
-  vx_type::Func_traitnames_from_any t_traitnames_from_any = vx_t_traitnames_from_any();
-
-  // (func traits<-any)
-  vx_type::Func_traits_from_any vx_e_traits_from_any() {
-    vx_type::Func_traits_from_any output = new vx_type::Class_traits_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_traits_from_any vx_t_traits_from_any() {
-    vx_type::Func_traits_from_any output = new vx_type::Class_traits_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_traits_from_any e_traits_from_any = vx_e_traits_from_any();
-  vx_type::Func_traits_from_any t_traits_from_any = vx_t_traits_from_any();
-
-  // (func traits<-typedef)
-  vx_type::Func_traits_from_typedef vx_e_traits_from_typedef() {
-    vx_type::Func_traits_from_typedef output = new vx_type::Class_traits_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_type::Func_traits_from_typedef vx_t_traits_from_typedef() {
-    vx_type::Func_traits_from_typedef output = new vx_type::Class_traits_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_type::Func_traits_from_typedef e_traits_from_typedef = vx_e_traits_from_typedef();
-  vx_type::Func_traits_from_typedef t_traits_from_typedef = vx_t_traits_from_typedef();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_type::e_allowtypenames_from_type = new vx_type::Class_allowtypenames_from_type();
+      vx_core::vx_reserve_empty(vx_type::e_allowtypenames_from_type);
+      vx_type::t_allowtypenames_from_type = new vx_type::Class_allowtypenames_from_type();
+      vx_core::vx_reserve_type(vx_type::t_allowtypenames_from_type);
+      vx_type::e_allowtypes_from_type = new vx_type::Class_allowtypes_from_type();
+      vx_core::vx_reserve_empty(vx_type::e_allowtypes_from_type);
+      vx_type::t_allowtypes_from_type = new vx_type::Class_allowtypes_from_type();
+      vx_core::vx_reserve_type(vx_type::t_allowtypes_from_type);
+      vx_type::e_is_boolean = new vx_type::Class_is_boolean();
+      vx_core::vx_reserve_empty(vx_type::e_is_boolean);
+      vx_type::t_is_boolean = new vx_type::Class_is_boolean();
+      vx_core::vx_reserve_type(vx_type::t_is_boolean);
+      vx_type::e_is_decimal = new vx_type::Class_is_decimal();
+      vx_core::vx_reserve_empty(vx_type::e_is_decimal);
+      vx_type::t_is_decimal = new vx_type::Class_is_decimal();
+      vx_core::vx_reserve_type(vx_type::t_is_decimal);
+      vx_type::e_is_float = new vx_type::Class_is_float();
+      vx_core::vx_reserve_empty(vx_type::e_is_float);
+      vx_type::t_is_float = new vx_type::Class_is_float();
+      vx_core::vx_reserve_type(vx_type::t_is_float);
+      vx_type::e_is_none = new vx_type::Class_is_none();
+      vx_core::vx_reserve_empty(vx_type::e_is_none);
+      vx_type::t_is_none = new vx_type::Class_is_none();
+      vx_core::vx_reserve_type(vx_type::t_is_none);
+      vx_type::e_is_string = new vx_type::Class_is_string();
+      vx_core::vx_reserve_empty(vx_type::e_is_string);
+      vx_type::t_is_string = new vx_type::Class_is_string();
+      vx_core::vx_reserve_type(vx_type::t_is_string);
+      vx_type::e_is_type = new vx_type::Class_is_type();
+      vx_core::vx_reserve_empty(vx_type::e_is_type);
+      vx_type::t_is_type = new vx_type::Class_is_type();
+      vx_core::vx_reserve_type(vx_type::t_is_type);
+      vx_type::e_is_type_from_any_typelist = new vx_type::Class_is_type_from_any_typelist();
+      vx_core::vx_reserve_empty(vx_type::e_is_type_from_any_typelist);
+      vx_type::t_is_type_from_any_typelist = new vx_type::Class_is_type_from_any_typelist();
+      vx_core::vx_reserve_type(vx_type::t_is_type_from_any_typelist);
+      vx_type::e_length_from_string = new vx_type::Class_length_from_string();
+      vx_core::vx_reserve_empty(vx_type::e_length_from_string);
+      vx_type::t_length_from_string = new vx_type::Class_length_from_string();
+      vx_core::vx_reserve_type(vx_type::t_length_from_string);
+      vx_type::e_string_from_int = new vx_type::Class_string_from_int();
+      vx_core::vx_reserve_empty(vx_type::e_string_from_int);
+      vx_type::t_string_from_int = new vx_type::Class_string_from_int();
+      vx_core::vx_reserve_type(vx_type::t_string_from_int);
+      vx_type::e_string_from_string_end = new vx_type::Class_string_from_string_end();
+      vx_core::vx_reserve_empty(vx_type::e_string_from_string_end);
+      vx_type::t_string_from_string_end = new vx_type::Class_string_from_string_end();
+      vx_core::vx_reserve_type(vx_type::t_string_from_string_end);
+      vx_type::e_string_from_string_start = new vx_type::Class_string_from_string_start();
+      vx_core::vx_reserve_empty(vx_type::e_string_from_string_start);
+      vx_type::t_string_from_string_start = new vx_type::Class_string_from_string_start();
+      vx_core::vx_reserve_type(vx_type::t_string_from_string_start);
+      vx_type::e_string_from_string_start_end = new vx_type::Class_string_from_string_start_end();
+      vx_core::vx_reserve_empty(vx_type::e_string_from_string_start_end);
+      vx_type::t_string_from_string_start_end = new vx_type::Class_string_from_string_start_end();
+      vx_core::vx_reserve_type(vx_type::t_string_from_string_start_end);
+      vx_type::e_string_from_stringlist_join = new vx_type::Class_string_from_stringlist_join();
+      vx_core::vx_reserve_empty(vx_type::e_string_from_stringlist_join);
+      vx_type::t_string_from_stringlist_join = new vx_type::Class_string_from_stringlist_join();
+      vx_core::vx_reserve_type(vx_type::t_string_from_stringlist_join);
+      vx_type::e_traitnames_from_any = new vx_type::Class_traitnames_from_any();
+      vx_core::vx_reserve_empty(vx_type::e_traitnames_from_any);
+      vx_type::t_traitnames_from_any = new vx_type::Class_traitnames_from_any();
+      vx_core::vx_reserve_type(vx_type::t_traitnames_from_any);
+      vx_type::e_traits_from_any = new vx_type::Class_traits_from_any();
+      vx_core::vx_reserve_empty(vx_type::e_traits_from_any);
+      vx_type::t_traits_from_any = new vx_type::Class_traits_from_any();
+      vx_core::vx_reserve_type(vx_type::t_traits_from_any);
+      vx_type::e_traits_from_typedef = new vx_type::Class_traits_from_typedef();
+      vx_core::vx_reserve_empty(vx_type::e_traits_from_typedef);
+      vx_type::t_traits_from_typedef = new vx_type::Class_traits_from_typedef();
+      vx_core::vx_reserve_type(vx_type::t_traits_from_typedef);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

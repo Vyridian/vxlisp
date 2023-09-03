@@ -7,6 +7,7 @@ Warning: This is my first C++ project, so there are going to be a lot of misconc
 * Ubiquitous - C++ is a well-established language that forms the bedrock of most complex systems such as Operating Systems.
 * Performance - It has fairly optimal memory and execution performance with only native C and Assembly being superior.
 * Native - Strong ability to program close to the 'metal'.
+* Hard things are easy - Pointers give you a great deal of power to do what you want.
 
 ## Cons of C++
 
@@ -19,6 +20,8 @@ Trigger Alert! - Strong opinions incoming.
 * Brittle - Null pointer exceptions and memory leaks are the norm not the exception. It is extremely difficult to create any program that does not encounter these regularly.
 * Exception Handling - Exception handling technically exists, but C++ programs still can crash past exception handling just by trying to reference a pointer to an object that has been deleted. Java is disgusting and it has far more robust exception handling.
 * Learning resources - Being an old language, almost every question has been asked and answered. The problem is that so much time has past and best practices are all over that map. My experience was that almost every straight-forward example ended up being a dead-end that I had to gut and rework later. Very frustrating learning experience.
+* Error messaging is vague - Balancing .hpp and .cpp files is complex and the messages produced by compiler are not helpful enough.
+* Easy things are hard - Common cases like establishing robust classes, global variables, templates, pointer references are all overly complex.
 
 ## vxlisp to C++ conversion
 

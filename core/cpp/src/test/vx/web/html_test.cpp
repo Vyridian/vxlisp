@@ -9,7 +9,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_body_indent(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-body-indent"),
       vx_core::vx_new_string(":describelist"),
@@ -59,7 +59,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_div_indent(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-div-indent"),
       vx_core::vx_new_string(":describelist"),
@@ -108,7 +108,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_head_indent(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-head-indent"),
       vx_core::vx_new_string(":describelist"),
@@ -138,7 +138,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_html(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-html"),
       vx_core::vx_new_string(":describelist"),
@@ -177,7 +177,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_meta_indent(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-meta-indent"),
       vx_core::vx_new_string(":describelist"),
@@ -211,7 +211,7 @@ namespace vx_web_html_test {
 
   vx_test::Type_testcase f_string_from_p_indent(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-p-indent"),
       vx_core::vx_new_string(":describelist"),

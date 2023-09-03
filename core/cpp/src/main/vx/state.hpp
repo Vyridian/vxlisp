@@ -17,12 +17,6 @@ namespace vx_state {
   typedef Abstract_register* Func_register;
   extern Func_register e_register;
   extern Func_register t_register;
-
-  class vx_Class_package {
-  public:
-  };
-
-
   // (func change)
   vx_core::Type_boolean f_change(vx_state::Type_value_map valuemap);
 
@@ -108,6 +102,16 @@ namespace vx_state {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

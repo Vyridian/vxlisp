@@ -253,7 +253,7 @@ func StringFromValueIndent(value vxvalue, indent string) string {
 func StringValueFromValue(value vxvalue) string {
 	var output = ""
 	switch value.code {
-	case "decimal", "int", "number", "string":
+	case "boolean", "decimal", "int", "number", "string":
 		output = value.native.(string)
 	}
 	return output

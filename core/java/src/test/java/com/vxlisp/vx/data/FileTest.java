@@ -113,29 +113,6 @@ public final class FileTest {
     return output;
   }
 
-  static Test.Type_testcase f_pathcurrent_from_os(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
-      ":passfail", false,
-      ":testpkg", "vx/data/file",
-      ":casename", "pathcurrent<-os",
-      ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test-true\n (is-endswith (pathcurrent<-os) \"\\java\"))",
-          ":testresult",
-            Test.f_test_true(
-              Core.f_is_endswith(
-                File.f_pathcurrent_from_os(),
-                Core.t_string.vx_new_from_string("\\java")
-              ),
-              context
-            )
-        )
-      )
-    );
-    return output;
-  }
-
   static Test.Type_testcase f_string_read_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -173,7 +150,6 @@ public final class FileTest {
       FileTest.f_boolean_exists_from_file(context),
       FileTest.f_boolean_write_from_file_string(context),
       FileTest.f_file_read_from_file(context),
-      FileTest.f_pathcurrent_from_os(context),
       FileTest.f_string_read_from_file(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
@@ -185,10 +161,10 @@ public final class FileTest {
       ":testpkg",   "vx/data/file", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 90, ":tests", 10, ":total", 11), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 5, ":total", 9), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 44, ":tests", 4, ":total", 9), 
       ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 9), 
       ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 9), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 45, ":tests", 5, ":total", 11), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 36, ":tests", 4, ":total", 11), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2)
     );
   }
@@ -210,7 +186,7 @@ public final class FileTest {
         ":file-read<-file", 1,
         ":name<-file", 0,
         ":path<-file", 0,
-        ":pathcurrent<-os", 1,
+        ":pathcurrent<-os", 0,
         ":pathfull<-file", 0,
         ":string-read<-file", 1
       )

@@ -1849,35 +1849,34 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
           ":testresult",
             Test.f_test(
               Core.f_new(
-                Core.t_stringlist,
+                Core.t_stringmap,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("a1"),
-                  Core.t_string.vx_new_from_string("b2")
+                  Core.t_string.vx_new_from_string("keya"),
+                  Core.t_string.vx_new_from_string("a"),
+                  Core.t_string.vx_new_from_string("keyb"),
+                  Core.t_string.vx_new_from_string("b")
                 )
               ),
-              Core.f_list_from_map(
-                Core.t_stringlist,
+              Core.f_map_from_list(
+                Core.t_stringmap,
                 Core.f_new(
-                  Core.t_stringmap,
+                  Core.t_stringlist,
                   Core.t_anylist.vx_new(
                     Core.t_string.vx_new_from_string("a"),
-                    Core.t_string.vx_new_from_string("1"),
-                    Core.t_string.vx_new_from_string("b"),
-                    Core.t_string.vx_new_from_string("2")
+                    Core.t_string.vx_new_from_string("b")
                   )
                 ),
-                Core.t_any_from_key_value.fn_new((key_any, val_any) -> {
-                  Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+                Core.t_any_from_any.fn_new((val_any) -> {
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
                   return 
                     Core.f_new(
                       Core.t_string,
                       Core.t_anylist.vx_new(
-                        key,
+                        Core.t_string.vx_new_from_string("key"),
                         val
                       )
                     );
@@ -2477,7 +2476,7 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 179, ":total", 222), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 81, ":tests", 180, ":total", 222), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 57, ":total", 119), 
       ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 142), 
       ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 142), 

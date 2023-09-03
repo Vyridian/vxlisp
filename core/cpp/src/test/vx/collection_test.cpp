@@ -9,7 +9,7 @@ namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_end(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-end"),
       vx_core::vx_new_string(":describelist"),
@@ -53,7 +53,7 @@ namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_filtertypes(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-filtertypes"),
       vx_core::vx_new_string(":describelist"),
@@ -102,7 +102,7 @@ namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_fn_filter(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-fn-filter"),
       vx_core::vx_new_string(":describelist"),
@@ -179,7 +179,7 @@ namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_start(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-start"),
       vx_core::vx_new_string(":describelist"),
@@ -223,7 +223,7 @@ namespace vx_collection_test {
 
   vx_test::Type_testcase f_list_from_list_start_end(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-start-end"),
       vx_core::vx_new_string(":describelist"),

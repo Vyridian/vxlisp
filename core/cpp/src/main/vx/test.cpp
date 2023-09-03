@@ -1,4 +1,5 @@
 #include <exception>
+#include <map>
 #include <string>
 #include <vector>
 #include "../vx/core.hpp"
@@ -2961,7 +2962,7 @@ namespace vx_test {
         vx_core::Type_boolean passfail = testpackage->passfail();
         vx_core::vx_ref_plus(passfail);
         vx_web_html::Type_style pkgnamestyle = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".pkgname")
         );
         vx_core::vx_ref_plus(pkgnamestyle);
@@ -3144,22 +3145,22 @@ namespace vx_test {
       vx_web_html::t_div,
       vx_core::t_any_from_func->vx_fn_new({testpackagelist}, [testpackagelist]() {
         vx_web_html::Type_style stylepassfail = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".passfail")
         );
         vx_core::vx_ref_plus(stylepassfail);
         vx_web_html::Type_style stylepkgname = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".pkgname")
         );
         vx_core::vx_ref_plus(stylepkgname);
         vx_web_html::Type_style stylepkgheader = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".pkgheader")
         );
         vx_core::vx_ref_plus(stylepkgheader);
         vx_web_html::Type_style stylecoveragenum = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".coveragenums")
         );
         vx_core::vx_ref_plus(stylecoveragenum);
@@ -3731,7 +3732,7 @@ namespace vx_test {
                 vx_core::vx_new_string("Test Suite")
               })
             ),
-            vx_test::c_stylesheet_test()
+            vx_test::c_stylesheet_test
           })
         ),
         vx_core::vx_new_string(":body"),
@@ -3853,7 +3854,7 @@ namespace vx_test {
         vx_core::Type_string stylename = vx_core::f_if_1(vx_core::t_string, passfail, vx_core::vx_new_string(".passflag"), vx_core::vx_new_string(".failflag"));
         vx_core::vx_ref_plus(stylename);
         vx_web_html::Type_style style = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           stylename
         );
         vx_core::vx_ref_plus(style);
@@ -3966,7 +3967,7 @@ namespace vx_test {
       vx_core::vx_new(vx_core::t_anylist, {
         vx_core::vx_new_string(":style"),
         vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".coveragenums")
         ),
         vx_core::vx_new_string(":text"),
@@ -6152,7 +6153,7 @@ namespace vx_test {
         );
         vx_core::vx_ref_plus(actual);
         vx_web_html::Type_style prestyle = vx_web_html::f_style_from_stylesheet_name(
-          vx_test::c_stylesheet_test(),
+          vx_test::c_stylesheet_test,
           vx_core::vx_new_string(".preformatted")
         );
         vx_core::vx_ref_plus(prestyle);
@@ -6511,618 +6512,286 @@ namespace vx_test {
 
   //}
 
-  vx_test::vx_Class_package* vx_package = new vx_test::vx_Class_package();
+  vx_test::Type_testcase e_testcase = NULL;
+  vx_test::Type_testcase t_testcase = NULL;
+  vx_test::Type_testcaselist e_testcaselist = NULL;
+  vx_test::Type_testcaselist t_testcaselist = NULL;
+  vx_test::Type_testcoveragedetail e_testcoveragedetail = NULL;
+  vx_test::Type_testcoveragedetail t_testcoveragedetail = NULL;
+  vx_test::Type_testcoveragenums e_testcoveragenums = NULL;
+  vx_test::Type_testcoveragenums t_testcoveragenums = NULL;
+  vx_test::Type_testcoveragesummary e_testcoveragesummary = NULL;
+  vx_test::Type_testcoveragesummary t_testcoveragesummary = NULL;
+  vx_test::Type_testdescribe e_testdescribe = NULL;
+  vx_test::Type_testdescribe t_testdescribe = NULL;
+  vx_test::Type_testdescribelist e_testdescribelist = NULL;
+  vx_test::Type_testdescribelist t_testdescribelist = NULL;
+  vx_test::Type_testpackage e_testpackage = NULL;
+  vx_test::Type_testpackage t_testpackage = NULL;
+  vx_test::Type_testpackagelist e_testpackagelist = NULL;
+  vx_test::Type_testpackagelist t_testpackagelist = NULL;
+  vx_test::Type_testresult e_testresult = NULL;
+  vx_test::Type_testresult t_testresult = NULL;
+  vx_test::Type_testresultlist e_testresultlist = NULL;
+  vx_test::Type_testresultlist t_testresultlist = NULL;
+  vx_test::Const_stylesheet_test c_stylesheet_test = NULL;
+  vx_test::Func_div_from_testcaselist e_div_from_testcaselist = NULL;
+  vx_test::Func_div_from_testcaselist t_div_from_testcaselist = NULL;
+  vx_test::Func_div_from_testpackage e_div_from_testpackage = NULL;
+  vx_test::Func_div_from_testpackage t_div_from_testpackage = NULL;
+  vx_test::Func_div_from_testpackagelist e_div_from_testpackagelist = NULL;
+  vx_test::Func_div_from_testpackagelist t_div_from_testpackagelist = NULL;
+  vx_test::Func_divchildlist_from_testpackagelist e_divchildlist_from_testpackagelist = NULL;
+  vx_test::Func_divchildlist_from_testpackagelist t_divchildlist_from_testpackagelist = NULL;
+  vx_test::Func_file_test e_file_test = NULL;
+  vx_test::Func_file_test t_file_test = NULL;
+  vx_test::Func_file_testhtml e_file_testhtml = NULL;
+  vx_test::Func_file_testhtml t_file_testhtml = NULL;
+  vx_test::Func_file_testnode e_file_testnode = NULL;
+  vx_test::Func_file_testnode t_file_testnode = NULL;
+  vx_test::Func_html_from_divtest e_html_from_divtest = NULL;
+  vx_test::Func_html_from_divtest t_html_from_divtest = NULL;
+  vx_test::Func_p_from_passfail e_p_from_passfail = NULL;
+  vx_test::Func_p_from_passfail t_p_from_passfail = NULL;
+  vx_test::Func_p_from_testcoveragenums e_p_from_testcoveragenums = NULL;
+  vx_test::Func_p_from_testcoveragenums t_p_from_testcoveragenums = NULL;
+  vx_test::Func_resolve_testcase e_resolve_testcase = NULL;
+  vx_test::Func_resolve_testcase t_resolve_testcase = NULL;
+  vx_test::Func_resolve_testcaselist e_resolve_testcaselist = NULL;
+  vx_test::Func_resolve_testcaselist t_resolve_testcaselist = NULL;
+  vx_test::Func_resolve_testdescribe e_resolve_testdescribe = NULL;
+  vx_test::Func_resolve_testdescribe t_resolve_testdescribe = NULL;
+  vx_test::Func_resolve_testdescribelist e_resolve_testdescribelist = NULL;
+  vx_test::Func_resolve_testdescribelist t_resolve_testdescribelist = NULL;
+  vx_test::Func_resolve_testpackage e_resolve_testpackage = NULL;
+  vx_test::Func_resolve_testpackage t_resolve_testpackage = NULL;
+  vx_test::Func_resolve_testpackagelist e_resolve_testpackagelist = NULL;
+  vx_test::Func_resolve_testpackagelist t_resolve_testpackagelist = NULL;
+  vx_test::Func_resolve_testresult e_resolve_testresult = NULL;
+  vx_test::Func_resolve_testresult t_resolve_testresult = NULL;
+  vx_test::Func_test e_test = NULL;
+  vx_test::Func_test t_test = NULL;
+  vx_test::Func_test_1 e_test_1 = NULL;
+  vx_test::Func_test_1 t_test_1 = NULL;
+  vx_test::Func_test_false e_test_false = NULL;
+  vx_test::Func_test_false t_test_false = NULL;
+  vx_test::Func_test_false_1 e_test_false_1 = NULL;
+  vx_test::Func_test_false_1 t_test_false_1 = NULL;
+  vx_test::Func_test_gt e_test_gt = NULL;
+  vx_test::Func_test_gt t_test_gt = NULL;
+  vx_test::Func_test_gt_1 e_test_gt_1 = NULL;
+  vx_test::Func_test_gt_1 t_test_gt_1 = NULL;
+  vx_test::Func_test_ne e_test_ne = NULL;
+  vx_test::Func_test_ne t_test_ne = NULL;
+  vx_test::Func_test_ne_1 e_test_ne_1 = NULL;
+  vx_test::Func_test_ne_1 t_test_ne_1 = NULL;
+  vx_test::Func_test_string e_test_string = NULL;
+  vx_test::Func_test_string t_test_string = NULL;
+  vx_test::Func_test_string_1 e_test_string_1 = NULL;
+  vx_test::Func_test_string_1 t_test_string_1 = NULL;
+  vx_test::Func_test_true e_test_true = NULL;
+  vx_test::Func_test_true t_test_true = NULL;
+  vx_test::Func_test_true_1 e_test_true_1 = NULL;
+  vx_test::Func_test_true_1 t_test_true_1 = NULL;
+  vx_test::Func_tr_from_testdescribe_casename e_tr_from_testdescribe_casename = NULL;
+  vx_test::Func_tr_from_testdescribe_casename t_tr_from_testdescribe_casename = NULL;
+  vx_test::Func_trlist_from_testcase e_trlist_from_testcase = NULL;
+  vx_test::Func_trlist_from_testcase t_trlist_from_testcase = NULL;
+  vx_test::Func_trlist_from_testcaselist e_trlist_from_testcaselist = NULL;
+  vx_test::Func_trlist_from_testcaselist t_trlist_from_testcaselist = NULL;
 
-  vx_test::Type_testcase vx_e_testcase() {
-    vx_test::Type_testcase output;
-      output = new Class_testcase();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testcase vx_t_testcase() {
-    vx_test::Type_testcase output = new Class_testcase();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testcase e_testcase = vx_e_testcase();
-  vx_test::Type_testcase t_testcase = vx_t_testcase();
-
-  vx_test::Type_testcaselist vx_e_testcaselist() {
-    vx_test::Type_testcaselist output;
-      output = new Class_testcaselist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testcaselist vx_t_testcaselist() {
-    vx_test::Type_testcaselist output = new Class_testcaselist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testcaselist e_testcaselist = vx_e_testcaselist();
-  vx_test::Type_testcaselist t_testcaselist = vx_t_testcaselist();
-
-  vx_test::Type_testcoveragedetail vx_e_testcoveragedetail() {
-    vx_test::Type_testcoveragedetail output;
-      output = new Class_testcoveragedetail();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testcoveragedetail vx_t_testcoveragedetail() {
-    vx_test::Type_testcoveragedetail output = new Class_testcoveragedetail();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testcoveragedetail e_testcoveragedetail = vx_e_testcoveragedetail();
-  vx_test::Type_testcoveragedetail t_testcoveragedetail = vx_t_testcoveragedetail();
-
-  vx_test::Type_testcoveragenums vx_e_testcoveragenums() {
-    vx_test::Type_testcoveragenums output;
-      output = new Class_testcoveragenums();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testcoveragenums vx_t_testcoveragenums() {
-    vx_test::Type_testcoveragenums output = new Class_testcoveragenums();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testcoveragenums e_testcoveragenums = vx_e_testcoveragenums();
-  vx_test::Type_testcoveragenums t_testcoveragenums = vx_t_testcoveragenums();
-
-  vx_test::Type_testcoveragesummary vx_e_testcoveragesummary() {
-    vx_test::Type_testcoveragesummary output;
-      output = new Class_testcoveragesummary();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testcoveragesummary vx_t_testcoveragesummary() {
-    vx_test::Type_testcoveragesummary output = new Class_testcoveragesummary();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testcoveragesummary e_testcoveragesummary = vx_e_testcoveragesummary();
-  vx_test::Type_testcoveragesummary t_testcoveragesummary = vx_t_testcoveragesummary();
-
-  vx_test::Type_testdescribe vx_e_testdescribe() {
-    vx_test::Type_testdescribe output;
-      output = new Class_testdescribe();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testdescribe vx_t_testdescribe() {
-    vx_test::Type_testdescribe output = new Class_testdescribe();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testdescribe e_testdescribe = vx_e_testdescribe();
-  vx_test::Type_testdescribe t_testdescribe = vx_t_testdescribe();
-
-  vx_test::Type_testdescribelist vx_e_testdescribelist() {
-    vx_test::Type_testdescribelist output;
-      output = new Class_testdescribelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testdescribelist vx_t_testdescribelist() {
-    vx_test::Type_testdescribelist output = new Class_testdescribelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testdescribelist e_testdescribelist = vx_e_testdescribelist();
-  vx_test::Type_testdescribelist t_testdescribelist = vx_t_testdescribelist();
-
-  vx_test::Type_testpackage vx_e_testpackage() {
-    vx_test::Type_testpackage output;
-      output = new Class_testpackage();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testpackage vx_t_testpackage() {
-    vx_test::Type_testpackage output = new Class_testpackage();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testpackage e_testpackage = vx_e_testpackage();
-  vx_test::Type_testpackage t_testpackage = vx_t_testpackage();
-
-  vx_test::Type_testpackagelist vx_e_testpackagelist() {
-    vx_test::Type_testpackagelist output;
-      output = new Class_testpackagelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testpackagelist vx_t_testpackagelist() {
-    vx_test::Type_testpackagelist output = new Class_testpackagelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testpackagelist e_testpackagelist = vx_e_testpackagelist();
-  vx_test::Type_testpackagelist t_testpackagelist = vx_t_testpackagelist();
-
-  vx_test::Type_testresult vx_e_testresult() {
-    vx_test::Type_testresult output;
-      output = new Class_testresult();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testresult vx_t_testresult() {
-    vx_test::Type_testresult output = new Class_testresult();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testresult e_testresult = vx_e_testresult();
-  vx_test::Type_testresult t_testresult = vx_t_testresult();
-
-  vx_test::Type_testresultlist vx_e_testresultlist() {
-    vx_test::Type_testresultlist output;
-      output = new Class_testresultlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Type_testresultlist vx_t_testresultlist() {
-    vx_test::Type_testresultlist output = new Class_testresultlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Type_testresultlist e_testresultlist = vx_e_testresultlist();
-  vx_test::Type_testresultlist t_testresultlist = vx_t_testresultlist();
-
-  // (const stylesheet-test)
-  vx_test::Const_stylesheet_test c_stylesheet_test() {
-    vx_test::Const_stylesheet_test output = vx_test::vx_package->c_stylesheet_test;
-    if (output == NULL) {
-      output = vx_test::Class_stylesheet_test::vx_const_new();
-      vx_test::vx_package->c_stylesheet_test = output;
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
     }
-    return output;
-  }
-
-  // (func div<-testcaselist)
-  vx_test::Func_div_from_testcaselist vx_e_div_from_testcaselist() {
-    vx_test::Func_div_from_testcaselist output = new vx_test::Class_div_from_testcaselist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_div_from_testcaselist vx_t_div_from_testcaselist() {
-    vx_test::Func_div_from_testcaselist output = new vx_test::Class_div_from_testcaselist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_div_from_testcaselist e_div_from_testcaselist = vx_e_div_from_testcaselist();
-  vx_test::Func_div_from_testcaselist t_div_from_testcaselist = vx_t_div_from_testcaselist();
-
-  // (func div<-testpackage)
-  vx_test::Func_div_from_testpackage vx_e_div_from_testpackage() {
-    vx_test::Func_div_from_testpackage output = new vx_test::Class_div_from_testpackage();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_div_from_testpackage vx_t_div_from_testpackage() {
-    vx_test::Func_div_from_testpackage output = new vx_test::Class_div_from_testpackage();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_div_from_testpackage e_div_from_testpackage = vx_e_div_from_testpackage();
-  vx_test::Func_div_from_testpackage t_div_from_testpackage = vx_t_div_from_testpackage();
-
-  // (func div<-testpackagelist)
-  vx_test::Func_div_from_testpackagelist vx_e_div_from_testpackagelist() {
-    vx_test::Func_div_from_testpackagelist output = new vx_test::Class_div_from_testpackagelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_div_from_testpackagelist vx_t_div_from_testpackagelist() {
-    vx_test::Func_div_from_testpackagelist output = new vx_test::Class_div_from_testpackagelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_div_from_testpackagelist e_div_from_testpackagelist = vx_e_div_from_testpackagelist();
-  vx_test::Func_div_from_testpackagelist t_div_from_testpackagelist = vx_t_div_from_testpackagelist();
-
-  // (func divchildlist<-testpackagelist)
-  vx_test::Func_divchildlist_from_testpackagelist vx_e_divchildlist_from_testpackagelist() {
-    vx_test::Func_divchildlist_from_testpackagelist output = new vx_test::Class_divchildlist_from_testpackagelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_divchildlist_from_testpackagelist vx_t_divchildlist_from_testpackagelist() {
-    vx_test::Func_divchildlist_from_testpackagelist output = new vx_test::Class_divchildlist_from_testpackagelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_divchildlist_from_testpackagelist e_divchildlist_from_testpackagelist = vx_e_divchildlist_from_testpackagelist();
-  vx_test::Func_divchildlist_from_testpackagelist t_divchildlist_from_testpackagelist = vx_t_divchildlist_from_testpackagelist();
-
-  // (func file-test)
-  vx_test::Func_file_test vx_e_file_test() {
-    vx_test::Func_file_test output = new vx_test::Class_file_test();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_file_test vx_t_file_test() {
-    vx_test::Func_file_test output = new vx_test::Class_file_test();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_file_test e_file_test = vx_e_file_test();
-  vx_test::Func_file_test t_file_test = vx_t_file_test();
-
-  // (func file-testhtml)
-  vx_test::Func_file_testhtml vx_e_file_testhtml() {
-    vx_test::Func_file_testhtml output = new vx_test::Class_file_testhtml();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_file_testhtml vx_t_file_testhtml() {
-    vx_test::Func_file_testhtml output = new vx_test::Class_file_testhtml();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_file_testhtml e_file_testhtml = vx_e_file_testhtml();
-  vx_test::Func_file_testhtml t_file_testhtml = vx_t_file_testhtml();
-
-  // (func file-testnode)
-  vx_test::Func_file_testnode vx_e_file_testnode() {
-    vx_test::Func_file_testnode output = new vx_test::Class_file_testnode();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_file_testnode vx_t_file_testnode() {
-    vx_test::Func_file_testnode output = new vx_test::Class_file_testnode();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_file_testnode e_file_testnode = vx_e_file_testnode();
-  vx_test::Func_file_testnode t_file_testnode = vx_t_file_testnode();
-
-  // (func html<-divtest)
-  vx_test::Func_html_from_divtest vx_e_html_from_divtest() {
-    vx_test::Func_html_from_divtest output = new vx_test::Class_html_from_divtest();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_html_from_divtest vx_t_html_from_divtest() {
-    vx_test::Func_html_from_divtest output = new vx_test::Class_html_from_divtest();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_html_from_divtest e_html_from_divtest = vx_e_html_from_divtest();
-  vx_test::Func_html_from_divtest t_html_from_divtest = vx_t_html_from_divtest();
-
-  // (func p<-passfail)
-  vx_test::Func_p_from_passfail vx_e_p_from_passfail() {
-    vx_test::Func_p_from_passfail output = new vx_test::Class_p_from_passfail();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_p_from_passfail vx_t_p_from_passfail() {
-    vx_test::Func_p_from_passfail output = new vx_test::Class_p_from_passfail();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_p_from_passfail e_p_from_passfail = vx_e_p_from_passfail();
-  vx_test::Func_p_from_passfail t_p_from_passfail = vx_t_p_from_passfail();
-
-  // (func p<-testcoveragenums)
-  vx_test::Func_p_from_testcoveragenums vx_e_p_from_testcoveragenums() {
-    vx_test::Func_p_from_testcoveragenums output = new vx_test::Class_p_from_testcoveragenums();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_p_from_testcoveragenums vx_t_p_from_testcoveragenums() {
-    vx_test::Func_p_from_testcoveragenums output = new vx_test::Class_p_from_testcoveragenums();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_p_from_testcoveragenums e_p_from_testcoveragenums = vx_e_p_from_testcoveragenums();
-  vx_test::Func_p_from_testcoveragenums t_p_from_testcoveragenums = vx_t_p_from_testcoveragenums();
-
-  // (func resolve-testcase)
-  vx_test::Func_resolve_testcase vx_e_resolve_testcase() {
-    vx_test::Func_resolve_testcase output = new vx_test::Class_resolve_testcase();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testcase vx_t_resolve_testcase() {
-    vx_test::Func_resolve_testcase output = new vx_test::Class_resolve_testcase();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testcase e_resolve_testcase = vx_e_resolve_testcase();
-  vx_test::Func_resolve_testcase t_resolve_testcase = vx_t_resolve_testcase();
-
-  // (func resolve-testcaselist)
-  vx_test::Func_resolve_testcaselist vx_e_resolve_testcaselist() {
-    vx_test::Func_resolve_testcaselist output = new vx_test::Class_resolve_testcaselist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testcaselist vx_t_resolve_testcaselist() {
-    vx_test::Func_resolve_testcaselist output = new vx_test::Class_resolve_testcaselist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testcaselist e_resolve_testcaselist = vx_e_resolve_testcaselist();
-  vx_test::Func_resolve_testcaselist t_resolve_testcaselist = vx_t_resolve_testcaselist();
-
-  // (func resolve-testdescribe)
-  vx_test::Func_resolve_testdescribe vx_e_resolve_testdescribe() {
-    vx_test::Func_resolve_testdescribe output = new vx_test::Class_resolve_testdescribe();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testdescribe vx_t_resolve_testdescribe() {
-    vx_test::Func_resolve_testdescribe output = new vx_test::Class_resolve_testdescribe();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testdescribe e_resolve_testdescribe = vx_e_resolve_testdescribe();
-  vx_test::Func_resolve_testdescribe t_resolve_testdescribe = vx_t_resolve_testdescribe();
-
-  // (func resolve-testdescribelist)
-  vx_test::Func_resolve_testdescribelist vx_e_resolve_testdescribelist() {
-    vx_test::Func_resolve_testdescribelist output = new vx_test::Class_resolve_testdescribelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testdescribelist vx_t_resolve_testdescribelist() {
-    vx_test::Func_resolve_testdescribelist output = new vx_test::Class_resolve_testdescribelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testdescribelist e_resolve_testdescribelist = vx_e_resolve_testdescribelist();
-  vx_test::Func_resolve_testdescribelist t_resolve_testdescribelist = vx_t_resolve_testdescribelist();
-
-  // (func resolve-testpackage)
-  vx_test::Func_resolve_testpackage vx_e_resolve_testpackage() {
-    vx_test::Func_resolve_testpackage output = new vx_test::Class_resolve_testpackage();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testpackage vx_t_resolve_testpackage() {
-    vx_test::Func_resolve_testpackage output = new vx_test::Class_resolve_testpackage();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testpackage e_resolve_testpackage = vx_e_resolve_testpackage();
-  vx_test::Func_resolve_testpackage t_resolve_testpackage = vx_t_resolve_testpackage();
-
-  // (func resolve-testpackagelist)
-  vx_test::Func_resolve_testpackagelist vx_e_resolve_testpackagelist() {
-    vx_test::Func_resolve_testpackagelist output = new vx_test::Class_resolve_testpackagelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testpackagelist vx_t_resolve_testpackagelist() {
-    vx_test::Func_resolve_testpackagelist output = new vx_test::Class_resolve_testpackagelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testpackagelist e_resolve_testpackagelist = vx_e_resolve_testpackagelist();
-  vx_test::Func_resolve_testpackagelist t_resolve_testpackagelist = vx_t_resolve_testpackagelist();
-
-  // (func resolve-testresult)
-  vx_test::Func_resolve_testresult vx_e_resolve_testresult() {
-    vx_test::Func_resolve_testresult output = new vx_test::Class_resolve_testresult();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_resolve_testresult vx_t_resolve_testresult() {
-    vx_test::Func_resolve_testresult output = new vx_test::Class_resolve_testresult();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_resolve_testresult e_resolve_testresult = vx_e_resolve_testresult();
-  vx_test::Func_resolve_testresult t_resolve_testresult = vx_t_resolve_testresult();
-
-  // (func test)
-  vx_test::Func_test vx_e_test() {
-    vx_test::Func_test output = new vx_test::Class_test();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test vx_t_test() {
-    vx_test::Func_test output = new vx_test::Class_test();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test e_test = vx_e_test();
-  vx_test::Func_test t_test = vx_t_test();
-
-  // (func test)
-  vx_test::Func_test_1 vx_e_test_1() {
-    vx_test::Func_test_1 output = new vx_test::Class_test_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_1 vx_t_test_1() {
-    vx_test::Func_test_1 output = new vx_test::Class_test_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_1 e_test_1 = vx_e_test_1();
-  vx_test::Func_test_1 t_test_1 = vx_t_test_1();
-
-  // (func test-false)
-  vx_test::Func_test_false vx_e_test_false() {
-    vx_test::Func_test_false output = new vx_test::Class_test_false();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_false vx_t_test_false() {
-    vx_test::Func_test_false output = new vx_test::Class_test_false();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_false e_test_false = vx_e_test_false();
-  vx_test::Func_test_false t_test_false = vx_t_test_false();
-
-  // (func test-false)
-  vx_test::Func_test_false_1 vx_e_test_false_1() {
-    vx_test::Func_test_false_1 output = new vx_test::Class_test_false_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_false_1 vx_t_test_false_1() {
-    vx_test::Func_test_false_1 output = new vx_test::Class_test_false_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_false_1 e_test_false_1 = vx_e_test_false_1();
-  vx_test::Func_test_false_1 t_test_false_1 = vx_t_test_false_1();
-
-  // (func test-gt)
-  vx_test::Func_test_gt vx_e_test_gt() {
-    vx_test::Func_test_gt output = new vx_test::Class_test_gt();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_gt vx_t_test_gt() {
-    vx_test::Func_test_gt output = new vx_test::Class_test_gt();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_gt e_test_gt = vx_e_test_gt();
-  vx_test::Func_test_gt t_test_gt = vx_t_test_gt();
-
-  // (func test-gt)
-  vx_test::Func_test_gt_1 vx_e_test_gt_1() {
-    vx_test::Func_test_gt_1 output = new vx_test::Class_test_gt_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_gt_1 vx_t_test_gt_1() {
-    vx_test::Func_test_gt_1 output = new vx_test::Class_test_gt_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_gt_1 e_test_gt_1 = vx_e_test_gt_1();
-  vx_test::Func_test_gt_1 t_test_gt_1 = vx_t_test_gt_1();
-
-  // (func test-ne)
-  vx_test::Func_test_ne vx_e_test_ne() {
-    vx_test::Func_test_ne output = new vx_test::Class_test_ne();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_ne vx_t_test_ne() {
-    vx_test::Func_test_ne output = new vx_test::Class_test_ne();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_ne e_test_ne = vx_e_test_ne();
-  vx_test::Func_test_ne t_test_ne = vx_t_test_ne();
-
-  // (func test-ne)
-  vx_test::Func_test_ne_1 vx_e_test_ne_1() {
-    vx_test::Func_test_ne_1 output = new vx_test::Class_test_ne_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_ne_1 vx_t_test_ne_1() {
-    vx_test::Func_test_ne_1 output = new vx_test::Class_test_ne_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_ne_1 e_test_ne_1 = vx_e_test_ne_1();
-  vx_test::Func_test_ne_1 t_test_ne_1 = vx_t_test_ne_1();
-
-  // (func test-string)
-  vx_test::Func_test_string vx_e_test_string() {
-    vx_test::Func_test_string output = new vx_test::Class_test_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_string vx_t_test_string() {
-    vx_test::Func_test_string output = new vx_test::Class_test_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_string e_test_string = vx_e_test_string();
-  vx_test::Func_test_string t_test_string = vx_t_test_string();
-
-  // (func test-string)
-  vx_test::Func_test_string_1 vx_e_test_string_1() {
-    vx_test::Func_test_string_1 output = new vx_test::Class_test_string_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_string_1 vx_t_test_string_1() {
-    vx_test::Func_test_string_1 output = new vx_test::Class_test_string_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_string_1 e_test_string_1 = vx_e_test_string_1();
-  vx_test::Func_test_string_1 t_test_string_1 = vx_t_test_string_1();
-
-  // (func test-true)
-  vx_test::Func_test_true vx_e_test_true() {
-    vx_test::Func_test_true output = new vx_test::Class_test_true();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_true vx_t_test_true() {
-    vx_test::Func_test_true output = new vx_test::Class_test_true();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_true e_test_true = vx_e_test_true();
-  vx_test::Func_test_true t_test_true = vx_t_test_true();
-
-  // (func test-true)
-  vx_test::Func_test_true_1 vx_e_test_true_1() {
-    vx_test::Func_test_true_1 output = new vx_test::Class_test_true_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_test_true_1 vx_t_test_true_1() {
-    vx_test::Func_test_true_1 output = new vx_test::Class_test_true_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_test_true_1 e_test_true_1 = vx_e_test_true_1();
-  vx_test::Func_test_true_1 t_test_true_1 = vx_t_test_true_1();
-
-  // (func tr<-testdescribe-casename)
-  vx_test::Func_tr_from_testdescribe_casename vx_e_tr_from_testdescribe_casename() {
-    vx_test::Func_tr_from_testdescribe_casename output = new vx_test::Class_tr_from_testdescribe_casename();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_tr_from_testdescribe_casename vx_t_tr_from_testdescribe_casename() {
-    vx_test::Func_tr_from_testdescribe_casename output = new vx_test::Class_tr_from_testdescribe_casename();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_tr_from_testdescribe_casename e_tr_from_testdescribe_casename = vx_e_tr_from_testdescribe_casename();
-  vx_test::Func_tr_from_testdescribe_casename t_tr_from_testdescribe_casename = vx_t_tr_from_testdescribe_casename();
-
-  // (func trlist<-testcase)
-  vx_test::Func_trlist_from_testcase vx_e_trlist_from_testcase() {
-    vx_test::Func_trlist_from_testcase output = new vx_test::Class_trlist_from_testcase();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_trlist_from_testcase vx_t_trlist_from_testcase() {
-    vx_test::Func_trlist_from_testcase output = new vx_test::Class_trlist_from_testcase();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_trlist_from_testcase e_trlist_from_testcase = vx_e_trlist_from_testcase();
-  vx_test::Func_trlist_from_testcase t_trlist_from_testcase = vx_t_trlist_from_testcase();
-
-  // (func trlist<-testcaselist)
-  vx_test::Func_trlist_from_testcaselist vx_e_trlist_from_testcaselist() {
-    vx_test::Func_trlist_from_testcaselist output = new vx_test::Class_trlist_from_testcaselist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_test::Func_trlist_from_testcaselist vx_t_trlist_from_testcaselist() {
-    vx_test::Func_trlist_from_testcaselist output = new vx_test::Class_trlist_from_testcaselist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_test::Func_trlist_from_testcaselist e_trlist_from_testcaselist = vx_e_trlist_from_testcaselist();
-  vx_test::Func_trlist_from_testcaselist t_trlist_from_testcaselist = vx_t_trlist_from_testcaselist();
+    void vx_Class_package::init() {
+      vx_test::e_testcase = new Class_testcase();
+      vx_core::vx_reserve_empty(vx_test::e_testcase);
+      vx_test::t_testcase = new Class_testcase();
+      vx_core::vx_reserve_type(vx_test::t_testcase);
+      vx_test::e_testcaselist = new Class_testcaselist();
+      vx_core::vx_reserve_empty(vx_test::e_testcaselist);
+      vx_test::t_testcaselist = new Class_testcaselist();
+      vx_core::vx_reserve_type(vx_test::t_testcaselist);
+      vx_test::e_testcoveragedetail = new Class_testcoveragedetail();
+      vx_core::vx_reserve_empty(vx_test::e_testcoveragedetail);
+      vx_test::t_testcoveragedetail = new Class_testcoveragedetail();
+      vx_core::vx_reserve_type(vx_test::t_testcoveragedetail);
+      vx_test::e_testcoveragenums = new Class_testcoveragenums();
+      vx_core::vx_reserve_empty(vx_test::e_testcoveragenums);
+      vx_test::t_testcoveragenums = new Class_testcoveragenums();
+      vx_core::vx_reserve_type(vx_test::t_testcoveragenums);
+      vx_test::e_testcoveragesummary = new Class_testcoveragesummary();
+      vx_core::vx_reserve_empty(vx_test::e_testcoveragesummary);
+      vx_test::t_testcoveragesummary = new Class_testcoveragesummary();
+      vx_core::vx_reserve_type(vx_test::t_testcoveragesummary);
+      vx_test::e_testdescribe = new Class_testdescribe();
+      vx_core::vx_reserve_empty(vx_test::e_testdescribe);
+      vx_test::t_testdescribe = new Class_testdescribe();
+      vx_core::vx_reserve_type(vx_test::t_testdescribe);
+      vx_test::e_testdescribelist = new Class_testdescribelist();
+      vx_core::vx_reserve_empty(vx_test::e_testdescribelist);
+      vx_test::t_testdescribelist = new Class_testdescribelist();
+      vx_core::vx_reserve_type(vx_test::t_testdescribelist);
+      vx_test::e_testpackage = new Class_testpackage();
+      vx_core::vx_reserve_empty(vx_test::e_testpackage);
+      vx_test::t_testpackage = new Class_testpackage();
+      vx_core::vx_reserve_type(vx_test::t_testpackage);
+      vx_test::e_testpackagelist = new Class_testpackagelist();
+      vx_core::vx_reserve_empty(vx_test::e_testpackagelist);
+      vx_test::t_testpackagelist = new Class_testpackagelist();
+      vx_core::vx_reserve_type(vx_test::t_testpackagelist);
+      vx_test::e_testresult = new Class_testresult();
+      vx_core::vx_reserve_empty(vx_test::e_testresult);
+      vx_test::t_testresult = new Class_testresult();
+      vx_core::vx_reserve_type(vx_test::t_testresult);
+      vx_test::e_testresultlist = new Class_testresultlist();
+      vx_core::vx_reserve_empty(vx_test::e_testresultlist);
+      vx_test::t_testresultlist = new Class_testresultlist();
+      vx_core::vx_reserve_type(vx_test::t_testresultlist);
+      vx_test::e_div_from_testcaselist = new vx_test::Class_div_from_testcaselist();
+      vx_core::vx_reserve_empty(vx_test::e_div_from_testcaselist);
+      vx_test::t_div_from_testcaselist = new vx_test::Class_div_from_testcaselist();
+      vx_core::vx_reserve_type(vx_test::t_div_from_testcaselist);
+      vx_test::e_div_from_testpackage = new vx_test::Class_div_from_testpackage();
+      vx_core::vx_reserve_empty(vx_test::e_div_from_testpackage);
+      vx_test::t_div_from_testpackage = new vx_test::Class_div_from_testpackage();
+      vx_core::vx_reserve_type(vx_test::t_div_from_testpackage);
+      vx_test::e_div_from_testpackagelist = new vx_test::Class_div_from_testpackagelist();
+      vx_core::vx_reserve_empty(vx_test::e_div_from_testpackagelist);
+      vx_test::t_div_from_testpackagelist = new vx_test::Class_div_from_testpackagelist();
+      vx_core::vx_reserve_type(vx_test::t_div_from_testpackagelist);
+      vx_test::e_divchildlist_from_testpackagelist = new vx_test::Class_divchildlist_from_testpackagelist();
+      vx_core::vx_reserve_empty(vx_test::e_divchildlist_from_testpackagelist);
+      vx_test::t_divchildlist_from_testpackagelist = new vx_test::Class_divchildlist_from_testpackagelist();
+      vx_core::vx_reserve_type(vx_test::t_divchildlist_from_testpackagelist);
+      vx_test::e_file_test = new vx_test::Class_file_test();
+      vx_core::vx_reserve_empty(vx_test::e_file_test);
+      vx_test::t_file_test = new vx_test::Class_file_test();
+      vx_core::vx_reserve_type(vx_test::t_file_test);
+      vx_test::e_file_testhtml = new vx_test::Class_file_testhtml();
+      vx_core::vx_reserve_empty(vx_test::e_file_testhtml);
+      vx_test::t_file_testhtml = new vx_test::Class_file_testhtml();
+      vx_core::vx_reserve_type(vx_test::t_file_testhtml);
+      vx_test::e_file_testnode = new vx_test::Class_file_testnode();
+      vx_core::vx_reserve_empty(vx_test::e_file_testnode);
+      vx_test::t_file_testnode = new vx_test::Class_file_testnode();
+      vx_core::vx_reserve_type(vx_test::t_file_testnode);
+      vx_test::e_html_from_divtest = new vx_test::Class_html_from_divtest();
+      vx_core::vx_reserve_empty(vx_test::e_html_from_divtest);
+      vx_test::t_html_from_divtest = new vx_test::Class_html_from_divtest();
+      vx_core::vx_reserve_type(vx_test::t_html_from_divtest);
+      vx_test::e_p_from_passfail = new vx_test::Class_p_from_passfail();
+      vx_core::vx_reserve_empty(vx_test::e_p_from_passfail);
+      vx_test::t_p_from_passfail = new vx_test::Class_p_from_passfail();
+      vx_core::vx_reserve_type(vx_test::t_p_from_passfail);
+      vx_test::e_p_from_testcoveragenums = new vx_test::Class_p_from_testcoveragenums();
+      vx_core::vx_reserve_empty(vx_test::e_p_from_testcoveragenums);
+      vx_test::t_p_from_testcoveragenums = new vx_test::Class_p_from_testcoveragenums();
+      vx_core::vx_reserve_type(vx_test::t_p_from_testcoveragenums);
+      vx_test::e_resolve_testcase = new vx_test::Class_resolve_testcase();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testcase);
+      vx_test::t_resolve_testcase = new vx_test::Class_resolve_testcase();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testcase);
+      vx_test::e_resolve_testcaselist = new vx_test::Class_resolve_testcaselist();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testcaselist);
+      vx_test::t_resolve_testcaselist = new vx_test::Class_resolve_testcaselist();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testcaselist);
+      vx_test::e_resolve_testdescribe = new vx_test::Class_resolve_testdescribe();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testdescribe);
+      vx_test::t_resolve_testdescribe = new vx_test::Class_resolve_testdescribe();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testdescribe);
+      vx_test::e_resolve_testdescribelist = new vx_test::Class_resolve_testdescribelist();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testdescribelist);
+      vx_test::t_resolve_testdescribelist = new vx_test::Class_resolve_testdescribelist();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testdescribelist);
+      vx_test::e_resolve_testpackage = new vx_test::Class_resolve_testpackage();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testpackage);
+      vx_test::t_resolve_testpackage = new vx_test::Class_resolve_testpackage();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testpackage);
+      vx_test::e_resolve_testpackagelist = new vx_test::Class_resolve_testpackagelist();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testpackagelist);
+      vx_test::t_resolve_testpackagelist = new vx_test::Class_resolve_testpackagelist();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testpackagelist);
+      vx_test::e_resolve_testresult = new vx_test::Class_resolve_testresult();
+      vx_core::vx_reserve_empty(vx_test::e_resolve_testresult);
+      vx_test::t_resolve_testresult = new vx_test::Class_resolve_testresult();
+      vx_core::vx_reserve_type(vx_test::t_resolve_testresult);
+      vx_test::e_test = new vx_test::Class_test();
+      vx_core::vx_reserve_empty(vx_test::e_test);
+      vx_test::t_test = new vx_test::Class_test();
+      vx_core::vx_reserve_type(vx_test::t_test);
+      vx_test::e_test_1 = new vx_test::Class_test_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_1);
+      vx_test::t_test_1 = new vx_test::Class_test_1();
+      vx_core::vx_reserve_type(vx_test::t_test_1);
+      vx_test::e_test_false = new vx_test::Class_test_false();
+      vx_core::vx_reserve_empty(vx_test::e_test_false);
+      vx_test::t_test_false = new vx_test::Class_test_false();
+      vx_core::vx_reserve_type(vx_test::t_test_false);
+      vx_test::e_test_false_1 = new vx_test::Class_test_false_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_false_1);
+      vx_test::t_test_false_1 = new vx_test::Class_test_false_1();
+      vx_core::vx_reserve_type(vx_test::t_test_false_1);
+      vx_test::e_test_gt = new vx_test::Class_test_gt();
+      vx_core::vx_reserve_empty(vx_test::e_test_gt);
+      vx_test::t_test_gt = new vx_test::Class_test_gt();
+      vx_core::vx_reserve_type(vx_test::t_test_gt);
+      vx_test::e_test_gt_1 = new vx_test::Class_test_gt_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_gt_1);
+      vx_test::t_test_gt_1 = new vx_test::Class_test_gt_1();
+      vx_core::vx_reserve_type(vx_test::t_test_gt_1);
+      vx_test::e_test_ne = new vx_test::Class_test_ne();
+      vx_core::vx_reserve_empty(vx_test::e_test_ne);
+      vx_test::t_test_ne = new vx_test::Class_test_ne();
+      vx_core::vx_reserve_type(vx_test::t_test_ne);
+      vx_test::e_test_ne_1 = new vx_test::Class_test_ne_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_ne_1);
+      vx_test::t_test_ne_1 = new vx_test::Class_test_ne_1();
+      vx_core::vx_reserve_type(vx_test::t_test_ne_1);
+      vx_test::e_test_string = new vx_test::Class_test_string();
+      vx_core::vx_reserve_empty(vx_test::e_test_string);
+      vx_test::t_test_string = new vx_test::Class_test_string();
+      vx_core::vx_reserve_type(vx_test::t_test_string);
+      vx_test::e_test_string_1 = new vx_test::Class_test_string_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_string_1);
+      vx_test::t_test_string_1 = new vx_test::Class_test_string_1();
+      vx_core::vx_reserve_type(vx_test::t_test_string_1);
+      vx_test::e_test_true = new vx_test::Class_test_true();
+      vx_core::vx_reserve_empty(vx_test::e_test_true);
+      vx_test::t_test_true = new vx_test::Class_test_true();
+      vx_core::vx_reserve_type(vx_test::t_test_true);
+      vx_test::e_test_true_1 = new vx_test::Class_test_true_1();
+      vx_core::vx_reserve_empty(vx_test::e_test_true_1);
+      vx_test::t_test_true_1 = new vx_test::Class_test_true_1();
+      vx_core::vx_reserve_type(vx_test::t_test_true_1);
+      vx_test::e_tr_from_testdescribe_casename = new vx_test::Class_tr_from_testdescribe_casename();
+      vx_core::vx_reserve_empty(vx_test::e_tr_from_testdescribe_casename);
+      vx_test::t_tr_from_testdescribe_casename = new vx_test::Class_tr_from_testdescribe_casename();
+      vx_core::vx_reserve_type(vx_test::t_tr_from_testdescribe_casename);
+      vx_test::e_trlist_from_testcase = new vx_test::Class_trlist_from_testcase();
+      vx_core::vx_reserve_empty(vx_test::e_trlist_from_testcase);
+      vx_test::t_trlist_from_testcase = new vx_test::Class_trlist_from_testcase();
+      vx_core::vx_reserve_type(vx_test::t_trlist_from_testcase);
+      vx_test::e_trlist_from_testcaselist = new vx_test::Class_trlist_from_testcaselist();
+      vx_core::vx_reserve_empty(vx_test::e_trlist_from_testcaselist);
+      vx_test::t_trlist_from_testcaselist = new vx_test::Class_trlist_from_testcaselist();
+      vx_core::vx_reserve_type(vx_test::t_trlist_from_testcaselist);
+      vx_test::c_stylesheet_test = vx_test::Class_stylesheet_test::vx_const_new();
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

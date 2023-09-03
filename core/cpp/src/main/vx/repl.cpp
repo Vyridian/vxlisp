@@ -1,3 +1,4 @@
+#include <map>
 #include <string>
 #include <vector>
 #include "../vx/core.hpp"
@@ -1231,146 +1232,86 @@ namespace vx_repl {
 
   //}
 
-  vx_repl::vx_Class_package* vx_package = new vx_repl::vx_Class_package();
+  vx_repl::Type_liblist e_liblist = NULL;
+  vx_repl::Type_liblist t_liblist = NULL;
+  vx_repl::Type_repl e_repl = NULL;
+  vx_repl::Type_repl t_repl = NULL;
+  vx_repl::Type_repllist e_repllist = NULL;
+  vx_repl::Type_repllist t_repllist = NULL;
+  vx_repl::Func_any_repl_from_functype_args e_any_repl_from_functype_args = NULL;
+  vx_repl::Func_any_repl_from_functype_args t_any_repl_from_functype_args = NULL;
+  vx_repl::Func_any_from_liblist_string e_any_from_liblist_string = NULL;
+  vx_repl::Func_any_from_liblist_string t_any_from_liblist_string = NULL;
+  vx_repl::Func_any_from_liblist_string_async e_any_from_liblist_string_async = NULL;
+  vx_repl::Func_any_from_liblist_string_async t_any_from_liblist_string_async = NULL;
+  vx_repl::Func_any_from_repl e_any_from_repl = NULL;
+  vx_repl::Func_any_from_repl t_any_from_repl = NULL;
+  vx_repl::Func_any_from_repl_async e_any_from_repl_async = NULL;
+  vx_repl::Func_any_from_repl_async t_any_from_repl_async = NULL;
+  vx_repl::Func_anylist_from_repllist e_anylist_from_repllist = NULL;
+  vx_repl::Func_anylist_from_repllist t_anylist_from_repllist = NULL;
+  vx_repl::Func_repl_from_liblist_string e_repl_from_liblist_string = NULL;
+  vx_repl::Func_repl_from_liblist_string t_repl_from_liblist_string = NULL;
 
-  vx_repl::Type_liblist vx_e_liblist() {
-    vx_repl::Type_liblist output;
-      output = new Class_liblist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Type_liblist vx_t_liblist() {
-    vx_repl::Type_liblist output = new Class_liblist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Type_liblist e_liblist = vx_e_liblist();
-  vx_repl::Type_liblist t_liblist = vx_t_liblist();
-
-  vx_repl::Type_repl vx_e_repl() {
-    vx_repl::Type_repl output;
-      output = new Class_repl();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Type_repl vx_t_repl() {
-    vx_repl::Type_repl output = new Class_repl();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Type_repl e_repl = vx_e_repl();
-  vx_repl::Type_repl t_repl = vx_t_repl();
-
-  vx_repl::Type_repllist vx_e_repllist() {
-    vx_repl::Type_repllist output;
-      output = new Class_repllist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Type_repllist vx_t_repllist() {
-    vx_repl::Type_repllist output = new Class_repllist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Type_repllist e_repllist = vx_e_repllist();
-  vx_repl::Type_repllist t_repllist = vx_t_repllist();
-
-  // (func any-repl<-functype-args)
-  vx_repl::Func_any_repl_from_functype_args vx_e_any_repl_from_functype_args() {
-    vx_repl::Func_any_repl_from_functype_args output = new vx_repl::Class_any_repl_from_functype_args();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_any_repl_from_functype_args vx_t_any_repl_from_functype_args() {
-    vx_repl::Func_any_repl_from_functype_args output = new vx_repl::Class_any_repl_from_functype_args();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_any_repl_from_functype_args e_any_repl_from_functype_args = vx_e_any_repl_from_functype_args();
-  vx_repl::Func_any_repl_from_functype_args t_any_repl_from_functype_args = vx_t_any_repl_from_functype_args();
-
-  // (func any<-liblist-string)
-  vx_repl::Func_any_from_liblist_string vx_e_any_from_liblist_string() {
-    vx_repl::Func_any_from_liblist_string output = new vx_repl::Class_any_from_liblist_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_any_from_liblist_string vx_t_any_from_liblist_string() {
-    vx_repl::Func_any_from_liblist_string output = new vx_repl::Class_any_from_liblist_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_any_from_liblist_string e_any_from_liblist_string = vx_e_any_from_liblist_string();
-  vx_repl::Func_any_from_liblist_string t_any_from_liblist_string = vx_t_any_from_liblist_string();
-
-  // (func any<-liblist-string-async)
-  vx_repl::Func_any_from_liblist_string_async vx_e_any_from_liblist_string_async() {
-    vx_repl::Func_any_from_liblist_string_async output = new vx_repl::Class_any_from_liblist_string_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_any_from_liblist_string_async vx_t_any_from_liblist_string_async() {
-    vx_repl::Func_any_from_liblist_string_async output = new vx_repl::Class_any_from_liblist_string_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_any_from_liblist_string_async e_any_from_liblist_string_async = vx_e_any_from_liblist_string_async();
-  vx_repl::Func_any_from_liblist_string_async t_any_from_liblist_string_async = vx_t_any_from_liblist_string_async();
-
-  // (func any<-repl)
-  vx_repl::Func_any_from_repl vx_e_any_from_repl() {
-    vx_repl::Func_any_from_repl output = new vx_repl::Class_any_from_repl();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_any_from_repl vx_t_any_from_repl() {
-    vx_repl::Func_any_from_repl output = new vx_repl::Class_any_from_repl();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_any_from_repl e_any_from_repl = vx_e_any_from_repl();
-  vx_repl::Func_any_from_repl t_any_from_repl = vx_t_any_from_repl();
-
-  // (func any<-repl-async)
-  vx_repl::Func_any_from_repl_async vx_e_any_from_repl_async() {
-    vx_repl::Func_any_from_repl_async output = new vx_repl::Class_any_from_repl_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_any_from_repl_async vx_t_any_from_repl_async() {
-    vx_repl::Func_any_from_repl_async output = new vx_repl::Class_any_from_repl_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_any_from_repl_async e_any_from_repl_async = vx_e_any_from_repl_async();
-  vx_repl::Func_any_from_repl_async t_any_from_repl_async = vx_t_any_from_repl_async();
-
-  // (func anylist<-repllist)
-  vx_repl::Func_anylist_from_repllist vx_e_anylist_from_repllist() {
-    vx_repl::Func_anylist_from_repllist output = new vx_repl::Class_anylist_from_repllist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_anylist_from_repllist vx_t_anylist_from_repllist() {
-    vx_repl::Func_anylist_from_repllist output = new vx_repl::Class_anylist_from_repllist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_anylist_from_repllist e_anylist_from_repllist = vx_e_anylist_from_repllist();
-  vx_repl::Func_anylist_from_repllist t_anylist_from_repllist = vx_t_anylist_from_repllist();
-
-  // (func repl<-liblist-string)
-  vx_repl::Func_repl_from_liblist_string vx_e_repl_from_liblist_string() {
-    vx_repl::Func_repl_from_liblist_string output = new vx_repl::Class_repl_from_liblist_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_repl::Func_repl_from_liblist_string vx_t_repl_from_liblist_string() {
-    vx_repl::Func_repl_from_liblist_string output = new vx_repl::Class_repl_from_liblist_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_repl::Func_repl_from_liblist_string e_repl_from_liblist_string = vx_e_repl_from_liblist_string();
-  vx_repl::Func_repl_from_liblist_string t_repl_from_liblist_string = vx_t_repl_from_liblist_string();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_repl::e_liblist = new Class_liblist();
+      vx_core::vx_reserve_empty(vx_repl::e_liblist);
+      vx_repl::t_liblist = new Class_liblist();
+      vx_core::vx_reserve_type(vx_repl::t_liblist);
+      vx_repl::e_repl = new Class_repl();
+      vx_core::vx_reserve_empty(vx_repl::e_repl);
+      vx_repl::t_repl = new Class_repl();
+      vx_core::vx_reserve_type(vx_repl::t_repl);
+      vx_repl::e_repllist = new Class_repllist();
+      vx_core::vx_reserve_empty(vx_repl::e_repllist);
+      vx_repl::t_repllist = new Class_repllist();
+      vx_core::vx_reserve_type(vx_repl::t_repllist);
+      vx_repl::e_any_repl_from_functype_args = new vx_repl::Class_any_repl_from_functype_args();
+      vx_core::vx_reserve_empty(vx_repl::e_any_repl_from_functype_args);
+      vx_repl::t_any_repl_from_functype_args = new vx_repl::Class_any_repl_from_functype_args();
+      vx_core::vx_reserve_type(vx_repl::t_any_repl_from_functype_args);
+      vx_repl::e_any_from_liblist_string = new vx_repl::Class_any_from_liblist_string();
+      vx_core::vx_reserve_empty(vx_repl::e_any_from_liblist_string);
+      vx_repl::t_any_from_liblist_string = new vx_repl::Class_any_from_liblist_string();
+      vx_core::vx_reserve_type(vx_repl::t_any_from_liblist_string);
+      vx_repl::e_any_from_liblist_string_async = new vx_repl::Class_any_from_liblist_string_async();
+      vx_core::vx_reserve_empty(vx_repl::e_any_from_liblist_string_async);
+      vx_repl::t_any_from_liblist_string_async = new vx_repl::Class_any_from_liblist_string_async();
+      vx_core::vx_reserve_type(vx_repl::t_any_from_liblist_string_async);
+      vx_repl::e_any_from_repl = new vx_repl::Class_any_from_repl();
+      vx_core::vx_reserve_empty(vx_repl::e_any_from_repl);
+      vx_repl::t_any_from_repl = new vx_repl::Class_any_from_repl();
+      vx_core::vx_reserve_type(vx_repl::t_any_from_repl);
+      vx_repl::e_any_from_repl_async = new vx_repl::Class_any_from_repl_async();
+      vx_core::vx_reserve_empty(vx_repl::e_any_from_repl_async);
+      vx_repl::t_any_from_repl_async = new vx_repl::Class_any_from_repl_async();
+      vx_core::vx_reserve_type(vx_repl::t_any_from_repl_async);
+      vx_repl::e_anylist_from_repllist = new vx_repl::Class_anylist_from_repllist();
+      vx_core::vx_reserve_empty(vx_repl::e_anylist_from_repllist);
+      vx_repl::t_anylist_from_repllist = new vx_repl::Class_anylist_from_repllist();
+      vx_core::vx_reserve_type(vx_repl::t_anylist_from_repllist);
+      vx_repl::e_repl_from_liblist_string = new vx_repl::Class_repl_from_liblist_string();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_from_liblist_string);
+      vx_repl::t_repl_from_liblist_string = new vx_repl::Class_repl_from_liblist_string();
+      vx_core::vx_reserve_type(vx_repl::t_repl_from_liblist_string);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

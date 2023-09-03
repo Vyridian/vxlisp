@@ -216,14 +216,14 @@ func StringFromConst(cnst *vxconst) string {
 func StringFromConstIndent(cnst *vxconst, indent string) string {
 	lineindent := "\n" + indent
 	output := "" +
-		"{const" +
+		"(const" +
 		lineindent + ":name    " + cnst.name +
 		lineindent + ":pkgname " + cnst.pkgname +
 		lineindent + ":type    " + NameFromType(cnst.vxtype)
 	if cnst.value.code != "" {
 		output += lineindent + ":value " + StringFromValueIndent(cnst.value, indent+" ")
 	}
-	output += "}"
+	output += ")"
 	return output
 }
 

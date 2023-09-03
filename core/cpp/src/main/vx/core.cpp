@@ -417,11 +417,11 @@ namespace vx_core {
   // vx_is_int(any)
   bool vx_is_int(vx_core::Type_any value) {
     bool output = false;
-    if (value == vx_core::c_infinity()) {
+    if (value == vx_core::c_infinity) {
       output = true;
-    } else if (value == vx_core::c_neginfinity()) {
+    } else if (value == vx_core::c_neginfinity) {
       output = true;
-    } else if (value == vx_core::c_notanumber()) {
+    } else if (value == vx_core::c_notanumber) {
       output = true;
     } else {
       vx_core::Type_any type = value->vx_type();
@@ -585,9 +585,9 @@ namespace vx_core {
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval) {
-    vx_core::Type_boolean output = vx_core::c_false();
+    vx_core::Type_boolean output = vx_core::c_false;
     if (isval) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }
     return output;
   }
@@ -867,11 +867,11 @@ namespace vx_core {
           text = vx_core::vx_string_from_string_start_end(text, 0, text.length() - 2);
         }
       } else if (type == vx_core::t_int) {
-        if (value == vx_core::c_notanumber()) {
+        if (value == vx_core::c_notanumber) {
           text = "notanumber";
-        } else if (value == vx_core::c_infinity()) {
+        } else if (value == vx_core::c_infinity) {
           text = "infinity";
-        } else if (value == vx_core::c_neginfinity()) {
+        } else if (value == vx_core::c_neginfinity) {
           text = "neginfinity";
         } else {
           vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int, value);
@@ -1246,14 +1246,14 @@ namespace vx_core {
       vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
       vx_core::vx_reserve(string_error);
       output->vx_p_text = string_error;
-      output->vx_p_severity = vx_core::c_msg_severe();
+      output->vx_p_severity = vx_core::c_msg_severe;
       return output;
     }
 
     vx_core::Type_msg Class_msg::vx_msg_from_exception(const std::string text, std::exception err) const {
       vx_core::Type_msg output = new vx_core::Class_msg();
       output->vx_p_text = vx_core::vx_new_string(text);
-      output->vx_p_severity = vx_core::c_msg_severe();
+      output->vx_p_severity = vx_core::c_msg_severe;
       output->err = err;
       return output;
     }
@@ -2336,9 +2336,9 @@ namespace vx_core {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
       } else if (booleanval) {
-        output = vx_core::c_true();
+        output = vx_core::c_true;
       } else {
-        output = vx_core::c_false();
+        output = vx_core::c_false;
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -12632,7 +12632,7 @@ namespace vx_core {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve(text);
     if (text->vx_p_iref == -2) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     };
     vx_core::vx_release_one_except(text, output);
     return output;
@@ -12726,7 +12726,7 @@ namespace vx_core {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve(value);
     if (value == value->vx_empty()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     };
     vx_core::vx_release_one_except(value, output);
     return output;
@@ -14153,9 +14153,9 @@ namespace vx_core {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve({val1, val2});
     if (val1->vx_boolean() && val2->vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     };
     vx_core::vx_release_one_except({val1, val2}, output);
     return output;
@@ -14370,9 +14370,9 @@ namespace vx_core {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve({val1, val2});
     if (val1->vx_boolean() || val2->vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     };
     vx_core::vx_release_one_except({val1, val2}, output);
     return output;
@@ -15993,7 +15993,7 @@ namespace vx_core {
     float float2 = vx_core::vx_float_from_number(num2);
     if (float1 == 0) {
     } else if (float2 == 0) {
-      output = vx_core::c_notanumber();
+      output = vx_core::c_notanumber;
     } else {
       float result = float1 / float2;
       output = vx_core::vx_new_float(result);
@@ -18306,21 +18306,21 @@ namespace vx_core {
         vx_core::f_case_1(
           vx_core::vx_new_string("notanumber"),
           vx_core::t_any_from_func->vx_fn_new({}, []() {
-            vx_core::Type_int output_1 = vx_core::c_notanumber();
+            vx_core::Type_int output_1 = vx_core::c_notanumber;
             return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_core::vx_new_string("infinity"),
           vx_core::t_any_from_func->vx_fn_new({}, []() {
-            vx_core::Type_int output_1 = vx_core::c_infinity();
+            vx_core::Type_int output_1 = vx_core::c_infinity;
             return output_1;
           })
         ),
         vx_core::f_case_1(
           vx_core::vx_new_string("neginfinity"),
           vx_core::t_any_from_func->vx_fn_new({}, []() {
-            vx_core::Type_int output_1 = vx_core::c_neginfinity();
+            vx_core::Type_int output_1 = vx_core::c_neginfinity;
             return output_1;
           })
         ),
@@ -18332,7 +18332,7 @@ namespace vx_core {
               long ival = std::stoll(sval);
               intresult = vx_core::vx_new_int(ival);
             } catch (std::exception ex) {
-              intresult = vx_core::c_notanumber();
+              intresult = vx_core::c_notanumber;
             }
             return intresult;
           })
@@ -18433,7 +18433,7 @@ namespace vx_core {
     std::string stext = text->vx_string();
     std::string sfind = find->vx_string();
     if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     };
     vx_core::vx_release_one_except({text, find}, output);
     return output;
@@ -18519,7 +18519,7 @@ namespace vx_core {
     std::string sextend = extend->vx_string();
     vx_core::vx_release(extend);
     if (sextend == ":func") {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     };
     vx_core::vx_release_one_except(val, output);
     return output;
@@ -20021,7 +20021,7 @@ namespace vx_core {
       vx_core::t_msg,
       vx_core::vx_new(vx_core::t_anylist, {
         vx_core::vx_new_string(":severity"),
-        vx_core::c_msg_error(),
+        vx_core::c_msg_error,
         vx_core::vx_new_string(":text"),
         error
       })
@@ -22959,3057 +22959,1301 @@ namespace vx_core {
 
   //}
 
-  vx_core::vx_Class_package* vx_package = new vx_core::vx_Class_package();
-
-  vx_core::Type_any vx_e_any() {
-    vx_core::Type_any output;
-      output = new Class_any();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_any vx_t_any() {
-    vx_core::Type_any output = new Class_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_any e_any = vx_e_any();
-  vx_core::Type_any t_any = vx_t_any();
-
-  vx_core::Type_list vx_e_list() {
-    vx_core::Type_list output;
-      output = new Class_list();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_list vx_t_list() {
-    vx_core::Type_list output = new Class_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_list e_list = vx_e_list();
-  vx_core::Type_list t_list = vx_t_list();
-
-  vx_core::Type_map vx_e_map() {
-    vx_core::Type_map output;
-      output = new Class_map();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_map vx_t_map() {
-    vx_core::Type_map output = new Class_map();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_map e_map = vx_e_map();
-  vx_core::Type_map t_map = vx_t_map();
-
-  vx_core::Type_struct vx_e_struct() {
-    vx_core::Type_struct output;
-      output = new Class_struct();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_struct vx_t_struct() {
-    vx_core::Type_struct output = new Class_struct();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_struct e_struct = vx_e_struct();
-  vx_core::Type_struct t_struct = vx_t_struct();
-
-  vx_core::Type_msg vx_e_msg() {
-    vx_core::Type_msg output;
-      output = new Class_msg();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_msg vx_t_msg() {
-    vx_core::Type_msg output = new Class_msg();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_msg e_msg = vx_e_msg();
-  vx_core::Type_msg t_msg = vx_t_msg();
-
-  vx_core::Type_msglist vx_e_msglist() {
-    vx_core::Type_msglist output;
-      output = new Class_msglist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_msglist vx_t_msglist() {
-    vx_core::Type_msglist output = new Class_msglist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_msglist e_msglist = vx_e_msglist();
-  vx_core::Type_msglist t_msglist = vx_t_msglist();
-
-  vx_core::Type_msgblock vx_e_msgblock() {
-    vx_core::Type_msgblock output;
-      output = new Class_msgblock();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_msgblock vx_t_msgblock() {
-    vx_core::Type_msgblock output = new Class_msgblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_msgblock e_msgblock = vx_e_msgblock();
-  vx_core::Type_msgblock t_msgblock = vx_t_msgblock();
-
-  vx_core::Type_msgblocklist vx_e_msgblocklist() {
-    vx_core::Type_msgblocklist output;
-      output = new Class_msgblocklist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_msgblocklist vx_t_msgblocklist() {
-    vx_core::Type_msgblocklist output = new Class_msgblocklist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_msgblocklist e_msgblocklist = vx_e_msgblocklist();
-  vx_core::Type_msgblocklist t_msgblocklist = vx_t_msgblocklist();
-
-  vx_core::Type_boolean vx_e_boolean() {
-    vx_core::Type_boolean output;
-      output = vx_core::c_false();
-    return output;
-  }
-  vx_core::Type_boolean vx_t_boolean() {
-    vx_core::Type_boolean output = new Class_boolean();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_boolean e_boolean = vx_e_boolean();
-  vx_core::Type_boolean t_boolean = vx_t_boolean();
-
-  vx_core::Type_number vx_e_number() {
-    vx_core::Type_number output;
-      output = new Class_number();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_number vx_t_number() {
-    vx_core::Type_number output = new Class_number();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_number e_number = vx_e_number();
-  vx_core::Type_number t_number = vx_t_number();
-
-  vx_core::Type_decimal vx_e_decimal() {
-    vx_core::Type_decimal output;
-      output = new Class_decimal();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_decimal vx_t_decimal() {
-    vx_core::Type_decimal output = new Class_decimal();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_decimal e_decimal = vx_e_decimal();
-  vx_core::Type_decimal t_decimal = vx_t_decimal();
-
-  vx_core::Type_float vx_e_float() {
-    vx_core::Type_float output;
-      output = new Class_float();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_float vx_t_float() {
-    vx_core::Type_float output = new Class_float();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_float e_float = vx_e_float();
-  vx_core::Type_float t_float = vx_t_float();
-
-  vx_core::Type_int vx_e_int() {
-    vx_core::Type_int output;
-      output = new Class_int();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_int vx_t_int() {
-    vx_core::Type_int output = new Class_int();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_int e_int = vx_e_int();
-  vx_core::Type_int t_int = vx_t_int();
-
-  vx_core::Type_string vx_e_string() {
-    vx_core::Type_string output;
-      output = new Class_string();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_string vx_t_string() {
-    vx_core::Type_string output = new Class_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_string e_string = vx_e_string();
-  vx_core::Type_string t_string = vx_t_string();
-
-  vx_core::Type_func vx_e_func() {
-    vx_core::Type_func output;
-      output = new Class_func();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_func vx_t_func() {
-    vx_core::Type_func output = new Class_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_func e_func = vx_e_func();
-  vx_core::Type_func t_func = vx_t_func();
-
-  vx_core::Type_typedef vx_e_typedef() {
-    vx_core::Type_typedef output;
-      output = new Class_typedef();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_typedef vx_t_typedef() {
-    vx_core::Type_typedef output = new Class_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_typedef e_typedef = vx_e_typedef();
-  vx_core::Type_typedef t_typedef = vx_t_typedef();
-
-  vx_core::Type_funcdef vx_e_funcdef() {
-    vx_core::Type_funcdef output;
-      output = new Class_funcdef();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_funcdef vx_t_funcdef() {
-    vx_core::Type_funcdef output = new Class_funcdef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_funcdef e_funcdef = vx_e_funcdef();
-  vx_core::Type_funcdef t_funcdef = vx_t_funcdef();
-
-  vx_core::Type_any_async_from_func vx_e_any_async_from_func() {
-    vx_core::Type_any_async_from_func output;
-      output = new Class_any_async_from_func();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_any_async_from_func vx_t_any_async_from_func() {
-    vx_core::Type_any_async_from_func output = new Class_any_async_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_any_async_from_func e_any_async_from_func = vx_e_any_async_from_func();
-  vx_core::Type_any_async_from_func t_any_async_from_func = vx_t_any_async_from_func();
-
-  vx_core::Type_any_from_anylist vx_e_any_from_anylist() {
-    vx_core::Type_any_from_anylist output;
-      output = new Class_any_from_anylist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_any_from_anylist vx_t_any_from_anylist() {
-    vx_core::Type_any_from_anylist output = new Class_any_from_anylist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_any_from_anylist e_any_from_anylist = vx_e_any_from_anylist();
-  vx_core::Type_any_from_anylist t_any_from_anylist = vx_t_any_from_anylist();
-
-  vx_core::Type_anylist vx_e_anylist() {
-    vx_core::Type_anylist output;
-      output = new Class_anylist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_anylist vx_t_anylist() {
-    vx_core::Type_anylist output = new Class_anylist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_anylist e_anylist = vx_e_anylist();
-  vx_core::Type_anylist t_anylist = vx_t_anylist();
-
-  vx_core::Type_anytype vx_e_anytype() {
-    vx_core::Type_anytype output;
-      output = new Class_anytype();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_anytype vx_t_anytype() {
-    vx_core::Type_anytype output = new Class_anytype();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_anytype e_anytype = vx_e_anytype();
-  vx_core::Type_anytype t_anytype = vx_t_anytype();
-
-  vx_core::Type_arg vx_e_arg() {
-    vx_core::Type_arg output;
-      output = new Class_arg();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_arg vx_t_arg() {
-    vx_core::Type_arg output = new Class_arg();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_arg e_arg = vx_e_arg();
-  vx_core::Type_arg t_arg = vx_t_arg();
-
-  vx_core::Type_arglist vx_e_arglist() {
-    vx_core::Type_arglist output;
-      output = new Class_arglist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_arglist vx_t_arglist() {
-    vx_core::Type_arglist output = new Class_arglist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_arglist e_arglist = vx_e_arglist();
-  vx_core::Type_arglist t_arglist = vx_t_arglist();
-
-  vx_core::Type_argmap vx_e_argmap() {
-    vx_core::Type_argmap output;
-      output = new Class_argmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_argmap vx_t_argmap() {
-    vx_core::Type_argmap output = new Class_argmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_argmap e_argmap = vx_e_argmap();
-  vx_core::Type_argmap t_argmap = vx_t_argmap();
-
-  vx_core::Type_booleanlist vx_e_booleanlist() {
-    vx_core::Type_booleanlist output;
-      output = new Class_booleanlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_booleanlist vx_t_booleanlist() {
-    vx_core::Type_booleanlist output = new Class_booleanlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_booleanlist e_booleanlist = vx_e_booleanlist();
-  vx_core::Type_booleanlist t_booleanlist = vx_t_booleanlist();
-
-  vx_core::Type_collection vx_e_collection() {
-    vx_core::Type_collection output;
-      output = new Class_collection();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_collection vx_t_collection() {
-    vx_core::Type_collection output = new Class_collection();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_collection e_collection = vx_e_collection();
-  vx_core::Type_collection t_collection = vx_t_collection();
-
-  vx_core::Type_compilelanguages vx_e_compilelanguages() {
-    vx_core::Type_compilelanguages output;
-      output = new Class_compilelanguages();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_compilelanguages vx_t_compilelanguages() {
-    vx_core::Type_compilelanguages output = new Class_compilelanguages();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_compilelanguages e_compilelanguages = vx_e_compilelanguages();
-  vx_core::Type_compilelanguages t_compilelanguages = vx_t_compilelanguages();
-
-  vx_core::Type_connect vx_e_connect() {
-    vx_core::Type_connect output;
-      output = new Class_connect();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_connect vx_t_connect() {
-    vx_core::Type_connect output = new Class_connect();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_connect e_connect = vx_e_connect();
-  vx_core::Type_connect t_connect = vx_t_connect();
-
-  vx_core::Type_connectlist vx_e_connectlist() {
-    vx_core::Type_connectlist output;
-      output = new Class_connectlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_connectlist vx_t_connectlist() {
-    vx_core::Type_connectlist output = new Class_connectlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_connectlist e_connectlist = vx_e_connectlist();
-  vx_core::Type_connectlist t_connectlist = vx_t_connectlist();
-
-  vx_core::Type_connectmap vx_e_connectmap() {
-    vx_core::Type_connectmap output;
-      output = new Class_connectmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_connectmap vx_t_connectmap() {
-    vx_core::Type_connectmap output = new Class_connectmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_connectmap e_connectmap = vx_e_connectmap();
-  vx_core::Type_connectmap t_connectmap = vx_t_connectmap();
-
-  vx_core::Type_const vx_e_const() {
-    vx_core::Type_const output;
-      output = new Class_const();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_const vx_t_const() {
-    vx_core::Type_const output = new Class_const();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_const e_const = vx_e_const();
-  vx_core::Type_const t_const = vx_t_const();
-
-  vx_core::Type_constdef vx_e_constdef() {
-    vx_core::Type_constdef output;
-      output = new Class_constdef();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_constdef vx_t_constdef() {
-    vx_core::Type_constdef output = new Class_constdef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_constdef e_constdef = vx_e_constdef();
-  vx_core::Type_constdef t_constdef = vx_t_constdef();
-
-  vx_core::Type_constlist vx_e_constlist() {
-    vx_core::Type_constlist output;
-      output = new Class_constlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_constlist vx_t_constlist() {
-    vx_core::Type_constlist output = new Class_constlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_constlist e_constlist = vx_e_constlist();
-  vx_core::Type_constlist t_constlist = vx_t_constlist();
-
-  vx_core::Type_constmap vx_e_constmap() {
-    vx_core::Type_constmap output;
-      output = new Class_constmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_constmap vx_t_constmap() {
-    vx_core::Type_constmap output = new Class_constmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_constmap e_constmap = vx_e_constmap();
-  vx_core::Type_constmap t_constmap = vx_t_constmap();
-
-  vx_core::Type_context vx_e_context() {
-    vx_core::Type_context output;
-      output = new Class_context();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_context vx_t_context() {
-    vx_core::Type_context output = new Class_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_context e_context = vx_e_context();
-  vx_core::Type_context t_context = vx_t_context();
-
-  vx_core::Type_error vx_e_error() {
-    vx_core::Type_error output;
-      output = new Class_error();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_error vx_t_error() {
-    vx_core::Type_error output = new Class_error();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_error e_error = vx_e_error();
-  vx_core::Type_error t_error = vx_t_error();
-
-  vx_core::Type_funclist vx_e_funclist() {
-    vx_core::Type_funclist output;
-      output = new Class_funclist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_funclist vx_t_funclist() {
-    vx_core::Type_funclist output = new Class_funclist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_funclist e_funclist = vx_e_funclist();
-  vx_core::Type_funclist t_funclist = vx_t_funclist();
-
-  vx_core::Type_funcmap vx_e_funcmap() {
-    vx_core::Type_funcmap output;
-      output = new Class_funcmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_funcmap vx_t_funcmap() {
-    vx_core::Type_funcmap output = new Class_funcmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_funcmap e_funcmap = vx_e_funcmap();
-  vx_core::Type_funcmap t_funcmap = vx_t_funcmap();
-
-  vx_core::Type_intlist vx_e_intlist() {
-    vx_core::Type_intlist output;
-      output = new Class_intlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_intlist vx_t_intlist() {
-    vx_core::Type_intlist output = new Class_intlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_intlist e_intlist = vx_e_intlist();
-  vx_core::Type_intlist t_intlist = vx_t_intlist();
-
-  vx_core::Type_intmap vx_e_intmap() {
-    vx_core::Type_intmap output;
-      output = new Class_intmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_intmap vx_t_intmap() {
-    vx_core::Type_intmap output = new Class_intmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_intmap e_intmap = vx_e_intmap();
-  vx_core::Type_intmap t_intmap = vx_t_intmap();
-
-  vx_core::Type_listtype vx_e_listtype() {
-    vx_core::Type_listtype output;
-      output = new Class_listtype();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_listtype vx_t_listtype() {
-    vx_core::Type_listtype output = new Class_listtype();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_listtype e_listtype = vx_e_listtype();
-  vx_core::Type_listtype t_listtype = vx_t_listtype();
-
-  vx_core::Type_maptype vx_e_maptype() {
-    vx_core::Type_maptype output;
-      output = new Class_maptype();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_maptype vx_t_maptype() {
-    vx_core::Type_maptype output = new Class_maptype();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_maptype e_maptype = vx_e_maptype();
-  vx_core::Type_maptype t_maptype = vx_t_maptype();
-
-  vx_core::Type_mempool vx_e_mempool() {
-    vx_core::Type_mempool output;
-      output = new Class_mempool();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_mempool vx_t_mempool() {
-    vx_core::Type_mempool output = new Class_mempool();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_mempool e_mempool = vx_e_mempool();
-  vx_core::Type_mempool t_mempool = vx_t_mempool();
-
-  vx_core::Type_none vx_e_none() {
-    vx_core::Type_none output;
-      output = new Class_none();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_none vx_t_none() {
-    vx_core::Type_none output = new Class_none();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_none e_none = vx_e_none();
-  vx_core::Type_none t_none = vx_t_none();
-
-  vx_core::Type_notype vx_e_notype() {
-    vx_core::Type_notype output;
-      output = new Class_notype();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_notype vx_t_notype() {
-    vx_core::Type_notype output = new Class_notype();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_notype e_notype = vx_e_notype();
-  vx_core::Type_notype t_notype = vx_t_notype();
-
-  vx_core::Type_numberlist vx_e_numberlist() {
-    vx_core::Type_numberlist output;
-      output = new Class_numberlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_numberlist vx_t_numberlist() {
-    vx_core::Type_numberlist output = new Class_numberlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_numberlist e_numberlist = vx_e_numberlist();
-  vx_core::Type_numberlist t_numberlist = vx_t_numberlist();
-
-  vx_core::Type_numbermap vx_e_numbermap() {
-    vx_core::Type_numbermap output;
-      output = new Class_numbermap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_numbermap vx_t_numbermap() {
-    vx_core::Type_numbermap output = new Class_numbermap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_numbermap e_numbermap = vx_e_numbermap();
-  vx_core::Type_numbermap t_numbermap = vx_t_numbermap();
-
-  vx_core::Type_package vx_e_package() {
-    vx_core::Type_package output;
-      output = new Class_package();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_package vx_t_package() {
-    vx_core::Type_package output = new Class_package();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_package e_package = vx_e_package();
-  vx_core::Type_package t_package = vx_t_package();
-
-  vx_core::Type_packagemap vx_e_packagemap() {
-    vx_core::Type_packagemap output;
-      output = new Class_packagemap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_packagemap vx_t_packagemap() {
-    vx_core::Type_packagemap output = new Class_packagemap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_packagemap e_packagemap = vx_e_packagemap();
-  vx_core::Type_packagemap t_packagemap = vx_t_packagemap();
-
-  vx_core::Type_permission vx_e_permission() {
-    vx_core::Type_permission output;
-      output = new Class_permission();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_permission vx_t_permission() {
-    vx_core::Type_permission output = new Class_permission();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_permission e_permission = vx_e_permission();
-  vx_core::Type_permission t_permission = vx_t_permission();
-
-  vx_core::Type_permissionlist vx_e_permissionlist() {
-    vx_core::Type_permissionlist output;
-      output = new Class_permissionlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_permissionlist vx_t_permissionlist() {
-    vx_core::Type_permissionlist output = new Class_permissionlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_permissionlist e_permissionlist = vx_e_permissionlist();
-  vx_core::Type_permissionlist t_permissionlist = vx_t_permissionlist();
-
-  vx_core::Type_permissionmap vx_e_permissionmap() {
-    vx_core::Type_permissionmap output;
-      output = new Class_permissionmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_permissionmap vx_t_permissionmap() {
-    vx_core::Type_permissionmap output = new Class_permissionmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_permissionmap e_permissionmap = vx_e_permissionmap();
-  vx_core::Type_permissionmap t_permissionmap = vx_t_permissionmap();
-
-  vx_core::Type_security vx_e_security() {
-    vx_core::Type_security output;
-      output = new Class_security();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_security vx_t_security() {
-    vx_core::Type_security output = new Class_security();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_security e_security = vx_e_security();
-  vx_core::Type_security t_security = vx_t_security();
-
-  vx_core::Type_session vx_e_session() {
-    vx_core::Type_session output;
-      output = new Class_session();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_session vx_t_session() {
-    vx_core::Type_session output = new Class_session();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_session e_session = vx_e_session();
-  vx_core::Type_session t_session = vx_t_session();
-
-  vx_core::Type_setting vx_e_setting() {
-    vx_core::Type_setting output;
-      output = new Class_setting();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_setting vx_t_setting() {
-    vx_core::Type_setting output = new Class_setting();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_setting e_setting = vx_e_setting();
-  vx_core::Type_setting t_setting = vx_t_setting();
-
-  vx_core::Type_state vx_e_state() {
-    vx_core::Type_state output;
-      output = new Class_state();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_state vx_t_state() {
-    vx_core::Type_state output = new Class_state();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_state e_state = vx_e_state();
-  vx_core::Type_state t_state = vx_t_state();
-
-  vx_core::Type_statelistener vx_e_statelistener() {
-    vx_core::Type_statelistener output;
-      output = new Class_statelistener();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_statelistener vx_t_statelistener() {
-    vx_core::Type_statelistener output = new Class_statelistener();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_statelistener e_statelistener = vx_e_statelistener();
-  vx_core::Type_statelistener t_statelistener = vx_t_statelistener();
-
-  vx_core::Type_stringlist vx_e_stringlist() {
-    vx_core::Type_stringlist output;
-      output = new Class_stringlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_stringlist vx_t_stringlist() {
-    vx_core::Type_stringlist output = new Class_stringlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_stringlist e_stringlist = vx_e_stringlist();
-  vx_core::Type_stringlist t_stringlist = vx_t_stringlist();
-
-  vx_core::Type_stringmap vx_e_stringmap() {
-    vx_core::Type_stringmap output;
-      output = new Class_stringmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_stringmap vx_t_stringmap() {
-    vx_core::Type_stringmap output = new Class_stringmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_stringmap e_stringmap = vx_e_stringmap();
-  vx_core::Type_stringmap t_stringmap = vx_t_stringmap();
-
-  vx_core::Type_thenelse vx_e_thenelse() {
-    vx_core::Type_thenelse output;
-      output = new Class_thenelse();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_thenelse vx_t_thenelse() {
-    vx_core::Type_thenelse output = new Class_thenelse();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_thenelse e_thenelse = vx_e_thenelse();
-  vx_core::Type_thenelse t_thenelse = vx_t_thenelse();
-
-  vx_core::Type_thenelselist vx_e_thenelselist() {
-    vx_core::Type_thenelselist output;
-      output = new Class_thenelselist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_thenelselist vx_t_thenelselist() {
-    vx_core::Type_thenelselist output = new Class_thenelselist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_thenelselist e_thenelselist = vx_e_thenelselist();
-  vx_core::Type_thenelselist t_thenelselist = vx_t_thenelselist();
-
-  vx_core::Type_type vx_e_type() {
-    vx_core::Type_type output;
-      output = new Class_type();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_type vx_t_type() {
-    vx_core::Type_type output = new Class_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_type e_type = vx_e_type();
-  vx_core::Type_type t_type = vx_t_type();
-
-  vx_core::Type_typelist vx_e_typelist() {
-    vx_core::Type_typelist output;
-      output = new Class_typelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_typelist vx_t_typelist() {
-    vx_core::Type_typelist output = new Class_typelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_typelist e_typelist = vx_e_typelist();
-  vx_core::Type_typelist t_typelist = vx_t_typelist();
-
-  vx_core::Type_typemap vx_e_typemap() {
-    vx_core::Type_typemap output;
-      output = new Class_typemap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_typemap vx_t_typemap() {
-    vx_core::Type_typemap output = new Class_typemap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_typemap e_typemap = vx_e_typemap();
-  vx_core::Type_typemap t_typemap = vx_t_typemap();
-
-  vx_core::Type_user vx_e_user() {
-    vx_core::Type_user output;
-      output = new Class_user();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_user vx_t_user() {
-    vx_core::Type_user output = new Class_user();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_user e_user = vx_e_user();
-  vx_core::Type_user t_user = vx_t_user();
-
-  vx_core::Type_value vx_e_value() {
-    vx_core::Type_value output;
-      output = new Class_value();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Type_value vx_t_value() {
-    vx_core::Type_value output = new Class_value();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Type_value e_value = vx_e_value();
-  vx_core::Type_value t_value = vx_t_value();
-
-  // (const false)
-  vx_core::Const_false c_false() {
-    vx_core::Const_false output = vx_core::vx_package->c_false;
-    if (output == NULL) {
-      output = vx_core::Class_false::vx_const_new();
-      vx_core::vx_package->c_false = output;
+  vx_core::Type_any e_any = NULL;
+  vx_core::Type_any t_any = NULL;
+  vx_core::Type_list e_list = NULL;
+  vx_core::Type_list t_list = NULL;
+  vx_core::Type_map e_map = NULL;
+  vx_core::Type_map t_map = NULL;
+  vx_core::Type_struct e_struct = NULL;
+  vx_core::Type_struct t_struct = NULL;
+  vx_core::Type_msg e_msg = NULL;
+  vx_core::Type_msg t_msg = NULL;
+  vx_core::Type_msglist e_msglist = NULL;
+  vx_core::Type_msglist t_msglist = NULL;
+  vx_core::Type_msgblock e_msgblock = NULL;
+  vx_core::Type_msgblock t_msgblock = NULL;
+  vx_core::Type_msgblocklist e_msgblocklist = NULL;
+  vx_core::Type_msgblocklist t_msgblocklist = NULL;
+  vx_core::Type_boolean e_boolean = NULL;
+  vx_core::Type_boolean t_boolean = NULL;
+  vx_core::Type_number e_number = NULL;
+  vx_core::Type_number t_number = NULL;
+  vx_core::Type_decimal e_decimal = NULL;
+  vx_core::Type_decimal t_decimal = NULL;
+  vx_core::Type_float e_float = NULL;
+  vx_core::Type_float t_float = NULL;
+  vx_core::Type_int e_int = NULL;
+  vx_core::Type_int t_int = NULL;
+  vx_core::Type_string e_string = NULL;
+  vx_core::Type_string t_string = NULL;
+  vx_core::Type_func e_func = NULL;
+  vx_core::Type_func t_func = NULL;
+  vx_core::Type_typedef e_typedef = NULL;
+  vx_core::Type_typedef t_typedef = NULL;
+  vx_core::Type_funcdef e_funcdef = NULL;
+  vx_core::Type_funcdef t_funcdef = NULL;
+  vx_core::Type_any_async_from_func e_any_async_from_func = NULL;
+  vx_core::Type_any_async_from_func t_any_async_from_func = NULL;
+  vx_core::Type_any_from_anylist e_any_from_anylist = NULL;
+  vx_core::Type_any_from_anylist t_any_from_anylist = NULL;
+  vx_core::Type_anylist e_anylist = NULL;
+  vx_core::Type_anylist t_anylist = NULL;
+  vx_core::Type_anytype e_anytype = NULL;
+  vx_core::Type_anytype t_anytype = NULL;
+  vx_core::Type_arg e_arg = NULL;
+  vx_core::Type_arg t_arg = NULL;
+  vx_core::Type_arglist e_arglist = NULL;
+  vx_core::Type_arglist t_arglist = NULL;
+  vx_core::Type_argmap e_argmap = NULL;
+  vx_core::Type_argmap t_argmap = NULL;
+  vx_core::Type_booleanlist e_booleanlist = NULL;
+  vx_core::Type_booleanlist t_booleanlist = NULL;
+  vx_core::Type_collection e_collection = NULL;
+  vx_core::Type_collection t_collection = NULL;
+  vx_core::Type_compilelanguages e_compilelanguages = NULL;
+  vx_core::Type_compilelanguages t_compilelanguages = NULL;
+  vx_core::Type_connect e_connect = NULL;
+  vx_core::Type_connect t_connect = NULL;
+  vx_core::Type_connectlist e_connectlist = NULL;
+  vx_core::Type_connectlist t_connectlist = NULL;
+  vx_core::Type_connectmap e_connectmap = NULL;
+  vx_core::Type_connectmap t_connectmap = NULL;
+  vx_core::Type_const e_const = NULL;
+  vx_core::Type_const t_const = NULL;
+  vx_core::Type_constdef e_constdef = NULL;
+  vx_core::Type_constdef t_constdef = NULL;
+  vx_core::Type_constlist e_constlist = NULL;
+  vx_core::Type_constlist t_constlist = NULL;
+  vx_core::Type_constmap e_constmap = NULL;
+  vx_core::Type_constmap t_constmap = NULL;
+  vx_core::Type_context e_context = NULL;
+  vx_core::Type_context t_context = NULL;
+  vx_core::Type_error e_error = NULL;
+  vx_core::Type_error t_error = NULL;
+  vx_core::Type_funclist e_funclist = NULL;
+  vx_core::Type_funclist t_funclist = NULL;
+  vx_core::Type_funcmap e_funcmap = NULL;
+  vx_core::Type_funcmap t_funcmap = NULL;
+  vx_core::Type_intlist e_intlist = NULL;
+  vx_core::Type_intlist t_intlist = NULL;
+  vx_core::Type_intmap e_intmap = NULL;
+  vx_core::Type_intmap t_intmap = NULL;
+  vx_core::Type_listtype e_listtype = NULL;
+  vx_core::Type_listtype t_listtype = NULL;
+  vx_core::Type_maptype e_maptype = NULL;
+  vx_core::Type_maptype t_maptype = NULL;
+  vx_core::Type_mempool e_mempool = NULL;
+  vx_core::Type_mempool t_mempool = NULL;
+  vx_core::Type_none e_none = NULL;
+  vx_core::Type_none t_none = NULL;
+  vx_core::Type_notype e_notype = NULL;
+  vx_core::Type_notype t_notype = NULL;
+  vx_core::Type_numberlist e_numberlist = NULL;
+  vx_core::Type_numberlist t_numberlist = NULL;
+  vx_core::Type_numbermap e_numbermap = NULL;
+  vx_core::Type_numbermap t_numbermap = NULL;
+  vx_core::Type_package e_package = NULL;
+  vx_core::Type_package t_package = NULL;
+  vx_core::Type_packagemap e_packagemap = NULL;
+  vx_core::Type_packagemap t_packagemap = NULL;
+  vx_core::Type_permission e_permission = NULL;
+  vx_core::Type_permission t_permission = NULL;
+  vx_core::Type_permissionlist e_permissionlist = NULL;
+  vx_core::Type_permissionlist t_permissionlist = NULL;
+  vx_core::Type_permissionmap e_permissionmap = NULL;
+  vx_core::Type_permissionmap t_permissionmap = NULL;
+  vx_core::Type_security e_security = NULL;
+  vx_core::Type_security t_security = NULL;
+  vx_core::Type_session e_session = NULL;
+  vx_core::Type_session t_session = NULL;
+  vx_core::Type_setting e_setting = NULL;
+  vx_core::Type_setting t_setting = NULL;
+  vx_core::Type_state e_state = NULL;
+  vx_core::Type_state t_state = NULL;
+  vx_core::Type_statelistener e_statelistener = NULL;
+  vx_core::Type_statelistener t_statelistener = NULL;
+  vx_core::Type_stringlist e_stringlist = NULL;
+  vx_core::Type_stringlist t_stringlist = NULL;
+  vx_core::Type_stringmap e_stringmap = NULL;
+  vx_core::Type_stringmap t_stringmap = NULL;
+  vx_core::Type_thenelse e_thenelse = NULL;
+  vx_core::Type_thenelse t_thenelse = NULL;
+  vx_core::Type_thenelselist e_thenelselist = NULL;
+  vx_core::Type_thenelselist t_thenelselist = NULL;
+  vx_core::Type_type e_type = NULL;
+  vx_core::Type_type t_type = NULL;
+  vx_core::Type_typelist e_typelist = NULL;
+  vx_core::Type_typelist t_typelist = NULL;
+  vx_core::Type_typemap e_typemap = NULL;
+  vx_core::Type_typemap t_typemap = NULL;
+  vx_core::Type_user e_user = NULL;
+  vx_core::Type_user t_user = NULL;
+  vx_core::Type_value e_value = NULL;
+  vx_core::Type_value t_value = NULL;
+  vx_core::Const_false c_false = NULL;
+  vx_core::Const_globalpackagemap c_globalpackagemap = NULL;
+  vx_core::Const_infinity c_infinity = NULL;
+  vx_core::Const_mempool_active c_mempool_active = NULL;
+  vx_core::Const_msg_error c_msg_error = NULL;
+  vx_core::Const_msg_info c_msg_info = NULL;
+  vx_core::Const_msg_severe c_msg_severe = NULL;
+  vx_core::Const_msg_warning c_msg_warning = NULL;
+  vx_core::Const_neginfinity c_neginfinity = NULL;
+  vx_core::Const_newline c_newline = NULL;
+  vx_core::Const_notanumber c_notanumber = NULL;
+  vx_core::Const_nothing c_nothing = NULL;
+  vx_core::Const_quote c_quote = NULL;
+  vx_core::Const_true c_true = NULL;
+  vx_core::Func_any_from_any e_any_from_any = NULL;
+  vx_core::Func_any_from_any t_any_from_any = NULL;
+  vx_core::Func_any_from_any_async e_any_from_any_async = NULL;
+  vx_core::Func_any_from_any_async t_any_from_any_async = NULL;
+  vx_core::Func_any_from_any_context e_any_from_any_context = NULL;
+  vx_core::Func_any_from_any_context t_any_from_any_context = NULL;
+  vx_core::Func_any_from_any_context_async e_any_from_any_context_async = NULL;
+  vx_core::Func_any_from_any_context_async t_any_from_any_context_async = NULL;
+  vx_core::Func_any_from_func e_any_from_func = NULL;
+  vx_core::Func_any_from_func t_any_from_func = NULL;
+  vx_core::Func_any_from_func_async e_any_from_func_async = NULL;
+  vx_core::Func_any_from_func_async t_any_from_func_async = NULL;
+  vx_core::Func_any_from_key_value e_any_from_key_value = NULL;
+  vx_core::Func_any_from_key_value t_any_from_key_value = NULL;
+  vx_core::Func_any_from_key_value_async e_any_from_key_value_async = NULL;
+  vx_core::Func_any_from_key_value_async t_any_from_key_value_async = NULL;
+  vx_core::Func_any_from_list e_any_from_list = NULL;
+  vx_core::Func_any_from_list t_any_from_list = NULL;
+  vx_core::Func_any_from_list_reduce e_any_from_list_reduce = NULL;
+  vx_core::Func_any_from_list_reduce t_any_from_list_reduce = NULL;
+  vx_core::Func_any_from_list_reduce_next e_any_from_list_reduce_next = NULL;
+  vx_core::Func_any_from_list_reduce_next t_any_from_list_reduce_next = NULL;
+  vx_core::Func_any_from_map e_any_from_map = NULL;
+  vx_core::Func_any_from_map t_any_from_map = NULL;
+  vx_core::Func_any_from_none e_any_from_none = NULL;
+  vx_core::Func_any_from_none t_any_from_none = NULL;
+  vx_core::Func_any_from_none_async e_any_from_none_async = NULL;
+  vx_core::Func_any_from_none_async t_any_from_none_async = NULL;
+  vx_core::Func_any_from_reduce e_any_from_reduce = NULL;
+  vx_core::Func_any_from_reduce t_any_from_reduce = NULL;
+  vx_core::Func_any_from_reduce_async e_any_from_reduce_async = NULL;
+  vx_core::Func_any_from_reduce_async t_any_from_reduce_async = NULL;
+  vx_core::Func_any_from_reduce_next e_any_from_reduce_next = NULL;
+  vx_core::Func_any_from_reduce_next t_any_from_reduce_next = NULL;
+  vx_core::Func_any_from_reduce_next_async e_any_from_reduce_next_async = NULL;
+  vx_core::Func_any_from_reduce_next_async t_any_from_reduce_next_async = NULL;
+  vx_core::Func_any_from_struct e_any_from_struct = NULL;
+  vx_core::Func_any_from_struct t_any_from_struct = NULL;
+  vx_core::Func_async e_async = NULL;
+  vx_core::Func_async t_async = NULL;
+  vx_core::Func_boolean_from_any e_boolean_from_any = NULL;
+  vx_core::Func_boolean_from_any t_boolean_from_any = NULL;
+  vx_core::Func_boolean_from_func e_boolean_from_func = NULL;
+  vx_core::Func_boolean_from_func t_boolean_from_func = NULL;
+  vx_core::Func_boolean_from_none e_boolean_from_none = NULL;
+  vx_core::Func_boolean_from_none t_boolean_from_none = NULL;
+  vx_core::Func_empty e_empty = NULL;
+  vx_core::Func_empty t_empty = NULL;
+  vx_core::Func_new e_new = NULL;
+  vx_core::Func_new t_new = NULL;
+  vx_core::Func_copy e_copy = NULL;
+  vx_core::Func_copy t_copy = NULL;
+  vx_core::Func_is_empty e_is_empty = NULL;
+  vx_core::Func_is_empty t_is_empty = NULL;
+  vx_core::Func_is_empty_1 e_is_empty_1 = NULL;
+  vx_core::Func_is_empty_1 t_is_empty_1 = NULL;
+  vx_core::Func_not e_not = NULL;
+  vx_core::Func_not t_not = NULL;
+  vx_core::Func_notempty e_notempty = NULL;
+  vx_core::Func_notempty t_notempty = NULL;
+  vx_core::Func_notempty_1 e_notempty_1 = NULL;
+  vx_core::Func_notempty_1 t_notempty_1 = NULL;
+  vx_core::Func_eq e_eq = NULL;
+  vx_core::Func_eq t_eq = NULL;
+  vx_core::Func_eq_1 e_eq_1 = NULL;
+  vx_core::Func_eq_1 t_eq_1 = NULL;
+  vx_core::Func_ne e_ne = NULL;
+  vx_core::Func_ne t_ne = NULL;
+  vx_core::Func_then e_then = NULL;
+  vx_core::Func_then t_then = NULL;
+  vx_core::Func_else e_else = NULL;
+  vx_core::Func_else t_else = NULL;
+  vx_core::Func_if e_if = NULL;
+  vx_core::Func_if t_if = NULL;
+  vx_core::Func_if_1 e_if_1 = NULL;
+  vx_core::Func_if_1 t_if_1 = NULL;
+  vx_core::Func_if_2 e_if_2 = NULL;
+  vx_core::Func_if_2 t_if_2 = NULL;
+  vx_core::Func_case e_case = NULL;
+  vx_core::Func_case t_case = NULL;
+  vx_core::Func_case_1 e_case_1 = NULL;
+  vx_core::Func_case_1 t_case_1 = NULL;
+  vx_core::Func_switch e_switch = NULL;
+  vx_core::Func_switch t_switch = NULL;
+  vx_core::Func_length_from_list e_length_from_list = NULL;
+  vx_core::Func_length_from_list t_length_from_list = NULL;
+  vx_core::Func_and e_and = NULL;
+  vx_core::Func_and t_and = NULL;
+  vx_core::Func_and_1 e_and_1 = NULL;
+  vx_core::Func_and_1 t_and_1 = NULL;
+  vx_core::Func_or e_or = NULL;
+  vx_core::Func_or t_or = NULL;
+  vx_core::Func_or_1 e_or_1 = NULL;
+  vx_core::Func_or_1 t_or_1 = NULL;
+  vx_core::Func_let e_let = NULL;
+  vx_core::Func_let t_let = NULL;
+  vx_core::Func_let_async e_let_async = NULL;
+  vx_core::Func_let_async t_let_async = NULL;
+  vx_core::Func_multiply e_multiply = NULL;
+  vx_core::Func_multiply t_multiply = NULL;
+  vx_core::Func_multiply_1 e_multiply_1 = NULL;
+  vx_core::Func_multiply_1 t_multiply_1 = NULL;
+  vx_core::Func_multiply_2 e_multiply_2 = NULL;
+  vx_core::Func_multiply_2 t_multiply_2 = NULL;
+  vx_core::Func_multiply_3 e_multiply_3 = NULL;
+  vx_core::Func_multiply_3 t_multiply_3 = NULL;
+  vx_core::Func_plus e_plus = NULL;
+  vx_core::Func_plus t_plus = NULL;
+  vx_core::Func_plus_1 e_plus_1 = NULL;
+  vx_core::Func_plus_1 t_plus_1 = NULL;
+  vx_core::Func_plus_2 e_plus_2 = NULL;
+  vx_core::Func_plus_2 t_plus_2 = NULL;
+  vx_core::Func_plus_3 e_plus_3 = NULL;
+  vx_core::Func_plus_3 t_plus_3 = NULL;
+  vx_core::Func_plus1 e_plus1 = NULL;
+  vx_core::Func_plus1 t_plus1 = NULL;
+  vx_core::Func_minus e_minus = NULL;
+  vx_core::Func_minus t_minus = NULL;
+  vx_core::Func_minus_1 e_minus_1 = NULL;
+  vx_core::Func_minus_1 t_minus_1 = NULL;
+  vx_core::Func_minus_2 e_minus_2 = NULL;
+  vx_core::Func_minus_2 t_minus_2 = NULL;
+  vx_core::Func_minus_3 e_minus_3 = NULL;
+  vx_core::Func_minus_3 t_minus_3 = NULL;
+  vx_core::Func_dotmethod e_dotmethod = NULL;
+  vx_core::Func_dotmethod t_dotmethod = NULL;
+  vx_core::Func_divide e_divide = NULL;
+  vx_core::Func_divide t_divide = NULL;
+  vx_core::Func_lt e_lt = NULL;
+  vx_core::Func_lt t_lt = NULL;
+  vx_core::Func_lt_1 e_lt_1 = NULL;
+  vx_core::Func_lt_1 t_lt_1 = NULL;
+  vx_core::Func_chainfirst e_chainfirst = NULL;
+  vx_core::Func_chainfirst t_chainfirst = NULL;
+  vx_core::Func_chainlast e_chainlast = NULL;
+  vx_core::Func_chainlast t_chainlast = NULL;
+  vx_core::Func_le e_le = NULL;
+  vx_core::Func_le t_le = NULL;
+  vx_core::Func_le_1 e_le_1 = NULL;
+  vx_core::Func_le_1 t_le_1 = NULL;
+  vx_core::Func_gt e_gt = NULL;
+  vx_core::Func_gt t_gt = NULL;
+  vx_core::Func_gt_1 e_gt_1 = NULL;
+  vx_core::Func_gt_1 t_gt_1 = NULL;
+  vx_core::Func_ge e_ge = NULL;
+  vx_core::Func_ge t_ge = NULL;
+  vx_core::Func_ge_1 e_ge_1 = NULL;
+  vx_core::Func_ge_1 t_ge_1 = NULL;
+  vx_core::Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = NULL;
+  vx_core::Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = NULL;
+  vx_core::Func_allowtypes_from_typedef e_allowtypes_from_typedef = NULL;
+  vx_core::Func_allowtypes_from_typedef t_allowtypes_from_typedef = NULL;
+  vx_core::Func_compare e_compare = NULL;
+  vx_core::Func_compare t_compare = NULL;
+  vx_core::Func_contains e_contains = NULL;
+  vx_core::Func_contains t_contains = NULL;
+  vx_core::Func_contains_1 e_contains_1 = NULL;
+  vx_core::Func_contains_1 t_contains_1 = NULL;
+  vx_core::Func_extends_from_any e_extends_from_any = NULL;
+  vx_core::Func_extends_from_any t_extends_from_any = NULL;
+  vx_core::Func_extends_from_typedef e_extends_from_typedef = NULL;
+  vx_core::Func_extends_from_typedef t_extends_from_typedef = NULL;
+  vx_core::Func_first_from_list e_first_from_list = NULL;
+  vx_core::Func_first_from_list t_first_from_list = NULL;
+  vx_core::Func_first_from_list_fn_any_from_any e_first_from_list_fn_any_from_any = NULL;
+  vx_core::Func_first_from_list_fn_any_from_any t_first_from_list_fn_any_from_any = NULL;
+  vx_core::Func_fn e_fn = NULL;
+  vx_core::Func_fn t_fn = NULL;
+  vx_core::Func_funcdef_from_func e_funcdef_from_func = NULL;
+  vx_core::Func_funcdef_from_func t_funcdef_from_func = NULL;
+  vx_core::Func_funcname_from_funcdef e_funcname_from_funcdef = NULL;
+  vx_core::Func_funcname_from_funcdef t_funcname_from_funcdef = NULL;
+  vx_core::Func_global_package_get e_global_package_get = NULL;
+  vx_core::Func_global_package_get t_global_package_get = NULL;
+  vx_core::Func_global_package_set e_global_package_set = NULL;
+  vx_core::Func_global_package_set t_global_package_set = NULL;
+  vx_core::Func_int_from_func e_int_from_func = NULL;
+  vx_core::Func_int_from_func t_int_from_func = NULL;
+  vx_core::Func_int_from_string e_int_from_string = NULL;
+  vx_core::Func_int_from_string t_int_from_string = NULL;
+  vx_core::Func_is_endswith e_is_endswith = NULL;
+  vx_core::Func_is_endswith t_is_endswith = NULL;
+  vx_core::Func_is_func e_is_func = NULL;
+  vx_core::Func_is_func t_is_func = NULL;
+  vx_core::Func_is_int e_is_int = NULL;
+  vx_core::Func_is_int t_is_int = NULL;
+  vx_core::Func_is_number e_is_number = NULL;
+  vx_core::Func_is_number t_is_number = NULL;
+  vx_core::Func_is_pass_from_permission e_is_pass_from_permission = NULL;
+  vx_core::Func_is_pass_from_permission t_is_pass_from_permission = NULL;
+  vx_core::Func_last_from_list e_last_from_list = NULL;
+  vx_core::Func_last_from_list t_last_from_list = NULL;
+  vx_core::Func_list_join_from_list e_list_join_from_list = NULL;
+  vx_core::Func_list_join_from_list t_list_join_from_list = NULL;
+  vx_core::Func_list_from_list e_list_from_list = NULL;
+  vx_core::Func_list_from_list t_list_from_list = NULL;
+  vx_core::Func_list_from_list_async e_list_from_list_async = NULL;
+  vx_core::Func_list_from_list_async t_list_from_list_async = NULL;
+  vx_core::Func_list_from_map e_list_from_map = NULL;
+  vx_core::Func_list_from_map t_list_from_map = NULL;
+  vx_core::Func_list_from_map_async e_list_from_map_async = NULL;
+  vx_core::Func_list_from_map_async t_list_from_map_async = NULL;
+  vx_core::Func_list_from_type e_list_from_type = NULL;
+  vx_core::Func_list_from_type t_list_from_type = NULL;
+  vx_core::Func_log e_log = NULL;
+  vx_core::Func_log t_log = NULL;
+  vx_core::Func_map_from_list e_map_from_list = NULL;
+  vx_core::Func_map_from_list t_map_from_list = NULL;
+  vx_core::Func_mempool_addref e_mempool_addref = NULL;
+  vx_core::Func_mempool_addref t_mempool_addref = NULL;
+  vx_core::Func_mempool_release e_mempool_release = NULL;
+  vx_core::Func_mempool_release t_mempool_release = NULL;
+  vx_core::Func_mempool_removeref e_mempool_removeref = NULL;
+  vx_core::Func_mempool_removeref t_mempool_removeref = NULL;
+  vx_core::Func_mempool_removerefchildren e_mempool_removerefchildren = NULL;
+  vx_core::Func_mempool_removerefchildren t_mempool_removerefchildren = NULL;
+  vx_core::Func_mempool_reserve e_mempool_reserve = NULL;
+  vx_core::Func_mempool_reserve t_mempool_reserve = NULL;
+  vx_core::Func_msg_from_error e_msg_from_error = NULL;
+  vx_core::Func_msg_from_error t_msg_from_error = NULL;
+  vx_core::Func_msgblock_from_msgblock_msg e_msgblock_from_msgblock_msg = NULL;
+  vx_core::Func_msgblock_from_msgblock_msg t_msgblock_from_msgblock_msg = NULL;
+  vx_core::Func_msgblock_from_msgblock_msgblock e_msgblock_from_msgblock_msgblock = NULL;
+  vx_core::Func_msgblock_from_msgblock_msgblock t_msgblock_from_msgblock_msgblock = NULL;
+  vx_core::Func_name_from_typedef e_name_from_typedef = NULL;
+  vx_core::Func_name_from_typedef t_name_from_typedef = NULL;
+  vx_core::Func_native e_native = NULL;
+  vx_core::Func_native t_native = NULL;
+  vx_core::Func_native_from_any e_native_from_any = NULL;
+  vx_core::Func_native_from_any t_native_from_any = NULL;
+  vx_core::Func_number_from_func e_number_from_func = NULL;
+  vx_core::Func_number_from_func t_number_from_func = NULL;
+  vx_core::Func_packagename_from_typedef e_packagename_from_typedef = NULL;
+  vx_core::Func_packagename_from_typedef t_packagename_from_typedef = NULL;
+  vx_core::Func_path_from_context_path e_path_from_context_path = NULL;
+  vx_core::Func_path_from_context_path t_path_from_context_path = NULL;
+  vx_core::Func_path_from_setting_path e_path_from_setting_path = NULL;
+  vx_core::Func_path_from_setting_path t_path_from_setting_path = NULL;
+  vx_core::Func_permission_from_id_context e_permission_from_id_context = NULL;
+  vx_core::Func_permission_from_id_context t_permission_from_id_context = NULL;
+  vx_core::Func_properties_from_typedef e_properties_from_typedef = NULL;
+  vx_core::Func_properties_from_typedef t_properties_from_typedef = NULL;
+  vx_core::Func_proplast_from_typedef e_proplast_from_typedef = NULL;
+  vx_core::Func_proplast_from_typedef t_proplast_from_typedef = NULL;
+  vx_core::Func_resolve e_resolve = NULL;
+  vx_core::Func_resolve t_resolve = NULL;
+  vx_core::Func_resolve_1 e_resolve_1 = NULL;
+  vx_core::Func_resolve_1 t_resolve_1 = NULL;
+  vx_core::Func_resolve_async e_resolve_async = NULL;
+  vx_core::Func_resolve_async t_resolve_async = NULL;
+  vx_core::Func_resolve_first e_resolve_first = NULL;
+  vx_core::Func_resolve_first t_resolve_first = NULL;
+  vx_core::Func_resolve_list e_resolve_list = NULL;
+  vx_core::Func_resolve_list t_resolve_list = NULL;
+  vx_core::Func_session_from_context e_session_from_context = NULL;
+  vx_core::Func_session_from_context t_session_from_context = NULL;
+  vx_core::Func_setting_from_context e_setting_from_context = NULL;
+  vx_core::Func_setting_from_context t_setting_from_context = NULL;
+  vx_core::Func_string_repeat e_string_repeat = NULL;
+  vx_core::Func_string_repeat t_string_repeat = NULL;
+  vx_core::Func_string_from_any e_string_from_any = NULL;
+  vx_core::Func_string_from_any t_string_from_any = NULL;
+  vx_core::Func_string_from_any_indent e_string_from_any_indent = NULL;
+  vx_core::Func_string_from_any_indent t_string_from_any_indent = NULL;
+  vx_core::Func_string_from_func e_string_from_func = NULL;
+  vx_core::Func_string_from_func t_string_from_func = NULL;
+  vx_core::Func_traits_from_typedef e_traits_from_typedef = NULL;
+  vx_core::Func_traits_from_typedef t_traits_from_typedef = NULL;
+  vx_core::Func_type_from_any e_type_from_any = NULL;
+  vx_core::Func_type_from_any t_type_from_any = NULL;
+  vx_core::Func_typedef_from_any e_typedef_from_any = NULL;
+  vx_core::Func_typedef_from_any t_typedef_from_any = NULL;
+  vx_core::Func_typedef_from_type e_typedef_from_type = NULL;
+  vx_core::Func_typedef_from_type t_typedef_from_type = NULL;
+  vx_core::Func_typename_from_any e_typename_from_any = NULL;
+  vx_core::Func_typename_from_any t_typename_from_any = NULL;
+  vx_core::Func_typename_from_type e_typename_from_type = NULL;
+  vx_core::Func_typename_from_type t_typename_from_type = NULL;
+  vx_core::Func_typename_from_typedef e_typename_from_typedef = NULL;
+  vx_core::Func_typename_from_typedef t_typename_from_typedef = NULL;
+  vx_core::Func_typenames_from_typelist e_typenames_from_typelist = NULL;
+  vx_core::Func_typenames_from_typelist t_typenames_from_typelist = NULL;
+  vx_core::Func_user_from_context e_user_from_context = NULL;
+  vx_core::Func_user_from_context t_user_from_context = NULL;
+
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
     }
-    return output;
-  }
-
-  // (const globalpackagemap)
-  vx_core::Const_globalpackagemap c_globalpackagemap() {
-    vx_core::Const_globalpackagemap output = vx_core::vx_package->c_globalpackagemap;
-    if (output == NULL) {
-      output = vx_core::Class_globalpackagemap::vx_const_new();
-      vx_core::vx_package->c_globalpackagemap = output;
+    void vx_Class_package::init() {
+      vx_core::c_false = vx_core::Class_false::vx_const_new();
+      vx_core::e_any = new Class_any();
+      vx_core::vx_reserve_empty(vx_core::e_any);
+      vx_core::t_any = new Class_any();
+      vx_core::vx_reserve_type(vx_core::t_any);
+      vx_core::e_list = new Class_list();
+      vx_core::vx_reserve_empty(vx_core::e_list);
+      vx_core::t_list = new Class_list();
+      vx_core::vx_reserve_type(vx_core::t_list);
+      vx_core::e_map = new Class_map();
+      vx_core::vx_reserve_empty(vx_core::e_map);
+      vx_core::t_map = new Class_map();
+      vx_core::vx_reserve_type(vx_core::t_map);
+      vx_core::e_struct = new Class_struct();
+      vx_core::vx_reserve_empty(vx_core::e_struct);
+      vx_core::t_struct = new Class_struct();
+      vx_core::vx_reserve_type(vx_core::t_struct);
+      vx_core::e_msg = new Class_msg();
+      vx_core::vx_reserve_empty(vx_core::e_msg);
+      vx_core::t_msg = new Class_msg();
+      vx_core::vx_reserve_type(vx_core::t_msg);
+      vx_core::e_msglist = new Class_msglist();
+      vx_core::vx_reserve_empty(vx_core::e_msglist);
+      vx_core::t_msglist = new Class_msglist();
+      vx_core::vx_reserve_type(vx_core::t_msglist);
+      vx_core::e_msgblock = new Class_msgblock();
+      vx_core::vx_reserve_empty(vx_core::e_msgblock);
+      vx_core::t_msgblock = new Class_msgblock();
+      vx_core::vx_reserve_type(vx_core::t_msgblock);
+      vx_core::e_msgblocklist = new Class_msgblocklist();
+      vx_core::vx_reserve_empty(vx_core::e_msgblocklist);
+      vx_core::t_msgblocklist = new Class_msgblocklist();
+      vx_core::vx_reserve_type(vx_core::t_msgblocklist);
+      vx_core::e_boolean = vx_core::c_false;
+      vx_core::t_boolean = new Class_boolean();
+      vx_core::vx_reserve_type(vx_core::t_boolean);
+      vx_core::e_number = new Class_number();
+      vx_core::vx_reserve_empty(vx_core::e_number);
+      vx_core::t_number = new Class_number();
+      vx_core::vx_reserve_type(vx_core::t_number);
+      vx_core::e_decimal = new Class_decimal();
+      vx_core::vx_reserve_empty(vx_core::e_decimal);
+      vx_core::t_decimal = new Class_decimal();
+      vx_core::vx_reserve_type(vx_core::t_decimal);
+      vx_core::e_float = new Class_float();
+      vx_core::vx_reserve_empty(vx_core::e_float);
+      vx_core::t_float = new Class_float();
+      vx_core::vx_reserve_type(vx_core::t_float);
+      vx_core::e_int = new Class_int();
+      vx_core::vx_reserve_empty(vx_core::e_int);
+      vx_core::t_int = new Class_int();
+      vx_core::vx_reserve_type(vx_core::t_int);
+      vx_core::e_string = new Class_string();
+      vx_core::vx_reserve_empty(vx_core::e_string);
+      vx_core::t_string = new Class_string();
+      vx_core::vx_reserve_type(vx_core::t_string);
+      vx_core::e_func = new Class_func();
+      vx_core::vx_reserve_empty(vx_core::e_func);
+      vx_core::t_func = new Class_func();
+      vx_core::vx_reserve_type(vx_core::t_func);
+      vx_core::e_typedef = new Class_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_typedef);
+      vx_core::t_typedef = new Class_typedef();
+      vx_core::vx_reserve_type(vx_core::t_typedef);
+      vx_core::e_funcdef = new Class_funcdef();
+      vx_core::vx_reserve_empty(vx_core::e_funcdef);
+      vx_core::t_funcdef = new Class_funcdef();
+      vx_core::vx_reserve_type(vx_core::t_funcdef);
+      vx_core::e_any_async_from_func = new Class_any_async_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_any_async_from_func);
+      vx_core::t_any_async_from_func = new Class_any_async_from_func();
+      vx_core::vx_reserve_type(vx_core::t_any_async_from_func);
+      vx_core::e_any_from_anylist = new Class_any_from_anylist();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_anylist);
+      vx_core::t_any_from_anylist = new Class_any_from_anylist();
+      vx_core::vx_reserve_type(vx_core::t_any_from_anylist);
+      vx_core::e_anylist = new Class_anylist();
+      vx_core::vx_reserve_empty(vx_core::e_anylist);
+      vx_core::t_anylist = new Class_anylist();
+      vx_core::vx_reserve_type(vx_core::t_anylist);
+      vx_core::e_anytype = new Class_anytype();
+      vx_core::vx_reserve_empty(vx_core::e_anytype);
+      vx_core::t_anytype = new Class_anytype();
+      vx_core::vx_reserve_type(vx_core::t_anytype);
+      vx_core::e_arg = new Class_arg();
+      vx_core::vx_reserve_empty(vx_core::e_arg);
+      vx_core::t_arg = new Class_arg();
+      vx_core::vx_reserve_type(vx_core::t_arg);
+      vx_core::e_arglist = new Class_arglist();
+      vx_core::vx_reserve_empty(vx_core::e_arglist);
+      vx_core::t_arglist = new Class_arglist();
+      vx_core::vx_reserve_type(vx_core::t_arglist);
+      vx_core::e_argmap = new Class_argmap();
+      vx_core::vx_reserve_empty(vx_core::e_argmap);
+      vx_core::t_argmap = new Class_argmap();
+      vx_core::vx_reserve_type(vx_core::t_argmap);
+      vx_core::e_booleanlist = new Class_booleanlist();
+      vx_core::vx_reserve_empty(vx_core::e_booleanlist);
+      vx_core::t_booleanlist = new Class_booleanlist();
+      vx_core::vx_reserve_type(vx_core::t_booleanlist);
+      vx_core::e_collection = new Class_collection();
+      vx_core::vx_reserve_empty(vx_core::e_collection);
+      vx_core::t_collection = new Class_collection();
+      vx_core::vx_reserve_type(vx_core::t_collection);
+      vx_core::e_compilelanguages = new Class_compilelanguages();
+      vx_core::vx_reserve_empty(vx_core::e_compilelanguages);
+      vx_core::t_compilelanguages = new Class_compilelanguages();
+      vx_core::vx_reserve_type(vx_core::t_compilelanguages);
+      vx_core::e_connect = new Class_connect();
+      vx_core::vx_reserve_empty(vx_core::e_connect);
+      vx_core::t_connect = new Class_connect();
+      vx_core::vx_reserve_type(vx_core::t_connect);
+      vx_core::e_connectlist = new Class_connectlist();
+      vx_core::vx_reserve_empty(vx_core::e_connectlist);
+      vx_core::t_connectlist = new Class_connectlist();
+      vx_core::vx_reserve_type(vx_core::t_connectlist);
+      vx_core::e_connectmap = new Class_connectmap();
+      vx_core::vx_reserve_empty(vx_core::e_connectmap);
+      vx_core::t_connectmap = new Class_connectmap();
+      vx_core::vx_reserve_type(vx_core::t_connectmap);
+      vx_core::e_const = new Class_const();
+      vx_core::vx_reserve_empty(vx_core::e_const);
+      vx_core::t_const = new Class_const();
+      vx_core::vx_reserve_type(vx_core::t_const);
+      vx_core::e_constdef = new Class_constdef();
+      vx_core::vx_reserve_empty(vx_core::e_constdef);
+      vx_core::t_constdef = new Class_constdef();
+      vx_core::vx_reserve_type(vx_core::t_constdef);
+      vx_core::e_constlist = new Class_constlist();
+      vx_core::vx_reserve_empty(vx_core::e_constlist);
+      vx_core::t_constlist = new Class_constlist();
+      vx_core::vx_reserve_type(vx_core::t_constlist);
+      vx_core::e_constmap = new Class_constmap();
+      vx_core::vx_reserve_empty(vx_core::e_constmap);
+      vx_core::t_constmap = new Class_constmap();
+      vx_core::vx_reserve_type(vx_core::t_constmap);
+      vx_core::e_context = new Class_context();
+      vx_core::vx_reserve_empty(vx_core::e_context);
+      vx_core::t_context = new Class_context();
+      vx_core::vx_reserve_type(vx_core::t_context);
+      vx_core::e_error = new Class_error();
+      vx_core::vx_reserve_empty(vx_core::e_error);
+      vx_core::t_error = new Class_error();
+      vx_core::vx_reserve_type(vx_core::t_error);
+      vx_core::e_funclist = new Class_funclist();
+      vx_core::vx_reserve_empty(vx_core::e_funclist);
+      vx_core::t_funclist = new Class_funclist();
+      vx_core::vx_reserve_type(vx_core::t_funclist);
+      vx_core::e_funcmap = new Class_funcmap();
+      vx_core::vx_reserve_empty(vx_core::e_funcmap);
+      vx_core::t_funcmap = new Class_funcmap();
+      vx_core::vx_reserve_type(vx_core::t_funcmap);
+      vx_core::e_intlist = new Class_intlist();
+      vx_core::vx_reserve_empty(vx_core::e_intlist);
+      vx_core::t_intlist = new Class_intlist();
+      vx_core::vx_reserve_type(vx_core::t_intlist);
+      vx_core::e_intmap = new Class_intmap();
+      vx_core::vx_reserve_empty(vx_core::e_intmap);
+      vx_core::t_intmap = new Class_intmap();
+      vx_core::vx_reserve_type(vx_core::t_intmap);
+      vx_core::e_listtype = new Class_listtype();
+      vx_core::vx_reserve_empty(vx_core::e_listtype);
+      vx_core::t_listtype = new Class_listtype();
+      vx_core::vx_reserve_type(vx_core::t_listtype);
+      vx_core::e_maptype = new Class_maptype();
+      vx_core::vx_reserve_empty(vx_core::e_maptype);
+      vx_core::t_maptype = new Class_maptype();
+      vx_core::vx_reserve_type(vx_core::t_maptype);
+      vx_core::e_mempool = new Class_mempool();
+      vx_core::vx_reserve_empty(vx_core::e_mempool);
+      vx_core::t_mempool = new Class_mempool();
+      vx_core::vx_reserve_type(vx_core::t_mempool);
+      vx_core::e_none = new Class_none();
+      vx_core::vx_reserve_empty(vx_core::e_none);
+      vx_core::t_none = new Class_none();
+      vx_core::vx_reserve_type(vx_core::t_none);
+      vx_core::e_notype = new Class_notype();
+      vx_core::vx_reserve_empty(vx_core::e_notype);
+      vx_core::t_notype = new Class_notype();
+      vx_core::vx_reserve_type(vx_core::t_notype);
+      vx_core::e_numberlist = new Class_numberlist();
+      vx_core::vx_reserve_empty(vx_core::e_numberlist);
+      vx_core::t_numberlist = new Class_numberlist();
+      vx_core::vx_reserve_type(vx_core::t_numberlist);
+      vx_core::e_numbermap = new Class_numbermap();
+      vx_core::vx_reserve_empty(vx_core::e_numbermap);
+      vx_core::t_numbermap = new Class_numbermap();
+      vx_core::vx_reserve_type(vx_core::t_numbermap);
+      vx_core::e_package = new Class_package();
+      vx_core::vx_reserve_empty(vx_core::e_package);
+      vx_core::t_package = new Class_package();
+      vx_core::vx_reserve_type(vx_core::t_package);
+      vx_core::e_packagemap = new Class_packagemap();
+      vx_core::vx_reserve_empty(vx_core::e_packagemap);
+      vx_core::t_packagemap = new Class_packagemap();
+      vx_core::vx_reserve_type(vx_core::t_packagemap);
+      vx_core::e_permission = new Class_permission();
+      vx_core::vx_reserve_empty(vx_core::e_permission);
+      vx_core::t_permission = new Class_permission();
+      vx_core::vx_reserve_type(vx_core::t_permission);
+      vx_core::e_permissionlist = new Class_permissionlist();
+      vx_core::vx_reserve_empty(vx_core::e_permissionlist);
+      vx_core::t_permissionlist = new Class_permissionlist();
+      vx_core::vx_reserve_type(vx_core::t_permissionlist);
+      vx_core::e_permissionmap = new Class_permissionmap();
+      vx_core::vx_reserve_empty(vx_core::e_permissionmap);
+      vx_core::t_permissionmap = new Class_permissionmap();
+      vx_core::vx_reserve_type(vx_core::t_permissionmap);
+      vx_core::e_security = new Class_security();
+      vx_core::vx_reserve_empty(vx_core::e_security);
+      vx_core::t_security = new Class_security();
+      vx_core::vx_reserve_type(vx_core::t_security);
+      vx_core::e_session = new Class_session();
+      vx_core::vx_reserve_empty(vx_core::e_session);
+      vx_core::t_session = new Class_session();
+      vx_core::vx_reserve_type(vx_core::t_session);
+      vx_core::e_setting = new Class_setting();
+      vx_core::vx_reserve_empty(vx_core::e_setting);
+      vx_core::t_setting = new Class_setting();
+      vx_core::vx_reserve_type(vx_core::t_setting);
+      vx_core::e_state = new Class_state();
+      vx_core::vx_reserve_empty(vx_core::e_state);
+      vx_core::t_state = new Class_state();
+      vx_core::vx_reserve_type(vx_core::t_state);
+      vx_core::e_statelistener = new Class_statelistener();
+      vx_core::vx_reserve_empty(vx_core::e_statelistener);
+      vx_core::t_statelistener = new Class_statelistener();
+      vx_core::vx_reserve_type(vx_core::t_statelistener);
+      vx_core::e_stringlist = new Class_stringlist();
+      vx_core::vx_reserve_empty(vx_core::e_stringlist);
+      vx_core::t_stringlist = new Class_stringlist();
+      vx_core::vx_reserve_type(vx_core::t_stringlist);
+      vx_core::e_stringmap = new Class_stringmap();
+      vx_core::vx_reserve_empty(vx_core::e_stringmap);
+      vx_core::t_stringmap = new Class_stringmap();
+      vx_core::vx_reserve_type(vx_core::t_stringmap);
+      vx_core::e_thenelse = new Class_thenelse();
+      vx_core::vx_reserve_empty(vx_core::e_thenelse);
+      vx_core::t_thenelse = new Class_thenelse();
+      vx_core::vx_reserve_type(vx_core::t_thenelse);
+      vx_core::e_thenelselist = new Class_thenelselist();
+      vx_core::vx_reserve_empty(vx_core::e_thenelselist);
+      vx_core::t_thenelselist = new Class_thenelselist();
+      vx_core::vx_reserve_type(vx_core::t_thenelselist);
+      vx_core::e_type = new Class_type();
+      vx_core::vx_reserve_empty(vx_core::e_type);
+      vx_core::t_type = new Class_type();
+      vx_core::vx_reserve_type(vx_core::t_type);
+      vx_core::e_typelist = new Class_typelist();
+      vx_core::vx_reserve_empty(vx_core::e_typelist);
+      vx_core::t_typelist = new Class_typelist();
+      vx_core::vx_reserve_type(vx_core::t_typelist);
+      vx_core::e_typemap = new Class_typemap();
+      vx_core::vx_reserve_empty(vx_core::e_typemap);
+      vx_core::t_typemap = new Class_typemap();
+      vx_core::vx_reserve_type(vx_core::t_typemap);
+      vx_core::e_user = new Class_user();
+      vx_core::vx_reserve_empty(vx_core::e_user);
+      vx_core::t_user = new Class_user();
+      vx_core::vx_reserve_type(vx_core::t_user);
+      vx_core::e_value = new Class_value();
+      vx_core::vx_reserve_empty(vx_core::e_value);
+      vx_core::t_value = new Class_value();
+      vx_core::vx_reserve_type(vx_core::t_value);
+      vx_core::c_globalpackagemap = vx_core::Class_globalpackagemap::vx_const_new();
+      vx_core::c_infinity = vx_core::Class_infinity::vx_const_new();
+      vx_core::c_mempool_active = vx_core::Class_mempool_active::vx_const_new();
+      vx_core::c_msg_error = vx_core::Class_msg_error::vx_const_new();
+      vx_core::c_msg_info = vx_core::Class_msg_info::vx_const_new();
+      vx_core::c_msg_severe = vx_core::Class_msg_severe::vx_const_new();
+      vx_core::c_msg_warning = vx_core::Class_msg_warning::vx_const_new();
+      vx_core::c_neginfinity = vx_core::Class_neginfinity::vx_const_new();
+      vx_core::c_newline = vx_core::Class_newline::vx_const_new();
+      vx_core::c_notanumber = vx_core::Class_notanumber::vx_const_new();
+      vx_core::c_nothing = vx_core::Class_nothing::vx_const_new();
+      vx_core::c_quote = vx_core::Class_quote::vx_const_new();
+      vx_core::c_true = vx_core::Class_true::vx_const_new();
+      vx_core::e_any_from_any = new vx_core::Class_any_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_any);
+      vx_core::t_any_from_any = new vx_core::Class_any_from_any();
+      vx_core::vx_reserve_type(vx_core::t_any_from_any);
+      vx_core::e_any_from_any_async = new vx_core::Class_any_from_any_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_any_async);
+      vx_core::t_any_from_any_async = new vx_core::Class_any_from_any_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_any_async);
+      vx_core::e_any_from_any_context = new vx_core::Class_any_from_any_context();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_any_context);
+      vx_core::t_any_from_any_context = new vx_core::Class_any_from_any_context();
+      vx_core::vx_reserve_type(vx_core::t_any_from_any_context);
+      vx_core::e_any_from_any_context_async = new vx_core::Class_any_from_any_context_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_any_context_async);
+      vx_core::t_any_from_any_context_async = new vx_core::Class_any_from_any_context_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_any_context_async);
+      vx_core::e_any_from_func = new vx_core::Class_any_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_func);
+      vx_core::t_any_from_func = new vx_core::Class_any_from_func();
+      vx_core::vx_reserve_type(vx_core::t_any_from_func);
+      vx_core::e_any_from_func_async = new vx_core::Class_any_from_func_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_func_async);
+      vx_core::t_any_from_func_async = new vx_core::Class_any_from_func_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_func_async);
+      vx_core::e_any_from_key_value = new vx_core::Class_any_from_key_value();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_key_value);
+      vx_core::t_any_from_key_value = new vx_core::Class_any_from_key_value();
+      vx_core::vx_reserve_type(vx_core::t_any_from_key_value);
+      vx_core::e_any_from_key_value_async = new vx_core::Class_any_from_key_value_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_key_value_async);
+      vx_core::t_any_from_key_value_async = new vx_core::Class_any_from_key_value_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_key_value_async);
+      vx_core::e_any_from_list = new vx_core::Class_any_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_list);
+      vx_core::t_any_from_list = new vx_core::Class_any_from_list();
+      vx_core::vx_reserve_type(vx_core::t_any_from_list);
+      vx_core::e_any_from_list_reduce = new vx_core::Class_any_from_list_reduce();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_list_reduce);
+      vx_core::t_any_from_list_reduce = new vx_core::Class_any_from_list_reduce();
+      vx_core::vx_reserve_type(vx_core::t_any_from_list_reduce);
+      vx_core::e_any_from_list_reduce_next = new vx_core::Class_any_from_list_reduce_next();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_list_reduce_next);
+      vx_core::t_any_from_list_reduce_next = new vx_core::Class_any_from_list_reduce_next();
+      vx_core::vx_reserve_type(vx_core::t_any_from_list_reduce_next);
+      vx_core::e_any_from_map = new vx_core::Class_any_from_map();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_map);
+      vx_core::t_any_from_map = new vx_core::Class_any_from_map();
+      vx_core::vx_reserve_type(vx_core::t_any_from_map);
+      vx_core::e_any_from_none = new vx_core::Class_any_from_none();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_none);
+      vx_core::t_any_from_none = new vx_core::Class_any_from_none();
+      vx_core::vx_reserve_type(vx_core::t_any_from_none);
+      vx_core::e_any_from_none_async = new vx_core::Class_any_from_none_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_none_async);
+      vx_core::t_any_from_none_async = new vx_core::Class_any_from_none_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_none_async);
+      vx_core::e_any_from_reduce = new vx_core::Class_any_from_reduce();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_reduce);
+      vx_core::t_any_from_reduce = new vx_core::Class_any_from_reduce();
+      vx_core::vx_reserve_type(vx_core::t_any_from_reduce);
+      vx_core::e_any_from_reduce_async = new vx_core::Class_any_from_reduce_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_reduce_async);
+      vx_core::t_any_from_reduce_async = new vx_core::Class_any_from_reduce_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_reduce_async);
+      vx_core::e_any_from_reduce_next = new vx_core::Class_any_from_reduce_next();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_reduce_next);
+      vx_core::t_any_from_reduce_next = new vx_core::Class_any_from_reduce_next();
+      vx_core::vx_reserve_type(vx_core::t_any_from_reduce_next);
+      vx_core::e_any_from_reduce_next_async = new vx_core::Class_any_from_reduce_next_async();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_reduce_next_async);
+      vx_core::t_any_from_reduce_next_async = new vx_core::Class_any_from_reduce_next_async();
+      vx_core::vx_reserve_type(vx_core::t_any_from_reduce_next_async);
+      vx_core::e_any_from_struct = new vx_core::Class_any_from_struct();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_struct);
+      vx_core::t_any_from_struct = new vx_core::Class_any_from_struct();
+      vx_core::vx_reserve_type(vx_core::t_any_from_struct);
+      vx_core::e_async = new vx_core::Class_async();
+      vx_core::vx_reserve_empty(vx_core::e_async);
+      vx_core::t_async = new vx_core::Class_async();
+      vx_core::vx_reserve_type(vx_core::t_async);
+      vx_core::e_boolean_from_any = new vx_core::Class_boolean_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_boolean_from_any);
+      vx_core::t_boolean_from_any = new vx_core::Class_boolean_from_any();
+      vx_core::vx_reserve_type(vx_core::t_boolean_from_any);
+      vx_core::e_boolean_from_func = new vx_core::Class_boolean_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_boolean_from_func);
+      vx_core::t_boolean_from_func = new vx_core::Class_boolean_from_func();
+      vx_core::vx_reserve_type(vx_core::t_boolean_from_func);
+      vx_core::e_boolean_from_none = new vx_core::Class_boolean_from_none();
+      vx_core::vx_reserve_empty(vx_core::e_boolean_from_none);
+      vx_core::t_boolean_from_none = new vx_core::Class_boolean_from_none();
+      vx_core::vx_reserve_type(vx_core::t_boolean_from_none);
+      vx_core::e_empty = new vx_core::Class_empty();
+      vx_core::vx_reserve_empty(vx_core::e_empty);
+      vx_core::t_empty = new vx_core::Class_empty();
+      vx_core::vx_reserve_type(vx_core::t_empty);
+      vx_core::e_new = new vx_core::Class_new();
+      vx_core::vx_reserve_empty(vx_core::e_new);
+      vx_core::t_new = new vx_core::Class_new();
+      vx_core::vx_reserve_type(vx_core::t_new);
+      vx_core::e_copy = new vx_core::Class_copy();
+      vx_core::vx_reserve_empty(vx_core::e_copy);
+      vx_core::t_copy = new vx_core::Class_copy();
+      vx_core::vx_reserve_type(vx_core::t_copy);
+      vx_core::e_is_empty = new vx_core::Class_is_empty();
+      vx_core::vx_reserve_empty(vx_core::e_is_empty);
+      vx_core::t_is_empty = new vx_core::Class_is_empty();
+      vx_core::vx_reserve_type(vx_core::t_is_empty);
+      vx_core::e_is_empty_1 = new vx_core::Class_is_empty_1();
+      vx_core::vx_reserve_empty(vx_core::e_is_empty_1);
+      vx_core::t_is_empty_1 = new vx_core::Class_is_empty_1();
+      vx_core::vx_reserve_type(vx_core::t_is_empty_1);
+      vx_core::e_not = new vx_core::Class_not();
+      vx_core::vx_reserve_empty(vx_core::e_not);
+      vx_core::t_not = new vx_core::Class_not();
+      vx_core::vx_reserve_type(vx_core::t_not);
+      vx_core::e_notempty = new vx_core::Class_notempty();
+      vx_core::vx_reserve_empty(vx_core::e_notempty);
+      vx_core::t_notempty = new vx_core::Class_notempty();
+      vx_core::vx_reserve_type(vx_core::t_notempty);
+      vx_core::e_notempty_1 = new vx_core::Class_notempty_1();
+      vx_core::vx_reserve_empty(vx_core::e_notempty_1);
+      vx_core::t_notempty_1 = new vx_core::Class_notempty_1();
+      vx_core::vx_reserve_type(vx_core::t_notempty_1);
+      vx_core::e_eq = new vx_core::Class_eq();
+      vx_core::vx_reserve_empty(vx_core::e_eq);
+      vx_core::t_eq = new vx_core::Class_eq();
+      vx_core::vx_reserve_type(vx_core::t_eq);
+      vx_core::e_eq_1 = new vx_core::Class_eq_1();
+      vx_core::vx_reserve_empty(vx_core::e_eq_1);
+      vx_core::t_eq_1 = new vx_core::Class_eq_1();
+      vx_core::vx_reserve_type(vx_core::t_eq_1);
+      vx_core::e_ne = new vx_core::Class_ne();
+      vx_core::vx_reserve_empty(vx_core::e_ne);
+      vx_core::t_ne = new vx_core::Class_ne();
+      vx_core::vx_reserve_type(vx_core::t_ne);
+      vx_core::e_then = new vx_core::Class_then();
+      vx_core::vx_reserve_empty(vx_core::e_then);
+      vx_core::t_then = new vx_core::Class_then();
+      vx_core::vx_reserve_type(vx_core::t_then);
+      vx_core::e_else = new vx_core::Class_else();
+      vx_core::vx_reserve_empty(vx_core::e_else);
+      vx_core::t_else = new vx_core::Class_else();
+      vx_core::vx_reserve_type(vx_core::t_else);
+      vx_core::e_if = new vx_core::Class_if();
+      vx_core::vx_reserve_empty(vx_core::e_if);
+      vx_core::t_if = new vx_core::Class_if();
+      vx_core::vx_reserve_type(vx_core::t_if);
+      vx_core::e_if_1 = new vx_core::Class_if_1();
+      vx_core::vx_reserve_empty(vx_core::e_if_1);
+      vx_core::t_if_1 = new vx_core::Class_if_1();
+      vx_core::vx_reserve_type(vx_core::t_if_1);
+      vx_core::e_if_2 = new vx_core::Class_if_2();
+      vx_core::vx_reserve_empty(vx_core::e_if_2);
+      vx_core::t_if_2 = new vx_core::Class_if_2();
+      vx_core::vx_reserve_type(vx_core::t_if_2);
+      vx_core::e_case = new vx_core::Class_case();
+      vx_core::vx_reserve_empty(vx_core::e_case);
+      vx_core::t_case = new vx_core::Class_case();
+      vx_core::vx_reserve_type(vx_core::t_case);
+      vx_core::e_case_1 = new vx_core::Class_case_1();
+      vx_core::vx_reserve_empty(vx_core::e_case_1);
+      vx_core::t_case_1 = new vx_core::Class_case_1();
+      vx_core::vx_reserve_type(vx_core::t_case_1);
+      vx_core::e_switch = new vx_core::Class_switch();
+      vx_core::vx_reserve_empty(vx_core::e_switch);
+      vx_core::t_switch = new vx_core::Class_switch();
+      vx_core::vx_reserve_type(vx_core::t_switch);
+      vx_core::e_length_from_list = new vx_core::Class_length_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_length_from_list);
+      vx_core::t_length_from_list = new vx_core::Class_length_from_list();
+      vx_core::vx_reserve_type(vx_core::t_length_from_list);
+      vx_core::e_and = new vx_core::Class_and();
+      vx_core::vx_reserve_empty(vx_core::e_and);
+      vx_core::t_and = new vx_core::Class_and();
+      vx_core::vx_reserve_type(vx_core::t_and);
+      vx_core::e_and_1 = new vx_core::Class_and_1();
+      vx_core::vx_reserve_empty(vx_core::e_and_1);
+      vx_core::t_and_1 = new vx_core::Class_and_1();
+      vx_core::vx_reserve_type(vx_core::t_and_1);
+      vx_core::e_or = new vx_core::Class_or();
+      vx_core::vx_reserve_empty(vx_core::e_or);
+      vx_core::t_or = new vx_core::Class_or();
+      vx_core::vx_reserve_type(vx_core::t_or);
+      vx_core::e_or_1 = new vx_core::Class_or_1();
+      vx_core::vx_reserve_empty(vx_core::e_or_1);
+      vx_core::t_or_1 = new vx_core::Class_or_1();
+      vx_core::vx_reserve_type(vx_core::t_or_1);
+      vx_core::e_let = new vx_core::Class_let();
+      vx_core::vx_reserve_empty(vx_core::e_let);
+      vx_core::t_let = new vx_core::Class_let();
+      vx_core::vx_reserve_type(vx_core::t_let);
+      vx_core::e_let_async = new vx_core::Class_let_async();
+      vx_core::vx_reserve_empty(vx_core::e_let_async);
+      vx_core::t_let_async = new vx_core::Class_let_async();
+      vx_core::vx_reserve_type(vx_core::t_let_async);
+      vx_core::e_multiply = new vx_core::Class_multiply();
+      vx_core::vx_reserve_empty(vx_core::e_multiply);
+      vx_core::t_multiply = new vx_core::Class_multiply();
+      vx_core::vx_reserve_type(vx_core::t_multiply);
+      vx_core::e_multiply_1 = new vx_core::Class_multiply_1();
+      vx_core::vx_reserve_empty(vx_core::e_multiply_1);
+      vx_core::t_multiply_1 = new vx_core::Class_multiply_1();
+      vx_core::vx_reserve_type(vx_core::t_multiply_1);
+      vx_core::e_multiply_2 = new vx_core::Class_multiply_2();
+      vx_core::vx_reserve_empty(vx_core::e_multiply_2);
+      vx_core::t_multiply_2 = new vx_core::Class_multiply_2();
+      vx_core::vx_reserve_type(vx_core::t_multiply_2);
+      vx_core::e_multiply_3 = new vx_core::Class_multiply_3();
+      vx_core::vx_reserve_empty(vx_core::e_multiply_3);
+      vx_core::t_multiply_3 = new vx_core::Class_multiply_3();
+      vx_core::vx_reserve_type(vx_core::t_multiply_3);
+      vx_core::e_plus = new vx_core::Class_plus();
+      vx_core::vx_reserve_empty(vx_core::e_plus);
+      vx_core::t_plus = new vx_core::Class_plus();
+      vx_core::vx_reserve_type(vx_core::t_plus);
+      vx_core::e_plus_1 = new vx_core::Class_plus_1();
+      vx_core::vx_reserve_empty(vx_core::e_plus_1);
+      vx_core::t_plus_1 = new vx_core::Class_plus_1();
+      vx_core::vx_reserve_type(vx_core::t_plus_1);
+      vx_core::e_plus_2 = new vx_core::Class_plus_2();
+      vx_core::vx_reserve_empty(vx_core::e_plus_2);
+      vx_core::t_plus_2 = new vx_core::Class_plus_2();
+      vx_core::vx_reserve_type(vx_core::t_plus_2);
+      vx_core::e_plus_3 = new vx_core::Class_plus_3();
+      vx_core::vx_reserve_empty(vx_core::e_plus_3);
+      vx_core::t_plus_3 = new vx_core::Class_plus_3();
+      vx_core::vx_reserve_type(vx_core::t_plus_3);
+      vx_core::e_plus1 = new vx_core::Class_plus1();
+      vx_core::vx_reserve_empty(vx_core::e_plus1);
+      vx_core::t_plus1 = new vx_core::Class_plus1();
+      vx_core::vx_reserve_type(vx_core::t_plus1);
+      vx_core::e_minus = new vx_core::Class_minus();
+      vx_core::vx_reserve_empty(vx_core::e_minus);
+      vx_core::t_minus = new vx_core::Class_minus();
+      vx_core::vx_reserve_type(vx_core::t_minus);
+      vx_core::e_minus_1 = new vx_core::Class_minus_1();
+      vx_core::vx_reserve_empty(vx_core::e_minus_1);
+      vx_core::t_minus_1 = new vx_core::Class_minus_1();
+      vx_core::vx_reserve_type(vx_core::t_minus_1);
+      vx_core::e_minus_2 = new vx_core::Class_minus_2();
+      vx_core::vx_reserve_empty(vx_core::e_minus_2);
+      vx_core::t_minus_2 = new vx_core::Class_minus_2();
+      vx_core::vx_reserve_type(vx_core::t_minus_2);
+      vx_core::e_minus_3 = new vx_core::Class_minus_3();
+      vx_core::vx_reserve_empty(vx_core::e_minus_3);
+      vx_core::t_minus_3 = new vx_core::Class_minus_3();
+      vx_core::vx_reserve_type(vx_core::t_minus_3);
+      vx_core::e_dotmethod = new vx_core::Class_dotmethod();
+      vx_core::vx_reserve_empty(vx_core::e_dotmethod);
+      vx_core::t_dotmethod = new vx_core::Class_dotmethod();
+      vx_core::vx_reserve_type(vx_core::t_dotmethod);
+      vx_core::e_divide = new vx_core::Class_divide();
+      vx_core::vx_reserve_empty(vx_core::e_divide);
+      vx_core::t_divide = new vx_core::Class_divide();
+      vx_core::vx_reserve_type(vx_core::t_divide);
+      vx_core::e_lt = new vx_core::Class_lt();
+      vx_core::vx_reserve_empty(vx_core::e_lt);
+      vx_core::t_lt = new vx_core::Class_lt();
+      vx_core::vx_reserve_type(vx_core::t_lt);
+      vx_core::e_lt_1 = new vx_core::Class_lt_1();
+      vx_core::vx_reserve_empty(vx_core::e_lt_1);
+      vx_core::t_lt_1 = new vx_core::Class_lt_1();
+      vx_core::vx_reserve_type(vx_core::t_lt_1);
+      vx_core::e_chainfirst = new vx_core::Class_chainfirst();
+      vx_core::vx_reserve_empty(vx_core::e_chainfirst);
+      vx_core::t_chainfirst = new vx_core::Class_chainfirst();
+      vx_core::vx_reserve_type(vx_core::t_chainfirst);
+      vx_core::e_chainlast = new vx_core::Class_chainlast();
+      vx_core::vx_reserve_empty(vx_core::e_chainlast);
+      vx_core::t_chainlast = new vx_core::Class_chainlast();
+      vx_core::vx_reserve_type(vx_core::t_chainlast);
+      vx_core::e_le = new vx_core::Class_le();
+      vx_core::vx_reserve_empty(vx_core::e_le);
+      vx_core::t_le = new vx_core::Class_le();
+      vx_core::vx_reserve_type(vx_core::t_le);
+      vx_core::e_le_1 = new vx_core::Class_le_1();
+      vx_core::vx_reserve_empty(vx_core::e_le_1);
+      vx_core::t_le_1 = new vx_core::Class_le_1();
+      vx_core::vx_reserve_type(vx_core::t_le_1);
+      vx_core::e_gt = new vx_core::Class_gt();
+      vx_core::vx_reserve_empty(vx_core::e_gt);
+      vx_core::t_gt = new vx_core::Class_gt();
+      vx_core::vx_reserve_type(vx_core::t_gt);
+      vx_core::e_gt_1 = new vx_core::Class_gt_1();
+      vx_core::vx_reserve_empty(vx_core::e_gt_1);
+      vx_core::t_gt_1 = new vx_core::Class_gt_1();
+      vx_core::vx_reserve_type(vx_core::t_gt_1);
+      vx_core::e_ge = new vx_core::Class_ge();
+      vx_core::vx_reserve_empty(vx_core::e_ge);
+      vx_core::t_ge = new vx_core::Class_ge();
+      vx_core::vx_reserve_type(vx_core::t_ge);
+      vx_core::e_ge_1 = new vx_core::Class_ge_1();
+      vx_core::vx_reserve_empty(vx_core::e_ge_1);
+      vx_core::t_ge_1 = new vx_core::Class_ge_1();
+      vx_core::vx_reserve_type(vx_core::t_ge_1);
+      vx_core::e_allowtypenames_from_typedef = new vx_core::Class_allowtypenames_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_allowtypenames_from_typedef);
+      vx_core::t_allowtypenames_from_typedef = new vx_core::Class_allowtypenames_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_allowtypenames_from_typedef);
+      vx_core::e_allowtypes_from_typedef = new vx_core::Class_allowtypes_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_allowtypes_from_typedef);
+      vx_core::t_allowtypes_from_typedef = new vx_core::Class_allowtypes_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_allowtypes_from_typedef);
+      vx_core::e_compare = new vx_core::Class_compare();
+      vx_core::vx_reserve_empty(vx_core::e_compare);
+      vx_core::t_compare = new vx_core::Class_compare();
+      vx_core::vx_reserve_type(vx_core::t_compare);
+      vx_core::e_contains = new vx_core::Class_contains();
+      vx_core::vx_reserve_empty(vx_core::e_contains);
+      vx_core::t_contains = new vx_core::Class_contains();
+      vx_core::vx_reserve_type(vx_core::t_contains);
+      vx_core::e_contains_1 = new vx_core::Class_contains_1();
+      vx_core::vx_reserve_empty(vx_core::e_contains_1);
+      vx_core::t_contains_1 = new vx_core::Class_contains_1();
+      vx_core::vx_reserve_type(vx_core::t_contains_1);
+      vx_core::e_extends_from_any = new vx_core::Class_extends_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_extends_from_any);
+      vx_core::t_extends_from_any = new vx_core::Class_extends_from_any();
+      vx_core::vx_reserve_type(vx_core::t_extends_from_any);
+      vx_core::e_extends_from_typedef = new vx_core::Class_extends_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_extends_from_typedef);
+      vx_core::t_extends_from_typedef = new vx_core::Class_extends_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_extends_from_typedef);
+      vx_core::e_first_from_list = new vx_core::Class_first_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_first_from_list);
+      vx_core::t_first_from_list = new vx_core::Class_first_from_list();
+      vx_core::vx_reserve_type(vx_core::t_first_from_list);
+      vx_core::e_first_from_list_fn_any_from_any = new vx_core::Class_first_from_list_fn_any_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_first_from_list_fn_any_from_any);
+      vx_core::t_first_from_list_fn_any_from_any = new vx_core::Class_first_from_list_fn_any_from_any();
+      vx_core::vx_reserve_type(vx_core::t_first_from_list_fn_any_from_any);
+      vx_core::e_fn = new vx_core::Class_fn();
+      vx_core::vx_reserve_empty(vx_core::e_fn);
+      vx_core::t_fn = new vx_core::Class_fn();
+      vx_core::vx_reserve_type(vx_core::t_fn);
+      vx_core::e_funcdef_from_func = new vx_core::Class_funcdef_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_funcdef_from_func);
+      vx_core::t_funcdef_from_func = new vx_core::Class_funcdef_from_func();
+      vx_core::vx_reserve_type(vx_core::t_funcdef_from_func);
+      vx_core::e_funcname_from_funcdef = new vx_core::Class_funcname_from_funcdef();
+      vx_core::vx_reserve_empty(vx_core::e_funcname_from_funcdef);
+      vx_core::t_funcname_from_funcdef = new vx_core::Class_funcname_from_funcdef();
+      vx_core::vx_reserve_type(vx_core::t_funcname_from_funcdef);
+      vx_core::e_global_package_get = new vx_core::Class_global_package_get();
+      vx_core::vx_reserve_empty(vx_core::e_global_package_get);
+      vx_core::t_global_package_get = new vx_core::Class_global_package_get();
+      vx_core::vx_reserve_type(vx_core::t_global_package_get);
+      vx_core::e_global_package_set = new vx_core::Class_global_package_set();
+      vx_core::vx_reserve_empty(vx_core::e_global_package_set);
+      vx_core::t_global_package_set = new vx_core::Class_global_package_set();
+      vx_core::vx_reserve_type(vx_core::t_global_package_set);
+      vx_core::e_int_from_func = new vx_core::Class_int_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_int_from_func);
+      vx_core::t_int_from_func = new vx_core::Class_int_from_func();
+      vx_core::vx_reserve_type(vx_core::t_int_from_func);
+      vx_core::e_int_from_string = new vx_core::Class_int_from_string();
+      vx_core::vx_reserve_empty(vx_core::e_int_from_string);
+      vx_core::t_int_from_string = new vx_core::Class_int_from_string();
+      vx_core::vx_reserve_type(vx_core::t_int_from_string);
+      vx_core::e_is_endswith = new vx_core::Class_is_endswith();
+      vx_core::vx_reserve_empty(vx_core::e_is_endswith);
+      vx_core::t_is_endswith = new vx_core::Class_is_endswith();
+      vx_core::vx_reserve_type(vx_core::t_is_endswith);
+      vx_core::e_is_func = new vx_core::Class_is_func();
+      vx_core::vx_reserve_empty(vx_core::e_is_func);
+      vx_core::t_is_func = new vx_core::Class_is_func();
+      vx_core::vx_reserve_type(vx_core::t_is_func);
+      vx_core::e_is_int = new vx_core::Class_is_int();
+      vx_core::vx_reserve_empty(vx_core::e_is_int);
+      vx_core::t_is_int = new vx_core::Class_is_int();
+      vx_core::vx_reserve_type(vx_core::t_is_int);
+      vx_core::e_is_number = new vx_core::Class_is_number();
+      vx_core::vx_reserve_empty(vx_core::e_is_number);
+      vx_core::t_is_number = new vx_core::Class_is_number();
+      vx_core::vx_reserve_type(vx_core::t_is_number);
+      vx_core::e_is_pass_from_permission = new vx_core::Class_is_pass_from_permission();
+      vx_core::vx_reserve_empty(vx_core::e_is_pass_from_permission);
+      vx_core::t_is_pass_from_permission = new vx_core::Class_is_pass_from_permission();
+      vx_core::vx_reserve_type(vx_core::t_is_pass_from_permission);
+      vx_core::e_last_from_list = new vx_core::Class_last_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_last_from_list);
+      vx_core::t_last_from_list = new vx_core::Class_last_from_list();
+      vx_core::vx_reserve_type(vx_core::t_last_from_list);
+      vx_core::e_list_join_from_list = new vx_core::Class_list_join_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_list_join_from_list);
+      vx_core::t_list_join_from_list = new vx_core::Class_list_join_from_list();
+      vx_core::vx_reserve_type(vx_core::t_list_join_from_list);
+      vx_core::e_list_from_list = new vx_core::Class_list_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_list);
+      vx_core::t_list_from_list = new vx_core::Class_list_from_list();
+      vx_core::vx_reserve_type(vx_core::t_list_from_list);
+      vx_core::e_list_from_list_async = new vx_core::Class_list_from_list_async();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_list_async);
+      vx_core::t_list_from_list_async = new vx_core::Class_list_from_list_async();
+      vx_core::vx_reserve_type(vx_core::t_list_from_list_async);
+      vx_core::e_list_from_map = new vx_core::Class_list_from_map();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_map);
+      vx_core::t_list_from_map = new vx_core::Class_list_from_map();
+      vx_core::vx_reserve_type(vx_core::t_list_from_map);
+      vx_core::e_list_from_map_async = new vx_core::Class_list_from_map_async();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_map_async);
+      vx_core::t_list_from_map_async = new vx_core::Class_list_from_map_async();
+      vx_core::vx_reserve_type(vx_core::t_list_from_map_async);
+      vx_core::e_list_from_type = new vx_core::Class_list_from_type();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_type);
+      vx_core::t_list_from_type = new vx_core::Class_list_from_type();
+      vx_core::vx_reserve_type(vx_core::t_list_from_type);
+      vx_core::e_log = new vx_core::Class_log();
+      vx_core::vx_reserve_empty(vx_core::e_log);
+      vx_core::t_log = new vx_core::Class_log();
+      vx_core::vx_reserve_type(vx_core::t_log);
+      vx_core::e_map_from_list = new vx_core::Class_map_from_list();
+      vx_core::vx_reserve_empty(vx_core::e_map_from_list);
+      vx_core::t_map_from_list = new vx_core::Class_map_from_list();
+      vx_core::vx_reserve_type(vx_core::t_map_from_list);
+      vx_core::e_mempool_addref = new vx_core::Class_mempool_addref();
+      vx_core::vx_reserve_empty(vx_core::e_mempool_addref);
+      vx_core::t_mempool_addref = new vx_core::Class_mempool_addref();
+      vx_core::vx_reserve_type(vx_core::t_mempool_addref);
+      vx_core::e_mempool_release = new vx_core::Class_mempool_release();
+      vx_core::vx_reserve_empty(vx_core::e_mempool_release);
+      vx_core::t_mempool_release = new vx_core::Class_mempool_release();
+      vx_core::vx_reserve_type(vx_core::t_mempool_release);
+      vx_core::e_mempool_removeref = new vx_core::Class_mempool_removeref();
+      vx_core::vx_reserve_empty(vx_core::e_mempool_removeref);
+      vx_core::t_mempool_removeref = new vx_core::Class_mempool_removeref();
+      vx_core::vx_reserve_type(vx_core::t_mempool_removeref);
+      vx_core::e_mempool_removerefchildren = new vx_core::Class_mempool_removerefchildren();
+      vx_core::vx_reserve_empty(vx_core::e_mempool_removerefchildren);
+      vx_core::t_mempool_removerefchildren = new vx_core::Class_mempool_removerefchildren();
+      vx_core::vx_reserve_type(vx_core::t_mempool_removerefchildren);
+      vx_core::e_mempool_reserve = new vx_core::Class_mempool_reserve();
+      vx_core::vx_reserve_empty(vx_core::e_mempool_reserve);
+      vx_core::t_mempool_reserve = new vx_core::Class_mempool_reserve();
+      vx_core::vx_reserve_type(vx_core::t_mempool_reserve);
+      vx_core::e_msg_from_error = new vx_core::Class_msg_from_error();
+      vx_core::vx_reserve_empty(vx_core::e_msg_from_error);
+      vx_core::t_msg_from_error = new vx_core::Class_msg_from_error();
+      vx_core::vx_reserve_type(vx_core::t_msg_from_error);
+      vx_core::e_msgblock_from_msgblock_msg = new vx_core::Class_msgblock_from_msgblock_msg();
+      vx_core::vx_reserve_empty(vx_core::e_msgblock_from_msgblock_msg);
+      vx_core::t_msgblock_from_msgblock_msg = new vx_core::Class_msgblock_from_msgblock_msg();
+      vx_core::vx_reserve_type(vx_core::t_msgblock_from_msgblock_msg);
+      vx_core::e_msgblock_from_msgblock_msgblock = new vx_core::Class_msgblock_from_msgblock_msgblock();
+      vx_core::vx_reserve_empty(vx_core::e_msgblock_from_msgblock_msgblock);
+      vx_core::t_msgblock_from_msgblock_msgblock = new vx_core::Class_msgblock_from_msgblock_msgblock();
+      vx_core::vx_reserve_type(vx_core::t_msgblock_from_msgblock_msgblock);
+      vx_core::e_name_from_typedef = new vx_core::Class_name_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_name_from_typedef);
+      vx_core::t_name_from_typedef = new vx_core::Class_name_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_name_from_typedef);
+      vx_core::e_native = new vx_core::Class_native();
+      vx_core::vx_reserve_empty(vx_core::e_native);
+      vx_core::t_native = new vx_core::Class_native();
+      vx_core::vx_reserve_type(vx_core::t_native);
+      vx_core::e_native_from_any = new vx_core::Class_native_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_native_from_any);
+      vx_core::t_native_from_any = new vx_core::Class_native_from_any();
+      vx_core::vx_reserve_type(vx_core::t_native_from_any);
+      vx_core::e_number_from_func = new vx_core::Class_number_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_number_from_func);
+      vx_core::t_number_from_func = new vx_core::Class_number_from_func();
+      vx_core::vx_reserve_type(vx_core::t_number_from_func);
+      vx_core::e_packagename_from_typedef = new vx_core::Class_packagename_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_packagename_from_typedef);
+      vx_core::t_packagename_from_typedef = new vx_core::Class_packagename_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_packagename_from_typedef);
+      vx_core::e_path_from_context_path = new vx_core::Class_path_from_context_path();
+      vx_core::vx_reserve_empty(vx_core::e_path_from_context_path);
+      vx_core::t_path_from_context_path = new vx_core::Class_path_from_context_path();
+      vx_core::vx_reserve_type(vx_core::t_path_from_context_path);
+      vx_core::e_path_from_setting_path = new vx_core::Class_path_from_setting_path();
+      vx_core::vx_reserve_empty(vx_core::e_path_from_setting_path);
+      vx_core::t_path_from_setting_path = new vx_core::Class_path_from_setting_path();
+      vx_core::vx_reserve_type(vx_core::t_path_from_setting_path);
+      vx_core::e_permission_from_id_context = new vx_core::Class_permission_from_id_context();
+      vx_core::vx_reserve_empty(vx_core::e_permission_from_id_context);
+      vx_core::t_permission_from_id_context = new vx_core::Class_permission_from_id_context();
+      vx_core::vx_reserve_type(vx_core::t_permission_from_id_context);
+      vx_core::e_properties_from_typedef = new vx_core::Class_properties_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_properties_from_typedef);
+      vx_core::t_properties_from_typedef = new vx_core::Class_properties_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_properties_from_typedef);
+      vx_core::e_proplast_from_typedef = new vx_core::Class_proplast_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_proplast_from_typedef);
+      vx_core::t_proplast_from_typedef = new vx_core::Class_proplast_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_proplast_from_typedef);
+      vx_core::e_resolve = new vx_core::Class_resolve();
+      vx_core::vx_reserve_empty(vx_core::e_resolve);
+      vx_core::t_resolve = new vx_core::Class_resolve();
+      vx_core::vx_reserve_type(vx_core::t_resolve);
+      vx_core::e_resolve_1 = new vx_core::Class_resolve_1();
+      vx_core::vx_reserve_empty(vx_core::e_resolve_1);
+      vx_core::t_resolve_1 = new vx_core::Class_resolve_1();
+      vx_core::vx_reserve_type(vx_core::t_resolve_1);
+      vx_core::e_resolve_async = new vx_core::Class_resolve_async();
+      vx_core::vx_reserve_empty(vx_core::e_resolve_async);
+      vx_core::t_resolve_async = new vx_core::Class_resolve_async();
+      vx_core::vx_reserve_type(vx_core::t_resolve_async);
+      vx_core::e_resolve_first = new vx_core::Class_resolve_first();
+      vx_core::vx_reserve_empty(vx_core::e_resolve_first);
+      vx_core::t_resolve_first = new vx_core::Class_resolve_first();
+      vx_core::vx_reserve_type(vx_core::t_resolve_first);
+      vx_core::e_resolve_list = new vx_core::Class_resolve_list();
+      vx_core::vx_reserve_empty(vx_core::e_resolve_list);
+      vx_core::t_resolve_list = new vx_core::Class_resolve_list();
+      vx_core::vx_reserve_type(vx_core::t_resolve_list);
+      vx_core::e_session_from_context = new vx_core::Class_session_from_context();
+      vx_core::vx_reserve_empty(vx_core::e_session_from_context);
+      vx_core::t_session_from_context = new vx_core::Class_session_from_context();
+      vx_core::vx_reserve_type(vx_core::t_session_from_context);
+      vx_core::e_setting_from_context = new vx_core::Class_setting_from_context();
+      vx_core::vx_reserve_empty(vx_core::e_setting_from_context);
+      vx_core::t_setting_from_context = new vx_core::Class_setting_from_context();
+      vx_core::vx_reserve_type(vx_core::t_setting_from_context);
+      vx_core::e_string_repeat = new vx_core::Class_string_repeat();
+      vx_core::vx_reserve_empty(vx_core::e_string_repeat);
+      vx_core::t_string_repeat = new vx_core::Class_string_repeat();
+      vx_core::vx_reserve_type(vx_core::t_string_repeat);
+      vx_core::e_string_from_any = new vx_core::Class_string_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_string_from_any);
+      vx_core::t_string_from_any = new vx_core::Class_string_from_any();
+      vx_core::vx_reserve_type(vx_core::t_string_from_any);
+      vx_core::e_string_from_any_indent = new vx_core::Class_string_from_any_indent();
+      vx_core::vx_reserve_empty(vx_core::e_string_from_any_indent);
+      vx_core::t_string_from_any_indent = new vx_core::Class_string_from_any_indent();
+      vx_core::vx_reserve_type(vx_core::t_string_from_any_indent);
+      vx_core::e_string_from_func = new vx_core::Class_string_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_string_from_func);
+      vx_core::t_string_from_func = new vx_core::Class_string_from_func();
+      vx_core::vx_reserve_type(vx_core::t_string_from_func);
+      vx_core::e_traits_from_typedef = new vx_core::Class_traits_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_traits_from_typedef);
+      vx_core::t_traits_from_typedef = new vx_core::Class_traits_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_traits_from_typedef);
+      vx_core::e_type_from_any = new vx_core::Class_type_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_type_from_any);
+      vx_core::t_type_from_any = new vx_core::Class_type_from_any();
+      vx_core::vx_reserve_type(vx_core::t_type_from_any);
+      vx_core::e_typedef_from_any = new vx_core::Class_typedef_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_typedef_from_any);
+      vx_core::t_typedef_from_any = new vx_core::Class_typedef_from_any();
+      vx_core::vx_reserve_type(vx_core::t_typedef_from_any);
+      vx_core::e_typedef_from_type = new vx_core::Class_typedef_from_type();
+      vx_core::vx_reserve_empty(vx_core::e_typedef_from_type);
+      vx_core::t_typedef_from_type = new vx_core::Class_typedef_from_type();
+      vx_core::vx_reserve_type(vx_core::t_typedef_from_type);
+      vx_core::e_typename_from_any = new vx_core::Class_typename_from_any();
+      vx_core::vx_reserve_empty(vx_core::e_typename_from_any);
+      vx_core::t_typename_from_any = new vx_core::Class_typename_from_any();
+      vx_core::vx_reserve_type(vx_core::t_typename_from_any);
+      vx_core::e_typename_from_type = new vx_core::Class_typename_from_type();
+      vx_core::vx_reserve_empty(vx_core::e_typename_from_type);
+      vx_core::t_typename_from_type = new vx_core::Class_typename_from_type();
+      vx_core::vx_reserve_type(vx_core::t_typename_from_type);
+      vx_core::e_typename_from_typedef = new vx_core::Class_typename_from_typedef();
+      vx_core::vx_reserve_empty(vx_core::e_typename_from_typedef);
+      vx_core::t_typename_from_typedef = new vx_core::Class_typename_from_typedef();
+      vx_core::vx_reserve_type(vx_core::t_typename_from_typedef);
+      vx_core::e_typenames_from_typelist = new vx_core::Class_typenames_from_typelist();
+      vx_core::vx_reserve_empty(vx_core::e_typenames_from_typelist);
+      vx_core::t_typenames_from_typelist = new vx_core::Class_typenames_from_typelist();
+      vx_core::vx_reserve_type(vx_core::t_typenames_from_typelist);
+      vx_core::e_user_from_context = new vx_core::Class_user_from_context();
+      vx_core::vx_reserve_empty(vx_core::e_user_from_context);
+      vx_core::t_user_from_context = new vx_core::Class_user_from_context();
+      vx_core::vx_reserve_type(vx_core::t_user_from_context);
     }
-    return output;
-  }
-
-  // (const infinity)
-  vx_core::Const_infinity c_infinity() {
-    vx_core::Const_infinity output = vx_core::vx_package->c_infinity;
-    if (output == NULL) {
-      output = vx_core::Class_infinity::vx_const_new();
-      vx_core::vx_package->c_infinity = output;
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
     }
-    return output;
-  }
-
-  // (const mempool-active)
-  vx_core::Const_mempool_active c_mempool_active() {
-    vx_core::Const_mempool_active output = vx_core::vx_package->c_mempool_active;
-    if (output == NULL) {
-      output = vx_core::Class_mempool_active::vx_const_new();
-      vx_core::vx_package->c_mempool_active = output;
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
     }
-    return output;
-  }
-
-  // (const msg-error)
-  vx_core::Const_msg_error c_msg_error() {
-    vx_core::Const_msg_error output = vx_core::vx_package->c_msg_error;
-    if (output == NULL) {
-      output = vx_core::Class_msg_error::vx_const_new();
-      vx_core::vx_package->c_msg_error = output;
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
     }
-    return output;
-  }
-
-  // (const msg-info)
-  vx_core::Const_msg_info c_msg_info() {
-    vx_core::Const_msg_info output = vx_core::vx_package->c_msg_info;
-    if (output == NULL) {
-      output = vx_core::Class_msg_info::vx_const_new();
-      vx_core::vx_package->c_msg_info = output;
-    }
-    return output;
-  }
-
-  // (const msg-severe)
-  vx_core::Const_msg_severe c_msg_severe() {
-    vx_core::Const_msg_severe output = vx_core::vx_package->c_msg_severe;
-    if (output == NULL) {
-      output = vx_core::Class_msg_severe::vx_const_new();
-      vx_core::vx_package->c_msg_severe = output;
-    }
-    return output;
-  }
-
-  // (const msg-warning)
-  vx_core::Const_msg_warning c_msg_warning() {
-    vx_core::Const_msg_warning output = vx_core::vx_package->c_msg_warning;
-    if (output == NULL) {
-      output = vx_core::Class_msg_warning::vx_const_new();
-      vx_core::vx_package->c_msg_warning = output;
-    }
-    return output;
-  }
-
-  // (const neginfinity)
-  vx_core::Const_neginfinity c_neginfinity() {
-    vx_core::Const_neginfinity output = vx_core::vx_package->c_neginfinity;
-    if (output == NULL) {
-      output = vx_core::Class_neginfinity::vx_const_new();
-      vx_core::vx_package->c_neginfinity = output;
-    }
-    return output;
-  }
-
-  // (const newline)
-  vx_core::Const_newline c_newline() {
-    vx_core::Const_newline output = vx_core::vx_package->c_newline;
-    if (output == NULL) {
-      output = vx_core::Class_newline::vx_const_new();
-      vx_core::vx_package->c_newline = output;
-    }
-    return output;
-  }
-
-  // (const notanumber)
-  vx_core::Const_notanumber c_notanumber() {
-    vx_core::Const_notanumber output = vx_core::vx_package->c_notanumber;
-    if (output == NULL) {
-      output = vx_core::Class_notanumber::vx_const_new();
-      vx_core::vx_package->c_notanumber = output;
-    }
-    return output;
-  }
-
-  // (const nothing)
-  vx_core::Const_nothing c_nothing() {
-    vx_core::Const_nothing output = vx_core::vx_package->c_nothing;
-    if (output == NULL) {
-      output = vx_core::Class_nothing::vx_const_new();
-      vx_core::vx_package->c_nothing = output;
-    }
-    return output;
-  }
-
-  // (const quote)
-  vx_core::Const_quote c_quote() {
-    vx_core::Const_quote output = vx_core::vx_package->c_quote;
-    if (output == NULL) {
-      output = vx_core::Class_quote::vx_const_new();
-      vx_core::vx_package->c_quote = output;
-    }
-    return output;
-  }
-
-  // (const true)
-  vx_core::Const_true c_true() {
-    vx_core::Const_true output = vx_core::vx_package->c_true;
-    if (output == NULL) {
-      output = vx_core::Class_true::vx_const_new();
-      vx_core::vx_package->c_true = output;
-    }
-    return output;
-  }
-
-  // (func any<-any)
-  vx_core::Func_any_from_any vx_e_any_from_any() {
-    vx_core::Func_any_from_any output = new vx_core::Class_any_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_any vx_t_any_from_any() {
-    vx_core::Func_any_from_any output = new vx_core::Class_any_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_any e_any_from_any = vx_e_any_from_any();
-  vx_core::Func_any_from_any t_any_from_any = vx_t_any_from_any();
-
-  // (func any<-any-async)
-  vx_core::Func_any_from_any_async vx_e_any_from_any_async() {
-    vx_core::Func_any_from_any_async output = new vx_core::Class_any_from_any_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_async vx_t_any_from_any_async() {
-    vx_core::Func_any_from_any_async output = new vx_core::Class_any_from_any_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_async e_any_from_any_async = vx_e_any_from_any_async();
-  vx_core::Func_any_from_any_async t_any_from_any_async = vx_t_any_from_any_async();
-
-  // (func any<-any-context)
-  vx_core::Func_any_from_any_context vx_e_any_from_any_context() {
-    vx_core::Func_any_from_any_context output = new vx_core::Class_any_from_any_context();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_context vx_t_any_from_any_context() {
-    vx_core::Func_any_from_any_context output = new vx_core::Class_any_from_any_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_context e_any_from_any_context = vx_e_any_from_any_context();
-  vx_core::Func_any_from_any_context t_any_from_any_context = vx_t_any_from_any_context();
-
-  // (func any<-any-context-async)
-  vx_core::Func_any_from_any_context_async vx_e_any_from_any_context_async() {
-    vx_core::Func_any_from_any_context_async output = new vx_core::Class_any_from_any_context_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_context_async vx_t_any_from_any_context_async() {
-    vx_core::Func_any_from_any_context_async output = new vx_core::Class_any_from_any_context_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_any_context_async e_any_from_any_context_async = vx_e_any_from_any_context_async();
-  vx_core::Func_any_from_any_context_async t_any_from_any_context_async = vx_t_any_from_any_context_async();
-
-  // (func any<-func)
-  vx_core::Func_any_from_func vx_e_any_from_func() {
-    vx_core::Func_any_from_func output = new vx_core::Class_any_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_func vx_t_any_from_func() {
-    vx_core::Func_any_from_func output = new vx_core::Class_any_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_func e_any_from_func = vx_e_any_from_func();
-  vx_core::Func_any_from_func t_any_from_func = vx_t_any_from_func();
-
-  // (func any<-func-async)
-  vx_core::Func_any_from_func_async vx_e_any_from_func_async() {
-    vx_core::Func_any_from_func_async output = new vx_core::Class_any_from_func_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_func_async vx_t_any_from_func_async() {
-    vx_core::Func_any_from_func_async output = new vx_core::Class_any_from_func_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_func_async e_any_from_func_async = vx_e_any_from_func_async();
-  vx_core::Func_any_from_func_async t_any_from_func_async = vx_t_any_from_func_async();
-
-  // (func any<-key-value)
-  vx_core::Func_any_from_key_value vx_e_any_from_key_value() {
-    vx_core::Func_any_from_key_value output = new vx_core::Class_any_from_key_value();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_key_value vx_t_any_from_key_value() {
-    vx_core::Func_any_from_key_value output = new vx_core::Class_any_from_key_value();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_key_value e_any_from_key_value = vx_e_any_from_key_value();
-  vx_core::Func_any_from_key_value t_any_from_key_value = vx_t_any_from_key_value();
-
-  // (func any<-key-value-async)
-  vx_core::Func_any_from_key_value_async vx_e_any_from_key_value_async() {
-    vx_core::Func_any_from_key_value_async output = new vx_core::Class_any_from_key_value_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_key_value_async vx_t_any_from_key_value_async() {
-    vx_core::Func_any_from_key_value_async output = new vx_core::Class_any_from_key_value_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_key_value_async e_any_from_key_value_async = vx_e_any_from_key_value_async();
-  vx_core::Func_any_from_key_value_async t_any_from_key_value_async = vx_t_any_from_key_value_async();
-
-  // (func any<-list)
-  vx_core::Func_any_from_list vx_e_any_from_list() {
-    vx_core::Func_any_from_list output = new vx_core::Class_any_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_list vx_t_any_from_list() {
-    vx_core::Func_any_from_list output = new vx_core::Class_any_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_list e_any_from_list = vx_e_any_from_list();
-  vx_core::Func_any_from_list t_any_from_list = vx_t_any_from_list();
-
-  // (func any<-list-reduce)
-  vx_core::Func_any_from_list_reduce vx_e_any_from_list_reduce() {
-    vx_core::Func_any_from_list_reduce output = new vx_core::Class_any_from_list_reduce();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_list_reduce vx_t_any_from_list_reduce() {
-    vx_core::Func_any_from_list_reduce output = new vx_core::Class_any_from_list_reduce();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_list_reduce e_any_from_list_reduce = vx_e_any_from_list_reduce();
-  vx_core::Func_any_from_list_reduce t_any_from_list_reduce = vx_t_any_from_list_reduce();
-
-  // (func any<-list-reduce-next)
-  vx_core::Func_any_from_list_reduce_next vx_e_any_from_list_reduce_next() {
-    vx_core::Func_any_from_list_reduce_next output = new vx_core::Class_any_from_list_reduce_next();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_list_reduce_next vx_t_any_from_list_reduce_next() {
-    vx_core::Func_any_from_list_reduce_next output = new vx_core::Class_any_from_list_reduce_next();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_list_reduce_next e_any_from_list_reduce_next = vx_e_any_from_list_reduce_next();
-  vx_core::Func_any_from_list_reduce_next t_any_from_list_reduce_next = vx_t_any_from_list_reduce_next();
-
-  // (func any<-map)
-  vx_core::Func_any_from_map vx_e_any_from_map() {
-    vx_core::Func_any_from_map output = new vx_core::Class_any_from_map();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_map vx_t_any_from_map() {
-    vx_core::Func_any_from_map output = new vx_core::Class_any_from_map();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_map e_any_from_map = vx_e_any_from_map();
-  vx_core::Func_any_from_map t_any_from_map = vx_t_any_from_map();
-
-  // (func any<-none)
-  vx_core::Func_any_from_none vx_e_any_from_none() {
-    vx_core::Func_any_from_none output = new vx_core::Class_any_from_none();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_none vx_t_any_from_none() {
-    vx_core::Func_any_from_none output = new vx_core::Class_any_from_none();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_none e_any_from_none = vx_e_any_from_none();
-  vx_core::Func_any_from_none t_any_from_none = vx_t_any_from_none();
-
-  // (func any<-none-async)
-  vx_core::Func_any_from_none_async vx_e_any_from_none_async() {
-    vx_core::Func_any_from_none_async output = new vx_core::Class_any_from_none_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_none_async vx_t_any_from_none_async() {
-    vx_core::Func_any_from_none_async output = new vx_core::Class_any_from_none_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_none_async e_any_from_none_async = vx_e_any_from_none_async();
-  vx_core::Func_any_from_none_async t_any_from_none_async = vx_t_any_from_none_async();
-
-  // (func any<-reduce)
-  vx_core::Func_any_from_reduce vx_e_any_from_reduce() {
-    vx_core::Func_any_from_reduce output = new vx_core::Class_any_from_reduce();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce vx_t_any_from_reduce() {
-    vx_core::Func_any_from_reduce output = new vx_core::Class_any_from_reduce();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce e_any_from_reduce = vx_e_any_from_reduce();
-  vx_core::Func_any_from_reduce t_any_from_reduce = vx_t_any_from_reduce();
-
-  // (func any<-reduce-async)
-  vx_core::Func_any_from_reduce_async vx_e_any_from_reduce_async() {
-    vx_core::Func_any_from_reduce_async output = new vx_core::Class_any_from_reduce_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_async vx_t_any_from_reduce_async() {
-    vx_core::Func_any_from_reduce_async output = new vx_core::Class_any_from_reduce_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_async e_any_from_reduce_async = vx_e_any_from_reduce_async();
-  vx_core::Func_any_from_reduce_async t_any_from_reduce_async = vx_t_any_from_reduce_async();
-
-  // (func any<-reduce-next)
-  vx_core::Func_any_from_reduce_next vx_e_any_from_reduce_next() {
-    vx_core::Func_any_from_reduce_next output = new vx_core::Class_any_from_reduce_next();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_next vx_t_any_from_reduce_next() {
-    vx_core::Func_any_from_reduce_next output = new vx_core::Class_any_from_reduce_next();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_next e_any_from_reduce_next = vx_e_any_from_reduce_next();
-  vx_core::Func_any_from_reduce_next t_any_from_reduce_next = vx_t_any_from_reduce_next();
-
-  // (func any<-reduce-next-async)
-  vx_core::Func_any_from_reduce_next_async vx_e_any_from_reduce_next_async() {
-    vx_core::Func_any_from_reduce_next_async output = new vx_core::Class_any_from_reduce_next_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_next_async vx_t_any_from_reduce_next_async() {
-    vx_core::Func_any_from_reduce_next_async output = new vx_core::Class_any_from_reduce_next_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_reduce_next_async e_any_from_reduce_next_async = vx_e_any_from_reduce_next_async();
-  vx_core::Func_any_from_reduce_next_async t_any_from_reduce_next_async = vx_t_any_from_reduce_next_async();
-
-  // (func any<-struct)
-  vx_core::Func_any_from_struct vx_e_any_from_struct() {
-    vx_core::Func_any_from_struct output = new vx_core::Class_any_from_struct();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_any_from_struct vx_t_any_from_struct() {
-    vx_core::Func_any_from_struct output = new vx_core::Class_any_from_struct();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_any_from_struct e_any_from_struct = vx_e_any_from_struct();
-  vx_core::Func_any_from_struct t_any_from_struct = vx_t_any_from_struct();
-
-  // (func async)
-  vx_core::Func_async vx_e_async() {
-    vx_core::Func_async output = new vx_core::Class_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_async vx_t_async() {
-    vx_core::Func_async output = new vx_core::Class_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_async e_async = vx_e_async();
-  vx_core::Func_async t_async = vx_t_async();
-
-  // (func boolean<-any)
-  vx_core::Func_boolean_from_any vx_e_boolean_from_any() {
-    vx_core::Func_boolean_from_any output = new vx_core::Class_boolean_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_any vx_t_boolean_from_any() {
-    vx_core::Func_boolean_from_any output = new vx_core::Class_boolean_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_any e_boolean_from_any = vx_e_boolean_from_any();
-  vx_core::Func_boolean_from_any t_boolean_from_any = vx_t_boolean_from_any();
-
-  // (func boolean<-func)
-  vx_core::Func_boolean_from_func vx_e_boolean_from_func() {
-    vx_core::Func_boolean_from_func output = new vx_core::Class_boolean_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_func vx_t_boolean_from_func() {
-    vx_core::Func_boolean_from_func output = new vx_core::Class_boolean_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_func e_boolean_from_func = vx_e_boolean_from_func();
-  vx_core::Func_boolean_from_func t_boolean_from_func = vx_t_boolean_from_func();
-
-  // (func boolean<-none)
-  vx_core::Func_boolean_from_none vx_e_boolean_from_none() {
-    vx_core::Func_boolean_from_none output = new vx_core::Class_boolean_from_none();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_none vx_t_boolean_from_none() {
-    vx_core::Func_boolean_from_none output = new vx_core::Class_boolean_from_none();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_boolean_from_none e_boolean_from_none = vx_e_boolean_from_none();
-  vx_core::Func_boolean_from_none t_boolean_from_none = vx_t_boolean_from_none();
-
-  // (func empty)
-  vx_core::Func_empty vx_e_empty() {
-    vx_core::Func_empty output = new vx_core::Class_empty();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_empty vx_t_empty() {
-    vx_core::Func_empty output = new vx_core::Class_empty();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_empty e_empty = vx_e_empty();
-  vx_core::Func_empty t_empty = vx_t_empty();
-
-  // (func new)
-  vx_core::Func_new vx_e_new() {
-    vx_core::Func_new output = new vx_core::Class_new();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_new vx_t_new() {
-    vx_core::Func_new output = new vx_core::Class_new();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_new e_new = vx_e_new();
-  vx_core::Func_new t_new = vx_t_new();
-
-  // (func copy)
-  vx_core::Func_copy vx_e_copy() {
-    vx_core::Func_copy output = new vx_core::Class_copy();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_copy vx_t_copy() {
-    vx_core::Func_copy output = new vx_core::Class_copy();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_copy e_copy = vx_e_copy();
-  vx_core::Func_copy t_copy = vx_t_copy();
-
-  // (func is-empty)
-  vx_core::Func_is_empty vx_e_is_empty() {
-    vx_core::Func_is_empty output = new vx_core::Class_is_empty();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_empty vx_t_is_empty() {
-    vx_core::Func_is_empty output = new vx_core::Class_is_empty();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_empty e_is_empty = vx_e_is_empty();
-  vx_core::Func_is_empty t_is_empty = vx_t_is_empty();
-
-  // (func is-empty)
-  vx_core::Func_is_empty_1 vx_e_is_empty_1() {
-    vx_core::Func_is_empty_1 output = new vx_core::Class_is_empty_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_empty_1 vx_t_is_empty_1() {
-    vx_core::Func_is_empty_1 output = new vx_core::Class_is_empty_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_empty_1 e_is_empty_1 = vx_e_is_empty_1();
-  vx_core::Func_is_empty_1 t_is_empty_1 = vx_t_is_empty_1();
-
-  // (func !)
-  vx_core::Func_not vx_e_not() {
-    vx_core::Func_not output = new vx_core::Class_not();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_not vx_t_not() {
-    vx_core::Func_not output = new vx_core::Class_not();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_not e_not = vx_e_not();
-  vx_core::Func_not t_not = vx_t_not();
-
-  // (func !-empty)
-  vx_core::Func_notempty vx_e_notempty() {
-    vx_core::Func_notempty output = new vx_core::Class_notempty();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_notempty vx_t_notempty() {
-    vx_core::Func_notempty output = new vx_core::Class_notempty();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_notempty e_notempty = vx_e_notempty();
-  vx_core::Func_notempty t_notempty = vx_t_notempty();
-
-  // (func !-empty)
-  vx_core::Func_notempty_1 vx_e_notempty_1() {
-    vx_core::Func_notempty_1 output = new vx_core::Class_notempty_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_notempty_1 vx_t_notempty_1() {
-    vx_core::Func_notempty_1 output = new vx_core::Class_notempty_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_notempty_1 e_notempty_1 = vx_e_notempty_1();
-  vx_core::Func_notempty_1 t_notempty_1 = vx_t_notempty_1();
-
-  // (func =)
-  vx_core::Func_eq vx_e_eq() {
-    vx_core::Func_eq output = new vx_core::Class_eq();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_eq vx_t_eq() {
-    vx_core::Func_eq output = new vx_core::Class_eq();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_eq e_eq = vx_e_eq();
-  vx_core::Func_eq t_eq = vx_t_eq();
-
-  // (func =)
-  vx_core::Func_eq_1 vx_e_eq_1() {
-    vx_core::Func_eq_1 output = new vx_core::Class_eq_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_eq_1 vx_t_eq_1() {
-    vx_core::Func_eq_1 output = new vx_core::Class_eq_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_eq_1 e_eq_1 = vx_e_eq_1();
-  vx_core::Func_eq_1 t_eq_1 = vx_t_eq_1();
-
-  // (func !=)
-  vx_core::Func_ne vx_e_ne() {
-    vx_core::Func_ne output = new vx_core::Class_ne();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_ne vx_t_ne() {
-    vx_core::Func_ne output = new vx_core::Class_ne();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_ne e_ne = vx_e_ne();
-  vx_core::Func_ne t_ne = vx_t_ne();
-
-  // (func then)
-  vx_core::Func_then vx_e_then() {
-    vx_core::Func_then output = new vx_core::Class_then();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_then vx_t_then() {
-    vx_core::Func_then output = new vx_core::Class_then();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_then e_then = vx_e_then();
-  vx_core::Func_then t_then = vx_t_then();
-
-  // (func else)
-  vx_core::Func_else vx_e_else() {
-    vx_core::Func_else output = new vx_core::Class_else();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_else vx_t_else() {
-    vx_core::Func_else output = new vx_core::Class_else();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_else e_else = vx_e_else();
-  vx_core::Func_else t_else = vx_t_else();
-
-  // (func if)
-  vx_core::Func_if vx_e_if() {
-    vx_core::Func_if output = new vx_core::Class_if();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_if vx_t_if() {
-    vx_core::Func_if output = new vx_core::Class_if();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_if e_if = vx_e_if();
-  vx_core::Func_if t_if = vx_t_if();
-
-  // (func if)
-  vx_core::Func_if_1 vx_e_if_1() {
-    vx_core::Func_if_1 output = new vx_core::Class_if_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_if_1 vx_t_if_1() {
-    vx_core::Func_if_1 output = new vx_core::Class_if_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_if_1 e_if_1 = vx_e_if_1();
-  vx_core::Func_if_1 t_if_1 = vx_t_if_1();
-
-  // (func if)
-  vx_core::Func_if_2 vx_e_if_2() {
-    vx_core::Func_if_2 output = new vx_core::Class_if_2();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_if_2 vx_t_if_2() {
-    vx_core::Func_if_2 output = new vx_core::Class_if_2();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_if_2 e_if_2 = vx_e_if_2();
-  vx_core::Func_if_2 t_if_2 = vx_t_if_2();
-
-  // (func case)
-  vx_core::Func_case vx_e_case() {
-    vx_core::Func_case output = new vx_core::Class_case();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_case vx_t_case() {
-    vx_core::Func_case output = new vx_core::Class_case();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_case e_case = vx_e_case();
-  vx_core::Func_case t_case = vx_t_case();
-
-  // (func case)
-  vx_core::Func_case_1 vx_e_case_1() {
-    vx_core::Func_case_1 output = new vx_core::Class_case_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_case_1 vx_t_case_1() {
-    vx_core::Func_case_1 output = new vx_core::Class_case_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_case_1 e_case_1 = vx_e_case_1();
-  vx_core::Func_case_1 t_case_1 = vx_t_case_1();
-
-  // (func switch)
-  vx_core::Func_switch vx_e_switch() {
-    vx_core::Func_switch output = new vx_core::Class_switch();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_switch vx_t_switch() {
-    vx_core::Func_switch output = new vx_core::Class_switch();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_switch e_switch = vx_e_switch();
-  vx_core::Func_switch t_switch = vx_t_switch();
-
-  // (func length<-list)
-  vx_core::Func_length_from_list vx_e_length_from_list() {
-    vx_core::Func_length_from_list output = new vx_core::Class_length_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_length_from_list vx_t_length_from_list() {
-    vx_core::Func_length_from_list output = new vx_core::Class_length_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_length_from_list e_length_from_list = vx_e_length_from_list();
-  vx_core::Func_length_from_list t_length_from_list = vx_t_length_from_list();
-
-  // (func and)
-  vx_core::Func_and vx_e_and() {
-    vx_core::Func_and output = new vx_core::Class_and();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_and vx_t_and() {
-    vx_core::Func_and output = new vx_core::Class_and();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_and e_and = vx_e_and();
-  vx_core::Func_and t_and = vx_t_and();
-
-  // (func and)
-  vx_core::Func_and_1 vx_e_and_1() {
-    vx_core::Func_and_1 output = new vx_core::Class_and_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_and_1 vx_t_and_1() {
-    vx_core::Func_and_1 output = new vx_core::Class_and_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_and_1 e_and_1 = vx_e_and_1();
-  vx_core::Func_and_1 t_and_1 = vx_t_and_1();
-
-  // (func or)
-  vx_core::Func_or vx_e_or() {
-    vx_core::Func_or output = new vx_core::Class_or();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_or vx_t_or() {
-    vx_core::Func_or output = new vx_core::Class_or();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_or e_or = vx_e_or();
-  vx_core::Func_or t_or = vx_t_or();
-
-  // (func or)
-  vx_core::Func_or_1 vx_e_or_1() {
-    vx_core::Func_or_1 output = new vx_core::Class_or_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_or_1 vx_t_or_1() {
-    vx_core::Func_or_1 output = new vx_core::Class_or_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_or_1 e_or_1 = vx_e_or_1();
-  vx_core::Func_or_1 t_or_1 = vx_t_or_1();
-
-  // (func let)
-  vx_core::Func_let vx_e_let() {
-    vx_core::Func_let output = new vx_core::Class_let();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_let vx_t_let() {
-    vx_core::Func_let output = new vx_core::Class_let();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_let e_let = vx_e_let();
-  vx_core::Func_let t_let = vx_t_let();
-
-  // (func let-async)
-  vx_core::Func_let_async vx_e_let_async() {
-    vx_core::Func_let_async output = new vx_core::Class_let_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_let_async vx_t_let_async() {
-    vx_core::Func_let_async output = new vx_core::Class_let_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_let_async e_let_async = vx_e_let_async();
-  vx_core::Func_let_async t_let_async = vx_t_let_async();
-
-  // (func *)
-  vx_core::Func_multiply vx_e_multiply() {
-    vx_core::Func_multiply output = new vx_core::Class_multiply();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_multiply vx_t_multiply() {
-    vx_core::Func_multiply output = new vx_core::Class_multiply();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_multiply e_multiply = vx_e_multiply();
-  vx_core::Func_multiply t_multiply = vx_t_multiply();
-
-  // (func *)
-  vx_core::Func_multiply_1 vx_e_multiply_1() {
-    vx_core::Func_multiply_1 output = new vx_core::Class_multiply_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_multiply_1 vx_t_multiply_1() {
-    vx_core::Func_multiply_1 output = new vx_core::Class_multiply_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_multiply_1 e_multiply_1 = vx_e_multiply_1();
-  vx_core::Func_multiply_1 t_multiply_1 = vx_t_multiply_1();
-
-  // (func *)
-  vx_core::Func_multiply_2 vx_e_multiply_2() {
-    vx_core::Func_multiply_2 output = new vx_core::Class_multiply_2();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_multiply_2 vx_t_multiply_2() {
-    vx_core::Func_multiply_2 output = new vx_core::Class_multiply_2();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_multiply_2 e_multiply_2 = vx_e_multiply_2();
-  vx_core::Func_multiply_2 t_multiply_2 = vx_t_multiply_2();
-
-  // (func *)
-  vx_core::Func_multiply_3 vx_e_multiply_3() {
-    vx_core::Func_multiply_3 output = new vx_core::Class_multiply_3();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_multiply_3 vx_t_multiply_3() {
-    vx_core::Func_multiply_3 output = new vx_core::Class_multiply_3();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_multiply_3 e_multiply_3 = vx_e_multiply_3();
-  vx_core::Func_multiply_3 t_multiply_3 = vx_t_multiply_3();
-
-  // (func +)
-  vx_core::Func_plus vx_e_plus() {
-    vx_core::Func_plus output = new vx_core::Class_plus();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_plus vx_t_plus() {
-    vx_core::Func_plus output = new vx_core::Class_plus();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_plus e_plus = vx_e_plus();
-  vx_core::Func_plus t_plus = vx_t_plus();
-
-  // (func +)
-  vx_core::Func_plus_1 vx_e_plus_1() {
-    vx_core::Func_plus_1 output = new vx_core::Class_plus_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_plus_1 vx_t_plus_1() {
-    vx_core::Func_plus_1 output = new vx_core::Class_plus_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_plus_1 e_plus_1 = vx_e_plus_1();
-  vx_core::Func_plus_1 t_plus_1 = vx_t_plus_1();
-
-  // (func +)
-  vx_core::Func_plus_2 vx_e_plus_2() {
-    vx_core::Func_plus_2 output = new vx_core::Class_plus_2();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_plus_2 vx_t_plus_2() {
-    vx_core::Func_plus_2 output = new vx_core::Class_plus_2();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_plus_2 e_plus_2 = vx_e_plus_2();
-  vx_core::Func_plus_2 t_plus_2 = vx_t_plus_2();
-
-  // (func +)
-  vx_core::Func_plus_3 vx_e_plus_3() {
-    vx_core::Func_plus_3 output = new vx_core::Class_plus_3();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_plus_3 vx_t_plus_3() {
-    vx_core::Func_plus_3 output = new vx_core::Class_plus_3();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_plus_3 e_plus_3 = vx_e_plus_3();
-  vx_core::Func_plus_3 t_plus_3 = vx_t_plus_3();
-
-  // (func +1)
-  vx_core::Func_plus1 vx_e_plus1() {
-    vx_core::Func_plus1 output = new vx_core::Class_plus1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_plus1 vx_t_plus1() {
-    vx_core::Func_plus1 output = new vx_core::Class_plus1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_plus1 e_plus1 = vx_e_plus1();
-  vx_core::Func_plus1 t_plus1 = vx_t_plus1();
-
-  // (func -)
-  vx_core::Func_minus vx_e_minus() {
-    vx_core::Func_minus output = new vx_core::Class_minus();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_minus vx_t_minus() {
-    vx_core::Func_minus output = new vx_core::Class_minus();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_minus e_minus = vx_e_minus();
-  vx_core::Func_minus t_minus = vx_t_minus();
-
-  // (func -)
-  vx_core::Func_minus_1 vx_e_minus_1() {
-    vx_core::Func_minus_1 output = new vx_core::Class_minus_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_minus_1 vx_t_minus_1() {
-    vx_core::Func_minus_1 output = new vx_core::Class_minus_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_minus_1 e_minus_1 = vx_e_minus_1();
-  vx_core::Func_minus_1 t_minus_1 = vx_t_minus_1();
-
-  // (func -)
-  vx_core::Func_minus_2 vx_e_minus_2() {
-    vx_core::Func_minus_2 output = new vx_core::Class_minus_2();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_minus_2 vx_t_minus_2() {
-    vx_core::Func_minus_2 output = new vx_core::Class_minus_2();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_minus_2 e_minus_2 = vx_e_minus_2();
-  vx_core::Func_minus_2 t_minus_2 = vx_t_minus_2();
-
-  // (func -)
-  vx_core::Func_minus_3 vx_e_minus_3() {
-    vx_core::Func_minus_3 output = new vx_core::Class_minus_3();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_minus_3 vx_t_minus_3() {
-    vx_core::Func_minus_3 output = new vx_core::Class_minus_3();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_minus_3 e_minus_3 = vx_e_minus_3();
-  vx_core::Func_minus_3 t_minus_3 = vx_t_minus_3();
-
-  // (func .)
-  vx_core::Func_dotmethod vx_e_dotmethod() {
-    vx_core::Func_dotmethod output = new vx_core::Class_dotmethod();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_dotmethod vx_t_dotmethod() {
-    vx_core::Func_dotmethod output = new vx_core::Class_dotmethod();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_dotmethod e_dotmethod = vx_e_dotmethod();
-  vx_core::Func_dotmethod t_dotmethod = vx_t_dotmethod();
-
-  // (func /)
-  vx_core::Func_divide vx_e_divide() {
-    vx_core::Func_divide output = new vx_core::Class_divide();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_divide vx_t_divide() {
-    vx_core::Func_divide output = new vx_core::Class_divide();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_divide e_divide = vx_e_divide();
-  vx_core::Func_divide t_divide = vx_t_divide();
-
-  // (func <)
-  vx_core::Func_lt vx_e_lt() {
-    vx_core::Func_lt output = new vx_core::Class_lt();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_lt vx_t_lt() {
-    vx_core::Func_lt output = new vx_core::Class_lt();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_lt e_lt = vx_e_lt();
-  vx_core::Func_lt t_lt = vx_t_lt();
-
-  // (func <)
-  vx_core::Func_lt_1 vx_e_lt_1() {
-    vx_core::Func_lt_1 output = new vx_core::Class_lt_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_lt_1 vx_t_lt_1() {
-    vx_core::Func_lt_1 output = new vx_core::Class_lt_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_lt_1 e_lt_1 = vx_e_lt_1();
-  vx_core::Func_lt_1 t_lt_1 = vx_t_lt_1();
-
-  // (func <-)
-  vx_core::Func_chainfirst vx_e_chainfirst() {
-    vx_core::Func_chainfirst output = new vx_core::Class_chainfirst();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_chainfirst vx_t_chainfirst() {
-    vx_core::Func_chainfirst output = new vx_core::Class_chainfirst();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_chainfirst e_chainfirst = vx_e_chainfirst();
-  vx_core::Func_chainfirst t_chainfirst = vx_t_chainfirst();
-
-  // (func <<-)
-  vx_core::Func_chainlast vx_e_chainlast() {
-    vx_core::Func_chainlast output = new vx_core::Class_chainlast();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_chainlast vx_t_chainlast() {
-    vx_core::Func_chainlast output = new vx_core::Class_chainlast();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_chainlast e_chainlast = vx_e_chainlast();
-  vx_core::Func_chainlast t_chainlast = vx_t_chainlast();
-
-  // (func <=)
-  vx_core::Func_le vx_e_le() {
-    vx_core::Func_le output = new vx_core::Class_le();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_le vx_t_le() {
-    vx_core::Func_le output = new vx_core::Class_le();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_le e_le = vx_e_le();
-  vx_core::Func_le t_le = vx_t_le();
-
-  // (func <=)
-  vx_core::Func_le_1 vx_e_le_1() {
-    vx_core::Func_le_1 output = new vx_core::Class_le_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_le_1 vx_t_le_1() {
-    vx_core::Func_le_1 output = new vx_core::Class_le_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_le_1 e_le_1 = vx_e_le_1();
-  vx_core::Func_le_1 t_le_1 = vx_t_le_1();
-
-  // (func >)
-  vx_core::Func_gt vx_e_gt() {
-    vx_core::Func_gt output = new vx_core::Class_gt();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_gt vx_t_gt() {
-    vx_core::Func_gt output = new vx_core::Class_gt();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_gt e_gt = vx_e_gt();
-  vx_core::Func_gt t_gt = vx_t_gt();
-
-  // (func >)
-  vx_core::Func_gt_1 vx_e_gt_1() {
-    vx_core::Func_gt_1 output = new vx_core::Class_gt_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_gt_1 vx_t_gt_1() {
-    vx_core::Func_gt_1 output = new vx_core::Class_gt_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_gt_1 e_gt_1 = vx_e_gt_1();
-  vx_core::Func_gt_1 t_gt_1 = vx_t_gt_1();
-
-  // (func >=)
-  vx_core::Func_ge vx_e_ge() {
-    vx_core::Func_ge output = new vx_core::Class_ge();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_ge vx_t_ge() {
-    vx_core::Func_ge output = new vx_core::Class_ge();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_ge e_ge = vx_e_ge();
-  vx_core::Func_ge t_ge = vx_t_ge();
-
-  // (func >=)
-  vx_core::Func_ge_1 vx_e_ge_1() {
-    vx_core::Func_ge_1 output = new vx_core::Class_ge_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_ge_1 vx_t_ge_1() {
-    vx_core::Func_ge_1 output = new vx_core::Class_ge_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_ge_1 e_ge_1 = vx_e_ge_1();
-  vx_core::Func_ge_1 t_ge_1 = vx_t_ge_1();
-
-  // (func allowtypenames<-typedef)
-  vx_core::Func_allowtypenames_from_typedef vx_e_allowtypenames_from_typedef() {
-    vx_core::Func_allowtypenames_from_typedef output = new vx_core::Class_allowtypenames_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_allowtypenames_from_typedef vx_t_allowtypenames_from_typedef() {
-    vx_core::Func_allowtypenames_from_typedef output = new vx_core::Class_allowtypenames_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = vx_e_allowtypenames_from_typedef();
-  vx_core::Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = vx_t_allowtypenames_from_typedef();
-
-  // (func allowtypes<-typedef)
-  vx_core::Func_allowtypes_from_typedef vx_e_allowtypes_from_typedef() {
-    vx_core::Func_allowtypes_from_typedef output = new vx_core::Class_allowtypes_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_allowtypes_from_typedef vx_t_allowtypes_from_typedef() {
-    vx_core::Func_allowtypes_from_typedef output = new vx_core::Class_allowtypes_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_allowtypes_from_typedef e_allowtypes_from_typedef = vx_e_allowtypes_from_typedef();
-  vx_core::Func_allowtypes_from_typedef t_allowtypes_from_typedef = vx_t_allowtypes_from_typedef();
-
-  // (func compare)
-  vx_core::Func_compare vx_e_compare() {
-    vx_core::Func_compare output = new vx_core::Class_compare();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_compare vx_t_compare() {
-    vx_core::Func_compare output = new vx_core::Class_compare();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_compare e_compare = vx_e_compare();
-  vx_core::Func_compare t_compare = vx_t_compare();
-
-  // (func contains)
-  vx_core::Func_contains vx_e_contains() {
-    vx_core::Func_contains output = new vx_core::Class_contains();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_contains vx_t_contains() {
-    vx_core::Func_contains output = new vx_core::Class_contains();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_contains e_contains = vx_e_contains();
-  vx_core::Func_contains t_contains = vx_t_contains();
-
-  // (func contains)
-  vx_core::Func_contains_1 vx_e_contains_1() {
-    vx_core::Func_contains_1 output = new vx_core::Class_contains_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_contains_1 vx_t_contains_1() {
-    vx_core::Func_contains_1 output = new vx_core::Class_contains_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_contains_1 e_contains_1 = vx_e_contains_1();
-  vx_core::Func_contains_1 t_contains_1 = vx_t_contains_1();
-
-  // (func extends<-any)
-  vx_core::Func_extends_from_any vx_e_extends_from_any() {
-    vx_core::Func_extends_from_any output = new vx_core::Class_extends_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_extends_from_any vx_t_extends_from_any() {
-    vx_core::Func_extends_from_any output = new vx_core::Class_extends_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_extends_from_any e_extends_from_any = vx_e_extends_from_any();
-  vx_core::Func_extends_from_any t_extends_from_any = vx_t_extends_from_any();
-
-  // (func extends<-typedef)
-  vx_core::Func_extends_from_typedef vx_e_extends_from_typedef() {
-    vx_core::Func_extends_from_typedef output = new vx_core::Class_extends_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_extends_from_typedef vx_t_extends_from_typedef() {
-    vx_core::Func_extends_from_typedef output = new vx_core::Class_extends_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_extends_from_typedef e_extends_from_typedef = vx_e_extends_from_typedef();
-  vx_core::Func_extends_from_typedef t_extends_from_typedef = vx_t_extends_from_typedef();
-
-  // (func first<-list)
-  vx_core::Func_first_from_list vx_e_first_from_list() {
-    vx_core::Func_first_from_list output = new vx_core::Class_first_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_first_from_list vx_t_first_from_list() {
-    vx_core::Func_first_from_list output = new vx_core::Class_first_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_first_from_list e_first_from_list = vx_e_first_from_list();
-  vx_core::Func_first_from_list t_first_from_list = vx_t_first_from_list();
-
-  // (func first<-list-fn-any<-any)
-  vx_core::Func_first_from_list_fn_any_from_any vx_e_first_from_list_fn_any_from_any() {
-    vx_core::Func_first_from_list_fn_any_from_any output = new vx_core::Class_first_from_list_fn_any_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_first_from_list_fn_any_from_any vx_t_first_from_list_fn_any_from_any() {
-    vx_core::Func_first_from_list_fn_any_from_any output = new vx_core::Class_first_from_list_fn_any_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_first_from_list_fn_any_from_any e_first_from_list_fn_any_from_any = vx_e_first_from_list_fn_any_from_any();
-  vx_core::Func_first_from_list_fn_any_from_any t_first_from_list_fn_any_from_any = vx_t_first_from_list_fn_any_from_any();
-
-  // (func fn)
-  vx_core::Func_fn vx_e_fn() {
-    vx_core::Func_fn output = new vx_core::Class_fn();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_fn vx_t_fn() {
-    vx_core::Func_fn output = new vx_core::Class_fn();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_fn e_fn = vx_e_fn();
-  vx_core::Func_fn t_fn = vx_t_fn();
-
-  // (func funcdef<-func)
-  vx_core::Func_funcdef_from_func vx_e_funcdef_from_func() {
-    vx_core::Func_funcdef_from_func output = new vx_core::Class_funcdef_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_funcdef_from_func vx_t_funcdef_from_func() {
-    vx_core::Func_funcdef_from_func output = new vx_core::Class_funcdef_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_funcdef_from_func e_funcdef_from_func = vx_e_funcdef_from_func();
-  vx_core::Func_funcdef_from_func t_funcdef_from_func = vx_t_funcdef_from_func();
-
-  // (func funcname<-funcdef)
-  vx_core::Func_funcname_from_funcdef vx_e_funcname_from_funcdef() {
-    vx_core::Func_funcname_from_funcdef output = new vx_core::Class_funcname_from_funcdef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_funcname_from_funcdef vx_t_funcname_from_funcdef() {
-    vx_core::Func_funcname_from_funcdef output = new vx_core::Class_funcname_from_funcdef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_funcname_from_funcdef e_funcname_from_funcdef = vx_e_funcname_from_funcdef();
-  vx_core::Func_funcname_from_funcdef t_funcname_from_funcdef = vx_t_funcname_from_funcdef();
-
-  // (func global-package-get)
-  vx_core::Func_global_package_get vx_e_global_package_get() {
-    vx_core::Func_global_package_get output = new vx_core::Class_global_package_get();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_global_package_get vx_t_global_package_get() {
-    vx_core::Func_global_package_get output = new vx_core::Class_global_package_get();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_global_package_get e_global_package_get = vx_e_global_package_get();
-  vx_core::Func_global_package_get t_global_package_get = vx_t_global_package_get();
-
-  // (func global-package-set)
-  vx_core::Func_global_package_set vx_e_global_package_set() {
-    vx_core::Func_global_package_set output = new vx_core::Class_global_package_set();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_global_package_set vx_t_global_package_set() {
-    vx_core::Func_global_package_set output = new vx_core::Class_global_package_set();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_global_package_set e_global_package_set = vx_e_global_package_set();
-  vx_core::Func_global_package_set t_global_package_set = vx_t_global_package_set();
-
-  // (func int<-func)
-  vx_core::Func_int_from_func vx_e_int_from_func() {
-    vx_core::Func_int_from_func output = new vx_core::Class_int_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_int_from_func vx_t_int_from_func() {
-    vx_core::Func_int_from_func output = new vx_core::Class_int_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_int_from_func e_int_from_func = vx_e_int_from_func();
-  vx_core::Func_int_from_func t_int_from_func = vx_t_int_from_func();
-
-  // (func int<-string)
-  vx_core::Func_int_from_string vx_e_int_from_string() {
-    vx_core::Func_int_from_string output = new vx_core::Class_int_from_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_int_from_string vx_t_int_from_string() {
-    vx_core::Func_int_from_string output = new vx_core::Class_int_from_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_int_from_string e_int_from_string = vx_e_int_from_string();
-  vx_core::Func_int_from_string t_int_from_string = vx_t_int_from_string();
-
-  // (func is-endswith)
-  vx_core::Func_is_endswith vx_e_is_endswith() {
-    vx_core::Func_is_endswith output = new vx_core::Class_is_endswith();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_endswith vx_t_is_endswith() {
-    vx_core::Func_is_endswith output = new vx_core::Class_is_endswith();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_endswith e_is_endswith = vx_e_is_endswith();
-  vx_core::Func_is_endswith t_is_endswith = vx_t_is_endswith();
-
-  // (func is-func)
-  vx_core::Func_is_func vx_e_is_func() {
-    vx_core::Func_is_func output = new vx_core::Class_is_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_func vx_t_is_func() {
-    vx_core::Func_is_func output = new vx_core::Class_is_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_func e_is_func = vx_e_is_func();
-  vx_core::Func_is_func t_is_func = vx_t_is_func();
-
-  // (func is-int)
-  vx_core::Func_is_int vx_e_is_int() {
-    vx_core::Func_is_int output = new vx_core::Class_is_int();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_int vx_t_is_int() {
-    vx_core::Func_is_int output = new vx_core::Class_is_int();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_int e_is_int = vx_e_is_int();
-  vx_core::Func_is_int t_is_int = vx_t_is_int();
-
-  // (func is-number)
-  vx_core::Func_is_number vx_e_is_number() {
-    vx_core::Func_is_number output = new vx_core::Class_is_number();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_number vx_t_is_number() {
-    vx_core::Func_is_number output = new vx_core::Class_is_number();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_number e_is_number = vx_e_is_number();
-  vx_core::Func_is_number t_is_number = vx_t_is_number();
-
-  // (func is-pass<-permission)
-  vx_core::Func_is_pass_from_permission vx_e_is_pass_from_permission() {
-    vx_core::Func_is_pass_from_permission output = new vx_core::Class_is_pass_from_permission();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_is_pass_from_permission vx_t_is_pass_from_permission() {
-    vx_core::Func_is_pass_from_permission output = new vx_core::Class_is_pass_from_permission();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_is_pass_from_permission e_is_pass_from_permission = vx_e_is_pass_from_permission();
-  vx_core::Func_is_pass_from_permission t_is_pass_from_permission = vx_t_is_pass_from_permission();
-
-  // (func last<-list)
-  vx_core::Func_last_from_list vx_e_last_from_list() {
-    vx_core::Func_last_from_list output = new vx_core::Class_last_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_last_from_list vx_t_last_from_list() {
-    vx_core::Func_last_from_list output = new vx_core::Class_last_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_last_from_list e_last_from_list = vx_e_last_from_list();
-  vx_core::Func_last_from_list t_last_from_list = vx_t_last_from_list();
-
-  // (func list-join<-list)
-  vx_core::Func_list_join_from_list vx_e_list_join_from_list() {
-    vx_core::Func_list_join_from_list output = new vx_core::Class_list_join_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_join_from_list vx_t_list_join_from_list() {
-    vx_core::Func_list_join_from_list output = new vx_core::Class_list_join_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_join_from_list e_list_join_from_list = vx_e_list_join_from_list();
-  vx_core::Func_list_join_from_list t_list_join_from_list = vx_t_list_join_from_list();
-
-  // (func list<-list)
-  vx_core::Func_list_from_list vx_e_list_from_list() {
-    vx_core::Func_list_from_list output = new vx_core::Class_list_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_from_list vx_t_list_from_list() {
-    vx_core::Func_list_from_list output = new vx_core::Class_list_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_from_list e_list_from_list = vx_e_list_from_list();
-  vx_core::Func_list_from_list t_list_from_list = vx_t_list_from_list();
-
-  // (func list<-list-async)
-  vx_core::Func_list_from_list_async vx_e_list_from_list_async() {
-    vx_core::Func_list_from_list_async output = new vx_core::Class_list_from_list_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_from_list_async vx_t_list_from_list_async() {
-    vx_core::Func_list_from_list_async output = new vx_core::Class_list_from_list_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_from_list_async e_list_from_list_async = vx_e_list_from_list_async();
-  vx_core::Func_list_from_list_async t_list_from_list_async = vx_t_list_from_list_async();
-
-  // (func list<-map)
-  vx_core::Func_list_from_map vx_e_list_from_map() {
-    vx_core::Func_list_from_map output = new vx_core::Class_list_from_map();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_from_map vx_t_list_from_map() {
-    vx_core::Func_list_from_map output = new vx_core::Class_list_from_map();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_from_map e_list_from_map = vx_e_list_from_map();
-  vx_core::Func_list_from_map t_list_from_map = vx_t_list_from_map();
-
-  // (func list<-map-async)
-  vx_core::Func_list_from_map_async vx_e_list_from_map_async() {
-    vx_core::Func_list_from_map_async output = new vx_core::Class_list_from_map_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_from_map_async vx_t_list_from_map_async() {
-    vx_core::Func_list_from_map_async output = new vx_core::Class_list_from_map_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_from_map_async e_list_from_map_async = vx_e_list_from_map_async();
-  vx_core::Func_list_from_map_async t_list_from_map_async = vx_t_list_from_map_async();
-
-  // (func list<-type)
-  vx_core::Func_list_from_type vx_e_list_from_type() {
-    vx_core::Func_list_from_type output = new vx_core::Class_list_from_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_list_from_type vx_t_list_from_type() {
-    vx_core::Func_list_from_type output = new vx_core::Class_list_from_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_list_from_type e_list_from_type = vx_e_list_from_type();
-  vx_core::Func_list_from_type t_list_from_type = vx_t_list_from_type();
-
-  // (func log)
-  vx_core::Func_log vx_e_log() {
-    vx_core::Func_log output = new vx_core::Class_log();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_log vx_t_log() {
-    vx_core::Func_log output = new vx_core::Class_log();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_log e_log = vx_e_log();
-  vx_core::Func_log t_log = vx_t_log();
-
-  // (func map<-list)
-  vx_core::Func_map_from_list vx_e_map_from_list() {
-    vx_core::Func_map_from_list output = new vx_core::Class_map_from_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_map_from_list vx_t_map_from_list() {
-    vx_core::Func_map_from_list output = new vx_core::Class_map_from_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_map_from_list e_map_from_list = vx_e_map_from_list();
-  vx_core::Func_map_from_list t_map_from_list = vx_t_map_from_list();
-
-  // (func mempool-addref)
-  vx_core::Func_mempool_addref vx_e_mempool_addref() {
-    vx_core::Func_mempool_addref output = new vx_core::Class_mempool_addref();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_mempool_addref vx_t_mempool_addref() {
-    vx_core::Func_mempool_addref output = new vx_core::Class_mempool_addref();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_mempool_addref e_mempool_addref = vx_e_mempool_addref();
-  vx_core::Func_mempool_addref t_mempool_addref = vx_t_mempool_addref();
-
-  // (func mempool-release)
-  vx_core::Func_mempool_release vx_e_mempool_release() {
-    vx_core::Func_mempool_release output = new vx_core::Class_mempool_release();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_mempool_release vx_t_mempool_release() {
-    vx_core::Func_mempool_release output = new vx_core::Class_mempool_release();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_mempool_release e_mempool_release = vx_e_mempool_release();
-  vx_core::Func_mempool_release t_mempool_release = vx_t_mempool_release();
-
-  // (func mempool-removeref)
-  vx_core::Func_mempool_removeref vx_e_mempool_removeref() {
-    vx_core::Func_mempool_removeref output = new vx_core::Class_mempool_removeref();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_mempool_removeref vx_t_mempool_removeref() {
-    vx_core::Func_mempool_removeref output = new vx_core::Class_mempool_removeref();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_mempool_removeref e_mempool_removeref = vx_e_mempool_removeref();
-  vx_core::Func_mempool_removeref t_mempool_removeref = vx_t_mempool_removeref();
-
-  // (func mempool-removerefchildren)
-  vx_core::Func_mempool_removerefchildren vx_e_mempool_removerefchildren() {
-    vx_core::Func_mempool_removerefchildren output = new vx_core::Class_mempool_removerefchildren();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_mempool_removerefchildren vx_t_mempool_removerefchildren() {
-    vx_core::Func_mempool_removerefchildren output = new vx_core::Class_mempool_removerefchildren();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_mempool_removerefchildren e_mempool_removerefchildren = vx_e_mempool_removerefchildren();
-  vx_core::Func_mempool_removerefchildren t_mempool_removerefchildren = vx_t_mempool_removerefchildren();
-
-  // (func mempool-reserve)
-  vx_core::Func_mempool_reserve vx_e_mempool_reserve() {
-    vx_core::Func_mempool_reserve output = new vx_core::Class_mempool_reserve();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_mempool_reserve vx_t_mempool_reserve() {
-    vx_core::Func_mempool_reserve output = new vx_core::Class_mempool_reserve();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_mempool_reserve e_mempool_reserve = vx_e_mempool_reserve();
-  vx_core::Func_mempool_reserve t_mempool_reserve = vx_t_mempool_reserve();
-
-  // (func msg<-error)
-  vx_core::Func_msg_from_error vx_e_msg_from_error() {
-    vx_core::Func_msg_from_error output = new vx_core::Class_msg_from_error();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_msg_from_error vx_t_msg_from_error() {
-    vx_core::Func_msg_from_error output = new vx_core::Class_msg_from_error();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_msg_from_error e_msg_from_error = vx_e_msg_from_error();
-  vx_core::Func_msg_from_error t_msg_from_error = vx_t_msg_from_error();
-
-  // (func msgblock<-msgblock-msg)
-  vx_core::Func_msgblock_from_msgblock_msg vx_e_msgblock_from_msgblock_msg() {
-    vx_core::Func_msgblock_from_msgblock_msg output = new vx_core::Class_msgblock_from_msgblock_msg();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_msgblock_from_msgblock_msg vx_t_msgblock_from_msgblock_msg() {
-    vx_core::Func_msgblock_from_msgblock_msg output = new vx_core::Class_msgblock_from_msgblock_msg();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_msgblock_from_msgblock_msg e_msgblock_from_msgblock_msg = vx_e_msgblock_from_msgblock_msg();
-  vx_core::Func_msgblock_from_msgblock_msg t_msgblock_from_msgblock_msg = vx_t_msgblock_from_msgblock_msg();
-
-  // (func msgblock<-msgblock-msgblock)
-  vx_core::Func_msgblock_from_msgblock_msgblock vx_e_msgblock_from_msgblock_msgblock() {
-    vx_core::Func_msgblock_from_msgblock_msgblock output = new vx_core::Class_msgblock_from_msgblock_msgblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_msgblock_from_msgblock_msgblock vx_t_msgblock_from_msgblock_msgblock() {
-    vx_core::Func_msgblock_from_msgblock_msgblock output = new vx_core::Class_msgblock_from_msgblock_msgblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_msgblock_from_msgblock_msgblock e_msgblock_from_msgblock_msgblock = vx_e_msgblock_from_msgblock_msgblock();
-  vx_core::Func_msgblock_from_msgblock_msgblock t_msgblock_from_msgblock_msgblock = vx_t_msgblock_from_msgblock_msgblock();
-
-  // (func name<-typedef)
-  vx_core::Func_name_from_typedef vx_e_name_from_typedef() {
-    vx_core::Func_name_from_typedef output = new vx_core::Class_name_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_name_from_typedef vx_t_name_from_typedef() {
-    vx_core::Func_name_from_typedef output = new vx_core::Class_name_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_name_from_typedef e_name_from_typedef = vx_e_name_from_typedef();
-  vx_core::Func_name_from_typedef t_name_from_typedef = vx_t_name_from_typedef();
-
-  // (func native)
-  vx_core::Func_native vx_e_native() {
-    vx_core::Func_native output = new vx_core::Class_native();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_native vx_t_native() {
-    vx_core::Func_native output = new vx_core::Class_native();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_native e_native = vx_e_native();
-  vx_core::Func_native t_native = vx_t_native();
-
-  // (func native<-any)
-  vx_core::Func_native_from_any vx_e_native_from_any() {
-    vx_core::Func_native_from_any output = new vx_core::Class_native_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_native_from_any vx_t_native_from_any() {
-    vx_core::Func_native_from_any output = new vx_core::Class_native_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_native_from_any e_native_from_any = vx_e_native_from_any();
-  vx_core::Func_native_from_any t_native_from_any = vx_t_native_from_any();
-
-  // (func number<-func)
-  vx_core::Func_number_from_func vx_e_number_from_func() {
-    vx_core::Func_number_from_func output = new vx_core::Class_number_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_number_from_func vx_t_number_from_func() {
-    vx_core::Func_number_from_func output = new vx_core::Class_number_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_number_from_func e_number_from_func = vx_e_number_from_func();
-  vx_core::Func_number_from_func t_number_from_func = vx_t_number_from_func();
-
-  // (func packagename<-typedef)
-  vx_core::Func_packagename_from_typedef vx_e_packagename_from_typedef() {
-    vx_core::Func_packagename_from_typedef output = new vx_core::Class_packagename_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_packagename_from_typedef vx_t_packagename_from_typedef() {
-    vx_core::Func_packagename_from_typedef output = new vx_core::Class_packagename_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_packagename_from_typedef e_packagename_from_typedef = vx_e_packagename_from_typedef();
-  vx_core::Func_packagename_from_typedef t_packagename_from_typedef = vx_t_packagename_from_typedef();
-
-  // (func path<-context-path)
-  vx_core::Func_path_from_context_path vx_e_path_from_context_path() {
-    vx_core::Func_path_from_context_path output = new vx_core::Class_path_from_context_path();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_path_from_context_path vx_t_path_from_context_path() {
-    vx_core::Func_path_from_context_path output = new vx_core::Class_path_from_context_path();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_path_from_context_path e_path_from_context_path = vx_e_path_from_context_path();
-  vx_core::Func_path_from_context_path t_path_from_context_path = vx_t_path_from_context_path();
-
-  // (func path<-setting-path)
-  vx_core::Func_path_from_setting_path vx_e_path_from_setting_path() {
-    vx_core::Func_path_from_setting_path output = new vx_core::Class_path_from_setting_path();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_path_from_setting_path vx_t_path_from_setting_path() {
-    vx_core::Func_path_from_setting_path output = new vx_core::Class_path_from_setting_path();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_path_from_setting_path e_path_from_setting_path = vx_e_path_from_setting_path();
-  vx_core::Func_path_from_setting_path t_path_from_setting_path = vx_t_path_from_setting_path();
-
-  // (func permission<-id-context)
-  vx_core::Func_permission_from_id_context vx_e_permission_from_id_context() {
-    vx_core::Func_permission_from_id_context output = new vx_core::Class_permission_from_id_context();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_permission_from_id_context vx_t_permission_from_id_context() {
-    vx_core::Func_permission_from_id_context output = new vx_core::Class_permission_from_id_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_permission_from_id_context e_permission_from_id_context = vx_e_permission_from_id_context();
-  vx_core::Func_permission_from_id_context t_permission_from_id_context = vx_t_permission_from_id_context();
-
-  // (func properties<-typedef)
-  vx_core::Func_properties_from_typedef vx_e_properties_from_typedef() {
-    vx_core::Func_properties_from_typedef output = new vx_core::Class_properties_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_properties_from_typedef vx_t_properties_from_typedef() {
-    vx_core::Func_properties_from_typedef output = new vx_core::Class_properties_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_properties_from_typedef e_properties_from_typedef = vx_e_properties_from_typedef();
-  vx_core::Func_properties_from_typedef t_properties_from_typedef = vx_t_properties_from_typedef();
-
-  // (func proplast<-typedef)
-  vx_core::Func_proplast_from_typedef vx_e_proplast_from_typedef() {
-    vx_core::Func_proplast_from_typedef output = new vx_core::Class_proplast_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_proplast_from_typedef vx_t_proplast_from_typedef() {
-    vx_core::Func_proplast_from_typedef output = new vx_core::Class_proplast_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_proplast_from_typedef e_proplast_from_typedef = vx_e_proplast_from_typedef();
-  vx_core::Func_proplast_from_typedef t_proplast_from_typedef = vx_t_proplast_from_typedef();
-
-  // (func resolve)
-  vx_core::Func_resolve vx_e_resolve() {
-    vx_core::Func_resolve output = new vx_core::Class_resolve();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_resolve vx_t_resolve() {
-    vx_core::Func_resolve output = new vx_core::Class_resolve();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_resolve e_resolve = vx_e_resolve();
-  vx_core::Func_resolve t_resolve = vx_t_resolve();
-
-  // (func resolve)
-  vx_core::Func_resolve_1 vx_e_resolve_1() {
-    vx_core::Func_resolve_1 output = new vx_core::Class_resolve_1();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_resolve_1 vx_t_resolve_1() {
-    vx_core::Func_resolve_1 output = new vx_core::Class_resolve_1();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_resolve_1 e_resolve_1 = vx_e_resolve_1();
-  vx_core::Func_resolve_1 t_resolve_1 = vx_t_resolve_1();
-
-  // (func resolve-async)
-  vx_core::Func_resolve_async vx_e_resolve_async() {
-    vx_core::Func_resolve_async output = new vx_core::Class_resolve_async();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_resolve_async vx_t_resolve_async() {
-    vx_core::Func_resolve_async output = new vx_core::Class_resolve_async();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_resolve_async e_resolve_async = vx_e_resolve_async();
-  vx_core::Func_resolve_async t_resolve_async = vx_t_resolve_async();
-
-  // (func resolve-first)
-  vx_core::Func_resolve_first vx_e_resolve_first() {
-    vx_core::Func_resolve_first output = new vx_core::Class_resolve_first();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_resolve_first vx_t_resolve_first() {
-    vx_core::Func_resolve_first output = new vx_core::Class_resolve_first();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_resolve_first e_resolve_first = vx_e_resolve_first();
-  vx_core::Func_resolve_first t_resolve_first = vx_t_resolve_first();
-
-  // (func resolve-list)
-  vx_core::Func_resolve_list vx_e_resolve_list() {
-    vx_core::Func_resolve_list output = new vx_core::Class_resolve_list();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_resolve_list vx_t_resolve_list() {
-    vx_core::Func_resolve_list output = new vx_core::Class_resolve_list();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_resolve_list e_resolve_list = vx_e_resolve_list();
-  vx_core::Func_resolve_list t_resolve_list = vx_t_resolve_list();
-
-  // (func session<-context)
-  vx_core::Func_session_from_context vx_e_session_from_context() {
-    vx_core::Func_session_from_context output = new vx_core::Class_session_from_context();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_session_from_context vx_t_session_from_context() {
-    vx_core::Func_session_from_context output = new vx_core::Class_session_from_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_session_from_context e_session_from_context = vx_e_session_from_context();
-  vx_core::Func_session_from_context t_session_from_context = vx_t_session_from_context();
-
-  // (func setting<-context)
-  vx_core::Func_setting_from_context vx_e_setting_from_context() {
-    vx_core::Func_setting_from_context output = new vx_core::Class_setting_from_context();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_setting_from_context vx_t_setting_from_context() {
-    vx_core::Func_setting_from_context output = new vx_core::Class_setting_from_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_setting_from_context e_setting_from_context = vx_e_setting_from_context();
-  vx_core::Func_setting_from_context t_setting_from_context = vx_t_setting_from_context();
-
-  // (func string-repeat)
-  vx_core::Func_string_repeat vx_e_string_repeat() {
-    vx_core::Func_string_repeat output = new vx_core::Class_string_repeat();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_string_repeat vx_t_string_repeat() {
-    vx_core::Func_string_repeat output = new vx_core::Class_string_repeat();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_string_repeat e_string_repeat = vx_e_string_repeat();
-  vx_core::Func_string_repeat t_string_repeat = vx_t_string_repeat();
-
-  // (func string<-any)
-  vx_core::Func_string_from_any vx_e_string_from_any() {
-    vx_core::Func_string_from_any output = new vx_core::Class_string_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_string_from_any vx_t_string_from_any() {
-    vx_core::Func_string_from_any output = new vx_core::Class_string_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_string_from_any e_string_from_any = vx_e_string_from_any();
-  vx_core::Func_string_from_any t_string_from_any = vx_t_string_from_any();
-
-  // (func string<-any-indent)
-  vx_core::Func_string_from_any_indent vx_e_string_from_any_indent() {
-    vx_core::Func_string_from_any_indent output = new vx_core::Class_string_from_any_indent();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_string_from_any_indent vx_t_string_from_any_indent() {
-    vx_core::Func_string_from_any_indent output = new vx_core::Class_string_from_any_indent();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_string_from_any_indent e_string_from_any_indent = vx_e_string_from_any_indent();
-  vx_core::Func_string_from_any_indent t_string_from_any_indent = vx_t_string_from_any_indent();
-
-  // (func string<-func)
-  vx_core::Func_string_from_func vx_e_string_from_func() {
-    vx_core::Func_string_from_func output = new vx_core::Class_string_from_func();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_string_from_func vx_t_string_from_func() {
-    vx_core::Func_string_from_func output = new vx_core::Class_string_from_func();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_string_from_func e_string_from_func = vx_e_string_from_func();
-  vx_core::Func_string_from_func t_string_from_func = vx_t_string_from_func();
-
-  // (func traits<-typedef)
-  vx_core::Func_traits_from_typedef vx_e_traits_from_typedef() {
-    vx_core::Func_traits_from_typedef output = new vx_core::Class_traits_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_traits_from_typedef vx_t_traits_from_typedef() {
-    vx_core::Func_traits_from_typedef output = new vx_core::Class_traits_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_traits_from_typedef e_traits_from_typedef = vx_e_traits_from_typedef();
-  vx_core::Func_traits_from_typedef t_traits_from_typedef = vx_t_traits_from_typedef();
-
-  // (func type<-any)
-  vx_core::Func_type_from_any vx_e_type_from_any() {
-    vx_core::Func_type_from_any output = new vx_core::Class_type_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_type_from_any vx_t_type_from_any() {
-    vx_core::Func_type_from_any output = new vx_core::Class_type_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_type_from_any e_type_from_any = vx_e_type_from_any();
-  vx_core::Func_type_from_any t_type_from_any = vx_t_type_from_any();
-
-  // (func typedef<-any)
-  vx_core::Func_typedef_from_any vx_e_typedef_from_any() {
-    vx_core::Func_typedef_from_any output = new vx_core::Class_typedef_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typedef_from_any vx_t_typedef_from_any() {
-    vx_core::Func_typedef_from_any output = new vx_core::Class_typedef_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typedef_from_any e_typedef_from_any = vx_e_typedef_from_any();
-  vx_core::Func_typedef_from_any t_typedef_from_any = vx_t_typedef_from_any();
-
-  // (func typedef<-type)
-  vx_core::Func_typedef_from_type vx_e_typedef_from_type() {
-    vx_core::Func_typedef_from_type output = new vx_core::Class_typedef_from_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typedef_from_type vx_t_typedef_from_type() {
-    vx_core::Func_typedef_from_type output = new vx_core::Class_typedef_from_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typedef_from_type e_typedef_from_type = vx_e_typedef_from_type();
-  vx_core::Func_typedef_from_type t_typedef_from_type = vx_t_typedef_from_type();
-
-  // (func typename<-any)
-  vx_core::Func_typename_from_any vx_e_typename_from_any() {
-    vx_core::Func_typename_from_any output = new vx_core::Class_typename_from_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typename_from_any vx_t_typename_from_any() {
-    vx_core::Func_typename_from_any output = new vx_core::Class_typename_from_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typename_from_any e_typename_from_any = vx_e_typename_from_any();
-  vx_core::Func_typename_from_any t_typename_from_any = vx_t_typename_from_any();
-
-  // (func typename<-type)
-  vx_core::Func_typename_from_type vx_e_typename_from_type() {
-    vx_core::Func_typename_from_type output = new vx_core::Class_typename_from_type();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typename_from_type vx_t_typename_from_type() {
-    vx_core::Func_typename_from_type output = new vx_core::Class_typename_from_type();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typename_from_type e_typename_from_type = vx_e_typename_from_type();
-  vx_core::Func_typename_from_type t_typename_from_type = vx_t_typename_from_type();
-
-  // (func typename<-typedef)
-  vx_core::Func_typename_from_typedef vx_e_typename_from_typedef() {
-    vx_core::Func_typename_from_typedef output = new vx_core::Class_typename_from_typedef();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typename_from_typedef vx_t_typename_from_typedef() {
-    vx_core::Func_typename_from_typedef output = new vx_core::Class_typename_from_typedef();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typename_from_typedef e_typename_from_typedef = vx_e_typename_from_typedef();
-  vx_core::Func_typename_from_typedef t_typename_from_typedef = vx_t_typename_from_typedef();
-
-  // (func typenames<-typelist)
-  vx_core::Func_typenames_from_typelist vx_e_typenames_from_typelist() {
-    vx_core::Func_typenames_from_typelist output = new vx_core::Class_typenames_from_typelist();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_typenames_from_typelist vx_t_typenames_from_typelist() {
-    vx_core::Func_typenames_from_typelist output = new vx_core::Class_typenames_from_typelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_typenames_from_typelist e_typenames_from_typelist = vx_e_typenames_from_typelist();
-  vx_core::Func_typenames_from_typelist t_typenames_from_typelist = vx_t_typenames_from_typelist();
-
-  // (func user<-context)
-  vx_core::Func_user_from_context vx_e_user_from_context() {
-    vx_core::Func_user_from_context output = new vx_core::Class_user_from_context();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_core::Func_user_from_context vx_t_user_from_context() {
-    vx_core::Func_user_from_context output = new vx_core::Class_user_from_context();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_core::Func_user_from_context e_user_from_context = vx_e_user_from_context();
-  vx_core::Func_user_from_context t_user_from_context = vx_t_user_from_context();
+  // }
 
 }

@@ -29,12 +29,6 @@ namespace vx_data_xml {
   typedef Abstract_xml_from_textblock* Func_xml_from_textblock;
   extern Func_xml_from_textblock e_xml_from_textblock;
   extern Func_xml_from_textblock t_xml_from_textblock;
-
-  class vx_Class_package {
-  public:
-  };
-
-
   // (func xml<-textblock)
   vx_data_xml::Type_xml f_xml_from_textblock(vx_data_textblock::Type_textblock textblock);
 
@@ -203,6 +197,16 @@ namespace vx_data_xml {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

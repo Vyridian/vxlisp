@@ -47,13 +47,7 @@ namespace vx_repl {
   class Abstract_repl_from_liblist_string;
   typedef Abstract_repl_from_liblist_string* Func_repl_from_liblist_string;
   extern Func_repl_from_liblist_string e_repl_from_liblist_string;
-  extern Func_repl_from_liblist_string t_repl_from_liblist_string;
-
-  class vx_Class_package {
-  public:
-  };
-
-// :headerfirst
+  extern Func_repl_from_liblist_string t_repl_from_liblist_string;// :headerfirst
 // :header
 
   // vx_string_from_listarg(type, liststring, context)
@@ -357,6 +351,16 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

@@ -284,17 +284,7 @@ namespace vx_web_html {
   class Abstract_uri_from_string;
   typedef Abstract_uri_from_string* Func_uri_from_string;
   extern Func_uri_from_string e_uri_from_string;
-  extern Func_uri_from_string t_uri_from_string;
-
-  class vx_Class_package {
-  public:
-    vx_web_html::Type_node e_node;
-    vx_web_html::Type_node t_node;
-    vx_web_html::Type_divchild e_divchild;
-    vx_web_html::Type_divchild t_divchild;
-  };
-
-// :headerfirst
+  extern Func_uri_from_string t_uri_from_string;// :headerfirst
 
 // :header
 
@@ -2389,6 +2379,16 @@ namespace vx_web_html {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

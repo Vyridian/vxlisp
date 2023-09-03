@@ -33,13 +33,7 @@ namespace vx_collection {
   class Abstract_list_from_list_start_end;
   typedef Abstract_list_from_list_start_end* Func_list_from_list_start_end;
   extern Func_list_from_list_start_end e_list_from_list_start_end;
-  extern Func_list_from_list_start_end t_list_from_list_start_end;
-
-  class vx_Class_package {
-  public:
-  };
-
-// :headerfirst
+  extern Func_list_from_list_start_end t_list_from_list_start_end;// :headerfirst
 // :header
 
   // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
@@ -281,6 +275,16 @@ namespace vx_collection {
     vx_core::vx_release_one_except({values, start}, output);
     return output;
   }
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

@@ -82,7 +82,7 @@ namespace test_lib {
     vx_test::Type_testcase output;
     long irefcount = vx_core::refcount;
     output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("boolean"),
       vx_core::vx_new_string(":describelist"), sample_testdescribelist(context)
@@ -93,7 +93,7 @@ namespace test_lib {
 
   vx_test::Type_testcase sample_testcase2(vx_core::Type_context context) {
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false(),
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":casename"), vx_core::vx_new_string("float"),
       vx_core::vx_new_string(":describelist"),

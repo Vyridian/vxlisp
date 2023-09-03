@@ -322,48 +322,44 @@ namespace vx_state {
 
   //}
 
-  vx_state::vx_Class_package* vx_package = new vx_state::vx_Class_package();
+  vx_state::Type_value_map e_value_map = NULL;
+  vx_state::Type_value_map t_value_map = NULL;
+  vx_state::Func_change e_change = NULL;
+  vx_state::Func_change t_change = NULL;
+  vx_state::Func_register e_register = NULL;
+  vx_state::Func_register t_register = NULL;
 
-  vx_state::Type_value_map vx_e_value_map() {
-    vx_state::Type_value_map output;
-      output = new Class_value_map();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_state::Type_value_map vx_t_value_map() {
-    vx_state::Type_value_map output = new Class_value_map();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_state::Type_value_map e_value_map = vx_e_value_map();
-  vx_state::Type_value_map t_value_map = vx_t_value_map();
-
-  // (func change)
-  vx_state::Func_change vx_e_change() {
-    vx_state::Func_change output = new vx_state::Class_change();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_state::Func_change vx_t_change() {
-    vx_state::Func_change output = new vx_state::Class_change();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_state::Func_change e_change = vx_e_change();
-  vx_state::Func_change t_change = vx_t_change();
-
-  // (func register)
-  vx_state::Func_register vx_e_register() {
-    vx_state::Func_register output = new vx_state::Class_register();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_state::Func_register vx_t_register() {
-    vx_state::Func_register output = new vx_state::Class_register();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_state::Func_register e_register = vx_e_register();
-  vx_state::Func_register t_register = vx_t_register();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_state::e_value_map = new Class_value_map();
+      vx_core::vx_reserve_empty(vx_state::e_value_map);
+      vx_state::t_value_map = new Class_value_map();
+      vx_core::vx_reserve_type(vx_state::t_value_map);
+      vx_state::e_change = new vx_state::Class_change();
+      vx_core::vx_reserve_empty(vx_state::e_change);
+      vx_state::t_change = new vx_state::Class_change();
+      vx_core::vx_reserve_type(vx_state::t_change);
+      vx_state::e_register = new vx_state::Class_register();
+      vx_core::vx_reserve_empty(vx_state::e_register);
+      vx_state::t_register = new vx_state::Class_register();
+      vx_core::vx_reserve_type(vx_state::t_register);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

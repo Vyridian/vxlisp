@@ -31,12 +31,6 @@ namespace vx_data_db {
   typedef Abstract_dbtable* Type_dbtable;
   extern Type_dbtable e_dbtable;
   extern Type_dbtable t_dbtable;
-
-  class vx_Class_package {
-  public:
-  };
-
-
   // (type db)
   class Abstract_db : public virtual vx_core::Abstract_struct {
   public:
@@ -258,6 +252,16 @@ namespace vx_data_db {
     virtual vx_data_db::Type_dbcellmap dbcellmap() const override;
     virtual vx_data_db::Type_dbfieldmap dbfieldmap() const override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

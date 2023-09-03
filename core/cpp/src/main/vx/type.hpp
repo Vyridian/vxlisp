@@ -76,13 +76,7 @@ namespace vx_type {
   class Abstract_traits_from_typedef;
   typedef Abstract_traits_from_typedef* Func_traits_from_typedef;
   extern Func_traits_from_typedef e_traits_from_typedef;
-  extern Func_traits_from_typedef t_traits_from_typedef;
-
-  class vx_Class_package {
-  public:
-  };
-
-// :headerfirst
+  extern Func_traits_from_typedef t_traits_from_typedef;// :headerfirst
 // :header
 
   // vx_string_from_stringlist_join(stringlist, string)
@@ -586,6 +580,16 @@ namespace vx_type {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

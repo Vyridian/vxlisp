@@ -2173,174 +2173,98 @@ namespace vx_data_table {
 
   //}
 
-  vx_data_table::vx_Class_package* vx_package = new vx_data_table::vx_Class_package();
+  vx_data_table::Type_cell e_cell = NULL;
+  vx_data_table::Type_cell t_cell = NULL;
+  vx_data_table::Type_celllist e_celllist = NULL;
+  vx_data_table::Type_celllist t_celllist = NULL;
+  vx_data_table::Type_cellmap e_cellmap = NULL;
+  vx_data_table::Type_cellmap t_cellmap = NULL;
+  vx_data_table::Type_field e_field = NULL;
+  vx_data_table::Type_field t_field = NULL;
+  vx_data_table::Type_fieldlist e_fieldlist = NULL;
+  vx_data_table::Type_fieldlist t_fieldlist = NULL;
+  vx_data_table::Type_fieldmap e_fieldmap = NULL;
+  vx_data_table::Type_fieldmap t_fieldmap = NULL;
+  vx_data_table::Type_filter e_filter = NULL;
+  vx_data_table::Type_filter t_filter = NULL;
+  vx_data_table::Type_row e_row = NULL;
+  vx_data_table::Type_row t_row = NULL;
+  vx_data_table::Type_rowlist e_rowlist = NULL;
+  vx_data_table::Type_rowlist t_rowlist = NULL;
+  vx_data_table::Type_rowmap e_rowmap = NULL;
+  vx_data_table::Type_rowmap t_rowmap = NULL;
+  vx_data_table::Type_sort e_sort = NULL;
+  vx_data_table::Type_sort t_sort = NULL;
+  vx_data_table::Type_table e_table = NULL;
+  vx_data_table::Type_table t_table = NULL;
 
-  vx_data_table::Type_cell vx_e_cell() {
-    vx_data_table::Type_cell output;
-      output = new Class_cell();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_cell vx_t_cell() {
-    vx_data_table::Type_cell output = new Class_cell();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_cell e_cell = vx_e_cell();
-  vx_data_table::Type_cell t_cell = vx_t_cell();
-
-  vx_data_table::Type_celllist vx_e_celllist() {
-    vx_data_table::Type_celllist output;
-      output = new Class_celllist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_celllist vx_t_celllist() {
-    vx_data_table::Type_celllist output = new Class_celllist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_celllist e_celllist = vx_e_celllist();
-  vx_data_table::Type_celllist t_celllist = vx_t_celllist();
-
-  vx_data_table::Type_cellmap vx_e_cellmap() {
-    vx_data_table::Type_cellmap output;
-      output = new Class_cellmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_cellmap vx_t_cellmap() {
-    vx_data_table::Type_cellmap output = new Class_cellmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_cellmap e_cellmap = vx_e_cellmap();
-  vx_data_table::Type_cellmap t_cellmap = vx_t_cellmap();
-
-  vx_data_table::Type_field vx_e_field() {
-    vx_data_table::Type_field output;
-      output = new Class_field();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_field vx_t_field() {
-    vx_data_table::Type_field output = new Class_field();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_field e_field = vx_e_field();
-  vx_data_table::Type_field t_field = vx_t_field();
-
-  vx_data_table::Type_fieldlist vx_e_fieldlist() {
-    vx_data_table::Type_fieldlist output;
-      output = new Class_fieldlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_fieldlist vx_t_fieldlist() {
-    vx_data_table::Type_fieldlist output = new Class_fieldlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_fieldlist e_fieldlist = vx_e_fieldlist();
-  vx_data_table::Type_fieldlist t_fieldlist = vx_t_fieldlist();
-
-  vx_data_table::Type_fieldmap vx_e_fieldmap() {
-    vx_data_table::Type_fieldmap output;
-      output = new Class_fieldmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_fieldmap vx_t_fieldmap() {
-    vx_data_table::Type_fieldmap output = new Class_fieldmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_fieldmap e_fieldmap = vx_e_fieldmap();
-  vx_data_table::Type_fieldmap t_fieldmap = vx_t_fieldmap();
-
-  vx_data_table::Type_filter vx_e_filter() {
-    vx_data_table::Type_filter output;
-      output = new Class_filter();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_filter vx_t_filter() {
-    vx_data_table::Type_filter output = new Class_filter();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_filter e_filter = vx_e_filter();
-  vx_data_table::Type_filter t_filter = vx_t_filter();
-
-  vx_data_table::Type_row vx_e_row() {
-    vx_data_table::Type_row output;
-      output = new Class_row();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_row vx_t_row() {
-    vx_data_table::Type_row output = new Class_row();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_row e_row = vx_e_row();
-  vx_data_table::Type_row t_row = vx_t_row();
-
-  vx_data_table::Type_rowlist vx_e_rowlist() {
-    vx_data_table::Type_rowlist output;
-      output = new Class_rowlist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_rowlist vx_t_rowlist() {
-    vx_data_table::Type_rowlist output = new Class_rowlist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_rowlist e_rowlist = vx_e_rowlist();
-  vx_data_table::Type_rowlist t_rowlist = vx_t_rowlist();
-
-  vx_data_table::Type_rowmap vx_e_rowmap() {
-    vx_data_table::Type_rowmap output;
-      output = new Class_rowmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_rowmap vx_t_rowmap() {
-    vx_data_table::Type_rowmap output = new Class_rowmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_rowmap e_rowmap = vx_e_rowmap();
-  vx_data_table::Type_rowmap t_rowmap = vx_t_rowmap();
-
-  vx_data_table::Type_sort vx_e_sort() {
-    vx_data_table::Type_sort output;
-      output = new Class_sort();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_sort vx_t_sort() {
-    vx_data_table::Type_sort output = new Class_sort();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_sort e_sort = vx_e_sort();
-  vx_data_table::Type_sort t_sort = vx_t_sort();
-
-  vx_data_table::Type_table vx_e_table() {
-    vx_data_table::Type_table output;
-      output = new Class_table();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_table::Type_table vx_t_table() {
-    vx_data_table::Type_table output = new Class_table();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_table::Type_table e_table = vx_e_table();
-  vx_data_table::Type_table t_table = vx_t_table();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_data_table::e_cell = new Class_cell();
+      vx_core::vx_reserve_empty(vx_data_table::e_cell);
+      vx_data_table::t_cell = new Class_cell();
+      vx_core::vx_reserve_type(vx_data_table::t_cell);
+      vx_data_table::e_celllist = new Class_celllist();
+      vx_core::vx_reserve_empty(vx_data_table::e_celllist);
+      vx_data_table::t_celllist = new Class_celllist();
+      vx_core::vx_reserve_type(vx_data_table::t_celllist);
+      vx_data_table::e_cellmap = new Class_cellmap();
+      vx_core::vx_reserve_empty(vx_data_table::e_cellmap);
+      vx_data_table::t_cellmap = new Class_cellmap();
+      vx_core::vx_reserve_type(vx_data_table::t_cellmap);
+      vx_data_table::e_field = new Class_field();
+      vx_core::vx_reserve_empty(vx_data_table::e_field);
+      vx_data_table::t_field = new Class_field();
+      vx_core::vx_reserve_type(vx_data_table::t_field);
+      vx_data_table::e_fieldlist = new Class_fieldlist();
+      vx_core::vx_reserve_empty(vx_data_table::e_fieldlist);
+      vx_data_table::t_fieldlist = new Class_fieldlist();
+      vx_core::vx_reserve_type(vx_data_table::t_fieldlist);
+      vx_data_table::e_fieldmap = new Class_fieldmap();
+      vx_core::vx_reserve_empty(vx_data_table::e_fieldmap);
+      vx_data_table::t_fieldmap = new Class_fieldmap();
+      vx_core::vx_reserve_type(vx_data_table::t_fieldmap);
+      vx_data_table::e_filter = new Class_filter();
+      vx_core::vx_reserve_empty(vx_data_table::e_filter);
+      vx_data_table::t_filter = new Class_filter();
+      vx_core::vx_reserve_type(vx_data_table::t_filter);
+      vx_data_table::e_row = new Class_row();
+      vx_core::vx_reserve_empty(vx_data_table::e_row);
+      vx_data_table::t_row = new Class_row();
+      vx_core::vx_reserve_type(vx_data_table::t_row);
+      vx_data_table::e_rowlist = new Class_rowlist();
+      vx_core::vx_reserve_empty(vx_data_table::e_rowlist);
+      vx_data_table::t_rowlist = new Class_rowlist();
+      vx_core::vx_reserve_type(vx_data_table::t_rowlist);
+      vx_data_table::e_rowmap = new Class_rowmap();
+      vx_core::vx_reserve_empty(vx_data_table::e_rowmap);
+      vx_data_table::t_rowmap = new Class_rowmap();
+      vx_core::vx_reserve_type(vx_data_table::t_rowmap);
+      vx_data_table::e_sort = new Class_sort();
+      vx_core::vx_reserve_empty(vx_data_table::e_sort);
+      vx_data_table::t_sort = new Class_sort();
+      vx_core::vx_reserve_type(vx_data_table::t_sort);
+      vx_data_table::e_table = new Class_table();
+      vx_core::vx_reserve_empty(vx_data_table::e_table);
+      vx_data_table::t_table = new Class_table();
+      vx_core::vx_reserve_type(vx_data_table::t_table);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

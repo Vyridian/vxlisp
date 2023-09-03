@@ -405,36 +405,14 @@ public final class Core {
     public Core.Type_any_from_anylist vx_copy(final Object... vals);
     public Core.Type_any_from_anylist vx_empty();
     public Core.Type_any_from_anylist vx_type();
-    public List<Core.Func_any_from_any> vx_listany_from_any();
-    public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index);
   }
 
   public static class Class_any_from_anylist extends Core.Class_base implements Type_any_from_anylist {
 
-    protected List<Core.Func_any_from_any> vxlist = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
+    protected List<Core.Type_any> vxlist = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
-
-    @Override
-    public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index) {
-      Core.Func_any_from_any output = Core.e_any_from_any;
-      Class_any_from_anylist list = this;
-      int iindex = index.vx_int();
-      List<Core.Func_any_from_any> listval = list.vxlist;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
-      }
-      return output;
-    }
-
-    @Override
-    public List<Core.Func_any_from_any> vx_listany_from_any() {return vxlist;}
-
-    @Override
-    public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_any_from_any(index);
-    }
 
     @Override
     public Type_any_from_anylist vx_new(final Object... vals) {return e_any_from_anylist.vx_copy(vals);}
@@ -444,22 +422,22 @@ public final class Core {
       Class_any_from_anylist output = new Class_any_from_anylist();
       Type_any_from_anylist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      List<Core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
+      List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof Core.Func_any_from_any) {
-          listval.add((Core.Func_any_from_any)valsub);
+        } else if (valsub instanceof Core.Type_any) {
+          listval.add((Core.Type_any)valsub);
         } else if (valsub instanceof Type_any_from_anylist) {
           Type_any_from_anylist multi = (Type_any_from_anylist)valsub;
-          listval.addAll(multi.vx_listany_from_any());
+          listval.addAll(multi.vx_list());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof Core.Func_any_from_any) {
-              Core.Func_any_from_any valitem = (Core.Func_any_from_any)item;
+            if (item instanceof Core.Type_any) {
+              Core.Type_any valitem = (Core.Type_any)item;
               listval.add(valitem);
             }
           }
@@ -4910,9 +4888,10 @@ public final class Core {
 
   /**
    * type: package
+   * A package that store types, consts and funcs.
    * (type package)
    */
-  public interface Type_package extends Core.Type_map {
+  public interface Type_package extends Core.Type_struct {
     public Core.Type_package vx_new(final Object... vals);
     public Core.Type_package vx_copy(final Object... vals);
     public Core.Type_package vx_empty();
@@ -4921,42 +4900,19 @@ public final class Core {
 
   public static class Class_package extends Core.Class_base implements Type_package {
 
-    protected Map<String, Core.Type_any> vxmap = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
-
-    @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
-
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      Class_package map = this;
       String skey = key.vx_string();
-      Map<String, Core.Type_any> mapval = map.vxmap;
-      output = mapval.getOrDefault(skey, Core.e_any);
+      switch (skey) {
+      }
       return output;
     }
 
     @Override
-    public Type_package vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_package output = new Class_package();
-      Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Core.Type_any> map = new LinkedHashMap<>();
-      Set<String> keys = mapval.keySet();
-      for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
-        if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;
-          map.put(key, castval);
-        } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(package) Invalid Value: " + val.toString() + "");
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-        }
-      }
-      output.vxmap = Core.immutablemap(map);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
-      }
-      return output;
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      return Core.immutablemap(output);
     }
 
     @Override
@@ -4965,42 +4921,8 @@ public final class Core {
     @Override
     public Type_package vx_copy(final Object... vals) {
       Class_package output = new Class_package();
-      Type_package valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<>(valmap.vx_map());
-      String key = "";
-      for (Object valsub : vals) {
-        if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
-            key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
-          } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-          }
-        } else {
-          Core.Type_any valany = null;
-          if (valsub instanceof Core.Type_any) {
-            valany = (Core.Type_any)valsub;
-          } else if (valsub instanceof Core.Type_any) {
-            valany = (Core.Type_any)valsub;
-          } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-          }
-          if (valany != null) {
-            mapval.put(key, valany);
-            key = "";
-          }
-        }
-      }
-      output.vxmap = Core.immutablemap(mapval);
+      Type_package val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -5017,9 +4939,9 @@ public final class Core {
       return Core.typedef_new(
         "vx/core", // pkgname
         "package", // name
-        ":map", // extends
+        ":struct", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Core.t_any), // allowtypes
+        Core.e_typelist, // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -12888,7 +12810,7 @@ public final class Core {
     T output = Core.f_empty(generic_any_1);
     output = valstart;
     final List<Core.Type_any> listval = list.vx_list();
-    Core.Type_any current = Core.t_any;
+    Core.Type_any current = Core.e_any;
     boolean first = true;
     for (final Core.Type_any next : listval) {
       if (first) {
@@ -15448,9 +15370,9 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "package", // name
-          ":map", // extends
+          ":struct", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -17760,7 +17682,7 @@ public final class Core {
 
   /**
    * @function map_from_list
-   * Returns a list from a map by applying a function to each key value.
+   * Returns a map from a list by applying a function to each key value.
    * @param  {list-2} vallist
    * @param  {any<-any} fn-any<-any
    * @return {map-1}

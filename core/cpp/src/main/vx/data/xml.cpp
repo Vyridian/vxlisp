@@ -767,76 +767,56 @@ namespace vx_data_xml {
 
   //}
 
-  vx_data_xml::vx_Class_package* vx_package = new vx_data_xml::vx_Class_package();
+  vx_data_xml::Type_xml e_xml = NULL;
+  vx_data_xml::Type_xml t_xml = NULL;
+  vx_data_xml::Type_xmlnode e_xmlnode = NULL;
+  vx_data_xml::Type_xmlnode t_xmlnode = NULL;
+  vx_data_xml::Type_xmlnodelist e_xmlnodelist = NULL;
+  vx_data_xml::Type_xmlnodelist t_xmlnodelist = NULL;
+  vx_data_xml::Type_xmlpropmap e_xmlpropmap = NULL;
+  vx_data_xml::Type_xmlpropmap t_xmlpropmap = NULL;
+  vx_data_xml::Func_xml_from_textblock e_xml_from_textblock = NULL;
+  vx_data_xml::Func_xml_from_textblock t_xml_from_textblock = NULL;
 
-  vx_data_xml::Type_xml vx_e_xml() {
-    vx_data_xml::Type_xml output;
-      output = new Class_xml();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_xml::Type_xml vx_t_xml() {
-    vx_data_xml::Type_xml output = new Class_xml();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_xml::Type_xml e_xml = vx_e_xml();
-  vx_data_xml::Type_xml t_xml = vx_t_xml();
-
-  vx_data_xml::Type_xmlnode vx_e_xmlnode() {
-    vx_data_xml::Type_xmlnode output;
-      output = new Class_xmlnode();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlnode vx_t_xmlnode() {
-    vx_data_xml::Type_xmlnode output = new Class_xmlnode();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlnode e_xmlnode = vx_e_xmlnode();
-  vx_data_xml::Type_xmlnode t_xmlnode = vx_t_xmlnode();
-
-  vx_data_xml::Type_xmlnodelist vx_e_xmlnodelist() {
-    vx_data_xml::Type_xmlnodelist output;
-      output = new Class_xmlnodelist();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlnodelist vx_t_xmlnodelist() {
-    vx_data_xml::Type_xmlnodelist output = new Class_xmlnodelist();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlnodelist e_xmlnodelist = vx_e_xmlnodelist();
-  vx_data_xml::Type_xmlnodelist t_xmlnodelist = vx_t_xmlnodelist();
-
-  vx_data_xml::Type_xmlpropmap vx_e_xmlpropmap() {
-    vx_data_xml::Type_xmlpropmap output;
-      output = new Class_xmlpropmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlpropmap vx_t_xmlpropmap() {
-    vx_data_xml::Type_xmlpropmap output = new Class_xmlpropmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_xml::Type_xmlpropmap e_xmlpropmap = vx_e_xmlpropmap();
-  vx_data_xml::Type_xmlpropmap t_xmlpropmap = vx_t_xmlpropmap();
-
-  // (func xml<-textblock)
-  vx_data_xml::Func_xml_from_textblock vx_e_xml_from_textblock() {
-    vx_data_xml::Func_xml_from_textblock output = new vx_data_xml::Class_xml_from_textblock();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_xml::Func_xml_from_textblock vx_t_xml_from_textblock() {
-    vx_data_xml::Func_xml_from_textblock output = new vx_data_xml::Class_xml_from_textblock();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_xml::Func_xml_from_textblock e_xml_from_textblock = vx_e_xml_from_textblock();
-  vx_data_xml::Func_xml_from_textblock t_xml_from_textblock = vx_t_xml_from_textblock();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_data_xml::e_xml = new Class_xml();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xml);
+      vx_data_xml::t_xml = new Class_xml();
+      vx_core::vx_reserve_type(vx_data_xml::t_xml);
+      vx_data_xml::e_xmlnode = new Class_xmlnode();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xmlnode);
+      vx_data_xml::t_xmlnode = new Class_xmlnode();
+      vx_core::vx_reserve_type(vx_data_xml::t_xmlnode);
+      vx_data_xml::e_xmlnodelist = new Class_xmlnodelist();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xmlnodelist);
+      vx_data_xml::t_xmlnodelist = new Class_xmlnodelist();
+      vx_core::vx_reserve_type(vx_data_xml::t_xmlnodelist);
+      vx_data_xml::e_xmlpropmap = new Class_xmlpropmap();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xmlpropmap);
+      vx_data_xml::t_xmlpropmap = new Class_xmlpropmap();
+      vx_core::vx_reserve_type(vx_data_xml::t_xmlpropmap);
+      vx_data_xml::e_xml_from_textblock = new vx_data_xml::Class_xml_from_textblock();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xml_from_textblock);
+      vx_data_xml::t_xml_from_textblock = new vx_data_xml::Class_xml_from_textblock();
+      vx_core::vx_reserve_type(vx_data_xml::t_xml_from_textblock);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

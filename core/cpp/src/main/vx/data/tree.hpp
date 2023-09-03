@@ -32,22 +32,13 @@ namespace vx_data_tree {
   extern Type_tree t_tree;
   class Class_brancharrow_down;
   typedef Class_brancharrow_down* Const_brancharrow_down;
-  extern Const_brancharrow_down c_brancharrow_down();
+  extern Const_brancharrow_down c_brancharrow_down;
   class Class_brancharrow_up;
   typedef Class_brancharrow_up* Const_brancharrow_up;
-  extern Const_brancharrow_up c_brancharrow_up();
+  extern Const_brancharrow_up c_brancharrow_up;
   class Class_brancharrow_updown;
   typedef Class_brancharrow_updown* Const_brancharrow_updown;
-  extern Const_brancharrow_updown c_brancharrow_updown();
-
-  class vx_Class_package {
-  public:
-    vx_data_tree::Const_brancharrow_down c_brancharrow_down;
-    vx_data_tree::Const_brancharrow_up c_brancharrow_up;
-    vx_data_tree::Const_brancharrow_updown c_brancharrow_updown;
-  };
-
-
+  extern Const_brancharrow_updown c_brancharrow_updown;
   // (type branch)
   class Abstract_branch : public virtual vx_core::Abstract_struct {
   public:
@@ -280,6 +271,16 @@ namespace vx_data_tree {
     static vx_data_tree::Const_brancharrow_updown vx_const_new();
     vx_core::Type_constdef vx_constdef() const;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

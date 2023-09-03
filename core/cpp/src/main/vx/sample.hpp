@@ -11,7 +11,7 @@ namespace vx_sample {
   extern Type_mytype t_mytype;
   class Class_myconst;
   typedef Class_myconst* Const_myconst;
-  extern Const_myconst c_myconst();
+  extern Const_myconst c_myconst;
   class Abstract_main;
   typedef Abstract_main* Func_main;
   extern Func_main e_main;
@@ -20,13 +20,6 @@ namespace vx_sample {
   typedef Abstract_myfunc* Func_myfunc;
   extern Func_myfunc e_myfunc;
   extern Func_myfunc t_myfunc;
-
-  class vx_Class_package {
-  public:
-    vx_sample::Const_myconst c_myconst;
-  };
-
-
   // (func main)
   void f_main();
 
@@ -121,6 +114,16 @@ namespace vx_sample {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

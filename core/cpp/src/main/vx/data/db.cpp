@@ -1163,90 +1163,62 @@ namespace vx_data_db {
 
   //}
 
-  vx_data_db::vx_Class_package* vx_package = new vx_data_db::vx_Class_package();
+  vx_data_db::Type_db e_db = NULL;
+  vx_data_db::Type_db t_db = NULL;
+  vx_data_db::Type_dbcell e_dbcell = NULL;
+  vx_data_db::Type_dbcell t_dbcell = NULL;
+  vx_data_db::Type_dbcellmap e_dbcellmap = NULL;
+  vx_data_db::Type_dbcellmap t_dbcellmap = NULL;
+  vx_data_db::Type_dbfield e_dbfield = NULL;
+  vx_data_db::Type_dbfield t_dbfield = NULL;
+  vx_data_db::Type_dbfieldmap e_dbfieldmap = NULL;
+  vx_data_db::Type_dbfieldmap t_dbfieldmap = NULL;
+  vx_data_db::Type_dbtable e_dbtable = NULL;
+  vx_data_db::Type_dbtable t_dbtable = NULL;
 
-  vx_data_db::Type_db vx_e_db() {
-    vx_data_db::Type_db output;
-      output = new Class_db();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_db vx_t_db() {
-    vx_data_db::Type_db output = new Class_db();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_db e_db = vx_e_db();
-  vx_data_db::Type_db t_db = vx_t_db();
-
-  vx_data_db::Type_dbcell vx_e_dbcell() {
-    vx_data_db::Type_dbcell output;
-      output = new Class_dbcell();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_dbcell vx_t_dbcell() {
-    vx_data_db::Type_dbcell output = new Class_dbcell();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_dbcell e_dbcell = vx_e_dbcell();
-  vx_data_db::Type_dbcell t_dbcell = vx_t_dbcell();
-
-  vx_data_db::Type_dbcellmap vx_e_dbcellmap() {
-    vx_data_db::Type_dbcellmap output;
-      output = new Class_dbcellmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_dbcellmap vx_t_dbcellmap() {
-    vx_data_db::Type_dbcellmap output = new Class_dbcellmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_dbcellmap e_dbcellmap = vx_e_dbcellmap();
-  vx_data_db::Type_dbcellmap t_dbcellmap = vx_t_dbcellmap();
-
-  vx_data_db::Type_dbfield vx_e_dbfield() {
-    vx_data_db::Type_dbfield output;
-      output = new Class_dbfield();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_dbfield vx_t_dbfield() {
-    vx_data_db::Type_dbfield output = new Class_dbfield();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_dbfield e_dbfield = vx_e_dbfield();
-  vx_data_db::Type_dbfield t_dbfield = vx_t_dbfield();
-
-  vx_data_db::Type_dbfieldmap vx_e_dbfieldmap() {
-    vx_data_db::Type_dbfieldmap output;
-      output = new Class_dbfieldmap();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_dbfieldmap vx_t_dbfieldmap() {
-    vx_data_db::Type_dbfieldmap output = new Class_dbfieldmap();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_dbfieldmap e_dbfieldmap = vx_e_dbfieldmap();
-  vx_data_db::Type_dbfieldmap t_dbfieldmap = vx_t_dbfieldmap();
-
-  vx_data_db::Type_dbtable vx_e_dbtable() {
-    vx_data_db::Type_dbtable output;
-      output = new Class_dbtable();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_db::Type_dbtable vx_t_dbtable() {
-    vx_data_db::Type_dbtable output = new Class_dbtable();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_db::Type_dbtable e_dbtable = vx_e_dbtable();
-  vx_data_db::Type_dbtable t_dbtable = vx_t_dbtable();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_data_db::e_db = new Class_db();
+      vx_core::vx_reserve_empty(vx_data_db::e_db);
+      vx_data_db::t_db = new Class_db();
+      vx_core::vx_reserve_type(vx_data_db::t_db);
+      vx_data_db::e_dbcell = new Class_dbcell();
+      vx_core::vx_reserve_empty(vx_data_db::e_dbcell);
+      vx_data_db::t_dbcell = new Class_dbcell();
+      vx_core::vx_reserve_type(vx_data_db::t_dbcell);
+      vx_data_db::e_dbcellmap = new Class_dbcellmap();
+      vx_core::vx_reserve_empty(vx_data_db::e_dbcellmap);
+      vx_data_db::t_dbcellmap = new Class_dbcellmap();
+      vx_core::vx_reserve_type(vx_data_db::t_dbcellmap);
+      vx_data_db::e_dbfield = new Class_dbfield();
+      vx_core::vx_reserve_empty(vx_data_db::e_dbfield);
+      vx_data_db::t_dbfield = new Class_dbfield();
+      vx_core::vx_reserve_type(vx_data_db::t_dbfield);
+      vx_data_db::e_dbfieldmap = new Class_dbfieldmap();
+      vx_core::vx_reserve_empty(vx_data_db::e_dbfieldmap);
+      vx_data_db::t_dbfieldmap = new Class_dbfieldmap();
+      vx_core::vx_reserve_type(vx_data_db::t_dbfieldmap);
+      vx_data_db::e_dbtable = new Class_dbtable();
+      vx_core::vx_reserve_empty(vx_data_db::e_dbtable);
+      vx_data_db::t_dbtable = new Class_dbtable();
+      vx_core::vx_reserve_type(vx_data_db::t_dbtable);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

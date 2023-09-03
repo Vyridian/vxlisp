@@ -1638,14 +1638,14 @@
               <div class="tr">
                 <div class="td">srccpp</div>
                 <div class="td">:source</div>
-                <div class="td">../cpp/src</div>
+                <div class="td">../cpp/src/main</div>
                 <div class="td">:cpp</div>
                 <div class="td"></div>
               </div>
               <div class="tr">
                 <div class="td">testcpp</div>
                 <div class="td">:test</div>
-                <div class="td">../cpp/test</div>
+                <div class="td">../cpp/src/test</div>
                 <div class="td">:cpp</div>
                 <div class="td"></div>
               </div>
@@ -1761,13 +1761,16 @@
    :port 8081
    :doc  &quot;Run Simple Development Web Server&quot;)
   (cmd srccpp
-   :code :source
-   :lang :cpp
-   :path ../cpp/src)
+   :code    :source
+   :lang    :cpp
+   :path    ../cpp/src/main
+   :context &quot;&quot;
+   :main    vx/core/string
+  )
   (cmd testcpp
    :code :test
    :lang :cpp
-   :path ../cpp/test)
+   :path ../cpp/src/test)
   (cmd srcjs
    :code :source
    :lang :js
@@ -1896,6 +1899,9 @@
  [vallist   : list-2
   fn-filter : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_collection::vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;const fn = fn_filter['vx_value']
     if (fn) {
@@ -1949,6 +1955,9 @@
   start  : int
   end    : int]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
+    output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :js
    &quot;let istart = start
     let iend = end
@@ -2299,6 +2308,9 @@
  [vallist   : list-2
   fn-filter : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_collection::vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;const fn = fn_filter['vx_value']
     if (fn) {
@@ -2469,6 +2481,9 @@
   start  : int
   end    : int]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
+    output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :js
    &quot;let istart = start
     let iend = end
@@ -2586,7 +2601,7 @@
   (native
    :cpp
     &quot;// :header
-     virtual vx_core::Type_any* vx_type_from_any(std::any* value);&quot;)
+     vx_core::Type_any vx_type_from_any(vx_core::Type_any value) const;&quot;)
  :doc &quot;Any Value for Variant Type&quot;)
 
 (type any-async&lt;-func
@@ -2632,8 +2647,7 @@
    :cpp
     &quot;// :header
      bool vx_p_boolean = false;
-     bool vx_boolean();
-     vx_core::Type_boolean* vx_new_from_boolean(bool isval);&quot;
+     bool vx_boolean() const;&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
@@ -2691,10 +2705,10 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+     static vx_core::Type_constdef vx_constdef_new(
        std::string pkgname,
        std::string name,
-       vx_core::Type_typedef* typ
+       vx_core::Type_typedef typ
      );&quot;)
  :doc &quot;Const Definition Class for inspecting properties.&quot;)
 
@@ -2723,10 +2737,9 @@
   (native
    :cpp
     &quot;// :header
-     std::string vx_decimal = “0.0”;
-     float vx_float();
-     std::string vx_string();
-     vx_core::Type_decimal* vx_new_from_string(std::string sval);&quot;
+     std::string vx_p_decimal = “0.0”;
+     float vx_float() const;
+     std::string vx_string() const;&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -2757,8 +2770,7 @@
    :cpp
     &quot;// :header
      float vx_p_float = 0;
-     float vx_float();
-     vx_core::Type_float* vx_new_from_float(float fval);&quot;
+     float vx_float() const;&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -2776,7 +2788,12 @@
 
 (type func
  :extends :func
- :doc     &quot;Original Function Class.&quot;)
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::Type_funcdef vx_funcdef() const;&quot;)
+ :doc &quot;Original Function Class.&quot;)
 
 (type funcdef
  :extends :struct
@@ -2789,21 +2806,13 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+     static vx_core::Type_funcdef vx_funcdef_new(
        std::string pkgname,
        std::string name,
-       int idx,
+       long idx,
        bool async,
-       vx_core::Type_typedef* typ
-     ) {
-       vx_core::Type_funcdef* output;
-       output-&gt;vx_p_pkgname = vx_core::t_string-&gt;vx_new_from_string(pkgname);
-       output-&gt;vx_p_name = vx_core::t_string-&gt;vx_new_from_string(name);
-       output-&gt;vx_p_idx = vx_core::t_int-&gt;vx_new_from_int(idx);
-       output-&gt;vx_p_async = vx_core::t_boolean-&gt;vx_new_from_boolean(async);
-       output-&gt;vx_p_type = typ;
-       return output;
-     };&quot;)
+       vx_core::Type_any typ
+     );&quot;)
  :doc &quot;Func Definition Class for inspecting properties.&quot;)
 
 (type funclist
@@ -2824,9 +2833,8 @@
   (native
    :cpp
     &quot;// :header
-     int vx_p_int = 0;
-     int vx_int();
-     vx_core::Type_int* vx_new_from_int(int ival);&quot;
+     long vx_p_int = 0;
+     long vx_int() const;&quot;
    :java
     &quot;protected int vxint = 0;
 
@@ -2839,14 +2847,14 @@
        output.vxint = ival;
        return output;
      }&quot;)
- :test        (test-true  (is-int 4))
-              (test-true  (is-int &quot;4&quot;))
-              (test-true  (is-int infinity))
-              (test-true  (is-int neginfinity))
-              (test-true  (is-int notanumber))
-              (test-false (is-int &quot;a&quot;))
-              (test-false (is-int 5.5))
- :doc         &quot;A simple integer.&quot;)
+ :test (test-true  (is-int 4))
+       (test-true  (is-int &quot;4&quot;))
+       (test-true  (is-int infinity))
+       (test-true  (is-int neginfinity))
+       (test-true  (is-int notanumber))
+       (test-false (is-int &quot;a&quot;))
+       (test-false (is-int 5.5))
+ :doc  &quot;A simple integer.&quot;)
 
 (type intlist
  :extends    :list
@@ -2861,7 +2869,15 @@
 (type list
  :extends    :list
  :allowtypes [any]
- :doc        &quot;A simple untyped list.&quot;)
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::vx_Type_listany vx_p_list;
+		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
+     vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;&quot;)
+ :doc &quot;A simple untyped list.&quot;)
 
 (type listtype
  :extends :type
@@ -2870,7 +2886,16 @@
 (type map
  :extends    :map
  :allowtypes [any]
- :doc        &quot;A simple untyped map.&quot;)
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     std::vector&lt;std::string&gt; vx_p_keys;
+     vx_core::vx_Type_mapany vx_p_map;
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
+     vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;&quot;)
+ :doc &quot;A simple untyped map.&quot;)
 
 (type maptype
  :extends :type
@@ -2941,7 +2966,9 @@
   (native
    :cpp
     &quot;// :header
-     std::exception* err;&quot;
+     std::exception err;
+     vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) const;
+     vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) const;&quot;
    :java
     &quot;public Exception err = null;
 
@@ -2968,6 +2995,9 @@
               msgblocks : msgblocklist]
  :create
   (native
+   :cpp
+    &quot;// :header
+     vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const;&quot;
    :java
     &quot;public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
        Core.Type_msgblock output = Core.e_msgblock;
@@ -3044,11 +3074,11 @@
  :doc        &quot;A map of number.&quot;)
 
 (type package
- :extends    :map
- :allowtypes [any])
+ :extends :struct
+ :doc     &quot;A package that store types, consts and funcs.&quot;)
 
 (type packagemap
- :extends      :map
+ :extends    :map
  :allowtypes [package])
 
 (type permission
@@ -3103,8 +3133,7 @@
    :cpp
     &quot;// :header
      std::string vx_p_string = “”;
-     std::string vx_string();
-     vx_core::Type_string* vx_new_from_string(std::string text);&quot;
+     std::string vx_string() const;&quot;
    :java
     &quot;protected String vxstring = “”;
 
@@ -3141,7 +3170,13 @@
 
 (type struct
  :extends :struct
- :doc     &quot;Struct is the type of all structures/objects with properties.&quot;)
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;&quot;)
+ :doc &quot;Struct is the type of all structures/objects with properties.&quot;)
 
 (type thenelse
  :extends    :struct
@@ -3177,18 +3212,18 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_typedef* vx_typedef_new(
+     static vx_core::Type_typedef vx_typedef_new(
        std::string pkgname,
        std::string name,
        std::string extend,
-       vx_core::Type_typelist* traits,
-       vx_core::Type_typelist* allowtypes,
-       vx_core::Type_typelist* disallowtypes,
-       vx_core::Type_funclist* allowfuncs,
-       vx_core::Type_funclist* disallowfuncs,
-       vx_core::Type_anylist* allowvalues,
-       vx_core::Type_anylist* disallowvalues,
-       vx_core::Type_argmap* properties
+       vx_core::Type_typelist traits,
+       vx_core::Type_typelist allowtypes,
+       vx_core::Type_typelist disallowtypes,
+       vx_core::Type_funclist allowfuncs,
+       vx_core::Type_funclist disallowfuncs,
+       vx_core::Type_anylist allowvalues,
+       vx_core::Type_anylist disallowvalues,
+       vx_core::Type_argmap properties
      );&quot;)
  :doc &quot;Type Definition Class for inspecting Type properties.&quot;)
 
@@ -3285,6 +3320,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() + num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 + num2&quot;
   :java
@@ -3299,6 +3337,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) + vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 + num2&quot;
   :java
@@ -3340,6 +3381,9 @@
 (func +1 : int
  [num : int]
  (native
+  :cpp
+   &quot;long result = num-&gt;vx_int() + 1;
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num + 1&quot;
   :java
@@ -3354,6 +3398,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() - num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 - num2&quot;
   :java
@@ -3368,6 +3415,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) - vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 - num2&quot;
   :java
@@ -3410,6 +3460,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() * num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 * num2&quot;
   :java
@@ -3424,6 +3477,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) * vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 * num2&quot;
   :java
@@ -3470,6 +3526,16 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float float1 = vx_core::vx_float_from_number(num1);
+    float float2 = vx_core::vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = vx_core::c_notanumber();
+    } else {
+      float result = float1 / float2;
+      output = vx_core::vx_new_float(result);
+    }&quot;
   :js
    &quot;num1 / num2&quot;
   :java
@@ -3491,6 +3557,18 @@
  [val1 : any
   val2 : any]
  (native
+  :cpp
+   &quot;bool isequal = false;
+    if (val1 == val2) {
+      isequal = true;
+    } else {
+      std::string str1 = vx_core::vx_string_from_any(val1);
+      std::string str2 = vx_core::vx_string_from_any(val2);
+      if (str1 == str2) {
+        isequal = true;
+      }
+    }
+    output = vx_core::vx_new_boolean(isequal);&quot;
   :js
    &quot;const native1 = &quot; (native&lt;-any val1) &quot;
     const native2 = &quot; (native&lt;-any val2) &quot;
@@ -3626,6 +3704,7 @@
 (func ! : boolean
  [val : boolean :doc &quot;Thing to not&quot;]
  (native
+  :cpp  &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
   :js   &quot;!val&quot;
   :java &quot;Core.t_boolean.vx_new_from_boolean(!val.vx_boolean());&quot;)
  :alias &quot;not&quot;
@@ -3779,6 +3858,8 @@
 (func allowtypes&lt;-typedef : typelist
  [vtypedef : typedef]
  (native
+  :cpp
+   &quot;vtypedef-&gt;allowtypes();&quot;
   :js
    &quot;vtypedef['vx_value']['allowtypes']&quot;
   :java
@@ -3789,6 +3870,12 @@
  [val1 : boolean
   val2 : boolean]
  (native
+  :cpp
+   &quot;if (val1-&gt;vx_boolean() &amp;&amp; val2-&gt;vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    }&quot;
   :js
    &quot;if (val1 &amp;&amp; val2) {
       output = true
@@ -3828,6 +3915,8 @@
 (func any&lt;-any : any-1
  [value : any-2]
  (native
+  :cpp
+   &quot;output = vx_core::vx_any_from_any(generic_any_1, value);&quot;
   :js
    &quot;value&quot;
   :java
@@ -3875,6 +3964,14 @@
  [values : list-1
   index  : int]
  (native
+  :cpp
+   &quot;long intindex = index-&gt;vx_int();
+    vx_core::vx_Type_listany listvalue = values-&gt;vx_list();
+    long intsize = vx_core::vx_int_from_sizet(listvalue.size());
+    if (intindex &lt; intsize) {
+      vx_core::Type_any value = listvalue[intindex];
+      output = vx_core::vx_any_from_any(generic_any_1, value);
+    }&quot;
   :js
    &quot;if (index &lt; values.length) {
       output = values[index]
@@ -3901,11 +3998,12 @@
   fn-reduce : any&lt;-reduce]
  (native
   :cpp
-   &quot;output = valstart;
-    std::vector&lt;vx_core::Type_any*&gt; listval = list-&gt;vx_list();
-    for (vx_core::Type_any* item : listval) {
-      output = fn_reduce-&gt;f_any_from_reduce(generic_any_1, output, item);
-    }&quot;
+   &quot;vx_core::Type_any work = valstart;
+    std::vector&lt;vx_core::Type_any&gt; listval = list-&gt;vx_list();
+    for (vx_core::Type_any item : listval) {
+      work = fn_reduce-&gt;vx_any_from_reduce(work, item);
+    };
+    output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -3937,11 +4035,14 @@
   valstart       : any-1
   fn-reduce-next : any&lt;-reduce-next]
  (native
+  :cpp
+   &quot;vx_core::Type_any result = vx_core::vx_any_from_list_result_next(generic_any_1, list, valstart, fn_reduce_next);
+    output = vx_core::vx_any_from_any(generic_any_1, result);&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce_next['vx_value']
     if (fn) {
-      let current = vx_core.t_any
+      let current = vx_core.e_any
       let first = true
       for (const next of list) {
         if (first) {
@@ -3955,7 +4056,7 @@
   :java
    &quot;output = valstart;
     final List&lt;Core.Type_any&gt; listval = list.vx_list();
-    Core.Type_any current = Core.t_any;
+    Core.Type_any current = Core.e_any;
     boolean first = true;
     for (final Core.Type_any next : listval) {
       if (first) {
@@ -3971,6 +4072,9 @@
  [valuemap : map-1
   key      : string]
  (native
+  :cpp
+   &quot;vx_core::Type_any val = valuemap-&gt;vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;if (key.startsWith(':')) {
       key = key.substring(1)
@@ -4018,6 +4122,9 @@
  [vstruct : struct-2
   key    : string]
  (native
+  :cpp
+   &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -4075,6 +4182,9 @@
  [val1 : any
   val2 : any]
  (native
+  :cpp
+   &quot;long intresult = vx_core::vx_compare(val1, val2);
+    output = vx_core::vx_new_int(intresult);&quot;
   :js
    &quot;if (val1 == val2) {
       output = 0
@@ -4114,6 +4224,9 @@
  [text : string
   find : string]
  (native
+  :cpp
+   &quot;bool booleanresult = vx_boolean_from_string_find(text-&gt;vx_string(), find-&gt;vx_string());
+    output = vx_core::vx_new_boolean(booleanresult);&quot;
   :js
    &quot;text.includes(find)&quot;
   :java
@@ -4130,6 +4243,17 @@
  [values : list-2 :doc &quot;Any list&quot;
   find   : any    :doc &quot;Any value&quot;]
  (native
+  :cpp
+   &quot;bool booleanresult = false;
+    vx_core::vx_Type_listany listvalues = values-&gt;vx_list();
+    for (vx_core::Type_any item : listvalues) {
+      vx_core::Type_boolean iseq = vx_core::f_eq(item, find);
+      if (iseq-&gt;vx_boolean()) {
+        booleanresult = true;
+        break;
+      }
+    }
+    output = vx_core::vx_new_boolean(booleanresult);&quot;
   :js
    &quot;values.includes(find)&quot;
   :java
@@ -4152,6 +4276,8 @@
  [value  : any-1
   values : anylist :...]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_copy(value, values-&gt;vx_list());&quot;
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :java
@@ -4170,6 +4296,8 @@
 (func empty : any-1
  [type : any-1]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :js
    &quot;const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
@@ -4203,6 +4331,15 @@
  [values      : list-1
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;std::vector&lt;vx_core::Type_any&gt; listvalue = values-&gt;vx_list();
+    for (vx_core::Type_any value : listvalue) {
+      if (value != vx_core::c_nothing()) {
+        vx_core::Type_any any = fn_any_from_any-&gt;vx_any_from_any(value);
+        output = vx_core::vx_any_from_any(generic_any_1, any);
+        break;
+      }
+    }&quot;
   :js
    &quot;output = &quot; nothing &quot;
     const fn = fn_any_from_any['vx_value']
@@ -4250,6 +4387,8 @@
 (func funcdef&lt;-func : funcdef
  [val : func]
  (native
+  :cpp
+   &quot;val-&gt;vx_funcdef();&quot;
   :java
    &quot;val.vx_funcdef();&quot;))
 
@@ -4276,6 +4415,10 @@
  [clause : boolean
   then   : any-1]
  (native
+  :cpp
+   &quot;if (clause-&gt;vx_boolean()) {
+      output = then;
+    }&quot;
   :js
    &quot;if (clause) {
       output = then
@@ -4293,6 +4436,12 @@
   thenval : any-1
   elseval : any-1]
  (native
+  :cpp
+   &quot;if (clause-&gt;vx_boolean()) {
+      output = thenval;
+    } else {
+      output = elseval;
+    }&quot;
   :js
    &quot;if (clause) {
       output = thenval
@@ -4312,6 +4461,9 @@
 (func if : any-1
  [thenelselist : thenelselist :...]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -4382,13 +4534,13 @@
    (native
     :cpp
      &quot;// :capture val
-      vx_core::Type_int* intresult = vx_core::e_int;
+      vx_core::Type_int intresult = vx_core::e_int;
       try {
         std::string sval = val-&gt;vx_string();
-        int ival = std::stoi(sval);
-        intresult = vx_core::t_int-&gt;vx_new_from_int(ival);
+        long ival = std::stoll(sval);
+        intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
-        intresult = vx_core::c_notanumber;
+        intresult = vx_core::c_notanumber();
       }
       return intresult;&quot;
     :js
@@ -4417,6 +4569,10 @@
 (func is-empty : boolean
  [text : string]
  (native
+  :cpp
+   &quot;if (text-&gt;vx_p_iref == -2) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;if (text.length == 0) {
       output = vx_core.c_true
@@ -4430,6 +4586,10 @@
 (func is-empty : boolean
  [value : any]
  (native
+  :cpp
+   &quot;if (value == value-&gt;vx_empty()) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
@@ -4452,6 +4612,12 @@
  [text : string
   find : string]
  (native
+  :cpp
+   &quot;std::string stext = text-&gt;vx_string();
+    std::string sfind = find-&gt;vx_string();
+    if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;if (text.endsWith(find)) {
       output = vx_core.c_true
@@ -4467,6 +4633,13 @@
 (func is-func : boolean
  [val : any]
  (native
+  :cpp
+   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any val) &quot;;
+    std::string sextend = extend-&gt;vx_string();
+    vx_core::vx_release(extend);
+    if (sextend == “:func”) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
     if (extend == ':func') {
@@ -4481,6 +4654,9 @@
 (func is-int : boolean
  [value : any]
  (native
+  :cpp
+   &quot;bool result = vx_core::vx_is_int(value);
+    output = vx_core::vx_new_boolean(result);&quot;
   :js
    &quot;output = false
     switch (value) {
@@ -4582,6 +4758,11 @@
 (func length&lt;-list : int
  [values : list-1]
  (native
+  :cpp
+   &quot;long len = vx_core::vx_int_from_sizet(values-&gt;vx_list().size());
+    if (len &gt; 0) {
+      output = vx_core::vx_new_int(len);
+    }&quot;
   :js &quot;values.length&quot;
   :java
    &quot;int intresult = values.vx_list().size();
@@ -4593,12 +4774,16 @@
  [args   : arglist
   fn-any : any&lt;-func :: any-1]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = fn_any-&gt;vx_any_from_func();
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
     }&quot;
-  :java &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
+  :java
+   &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
  :test (test
         7
         (let
@@ -4610,18 +4795,28 @@
  [args         : arglist
   fn-any-async : any&lt;-func-async]
  (native
+  :cpp
+   &quot;fn_any_async-&gt;vx_any_from_func_async(generic_any_1);&quot;
   :js
    &quot;const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
     }&quot;
-  :java &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
+  :java
+   &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)
 
 (func list&lt;-list : list-1
  [values      : list-2
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany list_value = values-&gt;vx_list();
+    vx_core::vx_Type_listany list_result = vx_core::vx_listany_from_listany_fn(list_value, [fn_any_from_any](vx_core::Type_any val) {
+      return fn_any_from_any-&gt;vx_any_from_any(val);
+    });
+    vx_core::Type_any anylist = generic_list_1-&gt;vx_new(list_result);
+    output = vx_core::vx_any_from_any(generic_list_1, anylist);&quot;
   :js
    &quot;const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -4640,6 +4835,12 @@
  [values                : list-2
   fn-any&lt;-any-async : any&lt;-any-async]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany list_value = values-&gt;vx_list();
+    vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
+      return fn_any_from_any_async-&gt;vx_any_from_any_async(vx_core::t_any, val);
+    });
+    output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);&quot;
   :js
    &quot;const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -4664,6 +4865,9 @@
  [values      : list-2
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -4686,9 +4890,12 @@
  :doc &quot;Returns a flattened list of processed items from another list&quot;)
 
 (func list&lt;-map : list-1
- [valuemap           : map-2
-  fn-any&lt;-key-value  : any&lt;-key-value]
+ [valuemap          : map-2
+  fn-any&lt;-key-value : any&lt;-key-value]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_list_1, list)&quot;
   :js
    &quot;const fn = fn_any_from_key_value['vx_value']
     if (fn) {
@@ -4717,6 +4924,20 @@
  [valuemap                : map-2
   fn-any&lt;-key-value-async : any&lt;-key-value-async])
 
+/*
+(func any&lt;-start-end-fn : any-1
+ [start : int
+  end   : int
+  fn-any&lt;-int-any : any&lt;-int-any ::any-1]
+ :doc &quot;Returns a list by for-nexting from start to end.&quot;)
+
+(func list&lt;-start-end-fn : list-1
+ [start : int
+  end   : int
+  fn-any&lt;-int : any&lt;-int ::any-1]
+ :doc &quot;Returns a list by for-nexting from start to end.&quot;)
+*/
+
 (func list&lt;-type : any
  [type : any]
  (native
@@ -4728,6 +4949,9 @@
 (func log : any
  [value : any]
  (native
+  :cpp
+   &quot;vx_core::vx_debug(value);
+    output = value;&quot;
   :js
    &quot;const text = vx_core.f_string_from_any(value)
     console.log(text)
@@ -4742,6 +4966,10 @@
  [vallist      : list-2
   fn-any&lt;-any  : any&lt;-any :: string]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
+    vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
+    output = vx_core::vx_new_from_map(generic_map_1, mapany);&quot;
   :js
    &quot;const valmap = {}
     vallist.map(value =&gt; {
@@ -4762,14 +4990,15 @@
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));&quot;)
  :test (test
-        (stringlist &quot;a1&quot; &quot;b2&quot;)
-        (list&lt;-map : stringlist
-         (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
+        (stringmap
+         &quot;keya&quot; &quot;a&quot;
+         &quot;keyb&quot; &quot;b&quot;)
+        (map&lt;-list : stringmap
+         (stringlist &quot;a&quot; &quot;b&quot;)
          (fn : string
-          [key : string
-           val : string]
-          (string key val))))
- :doc &quot;Returns a list from a map by applying a function to each key value.&quot;)
+          [val : string]
+          (string &quot;key&quot; val))))
+ :doc &quot;Returns a map from a list by applying a function to each key value.&quot;)
 
 (func mempool-addref : none
  [values : anylist :...]
@@ -4910,6 +5139,8 @@
  [type   : any-1
   values : anylist :...]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :js
    &quot;const typedef = vx_core.f_typedef_from_any(type)
     const copy = type
@@ -5580,6 +5811,12 @@
  [val1 : boolean
   val2 : boolean]
  (native
+  :cpp
+   &quot;if (val1-&gt;vx_boolean() || val2-&gt;vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    }&quot;
   :js
    &quot;if (val1 || val2) {
       output = true
@@ -5658,6 +5895,11 @@
 (func resolve : any-1
  [fn-any : any&lt;-func]
  (native
+  :cpp
+   &quot;if (fn_any) {
+      vx_core::Type_any any = fn_any-&gt;vx_any_from_func();
+      output = vx_core::vx_any_from_any(generic_any_1, any);
+    }&quot;
   :js
    &quot;const typedef = &quot; (typedef&lt;-any fn-any) &quot;
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -5681,6 +5923,10 @@
 (func resolve-async : any-1 :async
  [fn-any : any&lt;-func-async]
  (native
+  :cpp
+   &quot;if (fn_any) {
+      output = fn_any-&gt;vx_any_from_func_async(generic_any_1);
+    }&quot;
   :js
    &quot;const typedef = &quot; (typedef&lt;-any fn-any) &quot;
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -5724,6 +5970,9 @@
  [text   : string
   repeat : int]
  (native
+  :cpp
+   &quot;std::string stringtext = vx_core::vx_string_from_string_repeat(text-&gt;vx_string(), repeat-&gt;vx_int());
+    output = vx_core::vx_new_string(stringtext);&quot;
   :js &quot;text.repeat(repeat)&quot;
   :java
    &quot;String stringtext = text.vx_string();
@@ -5757,6 +6006,9 @@
   indent   : int
   linefeed : boolean]
  (native
+  :cpp
+   &quot;std::string soutput = vx_core::vx_string_from_any_indent(value, indent-&gt;vx_int(), linefeed-&gt;vx_boolean(), false);
+    output = vx_core::vx_new_string(soutput);&quot;
   :js
    &quot;const indenttext = ' '.repeat(indent)
     let text = ''
@@ -5963,6 +6215,9 @@
  [val          : any-2
   thenelselist : thenelselist :...]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;let fn_any = null
     if (thenelselist.length &gt; 0) {
@@ -6050,6 +6305,8 @@
 (func traits&lt;-typedef : typelist
  [vtypedef : typedef]
  (native
+  :cpp
+   &quot;vtypedef-&gt;traits();&quot;
   :js
    &quot;vtypedef['vx_value']['traits']&quot;
   :java
@@ -6059,6 +6316,8 @@
 (func type&lt;-any : any
  [value : any-1]
  (native
+  :cpp
+   &quot;value-&gt;vx_type();&quot;
   :js
    &quot;switch (typeof value) {
     case 'boolean':
@@ -6108,6 +6367,8 @@
 (func typedef&lt;-type : typedef
  [val : any]
  (native
+  :cpp
+   &quot;val-&gt;vx_typedef();&quot;
   :js
    &quot;output = val&quot;
   :java
@@ -6187,7 +6448,7 @@
   (native
    :cpp
     &quot;// :header
-     virtual vx_core::Type_any* vx_type_from_any(std::any* value);&quot;)
+     vx_core::Type_any vx_type_from_any(vx_core::Type_any value) const;&quot;)
  :doc &quot;Any Value for Variant Type&quot;)</div>
             </li>
           </ul>
@@ -6570,8 +6831,7 @@
    :cpp
     &quot;// :header
      bool vx_p_boolean = false;
-     bool vx_boolean();
-     vx_core::Type_boolean* vx_new_from_boolean(bool isval);&quot;
+     bool vx_boolean() const;&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
@@ -6956,10 +7216,10 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_constdef* vx_core::Type_constdef::vx_constdef_new(
+     static vx_core::Type_constdef vx_constdef_new(
        std::string pkgname,
        std::string name,
-       vx_core::Type_typedef* typ
+       vx_core::Type_typedef typ
      );&quot;)
  :doc &quot;Const Definition Class for inspecting properties.&quot;)</div>
             </li>
@@ -7168,10 +7428,9 @@
   (native
    :cpp
     &quot;// :header
-     std::string vx_decimal = “0.0”;
-     float vx_float();
-     std::string vx_string();
-     vx_core::Type_decimal* vx_new_from_string(std::string sval);&quot;
+     std::string vx_p_decimal = “0.0”;
+     float vx_float() const;
+     std::string vx_string() const;&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -7271,8 +7530,7 @@
    :cpp
     &quot;// :header
      float vx_p_float = 0;
-     float vx_float();
-     vx_core::Type_float* vx_new_from_float(float fval);&quot;
+     float vx_float() const;&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -7324,7 +7582,12 @@
             <li>
               <div class="source">(type func
  :extends :func
- :doc     &quot;Original Function Class.&quot;)</div>
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::Type_funcdef vx_funcdef() const;&quot;)
+ :doc &quot;Original Function Class.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -7408,21 +7671,13 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_funcdef* vx_core::Type_funcdef::vx_funcdef_new(
+     static vx_core::Type_funcdef vx_funcdef_new(
        std::string pkgname,
        std::string name,
-       int idx,
+       long idx,
        bool async,
-       vx_core::Type_typedef* typ
-     ) {
-       vx_core::Type_funcdef* output;
-       output-&gt;vx_p_pkgname = vx_core::t_string-&gt;vx_new_from_string(pkgname);
-       output-&gt;vx_p_name = vx_core::t_string-&gt;vx_new_from_string(name);
-       output-&gt;vx_p_idx = vx_core::t_int-&gt;vx_new_from_int(idx);
-       output-&gt;vx_p_async = vx_core::t_boolean-&gt;vx_new_from_boolean(async);
-       output-&gt;vx_p_type = typ;
-       return output;
-     };&quot;)
+       vx_core::Type_any typ
+     );&quot;)
  :doc &quot;Func Definition Class for inspecting properties.&quot;)</div>
             </li>
           </ul>
@@ -7564,9 +7819,8 @@
   (native
    :cpp
     &quot;// :header
-     int vx_p_int = 0;
-     int vx_int();
-     vx_core::Type_int* vx_new_from_int(int ival);&quot;
+     long vx_p_int = 0;
+     long vx_int() const;&quot;
    :java
     &quot;protected int vxint = 0;
 
@@ -7579,14 +7833,14 @@
        output.vxint = ival;
        return output;
      }&quot;)
- :test        (test-true  (is-int 4))
-              (test-true  (is-int &quot;4&quot;))
-              (test-true  (is-int infinity))
-              (test-true  (is-int neginfinity))
-              (test-true  (is-int notanumber))
-              (test-false (is-int &quot;a&quot;))
-              (test-false (is-int 5.5))
- :doc         &quot;A simple integer.&quot;)</div>
+ :test (test-true  (is-int 4))
+       (test-true  (is-int &quot;4&quot;))
+       (test-true  (is-int infinity))
+       (test-true  (is-int neginfinity))
+       (test-true  (is-int notanumber))
+       (test-false (is-int &quot;a&quot;))
+       (test-false (is-int 5.5))
+ :doc  &quot;A simple integer.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -7721,7 +7975,15 @@
               <div class="source">(type list
  :extends    :list
  :allowtypes [any]
- :doc        &quot;A simple untyped list.&quot;)</div>
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::vx_Type_listany vx_p_list;
+		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
+     vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;&quot;)
+ :doc &quot;A simple untyped list.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -7804,7 +8066,16 @@
               <div class="source">(type map
  :extends    :map
  :allowtypes [any]
- :doc        &quot;A simple untyped map.&quot;)</div>
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     std::vector&lt;std::string&gt; vx_p_keys;
+     vx_core::vx_Type_mapany vx_p_map;
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
+     vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;&quot;)
+ :doc &quot;A simple untyped map.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -8021,7 +8292,9 @@
   (native
    :cpp
     &quot;// :header
-     std::exception* err;&quot;
+     std::exception err;
+     vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) const;
+     vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) const;&quot;
    :java
     &quot;public Exception err = null;
 
@@ -8104,6 +8377,9 @@
               msgblocks : msgblocklist]
  :create
   (native
+   :cpp
+    &quot;// :header
+     vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const;&quot;
    :java
     &quot;public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
        Core.Type_msgblock output = Core.e_msgblock;
@@ -8468,25 +8744,19 @@
           <div class="lbl">Extends:</div>
           <ul>
             <li>
-              <div class="txt">:map</div>
+              <div class="txt">:struct</div>
             </li>
           </ul>
           <div class="lbl">Description:</div>
           <ul>
             <li>
-              <div class="txt"></div>
+              <div class="txt">A package that store types, consts and funcs.</div>
             </li>
           </ul>
           <div class="lbl">Default:</div>
           <ul>
             <li>
               <div class="txt"></div>
-            </li>
-          </ul>
-          <div class="lbl">Allowed Types:</div>
-          <ul>
-            <li>
-              <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">any</span></div>
             </li>
           </ul>
           <div class="lbl">Usage/Test Cases:</div>
@@ -8496,8 +8766,8 @@
           <ul>
             <li>
               <div class="source">(type package
- :extends    :map
- :allowtypes [any])</div>
+ :extends :struct
+ :doc     &quot;A package that store types, consts and funcs.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -8540,7 +8810,7 @@
           <ul>
             <li>
               <div class="source">(type packagemap
- :extends      :map
+ :extends    :map
  :allowtypes [package])</div>
             </li>
           </ul>
@@ -9031,8 +9301,7 @@
    :cpp
     &quot;// :header
      std::string vx_p_string = “”;
-     std::string vx_string();
-     vx_core::Type_string* vx_new_from_string(std::string text);&quot;
+     std::string vx_string() const;&quot;
    :java
     &quot;protected String vxstring = “”;
 
@@ -9183,7 +9452,13 @@
             <li>
               <div class="source">(type struct
  :extends :struct
- :doc     &quot;Struct is the type of all structures/objects with properties.&quot;)</div>
+ :create
+  (native
+   :cpp
+    &quot;// :header
+     vx_core::vx_Type_mapany vx_map() const;
+     vx_core::Type_any vx_get_any(vx_core::Type_string key) const;&quot;)
+ :doc &quot;Struct is the type of all structures/objects with properties.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -9470,18 +9745,18 @@
   (native
    :cpp
     &quot;// :header
-     static vx_core::Type_typedef* vx_typedef_new(
+     static vx_core::Type_typedef vx_typedef_new(
        std::string pkgname,
        std::string name,
        std::string extend,
-       vx_core::Type_typelist* traits,
-       vx_core::Type_typelist* allowtypes,
-       vx_core::Type_typelist* disallowtypes,
-       vx_core::Type_funclist* allowfuncs,
-       vx_core::Type_funclist* disallowfuncs,
-       vx_core::Type_anylist* allowvalues,
-       vx_core::Type_anylist* disallowvalues,
-       vx_core::Type_argmap* properties
+       vx_core::Type_typelist traits,
+       vx_core::Type_typelist allowtypes,
+       vx_core::Type_typelist disallowtypes,
+       vx_core::Type_funclist allowfuncs,
+       vx_core::Type_funclist disallowfuncs,
+       vx_core::Type_anylist allowvalues,
+       vx_core::Type_anylist disallowvalues,
+       vx_core::Type_argmap properties
      );&quot;)
  :doc &quot;Type Definition Class for inspecting Type properties.&quot;)</div>
             </li>
@@ -10278,6 +10553,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() + num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 + num2&quot;
   :java
@@ -10345,6 +10623,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) + vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 + num2&quot;
   :java
@@ -10526,6 +10807,9 @@
               <div class="source">(func +1 : int
  [num : int]
  (native
+  :cpp
+   &quot;long result = num-&gt;vx_int() + 1;
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num + 1&quot;
   :java
@@ -10593,6 +10877,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() - num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 - num2&quot;
   :java
@@ -10660,6 +10947,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) - vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 - num2&quot;
   :java
@@ -10847,6 +11137,9 @@
  [num1 : int
   num2 : int]
  (native
+  :cpp
+   &quot;long result = num1-&gt;vx_int() * num2-&gt;vx_int();
+    output = vx_core::vx_new_int(result);&quot;
   :js
    &quot;num1 * num2&quot;
   :java
@@ -10914,6 +11207,9 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float result = vx_core::vx_float_from_number(num1) * vx_core::vx_float_from_number(num2);
+    output = vx_core::vx_new_float(result);&quot;
   :js
    &quot;num1 * num2&quot;
   :java
@@ -11109,6 +11405,16 @@
  [num1 : number
   num2 : number]
  (native
+  :cpp
+   &quot;float float1 = vx_core::vx_float_from_number(num1);
+    float float2 = vx_core::vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = vx_core::c_notanumber();
+    } else {
+      float result = float1 / float2;
+      output = vx_core::vx_new_float(result);
+    }&quot;
   :js
    &quot;num1 / num2&quot;
   :java
@@ -11186,6 +11492,18 @@
  [val1 : any
   val2 : any]
  (native
+  :cpp
+   &quot;bool isequal = false;
+    if (val1 == val2) {
+      isequal = true;
+    } else {
+      std::string str1 = vx_core::vx_string_from_any(val1);
+      std::string str2 = vx_core::vx_string_from_any(val2);
+      if (str1 == str2) {
+        isequal = true;
+      }
+    }
+    output = vx_core::vx_new_boolean(isequal);&quot;
   :js
    &quot;const native1 = &quot; (native&lt;-any val1) &quot;
     const native2 = &quot; (native&lt;-any val2) &quot;
@@ -11378,6 +11696,7 @@
               <div class="source">(func ! : boolean
  [val : boolean :doc &quot;Thing to not&quot;]
  (native
+  :cpp  &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
   :js   &quot;!val&quot;
   :java &quot;Core.t_boolean.vx_new_from_boolean(!val.vx_boolean());&quot;)
  :alias &quot;not&quot;
@@ -12289,6 +12608,8 @@ improves readability.</div>
               <div class="source">(func allowtypes&lt;-typedef : typelist
  [vtypedef : typedef]
  (native
+  :cpp
+   &quot;vtypedef-&gt;allowtypes();&quot;
   :js
    &quot;vtypedef['vx_value']['allowtypes']&quot;
   :java
@@ -12352,6 +12673,12 @@ improves readability.</div>
  [val1 : boolean
   val2 : boolean]
  (native
+  :cpp
+   &quot;if (val1-&gt;vx_boolean() &amp;&amp; val2-&gt;vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    }&quot;
   :js
    &quot;if (val1 &amp;&amp; val2) {
       output = true
@@ -12485,6 +12812,8 @@ improves readability.</div>
               <div class="source">(func any&lt;-any : any-1
  [value : any-2]
  (native
+  :cpp
+   &quot;output = vx_core::vx_any_from_any(generic_any_1, value);&quot;
   :js
    &quot;value&quot;
   :java
@@ -12911,6 +13240,14 @@ improves readability.</div>
  [values : list-1
   index  : int]
  (native
+  :cpp
+   &quot;long intindex = index-&gt;vx_int();
+    vx_core::vx_Type_listany listvalue = values-&gt;vx_list();
+    long intsize = vx_core::vx_int_from_sizet(listvalue.size());
+    if (intindex &lt; intsize) {
+      vx_core::Type_any value = listvalue[intindex];
+      output = vx_core::vx_any_from_any(generic_any_1, value);
+    }&quot;
   :js
    &quot;if (index &lt; values.length) {
       output = values[index]
@@ -13003,11 +13340,12 @@ improves readability.</div>
   fn-reduce : any&lt;-reduce]
  (native
   :cpp
-   &quot;output = valstart;
-    std::vector&lt;vx_core::Type_any*&gt; listval = list-&gt;vx_list();
-    for (vx_core::Type_any* item : listval) {
-      output = fn_reduce-&gt;f_any_from_reduce(generic_any_1, output, item);
-    }&quot;
+   &quot;vx_core::Type_any work = valstart;
+    std::vector&lt;vx_core::Type_any&gt; listval = list-&gt;vx_list();
+    for (vx_core::Type_any item : listval) {
+      work = fn_reduce-&gt;vx_any_from_reduce(work, item);
+    };
+    output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -13095,11 +13433,14 @@ improves readability.</div>
   valstart       : any-1
   fn-reduce-next : any&lt;-reduce-next]
  (native
+  :cpp
+   &quot;vx_core::Type_any result = vx_core::vx_any_from_list_result_next(generic_any_1, list, valstart, fn_reduce_next);
+    output = vx_core::vx_any_from_any(generic_any_1, result);&quot;
   :js
    &quot;output = valstart
     const fn = fn_reduce_next['vx_value']
     if (fn) {
-      let current = vx_core.t_any
+      let current = vx_core.e_any
       let first = true
       for (const next of list) {
         if (first) {
@@ -13113,7 +13454,7 @@ improves readability.</div>
   :java
    &quot;output = valstart;
     final List&lt;Core.Type_any&gt; listval = list.vx_list();
-    Core.Type_any current = Core.t_any;
+    Core.Type_any current = Core.e_any;
     boolean first = true;
     for (final Core.Type_any next : listval) {
       if (first) {
@@ -13183,6 +13524,9 @@ improves readability.</div>
  [valuemap : map-1
   key      : string]
  (native
+  :cpp
+   &quot;vx_core::Type_any val = valuemap-&gt;vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;if (key.startsWith(':')) {
       key = key.substring(1)
@@ -13577,6 +13921,9 @@ improves readability.</div>
  [vstruct : struct-2
   key    : string]
  (native
+  :cpp
+   &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
+    output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -13963,6 +14310,9 @@ improves readability.</div>
  [val1 : any
   val2 : any]
  (native
+  :cpp
+   &quot;long intresult = vx_core::vx_compare(val1, val2);
+    output = vx_core::vx_new_int(intresult);&quot;
   :js
    &quot;if (val1 == val2) {
       output = 0
@@ -14055,6 +14405,9 @@ improves readability.</div>
  [text : string
   find : string]
  (native
+  :cpp
+   &quot;bool booleanresult = vx_boolean_from_string_find(text-&gt;vx_string(), find-&gt;vx_string());
+    output = vx_core::vx_new_boolean(booleanresult);&quot;
   :js
    &quot;text.includes(find)&quot;
   :java
@@ -14125,6 +14478,17 @@ improves readability.</div>
  [values : list-2 :doc &quot;Any list&quot;
   find   : any    :doc &quot;Any value&quot;]
  (native
+  :cpp
+   &quot;bool booleanresult = false;
+    vx_core::vx_Type_listany listvalues = values-&gt;vx_list();
+    for (vx_core::Type_any item : listvalues) {
+      vx_core::Type_boolean iseq = vx_core::f_eq(item, find);
+      if (iseq-&gt;vx_boolean()) {
+        booleanresult = true;
+        break;
+      }
+    }
+    output = vx_core::vx_new_boolean(booleanresult);&quot;
   :js
    &quot;values.includes(find)&quot;
   :java
@@ -14198,6 +14562,8 @@ improves readability.</div>
  [value  : any-1
   values : anylist :...]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_copy(value, values-&gt;vx_list());&quot;
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :java
@@ -14311,6 +14677,8 @@ improves readability.</div>
               <div class="source">(func empty : any-1
  [type : any-1]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :js
    &quot;const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
@@ -14535,6 +14903,15 @@ improves readability.</div>
  [values      : list-1
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;std::vector&lt;vx_core::Type_any&gt; listvalue = values-&gt;vx_list();
+    for (vx_core::Type_any value : listvalue) {
+      if (value != vx_core::c_nothing()) {
+        vx_core::Type_any any = fn_any_from_any-&gt;vx_any_from_any(value);
+        output = vx_core::vx_any_from_any(generic_any_1, any);
+        break;
+      }
+    }&quot;
   :js
    &quot;output = &quot; nothing &quot;
     const fn = fn_any_from_any['vx_value']
@@ -14662,6 +15039,8 @@ improves readability.</div>
               <div class="source">(func funcdef&lt;-func : funcdef
  [val : func]
  (native
+  :cpp
+   &quot;val-&gt;vx_funcdef();&quot;
   :java
    &quot;val.vx_funcdef();&quot;))</div>
             </li>
@@ -14884,6 +15263,10 @@ improves readability.</div>
  [clause : boolean
   then   : any-1]
  (native
+  :cpp
+   &quot;if (clause-&gt;vx_boolean()) {
+      output = then;
+    }&quot;
   :js
    &quot;if (clause) {
       output = then
@@ -14959,6 +15342,12 @@ improves readability.</div>
   thenval : any-1
   elseval : any-1]
  (native
+  :cpp
+   &quot;if (clause-&gt;vx_boolean()) {
+      output = thenval;
+    } else {
+      output = elseval;
+    }&quot;
   :js
    &quot;if (clause) {
       output = thenval
@@ -15029,6 +15418,9 @@ improves readability.</div>
               <div class="source">(func if : any-1
  [thenelselist : thenelselist :...]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -15192,13 +15584,13 @@ improves readability.</div>
    (native
     :cpp
      &quot;// :capture val
-      vx_core::Type_int* intresult = vx_core::e_int;
+      vx_core::Type_int intresult = vx_core::e_int;
       try {
         std::string sval = val-&gt;vx_string();
-        int ival = std::stoi(sval);
-        intresult = vx_core::t_int-&gt;vx_new_from_int(ival);
+        long ival = std::stoll(sval);
+        intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
-        intresult = vx_core::c_notanumber;
+        intresult = vx_core::c_notanumber();
       }
       return intresult;&quot;
     :js
@@ -15273,6 +15665,10 @@ improves readability.</div>
               <div class="source">(func is-empty : boolean
  [text : string]
  (native
+  :cpp
+   &quot;if (text-&gt;vx_p_iref == -2) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;if (text.length == 0) {
       output = vx_core.c_true
@@ -15335,6 +15731,10 @@ improves readability.</div>
               <div class="source">(func is-empty : boolean
  [value : any]
  (native
+  :cpp
+   &quot;if (value == value-&gt;vx_empty()) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
@@ -15408,6 +15808,12 @@ improves readability.</div>
  [text : string
   find : string]
  (native
+  :cpp
+   &quot;std::string stext = text-&gt;vx_string();
+    std::string sfind = find-&gt;vx_string();
+    if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;if (text.endsWith(find)) {
       output = vx_core.c_true
@@ -15469,6 +15875,13 @@ improves readability.</div>
               <div class="source">(func is-func : boolean
  [val : any]
  (native
+  :cpp
+   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any val) &quot;;
+    std::string sextend = extend-&gt;vx_string();
+    vx_core::vx_release(extend);
+    if (sextend == “:func”) {
+      output = vx_core::c_true();
+    }&quot;
   :js
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
     if (extend == ':func') {
@@ -15529,6 +15942,9 @@ improves readability.</div>
               <div class="source">(func is-int : boolean
  [value : any]
  (native
+  :cpp
+   &quot;bool result = vx_core::vx_is_int(value);
+    output = vx_core::vx_new_boolean(result);&quot;
   :js
    &quot;output = false
     switch (value) {
@@ -15819,6 +16235,11 @@ improves readability.</div>
               <div class="source">(func length&lt;-list : int
  [values : list-1]
  (native
+  :cpp
+   &quot;long len = vx_core::vx_int_from_sizet(values-&gt;vx_list().size());
+    if (len &gt; 0) {
+      output = vx_core::vx_new_int(len);
+    }&quot;
   :js &quot;values.length&quot;
   :java
    &quot;int intresult = values.vx_list().size();
@@ -15887,12 +16308,16 @@ improves readability.</div>
  [args   : arglist
   fn-any : any&lt;-func :: any-1]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = fn_any-&gt;vx_any_from_func();
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
     }&quot;
-  :java &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
+  :java
+   &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
  :test (test
         7
         (let
@@ -15955,12 +16380,15 @@ improves readability.</div>
  [args         : arglist
   fn-any-async : any&lt;-func-async]
  (native
+  :cpp
+   &quot;fn_any_async-&gt;vx_any_from_func_async(generic_any_1);&quot;
   :js
    &quot;const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
     }&quot;
-  :java &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
+  :java
+   &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)</div>
             </li>
           </ul>
@@ -16018,6 +16446,13 @@ improves readability.</div>
  [values      : list-2
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany list_value = values-&gt;vx_list();
+    vx_core::vx_Type_listany list_result = vx_core::vx_listany_from_listany_fn(list_value, [fn_any_from_any](vx_core::Type_any val) {
+      return fn_any_from_any-&gt;vx_any_from_any(val);
+    });
+    vx_core::Type_any anylist = generic_list_1-&gt;vx_new(list_result);
+    output = vx_core::vx_any_from_any(generic_list_1, anylist);&quot;
   :js
    &quot;const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -16087,6 +16522,12 @@ improves readability.</div>
  [values                : list-2
   fn-any&lt;-any-async : any&lt;-any-async]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany list_value = values-&gt;vx_list();
+    vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
+      return fn_any_from_any_async-&gt;vx_any_from_any_async(vx_core::t_any, val);
+    });
+    output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);&quot;
   :js
    &quot;const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -16162,6 +16603,9 @@ improves readability.</div>
  [values      : list-2
   fn-any&lt;-any : any&lt;-any]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -16243,9 +16687,12 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func list&lt;-map : list-1
- [valuemap           : map-2
-  fn-any&lt;-key-value  : any&lt;-key-value]
+ [valuemap          : map-2
+  fn-any&lt;-key-value : any&lt;-key-value]
  (native
+  :cpp
+   &quot;vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_list_1, list)&quot;
   :js
    &quot;const fn = fn_any_from_key_value['vx_value']
     if (fn) {
@@ -16428,6 +16875,9 @@ improves readability.</div>
               <div class="source">(func log : any
  [value : any]
  (native
+  :cpp
+   &quot;vx_core::vx_debug(value);
+    output = value;&quot;
   :js
    &quot;const text = vx_core.f_string_from_any(value)
     console.log(text)
@@ -16480,19 +16930,20 @@ improves readability.</div>
           <div class="lbl">Description:</div>
           <ul>
             <li>
-              <div class="txt">Returns a list from a map by applying a function to each key value.</div>
+              <div class="txt">Returns a map from a list by applying a function to each key value.</div>
             </li>
           </ul>
           <div class="lbl">Usage/Test Cases:</div>
           <ul>
             <li><div class="test">(test
- (stringlist &quot;a1&quot; &quot;b2&quot;)
- (list&lt;-map : stringlist
-  (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
+ (stringmap
+  &quot;keya&quot; &quot;a&quot;
+  &quot;keyb&quot; &quot;b&quot;)
+ (map&lt;-list : stringmap
+  (stringlist &quot;a&quot; &quot;b&quot;)
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))</div></li>
+   [val : string]
+   (string &quot;key&quot; val))))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
@@ -16501,6 +16952,10 @@ improves readability.</div>
  [vallist      : list-2
   fn-any&lt;-any  : any&lt;-any :: string]
  (native
+  :cpp
+   &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
+    vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
+    output = vx_core::vx_new_from_map(generic_map_1, mapany);&quot;
   :js
    &quot;const valmap = {}
     vallist.map(value =&gt; {
@@ -16521,14 +16976,15 @@ improves readability.</div>
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));&quot;)
  :test (test
-        (stringlist &quot;a1&quot; &quot;b2&quot;)
-        (list&lt;-map : stringlist
-         (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
+        (stringmap
+         &quot;keya&quot; &quot;a&quot;
+         &quot;keyb&quot; &quot;b&quot;)
+        (map&lt;-list : stringmap
+         (stringlist &quot;a&quot; &quot;b&quot;)
          (fn : string
-          [key : string
-           val : string]
-          (string key val))))
- :doc &quot;Returns a list from a map by applying a function to each key value.&quot;)</div>
+          [val : string]
+          (string &quot;key&quot; val))))
+ :doc &quot;Returns a map from a list by applying a function to each key value.&quot;)</div>
             </li>
           </ul>
         </div>
@@ -17241,6 +17697,8 @@ improves readability.</div>
  [type   : any-1
   values : anylist :...]
  (native
+  :cpp
+   &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :js
    &quot;const typedef = vx_core.f_typedef_from_any(type)
     const copy = type
@@ -18006,6 +18464,12 @@ improves readability.</div>
  [val1 : boolean
   val2 : boolean]
  (native
+  :cpp
+   &quot;if (val1-&gt;vx_boolean() || val2-&gt;vx_boolean()) {
+      output = vx_core::c_true();
+    } else {
+      output = vx_core::c_false();
+    }&quot;
   :js
    &quot;if (val1 || val2) {
       output = true
@@ -18507,6 +18971,11 @@ improves readability.</div>
               <div class="source">(func resolve : any-1
  [fn-any : any&lt;-func]
  (native
+  :cpp
+   &quot;if (fn_any) {
+      vx_core::Type_any any = fn_any-&gt;vx_any_from_func();
+      output = vx_core::vx_any_from_any(generic_any_1, any);
+    }&quot;
   :js
    &quot;const typedef = &quot; (typedef&lt;-any fn-any) &quot;
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -18577,6 +19046,10 @@ improves readability.</div>
               <div class="source">(func resolve-async : any-1 :async
  [fn-any : any&lt;-func-async]
  (native
+  :cpp
+   &quot;if (fn_any) {
+      output = fn_any-&gt;vx_any_from_func_async(generic_any_1);
+    }&quot;
   :js
    &quot;const typedef = &quot; (typedef&lt;-any fn-any) &quot;
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -18846,6 +19319,9 @@ improves readability.</div>
  [text   : string
   repeat : int]
  (native
+  :cpp
+   &quot;std::string stringtext = vx_core::vx_string_from_string_repeat(text-&gt;vx_string(), repeat-&gt;vx_int());
+    output = vx_core::vx_new_string(stringtext);&quot;
   :js &quot;text.repeat(repeat)&quot;
   :java
    &quot;String stringtext = text.vx_string();
@@ -18996,6 +19472,9 @@ improves readability.</div>
   indent   : int
   linefeed : boolean]
  (native
+  :cpp
+   &quot;std::string soutput = vx_core::vx_string_from_any_indent(value, indent-&gt;vx_int(), linefeed-&gt;vx_boolean(), false);
+    output = vx_core::vx_new_string(soutput);&quot;
   :js
    &quot;const indenttext = ' '.repeat(indent)
     let text = ''
@@ -19299,6 +19778,9 @@ improves readability.</div>
  [val          : any-2
   thenelselist : thenelselist :...]
  (native
+  :cpp
+   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+    output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;let fn_any = null
     if (thenelselist.length &gt; 0) {
@@ -19483,6 +19965,8 @@ improves readability.</div>
               <div class="source">(func traits&lt;-typedef : typelist
  [vtypedef : typedef]
  (native
+  :cpp
+   &quot;vtypedef-&gt;traits();&quot;
   :js
    &quot;vtypedef['vx_value']['traits']&quot;
   :java
@@ -19541,6 +20025,8 @@ improves readability.</div>
               <div class="source">(func type&lt;-any : any
  [value : any-1]
  (native
+  :cpp
+   &quot;value-&gt;vx_type();&quot;
   :js
    &quot;switch (typeof value) {
     case 'boolean':
@@ -19682,6 +20168,8 @@ improves readability.</div>
               <div class="source">(func typedef&lt;-type : typedef
  [val : any]
  (native
+  :cpp
+   &quot;val-&gt;vx_typedef();&quot;
   :js
    &quot;output = val&quot;
   :java
@@ -20864,6 +21352,8 @@ improves readability.</div>
 (func boolean-exists&lt;-file : boolean
  [file : file]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_boolean_exists_from_file(file);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -20892,6 +21382,8 @@ improves readability.</div>
  [file : file
   text : string]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_boolean_write_from_file_string(file, text);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -20933,6 +21425,8 @@ improves readability.</div>
 (func string-read&lt;-file : string
  [file : file]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -20969,13 +21463,13 @@ improves readability.</div>
 
 (func pathcurrent&lt;-os : string
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_pathcurrent_from_os();&quot;
   :java
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
     output = Core.t_string.vx_new_from_string(spath);&quot;)
- :test (test-true
-        (is-endswith (pathcurrent&lt;-os) &quot;\\java&quot;))
  :clientserver :server
  :doc  &quot;Returns current system path.&quot;)
 
@@ -21160,6 +21654,8 @@ improves readability.</div>
               <div class="source">(func boolean-exists&lt;-file : boolean
  [file : file]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_boolean_exists_from_file(file);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -21296,6 +21792,8 @@ improves readability.</div>
  [file : file
   text : string]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_boolean_write_from_file_string(file, text);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -21444,6 +21942,8 @@ improves readability.</div>
               <div class="source">(func string-read&lt;-file : string
  [file : file]
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -21607,21 +22107,19 @@ improves readability.</div>
           </ul>
           <div class="lbl">Usage/Test Cases:</div>
           <ul>
-            <li><div class="test">(test-true
- (is-endswith (pathcurrent&lt;-os) &quot;\\java&quot;))</div></li>
           </ul>
           <div class="lbl">Source Code:</div>
           <ul>
             <li>
               <div class="source">(func pathcurrent&lt;-os : string
  (native
+  :cpp
+   &quot;output = vx_data_file::vx_pathcurrent_from_os();&quot;
   :java
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
     output = Core.t_string.vx_new_from_string(spath);&quot;)
- :test (test-true
-        (is-endswith (pathcurrent&lt;-os) &quot;\\java&quot;))
  :clientserver :server
  :doc  &quot;Returns current system path.&quot;)</div>
             </li>
@@ -24012,6 +24510,9 @@ improves readability.</div>
  [type : any
   args : anylist]
  (native
+  :cpp
+   &quot;vx_core::Type_replfunc replfunc = dynamic_cast&lt;vx_core::Type_replfunc&gt;(type);
+    output = replfunc-&gt;vx_repl(args);&quot;
   :js
    &quot;const vxvalue = type['vx_value']
     if (vxvalue != undefined) {
@@ -24424,6 +24925,9 @@ improves readability.</div>
  [type : any
   args : anylist]
  (native
+  :cpp
+   &quot;vx_core::Type_replfunc replfunc = dynamic_cast&lt;vx_core::Type_replfunc&gt;(type);
+    output = replfunc-&gt;vx_repl(args);&quot;
   :js
    &quot;const vxvalue = type['vx_value']
     if (vxvalue != undefined) {
@@ -28788,6 +29292,9 @@ improves readability.</div>
 (func length&lt;-string : int
  [text : string]
  (native
+  :cpp
+   &quot;long len = text-&gt;vx_string().length();
+    output = vx_core::vx_new_int(len);&quot;
   :js
    &quot;text.length&quot;
   :java
@@ -28832,6 +29339,9 @@ improves readability.</div>
   start : int
   end   : int]
  (native
+  :cpp
+   &quot;std::string str = vx_core::vx_string_from_string_start_end(text-&gt;vx_string(), start-&gt;vx_int(), end-&gt;vx_int());
+    output = vx_core::vx_new_string(str);&quot;
   :js &quot;text.substring(start, end)&quot;
   :java
    &quot;String stext = text.vx_string();
@@ -28855,9 +29365,11 @@ improves readability.</div>
  :doc &quot;Returns a substring between start and end positions.&quot;)
 
 (func string&lt;-stringlist-join : string
- [vals      : stringlist
+ [vals  : stringlist
   delim : string]
  (native
+  :cpp
+   &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :js &quot;vals.join(delim)&quot;
   :java
    &quot;List&lt;String&gt; listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -&gt; {
@@ -29449,6 +29961,9 @@ improves readability.</div>
               <div class="source">(func length&lt;-string : int
  [text : string]
  (native
+  :cpp
+   &quot;long len = text-&gt;vx_string().length();
+    output = vx_core::vx_new_int(len);&quot;
   :js
    &quot;text.length&quot;
   :java
@@ -29710,6 +30225,9 @@ improves readability.</div>
   start : int
   end   : int]
  (native
+  :cpp
+   &quot;std::string str = vx_core::vx_string_from_string_start_end(text-&gt;vx_string(), start-&gt;vx_int(), end-&gt;vx_int());
+    output = vx_core::vx_new_string(str);&quot;
   :js &quot;text.substring(start, end)&quot;
   :java
    &quot;String stext = text.vx_string();
@@ -29785,9 +30303,11 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(func string&lt;-stringlist-join : string
- [vals      : stringlist
+ [vals  : stringlist
   delim : string]
  (native
+  :cpp
+   &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :js &quot;vals.join(delim)&quot;
   :java
    &quot;List&lt;String&gt; listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -&gt; {
@@ -30222,6 +30742,13 @@ improves readability.</div>
 (func htmlstring&lt;-string : string
  [text : string]
  (native
+  :cpp
+   &quot;std::string str = text-&gt;vx_string();
+    str = vx_core::vx_string_from_string_find_replace(str, “&amp;”, “&amp;amp;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “'”, “\'”);
+    str = vx_core::vx_string_from_string_find_replace(str, “&gt;”, “&amp;gt;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “&lt;”, “&amp;lt;”);
+    output = vx_core::vx_new_string(str);&quot;
   :js
    &quot;const str = “” + text
     output = str
@@ -32501,6 +33028,13 @@ improves readability.</div>
               <div class="source">(func htmlstring&lt;-string : string
  [text : string]
  (native
+  :cpp
+   &quot;std::string str = text-&gt;vx_string();
+    str = vx_core::vx_string_from_string_find_replace(str, “&amp;”, “&amp;amp;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “'”, “\'”);
+    str = vx_core::vx_string_from_string_find_replace(str, “&gt;”, “&amp;gt;”);
+    str = vx_core::vx_string_from_string_find_replace(str, “&lt;”, “&amp;lt;”);
+    output = vx_core::vx_new_string(str);&quot;
   :js
    &quot;const str = “” + text
     output = str

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include <fstream>
+#include <map>
 #include <string>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
@@ -11,19 +12,19 @@ namespace vx_data_file {
 // :body
 
   vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file) {
-    vx_core::Type_boolean output = vx_core::c_false();
+    vx_core::Type_boolean output = vx_core::c_false;
 		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
     std::string spath = path->vx_string();
     vx_core::vx_release(path);
 		std::ifstream f(spath);
     if (f.good()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
 		}
     return output;
 	}
 
   vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text) {
-    vx_core::Type_boolean output = vx_core::c_false();
+    vx_core::Type_boolean output = vx_core::c_false;
 		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
     std::string spath = path->vx_string();
     std::string stext = text->vx_string();
@@ -33,15 +34,15 @@ namespace vx_data_file {
 	}
 
   vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text) {
-    vx_core::Type_boolean output = vx_core::c_false();
+    vx_core::Type_boolean output = vx_core::c_false;
     std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
     if (filestream.is_open()) {
       filestream << text;
       filestream.close();
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
       vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("File not found:" + path);
-      output = vx_core::vx_copy(vx_core::c_false(), {msg});
+      output = vx_core::vx_copy(vx_core::c_false, {msg});
     }
     return output;
   }
@@ -1243,160 +1244,92 @@ namespace vx_data_file {
 
   //}
 
-  vx_data_file::vx_Class_package* vx_package = new vx_data_file::vx_Class_package();
+  vx_data_file::Type_file e_file = NULL;
+  vx_data_file::Type_file t_file = NULL;
+  vx_data_file::Type_fileformat e_fileformat = NULL;
+  vx_data_file::Type_fileformat t_fileformat = NULL;
+  vx_data_file::Func_boolean_exists_from_file e_boolean_exists_from_file = NULL;
+  vx_data_file::Func_boolean_exists_from_file t_boolean_exists_from_file = NULL;
+  vx_data_file::Func_boolean_write_from_file_any e_boolean_write_from_file_any = NULL;
+  vx_data_file::Func_boolean_write_from_file_any t_boolean_write_from_file_any = NULL;
+  vx_data_file::Func_boolean_write_from_file_string e_boolean_write_from_file_string = NULL;
+  vx_data_file::Func_boolean_write_from_file_string t_boolean_write_from_file_string = NULL;
+  vx_data_file::Func_file_read_from_file e_file_read_from_file = NULL;
+  vx_data_file::Func_file_read_from_file t_file_read_from_file = NULL;
+  vx_data_file::Func_name_from_file e_name_from_file = NULL;
+  vx_data_file::Func_name_from_file t_name_from_file = NULL;
+  vx_data_file::Func_path_from_file e_path_from_file = NULL;
+  vx_data_file::Func_path_from_file t_path_from_file = NULL;
+  vx_data_file::Func_pathcurrent_from_os e_pathcurrent_from_os = NULL;
+  vx_data_file::Func_pathcurrent_from_os t_pathcurrent_from_os = NULL;
+  vx_data_file::Func_pathfull_from_file e_pathfull_from_file = NULL;
+  vx_data_file::Func_pathfull_from_file t_pathfull_from_file = NULL;
+  vx_data_file::Func_string_read_from_file e_string_read_from_file = NULL;
+  vx_data_file::Func_string_read_from_file t_string_read_from_file = NULL;
 
-  vx_data_file::Type_file vx_e_file() {
-    vx_data_file::Type_file output;
-      output = new Class_file();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Type_file vx_t_file() {
-    vx_data_file::Type_file output = new Class_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Type_file e_file = vx_e_file();
-  vx_data_file::Type_file t_file = vx_t_file();
-
-  vx_data_file::Type_fileformat vx_e_fileformat() {
-    vx_data_file::Type_fileformat output;
-      output = new Class_fileformat();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Type_fileformat vx_t_fileformat() {
-    vx_data_file::Type_fileformat output = new Class_fileformat();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Type_fileformat e_fileformat = vx_e_fileformat();
-  vx_data_file::Type_fileformat t_fileformat = vx_t_fileformat();
-
-  // (func boolean-exists<-file)
-  vx_data_file::Func_boolean_exists_from_file vx_e_boolean_exists_from_file() {
-    vx_data_file::Func_boolean_exists_from_file output = new vx_data_file::Class_boolean_exists_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_exists_from_file vx_t_boolean_exists_from_file() {
-    vx_data_file::Func_boolean_exists_from_file output = new vx_data_file::Class_boolean_exists_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_exists_from_file e_boolean_exists_from_file = vx_e_boolean_exists_from_file();
-  vx_data_file::Func_boolean_exists_from_file t_boolean_exists_from_file = vx_t_boolean_exists_from_file();
-
-  // (func boolean-write<-file-any)
-  vx_data_file::Func_boolean_write_from_file_any vx_e_boolean_write_from_file_any() {
-    vx_data_file::Func_boolean_write_from_file_any output = new vx_data_file::Class_boolean_write_from_file_any();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_write_from_file_any vx_t_boolean_write_from_file_any() {
-    vx_data_file::Func_boolean_write_from_file_any output = new vx_data_file::Class_boolean_write_from_file_any();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_write_from_file_any e_boolean_write_from_file_any = vx_e_boolean_write_from_file_any();
-  vx_data_file::Func_boolean_write_from_file_any t_boolean_write_from_file_any = vx_t_boolean_write_from_file_any();
-
-  // (func boolean-write<-file-string)
-  vx_data_file::Func_boolean_write_from_file_string vx_e_boolean_write_from_file_string() {
-    vx_data_file::Func_boolean_write_from_file_string output = new vx_data_file::Class_boolean_write_from_file_string();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_write_from_file_string vx_t_boolean_write_from_file_string() {
-    vx_data_file::Func_boolean_write_from_file_string output = new vx_data_file::Class_boolean_write_from_file_string();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_boolean_write_from_file_string e_boolean_write_from_file_string = vx_e_boolean_write_from_file_string();
-  vx_data_file::Func_boolean_write_from_file_string t_boolean_write_from_file_string = vx_t_boolean_write_from_file_string();
-
-  // (func file-read<-file)
-  vx_data_file::Func_file_read_from_file vx_e_file_read_from_file() {
-    vx_data_file::Func_file_read_from_file output = new vx_data_file::Class_file_read_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_file_read_from_file vx_t_file_read_from_file() {
-    vx_data_file::Func_file_read_from_file output = new vx_data_file::Class_file_read_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_file_read_from_file e_file_read_from_file = vx_e_file_read_from_file();
-  vx_data_file::Func_file_read_from_file t_file_read_from_file = vx_t_file_read_from_file();
-
-  // (func name<-file)
-  vx_data_file::Func_name_from_file vx_e_name_from_file() {
-    vx_data_file::Func_name_from_file output = new vx_data_file::Class_name_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_name_from_file vx_t_name_from_file() {
-    vx_data_file::Func_name_from_file output = new vx_data_file::Class_name_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_name_from_file e_name_from_file = vx_e_name_from_file();
-  vx_data_file::Func_name_from_file t_name_from_file = vx_t_name_from_file();
-
-  // (func path<-file)
-  vx_data_file::Func_path_from_file vx_e_path_from_file() {
-    vx_data_file::Func_path_from_file output = new vx_data_file::Class_path_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_path_from_file vx_t_path_from_file() {
-    vx_data_file::Func_path_from_file output = new vx_data_file::Class_path_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_path_from_file e_path_from_file = vx_e_path_from_file();
-  vx_data_file::Func_path_from_file t_path_from_file = vx_t_path_from_file();
-
-  // (func pathcurrent<-os)
-  vx_data_file::Func_pathcurrent_from_os vx_e_pathcurrent_from_os() {
-    vx_data_file::Func_pathcurrent_from_os output = new vx_data_file::Class_pathcurrent_from_os();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_pathcurrent_from_os vx_t_pathcurrent_from_os() {
-    vx_data_file::Func_pathcurrent_from_os output = new vx_data_file::Class_pathcurrent_from_os();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_pathcurrent_from_os e_pathcurrent_from_os = vx_e_pathcurrent_from_os();
-  vx_data_file::Func_pathcurrent_from_os t_pathcurrent_from_os = vx_t_pathcurrent_from_os();
-
-  // (func pathfull<-file)
-  vx_data_file::Func_pathfull_from_file vx_e_pathfull_from_file() {
-    vx_data_file::Func_pathfull_from_file output = new vx_data_file::Class_pathfull_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_pathfull_from_file vx_t_pathfull_from_file() {
-    vx_data_file::Func_pathfull_from_file output = new vx_data_file::Class_pathfull_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_pathfull_from_file e_pathfull_from_file = vx_e_pathfull_from_file();
-  vx_data_file::Func_pathfull_from_file t_pathfull_from_file = vx_t_pathfull_from_file();
-
-  // (func string-read<-file)
-  vx_data_file::Func_string_read_from_file vx_e_string_read_from_file() {
-    vx_data_file::Func_string_read_from_file output = new vx_data_file::Class_string_read_from_file();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_data_file::Func_string_read_from_file vx_t_string_read_from_file() {
-    vx_data_file::Func_string_read_from_file output = new vx_data_file::Class_string_read_from_file();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_data_file::Func_string_read_from_file e_string_read_from_file = vx_e_string_read_from_file();
-  vx_data_file::Func_string_read_from_file t_string_read_from_file = vx_t_string_read_from_file();
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
+    }
+    void vx_Class_package::init() {
+      vx_data_file::e_file = new Class_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_file);
+      vx_data_file::t_file = new Class_file();
+      vx_core::vx_reserve_type(vx_data_file::t_file);
+      vx_data_file::e_fileformat = new Class_fileformat();
+      vx_core::vx_reserve_empty(vx_data_file::e_fileformat);
+      vx_data_file::t_fileformat = new Class_fileformat();
+      vx_core::vx_reserve_type(vx_data_file::t_fileformat);
+      vx_data_file::e_boolean_exists_from_file = new vx_data_file::Class_boolean_exists_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_boolean_exists_from_file);
+      vx_data_file::t_boolean_exists_from_file = new vx_data_file::Class_boolean_exists_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_boolean_exists_from_file);
+      vx_data_file::e_boolean_write_from_file_any = new vx_data_file::Class_boolean_write_from_file_any();
+      vx_core::vx_reserve_empty(vx_data_file::e_boolean_write_from_file_any);
+      vx_data_file::t_boolean_write_from_file_any = new vx_data_file::Class_boolean_write_from_file_any();
+      vx_core::vx_reserve_type(vx_data_file::t_boolean_write_from_file_any);
+      vx_data_file::e_boolean_write_from_file_string = new vx_data_file::Class_boolean_write_from_file_string();
+      vx_core::vx_reserve_empty(vx_data_file::e_boolean_write_from_file_string);
+      vx_data_file::t_boolean_write_from_file_string = new vx_data_file::Class_boolean_write_from_file_string();
+      vx_core::vx_reserve_type(vx_data_file::t_boolean_write_from_file_string);
+      vx_data_file::e_file_read_from_file = new vx_data_file::Class_file_read_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_file_read_from_file);
+      vx_data_file::t_file_read_from_file = new vx_data_file::Class_file_read_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_file_read_from_file);
+      vx_data_file::e_name_from_file = new vx_data_file::Class_name_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_name_from_file);
+      vx_data_file::t_name_from_file = new vx_data_file::Class_name_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_name_from_file);
+      vx_data_file::e_path_from_file = new vx_data_file::Class_path_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_path_from_file);
+      vx_data_file::t_path_from_file = new vx_data_file::Class_path_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_path_from_file);
+      vx_data_file::e_pathcurrent_from_os = new vx_data_file::Class_pathcurrent_from_os();
+      vx_core::vx_reserve_empty(vx_data_file::e_pathcurrent_from_os);
+      vx_data_file::t_pathcurrent_from_os = new vx_data_file::Class_pathcurrent_from_os();
+      vx_core::vx_reserve_type(vx_data_file::t_pathcurrent_from_os);
+      vx_data_file::e_pathfull_from_file = new vx_data_file::Class_pathfull_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_pathfull_from_file);
+      vx_data_file::t_pathfull_from_file = new vx_data_file::Class_pathfull_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_pathfull_from_file);
+      vx_data_file::e_string_read_from_file = new vx_data_file::Class_string_read_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_string_read_from_file);
+      vx_data_file::t_string_read_from_file = new vx_data_file::Class_string_read_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_string_read_from_file);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }

@@ -44,12 +44,6 @@ namespace vx_web_http {
   typedef Abstract_xml_from_httpget* Func_xml_from_httpget;
   extern Func_xml_from_httpget e_xml_from_httpget;
   extern Func_xml_from_httpget t_xml_from_httpget;
-
-  class vx_Class_package {
-  public:
-  };
-
-
   // (func csv<-httpget)
   vx_core::vx_Type_async f_csv_from_httpget(vx_core::Type_string url);
 
@@ -306,6 +300,16 @@ namespace vx_web_http {
     virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  class vx_Class_package : vx_core::vx_Abstract_package {
+  public:
+    vx_Class_package();
+    void init();
+    vx_core::vx_Type_mapany maptype();
+    vx_core::vx_Type_mapany mapconst();
+    vx_core::vx_Type_mapfunc mapfunc();
+  };
+  inline vx_Class_package const vx_package;
 
 }
 #endif

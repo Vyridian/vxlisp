@@ -262,6 +262,7 @@ export default class vx_core {
 
   /**
    * type: package
+   * A package that store types, consts and funcs.
    */
   static t_package = {}
 
@@ -1423,7 +1424,7 @@ export default class vx_core {
     output = output = valstart
     const fn = fn_reduce_next['vx_value']
     if (fn) {
-      let current = vx_core.t_any
+      let current = vx_core.e_any
       let first = true
       for (const next of list) {
         if (first) {
@@ -2480,7 +2481,7 @@ export default class vx_core {
 
   /**
    * @function map_from_list
-   * Returns a list from a map by applying a function to each key value.
+   * Returns a map from a list by applying a function to each key value.
    * @param  {typemap} generic
    * @param  {list} vallist
    * @param  {any_from_any} fn_any_from_any
@@ -5382,10 +5383,10 @@ export default class vx_core {
     vx_core.t_package['vx_value'] = {
       name          : "package",
       pkgname       : "vx/core",
-      extends       : ":map",
+      extends       : ":struct",
       allowfuncs    : [],
       disallowfuncs : [],
-      allowtypes    : [vx_core.t_any],
+      allowtypes    : [],
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],

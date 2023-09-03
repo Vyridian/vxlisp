@@ -1,3 +1,4 @@
+#include <map>
 #include <string>
 #include "../vx/core.hpp"
 #include "sample.hpp"
@@ -294,7 +295,7 @@ namespace vx_sample {
     vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve(myarg);
     output = vx_core::f_plus(
-      vx_sample::c_myconst(),
+      vx_sample::c_myconst,
       myarg
     );
     vx_core::vx_release_one_except(myarg, output);
@@ -384,58 +385,46 @@ namespace vx_sample {
 
   //}
 
-  vx_sample::vx_Class_package* vx_package = new vx_sample::vx_Class_package();
+  vx_sample::Type_mytype e_mytype = NULL;
+  vx_sample::Type_mytype t_mytype = NULL;
+  vx_sample::Const_myconst c_myconst = NULL;
+  vx_sample::Func_main e_main = NULL;
+  vx_sample::Func_main t_main = NULL;
+  vx_sample::Func_myfunc e_myfunc = NULL;
+  vx_sample::Func_myfunc t_myfunc = NULL;
 
-  vx_sample::Type_mytype vx_e_mytype() {
-    vx_sample::Type_mytype output;
-      output = new Class_mytype();
-      vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_sample::Type_mytype vx_t_mytype() {
-    vx_sample::Type_mytype output = new Class_mytype();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_sample::Type_mytype e_mytype = vx_e_mytype();
-  vx_sample::Type_mytype t_mytype = vx_t_mytype();
-
-  // (const myconst)
-  vx_sample::Const_myconst c_myconst() {
-    vx_sample::Const_myconst output = vx_sample::vx_package->c_myconst;
-    if (output == NULL) {
-      output = vx_sample::Class_myconst::vx_const_new();
-      vx_sample::vx_package->c_myconst = output;
+  // class vx_Class_package {
+    vx_Class_package::vx_Class_package() {
+      init();
     }
-    return output;
-  }
-
-  // (func main)
-  vx_sample::Func_main vx_e_main() {
-    vx_sample::Func_main output = new vx_sample::Class_main();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_sample::Func_main vx_t_main() {
-    vx_sample::Func_main output = new vx_sample::Class_main();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_sample::Func_main e_main = vx_e_main();
-  vx_sample::Func_main t_main = vx_t_main();
-
-  // (func myfunc)
-  vx_sample::Func_myfunc vx_e_myfunc() {
-    vx_sample::Func_myfunc output = new vx_sample::Class_myfunc();
-    vx_core::vx_reserve_empty(output);
-    return output;
-  }
-  vx_sample::Func_myfunc vx_t_myfunc() {
-    vx_sample::Func_myfunc output = new vx_sample::Class_myfunc();
-    vx_core::vx_reserve_type(output);
-    return output;
-  }
-  vx_sample::Func_myfunc e_myfunc = vx_e_myfunc();
-  vx_sample::Func_myfunc t_myfunc = vx_t_myfunc();
+    void vx_Class_package::init() {
+      vx_sample::e_mytype = new Class_mytype();
+      vx_core::vx_reserve_empty(vx_sample::e_mytype);
+      vx_sample::t_mytype = new Class_mytype();
+      vx_core::vx_reserve_type(vx_sample::t_mytype);
+      vx_sample::c_myconst = vx_sample::Class_myconst::vx_const_new();
+      vx_sample::e_main = new vx_sample::Class_main();
+      vx_core::vx_reserve_empty(vx_sample::e_main);
+      vx_sample::t_main = new vx_sample::Class_main();
+      vx_core::vx_reserve_type(vx_sample::t_main);
+      vx_sample::e_myfunc = new vx_sample::Class_myfunc();
+      vx_core::vx_reserve_empty(vx_sample::e_myfunc);
+      vx_sample::t_myfunc = new vx_sample::Class_myfunc();
+      vx_core::vx_reserve_type(vx_sample::t_myfunc);
+    }
+    vx_core::vx_Type_mapany vx_Class_package::maptype() {
+      vx_core::vx_Type_mapany output;
+      output["anylist"] = vx_core::t_anylist;
+      return output;
+    }
+    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
+      vx_core::vx_Type_mapfunc output;
+      return output;
+    }
+  // }
 
 }
