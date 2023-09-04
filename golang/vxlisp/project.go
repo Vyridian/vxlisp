@@ -380,8 +380,13 @@ func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 		}
 	}
 	if !msgblock.iserror {
-		extrafilenames, msgs := ListStringReadFromPathExtension(projectpath, "_cpp.txt")
-		msgblock = MsgblockAddBlock(msgblock, msgs)
+		var extrafilenames []string
+		langs := []string{"cpp", "java", "js"}
+		for _, lang := range langs {
+			extralangfilenames, msgs := ListStringReadFromPathExtension(projectpath, "_"+lang+".txt")
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			extrafilenames = append(extrafilenames, extralangfilenames...)
+		}
 		if !msgblock.iserror {
 			for _, filename := range extrafilenames {
 				extraname := StringFromStringFindReplace(filename, projectpath+"/", "")

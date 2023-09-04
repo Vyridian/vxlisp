@@ -406,6 +406,7 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 	emptytypes := ""
 	// empty values
 	pkgname := JsFromName(pkg.name)
+	specialcode := prj.maptext[pkg.name+"_js.txt"]
 	statics := "" +
 		"\n    vx_core.f_global_package_set(\"" + pkg.name + "\", " + pkgname + ")" +
 		"\n"
@@ -492,6 +493,7 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		"\n" + imports +
 		"\nexport default class " + pkgname + " {" +
 		"\n" +
+		specialcode +
 		alltypes +
 		allconsts +
 		allfuncs +

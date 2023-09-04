@@ -1,0 +1,260 @@
+  public static interface Type_replfunc {
+    public Core.Type_any vx_repl(Core.Type_anylist arglist);
+  }
+
+  public static interface Type_replfunc_async {
+    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);
+  }
+
+  public static List<Core.Type_any> emptylistany = Core.immutablelist(new ArrayList<Core.Type_any>());
+
+  public static Map<String, Core.Type_any> emptymapany = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+
+  public static <T> List<T> immutablelist(List<T> listany) {
+    return Collections.unmodifiableList(listany);
+  }
+
+  public static <T> Map<String, T> immutablemap(Map<String, T> mapany) {
+    return Collections.unmodifiableMap(mapany);
+  }
+
+  public static class Class_base {
+    protected int vx_iref = 0;
+    protected Core.Type_msgblock vxmsgblock = null;
+    public List<Type_any> vx_dispose() {
+      this.vx_iref = 0;
+      this.vxmsgblock = null;
+      return emptylistany;
+    }
+    public Core.Type_msgblock vx_msgblock() {return vxmsgblock;}
+    public boolean vx_release() {
+      boolean output = false;
+      if (this.vx_iref < 0) {
+      } else if (vx_iref == 0) {
+        vx_iref = -1;
+        output = true;
+      } else {
+        vx_iref -= 1;
+      }
+      return output;
+    }
+    public void vx_reserve() {this.vx_iref += 1;}
+  }
+
+  public static class KeyValue<T> {
+    public String key = "";
+    public T value = null;
+  }
+
+  public static Core.Type_constdef constdef_new(
+    String pkgname,
+    String name,
+    Core.Type_any typ
+  ) {
+    Core.Class_constdef output = new Core.Class_constdef();
+    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
+    output.vx_p_name = Core.t_string.vx_new_from_string(name);
+    output.vx_p_type = typ;
+    return output;
+  }
+
+  public static Core.Type_funcdef funcdef_new(
+    String pkgname,
+    String name,
+    int idx,
+    boolean async,
+    Core.Type_any typ
+  ) {
+    Core.Class_funcdef output = new Core.Class_funcdef();
+    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
+    output.vx_p_name = Core.t_string.vx_new_from_string(name);
+    output.vx_p_idx = Core.t_int.vx_new_from_int(idx);
+    output.vx_p_async = Core.t_boolean.vx_new_from_boolean(async);
+    output.vx_p_type = typ;
+    return output;
+  }
+
+  public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {
+    return list.vx_list().toArray(new Core.Type_any[0]);
+  }
+
+  @SafeVarargs
+  public static <T> List<T> arraylist_from_array(final T... items) {
+    List<T> output = new ArrayList<T>(Arrays.asList(items));
+    output = Core.immutablelist(output);
+    return output;
+  }
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> List<T> arraylist_from_arraylist(final T generic_any_1, final List<U> listval) {
+    List<T> output = new ArrayList<>();
+    for (Core.Type_any value : listval) {
+      T t_val = Core.f_any_from_any(generic_any_1, value);
+      output.add(t_val);
+    }
+    output = Core.immutablelist(output);
+    return output;
+  }
+
+  public static <T, U> List<T> arraylist_from_arraylist_fn(final List<U> listval, final Function<U, T> fn_any_from_any) {
+    List<T> output = new ArrayList<>();
+    for (U value_u : listval) {
+      T t_val = fn_any_from_any.apply(value_u);
+      output.add(t_val);
+    }
+    output = Core.immutablelist(output);
+    return output;
+  }
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> List<T> arraylist_from_linkedhashmap(final T generic_any_1, final Map<String, U> mapval) {
+    List<T> output = new ArrayList<T>();
+    Set<String> keys = mapval.keySet();
+    for (String key : keys) {
+      U u_val = mapval.get(key);
+      T t_val = Core.f_any_from_any(generic_any_1, u_val);
+      output.add(t_val);
+    }
+    output = Core.immutablelist(output);
+    return output;
+  }
+
+  public static <T, U> List<T> arraylist_from_linkedhashmap_fn(final Map<String, U> mapval, final BiFunction<String, U, T> fn_any_from_key_value) {
+    List<T> output = new ArrayList<T>();
+    Set<String> keys = mapval.keySet();
+    for (String key : keys) {
+      U u_val = mapval.get(key);
+      T t_val = fn_any_from_key_value.apply(key, u_val);
+      output.add(t_val);
+    }
+    return output;
+  }
+
+  public static <T> CompletableFuture<T> async_new_completed(final T val) {
+    CompletableFuture<T> output = CompletableFuture.completedFuture(val);
+    return output;
+  }
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {
+    CompletableFuture<T> output = future.thenApply(val -> {
+      return Core.f_any_from_any(generic_any_1, val);
+    });
+    return output;
+  }
+
+  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {
+    CompletableFuture<T> output = future.thenApply(fn);
+    return output;
+  }
+
+  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {
+    CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+      list_future.toArray(new CompletableFuture[list_future.size()])
+    );
+    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {
+      List<T> list = list_future.stream()
+        .map(future -> future.join())
+        .collect(Collectors.toList());
+      return Core.immutablelist(list);
+    });
+    return output;
+  }
+
+  public static void debug(Object... values) {
+    for (Object value : values) {
+      String text = "";
+      if (value == null) {
+        text = "null";
+      } else if (value instanceof Core.Type_any) {
+        Core.Type_any val_any = (Core.Type_any)value;
+        Core.Type_string valstring = Core.f_string_from_any(val_any);
+        text = valstring.vx_string();
+      } else {
+        text = value.toString();
+      }
+      System.out.println(text);
+    }
+  }
+
+  @SafeVarargs
+  public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
+    for (KeyValue<T> keyvalue : keyvalues) {
+      String key = keyvalue.key;
+      T value = keyvalue.value;
+      output.put(key, value);
+    }
+    return output;
+  }
+
+  public static <T> KeyValue<T> keyvalue_from_key_value(final String key, final T value) {
+    KeyValue<T> output = new KeyValue<T>();
+    output.key = key;
+    output.value = value;
+    return output;
+  }
+
+  public static <T> Map<String, T> map_from_list_fn(final List<T> listval, final Function<T, Core.Type_string> fn_any_from_any) {
+    Map<String, T> output = new LinkedHashMap<>();
+    for (T val : listval) {
+      Core.Type_string valkey = fn_any_from_any.apply(val);
+      String key = valkey.vx_string();
+      output.put(key, val);
+    }
+    return output;
+  }
+
+  public static <T extends Core.Type_any> LinkedHashMap<String, T> map_from_map(final LinkedHashMap<String, Core.Type_any> mapval) {
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
+    Set<String> keys = mapval.keySet();
+    for (String key : keys) {
+      Core.Type_any value = mapval.get(key);
+      try {
+        @SuppressWarnings("unchecked")
+        T castval = (T)value;
+        output.put(key, castval);
+      } catch (Exception ex) {
+        Core.debug("map<-map", ex);
+      }
+    }
+    return output;
+  }
+
+  // Warning!: Blocking
+  public static <T extends Core.Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
+    T output = Core.f_empty(generic_any_1);
+    try {
+      output = future.get();
+    } catch (Exception e) {
+      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("sync<-async", e);
+      Core.Type_any val = generic_any_1.vx_new(msg);
+      output = Core.f_any_from_any(generic_any_1, val);
+    }
+    return output;
+  }
+
+  public static Core.Type_typedef typedef_new(
+    String pkgname,
+    String name,
+    String extend,
+    Core.Type_typelist traits,
+    Core.Type_typelist allowtypes,
+    Core.Type_typelist disallowtypes,
+    Core.Type_funclist allowfuncs,
+    Core.Type_funclist disallowfuncs,
+    Core.Type_anylist allowvalues,
+    Core.Type_anylist disallowvalues,
+    Core.Type_argmap properties
+  ) {
+    Core.Class_typedef output = new Core.Class_typedef();
+    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
+    output.vx_p_name = Core.t_string.vx_new_from_string(name);
+    output.vx_p_extend = Core.t_string.vx_new_from_string(extend);
+    output.vx_p_traits = traits;
+    output.vx_p_allowtypes = allowtypes;
+    output.vx_p_disallowtypes = disallowtypes;
+    output.vx_p_allowfuncs = disallowfuncs;
+    output.vx_p_disallowfuncs = disallowfuncs;
+    output.vx_p_allowvalues = disallowvalues;
+    output.vx_p_disallowvalues = disallowvalues;
+    output.vx_p_properties = properties;
+    return output;
+  }

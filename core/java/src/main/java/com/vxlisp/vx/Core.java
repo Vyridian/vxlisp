@@ -278,7 +278,6 @@ public final class Core {
     return output;
   }
 
-
   /**
    * type: any
    * Any Value for Variant Type
