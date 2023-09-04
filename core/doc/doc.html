@@ -2612,7 +2612,7 @@
 (type any&lt;-anylist
  :extends    :list
  :allowfuncs [any&lt;-any]
- :doc        &quot;List of Any&quot;)
+ :doc        &quot;List of any&lt;-any&quot;)
 
 (type anylist
  :extends    :list
@@ -3302,6 +3302,7 @@
 
 (const true : boolean
  (native
+  :cpp &quot;true&quot;
   :js &quot;true&quot;
   :java &quot;true&quot;)
  :test (test-true true))
@@ -3531,7 +3532,7 @@
     float float2 = vx_core::vx_float_from_number(num2);
     if (float1 == 0) {
     } else if (float2 == 0) {
-      output = vx_core::c_notanumber();
+      output = vx_core::c_notanumber;
     } else {
       float result = float1 / float2;
       output = vx_core::vx_new_float(result);
@@ -3872,9 +3873,9 @@
  (native
   :cpp
    &quot;if (val1-&gt;vx_boolean() &amp;&amp; val2-&gt;vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     }&quot;
   :js
    &quot;if (val1 &amp;&amp; val2) {
@@ -4334,7 +4335,7 @@
   :cpp
    &quot;std::vector&lt;vx_core::Type_any&gt; listvalue = values-&gt;vx_list();
     for (vx_core::Type_any value : listvalue) {
-      if (value != vx_core::c_nothing()) {
+      if (value != vx_core::c_nothing) {
         vx_core::Type_any any = fn_any_from_any-&gt;vx_any_from_any(value);
         output = vx_core::vx_any_from_any(generic_any_1, any);
         break;
@@ -4540,7 +4541,7 @@
         long ival = std::stoll(sval);
         intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
-        intresult = vx_core::c_notanumber();
+        intresult = vx_core::c_notanumber;
       }
       return intresult;&quot;
     :js
@@ -4571,7 +4572,7 @@
  (native
   :cpp
    &quot;if (text-&gt;vx_p_iref == -2) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;if (text.length == 0) {
@@ -4588,7 +4589,7 @@
  (native
   :cpp
    &quot;if (value == value-&gt;vx_empty()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;const type = vx_core.f_type_from_any(value)
@@ -4616,7 +4617,7 @@
    &quot;std::string stext = text-&gt;vx_string();
     std::string sfind = find-&gt;vx_string();
     if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -4638,7 +4639,7 @@
     std::string sextend = extend-&gt;vx_string();
     vx_core::vx_release(extend);
     if (sextend == “:func”) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
@@ -5813,9 +5814,9 @@
  (native
   :cpp
    &quot;if (val1-&gt;vx_boolean() || val2-&gt;vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     }&quot;
   :js
    &quot;if (val1 || val2) {
@@ -6519,7 +6520,7 @@
           <div class="lbl">Description:</div>
           <ul>
             <li>
-              <div class="txt">List of Any</div>
+              <div class="txt">List of any&lt;-any</div>
             </li>
           </ul>
           <div class="lbl">Default:</div>
@@ -6543,7 +6544,7 @@
               <div class="source">(type any&lt;-anylist
  :extends    :list
  :allowfuncs [any&lt;-any]
- :doc        &quot;List of Any&quot;)</div>
+ :doc        &quot;List of any&lt;-any&quot;)</div>
             </li>
           </ul>
         </div>
@@ -10426,6 +10427,7 @@
             <li>
               <div class="source">(const true : boolean
  (native
+  :cpp &quot;true&quot;
   :js &quot;true&quot;
   :java &quot;true&quot;)
  :test (test-true true))</div>
@@ -11410,7 +11412,7 @@
     float float2 = vx_core::vx_float_from_number(num2);
     if (float1 == 0) {
     } else if (float2 == 0) {
-      output = vx_core::c_notanumber();
+      output = vx_core::c_notanumber;
     } else {
       float result = float1 / float2;
       output = vx_core::vx_new_float(result);
@@ -12675,9 +12677,9 @@ improves readability.</div>
  (native
   :cpp
    &quot;if (val1-&gt;vx_boolean() &amp;&amp; val2-&gt;vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     }&quot;
   :js
    &quot;if (val1 &amp;&amp; val2) {
@@ -14906,7 +14908,7 @@ improves readability.</div>
   :cpp
    &quot;std::vector&lt;vx_core::Type_any&gt; listvalue = values-&gt;vx_list();
     for (vx_core::Type_any value : listvalue) {
-      if (value != vx_core::c_nothing()) {
+      if (value != vx_core::c_nothing) {
         vx_core::Type_any any = fn_any_from_any-&gt;vx_any_from_any(value);
         output = vx_core::vx_any_from_any(generic_any_1, any);
         break;
@@ -15590,7 +15592,7 @@ improves readability.</div>
         long ival = std::stoll(sval);
         intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
-        intresult = vx_core::c_notanumber();
+        intresult = vx_core::c_notanumber;
       }
       return intresult;&quot;
     :js
@@ -15667,7 +15669,7 @@ improves readability.</div>
  (native
   :cpp
    &quot;if (text-&gt;vx_p_iref == -2) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;if (text.length == 0) {
@@ -15733,7 +15735,7 @@ improves readability.</div>
  (native
   :cpp
    &quot;if (value == value-&gt;vx_empty()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;const type = vx_core.f_type_from_any(value)
@@ -15812,7 +15814,7 @@ improves readability.</div>
    &quot;std::string stext = text-&gt;vx_string();
     std::string sfind = find-&gt;vx_string();
     if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -15880,7 +15882,7 @@ improves readability.</div>
     std::string sextend = extend-&gt;vx_string();
     vx_core::vx_release(extend);
     if (sextend == “:func”) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     }&quot;
   :js
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
@@ -18466,9 +18468,9 @@ improves readability.</div>
  (native
   :cpp
    &quot;if (val1-&gt;vx_boolean() || val2-&gt;vx_boolean()) {
-      output = vx_core::c_true();
+      output = vx_core::c_true;
     } else {
-      output = vx_core::c_false();
+      output = vx_core::c_false;
     }&quot;
   :js
    &quot;if (val1 || val2) {

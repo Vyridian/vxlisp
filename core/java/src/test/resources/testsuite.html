@@ -296,7 +296,7 @@
               <p class="coveragenums">6% 4/66</p>
               <p class="coveragenums">14% 2/14</p>
               <p class="coveragenums">47% 57/119</p>
-              <p class="coveragenums">80% 179/222</p>
+              <p class="coveragenums">81% 180/222</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -2048,23 +2048,24 @@
                     </td>
                     <td>
                       <p class="preformatted">(test
- (stringlist "a1" "b2")
- (list&lt;-map : stringlist
-  (stringmap "a" "1" "b" "2")
+ (stringmap
+  "keya" "a"
+  "keyb" "b")
+ (map&lt;-list : stringmap
+  (stringlist "a" "b")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))</p>
+   [val : string]
+   (string "key" val))))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(stringlist
- "a1"
- "b2")</p>
+                      <p class="preformatted">(stringmap
+ :keya "a"
+ :keyb "b")</p>
                     </td>
                     <td>
-                      <p class="preformatted">(stringlist
- "a1"
- "b2")</p>
+                      <p class="preformatted">(stringmap
+ :keya "a"
+ :keyb "b")</p>
                     </td>
                   </tr>
                   <tr>
@@ -2668,10 +2669,10 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/file</p>
-              <p class="coveragenums">45% 5/11</p>
+              <p class="coveragenums">36% 4/11</p>
               <p class="coveragenums">0% 0/2</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">55% 5/9</p>
+              <p class="coveragenums">44% 4/9</p>
               <p class="coveragenums">90% 10/11</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
@@ -2778,24 +2779,6 @@
   (permission
    :id "")
  :text "testdata")</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="passflag">Pass</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">pathcurrent&lt;-os</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(test-true
- (is-endswith (pathcurrent&lt;-os) "\java"))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">true</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">true</p>
                     </td>
                   </tr>
                   <tr>

@@ -1575,26 +1575,27 @@
        (testdescribe
         :describename
          "(test
- (stringlist "a1" "b2")
- (list<-map : stringlist
-  (stringmap "a" "1" "b" "2")
+ (stringmap
+  "keya" "a"
+  "keyb" "b")
+ (map<-list : stringmap
+  (stringlist "a" "b")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))"
+   [val : string]
+   (string "key" val))))"
         :testpkg ""
         :testresult
          (testresult
           :code ":eq"
           :passfail true
           :expected
-           (stringlist
-            "a1"
-            "b2")
+           (stringmap
+            :keya "a"
+            :keyb "b")
           :actual
-           (stringlist
-            "a1"
-            "b2")
+           (stringmap
+            :keya "a"
+            :keyb "b")
           :fn-actual (vx/core/any<-func-async)))))
     (testcase
      :passfail true
@@ -2245,9 +2246,9 @@
       :total 14)
     :docnums
      (testcoveragenums
-      :pct 80
+      :pct 81
       :testpkg ""
-      :tests 179
+      :tests 180
       :total 222)
     :funcnums
      (testcoveragenums
@@ -2485,24 +2486,6 @@
     (testcase
      :passfail true
      :testpkg "vx/data/file"
-     :casename "pathcurrent<-os"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test-true
- (is-endswith (pathcurrent<-os) "\java"))"
-        :testpkg ""
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true
-          :fn-actual (vx/core/any<-func-async)))))
-    (testcase
-     :passfail true
-     :testpkg "vx/data/file"
      :casename "string-read<-file"
      :describelist
       (testdescribelist
@@ -2533,7 +2516,7 @@
       :file-read<-file 1
       :name<-file 0
       :path<-file 0
-      :pathcurrent<-os 1
+      :pathcurrent<-os 0
       :pathfull<-file 0
       :string-read<-file 1)
     :testpkg "vx/data/file"
@@ -2569,16 +2552,16 @@
       :total 11)
     :funcnums
      (testcoveragenums
-      :pct 55
+      :pct 44
       :testpkg ""
-      :tests 5
+      :tests 4
       :total 9)
     :testpkg "vx/data/file"
     :totalnums
      (testcoveragenums
-      :pct 45
+      :pct 36
       :testpkg ""
-      :tests 5
+      :tests 4
       :total 11)
     :typenums
      (testcoveragenums

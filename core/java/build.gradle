@@ -17,11 +17,8 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
-
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
+	testImplementation(platform('org.junit:junit-bom:5.10.0'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
 application {
@@ -29,7 +26,9 @@ application {
     mainClass = 'com.vxlisp.vx.App'
 }
 
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }

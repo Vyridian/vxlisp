@@ -22,7 +22,7 @@
 (type any<-anylist
  :extends    :list
  :allowfuncs [any<-any]
- :doc        "List of Any")
+ :doc        "List of any<-any")
 
 (type anylist
  :extends    :list

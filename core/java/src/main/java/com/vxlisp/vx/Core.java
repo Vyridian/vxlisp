@@ -397,7 +397,7 @@ public final class Core {
 
   /**
    * type: any<-anylist
-   * List of Any
+   * List of any<-any
    * (type any<-anylist)
    */
   public interface Type_any_from_anylist extends Core.Type_list {
@@ -405,14 +405,36 @@ public final class Core {
     public Core.Type_any_from_anylist vx_copy(final Object... vals);
     public Core.Type_any_from_anylist vx_empty();
     public Core.Type_any_from_anylist vx_type();
+    public List<Core.Func_any_from_any> vx_listany_from_any();
+    public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index);
   }
 
   public static class Class_any_from_anylist extends Core.Class_base implements Type_any_from_anylist {
 
-    protected List<Core.Type_any> vxlist = Core.immutablelist(new ArrayList<Core.Type_any>());
+    protected List<Core.Func_any_from_any> vxlist = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+
+    @Override
+    public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index) {
+      Core.Func_any_from_any output = Core.e_any_from_any;
+      Class_any_from_anylist list = this;
+      int iindex = index.vx_int();
+      List<Core.Func_any_from_any> listval = list.vxlist;
+      if (iindex < listval.size()) {
+        output = listval.get(iindex);
+      }
+      return output;
+    }
+
+    @Override
+    public List<Core.Func_any_from_any> vx_listany_from_any() {return vxlist;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_int index) {
+      return this.vx_any_from_any(index);
+    }
 
     @Override
     public Type_any_from_anylist vx_new(final Object... vals) {return e_any_from_anylist.vx_copy(vals);}
@@ -422,22 +444,22 @@ public final class Core {
       Class_any_from_anylist output = new Class_any_from_anylist();
       Type_any_from_anylist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
+      List<Core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof Core.Type_any) {
-          listval.add((Core.Type_any)valsub);
+        } else if (valsub instanceof Core.Func_any_from_any) {
+          listval.add((Core.Func_any_from_any)valsub);
         } else if (valsub instanceof Type_any_from_anylist) {
           Type_any_from_anylist multi = (Type_any_from_anylist)valsub;
-          listval.addAll(multi.vx_list());
+          listval.addAll(multi.vx_listany_from_any());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof Core.Type_any) {
-              Core.Type_any valitem = (Core.Type_any)item;
+            if (item instanceof Core.Func_any_from_any) {
+              Core.Func_any_from_any valitem = (Core.Func_any_from_any)item;
               listval.add(valitem);
             }
           }

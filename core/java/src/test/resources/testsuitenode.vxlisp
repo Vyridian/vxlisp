@@ -1330,7 +1330,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "80% 179/222")
+                  :text "81% 180/222")
                  (p
                   :id ""
                   :style
@@ -12287,13 +12287,14 @@
                                     :white-space "pre"))
                                 :text
                                  "(test
- (stringlist "a1" "b2")
- (list<-map : stringlist
-  (stringmap "a" "1" "b" "2")
+ (stringmap
+  "keya" "a"
+  "keyb" "b")
+ (map<-list : stringmap
+  (stringlist "a" "b")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))")))
+   [val : string]
+   (string "key" val))))")))
                             (td
                              :id ""
                              :style
@@ -12314,9 +12315,9 @@
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text
-                                 "(stringlist
- "a1"
- "b2")")))
+                                 "(stringmap
+ :keya "a"
+ :keyb "b")")))
                             (td
                              :id ""
                              :style
@@ -12337,9 +12338,9 @@
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text
-                                 "(stringlist
- "a1"
- "b2")")))))
+                                 "(stringmap
+ :keya "a"
+ :keyb "b")")))))
                          (tr
                           :id ""
                           :style
@@ -16048,7 +16049,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "45% 5/11")
+                  :text "36% 4/11")
                  (p
                   :id ""
                   :style
@@ -16075,7 +16076,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "55% 5/9")
+                  :text "44% 4/9")
                  (p
                   :id ""
                   :style
@@ -16494,118 +16495,6 @@
   (permission
    :id "")
  :text "testdata")")))))
-                         (tr
-                          :id ""
-                          :style
-                           (style
-                            :name ""
-                            :props (propmap))
-                          :nodes
-                           (tdlist
-                            (td
-                             :id ""
-                             :style
-                              (style
-                               :name ""
-                               :props (propmap))
-                             :nodes
-                              (divchildlist
-                               (p
-                                :id ""
-                                :style
-                                 (style
-                                  :name ".passflag"
-                                  :props
-                                   (propmap
-                                    :background-color "green"
-                                    :color "white"
-                                    :padding-left "4px"
-                                    :padding-right "4px"
-                                    :padding-top "1px"
-                                    :padding-bottom "1px"))
-                                :text "Pass")))
-                            (td
-                             :id ""
-                             :style
-                              (style
-                               :name ""
-                               :props (propmap))
-                             :nodes
-                              (divchildlist
-                               (p
-                                :id ""
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "pathcurrent<-os")))
-                            (td
-                             :id ""
-                             :style
-                              (style
-                               :name ""
-                               :props (propmap))
-                             :nodes
-                              (divchildlist
-                               (p
-                                :id ""
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text
-                                 "(test-true
- (is-endswith (pathcurrent<-os) "\java"))")))
-                            (td
-                             :id ""
-                             :style
-                              (style
-                               :name ""
-                               :props (propmap))
-                             :nodes
-                              (divchildlist
-                               (p
-                                :id ""
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "true")))
-                            (td
-                             :id ""
-                             :style
-                              (style
-                               :name ""
-                               :props (propmap))
-                             :nodes
-                              (divchildlist
-                               (p
-                                :id ""
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "true")))))
                          (tr
                           :id ""
                           :style

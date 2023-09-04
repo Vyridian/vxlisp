@@ -512,11 +512,12 @@ func ListTypeFromGenericMapType(typmap map[string]*vxtype) []*vxtype {
 
 func ListTypeFromListFunc(listfunc []*vxfunc) []*vxtype {
 	var output []*vxtype
-	for _, fnc := range listfunc {
-		typ := NewTypeFromFunc(fnc)
-		if typ.isfunc {
-		} else {
-			output = append(output, typ)
+	if len(listfunc) > 0 {
+		for _, fnc := range listfunc {
+			typ := NewTypeFromFunc(fnc)
+			if typ.isfunc {
+				output = append(output, typ)
+			}
 		}
 	}
 	return output
