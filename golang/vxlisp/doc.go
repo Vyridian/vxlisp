@@ -120,17 +120,21 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 	detail := ""
 	nav := ""
 	for _, pkg := range listpackage {
-		typenav, typedetail := HtmlFromListType(pkg.listtype, indent+"  ")
-		constnav, constdetail := HtmlFromConsts(pkg.listconst, indent+"  ")
-		funcnav, funcdetail := HtmlFromListFuncIndent(pkg.listfunc, indent+"  ")
+		typenav, typedetail := HtmlFromListType(pkg.listtype, indent+"    ")
+		constnav, constdetail := HtmlFromConsts(pkg.listconst, indent+"    ")
+		funcnav, funcdetail := HtmlFromListFuncIndent(pkg.listfunc, indent+"    ")
 		nav += "" +
-			lineindent + "<div class=\"npackage\" onclick=\"docjs.navigate('pkg_" + HtmlNameFromPackage(pkg) + "')\">" +
-			HtmlNameFromPackage(pkg) + "</div>" +
-			lineindent + "<ul class=\"packagenav\" id=\"n_pkgnav_" + HtmlNameFromPackage(pkg) + "\">" +
+			lineindent + "<details>" +
+			lineindent + "  <summary>" +
+			lineindent + "    <span class=\"npackage\" onclick=\"docjs.navigate('pkg_" + HtmlNameFromPackage(pkg) + "')\">" +
+			HtmlNameFromPackage(pkg) + "</span>" +
+			lineindent + "  </summary>" +
+			lineindent + "  <ul class=\"packagenav\" id=\"n_pkgnav_" + HtmlNameFromPackage(pkg) + "\">" +
 			typenav +
 			constnav +
 			funcnav +
-			lineindent + "</ul>"
+			lineindent + "  </ul>" +
+			lineindent + "</details>"
 		var pkgconsts []string
 		for _, pkgconst := range pkg.listconst {
 			pkgtext := HtmlLinkNameFromConst(pkgconst)

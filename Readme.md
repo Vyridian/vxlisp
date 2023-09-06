@@ -45,7 +45,15 @@
 
 * New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, though its only in its infancy, I'm very pleased with the result.
 
-* What is its best use cases? - I think it might be best suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application. Also, it would be ideal for a developer who wants to work on a platform that requires a language they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
+* What is its best use cases?
+
+** Collaboration - It should be suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application.
+
+** Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work.
+
+** Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases.
+
+** Difficult Languages - It could be helpful for developers who wants to work on platforms that require languages they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
 
 * Everyone has a bias. What is yours? - I admit it. I love Functional Programming and Test driven development. I dislike Imperitive programming, and Object-Oriented programming. I also dislike vendor lockin, large corporations, and I am horrified by the probable impact of AI.
 
@@ -55,7 +63,7 @@
 
 * What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible. Mass production and reliability can only be maintained through simpilfication.
 
-* What are the key features of the language? - Open Source. Language is a data structure. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context.
+* What are the key features of the language? - Open Source. Language is a data structure. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context. Few dependencies and Plain old native objects.
 
 * Are there any unusual features of the language? - Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified context management. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling. State Management. File parsing. Repl. Programmatic Html/Xml generation. Function level permissions. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
 
