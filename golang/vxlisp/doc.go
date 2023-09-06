@@ -12,7 +12,8 @@ func HtmlFromConsts(consts []*vxconst, indent string) (string, string) {
 		detail += "" +
 			lineindent + "<div class=\"d\" id=\"d_const_" + HtmlNameFromConst(cnst) + "\">" +
 			lineindent + "  <div class=\"header\">" + HtmlLinkFromPackageName(cnst.pkgname) + " / " + HtmlLinkNameFromConst(cnst) + "</div>" +
-			lineindent + "  <div class=\"lbl\">Constant:</div>" +
+			HtmlDescriptionFromDoc(cnst.doc, indent+"  ") +
+			lineindent + "  <div class=\"lbl\">Constant Name:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
 			lineindent + "      <div class=\"txt\">" + HtmlFromNameAlias(cnst.name, cnst.alias) + "</div>" +
@@ -24,7 +25,6 @@ func HtmlFromConsts(consts []*vxconst, indent string) (string, string) {
 			lineindent + "      <div class=\"txt\">" + HtmlLinkFromType(cnst.vxtype) + "</div>" +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
-			HtmlFromDoc(cnst.doc, indent+"  ") +
 			HtmlFromListTestValue(cnst.listtestvalue, indent+"  ") +
 			HtmlFromSourceCode(cnst.textblock.text, indent+"  ") +
 			lineindent + "</div>"
@@ -32,7 +32,7 @@ func HtmlFromConsts(consts []*vxconst, indent string) (string, string) {
 	return nav, detail
 }
 
-func HtmlFromDoc(doc string, indent string) string {
+func HtmlDescriptionFromDoc(doc string, indent string) string {
 	lineindent := "\n" + indent
 	output := "" +
 		lineindent + "<div class=\"lbl\">Description:</div>" +
@@ -54,7 +54,10 @@ func HtmlFromListFuncIndent(listfunc []*vxfunc, indent string) (string, string) 
 			lineindent + "  (f) " + HtmlFromString(fnc.name) +
 			lineindent + "</li>"
 		arguments := "" +
-			lineindent + "  <div class=\"lbl\">Arguments:</div>" +
+			lineindent + "<details open=\"true\">" +
+			lineindent + "  <summary>" +
+			lineindent + "    <span class=\"lbl\">Arguments:</span>" +
+			lineindent + "  </summary>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
 			lineindent + "      <div class=\"table\">" +
@@ -76,11 +79,13 @@ func HtmlFromListFuncIndent(listfunc []*vxfunc, indent string) (string, string) 
 		arguments += "" +
 			lineindent + "      </div>" +
 			lineindent + "    </li>" +
-			lineindent + "  </ul>"
+			lineindent + "  </ul>" +
+			lineindent + "</details>"
 		detail += "" +
 			lineindent + "<div class=\"d\" id=\"d_func_" + HtmlNameFromFunc(fnc) + "\">" +
 			lineindent + "  <div class=\"header\">" + HtmlLinkFromPackageName(fnc.pkgname) + " / " + HtmlLinkNameFromFunc(fnc) + "</div>" +
-			lineindent + "  <div class=\"lbl\">Function:</div>" +
+			HtmlDescriptionFromDoc(fnc.doc, indent+"  ") +
+			lineindent + "  <div class=\"lbl\">Function Name:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
 			lineindent + "      <div class=\"txt\">" + HtmlFromNameAlias(fnc.name, fnc.alias) + "</div>" +
@@ -93,7 +98,6 @@ func HtmlFromListFuncIndent(listfunc []*vxfunc, indent string) (string, string) 
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
 			arguments +
-			HtmlFromDoc(fnc.doc, indent+"  ") +
 			HtmlFromListTestValue(fnc.listtestvalue, indent+"  ") +
 			HtmlFromSourceCode(fnc.textblock.text, indent+"  ") +
 			lineindent + "</div>"
@@ -175,33 +179,49 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 		detail += "" +
 			lineindent + "<div class=\"d\" id=\"d_pkg_" + HtmlNameFromPackage(pkg) + "\">" +
 			lineindent + "  <div class=\"header\">" + HtmlLinkFromPackageName(pkg.name) + "</div>" +
-			lineindent + "  <div class=\"lbl\">Package:</div>" +
+			HtmlDescriptionFromDoc(pkg.doc, "        ") +
+			lineindent + "  <div class=\"lbl\">Package Name:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
 			lineindent + "      <div class=\"txt\">" + HtmlFromName(pkg.name) + "</div>" +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
-			HtmlFromDoc(pkg.doc, "        ") +
-			lineindent + "  <div class=\"lbl\">Libraries:</div>" +
+			lineindent + "  <details open=\"true\">" +
+			lineindent + "    <summary>" +
+			lineindent + "      <span class=\"lbl\">Libraries:</span>" +
+			lineindent + "    </summary>" +
 			libraries +
-			lineindent + "  <div class=\"lbl\">Types:</div>" +
-			lineindent + "  <ul>" +
-			lineindent + "    <li>" +
-			lineindent + StringFromListStringJoin(pkgtypes, ", ") +
-			lineindent + "    </li>" +
-			lineindent + "  </ul>" +
-			lineindent + "  <div class=\"lbl\">Constants:</div>" +
-			lineindent + "  <ul>" +
-			lineindent + "    <li>" +
+			lineindent + "  </details>" +
+			lineindent + "  <details open=\"true\">" +
+			lineindent + "    <summary>" +
+			lineindent + "      <span class=\"lbl\">Types:</span>" +
+			lineindent + "    </summary>" +
+			lineindent + "    <ul>" +
+			lineindent + "      <li>" +
+			lineindent + "        " + StringFromListStringJoin(pkgtypes, ", ") +
+			lineindent + "      </li>" +
+			lineindent + "    </ul>" +
+			lineindent + "  </details>" +
+			lineindent + "  <details open=\"true\">" +
+			lineindent + "    <summary>" +
+			lineindent + "      <span class=\"lbl\">Constants:</span>" +
+			lineindent + "    </summary>" +
+			lineindent + "    <ul>" +
+			lineindent + "      <li>" +
 			lineindent + StringFromListStringJoin(pkgconsts, ", ") +
-			lineindent + "    </li>" +
-			lineindent + "  </ul>" +
-			lineindent + "  <div class=\"lbl\">Functions:</div>" +
-			lineindent + "  <ul>" +
-			lineindent + "    <li>" +
+			lineindent + "      </li>" +
+			lineindent + "    </ul>" +
+			lineindent + "  </details>" +
+			lineindent + "  <details open=\"true\">" +
+			lineindent + "    <summary>" +
+			lineindent + "      <span class=\"lbl\">Functions:</span>" +
+			lineindent + "    </summary>" +
+			lineindent + "    <ul>" +
+			lineindent + "      <li>" +
 			lineindent + StringFromListStringJoin(pkgfuncs, ", ") +
-			lineindent + "    </li>" +
-			lineindent + "  </ul>" +
+			lineindent + "      </li>" +
+			lineindent + "    </ul>" +
+			lineindent + "  </details>" +
 			HtmlFromSourceCode(pkg.textblock.text, indent+"  ") +
 			lineindent + "</div>" +
 			typedetail +
@@ -217,9 +237,31 @@ func HtmlFromProject(prj *vxproject) string {
 	prjpackages := ""
 	for _, pkg := range prj.listpackage {
 		prjpackages += "" +
-			lineindent + "        <ul>" +
-			lineindent + "          <li>" + HtmlLinkFromPackageName(pkg.name) + "</li>" +
-			lineindent + "        </ul>"
+			lineindent + "            <li>" + HtmlLinkFromPackageName(pkg.name) + "</li>"
+	}
+	prjlibraries := ""
+	if len(prj.listlib) > 0 {
+		prjlibraries += "" +
+			lineindent + "          <ul>" +
+			lineindent + "            <li>" +
+			lineindent + "              <div class=\"table\">" +
+			lineindent + "                <div class=\"th\">" +
+			lineindent + "                  <div class=\"td\">Name</div>" +
+			lineindent + "                  <div class=\"td\">Lang</div>" +
+			lineindent + "                  <div class=\"td\">Path</div>" +
+			lineindent + "                </div>"
+		for _, lib := range prj.listlib {
+			prjlibraries += "" +
+				lineindent + "                <div class=\"tr\">" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(lib.name) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(lib.lang) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(lib.path) + "</div>" +
+				lineindent + "                </div>"
+		}
+		prjlibraries += "" +
+			lineindent + "              </div>" +
+			lineindent + "            </li>" +
+			lineindent + "          </ul>"
 	}
 	paths := ""
 	if len(prj.listpath) > 0 {
@@ -246,30 +288,36 @@ func HtmlFromProject(prj *vxproject) string {
 	commands := ""
 	if len(prj.listcmd) > 0 {
 		commands += "" +
-			lineindent + "        <ul>" +
-			lineindent + "          <li>" +
-			lineindent + "            <div class=\"table\">" +
-			lineindent + "              <div class=\"th\">" +
-			lineindent + "                <div class=\"td\">Name</div>" +
-			lineindent + "                <div class=\"td\">Code</div>" +
-			lineindent + "                <div class=\"td\">Path</div>" +
-			lineindent + "                <div class=\"td\">Language</div>" +
-			lineindent + "                <div class=\"td\">Description</div>" +
-			lineindent + "              </div>"
+			lineindent + "          <ul>" +
+			lineindent + "            <li>" +
+			lineindent + "              <div class=\"table\">" +
+			lineindent + "                <div class=\"th\">" +
+			lineindent + "                  <div class=\"td\">Name</div>" +
+			lineindent + "                  <div class=\"td\">Code</div>" +
+			lineindent + "                  <div class=\"td\">Path</div>" +
+			lineindent + "                  <div class=\"td\">Language</div>" +
+			lineindent + "                  <div class=\"td\">Main</div>" +
+			lineindent + "                  <div class=\"td\">Context</div>" +
+			lineindent + "                  <div class=\"td\">Port</div>" +
+			lineindent + "                  <div class=\"td\">Description</div>" +
+			lineindent + "                </div>"
 		for _, cmd := range prj.listcmd {
 			commands += "" +
-				lineindent + "              <div class=\"tr\">" +
-				lineindent + "                <div class=\"td\">" + HtmlFromString(cmd.name) + "</div>" +
-				lineindent + "                <div class=\"td\">" + HtmlFromString(cmd.code) + "</div>" +
-				lineindent + "                <div class=\"td\">" + HtmlFromString(cmd.path) + "</div>" +
-				lineindent + "                <div class=\"td\">" + HtmlFromString(cmd.lang) + "</div>" +
-				lineindent + "                <div class=\"td\">" + HtmlFromString(cmd.doc) + "</div>" +
-				lineindent + "              </div>"
+				lineindent + "                <div class=\"tr\">" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.name) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.code) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.path) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.lang) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.main) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.context) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + StringFromInt(cmd.port) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.doc) + "</div>" +
+				lineindent + "                </div>"
 		}
 		commands += "" +
-			lineindent + "            </div>" +
-			lineindent + "          </li>" +
-			lineindent + "        </ul>"
+			lineindent + "              </div>" +
+			lineindent + "            </li>" +
+			lineindent + "          </ul>"
 	}
 	output := "" +
 		`<!DOCTYPE html>
@@ -277,30 +325,25 @@ func HtmlFromProject(prj *vxproject) string {
 <head>
   <meta charset="UTF-8">
   <title>Project: ` + HtmlFromName(prj.name) + `</title>
-	<style>
-	  html {
-		  height: 100%;
-	  }
-
+  <style>
+    html {
+      height: 100%;
+    }
     body {
       font-family: Arial, Helvetica, sans-serif;
       height: 100%;
       margin: 0px;
     }
-
     .table {
       display: table;
     }
-
     .th {
       display: table-header-group;
       background-color: #f2f2f2;
     }
-
     .tr {
       display: table-row;
     }
-
     .td {
       display: table-cell;
       overflow: hidden;
@@ -310,128 +353,107 @@ func HtmlFromProject(prj *vxproject) string {
       white-space: nowrap;
       border-bottom: 1px solid #d0d0d0;
     }
-
     ul {
       margin-block-start: 0.5em;
       margin-block-end: 0.5em;
       padding-inline-start: 40px;  
     }
-
     .nav {
       width: 22%;
       height: 100%;
       overflow: auto;
     }
-
     .detail {
       width: 78%;
       height: 100%;
       overflow: auto;
     }
-
     .d {
       display: none;
     }
-
     .header {
       font-size: 130%;
       font-weight: bold;
       padding-bottom: 1em;
       padding-top: 1em;
     }
-
     .lbl {
       color: gray;
       font-weight: bold;
       font-size: 100%;
     }
-
     .nconst {
       color: brown;
       cursor: pointer;
     }
-
     .nconst:hover {
       color: red;
       background-color: transparent;
       text-decoration: underline;
     }
-
     .nfunc {
       color: green;
       cursor: pointer;
     }
-
     .nfunc:hover {
       color: red;
       background-color: transparent;
       text-decoration: underline;
     }
-
     .npackage {
       color: goldenrod;
       cursor: pointer;
       font-size: 110%;
     }
-
     .npackage:hover {
       color: red;
       background-color: transparent;
       text-decoration: underline;
     }
-
     .nproject {
       color: orange;
       cursor: pointer;
       font-size: 120%;
       padding-bottom: 3px;
     }
-
     .nproject:hover {
       color: red;
       background-color: transparent;
       text-decoration: underline;
     }
-
     .ntype {
       color: blue;
       cursor: pointer;
     }
-
     .ntype:hover {
       color: red;
       background-color: transparent;
       text-decoration: underline;
     }
-
     .packagenav {
       list-style-type: none;
       margin-block-start: 0.5em;
       margin-block-end: 0.5em;
       padding-inline-start: 5px;
     }
-
     .project {
       display: flex;
       flex-wrap: nowrap;
       height: 100%;
       width: 100%;
     }
-
     .source {
       display: block;
       font-family: monospace;
       unicode-bidi: embed;
       white-space: pre;
     }
-
     .test {
       display: block;
       font-family: monospace;
       unicode-bidi: embed;
       white-space: pre;
     }
-
     .txt {
       font-size: 100%;
     }
@@ -439,13 +461,6 @@ func HtmlFromProject(prj *vxproject) string {
   <script>
     const docjs = {
       selected: null,
-/*
-      packagename_click: function (element) {
-        const elementid = element.id
-        const navelement = document.getElementById('n_' + elementid)
-        docjs.visibilitytoggle(navelement)
-      },
-*/
       navigate: function (elementid) {
         if (docjs.selected != null) {
           docjs.visibilityhide(docjs.selected)
@@ -483,12 +498,12 @@ func HtmlFromProject(prj *vxproject) string {
   <noscript>Warning: JavaScript disabled in browser.</noscript>
   <div class="project" id="project">
     <div class="nav" id="nav">
-    <div class="nproject" onclick="docjs.navigate('prj')">project</div>
-    ` + nav + `
+    <div class="nproject" onclick="docjs.navigate('prj')">project</div>` +
+		nav + `
     </div>
     <div class="detail" id="detail">
       <div class="d" id="d_prj">
-			  <div class="lbl">Project:</div>
+			  <div class="lbl">Project Name:</div>
         <ul>
           <li>
             <div class="txt">` + HtmlFromName(prj.name) + `</div>
@@ -505,14 +520,40 @@ func HtmlFromProject(prj *vxproject) string {
           <li>
             <div class="txt">` + HtmlFromString(prj.author) + `</div>
           </li>
+        </ul>
+        <div class="lbl">Java Domain:</div>
+        <ul>
+          <li>
+            <div class="txt">` + HtmlFromString(prj.javadomain) + `</div>
+          </li>
         </ul>` +
-		HtmlFromDoc(prj.doc, "        ") + `
-        <div class=\"lbl\">Paths:</div>` +
+		HtmlDescriptionFromDoc(prj.doc, "        ") + `
+        <details open="true">
+          <summary>
+            <span class="lbl">Paths:</span>
+          </summary>` +
 		paths + `
-        <div class="lbl">Commands:</div>` +
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Libraries:</span>
+          </summary>` +
+		prjlibraries + `
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Commands:</span>
+          </summary>` +
 		commands + `
-        <div class="lbl">Packages:</div>` +
-		prjpackages +
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Packages:</span>
+          </summary>
+          <ul>` +
+		prjpackages + `
+          </ul>
+        </details>` +
 		HtmlFromSourceCode(prj.textblock.text, "        ") + `
 		  </div>
 		  ` + detail + `
@@ -526,12 +567,16 @@ func HtmlFromProject(prj *vxproject) string {
 func HtmlFromSourceCode(text string, indent string) string {
 	lineindent := "\n" + indent
 	output := "" +
-		lineindent + "<div class=\"lbl\">Source Code:</div>" +
-		lineindent + "<ul>" +
-		lineindent + "  <li>" +
-		lineindent + "    <div class=\"source\">" + HtmlFromString(text) + "</div>" +
-		lineindent + "  </li>" +
-		lineindent + "</ul>"
+		lineindent + "<details open=\"true\">" +
+		lineindent + "  <summary>" +
+		lineindent + "    <span class=\"lbl\">Source Code:</span>" +
+		lineindent + "  </summary>" +
+		lineindent + "  <ul>" +
+		lineindent + "    <li>" +
+		lineindent + "      <div class=\"source\">" + HtmlFromString(text) + "</div>" +
+		lineindent + "    </li>" +
+		lineindent + "  </ul>" +
+		lineindent + "</details>"
 	return output
 }
 
@@ -547,14 +592,18 @@ func HtmlFromString(text string) string {
 func HtmlFromListTestValue(listtestvalue []vxvalue, indent string) string {
 	lineindent := "\n" + indent
 	output := "" +
-		lineindent + "<div class=\"lbl\">Usage/Test Cases:</div>" +
-		lineindent + "<ul>"
+		lineindent + "<details open=\"true\">" +
+		lineindent + "  <summary>" +
+		lineindent + "    <span class=\"lbl\">Usage/Test Cases:</span>" +
+		lineindent + "  </summary>" +
+		lineindent + "  <ul>"
 	for _, testvalue := range listtestvalue {
 		output += "" +
-			lineindent + "  <li><div class=\"test\">" + HtmlFromString(testvalue.textblock.text) + "</div></li>"
+			lineindent + "    <li><div class=\"test\">" + HtmlFromString(testvalue.textblock.text) + "</div></li>"
 	}
 	output += "" +
-		lineindent + "</ul>"
+		lineindent + "  </ul>" +
+		lineindent + "</details>"
 	return output
 }
 
@@ -581,9 +630,10 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				allowfuncs += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromFunc(subfunc) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			allowfuncs += "" +
+				lineindent + "  </ul>"
 		}
 		if len(typ.disallowfuncs) > 0 {
 			disallowfuncs += "" +
@@ -593,9 +643,10 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				disallowfuncs += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromFunc(subfunc) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			disallowfuncs += "" +
+				lineindent + "  </ul>"
 		}
 		if len(typ.allowtypes) > 0 {
 			allowtypes += "" +
@@ -605,9 +656,10 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				allowtypes += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromType(subtyp) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			allowtypes += "" +
+				lineindent + "  </ul>"
 		}
 		if len(typ.disallowtypes) > 0 {
 			disallowtypes += "" +
@@ -617,9 +669,10 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				disallowtypes += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromType(subtyp) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			disallowtypes += "" +
+				lineindent + "  </ul>"
 		}
 		if len(typ.allowvalues) > 0 {
 			allowvalues += "" +
@@ -629,9 +682,10 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				allowvalues += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromConst(subvalue) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			allowvalues += "" +
+				lineindent + "  </ul>"
 		}
 		if len(typ.disallowvalues) > 0 {
 			disallowvalues += "" +
@@ -641,39 +695,49 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 				disallowvalues += "" +
 					lineindent + "    <li>" +
 					lineindent + "      <div class=\"txt\">" + HtmlLinkNameFromConst(subvalue) + "</div>" +
-					lineindent + "    </li>" +
-					lineindent + "  </ul>"
+					lineindent + "    </li>"
 			}
+			disallowvalues += "" +
+				lineindent + "  </ul>"
 		}
 		properties := ""
 		if len(typ.properties) > 0 {
 			properties += "" +
-				lineindent + "  <div class=\"lbl\">Properties:</div>" +
-				lineindent + "  <ul>" +
-				lineindent + "    <li>" +
-				lineindent + "      <div class=\"table\">" +
-				lineindent + "        <div class=\"th\">" +
-				lineindent + "          <div class=\"td\">Name</div>" +
-				lineindent + "          <div class=\"td\">Type</div>" +
-				lineindent + "          <div class=\"td\">Description</div>" +
-				lineindent + "        </div>"
+				lineindent + "  <details>" +
+				lineindent + "    <summary>" +
+				lineindent + "      <span class=\"lbl\">Properties:</span>" +
+				lineindent + "    </summary>" +
+				lineindent + "    <ul>" +
+				lineindent + "      <li>" +
+				lineindent + "        <div class=\"table\">" +
+				lineindent + "          <div class=\"th\">" +
+				lineindent + "            <div class=\"td\">Name</div>" +
+				lineindent + "            <div class=\"td\">Type</div>" +
+				lineindent + "            <div class=\"td\">Description</div>" +
+				lineindent + "            <div class=\"td\">Is Multi</div>" +
+				lineindent + "            <div class=\"td\">Is Default</div>" +
+				lineindent + "          </div>"
 			for _, property := range typ.properties {
 				properties += "" +
-					lineindent + "        <div class=\"tr\">" +
-					lineindent + "          <div class=\"td\">" + HtmlFromString(property.name) + "</div>" +
-					lineindent + "          <div class=\"td\">" + HtmlLinkFromType(property.vxtype) + "</div>" +
-					lineindent + "          <div class=\"td\">" + HtmlFromString(property.doc) + "</div>" +
-					lineindent + "        </div>"
+					lineindent + "          <div class=\"tr\">" +
+					lineindent + "            <div class=\"td\">" + HtmlFromNameAlias(property.name, property.alias) + "</div>" +
+					lineindent + "            <div class=\"td\">" + HtmlLinkFromType(property.vxtype) + "</div>" +
+					lineindent + "            <div class=\"td\">" + HtmlFromString(property.doc) + "</div>" +
+					lineindent + "            <div class=\"td\">" + StringFromBoolean(property.multi) + "</div>" +
+					lineindent + "            <div class=\"td\">" + StringFromBoolean(property.isdefault) + "</div>" +
+					lineindent + "          </div>"
 			}
 			properties += "" +
-				lineindent + "      </div>" +
-				lineindent + "    </li>" +
-				lineindent + "  </ul>"
+				lineindent + "        </div>" +
+				lineindent + "      </li>" +
+				lineindent + "    </ul>" +
+				lineindent + "  </details>"
 		}
 		detail += "" +
 			lineindent + "<div class=\"d\" id=\"d_type_" + HtmlNameFromType(typ) + "\">" +
 			lineindent + "  <div class=\"header\">" + HtmlLinkFromPackageName(typ.pkgname) + " / " + HtmlLinkNameFromType(typ) + "</div>" +
-			lineindent + "  <div class=\"lbl\">Type:</div>" +
+			HtmlDescriptionFromDoc(typ.doc, indent+"  ") +
+			lineindent + "  <div class=\"lbl\">Type Name:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +
 			lineindent + "      <div class=\"txt\">" + HtmlFromNameAlias(typ.name, typ.alias) + "</div>" +
@@ -685,7 +749,6 @@ func HtmlFromListType(listtype []*vxtype, indent string) (string, string) {
 			lineindent + "      <div class=\"txt\">" + HtmlFromString(typ.extends) + "</div>" +
 			lineindent + "    </li>" +
 			lineindent + "  </ul>" +
-			HtmlFromDoc(typ.doc, indent+"  ") +
 			lineindent + "  <div class=\"lbl\">Default:</div>" +
 			lineindent + "  <ul>" +
 			lineindent + "    <li>" +

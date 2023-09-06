@@ -32,25 +32,30 @@
    :path    ../cpp/src/main
    :context ""
    :main    vx/core/string
-  )
+   :doc     "Build C++ Source Code")
   (cmd testcpp
    :code :test
    :lang :cpp
-   :path ../cpp/src/test)
+   :path ../cpp/src/test
+   :doc  "Build C++ Test Code")
   (cmd srcjs
    :code :source
    :lang :js
-   :path ../js/src)
+   :path ../js/src
+   :doc  "Build JavaScript Source Code")
   (cmd testjs
    :code :test
    :lang :js
-   :path ../js/test)
+   :path ../js/test
+   :doc  "Build JavaScript Test Code")
   (cmd srcjava
    :code :source
    :lang :java
-   :path ../java/src/main/java)
+   :path ../java/src/main/java
+   :doc  "Build Java Source Code")
   (cmd testjava
    :code :test
    :lang :java
-   :path ../java/src/test/java)
+   :path ../java/src/test/java
+   :doc  "Build Java Test Code")
 )
