@@ -1,66 +1,54 @@
 (package vx/data/table
  :doc "General data table")
 
-(type cell
- :extends :struct
+(type cell : struct
  :properties
   [id    : string
    value : any])
 
-(type celllist
- :extends    :list
+(type celllist : list
  :allowtypes [cell])
 
-(type cellmap
- :extends    :map
+(type cellmap : map
  :allowtypes [cell])
 
-(type field
- :extends :struct
+(type field : struct
  :properties
   [id      : string
    name    : string
    fldtype : any])
 
-(type fieldlist
- :extends    :list
+(type fieldlist : list
  :allowtypes [field])
 
-(type fieldmap
- :extends    :list
+(type fieldmap : list
  :allowtypes [field])
 
-(type filter
- :extends :struct
+(type filter : struct
  :properties
   [id      : string
    name    : string
    idlist  : stringlist])
 
-(type row
- :extends :struct
+(type row : struct
  :properties
   [id       : string
    cellmap  : cellmap
    cellsort : sort])
 
-(type rowlist
- :extends    :list
+(type rowlist : list
  :allowtypes [row])
 
-(type rowmap
- :extends    :map
+(type rowmap : map
  :allowtypes [row])
 
-(type sort
- :extends :struct
+(type sort : struct
  :properties
   [id      : string
    name    : string
    idlist  : stringlist])
 
-(type table
- :extends :struct
+(type table : struct
  :properties
   [id        : string
    name      : string

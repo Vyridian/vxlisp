@@ -71,8 +71,8 @@ public final class Core {
     Core.Type_any typ
   ) {
     Core.Class_constdef output = new Core.Class_constdef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
     output.vx_p_type = typ;
     return output;
   }
@@ -85,10 +85,10 @@ public final class Core {
     Core.Type_any typ
   ) {
     Core.Class_funcdef output = new Core.Class_funcdef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
-    output.vx_p_idx = Core.t_int.vx_new_from_int(idx);
-    output.vx_p_async = Core.t_boolean.vx_new_from_boolean(async);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
+    output.vx_p_idx = Core.vx_new_int(idx);
+    output.vx_p_async = Core.vx_new_boolean(async);
     output.vx_p_type = typ;
     return output;
   }
@@ -237,6 +237,156 @@ public final class Core {
     return output;
   }
 
+  public static Type_boolean vx_new_boolean(final boolean isval) {
+    Type_boolean output = Core.c_false;
+    if (isval) {
+      output = Core.c_true;
+    }
+    return output;
+  }
+
+  public static Type_float vx_new_float(final float fval) {
+    Class_float output = new Core.Class_float();
+    output.vxfloat = fval;
+    return output;
+  }
+
+  public static Type_int vx_new_int(final int ival) {
+    Class_int output = new Core.Class_int();
+    output.vxint = ival;
+    return output;
+  }
+
+  public static Type_string vx_new_string(final String text) {
+    Type_string output;
+    if (text == "" && Core.e_string != null) {
+      output = Core.e_string;
+    } else {
+      Class_string work = new Core.Class_string();
+      work.vxstring = text;
+      output = work;
+    }
+    return output;
+  }
+
+  public static String vx_string_from_any_indent(Core.Type_any value, int indent, boolean linefeed) {
+    String indenttext = " ".repeat(indent);
+    String output = "";
+    if (indent > 50) {
+      output = "Error: Max Depth Exceeded";
+    } else if (value == null) {
+      output = "null";
+    } else if (value == value.vx_type()) {
+      Core.Type_typedef typedef = value.vx_typedef();
+      output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
+    } else if (value instanceof Core.Type_boolean) {
+      Core.Type_boolean valbool = Core.f_any_from_any(Core.t_boolean, value);
+      if (valbool.vx_boolean() == true) {
+        output = "true";
+      } else {
+        output = "false";
+      }
+    } else if (value instanceof Core.Type_decimal) {
+      Core.Type_decimal valdec = Core.f_any_from_any(Core.t_decimal, value);
+      output = valdec.vx_string();
+    } else if (value instanceof Core.Type_float) {
+      Core.Type_float valfloat = Core.f_any_from_any(Core.t_float, value);
+      output = Float.toString(valfloat.vx_float());
+      if (output.endsWith(".0")) {
+        output = output.substring(0, output.length() - 2);
+      }
+    } else if (value instanceof Core.Type_int) {
+      if (value == Core.c_notanumber) {
+        output = "notanumber";
+      } else if (value == Core.c_infinity) {
+        output = "infinity";
+      } else if (value == Core.c_neginfinity) {
+        output = "neginfinity";
+      } else {
+        Core.Type_int valint = Core.f_any_from_any(Core.t_int, value);
+        output = Integer.toString(valint.vx_int());
+      }
+    } else if (value instanceof Core.Type_string) {
+      Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
+      output = "\"" + valstring.vx_string() + "\"";
+    } else if (value instanceof Core.Type_list) {
+      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
+      Core.Type_typedef typedef = vallist.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      int indentint = indent;
+      indentint += 1;
+      List<Core.Type_any> listval = vallist.vx_list();
+      for (Core.Type_any valsub : listval) {
+        String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        output += "\n " + indenttext + valtext;
+      }
+      if (vallist.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
+    } else if (value instanceof Core.Type_map) {
+      Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
+      Core.Type_typedef typedef = valmap.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      int indentint = indent;
+      indentint += 2;
+      Map<String, Core.Type_any> mapval = valmap.vx_map();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any valsub = mapval.get(key);
+        if (!key.startsWith(":")) {
+          key = ":" + key;
+        }
+        String strval = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        if (strval.contains("\n")) {
+          strval = "\n  " + indenttext + strval;
+        } else {
+          strval = " " + strval;
+        }
+        output += "\n" + indenttext + " " + key + strval;
+      }
+      if (valmap.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
+    } else if (value instanceof Core.Type_struct) {
+      Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
+      Core.Type_typedef typedef = valstruct.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
+      String valtext = Core.vx_string_from_any_indent(valmap, indent, linefeed);
+      output = valtext.replaceFirst("map", typedefname.vx_string());
+    } else if (value instanceof Core.Type_func) {
+      Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
+      Core.Type_funcdef funcdef = valfunc.vx_funcdef();
+      Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
+      output = funcdefname.vx_string();
+      if (valfunc.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + output + ")";
+    }
+    return output;
+  }
+
+  public static String vx_string_from_string_start_end(String text, int start, int end) {
+    String output = "";
+    int len = text.length();
+    if (start >= len) {
+      output = "";
+    } else if (end <= start) {
+      output = "";
+    } else if (end >= len) {
+      output = text.substring(start, len);
+    } else {
+      output = text.substring(start, end);
+    }
+    return output;   
+  }
+
   // Warning!: Blocking
   public static <T extends Core.Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
     T output = Core.f_empty(generic_any_1);
@@ -264,9 +414,9 @@ public final class Core {
     Core.Type_argmap properties
   ) {
     Core.Class_typedef output = new Core.Class_typedef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
-    output.vx_p_extend = Core.t_string.vx_new_from_string(extend);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
+    output.vx_p_extend = Core.vx_new_string(extend);
     output.vx_p_traits = traits;
     output.vx_p_allowtypes = allowtypes;
     output.vx_p_disallowtypes = disallowtypes;
@@ -1074,7 +1224,6 @@ public final class Core {
     public Core.Type_boolean vx_empty();
     public Core.Type_boolean vx_type();
     public boolean vx_boolean();
-    public Type_boolean vx_new_from_boolean(final boolean isval);
   }
 
   public static class Class_boolean extends Core.Class_base implements Type_boolean {
@@ -1083,15 +1232,6 @@ public final class Core {
     
     @Override
     public boolean vx_boolean() {return vxboolean;}
-    
-    @Override
-    public Type_boolean vx_new_from_boolean(final boolean isval) {
-      Type_boolean output = Core.c_false;
-      if (isval) {
-        output = Core.c_true;
-      }
-      return output;
-    }
 
     @Override
     public Type_boolean vx_new(final Object... vals) {return e_boolean.vx_copy(vals);}
@@ -2459,7 +2599,6 @@ public final class Core {
     public Core.Type_float vx_empty();
     public Core.Type_float vx_type();
     public float vx_float();
-    public Type_float vx_new_from_float(final float fval);
   }
 
   public static class Class_float extends Core.Class_base implements Type_float {
@@ -2468,13 +2607,6 @@ public final class Core {
     
     @Override
     public float vx_float() {return vxfloat;}
-    
-    @Override
-    public Type_float vx_new_from_float(final float fval) {
-      Class_float output = new Core.Class_float();
-      output.vxfloat = fval;
-      return output;
-    }
 
     @Override
     public Type_float vx_new(final Object... vals) {return e_float.vx_copy(vals);}
@@ -3074,7 +3206,6 @@ public final class Core {
     public Core.Type_int vx_empty();
     public Core.Type_int vx_type();
     public int vx_int();
-    public Type_int vx_new_from_int(final int ival);
   }
 
   public static class Class_int extends Core.Class_base implements Type_int {
@@ -3083,13 +3214,6 @@ public final class Core {
     
     @Override
     public int vx_int() {return vxint;}
-    
-    @Override
-    public Type_int vx_new_from_int(final int ival) {
-      Class_int output = new Core.Class_int();
-      output.vxint = ival;
-      return output;
-    }
 
     @Override
     public Type_int vx_new(final Object... vals) {return e_int.vx_copy(vals);}
@@ -3959,14 +4083,14 @@ public final class Core {
     
     public Type_msg vx_new_error(final String text) {
       Class_msg output = new Class_msg();
-      output.vx_p_text = Core.t_string.vx_new_from_string(text);
+      output.vx_p_text = Core.vx_new_string(text);
       output.vx_p_severity = Core.c_msg_severe;
       return output;
     }
     
     public Type_msg vx_new_from_exception(final String text, final Exception err) {
       Class_msg output = new Class_msg();
-      output.vx_p_text = Core.t_string.vx_new_from_string(text);
+      output.vx_p_text = Core.vx_new_string(text);
       output.vx_p_severity = Core.c_msg_severe;
       output.err = err;
       Core.debug(output);
@@ -6233,7 +6357,6 @@ public final class Core {
     public Core.Type_string vx_empty();
     public Core.Type_string vx_type();
     public String vx_string();
-    public Type_string vx_new_from_string(final String text);
   }
 
   public static class Class_string extends Core.Class_base implements Type_string {
@@ -6243,19 +6366,6 @@ public final class Core {
     @Override
     public String vx_string() {
       return vxstring;
-    }
-    
-    @Override
-    public Type_string vx_new_from_string(final String text) {
-      Type_string output;
-      if (text == "" && Core.e_string != null) {
-        output = Core.e_string;
-      } else {
-        Class_string work = new Core.Class_string();
-        work.vxstring = text;
-        output = work;
-      }
-      return output;
     }
 
     @Override
@@ -6313,7 +6423,7 @@ public final class Core {
       return Core.typedef_new(
         "vx/core", // pkgname
         "string", // name
-        "string", // extends
+        ":string", // extends
         Core.e_typelist, // traits
         Core.e_typelist, // allowtypes
         Core.e_typelist, // disallowtypes
@@ -7958,9 +8068,7 @@ public final class Core {
       );
     }
 
-    public static Const_false const_new() {
-      Const_false output = new Const_false();
-      return output;
+    public static void const_new(Const_false output) {
     }
 
     @Override
@@ -7971,7 +8079,7 @@ public final class Core {
 
   }
 
-  public static final Const_false c_false = Const_false.const_new();
+  public static final Const_false c_false = new Const_false();
 
 
   /**
@@ -8000,15 +8108,13 @@ public final class Core {
       );
     }
 
-    public static Const_globalpackagemap const_new() {
-      Const_globalpackagemap output = new Const_globalpackagemap();
-      return output;
+    public static void const_new(Const_globalpackagemap output) {
     }
 
 
   }
 
-  public static final Const_globalpackagemap c_globalpackagemap = Const_globalpackagemap.const_new();
+  public static final Const_globalpackagemap c_globalpackagemap = new Const_globalpackagemap();
 
 
   /**
@@ -8038,9 +8144,7 @@ public final class Core {
       );
     }
 
-    public static Const_infinity const_new() {
-      Const_infinity output = new Const_infinity();
-      return output;
+    public static void const_new(Const_infinity output) {
     }
 
     @Override
@@ -8051,7 +8155,7 @@ public final class Core {
 
   }
 
-  public static final Const_infinity c_infinity = Const_infinity.const_new();
+  public static final Const_infinity c_infinity = new Const_infinity();
 
 
   /**
@@ -8081,15 +8185,13 @@ public final class Core {
       );
     }
 
-    public static Const_mempool_active const_new() {
-      Const_mempool_active output = new Const_mempool_active();
-      return output;
+    public static void const_new(Const_mempool_active output) {
     }
 
 
   }
 
-  public static final Const_mempool_active c_mempool_active = Const_mempool_active.const_new();
+  public static final Const_mempool_active c_mempool_active = new Const_mempool_active();
 
 
   /**
@@ -8119,9 +8221,7 @@ public final class Core {
       );
     }
 
-    public static Const_msg_error const_new() {
-      Const_msg_error output = new Const_msg_error();
-      return output;
+    public static void const_new(Const_msg_error output) {
     }
 
     @Override
@@ -8132,7 +8232,7 @@ public final class Core {
 
   }
 
-  public static final Const_msg_error c_msg_error = Const_msg_error.const_new();
+  public static final Const_msg_error c_msg_error = new Const_msg_error();
 
 
   /**
@@ -8162,9 +8262,7 @@ public final class Core {
       );
     }
 
-    public static Const_msg_info const_new() {
-      Const_msg_info output = new Const_msg_info();
-      return output;
+    public static void const_new(Const_msg_info output) {
     }
 
     @Override
@@ -8175,7 +8273,7 @@ public final class Core {
 
   }
 
-  public static final Const_msg_info c_msg_info = Const_msg_info.const_new();
+  public static final Const_msg_info c_msg_info = new Const_msg_info();
 
 
   /**
@@ -8205,9 +8303,7 @@ public final class Core {
       );
     }
 
-    public static Const_msg_severe const_new() {
-      Const_msg_severe output = new Const_msg_severe();
-      return output;
+    public static void const_new(Const_msg_severe output) {
     }
 
     @Override
@@ -8218,7 +8314,7 @@ public final class Core {
 
   }
 
-  public static final Const_msg_severe c_msg_severe = Const_msg_severe.const_new();
+  public static final Const_msg_severe c_msg_severe = new Const_msg_severe();
 
 
   /**
@@ -8248,9 +8344,7 @@ public final class Core {
       );
     }
 
-    public static Const_msg_warning const_new() {
-      Const_msg_warning output = new Const_msg_warning();
-      return output;
+    public static void const_new(Const_msg_warning output) {
     }
 
     @Override
@@ -8261,7 +8355,7 @@ public final class Core {
 
   }
 
-  public static final Const_msg_warning c_msg_warning = Const_msg_warning.const_new();
+  public static final Const_msg_warning c_msg_warning = new Const_msg_warning();
 
 
   /**
@@ -8291,9 +8385,7 @@ public final class Core {
       );
     }
 
-    public static Const_neginfinity const_new() {
-      Const_neginfinity output = new Const_neginfinity();
-      return output;
+    public static void const_new(Const_neginfinity output) {
     }
 
     @Override
@@ -8304,7 +8396,7 @@ public final class Core {
 
   }
 
-  public static final Const_neginfinity c_neginfinity = Const_neginfinity.const_new();
+  public static final Const_neginfinity c_neginfinity = new Const_neginfinity();
 
 
   /**
@@ -8321,7 +8413,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -8334,9 +8426,7 @@ public final class Core {
       );
     }
 
-    public static Const_newline const_new() {
-      Const_newline output = new Const_newline();
-      return output;
+    public static void const_new(Const_newline output) {
     }
 
     @Override
@@ -8347,7 +8437,7 @@ public final class Core {
 
   }
 
-  public static final Const_newline c_newline = Const_newline.const_new();
+  public static final Const_newline c_newline = new Const_newline();
 
 
   /**
@@ -8377,9 +8467,7 @@ public final class Core {
       );
     }
 
-    public static Const_notanumber const_new() {
-      Const_notanumber output = new Const_notanumber();
-      return output;
+    public static void const_new(Const_notanumber output) {
     }
 
     @Override
@@ -8390,7 +8478,7 @@ public final class Core {
 
   }
 
-  public static final Const_notanumber c_notanumber = Const_notanumber.const_new();
+  public static final Const_notanumber c_notanumber = new Const_notanumber();
 
 
   /**
@@ -8407,7 +8495,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -8420,9 +8508,7 @@ public final class Core {
       );
     }
 
-    public static Const_nothing const_new() {
-      Const_nothing output = new Const_nothing();
-      return output;
+    public static void const_new(Const_nothing output) {
     }
 
     @Override
@@ -8433,7 +8519,7 @@ public final class Core {
 
   }
 
-  public static final Const_nothing c_nothing = Const_nothing.const_new();
+  public static final Const_nothing c_nothing = new Const_nothing();
 
 
   /**
@@ -8450,7 +8536,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -8463,9 +8549,7 @@ public final class Core {
       );
     }
 
-    public static Const_quote const_new() {
-      Const_quote output = new Const_quote();
-      return output;
+    public static void const_new(Const_quote output) {
     }
 
     @Override
@@ -8476,7 +8560,7 @@ public final class Core {
 
   }
 
-  public static final Const_quote c_quote = Const_quote.const_new();
+  public static final Const_quote c_quote = new Const_quote();
 
 
   /**
@@ -8505,9 +8589,7 @@ public final class Core {
       );
     }
 
-    public static Const_true const_new() {
-      Const_true output = new Const_true();
-      return output;
+    public static void const_new(Const_true output) {
     }
 
     @Override
@@ -8518,7 +8600,7 @@ public final class Core {
 
   }
 
-  public static final Const_true c_true = Const_true.const_new();
+  public static final Const_true c_true = new Const_true();
 
   /**
    * @function not
@@ -8577,7 +8659,7 @@ public final class Core {
     public Func_not vx_type() {return t_not;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -8590,7 +8672,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_boolean val = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_boolean val = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_not(val);
       return output;
     }
@@ -8607,7 +8689,7 @@ public final class Core {
 
   public static Core.Type_boolean f_not(final Core.Type_boolean val) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.t_boolean.vx_new_from_boolean(!val.vx_boolean());
+    output = Core.vx_new_boolean(!val.vx_boolean());
     return output;
   }
 
@@ -8668,7 +8750,7 @@ public final class Core {
     public Func_notempty vx_type() {return t_notempty;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -8681,7 +8763,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_notempty(text);
       return output;
     }
@@ -8761,7 +8843,7 @@ public final class Core {
     public Func_notempty_1 vx_type() {return t_notempty_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -8774,7 +8856,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_notempty_1(val);
       return output;
     }
@@ -8856,8 +8938,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_ne(val1, val2);
       return output;
     }
@@ -8939,8 +9021,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_multiply(num1, num2);
       return output;
     }
@@ -8958,7 +9040,7 @@ public final class Core {
   public static Core.Type_int f_multiply(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
     int result = num1.vx_int() * num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);
+    output = Core.vx_new_int(result);
     return output;
   }
 
@@ -9021,8 +9103,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_multiply_1(num1, num2);
       return output;
     }
@@ -9042,7 +9124,7 @@ public final class Core {
     Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() * float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);
+    output = Core.vx_new_float(result);
     return output;
   }
 
@@ -9103,7 +9185,7 @@ public final class Core {
     public Func_multiply_2 vx_type() {return t_multiply_2;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9116,7 +9198,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_multiply_2(nums);
       return output;
     }
@@ -9136,8 +9218,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_int,
       nums,
-      Core.t_int.vx_new_from_int(1),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(1),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
@@ -9204,7 +9286,7 @@ public final class Core {
     public Func_multiply_3 vx_type() {return t_multiply_3;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9217,7 +9299,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_multiply_3(nums);
       return output;
     }
@@ -9237,8 +9319,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_number,
       nums,
-      Core.t_int.vx_new_from_int(1),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(1),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
@@ -9307,8 +9389,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_plus(num1, num2);
       return output;
     }
@@ -9326,7 +9408,7 @@ public final class Core {
   public static Core.Type_int f_plus(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
     int result = num1.vx_int() + num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);
+    output = Core.vx_new_int(result);
     return output;
   }
 
@@ -9389,8 +9471,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_plus_1(num1, num2);
       return output;
     }
@@ -9410,7 +9492,7 @@ public final class Core {
     Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() + float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);
+    output = Core.vx_new_float(result);
     return output;
   }
 
@@ -9471,7 +9553,7 @@ public final class Core {
     public Func_plus_2 vx_type() {return t_plus_2;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9484,7 +9566,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_plus_2(nums);
       return output;
     }
@@ -9504,8 +9586,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_int,
       nums,
-      Core.t_int.vx_new_from_int(0),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(0),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
@@ -9572,7 +9654,7 @@ public final class Core {
     public Func_plus_3 vx_type() {return t_plus_3;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9585,7 +9667,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_plus_3(nums);
       return output;
     }
@@ -9605,8 +9687,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_number,
       nums,
-      Core.t_int.vx_new_from_int(0),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(0),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
@@ -9673,7 +9755,7 @@ public final class Core {
     public Func_plus1 vx_type() {return t_plus1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9686,7 +9768,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_plus1(num);
       return output;
     }
@@ -9704,7 +9786,7 @@ public final class Core {
   public static Core.Type_int f_plus1(final Core.Type_int num) {
     Core.Type_int output = Core.e_int;
     int result = num.vx_int() + 1;
-    output = Core.t_int.vx_new_from_int(result);
+    output = Core.vx_new_int(result);
     return output;
   }
 
@@ -9767,8 +9849,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int num2 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_minus(num1, num2);
       return output;
     }
@@ -9786,7 +9868,7 @@ public final class Core {
   public static Core.Type_int f_minus(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
     int result = num1.vx_int() - num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);
+    output = Core.vx_new_int(result);
     return output;
   }
 
@@ -9849,8 +9931,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_minus_1(num1, num2);
       return output;
     }
@@ -9870,7 +9952,7 @@ public final class Core {
     Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() - float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);
+    output = Core.vx_new_float(result);
     return output;
   }
 
@@ -9931,7 +10013,7 @@ public final class Core {
     public Func_minus_2 vx_type() {return t_minus_2;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -9944,7 +10026,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_minus_2(nums);
       return output;
     }
@@ -9964,8 +10046,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_int,
       nums,
-      Core.t_int.vx_new_from_int(0),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(0),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
@@ -10032,7 +10114,7 @@ public final class Core {
     public Func_minus_3 vx_type() {return t_minus_3;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -10045,7 +10127,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_minus_3(nums);
       return output;
     }
@@ -10065,8 +10147,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce(
       Core.t_number,
       nums,
-      Core.t_int.vx_new_from_int(0),
-      Core.t_any_from_reduce.fn_new((total_any, num_any) -> {
+      Core.vx_new_int(0),
+      Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
@@ -10136,9 +10218,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any object = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string method = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_anylist params = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any object = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string method = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_anylist params = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_dotmethod(object, method, params);
       return output;
     }
@@ -10217,8 +10299,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_number num2 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_divide(num1, num2);
       return output;
     }
@@ -10242,7 +10324,7 @@ public final class Core {
       output = Core.c_notanumber;
     } else {
       float result = float1.vx_float() / float2.vx_float();
-      output = Core.t_float.vx_new_from_float(result);
+      output = Core.vx_new_float(result);
     };
     return output;
   }
@@ -10306,8 +10388,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_lt(val1, val2);
       return output;
     }
@@ -10329,14 +10411,14 @@ public final class Core {
       Core.f_compare(val1, val2),
       Core.t_thenelselist.vx_new(
         Core.f_case_1(
-          Core.t_int.vx_new_from_int(-1),
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(true);
+          Core.vx_new_int(-1),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(true);
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(false);
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(false);
           })
         )
       )
@@ -10401,7 +10483,7 @@ public final class Core {
     public Func_lt_1 vx_type() {return t_lt_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -10414,7 +10496,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_lt_1(values);
       return output;
     }
@@ -10434,8 +10516,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce_next(
       Core.t_boolean,
       values,
-      Core.t_boolean.vx_new_from_boolean(true),
-      Core.t_any_from_reduce_next.fn_new((reduce_any, current_any, next_any) -> {
+      Core.vx_new_boolean(true),
+      Core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any) -> {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
@@ -10510,9 +10592,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any_from_anylist fnlist = Core.f_any_from_any(Core.t_any_from_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any_from_anylist fnlist = Core.f_any_from_any(Core.t_any_from_anylist, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_chainfirst(generic_any_1, value, fnlist);
       return output;
     }
@@ -10593,9 +10675,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any_from_anylist fnlist = Core.f_any_from_any(Core.t_any_from_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any_from_anylist fnlist = Core.f_any_from_any(Core.t_any_from_anylist, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_chainlast(generic_any_1, value, fnlist);
       return output;
     }
@@ -10674,8 +10756,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_le(val1, val2);
       return output;
     }
@@ -10755,7 +10837,7 @@ public final class Core {
     public Func_le_1 vx_type() {return t_le_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -10768,7 +10850,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_le_1(args);
       return output;
     }
@@ -10850,8 +10932,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_eq(val1, val2);
       return output;
     }
@@ -10878,7 +10960,7 @@ public final class Core {
         isequal = true;
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(isequal);
+    output = Core.vx_new_boolean(isequal);
     return output;
   }
 
@@ -10939,7 +11021,7 @@ public final class Core {
     public Func_eq_1 vx_type() {return t_eq_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -10952,7 +11034,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_eq_1(values);
       return output;
     }
@@ -10972,8 +11054,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce_next(
       Core.t_boolean,
       values,
-      Core.t_boolean.vx_new_from_boolean(false),
-      Core.t_any_from_reduce_next.fn_new((reduce_any, current_any, next_any) -> {
+      Core.vx_new_boolean(false),
+      Core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any) -> {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
@@ -11046,8 +11128,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_gt(val1, val2);
       return output;
     }
@@ -11069,14 +11151,14 @@ public final class Core {
       Core.f_compare(val1, val2),
       Core.t_thenelselist.vx_new(
         Core.f_case_1(
-          Core.t_int.vx_new_from_int(1),
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(true);
+          Core.vx_new_int(1),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(true);
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(false);
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(false);
           })
         )
       )
@@ -11141,7 +11223,7 @@ public final class Core {
     public Func_gt_1 vx_type() {return t_gt_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -11154,7 +11236,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_gt_1(values);
       return output;
     }
@@ -11174,8 +11256,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce_next(
       Core.t_boolean,
       values,
-      Core.t_boolean.vx_new_from_boolean(true),
-      Core.t_any_from_reduce_next.fn_new((reduce_any, current_any, next_any) -> {
+      Core.vx_new_boolean(true),
+      Core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any) -> {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
@@ -11248,8 +11330,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_ge(val1, val2);
       return output;
     }
@@ -11329,7 +11411,7 @@ public final class Core {
     public Func_ge_1 vx_type() {return t_ge_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -11342,7 +11424,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_ge_1(args);
       return output;
     }
@@ -11422,7 +11504,7 @@ public final class Core {
     public Func_allowtypenames_from_typedef vx_type() {return t_allowtypenames_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -11435,7 +11517,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_allowtypenames_from_typedef(vtypedef);
       return output;
     }
@@ -11515,7 +11597,7 @@ public final class Core {
     public Func_allowtypes_from_typedef vx_type() {return t_allowtypes_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -11528,7 +11610,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_allowtypes_from_typedef(vtypedef);
       return output;
     }
@@ -11608,8 +11690,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_boolean val2 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_boolean val2 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_and(val1, val2);
       return output;
     }
@@ -11691,7 +11773,7 @@ public final class Core {
     public Func_and_1 vx_type() {return t_and_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -11704,7 +11786,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_and_1(values);
       return output;
     }
@@ -11726,24 +11808,24 @@ public final class Core {
       Core.f_length_from_list(values),
       Core.t_thenelselist.vx_new(
         Core.f_case_1(
-          Core.t_int.vx_new_from_int(0),
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(true);
+          Core.vx_new_int(0),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(true);
           })
         ),
         Core.f_case_1(
-          Core.t_int.vx_new_from_int(1),
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.f_any_from_list(Core.t_boolean, values, Core.t_int.vx_new_from_int(0));
+          Core.vx_new_int(1),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_any_from_list(Core.t_boolean, values, Core.vx_new_int(0));
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.fn_new(() -> {
+          Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_any_from_list_reduce_next(
               Core.t_boolean,
               values,
-              Core.t_boolean.vx_new_from_boolean(true),
-              Core.t_any_from_reduce_next.fn_new((reduce_any, current_any, next_any) -> {
+              Core.vx_new_boolean(true),
+              Core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any) -> {
                 Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
                 Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
                 Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
@@ -11769,7 +11851,7 @@ public final class Core {
    * (func any<-any)
    */
   public static interface Func_any_from_any extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn);
+    public Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value);
   }
 
@@ -11778,7 +11860,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {
+    public Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
       Class_any_from_any output = new Class_any_from_any();
       output.fn = fn;
       return output;
@@ -11829,13 +11911,13 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_any resolve(Core.Type_any val);
+      public Core.Type_any resolve(Core.Type_any value);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_any_from_any(generic_any_1, value);
       return output;
     }
@@ -11871,7 +11953,7 @@ public final class Core {
    * (func any<-any-async)
    */
   public static interface Func_any_from_any_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn);
+    public Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value);
   }
 
@@ -11879,8 +11961,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {
+    @Override
+    public Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       output.fn = fn;
       return output;
@@ -11931,13 +12013,13 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_any val);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_any value);
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_any_async(generic_any_1, value);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -11973,7 +12055,7 @@ public final class Core {
    * (func any<-any-context)
    */
   public static interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn);
+    public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, Core.Type_context context);
   }
 
@@ -11982,7 +12064,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {
+    public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       output.fn = fn;
       return output;
@@ -12033,14 +12115,14 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_any resolve(Core.Type_any val, Core.Type_context context);
+      public Core.Type_any resolve(Core.Type_any value, Core.Type_context context);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_any_context(generic_any_1, value, context);
       return output;
     }
@@ -12076,7 +12158,7 @@ public final class Core {
    * (func any<-any-context-async)
    */
   public static interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_any_context_async fn_new(Core.Class_any_from_any_context_async.IFn fn);
+    public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final U value, Core.Type_context context);
   }
 
@@ -12084,8 +12166,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_any_context_async fn_new(Core.Class_any_from_any_context_async.IFn fn) {
+    @Override
+    public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       output.fn = fn;
       return output;
@@ -12136,14 +12218,14 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_any val, Core.Type_context context);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_any value, Core.Type_context context);
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_any_context_async(generic_any_1, value, context);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -12178,7 +12260,7 @@ public final class Core {
    * (func any<-func)
    */
   public static interface Func_any_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_func fn_new(Core.Class_any_from_func.IFn fn);
+    public Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public <T extends Core.Type_any> T f_any_from_func(final T generic_any_1);
   }
 
@@ -12187,7 +12269,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_func fn_new(Core.Class_any_from_func.IFn fn) {
+    public Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_any_from_func output = new Class_any_from_func();
       output.fn = fn;
       return output;
@@ -12243,7 +12325,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_any_from_func(generic_any_1);
       return output;
     }
@@ -12276,7 +12358,7 @@ public final class Core {
    * (func any<-func-async)
    */
   public static interface Func_any_from_func_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_func_async fn_new(Core.Class_any_from_func_async.IFn fn);
+    public Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> f_any_from_func_async(final T generic_any_1);
   }
 
@@ -12284,8 +12366,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_func_async fn_new(Core.Class_any_from_func_async.IFn fn) {
+    @Override
+    public Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       output.fn = fn;
       return output;
@@ -12341,7 +12423,7 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_func_async(generic_any_1);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -12377,7 +12459,7 @@ public final class Core {
    * (func any<-key-value)
    */
   public static interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_key_value fn_new(Core.Class_any_from_key_value.IFn fn);
+    public Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val);
   }
 
@@ -12386,7 +12468,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_key_value fn_new(Core.Class_any_from_key_value.IFn fn) {
+    public Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       output.fn = fn;
       return output;
@@ -12442,9 +12524,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_key_value(generic_any_1, key, val);
       return output;
     }
@@ -12478,7 +12560,7 @@ public final class Core {
    * (func any<-key-value-async)
    */
   public static interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_key_value_async fn_new(Core.Class_any_from_key_value_async.IFn fn);
+    public Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val);
   }
 
@@ -12486,8 +12568,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_key_value_async fn_new(Core.Class_any_from_key_value_async.IFn fn) {
+    @Override
+    public Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       output.fn = fn;
       return output;
@@ -12543,9 +12625,9 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_key_value_async(generic_any_1, key, val);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -12632,9 +12714,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int index = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int index = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_list(generic_any_1, values, index);
       return output;
     }
@@ -12671,10 +12753,20 @@ public final class Core {
    * (func any<-list-reduce)
    */
   public static interface Func_any_from_list_reduce extends Core.Type_func, Core.Type_replfunc {
+    public Func_any_from_list_reduce vx_fn_new(Core.Class_any_from_list_reduce.IFn fn);
     public <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce);
   }
 
   public static class Class_any_from_list_reduce extends Core.Class_base implements Func_any_from_list_reduce {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_any_from_list_reduce vx_fn_new(Core.Class_any_from_list_reduce.IFn fn) {
+      Class_any_from_list_reduce output = new Class_any_from_list_reduce();
+      output.fn = fn;
+      return output;
+    }
 
     @Override
     public Func_any_from_list_reduce vx_new(Object... vals) {
@@ -12719,19 +12811,28 @@ public final class Core {
     @Override
     public Func_any_from_list_reduce vx_type() {return t_any_from_list_reduce;}
 
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_list list, Core.Type_any valstart, Core.Func_any_from_reduce fn_reduce);
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Func_any_from_reduce fn_reduce = Core.f_any_from_any(Core.t_any_from_reduce, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Func_any_from_reduce fn_reduce = Core.f_any_from_any(Core.t_any_from_reduce, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_any_from_list_reduce(generic_any_1, list, valstart, fn_reduce);
       return output;
     }
 
     @Override
     public <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
-      return Core.f_any_from_list_reduce(generic_any_1, list, valstart, fn_reduce);
+      T output = Core.f_empty(generic_any_1);
+      if (fn != null) {
+        output = Core.f_any_from_any(generic_any_1, fn.resolve(list, valstart, fn_reduce));
+      }
+      return output;
     }
 
   }
@@ -12759,10 +12860,20 @@ public final class Core {
    * (func any<-list-reduce-next)
    */
   public static interface Func_any_from_list_reduce_next extends Core.Type_func, Core.Type_replfunc {
+    public Func_any_from_list_reduce_next vx_fn_new(Core.Class_any_from_list_reduce_next.IFn fn);
     public <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next);
   }
 
   public static class Class_any_from_list_reduce_next extends Core.Class_base implements Func_any_from_list_reduce_next {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_any_from_list_reduce_next vx_fn_new(Core.Class_any_from_list_reduce_next.IFn fn) {
+      Class_any_from_list_reduce_next output = new Class_any_from_list_reduce_next();
+      output.fn = fn;
+      return output;
+    }
 
     @Override
     public Func_any_from_list_reduce_next vx_new(Object... vals) {
@@ -12807,19 +12918,28 @@ public final class Core {
     @Override
     public Func_any_from_list_reduce_next vx_type() {return t_any_from_list_reduce_next;}
 
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_list list, Core.Type_any valstart, Core.Func_any_from_reduce_next fn_reduce_next);
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Func_any_from_reduce_next fn_reduce_next = Core.f_any_from_any(Core.t_any_from_reduce_next, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Func_any_from_reduce_next fn_reduce_next = Core.f_any_from_any(Core.t_any_from_reduce_next, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_any_from_list_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
       return output;
     }
 
     @Override
     public <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
-      return Core.f_any_from_list_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      T output = Core.f_empty(generic_any_1);
+      if (fn != null) {
+        output = Core.f_any_from_any(generic_any_1, fn.resolve(list, valstart, fn_reduce_next));
+      }
+      return output;
     }
 
   }
@@ -12903,9 +13023,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_map(generic_any_1, valuemap, key);
       return output;
     }
@@ -12934,7 +13054,7 @@ public final class Core {
    * (func any<-none)
    */
   public static interface Func_any_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_none fn_new(Core.Class_any_from_none.IFn fn);
+    public Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
     public <T extends Core.Type_any> T f_any_from_none(final T generic_any_1);
   }
 
@@ -12943,7 +13063,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_none fn_new(Core.Class_any_from_none.IFn fn) {
+    public Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn) {
       Class_any_from_none output = new Class_any_from_none();
       output.fn = fn;
       return output;
@@ -12999,7 +13119,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_any_from_none(generic_any_1);
       return output;
     }
@@ -13032,7 +13152,7 @@ public final class Core {
    * (func any<-none-async)
    */
   public static interface Func_any_from_none_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_none_async fn_new(Core.Class_any_from_none_async.IFn fn);
+    public Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> f_any_from_none_async(final T generic_any_1);
   }
 
@@ -13040,8 +13160,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_none_async fn_new(Core.Class_any_from_none_async.IFn fn) {
+    @Override
+    public Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       output.fn = fn;
       return output;
@@ -13097,7 +13217,7 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_none_async(generic_any_1);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -13133,7 +13253,7 @@ public final class Core {
    * (func any<-reduce)
    */
   public static interface Func_any_from_reduce extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_reduce fn_new(Core.Class_any_from_reduce.IFn fn);
+    public Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_reduce(final T generic_any_1, final T result, final U item);
   }
 
@@ -13142,7 +13262,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_reduce fn_new(Core.Class_any_from_reduce.IFn fn) {
+    public Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       output.fn = fn;
       return output;
@@ -13193,14 +13313,14 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_any resolve(Core.Type_any reduce, Core.Type_any item);
+      public Core.Type_any resolve(Core.Type_any result, Core.Type_any item);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any item = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any item = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_reduce(generic_any_1, result, item);
       return output;
     }
@@ -13234,7 +13354,7 @@ public final class Core {
    * (func any<-reduce-async)
    */
   public static interface Func_any_from_reduce_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_reduce_async fn_new(Core.Class_any_from_reduce_async.IFn fn);
+    public Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_async(final T generic_any_1, final T result, final U item);
   }
 
@@ -13242,8 +13362,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_reduce_async fn_new(Core.Class_any_from_reduce_async.IFn fn) {
+    @Override
+    public Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       output.fn = fn;
       return output;
@@ -13294,14 +13414,14 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_any reduce, Core.Type_any item);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any item);
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any item = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any item = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_reduce_async(generic_any_1, result, item);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -13338,7 +13458,7 @@ public final class Core {
    * (func any<-reduce-next)
    */
   public static interface Func_any_from_reduce_next extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_reduce_next fn_new(Core.Class_any_from_reduce_next.IFn fn);
+    public Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next);
   }
 
@@ -13347,7 +13467,7 @@ public final class Core {
     public IFn fn = null;
 
     @Override
-    public Func_any_from_reduce_next fn_new(Core.Class_any_from_reduce_next.IFn fn) {
+    public Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       output.fn = fn;
       return output;
@@ -13398,15 +13518,15 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_any resolve(Core.Type_any reduce, Core.Type_any current, Core.Type_any next);
+      public Core.Type_any resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_any next = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any next = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_any_from_reduce_next(generic_any_1, result, current, next);
       return output;
     }
@@ -13441,7 +13561,7 @@ public final class Core {
    * (func any<-reduce-next-async)
    */
   public static interface Func_any_from_reduce_next_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_reduce_next_async fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
+    public Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next);
   }
 
@@ -13449,8 +13569,8 @@ public final class Core {
 
     public IFn fn = null;
 
-    // static
-    public Func_any_from_reduce_next_async fn_new(Core.Class_any_from_reduce_next_async.IFn fn) {
+    @Override
+    public Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       output.fn = fn;
       return output;
@@ -13501,15 +13621,15 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_any reduce, Core.Type_any current, Core.Type_any next);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_any next = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any next = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_reduce_next_async(generic_any_1, result, current, next);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -13596,9 +13716,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_struct vstruct = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_struct vstruct = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_any_from_struct(generic_any_1, vstruct, key);
       return output;
     }
@@ -13679,7 +13799,7 @@ public final class Core {
     public Func_async vx_type() {return t_async;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -13690,8 +13810,8 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_async(generic_any_1, value);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -13770,7 +13890,7 @@ public final class Core {
     public Func_boolean_from_any vx_type() {return t_boolean_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -13783,7 +13903,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_boolean_from_any(value);
       return output;
     }
@@ -13810,7 +13930,7 @@ public final class Core {
    * (func boolean<-func)
    */
   public static interface Func_boolean_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_boolean_from_func fn_new(Core.Class_any_from_func.IFn fn);
+    public Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean f_boolean_from_func();
   }
 
@@ -13861,13 +13981,13 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_boolean resolve();
+      public Core.Type_any resolve();
     }
 
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_boolean_from_func fn_new(Core.Class_any_from_func.IFn fn) {
+    public Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       output.fn = fn;
       return output;
@@ -13905,7 +14025,7 @@ public final class Core {
    * (func boolean<-none)
    */
   public static interface Func_boolean_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Func_boolean_from_none fn_new(Core.Class_any_from_func.IFn fn);
+    public Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean f_boolean_from_none();
   }
 
@@ -13956,13 +14076,13 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_boolean resolve();
+      public Core.Type_any resolve();
     }
 
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_boolean_from_none fn_new(Core.Class_any_from_func.IFn fn) {
+    public Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       output.fn = fn;
       return output;
@@ -14051,8 +14171,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_case(values, fn_any);
       return output;
     }
@@ -14072,11 +14192,11 @@ public final class Core {
     output = Core.f_new(
       Core.t_thenelse,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":code"),
-        Core.t_string.vx_new_from_string(":casemany"),
-        Core.t_string.vx_new_from_string(":values"),
+        Core.vx_new_string(":code"),
+        Core.vx_new_string(":casemany"),
+        Core.vx_new_string(":values"),
         values,
-        Core.t_string.vx_new_from_string(":fn-any"),
+        Core.vx_new_string(":fn-any"),
         fn_any
       )
     );
@@ -14141,8 +14261,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_case_1(value, fn_any);
       return output;
     }
@@ -14162,11 +14282,11 @@ public final class Core {
     output = Core.f_new(
       Core.t_thenelse,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":code"),
-        Core.t_string.vx_new_from_string(":case"),
-        Core.t_string.vx_new_from_string(":value"),
+        Core.vx_new_string(":code"),
+        Core.vx_new_string(":case"),
+        Core.vx_new_string(":value"),
         value,
-        Core.t_string.vx_new_from_string(":fn-any"),
+        Core.vx_new_string(":fn-any"),
         fn_any
       )
     );
@@ -14232,8 +14352,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_compare(val1, val2);
       return output;
     }
@@ -14271,7 +14391,7 @@ public final class Core {
         intresult = -1;
       }
     }
-    output = Core.t_int.vx_new_from_int(intresult);
+    output = Core.vx_new_int(intresult);
     return output;
   }
 
@@ -14334,8 +14454,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_contains(text, find);
       return output;
     }
@@ -14356,7 +14476,7 @@ public final class Core {
     String stext = text.vx_string();
     String sfind = find.vx_string();
     booleanresult = stext.contains(sfind);
-    output = Core.t_boolean.vx_new_from_boolean(booleanresult);
+    output = Core.vx_new_boolean(booleanresult);
     return output;
   }
 
@@ -14419,8 +14539,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any find = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any find = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_contains_1(values, find);
       return output;
     }
@@ -14446,20 +14566,20 @@ public final class Core {
         break;
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(booleanresult);
+    output = Core.vx_new_boolean(booleanresult);
     return output;
   }
 
   /**
    * @function copy
    * Returns a copy of a given value with the given values added or updated.
-   * @param  {any-1} value
+   * @param  {any} value
    * @param  {anylist} values
    * @return {any-1}
    * (func copy)
    */
   public static interface Func_copy extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_copy(final T value, final Core.Type_anylist values);
+    public <T extends Core.Type_any> T f_copy(final Core.Type_any value, final Core.Type_anylist values);
   }
 
   public static class Class_copy extends Core.Class_base implements Func_copy {
@@ -14509,14 +14629,14 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_copy(value, values);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any> T f_copy(final T value, final Core.Type_anylist values) {
+    public <T extends Core.Type_any> T f_copy(final Core.Type_any value, final Core.Type_anylist values) {
       return Core.f_copy(value, values);
     }
 
@@ -14526,7 +14646,7 @@ public final class Core {
   public static final Func_copy t_copy = new Core.Class_copy();
 
   @SuppressWarnings("unchecked")
-  public static <T extends Core.Type_any> T f_copy(final T value, final Core.Type_anylist values) {
+  public static <T extends Core.Type_any> T f_copy(final Core.Type_any value, final Core.Type_anylist values) {
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));
@@ -14589,7 +14709,7 @@ public final class Core {
     public Func_else vx_type() {return t_else;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -14602,7 +14722,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_else(fn_any);
       return output;
     }
@@ -14622,9 +14742,9 @@ public final class Core {
     output = Core.f_new(
       Core.t_thenelse,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":code"),
-        Core.t_string.vx_new_from_string(":else"),
-        Core.t_string.vx_new_from_string(":fn-any"),
+        Core.vx_new_string(":code"),
+        Core.vx_new_string(":else"),
+        Core.vx_new_string(":fn-any"),
         fn_any
       )
     );
@@ -14688,7 +14808,7 @@ public final class Core {
     public Func_empty vx_type() {return t_empty;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -14701,7 +14821,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_empty(type);
       return output;
     }
@@ -14759,7 +14879,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -14778,7 +14898,7 @@ public final class Core {
     public Func_extends_from_any vx_type() {return t_extends_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -14791,7 +14911,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_extends_from_any(val);
       return output;
     }
@@ -14852,7 +14972,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -14871,7 +14991,7 @@ public final class Core {
     public Func_extends_from_typedef vx_type() {return t_extends_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -14884,7 +15004,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_extends_from_typedef(vtypedef);
       return output;
     }
@@ -14962,7 +15082,7 @@ public final class Core {
     public Func_first_from_list vx_type() {return t_first_from_list;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -14975,8 +15095,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_first_from_list(generic_any_1, values);
       return output;
     }
@@ -14993,7 +15113,7 @@ public final class Core {
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_first_from_list(final T generic_any_1, final X values) {
     T output = Core.f_empty(generic_any_1);
-    output = Core.f_any_from_list(generic_any_1, values, Core.t_int.vx_new_from_int(0));
+    output = Core.f_any_from_list(generic_any_1, values, Core.vx_new_int(0));
     return output;
   }
 
@@ -15056,9 +15176,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_first_from_list_fn_any_from_any(generic_any_1, values, fn_any_from_any);
       return output;
     }
@@ -15144,9 +15264,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_arglist params = Core.f_any_from_any(Core.t_arglist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_arglist params = Core.f_any_from_any(Core.t_arglist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_fn(generic_any_1, params, fn_any);
       return output;
     }
@@ -15222,7 +15342,7 @@ public final class Core {
     public Func_funcdef_from_func vx_type() {return t_funcdef_from_func;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -15235,7 +15355,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_func val = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_func val = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_funcdef_from_func(val);
       return output;
     }
@@ -15294,7 +15414,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -15313,7 +15433,7 @@ public final class Core {
     public Func_funcname_from_funcdef vx_type() {return t_funcname_from_funcdef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -15326,7 +15446,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_funcdef funcdef = Core.f_any_from_any(Core.t_funcdef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_funcdef funcdef = Core.f_any_from_any(Core.t_funcdef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_funcname_from_funcdef(funcdef);
       return output;
     }
@@ -15347,7 +15467,7 @@ public final class Core {
       Core.t_string,
       Core.t_anylist.vx_new(
         funcdef.pkgname(),
-        Core.t_string.vx_new_from_string("/"),
+        Core.vx_new_string("/"),
         funcdef.name()
       )
     );
@@ -15410,7 +15530,7 @@ public final class Core {
     public Func_global_package_get vx_type() {return t_global_package_get;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -15423,7 +15543,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string pkgname = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string pkgname = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_global_package_get(pkgname);
       return output;
     }
@@ -15501,8 +15621,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string pkgname = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_package pkg = Core.f_any_from_any(Core.t_package, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string pkgname = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_package pkg = Core.f_any_from_any(Core.t_package, arglist.vx_any(Core.vx_new_int(1)));
       Core.f_global_package_set(pkgname, pkg);
       return output;
     }
@@ -15578,9 +15698,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_boolean clause = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any then = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_boolean clause = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any then = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_if(generic_any_1, clause, then);
       return output;
     }
@@ -15663,10 +15783,10 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_boolean clause = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any thenval = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_any elseval = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_boolean clause = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any thenval = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any elseval = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_if_1(generic_any_1, clause, thenval, elseval);
       return output;
     }
@@ -15748,7 +15868,7 @@ public final class Core {
     public Func_if_2 vx_type() {return t_if_2;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -15761,8 +15881,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_thenelselist thenelselist = Core.f_any_from_any(Core.t_thenelselist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_thenelselist thenelselist = Core.f_any_from_any(Core.t_thenelselist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_if_2(generic_any_1, thenelselist);
       return output;
     }
@@ -15812,7 +15932,7 @@ public final class Core {
    * (func int<-func)
    */
   public static interface Func_int_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_int_from_func fn_new(Core.Class_any_from_func.IFn fn);
+    public Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_int f_int_from_func();
   }
 
@@ -15864,7 +15984,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_int_from_func fn_new(Core.Class_any_from_func.IFn fn) {
+    public Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_int_from_func output = new Class_int_from_func();
       output.fn = fn;
       return output;
@@ -15948,7 +16068,7 @@ public final class Core {
     public Func_int_from_string vx_type() {return t_int_from_string;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -15961,7 +16081,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string val = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string val = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_int_from_string(val);
       return output;
     }
@@ -15983,30 +16103,30 @@ public final class Core {
       val,
       Core.t_thenelselist.vx_new(
         Core.f_case_1(
-          Core.t_string.vx_new_from_string("notanumber"),
-          Core.t_any_from_func.fn_new(() -> {
+          Core.vx_new_string("notanumber"),
+          Core.t_any_from_func.vx_fn_new(() -> {
             return Core.c_notanumber;
           })
         ),
         Core.f_case_1(
-          Core.t_string.vx_new_from_string("infinity"),
-          Core.t_any_from_func.fn_new(() -> {
+          Core.vx_new_string("infinity"),
+          Core.t_any_from_func.vx_fn_new(() -> {
             return Core.c_infinity;
           })
         ),
         Core.f_case_1(
-          Core.t_string.vx_new_from_string("neginfinity"),
-          Core.t_any_from_func.fn_new(() -> {
+          Core.vx_new_string("neginfinity"),
+          Core.t_any_from_func.vx_fn_new(() -> {
             return Core.c_neginfinity;
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.fn_new(() -> {int intresult = 0;
+          Core.t_any_from_func.vx_fn_new(() -> {int intresult = 0;
             String strval = val.vx_string();
             try {
               float floatresult = Float.parseFloat(strval);
               intresult = (int)floatresult;
-              return Core.t_int.vx_new_from_int(intresult);
+              return Core.vx_new_int(intresult);
             } catch (Exception ex) {
               return Core.c_notanumber;
             }
@@ -16074,7 +16194,7 @@ public final class Core {
     public Func_is_empty vx_type() {return t_is_empty;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16087,7 +16207,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_is_empty(text);
       return output;
     }
@@ -16167,7 +16287,7 @@ public final class Core {
     public Func_is_empty_1 vx_type() {return t_is_empty_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16180,7 +16300,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_is_empty_1(value);
       return output;
     }
@@ -16264,8 +16384,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_is_endswith(text, find);
       return output;
     }
@@ -16347,7 +16467,7 @@ public final class Core {
     public Func_is_func vx_type() {return t_is_func;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16360,7 +16480,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_is_func(val);
       return output;
     }
@@ -16440,7 +16560,7 @@ public final class Core {
     public Func_is_int vx_type() {return t_is_int;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16453,7 +16573,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_is_int(value);
       return output;
     }
@@ -16504,7 +16624,7 @@ public final class Core {
       } catch (Exception ex) {
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(result);
+    output = Core.vx_new_boolean(result);
     return output;
   }
 
@@ -16565,7 +16685,7 @@ public final class Core {
     public Func_is_number vx_type() {return t_is_number;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16578,7 +16698,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_is_number(value);
       return output;
     }
@@ -16603,19 +16723,19 @@ public final class Core {
           Core.f_new(
             Core.t_list,
             Core.t_anylist.vx_new(
-              Core.t_string.vx_new_from_string("vx/core/decimal"),
-              Core.t_string.vx_new_from_string("vx/core/float"),
-              Core.t_string.vx_new_from_string("vx/core/int"),
-              Core.t_string.vx_new_from_string("vx/core/number")
+              Core.vx_new_string("vx/core/decimal"),
+              Core.vx_new_string("vx/core/float"),
+              Core.vx_new_string("vx/core/int"),
+              Core.vx_new_string("vx/core/number")
             )
           ),
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(true);
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(true);
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.fn_new(() -> {
-            return Core.t_boolean.vx_new_from_boolean(false);
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.vx_new_boolean(false);
           })
         )
       )
@@ -16680,7 +16800,7 @@ public final class Core {
     public Func_is_pass_from_permission vx_type() {return t_is_pass_from_permission;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -16693,8 +16813,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_permission permission = Core.f_any_from_any(Core.t_permission, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_permission permission = Core.f_any_from_any(Core.t_permission, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_is_pass_from_permission(permission, context);
       return output;
     }
@@ -16713,7 +16833,7 @@ public final class Core {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_let(
       Core.t_boolean,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string id = permission.id();
         final Core.Type_permission lookup = Core.f_permission_from_id_context(id, context);
         return Core.f_eq(lookup, permission);
@@ -16779,7 +16899,7 @@ public final class Core {
     public Func_last_from_list vx_type() {return t_last_from_list;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16792,8 +16912,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_last_from_list(generic_any_1, values);
       return output;
     }
@@ -16812,9 +16932,9 @@ public final class Core {
     T output = Core.f_empty(generic_any_1);
     output = Core.f_let(
       generic_any_1,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_int len = Core.f_length_from_list(values);
-        final Core.Type_int last = Core.f_minus(len, Core.t_int.vx_new_from_int(1));
+        final Core.Type_int last = Core.f_minus(len, Core.vx_new_int(1));
         return Core.f_any_from_list(generic_any_1, values, last);
       })
     );
@@ -16878,7 +16998,7 @@ public final class Core {
     public Func_length_from_list vx_type() {return t_length_from_list;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -16891,7 +17011,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_length_from_list(values);
       return output;
     }
@@ -16909,7 +17029,7 @@ public final class Core {
   public static Core.Type_int f_length_from_list(final Core.Type_list values) {
     Core.Type_int output = Core.e_int;
     int intresult = values.vx_list().size();
-    output = Core.t_int.vx_new_from_int(intresult);
+    output = Core.vx_new_int(intresult);
     return output;
   }
 
@@ -16971,8 +17091,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_let(generic_any_1, fn_any);
       return output;
     }
@@ -17054,8 +17174,8 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_any_async = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_any_async = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_let_async(generic_any_1, fn_any_async);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -17136,9 +17256,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_list_join_from_list(generic_list_1, values, fn_any_from_any);
       return output;
     }
@@ -17228,9 +17348,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_list_from_list(generic_list_1, values, fn_any_from_any);
       return output;
     }
@@ -17316,9 +17436,9 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any_async fn_any_from_any_async = Core.f_any_from_any(Core.t_any_from_any_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any_async fn_any_from_any_async = Core.f_any_from_any(Core.t_any_from_any_async, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_list> future = Core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -17407,9 +17527,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_list_from_map(generic_list_1, valuemap, fn_any_from_key_value);
       return output;
     }
@@ -17428,7 +17548,7 @@ public final class Core {
     X output = Core.f_empty(generic_list_1);
     Map<String, Core.Type_any> map_value = valuemap.vx_map();
     List<Core.Type_any> listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -> {
-      Core.Type_string valkey = Core.t_string.vx_new_from_string(key);
+      Core.Type_string valkey = Core.vx_new_string(key);
       return fn_any_from_key_value.f_any_from_key_value(Core.t_any, valkey, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));
@@ -17495,9 +17615,9 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_key_value_async fn_any_from_key_value_async = Core.f_any_from_any(Core.t_any_from_key_value_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_key_value_async fn_any_from_key_value_async = Core.f_any_from_any(Core.t_any_from_key_value_async, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_list> future = Core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -17575,7 +17695,7 @@ public final class Core {
     public Func_list_from_type vx_type() {return t_list_from_type;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -17588,7 +17708,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_list_from_type(type);
       return output;
     }
@@ -17664,7 +17784,7 @@ public final class Core {
     public Func_log vx_type() {return t_log;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -17677,7 +17797,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_log(value);
       return output;
     }
@@ -17760,9 +17880,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
       return output;
     }
@@ -17845,7 +17965,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       Core.f_mempool_addref(values);
       return output;
     }
@@ -17920,7 +18040,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_value value = Core.f_any_from_any(Core.t_value, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_value value = Core.f_any_from_any(Core.t_value, arglist.vx_any(Core.vx_new_int(0)));
       Core.f_mempool_release(value);
       return output;
     }
@@ -17995,7 +18115,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       Core.f_mempool_removeref(values);
       return output;
     }
@@ -18070,7 +18190,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       Core.f_mempool_removerefchildren(values);
       return output;
     }
@@ -18220,7 +18340,7 @@ public final class Core {
     public Func_msg_from_error vx_type() {return t_msg_from_error;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -18233,7 +18353,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string error = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string error = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_msg_from_error(error);
       return output;
     }
@@ -18253,9 +18373,9 @@ public final class Core {
     output = Core.f_new(
       Core.t_msg,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":severity"),
+        Core.vx_new_string(":severity"),
         Core.c_msg_error,
-        Core.t_string.vx_new_from_string(":text"),
+        Core.vx_new_string(":text"),
         error
       )
     );
@@ -18321,8 +18441,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_msg addmsg = Core.f_any_from_any(Core.t_msg, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_msg addmsg = Core.f_any_from_any(Core.t_msg, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_msgblock_from_msgblock_msg(origblock, addmsg);
       return output;
     }
@@ -18403,8 +18523,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_msgblock addblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_msgblock addblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
       return output;
     }
@@ -18469,7 +18589,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -18488,7 +18608,7 @@ public final class Core {
     public Func_name_from_typedef vx_type() {return t_name_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -18501,7 +18621,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_name_from_typedef(vtypedef);
       return output;
     }
@@ -18579,7 +18699,7 @@ public final class Core {
     public Func_native vx_type() {return t_native;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -18592,8 +18712,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_anylist clauses = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_anylist clauses = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_native(generic_any_1, clauses);
       return output;
     }
@@ -18670,7 +18790,7 @@ public final class Core {
     public Func_native_from_any vx_type() {return t_native_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -18683,7 +18803,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_native_from_any(value);
       return output;
     }
@@ -18762,8 +18882,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_new(type, values);
       return output;
     }
@@ -18921,8 +19041,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_boolean val2 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_boolean val2 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_or(val1, val2);
       return output;
     }
@@ -19004,7 +19124,7 @@ public final class Core {
     public Func_or_1 vx_type() {return t_or_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19017,7 +19137,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_or_1(values);
       return output;
     }
@@ -19037,8 +19157,8 @@ public final class Core {
     output = Core.f_any_from_list_reduce_next(
       Core.t_boolean,
       values,
-      Core.t_boolean.vx_new_from_boolean(false),
-      Core.t_any_from_reduce_next.fn_new((reduce_any, current_any, next_any) -> {
+      Core.vx_new_boolean(false),
+      Core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any) -> {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
         Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
@@ -19090,7 +19210,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -19109,7 +19229,7 @@ public final class Core {
     public Func_packagename_from_typedef vx_type() {return t_packagename_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19122,7 +19242,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_packagename_from_typedef(vtypedef);
       return output;
     }
@@ -19181,7 +19301,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -19200,7 +19320,7 @@ public final class Core {
     public Func_path_from_context_path vx_type() {return t_path_from_context_path;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -19213,8 +19333,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_path_from_context_path(path, context);
       return output;
     }
@@ -19277,7 +19397,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -19297,8 +19417,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_setting session = Core.f_any_from_any(Core.t_setting, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_setting session = Core.f_any_from_any(Core.t_setting, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_path_from_setting_path(session, path);
       return output;
     }
@@ -19375,7 +19495,7 @@ public final class Core {
     public Func_permission_from_id_context vx_type() {return t_permission_from_id_context;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -19388,8 +19508,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_permission_from_id_context(id, context);
       return output;
     }
@@ -19408,11 +19528,11 @@ public final class Core {
     Core.Type_permission output = Core.e_permission;
     output = Core.f_let(
       Core.t_permission,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_user user = Core.f_user_from_context(context);
         final Core.Type_security security = user.security();
         final Core.Type_permissionmap permissionmap = security.permissionmap();
-        return Core.f_any_from_map(Core.t_permission, permissionmap, Core.t_string.vx_new_from_string(":id"));
+        return Core.f_any_from_map(Core.t_permission, permissionmap, Core.vx_new_string(":id"));
       })
     );
     return output;
@@ -19475,7 +19595,7 @@ public final class Core {
     public Func_properties_from_typedef vx_type() {return t_properties_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19488,7 +19608,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_properties_from_typedef(vtypedef);
       return output;
     }
@@ -19566,7 +19686,7 @@ public final class Core {
     public Func_proplast_from_typedef vx_type() {return t_proplast_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19579,7 +19699,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_proplast_from_typedef(vtypedef);
       return output;
     }
@@ -19656,7 +19776,7 @@ public final class Core {
     public Func_resolve vx_type() {return t_resolve;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19669,8 +19789,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_resolve(generic_any_1, value);
       return output;
     }
@@ -19747,7 +19867,7 @@ public final class Core {
     public Func_resolve_1 vx_type() {return t_resolve_1;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19760,8 +19880,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_resolve_1(generic_any_1, fn_any);
       return output;
     }
@@ -19842,7 +19962,7 @@ public final class Core {
     public Func_resolve_async vx_type() {return t_resolve_async;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -19853,8 +19973,8 @@ public final class Core {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_any = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_any = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_resolve_async(generic_any_1, fn_any);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -19935,7 +20055,7 @@ public final class Core {
     public Func_resolve_first vx_type() {return t_resolve_first;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -19948,8 +20068,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list clauses = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list clauses = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_resolve_first(generic_any_1, clauses);
       return output;
     }
@@ -20030,7 +20150,7 @@ public final class Core {
     public Func_resolve_list vx_type() {return t_resolve_list;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -20043,8 +20163,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list clauses = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list clauses = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_resolve_list(generic_list_1, clauses);
       return output;
     }
@@ -20126,7 +20246,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_session_from_context(context);
       return output;
     }
@@ -20204,7 +20324,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_setting_from_context(context);
       return output;
     }
@@ -20263,7 +20383,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -20283,8 +20403,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int repeat = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int repeat = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_string_repeat(text, repeat);
       return output;
     }
@@ -20304,7 +20424,7 @@ public final class Core {
     String stringtext = text.vx_string();
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
-    output = Core.t_string.vx_new_from_string(stringresult);
+    output = Core.vx_new_string(stringresult);
     return output;
   }
 
@@ -20346,7 +20466,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -20365,7 +20485,7 @@ public final class Core {
     public Func_string_from_any vx_type() {return t_string_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -20378,7 +20498,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_string_from_any(value);
       return output;
     }
@@ -20397,8 +20517,8 @@ public final class Core {
     Core.Type_string output = Core.e_string;
     output = Core.f_string_from_any_indent(
       value,
-      Core.t_int.vx_new_from_int(0),
-      Core.t_boolean.vx_new_from_boolean(true)
+      Core.vx_new_int(0),
+      Core.vx_new_boolean(true)
     );
     return output;
   }
@@ -20443,7 +20563,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -20463,9 +20583,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int indent = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_boolean linefeed = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int indent = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_boolean linefeed = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(2)));
       output = Core.f_string_from_any_indent(value, indent, linefeed);
       return output;
     }
@@ -20482,107 +20602,8 @@ public final class Core {
 
   public static Core.Type_string f_string_from_any_indent(final Core.Type_any value, final Core.Type_int indent, final Core.Type_boolean linefeed) {
     Core.Type_string output = Core.e_string;
-    String indenttext = " ".repeat(indent.vx_int());
-    String text = "";
-    if (indent.vx_int() > 50) {
-      text = "Error: Max Depth Exceeded";
-    } else if (value == null) {
-      text = "null";
-    } else if (value == value.vx_type()) {
-      Core.Type_typedef typedef = value.vx_typedef();
-      text = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
-    } else if (value instanceof Core.Type_boolean) {
-      Core.Type_boolean valbool = Core.f_any_from_any(Core.t_boolean, value);
-      if (valbool.vx_boolean() == true) {
-        text = "true";
-      } else {
-        text = "false";
-      }
-    } else if (value instanceof Core.Type_decimal) {
-      Core.Type_decimal valdec = Core.f_any_from_any(Core.t_decimal, value);
-      text = valdec.vx_string();
-    } else if (value instanceof Core.Type_float) {
-      Core.Type_float valfloat = Core.f_any_from_any(Core.t_float, value);
-      text = Float.toString(valfloat.vx_float());
-      if (text.endsWith(".0")) {
-        text = text.substring(0, text.length() - 2);
-      }
-    } else if (value instanceof Core.Type_int) {
-      if (value == Core.c_notanumber) {
-        text = "notanumber";
-      } else if (value == Core.c_infinity) {
-        text = "infinity";
-      } else if (value == Core.c_neginfinity) {
-        text = "neginfinity";
-      } else {
-        Core.Type_int valint = Core.f_any_from_any(Core.t_int, value);
-        text = Integer.toString(valint.vx_int());
-      }
-    } else if (value instanceof Core.Type_string) {
-      Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
-      text = "\"" + valstring.vx_string() + "\"";
-    } else if (value instanceof Core.Type_list) {
-      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
-      Core.Type_typedef typedef = vallist.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      int indentint = indent.vx_int();
-      indentint += 1;
-      List<Core.Type_any> listval = vallist.vx_list();
-      for (Core.Type_any valsub : listval) {
-        Core.Type_string valtext = Core.f_string_from_any_indent(valsub, Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += "\n " + indenttext + valtext.vx_string();
-      }
-      if (vallist.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(vallist.vx_msgblock(), Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext.vx_string();
-      }
-      text = "(" + typedefname.vx_string() + text + ")";
-    } else if (value instanceof Core.Type_map) {
-      Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
-      Core.Type_typedef typedef = valmap.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      int indentint = indent.vx_int();
-      indentint += 2;
-      Map<String, Core.Type_any> mapval = valmap.vx_map();
-      Set<String> keys = mapval.keySet();
-      for (String key : keys) {
-        Core.Type_any valsub = mapval.get(key);
-        if (!key.startsWith(":")) {
-          key = ":" + key;
-        }
-        Core.Type_string valtext = Core.f_string_from_any_indent(valsub, Core.t_int.vx_new_from_int(indentint), linefeed);
-        String strval = valtext.vx_string();
-        if (strval.contains("\n")) {
-          strval = "\n  " + indenttext + strval;
-        } else {
-          strval = " " + strval;
-        }
-        text += "\n" + indenttext + " " + key + strval;
-      }
-      if (valmap.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(valmap.vx_msgblock(), Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext.vx_string();
-      }
-      text = "(" + typedefname.vx_string() + text + ")";
-    } else if (value instanceof Core.Type_struct) {
-      Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
-      Core.Type_typedef typedef = valstruct.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
-      String valtext = Core.f_string_from_any_indent(valmap, indent, linefeed).vx_string();
-      text = valtext.replaceFirst("map", typedefname.vx_string());
-    } else if (value instanceof Core.Type_func) {
-      Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
-      Core.Type_funcdef funcdef = valfunc.vx_funcdef();
-      Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
-      text = funcdefname.vx_string();
-      if (valfunc.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
-        text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext.vx_string();
-      }
-      text = "(" + text + ")";
-    }
-    output = Core.t_string.vx_new_from_string(text);
+    String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+    output = Core.vx_new_string(soutput);
     return output;
   }
 
@@ -20593,7 +20614,7 @@ public final class Core {
    * (func string<-func)
    */
   public static interface Func_string_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_string_from_func fn_new(Core.Class_any_from_func.IFn fn);
+    public Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_string f_string_from_func();
   }
 
@@ -20624,7 +20645,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -20645,7 +20666,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_string_from_func fn_new(Core.Class_any_from_func.IFn fn) {
+    public Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_string_from_func output = new Class_string_from_func();
       output.fn = fn;
       return output;
@@ -20730,9 +20751,9 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_thenelselist thenelselist = Core.f_any_from_any(Core.t_thenelselist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_thenelselist thenelselist = Core.f_any_from_any(Core.t_thenelselist, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_switch(generic_any_1, val, thenelselist);
       return output;
     }
@@ -20840,8 +20861,8 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Func_boolean_from_func fn_cond = Core.f_any_from_any(Core.t_boolean_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Func_boolean_from_func fn_cond = Core.f_any_from_any(Core.t_boolean_from_func, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(1)));
       output = Core.f_then(fn_cond, fn_any);
       return output;
     }
@@ -20861,11 +20882,11 @@ public final class Core {
     output = Core.f_new(
       Core.t_thenelse,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":code"),
-        Core.t_string.vx_new_from_string(":then"),
-        Core.t_string.vx_new_from_string(":fn-cond"),
+        Core.vx_new_string(":code"),
+        Core.vx_new_string(":then"),
+        Core.vx_new_string(":fn-cond"),
         fn_cond,
-        Core.t_string.vx_new_from_string(":fn-any"),
+        Core.vx_new_string(":fn-any"),
         fn_any
       )
     );
@@ -20929,7 +20950,7 @@ public final class Core {
     public Func_traits_from_typedef vx_type() {return t_traits_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -20942,7 +20963,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_traits_from_typedef(vtypedef);
       return output;
     }
@@ -21020,7 +21041,7 @@ public final class Core {
     public Func_type_from_any vx_type() {return t_type_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21033,7 +21054,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_type_from_any(value);
       return output;
     }
@@ -21110,7 +21131,7 @@ public final class Core {
     public Func_typedef_from_any vx_type() {return t_typedef_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21123,7 +21144,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typedef_from_any(val);
       return output;
     }
@@ -21202,7 +21223,7 @@ public final class Core {
     public Func_typedef_from_type vx_type() {return t_typedef_from_type;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21215,7 +21236,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typedef_from_type(val);
       return output;
     }
@@ -21274,7 +21295,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -21293,7 +21314,7 @@ public final class Core {
     public Func_typename_from_any vx_type() {return t_typename_from_any;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21306,7 +21327,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typename_from_any(value);
       return output;
     }
@@ -21367,7 +21388,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -21386,7 +21407,7 @@ public final class Core {
     public Func_typename_from_type vx_type() {return t_typename_from_type;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21399,7 +21420,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typename_from_type(type);
       return output;
     }
@@ -21460,7 +21481,7 @@ public final class Core {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -21479,7 +21500,7 @@ public final class Core {
     public Func_typename_from_typedef vx_type() {return t_typename_from_typedef;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21492,7 +21513,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typename_from_typedef(vtypedef);
       return output;
     }
@@ -21513,7 +21534,7 @@ public final class Core {
       Core.t_string,
       Core.t_anylist.vx_new(
         vtypedef.pkgname(),
-        Core.t_string.vx_new_from_string("/"),
+        Core.vx_new_string("/"),
         vtypedef.name()
       )
     );
@@ -21577,7 +21598,7 @@ public final class Core {
     public Func_typenames_from_typelist vx_type() {return t_typenames_from_typelist;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -21590,7 +21611,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_typelist typelist = Core.f_any_from_any(Core.t_typelist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_typelist typelist = Core.f_any_from_any(Core.t_typelist, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_typenames_from_typelist(typelist);
       return output;
     }
@@ -21610,7 +21631,7 @@ public final class Core {
     output = Core.f_list_from_list(
       Core.t_stringlist,
       typelist,
-      Core.t_any_from_any.fn_new((type_any) -> {
+      Core.t_any_from_any.vx_fn_new((type_any) -> {
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
         return 
           Core.f_typename_from_type(type);
@@ -21676,7 +21697,7 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       output = Core.f_user_from_context(context);
       return output;
     }
@@ -21697,5 +21718,22 @@ public final class Core {
     return output;
   }
 
+
+  static {
+    Const_false.const_new(c_false);
+    Const_globalpackagemap.const_new(c_globalpackagemap);
+    Const_infinity.const_new(c_infinity);
+    Const_mempool_active.const_new(c_mempool_active);
+    Const_msg_error.const_new(c_msg_error);
+    Const_msg_info.const_new(c_msg_info);
+    Const_msg_severe.const_new(c_msg_severe);
+    Const_msg_warning.const_new(c_msg_warning);
+    Const_neginfinity.const_new(c_neginfinity);
+    Const_newline.const_new(c_newline);
+    Const_notanumber.const_new(c_notanumber);
+    Const_nothing.const_new(c_nothing);
+    Const_quote.const_new(c_quote);
+    Const_true.const_new(c_true);
+  }
 
 }

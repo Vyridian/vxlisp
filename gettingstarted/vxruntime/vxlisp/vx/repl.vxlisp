@@ -4,21 +4,18 @@
 
  :doc "Read-Evaluate-Print-Loop processor.")
 
-(type liblist
- :extends    :list
+(type liblist : list
  :allowtypes [string]
  :doc "List of library names")
 
-(type repl
- :extends    :struct
+(type repl : struct
  :properties [type     : any
               repllist : repllist
               async    : boolean
               val      : any]
  :doc "Repl structure")
 
-(type repllist
- :extends    :list
+(type repllist : list
  :allowtypes [repl]
  :doc "List of repl")
 

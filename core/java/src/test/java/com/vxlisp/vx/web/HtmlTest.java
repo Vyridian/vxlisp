@@ -20,12 +20,12 @@ public final class HtmlTest {
           ":describename", "(test\n \"<body></body>\"\n (string<-body-indent (body) 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<body></body>"),
+              Core.vx_new_string("<body></body>"),
               Html.f_string_from_body_indent(
                 Core.f_empty(
                   Html.t_body
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -34,7 +34,7 @@ public final class HtmlTest {
           ":describename", "(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<body>\n  <div></div>\n</body>"),
+              Core.vx_new_string("<body>\n  <div></div>\n</body>"),
               Html.f_string_from_body_indent(
                 Core.f_new(
                   Html.t_body,
@@ -44,7 +44,7 @@ public final class HtmlTest {
                     )
                   )
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -65,12 +65,12 @@ public final class HtmlTest {
           ":describename", "(test\n \"<div></div>\"\n (string<-div-indent (div) 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<div></div>"),
+              Core.vx_new_string("<div></div>"),
               Html.f_string_from_div_indent(
                 Core.f_empty(
                   Html.t_div
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -79,16 +79,16 @@ public final class HtmlTest {
           ":describename", "(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<div id=\"myid\"></div>"),
+              Core.vx_new_string("<div id=\"myid\"></div>"),
               Html.f_string_from_div_indent(
                 Core.f_new(
                   Html.t_div,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":id"),
-                    Core.t_string.vx_new_from_string("myid")
+                    Core.vx_new_string(":id"),
+                    Core.vx_new_string("myid")
                   )
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -109,12 +109,12 @@ public final class HtmlTest {
           ":describename", "(test\n \"<head></head>\"\n (string<-head-indent (head) 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<head></head>"),
+              Core.vx_new_string("<head></head>"),
               Html.f_string_from_head_indent(
                 Core.f_empty(
                   Html.t_head
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -135,16 +135,16 @@ public final class HtmlTest {
           ":describename", "(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
+              Core.vx_new_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
               Html.f_string_from_html(
                 Core.f_new(
                   Html.t_html,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":head"),
+                    Core.vx_new_string(":head"),
                     Core.f_empty(
                       Html.t_head
                     ),
-                    Core.t_string.vx_new_from_string(":body"),
+                    Core.vx_new_string(":body"),
                     Core.f_empty(
                       Html.t_body
                     )
@@ -170,16 +170,16 @@ public final class HtmlTest {
           ":describename", "(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<meta charset=\"utf-8\" />"),
+              Core.vx_new_string("<meta charset=\"utf-8\" />"),
               Html.f_string_from_meta_indent(
                 Core.f_new(
                   Html.t_meta,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":charset"),
-                    Core.t_string.vx_new_from_string("utf-8")
+                    Core.vx_new_string(":charset"),
+                    Core.vx_new_string("utf-8")
                   )
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -200,16 +200,16 @@ public final class HtmlTest {
           ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<p>data</p>"),
+              Core.vx_new_string("<p>data</p>"),
               Html.f_string_from_p_indent(
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("data")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("data")
                   )
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )
@@ -218,18 +218,18 @@ public final class HtmlTest {
           ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("<p id=\"myid\">data</p>"),
+              Core.vx_new_string("<p id=\"myid\">data</p>"),
               Html.f_string_from_p_indent(
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":id"),
-                    Core.t_string.vx_new_from_string("myid"),
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("data")
+                    Core.vx_new_string(":id"),
+                    Core.vx_new_string("myid"),
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("data")
                   )
                 ),
-                Core.t_int.vx_new_from_int(0)
+                Core.vx_new_int(0)
               ),
               context
             )

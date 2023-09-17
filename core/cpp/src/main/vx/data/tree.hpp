@@ -254,21 +254,21 @@ namespace vx_data_tree {
   // (const brancharrow-down)
   class Class_brancharrow_down : public vx_data_tree::Class_brancharrow {
   public:
-    static vx_data_tree::Const_brancharrow_down vx_const_new();
+    static void vx_const_new(vx_data_tree::Const_brancharrow_down output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const brancharrow-up)
   class Class_brancharrow_up : public vx_data_tree::Class_brancharrow {
   public:
-    static vx_data_tree::Const_brancharrow_up vx_const_new();
+    static void vx_const_new(vx_data_tree::Const_brancharrow_up output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const brancharrow-updown)
   class Class_brancharrow_updown : public vx_data_tree::Class_brancharrow {
   public:
-    static vx_data_tree::Const_brancharrow_updown vx_const_new();
+    static void vx_const_new(vx_data_tree::Const_brancharrow_updown output);
     vx_core::Type_constdef vx_constdef() const;
   };
 

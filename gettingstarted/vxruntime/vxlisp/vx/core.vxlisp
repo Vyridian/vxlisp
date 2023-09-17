@@ -9,22 +9,18 @@
            string int    int<-string]
  :doc "Any Value for Variant Type")
 
-(type any-async<-func
- :extends    :func
+(type any-async<-func : func
  :allowfuncs [any<-func any<-func-async]
  :doc        "A sync or async function that returns one value.")
 
-(type any<-anylist
- :extends    :list
+(type any<-anylist : list
  :allowfuncs [any<-any]
  :doc        "List of Any")
 
-(type anylist
- :extends    :list
+(type anylist : list
  :allowtypes [any])
 
-(type anytype
- :extends :type
+(type anytype : type
  :doc     "Any Type that allows any Type as a Value")
 
 (type arg

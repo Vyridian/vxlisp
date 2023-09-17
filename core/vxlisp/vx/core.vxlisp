@@ -14,38 +14,31 @@
      vx_core::Type_any vx_type_from_any(vx_core::Type_any value) const;")
  :doc "Any Value for Variant Type")
 
-(type any-async<-func
- :extends    :func
+(type any-async<-func : func
  :allowfuncs [any<-func any<-func-async]
  :doc        "A sync or async function that returns one value.")
 
-(type any<-anylist
- :extends    :list
+(type any<-anylist : list
  :allowfuncs [any<-any]
  :doc        "List of any<-any")
 
-(type anylist
- :extends    :list
+(type anylist : list
  :allowtypes [any])
 
-(type anytype
- :extends :type
+(type anytype : type
  :doc     "Any Type that allows any Type as a Value")
 
-(type arg
- :extends    :struct
+(type arg : struct
  :properties [name    : string
               argtype : type
               fn-any  : any<-func]
  :doc        "A function argument")
 
-(type arglist
- :extends    :list
+(type arglist : list
  :allowtypes [arg]
  :doc        "A list of arg")
 
-(type argmap
- :extends    :map
+(type argmap : map
  :allowtypes [arg]
  :doc        "A map of arg")
 
@@ -62,24 +55,14 @@
     "protected boolean vxboolean = false;
 
      @Override
-     public boolean vx_boolean() {return vxboolean;}
-
-     @Override
-     public Type_boolean vx_new_from_boolean(final boolean isval) {
-       Type_boolean output = Core.c_false;
-       if (isval) {
-         output = Core.c_true;
-       }
-       return output;
-     }")
+     public boolean vx_boolean() {return vxboolean;}")
  :test (test-true true)
        (test-false false)
        (test-true (boolean true))
        (test-false (boolean false))
  :doc "Standard Boolean Type")
 
-(type booleanlist
- :extends    :list
+(type booleanlist : list
  :allowtypes [boolean])
 
 (type collection
@@ -92,22 +75,18 @@
 (type connect
  :doc "General connect trait")
 
-(type connectlist
- :extends    :list
+(type connectlist : list
  :allowtypes [connect]
  :doc        "List of connect")
 
-(type connectmap
- :extends    :map
+(type connectmap : map
  :allowtypes [connect]
  :doc        "Map of connect")
 
-(type const
- :extends :const
+(type const : const
  :doc     "Original Constant Class.")
 
-(type constdef
- :extends    :struct
+(type constdef : struct
  :properties [pkgname : string
               name    : string
               type    : any]
@@ -122,18 +101,15 @@
      );")
  :doc "Const Definition Class for inspecting properties.")
 
-(type constlist
- :extends    :list
+(type constlist : list
  :allowtypes [const]
  :doc        "List of Const.")
 
-(type constmap
- :extends    :map
+(type constmap : map
  :allowtypes [const]
  :doc        "Map of Const.")
 
-(type context
- :extends    :struct
+(type context : struct
  :properties [code    : string
               session : session
               setting : setting
@@ -141,8 +117,8 @@
  :doc        "Context")
 
 (type decimal
- :traits     [number]
- :default    0
+ :traits  [number]
+ :default 0
  :create
   (native
    :cpp
@@ -185,19 +161,11 @@
     "protected float vxfloat = 0;
 
      @Override
-     public float vx_float() {return vxfloat;}
-
-     @Override
-     public Type_float vx_new_from_float(final float fval) {
-       Class_float output = new Core.Class_float();
-       output.vxfloat = fval;
-       return output;
-     }")
+     public float vx_float() {return vxfloat;}")
  :test    (test 4.5 (float 4.5))
  :doc     "Standard Floating Point Number")
 
-(type func
- :extends :func
+(type func : func
  :create
   (native
    :cpp
@@ -205,8 +173,7 @@
      vx_core::Type_funcdef vx_funcdef() const;")
  :doc "Original Function Class.")
 
-(type funcdef
- :extends :struct
+(type funcdef : struct
  :properties [pkgname : string
               name    : string
               idx     : int
@@ -225,13 +192,11 @@
      );")
  :doc "Func Definition Class for inspecting properties.")
 
-(type funclist
- :extends    :list
+(type funclist : list
  :allowtypes [func]
  :doc        "List of Func.")
 
-(type funcmap
- :extends    :map
+(type funcmap : map
  :allowtypes [func]
  :doc        "Map of Func.")
 
@@ -249,14 +214,7 @@
     "protected int vxint = 0;
 
      @Override
-     public int vx_int() {return vxint;}
-
-     @Override
-     public Type_int vx_new_from_int(final int ival) {
-       Class_int output = new Core.Class_int();
-       output.vxint = ival;
-       return output;
-     }")
+     public int vx_int() {return vxint;}")
  :test (test-true  (is-int 4))
        (test-true  (is-int "4"))
        (test-true  (is-int infinity))
@@ -266,18 +224,15 @@
        (test-false (is-int 5.5))
  :doc  "A simple integer.")
 
-(type intlist
- :extends    :list
+(type intlist : list
  :allowtypes [int]
  :doc        "A list of int.")
 
-(type intmap
- :extends    :map
+(type intmap : map
  :allowtypes [int]
  :doc        "A map of int.")
 
-(type list
- :extends    :list
+(type list : list
  :allowtypes [any]
  :create
   (native
@@ -289,12 +244,10 @@
      vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;")
  :doc "A simple untyped list.")
 
-(type listtype
- :extends :type
+(type listtype : type
  :doc     "A generic type that extends :list.")
 
-(type map
- :extends    :map
+(type map : map
  :allowtypes [any]
  :create
   (native
@@ -307,12 +260,10 @@
      vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;")
  :doc "A simple untyped map.")
 
-(type maptype
- :extends :type
+(type maptype : type
  :doc     "A generic type that extends :map.")
 
-(type mempool
- :extends    :struct
+(type mempool : struct
  :properties [valuepool : value]
  :create
   (native
@@ -367,8 +318,7 @@
      }")
  :doc "Memory Pool")
 
-(type msg
- :extends    :struct
+(type msg : struct
  :properties [code     : string  :doc "Message Code"
               severity : int     :doc "Message Severity"
               text     : string  :doc "Message Text"]
@@ -384,14 +334,14 @@
 
      public Type_msg vx_new_error(final String text) {
        Class_msg output = new Class_msg();
-       output.vx_p_text = Core.t_string.vx_new_from_string(text);
+       output.vx_p_text = Core.vx_new_string(text);
        output.vx_p_severity = Core.c_msg_severe;
        return output;
      }
 
      public Type_msg vx_new_from_exception(final String text, final Exception err) {
        Class_msg output = new Class_msg();
-       output.vx_p_text = Core.t_string.vx_new_from_string(text);
+       output.vx_p_text = Core.vx_new_string(text);
        output.vx_p_severity = Core.c_msg_severe;
        output.err = err;
        Core.debug(output);
@@ -399,8 +349,7 @@
      }")
  :doc "Message Type for error handling")
 
-(type msgblock
- :extends    :struct
+(type msgblock : struct
  :properties [msgs      : msglist
               msgblocks : msgblocklist]
  :create
@@ -452,13 +401,11 @@
      }")
  :doc "Block of Messages")
 
-(type msgblocklist
- :extends    :list
+(type msgblocklist : list
  :allowtypes [msgblock]
  :doc        "List of Message Blocks")
 
-(type msglist
- :extends    :list
+(type msglist : list
  :allowtypes [msg]
  :doc        "List of Messages")
 
@@ -473,70 +420,57 @@
  :allowtypes [int float decimal]
  :doc        "A generic number that could be int, float, or decimal.")
 
-(type numberlist
+(type numberlist : list
  :allowtypes [number]
- :extends    :list
  :doc        "A list of number.")
 
-(type numbermap
+(type numbermap : map
  :allowtypes [number]
- :extends    :map
  :doc        "A map of number.")
 
-(type package
- :extends :struct
+(type package : struct
  :doc     "A package that store types, consts and funcs.")
 
-(type packagemap
- :extends    :map
+(type packagemap : map
  :allowtypes [package])
 
-(type permission
- :extends    :struct
+(type permission : struct
  :properties [id : string]
  :doc        "Permission")
 
-(type permissionlist
- :extends    :list
+(type permissionlist : list
  :allowtypes [permission]
  :doc        "List of Permission")
 
-(type permissionmap
- :extends    :map
+(type permissionmap : map
  :allowtypes [permission]
  :doc        "Map of Permission")
 
-(type security
- :extends    :struct
+(type security : struct
  :properties [permissions   : permissionlist
               permissionmap : permissionmap]
  :doc        "Security rules")
 
-(type session
- :extends    :struct
+(type session : struct
  :properties [user        : user
               connectlist : connectlist
               connectmap : connectmap]
  :doc        "Session")
 
-(type setting
- :extends    :struct
+(type setting : struct
  :properties [pathmap : stringmap]
  :doc        "Settings")
 
-(type state
- :extends    :map
+(type state : map
  :allowtypes [statelistener])
 
-(type statelistener
- :extends     :struct
+(type statelistener : struct
  :properties
   [path       : string
    value      : any
    fn-boolean : boolean<-none])
 
-(type string
- :extends string
+(type string : string
  :default ""
  :create
   (native
@@ -550,36 +484,20 @@
      @Override
      public String vx_string() {
        return vxstring;
-     }
-
-     @Override
-     public Type_string vx_new_from_string(final String text) {
-       Type_string output;
-       if (text == “” && Core.e_string != null) {
-         output = Core.e_string;
-       } else {
-         Class_string work = new Core.Class_string();
-         work.vxstring = text;
-         output = work;
-       }
-       return output;
      }")
  :test    (test "a" (string "a"))
           (test "ab" (string "a" "b"))
  :doc     "A simple string.")
 
-(type stringlist
- :extends    :list
+(type stringlist : list
  :allowtypes [string]
  :doc        "A list of string.")
 
-(type stringmap
- :extends    :map
+(type stringmap : map
  :allowtypes [string]
  :doc        "A map of string.")
 
-(type struct
- :extends :struct
+(type struct : struct
  :create
   (native
    :cpp
@@ -588,24 +506,20 @@
      vx_core::Type_any vx_get_any(vx_core::Type_string key) const;")
  :doc "Struct is the type of all structures/objects with properties.")
 
-(type thenelse
- :extends    :struct
+(type thenelse : struct
  :properties [code    : string
               value   : any
               values  : list
               fn-cond : boolean<-func
               fn-any  : any<-func])
 
-(type thenelselist
- :extends    :list
+(type thenelselist : list
  :allowtypes [thenelse])
 
-(type type
- :extends :type
+(type type : type
  :doc     "Original Type Class")
 
-(type typedef
- :extends    :struct
+(type typedef : struct
  :properties [pkgname        : string
               name           : string
               extends        : string
@@ -637,25 +551,21 @@
      );")
  :doc "Type Definition Class for inspecting Type properties.")
 
-(type typelist
- :extends    :list
+(type typelist : list
  :allowtypes [any]
  :doc        "List of Types")
 
-(type typemap
- :extends    :map
+(type typemap : map
  :allowtypes [any]
  :doc        "Map of Any Type Class")
 
-(type user
- :extends    :struct
+(type user : struct
  :properties [security : security
               username : string
               token    : string]
  :doc        "User Type")
 
-(type value
- :extends    :struct
+(type value : struct
  :properties [next : any
               refs : int])
 
@@ -738,7 +648,7 @@
    "num1 + num2"
   :java
    "int result = num1.vx_int() + num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);")
+    output = Core.vx_new_int(result);")
  :alias "plus"
  :doc   "Math int plus"
  :test  (test 5 (+ 2 3))
@@ -757,7 +667,7 @@
    "Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() + float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);")
+    output = Core.vx_new_float(result);")
  :alias "plus"
  :test  (test 5 (+ 2  3))
         (test 3 (+ 5 -2))
@@ -799,7 +709,7 @@
    "num + 1"
   :java
    "int result = num.vx_int() + 1;
-    output = Core.t_int.vx_new_from_int(result);")
+    output = Core.vx_new_int(result);")
  :alias "plus1"
  :test  (test  3 (+1  2))
         (test -1 (+1 -2))
@@ -816,7 +726,7 @@
    "num1 - num2"
   :java
    "int result = num1.vx_int() - num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);")
+    output = Core.vx_new_int(result);")
  :alias "minus"
  :doc   "Math int minus"
  :test  (test 1 (- 3 2))
@@ -835,7 +745,7 @@
    "Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() - float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);")
+    output = Core.vx_new_float(result);")
  :alias "minus"
  :doc   "Math number minus"
  :test  (test 5 (+ 2 3))
@@ -878,7 +788,7 @@
    "num1 * num2"
   :java
    "int result = num1.vx_int() * num2.vx_int();
-    output = Core.t_int.vx_new_from_int(result);")
+    output = Core.vx_new_int(result);")
  :alias "multiply"
  :test  (test 6 (* 3 2))
         (test -10 (* 5 -2))
@@ -897,7 +807,7 @@
    "Core.Type_float float1 = Core.t_float.vx_new(num1);
     Core.Type_float float2 = Core.t_float.vx_new(num2);
     float result = float1.vx_float() * float2.vx_float();
-    output = Core.t_float.vx_new_from_float(result);")
+    output = Core.vx_new_float(result);")
  :alias "multiply"
  :test  (test 6.4 (* 3.2 2))
         (test -10.2 (* 5.1 -2))
@@ -957,7 +867,7 @@
       output = Core.c_notanumber;
     } else {
       float result = float1.vx_float() / float2.vx_float();
-      output = Core.t_float.vx_new_from_float(result);
+      output = Core.vx_new_float(result);
     }")
  :alias "divide"
  :test  (test 3 (/ 6 2))
@@ -981,64 +891,7 @@
     }
     output = vx_core::vx_new_boolean(isequal);"
   :js
-   "const native1 = " (native<-any val1) "
-    const native2 = " (native<-any val2) "
-    output = true
-    if (val1 === val2) {
-    } else if (native1 === native2) {
-    } else {
-      const typename = typeof native1
-      switch (typename) {
-      case 'number':
-        if (isNaN(native1) && isNaN(native2)) {
-        } else {
-          output = false
-        }
-        break
-      case 'boolean':
-      case 'string':
-        output = false
-        break
-      default:
-        const type1 = " (type<-any val1) "
-        const type2 = " (type<-any val2) "
-        const extends1 = " (extends<-typedef type1 :native) "
-        const extends2 = " (extends<-typedef type2 :native) "
-        if (type1 != type2) {
-          output = false
-        } else if (extends1 != extends2) {
-          output = false
-        } else {
-          switch (extends1) {
-          case ':list':
-            if (val1.length !== val2.length) {
-              output = false
-            } else if (val1.every((val, index) => val === val2[index])) {
-              output = true
-            } else {
-              output = false
-            }
-            break
-          case ':map':
-            const keys1 = Object.keys(native1)
-            const keys2 = Object.keys(native2)
-            if (keys1.length !== keys2.length) {
-              output = false
-            } else if (keys1.every(key => native1[key] === native2[key])) {
-              output = true
-            } else {
-              output = false
-            }
-            break
-          default:
-            output = false
-            break
-          }
-          break
-        }
-        break
-      }
-    }"
+   "vx_core.vx_eq(val1, val2)"
   :java
    "boolean isequal = false;
     if (val1 == val2) {
@@ -1050,7 +903,7 @@
         isequal = true;
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(isequal);")
+    output = Core.vx_new_boolean(isequal);")
  :alias "eq"
  :doc   "Boolean equal/equivalent"
  :test  (test-true (= true true))
@@ -1103,7 +956,7 @@
         }
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(isequal);")
+    output = Core.vx_new_boolean(isequal);")
  :alias "eqeq"
  :doc   "Strict Boolean equality"
  :test  (test-true (== true true))
@@ -1117,7 +970,7 @@
  (native
   :cpp  "vx_core::vx_new_boolean(!val->vx_boolean());"
   :js   "!val"
-  :java "Core.t_boolean.vx_new_from_boolean(!val.vx_boolean());")
+  :java "Core.vx_new_boolean(!val.vx_boolean());")
  :alias "not"
  :test  (test-false false)
         (test-false (! true))
@@ -1626,7 +1479,7 @@
         intresult = -1;
       }
     }
-    output = Core.t_int.vx_new_from_int(intresult);")
+    output = Core.vx_new_int(intresult);")
  :test (test 1 (compare 3 2))
        (test 1 (compare "z" "a"))
  :doc "Returns 0 if vals are equal, 1 if val1 > val2, -1 if val1 < val2")
@@ -1645,7 +1498,7 @@
     String stext = text.vx_string();
     String sfind = find.vx_string();
     booleanresult = stext.contains(sfind);
-    output = Core.t_boolean.vx_new_from_boolean(booleanresult);")
+    output = Core.vx_new_boolean(booleanresult);")
  :test (test-true  (contains "abcde" "cd"))
        (test-false (contains "abcde" "dc"))
  :doc  "Returns true if the given list contains the given value.")
@@ -1677,18 +1530,18 @@
         break;
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(booleanresult);")
+    output = Core.vx_new_boolean(booleanresult);")
  :test (test-true  (contains (stringlist "1" "2" "3") "2"))
        (test-true  (contains (intlist 1 2 3) 2))
        (test-false (contains (list 1 "2" 3) 2))
  :doc  "Returns true if the given list contains the given value.")
 
 (func copy : any-1
- [value  : any-1
+ [value  : any
   values : anylist :...]
  (native
   :cpp
-   "T* output = vx_core::vx_copy(value, values->vx_list());"
+   "T* output = vx_core::vx_copy(generic_any_1, value, values->vx_list());"
   :js
    "vx_core.f_new(value, ...values)"
   :java
@@ -1710,11 +1563,7 @@
   :cpp
    "T* output = vx_core::vx_any_from_any(type, type->vx_empty());"
   :js
-   "const typedef = vx_core.f_typedef_from_type(type)
-    const pkgname = typedef['vx_value'].pkgname
-    const typename = typedef['vx_value'].name
-    const pkg = vx_core.f_global_package_get(pkgname)
-    output = pkg.c_empty[typename]"
+   "vx_core.vx_empty(type)"
   :java
    "@SuppressWarnings(“unchecked”)
     T output = (T)(type.vx_empty());")
@@ -1786,7 +1635,7 @@
       Core.Type_float valfloat = (Core.Type_float)value;
       num = valfloat.vx_float();
     }
-    output = Core.t_float.vx_new_from_float(num);")
+    output = Core.vx_new_float(num);")
  :doc "Function Type taking generic any_1 and returning float")
 */
 
@@ -1962,7 +1811,7 @@
       try {
         float floatresult = Float.parseFloat(strval);
         intresult = (int)floatresult;
-        return Core.t_int.vx_new_from_int(intresult);
+        return Core.vx_new_int(intresult);
       } catch (Exception ex) {
         return Core.c_notanumber;
       }"
@@ -2130,7 +1979,7 @@
       } catch (Exception ex) {
       }
     }
-    output = Core.t_boolean.vx_new_from_boolean(result);")
+    output = Core.vx_new_boolean(result);")
  :doc "Returns true if the value is an integer.")
 
 (func is-number : boolean
@@ -2177,7 +2026,7 @@
   :js "values.length"
   :java
    "int intresult = values.vx_list().size();
-    output = Core.t_int.vx_new_from_int(intresult);")
+    output = Core.vx_new_int(intresult);")
  :doc "Returns the currently used size/length of a list"
  :test (test 3 (length<-list (stringlist "a" "b" "c"))))
 
@@ -2249,7 +2098,7 @@
   :cpp
    "vx_core::vx_Type_listany list_value = values->vx_list();
     vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
-      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any, val);
+      return fn_any_from_any_async->vx_any_from_any_async(vx_core::vx_type(val), val);
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);"
   :js
@@ -2317,7 +2166,7 @@
   :java
    "Map<String, Core.Type_any> map_value = valuemap.vx_map();
     List<Core.Type_any> listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -> {
-      Core.Type_string valkey = Core.t_string.vx_new_from_string(key);
+      Core.Type_string valkey = Core.vx_new_string(key);
       return fn_any_from_key_value.f_any_from_key_value(Core.t_any, valkey, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));")
@@ -2553,651 +2402,7 @@
   :cpp
    "T* output = vx_core::vx_new(type, values->vx_list());"
   :js
-   "const typedef = vx_core.f_typedef_from_any(type)
-    const copy = type
-    let msgblock = vx_core.e_msgblock
-    if (values.length == 1) {
-      // check if anylist passed as the only value
-      const val1 = values[0]
-      const val1typedef = val1['vx_type']
-      if (val1typedef == undefined) {
-      } else if (val1typedef == vx_core.t_anylist) {
-        values = val1
-      }
-    }
-    let isfirst = true
-    switch (typedef) {
-    case vx_core.t_boolean:
-      output = false
-      if (type == vx_core.t_boolean) {
-      } else if ((typeof copy) == 'boolean') {
-        output = copy
-      } else {
-        output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
-        }
-      }
-      values.map(value => {
-        switch (typeof value) {
-        case 'boolean':
-          if (isfirst) {
-            isfirst = false
-            output = value
-          } else {
-            output = output && value
-          }
-          break
-        default:
-          const valuetype = vx_core.f_typedef_from_any(value)
-          switch (valuetype) {
-          case vx_core.t_boolean:
-            value = value['vx_value']
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output = output && value
-            }
-            break
-          case vx_core.t_msgblock:
-            msgblock = value
-            break
-          case vx_core.t_msg:
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-            break
-          default:
-            const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-            break
-          }
-          break
-        }
-      })
-      if (msgblock != vx_core.e_msgblock) {
-        output = {
-          vx_type: typedef,
-          vx_value: output,
-          vx_msgblock: msgblock
-        }
-      }
-      break
-    case vx_core.t_int:
-      output = 0
-      if (type == vx_core.t_int) {
-      } else if ((typeof copy) == 'number') {
-        output = copy
-      } else {
-        output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
-        }
-      }
-      values.map(value => {
-        switch (typeof value) {
-        case 'number':
-          if (isfirst) {
-            isfirst = false
-            output = value
-          } else {
-            output += value
-          }
-          break
-        case 'string':
-          value = parseFloat(value)
-          if (isfirst) {
-            isfirst = false
-            output = value
-          } else {
-            output += value
-          }
-          break
-        default:
-          const valuetype = vx_core.f_type_from_any(value)
-          switch (valuetype) {
-          case vx_core.t_int:
-            value = value['vx_value']
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output = output + value
-            }
-            break
-          case vx_core.t_float:
-            value = value['vx_value']
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output += value
-            }
-            break
-          case vx_core.t_string:
-            value = parseFloat(value)
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output += value
-            }
-            break
-          case vx_core.t_msgblock:
-            msgblock = value
-            break
-          case vx_core.t_msg:
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-            break
-          default:
-            const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-            break
-          }
-          break
-        }
-      })
-      output = Math.round(output)
-      if (msgblock != vx_core.e_msgblock) {
-        output = {
-          vx_type: typedef,
-          vx_value: output,
-          vx_msgblock: msgblock
-        }
-      }
-      break
-    case vx_core.t_float:
-      output = 0.0
-      if (type == vx_core.t_float) {
-      } else if ((typeof copy) == 'number') {
-        output = copy
-      } else {
-        output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
-        }
-      }
-      values.map(value => {
-        switch (typeof value) {
-        case 'number':
-          if (isfirst) {
-            isfirst = false
-            output = value
-          } else {
-            output += value
-          }
-          break
-        case 'string':
-          value = parseFloat(value)
-          if (isfirst) {
-            isfirst = false
-            output = value
-          } else {
-            output += value
-          }
-          break
-        default:
-          const valuetype = vx_core.f_type_from_any(value)
-          switch (valuetype) {
-          case vx_core.t_int:
-          case vx_core.t_float:
-            value = value['vx_value']
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output += value
-            }
-            break
-          case vx_core.t_string:
-            value = parseFloat(value['vx_value'])
-            if (isfirst) {
-              isfirst = false
-              output = value
-            } else {
-              output += value
-            }
-            break
-          case vx_core.t_msgblock:
-            msgblock = value
-            break
-          case vx_core.t_msg:
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-            break
-          default:
-            const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-            break
-          }
-        }
-      })
-      if (msgblock != vx_core.e_msgblock) {
-        output = {
-          vx_type: typedef,
-          vx_value: output,
-          vx_msgblock: msgblock
-        }
-      }
-      break
-    case vx_core.t_string:
-      output = ''
-      if (type == vx_core.t_string) {
-      } else if ((typeof copy) == 'string') {
-        output = copy
-      } else {
-        output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
-        }
-      }
-      values.map(value => {
-        switch (typeof value) {
-        case 'boolean':
-          if (value) {
-            output += 'true'
-          } else {
-            output += 'false'
-          }
-          break
-        case 'number':
-        case 'string':
-          output += '' + value
-          break
-        default:
-          const valuetype = vx_core.f_typedef_from_any(value)
-          switch (valuetype) {
-          case vx_core.t_int:
-          case vx_core.t_float:
-            output += '' + value
-            break
-          case vx_core.t_string:
-            output += value
-            break
-          case vx_core.t_msgblock:
-            msgblock = value
-            break
-          case vx_core.t_msg:
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-            break
-          default:
-            const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-            break
-          }
-          break
-        }
-      })
-      if (msgblock != vx_core.e_msgblock) {
-        output = {
-          vx_type: typedef,
-          vx_value: output,
-          vx_msgblock: msgblock
-        }
-      }
-      break
-    default:
-      let allowany = false
-      let allowtypes = []
-      let key = ''
-      let propmap = {}
-      const extend = vx_core.f_extends_from_typedef(typedef)
-      switch (extend) {
-      case ':func':
-        // output = vx_core.f_mempool-getvalue()
-        let fn = null
-        const empty = vx_core.f_empty(typedef)
-        if (type == typedef) {
-        } else {
-          fn = copy['vx_value']
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
-          }
-        }
-        values.map(value => {
-          if (value == empty) {
-          } else if ((typeof value) == 'function') {
-            fn = value
-          } else {
-            const valuetype = vx_core.f_type_from_any(value)
-            if (value == valuetype) {
-              fn = valuetype['vx_value']['fn']
-            } else {
-              switch (valuetype) {
-              case vx_core.t_msgblock:
-                msgblock = value
-                break
-              case vx_core.t_msg:
-                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-                break
-              default:
-                const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-                break
-              }
-            }
-          }
-        })
-        if ((fn != null) || (msgblock != vx_core.e_msgblock)) {
-          output = {}
-          output['vx_type'] = typedef
-          if (fn != null) {
-            output['vx_value'] = fn
-          }
-          if (msgblock != vx_core.e_msgblock) {
-            output['vx_msgblock'] = msgblock
-          }
-        } else {
-          output = empty
-        }
-        break
-      case ':list':
-        // output = vx_core.f_mempool-getvalue()
-        const listvals = []
-        if (type == typedef) {
-        } else {
-          listvals = copy.slice()
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
-          }
-        }
-        allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
-        if (allowtypes.includes(vx_core.t_any)) {
-          allowany = true
-        }
-        values.map(value => {
-          const valuetype = vx_core.f_type_from_any(value)
-          let isfound = false
-          if (typedef == valuetype) {
-            listvals.push(...value)
-            isfound = true
-          } else if (allowany) {
-            listvals.push(value)
-            isfound = true
-          } else if (allowtypes.includes(valuetype)) {
-            listvals.push(value)
-            isfound = true
-          } else {
-            switch (valuetype) {
-            case vx_core.t_msgblock:
-              msgblock = value
-              isfound = true
-              break
-            case vx_core.t_msg:
-              msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-              isfound = true
-              break
-            default:
-              const valuetraits = vx_core.f_traits_from_typedef(valuetype)
-              const intersection = allowtypes.filter(function(n) {
-                return valuetraits.indexOf(n) > -1
-              })
-              if (intersection.length > 0) {
-                listvals.push(value)
-                isfound = true
-              }
-              break
-            }
-          }
-          if (!isfound) {
-            const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error('(new ' + typename + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Value')
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-          }
-        })
-        if ((listvals.length > 0) || (msgblock != vx_core.e_msgblock)) {
-          output = listvals
-          output['vx_type'] = typedef
-          if (msgblock != vx_core.e_msgblock) {
-            output['vx_msgblock'] = msgblock
-          }
-        } else {
-          output = vx_core.f_empty(typedef)
-        }
-        break
-      case ':map':
-        if (type != typedef) {
-          propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
-          }
-        }
-        allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
-        if (allowtypes.includes(vx_core.t_any)) {
-          allowany = true
-        }
-        values.map(value => {
-          const valuetype = vx_core.f_type_from_any(value)
-          if (key == '') {
-            switch (valuetype) {
-            case vx_core.t_string:
-              if ((typeof value) == 'string') {
-                key = value
-              } else {
-                key = value['vx_value']
-              }
-              if (key.startsWith(':')) {
-                key = key.substring(1)
-              }
-              break
-            case vx_core.t_msgblock:
-              msgblock = value
-              break
-            case vx_core.t_msg:
-              msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-              break
-            default:
-              const typename = vx_core.f_typename_from_typedef(typedef)
-              const msg = vx_core.f_msg_from_error('(new ' + typename + ' :key ' + vx_core.f_string_from_any(value) + ') - Invalid Key')
-              msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-              break
-            }
-          } else {
-            if (allowany) {
-              propmap[key] = value
-            } else if (allowtypes.includes(valuetype)) {
-              propmap[key] = value
-            } else {
-              const valuetraits = vx_core.f_traits_from_typedef(valuetype)
-              const intersection = allowtypes.filter(function(n) {
-                return valuetraits.indexOf(n) > -1
-              })
-              if (intersection.length > 0) {
-                propmap[key] = value
-              } else {
-                const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error('(new ' + typename + ' :key ' + key + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Key Value')
-                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-              }
-            }
-            key = ''
-          }
-        })
-        // output = vx_core.f_mempool-getvalue()
-        if ((Object.keys(propmap).length > 0) || (msgblock != vx_core.e_msgblock)) {
-          output = {
-            vx_type: typedef,
-            vx_value: propmap
-          }
-          if (msgblock != vx_core.e_msgblock) {
-            output['vx_msgblock'] = msgblock
-          }
-        } else {
-          output = vx_core.f_empty(typedef)
-        }
-        break
-      case ':struct':
-        switch (typedef) {
-        case vx_core.t_msgblock:
-        case type:
-          break
-        default:
-          propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
-          }
-          break
-        }
-        if (values.length > 0) {
-          const properties = vx_core.f_properties_from_typedef(typedef)
-          const lastprop = vx_core.f_proplast_from_typedef(typedef)
-          const validkeys = Object.keys(properties)
-          let lastpropname = ''
-          let lasttype = null
-          let lastallowtypes = []
-          const ismulti = lastprop['multi']
-          if (ismulti) {
-            lastpropname = lastprop['name']
-            lasttype = lastprop['type']
-            lastallowtypes = vx_core.f_allowtypes_from_typedef(lasttype)
-          }
-          let testkey = ''
-          values.map(value => {
-            const valuetype = vx_core.f_type_from_any(value)
-            if (key == '') {
-              switch (valuetype) {
-              case vx_core.t_string:
-                if ((typeof value) == 'string') {
-                  testkey = value
-                } else {
-                  testkey = value['vx_value']
-                }
-                if (testkey.startsWith(':')) {
-                  testkey = testkey.substring(1)
-                }
-                if (validkeys.includes(testkey)) {
-                  key = testkey
-                } else {
-                  const typename = vx_core.f_typename_from_typedef(typedef)
-                  const msg = vx_core.f_msg_from_error('(new ' + typename + ' :key ' + vx_core.f_string_from_any(value) + ') - Invalid Key')
-                  msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-                }
-                break
-              case vx_core.t_msgblock:
-                switch (typedef) {
-                case vx_core.t_msg:
-                  // invalid msg cannot contain msgblock
-                  break
-                case vx_core.t_msgblock:
-                  if (value == vx_core.t_msgblock) {
-                  } else {
-                    let msgblocks = propmap['msgblocks']
-                    if (msgblocks == undefined) {
-                      msgblocks = [value]
-                      msgblock['vx_type'] = vx_core.t_msgblocklist
-                    } else {
-                      msgblocks.push(value)
-                    }
-                    propmap['msgblocks'] = msgblocks
-                  }
-                  break
-                default:
-                  msgblock = vx_core.f_msgblock_from_msgblock_msgblock(msgblock, value)
-                  break
-                }
-                break
-              case vx_core.t_msg:
-                switch (typedef) {
-                case vx_core.t_msg:
-                  // invalid msg cannot contain msg
-                  break
-                case vx_core.t_msgblock:
-                  let msgs = propmap['msgs']
-                  if (msgs == undefined) {
-                    msgs = [value]
-                    msgs['vx_type'] = vx_core.t_msglist
-                  } else {
-                    msgs.push(value)
-                  }
-                  propmap['msgs'] = msgs
-                  break
-                default:
-                  msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
-                  break
-                }
-                break
-              default:
-                let isfound = false
-                if (!ismulti) {
-                } else if (lasttype == vx_core.t_any) {
-                  isfound = true
-                } else if (lasttype == valuetype) {
-                  isfound = true
-                } else if (lastallowtypes.length > 0) {
-                  if (lastallowtypes.includes(valuetype)) {
-                    isfound = true
-                  } else {
-                    const valuetraits = vx_core.f_traits_from_typedef(valuetype)
-                    const intersection = lastallowtypes.filter(function(n) {
-                      return valuetraits.indexOf(n) > -1
-                    })
-                    if (intersection.length > 0) {
-                      isfound = true
-                    }
-                  }
-                }
-                if (isfound) {
-                  let lastpropvalue = propmap[lastpropname]
-                  if (lastpropvalue == undefined) {
-                    lastpropvalue = []
-                    lastpropvalue['vx_type'] = lasttype
-                    propmap[lastpropname] = lastpropvalue
-                  }
-                  if (lasttype == valuetype) {
-                    lastpropvalue.push(...value)
-                  } else {
-                    lastpropvalue.push(value)
-                  }
-                } else {
-                  const typename = vx_core.f_typename_from_typedef(typedef)
-                  const msg = vx_core.f_msg_from_error('(new ' + typename + ' :key ' + vx_core.f_string_from_any(value) + ') - Invalid Key')
-                  msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-                }
-                break
-              }
-            } else {
-              const property = properties[key]
-              const propertytype = property['type']
-              if (propertytype == vx_core.t_any) {
-                propmap[key] = value
-              } else if (propertytype == valuetype) {
-                propmap[key] = value
-              } else {
-                const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error('(new ' + typename + ' :key ' + key + ' :value ' + vx_core.f_string_from_any(value) + ') - Invalid Key Value')
-                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
-              }
-              key = ''
-            }
-          })
-        }
-        // output = vx_core.f_mempool-getvalue()
-        if ((Object.keys(propmap).length > 0) || (msgblock != vx_core.e_msgblock)) {
-          output = {
-            vx_type: typedef,
-            vx_value: propmap
-          }
-          if (msgblock != vx_core.e_msgblock) {
-            output['vx_msgblock'] = msgblock
-          }
-        } else {
-          output = vx_core.f_empty(typedef)
-        }
-        break
-      }
-      break
-    }"
+   "vx_core.vx_new(type, values)"
   :java
    "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
@@ -3389,7 +2594,7 @@
    "String stringtext = text.vx_string();
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
-    output = Core.t_string.vx_new_from_string(stringresult);")
+    output = Core.vx_new_string(stringresult);")
  :test (test "abab" (string-repeat "ab" 2)))
 
 (func string<-any : string
@@ -3423,107 +2628,8 @@
   :js
    "output = vx_core.vx_string_from_any_indent(value, indent, linefeed)"
   :java
-   "String indenttext = “ ”.repeat(indent.vx_int());
-    String text = “”;
-    if (indent.vx_int() > 50) {
-      text = “Error: Max Depth Exceeded”;
-    } else if (value == null) {
-      text = “null”;
-    } else if (value == value.vx_type()) {
-      Core.Type_typedef typedef = value.vx_typedef();
-      text = typedef.pkgname().vx_string() + “/” + typedef.name().vx_string();
-    } else if (value instanceof Core.Type_boolean) {
-      Core.Type_boolean valbool = Core.f_any_from_any(Core.t_boolean, value);
-      if (valbool.vx_boolean() == true) {
-        text = “true”;
-      } else {
-        text = “false”;
-      }
-    } else if (value instanceof Core.Type_decimal) {
-      Core.Type_decimal valdec = Core.f_any_from_any(Core.t_decimal, value);
-      text = valdec.vx_string();
-    } else if (value instanceof Core.Type_float) {
-      Core.Type_float valfloat = Core.f_any_from_any(Core.t_float, value);
-      text = Float.toString(valfloat.vx_float());
-      if (text.endsWith(“.0”)) {
-        text = text.substring(0, text.length() - 2);
-      }
-    } else if (value instanceof Core.Type_int) {
-      if (value == Core.c_notanumber) {
-        text = “notanumber”;
-      } else if (value == Core.c_infinity) {
-        text = “infinity”;
-      } else if (value == Core.c_neginfinity) {
-        text = “neginfinity”;
-      } else {
-        Core.Type_int valint = Core.f_any_from_any(Core.t_int, value);
-        text = Integer.toString(valint.vx_int());
-      }
-    } else if (value instanceof Core.Type_string) {
-      Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
-      text = “\"” + valstring.vx_string() + “\"”;
-    } else if (value instanceof Core.Type_list) {
-      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
-      Core.Type_typedef typedef = vallist.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      int indentint = indent.vx_int();
-      indentint += 1;
-      List<Core.Type_any> listval = vallist.vx_list();
-      for (Core.Type_any valsub : listval) {
-        Core.Type_string valtext = Core.f_string_from_any_indent(valsub, Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += “\n ” + indenttext + valtext.vx_string();
-      }
-      if (vallist.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(vallist.vx_msgblock(), Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += “\n” + indenttext + “ :msgblock\n  ” + indenttext + msgtext.vx_string();
-      }
-      text = “(” + typedefname.vx_string() + text + “)”;
-    } else if (value instanceof Core.Type_map) {
-      Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
-      Core.Type_typedef typedef = valmap.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      int indentint = indent.vx_int();
-      indentint += 2;
-      Map<String, Core.Type_any> mapval = valmap.vx_map();
-      Set<String> keys = mapval.keySet();
-      for (String key : keys) {
-        Core.Type_any valsub = mapval.get(key);
-        if (!key.startsWith(“:”)) {
-          key = “:” + key;
-        }
-        Core.Type_string valtext = Core.f_string_from_any_indent(valsub, Core.t_int.vx_new_from_int(indentint), linefeed);
-        String strval = valtext.vx_string();
-        if (strval.contains(“\n”)) {
-          strval = “\n  ” + indenttext + strval;
-        } else {
-          strval = “ ” + strval;
-        }
-        text += “\n” + indenttext + “ ” + key + strval;
-      }
-      if (valmap.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(valmap.vx_msgblock(), Core.t_int.vx_new_from_int(indentint), linefeed);
-        text += “\n” + indenttext + “ :msgblock\n  ” + indenttext + msgtext.vx_string();
-      }
-      text = “(” + typedefname.vx_string() + text + “)”;
-    } else if (value instanceof Core.Type_struct) {
-      Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
-      Core.Type_typedef typedef = valstruct.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
-      String valtext = Core.f_string_from_any_indent(valmap, indent, linefeed).vx_string();
-      text = valtext.replaceFirst(“map”, typedefname.vx_string());
-    } else if (value instanceof Core.Type_func) {
-      Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
-      Core.Type_funcdef funcdef = valfunc.vx_funcdef();
-      Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
-      text = funcdefname.vx_string();
-      if (valfunc.vx_msgblock() != null) {
-        Core.Type_string msgtext = Core.f_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
-        text += “\n” + indenttext + “ :msgblock\n  ” + indenttext + msgtext.vx_string();
-      }
-      text = “(” + text + “)”;
-    }
-    output = Core.t_string.vx_new_from_string(text);")
+   "String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+    output = Core.vx_new_string(soutput);")
  :doc "Return a string representation of a value")
 
 (func string<-func : string

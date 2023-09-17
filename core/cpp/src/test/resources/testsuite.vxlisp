@@ -2092,7 +2092,7 @@
    (vx/test/testcoveragedetail
     :constmap
      (intmap
-      :delims 0)
+      :delimcsv 0)
     :funcmap
      (intmap
       :csv<-textblock 0
@@ -2121,8 +2121,8 @@
       :total 1)
     :docnums
      (vx/test/testcoveragenums
-      :pct 0
-      :tests 0
+      :pct 20
+      :tests 1
       :total 5)
     :funcnums
      (vx/test/testcoveragenums
@@ -2415,20 +2415,301 @@
   :passfail true
   :testpkg "vx/data/table")
  (vx/test/testpackage
-  :caselist (vx/test/testcaselist)
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-first<-delim-delim"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-delim-delim
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)
+          :actual
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-first<-string-delimlist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-string-delimlist
+  \"a, b\"
+  (delimlist delimspace delimcomma)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)
+          :actual
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-startpos<-string-delim"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-startpos<-string-delim
+  \"a,b\"
+  delimcomma))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)
+          :actual
+           (vx/data/textblock/delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1)))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delimlist-startpos<-string-delimlist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (delimlist
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1))
+ (delimlist-startpos<-string-delimlist
+  \"a, b\"
+  (delimlist delimspace delimcomma)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/delimlist
+            (vx/data/textblock/delim
+             :name "delimspace"
+             :starttext " "
+             :endtext " "
+             :startpos 2)
+            (vx/data/textblock/delim
+             :name "delimcomma"
+             :starttext ","
+             :endtext ","
+             :startpos 1))
+          :actual
+           (vx/data/textblock/delimlist
+            (vx/data/textblock/delim
+             :name "delimspace"
+             :starttext " "
+             :endtext " "
+             :startpos 2)
+            (vx/data/textblock/delim
+             :name "delimcomma"
+             :starttext ","
+             :endtext ","
+             :startpos 1))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-firstdelim<-textblock-delimlist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :delim
+   (copy delimcomma
+    :startpos 1)
+  :text \" b\"
+  :parent
+   (textblock
+    :text \"a, b\"
+    :textblocks
+     (textblocklist
+      (textblock
+       :text \"a\"))))
+ (textblock-firstdelim<-textblock-delimlist
+  (textblock
+   :text \"a, b\")
+  (delimlist delimspace delimcomma)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text " b"
+            :delim
+             (vx/data/textblock/delim
+              :name "delimcomma"
+              :starttext ","
+              :endtext ","
+              :startpos 1)
+            :parent
+             (vx/data/textblock/textblock
+              :text "a, b"
+              :textblocks
+               (vx/data/textblock/textblocklist
+                (vx/data/textblock/textblock
+                 :text "a"))))
+          :actual
+           (vx/data/textblock/textblock
+            :text " b"
+            :delim
+             (vx/data/textblock/delim
+              :name "delimcomma"
+              :starttext ","
+              :endtext ","
+              :startpos 1)
+            :parent
+             (vx/data/textblock/textblock
+              :text "a, b"
+              :textblocks
+               (vx/data/textblock/textblocklist
+                (vx/data/textblock/textblock
+                 :text "a"))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-startafter<-string-delim"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :text \" b\")
+ (textblock-startafter<-string-delim
+  \"a, b\"
+  (delim
+   :starttext \",\"
+   :startpos  1)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text " b")
+          :actual
+           (vx/data/textblock/textblock
+            :text " b")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-startbefore<-string-delim"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :text \"a\")
+ (textblock-startbefore<-string-delim
+  \"a, b\"
+  (delim
+   :startpos 1)))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text "a")
+          :actual
+           (vx/data/textblock/textblock
+            :text "a"))))))
   :coveragedetail
    (vx/test/testcoveragedetail
-    :constmap (intmap)
+    :constmap
+     (intmap
+      :delimbracketcurly 0
+      :delimbracketsquare 0
+      :delimclose 0
+      :delimcomma 0
+      :delimcomment 0
+      :delimcommentblock 0
+      :delimline 0
+      :delimnonwhitespace 0
+      :delimparen 0
+      :delimparenline 0
+      :delimquote 0
+      :delimquoteblock 0
+      :delimspace 0
+      :delimtext 0
+      :delimwhitespace 0)
     :funcmap
      (intmap
-      :parse 0
+      :delim-first<-delim-delim 1
+      :delim-first<-string-delimlist 1
+      :delim-startpos<-string-delim 1
+      :delimlist-startpos<-string-delimlist 1
       :stringlist<-textblocklist 0
       :text<-textblock 0
+      :textblock-firstdelim<-textblock-delimlist 1
+      :textblock-startafter<-string-delim 1
+      :textblock-startbefore<-string-delim 1
+      :textblock<-textblock-delim 0
       :textblocks<-textblock 0)
     :testpkg "vx/data/textblock"
     :typemap
      (intmap
-      :delimset 0
+      :delim 0
+      :delimlist 0
       :textblock 0
       :textblocklist 0))
   :coveragesummary
@@ -2437,38 +2718,38 @@
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 4)
+      :total 11)
     :bigotimenums
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 4)
+      :total 11)
     :constnums
-     (vx/test/testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (vx/test/testcoveragenums
-      :pct 42
-      :tests 3
-      :total 7)
-    :funcnums
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 4)
+      :total 15)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 30
+      :total 30)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 63
+      :tests 7
+      :total 11)
     :testpkg "vx/data/textblock"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 0
-      :tests 0
-      :total 7)
+      :pct 23
+      :tests 7
+      :total 30)
     :typenums
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 3))
+      :total 4))
   :passfail true
   :testpkg "vx/data/textblock")
  (vx/test/testpackage
@@ -2991,6 +3272,55 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/type"
+     :casename "int<-string-find"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 2
+ (int<-string-find \"abcdefg\" \"cd\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 2
+          :actual 2))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "int<-string-findkeyword"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 2
+ (int<-string-findkeyword \"ab	cdefg\" \":whitespace\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 2
+          :actual 2))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 4
+ (int<-string-findkeyword \" 	
+ab\" \":nonwhitespace\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 4
+          :actual 4))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/type"
      :casename "is-string"
      :describelist
       (vx/test/testdescribelist
@@ -3307,6 +3637,8 @@
      (intmap
       :allowtypenames<-type 0
       :allowtypes<-type 0
+      :int<-string-find 1
+      :int<-string-findkeyword 2
       :is-boolean 0
       :is-decimal 0
       :is-float 0
@@ -3331,12 +3663,12 @@
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 18)
+      :total 20)
     :bigotimenums
      (vx/test/testcoveragenums
       :pct 0
       :tests 0
-      :total 18)
+      :total 20)
     :constnums
      (vx/test/testcoveragenums
       :pct 100
@@ -3344,20 +3676,20 @@
       :total 0)
     :docnums
      (vx/test/testcoveragenums
-      :pct 61
-      :tests 11
-      :total 18)
+      :pct 65
+      :tests 13
+      :total 20)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 50
-      :tests 9
-      :total 18)
+      :pct 55
+      :tests 11
+      :total 20)
     :testpkg "vx/type"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 50
-      :tests 9
-      :total 18)
+      :pct 55
+      :tests 11
+      :total 20)
     :typenums
      (vx/test/testcoveragenums
       :pct 100

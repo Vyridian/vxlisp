@@ -97,7 +97,7 @@ Typesafe Languages: For typesafe languages a construct like this is not directly
 
 vxlisp: vxlisp enforces typesafety on such constructs by declaring type and allowing substypes.
 
-    (type foo :extends :list :allowtypes [string, int, float, bar])
+    (type foo : list :allowtypes [string, int, float, bar])
 
     (foo "a", 1, 2.5, bar)
 
@@ -115,11 +115,11 @@ Typesafe Languages: For typesafe languages, you gain typesafety, but you some fo
 
 vxlisp: Types are declared upfront and reused (like C++ typedef).
 
-    (type type1 :extends :map :allowtypes [int])
+    (type type1 : map  :allowtypes [int])
 
-    (type type2 :extends :list :allowtypes [type1])
+    (type type2 : list :allowtypes [type1])
 
-    (type type3 :extends :map :allowtypes [type2])
+    (type type3 : map  :allowtypes [type2])
 
     (let
      [foo := (type3 :a (type2 (type1 :b 4)))])
@@ -192,13 +192,13 @@ Typesafe languages have a problem with complex inheritence structures. The Deadl
 
 vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces.Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the heavy lifting for you.
 
-    (type animal :extends struct)
+    (type animal : struct)
 
-    (type dog :extends :struct :traits [animal])
+    (type dog : struct :traits [animal])
 
-    (type cat :extends :struct :traits [animal])
+    (type cat : struct :traits [animal])
 
-    (type hybrid :extends :struct :traits [dog, cat])
+    (type hybrid : struct :traits [dog, cat])
 
 ## Constructors
 

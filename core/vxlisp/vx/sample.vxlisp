@@ -1,8 +1,7 @@
 (package vx/sample
  :doc "Sample VxLisp Code")
 
-(type mytype
- :extends :struct
+(type mytype : struct
  :properties
   [mynum : int    :doc "mynum"
    mystr : string :doc "mystr"])

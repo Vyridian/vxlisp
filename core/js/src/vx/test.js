@@ -1625,6 +1625,19 @@ export default class vx_test {
           vx_core.f_new(
             vx_web_html.t_style,
             ":name",
+            "body",
+            ":props",
+            vx_core.f_new(
+              vx_web_html.t_propmap,
+              "font-size",
+              "0.9em",
+              "font-family",
+              "sans-serif"
+            )
+          ),
+          vx_core.f_new(
+            vx_web_html.t_style,
+            ":name",
             "details summary",
             ":props",
             vx_core.f_new(
@@ -1650,10 +1663,6 @@ export default class vx_test {
               "collapse",
               "margin",
               "25px 0",
-              "font-size",
-              "0.9em",
-              "font-family",
-              "sans-serif",
               "min-width",
               "400px",
               "box-shadow",

@@ -6,6 +6,39 @@
 namespace vx_type {
 // :body
 
+  // vx_int_from_string_findkeyword(string, string)
+  int vx_int_from_string_findkeyword(std::string text, std::string find) {
+    int output = -1;
+    if (text != "") {
+      if (find == ":nonwhitespace") {
+        std::string wschars1 = " \n\r\t";
+				int ilen = text.length();
+        for (int i = 0; i < ilen; i++) {
+					char cchar = text[i];
+          int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
+					if (pos < 0) {
+						output = i;
+            break;
+          }
+        }
+      } else if (find == ":whitespace") {
+        std::string wschars2 = " \n\r\t";
+        for (char cchar : wschars2) {
+          int pos = vx_core::vx_int_from_sizet(text.find(cchar));
+          if (pos < 0) {
+          } else if (output < 0) {
+           output = pos;
+          } else if (pos < output) {
+           output = pos;
+          }
+				}
+      } else {
+			  output = text.find(find);
+			}
+		}
+		return output;
+	}
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
     bool isfirst = true;
@@ -209,6 +242,172 @@ namespace vx_type {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_allowtypes_from_type(type);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func int<-string-find)
+  vx_core::Type_int f_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve({text, find});
+    std::string stext = text->vx_string();
+    std::string sfind = find->vx_string();
+    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind));
+    output = vx_core::vx_new_int(ipos);
+    vx_core::vx_release_one_except({text, find}, output);
+    return output;
+  }
+
+  // (func int<-string-find)
+  // class Class_int_from_string_find {
+    Abstract_int_from_string_find::~Abstract_int_from_string_find() {}
+
+    Class_int_from_string_find::Class_int_from_string_find() : Abstract_int_from_string_find::Abstract_int_from_string_find() {
+      vx_core::refcount += 1;
+    }
+
+    Class_int_from_string_find::~Class_int_from_string_find() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_int_from_string_find::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_find output = vx_type::e_int_from_string_find;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_find::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_find output = vx_type::e_int_from_string_find;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_int_from_string_find::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "int<-string-find", // name
+        ":func", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_int_from_string_find::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "int<-string-find", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_find::vx_empty() const {return vx_type::e_int_from_string_find;}
+    vx_core::Type_any Class_int_from_string_find::vx_type() const {return vx_type::t_int_from_string_find;}
+    vx_core::Type_msgblock Class_int_from_string_find::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_int_from_string_find::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_int_from_string_find::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string find = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_int_from_string_find(text, find);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func int<-string-findkeyword)
+  vx_core::Type_int f_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve({text, find});
+    int ipos = vx_type::vx_int_from_string_findkeyword(text->vx_string(), find->vx_string());
+    output = vx_core::vx_new_int(ipos);
+    vx_core::vx_release_one_except({text, find}, output);
+    return output;
+  }
+
+  // (func int<-string-findkeyword)
+  // class Class_int_from_string_findkeyword {
+    Abstract_int_from_string_findkeyword::~Abstract_int_from_string_findkeyword() {}
+
+    Class_int_from_string_findkeyword::Class_int_from_string_findkeyword() : Abstract_int_from_string_findkeyword::Abstract_int_from_string_findkeyword() {
+      vx_core::refcount += 1;
+    }
+
+    Class_int_from_string_findkeyword::~Class_int_from_string_findkeyword() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_int_from_string_findkeyword::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_findkeyword output = vx_type::e_int_from_string_findkeyword;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_findkeyword::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_findkeyword output = vx_type::e_int_from_string_findkeyword;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_int_from_string_findkeyword::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "int<-string-findkeyword", // name
+        ":func", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_int_from_string_findkeyword::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "int<-string-findkeyword", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_findkeyword::vx_empty() const {return vx_type::e_int_from_string_findkeyword;}
+    vx_core::Type_any Class_int_from_string_findkeyword::vx_type() const {return vx_type::t_int_from_string_findkeyword;}
+    vx_core::Type_msgblock Class_int_from_string_findkeyword::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_int_from_string_findkeyword::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_int_from_string_findkeyword::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string find = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_int_from_string_findkeyword(text, find);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -794,9 +993,8 @@ namespace vx_type {
       vx_core::t_boolean,
       typelist,
       vx_core::vx_new_boolean(false),
-      vx_core::t_any_from_reduce->vx_fn_new({val}, [val](vx_core::Type_any result_any, vx_core::Type_any type_any) {
+      vx_core::t_any_from_reduce->vx_fn_new({val}, [val](vx_core::Type_any result_any, vx_core::Type_any type) {
         vx_core::Type_boolean result = vx_core::vx_any_from_any(vx_core::t_boolean, result_any);
-        vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any, type_any);
         vx_core::Type_any output_1 = 
           vx_core::f_or(
             result,
@@ -1717,6 +1915,10 @@ namespace vx_type {
   vx_type::Func_allowtypenames_from_type t_allowtypenames_from_type = NULL;
   vx_type::Func_allowtypes_from_type e_allowtypes_from_type = NULL;
   vx_type::Func_allowtypes_from_type t_allowtypes_from_type = NULL;
+  vx_type::Func_int_from_string_find e_int_from_string_find = NULL;
+  vx_type::Func_int_from_string_find t_int_from_string_find = NULL;
+  vx_type::Func_int_from_string_findkeyword e_int_from_string_findkeyword = NULL;
+  vx_type::Func_int_from_string_findkeyword t_int_from_string_findkeyword = NULL;
   vx_type::Func_is_boolean e_is_boolean = NULL;
   vx_type::Func_is_boolean t_is_boolean = NULL;
   vx_type::Func_is_decimal e_is_decimal = NULL;
@@ -1763,6 +1965,14 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_allowtypes_from_type);
       vx_type::t_allowtypes_from_type = new vx_type::Class_allowtypes_from_type();
       vx_core::vx_reserve_type(vx_type::t_allowtypes_from_type);
+      vx_type::e_int_from_string_find = new vx_type::Class_int_from_string_find();
+      vx_core::vx_reserve_empty(vx_type::e_int_from_string_find);
+      vx_type::t_int_from_string_find = new vx_type::Class_int_from_string_find();
+      vx_core::vx_reserve_type(vx_type::t_int_from_string_find);
+      vx_type::e_int_from_string_findkeyword = new vx_type::Class_int_from_string_findkeyword();
+      vx_core::vx_reserve_empty(vx_type::e_int_from_string_findkeyword);
+      vx_type::t_int_from_string_findkeyword = new vx_type::Class_int_from_string_findkeyword();
+      vx_core::vx_reserve_type(vx_type::t_int_from_string_findkeyword);
       vx_type::e_is_boolean = new vx_type::Class_is_boolean();
       vx_core::vx_reserve_empty(vx_type::e_is_boolean);
       vx_type::t_is_boolean = new vx_type::Class_is_boolean();

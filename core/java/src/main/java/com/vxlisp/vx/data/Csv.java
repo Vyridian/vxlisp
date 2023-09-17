@@ -263,18 +263,19 @@ public final class Csv {
   public static final Type_csvrows t_csvrows = new Class_csvrows();
 
   /**
-   * Constant: delims
-   * {delimset}
+   * Constant: delimcsv
+   * Csv File Delimiters
+   * {delim}
    */
-  public static class Const_delims extends Textblock.Class_delimset {
+  public static class Const_delimcsv extends Textblock.Class_delim {
 
     public Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/csv", // pkgname
-        "delims", // name
+        "delimcsv", // name
         Core.typedef_new(
           "vx/data/textblock", // pkgname
-          "delimset", // name
+          "delim", // name
           ":struct", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
@@ -288,45 +289,25 @@ public final class Csv {
       );
     }
 
-    public static Const_delims const_new() {
-      Const_delims output = new Const_delims();
-      Textblock.Type_delimset val = Core.f_new(
-        Textblock.t_delimset,
+    public static void const_new(Const_delimcsv output) {
+      Textblock.Type_delim val = Core.f_new(
+        Textblock.t_delim,
         Core.t_anylist.vx_new(
-                Core.t_string.vx_new_from_string(":split"),
+                Core.vx_new_string(":name"),
+                Core.vx_new_string("delimcsv"),
+                Core.vx_new_string(":delimlist"),
                 Core.f_new(
-                  Core.t_stringlist,
+                  Textblock.t_delimlist,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("\n")
-                  )
-                ),
-                Core.t_string.vx_new_from_string(":subset"),
-                Core.f_new(
-                  Textblock.t_delimset,
-                  Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":split"),
-                    Core.f_new(
-                      Core.t_stringlist,
+                    Core.f_copy(
+                      Textblock.c_delimline,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string(",")
-                      )
-                    ),
-                    Core.t_string.vx_new_from_string(":subset"),
-                    Core.f_new(
-                      Textblock.t_delimset,
-                      Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string(":start"),
+                        Core.vx_new_string(":delimlist"),
                         Core.f_new(
-                          Core.t_stringlist,
+                          Textblock.t_delimlist,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string("\"")
-                          )
-                        ),
-                        Core.t_string.vx_new_from_string(":end"),
-                        Core.f_new(
-                          Core.t_stringlist,
-                          Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string("\"")
+                            Textblock.c_delimquote,
+                            Textblock.c_delimcomma
                           )
                         )
                       )
@@ -335,17 +316,18 @@ public final class Csv {
                 )
         )
       );
-      output.vx_p_start = val.start();
-      output.vx_p_end = val.end();
-      output.vx_p_split = val.split();
-      output.vx_p_subset = val.subset();
-      return output;
+      output.vx_p_name = val.name();
+      output.vx_p_starttext = val.starttext();
+      output.vx_p_endtext = val.endtext();
+      output.vx_p_startpos = val.startpos();
+      output.vx_p_endpos = val.endpos();
+      output.vx_p_delimlist = val.delimlist();
     }
 
 
   }
 
-  public static final Const_delims c_delims = Const_delims.const_new();
+  public static final Const_delimcsv c_delimcsv = new Const_delimcsv();
 
   /**
    * @function csv_from_textblock
@@ -403,7 +385,7 @@ public final class Csv {
     public Func_csv_from_textblock vx_type() {return t_csv_from_textblock;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -416,7 +398,7 @@ public final class Csv {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(0)));
       output = Csv.f_csv_from_textblock(textblock);
       return output;
     }
@@ -435,16 +417,16 @@ public final class Csv {
     Csv.Type_csv output = Csv.e_csv;
     output = Core.f_let(
       Csv.t_csv,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Csv.Type_csvrows allrows = Csv.f_csvrows_from_textblock(textblock);
-        final Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.t_int.vx_new_from_int(0));
-        final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.t_int.vx_new_from_int(1));
+        final Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.vx_new_int(0));
+        final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(1));
         return Core.f_new(
           Csv.t_csv,
           Core.t_anylist.vx_new(
-            Core.t_string.vx_new_from_string(":headers"),
+            Core.vx_new_string(":headers"),
             headers,
-            Core.t_string.vx_new_from_string(":rows"),
+            Core.vx_new_string(":rows"),
             rows
           )
         );
@@ -509,7 +491,7 @@ public final class Csv {
     public Func_csvrows_from_textblock vx_type() {return t_csvrows_from_textblock;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -522,7 +504,7 @@ public final class Csv {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(0)));
       output = Csv.f_csvrows_from_textblock(textblock);
       return output;
     }
@@ -541,10 +523,10 @@ public final class Csv {
     Csv.Type_csvrows output = Csv.e_csvrows;
     output = Core.f_let(
       Csv.t_csvrows,
-      Core.t_any_from_func.fn_new(() -> {
-        final Textblock.Type_textblock parsedtb = Textblock.f_parse(
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Textblock.Type_textblock parsedtb = Textblock.f_textblock_from_textblock_delim(
           textblock,
-          Csv.c_delims
+          Csv.c_delimcsv
         );
         final Textblock.Type_textblocklist childtbs = Textblock.f_textblocks_from_textblock(parsedtb);
         final Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(childtbs);
@@ -559,5 +541,9 @@ public final class Csv {
     return output;
   }
 
+
+  static {
+    Const_delimcsv.const_new(c_delimcsv);
+  }
 
 }

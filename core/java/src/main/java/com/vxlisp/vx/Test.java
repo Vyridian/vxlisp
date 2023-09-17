@@ -1938,33 +1938,30 @@ public final class Test {
       );
     }
 
-    public static Const_stylesheet_test const_new() {
-      Const_stylesheet_test output = new Const_stylesheet_test();
+    public static void const_new(Const_stylesheet_test output) {
       Html.Type_stylesheet val = Html.f_stylesheet_loadmap(
         Core.f_new(
           Html.t_stylesheet,
           Core.t_anylist.vx_new(
-            Core.t_string.vx_new_from_string(":name"),
-            Core.t_string.vx_new_from_string("Test Suite"),
-            Core.t_string.vx_new_from_string(":styles"),
+            Core.vx_new_string(":name"),
+            Core.vx_new_string("Test Suite"),
+            Core.vx_new_string(":styles"),
             Core.f_new(
               Html.t_stylelist,
               Core.t_anylist.vx_new(
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("details summary"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("body"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("cursor"),
-                        Core.t_string.vx_new_from_string("pointer"),
-                        Core.t_string.vx_new_from_string("display"),
-                        Core.t_string.vx_new_from_string("inline-flex"),
-                        Core.t_string.vx_new_from_string("gap"),
-                        Core.t_string.vx_new_from_string("10px")
+                        Core.vx_new_string("font-size"),
+                        Core.vx_new_string("0.9em"),
+                        Core.vx_new_string("font-family"),
+                        Core.vx_new_string("sans-serif")
                       )
                     )
                   )
@@ -1972,26 +1969,18 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("table"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("details summary"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("vertical-align"),
-                        Core.t_string.vx_new_from_string("top"),
-                        Core.t_string.vx_new_from_string("border-collapse"),
-                        Core.t_string.vx_new_from_string("collapse"),
-                        Core.t_string.vx_new_from_string("margin"),
-                        Core.t_string.vx_new_from_string("25px 0"),
-                        Core.t_string.vx_new_from_string("font-size"),
-                        Core.t_string.vx_new_from_string("0.9em"),
-                        Core.t_string.vx_new_from_string("font-family"),
-                        Core.t_string.vx_new_from_string("sans-serif"),
-                        Core.t_string.vx_new_from_string("min-width"),
-                        Core.t_string.vx_new_from_string("400px"),
-                        Core.t_string.vx_new_from_string("box-shadow"),
-                        Core.t_string.vx_new_from_string("0 0 20px rgba(0, 0, 0, 0.15)")
+                        Core.vx_new_string("cursor"),
+                        Core.vx_new_string("pointer"),
+                        Core.vx_new_string("display"),
+                        Core.vx_new_string("inline-flex"),
+                        Core.vx_new_string("gap"),
+                        Core.vx_new_string("10px")
                       )
                     )
                   )
@@ -1999,18 +1988,22 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("thead tr"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("table"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("#009879"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("#ffffff"),
-                        Core.t_string.vx_new_from_string("text-align"),
-                        Core.t_string.vx_new_from_string("left")
+                        Core.vx_new_string("vertical-align"),
+                        Core.vx_new_string("top"),
+                        Core.vx_new_string("border-collapse"),
+                        Core.vx_new_string("collapse"),
+                        Core.vx_new_string("margin"),
+                        Core.vx_new_string("25px 0"),
+                        Core.vx_new_string("min-width"),
+                        Core.vx_new_string("400px"),
+                        Core.vx_new_string("box-shadow"),
+                        Core.vx_new_string("0 0 20px rgba(0, 0, 0, 0.15)")
                       )
                     )
                   )
@@ -2018,16 +2011,18 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("td"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("thead tr"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("padding"),
-                        Core.t_string.vx_new_from_string("10px 10px"),
-                        Core.t_string.vx_new_from_string("vertical-align"),
-                        Core.t_string.vx_new_from_string("top")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("#009879"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("#ffffff"),
+                        Core.vx_new_string("text-align"),
+                        Core.vx_new_string("left")
                       )
                     )
                   )
@@ -2035,14 +2030,16 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("tbody tr"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("td"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("border-bottom"),
-                        Core.t_string.vx_new_from_string("1px solid #dddddd")
+                        Core.vx_new_string("padding"),
+                        Core.vx_new_string("10px 10px"),
+                        Core.vx_new_string("vertical-align"),
+                        Core.vx_new_string("top")
                       )
                     )
                   )
@@ -2050,14 +2047,14 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("tbody tr:nth-of-type(even)"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("tbody tr"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("#f3f3f3")
+                        Core.vx_new_string("border-bottom"),
+                        Core.vx_new_string("1px solid #dddddd")
                       )
                     )
                   )
@@ -2065,14 +2062,14 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("tbody tr:last-of-type"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("tbody tr:nth-of-type(even)"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("border-bottom"),
-                        Core.t_string.vx_new_from_string("2px solid #009879")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("#f3f3f3")
                       )
                     )
                   )
@@ -2080,16 +2077,14 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("tbody tr.active-row"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("tbody tr:last-of-type"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("font-weight"),
-                        Core.t_string.vx_new_from_string("bold"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("#009879")
+                        Core.vx_new_string("border-bottom"),
+                        Core.vx_new_string("2px solid #009879")
                       )
                     )
                   )
@@ -2097,24 +2092,16 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".failflag"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("tbody tr.active-row"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("red"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("white"),
-                        Core.t_string.vx_new_from_string("padding-left"),
-                        Core.t_string.vx_new_from_string("4px"),
-                        Core.t_string.vx_new_from_string("padding-right"),
-                        Core.t_string.vx_new_from_string("4px"),
-                        Core.t_string.vx_new_from_string("padding-top"),
-                        Core.t_string.vx_new_from_string("1px"),
-                        Core.t_string.vx_new_from_string("padding-bottom"),
-                        Core.t_string.vx_new_from_string("1px")
+                        Core.vx_new_string("font-weight"),
+                        Core.vx_new_string("bold"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("#009879")
                       )
                     )
                   )
@@ -2122,24 +2109,24 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".passflag"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".failflag"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("green"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("white"),
-                        Core.t_string.vx_new_from_string("padding-left"),
-                        Core.t_string.vx_new_from_string("4px"),
-                        Core.t_string.vx_new_from_string("padding-right"),
-                        Core.t_string.vx_new_from_string("4px"),
-                        Core.t_string.vx_new_from_string("padding-top"),
-                        Core.t_string.vx_new_from_string("1px"),
-                        Core.t_string.vx_new_from_string("padding-bottom"),
-                        Core.t_string.vx_new_from_string("1px")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("red"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("white"),
+                        Core.vx_new_string("padding-left"),
+                        Core.vx_new_string("4px"),
+                        Core.vx_new_string("padding-right"),
+                        Core.vx_new_string("4px"),
+                        Core.vx_new_string("padding-top"),
+                        Core.vx_new_string("1px"),
+                        Core.vx_new_string("padding-bottom"),
+                        Core.vx_new_string("1px")
                       )
                     )
                   )
@@ -2147,14 +2134,24 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".coveragenums"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".passflag"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("width"),
-                        Core.t_string.vx_new_from_string("90px")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("green"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("white"),
+                        Core.vx_new_string("padding-left"),
+                        Core.vx_new_string("4px"),
+                        Core.vx_new_string("padding-right"),
+                        Core.vx_new_string("4px"),
+                        Core.vx_new_string("padding-top"),
+                        Core.vx_new_string("1px"),
+                        Core.vx_new_string("padding-bottom"),
+                        Core.vx_new_string("1px")
                       )
                     )
                   )
@@ -2162,14 +2159,14 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".coveragepct"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".coveragenums"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("text-align"),
-                        Core.t_string.vx_new_from_string("right")
+                        Core.vx_new_string("width"),
+                        Core.vx_new_string("90px")
                       )
                     )
                   )
@@ -2177,18 +2174,14 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".coveragepctgreen"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".coveragepct"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("green"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("white"),
-                        Core.t_string.vx_new_from_string("text-align"),
-                        Core.t_string.vx_new_from_string("right")
+                        Core.vx_new_string("text-align"),
+                        Core.vx_new_string("right")
                       )
                     )
                   )
@@ -2196,18 +2189,18 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".coveragepctred"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".coveragepctgreen"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("background-color"),
-                        Core.t_string.vx_new_from_string("red"),
-                        Core.t_string.vx_new_from_string("color"),
-                        Core.t_string.vx_new_from_string("white"),
-                        Core.t_string.vx_new_from_string("text-align"),
-                        Core.t_string.vx_new_from_string("right")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("green"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("white"),
+                        Core.vx_new_string("text-align"),
+                        Core.vx_new_string("right")
                       )
                     )
                   )
@@ -2215,16 +2208,18 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".pkgheader"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".coveragepctred"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("display"),
-                        Core.t_string.vx_new_from_string("inline-flex"),
-                        Core.t_string.vx_new_from_string("gap"),
-                        Core.t_string.vx_new_from_string("10px")
+                        Core.vx_new_string("background-color"),
+                        Core.vx_new_string("red"),
+                        Core.vx_new_string("color"),
+                        Core.vx_new_string("white"),
+                        Core.vx_new_string("text-align"),
+                        Core.vx_new_string("right")
                       )
                     )
                   )
@@ -2232,16 +2227,16 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".pkgname"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".pkgheader"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("font-weight"),
-                        Core.t_string.vx_new_from_string("bold"),
-                        Core.t_string.vx_new_from_string("width"),
-                        Core.t_string.vx_new_from_string("180px")
+                        Core.vx_new_string("display"),
+                        Core.vx_new_string("inline-flex"),
+                        Core.vx_new_string("gap"),
+                        Core.vx_new_string("10px")
                       )
                     )
                   )
@@ -2249,20 +2244,37 @@ public final class Test {
                 Core.f_new(
                   Html.t_style,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string(".preformatted"),
-                    Core.t_string.vx_new_from_string(":props"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".pkgname"),
+                    Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
                       Core.t_anylist.vx_new(
-                        Core.t_string.vx_new_from_string("display"),
-                        Core.t_string.vx_new_from_string("block"),
-                        Core.t_string.vx_new_from_string("unicode-bidi"),
-                        Core.t_string.vx_new_from_string("embed"),
-                        Core.t_string.vx_new_from_string("font-family"),
-                        Core.t_string.vx_new_from_string("monospace"),
-                        Core.t_string.vx_new_from_string("white-space"),
-                        Core.t_string.vx_new_from_string("pre")
+                        Core.vx_new_string("font-weight"),
+                        Core.vx_new_string("bold"),
+                        Core.vx_new_string("width"),
+                        Core.vx_new_string("180px")
+                      )
+                    )
+                  )
+                ),
+                Core.f_new(
+                  Html.t_style,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string(".preformatted"),
+                    Core.vx_new_string(":props"),
+                    Core.f_new(
+                      Html.t_propmap,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string("display"),
+                        Core.vx_new_string("block"),
+                        Core.vx_new_string("unicode-bidi"),
+                        Core.vx_new_string("embed"),
+                        Core.vx_new_string("font-family"),
+                        Core.vx_new_string("monospace"),
+                        Core.vx_new_string("white-space"),
+                        Core.vx_new_string("pre")
                       )
                     )
                   )
@@ -2277,13 +2289,12 @@ public final class Test {
       output.vx_p_name = val.name();
       output.vx_p_styles = val.styles();
       output.vx_p_stylemap = val.stylemap();
-      return output;
     }
 
 
   }
 
-  public static final Const_stylesheet_test c_stylesheet_test = Const_stylesheet_test.const_new();
+  public static final Const_stylesheet_test c_stylesheet_test = new Const_stylesheet_test();
 
   /**
    * @function div_from_testcaselist
@@ -2341,7 +2352,7 @@ public final class Test {
     public Func_div_from_testcaselist vx_type() {return t_div_from_testcaselist;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -2354,7 +2365,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_div_from_testcaselist(testcaselist);
       return output;
     }
@@ -2377,7 +2388,7 @@ public final class Test {
         Core.f_new(
           Html.t_table,
           Core.t_anylist.vx_new(
-            Core.t_string.vx_new_from_string(":thead"),
+            Core.vx_new_string(":thead"),
             Core.f_new(
               Html.t_thead,
               Core.t_anylist.vx_new(
@@ -2390,8 +2401,8 @@ public final class Test {
                         Core.f_new(
                           Html.t_p,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":text"),
-                            Core.t_string.vx_new_from_string("Pass?")
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("Pass?")
                           )
                         )
                       )
@@ -2402,8 +2413,8 @@ public final class Test {
                         Core.f_new(
                           Html.t_p,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":text"),
-                            Core.t_string.vx_new_from_string("Name")
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("Name")
                           )
                         )
                       )
@@ -2414,8 +2425,8 @@ public final class Test {
                         Core.f_new(
                           Html.t_p,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":text"),
-                            Core.t_string.vx_new_from_string("Test")
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("Test")
                           )
                         )
                       )
@@ -2426,8 +2437,8 @@ public final class Test {
                         Core.f_new(
                           Html.t_p,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":text"),
-                            Core.t_string.vx_new_from_string("Expected")
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("Expected")
                           )
                         )
                       )
@@ -2438,8 +2449,8 @@ public final class Test {
                         Core.f_new(
                           Html.t_p,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":text"),
-                            Core.t_string.vx_new_from_string("Actual")
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("Actual")
                           )
                         )
                       )
@@ -2448,7 +2459,7 @@ public final class Test {
                 )
               )
             ),
-            Core.t_string.vx_new_from_string(":tbody"),
+            Core.vx_new_string(":tbody"),
             Core.f_new(
               Html.t_tbody,
               Core.t_anylist.vx_new(
@@ -2519,7 +2530,7 @@ public final class Test {
     public Func_div_from_testpackage vx_type() {return t_div_from_testpackage;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -2532,7 +2543,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_div_from_testpackage(testpackage);
       return output;
     }
@@ -2551,14 +2562,14 @@ public final class Test {
     Html.Type_div output = Html.e_div;
     output = Core.f_let(
       Html.t_div,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Test.Type_testcoveragesummary testcoveragesummary = testpackage.coveragesummary();
         final Core.Type_string pkgname = testpackage.testpkg();
         final Test.Type_testcaselist caselist = testpackage.caselist();
         final Core.Type_boolean passfail = testpackage.passfail();
         final Html.Type_style pkgnamestyle = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".pkgname")
+          Core.vx_new_string(".pkgname")
         );
         final Html.Type_div node = Test.f_div_from_testcaselist(caselist);
         final Html.Type_divchildlist nodes = Core.f_new(
@@ -2571,9 +2582,9 @@ public final class Test {
         final Html.Type_p p_pkgname = Core.f_new(
           Html.t_p,
           Core.t_anylist.vx_new(
-              Core.t_string.vx_new_from_string(":style"),
+              Core.vx_new_string(":style"),
               pkgnamestyle,
-              Core.t_string.vx_new_from_string(":text"),
+              Core.vx_new_string(":text"),
               pkgname
           )
         );
@@ -2615,9 +2626,9 @@ public final class Test {
         final Html.Type_details details = Core.f_new(
           Html.t_details,
           Core.t_anylist.vx_new(
-              Core.t_string.vx_new_from_string(":summary"),
+              Core.vx_new_string(":summary"),
               summary,
-              Core.t_string.vx_new_from_string(":nodes"),
+              Core.vx_new_string(":nodes"),
               nodes
           )
         );
@@ -2688,7 +2699,7 @@ public final class Test {
     public Func_div_from_testpackagelist vx_type() {return t_div_from_testpackagelist;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -2701,7 +2712,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_div_from_testpackagelist(testpackagelist);
       return output;
     }
@@ -2720,22 +2731,22 @@ public final class Test {
     Html.Type_div output = Html.e_div;
     output = Core.f_let(
       Html.t_div,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Html.Type_style stylepassfail = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".passfail")
+          Core.vx_new_string(".passfail")
         );
         final Html.Type_style stylepkgname = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".pkgname")
+          Core.vx_new_string(".pkgname")
         );
         final Html.Type_style stylepkgheader = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".pkgheader")
+          Core.vx_new_string(".pkgheader")
         );
         final Html.Type_style stylecoveragenum = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".coveragenums")
+          Core.vx_new_string(".coveragenums")
         );
         return Core.f_new(
           Html.t_div,
@@ -2743,87 +2754,87 @@ public final class Test {
             Core.f_new(
               Html.t_div,
               Core.t_anylist.vx_new(
-                Core.t_string.vx_new_from_string(":style"),
+                Core.vx_new_string(":style"),
                 stylepkgheader,
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylepassfail,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("Pass?")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("Pass?")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylepkgname,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("Package Name")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("Package Name")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("Coverage")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("Coverage")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("(type)")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("(type)")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("(const)")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("(const)")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string("(func)")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string("(func)")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string(":doc")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string(":doc")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string(":bigospace")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string(":bigospace")
                   )
                 ),
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     stylecoveragenum,
-                    Core.t_string.vx_new_from_string(":text"),
-                    Core.t_string.vx_new_from_string(":bigotime")
+                    Core.vx_new_string(":text"),
+                    Core.vx_new_string(":bigotime")
                   )
                 )
               )
@@ -2898,7 +2909,7 @@ public final class Test {
     public Func_divchildlist_from_testpackagelist vx_type() {return t_divchildlist_from_testpackagelist;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -2911,7 +2922,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_divchildlist_from_testpackagelist(testpackagelist);
       return output;
     }
@@ -3012,10 +3023,10 @@ public final class Test {
     output = Core.f_new(
       File.t_file,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":name"),
-        Core.t_string.vx_new_from_string("testsuite.vxlisp"),
-        Core.t_string.vx_new_from_string(":path"),
-        Core.t_string.vx_new_from_string("src/test/resources")
+        Core.vx_new_string(":name"),
+        Core.vx_new_string("testsuite.vxlisp"),
+        Core.vx_new_string(":path"),
+        Core.vx_new_string("src/test/resources")
       )
     );
     return output;
@@ -3097,10 +3108,10 @@ public final class Test {
     output = Core.f_new(
       File.t_file,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":name"),
-        Core.t_string.vx_new_from_string("testsuite.html"),
-        Core.t_string.vx_new_from_string(":path"),
-        Core.t_string.vx_new_from_string("src/test/resources")
+        Core.vx_new_string(":name"),
+        Core.vx_new_string("testsuite.html"),
+        Core.vx_new_string(":path"),
+        Core.vx_new_string("src/test/resources")
       )
     );
     return output;
@@ -3182,10 +3193,10 @@ public final class Test {
     output = Core.f_new(
       File.t_file,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":name"),
-        Core.t_string.vx_new_from_string("testsuitenode.vxlisp"),
-        Core.t_string.vx_new_from_string(":path"),
-        Core.t_string.vx_new_from_string("src/test/resources")
+        Core.vx_new_string(":name"),
+        Core.vx_new_string("testsuitenode.vxlisp"),
+        Core.vx_new_string(":path"),
+        Core.vx_new_string("src/test/resources")
       )
     );
     return output;
@@ -3248,7 +3259,7 @@ public final class Test {
     public Func_html_from_divtest vx_type() {return t_html_from_divtest;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -3261,7 +3272,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Html.Type_div divtest = Core.f_any_from_any(Html.t_div, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Html.Type_div divtest = Core.f_any_from_any(Html.t_div, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_html_from_divtest(divtest);
       return output;
     }
@@ -3281,30 +3292,30 @@ public final class Test {
     output = Core.f_new(
       Html.t_html,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":lang"),
-        Core.t_string.vx_new_from_string("en"),
-        Core.t_string.vx_new_from_string(":head"),
+        Core.vx_new_string(":lang"),
+        Core.vx_new_string("en"),
+        Core.vx_new_string(":head"),
         Core.f_new(
           Html.t_head,
           Core.t_anylist.vx_new(
             Core.f_new(
               Html.t_meta,
               Core.t_anylist.vx_new(
-                Core.t_string.vx_new_from_string(":charset"),
-                Core.t_string.vx_new_from_string("utf-8")
+                Core.vx_new_string(":charset"),
+                Core.vx_new_string("utf-8")
               )
             ),
             Core.f_new(
               Html.t_title,
               Core.t_anylist.vx_new(
-                Core.t_string.vx_new_from_string(":text"),
-                Core.t_string.vx_new_from_string("Test Suite")
+                Core.vx_new_string(":text"),
+                Core.vx_new_string("Test Suite")
               )
             ),
             Test.c_stylesheet_test
           )
         ),
-        Core.t_string.vx_new_from_string(":body"),
+        Core.vx_new_string(":body"),
         Core.f_new(
           Html.t_body,
           Core.t_anylist.vx_new(
@@ -3314,7 +3325,7 @@ public final class Test {
                 Core.f_new(
                   Html.t_h1,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("Test Suite")
+                    Core.vx_new_string("Test Suite")
                   )
                 )
               )
@@ -3384,7 +3395,7 @@ public final class Test {
     public Func_p_from_passfail vx_type() {return t_p_from_passfail;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -3397,7 +3408,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_boolean passfail = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_boolean passfail = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_p_from_passfail(passfail);
       return output;
     }
@@ -3416,9 +3427,9 @@ public final class Test {
     Html.Type_p output = Html.e_p;
     output = Core.f_let(
       Html.t_p,
-      Core.t_any_from_func.fn_new(() -> {
-        final Core.Type_string text = Core.f_if_1(Core.t_string, passfail, Core.t_string.vx_new_from_string("Pass"), Core.t_string.vx_new_from_string("Fail"));
-        final Core.Type_string stylename = Core.f_if_1(Core.t_string, passfail, Core.t_string.vx_new_from_string(".passflag"), Core.t_string.vx_new_from_string(".failflag"));
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string text = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string("Pass"), Core.vx_new_string("Fail"));
+        final Core.Type_string stylename = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string(".passflag"), Core.vx_new_string(".failflag"));
         final Html.Type_style style = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           stylename
@@ -3426,9 +3437,9 @@ public final class Test {
         return Core.f_new(
           Html.t_p,
           Core.t_anylist.vx_new(
-            Core.t_string.vx_new_from_string(":style"),
+            Core.vx_new_string(":style"),
             style,
-            Core.t_string.vx_new_from_string(":text"),
+            Core.vx_new_string(":text"),
             text
           )
         );
@@ -3494,7 +3505,7 @@ public final class Test {
     public Func_p_from_testcoveragenums vx_type() {return t_p_from_testcoveragenums;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -3507,7 +3518,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testcoveragenums nums = Core.f_any_from_any(Test.t_testcoveragenums, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcoveragenums nums = Core.f_any_from_any(Test.t_testcoveragenums, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_p_from_testcoveragenums(nums);
       return output;
     }
@@ -3527,19 +3538,19 @@ public final class Test {
     output = Core.f_new(
       Html.t_p,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":style"),
+        Core.vx_new_string(":style"),
         Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".coveragenums")
+          Core.vx_new_string(".coveragenums")
         ),
-        Core.t_string.vx_new_from_string(":text"),
+        Core.vx_new_string(":text"),
         Core.f_new(
           Core.t_string,
           Core.t_anylist.vx_new(
             nums.pct(),
-            Core.t_string.vx_new_from_string("% "),
+            Core.vx_new_string("% "),
             nums.tests(),
-            Core.t_string.vx_new_from_string("/"),
+            Core.vx_new_string("/"),
             nums.total()
           )
         )
@@ -3607,7 +3618,7 @@ public final class Test {
     public Func_resolve_testcase vx_type() {return t_resolve_testcase;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -3620,7 +3631,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcase> future = Test.f_resolve_testcase(testcase);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -3640,19 +3651,19 @@ public final class Test {
     CompletableFuture<Test.Type_testcase> output = Core.async_new_completed(Test.e_testcase);
     output = Core.f_let_async(
       Test.t_testcase,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
         return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list(
             Core.t_booleanlist,
             resolvedlist,
-            Core.t_any_from_any.fn_new((testdescribe_any) -> {
+            Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
               Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
               return 
                     Core.f_let(
                       Core.t_boolean,
-                      Core.t_any_from_func.fn_new(() -> {
+                      Core.t_any_from_func.vx_fn_new(() -> {
                         final Test.Type_testresult testresult = testdescribe.testresult();
                         return testresult.passfail();
                       })
@@ -3663,9 +3674,9 @@ public final class Test {
           return Core.f_copy(
             testcase,
             Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string(":passfail"),
+                  Core.vx_new_string(":passfail"),
                   passfail,
-                  Core.t_string.vx_new_from_string(":describelist"),
+                  Core.vx_new_string(":describelist"),
                   resolvedlist
             )
           );
@@ -3734,7 +3745,7 @@ public final class Test {
     public Func_resolve_testcaselist vx_type() {return t_resolve_testcaselist;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -3747,7 +3758,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcaselist> future = Test.f_resolve_testcaselist(testcaselist);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -3832,7 +3843,7 @@ public final class Test {
     public Func_resolve_testdescribe vx_type() {return t_resolve_testdescribe;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -3845,7 +3856,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribe> future = Test.f_resolve_testdescribe(testdescribe);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -3865,14 +3876,14 @@ public final class Test {
     CompletableFuture<Test.Type_testdescribe> output = Core.async_new_completed(Test.e_testdescribe);
     output = Core.f_let_async(
       Test.t_testdescribe,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testresult testresult = testdescribe.testresult();
         final CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(testresult);
         return Core.async_from_async_fn(future_resolved, (resolved) -> {
           return Core.f_copy(
             testdescribe,
             Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string(":testresult"),
+                  Core.vx_new_string(":testresult"),
                   resolved
             )
           );
@@ -3941,7 +3952,7 @@ public final class Test {
     public Func_resolve_testdescribelist vx_type() {return t_resolve_testdescribelist;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -3954,7 +3965,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testdescribelist testdescribelist = Core.f_any_from_any(Test.t_testdescribelist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testdescribelist testdescribelist = Core.f_any_from_any(Test.t_testdescribelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribelist> future = Test.f_resolve_testdescribelist(testdescribelist);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -4039,7 +4050,7 @@ public final class Test {
     public Func_resolve_testpackage vx_type() {return t_resolve_testpackage;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -4052,7 +4063,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackage> future = Test.f_resolve_testpackage(testpackage);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -4072,14 +4083,14 @@ public final class Test {
     CompletableFuture<Test.Type_testpackage> output = Core.async_new_completed(Test.e_testpackage);
     output = Core.f_let_async(
       Test.t_testpackage,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testcaselist testcaselist = testpackage.caselist();
         final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
         return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list(
             Core.t_booleanlist,
             resolvedlist,
-            Core.t_any_from_any.fn_new((testcase_any) -> {
+            Core.t_any_from_any.vx_fn_new((testcase_any) -> {
               Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, testcase_any);
               return 
                     testcase.passfail();
@@ -4089,9 +4100,9 @@ public final class Test {
           return Core.f_copy(
             testpackage,
             Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string(":passfail"),
+                  Core.vx_new_string(":passfail"),
                   passfail,
-                  Core.t_string.vx_new_from_string(":caselist"),
+                  Core.vx_new_string(":caselist"),
                   resolvedlist
             )
           );
@@ -4160,7 +4171,7 @@ public final class Test {
     public Func_resolve_testpackagelist vx_type() {return t_resolve_testpackagelist;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -4173,7 +4184,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackagelist> future = Test.f_resolve_testpackagelist(testpackagelist);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -4258,7 +4269,7 @@ public final class Test {
     public Func_resolve_testresult vx_type() {return t_resolve_testresult;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -4271,7 +4282,7 @@ public final class Test {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Test.Type_testresult testresult = Core.f_any_from_any(Test.t_testresult, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testresult testresult = Core.f_any_from_any(Test.t_testresult, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testresult> future = Test.f_resolve_testresult(testresult);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -4291,7 +4302,7 @@ public final class Test {
     CompletableFuture<Test.Type_testresult> output = Core.async_new_completed(Test.e_testresult);
     output = Core.f_let_async(
       Test.t_testresult,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
         final Core.Type_any expected = testresult.expected();
         final CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(Core.t_any, fn_actual);
@@ -4300,25 +4311,25 @@ public final class Test {
             Test.t_testresult,
             Core.t_thenelselist.vx_new(
                   Core.f_then(
-                    Core.t_boolean_from_func.fn_new(() -> {
+                    Core.t_boolean_from_func.vx_fn_new(() -> {
                       return Core.f_is_empty_1(fn_actual);
                     }),
-                    Core.t_any_from_func.fn_new(() -> {
+                    Core.t_any_from_func.vx_fn_new(() -> {
                       return testresult;
                     })
                   ),
                   Core.f_else(
-                    Core.t_any_from_func.fn_new(() -> {
+                    Core.t_any_from_func.vx_fn_new(() -> {
                       return Core.f_let(
                         Test.t_testresult,
-                        Core.t_any_from_func.fn_new(() -> {
+                        Core.t_any_from_func.vx_fn_new(() -> {
                           final Core.Type_boolean passfail = Core.f_eq(expected, actual);
                           return Core.f_copy(
                             testresult,
                             Core.t_anylist.vx_new(
-                              Core.t_string.vx_new_from_string(":passfail"),
+                              Core.vx_new_string(":passfail"),
                               passfail,
-                              Core.t_string.vx_new_from_string(":actual"),
+                              Core.vx_new_string(":actual"),
                               actual
                             )
                           );
@@ -4393,9 +4404,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test(expected, actual, context);
       return output;
     }
@@ -4416,13 +4427,13 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":eq"),
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":eq"),
+          Core.vx_new_string(":passfail"),
           Core.f_eq(expected, actual),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -4492,9 +4503,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_1(expected, fn_actual, context);
       return output;
     }
@@ -4515,11 +4526,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":eq"),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":eq"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -4587,7 +4598,7 @@ public final class Test {
     public Func_test_false vx_type() {return t_test_false;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -4600,8 +4611,8 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Test.f_test_false(actual, context);
       return output;
     }
@@ -4622,16 +4633,16 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":false"),
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":false"),
+          Core.vx_new_string(":passfail"),
           Core.f_eq(
-            Core.t_boolean.vx_new_from_boolean(false),
+            Core.vx_new_boolean(false),
             actual
           ),
-          Core.t_string.vx_new_from_string(":expected"),
-          Core.t_boolean.vx_new_from_boolean(false),
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":expected"),
+          Core.vx_new_boolean(false),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -4699,7 +4710,7 @@ public final class Test {
     public Func_test_false_1 vx_type() {return t_test_false_1;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -4712,8 +4723,8 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Test.f_test_false_1(fn_actual, context);
       return output;
     }
@@ -4734,11 +4745,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":false"),
-          Core.t_string.vx_new_from_string(":expected"),
-          Core.t_boolean.vx_new_from_boolean(false),
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":false"),
+          Core.vx_new_string(":expected"),
+          Core.vx_new_boolean(false),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -4808,9 +4819,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_gt(expected, actual, context);
       return output;
     }
@@ -4831,13 +4842,13 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":gt"),
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":gt"),
+          Core.vx_new_string(":passfail"),
           Core.f_gt(expected, actual),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -4907,9 +4918,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_gt_1(expected, fn_actual, context);
       return output;
     }
@@ -4930,11 +4941,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":gt"),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":gt"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -5004,9 +5015,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_ne(expected, actual, context);
       return output;
     }
@@ -5027,13 +5038,13 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":ne"),
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":ne"),
+          Core.vx_new_string(":passfail"),
           Core.f_ne(expected, actual),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -5103,9 +5114,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_ne_1(expected, fn_actual, context);
       return output;
     }
@@ -5126,11 +5137,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":ne"),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":ne"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -5200,9 +5211,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_string(expected, actual, context);
       return output;
     }
@@ -5223,14 +5234,14 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":passfail"),
           Core.f_eq(
             Core.f_string_from_any(expected),
             Core.f_string_from_any(actual)
           ),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -5300,9 +5311,9 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Test.f_test_string_1(expected, fn_actual, context);
       return output;
     }
@@ -5323,11 +5334,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":string"),
-          Core.t_string.vx_new_from_string(":expected"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":string"),
+          Core.vx_new_string(":expected"),
           expected,
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -5395,7 +5406,7 @@ public final class Test {
     public Func_test_true vx_type() {return t_test_true;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -5408,8 +5419,8 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Test.f_test_true(actual, context);
       return output;
     }
@@ -5430,16 +5441,16 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":true"),
-          Core.t_string.vx_new_from_string(":passfail"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":true"),
+          Core.vx_new_string(":passfail"),
           Core.f_eq(
-            Core.t_boolean.vx_new_from_boolean(true),
+            Core.vx_new_boolean(true),
             actual
           ),
-          Core.t_string.vx_new_from_string(":expected"),
-          Core.t_boolean.vx_new_from_boolean(true),
-          Core.t_string.vx_new_from_string(":actual"),
+          Core.vx_new_string(":expected"),
+          Core.vx_new_boolean(true),
+          Core.vx_new_string(":actual"),
           actual
         )
       );
@@ -5507,7 +5518,7 @@ public final class Test {
     public Func_test_true_1 vx_type() {return t_test_true_1;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -5520,8 +5531,8 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Test.f_test_true_1(fn_actual, context);
       return output;
     }
@@ -5542,11 +5553,11 @@ public final class Test {
       output = Core.f_new(
         Test.t_testresult,
         Core.t_anylist.vx_new(
-          Core.t_string.vx_new_from_string(":code"),
-          Core.t_string.vx_new_from_string(":true"),
-          Core.t_string.vx_new_from_string(":expected"),
-          Core.t_boolean.vx_new_from_boolean(true),
-          Core.t_string.vx_new_from_string(":fn-actual"),
+          Core.vx_new_string(":code"),
+          Core.vx_new_string(":true"),
+          Core.vx_new_string(":expected"),
+          Core.vx_new_boolean(true),
+          Core.vx_new_string(":fn-actual"),
           fn_actual
         )
       );
@@ -5616,8 +5627,8 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string casename = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string casename = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Test.f_tr_from_testdescribe_casename(testdescribe, casename);
       return output;
     }
@@ -5636,7 +5647,7 @@ public final class Test {
     Html.Type_tr output = Html.e_tr;
     output = Core.f_let(
       Html.t_tr,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string describename = testdescribe.describename();
         final Test.Type_testresult result = testdescribe.testresult();
         final Core.Type_boolean passfail = result.passfail();
@@ -5648,7 +5659,7 @@ public final class Test {
         );
         final Html.Type_style prestyle = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
-          Core.t_string.vx_new_from_string(".preformatted")
+          Core.vx_new_string(".preformatted")
         );
         return Core.f_new(
           Html.t_tr,
@@ -5665,9 +5676,9 @@ public final class Test {
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     prestyle,
-                    Core.t_string.vx_new_from_string(":text"),
+                    Core.vx_new_string(":text"),
                     casename
                   )
                 )
@@ -5679,9 +5690,9 @@ public final class Test {
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     prestyle,
-                    Core.t_string.vx_new_from_string(":text"),
+                    Core.vx_new_string(":text"),
                     describename
                   )
                 )
@@ -5693,9 +5704,9 @@ public final class Test {
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     prestyle,
-                    Core.t_string.vx_new_from_string(":text"),
+                    Core.vx_new_string(":text"),
                     expected
                   )
                 )
@@ -5707,9 +5718,9 @@ public final class Test {
                 Core.f_new(
                   Html.t_p,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":style"),
+                    Core.vx_new_string(":style"),
                     prestyle,
-                    Core.t_string.vx_new_from_string(":text"),
+                    Core.vx_new_string(":text"),
                     actual
                   )
                 )
@@ -5778,7 +5789,7 @@ public final class Test {
     public Func_trlist_from_testcase vx_type() {return t_trlist_from_testcase;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -5791,7 +5802,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_trlist_from_testcase(testcase);
       return output;
     }
@@ -5810,13 +5821,13 @@ public final class Test {
     Html.Type_trlist output = Html.e_trlist;
     output = Core.f_let(
       Html.t_trlist,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final Core.Type_string casename = testcase.casename();
         return Core.f_list_from_list(
           Html.t_trlist,
           describelist,
-          Core.t_any_from_any.fn_new((testdescribe_any) -> {
+          Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
             Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
             return 
               Test.f_tr_from_testdescribe_casename(testdescribe, casename);
@@ -5884,7 +5895,7 @@ public final class Test {
     public Func_trlist_from_testcaselist vx_type() {return t_trlist_from_testcaselist;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -5897,7 +5908,7 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
       output = Test.f_trlist_from_testcaselist(testcaselist);
       return output;
     }
@@ -5922,5 +5933,9 @@ public final class Test {
     return output;
   }
 
+
+  static {
+    Const_stylesheet_test.const_new(c_stylesheet_test);
+  }
 
 }

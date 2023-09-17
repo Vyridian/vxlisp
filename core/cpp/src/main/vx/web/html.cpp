@@ -9175,6 +9175,7 @@ namespace vx_web_html {
     vx_web_html::Type_stylesheet output = vx_web_html::e_stylesheet;
     vx_core::vx_reserve(stylesheet);
     output = vx_core::f_copy(
+      vx_web_html::t_stylesheet,
       stylesheet,
       vx_core::vx_new(vx_core::t_anylist, {
         vx_core::vx_new_string(":stylemap"),

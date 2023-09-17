@@ -314,50 +314,31 @@ namespace vx_data_csv {
 
   //}
 
-  // (const delims)
-  // class Class_delims {
+  // (const delimcsv)
+  // class Class_delimcsv {
 
     // vx_const_new()
-    vx_data_csv::Const_delims vx_data_csv::Class_delims::vx_const_new() {
-      vx_data_csv::Const_delims output = new vx_data_csv::Class_delims();
+    void vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::Const_delimcsv output) {
       long irefcount = vx_core::refcount;
-      vx_data_textblock::Type_delimset val = vx_core::f_new(
-        vx_data_textblock::t_delimset,
+      vx_data_textblock::Type_delim val = vx_core::f_new(
+        vx_data_textblock::t_delim,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":split"),
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string("delimcsv"),
+          vx_core::vx_new_string(":delimlist"),
           vx_core::f_new(
-            vx_core::t_stringlist,
+            vx_data_textblock::t_delimlist,
             vx_core::vx_new(vx_core::t_anylist, {
-              vx_core::vx_new_string("\n")
-            })
-          ),
-          vx_core::vx_new_string(":subset"),
-          vx_core::f_new(
-            vx_data_textblock::t_delimset,
-            vx_core::vx_new(vx_core::t_anylist, {
-              vx_core::vx_new_string(":split"),
-              vx_core::f_new(
-                vx_core::t_stringlist,
+              vx_core::f_copy(
+                vx_data_textblock::t_delim,
+                vx_data_textblock::c_delimline,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(",")
-                })
-              ),
-              vx_core::vx_new_string(":subset"),
-              vx_core::f_new(
-                vx_data_textblock::t_delimset,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":start"),
+                  vx_core::vx_new_string(":delimlist"),
                   vx_core::f_new(
-                    vx_core::t_stringlist,
+                    vx_data_textblock::t_delimlist,
                     vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string("\"")
-                    })
-                  ),
-                  vx_core::vx_new_string(":end"),
-                  vx_core::f_new(
-                    vx_core::t_stringlist,
-                    vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string("\"")
+                      vx_data_textblock::c_delimquote,
+                      vx_data_textblock::c_delimcomma
                     })
                   )
                 })
@@ -366,28 +347,31 @@ namespace vx_data_csv {
           )
         })
       );
-      output->vx_p_start = val->start();
-      vx_core::vx_reserve(output->vx_p_start);
-      output->vx_p_end = val->end();
-      vx_core::vx_reserve(output->vx_p_end);
-      output->vx_p_split = val->split();
-      vx_core::vx_reserve(output->vx_p_split);
-      output->vx_p_subset = val->subset();
-      vx_core::vx_reserve(output->vx_p_subset);
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_starttext = val->starttext();
+      vx_core::vx_reserve(output->vx_p_starttext);
+      output->vx_p_endtext = val->endtext();
+      vx_core::vx_reserve(output->vx_p_endtext);
+      output->vx_p_startpos = val->startpos();
+      vx_core::vx_reserve(output->vx_p_startpos);
+      output->vx_p_endpos = val->endpos();
+      vx_core::vx_reserve(output->vx_p_endpos);
+      output->vx_p_delimlist = val->delimlist();
+      vx_core::vx_reserve(output->vx_p_delimlist);
       vx_core::vx_release(val);
       vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
-    vx_core::Type_constdef vx_data_csv::Class_delims::vx_constdef() const {
+    vx_core::Type_constdef vx_data_csv::Class_delimcsv::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
         "vx/data/csv", // pkgname
-        "delims", // name
+        "delimcsv", // name
         vx_core::Class_typedef::vx_typedef_new(
           "vx/data/textblock", // pkgname
-          "delimset", // name
+          "delim", // name
           ":struct", // extends
           vx_core::e_typelist, // traits
           vx_core::e_typelist, // allowtypes
@@ -398,20 +382,28 @@ namespace vx_data_csv {
           vx_core::e_anylist, // disallowvalues
           vx_core::vx_argmap_from_listarg({
           vx_core::vx_new_arg(
-            "start", // name
-            vx_core::t_stringlist // type
+            "name", // name
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
-            "end", // name
-            vx_core::t_stringlist // type
+            "starttext", // name
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
-            "split", // name
-            vx_core::t_stringlist // type
+            "endtext", // name
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
-            "subset", // name
-            vx_data_textblock::t_delimset // type
+            "startpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "endpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "delimlist", // name
+            vx_data_textblock::t_delimlist // type
           )
         }) // properties
         )
@@ -541,9 +533,9 @@ namespace vx_data_csv {
     output = vx_core::f_let(
       vx_data_csv::t_csvrows,
       vx_core::t_any_from_func->vx_fn_new({textblock}, [textblock]() {
-        vx_data_textblock::Type_textblock parsedtb = vx_data_textblock::f_parse(
+        vx_data_textblock::Type_textblock parsedtb = vx_data_textblock::f_textblock_from_textblock_delim(
           textblock,
-          vx_data_csv::c_delims
+          vx_data_csv::c_delimcsv
         );
         vx_core::vx_ref_plus(parsedtb);
         vx_data_textblock::Type_textblocklist childtbs = vx_data_textblock::f_textblocks_from_textblock(parsedtb);
@@ -651,7 +643,7 @@ namespace vx_data_csv {
   vx_data_csv::Type_csv t_csv = NULL;
   vx_data_csv::Type_csvrows e_csvrows = NULL;
   vx_data_csv::Type_csvrows t_csvrows = NULL;
-  vx_data_csv::Const_delims c_delims = NULL;
+  vx_data_csv::Const_delimcsv c_delimcsv = NULL;
   vx_data_csv::Func_csv_from_textblock e_csv_from_textblock = NULL;
   vx_data_csv::Func_csv_from_textblock t_csv_from_textblock = NULL;
   vx_data_csv::Func_csvrows_from_textblock e_csvrows_from_textblock = NULL;
@@ -678,7 +670,8 @@ namespace vx_data_csv {
       vx_core::vx_reserve_empty(vx_data_csv::e_csvrows_from_textblock);
       vx_data_csv::t_csvrows_from_textblock = new vx_data_csv::Class_csvrows_from_textblock();
       vx_core::vx_reserve_type(vx_data_csv::t_csvrows_from_textblock);
-      vx_data_csv::c_delims = vx_data_csv::Class_delims::vx_const_new();
+      vx_data_csv::c_delimcsv = new vx_data_csv::Class_delimcsv();
+      vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::c_delimcsv);
     }
     vx_core::vx_Type_mapany vx_Class_package::maptype() {
       vx_core::vx_Type_mapany output;

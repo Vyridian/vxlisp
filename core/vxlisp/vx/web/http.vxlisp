@@ -5,8 +5,7 @@
        (lib javafuture)
  :doc "Http library")
 
-(type response
- :extends :struct
+(type response : struct
  :properties
   [ok     : boolean
    status : int])

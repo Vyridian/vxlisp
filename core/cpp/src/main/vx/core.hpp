@@ -1220,6 +1220,14 @@ namespace vx_core {
     return output;
   }
 
+  // vx_copy(T, copyval, args)
+  template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
+    T* output;
+    vx_core::Type_any val = copyval->vx_copy(copyval, vals);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_empty(T)
   template <class T> static T* vx_empty(T* generic_any_1) {
     T* output;
@@ -2110,6 +2118,11 @@ namespace vx_core {
   public:
     Abstract_any_from_list_reduce() {};
     virtual ~Abstract_any_from_list_reduce() = 0;
+    typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce)> IFn;
+    IFn fn;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_list_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce::IFn fn) const = 0;
+    virtual vx_core::Type_any vx_any_from_list_reduce(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce fn_reduce) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_list_reduce : public virtual Abstract_any_from_list_reduce {
@@ -2124,6 +2137,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_list_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce::IFn fn) const;
+    virtual vx_core::Type_any vx_any_from_list_reduce(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce fn_reduce) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2132,6 +2147,11 @@ namespace vx_core {
   public:
     Abstract_any_from_list_reduce_next() {};
     virtual ~Abstract_any_from_list_reduce_next() = 0;
+    typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce_next)> IFn;
+    IFn fn;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_list_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce_next::IFn fn) const = 0;
+    virtual vx_core::Type_any vx_any_from_list_reduce_next(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_list_reduce_next : public virtual Abstract_any_from_list_reduce_next {
@@ -2146,6 +2166,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_list_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce_next::IFn fn) const;
+    virtual vx_core::Type_any vx_any_from_list_reduce_next(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -3412,7 +3434,11 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_list() const = 0;
     // vx_new_from_list(T, List<T>)
     virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const = 0;
-    std::vector<vx_core::Type_any> vx_p_list;
+    std::vector<vx_core::Func_any_from_any> vx_p_list;
+    // vx_listany_from_any()
+    virtual std::vector<vx_core::Func_any_from_any> vx_listany_from_any() const = 0;
+    // vx_get_any_from_any(index)
+    virtual vx_core::Func_any_from_any vx_get_any_from_any(vx_core::Type_int index) const = 0;
   };
   class Class_any_from_anylist : public virtual Abstract_any_from_anylist {
   public:
@@ -3428,6 +3454,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
     virtual vx_core::vx_Type_listany vx_list() const override;
     virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+    virtual std::vector<vx_core::Func_any_from_any> vx_listany_from_any() const override;
+    virtual vx_core::Func_any_from_any vx_get_any_from_any(vx_core::Type_int index) const override;
   };
 
   // (type anylist)
@@ -4882,7 +4910,7 @@ namespace vx_core {
   // (const false)
   class Class_false : public vx_core::Class_boolean {
   public:
-    static vx_core::Const_false vx_const_new();
+    static void vx_const_new(vx_core::Const_false output);
     vx_core::Type_constdef vx_constdef() const;
     bool vx_boolean() const override;
   };
@@ -4890,14 +4918,14 @@ namespace vx_core {
   // (const globalpackagemap)
   class Class_globalpackagemap : public vx_core::Class_packagemap {
   public:
-    static vx_core::Const_globalpackagemap vx_const_new();
+    static void vx_const_new(vx_core::Const_globalpackagemap output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const infinity)
   class Class_infinity : public vx_core::Class_int {
   public:
-    static vx_core::Const_infinity vx_const_new();
+    static void vx_const_new(vx_core::Const_infinity output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4905,14 +4933,14 @@ namespace vx_core {
   // (const mempool-active)
   class Class_mempool_active : public vx_core::Class_mempool {
   public:
-    static vx_core::Const_mempool_active vx_const_new();
+    static void vx_const_new(vx_core::Const_mempool_active output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const msg-error)
   class Class_msg_error : public vx_core::Class_int {
   public:
-    static vx_core::Const_msg_error vx_const_new();
+    static void vx_const_new(vx_core::Const_msg_error output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4920,7 +4948,7 @@ namespace vx_core {
   // (const msg-info)
   class Class_msg_info : public vx_core::Class_int {
   public:
-    static vx_core::Const_msg_info vx_const_new();
+    static void vx_const_new(vx_core::Const_msg_info output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4928,7 +4956,7 @@ namespace vx_core {
   // (const msg-severe)
   class Class_msg_severe : public vx_core::Class_int {
   public:
-    static vx_core::Const_msg_severe vx_const_new();
+    static void vx_const_new(vx_core::Const_msg_severe output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4936,7 +4964,7 @@ namespace vx_core {
   // (const msg-warning)
   class Class_msg_warning : public vx_core::Class_int {
   public:
-    static vx_core::Const_msg_warning vx_const_new();
+    static void vx_const_new(vx_core::Const_msg_warning output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4944,7 +4972,7 @@ namespace vx_core {
   // (const neginfinity)
   class Class_neginfinity : public vx_core::Class_int {
   public:
-    static vx_core::Const_neginfinity vx_const_new();
+    static void vx_const_new(vx_core::Const_neginfinity output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4952,7 +4980,7 @@ namespace vx_core {
   // (const newline)
   class Class_newline : public vx_core::Class_string {
   public:
-    static vx_core::Const_newline vx_const_new();
+    static void vx_const_new(vx_core::Const_newline output);
     vx_core::Type_constdef vx_constdef() const;
     std::string vx_string() const override;
   };
@@ -4960,7 +4988,7 @@ namespace vx_core {
   // (const notanumber)
   class Class_notanumber : public vx_core::Class_int {
   public:
-    static vx_core::Const_notanumber vx_const_new();
+    static void vx_const_new(vx_core::Const_notanumber output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };
@@ -4968,7 +4996,7 @@ namespace vx_core {
   // (const nothing)
   class Class_nothing : public vx_core::Class_string {
   public:
-    static vx_core::Const_nothing vx_const_new();
+    static void vx_const_new(vx_core::Const_nothing output);
     vx_core::Type_constdef vx_constdef() const;
     std::string vx_string() const override;
   };
@@ -4976,7 +5004,7 @@ namespace vx_core {
   // (const quote)
   class Class_quote : public vx_core::Class_string {
   public:
-    static vx_core::Const_quote vx_const_new();
+    static void vx_const_new(vx_core::Const_quote output);
     vx_core::Type_constdef vx_constdef() const;
     std::string vx_string() const override;
   };
@@ -4984,7 +5012,7 @@ namespace vx_core {
   // (const true)
   class Class_true : public vx_core::Class_boolean {
   public:
-    static vx_core::Const_true vx_const_new();
+    static void vx_const_new(vx_core::Const_true output);
     vx_core::Type_constdef vx_constdef() const;
     bool vx_boolean() const override;
   };
@@ -7462,9 +7490,9 @@ namespace vx_core {
   }
 
   // (func copy)
-  template <class T> T* f_copy(T* value, vx_core::Type_anylist values) {
+  template <class T> T* f_copy(T* generic_any_1, vx_core::Type_any value, vx_core::Type_anylist values) {
     vx_core::vx_reserve({value, values});
-    T* output = vx_core::vx_copy(value, values->vx_list());
+    T* output = vx_core::vx_copy(generic_any_1, value, values->vx_list());
     vx_core::vx_release_one_except({value, values}, output);
     return output;
   }
@@ -7634,7 +7662,7 @@ namespace vx_core {
     vx_core::vx_reserve({values, fn_any_from_any_async});
     vx_core::vx_Type_listany list_value = values->vx_list();
     vx_core::vx_Type_listasync list_async_result = vx_core::vx_listasync_from_listany_fn(list_value, [fn_any_from_any_async](vx_core::Type_any val) {
-      return fn_any_from_any_async->vx_any_from_any_async(vx_core::t_any, val);
+      return fn_any_from_any_async->vx_any_from_any_async(vx_core::vx_type(val), val);
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);
     vx_core::vx_release_one({values, fn_any_from_any_async});
@@ -7726,7 +7754,10 @@ namespace vx_core {
     output = vx_core::f_first_from_list_fn_any_from_any(
       generic_any_1,
       clauses,
-      vx_core::t_resolve
+      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any value) {
+        vx_core::Type_any output_1 = vx_core::f_resolve(vx_core::t_any, value);
+        return output_1;
+      })
     );
     vx_core::vx_release_one_except(clauses, output);
     return output;
@@ -7739,7 +7770,10 @@ namespace vx_core {
     output = vx_core::f_list_from_list(
       generic_list_1,
       clauses,
-      vx_core::t_resolve
+      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any value) {
+        vx_core::Type_any output_1 = vx_core::f_resolve(vx_core::t_any, value);
+        return output_1;
+      })
     );
     vx_core::vx_release_one_except(clauses, output);
     return output;

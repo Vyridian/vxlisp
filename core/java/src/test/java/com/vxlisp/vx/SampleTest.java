@@ -19,7 +19,7 @@ public final class SampleTest {
           ":describename", "(test 4 myconst)",
           ":testresult",
             Test.f_test(
-              Core.t_int.vx_new_from_int(4),
+              Core.vx_new_int(4),
               Sample.c_myconst,
               context
             )
@@ -40,8 +40,8 @@ public final class SampleTest {
           ":describename", "(test 5 (myfunc 1))",
           ":testresult",
             Test.f_test(
-              Core.t_int.vx_new_from_int(5),
-              Sample.f_myfunc(Core.t_int.vx_new_from_int(1)),
+              Core.vx_new_int(5),
+              Sample.f_myfunc(Core.vx_new_int(1)),
               context
             )
         )

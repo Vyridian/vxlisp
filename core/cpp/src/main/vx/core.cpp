@@ -363,7 +363,9 @@ namespace vx_core {
   // vx_int_from_sizet(size_t)
   long vx_int_from_sizet(std::size_t size) {
     long output = 0;
-    if (size > 100000000) {
+    if (size == std::string::npos) {
+      output = -1;
+    } else if (size > 100000000) {
       output = 100000000;
     } else {
       output = static_cast<long>(size);
@@ -1374,9 +1376,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         }
       }
       output = new vx_core::Class_any();
@@ -2322,9 +2324,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_boolean) {
           vx_core::Type_boolean valboolean = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
           booleanval = booleanval || valboolean->vx_boolean();
@@ -2446,9 +2448,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_string) {
           vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           sval = valstring->vx_string();
@@ -2516,9 +2518,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_decimal) {
           vx_core::Type_decimal valnum = vx_core::vx_any_from_any(vx_core::t_decimal, valsub);
           floatval += valnum->vx_float();
@@ -2595,9 +2597,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_int) {
           vx_core::Type_int valnum = vx_core::vx_any_from_any(vx_core::t_int, valsub);
           intval += valnum->vx_int();
@@ -2668,9 +2670,9 @@ namespace vx_core {
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(vx_core::t_msgblock, {valsub});
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_string) {
           vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           sb += valstring->vx_string();
@@ -2708,7 +2710,7 @@ namespace vx_core {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "string", // name
-        "string", // extends
+        ":string", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
@@ -3625,14 +3627,13 @@ namespace vx_core {
 
     // vx_list()
     vx_core::vx_Type_listany Class_any_from_anylist::vx_list() const {
-      return this->vx_p_list;
+      return vx_core::vx_list_from_list(vx_core::t_any, this->vx_p_list);
     }
 
-    // vx_get_any(index)
-    vx_core::Type_any Class_any_from_anylist::vx_get_any(vx_core::Type_int index) const {
-      vx_core::Type_any output = vx_core::e_any;
+    vx_core::Func_any_from_any Class_any_from_anylist::vx_get_any_from_any(vx_core::Type_int index) const {
+      vx_core::Func_any_from_any output = vx_core::e_any_from_any;
       long iindex = index->vx_int();
-      std::vector<vx_core::Type_any> listval = this->vx_p_list;
+      std::vector<vx_core::Func_any_from_any> listval = this->vx_p_list;
       if ((unsigned long long)iindex < listval.size()) {
         output = listval[iindex];
       }
@@ -3640,13 +3641,26 @@ namespace vx_core {
       return output;
     }
 
+    std::vector<vx_core::Func_any_from_any> Class_any_from_anylist::vx_listany_from_any() const {return vx_p_list;}
+
+    vx_core::Type_any vx_core::Class_any_from_anylist::vx_get_any(vx_core::Type_int index) const {
+      return this->vx_get_any_from_any(index);
+    }
+
     // vx_new_from_list(listval)
     vx_core::Type_any Class_any_from_anylist::vx_new_from_list(vx_core::vx_Type_listany listval) const {
       vx_core::Type_any_from_anylist output = vx_core::e_any_from_anylist;
       vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
-      std::vector<vx_core::Type_any> list;
+      std::vector<vx_core::Func_any_from_any> list;
       for (auto const& valsub : listval) {
-        list.push_back(valsub);
+        vx_core::Type_any valtype = valsub->vx_type();
+        if (valtype == vx_core::t_any_from_any) {
+          vx_core::Func_any_from_any castval = vx_core::vx_any_from_any(vx_core::t_any_from_any, valsub);
+          list.push_back(castval);
+        } else {
+          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(any_from_anylist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
+        }
       }
       output = new vx_core::Class_any_from_anylist();
       output->vx_p_list = list;
@@ -3669,7 +3683,7 @@ namespace vx_core {
       vx_core::Type_any_from_anylist output = vx_core::e_any_from_anylist;
       vx_core::Type_any_from_anylist val = vx_core::vx_any_from_any(vx_core::t_any_from_anylist, copyval);
       vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
-      std::vector<vx_core::Type_any> listval = val->vx_list();
+      std::vector<vx_core::Func_any_from_any> listval = val->vx_listany_from_any();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
@@ -3678,7 +3692,7 @@ namespace vx_core {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_any_from_anylist) {
           vx_core::Type_any_from_anylist multi = vx_core::vx_any_from_any(vx_core::t_any_from_anylist, valsub);
-          listval = vx_core::vx_listaddall(listval, multi->vx_list());
+          listval = vx_core::vx_listaddall(listval, multi->vx_listany_from_any());
         } else {
           vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new any<-anylist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -9876,11 +9890,9 @@ namespace vx_core {
   // class Class_false {
 
     // vx_const_new()
-    vx_core::Const_false vx_core::Class_false::vx_const_new() {
-      vx_core::Const_false output = new vx_core::Class_false();
+    void vx_core::Class_false::vx_const_new(vx_core::Const_false output) {
       output->vx_p_boolean = false;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -9914,10 +9926,8 @@ namespace vx_core {
   // class Class_globalpackagemap {
 
     // vx_const_new()
-    vx_core::Const_globalpackagemap vx_core::Class_globalpackagemap::vx_const_new() {
-      vx_core::Const_globalpackagemap output = new vx_core::Class_globalpackagemap();
+    void vx_core::Class_globalpackagemap::vx_const_new(vx_core::Const_globalpackagemap output) {
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -9948,11 +9958,9 @@ namespace vx_core {
   // class Class_infinity {
 
     // vx_const_new()
-    vx_core::Const_infinity vx_core::Class_infinity::vx_const_new() {
-      vx_core::Const_infinity output = new vx_core::Class_infinity();
+    void vx_core::Class_infinity::vx_const_new(vx_core::Const_infinity output) {
       output->vx_p_int = 0;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -9986,10 +9994,8 @@ namespace vx_core {
   // class Class_mempool_active {
 
     // vx_const_new()
-    vx_core::Const_mempool_active vx_core::Class_mempool_active::vx_const_new() {
-      vx_core::Const_mempool_active output = new vx_core::Class_mempool_active();
+    void vx_core::Class_mempool_active::vx_const_new(vx_core::Const_mempool_active output) {
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10025,11 +10031,9 @@ namespace vx_core {
   // class Class_msg_error {
 
     // vx_const_new()
-    vx_core::Const_msg_error vx_core::Class_msg_error::vx_const_new() {
-      vx_core::Const_msg_error output = new vx_core::Class_msg_error();
+    void vx_core::Class_msg_error::vx_const_new(vx_core::Const_msg_error output) {
       output->vx_p_int = 2;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10063,11 +10067,9 @@ namespace vx_core {
   // class Class_msg_info {
 
     // vx_const_new()
-    vx_core::Const_msg_info vx_core::Class_msg_info::vx_const_new() {
-      vx_core::Const_msg_info output = new vx_core::Class_msg_info();
+    void vx_core::Class_msg_info::vx_const_new(vx_core::Const_msg_info output) {
       output->vx_p_int = 0;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10101,11 +10103,9 @@ namespace vx_core {
   // class Class_msg_severe {
 
     // vx_const_new()
-    vx_core::Const_msg_severe vx_core::Class_msg_severe::vx_const_new() {
-      vx_core::Const_msg_severe output = new vx_core::Class_msg_severe();
+    void vx_core::Class_msg_severe::vx_const_new(vx_core::Const_msg_severe output) {
       output->vx_p_int = 3;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10139,11 +10139,9 @@ namespace vx_core {
   // class Class_msg_warning {
 
     // vx_const_new()
-    vx_core::Const_msg_warning vx_core::Class_msg_warning::vx_const_new() {
-      vx_core::Const_msg_warning output = new vx_core::Class_msg_warning();
+    void vx_core::Class_msg_warning::vx_const_new(vx_core::Const_msg_warning output) {
       output->vx_p_int = 1;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10177,11 +10175,9 @@ namespace vx_core {
   // class Class_neginfinity {
 
     // vx_const_new()
-    vx_core::Const_neginfinity vx_core::Class_neginfinity::vx_const_new() {
-      vx_core::Const_neginfinity output = new vx_core::Class_neginfinity();
+    void vx_core::Class_neginfinity::vx_const_new(vx_core::Const_neginfinity output) {
       output->vx_p_int = 0;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10215,11 +10211,9 @@ namespace vx_core {
   // class Class_newline {
 
     // vx_const_new()
-    vx_core::Const_newline vx_core::Class_newline::vx_const_new() {
-      vx_core::Const_newline output = new vx_core::Class_newline();
+    void vx_core::Class_newline::vx_const_new(vx_core::Const_newline output) {
       output->vx_p_string = "\n";
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10230,7 +10224,7 @@ namespace vx_core {
         vx_core::Class_typedef::vx_typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           vx_core::e_typelist, // traits
           vx_core::e_typelist, // allowtypes
           vx_core::e_typelist, // disallowtypes
@@ -10253,11 +10247,9 @@ namespace vx_core {
   // class Class_notanumber {
 
     // vx_const_new()
-    vx_core::Const_notanumber vx_core::Class_notanumber::vx_const_new() {
-      vx_core::Const_notanumber output = new vx_core::Class_notanumber();
+    void vx_core::Class_notanumber::vx_const_new(vx_core::Const_notanumber output) {
       output->vx_p_int = 0;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10291,11 +10283,9 @@ namespace vx_core {
   // class Class_nothing {
 
     // vx_const_new()
-    vx_core::Const_nothing vx_core::Class_nothing::vx_const_new() {
-      vx_core::Const_nothing output = new vx_core::Class_nothing();
+    void vx_core::Class_nothing::vx_const_new(vx_core::Const_nothing output) {
       output->vx_p_string = "nothing";
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10306,7 +10296,7 @@ namespace vx_core {
         vx_core::Class_typedef::vx_typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           vx_core::e_typelist, // traits
           vx_core::e_typelist, // allowtypes
           vx_core::e_typelist, // disallowtypes
@@ -10329,11 +10319,9 @@ namespace vx_core {
   // class Class_quote {
 
     // vx_const_new()
-    vx_core::Const_quote vx_core::Class_quote::vx_const_new() {
-      vx_core::Const_quote output = new vx_core::Class_quote();
+    void vx_core::Class_quote::vx_const_new(vx_core::Const_quote output) {
       output->vx_p_string = "\"";
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -10344,7 +10332,7 @@ namespace vx_core {
         vx_core::Class_typedef::vx_typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           vx_core::e_typelist, // traits
           vx_core::e_typelist, // allowtypes
           vx_core::e_typelist, // disallowtypes
@@ -10367,11 +10355,9 @@ namespace vx_core {
   // class Class_true {
 
     // vx_const_new()
-    vx_core::Const_true vx_core::Class_true::vx_const_new() {
-      vx_core::Const_true output = new vx_core::Class_true();
+    void vx_core::Class_true::vx_const_new(vx_core::Const_true output) {
       output->vx_p_boolean = true;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -11213,6 +11199,23 @@ namespace vx_core {
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
+      vx_core::vx_release_one(this->lambdavars);
+    }
+
+    vx_core::Func_any_from_list_reduce Class_any_from_list_reduce::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce::IFn fn) const {
+      vx_core::Func_any_from_list_reduce output = new vx_core::Class_any_from_list_reduce();
+      output->fn = fn;
+      output->lambdavars = lambdavars;
+      vx_core::vx_reserve(lambdavars);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_list_reduce::vx_any_from_list_reduce(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce fn_reduce) const {
+      vx_core::Type_any output = vx_core::e_any;
+      if (fn) {
+        output = fn(list, valstart, fn_reduce);
+      }
+      return output;
     }
 
     vx_core::Type_any Class_any_from_list_reduce::vx_new(vx_core::vx_Type_listany vals) const {
@@ -11287,6 +11290,23 @@ namespace vx_core {
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
+      vx_core::vx_release_one(this->lambdavars);
+    }
+
+    vx_core::Func_any_from_list_reduce_next Class_any_from_list_reduce_next::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce_next::IFn fn) const {
+      vx_core::Func_any_from_list_reduce_next output = new vx_core::Class_any_from_list_reduce_next();
+      output->fn = fn;
+      output->lambdavars = lambdavars;
+      vx_core::vx_reserve(lambdavars);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_list_reduce_next::vx_any_from_list_reduce_next(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) const {
+      vx_core::Type_any output = vx_core::e_any;
+      if (fn) {
+        output = fn(list, valstart, fn_reduce_next);
+      }
+      return output;
     }
 
     vx_core::Type_any Class_any_from_list_reduce_next::vx_new(vx_core::vx_Type_listany vals) const {
@@ -12618,9 +12638,10 @@ namespace vx_core {
 
     vx_core::Type_any Class_copy::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_anylist values = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_copy(value, values);
+      output = vx_core::f_copy(generic_any_1, value, values);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -13194,10 +13215,8 @@ namespace vx_core {
       vx_core::t_boolean,
       values,
       vx_core::vx_new_boolean(false),
-      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current_any, vx_core::Type_any next_any) {
+      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current, vx_core::Type_any next) {
         vx_core::Type_boolean reduce = vx_core::vx_any_from_any(vx_core::t_boolean, reduce_any);
-        vx_core::Type_any current = vx_core::vx_any_from_any(vx_core::t_any, current_any);
-        vx_core::Type_any next = vx_core::vx_any_from_any(vx_core::t_any, next_any);
         vx_core::Type_any output_1 = 
           vx_core::f_and(
             reduce,
@@ -16181,10 +16200,8 @@ namespace vx_core {
       vx_core::t_boolean,
       values,
       vx_core::vx_new_boolean(true),
-      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current_any, vx_core::Type_any next_any) {
+      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current, vx_core::Type_any next) {
         vx_core::Type_boolean reduce = vx_core::vx_any_from_any(vx_core::t_boolean, reduce_any);
-        vx_core::Type_any current = vx_core::vx_any_from_any(vx_core::t_any, current_any);
-        vx_core::Type_any next = vx_core::vx_any_from_any(vx_core::t_any, next_any);
         vx_core::Type_any output_1 = 
           vx_core::f_and(
             reduce,
@@ -16710,10 +16727,8 @@ namespace vx_core {
       vx_core::t_boolean,
       values,
       vx_core::vx_new_boolean(true),
-      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current_any, vx_core::Type_any next_any) {
+      vx_core::t_any_from_reduce_next->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current, vx_core::Type_any next) {
         vx_core::Type_boolean reduce = vx_core::vx_any_from_any(vx_core::t_boolean, reduce_any);
-        vx_core::Type_any current = vx_core::vx_any_from_any(vx_core::t_any, current_any);
-        vx_core::Type_any next = vx_core::vx_any_from_any(vx_core::t_any, next_any);
         vx_core::Type_any output_1 = 
           vx_core::f_and(
             reduce,
@@ -20117,7 +20132,7 @@ namespace vx_core {
   vx_core::Type_msgblock f_msgblock_from_msgblock_msg(vx_core::Type_msgblock origblock, vx_core::Type_msg addmsg) {
     vx_core::Type_msgblock output = vx_core::e_msgblock;
     vx_core::vx_reserve({origblock, addmsg});
-    output = vx_core::f_copy(origblock, vx_core::vx_new(vx_core::t_anylist, {
+    output = vx_core::f_copy(vx_core::t_msgblock, origblock, vx_core::vx_new(vx_core::t_anylist, {
       addmsg}));
     vx_core::vx_release_one_except({origblock, addmsg}, output);
     return output;
@@ -22783,8 +22798,7 @@ namespace vx_core {
     output = vx_core::f_list_from_list(
       vx_core::t_stringlist,
       typelist,
-      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any type_any) {
-        vx_core::Type_any type = vx_core::vx_any_from_any(vx_core::t_any, type_any);
+      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any type) {
         vx_core::Type_any output_1 = 
           vx_core::f_typename_from_type(type);
         return output_1;
@@ -23395,7 +23409,8 @@ namespace vx_core {
       init();
     }
     void vx_Class_package::init() {
-      vx_core::c_false = vx_core::Class_false::vx_const_new();
+      vx_core::c_false = new vx_core::Class_false();
+      vx_core::Class_false::vx_const_new(vx_core::c_false);
       vx_core::e_any = new Class_any();
       vx_core::vx_reserve_empty(vx_core::e_any);
       vx_core::t_any = new Class_any();
@@ -23659,19 +23674,32 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_value);
       vx_core::t_value = new Class_value();
       vx_core::vx_reserve_type(vx_core::t_value);
-      vx_core::c_globalpackagemap = vx_core::Class_globalpackagemap::vx_const_new();
-      vx_core::c_infinity = vx_core::Class_infinity::vx_const_new();
-      vx_core::c_mempool_active = vx_core::Class_mempool_active::vx_const_new();
-      vx_core::c_msg_error = vx_core::Class_msg_error::vx_const_new();
-      vx_core::c_msg_info = vx_core::Class_msg_info::vx_const_new();
-      vx_core::c_msg_severe = vx_core::Class_msg_severe::vx_const_new();
-      vx_core::c_msg_warning = vx_core::Class_msg_warning::vx_const_new();
-      vx_core::c_neginfinity = vx_core::Class_neginfinity::vx_const_new();
-      vx_core::c_newline = vx_core::Class_newline::vx_const_new();
-      vx_core::c_notanumber = vx_core::Class_notanumber::vx_const_new();
-      vx_core::c_nothing = vx_core::Class_nothing::vx_const_new();
-      vx_core::c_quote = vx_core::Class_quote::vx_const_new();
-      vx_core::c_true = vx_core::Class_true::vx_const_new();
+      vx_core::c_globalpackagemap = new vx_core::Class_globalpackagemap();
+      vx_core::Class_globalpackagemap::vx_const_new(vx_core::c_globalpackagemap);
+      vx_core::c_infinity = new vx_core::Class_infinity();
+      vx_core::Class_infinity::vx_const_new(vx_core::c_infinity);
+      vx_core::c_mempool_active = new vx_core::Class_mempool_active();
+      vx_core::Class_mempool_active::vx_const_new(vx_core::c_mempool_active);
+      vx_core::c_msg_error = new vx_core::Class_msg_error();
+      vx_core::Class_msg_error::vx_const_new(vx_core::c_msg_error);
+      vx_core::c_msg_info = new vx_core::Class_msg_info();
+      vx_core::Class_msg_info::vx_const_new(vx_core::c_msg_info);
+      vx_core::c_msg_severe = new vx_core::Class_msg_severe();
+      vx_core::Class_msg_severe::vx_const_new(vx_core::c_msg_severe);
+      vx_core::c_msg_warning = new vx_core::Class_msg_warning();
+      vx_core::Class_msg_warning::vx_const_new(vx_core::c_msg_warning);
+      vx_core::c_neginfinity = new vx_core::Class_neginfinity();
+      vx_core::Class_neginfinity::vx_const_new(vx_core::c_neginfinity);
+      vx_core::c_newline = new vx_core::Class_newline();
+      vx_core::Class_newline::vx_const_new(vx_core::c_newline);
+      vx_core::c_notanumber = new vx_core::Class_notanumber();
+      vx_core::Class_notanumber::vx_const_new(vx_core::c_notanumber);
+      vx_core::c_nothing = new vx_core::Class_nothing();
+      vx_core::Class_nothing::vx_const_new(vx_core::c_nothing);
+      vx_core::c_quote = new vx_core::Class_quote();
+      vx_core::Class_quote::vx_const_new(vx_core::c_quote);
+      vx_core::c_true = new vx_core::Class_true();
+      vx_core::Class_true::vx_const_new(vx_core::c_true);
       vx_core::e_any_from_any = new vx_core::Class_any_from_any();
       vx_core::vx_reserve_empty(vx_core::e_any_from_any);
       vx_core::t_any_from_any = new vx_core::Class_any_from_any();

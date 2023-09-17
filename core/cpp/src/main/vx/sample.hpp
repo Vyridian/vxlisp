@@ -62,7 +62,7 @@ namespace vx_sample {
   // (const myconst)
   class Class_myconst : public vx_core::Class_int {
   public:
-    static vx_sample::Const_myconst vx_const_new();
+    static void vx_const_new(vx_sample::Const_myconst output);
     vx_core::Type_constdef vx_constdef() const;
     long vx_int() const override;
   };

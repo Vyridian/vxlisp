@@ -3,8 +3,7 @@
        (lib javaniofile)
  :doc "File handler")
 
-(type file
- :extends :struct
+(type file : struct
  :properties [name       : string
               format     : fileformat
               path       : string
@@ -12,8 +11,7 @@
               text       : string]
  :doc "File structure")
 
-(type fileformat
- :extends :string
+(type fileformat : string
  :allowvalues [:text])
 
 (func boolean-exists<-file : boolean
@@ -101,7 +99,7 @@
     if (Files.exists(path)) {
       byte[] bytes = Files.readAllBytes(path);
       String scontent = new String(bytes);
-      Core.Type_string valcontent = Core.t_string.vx_new_from_string(scontent);
+      Core.Type_string valcontent = Core.vx_new_string(scontent);
       output = valcontent;
     } else {
       Core.Type_msg msg = Core.t_msg.vx_new_error(“File Not Found: ” + sfullpath);
@@ -136,7 +134,7 @@
    "Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
-    output = Core.t_string.vx_new_from_string(spath);")
+    output = Core.vx_new_string(spath);")
  :clientserver :server
  :doc  "Returns current system path.")
 

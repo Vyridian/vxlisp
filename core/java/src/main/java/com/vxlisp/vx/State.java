@@ -190,7 +190,7 @@ public final class State {
     public Func_change vx_type() {return t_change;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -203,7 +203,7 @@ public final class State {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      State.Type_value_map valuemap = Core.f_any_from_any(State.t_value_map, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      State.Type_value_map valuemap = Core.f_any_from_any(State.t_value_map, arglist.vx_any(Core.vx_new_int(0)));
       output = State.f_change(valuemap);
       return output;
     }
@@ -279,7 +279,7 @@ public final class State {
     public Func_register vx_type() {return t_register;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -292,7 +292,7 @@ public final class State {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_statelistener listener = Core.f_any_from_any(Core.t_statelistener, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_statelistener listener = Core.f_any_from_any(Core.t_statelistener, arglist.vx_any(Core.vx_new_int(0)));
       output = State.f_register(listener);
       return output;
     }
@@ -312,5 +312,8 @@ public final class State {
     return output;
   }
 
+
+  static {
+  }
 
 }

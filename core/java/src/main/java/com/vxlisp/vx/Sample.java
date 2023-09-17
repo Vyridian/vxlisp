@@ -183,9 +183,7 @@ public final class Sample {
       );
     }
 
-    public static Const_myconst const_new() {
-      Const_myconst output = new Const_myconst();
-      return output;
+    public static void const_new(Const_myconst output) {
     }
 
     @Override
@@ -196,7 +194,7 @@ public final class Sample {
 
   }
 
-  public static final Const_myconst c_myconst = Const_myconst.const_new();
+  public static final Const_myconst c_myconst = new Const_myconst();
 
   /**
    * @function main
@@ -268,7 +266,7 @@ public final class Sample {
   public static final Func_main t_main = new Sample.Class_main();
 
   public static void f_main() {
-    Sample.f_myfunc(Core.t_int.vx_new_from_int(2));
+    Sample.f_myfunc(Core.vx_new_int(2));
   }
 
   /**
@@ -328,7 +326,7 @@ public final class Sample {
     public Func_myfunc vx_type() {return t_myfunc;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -341,7 +339,7 @@ public final class Sample {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_int myarg = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_int myarg = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
       output = Sample.f_myfunc(myarg);
       return output;
     }
@@ -365,5 +363,9 @@ public final class Sample {
     return output;
   }
 
+
+  static {
+    Const_myconst.const_new(c_myconst);
+  }
 
 }

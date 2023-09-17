@@ -25,10 +25,10 @@ public final class TestTest {
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("testsuite.vxlisp"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("testsuite.vxlisp"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources")
                   )
                 )
               ),
@@ -55,10 +55,10 @@ public final class TestTest {
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("testsuite.html"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("testsuite.html"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources")
                   )
                 )
               ),
@@ -85,10 +85,10 @@ public final class TestTest {
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("testsuitenode.vxlisp"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("testsuitenode.vxlisp"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources")
                   )
                 )
               ),

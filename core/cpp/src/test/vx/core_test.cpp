@@ -1619,7 +1619,10 @@ namespace vx_core_test {
                     vx_core::vx_new_string("c")
                   })
                 ),
-                vx_core::t_resolve
+                vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any value) {
+                  vx_core::Type_any output_1 = vx_core::f_resolve(vx_core::t_any, value);
+                  return output_1;
+                })
               ),
               context
             )

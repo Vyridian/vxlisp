@@ -597,7 +597,7 @@ namespace vx_data_file {
       output = vx_data_file::vx_boolean_write_from_file_string(file, text);
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("boolean-write<-file-string", err);
-      output = vx_core::vx_copy(vx_core::t_boolean, {msg});
+      output = vx_core::vx_new(vx_core::t_boolean, {msg});
     }
     vx_core::vx_release_one_except({file, text}, output);
     return output;
@@ -681,6 +681,7 @@ namespace vx_data_file {
     vx_data_file::Type_file output = vx_data_file::e_file;
     vx_core::vx_reserve(file);
     output = vx_core::f_copy(
+      vx_data_file::t_file,
       file,
       vx_core::vx_new(vx_core::t_anylist, {
         vx_core::vx_new_string(":text"),
@@ -1154,7 +1155,7 @@ namespace vx_data_file {
       output = vx_data_file::vx_string_read_from_file(file);
     } catch (std::exception err) {
       vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("string-read<-file", err);
-      output = vx_core::vx_copy(vx_core::t_string, {msg});
+      output = vx_core::vx_new(vx_core::t_string, {msg});
     }
     vx_core::vx_release_one_except(file, output);
     return output;

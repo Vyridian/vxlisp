@@ -217,7 +217,7 @@ public final class Http {
     public Func_csv_from_httpget vx_type() {return t_csv_from_httpget;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -230,7 +230,7 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Csv.Type_csv> future = Http.f_csv_from_httpget(url);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -250,8 +250,8 @@ public final class Http {
     CompletableFuture<Csv.Type_csv> output = Core.async_new_completed(Csv.e_csv);
     output = Core.f_let_async(
       Csv.t_csv,
-      Core.t_any_from_func_async.fn_new(() -> {
-        final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.t_string.vx_new_from_string("text/csv"));
+      Core.t_any_from_func_async.vx_fn_new(() -> {
+        final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/csv"));
         return Core.async_from_async_fn(future_textblock, (textblock) -> {
           return Csv.f_csv_from_textblock(textblock);
         });
@@ -319,7 +319,7 @@ public final class Http {
     public Func_json_from_httpget vx_type() {return t_json_from_httpget;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -332,7 +332,7 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Http.Type_response> future = Http.f_json_from_httpget(url);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -352,8 +352,8 @@ public final class Http {
     CompletableFuture<Http.Type_response> output = Core.async_new_completed(Http.e_response);
     output = Core.f_let_async(
       Http.t_response,
-      Core.t_any_from_func_async.fn_new(() -> {
-        final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.t_string.vx_new_from_string("application/json"));
+      Core.t_any_from_func_async.vx_fn_new(() -> {
+        final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("application/json"));
         return Core.async_from_async_fn(future_response, (response) -> {
           return response;
         });
@@ -423,8 +423,8 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Http.Type_response> future = Http.f_response_from_httpget(url, contenttype);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -485,7 +485,7 @@ public final class Http {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -504,7 +504,7 @@ public final class Http {
     public Func_text_from_httpget vx_type() {return t_text_from_httpget;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -517,7 +517,7 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_string> future = Http.f_text_from_httpget(url);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -537,8 +537,8 @@ public final class Http {
     CompletableFuture<Core.Type_string> output = Core.async_new_completed(Core.e_string);
     output = Core.f_let_async(
       Core.t_string,
-      Core.t_any_from_func_async.fn_new(() -> {
-        final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.t_string.vx_new_from_string("text/plain"));
+      Core.t_any_from_func_async.vx_fn_new(() -> {
+        final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("text/plain"));
         return Core.async_from_async_fn(future_response, (response) -> {
           return Http.f_text_from_response(response);
         });
@@ -585,7 +585,7 @@ public final class Http {
         Core.typedef_new(
           "vx/core", // pkgname
           "string", // name
-          "string", // extends
+          ":string", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
@@ -604,7 +604,7 @@ public final class Http {
     public Func_text_from_response vx_type() {return t_text_from_response;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -617,7 +617,7 @@ public final class Http {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Http.Type_response response = Core.f_any_from_any(Http.t_response, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Http.Type_response response = Core.f_any_from_any(Http.t_response, arglist.vx_any(Core.vx_new_int(0)));
       output = Http.f_text_from_response(response);
       return output;
     }
@@ -698,8 +698,8 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Textblock.Type_textblock> future = Http.f_textblock_from_httpget(url, contenttype);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -719,7 +719,7 @@ public final class Http {
     CompletableFuture<Textblock.Type_textblock> output = Core.async_new_completed(Textblock.e_textblock);
     output = Core.f_let_async(
       Textblock.t_textblock,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, contenttype);
         return Core.async_from_async_fn(future_response, (response) -> {
           return Http.f_textblock_from_response(response);
@@ -786,7 +786,7 @@ public final class Http {
     public Func_textblock_from_response vx_type() {return t_textblock_from_response;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -799,7 +799,7 @@ public final class Http {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Http.Type_response response = Core.f_any_from_any(Http.t_response, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Http.Type_response response = Core.f_any_from_any(Http.t_response, arglist.vx_any(Core.vx_new_int(0)));
       output = Http.f_textblock_from_response(response);
       return output;
     }
@@ -819,7 +819,7 @@ public final class Http {
     output = Core.f_new(
       Textblock.t_textblock,
       Core.t_anylist.vx_new(
-        Core.t_string.vx_new_from_string(":text"),
+        Core.vx_new_string(":text"),
         Http.f_text_from_response(response)
       )
     );
@@ -885,7 +885,7 @@ public final class Http {
     public Func_xml_from_httpget vx_type() {return t_xml_from_httpget;}
 
     @Override
-    public Core.Func_any_from_any_async fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
@@ -898,7 +898,7 @@ public final class Http {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Xml.Type_xml> future = Http.f_xml_from_httpget(url);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -918,8 +918,8 @@ public final class Http {
     CompletableFuture<Xml.Type_xml> output = Core.async_new_completed(Xml.e_xml);
     output = Core.f_let_async(
       Xml.t_xml,
-      Core.t_any_from_func_async.fn_new(() -> {
-        final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.t_string.vx_new_from_string("text/xml"));
+      Core.t_any_from_func_async.vx_fn_new(() -> {
+        final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/xml"));
         return Core.async_from_async_fn(future_textblock, (textblock) -> {
           return Xml.f_xml_from_textblock(textblock);
         });
@@ -928,5 +928,8 @@ public final class Http {
     return output;
   }
 
+
+  static {
+  }
 
 }

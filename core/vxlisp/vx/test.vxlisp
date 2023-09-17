@@ -3,37 +3,32 @@
        (lib html :path vx/web/html)
  :doc  "Test Suite builder")
 
-(type testcase
- :extends    :struct
+(type testcase : struct
  :properties [passfail     : boolean
               testpkg      : string
               casename     : string
               describelist : testdescribelist]
  :doc        "Structure to describe a test case")
 
-(type testcaselist
- :extends    :list
+(type testcaselist : list
  :allowtypes [testcase]
  :doc        "List of test cases")
 
-(type testcoveragedetail
- :extends    :struct
+(type testcoveragedetail : struct
  :properties [constmap : intmap
               funcmap  : intmap
               testpkg  : string
               typemap  : intmap]
  :doc        "Structure to describe a test coverage detail")
 
-(type testcoveragenums
- :extends    :struct
+(type testcoveragenums : struct
  :properties [pct     : int
               testpkg : string
               tests   : int
               total   : int]
  :doc        "Structure to describe a test coverage summary")
 
-(type testcoveragesummary
- :extends    :struct
+(type testcoveragesummary : struct
  :properties [bigospacenums : testcoveragenums
               bigotimenums  : testcoveragenums
               constnums     : testcoveragenums
@@ -44,20 +39,17 @@
               typenums      : testcoveragenums]
  :doc        "Structure to describe a test coverage summary")
 
-(type testdescribe
- :extends    :struct
+(type testdescribe : struct
  :properties [describename : string
               testpkg      : string
               testresult   : testresult]
  :doc        "Structure to describe test results")
 
-(type testdescribelist
- :extends    :list
+(type testdescribelist : list
  :allowtypes [testdescribe]
  :doc        "List of testdescribe")
 
-(type testpackage
- :extends    :struct
+(type testpackage : struct
  :properties [caselist        : testcaselist
               coveragedetail  : testcoveragedetail
               coveragesummary : testcoveragesummary
@@ -65,13 +57,11 @@
               testpkg         : string]
  :doc        "Structure to hold all tests for a package")
 
-(type testpackagelist
- :extends    :list
+(type testpackagelist : list
  :allowtypes [testpackage]
  :doc        "List of testpackage")
 
-(type testresult
- :extends    :struct
+(type testresult : struct
  :properties [code      : string
               passfail  : boolean
               expected  : any
@@ -79,8 +69,7 @@
               fn-actual : any<-func-async]
  :doc        "Structure to hold test results")
 
-(type testresultlist
- :extends    :list
+(type testresultlist : list
  :allowtypes [testresult]
  :doc        "List of test results")
 
@@ -90,6 +79,11 @@
    :name "Test Suite"
    :styles
     (stylelist
+     (style
+      :name  "body"
+      :props (propmap
+              "font-size"        "0.9em"
+              "font-family"      "sans-serif"))
      (style
       :name  "details summary"
       :props (propmap
@@ -102,8 +96,6 @@
               "vertical-align"   "top"
               "border-collapse"  "collapse"
               "margin"           "25px 0"
-              "font-size"        "0.9em"
-              "font-family"      "sans-serif"
               "min-width"        "400px"
               "box-shadow"       "0 0 20px rgba(0, 0, 0, 0.15)"))
      (style

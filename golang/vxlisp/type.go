@@ -904,6 +904,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 				}
 			} else if lastword != "" {
 				switch lastword {
+				case ":":
+					typ.extends = ":" + word
 				case ":alias":
 					typ.alias = StringRemoveQuotes(word)
 				case ":allowfuncs", ":disallowfuncs":
@@ -1016,7 +1018,7 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 				lastword = ""
 			} else if BooleanFromStringStarts(word, ":") {
 				switch word {
-				case ":alias", ":allowfuncs", ":allowtypes", ":allowvalues", ":convert", ":create", ":default", ":deprecated", ":destroy", ":disallowfuncs", ":disallowtypes", ":disallowvalues", ":doc", ":extends", ":properties", ":traits":
+				case ":", ":alias", ":allowfuncs", ":allowtypes", ":allowvalues", ":convert", ":create", ":default", ":deprecated", ":destroy", ":disallowfuncs", ":disallowtypes", ":disallowvalues", ":doc", ":extends", ":properties", ":traits":
 					lastword = word
 				case ":test":
 					testcls = true

@@ -4,23 +4,61 @@
 
  :doc "Read-Evaluate-Print-Loop processor.")
 
-(type liblist
- :extends    :list
+(type liblist : list
  :allowtypes [string]
  :doc "List of library names")
 
-(type repl
- :extends    :struct
+(type repl : struct
  :properties [type     : any
               repllist : repllist
               async    : boolean
               val      : any]
  :doc "Repl structure")
 
-(type repllist
- :extends    :list
+(type repllist : list
  :allowtypes [repl]
  :doc "List of repl")
+
+/*
+(const delimvxlisp : tb/delim
+ (tb/delim
+  :name "delimvxlisp"
+  :delimlist
+   (tb/delimlist
+    tb/delimcomment
+    tb/delimcommentblock
+    tb/delimwhitespace
+    delimvxlispparen))
+ :doc "vxlisp File Delimiters")
+
+(const delimvxlispbracket : tb/delim
+ (copy tb/delimbracketsquare
+  :name "delimvxlispbracketsquare"
+  :delimlist
+   (tb/delimlist
+    tb/delimcomment
+    tb/delimcommentblock
+    tb/delimquote
+    tb/delimquoteblock
+    tb/delimwhitespace
+    delimvxlispbracket
+    delimvxlispparen))
+ :doc "vxlisp Square Bracket Delimiters")
+
+(const delimvxlispparen : tb/delim
+ (copy tb/delimparen
+  :name "delimvxlispparen"
+  :delimlist
+   (tb/delimlist
+    tb/delimcomment
+    tb/delimcommentblock
+    tb/delimquote
+    tb/delimquoteblock
+    tb/delimwhitespace
+    delimvxlispbracket
+    delimvxlispparen))
+ :doc "vxlisp Paren Delimiters")
+*/
 
 (func any<-liblist-string : any
  [liblist : liblist

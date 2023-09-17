@@ -840,6 +840,7 @@ namespace test_lib {
                 vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
                 vx_core::vx_ref_plus(passfail);
                 vx_test::Type_testresult output_1 = vx_core::f_copy(
+									vx_test::t_testresult,
                   testresult,
                   vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":passfail"),
@@ -916,6 +917,7 @@ namespace test_lib {
               vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
               vx_core::vx_ref_plus(passfail);
               vx_test::Type_testresult output_1 = vx_core::f_copy(
+								vx_test::t_testresult,
                 testresult,
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_string(":passfail"),

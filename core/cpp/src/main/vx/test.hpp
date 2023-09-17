@@ -729,7 +729,7 @@ namespace vx_test {
   // (const stylesheet-test)
   class Class_stylesheet_test : public vx_web_html::Class_stylesheet {
   public:
-    static vx_test::Const_stylesheet_test vx_const_new();
+    static void vx_const_new(vx_test::Const_stylesheet_test output);
     vx_core::Type_constdef vx_constdef() const;
   };
 

@@ -26,7 +26,7 @@ export default class vx_data_csv_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/csv", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 5), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 20, ":tests", 1, ":total", 5), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -48,7 +48,7 @@ export default class vx_data_csv_test {
       "constmap",
         vx_core.f_new(
           vx_core.t_intmap,
-          "delims", 0
+          "delimcsv", 0
         ),
       "funcmap",
         vx_core.f_new(

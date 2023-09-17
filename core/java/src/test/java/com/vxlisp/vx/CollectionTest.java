@@ -22,9 +22,9 @@ public final class CollectionTest {
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("a"),
-                  Core.t_string.vx_new_from_string("b"),
-                  Core.t_string.vx_new_from_string("c")
+                  Core.vx_new_string("a"),
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c")
                 )
               ),
               Collection.f_list_from_list_end(
@@ -32,13 +32,13 @@ public final class CollectionTest {
                 Core.f_new(
                   Core.t_stringlist,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("a"),
-                    Core.t_string.vx_new_from_string("b"),
-                    Core.t_string.vx_new_from_string("c"),
-                    Core.t_string.vx_new_from_string("d")
+                    Core.vx_new_string("a"),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string("c"),
+                    Core.vx_new_string("d")
                   )
                 ),
-                Core.t_int.vx_new_from_int(3)
+                Core.vx_new_int(3)
               ),
               context
             )
@@ -62,10 +62,10 @@ public final class CollectionTest {
               Core.f_new(
                 Core.t_list,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("a"),
-                  Core.t_int.vx_new_from_int(1),
-                  Core.t_string.vx_new_from_string("b"),
-                  Core.t_string.vx_new_from_string("c")
+                  Core.vx_new_string("a"),
+                  Core.vx_new_int(1),
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c")
                 )
               ),
               Collection.f_list_from_list_filtertypes(
@@ -73,10 +73,10 @@ public final class CollectionTest {
                 Core.f_new(
                   Core.t_list,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("a"),
-                    Core.t_int.vx_new_from_int(1),
-                    Core.t_string.vx_new_from_string("b"),
-                    Core.t_string.vx_new_from_string("c"),
+                    Core.vx_new_string("a"),
+                    Core.vx_new_int(1),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string("c"),
                     Core.t_decimal.vx_new_from_string("4.5")
                   )
                 ),
@@ -107,10 +107,10 @@ public final class CollectionTest {
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("a1"),
-                  Core.t_string.vx_new_from_string("b1"),
-                  Core.t_string.vx_new_from_string("c1"),
-                  Core.t_string.vx_new_from_string("d1")
+                  Core.vx_new_string("a1"),
+                  Core.vx_new_string("b1"),
+                  Core.vx_new_string("c1"),
+                  Core.vx_new_string("d1")
                 )
               ),
               Collection.f_list_from_list_fn_filter(
@@ -118,35 +118,35 @@ public final class CollectionTest {
                 Core.f_new(
                   Core.t_list,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("a"),
-                    Core.t_int.vx_new_from_int(4),
-                    Core.t_string.vx_new_from_string("b"),
+                    Core.vx_new_string("a"),
+                    Core.vx_new_int(4),
+                    Core.vx_new_string("b"),
                     Core.f_empty(
                       Core.t_list
                     ),
-                    Core.t_string.vx_new_from_string("c"),
+                    Core.vx_new_string("c"),
                     Core.f_empty(
                       Core.t_map
                     ),
-                    Core.t_string.vx_new_from_string("d")
+                    Core.vx_new_string("d")
                   )
                 ),
-                Core.t_any_from_any.fn_new((val_any) -> {
+                Core.t_any_from_any.vx_fn_new((val_any) -> {
                   Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
                   return 
                     Core.f_if_2(
                       Core.t_string,
                       Core.t_thenelselist.vx_new(
                         Core.f_then(
-                          Core.t_boolean_from_func.fn_new(() -> {
+                          Core.t_boolean_from_func.vx_fn_new(() -> {
                             return Type.f_is_string(val);
                           }),
-                          Core.t_any_from_func.fn_new(() -> {
+                          Core.t_any_from_func.vx_fn_new(() -> {
                             return Core.f_new(
                               Core.t_string,
                               Core.t_anylist.vx_new(
                                   val,
-                                  Core.t_string.vx_new_from_string("1")
+                                  Core.vx_new_string("1")
                               )
                             );
                           })
@@ -177,9 +177,9 @@ public final class CollectionTest {
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("b"),
-                  Core.t_string.vx_new_from_string("c"),
-                  Core.t_string.vx_new_from_string("d")
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c"),
+                  Core.vx_new_string("d")
                 )
               ),
               Collection.f_list_from_list_start(
@@ -187,13 +187,13 @@ public final class CollectionTest {
                 Core.f_new(
                   Core.t_stringlist,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("a"),
-                    Core.t_string.vx_new_from_string("b"),
-                    Core.t_string.vx_new_from_string("c"),
-                    Core.t_string.vx_new_from_string("d")
+                    Core.vx_new_string("a"),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string("c"),
+                    Core.vx_new_string("d")
                   )
                 ),
-                Core.t_int.vx_new_from_int(1)
+                Core.vx_new_int(1)
               ),
               context
             )
@@ -217,8 +217,8 @@ public final class CollectionTest {
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string("b"),
-                  Core.t_string.vx_new_from_string("c")
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c")
                 )
               ),
               Collection.f_list_from_list_start_end(
@@ -226,14 +226,14 @@ public final class CollectionTest {
                 Core.f_new(
                   Core.t_stringlist,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string("a"),
-                    Core.t_string.vx_new_from_string("b"),
-                    Core.t_string.vx_new_from_string("c"),
-                    Core.t_string.vx_new_from_string("d")
+                    Core.vx_new_string("a"),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string("c"),
+                    Core.vx_new_string("d")
                   )
                 ),
-                Core.t_int.vx_new_from_int(1),
-                Core.t_int.vx_new_from_int(3)
+                Core.vx_new_int(1),
+                Core.vx_new_int(3)
               ),
               context
             )

@@ -1,5 +1,6 @@
 #ifndef VX_TYPE_HPP
 #define VX_TYPE_HPP
+#include <string>
 #include "../vx/core.hpp"
 
 namespace vx_type {
@@ -13,6 +14,14 @@ namespace vx_type {
   typedef Abstract_allowtypes_from_type* Func_allowtypes_from_type;
   extern Func_allowtypes_from_type e_allowtypes_from_type;
   extern Func_allowtypes_from_type t_allowtypes_from_type;
+  class Abstract_int_from_string_find;
+  typedef Abstract_int_from_string_find* Func_int_from_string_find;
+  extern Func_int_from_string_find e_int_from_string_find;
+  extern Func_int_from_string_find t_int_from_string_find;
+  class Abstract_int_from_string_findkeyword;
+  typedef Abstract_int_from_string_findkeyword* Func_int_from_string_findkeyword;
+  extern Func_int_from_string_findkeyword e_int_from_string_findkeyword;
+  extern Func_int_from_string_findkeyword t_int_from_string_findkeyword;
   class Abstract_is_boolean;
   typedef Abstract_is_boolean* Func_is_boolean;
   extern Func_is_boolean e_is_boolean;
@@ -79,6 +88,9 @@ namespace vx_type {
   extern Func_traits_from_typedef t_traits_from_typedef;// :headerfirst
 // :header
 
+  // vx_int_from_string_findkeyword(string, string)
+  int vx_int_from_string_findkeyword(std::string text, std::string find);
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
@@ -88,6 +100,12 @@ namespace vx_type {
 
   // (func allowtypes<-type)
   vx_core::Type_typelist f_allowtypes_from_type(vx_core::Type_any type);
+
+  // (func int<-string-find)
+  vx_core::Type_int f_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find);
+
+  // (func int<-string-findkeyword)
+  vx_core::Type_int f_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find);
 
   // (func is-boolean)
   vx_core::Type_boolean f_is_boolean(vx_core::Type_any value);
@@ -186,6 +204,50 @@ namespace vx_type {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func int<-string-find)
+  class Abstract_int_from_string_find : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_int_from_string_find() {};
+    virtual ~Abstract_int_from_string_find() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_int_from_string_find : public virtual Abstract_int_from_string_find {
+  public:
+    Class_int_from_string_find();
+    virtual ~Class_int_from_string_find() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func int<-string-findkeyword)
+  class Abstract_int_from_string_findkeyword : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_int_from_string_findkeyword() {};
+    virtual ~Abstract_int_from_string_findkeyword() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_int_from_string_findkeyword : public virtual Abstract_int_from_string_findkeyword {
+  public:
+    Class_int_from_string_findkeyword();
+    virtual ~Class_int_from_string_findkeyword() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

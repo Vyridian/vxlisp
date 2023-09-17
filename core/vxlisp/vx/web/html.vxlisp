@@ -2,179 +2,148 @@
  :libs (lib type :path vx/type)
  :doc "Html handler")
 
-(type body
- :extends    :struct
+(type body : struct
  :properties [nodes : divchildlist :... :default]
  :doc        "Body Tag")
 
-(type details
- :extends    :struct
+(type details : struct
  :properties [summary : divchildlist
               nodes   : divchildlist]
  :traits     [node divchild]
  :doc "Details Tag")
 
-(type div
- :extends    :struct
+(type div : struct
  :properties [nodes : divchildlist :... :default]
  :traits     [node divchild]
  :doc "Div Tag")
 
-(type divchild
- :extends :struct
- :doc     "Div Child Trait")
+(type divchild : struct
+ :doc "Div Child Trait")
 
-(type divchildlist
- :extends    :list
+(type divchildlist : list
  :allowtypes [divchild]
  :doc        "List of divchild")
 
-(type divlist
- :extends    :list
+(type divlist : list
  :allowtypes [div]
  :doc        "List of div")
 
-(type footer
- :extends    :struct
+(type footer : struct
  :properties [nodes : divchildlist :... :default]
  :doc        "Body Tag")
 
-(type h1
- :extends    :struct
+(type h1 : struct
  :properties [text : string :default]
  :traits     [node divchild]
  :doc        "Header 1 Tag")
 
-(type h2
- :extends    :struct
+(type h2 : struct
  :properties [text : string :default]
  :traits     [node divchild]
  :doc        "Header 2 Tag")
 
-(type h3
- :extends    :struct
+(type h3 : struct
  :properties [text : string :default]
  :traits     [node divchild]
  :doc        "Header 3 Tag")
 
-(type head
- :extends    :struct
+(type head : struct
  :properties [nodes : headchildlist :... :default]
  :doc        "Head Tag")
 
-(type headchild
- :extends :struct
+(type headchild : struct
  :doc     "Head Child Trait")
 
-(type headchildlist
- :extends    :list
+(type headchildlist : list
  :allowtypes [headchild]
  :doc        "List of headchild")
 
-(type html
- :extends    :struct
+(type html : struct
  :properties [lang   : string
               head   : head
               body   : body
               footer : footer]
  :doc        "Html Tag")
 
-(type meta
- :extends    :struct
+(type meta : struct
  :properties [charset : string]
  :traits     [node headchild]
  :doc        "Meta Tag")
 
-(type node
- :extends    :struct
+(type node : struct
  :properties [id    : string
               style : style]
  :doc "Common Html Node Trait")
 
-(type nodelist
- :extends    :list
+(type nodelist : list
  :allowtypes [node]
  :doc "List of node")
 
-(type p
- :extends    :struct
+(type p : struct
  :properties [text : string :default]
  :traits     [node divchild]
  :doc "Paragraph Tag")
 
-(type propmap
- :extends    :map
+(type propmap : map
  :allowtypes [string]
  :doc        "Map of props")
 
-(type style
- :extends    :struct
+(type style : struct
  :properties [name  : string
               props : propmap]
  :doc        "Programmable Cascading Style")
 
-(type stylelist
- :extends    :list
+(type stylelist : list
  :allowtypes [style]
  :doc        "List of style")
 
-(type stylemap
- :extends    :map
+(type stylemap : map
  :allowtypes [style]
  :doc        "Map of style")
 
-(type stylesheet
- :extends    :struct
+(type stylesheet : struct
  :properties [name     : string
               styles   : stylelist
               stylemap : stylemap]
  :traits     [node headchild]
  :doc        "Programmable Cascading Style Sheet CSS type")
 
-(type table
- :extends    :struct
+(type table : struct
  :properties [tbody : tbody
               thead : thead]
  :traits     [node divchild]
  :doc        "<table> Tag")
 
-(type tbody
- :extends    :struct
+(type tbody : struct
  :properties [nodes : trlist :default :...]
  :traits     [node]
  :doc        "<tbody> Tag")
 
-(type td
- :extends    :struct
+(type td : struct
  :properties [nodes : divchildlist :default :...]
  :traits     [node]
  :doc        "<tr> Tag")
 
-(type tdlist
- :extends    :list
+(type tdlist : list
  :allowtypes [td]
  :doc        "List of td")
 
-(type thead
- :extends    :struct
+(type thead : struct
  :properties [nodes : trlist :default :...]
  :traits     [node]
  :doc        "<thead> Tag")
 
-(type title
- :extends    :struct
+(type title : struct
  :properties [text : string]
  :traits     [node headchild]
  :doc        "Title Tag")
 
-(type tr
- :extends    :struct
+(type tr : struct
  :properties [nodes : tdlist :default :...]
  :traits     [node]
  :doc        "<tr> Tag")
 
-(type trlist
- :extends    :list
+(type trlist : list
  :allowtypes [tr]
  :doc        "List of tr")
 
@@ -230,7 +199,7 @@
       .replaceAll(“'”, “\'”)
       .replaceAll(“>”, “&gt;”)   
       .replaceAll(“<”, “&lt;”);
-    output = Core.t_string.vx_new_from_string(str);")
+    output = Core.vx_new_string(str);")
  :doc "Convert text to HTML string")
 
 (func string-indent : string

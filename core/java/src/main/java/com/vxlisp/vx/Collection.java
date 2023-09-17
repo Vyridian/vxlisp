@@ -63,7 +63,7 @@ public final class Collection {
     public Func_is_list vx_type() {return t_is_list;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -76,7 +76,7 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Collection.f_is_list(val);
       return output;
     }
@@ -94,7 +94,7 @@ public final class Collection {
   public static Core.Type_boolean f_is_list(final Core.Type_any val) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_eq(
-      Core.t_string.vx_new_from_string(":list"),
+      Core.vx_new_string(":list"),
       Core.f_extends_from_any(val)
     );
     return output;
@@ -157,7 +157,7 @@ public final class Collection {
     public Func_is_map vx_type() {return t_is_map;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -170,7 +170,7 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       output = Collection.f_is_map(val);
       return output;
     }
@@ -188,7 +188,7 @@ public final class Collection {
   public static Core.Type_boolean f_is_map(final Core.Type_any val) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_eq(
-      Core.t_string.vx_new_from_string(":map"),
+      Core.vx_new_string(":map"),
       Core.f_extends_from_any(val)
     );
     return output;
@@ -253,9 +253,9 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Collection.f_list_from_list_end(generic_list_1, values, end);
       return output;
     }
@@ -272,7 +272,7 @@ public final class Collection {
 
   public static <X extends Core.Type_list> X f_list_from_list_end(final X generic_list_1, final X values, final Core.Type_int end) {
     X output = Core.f_empty(generic_list_1);
-    output = Collection.f_list_from_list_start_end(generic_list_1, values, Core.t_int.vx_new_from_int(0), end);
+    output = Collection.f_list_from_list_start_end(generic_list_1, values, Core.vx_new_int(0), end);
     return output;
   }
 
@@ -335,9 +335,9 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_typelist filtertypes = Core.f_any_from_any(Core.t_typelist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_typelist filtertypes = Core.f_any_from_any(Core.t_typelist, arglist.vx_any(Core.vx_new_int(1)));
       output = Collection.f_list_from_list_filtertypes(generic_list_1, vallist, filtertypes);
       return output;
     }
@@ -357,7 +357,7 @@ public final class Collection {
     output = Collection.f_list_from_list_fn_filter(
       generic_list_1,
       vallist,
-      Core.t_any_from_any.fn_new((val_any) -> {
+      Core.t_any_from_any.vx_fn_new((val_any) -> {
         Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
         return 
           Core.f_if(
@@ -429,9 +429,9 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Func_any_from_any fn_filter = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_filter = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
       output = Collection.f_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
       return output;
     }
@@ -521,9 +521,9 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
       output = Collection.f_list_from_list_start(generic_list_1, values, start);
       return output;
     }
@@ -609,10 +609,10 @@ public final class Collection {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
       output = Collection.f_list_from_list_start_end(generic_list_1, values, start, end);
       return output;
     }
@@ -647,5 +647,8 @@ public final class Collection {
     return output;
   }
 
+
+  static {
+  }
 
 }

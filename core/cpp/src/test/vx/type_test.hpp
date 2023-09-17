@@ -5,6 +5,8 @@
 
 namespace vx_type_test {
 
+  vx_test::Type_testcase f_int_from_string_find(vx_core::Type_context context);
+  vx_test::Type_testcase f_int_from_string_findkeyword(vx_core::Type_context context);
   vx_test::Type_testcase f_is_string(vx_core::Type_context context);
   vx_test::Type_testcase f_is_type(vx_core::Type_context context);
   vx_test::Type_testcase f_is_type_from_any_typelist(vx_core::Type_context context);

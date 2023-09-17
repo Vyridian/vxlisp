@@ -11,6 +11,49 @@
  (:allowtypes (typedef<-type type))
  :doc "Get the name of a given type")
 
+(func int<-string-find : int
+ [text : string
+  find : string]
+ (native
+  :cpp
+   "std::string stext = text->vx_string();
+    std::string sfind = find->vx_string();
+    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind));
+    output = vx_core::vx_new_int(ipos);"
+  :js
+   "text.indexOf(find)"
+  :java
+   "String stext = text.vx_string();
+    String sfind = find.vx_string();
+    int ipos = stext.indexOf(sfind);
+    output = Core.vx_new_int(ipos);")
+ :test
+  (test
+   2
+   (int<-string-find "abcdefg" "cd"))
+ :doc "Returns integer position of find string in text string.")
+
+(func int<-string-findkeyword : int
+ [text : string
+  find : string]
+ (native
+  :cpp
+   "int ipos = vx_type::vx_int_from_string_findkeyword(text->vx_string(), find->vx_string());
+    output = vx_core::vx_new_int(ipos);"
+  :js
+   "vx_type.vx_int_from_string_findkeyword(text, find)"
+  :java
+   "int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
+    output = Core.vx_new_int(ipos);")
+ :test
+  (test
+   2
+   (int<-string-findkeyword "ab\tcdefg" ":whitespace"))
+  (test
+   4
+   (int<-string-findkeyword " \t\n\rab" ":nonwhitespace"))
+ :doc "Returns integer position of find string in text string. Note: the find terms :whitespace and :nonwhitespace have special meaning.")
+
 (func is-boolean : boolean [value : any]
  (= "boolean" (typename<-any value)))
 
@@ -81,7 +124,7 @@
    "text.length"
   :java
    "int len = text.vx_string().length();
-    output = Core.t_int.vx_new_from_int(len);")
+    output = Core.vx_new_int(len);")
  :test (test 4 (length<-string "abcd"))
        (test 0 (length<-string ""))
  :doc "Returns length of a string.")
@@ -126,20 +169,8 @@
     output = vx_core::vx_new_string(str);"
   :js "text.substring(start, end)"
   :java
-   "String stext = text.vx_string();
-    int istart = start.vx_int();
-    int iend = end.vx_int();
-    int ilen = stext.length();
-    if (istart >= ilen) {
-      stext = “”;
-    } else if (iend <= istart) {
-      stext = “”;
-    } else if (iend >= ilen) {
-      stext = stext.substring(istart, ilen);
-    } else {
-      stext = stext.substring(istart, iend);
-    }
-    output = Core.t_string.vx_new_from_string(stext);")
+   "String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
+    output = Core.vx_new_string(stext);")
  :test (test "abc" (string<-string-start-end "abcd" 0 3))
        (test "bc"  (string<-string-start-end "abcd" 1 3))
        (test ""    (string<-string-start-end "abcd" 5 6))
@@ -154,12 +185,7 @@
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
   :js "vals.join(delim)"
   :java
-   "List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {
-      Core.Type_string valstring = Core.f_any_from_any(Core.t_string, item);
-      return valstring.vx_string();
-    });
-    String stext = String.join(delim.vx_string(), listvalstring);
-    output = Core.t_string.vx_new_from_string(stext);")
+   "output = Type.vx_string_from_stringlist_join(vals, delim);")
  :test (test "a$b$c" (string<-stringlist-join (stringlist "a" "b" "c") "$")))
 
 (func traitnames<-any : stringlist

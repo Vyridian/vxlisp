@@ -2277,7 +2277,7 @@
    (testcoveragedetail
     :constmap
      (intmap
-      :delims 0)
+      :delimcsv 0)
     :funcmap
      (intmap
       :csv<-textblock 0
@@ -2309,9 +2309,9 @@
       :total 1)
     :docnums
      (testcoveragenums
-      :pct 0
+      :pct 20
       :testpkg ""
-      :tests 0
+      :tests 1
       :total 5)
     :funcnums
      (testcoveragenums
@@ -2348,7 +2348,13 @@
       :dbcellmap 0
       :dbfield 0
       :dbfieldmap 0
-      :dbtable 0))
+      :dbid 0
+      :dblink 0
+      :dblinklist 0
+      :dbnode 0
+      :dbnote 0
+      :dbtable 0
+      :dbvalue 0))
   :coveragesummary
    (testcoveragesummary
     :bigospacenums
@@ -2373,8 +2379,8 @@
      (testcoveragenums
       :pct 100
       :testpkg ""
-      :tests 6
-      :total 6)
+      :tests 12
+      :total 12)
     :funcnums
      (testcoveragenums
       :pct 100
@@ -2387,13 +2393,13 @@
       :pct 0
       :testpkg ""
       :tests 0
-      :total 6)
+      :total 12)
     :typenums
      (testcoveragenums
       :pct 0
       :testpkg ""
       :tests 0
-      :total 6))
+      :total 12))
   :passfail true
   :testpkg "vx/data/db")
  (testpackage
@@ -2640,20 +2646,2576 @@
   :passfail true
   :testpkg "vx/data/table")
  (testpackage
-  :caselist (testcaselist)
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-first<-delim-delim"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-delim-delim
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :actual
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-first<-string-delimlist"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-string-delimlist
+  "a, b"
+  (delimlist delimspace delimcomma)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :actual
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delim-startpos<-string-delim"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-startpos<-string-delim
+  "a,b"
+  delimcomma))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :actual
+           (delim
+            :name "delimcomma"
+            :starttext ","
+            :endtext ","
+            :startpos 1
+            :endpos 0
+            :delimlist (delimlist))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "delimlist-startpos<-string-delimlist"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (delimlist
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1))
+ (delimlist-startpos<-string-delimlist
+  "a, b"
+  (delimlist delimspace delimcomma)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (delimlist
+            (delim
+             :name "delimspace"
+             :starttext " "
+             :endtext " "
+             :startpos 2
+             :endpos 0
+             :delimlist (delimlist))
+            (delim
+             :name "delimcomma"
+             :starttext ","
+             :endtext ","
+             :startpos 1
+             :endpos 0
+             :delimlist (delimlist)))
+          :actual
+           (delimlist
+            (delim
+             :name "delimspace"
+             :starttext " "
+             :endtext " "
+             :startpos 2
+             :endpos 0
+             :delimlist (delimlist))
+            (delim
+             :name "delimcomma"
+             :starttext ","
+             :endtext ","
+             :startpos 1
+             :endpos 0
+             :delimlist (delimlist)))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-firstdelim<-textblock-delimlist"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (textblock
+  :delim
+   (copy delimcomma
+    :startpos 1)
+  :text " b"
+  :parent
+   (textblock
+    :text "a, b"
+    :textblocks
+     (textblocklist
+      (textblock
+       :text "a"))))
+ (textblock-firstdelim<-textblock-delimlist
+  (textblock
+   :text "a, b")
+  (delimlist delimspace delimcomma)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :name ""
+            :text " b"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name "delimcomma"
+              :starttext ","
+              :endtext ","
+              :startpos 1
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text "a, b"
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks
+               (textblocklist
+                (textblock
+                 :name ""
+                 :text "a"
+                 :line 0
+                 :column 0
+                 :delim
+                  (delim
+                   :name ""
+                   :starttext ""
+                   :endtext ""
+                   :startpos 0
+                   :endpos 0
+                   :delimlist (delimlist))
+                 :textblocks (textblocklist)
+                 :parent
+                  (textblock
+                   :name ""
+                   :text ""
+                   :line 0
+                   :column 0
+                   :delim
+                    (delim
+                     :name ""
+                     :starttext ""
+                     :endtext ""
+                     :startpos 0
+                     :endpos 0
+                     :delimlist (delimlist))
+                   :textblocks (textblocklist)
+                   :parent
+                    (textblock
+                     :name ""
+                     :text ""
+                     :line 0
+                     :column 0
+                     :delim
+                      (delim
+                       :name ""
+                       :starttext ""
+                       :endtext ""
+                       :startpos 0
+                       :endpos 0
+                       :delimlist (delimlist))
+                     :textblocks (textblocklist)
+                     :parent
+                      (textblock
+                       :name ""
+                       :text ""
+                       :line 0
+                       :column 0
+                       :delim
+                        (delim
+                         :name ""
+                         :starttext ""
+                         :endtext ""
+                         :startpos 0
+                         :endpos 0
+                         :delimlist (delimlist))
+                       :textblocks (textblocklist)
+                       :parent
+                        (textblock
+                         :name ""
+                         :text ""
+                         :line 0
+                         :column 0
+                         :delim
+                          (delim
+                           :name ""
+                           :starttext ""
+                           :endtext ""
+                           :startpos 0
+                           :endpos 0
+                           :delimlist (delimlist))
+                         :textblocks (textblocklist)
+                         :parent
+                          (textblock
+                           :name ""
+                           :text ""
+                           :line 0
+                           :column 0
+                           :delim
+                            (delim
+                             :name ""
+                             :starttext ""
+                             :endtext ""
+                             :startpos 0
+                             :endpos 0
+                             :delimlist (delimlist))
+                           :textblocks (textblocklist)
+                           :parent
+                            (textblock
+                             :name ""
+                             :text ""
+                             :line 0
+                             :column 0
+                             :delim
+                              (delim
+                               :name ""
+                               :starttext ""
+                               :endtext ""
+                               :startpos 0
+                               :endpos 0
+                               :delimlist (delimlist))
+                             :textblocks (textblocklist)
+                             :parent
+                              (textblock
+                               :name ""
+                               :text ""
+                               :line 0
+                               :column 0
+                               :delim
+                                (delim
+                                 :name ""
+                                 :starttext ""
+                                 :endtext ""
+                                 :startpos 0
+                                 :endpos 0
+                                 :delimlist (delimlist))
+                               :textblocks (textblocklist)
+                               :parent
+                                (textblock
+                                 :name ""
+                                 :text ""
+                                 :line 0
+                                 :column 0
+                                 :delim
+                                  (delim
+                                   :name ""
+                                   :starttext ""
+                                   :endtext ""
+                                   :startpos 0
+                                   :endpos 0
+                                   :delimlist (delimlist))
+                                 :textblocks (textblocklist)
+                                 :parent
+                                  (textblock
+                                   :name ""
+                                   :text ""
+                                   :line 0
+                                   :column 0
+                                   :delim
+                                    (delim
+                                     :name ""
+                                     :starttext ""
+                                     :endtext ""
+                                     :startpos 0
+                                     :endpos 0
+                                     :delimlist (delimlist))
+                                   :textblocks (textblocklist)
+                                   :parent
+                                    (textblock
+                                     :name ""
+                                     :text ""
+                                     :line 0
+                                     :column 0
+                                     :delim
+                                      (delim
+                                       :name ""
+                                       :starttext ""
+                                       :endtext ""
+                                       :startpos 0
+                                       :endpos 0
+                                       :delimlist (delimlist))
+                                     :textblocks (textblocklist)
+                                     :parent
+                                      (textblock
+                                       :name ""
+                                       :text ""
+                                       :line 0
+                                       :column 0
+                                       :delim
+                                        (delim
+                                         :name ""
+                                         :starttext ""
+                                         :endtext ""
+                                         :startpos 0
+                                         :endpos 0
+                                         :delimlist (delimlist))
+                                       :textblocks (textblocklist)
+                                       :parent
+                                        (textblock
+                                         :name ""
+                                         :text ""
+                                         :line 0
+                                         :column 0
+                                         :delim
+                                          (delim
+                                           :name ""
+                                           :starttext ""
+                                           :endtext ""
+                                           :startpos 0
+                                           :endpos 0
+                                           :delimlist (delimlist))
+                                         :textblocks (textblocklist)
+                                         :parent
+                                          (textblock
+                                           :name ""
+                                           :text ""
+                                           :line 0
+                                           :column 0
+                                           :delim
+                                            (delim
+                                             :name ""
+                                             :starttext ""
+                                             :endtext ""
+                                             :startpos 0
+                                             :endpos 0
+                                             :delimlist (delimlist))
+                                           :textblocks (textblocklist)
+                                           :parent
+                                            (textblock
+                                             :name ""
+                                             :text ""
+                                             :line 0
+                                             :column 0
+                                             :delim
+                                              (delim
+                                               :name ""
+                                               :starttext ""
+                                               :endtext ""
+                                               :startpos 0
+                                               :endpos 0
+                                               :delimlist (delimlist))
+                                             :textblocks (textblocklist)
+                                             :parent
+                                              (textblock
+                                               :name ""
+                                               :text ""
+                                               :line 0
+                                               :column 0
+                                               :delim
+                                                (delim
+                                                 :name ""
+                                                 :starttext ""
+                                                 :endtext ""
+                                                 :startpos 0
+                                                 :endpos 0
+                                                 :delimlist (delimlist))
+                                               :textblocks (textblocklist)
+                                               :parent
+                                                (textblock
+                                                 :name ""
+                                                 :text ""
+                                                 :line 0
+                                                 :column 0
+                                                 :delim
+                                                  (delim
+                                                   :name Error: Max Depth Exceeded
+                                                   :starttext Error: Max Depth Exceeded
+                                                   :endtext Error: Max Depth Exceeded
+                                                   :startpos Error: Max Depth Exceeded
+                                                   :endpos Error: Max Depth Exceeded
+                                                   :delimlist Error: Max Depth Exceeded)
+                                                 :textblocks (textblocklist)
+                                                 :parent
+                                                  (textblock
+                                                   :name Error: Max Depth Exceeded
+                                                   :text Error: Max Depth Exceeded
+                                                   :line Error: Max Depth Exceeded
+                                                   :column Error: Max Depth Exceeded
+                                                   :delim Error: Max Depth Exceeded
+                                                   :textblocks Error: Max Depth Exceeded
+                                                   :parent Error: Max Depth Exceeded)))))))))))))))))))
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :actual
+           (textblock
+            :name ""
+            :text " b"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name "delimcomma"
+              :starttext ","
+              :endtext ","
+              :startpos 1
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text "a, b"
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks
+               (textblocklist
+                (textblock
+                 :name ""
+                 :text "a"
+                 :line 0
+                 :column 0
+                 :delim
+                  (delim
+                   :name ""
+                   :starttext ""
+                   :endtext ""
+                   :startpos 0
+                   :endpos 0
+                   :delimlist (delimlist))
+                 :textblocks (textblocklist)
+                 :parent
+                  (textblock
+                   :name ""
+                   :text ""
+                   :line 0
+                   :column 0
+                   :delim
+                    (delim
+                     :name ""
+                     :starttext ""
+                     :endtext ""
+                     :startpos 0
+                     :endpos 0
+                     :delimlist (delimlist))
+                   :textblocks (textblocklist)
+                   :parent
+                    (textblock
+                     :name ""
+                     :text ""
+                     :line 0
+                     :column 0
+                     :delim
+                      (delim
+                       :name ""
+                       :starttext ""
+                       :endtext ""
+                       :startpos 0
+                       :endpos 0
+                       :delimlist (delimlist))
+                     :textblocks (textblocklist)
+                     :parent
+                      (textblock
+                       :name ""
+                       :text ""
+                       :line 0
+                       :column 0
+                       :delim
+                        (delim
+                         :name ""
+                         :starttext ""
+                         :endtext ""
+                         :startpos 0
+                         :endpos 0
+                         :delimlist (delimlist))
+                       :textblocks (textblocklist)
+                       :parent
+                        (textblock
+                         :name ""
+                         :text ""
+                         :line 0
+                         :column 0
+                         :delim
+                          (delim
+                           :name ""
+                           :starttext ""
+                           :endtext ""
+                           :startpos 0
+                           :endpos 0
+                           :delimlist (delimlist))
+                         :textblocks (textblocklist)
+                         :parent
+                          (textblock
+                           :name ""
+                           :text ""
+                           :line 0
+                           :column 0
+                           :delim
+                            (delim
+                             :name ""
+                             :starttext ""
+                             :endtext ""
+                             :startpos 0
+                             :endpos 0
+                             :delimlist (delimlist))
+                           :textblocks (textblocklist)
+                           :parent
+                            (textblock
+                             :name ""
+                             :text ""
+                             :line 0
+                             :column 0
+                             :delim
+                              (delim
+                               :name ""
+                               :starttext ""
+                               :endtext ""
+                               :startpos 0
+                               :endpos 0
+                               :delimlist (delimlist))
+                             :textblocks (textblocklist)
+                             :parent
+                              (textblock
+                               :name ""
+                               :text ""
+                               :line 0
+                               :column 0
+                               :delim
+                                (delim
+                                 :name ""
+                                 :starttext ""
+                                 :endtext ""
+                                 :startpos 0
+                                 :endpos 0
+                                 :delimlist (delimlist))
+                               :textblocks (textblocklist)
+                               :parent
+                                (textblock
+                                 :name ""
+                                 :text ""
+                                 :line 0
+                                 :column 0
+                                 :delim
+                                  (delim
+                                   :name ""
+                                   :starttext ""
+                                   :endtext ""
+                                   :startpos 0
+                                   :endpos 0
+                                   :delimlist (delimlist))
+                                 :textblocks (textblocklist)
+                                 :parent
+                                  (textblock
+                                   :name ""
+                                   :text ""
+                                   :line 0
+                                   :column 0
+                                   :delim
+                                    (delim
+                                     :name ""
+                                     :starttext ""
+                                     :endtext ""
+                                     :startpos 0
+                                     :endpos 0
+                                     :delimlist (delimlist))
+                                   :textblocks (textblocklist)
+                                   :parent
+                                    (textblock
+                                     :name ""
+                                     :text ""
+                                     :line 0
+                                     :column 0
+                                     :delim
+                                      (delim
+                                       :name ""
+                                       :starttext ""
+                                       :endtext ""
+                                       :startpos 0
+                                       :endpos 0
+                                       :delimlist (delimlist))
+                                     :textblocks (textblocklist)
+                                     :parent
+                                      (textblock
+                                       :name ""
+                                       :text ""
+                                       :line 0
+                                       :column 0
+                                       :delim
+                                        (delim
+                                         :name ""
+                                         :starttext ""
+                                         :endtext ""
+                                         :startpos 0
+                                         :endpos 0
+                                         :delimlist (delimlist))
+                                       :textblocks (textblocklist)
+                                       :parent
+                                        (textblock
+                                         :name ""
+                                         :text ""
+                                         :line 0
+                                         :column 0
+                                         :delim
+                                          (delim
+                                           :name ""
+                                           :starttext ""
+                                           :endtext ""
+                                           :startpos 0
+                                           :endpos 0
+                                           :delimlist (delimlist))
+                                         :textblocks (textblocklist)
+                                         :parent
+                                          (textblock
+                                           :name ""
+                                           :text ""
+                                           :line 0
+                                           :column 0
+                                           :delim
+                                            (delim
+                                             :name ""
+                                             :starttext ""
+                                             :endtext ""
+                                             :startpos 0
+                                             :endpos 0
+                                             :delimlist (delimlist))
+                                           :textblocks (textblocklist)
+                                           :parent
+                                            (textblock
+                                             :name ""
+                                             :text ""
+                                             :line 0
+                                             :column 0
+                                             :delim
+                                              (delim
+                                               :name ""
+                                               :starttext ""
+                                               :endtext ""
+                                               :startpos 0
+                                               :endpos 0
+                                               :delimlist (delimlist))
+                                             :textblocks (textblocklist)
+                                             :parent
+                                              (textblock
+                                               :name ""
+                                               :text ""
+                                               :line 0
+                                               :column 0
+                                               :delim
+                                                (delim
+                                                 :name ""
+                                                 :starttext ""
+                                                 :endtext ""
+                                                 :startpos 0
+                                                 :endpos 0
+                                                 :delimlist (delimlist))
+                                               :textblocks (textblocklist)
+                                               :parent
+                                                (textblock
+                                                 :name ""
+                                                 :text ""
+                                                 :line 0
+                                                 :column 0
+                                                 :delim
+                                                  (delim
+                                                   :name Error: Max Depth Exceeded
+                                                   :starttext Error: Max Depth Exceeded
+                                                   :endtext Error: Max Depth Exceeded
+                                                   :startpos Error: Max Depth Exceeded
+                                                   :endpos Error: Max Depth Exceeded
+                                                   :delimlist Error: Max Depth Exceeded)
+                                                 :textblocks (textblocklist)
+                                                 :parent
+                                                  (textblock
+                                                   :name Error: Max Depth Exceeded
+                                                   :text Error: Max Depth Exceeded
+                                                   :line Error: Max Depth Exceeded
+                                                   :column Error: Max Depth Exceeded
+                                                   :delim Error: Max Depth Exceeded
+                                                   :textblocks Error: Max Depth Exceeded
+                                                   :parent Error: Max Depth Exceeded)))))))))))))))))))
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-startafter<-string-delim"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (textblock
+  :text " b")
+ (textblock-startafter<-string-delim
+  "a, b"
+  (delim
+   :starttext ","
+   :startpos  1)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :name ""
+            :text " b"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name ""
+              :starttext ""
+              :endtext ""
+              :startpos 0
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text ""
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks (textblocklist)
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :actual
+           (textblock
+            :name ""
+            :text " b"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name ""
+              :starttext ""
+              :endtext ""
+              :startpos 0
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text ""
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks (textblocklist)
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/textblock"
+     :casename "textblock-startbefore<-string-delim"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (textblock
+  :text "a")
+ (textblock-startbefore<-string-delim
+  "a, b"
+  (delim
+   :startpos 1)))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :name ""
+            :text "a"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name ""
+              :starttext ""
+              :endtext ""
+              :startpos 0
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text ""
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks (textblocklist)
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :actual
+           (textblock
+            :name ""
+            :text "a"
+            :line 0
+            :column 0
+            :delim
+             (delim
+              :name ""
+              :starttext ""
+              :endtext ""
+              :startpos 0
+              :endpos 0
+              :delimlist (delimlist))
+            :textblocks (textblocklist)
+            :parent
+             (textblock
+              :name ""
+              :text ""
+              :line 0
+              :column 0
+              :delim
+               (delim
+                :name ""
+                :starttext ""
+                :endtext ""
+                :startpos 0
+                :endpos 0
+                :delimlist (delimlist))
+              :textblocks (textblocklist)
+              :parent
+               (textblock
+                :name ""
+                :text ""
+                :line 0
+                :column 0
+                :delim
+                 (delim
+                  :name ""
+                  :starttext ""
+                  :endtext ""
+                  :startpos 0
+                  :endpos 0
+                  :delimlist (delimlist))
+                :textblocks (textblocklist)
+                :parent
+                 (textblock
+                  :name ""
+                  :text ""
+                  :line 0
+                  :column 0
+                  :delim
+                   (delim
+                    :name ""
+                    :starttext ""
+                    :endtext ""
+                    :startpos 0
+                    :endpos 0
+                    :delimlist (delimlist))
+                  :textblocks (textblocklist)
+                  :parent
+                   (textblock
+                    :name ""
+                    :text ""
+                    :line 0
+                    :column 0
+                    :delim
+                     (delim
+                      :name ""
+                      :starttext ""
+                      :endtext ""
+                      :startpos 0
+                      :endpos 0
+                      :delimlist (delimlist))
+                    :textblocks (textblocklist)
+                    :parent
+                     (textblock
+                      :name ""
+                      :text ""
+                      :line 0
+                      :column 0
+                      :delim
+                       (delim
+                        :name ""
+                        :starttext ""
+                        :endtext ""
+                        :startpos 0
+                        :endpos 0
+                        :delimlist (delimlist))
+                      :textblocks (textblocklist)
+                      :parent
+                       (textblock
+                        :name ""
+                        :text ""
+                        :line 0
+                        :column 0
+                        :delim
+                         (delim
+                          :name ""
+                          :starttext ""
+                          :endtext ""
+                          :startpos 0
+                          :endpos 0
+                          :delimlist (delimlist))
+                        :textblocks (textblocklist)
+                        :parent
+                         (textblock
+                          :name ""
+                          :text ""
+                          :line 0
+                          :column 0
+                          :delim
+                           (delim
+                            :name ""
+                            :starttext ""
+                            :endtext ""
+                            :startpos 0
+                            :endpos 0
+                            :delimlist (delimlist))
+                          :textblocks (textblocklist)
+                          :parent
+                           (textblock
+                            :name ""
+                            :text ""
+                            :line 0
+                            :column 0
+                            :delim
+                             (delim
+                              :name ""
+                              :starttext ""
+                              :endtext ""
+                              :startpos 0
+                              :endpos 0
+                              :delimlist (delimlist))
+                            :textblocks (textblocklist)
+                            :parent
+                             (textblock
+                              :name ""
+                              :text ""
+                              :line 0
+                              :column 0
+                              :delim
+                               (delim
+                                :name ""
+                                :starttext ""
+                                :endtext ""
+                                :startpos 0
+                                :endpos 0
+                                :delimlist (delimlist))
+                              :textblocks (textblocklist)
+                              :parent
+                               (textblock
+                                :name ""
+                                :text ""
+                                :line 0
+                                :column 0
+                                :delim
+                                 (delim
+                                  :name ""
+                                  :starttext ""
+                                  :endtext ""
+                                  :startpos 0
+                                  :endpos 0
+                                  :delimlist (delimlist))
+                                :textblocks (textblocklist)
+                                :parent
+                                 (textblock
+                                  :name ""
+                                  :text ""
+                                  :line 0
+                                  :column 0
+                                  :delim
+                                   (delim
+                                    :name ""
+                                    :starttext ""
+                                    :endtext ""
+                                    :startpos 0
+                                    :endpos 0
+                                    :delimlist (delimlist))
+                                  :textblocks (textblocklist)
+                                  :parent
+                                   (textblock
+                                    :name ""
+                                    :text ""
+                                    :line 0
+                                    :column 0
+                                    :delim
+                                     (delim
+                                      :name ""
+                                      :starttext ""
+                                      :endtext ""
+                                      :startpos 0
+                                      :endpos 0
+                                      :delimlist (delimlist))
+                                    :textblocks (textblocklist)
+                                    :parent
+                                     (textblock
+                                      :name ""
+                                      :text ""
+                                      :line 0
+                                      :column 0
+                                      :delim
+                                       (delim
+                                        :name ""
+                                        :starttext ""
+                                        :endtext ""
+                                        :startpos 0
+                                        :endpos 0
+                                        :delimlist (delimlist))
+                                      :textblocks (textblocklist)
+                                      :parent
+                                       (textblock
+                                        :name ""
+                                        :text ""
+                                        :line 0
+                                        :column 0
+                                        :delim
+                                         (delim
+                                          :name ""
+                                          :starttext ""
+                                          :endtext ""
+                                          :startpos 0
+                                          :endpos 0
+                                          :delimlist (delimlist))
+                                        :textblocks (textblocklist)
+                                        :parent
+                                         (textblock
+                                          :name ""
+                                          :text ""
+                                          :line 0
+                                          :column 0
+                                          :delim
+                                           (delim
+                                            :name ""
+                                            :starttext ""
+                                            :endtext ""
+                                            :startpos 0
+                                            :endpos 0
+                                            :delimlist (delimlist))
+                                          :textblocks (textblocklist)
+                                          :parent
+                                           (textblock
+                                            :name ""
+                                            :text ""
+                                            :line 0
+                                            :column 0
+                                            :delim
+                                             (delim
+                                              :name ""
+                                              :starttext ""
+                                              :endtext ""
+                                              :startpos 0
+                                              :endpos 0
+                                              :delimlist (delimlist))
+                                            :textblocks (textblocklist)
+                                            :parent
+                                             (textblock
+                                              :name ""
+                                              :text ""
+                                              :line 0
+                                              :column 0
+                                              :delim
+                                               (delim
+                                                :name ""
+                                                :starttext ""
+                                                :endtext ""
+                                                :startpos 0
+                                                :endpos 0
+                                                :delimlist (delimlist))
+                                              :textblocks (textblocklist)
+                                              :parent
+                                               (textblock
+                                                :name ""
+                                                :text ""
+                                                :line 0
+                                                :column 0
+                                                :delim
+                                                 (delim
+                                                  :name Error: Max Depth Exceeded
+                                                  :starttext Error: Max Depth Exceeded
+                                                  :endtext Error: Max Depth Exceeded
+                                                  :startpos Error: Max Depth Exceeded
+                                                  :endpos Error: Max Depth Exceeded
+                                                  :delimlist Error: Max Depth Exceeded)
+                                                :textblocks (textblocklist)
+                                                :parent
+                                                 (textblock
+                                                  :name Error: Max Depth Exceeded
+                                                  :text Error: Max Depth Exceeded
+                                                  :line Error: Max Depth Exceeded
+                                                  :column Error: Max Depth Exceeded
+                                                  :delim Error: Max Depth Exceeded
+                                                  :textblocks Error: Max Depth Exceeded
+                                                  :parent Error: Max Depth Exceeded))))))))))))))))))))
+          :fn-actual (vx/core/any<-func-async))))))
   :coveragedetail
    (testcoveragedetail
-    :constmap (intmap)
+    :constmap
+     (intmap
+      :delimbracketcurly 0
+      :delimbracketsquare 0
+      :delimclose 0
+      :delimcomma 0
+      :delimcomment 0
+      :delimcommentblock 0
+      :delimline 0
+      :delimnonwhitespace 0
+      :delimparen 0
+      :delimparenline 0
+      :delimquote 0
+      :delimquoteblock 0
+      :delimspace 0
+      :delimtext 0
+      :delimwhitespace 0)
     :funcmap
      (intmap
-      :parse 0
+      :delim-first<-delim-delim 1
+      :delim-first<-string-delimlist 1
+      :delim-startpos<-string-delim 1
+      :delimlist-startpos<-string-delimlist 1
       :stringlist<-textblocklist 0
       :text<-textblock 0
+      :textblock-firstdelim<-textblock-delimlist 1
+      :textblock-startafter<-string-delim 1
+      :textblock-startbefore<-string-delim 1
+      :textblock<-textblock-delim 0
       :textblocks<-textblock 0)
     :testpkg "vx/data/textblock"
     :typemap
      (intmap
-      :delimset 0
+      :delim 0
+      :delimlist 0
       :textblock 0
       :textblocklist 0))
   :coveragesummary
@@ -2672,35 +5234,35 @@
       :total 0)
     :constnums
      (testcoveragenums
-      :pct 100
-      :testpkg ""
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 42
-      :testpkg ""
-      :tests 3
-      :total 7)
-    :funcnums
-     (testcoveragenums
       :pct 0
       :testpkg ""
       :tests 0
-      :total 4)
+      :total 15)
+    :docnums
+     (testcoveragenums
+      :pct 100
+      :testpkg ""
+      :tests 30
+      :total 30)
+    :funcnums
+     (testcoveragenums
+      :pct 63
+      :testpkg ""
+      :tests 7
+      :total 11)
     :testpkg "vx/data/textblock"
     :totalnums
      (testcoveragenums
-      :pct 0
+      :pct 23
       :testpkg ""
-      :tests 0
-      :total 7)
+      :tests 7
+      :total 30)
     :typenums
      (testcoveragenums
       :pct 0
       :testpkg ""
       :tests 0
-      :total 3))
+      :total 4))
   :passfail true
   :testpkg "vx/data/textblock")
  (testpackage
@@ -3272,6 +5834,58 @@
     (testcase
      :passfail true
      :testpkg "vx/type"
+     :casename "int<-string-find"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ 2
+ (int<-string-find "abcdefg" "cd"))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 2
+          :actual 2
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "int<-string-findkeyword"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ 2
+ (int<-string-findkeyword "ab	cdefg" ":whitespace"))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 2
+          :actual 2
+          :fn-actual (vx/core/any<-func-async)))
+       (testdescribe
+        :describename
+         "(test
+ 4
+ (int<-string-findkeyword " 	
+ab" ":nonwhitespace"))"
+        :testpkg ""
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 4
+          :actual 4
+          :fn-actual (vx/core/any<-func-async)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
      :casename "is-string"
      :describelist
       (testdescribelist
@@ -3622,6 +6236,8 @@
      (intmap
       :allowtypenames<-type 0
       :allowtypes<-type 0
+      :int<-string-find 1
+      :int<-string-findkeyword 2
       :is-boolean 0
       :is-decimal 0
       :is-float 0
@@ -3662,23 +6278,23 @@
       :total 0)
     :docnums
      (testcoveragenums
-      :pct 61
+      :pct 65
       :testpkg ""
-      :tests 11
-      :total 18)
+      :tests 13
+      :total 20)
     :funcnums
      (testcoveragenums
-      :pct 50
+      :pct 55
       :testpkg ""
-      :tests 9
-      :total 18)
+      :tests 11
+      :total 20)
     :testpkg "vx/type"
     :totalnums
      (testcoveragenums
-      :pct 50
+      :pct 55
       :testpkg ""
-      :tests 9
-      :total 18)
+      :tests 11
+      :total 20)
     :typenums
      (testcoveragenums
       :pct 100

@@ -52,8 +52,8 @@
     Core.Type_any typ
   ) {
     Core.Class_constdef output = new Core.Class_constdef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
     output.vx_p_type = typ;
     return output;
   }
@@ -66,10 +66,10 @@
     Core.Type_any typ
   ) {
     Core.Class_funcdef output = new Core.Class_funcdef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
-    output.vx_p_idx = Core.t_int.vx_new_from_int(idx);
-    output.vx_p_async = Core.t_boolean.vx_new_from_boolean(async);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
+    output.vx_p_idx = Core.vx_new_int(idx);
+    output.vx_p_async = Core.vx_new_boolean(async);
     output.vx_p_type = typ;
     return output;
   }
@@ -218,6 +218,156 @@
     return output;
   }
 
+  public static Type_boolean vx_new_boolean(final boolean isval) {
+    Type_boolean output = Core.c_false;
+    if (isval) {
+      output = Core.c_true;
+    }
+    return output;
+  }
+
+  public static Type_float vx_new_float(final float fval) {
+    Class_float output = new Core.Class_float();
+    output.vxfloat = fval;
+    return output;
+  }
+
+  public static Type_int vx_new_int(final int ival) {
+    Class_int output = new Core.Class_int();
+    output.vxint = ival;
+    return output;
+  }
+
+  public static Type_string vx_new_string(final String text) {
+    Type_string output;
+    if (text == "" && Core.e_string != null) {
+      output = Core.e_string;
+    } else {
+      Class_string work = new Core.Class_string();
+      work.vxstring = text;
+      output = work;
+    }
+    return output;
+  }
+
+  public static String vx_string_from_any_indent(Core.Type_any value, int indent, boolean linefeed) {
+    String indenttext = " ".repeat(indent);
+    String output = "";
+    if (indent > 50) {
+      output = "Error: Max Depth Exceeded";
+    } else if (value == null) {
+      output = "null";
+    } else if (value == value.vx_type()) {
+      Core.Type_typedef typedef = value.vx_typedef();
+      output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
+    } else if (value instanceof Core.Type_boolean) {
+      Core.Type_boolean valbool = Core.f_any_from_any(Core.t_boolean, value);
+      if (valbool.vx_boolean() == true) {
+        output = "true";
+      } else {
+        output = "false";
+      }
+    } else if (value instanceof Core.Type_decimal) {
+      Core.Type_decimal valdec = Core.f_any_from_any(Core.t_decimal, value);
+      output = valdec.vx_string();
+    } else if (value instanceof Core.Type_float) {
+      Core.Type_float valfloat = Core.f_any_from_any(Core.t_float, value);
+      output = Float.toString(valfloat.vx_float());
+      if (output.endsWith(".0")) {
+        output = output.substring(0, output.length() - 2);
+      }
+    } else if (value instanceof Core.Type_int) {
+      if (value == Core.c_notanumber) {
+        output = "notanumber";
+      } else if (value == Core.c_infinity) {
+        output = "infinity";
+      } else if (value == Core.c_neginfinity) {
+        output = "neginfinity";
+      } else {
+        Core.Type_int valint = Core.f_any_from_any(Core.t_int, value);
+        output = Integer.toString(valint.vx_int());
+      }
+    } else if (value instanceof Core.Type_string) {
+      Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
+      output = "\"" + valstring.vx_string() + "\"";
+    } else if (value instanceof Core.Type_list) {
+      Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
+      Core.Type_typedef typedef = vallist.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      int indentint = indent;
+      indentint += 1;
+      List<Core.Type_any> listval = vallist.vx_list();
+      for (Core.Type_any valsub : listval) {
+        String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        output += "\n " + indenttext + valtext;
+      }
+      if (vallist.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
+    } else if (value instanceof Core.Type_map) {
+      Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
+      Core.Type_typedef typedef = valmap.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      int indentint = indent;
+      indentint += 2;
+      Map<String, Core.Type_any> mapval = valmap.vx_map();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any valsub = mapval.get(key);
+        if (!key.startsWith(":")) {
+          key = ":" + key;
+        }
+        String strval = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        if (strval.contains("\n")) {
+          strval = "\n  " + indenttext + strval;
+        } else {
+          strval = " " + strval;
+        }
+        output += "\n" + indenttext + " " + key + strval;
+      }
+      if (valmap.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
+    } else if (value instanceof Core.Type_struct) {
+      Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
+      Core.Type_typedef typedef = valstruct.vx_typedef();
+      Core.Type_string typedefname = typedef.name();
+      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
+      String valtext = Core.vx_string_from_any_indent(valmap, indent, linefeed);
+      output = valtext.replaceFirst("map", typedefname.vx_string());
+    } else if (value instanceof Core.Type_func) {
+      Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
+      Core.Type_funcdef funcdef = valfunc.vx_funcdef();
+      Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
+      output = funcdefname.vx_string();
+      if (valfunc.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+      }
+      output = "(" + output + ")";
+    }
+    return output;
+  }
+
+  public static String vx_string_from_string_start_end(String text, int start, int end) {
+    String output = "";
+    int len = text.length();
+    if (start >= len) {
+      output = "";
+    } else if (end <= start) {
+      output = "";
+    } else if (end >= len) {
+      output = text.substring(start, len);
+    } else {
+      output = text.substring(start, end);
+    }
+    return output;   
+  }
+
   // Warning!: Blocking
   public static <T extends Core.Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
     T output = Core.f_empty(generic_any_1);
@@ -245,9 +395,9 @@
     Core.Type_argmap properties
   ) {
     Core.Class_typedef output = new Core.Class_typedef();
-    output.vx_p_pkgname = Core.t_string.vx_new_from_string(pkgname);
-    output.vx_p_name = Core.t_string.vx_new_from_string(name);
-    output.vx_p_extend = Core.t_string.vx_new_from_string(extend);
+    output.vx_p_pkgname = Core.vx_new_string(pkgname);
+    output.vx_p_name = Core.vx_new_string(name);
+    output.vx_p_extend = Core.vx_new_string(extend);
     output.vx_p_traits = traits;
     output.vx_p_allowtypes = allowtypes;
     output.vx_p_disallowtypes = disallowtypes;

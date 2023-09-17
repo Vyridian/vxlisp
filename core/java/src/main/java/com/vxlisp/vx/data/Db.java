@@ -2,6 +2,7 @@ package com.vxlisp.vx.data;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.vxlisp.vx.*;
@@ -792,6 +793,668 @@ public final class Db {
   public static final Type_dbfieldmap t_dbfieldmap = new Class_dbfieldmap();
 
   /**
+   * type: dbid
+   * Database id
+   * (type dbid)
+   */
+  public interface Type_dbid extends Core.Type_any {
+    public Db.Type_dbid vx_new(final Object... vals);
+    public Db.Type_dbid vx_copy(final Object... vals);
+    public Db.Type_dbid vx_empty();
+    public Db.Type_dbid vx_type();
+  }
+
+  public static class Class_dbid extends Core.Class_base implements Type_dbid {
+
+    @Override
+    public Type_dbid vx_new(final Object... vals) {return e_dbid.vx_copy(vals);}
+
+    @Override
+    public Type_dbid vx_copy(final Object... vals) {
+      Class_dbid output = new Class_dbid();
+      return output;
+    }
+
+    @Override
+    public Type_dbid vx_empty() {return e_dbid;}
+    @Override
+    public Type_dbid vx_type() {return t_dbid;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dbid", // name
+        ":string", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dbid e_dbid = new Class_dbid();
+  public static final Type_dbid t_dbid = new Class_dbid();
+
+  /**
+   * type: dblink
+   * Database link
+   * (type dblink)
+   */
+  public interface Type_dblink extends Core.Type_struct {
+    public Db.Type_dblink vx_new(final Object... vals);
+    public Db.Type_dblink vx_copy(final Object... vals);
+    public Db.Type_dblink vx_empty();
+    public Db.Type_dblink vx_type();
+    public Db.Type_dbid fromid();
+    public Db.Type_dbid toid();
+  }
+
+  public static class Class_dblink extends Core.Class_base implements Type_dblink {
+
+    protected Db.Type_dbid vx_p_fromid;
+
+    @Override
+    public Db.Type_dbid fromid() {
+      return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
+    }
+
+    protected Db.Type_dbid vx_p_toid;
+
+    @Override
+    public Db.Type_dbid toid() {
+      return this.vx_p_toid == null ? Db.e_dbid : this.vx_p_toid;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":fromid":
+        output = this.fromid();
+        break;
+      case ":toid":
+        output = this.toid();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":fromid", this.fromid());
+      output.put(":toid", this.toid());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_dblink vx_new(final Object... vals) {return e_dblink.vx_copy(vals);}
+
+    @Override
+    public Type_dblink vx_copy(final Object... vals) {
+      Class_dblink output = new Class_dblink();
+      Type_dblink val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      output.vx_p_fromid = val.fromid();
+      output.vx_p_toid = val.toid();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":fromid");
+      validkeys.add(":toid");
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+          }
+          boolean isvalidkey = validkeys.contains(testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dblink) - Invalid Key Type: " + valsub.toString());
+            msgblock = msgblock.vx_copy(msg);
+          }
+        } else {
+          switch (key) {
+          case ":fromid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_fromid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dblink :fromid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":toid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_toid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dblink :toid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dblink) - Invalid Key: " + key);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_dblink vx_empty() {return e_dblink;}
+    @Override
+    public Type_dblink vx_type() {return t_dblink;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dblink", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dblink e_dblink = new Class_dblink();
+  public static final Type_dblink t_dblink = new Class_dblink();
+
+  /**
+   * type: dblinklist
+   * Database link
+   * (type dblinklist)
+   */
+  public interface Type_dblinklist extends Core.Type_list {
+    public Db.Type_dblinklist vx_new(final Object... vals);
+    public Db.Type_dblinklist vx_copy(final Object... vals);
+    public Db.Type_dblinklist vx_empty();
+    public Db.Type_dblinklist vx_type();
+    public List<Db.Type_dblink> vx_listdblink();
+    public Db.Type_dblink vx_dblink(final Core.Type_int index);
+  }
+
+  public static class Class_dblinklist extends Core.Class_base implements Type_dblinklist {
+
+    protected List<Db.Type_dblink> vxlist = Core.immutablelist(new ArrayList<Db.Type_dblink>());
+
+    @Override
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+
+    @Override
+    public Db.Type_dblink vx_dblink(final Core.Type_int index) {
+      Db.Type_dblink output = Db.e_dblink;
+      Class_dblinklist list = this;
+      int iindex = index.vx_int();
+      List<Db.Type_dblink> listval = list.vxlist;
+      if (iindex < listval.size()) {
+        output = listval.get(iindex);
+      }
+      return output;
+    }
+
+    @Override
+    public List<Db.Type_dblink> vx_listdblink() {return vxlist;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_int index) {
+      return this.vx_dblink(index);
+    }
+
+    @Override
+    public Type_dblinklist vx_new(final Object... vals) {return e_dblinklist.vx_copy(vals);}
+
+    @Override
+    public Type_dblinklist vx_copy(final Object... vals) {
+      Class_dblinklist output = new Class_dblinklist();
+      Type_dblinklist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      List<Db.Type_dblink> listval = new ArrayList<>(val.vx_listdblink());
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Db.Type_dblink) {
+          listval.add((Db.Type_dblink)valsub);
+        } else if (valsub instanceof Db.Type_dblink) {
+          listval.add((Db.Type_dblink)valsub);
+        } else if (valsub instanceof Type_dblinklist) {
+          Type_dblinklist multi = (Type_dblinklist)valsub;
+          listval.addAll(multi.vx_listdblink());
+        } else if (valsub instanceof List) {
+          List<?> listunknown = (List<?>)valsub;
+          for (Object item : listunknown) {
+            if (item instanceof Db.Type_dblink) {
+              Db.Type_dblink valitem = (Db.Type_dblink)item;
+              listval.add(valitem);
+            }
+          }
+        } else {
+          Core.Type_msg msg = Core.t_msg.vx_new_error("(new dblinklist) - Invalid Type: " + valsub.toString());
+          msgblock = msgblock.vx_copy(msg);
+        }
+      }
+      output.vxlist = Core.immutablelist(listval);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_dblinklist vx_empty() {return e_dblinklist;}
+    @Override
+    public Type_dblinklist vx_type() {return t_dblinklist;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dblinklist", // name
+        ":list", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Db.t_dblink), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dblinklist e_dblinklist = new Class_dblinklist();
+  public static final Type_dblinklist t_dblinklist = new Class_dblinklist();
+
+  /**
+   * type: dbnode
+   * Database node
+   * (type dbnode)
+   */
+  public interface Type_dbnode extends Core.Type_struct {
+    public Db.Type_dbnode vx_new(final Object... vals);
+    public Db.Type_dbnode vx_copy(final Object... vals);
+    public Db.Type_dbnode vx_empty();
+    public Db.Type_dbnode vx_type();
+    public Db.Type_dbid dbid();
+    public Db.Type_dblinklist links();
+  }
+
+  public static class Class_dbnode extends Core.Class_base implements Type_dbnode {
+
+    protected Db.Type_dbid vx_p_dbid;
+
+    @Override
+    public Db.Type_dbid dbid() {
+      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+    }
+
+    protected Db.Type_dblinklist vx_p_links;
+
+    @Override
+    public Db.Type_dblinklist links() {
+      return this.vx_p_links == null ? Db.e_dblinklist : this.vx_p_links;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":dbid":
+        output = this.dbid();
+        break;
+      case ":links":
+        output = this.links();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":dbid", this.dbid());
+      output.put(":links", this.links());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_dbnode vx_new(final Object... vals) {return e_dbnode.vx_copy(vals);}
+
+    @Override
+    public Type_dbnode vx_copy(final Object... vals) {
+      Class_dbnode output = new Class_dbnode();
+      Type_dbnode val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      output.vx_p_dbid = val.dbid();
+      output.vx_p_links = val.links();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":dbid");
+      validkeys.add(":links");
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+          }
+          boolean isvalidkey = validkeys.contains(testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnode) - Invalid Key Type: " + valsub.toString());
+            msgblock = msgblock.vx_copy(msg);
+          }
+        } else {
+          switch (key) {
+          case ":dbid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnode :dbid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":links":
+            if (valsub instanceof Db.Type_dblinklist) {
+              output.vx_p_links = (Db.Type_dblinklist)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnode :links " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnode) - Invalid Key: " + key);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_dbnode vx_empty() {return e_dbnode;}
+    @Override
+    public Type_dbnode vx_type() {return t_dbnode;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dbnode", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dbnode e_dbnode = new Class_dbnode();
+  public static final Type_dbnode t_dbnode = new Class_dbnode();
+
+  /**
+   * type: dbnote
+   * Database Value
+   * (type dbnote)
+   */
+  public interface Type_dbnote extends Core.Type_struct {
+    public Db.Type_dbnote vx_new(final Object... vals);
+    public Db.Type_dbnote vx_copy(final Object... vals);
+    public Db.Type_dbnote vx_empty();
+    public Db.Type_dbnote vx_type();
+    public Db.Type_dbid dbid();
+    public Db.Type_dbid valid();
+    public Db.Type_dbid noteid();
+    public Db.Type_dbid valueid();
+    public Core.Type_string value();
+  }
+
+  public static class Class_dbnote extends Core.Class_base implements Type_dbnote {
+
+    protected Db.Type_dbid vx_p_dbid;
+
+    @Override
+    public Db.Type_dbid dbid() {
+      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+    }
+
+    protected Db.Type_dbid vx_p_valid;
+
+    @Override
+    public Db.Type_dbid valid() {
+      return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
+    }
+
+    protected Db.Type_dbid vx_p_noteid;
+
+    @Override
+    public Db.Type_dbid noteid() {
+      return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
+    }
+
+    protected Db.Type_dbid vx_p_valueid;
+
+    @Override
+    public Db.Type_dbid valueid() {
+      return this.vx_p_valueid == null ? Db.e_dbid : this.vx_p_valueid;
+    }
+
+    protected Core.Type_string vx_p_value;
+
+    @Override
+    public Core.Type_string value() {
+      return this.vx_p_value == null ? Core.e_string : this.vx_p_value;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":dbid":
+        output = this.dbid();
+        break;
+      case ":valid":
+        output = this.valid();
+        break;
+      case ":noteid":
+        output = this.noteid();
+        break;
+      case ":valueid":
+        output = this.valueid();
+        break;
+      case ":value":
+        output = this.value();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":dbid", this.dbid());
+      output.put(":valid", this.valid());
+      output.put(":noteid", this.noteid());
+      output.put(":valueid", this.valueid());
+      output.put(":value", this.value());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_dbnote vx_new(final Object... vals) {return e_dbnote.vx_copy(vals);}
+
+    @Override
+    public Type_dbnote vx_copy(final Object... vals) {
+      Class_dbnote output = new Class_dbnote();
+      Type_dbnote val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      output.vx_p_dbid = val.dbid();
+      output.vx_p_valid = val.valid();
+      output.vx_p_noteid = val.noteid();
+      output.vx_p_valueid = val.valueid();
+      output.vx_p_value = val.value();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":dbid");
+      validkeys.add(":valid");
+      validkeys.add(":noteid");
+      validkeys.add(":valueid");
+      validkeys.add(":value");
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+          }
+          boolean isvalidkey = validkeys.contains(testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote) - Invalid Key Type: " + valsub.toString());
+            msgblock = msgblock.vx_copy(msg);
+          }
+        } else {
+          switch (key) {
+          case ":dbid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote :dbid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":valid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_valid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote :valid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":noteid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_noteid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote :noteid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":valueid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_valueid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote :valueid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":value":
+            if (valsub instanceof Core.Type_string) {
+              output.vx_p_value = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              output.vx_p_value = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote :value " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbnote) - Invalid Key: " + key);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_dbnote vx_empty() {return e_dbnote;}
+    @Override
+    public Type_dbnote vx_type() {return t_dbnote;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dbnote", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dbnote e_dbnote = new Class_dbnote();
+  public static final Type_dbnote t_dbnote = new Class_dbnote();
+
+  /**
    * type: dbtable
    * Database Table trait
    * (type dbtable)
@@ -981,5 +1644,243 @@ public final class Db {
 
   public static final Type_dbtable e_dbtable = new Class_dbtable();
   public static final Type_dbtable t_dbtable = new Class_dbtable();
+
+  /**
+   * type: dbvalue
+   * Database Value
+   * (type dbvalue)
+   */
+  public interface Type_dbvalue extends Core.Type_struct {
+    public Db.Type_dbvalue vx_new(final Object... vals);
+    public Db.Type_dbvalue vx_copy(final Object... vals);
+    public Db.Type_dbvalue vx_empty();
+    public Db.Type_dbvalue vx_type();
+    public Db.Type_dbid dbid();
+    public Db.Type_dbid fromid();
+    public Db.Type_dbid toid();
+    public Db.Type_dbid noteid();
+    public Db.Type_dbid valid();
+    public Core.Type_string valtext();
+  }
+
+  public static class Class_dbvalue extends Core.Class_base implements Type_dbvalue {
+
+    protected Db.Type_dbid vx_p_dbid;
+
+    @Override
+    public Db.Type_dbid dbid() {
+      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+    }
+
+    protected Db.Type_dbid vx_p_fromid;
+
+    @Override
+    public Db.Type_dbid fromid() {
+      return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
+    }
+
+    protected Db.Type_dbid vx_p_toid;
+
+    @Override
+    public Db.Type_dbid toid() {
+      return this.vx_p_toid == null ? Db.e_dbid : this.vx_p_toid;
+    }
+
+    protected Db.Type_dbid vx_p_noteid;
+
+    @Override
+    public Db.Type_dbid noteid() {
+      return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
+    }
+
+    protected Db.Type_dbid vx_p_valid;
+
+    @Override
+    public Db.Type_dbid valid() {
+      return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
+    }
+
+    protected Core.Type_string vx_p_valtext;
+
+    @Override
+    public Core.Type_string valtext() {
+      return this.vx_p_valtext == null ? Core.e_string : this.vx_p_valtext;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":dbid":
+        output = this.dbid();
+        break;
+      case ":fromid":
+        output = this.fromid();
+        break;
+      case ":toid":
+        output = this.toid();
+        break;
+      case ":noteid":
+        output = this.noteid();
+        break;
+      case ":valid":
+        output = this.valid();
+        break;
+      case ":valtext":
+        output = this.valtext();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":dbid", this.dbid());
+      output.put(":fromid", this.fromid());
+      output.put(":toid", this.toid());
+      output.put(":noteid", this.noteid());
+      output.put(":valid", this.valid());
+      output.put(":valtext", this.valtext());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_dbvalue vx_new(final Object... vals) {return e_dbvalue.vx_copy(vals);}
+
+    @Override
+    public Type_dbvalue vx_copy(final Object... vals) {
+      Class_dbvalue output = new Class_dbvalue();
+      Type_dbvalue val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      output.vx_p_dbid = val.dbid();
+      output.vx_p_fromid = val.fromid();
+      output.vx_p_toid = val.toid();
+      output.vx_p_noteid = val.noteid();
+      output.vx_p_valid = val.valid();
+      output.vx_p_valtext = val.valtext();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":dbid");
+      validkeys.add(":fromid");
+      validkeys.add(":toid");
+      validkeys.add(":noteid");
+      validkeys.add(":valid");
+      validkeys.add(":valtext");
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+          }
+          boolean isvalidkey = validkeys.contains(testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue) - Invalid Key Type: " + valsub.toString());
+            msgblock = msgblock.vx_copy(msg);
+          }
+        } else {
+          switch (key) {
+          case ":dbid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :dbid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":fromid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_fromid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :fromid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":toid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_toid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :toid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":noteid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_noteid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :noteid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":valid":
+            if (valsub instanceof Db.Type_dbid) {
+              output.vx_p_valid = (Db.Type_dbid)valsub;
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :valid " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":valtext":
+            if (valsub instanceof Core.Type_string) {
+              output.vx_p_valtext = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              output.vx_p_valtext = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue :valtext " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_msg msg = Core.t_msg.vx_new_error("(new dbvalue) - Invalid Key: " + key);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_dbvalue vx_empty() {return e_dbvalue;}
+    @Override
+    public Type_dbvalue vx_type() {return t_dbvalue;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/db", // pkgname
+        "dbvalue", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_dbvalue e_dbvalue = new Class_dbvalue();
+  public static final Type_dbvalue t_dbvalue = new Class_dbvalue();
+
+  static {
+  }
 
 }

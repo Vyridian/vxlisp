@@ -3,10 +3,46 @@
 // :headerfunc
 // :header
 
+  // vx_int_from_string_findkeyword(string, string)
+  int vx_int_from_string_findkeyword(std::string text, std::string find);
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
 // :body
+
+  // vx_int_from_string_findkeyword(string, string)
+  int vx_int_from_string_findkeyword(std::string text, std::string find) {
+    int output = -1;
+    if (text != "") {
+      if (find == ":nonwhitespace") {
+        std::string wschars1 = " \n\r\t";
+				int ilen = text.length();
+        for (int i = 0; i < ilen; i++) {
+					char cchar = text[i];
+          int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
+					if (pos < 0) {
+						output = i;
+            break;
+          }
+        }
+      } else if (find == ":whitespace") {
+        std::string wschars2 = " \n\r\t";
+        for (char cchar : wschars2) {
+          int pos = vx_core::vx_int_from_sizet(text.find(cchar));
+          if (pos < 0) {
+          } else if (output < 0) {
+           output = pos;
+          } else if (pos < output) {
+           output = pos;
+          }
+				}
+      } else {
+			  output = text.find(find);
+			}
+		}
+		return output;
+	}
 
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {

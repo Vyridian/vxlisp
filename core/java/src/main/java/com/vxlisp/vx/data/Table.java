@@ -1797,4 +1797,7 @@ public final class Table {
   public static final Type_table e_table = new Class_table();
   public static final Type_table t_table = new Class_table();
 
+  static {
+  }
+
 }

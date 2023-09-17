@@ -624,7 +624,7 @@ public final class Xml {
     public Func_xml_from_textblock vx_type() {return t_xml_from_textblock;}
 
     @Override
-    public Core.Func_any_from_any fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -637,7 +637,7 @@ public final class Xml {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
+      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(0)));
       output = Xml.f_xml_from_textblock(textblock);
       return output;
     }
@@ -660,5 +660,8 @@ public final class Xml {
     return output;
   }
 
+
+  static {
+  }
 
 }

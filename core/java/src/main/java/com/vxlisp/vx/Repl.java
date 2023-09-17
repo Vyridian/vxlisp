@@ -478,8 +478,8 @@ public final class Repl {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(1)));
       output = Repl.f_any_repl_from_functype_args(type, args);
       return output;
     }
@@ -562,9 +562,9 @@ public final class Repl {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       output = Repl.f_any_from_liblist_string(liblist, text, context);
       return output;
     }
@@ -583,7 +583,7 @@ public final class Repl {
     Core.Type_any output = Core.e_any;
     output = Core.f_let(
       Core.t_any,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Repl.Type_repl repl = Repl.f_repl_from_liblist_string(liblist, text);
         return Repl.f_any_from_repl(repl, context);
       })
@@ -652,9 +652,9 @@ public final class Repl {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(2)));
+      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
       CompletableFuture<Core.Type_any> future = Repl.f_any_from_liblist_string_async(liblist, text, context);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -674,7 +674,7 @@ public final class Repl {
     CompletableFuture<Core.Type_any> output = Core.async_new_completed(Core.e_any);
     output = Core.f_let_async(
       Core.t_any,
-      Core.t_any_from_func_async.fn_new(() -> {
+      Core.t_any_from_func_async.vx_fn_new(() -> {
         final Repl.Type_repl repl = Repl.f_repl_from_liblist_string(liblist, text);
         final CompletableFuture<Core.Type_any> future_val = Repl.f_any_from_repl_async(repl, context);
         return Core.async_from_async_fn(future_val, (val) -> {
@@ -742,7 +742,7 @@ public final class Repl {
     public Func_any_from_repl vx_type() {return t_any_from_repl;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -755,8 +755,8 @@ public final class Repl {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Repl.f_any_from_repl(repl, context);
       return output;
     }
@@ -775,7 +775,7 @@ public final class Repl {
     Core.Type_any output = Core.e_any;
     output = Core.f_let(
       Core.t_any,
-      Core.t_any_from_func.fn_new(() -> {
+      Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_any val = repl.val();
         final Core.Type_any repltype = repl.type();
         final Repl.Type_repllist repllist = repl.repllist();
@@ -784,23 +784,23 @@ public final class Repl {
           Core.t_any,
           Core.t_thenelselist.vx_new(
             Core.f_then(
-              Core.t_boolean_from_func.fn_new(() -> {
+              Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_notempty_1(val);
               }),
-              Core.t_any_from_func.fn_new(() -> {
+              Core.t_any_from_func.vx_fn_new(() -> {
                 return val;
               })
             ),
             Core.f_then(
-              Core.t_boolean_from_func.fn_new(() -> {
+              Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_is_func(repltype);
               }),
-              Core.t_any_from_func.fn_new(() -> {
+              Core.t_any_from_func.vx_fn_new(() -> {
                 return Repl.f_any_repl_from_functype_args(repltype, args);
               })
             ),
             Core.f_else(
-              Core.t_any_from_func.fn_new(() -> {
+              Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_new(repltype, args);
               })
             )
@@ -870,7 +870,7 @@ public final class Repl {
     public Func_any_from_repl_async vx_type() {return t_any_from_repl_async;}
 
     @Override
-    public Core.Func_any_from_any_context_async fn_new(Core.Class_any_from_any_context_async.IFn fn) {return Core.e_any_from_any_context_async;}
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {return Core.e_any_from_any_context_async;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -883,8 +883,8 @@ public final class Repl {
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Core.Type_any> future = Repl.f_any_from_repl_async(repl, context);
       output = Core.async_from_async(Core.t_any, future);
       return output;
@@ -962,7 +962,7 @@ public final class Repl {
     public Func_anylist_from_repllist vx_type() {return t_anylist_from_repllist;}
 
     @Override
-    public Core.Func_any_from_any_context fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
@@ -975,8 +975,8 @@ public final class Repl {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Repl.Type_repllist repllist = Core.f_any_from_any(Repl.t_repllist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Repl.Type_repllist repllist = Core.f_any_from_any(Repl.t_repllist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
       output = Repl.f_anylist_from_repllist(repllist, context);
       return output;
     }
@@ -996,7 +996,7 @@ public final class Repl {
     output = Core.f_list_from_list(
       Core.t_anylist,
       repllist,
-      Core.t_any_from_any.fn_new((repl_any) -> {
+      Core.t_any_from_any.vx_fn_new((repl_any) -> {
         Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, repl_any);
         return 
           Repl.f_any_from_repl(repl, context);
@@ -1064,8 +1064,8 @@ public final class Repl {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.t_int.vx_new_from_int(0)));
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.t_int.vx_new_from_int(1)));
+      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       output = Repl.f_repl_from_liblist_string(liblist, text);
       return output;
     }
@@ -1085,5 +1085,8 @@ public final class Repl {
     return output;
   }
 
+
+  static {
+  }
 
 }

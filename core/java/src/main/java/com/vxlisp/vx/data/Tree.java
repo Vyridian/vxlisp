@@ -875,15 +875,13 @@ public final class Tree {
       );
     }
 
-    public static Const_brancharrow_down const_new() {
-      Const_brancharrow_down output = new Const_brancharrow_down();
-      return output;
+    public static void const_new(Const_brancharrow_down output) {
     }
 
 
   }
 
-  public static final Const_brancharrow_down c_brancharrow_down = Const_brancharrow_down.const_new();
+  public static final Const_brancharrow_down c_brancharrow_down = new Const_brancharrow_down();
 
 
   /**
@@ -912,15 +910,13 @@ public final class Tree {
       );
     }
 
-    public static Const_brancharrow_up const_new() {
-      Const_brancharrow_up output = new Const_brancharrow_up();
-      return output;
+    public static void const_new(Const_brancharrow_up output) {
     }
 
 
   }
 
-  public static final Const_brancharrow_up c_brancharrow_up = Const_brancharrow_up.const_new();
+  public static final Const_brancharrow_up c_brancharrow_up = new Const_brancharrow_up();
 
 
   /**
@@ -949,15 +945,19 @@ public final class Tree {
       );
     }
 
-    public static Const_brancharrow_updown const_new() {
-      Const_brancharrow_updown output = new Const_brancharrow_updown();
-      return output;
+    public static void const_new(Const_brancharrow_updown output) {
     }
 
 
   }
 
-  public static final Const_brancharrow_updown c_brancharrow_updown = Const_brancharrow_updown.const_new();
+  public static final Const_brancharrow_updown c_brancharrow_updown = new Const_brancharrow_updown();
 
+
+  static {
+    Const_brancharrow_down.const_new(c_brancharrow_down);
+    Const_brancharrow_up.const_new(c_brancharrow_up);
+    Const_brancharrow_updown.const_new(c_brancharrow_updown);
+  }
 
 }

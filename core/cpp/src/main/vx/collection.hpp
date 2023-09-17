@@ -247,8 +247,7 @@ namespace vx_collection {
     output = vx_collection::f_list_from_list_fn_filter(
       generic_list_1,
       vallist,
-      vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val_any) {
-        vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, val_any);
+      vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val) {
         vx_core::Type_any output_1 = 
           vx_core::f_if(
             vx_core::t_any,

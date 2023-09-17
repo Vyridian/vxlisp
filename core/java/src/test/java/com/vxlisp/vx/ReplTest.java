@@ -20,29 +20,29 @@ public final class ReplTest {
           ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("HelloWorld"),
+              Core.vx_new_string("HelloWorld"),
               Repl.f_any_from_repl(
                 Core.f_new(
                   Repl.t_repl,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":type"),
+                    Core.vx_new_string(":type"),
                     Core.t_string,
-                    Core.t_string.vx_new_from_string(":repllist"),
+                    Core.vx_new_string(":repllist"),
                     Core.f_new(
                       Repl.t_repllist,
                       Core.t_anylist.vx_new(
                         Core.f_new(
                           Repl.t_repl,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":val"),
-                            Core.t_string.vx_new_from_string("Hello")
+                            Core.vx_new_string(":val"),
+                            Core.vx_new_string("Hello")
                           )
                         ),
                         Core.f_new(
                           Repl.t_repl,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":val"),
-                            Core.t_string.vx_new_from_string("World")
+                            Core.vx_new_string(":val"),
+                            Core.vx_new_string("World")
                           )
                         )
                       )
@@ -58,29 +58,29 @@ public final class ReplTest {
           ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))",
           ":testresult",
             Test.f_test(
-              Core.t_int.vx_new_from_int(5),
+              Core.vx_new_int(5),
               Repl.f_any_from_repl(
                 Core.f_new(
                   Repl.t_repl,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":type"),
+                    Core.vx_new_string(":type"),
                     Core.t_plus,
-                    Core.t_string.vx_new_from_string(":repllist"),
+                    Core.vx_new_string(":repllist"),
                     Core.f_new(
                       Repl.t_repllist,
                       Core.t_anylist.vx_new(
                         Core.f_new(
                           Repl.t_repl,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":val"),
-                            Core.t_int.vx_new_from_int(2)
+                            Core.vx_new_string(":val"),
+                            Core.vx_new_int(2)
                           )
                         ),
                         Core.f_new(
                           Repl.t_repl,
                           Core.t_anylist.vx_new(
-                            Core.t_string.vx_new_from_string(":val"),
-                            Core.t_int.vx_new_from_int(3)
+                            Core.vx_new_string(":val"),
+                            Core.vx_new_int(3)
                           )
                         )
                       )

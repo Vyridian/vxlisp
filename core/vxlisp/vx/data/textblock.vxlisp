@@ -1,31 +1,220 @@
 (package vx/data/textblock
+ :libs (lib type :path vx/type)
  :doc "Text parser")
 
-(type delimset
- :extends    :struct
+(type delim : struct
  :properties
-  [start  : stringlist
-   end    : stringlist
-   split  : stringlist
-   subset : delimset])
+  [name      : string
+   starttext : string
+   endtext   : string
+   startpos  : int
+   endpos    : int
+   delimlist : delimlist]
+ :doc "A delimiter type supporting start and end delimiters and positions.")
 
-(type textblock
- :extends     :struct
+(type delimlist : list
+ :allowtypes [delim]
+ :doc "A list of delim.")
+
+(type textblock : struct
  :properties
   [name       : string
    text       : string
    line       : int
    column     : int
-   textblocks : textblocklist])
+   delim      : delim
+   textblocks : textblocklist
+   parent     : textblock]
+ :doc "A textblock is a tree of text used for parsing by delimter.")
 
-(type textblocklist
- :extends      :list
- :allowtypes [textblock])
+(type textblocklist : list
+ :allowtypes [textblock]
+ :doc "A list of textblock.")
 
-(func parse : textblock
- [block         : textblock
-  delimpairlist : delimset]
- block)
+(const delimbracketcurly : delim
+ (delim
+  :name      "delimbracketcurly"
+  :starttext "{"
+  :endtext   "}")
+ :doc "Curly Bracket Delimiter")
+
+(const delimbracketsquare : delim
+ (delim
+  :name      "delimbracketsquare"
+  :starttext "["
+  :endtext   "]")
+ :doc "Square Bracket Delimiter")
+
+(const delimclose : delim
+ (delim
+  :name      "delimclose"
+  :starttext ""
+  :endtext   "")
+ :doc "A placeholder delimiter used to mark the close of whatever is the current delimiter.")
+
+(const delimcomma : delim
+ (delim
+  :name      "delimcomma"
+  :starttext ","
+  :endtext   ",")
+ :doc "Comma Delimiter")
+
+(const delimcomment : delim
+ (delim
+  :name      "delimcomment"
+  :starttext "//"
+  :endtext   "\n")
+ :doc "Comment Delimiter")
+
+(const delimcommentblock : delim
+ (delim
+  :name      "delimcommentblock"
+  :starttext "/*"
+  :endtext   "*/")
+ :doc "Block Comment Delimiter")
+
+(const delimline : delim
+ (delim
+  :name      "delimline"
+  :starttext "\n"
+  :endtext   "\n")
+ :doc "New Line Delimiter")
+
+(const delimnonwhitespace : delim
+ (delim
+  :name      "delimnonwhitespace"
+  :starttext ":nonwhitespace"
+  :endtext   ":whitespace")
+ :doc "Placeholder for delimited non-whitespace")
+
+(const delimparen : delim
+ (delim
+  :name      "delimparen"
+  :starttext "("
+  :endtext   ")")
+ :doc "Parenthesis Delimiter")
+
+(const delimparenline : delim
+ (delim
+  :name      "delimparenline"
+  :starttext "\n("
+  :endtext   ")\n")
+ :doc "Parenthesis with newline Delimiter")
+
+(const delimquote : delim
+ (delim
+  :name      "delimquote"
+  :starttext "\""
+  :endtext   "\"")
+ :doc "Quote Delimiter")
+
+(const delimquoteblock : delim
+ (delim
+  :name      "delimquoteblock"
+  :starttext "`"
+  :endtext   "`")
+ :doc "Block Quote Delimiter")
+
+(const delimspace : delim
+ (delim
+  :name      "delimspace"
+  :starttext " "
+  :endtext   " ")
+ :doc "Space Delimiter")
+
+(const delimtext : delim
+ (delim
+  :name "delimtext")
+ :doc "Placeholder for delimited text")
+
+(const delimwhitespace : delim
+ (delim
+  :name      "delimwhitespace"
+  :starttext ":whitespace"
+  :endtext   ":nonwhitespace")
+ :doc "Placeholder for delimited whitespace")
+
+(func delim-first<-delim-delim : delim
+ [delim1 : delim
+  delim2 : delim]
+ (let : delim
+  [pos1 : int := (:startpos delim1)
+   pos2 : int := (:startpos delim2)]
+  (if : delim
+   (then (is-empty delim2) delim1)
+   (then (is-empty delim1) delim2)
+   (then (< pos2 0) delim1)
+   (then (< pos1 0) delim2)
+   (then (< pos2 pos1) delim2)
+   (else delim1)))
+ :test
+  (test
+   (copy delimcomma
+    :startpos 1)
+   (delim-first<-delim-delim
+    (copy delimspace
+     :startpos 2)
+    (copy delimcomma
+     :startpos 1)))
+ :doc "Returns non-empty delim with lowest, non-negative startpos found in string.")
+
+(func delim-first<-string-delimlist : delim
+ [text      : string
+  delimlist : delimlist]
+ (let
+  [resolvedlist : delimlist :=
+   (delimlist-startpos<-string-delimlist text delimlist)]
+  (any<-list-reduce : delim
+   resolvedlist
+   (delim)
+   delim-first<-delim-delim))
+ :test
+  (test
+   (copy delimcomma
+    :startpos 1)
+   (delim-first<-string-delimlist
+    "a, b"
+    (delimlist delimspace delimcomma)))
+ :doc "Returns delim with lowest startpos found in string.")
+
+(func delim-startpos<-string-delim : delim
+ [text  : string
+  delim : delim]
+ (let : delim
+  [find : string := (:starttext delim)
+   pos  : int := 
+    (if : int
+	   (then (= find "") -1)
+	   (else (int<-string-findkeyword text find)))]
+  (copy delim :startpos pos))
+ :test
+  (test
+   (copy delimcomma
+    :startpos 1)
+   (delim-startpos<-string-delim
+    "a,b"
+    delimcomma))
+ :doc "Return a delim with istart updated to position of first starttext.")
+
+(func delimlist-startpos<-string-delimlist : delimlist
+ [text      : string
+  delimlist : delimlist]
+ (list<-list : delimlist
+  delimlist
+  (fn : delim
+   [delim : delim]
+   (delim-startpos<-string-delim text delim)))
+ :test
+  (test
+   (delimlist
+    (copy delimspace
+     :startpos 2)
+    (copy delimcomma
+     :startpos 1))
+   (delimlist-startpos<-string-delimlist
+    "a, b"
+    (delimlist delimspace delimcomma)))
+ :doc "Returns a delimlist with each delim updated to position of first starttext.")
 
 (func stringlist<-textblocklist : stringlist
  [textblocks : textblocklist]
@@ -38,6 +227,100 @@
  [block : textblock]
  (:text block)
  :doc "Returns the text from a given textblock.")
+
+(func textblock-firstdelim<-textblock-delimlist : textblock
+ [textblock : textblock
+  delimlist : delimlist]
+ (let : textblock
+  [text  : string := (:text textblock)
+   delim : delim  := (delim-first<-string-delimlist text delimlist)]
+  (if : textblock
+   (then (is-empty delim) textblock)
+   (else
+    (let : textblock
+     [textblockbefore : textblock     := (textblock-startbefore<-string-delim text delim)
+      textblockafter  : textblock     := (textblock-startafter<-string-delim text delim)
+      textblocks      : textblocklist := (:textblocks textblock)
+      addtextblocks   : textblocklist :=
+       (if : textblocklist
+        (then (is-empty textblockbefore) textblocks)
+        (then (is-empty textblocks) (textblocklist textblockbefore))
+        (else (copy textblocks textblockbefore)))
+      parent          : textblock     := (copy textblock
+                                          :textblocks addtextblocks)]
+     (copy textblockafter
+      :delim  delim
+      :parent parent)))))
+ :test
+  (test
+   (textblock
+    :delim
+     (copy delimcomma
+      :startpos 1)
+    :text " b"
+    :parent
+     (textblock
+      :text "a, b"
+      :textblocks
+       (textblocklist
+        (textblock
+         :text "a"))))
+   (textblock-firstdelim<-textblock-delimlist
+    (textblock
+     :text "a, b")
+    (delimlist delimspace delimcomma)))
+ :doc "Returns textblock with delim with lowest startpos found in text.")
+
+(func textblock-startafter<-string-delim : textblock
+ [text  : string
+  delim : delim]
+ (let
+  [startpos  : int    := (:startpos delim)
+   starttext : string := (:starttext delim)
+   delimlen  : int    := (length<-string starttext)
+   beginpos  : int    := (+ startpos delimlen)]
+  (if
+   (then (= text "")    (textblock))
+   (then (< startpos 0) (textblock))
+   (else
+    (textblock
+     :text (string<-string-start text beginpos)))))
+ :test
+  (test
+   (textblock
+    :text " b")
+   (textblock-startafter<-string-delim
+    "a, b"
+    (delim
+     :starttext ","
+     :startpos  1)))
+ :doc "Returns a textblock constructed from the text after the current delimiter start.")
+
+(func textblock-startbefore<-string-delim : textblock
+ [text  : string
+  delim : delim]
+ (let
+  [startpos : int := (:startpos delim)]
+  (if
+   (then (= text "")    (textblock))
+   (then (< startpos 0) (textblock))
+   (else
+    (textblock
+     :text (string<-string-start-end text 0 startpos)))))
+ :test
+  (test
+   (textblock
+    :text "a")
+   (textblock-startbefore<-string-delim
+    "a, b"
+    (delim
+     :startpos 1)))
+ :doc "Returns a textblock constructed from the text before the current delimiter start.")
+
+(func textblock<-textblock-delim : textblock
+ [textblock : textblock
+  delim     : delim]
+ :doc "Returns a parsed textblock from an unparsed one.")
 
 (func textblocks<-textblock : textblocklist
  [block : textblock]

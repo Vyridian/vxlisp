@@ -181,11 +181,9 @@ namespace vx_sample {
   // class Class_myconst {
 
     // vx_const_new()
-    vx_sample::Const_myconst vx_sample::Class_myconst::vx_const_new() {
-      vx_sample::Const_myconst output = new vx_sample::Class_myconst();
+    void vx_sample::Class_myconst::vx_const_new(vx_sample::Const_myconst output) {
       output->vx_p_int = 4;
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -402,7 +400,8 @@ namespace vx_sample {
       vx_core::vx_reserve_empty(vx_sample::e_mytype);
       vx_sample::t_mytype = new Class_mytype();
       vx_core::vx_reserve_type(vx_sample::t_mytype);
-      vx_sample::c_myconst = vx_sample::Class_myconst::vx_const_new();
+      vx_sample::c_myconst = new vx_sample::Class_myconst();
+      vx_sample::Class_myconst::vx_const_new(vx_sample::c_myconst);
       vx_sample::e_main = new vx_sample::Class_main();
       vx_core::vx_reserve_empty(vx_sample::e_main);
       vx_sample::t_main = new vx_sample::Class_main();

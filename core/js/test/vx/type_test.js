@@ -23,11 +23,11 @@ export default class vx_type_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/type", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 61, ":tests", 11, ":total", 18), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 50, ":tests", 9, ":total", 18), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 13, ":total", 20), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 11, ":total", 20), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 50, ":tests", 9, ":total", 18), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 11, ":total", 20), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -49,6 +49,8 @@ export default class vx_type_test {
           vx_core.t_intmap,
           "allowtypenames<-type", 0,
           "allowtypes<-type", 0,
+          "int<-string-find", 1,
+          "int<-string-findkeyword", 2,
           "is-boolean", 0,
           "is-decimal", 0,
           "is-float", 0,
@@ -67,6 +69,64 @@ export default class vx_type_test {
           "traits<-typedef", 0
         )
     )
+  }
+
+  static f_int_from_string_find(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "int<-string-find",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 2\n (int<-string-find \"abcdefg\" \"cd\"))",
+            ":testresult",
+            vx_test.f_test(
+              2,
+              vx_type.f_int_from_string_find("abcdefg", "cd"),
+              context
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_int_from_string_findkeyword(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "int<-string-findkeyword",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 2\n (int<-string-findkeyword \"ab\tcdefg\" \":whitespace\"))",
+            ":testresult",
+            vx_test.f_test(
+              2,
+              vx_type.f_int_from_string_findkeyword("ab\tcdefg", ":whitespace"),
+              context
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 4\n (int<-string-findkeyword \" \t\n\rab\" \":nonwhitespace\"))",
+            ":testresult",
+            vx_test.f_test(
+              4,
+              vx_type.f_int_from_string_findkeyword(" \t\n\rab", ":nonwhitespace"),
+              context
+            )
+          )
+        )
+    )
+    return output
   }
 
   static f_is_string(context) {
@@ -524,6 +584,8 @@ export default class vx_type_test {
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
+      vx_type_test.f_int_from_string_find(context),
+      vx_type_test.f_int_from_string_findkeyword(context),
       vx_type_test.f_is_string(context),
       vx_type_test.f_is_type(context),
       vx_type_test.f_is_type_from_any_typelist(context),

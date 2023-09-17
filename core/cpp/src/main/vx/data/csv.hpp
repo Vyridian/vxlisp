@@ -17,9 +17,9 @@ namespace vx_data_csv {
   typedef Abstract_csvrows* Type_csvrows;
   extern Type_csvrows e_csvrows;
   extern Type_csvrows t_csvrows;
-  class Class_delims;
-  typedef Class_delims* Const_delims;
-  extern Const_delims c_delims;
+  class Class_delimcsv;
+  typedef Class_delimcsv* Const_delimcsv;
+  extern Const_delimcsv c_delimcsv;
   class Abstract_csv_from_textblock;
   typedef Abstract_csv_from_textblock* Func_csv_from_textblock;
   extern Func_csv_from_textblock e_csv_from_textblock;
@@ -102,10 +102,10 @@ namespace vx_data_csv {
     virtual vx_core::Type_stringlist vx_get_stringlist(vx_core::Type_int index) const override;
   };
 
-  // (const delims)
-  class Class_delims : public vx_data_textblock::Class_delimset {
+  // (const delimcsv)
+  class Class_delimcsv : public vx_data_textblock::Class_delim {
   public:
-    static vx_data_csv::Const_delims vx_const_new();
+    static void vx_const_new(vx_data_csv::Const_delimcsv output);
     vx_core::Type_constdef vx_constdef() const;
   };
 

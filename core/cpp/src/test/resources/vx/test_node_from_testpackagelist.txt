@@ -13,6 +13,12 @@
       :styles
        (vx/web/html/stylelist
         (vx/web/html/style
+         :name "body"
+         :props
+          (vx/web/html/propmap
+           :font-family "sans-serif"
+           :font-size "0.9em"))
+        (vx/web/html/style
          :name "details summary"
          :props
           (vx/web/html/propmap
@@ -25,8 +31,6 @@
           (vx/web/html/propmap
            :border-collapse "collapse"
            :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
-           :font-family "sans-serif"
-           :font-size "0.9em"
            :margin "25px 0"
            :min-width "400px"
            :vertical-align "top"))
@@ -203,6 +207,13 @@
             :font-family "monospace"
             :unicode-bidi "embed"
             :white-space "pre"))
+        :body
+         (vx/web/html/style
+          :name "body"
+          :props
+           (vx/web/html/propmap
+            :font-family "sans-serif"
+            :font-size "0.9em"))
         :details summary
          (vx/web/html/style
           :name "details summary"
@@ -218,8 +229,6 @@
            (vx/web/html/propmap
             :border-collapse "collapse"
             :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
-            :font-family "sans-serif"
-            :font-size "0.9em"
             :margin "25px 0"
             :min-width "400px"
             :vertical-align "top"))

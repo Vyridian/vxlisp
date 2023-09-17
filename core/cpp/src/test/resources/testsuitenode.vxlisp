@@ -13,6 +13,12 @@
       :styles
        (vx/web/html/stylelist
         (vx/web/html/style
+         :name "body"
+         :props
+          (vx/web/html/propmap
+           :font-family "sans-serif"
+           :font-size "0.9em"))
+        (vx/web/html/style
          :name "details summary"
          :props
           (vx/web/html/propmap
@@ -25,8 +31,6 @@
           (vx/web/html/propmap
            :border-collapse "collapse"
            :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
-           :font-family "sans-serif"
-           :font-size "0.9em"
            :margin "25px 0"
            :min-width "400px"
            :vertical-align "top"))
@@ -203,6 +207,13 @@
             :font-family "monospace"
             :unicode-bidi "embed"
             :white-space "pre"))
+        :body
+         (vx/web/html/style
+          :name "body"
+          :props
+           (vx/web/html/propmap
+            :font-family "sans-serif"
+            :font-size "0.9em"))
         :details summary
          (vx/web/html/style
           :name "details summary"
@@ -218,8 +229,6 @@
            (vx/web/html/propmap
             :border-collapse "collapse"
             :box-shadow "0 0 20px rgba(0, 0, 0, 0.15)"
-            :font-family "sans-serif"
-            :font-size "0.9em"
             :margin "25px 0"
             :min-width "400px"
             :vertical-align "top"))
@@ -4345,7 +4354,7 @@
                  (vx/web/html/p
                   :text "0% 0/2")
                  (vx/web/html/p
-                  :text "0% 0/5")
+                  :text "20% 1/5")
                  (vx/web/html/p
                   :text "0% 0/2")
                  (vx/web/html/p
@@ -4744,19 +4753,19 @@
                  (vx/web/html/p
                   :text "vx/data/textblock")
                  (vx/web/html/p
-                  :text "0% 0/7")
-                 (vx/web/html/p
-                  :text "0% 0/3")
-                 (vx/web/html/p
-                  :text "100% 0/0")
+                  :text "23% 7/30")
                  (vx/web/html/p
                   :text "0% 0/4")
                  (vx/web/html/p
-                  :text "42% 3/7")
+                  :text "0% 0/15")
                  (vx/web/html/p
-                  :text "0% 0/4")
+                  :text "63% 7/11")
                  (vx/web/html/p
-                  :text "0% 0/4"))
+                  :text "100% 30/30")
+                 (vx/web/html/p
+                  :text "0% 0/11")
+                 (vx/web/html/p
+                  :text "0% 0/11"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -4765,7 +4774,355 @@
                     (vx/web/html/table
                      :tbody
                       (vx/web/html/tbody
-                       :nodes (vx/web/html/trlist))
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "delim-first<-delim-delim")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-delim-delim
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "delim-first<-string-delimlist")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-first<-string-delimlist
+  \"a, b\"
+  (delimlist delimspace delimcomma)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "delim-startpos<-string-delim")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (copy delimcomma
+  :startpos 1)
+ (delim-startpos<-string-delim
+  \"a,b\"
+  delimcomma))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delim
+ :name \"delimcomma\"
+ :starttext \",\"
+ :endtext \",\"
+ :startpos 1)")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "delimlist-startpos<-string-delimlist")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (delimlist
+  (copy delimspace
+   :startpos 2)
+  (copy delimcomma
+   :startpos 1))
+ (delimlist-startpos<-string-delimlist
+  \"a, b\"
+  (delimlist delimspace delimcomma)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delimlist
+ (vx/data/textblock/delim
+  :name \"delimspace\"
+  :starttext \" \"
+  :endtext \" \"
+  :startpos 2)
+ (vx/data/textblock/delim
+  :name \"delimcomma\"
+  :starttext \",\"
+  :endtext \",\"
+  :startpos 1))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/delimlist
+ (vx/data/textblock/delim
+  :name \"delimspace\"
+  :starttext \" \"
+  :endtext \" \"
+  :startpos 2)
+ (vx/data/textblock/delim
+  :name \"delimcomma\"
+  :starttext \",\"
+  :endtext \",\"
+  :startpos 1))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "textblock-firstdelim<-textblock-delimlist")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (textblock
+  :delim
+   (copy delimcomma
+    :startpos 1)
+  :text \" b\"
+  :parent
+   (textblock
+    :text \"a, b\"
+    :textblocks
+     (textblocklist
+      (textblock
+       :text \"a\"))))
+ (textblock-firstdelim<-textblock-delimlist
+  (textblock
+   :text \"a, b\")
+  (delimlist delimspace delimcomma)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \" b\"
+ :delim
+  (vx/data/textblock/delim
+   :name \"delimcomma\"
+   :starttext \",\"
+   :endtext \",\"
+   :startpos 1)
+ :parent
+  (vx/data/textblock/textblock
+   :text \"a, b\"
+   :textblocks
+    (vx/data/textblock/textblocklist
+     (vx/data/textblock/textblock
+      :text \"a\"))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \" b\"
+ :delim
+  (vx/data/textblock/delim
+   :name \"delimcomma\"
+   :starttext \",\"
+   :endtext \",\"
+   :startpos 1)
+ :parent
+  (vx/data/textblock/textblock
+   :text \"a, b\"
+   :textblocks
+    (vx/data/textblock/textblocklist
+     (vx/data/textblock/textblock
+      :text \"a\"))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "textblock-startafter<-string-delim")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (textblock
+  :text \" b\")
+ (textblock-startafter<-string-delim
+  \"a, b\"
+  (delim
+   :starttext \",\"
+   :startpos  1)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \" b\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \" b\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "textblock-startbefore<-string-delim")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (textblock
+  :text \"a\")
+ (textblock-startbefore<-string-delim
+  \"a, b\"
+  (delim
+   :startpos 1)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \"a\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text \"a\")")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes
@@ -5433,19 +5790,19 @@
                  (vx/web/html/p
                   :text "vx/type")
                  (vx/web/html/p
-                  :text "50% 9/18")
+                  :text "55% 11/20")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "50% 9/18")
+                  :text "55% 11/20")
                  (vx/web/html/p
-                  :text "61% 11/18")
+                  :text "65% 13/20")
                  (vx/web/html/p
-                  :text "0% 0/18")
+                  :text "0% 0/20")
                  (vx/web/html/p
-                  :text "0% 0/18"))
+                  :text "0% 0/20"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -5456,6 +5813,100 @@
                       (vx/web/html/tbody
                        :nodes
                         (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "int<-string-find")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 2
+ (int<-string-find \"abcdefg\" \"cd\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "2")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "2")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "int<-string-findkeyword")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 2
+ (int<-string-findkeyword \"ab	cdefg\" \":whitespace\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "2")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "2")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "int<-string-findkeyword")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 4
+ (int<-string-findkeyword \" 	
+ab\" \":nonwhitespace\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "4")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "4")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist

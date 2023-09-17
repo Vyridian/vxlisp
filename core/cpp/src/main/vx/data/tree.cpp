@@ -1039,10 +1039,8 @@ namespace vx_data_tree {
   // class Class_brancharrow_down {
 
     // vx_const_new()
-    vx_data_tree::Const_brancharrow_down vx_data_tree::Class_brancharrow_down::vx_const_new() {
-      vx_data_tree::Const_brancharrow_down output = new vx_data_tree::Class_brancharrow_down();
+    void vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::Const_brancharrow_down output) {
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -1073,10 +1071,8 @@ namespace vx_data_tree {
   // class Class_brancharrow_up {
 
     // vx_const_new()
-    vx_data_tree::Const_brancharrow_up vx_data_tree::Class_brancharrow_up::vx_const_new() {
-      vx_data_tree::Const_brancharrow_up output = new vx_data_tree::Class_brancharrow_up();
+    void vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::Const_brancharrow_up output) {
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -1107,10 +1103,8 @@ namespace vx_data_tree {
   // class Class_brancharrow_updown {
 
     // vx_const_new()
-    vx_data_tree::Const_brancharrow_updown vx_data_tree::Class_brancharrow_updown::vx_const_new() {
-      vx_data_tree::Const_brancharrow_updown output = new vx_data_tree::Class_brancharrow_updown();
+    void vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::Const_brancharrow_updown output) {
       vx_core::vx_reserve_type(output);
-      return output;
     }
 
     // vx_constdef()
@@ -1182,9 +1176,12 @@ namespace vx_data_tree {
       vx_core::vx_reserve_empty(vx_data_tree::e_tree);
       vx_data_tree::t_tree = new Class_tree();
       vx_core::vx_reserve_type(vx_data_tree::t_tree);
-      vx_data_tree::c_brancharrow_down = vx_data_tree::Class_brancharrow_down::vx_const_new();
-      vx_data_tree::c_brancharrow_up = vx_data_tree::Class_brancharrow_up::vx_const_new();
-      vx_data_tree::c_brancharrow_updown = vx_data_tree::Class_brancharrow_updown::vx_const_new();
+      vx_data_tree::c_brancharrow_down = new vx_data_tree::Class_brancharrow_down();
+      vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::c_brancharrow_down);
+      vx_data_tree::c_brancharrow_up = new vx_data_tree::Class_brancharrow_up();
+      vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::c_brancharrow_up);
+      vx_data_tree::c_brancharrow_updown = new vx_data_tree::Class_brancharrow_updown();
+      vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::c_brancharrow_updown);
     }
     vx_core::vx_Type_mapany vx_Class_package::maptype() {
       vx_core::vx_Type_mapany output;

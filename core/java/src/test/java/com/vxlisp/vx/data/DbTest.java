@@ -21,12 +21,12 @@ public final class DbTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/db", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 6, ":total", 6), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 12, ":total", 12), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
       ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
       ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12)
     );
   }
 
@@ -39,7 +39,13 @@ public final class DbTest {
         ":dbcellmap", 0,
         ":dbfield", 0,
         ":dbfieldmap", 0,
-        ":dbtable", 0
+        ":dbid", 0,
+        ":dblink", 0,
+        ":dblinklist", 0,
+        ":dbnode", 0,
+        ":dbnote", 0,
+        ":dbtable", 0,
+        ":dbvalue", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
   

@@ -141,8 +141,7 @@ namespace vx_collection_test {
                     vx_core::vx_new_string("d")
                   })
                 ),
-                vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any val_any) {
-                  vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, val_any);
+                vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any val) {
                   vx_core::Type_any output_1 = 
                     vx_core::f_if_2(
                       vx_core::t_string,

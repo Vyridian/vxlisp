@@ -4,26 +4,22 @@
        (lib tb :path vx/data/textblock)
  :doc "Csv handler")
 
-(type csv
- :extends    :struct
+(type csv : struct
  :properties
   [headers : stringlist
    rows    : csvrows])
 
-(type csvrows
- :extends      :list
+(type csvrows : list
  :allowtypes [stringlist])
 
-(const delims : tb/delimset
- (tb/delimset
-  :split (stringlist "\n")
-  :subset
-   (tb/delimset
-    :split (stringlist ",")
-    :subset
-     (tb/delimset
-      :start (stringlist "\"")
-      :end   (stringlist "\"")))))
+(const delimcsv : tb/delim
+ (tb/delim
+  :name "delimcsv"
+  :delimlist
+   (tb/delimlist
+    (copy delimline
+     :delimlist (tb/delimlist tb/delimquote tb/delimcomma))))
+ :doc "Csv File Delimiters")
 
 (func csv<-textblock : csv
  [textblock : tb/textblock]
@@ -36,7 +32,7 @@
 (func csvrows<-textblock : csvrows
  [textblock : tb/textblock]
  (let
-  [parsedtb : tb/textblock := (tb/parse textblock delims)
+  [parsedtb : tb/textblock     := (tb/textblock<-textblock-delim textblock delimcsv)
    childtbs : tb/textblocklist := (tb/textblocks<-textblock parsedtb)
-   strings  : stringlist := (tb/stringlist<-textblocklist childtbs)]
+   strings  : stringlist       := (tb/stringlist<-textblocklist childtbs)]
   (csvrows strings)))

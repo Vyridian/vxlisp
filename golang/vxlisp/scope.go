@@ -28,6 +28,12 @@ func ArgFromListScope(listscope []vxscope, argname string) (vxarg, bool) {
 func ConstFromListScope(listscope []vxscope, pkgname string, cnstname string) (*vxconst, bool) {
 	var cnst *vxconst
 	var ok = false
+	if pkgname == "" {
+		var ipos = IntFromStringFindLast(cnstname, "/")
+		if ipos > 0 {
+			cnstname = cnstname[ipos+1:]
+		}
+	}
 	for _, scope := range listscope {
 		if pkgname == "" {
 			mapconst := scope.mapconst

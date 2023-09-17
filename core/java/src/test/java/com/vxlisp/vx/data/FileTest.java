@@ -24,10 +24,10 @@ public final class FileTest {
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("boolean_exists_from_file.txt"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources/vx")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("boolean_exists_from_file.txt"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources/vx")
                   )
                 )
               ),
@@ -54,13 +54,13 @@ public final class FileTest {
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("boolean_write_from_file_string.txt"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources/vx")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("boolean_write_from_file_string.txt"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources/vx")
                   )
                 ),
-                Core.t_string.vx_new_from_string("writetext"),
+                Core.vx_new_string("writetext"),
                 context
               ),
               context
@@ -85,22 +85,22 @@ public final class FileTest {
               Core.f_new(
                 File.t_file,
                 Core.t_anylist.vx_new(
-                  Core.t_string.vx_new_from_string(":name"),
-                  Core.t_string.vx_new_from_string("string_read_from_file.txt"),
-                  Core.t_string.vx_new_from_string(":path"),
-                  Core.t_string.vx_new_from_string("src/test/resources/vx"),
-                  Core.t_string.vx_new_from_string(":text"),
-                  Core.t_string.vx_new_from_string("testdata")
+                  Core.vx_new_string(":name"),
+                  Core.vx_new_string("string_read_from_file.txt"),
+                  Core.vx_new_string(":path"),
+                  Core.vx_new_string("src/test/resources/vx"),
+                  Core.vx_new_string(":text"),
+                  Core.vx_new_string("testdata")
                 )
               ),
               File.f_file_read_from_file(
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("string_read_from_file.txt"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources/vx")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("string_read_from_file.txt"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources/vx")
                   )
                 ),
                 context
@@ -124,15 +124,15 @@ public final class FileTest {
           ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
           ":testresult",
             Test.f_test(
-              Core.t_string.vx_new_from_string("testdata"),
+              Core.vx_new_string("testdata"),
               File.f_string_read_from_file(
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
-                    Core.t_string.vx_new_from_string(":name"),
-                    Core.t_string.vx_new_from_string("string_read_from_file.txt"),
-                    Core.t_string.vx_new_from_string(":path"),
-                    Core.t_string.vx_new_from_string("src/test/resources/vx")
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("string_read_from_file.txt"),
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("src/test/resources/vx")
                   )
                 ),
                 context

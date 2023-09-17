@@ -1,8 +1,7 @@
 (package vx/state
  :doc "State handler")
 
-(type value-map
- :extends    :map
+(type value-map : map
  :allowtypes [any])
 
 (func change : boolean

@@ -2,16 +2,29 @@
 
 ## Overview
 
-* vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere'. It also tries to address a large number of complaints I have with other languages.
+* vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere'. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
 
 ## Sample
 
-    (func foo : int               // function foo() returns integer
-     [arg1 : int                  // arg1
-      arg2 : int]                 // arg2
-     (+ arg1 arg2)                // arg1 + arg2
-     :test (test 3 (foo 1 2))     // A Test case {expect: 3, actual: {foo 1 2}}
-     :doc  "Foo function returns an integer after adding arg1 and arg2")
+    (type person : struct
+     :properties [firstname : string
+                  lastname  : string]
+     :doc "A type/template/class/structure representing a person.")
+
+    (const johndoe : person
+     (person
+      :firstname "John"
+      :lastname  "Doe")
+     :doc "A constant representing a particular person.")
+
+    (func fullname : string
+     [person : person]
+     (string
+      (:firstname person)
+      " "
+      (:lastname  person))
+     :test (test "John Doe" (fullname johndoe)) // A Test case {expect: "John Doe"}
+     :doc  "Returns fullname from any person type.")
 
 ## Folder Structure
 
@@ -23,37 +36,57 @@
 
 ## FAQ
 
+* Aren't there already too many languages? - I agree completely. The ubiquity of beutiful, niche languages is exactly the inspiration for this one. vxlisp is a model for a new language that can break the hamster-wheel of shifting languages.
+
+1. Choosing a Language - The first problem with existing languages is you need to choose one for your task. You could choose the most used languages to be safe (e.g. JavaScript, Java, C++), or you could choose a more niche language that might fit your coding style or the project requirements (e.g. Typescript, Scala, Clojure, Rust, Dart).
+
+2. Language Limitiations - Now you are working through your project and realize that a key feature you need is not available in your language or is extremely convoluted (e.g. futures) or has poor performance for your use case (e.g. distributed systems). Too bad. You are committed to the language. Changing now is not realistic, or... you start from scratch.
+
+3. Platform Lockin - You have mastered a language and finished your project, but one day your vendor changes his licensing or goes out of business (e.g. Java Applet, Adobe Flash, Unity Runtime, D&D OGL, Cloud Service Providers). Too bad. You are committed to the language. Changing now is not realistic, or... you start from scratch.
+
+4. Language Obsolesence - You have mastered a language and finished your project, but one day your language is no longer the 'It' language, you need a job in another language, or worse is fading in usage and support (e.g. Elm, Ruby, VisualBasic, Scala, Perl, Haskell, Erlang). Too bad. You are committed to the language. Changing now is not realistic, or... you start from scratch.
+
+5. Library Obsolesence - You have mastered a language and finished your project, but one day you start a new project and for whatever reason it would be best in another language/platform. All of your perfectly working and tested libraries are useless. Too bad. You are committed to the new language. Porting your existing work would be very painful, or... you start from scratch.
+
 * What is vxlisp?
 
-1. vxlisp is a simple data structure similar to JSON, but it is simpler and more consistent while also being able to describe complex objects and functions.
+1. vxlisp is easy to learn with simple, concise, consistent, readable syntax. It seeks to make programming more modular and reliable by standardizing like Lego pieces. If focuses on making the most common programming cases easier.
 
-2. vxlisp is a meta language designed to be natively compiled to other languages. It is sort of like Typescript's relationship to Javascript or Kotlin's relationship to Java.
+2. vxlisp is easy to setup. Unzip the folder, write some code, run the executable file, and you are up and running with JavaScript. The built-in webserver even serves up your code and testscripts.
 
-3. vxlisp is a transparency layer so that code can be more easily read, shared, tested, and ported between applications and platforms.
+3. vxlisp is a full featured language including documentation, test cases, meta tags, type-safety, data structures, generic types, multiple-inheritance, asynchronous/futures, memory management, state management, and a read-execute-print-loop. All of these should be noticably easier to code in vxlisp than their original languages.
 
-4. vxlisp is a mass-production tool allowing the quick and concise creation of many complex interconnected objects while maintaining readability.
+4. vxlisp is a simple data structure similar to JSON, but it is simpler and more consistent while also being able to describe complex objects and functions.
 
-5. vxlisp is a future-proofing tool allowing code to be recompiled in the future when new languages or features appear.
+5. vxlisp is a meta language designed to be natively compiled to other languages. It is sort of like Typescript's relationship to Javascript or Kotlin's relationship to Java. However, since it generates plain old native code, it can be interspersed with native code in any amount you might prefer.
+
+6. vxlisp is a transparency layer so that code can be more easily read, shared, tested, and ported between applications and platforms. It can evolve directly from a specification requirement to production/test code.
+
+7. vxlisp is a mass-production tool allowing the quick and concise creation of many complex interconnected objects while maintaining readability.
+
+8. vxlisp is a future-proofing tool allowing code to be recompiled in the future when new languages or features appear.
+
+9. vxlisp is very compact, readable language. The equivalent native code vxlisp generates is 10x-20x as large as the original including test suite and documenation.
 
 * What is vxlisp not?
 
 1. vxlisp is not a platform. vxlisp produces plain old (JavaScript/Java/C++) for any purpose. vxlisp does not require outside libraries (except Java:JUnit for test support)
 
-2. vxlisp is not a replacement for other languages. Instead it is meant to interact with existing platforms and languages.
+2. vxlisp compliments other languages instead of replacing them. Instead it is meant to interact with existing platforms and languages. vxlisp generates plain old native objects that are written into your existing native project. Write as much native code as you like inside or outside vxlisp (though native code is not cross-platform).
 
 * Write once, run anywhere is a pipedream. How can it possibly work? - Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
 
 * New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, though its only in its infancy, I'm very pleased with the result.
 
-* What is its best use cases?
+* What are its best use cases?
 
-** Collaboration - It should be suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application.
+1. Collaboration - It should be suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application.
 
-** Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work.
+2. Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work.
 
-** Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases.
+3. Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases.
 
-** Difficult Languages - It could be helpful for developers who wants to work on platforms that require languages they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
+4. Difficult Languages - It could be helpful for developers who wants to work on platforms that require languages they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
 
 * Everyone has a bias. What is yours? - I admit it. I love Functional Programming and Test driven development. I dislike Imperitive programming, and Object-Oriented programming. I also dislike vendor lockin, large corporations, and I am horrified by the probable impact of AI.
 
@@ -86,18 +119,15 @@
       (+ arg1 arg2))
 
 * What does type declaration look like? -
-    (type personlist
-     :extends    :list
+    (type personlist : list
      :allowtypes [person]
      :doc "This is a list of person")
 
-    (type personmap
-     :extends    :map
+    (type personmap : map
      :allowtypes [person]
      :doc "This is a hash map of person")
 
-    (type person
-     :extends    :struct
+    (type person : struct
      :properties [name    : string     :doc "The person's name"
                   age     : number     :doc "The person's age"
                   kidlist : personlist :doc "List of kids"
@@ -137,5 +167,7 @@
     (any<-list   kidlist 0)
     (any<-map    kidmap "Jack")
     (any<-struct person "name")
+
+* Why did you choose unusual naming conventions? - My goal was to write a language targetting beginner programmers with no particular bias toward an existing language. Generally, when searching for a function you already know the return type, so I place return type first to make it easy for type ahead or other sorting to find the return type I seek.
 
 * Overall, how do you feel about vxlisp? - I've been writing code since 1980 and have seen a lot of languages come and go. vxlisp brings together so many concepts that I have struggled with in the past, so it is a pleasure to work with. It feels like my Magnum Opus, and I feel it's muse calling to me. It feels damn good.

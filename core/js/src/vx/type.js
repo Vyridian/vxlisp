@@ -3,7 +3,41 @@
 import vx_core from "../vx/core.js"
 
 export default class vx_type {
-  /**
+
+  static vx_int_from_string_findkeyword(text, find) {
+    let output = -1
+    if (text != "") {
+      switch (find) {
+      case ":nonwhitespace":
+        const wschars1 = [" ", "\n", "\r", "\t"]
+        let ilen = text.length
+        for (let i = 0; i < ilen; i++) {
+          const char = text.charAt(i)
+          if (!wschars1.includes(char)) {
+            output = i
+            break
+          }
+        }
+        break
+      case ":whitespace":
+        const wschars2 = [" ", "\n", "\r", "\t"]
+        for (let char of wschars2) {
+          const pos = text.indexOf(char)
+          if (pos < 0) {
+          } else if (output < 0) {
+           output = pos
+          } else if (pos < output) {
+           output = pos
+          }
+        }
+        break
+      default:
+        output = text.indexOf(find)
+        break
+      }
+    }
+    return output
+  }  /**
    * @function allowtypenames_from_type
    * Get the name of a given type
    * @param  {any} type
@@ -36,6 +70,38 @@ export default class vx_type {
       vx_core.f_typedef_from_type(type),
       ":allowtypes"
     )
+    return output
+  }
+
+  /**
+   * @function int_from_string_find
+   * Returns integer position of find string in text string.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {int}
+   */
+  static t_int_from_string_find = {}
+  static e_int_from_string_find = {vx_type: vx_type.t_int_from_string_find}
+
+  static f_int_from_string_find(text, find) {
+    let output = vx_core.e_int
+    output = text.indexOf(find)
+    return output
+  }
+
+  /**
+   * @function int_from_string_findkeyword
+   * Returns integer position of find string in text string. Note: the find terms :whitespace and :nonwhitespace have special meaning.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {int}
+   */
+  static t_int_from_string_findkeyword = {}
+  static e_int_from_string_findkeyword = {vx_type: vx_type.t_int_from_string_findkeyword}
+
+  static f_int_from_string_findkeyword(text, find) {
+    let output = vx_core.e_int
+    output = vx_type.vx_int_from_string_findkeyword(text, find)
     return output
   }
 
@@ -350,6 +416,8 @@ export default class vx_type {
   static c_empty = {
     "allowtypenames<-type": vx_type.e_allowtypenames_from_type,
     "allowtypes<-type": vx_type.e_allowtypes_from_type,
+    "int<-string-find": vx_type.e_int_from_string_find,
+    "int<-string-findkeyword": vx_type.e_int_from_string_findkeyword,
     "is-boolean": vx_type.e_is_boolean,
     "is-decimal": vx_type.e_is_decimal,
     "is-float": vx_type.e_is_float,
@@ -408,6 +476,44 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_allowtypes_from_type
+    }
+
+    // (func int_from_string_find)
+    vx_type.t_int_from_string_find['vx_type'] = vx_core.t_type
+    vx_type.t_int_from_string_find['vx_value'] = {
+      name          : "int<-string-find",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_int_from_string_find
+    }
+
+    // (func int_from_string_findkeyword)
+    vx_type.t_int_from_string_findkeyword['vx_type'] = vx_core.t_type
+    vx_type.t_int_from_string_findkeyword['vx_value'] = {
+      name          : "int<-string-findkeyword",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_int_from_string_findkeyword
     }
 
     // (func is_boolean)

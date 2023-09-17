@@ -396,6 +396,14 @@ let-async
     return output;
   }
 
+  // vx_copy(T, copyval, args)
+  template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
+    T* output;
+    vx_core::Type_any val = copyval->vx_copy(copyval, vals);
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_empty(T)
   template <class T> static T* vx_empty(T* generic_any_1) {
     T* output;
@@ -841,7 +849,9 @@ let-async
   // vx_int_from_sizet(size_t)
   long vx_int_from_sizet(std::size_t size) {
     long output = 0;
-    if (size > 100000000) {
+    if (size == std::string::npos) {
+      output = -1;
+    } else if (size > 100000000) {
       output = 100000000;
     } else {
       output = static_cast<long>(size);

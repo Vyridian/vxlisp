@@ -17,10 +17,11 @@ export default class vx_data_csv {
    */
   static t_csvrows = {}
   /**
-   * Constant: delims
-   * {delimset}
+   * Constant: delimcsv
+   * Csv File Delimiters
+   * {delim}
    */
-  static c_delims = {vx_type: vx_data_textblock.t_delimset}
+  static c_delimcsv = {vx_type: vx_data_textblock.t_delim}
 
   /**
    * @function csv_from_textblock
@@ -65,9 +66,9 @@ export default class vx_data_csv {
       {"any-1": vx_data_csv.t_csvrows},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const parsedtb = vx_data_textblock.f_parse(
+        const parsedtb = vx_data_textblock.f_textblock_from_textblock_delim(
           textblock,
-          vx_data_csv.c_delims
+          vx_data_csv.c_delimcsv
         )
         const childtbs = vx_data_textblock.f_textblocks_from_textblock(parsedtb)
         const strings = vx_data_textblock.f_stringlist_from_textblocklist(childtbs)
@@ -147,34 +148,21 @@ export default class vx_data_csv {
     }
     vx_data_csv.e_csvrows['vx_type'] = vx_data_csv.t_csvrows
 
-    // (const delims)
-    Object.assign(vx_data_csv.c_delims, vx_core.f_new(
-      vx_data_textblock.t_delimset,
-      ":split",
+    // (const delimcsv)
+    Object.assign(vx_data_csv.c_delimcsv, vx_core.f_new(
+      vx_data_textblock.t_delim,
+      ":name",
+      "delimcsv",
+      ":delimlist",
       vx_core.f_new(
-        vx_core.t_stringlist,
-        "\n"
-      ),
-      ":subset",
-      vx_core.f_new(
-        vx_data_textblock.t_delimset,
-        ":split",
-        vx_core.f_new(
-          vx_core.t_stringlist,
-          ","
-        ),
-        ":subset",
-        vx_core.f_new(
-          vx_data_textblock.t_delimset,
-          ":start",
+        vx_data_textblock.t_delimlist,
+        vx_core.f_copy(
+          vx_data_textblock.c_delimline,
+          ":delimlist",
           vx_core.f_new(
-            vx_core.t_stringlist,
-            "\""
-          ),
-          ":end",
-          vx_core.f_new(
-            vx_core.t_stringlist,
-            "\""
+            vx_data_textblock.t_delimlist,
+            vx_data_textblock.c_delimquote,
+            vx_data_textblock.c_delimcomma
           )
         )
       )
