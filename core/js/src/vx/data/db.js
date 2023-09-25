@@ -35,17 +35,59 @@ export default class vx_data_db {
   static t_dbfieldmap = {}
 
   /**
+   * type: dbid
+   * Database id
+   */
+  static t_dbid = {}
+
+  /**
+   * type: dblink
+   * Database link
+   */
+  static t_dblink = {}
+
+  /**
+   * type: dblinklist
+   * Database link
+   */
+  static t_dblinklist = {}
+
+  /**
+   * type: dbnode
+   * Database node
+   */
+  static t_dbnode = {}
+
+  /**
+   * type: dbnote
+   * Database Value
+   */
+  static t_dbnote = {}
+
+  /**
    * type: dbtable
    * Database Table trait
    */
   static t_dbtable = {}
+
+  /**
+   * type: dbvalue
+   * Database Value
+   */
+  static t_dbvalue = {}
   // empty types
   static e_db = {}
   static e_dbcell = {}
   static e_dbcellmap = {}
   static e_dbfield = {}
   static e_dbfieldmap = {}
+  static e_dbid = {}
+  static e_dblink = {}
+  static e_dblinklist = []
+  static e_dbnode = {}
+  static e_dbnote = {}
   static e_dbtable = {}
+  static e_dbvalue = {}
 
   static c_empty = {
     "db": vx_data_db.e_db,
@@ -53,7 +95,13 @@ export default class vx_data_db {
     "dbcellmap": vx_data_db.e_dbcellmap,
     "dbfield": vx_data_db.e_dbfield,
     "dbfieldmap": vx_data_db.e_dbfieldmap,
-    "dbtable": vx_data_db.e_dbtable
+    "dbid": vx_data_db.e_dbid,
+    "dblink": vx_data_db.e_dblink,
+    "dblinklist": vx_data_db.e_dblinklist,
+    "dbnode": vx_data_db.e_dbnode,
+    "dbnote": vx_data_db.e_dbnote,
+    "dbtable": vx_data_db.e_dbtable,
+    "dbvalue": vx_data_db.e_dbvalue
   }
 
 
@@ -215,6 +263,160 @@ export default class vx_data_db {
     vx_data_db.e_dbfieldmap['vx_type'] = vx_data_db.t_dbfieldmap
     vx_data_db.e_dbfieldmap['vx_value'] = {}
 
+    // (type dbid)
+    vx_data_db.t_dbid['vx_type'] = vx_core.t_type
+    vx_data_db.t_dbid['vx_value'] = {
+      name          : "dbid",
+      pkgname       : "vx/data/db",
+      extends       : ":string",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_data_db.e_dbid['vx_type'] = vx_data_db.t_dbid
+    vx_data_db.e_dbid['vx_value'] = {}
+
+    // (type dblink)
+    vx_data_db.t_dblink['vx_type'] = vx_core.t_type
+    vx_data_db.t_dblink['vx_value'] = {
+      name          : "dblink",
+      pkgname       : "vx/data/db",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "fromid": {
+          "name" : "fromid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "toid": {
+          "name" : "toid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "toid",
+        "type" : vx_data_db.t_dbid,
+        "multi": false
+      }
+    }
+    vx_data_db.e_dblink['vx_type'] = vx_data_db.t_dblink
+    vx_data_db.e_dblink['vx_value'] = {}
+
+    // (type dblinklist)
+    vx_data_db.t_dblinklist['vx_type'] = vx_core.t_type
+    vx_data_db.t_dblinklist['vx_value'] = {
+      name          : "dblinklist",
+      pkgname       : "vx/data/db",
+      extends       : ":list",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_data_db.t_dblink],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_data_db.e_dblinklist['vx_type'] = vx_data_db.t_dblinklist
+
+    // (type dbnode)
+    vx_data_db.t_dbnode['vx_type'] = vx_core.t_type
+    vx_data_db.t_dbnode['vx_value'] = {
+      name          : "dbnode",
+      pkgname       : "vx/data/db",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "dbid": {
+          "name" : "dbid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "links": {
+          "name" : "links",
+          "type" : vx_data_db.t_dblinklist,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "links",
+        "type" : vx_data_db.t_dblinklist,
+        "multi": false
+      }
+    }
+    vx_data_db.e_dbnode['vx_type'] = vx_data_db.t_dbnode
+    vx_data_db.e_dbnode['vx_value'] = {}
+
+    // (type dbnote)
+    vx_data_db.t_dbnote['vx_type'] = vx_core.t_type
+    vx_data_db.t_dbnote['vx_value'] = {
+      name          : "dbnote",
+      pkgname       : "vx/data/db",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "dbid": {
+          "name" : "dbid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "valid": {
+          "name" : "valid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "noteid": {
+          "name" : "noteid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "valueid": {
+          "name" : "valueid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "value": {
+          "name" : "value",
+          "type" : vx_core.t_string,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "value",
+        "type" : vx_core.t_string,
+        "multi": false
+      }
+    }
+    vx_data_db.e_dbnote['vx_type'] = vx_data_db.t_dbnote
+    vx_data_db.e_dbnote['vx_value'] = {}
+
     // (type dbtable)
     vx_data_db.t_dbtable['vx_type'] = vx_core.t_type
     vx_data_db.t_dbtable['vx_value'] = {
@@ -258,6 +460,60 @@ export default class vx_data_db {
     }
     vx_data_db.e_dbtable['vx_type'] = vx_data_db.t_dbtable
     vx_data_db.e_dbtable['vx_value'] = {}
+
+    // (type dbvalue)
+    vx_data_db.t_dbvalue['vx_type'] = vx_core.t_type
+    vx_data_db.t_dbvalue['vx_value'] = {
+      name          : "dbvalue",
+      pkgname       : "vx/data/db",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "dbid": {
+          "name" : "dbid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "fromid": {
+          "name" : "fromid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "toid": {
+          "name" : "toid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "noteid": {
+          "name" : "noteid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "valid": {
+          "name" : "valid",
+          "type" : vx_data_db.t_dbid,
+          "multi": false
+        },
+        "valtext": {
+          "name" : "valtext",
+          "type" : vx_core.t_string,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "valtext",
+        "type" : vx_core.t_string,
+        "multi": false
+      }
+    }
+    vx_data_db.e_dbvalue['vx_type'] = vx_data_db.t_dbvalue
+    vx_data_db.e_dbvalue['vx_value'] = {}
 
   }
 }

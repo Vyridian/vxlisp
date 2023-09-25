@@ -186,7 +186,24 @@
   :js "vals.join(delim)"
   :java
    "output = Type.vx_string_from_stringlist_join(vals, delim);")
- :test (test "a$b$c" (string<-stringlist-join (stringlist "a" "b" "c") "$")))
+ :test (test
+        "a$b$c"
+        (string<-stringlist-join (stringlist "a" "b" "c") "$"))
+ :doc "Returns a string by joining a stringlist by the delimiter")
+
+(func stringlist<-string-split : stringlist
+ [text  : string
+  delim : string]
+ (native
+  :cpp
+   "vx_type::vx_stringlist_from_string_split(text, delim);"
+  :js "vx_type.vx_stringlist_from_string_split(text, delim)"
+  :java
+   "Type.vx_stringlist_from_string_split(text, delim);")
+ :test (test
+        (stringlist "a" "b" "c")
+        (stringlist<-string-split "a$b$c" "$"))
+ :doc "Returns a stringlist by splitting a string by the delimiter")
 
 (func traitnames<-any : stringlist
  [val : any]

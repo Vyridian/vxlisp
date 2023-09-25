@@ -2,8 +2,8 @@
 
 ## Conventions
 
-* Spaces or Tabs - Spaces because tabs are hidden and formatting in vxlisp is intentional.
-* LF, CRLF, or CR - LF (Linefeeds) are used to stick to the open standard of UNIX/Linux.
+* Spaces or Tabs? - Only 1 space is normally used for indentation, so spaces are more logical. Besides that tabs are hidden and formatting in vxlisp is intended to be used for consistent readability.
+* LF, CRLF, or CR - LF (Linefeeds) are used to stick to the open standard of UNIX/Linux instead of Windows or Apple.
 * UTF-8 or ANSI - UTF-8 is the simple standard that supports localization.
 * Whitespace - Any amount of whitespace is a single delimiter except inside "" or ``
 * lower-case, CamelCase, camelCase - lower-case because hyphens are more readable and vxlisp does not confuse hyphen with minus sign. camelCase is gross.
@@ -51,13 +51,88 @@
 
 ## Overloading
 
+* Functions may be redefined as often as you like. The compiler will choose the first match it find based on package include order and top-down within a package.
+
 ## Async
 
-## Context
+* Asynchronous functions in vxlisp are easier than any other language I've encountered. The state of the art in async is the async/await pattern. vxlisp is effectively the same lets you ignore the async completely. It automatically detects the use of async function and creating continuation future chains for you. The only requirement is that any function that uses an async must also be async.
+
+Sample JavaScript:
+
+async function httpget(url) {
+...
+  return promise; // promise of string
+}
+
+let text = await httpget("http:..");
+
+Sample vxlisp:
+
+(func httpget : string
+ [url :string]
+ ...
+ (string)
+:async)
+
+(let
+ [text : string := (httpget "http:..")])
+
+## Project
+
+* project.vxlisp - There can be only one project file and it must be in the root of your project and it must be named project.vxlisp.
+
+* (project) - The project file must have only one (project) type and nothing else.
+
+Sample Project:
+
+(project core                      // The name of the project
+ :version    "0.5"                 // The version of the project
+ :author     ""                    // The author of the project
+ :doc        "The vx/core project" // The description of the project for documentation.
+ :javadomain "com.vxlisp"          // A special variable for Java project prefixing
+ :libs                             // A list of libraries to include when building a language.
+  (lib javaniofile
+   :path "java.nio.file.*"
+   :lang :java)
+ :cmds                             // A list of command line options available.
+  (cmd srccpp
+   :code    :source
+   :lang    :cpp
+   :path    ../cpp/src/main
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build C++ Source Code")
+)
+
+### Libraries
+
+### Commands
+
+Commands are command line options when running the vxlisp executable. Any number of commands may be chained into one command line.
+
+Sample:
+vxlisp_win64 doc srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
+
+* :main - When you build a project, the main function will be run when the application starts. This setting can be changed to any function you choose. The setting is found in your project file project.vxlisp:
+
+(project
+ :cmds
+  (cmd
+   :main vx/core/main))
+
+### Context
+
+* When you build a project, the context function will be run when the application starts to generate application level context. This setting can be changed to any function you choose. The setting is found in your project file project.vxlisp:
+
+(project
+ :cmds
+  (cmd
+   :context vx/core/context))
+
+## Packages
 
 ## Types
 
 ## Constants
 
 ## Functions
-

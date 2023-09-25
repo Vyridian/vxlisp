@@ -177,22 +177,6 @@ public final class Core {
     return output;
   }
 
-  public static void debug(Object... values) {
-    for (Object value : values) {
-      String text = "";
-      if (value == null) {
-        text = "null";
-      } else if (value instanceof Core.Type_any) {
-        Core.Type_any val_any = (Core.Type_any)value;
-        Core.Type_string valstring = Core.f_string_from_any(val_any);
-        text = valstring.vx_string();
-      } else {
-        text = value.toString();
-      }
-      System.out.println(text);
-    }
-  }
-
   @SafeVarargs
   public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {
     LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
@@ -231,9 +215,120 @@ public final class Core {
         T castval = (T)value;
         output.put(key, castval);
       } catch (Exception ex) {
-        Core.debug("map<-map", ex);
+        Core.vx_log("map<-map", ex);
       }
     }
+    return output;
+  }
+
+  // vx_float_from_string(string)
+  public static float vx_float_from_string(String text) {
+    float output = 0;
+    try {
+      output = Float.parseFloat(text);
+    } catch (Exception e) {
+    }    
+    return output;
+  }
+
+  // vx_int_from_string(string)
+  public static int vx_int_from_string(String text) {
+    int output = 0;
+    try {
+      output = Integer.parseInt(text);
+    } catch (Exception e) {
+    }    
+    return output;
+  }
+
+  // vx_is_float(string)
+  public static boolean vx_is_float(String text) {
+    boolean output = false;
+    try {
+      Float.parseFloat(text);
+      output = true;
+    } catch (Exception e) {
+    }    
+    return output;
+  }
+
+  // vx_is_int(string)
+  public static boolean vx_is_int(String text) {
+    boolean output = false;
+    try {
+      Integer.parseInt(text);
+      output = true;
+    } catch (Exception e) {
+    }    
+    return output;
+  }
+
+  // vx_is_int(any)
+  public static boolean vx_is_int(Core.Type_any value) {
+    boolean result = false;
+    if (value == Core.c_infinity) {
+      result = true;
+    } else if (value == Core.c_neginfinity) {
+      result = true;
+    } else if (value == Core.c_notanumber) {
+      result = true;
+    } else if (value instanceof Core.Type_int) {
+      result = true;
+    } else if (value instanceof Core.Type_float) {
+      Core.Type_float valfloat = (Core.Type_float)value;
+      float floatval = valfloat.vx_float();
+      if ((int)floatval == floatval) {
+        result = true;
+      }
+    } else if (value instanceof Core.Type_decimal) {
+      Core.Type_decimal valdec = (Core.Type_decimal)value;
+      String strval = valdec.vx_string();
+      try {
+        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
+          result = true;
+        }
+      } catch (Exception ex) {
+      }
+    } else if (value instanceof Core.Type_string) {
+      Core.Type_string valstr = (Core.Type_string)value;
+      String strval = valstr.vx_string();
+      result = vx_is_int(strval);
+    }
+    return result;
+  }
+
+  // vx_log(object...)
+  public static void vx_log(Object... values) {
+    for (Object value : values) {
+      String text = "";
+      if (value == null) {
+        text = "null";
+      } else if (value instanceof Core.Type_any) {
+        Core.Type_any val_any = (Core.Type_any)value;
+        Core.Type_string valstring = Core.f_string_from_any(val_any);
+        text = valstring.vx_string();
+      } else {
+        text = value.toString();
+      }
+      System.out.println(text);
+    }
+  }
+
+  // vx_msg_error
+  public static Type_msg vx_msg_error(final String text) {
+    Class_msg output = new Class_msg();
+    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception
+  public static Type_msg vx_msg_from_exception(final String text, final Exception err) {
+    Class_msg output = new Class_msg();
+    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_severity = Core.c_msg_severe;
+    output.err = err;
+    Core.vx_log(output);
     return output;
   }
 
@@ -269,6 +364,10 @@ public final class Core {
     return output;
   }
 
+  public static String vx_string_from_any(Core.Type_any value) {
+    return vx_string_from_any_indent(value, 0, false);
+  }
+
   public static String vx_string_from_any_indent(Core.Type_any value, int indent, boolean linefeed) {
     String indenttext = " ".repeat(indent);
     String output = "";
@@ -277,8 +376,14 @@ public final class Core {
     } else if (value == null) {
       output = "null";
     } else if (value == value.vx_type()) {
-      Core.Type_typedef typedef = value.vx_typedef();
-      output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
+      if (value instanceof Core.Type_func) {
+        Core.Type_func valuefunc = (Core.Type_func)value;
+        Core.Type_funcdef funcdef = valuefunc.vx_funcdef();
+        output = funcdef.pkgname().vx_string() + "/" + funcdef.name().vx_string();
+      } else {
+        Core.Type_typedef typedef = value.vx_typedef();
+        output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
+      }
     } else if (value instanceof Core.Type_boolean) {
       Core.Type_boolean valbool = Core.f_any_from_any(Core.t_boolean, value);
       if (valbool.vx_boolean() == true) {
@@ -387,19 +492,6 @@ public final class Core {
     return output;   
   }
 
-  // Warning!: Blocking
-  public static <T extends Core.Type_any> T sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
-    T output = Core.f_empty(generic_any_1);
-    try {
-      output = future.get();
-    } catch (Exception e) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("sync<-async", e);
-      Core.Type_any val = generic_any_1.vx_new(msg);
-      output = Core.f_any_from_any(generic_any_1, val);
-    }
-    return output;
-  }
-
   public static Core.Type_typedef typedef_new(
     String pkgname,
     String name,
@@ -425,6 +517,30 @@ public final class Core {
     output.vx_p_allowvalues = disallowvalues;
     output.vx_p_disallowvalues = disallowvalues;
     output.vx_p_properties = properties;
+    return output;
+  }
+
+  public static Core.Type_anylist vx_anylist_from_arraystring(String[] arraystring) {
+    List<Object> listany = new ArrayList<>();
+    for (String svalue : arraystring) {
+      Core.Type_string value = Core.vx_new_string(svalue);
+      listany.add(value);
+    }
+    Object[] arrayany = listany.toArray();
+    Core.Type_anylist output = Core.t_anylist.vx_new(arrayany);
+    return output;
+  }
+
+  // Warning!: Blocking
+  public static <T extends Core.Type_any> T vx_sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
+    T output = Core.f_empty(generic_any_1);
+    try {
+      output = future.get();
+    } catch (Exception e) {
+      Core.Type_msg msg = Core.vx_msg_from_exception("sync<-async", e);
+      Core.Type_any val = generic_any_1.vx_new(msg);
+      output = Core.f_any_from_any(generic_any_1, val);
+    }
     return output;
   }
 
@@ -560,17 +676,17 @@ public final class Core {
 
   public static class Class_any_from_anylist extends Core.Class_base implements Type_any_from_anylist {
 
-    protected List<Core.Func_any_from_any> vxlist = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
+    protected List<Core.Func_any_from_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index) {
       Core.Func_any_from_any output = Core.e_any_from_any;
       Class_any_from_anylist list = this;
       int iindex = index.vx_int();
-      List<Core.Func_any_from_any> listval = list.vxlist;
+      List<Core.Func_any_from_any> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -578,7 +694,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Func_any_from_any> vx_listany_from_any() {return vxlist;}
+    public List<Core.Func_any_from_any> vx_listany_from_any() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -613,11 +729,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new any<-anylist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new any<-anylist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -664,17 +780,17 @@ public final class Core {
 
   public static class Class_anylist extends Core.Class_base implements Type_anylist {
 
-    protected List<Core.Type_any> vxlist = Core.immutablelist(new ArrayList<Core.Type_any>());
+    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
       Core.Type_any output = Core.e_any;
       Class_anylist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_any> listval = list.vxlist;
+      List<Core.Type_any> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -711,11 +827,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new anylist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new anylist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -897,7 +1013,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new arg) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new arg) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -908,7 +1024,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new arg :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new arg :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -916,7 +1032,7 @@ public final class Core {
             if (valsub instanceof Core.Type_type) {
               output.vx_p_argtype = (Core.Type_type)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new arg :argtype " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new arg :argtype " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -924,12 +1040,12 @@ public final class Core {
             if (valsub instanceof Core.Func_any_from_func) {
               output.vx_p_fn_any = (Core.Func_any_from_func)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new arg :fn-any " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new arg :fn-any " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new arg) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new arg) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -984,17 +1100,17 @@ public final class Core {
 
   public static class Class_arglist extends Core.Class_base implements Type_arglist {
 
-    protected List<Core.Type_arg> vxlist = Core.immutablelist(new ArrayList<Core.Type_arg>());
+    protected List<Core.Type_arg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_arg>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_arg vx_arg(final Core.Type_int index) {
       Core.Type_arg output = Core.e_arg;
       Class_arglist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_arg> listval = list.vxlist;
+      List<Core.Type_arg> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1002,7 +1118,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_arg> vx_listarg() {return vxlist;}
+    public List<Core.Type_arg> vx_listarg() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1039,11 +1155,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new arglist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new arglist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1128,7 +1244,7 @@ public final class Core {
           Core.Type_arg castval = (Core.Type_arg)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(argmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(argmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -1161,7 +1277,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -1171,7 +1287,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_arg) {
             valany = (Core.Type_arg)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1304,17 +1420,17 @@ public final class Core {
 
   public static class Class_booleanlist extends Core.Class_base implements Type_booleanlist {
 
-    protected List<Core.Type_boolean> vxlist = Core.immutablelist(new ArrayList<Core.Type_boolean>());
+    protected List<Core.Type_boolean> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_boolean>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_boolean vx_boolean(final Core.Type_int index) {
       Core.Type_boolean output = Core.e_boolean;
       Class_booleanlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_boolean> listval = list.vxlist;
+      List<Core.Type_boolean> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1322,7 +1438,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_boolean> vx_listboolean() {return vxlist;}
+    public List<Core.Type_boolean> vx_listboolean() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1359,11 +1475,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new booleanlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new booleanlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1561,17 +1677,17 @@ public final class Core {
 
   public static class Class_connectlist extends Core.Class_base implements Type_connectlist {
 
-    protected List<Core.Type_connect> vxlist = Core.immutablelist(new ArrayList<Core.Type_connect>());
+    protected List<Core.Type_connect> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_connect>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_connect vx_connect(final Core.Type_int index) {
       Core.Type_connect output = Core.e_connect;
       Class_connectlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_connect> listval = list.vxlist;
+      List<Core.Type_connect> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1579,7 +1695,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_connect> vx_listconnect() {return vxlist;}
+    public List<Core.Type_connect> vx_listconnect() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1616,11 +1732,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new connectlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new connectlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1705,7 +1821,7 @@ public final class Core {
           Core.Type_connect castval = (Core.Type_connect)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(connectmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(connectmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -1738,7 +1854,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -1748,7 +1864,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_connect) {
             valany = (Core.Type_connect)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1939,7 +2055,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new constdef) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new constdef) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -1950,7 +2066,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_pkgname = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new constdef :pkgname " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new constdef :pkgname " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1960,7 +2076,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new constdef :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new constdef :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1968,12 +2084,12 @@ public final class Core {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_type = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new constdef :type " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new constdef :type " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new constdef) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new constdef) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2028,17 +2144,17 @@ public final class Core {
 
   public static class Class_constlist extends Core.Class_base implements Type_constlist {
 
-    protected List<Core.Type_const> vxlist = Core.immutablelist(new ArrayList<Core.Type_const>());
+    protected List<Core.Type_const> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_const>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_const vx_const(final Core.Type_int index) {
       Core.Type_const output = Core.e_const;
       Class_constlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_const> listval = list.vxlist;
+      List<Core.Type_const> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -2046,7 +2162,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_const> vx_listconst() {return vxlist;}
+    public List<Core.Type_const> vx_listconst() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -2083,11 +2199,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new constlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new constlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -2172,7 +2288,7 @@ public final class Core {
           Core.Type_const castval = (Core.Type_const)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(constmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(constmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -2205,7 +2321,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -2215,7 +2331,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_const) {
             valany = (Core.Type_const)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -2370,7 +2486,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new context) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new context) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -2381,7 +2497,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_code = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new context :code " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new context :code " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2389,7 +2505,7 @@ public final class Core {
             if (valsub instanceof Core.Type_session) {
               output.vx_p_session = (Core.Type_session)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new context :session " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new context :session " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2397,7 +2513,7 @@ public final class Core {
             if (valsub instanceof Core.Type_setting) {
               output.vx_p_setting = (Core.Type_setting)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new context :setting " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new context :setting " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2405,12 +2521,12 @@ public final class Core {
             if (valsub instanceof Core.Type_state) {
               output.vx_p_state = (Core.Type_state)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new context :state " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new context :state " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new context) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new context) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2857,7 +2973,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new funcdef) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -2868,7 +2984,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_pkgname = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef :pkgname " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new funcdef :pkgname " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2878,7 +2994,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new funcdef :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2888,7 +3004,7 @@ public final class Core {
             } else if (valsub instanceof Integer) {
               output.vx_p_idx = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef :idx " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new funcdef :idx " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2896,7 +3012,7 @@ public final class Core {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_type = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef :type " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new funcdef :type " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2906,12 +3022,12 @@ public final class Core {
             } else if (valsub instanceof Boolean) {
               output.vx_p_async = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef :async " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new funcdef :async " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new funcdef) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new funcdef) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2966,17 +3082,17 @@ public final class Core {
 
   public static class Class_funclist extends Core.Class_base implements Type_funclist {
 
-    protected List<Core.Type_func> vxlist = Core.immutablelist(new ArrayList<Core.Type_func>());
+    protected List<Core.Type_func> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_func>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_func vx_func(final Core.Type_int index) {
       Core.Type_func output = Core.e_func;
       Class_funclist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_func> listval = list.vxlist;
+      List<Core.Type_func> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -2984,7 +3100,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_func> vx_listfunc() {return vxlist;}
+    public List<Core.Type_func> vx_listfunc() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -3021,11 +3137,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new funclist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new funclist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -3110,7 +3226,7 @@ public final class Core {
           Core.Type_func castval = (Core.Type_func)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(funcmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(funcmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -3143,7 +3259,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3153,7 +3269,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_func) {
             valany = (Core.Type_func)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3287,17 +3403,17 @@ public final class Core {
 
   public static class Class_intlist extends Core.Class_base implements Type_intlist {
 
-    protected List<Core.Type_int> vxlist = Core.immutablelist(new ArrayList<Core.Type_int>());
+    protected List<Core.Type_int> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_int>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_int vx_int(final Core.Type_int index) {
       Core.Type_int output = Core.e_int;
       Class_intlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_int> listval = list.vxlist;
+      List<Core.Type_int> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -3305,7 +3421,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_int> vx_listint() {return vxlist;}
+    public List<Core.Type_int> vx_listint() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -3342,11 +3458,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new intlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new intlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -3431,7 +3547,7 @@ public final class Core {
           Core.Type_int castval = (Core.Type_int)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(intmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(intmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -3464,7 +3580,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3474,7 +3590,7 @@ public final class Core {
           } else if (valsub instanceof Integer) {
             valany = Core.t_int.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3542,17 +3658,17 @@ public final class Core {
       return vx_any_from_list(generic_any_1, this.vx_list(), index);
     }
 
-    protected List<Core.Type_any> vxlist = Core.immutablelist(new ArrayList<Core.Type_any>());
+    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
       Core.Type_any output = Core.e_any;
       Class_list list = this;
       int iindex = index.vx_int();
-      List<Core.Type_any> listval = list.vxlist;
+      List<Core.Type_any> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -3589,11 +3705,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new list) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new list) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -3748,7 +3864,7 @@ public final class Core {
           Core.Type_any castval = (Core.Type_any)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(map) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(map) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -3781,7 +3897,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3791,7 +3907,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -4006,7 +4122,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new mempool) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new mempool) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -4015,12 +4131,12 @@ public final class Core {
             if (valsub instanceof Core.Type_value) {
               output.vx_p_valuepool = (Core.Type_value)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new mempool :valuepool " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new mempool :valuepool " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new mempool) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new mempool) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -4070,8 +4186,6 @@ public final class Core {
     public Core.Type_msg vx_empty();
     public Core.Type_msg vx_type();
     public Core.Type_typedef vx_typedef();
-    public Type_msg vx_new_error(final String text);
-    public Type_msg vx_new_from_exception(final String text, final Exception err);
     public Core.Type_string code();
     public Core.Type_int severity();
     public Core.Type_string text();
@@ -4080,22 +4194,6 @@ public final class Core {
   public static class Class_msg extends Core.Class_base implements Type_msg {
 
     public Exception err = null;
-    
-    public Type_msg vx_new_error(final String text) {
-      Class_msg output = new Class_msg();
-      output.vx_p_text = Core.vx_new_string(text);
-      output.vx_p_severity = Core.c_msg_severe;
-      return output;
-    }
-    
-    public Type_msg vx_new_from_exception(final String text, final Exception err) {
-      Class_msg output = new Class_msg();
-      output.vx_p_text = Core.vx_new_string(text);
-      output.vx_p_severity = Core.c_msg_severe;
-      output.err = err;
-      Core.debug(output);
-      return output;
-    }
 
     protected Core.Type_string vx_p_code;
 
@@ -4165,7 +4263,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new msg) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new msg) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -4176,7 +4274,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_code = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new msg :code " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new msg :code " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4186,7 +4284,7 @@ public final class Core {
             } else if (valsub instanceof Integer) {
               output.vx_p_severity = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new msg :severity " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new msg :severity " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4196,7 +4294,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new msg :text " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new msg :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4260,39 +4358,6 @@ public final class Core {
       if (copymsgblock != null) {
         output = copymsgblock;
       }
-    /*
-      List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
-      List<Core.Type_msg> listmsg = new ArrayList<>();
-      for (Object subval : vals) {
-        if (subval instanceof Core.Type_msgblock) {
-          listmsgblock.add((Core.Type_msgblock)subval);
-        } else if (subval instanceof Core.Type_msg) {
-          listmsg.add((Core.Type_msg)subval);
-        } else if (subval instanceof Core.Type_any) {
-          Core.Type_any val = (Core.Type_any)subval;
-          Core.Type_msgblock msgblock = val.vx_msgblock();
-          if (msgblock == null) {
-          } else if (msgblock == Core.e_msgblock) {
-          } else {
-            listmsgblock.add(msgblock);
-          }
-        }
-      }
-      if ((listmsg.size() > 0) || (listmsgblock.size() > 0)) {
-        Core.Class_msgblock work = new Core.Class_msgblock();
-        if (listmsg.size() > 0) {
-          Core.Class_msglist msglist = new Core.Class_msglist();
-          msglist.vxlist = listmsg;
-          work.vxmsglist = msglist;
-        }
-        if (listmsgblock.size() > 0) {
-          Core.Class_msgblocklist msgblocklist = new Core.Class_msgblocklist();
-          msgblocklist.vxlist = listmsgblock;
-          work.vxmsgblocklist = msgblocklist;
-        }
-        output = Core.t_msgblock.vx_copy(output, work);
-      }
-    */
       return output;
     }
 
@@ -4368,7 +4433,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new msgblock) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new msgblock) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -4377,7 +4442,7 @@ public final class Core {
             if (valsub instanceof Core.Type_msglist) {
               output.vx_p_msgs = (Core.Type_msglist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new msgblock :msgs " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new msgblock :msgs " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4385,7 +4450,7 @@ public final class Core {
             if (valsub instanceof Core.Type_msgblocklist) {
               output.vx_p_msgblocks = (Core.Type_msgblocklist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new msgblock :msgblocks " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new msgblock :msgblocks " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4441,17 +4506,17 @@ public final class Core {
 
   public static class Class_msgblocklist extends Core.Class_base implements Type_msgblocklist {
 
-    protected List<Core.Type_msgblock> vxlist = Core.immutablelist(new ArrayList<Core.Type_msgblock>());
+    protected List<Core.Type_msgblock> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msgblock>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_msgblock vx_msgblock(final Core.Type_int index) {
       Core.Type_msgblock output = Core.e_msgblock;
       Class_msgblocklist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_msgblock> listval = list.vxlist;
+      List<Core.Type_msgblock> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -4459,7 +4524,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_msgblock> vx_listmsgblock() {return vxlist;}
+    public List<Core.Type_msgblock> vx_listmsgblock() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -4492,11 +4557,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new msgblocklist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new msgblocklist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -4546,17 +4611,17 @@ public final class Core {
 
   public static class Class_msglist extends Core.Class_base implements Type_msglist {
 
-    protected List<Core.Type_msg> vxlist = Core.immutablelist(new ArrayList<Core.Type_msg>());
+    protected List<Core.Type_msg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msg>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_msg vx_msg(final Core.Type_int index) {
       Core.Type_msg output = Core.e_msg;
       Class_msglist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_msg> listval = list.vxlist;
+      List<Core.Type_msg> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -4564,7 +4629,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_msg> vx_listmsg() {return vxlist;}
+    public List<Core.Type_msg> vx_listmsg() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -4597,11 +4662,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new msglist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new msglist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -4801,17 +4866,17 @@ public final class Core {
 
   public static class Class_numberlist extends Core.Class_base implements Type_numberlist {
 
-    protected List<Core.Type_number> vxlist = Core.immutablelist(new ArrayList<Core.Type_number>());
+    protected List<Core.Type_number> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_number>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_number vx_number(final Core.Type_int index) {
       Core.Type_number output = Core.e_number;
       Class_numberlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_number> listval = list.vxlist;
+      List<Core.Type_number> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -4819,7 +4884,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_number> vx_listnumber() {return vxlist;}
+    public List<Core.Type_number> vx_listnumber() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -4856,11 +4921,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new numberlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new numberlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -4945,7 +5010,7 @@ public final class Core {
           Core.Type_number castval = (Core.Type_number)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(numbermap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(numbermap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -4978,7 +5043,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -4988,7 +5053,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_number) {
             valany = (Core.Type_number)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -5151,7 +5216,7 @@ public final class Core {
           Core.Type_package castval = (Core.Type_package)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(packagemap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(packagemap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -5184,7 +5249,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -5194,7 +5259,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_package) {
             valany = (Core.Type_package)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -5307,7 +5372,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new permission) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new permission) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -5318,12 +5383,12 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new permission :id " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new permission :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new permission) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new permission) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5378,17 +5443,17 @@ public final class Core {
 
   public static class Class_permissionlist extends Core.Class_base implements Type_permissionlist {
 
-    protected List<Core.Type_permission> vxlist = Core.immutablelist(new ArrayList<Core.Type_permission>());
+    protected List<Core.Type_permission> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_permission>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_permission vx_permission(final Core.Type_int index) {
       Core.Type_permission output = Core.e_permission;
       Class_permissionlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_permission> listval = list.vxlist;
+      List<Core.Type_permission> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -5396,7 +5461,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_permission> vx_listpermission() {return vxlist;}
+    public List<Core.Type_permission> vx_listpermission() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -5433,11 +5498,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new permissionlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new permissionlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -5522,7 +5587,7 @@ public final class Core {
           Core.Type_permission castval = (Core.Type_permission)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(permissionmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(permissionmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -5555,7 +5620,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -5565,7 +5630,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_permission) {
             valany = (Core.Type_permission)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -5618,11 +5683,19 @@ public final class Core {
     public Core.Type_security vx_copy(final Object... vals);
     public Core.Type_security vx_empty();
     public Core.Type_security vx_type();
+    public Core.Type_funclist allowfuncs();
     public Core.Type_permissionlist permissions();
     public Core.Type_permissionmap permissionmap();
   }
 
   public static class Class_security extends Core.Class_base implements Type_security {
+
+    protected Core.Type_funclist vx_p_allowfuncs;
+
+    @Override
+    public Core.Type_funclist allowfuncs() {
+      return this.vx_p_allowfuncs == null ? Core.e_funclist : this.vx_p_allowfuncs;
+    }
 
     protected Core.Type_permissionlist vx_p_permissions;
 
@@ -5643,6 +5716,9 @@ public final class Core {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
       switch (skey) {
+      case ":allowfuncs":
+        output = this.allowfuncs();
+        break;
       case ":permissions":
         output = this.permissions();
         break;
@@ -5656,6 +5732,7 @@ public final class Core {
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":allowfuncs", this.allowfuncs());
       output.put(":permissions", this.permissions());
       output.put(":permissionmap", this.permissionmap());
       return Core.immutablemap(output);
@@ -5669,9 +5746,11 @@ public final class Core {
       Class_security output = new Class_security();
       Type_security val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      output.vx_p_allowfuncs = val.allowfuncs();
       output.vx_p_permissions = val.permissions();
       output.vx_p_permissionmap = val.permissionmap();
       ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":allowfuncs");
       validkeys.add(":permissions");
       validkeys.add(":permissionmap");
       String key = "";
@@ -5692,16 +5771,24 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new security) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new security) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
           switch (key) {
+          case ":allowfuncs":
+            if (valsub instanceof Core.Type_funclist) {
+              output.vx_p_allowfuncs = (Core.Type_funclist)valsub;
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new security :allowfuncs " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":permissions":
             if (valsub instanceof Core.Type_permissionlist) {
               output.vx_p_permissions = (Core.Type_permissionlist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new security :permissions " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new security :permissions " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5709,12 +5796,12 @@ public final class Core {
             if (valsub instanceof Core.Type_permissionmap) {
               output.vx_p_permissionmap = (Core.Type_permissionmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new security :permissionmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new security :permissionmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new security) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new security) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5851,7 +5938,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new session) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new session) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -5860,7 +5947,7 @@ public final class Core {
             if (valsub instanceof Core.Type_user) {
               output.vx_p_user = (Core.Type_user)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new session :user " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new session :user " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5868,7 +5955,7 @@ public final class Core {
             if (valsub instanceof Core.Type_connectlist) {
               output.vx_p_connectlist = (Core.Type_connectlist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new session :connectlist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new session :connectlist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5876,12 +5963,12 @@ public final class Core {
             if (valsub instanceof Core.Type_connectmap) {
               output.vx_p_connectmap = (Core.Type_connectmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new session :connectmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new session :connectmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new session) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new session) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5990,7 +6077,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new setting) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new setting) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -5999,12 +6086,12 @@ public final class Core {
             if (valsub instanceof Core.Type_stringmap) {
               output.vx_p_pathmap = (Core.Type_stringmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new setting :pathmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new setting :pathmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new setting) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new setting) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -6093,7 +6180,7 @@ public final class Core {
           Core.Type_statelistener castval = (Core.Type_statelistener)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(state) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(state) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -6126,7 +6213,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -6136,7 +6223,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_statelistener) {
             valany = (Core.Type_statelistener)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -6276,7 +6363,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new statelistener) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new statelistener) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -6287,7 +6374,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_path = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new statelistener :path " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new statelistener :path " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6295,7 +6382,7 @@ public final class Core {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_value = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new statelistener :value " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new statelistener :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6303,12 +6390,12 @@ public final class Core {
             if (valsub instanceof Core.Func_boolean_from_none) {
               output.vx_p_fn_boolean = (Core.Func_boolean_from_none)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new statelistener :fn-boolean " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new statelistener :fn-boolean " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new statelistener) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new statelistener) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -6402,7 +6489,7 @@ public final class Core {
         } else if (valsub instanceof Float) {
           sb.append((Float)valsub);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new string) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new string) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -6456,17 +6543,17 @@ public final class Core {
 
   public static class Class_stringlist extends Core.Class_base implements Type_stringlist {
 
-    protected List<Core.Type_string> vxlist = Core.immutablelist(new ArrayList<Core.Type_string>());
+    protected List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_string vx_string(final Core.Type_int index) {
       Core.Type_string output = Core.e_string;
       Class_stringlist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_string> listval = list.vxlist;
+      List<Core.Type_string> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -6474,7 +6561,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_string> vx_liststring() {return vxlist;}
+    public List<Core.Type_string> vx_liststring() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -6511,11 +6598,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new stringlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new stringlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -6600,7 +6687,7 @@ public final class Core {
           Core.Type_string castval = (Core.Type_string)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(stringmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(stringmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -6633,7 +6720,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -6643,7 +6730,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -6883,7 +6970,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new thenelse) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -6894,7 +6981,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_code = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse :code " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new thenelse :code " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6902,7 +6989,7 @@ public final class Core {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_value = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse :value " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new thenelse :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6910,7 +6997,7 @@ public final class Core {
             if (valsub instanceof Core.Type_list) {
               output.vx_p_values = (Core.Type_list)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse :values " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new thenelse :values " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6918,7 +7005,7 @@ public final class Core {
             if (valsub instanceof Core.Func_boolean_from_func) {
               output.vx_p_fn_cond = (Core.Func_boolean_from_func)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse :fn-cond " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new thenelse :fn-cond " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -6926,12 +7013,12 @@ public final class Core {
             if (valsub instanceof Core.Func_any_from_func) {
               output.vx_p_fn_any = (Core.Func_any_from_func)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse :fn-any " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new thenelse :fn-any " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelse) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new thenelse) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -6985,17 +7072,17 @@ public final class Core {
 
   public static class Class_thenelselist extends Core.Class_base implements Type_thenelselist {
 
-    protected List<Core.Type_thenelse> vxlist = Core.immutablelist(new ArrayList<Core.Type_thenelse>());
+    protected List<Core.Type_thenelse> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_thenelse>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_thenelse vx_thenelse(final Core.Type_int index) {
       Core.Type_thenelse output = Core.e_thenelse;
       Class_thenelselist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_thenelse> listval = list.vxlist;
+      List<Core.Type_thenelse> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -7003,7 +7090,7 @@ public final class Core {
     }
 
     @Override
-    public List<Core.Type_thenelse> vx_listthenelse() {return vxlist;}
+    public List<Core.Type_thenelse> vx_listthenelse() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -7040,11 +7127,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new thenelselist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new thenelselist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -7352,7 +7439,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new typedef) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -7363,7 +7450,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_pkgname = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :pkgname " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :pkgname " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7373,7 +7460,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7383,7 +7470,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_extend = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :extends " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :extends " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7391,7 +7478,7 @@ public final class Core {
             if (valsub instanceof Core.Type_funclist) {
               output.vx_p_allowfuncs = (Core.Type_funclist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :allowfuncs " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :allowfuncs " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7399,7 +7486,7 @@ public final class Core {
             if (valsub instanceof Core.Type_typelist) {
               output.vx_p_allowtypes = (Core.Type_typelist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :allowtypes " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :allowtypes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7407,7 +7494,7 @@ public final class Core {
             if (valsub instanceof Core.Type_anylist) {
               output.vx_p_allowvalues = (Core.Type_anylist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :allowvalues " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :allowvalues " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7415,7 +7502,7 @@ public final class Core {
             if (valsub instanceof Core.Type_funclist) {
               output.vx_p_disallowfuncs = (Core.Type_funclist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :disallowfuncs " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :disallowfuncs " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7423,7 +7510,7 @@ public final class Core {
             if (valsub instanceof Core.Type_typelist) {
               output.vx_p_disallowtypes = (Core.Type_typelist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :disallowtypes " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :disallowtypes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7431,7 +7518,7 @@ public final class Core {
             if (valsub instanceof Core.Type_anylist) {
               output.vx_p_disallowvalues = (Core.Type_anylist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :disallowvalues " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :disallowvalues " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7439,7 +7526,7 @@ public final class Core {
             if (valsub instanceof Core.Type_argmap) {
               output.vx_p_properties = (Core.Type_argmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :properties " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :properties " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7447,7 +7534,7 @@ public final class Core {
             if (valsub instanceof Core.Type_arg) {
               output.vx_p_proplast = (Core.Type_arg)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :proplast " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :proplast " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7455,12 +7542,12 @@ public final class Core {
             if (valsub instanceof Core.Type_typelist) {
               output.vx_p_traits = (Core.Type_typelist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef :traits " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new typedef :traits " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new typedef) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new typedef) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -7513,17 +7600,17 @@ public final class Core {
 
   public static class Class_typelist extends Core.Class_base implements Type_typelist {
 
-    protected List<Core.Type_any> vxlist = Core.immutablelist(new ArrayList<Core.Type_any>());
+    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
       Core.Type_any output = Core.e_any;
       Class_typelist list = this;
       int iindex = index.vx_int();
-      List<Core.Type_any> listval = list.vxlist;
+      List<Core.Type_any> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -7560,11 +7647,11 @@ public final class Core {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new typelist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new typelist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -7639,7 +7726,7 @@ public final class Core {
           Core.Type_any castval = (Core.Type_any)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(typemap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(typemap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -7672,7 +7759,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -7682,7 +7769,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -7823,7 +7910,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new user) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new user) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -7832,7 +7919,7 @@ public final class Core {
             if (valsub instanceof Core.Type_security) {
               output.vx_p_security = (Core.Type_security)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new user :security " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new user :security " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7842,7 +7929,7 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_username = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new user :username " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new user :username " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7852,12 +7939,12 @@ public final class Core {
             } else if (valsub instanceof String) {
               output.vx_p_token = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new user :token " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new user :token " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new user) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new user) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -7979,7 +8066,7 @@ public final class Core {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new value) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new value) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -7988,7 +8075,7 @@ public final class Core {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_next = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new value :next " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new value :next " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7998,12 +8085,12 @@ public final class Core {
             } else if (valsub instanceof Integer) {
               output.vx_p_refs = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new value :refs " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new value :refs " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new value) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new value) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -11448,6 +11535,97 @@ public final class Core {
   }
 
   /**
+   * @function allowfuncs_from_security
+   * Returns allowfuncs from a given security.
+   * @param  {security} security
+   * @return {funclist}
+   * (func allowfuncs<-security)
+   */
+  public static interface Func_allowfuncs_from_security extends Core.Func_any_from_any {
+    public Core.Type_funclist f_allowfuncs_from_security(final Core.Type_security security);
+  }
+
+  public static class Class_allowfuncs_from_security extends Core.Class_base implements Func_allowfuncs_from_security {
+
+    @Override
+    public Func_allowfuncs_from_security vx_new(Object... vals) {
+      Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
+      return output;
+    }
+
+    @Override
+    public Func_allowfuncs_from_security vx_copy(Object... vals) {
+      Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "allowfuncs<-security", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "funclist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_func), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_allowfuncs_from_security vx_empty() {return e_allowfuncs_from_security;}
+    @Override
+    public Func_allowfuncs_from_security vx_type() {return t_allowfuncs_from_security;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_security inputval = (Core.Type_security)value;
+      Core.Type_any outputval = Core.f_allowfuncs_from_security(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_security security = Core.f_any_from_any(Core.t_security, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_allowfuncs_from_security(security);
+      return output;
+    }
+
+    @Override
+    public Core.Type_funclist f_allowfuncs_from_security(final Core.Type_security security) {
+      return Core.f_allowfuncs_from_security(security);
+    }
+
+  }
+
+  public static final Func_allowfuncs_from_security e_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
+  public static final Func_allowfuncs_from_security t_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
+
+  public static Core.Type_funclist f_allowfuncs_from_security(final Core.Type_security security) {
+    Core.Type_funclist output = Core.e_funclist;
+    output = security.allowfuncs();
+    return output;
+  }
+
+  /**
    * @function allowtypenames_from_typedef
    * Return allow name list from type
    * @param  {typedef} vtypedef
@@ -13834,6 +14012,103 @@ public final class Core {
   }
 
   /**
+   * @function boolean_permission_from_func
+   * Returns true if the given func has permission.
+   * @param  {func} func
+   * @return {boolean}
+   * (func boolean-permission<-func)
+   */
+  public static interface Func_boolean_permission_from_func extends Core.Func_any_from_any_context {
+    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, Core.Type_context context);
+  }
+
+  public static class Class_boolean_permission_from_func extends Core.Class_base implements Func_boolean_permission_from_func {
+
+    @Override
+    public Func_boolean_permission_from_func vx_new(Object... vals) {
+      Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_permission_from_func vx_copy(Object... vals) {
+      Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "boolean-permission<-func", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_permission_from_func vx_empty() {return e_boolean_permission_from_func;}
+    @Override
+    public Func_boolean_permission_from_func vx_type() {return t_boolean_permission_from_func;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_func inputval = (Core.Type_func)value;
+      Core.Type_any outputval = Core.f_boolean_permission_from_func(inputval, context);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_func func = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_boolean_permission_from_func(func, context);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, final Core.Type_context context) {
+      return Core.f_boolean_permission_from_func(func, context);
+    }
+
+  }
+
+  public static final Func_boolean_permission_from_func e_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
+  public static final Func_boolean_permission_from_func t_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
+
+  public static Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, final Core.Type_context context) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_contains_1(
+      Core.f_allowfuncs_from_security(
+        Core.f_security_from_context(context)
+      ),
+      func
+    );
+    return output;
+  }
+
+  /**
    * @function boolean_from_any
    * Function Type taking generic any-2 and returning boolean
    * @param  {any-1} value
@@ -14567,6 +14842,99 @@ public final class Core {
       }
     }
     output = Core.vx_new_boolean(booleanresult);
+    return output;
+  }
+
+  /**
+   * @function context_main
+   * Returns the default context for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-main)
+   */
+  public static interface Func_context_main extends Core.Func_any_from_any {
+    public Core.Type_context f_context_main(final Core.Type_anylist args);
+  }
+
+  public static class Class_context_main extends Core.Class_base implements Func_context_main {
+
+    @Override
+    public Func_context_main vx_new(Object... vals) {
+      Class_context_main output = new Class_context_main();
+      return output;
+    }
+
+    @Override
+    public Func_context_main vx_copy(Object... vals) {
+      Class_context_main output = new Class_context_main();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "context-main", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_main vx_empty() {return e_context_main;}
+    @Override
+    public Func_context_main vx_type() {return t_context_main;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_anylist inputval = (Core.Type_anylist)value;
+      Core.Type_any outputval = Core.f_context_main(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_context_main(args);
+      return output;
+    }
+
+    @Override
+    public Core.Type_context f_context_main(final Core.Type_anylist args) {
+      return Core.f_context_main(args);
+    }
+
+  }
+
+  public static final Func_context_main e_context_main = new Core.Class_context_main();
+  public static final Func_context_main t_context_main = new Core.Class_context_main();
+
+  public static Core.Type_context f_context_main(final Core.Type_anylist args) {
+    Core.Type_context output = Core.e_context;
+    output = Core.f_empty(
+      Core.t_context
+    );
     return output;
   }
 
@@ -16590,40 +16958,7 @@ public final class Core {
 
   public static Core.Type_boolean f_is_int(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
-    boolean result = false;
-    if (value == Core.c_infinity) {
-      result = true;
-    } else if (value == Core.c_neginfinity) {
-      result = true;
-    } else if (value == Core.c_notanumber) {
-      result = true;
-    } else if (value instanceof Core.Type_int) {
-      result = true;
-    } else if (value instanceof Core.Type_float) {
-      Core.Type_float valfloat = (Core.Type_float)value;
-      float floatval = valfloat.vx_float();
-      if ((int)floatval == floatval) {
-        result = true;
-      }
-    } else if (value instanceof Core.Type_decimal) {
-      Core.Type_decimal valdec = (Core.Type_decimal)value;
-      String strval = valdec.vx_string();
-      try {
-        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
-          result = true;
-        }
-      } catch (Exception ex) {
-      }
-    } else if (value instanceof Core.Type_string) {
-      Core.Type_string valstr = (Core.Type_string)value;
-      String strval = valstr.vx_string();
-      try {
-        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
-          result = true;
-        }
-      } catch (Exception ex) {
-      }
-    }
+    boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);
     return output;
   }
@@ -17818,6 +18153,100 @@ public final class Core {
     String text = stringtext.vx_string();
     System.out.println(text);
     output = value;
+    return output;
+  }
+
+  /**
+   * @function main
+   * The default function for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {string}
+   * (func main)
+   */
+  public static interface Func_main extends Core.Func_any_from_any {
+    public Core.Type_string f_main(final Core.Type_anylist args);
+  }
+
+  public static class Class_main extends Core.Class_base implements Func_main {
+
+    @Override
+    public Func_main vx_new(Object... vals) {
+      Class_main output = new Class_main();
+      return output;
+    }
+
+    @Override
+    public Func_main vx_copy(Object... vals) {
+      Class_main output = new Class_main();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "main", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_main vx_empty() {return e_main;}
+    @Override
+    public Func_main vx_type() {return t_main;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_anylist inputval = (Core.Type_anylist)value;
+      Core.Type_any outputval = Core.f_main(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_main(args);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string f_main(final Core.Type_anylist args) {
+      return Core.f_main(args);
+    }
+
+  }
+
+  public static final Func_main e_main = new Core.Class_main();
+  public static final Func_main t_main = new Core.Class_main();
+
+  public static Core.Type_string f_main(final Core.Type_anylist args) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_new(
+      Core.t_string,
+      args
+    );
     return output;
   }
 
@@ -20190,6 +20619,177 @@ public final class Core {
   }
 
   /**
+   * @function security_from_context
+   * Return security from the given context.
+   * @return {security}
+   * (func security<-context)
+   */
+  public static interface Func_security_from_context extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_security f_security_from_context(Core.Type_context context);
+  }
+
+  public static class Class_security_from_context extends Core.Class_base implements Func_security_from_context {
+
+    @Override
+    public Func_security_from_context vx_new(Object... vals) {
+      Class_security_from_context output = new Class_security_from_context();
+      return output;
+    }
+
+    @Override
+    public Func_security_from_context vx_copy(Object... vals) {
+      Class_security_from_context output = new Class_security_from_context();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "security<-context", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "security", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_security_from_context vx_empty() {return e_security_from_context;}
+    @Override
+    public Func_security_from_context vx_type() {return t_security_from_context;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_security_from_context(context);
+      return output;
+    }
+
+    @Override
+    public Core.Type_security f_security_from_context(final Core.Type_context context) {
+      return Core.f_security_from_context(context);
+    }
+
+  }
+
+  public static final Func_security_from_context e_security_from_context = new Core.Class_security_from_context();
+  public static final Func_security_from_context t_security_from_context = new Core.Class_security_from_context();
+
+  public static Core.Type_security f_security_from_context(final Core.Type_context context) {
+    Core.Type_security output = Core.e_security;
+    output = Core.f_security_from_user(
+      Core.f_user_from_context(context)
+    );
+    return output;
+  }
+
+  /**
+   * @function security_from_user
+   * Return security from the given user.
+   * @param  {user} user
+   * @return {security}
+   * (func security<-user)
+   */
+  public static interface Func_security_from_user extends Core.Func_any_from_any {
+    public Core.Type_security f_security_from_user(final Core.Type_user user);
+  }
+
+  public static class Class_security_from_user extends Core.Class_base implements Func_security_from_user {
+
+    @Override
+    public Func_security_from_user vx_new(Object... vals) {
+      Class_security_from_user output = new Class_security_from_user();
+      return output;
+    }
+
+    @Override
+    public Func_security_from_user vx_copy(Object... vals) {
+      Class_security_from_user output = new Class_security_from_user();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "security<-user", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "security", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_security_from_user vx_empty() {return e_security_from_user;}
+    @Override
+    public Func_security_from_user vx_type() {return t_security_from_user;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_user inputval = (Core.Type_user)value;
+      Core.Type_any outputval = Core.f_security_from_user(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_user user = Core.f_any_from_any(Core.t_user, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_security_from_user(user);
+      return output;
+    }
+
+    @Override
+    public Core.Type_security f_security_from_user(final Core.Type_user user) {
+      return Core.f_security_from_user(user);
+    }
+
+  }
+
+  public static final Func_security_from_user e_security_from_user = new Core.Class_security_from_user();
+  public static final Func_security_from_user t_security_from_user = new Core.Class_security_from_user();
+
+  public static Core.Type_security f_security_from_user(final Core.Type_user user) {
+    Core.Type_security output = Core.e_security;
+    output = user.security();
+    return output;
+  }
+
+  /**
    * @function session_from_context
    * Returns session from a context
    * @return {session}
@@ -20263,7 +20863,7 @@ public final class Core {
 
   public static Core.Type_session f_session_from_context(final Core.Type_context context) {
     Core.Type_session output = Core.e_session;
-    output = Core.t_context.session();
+    output = context.session();
     return output;
   }
 
@@ -20341,7 +20941,7 @@ public final class Core {
 
   public static Core.Type_setting f_setting_from_context(final Core.Type_context context) {
     Core.Type_setting output = Core.e_setting;
-    output = Core.t_context.setting();
+    output = context.setting();
     return output;
   }
 

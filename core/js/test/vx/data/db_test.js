@@ -23,12 +23,12 @@ export default class vx_data_db_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/db", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 6, ":total", 6), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 12, ":total", 12), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12)
     )
   }
 
@@ -44,7 +44,13 @@ export default class vx_data_db_test {
           "dbcellmap", 0,
           "dbfield", 0,
           "dbfieldmap", 0,
-          "dbtable", 0
+          "dbid", 0,
+          "dblink", 0,
+          "dblinklist", 0,
+          "dbnode", 0,
+          "dbnote", 0,
+          "dbtable", 0,
+          "dbvalue", 0
         ),
       "constmap",
         vx_core.f_new(

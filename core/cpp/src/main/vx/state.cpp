@@ -74,7 +74,7 @@ namespace vx_state {
     vx_core::Type_any Class_value_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Type_value_map output = vx_state::e_value_map;
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
@@ -89,7 +89,7 @@ namespace vx_state {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -181,7 +181,7 @@ namespace vx_state {
         "vx/state", // pkgname
         "change", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -272,7 +272,7 @@ namespace vx_state {
         "vx/state", // pkgname
         "register", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs

@@ -150,7 +150,7 @@ public final class Textblock {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new delim) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -161,7 +161,7 @@ public final class Textblock {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -171,7 +171,7 @@ public final class Textblock {
             } else if (valsub instanceof String) {
               output.vx_p_starttext = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :starttext " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :starttext " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -181,7 +181,7 @@ public final class Textblock {
             } else if (valsub instanceof String) {
               output.vx_p_endtext = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :endtext " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :endtext " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -191,7 +191,7 @@ public final class Textblock {
             } else if (valsub instanceof Integer) {
               output.vx_p_startpos = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :startpos " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :startpos " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -201,7 +201,7 @@ public final class Textblock {
             } else if (valsub instanceof Integer) {
               output.vx_p_endpos = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :endpos " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :endpos " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -209,12 +209,12 @@ public final class Textblock {
             if (valsub instanceof Textblock.Type_delimlist) {
               output.vx_p_delimlist = (Textblock.Type_delimlist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim :delimlist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new delim :delimlist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new delim) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new delim) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -269,17 +269,17 @@ public final class Textblock {
 
   public static class Class_delimlist extends Core.Class_base implements Type_delimlist {
 
-    protected List<Textblock.Type_delim> vxlist = Core.immutablelist(new ArrayList<Textblock.Type_delim>());
+    protected List<Textblock.Type_delim> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_delim>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Textblock.Type_delim vx_delim(final Core.Type_int index) {
       Textblock.Type_delim output = Textblock.e_delim;
       Class_delimlist list = this;
       int iindex = index.vx_int();
-      List<Textblock.Type_delim> listval = list.vxlist;
+      List<Textblock.Type_delim> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -287,7 +287,7 @@ public final class Textblock {
     }
 
     @Override
-    public List<Textblock.Type_delim> vx_listdelim() {return vxlist;}
+    public List<Textblock.Type_delim> vx_listdelim() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -324,11 +324,11 @@ public final class Textblock {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new delimlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new delimlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -516,7 +516,7 @@ public final class Textblock {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new textblock) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -527,7 +527,7 @@ public final class Textblock {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -537,7 +537,7 @@ public final class Textblock {
             } else if (valsub instanceof String) {
               output.vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :text " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -547,7 +547,7 @@ public final class Textblock {
             } else if (valsub instanceof Integer) {
               output.vx_p_line = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :line " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :line " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -557,7 +557,7 @@ public final class Textblock {
             } else if (valsub instanceof Integer) {
               output.vx_p_column = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :column " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :column " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -565,7 +565,7 @@ public final class Textblock {
             if (valsub instanceof Textblock.Type_delim) {
               output.vx_p_delim = (Textblock.Type_delim)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :delim " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :delim " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -573,7 +573,7 @@ public final class Textblock {
             if (valsub instanceof Textblock.Type_textblocklist) {
               output.vx_p_textblocks = (Textblock.Type_textblocklist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :textblocks " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :textblocks " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -581,12 +581,12 @@ public final class Textblock {
             if (valsub instanceof Textblock.Type_textblock) {
               output.vx_p_parent = (Textblock.Type_textblock)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock :parent " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new textblock :parent " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblock) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new textblock) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -641,17 +641,17 @@ public final class Textblock {
 
   public static class Class_textblocklist extends Core.Class_base implements Type_textblocklist {
 
-    protected List<Textblock.Type_textblock> vxlist = Core.immutablelist(new ArrayList<Textblock.Type_textblock>());
+    protected List<Textblock.Type_textblock> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_textblock>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Textblock.Type_textblock vx_textblock(final Core.Type_int index) {
       Textblock.Type_textblock output = Textblock.e_textblock;
       Class_textblocklist list = this;
       int iindex = index.vx_int();
-      List<Textblock.Type_textblock> listval = list.vxlist;
+      List<Textblock.Type_textblock> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -659,7 +659,7 @@ public final class Textblock {
     }
 
     @Override
-    public List<Textblock.Type_textblock> vx_listtextblock() {return vxlist;}
+    public List<Textblock.Type_textblock> vx_listtextblock() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -696,11 +696,11 @@ public final class Textblock {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new textblocklist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new textblocklist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }

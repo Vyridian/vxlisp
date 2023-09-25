@@ -1894,6 +1894,21 @@ export default class vx_core {
   }
 
   /**
+   * @function allowfuncs_from_security
+   * Returns allowfuncs from a given security.
+   * @param  {security} security
+   * @return {funclist}
+   */
+  static t_allowfuncs_from_security = {}
+  static e_allowfuncs_from_security = {vx_type: vx_core.t_allowfuncs_from_security}
+
+  static f_allowfuncs_from_security(security) {
+    let output = vx_core.e_funclist
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_funclist, "struct-1": vx_core.t_security}, security, ":allowfuncs")
+    return output
+  }
+
+  /**
    * @function allowtypenames_from_typedef
    * Return allow name list from type
    * @param  {typedef} vtypedef
@@ -2362,6 +2377,26 @@ export default class vx_core {
   }
 
   /**
+   * @function boolean_permission_from_func
+   * Returns true if the given func has permission.
+   * @param  {func} func
+   * @return {boolean}
+   */
+  static t_boolean_permission_from_func = {}
+  static e_boolean_permission_from_func = {vx_type: vx_core.t_boolean_permission_from_func}
+
+  static f_boolean_permission_from_func(func, context) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_contains_1(
+      vx_core.f_allowfuncs_from_security(
+        vx_core.f_security_from_context(context)
+      ),
+      func
+    )
+    return output
+  }
+
+  /**
    * @function boolean_from_any
    * Function Type taking generic any-2 and returning boolean
    * @param  {any} value
@@ -2498,6 +2533,24 @@ export default class vx_core {
   static f_contains_1(values, find) {
     let output = vx_core.e_boolean
     output = values.includes(find)
+    return output
+  }
+
+  /**
+   * @function context_main
+   * Returns the default context for app main execution. Arguments come from the command line.
+   * @param  {anylist} ... args
+   * @return {context}
+   */
+  static t_context_main = {}
+  static e_context_main = {vx_type: vx_core.t_context_main}
+
+  static f_context_main(...args) {
+    let output = vx_core.e_context
+    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    output = vx_core.f_empty(
+      vx_core.t_context
+    )
     return output
   }
 
@@ -3230,6 +3283,25 @@ export default class vx_core {
   }
 
   /**
+   * @function main
+   * The default function for app main execution. Arguments come from the command line.
+   * @param  {anylist} ... args
+   * @return {string}
+   */
+  static t_main = {}
+  static e_main = {vx_type: vx_core.t_main}
+
+  static f_main(...args) {
+    let output = vx_core.e_string
+    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    output = vx_core.f_new(
+      vx_core.t_string,
+      args
+    )
+    return output
+  }
+
+  /**
    * @function map_from_list
    * Returns a map from a list by applying a function to each key value.
    * @param  {typemap} generic
@@ -3792,6 +3864,37 @@ export default class vx_core {
   }
 
   /**
+   * @function security_from_context
+   * Return security from the given context.
+   * @return {security}
+   */
+  static t_security_from_context = {}
+  static e_security_from_context = {vx_type: vx_core.t_security_from_context}
+
+  static f_security_from_context(context) {
+    let output = vx_core.e_security
+    output = vx_core.f_security_from_user(
+      vx_core.f_user_from_context(context)
+    )
+    return output
+  }
+
+  /**
+   * @function security_from_user
+   * Return security from the given user.
+   * @param  {user} user
+   * @return {security}
+   */
+  static t_security_from_user = {}
+  static e_security_from_user = {vx_type: vx_core.t_security_from_user}
+
+  static f_security_from_user(user) {
+    let output = vx_core.e_security
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_security, "struct-1": vx_core.t_user}, user, ":security")
+    return output
+  }
+
+  /**
    * @function session_from_context
    * Returns session from a context
    * @return {session}
@@ -3801,11 +3904,7 @@ export default class vx_core {
 
   static f_session_from_context(context) {
     let output = vx_core.e_session
-    output = vx_core.f_any_from_struct(
-      {"any-1": vx_core.t_session, "struct-1": vx_core.t_context},
-      vx_core.t_context,
-      ":session"
-    )
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_session, "struct-1": vx_core.t_context}, context, ":session")
     return output
   }
 
@@ -3819,11 +3918,7 @@ export default class vx_core {
 
   static f_setting_from_context(context) {
     let output = vx_core.e_setting
-    output = vx_core.f_any_from_struct(
-      {"any-1": vx_core.t_setting, "struct-1": vx_core.t_context},
-      vx_core.t_context,
-      ":setting"
-    )
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_setting, "struct-1": vx_core.t_context}, context, ":setting")
     return output
   }
 
@@ -4320,6 +4415,7 @@ export default class vx_core {
     ">_1": vx_core.e_gt_1,
     ">=": vx_core.e_ge,
     ">=_1": vx_core.e_ge_1,
+    "allowfuncs<-security": vx_core.e_allowfuncs_from_security,
     "allowtypenames<-typedef": vx_core.e_allowtypenames_from_typedef,
     "allowtypes<-typedef": vx_core.e_allowtypes_from_typedef,
     "and": vx_core.e_and,
@@ -4344,6 +4440,7 @@ export default class vx_core {
     "any<-reduce-next-async": vx_core.e_any_from_reduce_next_async,
     "any<-struct": vx_core.e_any_from_struct,
     "async": vx_core.e_async,
+    "boolean-permission<-func": vx_core.e_boolean_permission_from_func,
     "boolean<-any": vx_core.e_boolean_from_any,
     "boolean<-func": vx_core.e_boolean_from_func,
     "boolean<-none": vx_core.e_boolean_from_none,
@@ -4352,6 +4449,7 @@ export default class vx_core {
     "compare": vx_core.e_compare,
     "contains": vx_core.e_contains,
     "contains_1": vx_core.e_contains_1,
+    "context-main": vx_core.e_context_main,
     "copy": vx_core.e_copy,
     "else": vx_core.e_else,
     "empty": vx_core.e_empty,
@@ -4387,6 +4485,7 @@ export default class vx_core {
     "list<-map-async": vx_core.e_list_from_map_async,
     "list<-type": vx_core.e_list_from_type,
     "log": vx_core.e_log,
+    "main": vx_core.e_main,
     "map<-list": vx_core.e_map_from_list,
     "mempool-addref": vx_core.e_mempool_addref,
     "mempool-release": vx_core.e_mempool_release,
@@ -4414,6 +4513,8 @@ export default class vx_core {
     "resolve-async": vx_core.e_resolve_async,
     "resolve-first": vx_core.e_resolve_first,
     "resolve-list": vx_core.e_resolve_list,
+    "security<-context": vx_core.e_security_from_context,
+    "security<-user": vx_core.e_security_from_user,
     "session<-context": vx_core.e_session_from_context,
     "setting<-context": vx_core.e_setting_from_context,
     "string-repeat": vx_core.e_string_repeat,
@@ -5510,6 +5611,11 @@ export default class vx_core {
       disallowvalues: [],
       traits        : [],
       properties    : {
+        "allowfuncs": {
+          "name" : "allowfuncs",
+          "type" : vx_core.t_funclist,
+          "multi": false
+        },
         "permissions": {
           "name" : "permissions",
           "type" : vx_core.t_permissionlist,
@@ -6605,6 +6711,25 @@ export default class vx_core {
       fn            : vx_core.f_ge_1
     }
 
+    // (func allowfuncs_from_security)
+    vx_core.t_allowfuncs_from_security['vx_type'] = vx_core.t_type
+    vx_core.t_allowfuncs_from_security['vx_value'] = {
+      name          : "allowfuncs<-security",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_allowfuncs_from_security
+    }
+
     // (func allowtypenames_from_typedef)
     vx_core.t_allowtypenames_from_typedef['vx_type'] = vx_core.t_type
     vx_core.t_allowtypenames_from_typedef['vx_value'] = {
@@ -7061,6 +7186,25 @@ export default class vx_core {
       fn            : vx_core.f_async
     }
 
+    // (func boolean_permission_from_func)
+    vx_core.t_boolean_permission_from_func['vx_type'] = vx_core.t_type
+    vx_core.t_boolean_permission_from_func['vx_value'] = {
+      name          : "boolean-permission<-func",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_boolean_permission_from_func
+    }
+
     // (func boolean_from_any)
     vx_core.t_boolean_from_any['vx_type'] = vx_core.t_type
     vx_core.t_boolean_from_any['vx_value'] = {
@@ -7211,6 +7355,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_contains_1
+    }
+
+    // (func context_main)
+    vx_core.t_context_main['vx_type'] = vx_core.t_type
+    vx_core.t_context_main['vx_value'] = {
+      name          : "context-main",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_context_main
     }
 
     // (func copy)
@@ -7878,6 +8041,25 @@ export default class vx_core {
       fn            : vx_core.f_log
     }
 
+    // (func main)
+    vx_core.t_main['vx_type'] = vx_core.t_type
+    vx_core.t_main['vx_value'] = {
+      name          : "main",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_main
+    }
+
     // (func map_from_list)
     vx_core.t_map_from_list['vx_type'] = vx_core.t_type
     vx_core.t_map_from_list['vx_value'] = {
@@ -8389,6 +8571,44 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_resolve_list
+    }
+
+    // (func security_from_context)
+    vx_core.t_security_from_context['vx_type'] = vx_core.t_type
+    vx_core.t_security_from_context['vx_value'] = {
+      name          : "security<-context",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_security_from_context
+    }
+
+    // (func security_from_user)
+    vx_core.t_security_from_user['vx_type'] = vx_core.t_type
+    vx_core.t_security_from_user['vx_value'] = {
+      name          : "security<-user",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_security_from_user
     }
 
     // (func session_from_context)

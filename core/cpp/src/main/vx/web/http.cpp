@@ -75,7 +75,7 @@ namespace vx_web_http {
     vx_core::Type_any Class_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Type_response output = vx_web_http::e_response;
       vx_web_http::Type_response val = vx_core::vx_any_from_any(vx_web_http::t_response, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_boolean vx_p_ok = val->ok();
       vx_core::Type_int vx_p_status = val->status();
       std::string key = "";
@@ -97,7 +97,7 @@ namespace vx_web_http {
           } else if (testkey == ":status") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new response) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -106,18 +106,18 @@ namespace vx_web_http {
             if (valsubtype == vx_core::t_boolean) {
               vx_p_ok = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new response :ok " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response :ok " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":status") {
             if (valsubtype == vx_core::t_int) {
               vx_p_status = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new response :status " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response :status " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new response) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -239,7 +239,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "csv<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -347,7 +347,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "json<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -440,7 +440,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "response<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -538,7 +538,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "text<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -628,7 +628,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "text<-response", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -737,7 +737,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "textblock<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -824,7 +824,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "textblock<-response", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -933,7 +933,7 @@ namespace vx_web_http {
         "vx/web/http", // pkgname
         "xml<-httpget", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs

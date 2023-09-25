@@ -41,7 +41,7 @@ namespace vx_data_file {
       filestream.close();
       output = vx_core::c_true;
     } else {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("File not found:" + path);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("File not found:" + path);
       output = vx_core::vx_copy(vx_core::c_false, {msg});
     }
     return output;
@@ -74,7 +74,7 @@ namespace vx_data_file {
       filestream.close();
       output = vx_core::vx_new_string(text);
     } else {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("File not found:" + path);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("File not found:" + path);
       output = vx_core::vx_new(vx_core::t_string, {msg});
     }
     return output;
@@ -193,7 +193,7 @@ namespace vx_data_file {
     vx_core::Type_any Class_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_file output = vx_data_file::e_file;
       vx_data_file::Type_file val = vx_core::vx_any_from_any(vx_data_file::t_file, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
       vx_data_file::Type_fileformat vx_p_format = val->format();
       vx_core::Type_string vx_p_path = val->path();
@@ -224,7 +224,7 @@ namespace vx_data_file {
           } else if (testkey == ":text") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -233,39 +233,39 @@ namespace vx_data_file {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":format") {
             if (valsubtype == vx_data_file::t_fileformat) {
               vx_p_format = vx_core::vx_any_from_any(vx_data_file::t_fileformat, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file :format " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :format " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":path") {
             if (valsubtype == vx_core::t_string) {
               vx_p_path = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":permission") {
             if (valsubtype == vx_core::t_permission) {
               vx_p_permission = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file :permission " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :permission " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new file) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -453,7 +453,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "boolean-exists<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -549,7 +549,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "boolean-write<-file-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -593,10 +593,15 @@ namespace vx_data_file {
   vx_core::Type_boolean f_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text, vx_core::Type_context context) {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve({file, text});
+    if (vx_core::f_boolean_permission_from_func(vx_data_file::t_boolean_write_from_file_string, context)) {
     try {
-      output = vx_data_file::vx_boolean_write_from_file_string(file, text);
+        output = vx_data_file::vx_boolean_write_from_file_string(file, text);
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("boolean-write<-file-string", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("boolean-write<-file-string", err);
+      output = vx_core::vx_new(vx_core::t_boolean, {msg});
+    }
+    } else {
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Permission Denied: boolean-write<-file-string");
       output = vx_core::vx_new(vx_core::t_boolean, {msg});
     }
     vx_core::vx_release_one_except({file, text}, output);
@@ -636,7 +641,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "boolean-write<-file-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -680,14 +685,19 @@ namespace vx_data_file {
   vx_data_file::Type_file f_file_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context) {
     vx_data_file::Type_file output = vx_data_file::e_file;
     vx_core::vx_reserve(file);
-    output = vx_core::f_copy(
-      vx_data_file::t_file,
-      file,
-      vx_core::vx_new(vx_core::t_anylist, {
-        vx_core::vx_new_string(":text"),
-        vx_data_file::f_string_read_from_file(file, context)
-      })
-    );
+    if (vx_core::f_boolean_permission_from_func(vx_data_file::t_file_read_from_file, context)) {
+      output = vx_core::f_copy(
+        vx_data_file::t_file,
+        file,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":text"),
+          vx_data_file::f_string_read_from_file(file, context)
+        })
+      );
+    } else {
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Permission Denied: file-read<-file");
+      output = vx_core::vx_new(vx_data_file::t_file, {msg});
+    }
     vx_core::vx_release_one_except(file, output);
     return output;
   }
@@ -725,7 +735,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "file-read<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -818,7 +828,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "name<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -910,7 +920,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "path<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1000,7 +1010,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "pathcurrent<-os", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1097,7 +1107,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "pathfull<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1151,10 +1161,15 @@ namespace vx_data_file {
   vx_core::Type_string f_string_read_from_file(vx_data_file::Type_file file, vx_core::Type_context context) {
     vx_core::Type_string output = vx_core::e_string;
     vx_core::vx_reserve(file);
+    if (vx_core::f_boolean_permission_from_func(vx_data_file::t_string_read_from_file, context)) {
     try {
-      output = vx_data_file::vx_string_read_from_file(file);
+        output = vx_data_file::vx_string_read_from_file(file);
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("string-read<-file", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("string-read<-file", err);
+      output = vx_core::vx_new(vx_core::t_string, {msg});
+    }
+    } else {
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Permission Denied: string-read<-file");
       output = vx_core::vx_new(vx_core::t_string, {msg});
     }
     vx_core::vx_release_one_except(file, output);
@@ -1194,7 +1209,7 @@ namespace vx_data_file {
         "vx/data/file", // pkgname
         "string-read<-file", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs

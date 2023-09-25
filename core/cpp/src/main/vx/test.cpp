@@ -102,7 +102,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcase::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcase output = vx_test::e_testcase;
       vx_test::Type_testcase val = vx_core::vx_any_from_any(vx_test::t_testcase, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_boolean vx_p_passfail = val->passfail();
       vx_core::Type_string vx_p_testpkg = val->testpkg();
       vx_core::Type_string vx_p_casename = val->casename();
@@ -130,7 +130,7 @@ namespace vx_test {
           } else if (testkey == ":describelist") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -139,32 +139,32 @@ namespace vx_test {
             if (valsubtype == vx_core::t_boolean) {
               vx_p_passfail = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":casename") {
             if (valsubtype == vx_core::t_string) {
               vx_p_casename = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase :casename " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase :casename " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":describelist") {
             if (valsubtype == vx_test::t_testdescribelist) {
               vx_p_describelist = vx_core::vx_any_from_any(vx_test::t_testdescribelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase :describelist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase :describelist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcase) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcase) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -299,8 +299,11 @@ namespace vx_test {
         if (valtype == vx_test::t_testcase) {
           vx_test::Type_testcase castval = vx_core::vx_any_from_any(vx_test::t_testcase, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_test::t_testcase)) {
+          vx_test::Type_testcase castval = vx_core::vx_any_from_any(vx_test::t_testcase, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(testcaselist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(testcaselist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -324,7 +327,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcaselist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcaselist output = vx_test::e_testcaselist;
       vx_test::Type_testcaselist val = vx_core::vx_any_from_any(vx_test::t_testcaselist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testcase> listval = val->vx_listtestcase();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -340,7 +343,7 @@ namespace vx_test {
           vx_test::Type_testcaselist multi = vx_core::vx_any_from_any(vx_test::t_testcaselist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtestcase());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcaselist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcaselist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -474,7 +477,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragedetail::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragedetail output = vx_test::e_testcoveragedetail;
       vx_test::Type_testcoveragedetail val = vx_core::vx_any_from_any(vx_test::t_testcoveragedetail, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_intmap vx_p_constmap = val->constmap();
       vx_core::Type_intmap vx_p_funcmap = val->funcmap();
       vx_core::Type_string vx_p_testpkg = val->testpkg();
@@ -502,7 +505,7 @@ namespace vx_test {
           } else if (testkey == ":typemap") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -511,32 +514,32 @@ namespace vx_test {
             if (valsubtype == vx_core::t_intmap) {
               vx_p_constmap = vx_core::vx_any_from_any(vx_core::t_intmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail :constmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail :constmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":funcmap") {
             if (valsubtype == vx_core::t_intmap) {
               vx_p_funcmap = vx_core::vx_any_from_any(vx_core::t_intmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail :funcmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail :funcmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":typemap") {
             if (valsubtype == vx_core::t_intmap) {
               vx_p_typemap = vx_core::vx_any_from_any(vx_core::t_intmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail :typemap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail :typemap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragedetail) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragedetail) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -713,7 +716,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragenums::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragenums output = vx_test::e_testcoveragenums;
       vx_test::Type_testcoveragenums val = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_int vx_p_pct = val->pct();
       vx_core::Type_string vx_p_testpkg = val->testpkg();
       vx_core::Type_int vx_p_tests = val->tests();
@@ -741,7 +744,7 @@ namespace vx_test {
           } else if (testkey == ":total") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -750,32 +753,32 @@ namespace vx_test {
             if (valsubtype == vx_core::t_int) {
               vx_p_pct = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums :pct " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums :pct " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":tests") {
             if (valsubtype == vx_core::t_int) {
               vx_p_tests = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums :tests " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums :tests " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":total") {
             if (valsubtype == vx_core::t_int) {
               vx_p_total = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums :total " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums :total " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragenums) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragenums) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1004,7 +1007,7 @@ namespace vx_test {
     vx_core::Type_any Class_testcoveragesummary::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testcoveragesummary output = vx_test::e_testcoveragesummary;
       vx_test::Type_testcoveragesummary val = vx_core::vx_any_from_any(vx_test::t_testcoveragesummary, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_test::Type_testcoveragenums vx_p_bigospacenums = val->bigospacenums();
       vx_test::Type_testcoveragenums vx_p_bigotimenums = val->bigotimenums();
       vx_test::Type_testcoveragenums vx_p_constnums = val->constnums();
@@ -1044,7 +1047,7 @@ namespace vx_test {
           } else if (testkey == ":typenums") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1053,60 +1056,60 @@ namespace vx_test {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_bigospacenums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :bigospacenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :bigospacenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":bigotimenums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_bigotimenums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :bigotimenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :bigotimenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":constnums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_constnums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :constnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :constnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":docnums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_docnums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :docnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :docnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":funcnums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_funcnums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :funcnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :funcnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":totalnums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_totalnums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :totalnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :totalnums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":typenums") {
             if (valsubtype == vx_test::t_testcoveragenums) {
               vx_p_typenums = vx_core::vx_any_from_any(vx_test::t_testcoveragenums, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary :typenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary :typenums " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testcoveragesummary) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testcoveragesummary) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1314,7 +1317,7 @@ namespace vx_test {
     vx_core::Type_any Class_testdescribe::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testdescribe output = vx_test::e_testdescribe;
       vx_test::Type_testdescribe val = vx_core::vx_any_from_any(vx_test::t_testdescribe, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_describename = val->describename();
       vx_core::Type_string vx_p_testpkg = val->testpkg();
       vx_test::Type_testresult vx_p_testresult = val->testresult();
@@ -1339,7 +1342,7 @@ namespace vx_test {
           } else if (testkey == ":testresult") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribe) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribe) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1348,25 +1351,25 @@ namespace vx_test {
             if (valsubtype == vx_core::t_string) {
               vx_p_describename = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribe :describename " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribe :describename " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribe :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribe :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testresult") {
             if (valsubtype == vx_test::t_testresult) {
               vx_p_testresult = vx_core::vx_any_from_any(vx_test::t_testresult, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribe :testresult " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribe :testresult " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribe) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribe) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1490,8 +1493,11 @@ namespace vx_test {
         if (valtype == vx_test::t_testdescribe) {
           vx_test::Type_testdescribe castval = vx_core::vx_any_from_any(vx_test::t_testdescribe, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_test::t_testdescribe)) {
+          vx_test::Type_testdescribe castval = vx_core::vx_any_from_any(vx_test::t_testdescribe, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(testdescribelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(testdescribelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1515,7 +1521,7 @@ namespace vx_test {
     vx_core::Type_any Class_testdescribelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testdescribelist output = vx_test::e_testdescribelist;
       vx_test::Type_testdescribelist val = vx_core::vx_any_from_any(vx_test::t_testdescribelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testdescribe> listval = val->vx_listtestdescribe();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1531,7 +1537,7 @@ namespace vx_test {
           vx_test::Type_testdescribelist multi = vx_core::vx_any_from_any(vx_test::t_testdescribelist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtestdescribe());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testdescribelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testdescribelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -1678,7 +1684,7 @@ namespace vx_test {
     vx_core::Type_any Class_testpackage::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testpackage output = vx_test::e_testpackage;
       vx_test::Type_testpackage val = vx_core::vx_any_from_any(vx_test::t_testpackage, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_test::Type_testcaselist vx_p_caselist = val->caselist();
       vx_test::Type_testcoveragedetail vx_p_coveragedetail = val->coveragedetail();
       vx_test::Type_testcoveragesummary vx_p_coveragesummary = val->coveragesummary();
@@ -1709,7 +1715,7 @@ namespace vx_test {
           } else if (testkey == ":testpkg") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1718,39 +1724,39 @@ namespace vx_test {
             if (valsubtype == vx_test::t_testcaselist) {
               vx_p_caselist = vx_core::vx_any_from_any(vx_test::t_testcaselist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage :caselist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage :caselist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":coveragedetail") {
             if (valsubtype == vx_test::t_testcoveragedetail) {
               vx_p_coveragedetail = vx_core::vx_any_from_any(vx_test::t_testcoveragedetail, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage :coveragedetail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage :coveragedetail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":coveragesummary") {
             if (valsubtype == vx_test::t_testcoveragesummary) {
               vx_p_coveragesummary = vx_core::vx_any_from_any(vx_test::t_testcoveragesummary, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage :coveragesummary " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage :coveragesummary " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":passfail") {
             if (valsubtype == vx_core::t_boolean) {
               vx_p_passfail = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":testpkg") {
             if (valsubtype == vx_core::t_string) {
               vx_p_testpkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage :testpkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackage) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackage) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1896,8 +1902,11 @@ namespace vx_test {
         if (valtype == vx_test::t_testpackage) {
           vx_test::Type_testpackage castval = vx_core::vx_any_from_any(vx_test::t_testpackage, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_test::t_testpackage)) {
+          vx_test::Type_testpackage castval = vx_core::vx_any_from_any(vx_test::t_testpackage, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(testpackagelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(testpackagelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1921,7 +1930,7 @@ namespace vx_test {
     vx_core::Type_any Class_testpackagelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testpackagelist output = vx_test::e_testpackagelist;
       vx_test::Type_testpackagelist val = vx_core::vx_any_from_any(vx_test::t_testpackagelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testpackage> listval = val->vx_listtestpackage();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1937,7 +1946,7 @@ namespace vx_test {
           vx_test::Type_testpackagelist multi = vx_core::vx_any_from_any(vx_test::t_testpackagelist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtestpackage());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testpackagelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testpackagelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2084,7 +2093,7 @@ namespace vx_test {
     vx_core::Type_any Class_testresult::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testresult output = vx_test::e_testresult;
       vx_test::Type_testresult val = vx_core::vx_any_from_any(vx_test::t_testresult, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_code = val->code();
       vx_core::Type_boolean vx_p_passfail = val->passfail();
       vx_core::Type_any vx_p_expected = val->expected();
@@ -2115,7 +2124,7 @@ namespace vx_test {
           } else if (testkey == ":fn-actual") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresult) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresult) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -2124,14 +2133,14 @@ namespace vx_test {
             if (valsubtype == vx_core::t_string) {
               vx_p_code = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresult :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresult :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":passfail") {
             if (valsubtype == vx_core::t_boolean) {
               vx_p_passfail = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresult :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresult :passfail " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":expected") {
@@ -2142,11 +2151,11 @@ namespace vx_test {
             if (valsubtype == vx_core::t_any_from_func_async) {
               vx_p_fn_actual = vx_core::vx_any_from_any(vx_core::t_any_from_func_async, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresult :fn-actual " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresult :fn-actual " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresult) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresult) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -2292,8 +2301,11 @@ namespace vx_test {
         if (valtype == vx_test::t_testresult) {
           vx_test::Type_testresult castval = vx_core::vx_any_from_any(vx_test::t_testresult, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_test::t_testresult)) {
+          vx_test::Type_testresult castval = vx_core::vx_any_from_any(vx_test::t_testresult, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(testresultlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(testresultlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -2317,7 +2329,7 @@ namespace vx_test {
     vx_core::Type_any Class_testresultlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_test::Type_testresultlist output = vx_test::e_testresultlist;
       vx_test::Type_testresultlist val = vx_core::vx_any_from_any(vx_test::t_testresultlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_test::Type_testresult> listval = val->vx_listtestresult();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2333,7 +2345,7 @@ namespace vx_test {
           vx_test::Type_testresultlist multi = vx_core::vx_any_from_any(vx_test::t_testresultlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtestresult());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new testresultlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new testresultlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2778,6 +2790,116 @@ namespace vx_test {
 
   //}
 
+  // (func context-test)
+  vx_core::Type_context f_context_test(vx_core::Type_anylist args) {
+    vx_core::Type_context output = vx_core::e_context;
+    vx_core::vx_reserve(args);
+    output = vx_core::f_new(
+      vx_core::t_context,
+      vx_core::vx_new(vx_core::t_anylist, {
+        vx_core::vx_new_string(":session"),
+        vx_core::f_new(
+          vx_core::t_session,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":user"),
+            vx_core::f_new(
+              vx_core::t_user,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":security"),
+                vx_test::f_security_test()
+              })
+            )
+          })
+        )
+      })
+    );
+    vx_core::vx_release_one_except(args, output);
+    return output;
+  }
+
+  // (func context-test)
+  // class Class_context_test {
+    Abstract_context_test::~Abstract_context_test() {}
+
+    Class_context_test::Class_context_test() : Abstract_context_test::Abstract_context_test() {
+      vx_core::refcount += 1;
+    }
+
+    Class_context_test::~Class_context_test() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_context_test::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_test::Func_context_test output = vx_test::e_context_test;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_test::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_test::Func_context_test output = vx_test::e_context_test;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_context_test::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/test", // pkgname
+        "context-test", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_context_test::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/test", // pkgname
+        "context-test", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_context_test::vx_empty() const {return vx_test::e_context_test;}
+    vx_core::Type_any Class_context_test::vx_type() const {return vx_test::t_context_test;}
+    vx_core::Type_msgblock Class_context_test::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_context_test::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_context_test::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_context_test::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist inputval = vx_core::vx_any_from_any(vx_core::t_anylist, val);
+      output = vx_test::f_context_test(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_test::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist args = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_test::f_context_test(args);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func div<-testcaselist)
   vx_web_html::Type_div f_div_from_testcaselist(vx_test::Type_testcaselist testcaselist) {
     vx_web_html::Type_div output = vx_web_html::e_div;
@@ -2907,7 +3029,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "div<-testcaselist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3098,7 +3220,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "div<-testpackage", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3315,7 +3437,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "div<-testpackagelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3415,7 +3537,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "divchildlist<-testpackagelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3513,7 +3635,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "file-test", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3598,7 +3720,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "file-testhtml", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3683,7 +3805,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "file-testnode", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3807,7 +3929,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "html<-divtest", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -3923,7 +4045,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "p<-passfail", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4035,7 +4157,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "p<-testcoveragenums", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4178,7 +4300,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testcase", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4280,7 +4402,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testcaselist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4398,7 +4520,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testdescribe", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4500,7 +4622,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testdescribelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4633,7 +4755,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testpackage", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4735,7 +4857,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testpackagelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4886,7 +5008,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "resolve-testresult", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -4935,6 +5057,97 @@ namespace vx_test {
 
   //}
 
+  // (func security-test)
+  vx_core::Type_security f_security_test() {
+    vx_core::Type_security output = vx_core::e_security;
+    output = vx_core::f_new(
+      vx_core::t_security,
+      vx_core::vx_new(vx_core::t_anylist, {
+        vx_core::vx_new_string(":allowfuncs"),
+        vx_core::f_new(
+          vx_core::t_funclist,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_data_file::t_boolean_write_from_file_any,
+            vx_data_file::t_boolean_write_from_file_string,
+            vx_data_file::t_file_read_from_file,
+            vx_data_file::t_string_read_from_file
+          })
+        )
+      })
+    );
+    return output;
+  }
+
+  // (func security-test)
+  // class Class_security_test {
+    Abstract_security_test::~Abstract_security_test() {}
+
+    Class_security_test::Class_security_test() : Abstract_security_test::Abstract_security_test() {
+      vx_core::refcount += 1;
+    }
+
+    Class_security_test::~Class_security_test() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_security_test::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_test::Func_security_test output = vx_test::e_security_test;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_security_test::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_test::Func_security_test output = vx_test::e_security_test;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_security_test::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/test", // pkgname
+        "security-test", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_security_test::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/test", // pkgname
+        "security-test", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_security_test::vx_empty() const {return vx_test::e_security_test;}
+    vx_core::Type_any Class_security_test::vx_type() const {return vx_test::t_security_test;}
+    vx_core::Type_msgblock Class_security_test::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_security_test::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_security_test::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      output = vx_test::f_security_test();
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func test)
   vx_test::Type_testresult f_test(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context) {
     vx_test::Type_testresult output = vx_test::e_testresult;
@@ -4954,7 +5167,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, actual}, output);
@@ -4994,7 +5207,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5051,7 +5264,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, fn_actual}, output);
@@ -5091,7 +5304,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5153,7 +5366,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-false", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-false", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except(actual, output);
@@ -5193,7 +5406,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-false", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5261,7 +5474,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-false", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-false", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except(fn_actual, output);
@@ -5301,7 +5514,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-false", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5371,7 +5584,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-gt", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-gt", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, actual}, output);
@@ -5411,7 +5624,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-gt", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5468,7 +5681,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-gt", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-gt", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, fn_actual}, output);
@@ -5508,7 +5721,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-gt", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5567,7 +5780,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-ne", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-ne", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, actual}, output);
@@ -5607,7 +5820,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-ne", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5664,7 +5877,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-ne", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-ne", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, fn_actual}, output);
@@ -5704,7 +5917,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-ne", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5764,7 +5977,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-string", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-string", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, actual}, output);
@@ -5804,7 +6017,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5861,7 +6074,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-string", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-string", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except({expected, fn_actual}, output);
@@ -5901,7 +6114,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5963,7 +6176,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-true", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-true", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except(actual, output);
@@ -6003,7 +6216,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-true", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6071,7 +6284,7 @@ namespace vx_test {
         })
       );
     } catch (std::exception err) {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_exception("test-true", err);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_exception("test-true", err);
       output = vx_core::vx_new(vx_test::t_testresult, {msg});
     }
     vx_core::vx_release_one_except(fn_actual, output);
@@ -6111,7 +6324,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "test-true", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6296,7 +6509,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "tr<-testdescribe-casename", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6397,7 +6610,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "trlist<-testcase", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6497,7 +6710,7 @@ namespace vx_test {
         "vx/test", // pkgname
         "trlist<-testcaselist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6570,6 +6783,8 @@ namespace vx_test {
   vx_test::Type_testresultlist e_testresultlist = NULL;
   vx_test::Type_testresultlist t_testresultlist = NULL;
   vx_test::Const_stylesheet_test c_stylesheet_test = NULL;
+  vx_test::Func_context_test e_context_test = NULL;
+  vx_test::Func_context_test t_context_test = NULL;
   vx_test::Func_div_from_testcaselist e_div_from_testcaselist = NULL;
   vx_test::Func_div_from_testcaselist t_div_from_testcaselist = NULL;
   vx_test::Func_div_from_testpackage e_div_from_testpackage = NULL;
@@ -6604,6 +6819,8 @@ namespace vx_test {
   vx_test::Func_resolve_testpackagelist t_resolve_testpackagelist = NULL;
   vx_test::Func_resolve_testresult e_resolve_testresult = NULL;
   vx_test::Func_resolve_testresult t_resolve_testresult = NULL;
+  vx_test::Func_security_test e_security_test = NULL;
+  vx_test::Func_security_test t_security_test = NULL;
   vx_test::Func_test e_test = NULL;
   vx_test::Func_test t_test = NULL;
   vx_test::Func_test_1 e_test_1 = NULL;
@@ -6684,6 +6901,10 @@ namespace vx_test {
       vx_core::vx_reserve_empty(vx_test::e_testresultlist);
       vx_test::t_testresultlist = new Class_testresultlist();
       vx_core::vx_reserve_type(vx_test::t_testresultlist);
+      vx_test::e_context_test = new vx_test::Class_context_test();
+      vx_core::vx_reserve_empty(vx_test::e_context_test);
+      vx_test::t_context_test = new vx_test::Class_context_test();
+      vx_core::vx_reserve_type(vx_test::t_context_test);
       vx_test::e_div_from_testcaselist = new vx_test::Class_div_from_testcaselist();
       vx_core::vx_reserve_empty(vx_test::e_div_from_testcaselist);
       vx_test::t_div_from_testcaselist = new vx_test::Class_div_from_testcaselist();
@@ -6752,6 +6973,10 @@ namespace vx_test {
       vx_core::vx_reserve_empty(vx_test::e_resolve_testresult);
       vx_test::t_resolve_testresult = new vx_test::Class_resolve_testresult();
       vx_core::vx_reserve_type(vx_test::t_resolve_testresult);
+      vx_test::e_security_test = new vx_test::Class_security_test();
+      vx_core::vx_reserve_empty(vx_test::e_security_test);
+      vx_test::t_security_test = new vx_test::Class_security_test();
+      vx_core::vx_reserve_type(vx_test::t_security_test);
       vx_test::e_test = new vx_test::Class_test();
       vx_core::vx_reserve_empty(vx_test::e_test);
       vx_test::t_test = new vx_test::Class_test();

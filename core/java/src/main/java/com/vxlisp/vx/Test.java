@@ -124,7 +124,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testcase) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -135,7 +135,7 @@ public final class Test {
             } else if (valsub instanceof Boolean) {
               output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase :passfail " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcase :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -145,7 +145,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcase :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -155,7 +155,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_casename = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase :casename " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcase :casename " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -163,12 +163,12 @@ public final class Test {
             if (valsub instanceof Test.Type_testdescribelist) {
               output.vx_p_describelist = (Test.Type_testdescribelist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase :describelist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcase :describelist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcase) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testcase) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -223,17 +223,17 @@ public final class Test {
 
   public static class Class_testcaselist extends Core.Class_base implements Type_testcaselist {
 
-    protected List<Test.Type_testcase> vxlist = Core.immutablelist(new ArrayList<Test.Type_testcase>());
+    protected List<Test.Type_testcase> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testcase>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Test.Type_testcase vx_testcase(final Core.Type_int index) {
       Test.Type_testcase output = Test.e_testcase;
       Class_testcaselist list = this;
       int iindex = index.vx_int();
-      List<Test.Type_testcase> listval = list.vxlist;
+      List<Test.Type_testcase> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -241,7 +241,7 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testcase> vx_listtestcase() {return vxlist;}
+    public List<Test.Type_testcase> vx_listtestcase() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -278,11 +278,11 @@ public final class Test {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcaselist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new testcaselist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -428,7 +428,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -437,7 +437,7 @@ public final class Test {
             if (valsub instanceof Core.Type_intmap) {
               output.vx_p_constmap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail :constmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :constmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -445,7 +445,7 @@ public final class Test {
             if (valsub instanceof Core.Type_intmap) {
               output.vx_p_funcmap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail :funcmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :funcmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -455,7 +455,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -463,12 +463,12 @@ public final class Test {
             if (valsub instanceof Core.Type_intmap) {
               output.vx_p_typemap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail :typemap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :typemap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragedetail) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -619,7 +619,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -630,7 +630,7 @@ public final class Test {
             } else if (valsub instanceof Integer) {
               output.vx_p_pct = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums :pct " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :pct " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -640,7 +640,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -650,7 +650,7 @@ public final class Test {
             } else if (valsub instanceof Integer) {
               output.vx_p_tests = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums :tests " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :tests " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -660,12 +660,12 @@ public final class Test {
             } else if (valsub instanceof Integer) {
               output.vx_p_total = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums :total " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :total " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragenums) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -872,7 +872,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -881,7 +881,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :bigospacenums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :bigospacenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -889,7 +889,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :bigotimenums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :bigotimenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -897,7 +897,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_constnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :constnums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :constnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -905,7 +905,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_docnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :docnums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :docnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -913,7 +913,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :funcnums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :funcnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -923,7 +923,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -931,7 +931,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :totalnums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :totalnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -939,12 +939,12 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragenums) {
               output.vx_p_typenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary :typenums " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :typenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testcoveragesummary) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1081,7 +1081,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribe) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testdescribe) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -1092,7 +1092,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_describename = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribe :describename " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :describename " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1102,7 +1102,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribe :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1110,12 +1110,12 @@ public final class Test {
             if (valsub instanceof Test.Type_testresult) {
               output.vx_p_testresult = (Test.Type_testresult)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribe :testresult " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :testresult " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribe) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testdescribe) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1170,17 +1170,17 @@ public final class Test {
 
   public static class Class_testdescribelist extends Core.Class_base implements Type_testdescribelist {
 
-    protected List<Test.Type_testdescribe> vxlist = Core.immutablelist(new ArrayList<Test.Type_testdescribe>());
+    protected List<Test.Type_testdescribe> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testdescribe>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Test.Type_testdescribe vx_testdescribe(final Core.Type_int index) {
       Test.Type_testdescribe output = Test.e_testdescribe;
       Class_testdescribelist list = this;
       int iindex = index.vx_int();
-      List<Test.Type_testdescribe> listval = list.vxlist;
+      List<Test.Type_testdescribe> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1188,7 +1188,7 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testdescribe> vx_listtestdescribe() {return vxlist;}
+    public List<Test.Type_testdescribe> vx_listtestdescribe() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1225,11 +1225,11 @@ public final class Test {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new testdescribelist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new testdescribelist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1389,7 +1389,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testpackage) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -1398,7 +1398,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcaselist) {
               output.vx_p_caselist = (Test.Type_testcaselist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage :caselist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testpackage :caselist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1406,7 +1406,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragedetail) {
               output.vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage :coveragedetail " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testpackage :coveragedetail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1414,7 +1414,7 @@ public final class Test {
             if (valsub instanceof Test.Type_testcoveragesummary) {
               output.vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage :coveragesummary " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testpackage :coveragesummary " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1424,7 +1424,7 @@ public final class Test {
             } else if (valsub instanceof Boolean) {
               output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage :passfail " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testpackage :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1434,12 +1434,12 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage :testpkg " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testpackage :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackage) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testpackage) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1494,17 +1494,17 @@ public final class Test {
 
   public static class Class_testpackagelist extends Core.Class_base implements Type_testpackagelist {
 
-    protected List<Test.Type_testpackage> vxlist = Core.immutablelist(new ArrayList<Test.Type_testpackage>());
+    protected List<Test.Type_testpackage> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testpackage>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Test.Type_testpackage vx_testpackage(final Core.Type_int index) {
       Test.Type_testpackage output = Test.e_testpackage;
       Class_testpackagelist list = this;
       int iindex = index.vx_int();
-      List<Test.Type_testpackage> listval = list.vxlist;
+      List<Test.Type_testpackage> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1512,7 +1512,7 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testpackage> vx_listtestpackage() {return vxlist;}
+    public List<Test.Type_testpackage> vx_listtestpackage() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1549,11 +1549,11 @@ public final class Test {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new testpackagelist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new testpackagelist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1713,7 +1713,7 @@ public final class Test {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new testresult) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -1724,7 +1724,7 @@ public final class Test {
             } else if (valsub instanceof String) {
               output.vx_p_code = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult :code " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testresult :code " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1734,7 +1734,7 @@ public final class Test {
             } else if (valsub instanceof Boolean) {
               output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult :passfail " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testresult :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1742,7 +1742,7 @@ public final class Test {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_expected = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult :expected " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testresult :expected " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1750,7 +1750,7 @@ public final class Test {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_actual = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult :actual " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testresult :actual " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1758,12 +1758,12 @@ public final class Test {
             if (valsub instanceof Core.Func_any_from_func_async) {
               output.vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult :fn-actual " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new testresult :fn-actual " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresult) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new testresult) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1818,17 +1818,17 @@ public final class Test {
 
   public static class Class_testresultlist extends Core.Class_base implements Type_testresultlist {
 
-    protected List<Test.Type_testresult> vxlist = Core.immutablelist(new ArrayList<Test.Type_testresult>());
+    protected List<Test.Type_testresult> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testresult>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Test.Type_testresult vx_testresult(final Core.Type_int index) {
       Test.Type_testresult output = Test.e_testresult;
       Class_testresultlist list = this;
       int iindex = index.vx_int();
-      List<Test.Type_testresult> listval = list.vxlist;
+      List<Test.Type_testresult> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -1836,7 +1836,7 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testresult> vx_listtestresult() {return vxlist;}
+    public List<Test.Type_testresult> vx_listtestresult() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1873,11 +1873,11 @@ public final class Test {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new testresultlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new testresultlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -2295,6 +2295,115 @@ public final class Test {
   }
 
   public static final Const_stylesheet_test c_stylesheet_test = new Const_stylesheet_test();
+
+  /**
+   * @function context_test
+   * Returns the default context for test case execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-test)
+   */
+  public static interface Func_context_test extends Core.Func_any_from_any {
+    public Core.Type_context f_context_test(final Core.Type_anylist args);
+  }
+
+  public static class Class_context_test extends Core.Class_base implements Func_context_test {
+
+    @Override
+    public Func_context_test vx_new(Object... vals) {
+      Class_context_test output = new Class_context_test();
+      return output;
+    }
+
+    @Override
+    public Func_context_test vx_copy(Object... vals) {
+      Class_context_test output = new Class_context_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/test", // pkgname
+        "context-test", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_test vx_empty() {return e_context_test;}
+    @Override
+    public Func_context_test vx_type() {return t_context_test;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_anylist inputval = (Core.Type_anylist)value;
+      Core.Type_any outputval = Test.f_context_test(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
+      output = Test.f_context_test(args);
+      return output;
+    }
+
+    @Override
+    public Core.Type_context f_context_test(final Core.Type_anylist args) {
+      return Test.f_context_test(args);
+    }
+
+  }
+
+  public static final Func_context_test e_context_test = new Test.Class_context_test();
+  public static final Func_context_test t_context_test = new Test.Class_context_test();
+
+  public static Core.Type_context f_context_test(final Core.Type_anylist args) {
+    Core.Type_context output = Core.e_context;
+    output = Core.f_new(
+      Core.t_context,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":session"),
+        Core.f_new(
+          Core.t_session,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":user"),
+            Core.f_new(
+              Core.t_user,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":security"),
+                Test.f_security_test()
+              )
+            )
+          )
+        )
+      )
+    );
+    return output;
+  }
 
   /**
    * @function div_from_testcaselist
@@ -4346,6 +4455,97 @@ public final class Test {
   }
 
   /**
+   * @function security_test
+   * Returns the default security for test case execution. Arguments come from the command line.
+   * @return {security}
+   * (func security-test)
+   */
+  public static interface Func_security_test extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_security f_security_test();
+  }
+
+  public static class Class_security_test extends Core.Class_base implements Func_security_test {
+
+    @Override
+    public Func_security_test vx_new(Object... vals) {
+      Class_security_test output = new Class_security_test();
+      return output;
+    }
+
+    @Override
+    public Func_security_test vx_copy(Object... vals) {
+      Class_security_test output = new Class_security_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/test", // pkgname
+        "security-test", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "security", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_security_test vx_empty() {return e_security_test;}
+    @Override
+    public Func_security_test vx_type() {return t_security_test;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      output = Test.f_security_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_security f_security_test() {
+      return Test.f_security_test();
+    }
+
+  }
+
+  public static final Func_security_test e_security_test = new Test.Class_security_test();
+  public static final Func_security_test t_security_test = new Test.Class_security_test();
+
+  public static Core.Type_security f_security_test() {
+    Core.Type_security output = Core.e_security;
+    output = Core.f_new(
+      Core.t_security,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":allowfuncs"),
+        Core.f_new(
+          Core.t_funclist,
+          Core.t_anylist.vx_new(
+            File.t_boolean_write_from_file_any,
+            File.t_boolean_write_from_file_string,
+            File.t_file_read_from_file,
+            File.t_string_read_from_file
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
    * @function test
    * Test expected equal actual
    * @param  {any-1} expected
@@ -4422,7 +4622,7 @@ public final class Test {
   public static final Func_test t_test = new Test.Class_test();
 
   public static Test.Type_testresult f_test(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4438,10 +4638,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4521,7 +4721,7 @@ public final class Test {
   public static final Func_test_1 t_test_1 = new Test.Class_test_1();
 
   public static Test.Type_testresult f_test_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4535,10 +4735,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4628,7 +4828,7 @@ public final class Test {
   public static final Func_test_false t_test_false = new Test.Class_test_false();
 
   public static Test.Type_testresult f_test_false(final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4647,10 +4847,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-false", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-false", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4740,7 +4940,7 @@ public final class Test {
   public static final Func_test_false_1 t_test_false_1 = new Test.Class_test_false_1();
 
   public static Test.Type_testresult f_test_false_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4754,10 +4954,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-false", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-false", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4837,7 +5037,7 @@ public final class Test {
   public static final Func_test_gt t_test_gt = new Test.Class_test_gt();
 
   public static Test.Type_testresult f_test_gt(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4853,10 +5053,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-gt", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-gt", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -4936,7 +5136,7 @@ public final class Test {
   public static final Func_test_gt_1 t_test_gt_1 = new Test.Class_test_gt_1();
 
   public static Test.Type_testresult f_test_gt_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -4950,10 +5150,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-gt", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-gt", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5033,7 +5233,7 @@ public final class Test {
   public static final Func_test_ne t_test_ne = new Test.Class_test_ne();
 
   public static Test.Type_testresult f_test_ne(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5049,10 +5249,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-ne", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-ne", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5132,7 +5332,7 @@ public final class Test {
   public static final Func_test_ne_1 t_test_ne_1 = new Test.Class_test_ne_1();
 
   public static Test.Type_testresult f_test_ne_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5146,10 +5346,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-ne", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-ne", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5229,7 +5429,7 @@ public final class Test {
   public static final Func_test_string t_test_string = new Test.Class_test_string();
 
   public static Test.Type_testresult f_test_string(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5246,10 +5446,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-string", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-string", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5329,7 +5529,7 @@ public final class Test {
   public static final Func_test_string_1 t_test_string_1 = new Test.Class_test_string_1();
 
   public static Test.Type_testresult f_test_string_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5343,10 +5543,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-string", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-string", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5436,7 +5636,7 @@ public final class Test {
   public static final Func_test_true t_test_true = new Test.Class_test_true();
 
   public static Test.Type_testresult f_test_true(final Core.Type_any actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5455,10 +5655,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-true", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-true", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -5548,7 +5748,7 @@ public final class Test {
   public static final Func_test_true_1 t_test_true_1 = new Test.Class_test_true_1();
 
   public static Test.Type_testresult f_test_true_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      Test.Type_testresult output = Test.e_testresult;
+    Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
         Test.t_testresult,
@@ -5562,10 +5762,10 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("test-true", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("test-true", err);
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**

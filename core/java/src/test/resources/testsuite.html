@@ -294,11 +294,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">31% 63/199</p>
+              <p class="coveragenums">30% 63/205</p>
               <p class="coveragenums">6% 4/66</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">47% 57/119</p>
-              <p class="coveragenums">81% 180/222</p>
+              <p class="coveragenums">45% 57/125</p>
+              <p class="coveragenums">81% 186/228</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -6178,12 +6178,51 @@
           <details>
             <summary>
               <p class="passflag">Pass</p>
+              <p class="pkgname">vx/event</p>
+              <p class="coveragenums">0% 0/4</p>
+              <p class="coveragenums">0% 0/1</p>
+              <p class="coveragenums">0% 0/2</p>
+              <p class="coveragenums">0% 0/1</p>
+              <p class="coveragenums">100% 4/4</p>
+              <p class="coveragenums">0% 0/0</p>
+              <p class="coveragenums">0% 0/0</p>
+            </summary>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      <p>Pass?</p>
+                    </td>
+                    <td>
+                      <p>Name</p>
+                    </td>
+                    <td>
+                      <p>Test</p>
+                    </td>
+                    <td>
+                      <p>Expected</p>
+                    </td>
+                    <td>
+                      <p>Actual</p>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/repl</p>
-              <p class="coveragenums">10% 1/10</p>
+              <p class="coveragenums">9% 1/11</p>
               <p class="coveragenums">0% 0/3</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">14% 1/7</p>
-              <p class="coveragenums">100% 10/10</p>
+              <p class="coveragenums">12% 1/8</p>
+              <p class="coveragenums">100% 11/11</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -6384,11 +6423,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/test</p>
-              <p class="coveragenums">7% 3/38</p>
+              <p class="coveragenums">7% 3/40</p>
               <p class="coveragenums">0% 0/11</p>
               <p class="coveragenums">0% 0/1</p>
-              <p class="coveragenums">11% 3/26</p>
-              <p class="coveragenums">93% 41/44</p>
+              <p class="coveragenums">10% 3/28</p>
+              <p class="coveragenums">93% 43/46</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -6487,11 +6526,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/type</p>
-              <p class="coveragenums">55% 11/20</p>
+              <p class="coveragenums">57% 12/21</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">55% 11/20</p>
-              <p class="coveragenums">65% 13/20</p>
+              <p class="coveragenums">57% 12/21</p>
+              <p class="coveragenums">71% 15/21</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -7050,13 +7089,40 @@
                       <p class="preformatted">string&lt;-stringlist-join</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test "a$b$c" (string&lt;-stringlist-join (stringlist "a" "b" "c") "$"))</p>
+                      <p class="preformatted">(test
+ "a$b$c"
+ (string&lt;-stringlist-join (stringlist "a" "b" "c") "$"))</p>
                     </td>
                     <td>
                       <p class="preformatted">"a$b$c"</p>
                     </td>
                     <td>
                       <p class="preformatted">"a$b$c"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">stringlist&lt;-string-split</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringlist "a" "b" "c")
+ (stringlist&lt;-string-split "a$b$c" "$"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringlist
+ "a"
+ "b"
+ "c")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringlist
+ "a"
+ "b"
+ "c")</p>
                     </td>
                   </tr>
                 </tbody>
@@ -7069,11 +7135,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/html</p>
-              <p class="coveragenums">8% 6/69</p>
+              <p class="coveragenums">8% 6/67</p>
               <p class="coveragenums">0% 0/31</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">15% 6/38</p>
-              <p class="coveragenums">98% 68/69</p>
+              <p class="coveragenums">16% 6/36</p>
+              <p class="coveragenums">98% 66/67</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -7295,6 +7361,45 @@
                     </td>
                   </tr>
                 </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>
+              <p class="passflag">Pass</p>
+              <p class="pkgname">vx/web/htmldoc</p>
+              <p class="coveragenums">0% 0/3</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">0% 0/3</p>
+              <p class="coveragenums">100% 3/3</p>
+              <p class="coveragenums">0% 0/0</p>
+              <p class="coveragenums">0% 0/0</p>
+            </summary>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      <p>Pass?</p>
+                    </td>
+                    <td>
+                      <p>Name</p>
+                    </td>
+                    <td>
+                      <p>Test</p>
+                    </td>
+                    <td>
+                      <p>Expected</p>
+                    </td>
+                    <td>
+                      <p>Actual</p>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
               </table>
             </div>
           </details>

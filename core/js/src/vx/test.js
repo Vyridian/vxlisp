@@ -79,6 +79,34 @@ export default class vx_test {
   static c_stylesheet_test = {vx_type: vx_web_html.t_stylesheet}
 
   /**
+   * @function context_test
+   * Returns the default context for test case execution. Arguments come from the command line.
+   * @param  {anylist} ... args
+   * @return {context}
+   */
+  static t_context_test = {}
+  static e_context_test = {vx_type: vx_test.t_context_test}
+
+  static f_context_test(...args) {
+    let output = vx_core.e_context
+    args = vx_core.f_new(vx_core.t_anylist, ...args)
+    output = vx_core.f_new(
+      vx_core.t_context,
+      ":session",
+      vx_core.f_new(
+        vx_core.t_session,
+        ":user",
+        vx_core.f_new(
+          vx_core.t_user,
+          ":security",
+          vx_test.f_security_test()
+        )
+      )
+    )
+    return output
+  }
+
+  /**
    * @function div_from_testcaselist
    * @param  {testcaselist} testcaselist
    * @return {div}
@@ -668,6 +696,30 @@ export default class vx_test {
   }
 
   /**
+   * @function security_test
+   * Returns the default security for test case execution. Arguments come from the command line.
+   * @return {security}
+   */
+  static t_security_test = {}
+  static e_security_test = {vx_type: vx_test.t_security_test}
+
+  static f_security_test() {
+    let output = vx_core.e_security
+    output = vx_core.f_new(
+      vx_core.t_security,
+      ":allowfuncs",
+      vx_core.f_new(
+        vx_core.t_funclist,
+        vx_data_file.t_boolean_write_from_file_any,
+        vx_data_file.t_boolean_write_from_file_string,
+        vx_data_file.t_file_read_from_file,
+        vx_data_file.t_string_read_from_file
+      )
+    )
+    return output
+  }
+
+  /**
    * @function test
    * Test expected equal actual
    * @param  {any} expected
@@ -1170,6 +1222,7 @@ export default class vx_test {
     "testpackagelist": vx_test.e_testpackagelist,
     "testresult": vx_test.e_testresult,
     "testresultlist": vx_test.e_testresultlist,
+    "context-test": vx_test.e_context_test,
     "div<-testcaselist": vx_test.e_div_from_testcaselist,
     "div<-testpackage": vx_test.e_div_from_testpackage,
     "div<-testpackagelist": vx_test.e_div_from_testpackagelist,
@@ -1187,6 +1240,7 @@ export default class vx_test {
     "resolve-testpackage": vx_test.e_resolve_testpackage,
     "resolve-testpackagelist": vx_test.e_resolve_testpackagelist,
     "resolve-testresult": vx_test.e_resolve_testresult,
+    "security-test": vx_test.e_security_test,
     "test": vx_test.e_test,
     "test_1": vx_test.e_test_1,
     "test-false": vx_test.e_test_false,
@@ -1884,6 +1938,25 @@ export default class vx_test {
       )
     ))
 
+    // (func context_test)
+    vx_test.t_context_test['vx_type'] = vx_core.t_type
+    vx_test.t_context_test['vx_value'] = {
+      name          : "context-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_context_test
+    }
+
     // (func div_from_testcaselist)
     vx_test.t_div_from_testcaselist['vx_type'] = vx_core.t_type
     vx_test.t_div_from_testcaselist['vx_value'] = {
@@ -2148,6 +2221,25 @@ export default class vx_test {
       properties    : [],
       proplast      : {},
       fn            : vx_test.f_resolve_testresult
+    }
+
+    // (func security_test)
+    vx_test.t_security_test['vx_type'] = vx_core.t_type
+    vx_test.t_security_test['vx_value'] = {
+      name          : "security-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_security_test
     }
 
     // (func test)

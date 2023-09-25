@@ -326,27 +326,9 @@
   (native
    :cpp
     "// :header
-     std::exception err;
-     vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) const;
-     vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) const;"
+     std::exception err;"
    :java
-    "public Exception err = null;
-
-     public Type_msg vx_new_error(final String text) {
-       Class_msg output = new Class_msg();
-       output.vx_p_text = Core.vx_new_string(text);
-       output.vx_p_severity = Core.c_msg_severe;
-       return output;
-     }
-
-     public Type_msg vx_new_from_exception(final String text, final Exception err) {
-       Class_msg output = new Class_msg();
-       output.vx_p_text = Core.vx_new_string(text);
-       output.vx_p_severity = Core.c_msg_severe;
-       output.err = err;
-       Core.debug(output);
-       return output;
-     }")
+    "public Exception err = null;")
  :doc "Message Type for error handling")
 
 (type msgblock : struct
@@ -354,9 +336,6 @@
               msgblocks : msgblocklist]
  :create
   (native
-   :cpp
-    "// :header
-     vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const;"
    :java
     "public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
        Core.Type_msgblock output = Core.e_msgblock;
@@ -364,39 +343,6 @@
        if (copymsgblock != null) {
          output = copymsgblock;
        }
-/*
-       List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
-       List<Core.Type_msg> listmsg = new ArrayList<>();
-       for (Object subval : vals) {
-         if (subval instanceof Core.Type_msgblock) {
-           listmsgblock.add((Core.Type_msgblock)subval);
-         } else if (subval instanceof Core.Type_msg) {
-           listmsg.add((Core.Type_msg)subval);
-         } else if (subval instanceof Core.Type_any) {
-           Core.Type_any val = (Core.Type_any)subval;
-           Core.Type_msgblock msgblock = val.vx_msgblock();
-           if (msgblock == null) {
-           } else if (msgblock == Core.e_msgblock) {
-           } else {
-             listmsgblock.add(msgblock);
-           }
-         }
-       }
-       if ((listmsg.size() > 0) || (listmsgblock.size() > 0)) {
-         Core.Class_msgblock work = new Core.Class_msgblock();
-         if (listmsg.size() > 0) {
-           Core.Class_msglist msglist = new Core.Class_msglist();
-           msglist.vxlist = listmsg;
-           work.vxmsglist = msglist;
-         }
-         if (listmsgblock.size() > 0) {
-           Core.Class_msgblocklist msgblocklist = new Core.Class_msgblocklist();
-           msgblocklist.vxlist = listmsgblock;
-           work.vxmsgblocklist = msgblocklist;
-         }
-         output = Core.t_msgblock.vx_copy(output, work);
-       }
-*/
        return output;
      }")
  :doc "Block of Messages")
@@ -447,7 +393,8 @@
  :doc        "Map of Permission")
 
 (type security : struct
- :properties [permissions   : permissionlist
+ :properties [allowfuncs    : funclist
+              permissions   : permissionlist
               permissionmap : permissionmap]
  :doc        "Security rules")
 
@@ -1114,6 +1061,11 @@
  :test  (test-true (>= "z" "b" "b"))
  :doc   "Returns true if the first arg is greater or equal than all of the other args")
 
+(func allowfuncs<-security : funclist
+ [security : security]
+ (:allowfuncs security)
+ :doc "Returns allowfuncs from a given security.")
+
 (func allowtypenames<-typedef : stringlist
  [vtypedef : typedef]
  (typenames<-typelist (allowtypes<-typedef vtypedef))
@@ -1426,6 +1378,14 @@
  []
  :doc "Function Type returning boolean with no parameters")
 
+(func boolean-permission<-func : boolean
+ [func : func]
+ (contains
+  (allowfuncs<-security (security<-context))
+  func)
+ :context
+ :doc "Returns true if the given func has permission.")
+
 (func case : thenelse
  [values : list-1
   fn-any : any<-func]
@@ -1535,6 +1495,11 @@
        (test-true  (contains (intlist 1 2 3) 2))
        (test-false (contains (list 1 "2" 3) 2))
  :doc  "Returns true if the given list contains the given value.")
+
+(func context-main : context
+ [args : anylist :...]
+ (context)
+ :doc "Returns the default context for app main execution. Arguments come from the command line.")
 
 (func copy : any-1
  [value  : any
@@ -1945,40 +1910,7 @@
       break
     }"
   :java
-   "boolean result = false;
-    if (value == " infinity ") {
-      result = true;
-    } else if (value == " neginfinity ") {
-      result = true;
-    } else if (value == " notanumber ") {
-      result = true;
-    } else if (value instanceof Core.Type_int) {
-      result = true;
-    } else if (value instanceof Core.Type_float) {
-      Core.Type_float valfloat = (Core.Type_float)value;
-      float floatval = valfloat.vx_float();
-      if ((int)floatval == floatval) {
-        result = true;
-      }
-    } else if (value instanceof Core.Type_decimal) {
-      Core.Type_decimal valdec = (Core.Type_decimal)value;
-      String strval = valdec.vx_string();
-      try {
-        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
-          result = true;
-        }
-      } catch (Exception ex) {
-      }
-    } else if (value instanceof Core.Type_string) {
-      Core.Type_string valstr = (Core.Type_string)value;
-      String strval = valstr.vx_string();
-      try {
-        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
-          result = true;
-        }
-      } catch (Exception ex) {
-      }
-    }
+   "boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);")
  :doc "Returns true if the value is an integer.")
 
@@ -2210,7 +2142,7 @@
  [value : any]
  (native
   :cpp
-   "vx_core::vx_debug(value);
+   "vx_core::vx_log(value);
     output = value;"
   :js
    "const text = vx_core.f_string_from_any(value)
@@ -2221,6 +2153,11 @@
     String text = stringtext.vx_string();
     System.out.println(text);
     output = value;"))
+
+(func main : string
+ [args : anylist :...]
+ (string args)
+ :doc "The default function for app main execution. Arguments come from the command line.")
 
 (func map<-list : map-1
  [vallist      : list-2
@@ -2571,6 +2508,16 @@
 (func resolve-list : list-1
  [clauses : list-1]
  (list<-list clauses resolve))
+
+(func security<-context : security
+ (security<-user (user<-context))
+ :context
+ :doc "Return security from the given context.")
+
+(func security<-user : security
+ [user : user]
+ (:security user)
+ :doc "Return security from the given user.")
 
 (func session<-context : session
  (:session context)

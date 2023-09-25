@@ -2,7 +2,6 @@ package com.vxlisp.vx;
 
 import com.vxlisp.vx.data.*;
 import com.vxlisp.vx.web.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,9 @@ import org.junit.jupiter.api.Test;
  */
 public class AppTest {
 
-  Core.Type_context context = Core.t_context.vx_new();
+
+  Core.Type_anylist arglist = Core.e_anylist;
+  Core.Type_context context = com.vxlisp.vx.Test.f_context_test(arglist);
 
   @Test
   @DisplayName("vx/collection")
@@ -20,12 +21,14 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/core")
   void test_vx_core() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = CoreTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/data/csv")
@@ -34,12 +37,14 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/data/db")
   void test_vx_data_db() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = DbTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/data/file")
@@ -48,12 +53,14 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/data/table")
   void test_vx_data_table() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = TableTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/data/textblock")
@@ -62,12 +69,14 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/data/tree")
   void test_vx_data_tree() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = TreeTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/data/xml")
@@ -76,12 +85,22 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
+  @Test
+  @DisplayName("vx/event")
+  void test_vx_event() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = EventTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
   @Test
   @DisplayName("vx/repl")
   void test_vx_repl() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = ReplTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/sample")
@@ -90,12 +109,14 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/state")
   void test_vx_state() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = StateTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
 
   @Test
   @DisplayName("vx/test")
@@ -104,6 +125,7 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/type")
   void test_vx_type() {
@@ -111,12 +133,22 @@ public class AppTest {
 	  TestLib.run_testpackage_async(testpackage);
   }
 
+
   @Test
   @DisplayName("vx/web/html")
   void test_vx_web_html() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = HtmlTest.test_package(context);
 	  TestLib.run_testpackage_async(testpackage);
   }
+
+
+  @Test
+  @DisplayName("vx/web/htmldoc")
+  void test_vx_web_htmldoc() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = HtmldocTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
 
   @Test
   @DisplayName("vx/web/http")
@@ -139,12 +171,14 @@ public class AppTest {
     TextblockTest.test_package(context),
     TreeTest.test_package(context),
     XmlTest.test_package(context),
+    EventTest.test_package(context),
     ReplTest.test_package(context),
     SampleTest.test_package(context),
     StateTest.test_package(context),
     TestTest.test_package(context),
     TypeTest.test_package(context),
     HtmlTest.test_package(context),
+    HtmldocTest.test_package(context),
     HttpTest.test_package(context)
     );
     TestLib.write_testpackagelist_async(testpackagelist, context);

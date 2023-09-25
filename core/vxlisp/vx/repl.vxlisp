@@ -152,6 +152,10 @@
  :context
  :doc "Run an arbitrary program in the REPL.")
 
+(func macro : any-1
+ [anylist : anylist :...]
+ :doc "A function that joins any number of values into a string and then parses and evaluates it.")
+
 (func repl<-liblist-string : repl
  [liblist : liblist
   text    : string :doc "Program to run"]

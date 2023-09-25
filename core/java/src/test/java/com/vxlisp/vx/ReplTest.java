@@ -109,11 +109,11 @@ public final class ReplTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/repl", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 10, ":total", 10), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 1, ":total", 7), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 10, ":tests", 1, ":total", 10), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 11, ":total", 11), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 12, ":tests", 1, ":total", 8), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 8), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 8), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 9, ":tests", 1, ":total", 11), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -136,6 +136,7 @@ public final class ReplTest {
         ":any<-repl", 2,
         ":any<-repl-async", 0,
         ":anylist<-repllist", 0,
+        ":macro", 0,
         ":repl<-liblist-string", 0
       )
     );

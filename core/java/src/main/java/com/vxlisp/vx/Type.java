@@ -48,6 +48,15 @@ public final class Type {
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
 	}
+
+  public static Core.Type_stringlist vx_stringlist_from_string_split(Core.Type_string text, Core.Type_string delim) {
+    Core.Type_stringlist output = Core.e_stringlist;
+    String stext = text.vx_string();
+    String sdelim = delim.vx_string();
+    Object[] arraystring = stext.split(java.util.regex.Pattern.quote(sdelim));
+    output = Core.t_stringlist.vx_new(arraystring);
+    return output;
+  }
   /**
    * @function allowtypenames_from_type
    * Get the name of a given type
@@ -1520,6 +1529,7 @@ public final class Type {
 
   /**
    * @function string_from_stringlist_join
+   * Returns a string by joining a stringlist by the delimiter
    * @param  {stringlist} vals
    * @param  {string} delim
    * @return {string}
@@ -1595,6 +1605,87 @@ public final class Type {
   public static Core.Type_string f_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim) {
     Core.Type_string output = Core.e_string;
     output = Type.vx_string_from_stringlist_join(vals, delim);
+    return output;
+  }
+
+  /**
+   * @function stringlist_from_string_split
+   * Returns a stringlist by splitting a string by the delimiter
+   * @param  {string} text
+   * @param  {string} delim
+   * @return {stringlist}
+   * (func stringlist<-string-split)
+   */
+  public static interface Func_stringlist_from_string_split extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim);
+  }
+
+  public static class Class_stringlist_from_string_split extends Core.Class_base implements Func_stringlist_from_string_split {
+
+    @Override
+    public Func_stringlist_from_string_split vx_new(Object... vals) {
+      Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
+      return output;
+    }
+
+    @Override
+    public Func_stringlist_from_string_split vx_copy(Object... vals) {
+      Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "stringlist<-string-split", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "stringlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_stringlist_from_string_split vx_empty() {return e_stringlist_from_string_split;}
+    @Override
+    public Func_stringlist_from_string_split vx_type() {return t_stringlist_from_string_split;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string delim = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Type.f_stringlist_from_string_split(text, delim);
+      return output;
+    }
+
+    @Override
+    public Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim) {
+      return Type.f_stringlist_from_string_split(text, delim);
+    }
+
+  }
+
+  public static final Func_stringlist_from_string_split e_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
+  public static final Func_stringlist_from_string_split t_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
+
+  public static Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim) {
+    Core.Type_stringlist output = Core.e_stringlist;
+    output = Type.vx_stringlist_from_string_split(text, delim);
     return output;
   }
 

@@ -57,6 +57,26 @@ namespace vx_type {
     return output;
 	}
 
+  // vx_stringlist_from_string_split(string, string)
+  vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim) {
+    std::string stext = text->vx_string();
+    std::string sdelim = delim->vx_string();
+    vx_core::vx_Type_listany listany;
+    size_t pos = 0;
+    std::string stoken;
+    while ((pos = stext.find(sdelim)) != std::string::npos) {
+      stoken = stext.substr(0, pos);
+      vx_core::Type_string token = vx_core::vx_new_string(stoken);
+      listany.push_back(token);
+      stext.erase(0, pos + sdelim.length());
+    }
+    vx_core::Type_string token = vx_core::vx_new_string(stext);
+    listany.push_back(token);
+    vx_core::Type_stringlist output = vx_core::vx_new(vx_core::t_stringlist, listany);
+    vx_core::vx_release({text, delim});
+    return output;
+  }
+
 
   // (func allowtypenames<-type)
   vx_core::Type_stringlist f_allowtypenames_from_type(vx_core::Type_any type) {
@@ -102,7 +122,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "allowtypenames<-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -198,7 +218,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "allowtypes<-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -293,7 +313,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "int<-string-find", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -375,7 +395,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "int<-string-findkeyword", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -459,7 +479,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-boolean", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -554,7 +574,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-decimal", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -649,7 +669,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-float", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -744,7 +764,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-none", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -839,7 +859,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -946,7 +966,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1040,7 +1060,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "is-type<-any-typelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1122,7 +1142,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "length<-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1251,7 +1271,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "string<-int", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1343,7 +1363,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "string<-string-end", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1428,7 +1448,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "string<-string-start", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1510,7 +1530,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "string<-string-start-end", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1592,7 +1612,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "string<-stringlist-join", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1625,6 +1645,87 @@ namespace vx_type {
       vx_core::Type_stringlist vals = vx_core::vx_any_from_any(vx_core::t_stringlist, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string delim = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_type::f_string_from_stringlist_join(vals, delim);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func stringlist<-string-split)
+  vx_core::Type_stringlist f_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim) {
+    vx_core::Type_stringlist output = vx_core::e_stringlist;
+    vx_core::vx_reserve({text, delim});
+    output = vx_type::vx_stringlist_from_string_split(text, delim);
+    vx_core::vx_release_one_except({text, delim}, output);
+    return output;
+  }
+
+  // (func stringlist<-string-split)
+  // class Class_stringlist_from_string_split {
+    Abstract_stringlist_from_string_split::~Abstract_stringlist_from_string_split() {}
+
+    Class_stringlist_from_string_split::Class_stringlist_from_string_split() : Abstract_stringlist_from_string_split::Abstract_stringlist_from_string_split() {
+      vx_core::refcount += 1;
+    }
+
+    Class_stringlist_from_string_split::~Class_stringlist_from_string_split() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_stringlist_from_string_split::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_stringlist_from_string_split output = vx_type::e_stringlist_from_string_split;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_string_split::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_stringlist_from_string_split output = vx_type::e_stringlist_from_string_split;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_stringlist_from_string_split::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "stringlist<-string-split", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_stringlist_from_string_split::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "stringlist<-string-split", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_string_split::vx_empty() const {return vx_type::e_stringlist_from_string_split;}
+    vx_core::Type_any Class_stringlist_from_string_split::vx_type() const {return vx_type::t_stringlist_from_string_split;}
+    vx_core::Type_msgblock Class_stringlist_from_string_split::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_stringlist_from_string_split::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_stringlist_from_string_split::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string delim = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_stringlist_from_string_split(text, delim);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1675,7 +1776,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "traitnames<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1769,7 +1870,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "traits<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1861,7 +1962,7 @@ namespace vx_type {
         "vx/type", // pkgname
         "traits<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -1945,6 +2046,8 @@ namespace vx_type {
   vx_type::Func_string_from_string_start_end t_string_from_string_start_end = NULL;
   vx_type::Func_string_from_stringlist_join e_string_from_stringlist_join = NULL;
   vx_type::Func_string_from_stringlist_join t_string_from_stringlist_join = NULL;
+  vx_type::Func_stringlist_from_string_split e_stringlist_from_string_split = NULL;
+  vx_type::Func_stringlist_from_string_split t_stringlist_from_string_split = NULL;
   vx_type::Func_traitnames_from_any e_traitnames_from_any = NULL;
   vx_type::Func_traitnames_from_any t_traitnames_from_any = NULL;
   vx_type::Func_traits_from_any e_traits_from_any = NULL;
@@ -2025,6 +2128,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_string_from_stringlist_join);
       vx_type::t_string_from_stringlist_join = new vx_type::Class_string_from_stringlist_join();
       vx_core::vx_reserve_type(vx_type::t_string_from_stringlist_join);
+      vx_type::e_stringlist_from_string_split = new vx_type::Class_stringlist_from_string_split();
+      vx_core::vx_reserve_empty(vx_type::e_stringlist_from_string_split);
+      vx_type::t_stringlist_from_string_split = new vx_type::Class_stringlist_from_string_split();
+      vx_core::vx_reserve_type(vx_type::t_stringlist_from_string_split);
       vx_type::e_traitnames_from_any = new vx_type::Class_traitnames_from_any();
       vx_core::vx_reserve_empty(vx_type::e_traitnames_from_any);
       vx_type::t_traitnames_from_any = new vx_type::Class_traitnames_from_any();

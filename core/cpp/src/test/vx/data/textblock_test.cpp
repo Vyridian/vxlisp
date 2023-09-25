@@ -8,6 +8,45 @@
 namespace vx_data_textblock_test {
 
   vx_test::Type_testcase f_delim_first_from_delim_delim(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_delim_first_from_delim_delim");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_copy(
+        vx_data_textblock::t_delim,
+        vx_data_textblock::c_delimcomma,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":startpos"),
+          vx_core::vx_new_int(1)
+        })
+      ),
+      vx_data_textblock::f_delim_first_from_delim_delim(
+        vx_core::f_copy(
+          vx_data_textblock::t_delim,
+          vx_data_textblock::c_delimspace,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":startpos"),
+            vx_core::vx_new_int(2)
+          })
+        ),
+        vx_core::f_copy(
+          vx_data_textblock::t_delim,
+          vx_data_textblock::c_delimcomma,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":startpos"),
+            vx_core::vx_new_int(1)
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-first<-delim-delim\n  (copy delimspace\n   :startpos 2)\n  (copy delimcomma\n   :startpos 1)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -15,48 +54,45 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-first<-delim-delim\n  (copy delimspace\n   :startpos 2)\n  (copy delimcomma\n   :startpos 1)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_copy(
-                vx_data_textblock::t_delim,
-                vx_data_textblock::c_delimcomma,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":startpos"),
-                  vx_core::vx_new_int(1)
-                })
-              ),
-              vx_data_textblock::f_delim_first_from_delim_delim(
-                vx_core::f_copy(
-                  vx_data_textblock::t_delim,
-                  vx_data_textblock::c_delimspace,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":startpos"),
-                    vx_core::vx_new_int(2)
-                  })
-                ),
-                vx_core::f_copy(
-                  vx_data_textblock::t_delim,
-                  vx_data_textblock::c_delimcomma,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":startpos"),
-                    vx_core::vx_new_int(1)
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_delim_first_from_delim_delim");
     return output;
   }
 
   vx_test::Type_testcase f_delim_first_from_string_delimlist(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_delim_first_from_string_delimlist");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_copy(
+        vx_data_textblock::t_delim,
+        vx_data_textblock::c_delimcomma,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":startpos"),
+          vx_core::vx_new_int(1)
+        })
+      ),
+      vx_data_textblock::f_delim_first_from_string_delimlist(
+        vx_core::vx_new_string("a, b"),
+        vx_core::f_new(
+          vx_data_textblock::t_delimlist,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_data_textblock::c_delimspace,
+            vx_data_textblock::c_delimcomma
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-first<-string-delimlist\n  \"a, b\"\n  (delimlist delimspace delimcomma)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -64,40 +100,39 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-first<-string-delimlist\n  \"a, b\"\n  (delimlist delimspace delimcomma)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_copy(
-                vx_data_textblock::t_delim,
-                vx_data_textblock::c_delimcomma,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":startpos"),
-                  vx_core::vx_new_int(1)
-                })
-              ),
-              vx_data_textblock::f_delim_first_from_string_delimlist(
-                vx_core::vx_new_string("a, b"),
-                vx_core::f_new(
-                  vx_data_textblock::t_delimlist,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_data_textblock::c_delimspace,
-                    vx_data_textblock::c_delimcomma
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_delim_first_from_string_delimlist");
     return output;
   }
 
   vx_test::Type_testcase f_delim_startpos_from_string_delim(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_delim_startpos_from_string_delim");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_copy(
+        vx_data_textblock::t_delim,
+        vx_data_textblock::c_delimcomma,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":startpos"),
+          vx_core::vx_new_int(1)
+        })
+      ),
+      vx_data_textblock::f_delim_startpos_from_string_delim(
+        vx_core::vx_new_string("a,b"),
+        vx_data_textblock::c_delimcomma
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-startpos<-string-delim\n  \"a,b\"\n  delimcomma))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -105,34 +140,58 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (copy delimcomma\n  :startpos 1)\n (delim-startpos<-string-delim\n  \"a,b\"\n  delimcomma))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_copy(
-                vx_data_textblock::t_delim,
-                vx_data_textblock::c_delimcomma,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":startpos"),
-                  vx_core::vx_new_int(1)
-                })
-              ),
-              vx_data_textblock::f_delim_startpos_from_string_delim(
-                vx_core::vx_new_string("a,b"),
-                vx_data_textblock::c_delimcomma
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_delim_startpos_from_string_delim");
     return output;
   }
 
   vx_test::Type_testcase f_delimlist_startpos_from_string_delimlist(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_delimlist_startpos_from_string_delimlist");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_new(
+        vx_data_textblock::t_delimlist,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::f_copy(
+            vx_data_textblock::t_delim,
+            vx_data_textblock::c_delimspace,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":startpos"),
+              vx_core::vx_new_int(2)
+            })
+          ),
+          vx_core::f_copy(
+            vx_data_textblock::t_delim,
+            vx_data_textblock::c_delimcomma,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":startpos"),
+              vx_core::vx_new_int(1)
+            })
+          )
+        })
+      ),
+      vx_data_textblock::f_delimlist_startpos_from_string_delimlist(
+        vx_core::vx_new_string("a, b"),
+        vx_core::f_new(
+          vx_data_textblock::t_delimlist,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_data_textblock::c_delimspace,
+            vx_data_textblock::c_delimcomma
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (delimlist\n  (copy delimspace\n   :startpos 2)\n  (copy delimcomma\n   :startpos 1))\n (delimlist-startpos<-string-delimlist\n  \"a, b\"\n  (delimlist delimspace delimcomma)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -140,53 +199,80 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (delimlist\n  (copy delimspace\n   :startpos 2)\n  (copy delimcomma\n   :startpos 1))\n (delimlist-startpos<-string-delimlist\n  \"a, b\"\n  (delimlist delimspace delimcomma)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_new(
-                vx_data_textblock::t_delimlist,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::f_copy(
-                    vx_data_textblock::t_delim,
-                    vx_data_textblock::c_delimspace,
-                    vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string(":startpos"),
-                      vx_core::vx_new_int(2)
-                    })
-                  ),
-                  vx_core::f_copy(
-                    vx_data_textblock::t_delim,
-                    vx_data_textblock::c_delimcomma,
-                    vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string(":startpos"),
-                      vx_core::vx_new_int(1)
-                    })
-                  )
-                })
-              ),
-              vx_data_textblock::f_delimlist_startpos_from_string_delimlist(
-                vx_core::vx_new_string("a, b"),
-                vx_core::f_new(
-                  vx_data_textblock::t_delimlist,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_data_textblock::c_delimspace,
-                    vx_data_textblock::c_delimcomma
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_delimlist_startpos_from_string_delimlist");
     return output;
   }
 
   vx_test::Type_testcase f_textblock_firstdelim_from_textblock_delimlist(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_textblock_firstdelim_from_textblock_delimlist");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_new(
+        vx_data_textblock::t_textblock,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":delim"),
+          vx_core::f_copy(
+            vx_data_textblock::t_delim,
+            vx_data_textblock::c_delimcomma,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":startpos"),
+              vx_core::vx_new_int(1)
+            })
+          ),
+          vx_core::vx_new_string(":text"),
+          vx_core::vx_new_string(" b"),
+          vx_core::vx_new_string(":parent"),
+          vx_core::f_new(
+            vx_data_textblock::t_textblock,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":text"),
+              vx_core::vx_new_string("a, b"),
+              vx_core::vx_new_string(":textblocks"),
+              vx_core::f_new(
+                vx_data_textblock::t_textblocklist,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::f_new(
+                    vx_data_textblock::t_textblock,
+                    vx_core::vx_new(vx_core::t_anylist, {
+                      vx_core::vx_new_string(":text"),
+                      vx_core::vx_new_string("a")
+                    })
+                  )
+                })
+              )
+            })
+          )
+        })
+      ),
+      vx_data_textblock::f_textblock_firstdelim_from_textblock_delimlist(
+        vx_core::f_new(
+          vx_data_textblock::t_textblock,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":text"),
+            vx_core::vx_new_string("a, b")
+          })
+        ),
+        vx_core::f_new(
+          vx_data_textblock::t_delimlist,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_data_textblock::c_delimspace,
+            vx_data_textblock::c_delimcomma
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :delim\n   (copy delimcomma\n    :startpos 1)\n  :text \" b\"\n  :parent\n   (textblock\n    :text \"a, b\"\n    :textblocks\n     (textblocklist\n      (textblock\n       :text \"a\"))))\n (textblock-firstdelim<-textblock-delimlist\n  (textblock\n   :text \"a, b\")\n  (delimlist delimspace delimcomma)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -194,75 +280,46 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :delim\n   (copy delimcomma\n    :startpos 1)\n  :text \" b\"\n  :parent\n   (textblock\n    :text \"a, b\"\n    :textblocks\n     (textblocklist\n      (textblock\n       :text \"a\"))))\n (textblock-firstdelim<-textblock-delimlist\n  (textblock\n   :text \"a, b\")\n  (delimlist delimspace delimcomma)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_new(
-                vx_data_textblock::t_textblock,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":delim"),
-                  vx_core::f_copy(
-                    vx_data_textblock::t_delim,
-                    vx_data_textblock::c_delimcomma,
-                    vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string(":startpos"),
-                      vx_core::vx_new_int(1)
-                    })
-                  ),
-                  vx_core::vx_new_string(":text"),
-                  vx_core::vx_new_string(" b"),
-                  vx_core::vx_new_string(":parent"),
-                  vx_core::f_new(
-                    vx_data_textblock::t_textblock,
-                    vx_core::vx_new(vx_core::t_anylist, {
-                      vx_core::vx_new_string(":text"),
-                      vx_core::vx_new_string("a, b"),
-                      vx_core::vx_new_string(":textblocks"),
-                      vx_core::f_new(
-                        vx_data_textblock::t_textblocklist,
-                        vx_core::vx_new(vx_core::t_anylist, {
-                          vx_core::f_new(
-                            vx_data_textblock::t_textblock,
-                            vx_core::vx_new(vx_core::t_anylist, {
-                              vx_core::vx_new_string(":text"),
-                              vx_core::vx_new_string("a")
-                            })
-                          )
-                        })
-                      )
-                    })
-                  )
-                })
-              ),
-              vx_data_textblock::f_textblock_firstdelim_from_textblock_delimlist(
-                vx_core::f_new(
-                  vx_data_textblock::t_textblock,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":text"),
-                    vx_core::vx_new_string("a, b")
-                  })
-                ),
-                vx_core::f_new(
-                  vx_data_textblock::t_delimlist,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_data_textblock::c_delimspace,
-                    vx_data_textblock::c_delimcomma
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_textblock_firstdelim_from_textblock_delimlist");
     return output;
   }
 
   vx_test::Type_testcase f_textblock_startafter_from_string_delim(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_textblock_startafter_from_string_delim");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_new(
+        vx_data_textblock::t_textblock,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":text"),
+          vx_core::vx_new_string(" b")
+        })
+      ),
+      vx_data_textblock::f_textblock_startafter_from_string_delim(
+        vx_core::vx_new_string("a, b"),
+        vx_core::f_new(
+          vx_data_textblock::t_delim,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":starttext"),
+            vx_core::vx_new_string(","),
+            vx_core::vx_new_string(":startpos"),
+            vx_core::vx_new_int(1)
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \" b\")\n (textblock-startafter<-string-delim\n  \"a, b\"\n  (delim\n   :starttext \",\"\n   :startpos  1)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -270,41 +327,44 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \" b\")\n (textblock-startafter<-string-delim\n  \"a, b\"\n  (delim\n   :starttext \",\"\n   :startpos  1)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_new(
-                vx_data_textblock::t_textblock,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":text"),
-                  vx_core::vx_new_string(" b")
-                })
-              ),
-              vx_data_textblock::f_textblock_startafter_from_string_delim(
-                vx_core::vx_new_string("a, b"),
-                vx_core::f_new(
-                  vx_data_textblock::t_delim,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":starttext"),
-                    vx_core::vx_new_string(","),
-                    vx_core::vx_new_string(":startpos"),
-                    vx_core::vx_new_int(1)
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_textblock_startafter_from_string_delim");
     return output;
   }
 
   vx_test::Type_testcase f_textblock_startbefore_from_string_delim(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_textblock_startbefore_from_string_delim");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_new(
+        vx_data_textblock::t_textblock,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":text"),
+          vx_core::vx_new_string("a")
+        })
+      ),
+      vx_data_textblock::f_textblock_startbefore_from_string_delim(
+        vx_core::vx_new_string("a, b"),
+        vx_core::f_new(
+          vx_data_textblock::t_delim,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":startpos"),
+            vx_core::vx_new_int(1)
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"a\")\n (textblock-startbefore<-string-delim\n  \"a, b\"\n  (delim\n   :startpos 1)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
@@ -312,35 +372,10 @@ namespace vx_data_textblock_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"a\")\n (textblock-startbefore<-string-delim\n  \"a, b\"\n  (delim\n   :startpos 1)))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_new(
-                vx_data_textblock::t_textblock,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":text"),
-                  vx_core::vx_new_string("a")
-                })
-              ),
-              vx_data_textblock::f_textblock_startbefore_from_string_delim(
-                vx_core::vx_new_string("a, b"),
-                vx_core::f_new(
-                  vx_data_textblock::t_delim,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":startpos"),
-                    vx_core::vx_new_int(1)
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_textblock_startbefore_from_string_delim");
     return output;
   }
 

@@ -114,11 +114,11 @@ public final class TestTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/test", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 93, ":tests", 41, ":total", 44), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 11, ":tests", 3, ":total", 26), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 7, ":tests", 3, ":total", 38), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 93, ":tests", 43, ":total", 46), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 10, ":tests", 3, ":total", 28), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 34), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 34), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 7, ":tests", 3, ":total", 40), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11)
     );
   }
@@ -143,6 +143,7 @@ public final class TestTest {
         ":stylesheet-test", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":context-test", 0,
         ":div<-testcaselist", 0,
         ":div<-testpackage", 0,
         ":div<-testpackagelist", 0,
@@ -160,6 +161,7 @@ public final class TestTest {
         ":resolve-testpackage", 0,
         ":resolve-testpackagelist", 0,
         ":resolve-testresult", 0,
+        ":security-test", 0,
         ":test", 0,
         ":test_1", 0,
         ":test-false", 0,

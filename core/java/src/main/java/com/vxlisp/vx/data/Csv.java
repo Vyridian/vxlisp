@@ -93,7 +93,7 @@ public final class Csv {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new csv) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new csv) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -102,7 +102,7 @@ public final class Csv {
             if (valsub instanceof Core.Type_stringlist) {
               output.vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -110,12 +110,12 @@ public final class Csv {
             if (valsub instanceof Csv.Type_csvrows) {
               output.vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new csv) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new csv) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -169,17 +169,17 @@ public final class Csv {
 
   public static class Class_csvrows extends Core.Class_base implements Type_csvrows {
 
-    protected List<Core.Type_stringlist> vxlist = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
+    protected List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Core.Type_stringlist vx_stringlist(final Core.Type_int index) {
       Core.Type_stringlist output = Core.e_stringlist;
       Class_csvrows list = this;
       int iindex = index.vx_int();
-      List<Core.Type_stringlist> listval = list.vxlist;
+      List<Core.Type_stringlist> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -187,7 +187,7 @@ public final class Csv {
     }
 
     @Override
-    public List<Core.Type_stringlist> vx_liststringlist() {return vxlist;}
+    public List<Core.Type_stringlist> vx_liststringlist() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -224,11 +224,11 @@ public final class Csv {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new csvrows) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new csvrows) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }

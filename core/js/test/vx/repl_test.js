@@ -24,11 +24,11 @@ export default class vx_repl_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/repl", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 10, ":total", 10), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 1, ":total", 7), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 11, ":total", 11), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 12, ":tests", 1, ":total", 8), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 10, ":tests", 1, ":total", 10), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -57,6 +57,7 @@ export default class vx_repl_test {
           "any<-repl", 2,
           "any<-repl-async", 0,
           "anylist<-repllist", 0,
+          "macro", 0,
           "repl<-liblist-string", 0
         )
     )

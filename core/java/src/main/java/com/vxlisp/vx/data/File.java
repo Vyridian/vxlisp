@@ -10,6 +10,23 @@ import java.nio.file.*;
 public final class File {
 
 
+  public static Core.Type_string vx_string_read_from_file(File.Type_file file) throws java.io.IOException {
+		Core.Type_string output = Core.e_string;
+    Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    String sfullpath = fullpath.vx_string();
+    Path path = Paths.get(sfullpath);
+    if (Files.exists(path)) {
+      byte[] bytes = Files.readAllBytes(path);
+      String scontent = new String(bytes);
+      Core.Type_string valcontent = Core.vx_new_string(scontent);
+      output = valcontent;
+    } else {
+      Core.Type_msg msg = Core.vx_msg_error("File Not Found: " + sfullpath);
+      output = Core.t_string.vx_copy(output, msg);
+    }
+		return output;
+	}
+
   /**
    * type: file
    * File structure
@@ -136,7 +153,7 @@ public final class File {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new file) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new file) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -147,7 +164,7 @@ public final class File {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new file :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new file :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -155,7 +172,7 @@ public final class File {
             if (valsub instanceof File.Type_fileformat) {
               output.vx_p_format = (File.Type_fileformat)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new file :format " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new file :format " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -165,7 +182,7 @@ public final class File {
             } else if (valsub instanceof String) {
               output.vx_p_path = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new file :path " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new file :path " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -173,7 +190,7 @@ public final class File {
             if (valsub instanceof Core.Type_permission) {
               output.vx_p_permission = (Core.Type_permission)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -183,12 +200,12 @@ public final class File {
             } else if (valsub instanceof String) {
               output.vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new file :text " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new file :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new file) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new file) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -534,20 +551,25 @@ public final class File {
   public static final Func_boolean_write_from_file_string t_boolean_write_from_file_string = new File.Class_boolean_write_from_file_string();
 
   public static Core.Type_boolean f_boolean_write_from_file_string(final File.Type_file file, final Core.Type_string text, final Core.Type_context context) {
-      Core.Type_boolean output = Core.e_boolean;
-    try {
-      Core.Type_string fullpath = File.f_pathfull_from_file(file);
-      String sfullpath = fullpath.vx_string();
-      Path path = Paths.get(sfullpath);
-      String stext = text.vx_string();
-      byte[] bytes = stext.getBytes();
-      java.nio.file.Files.write(path, bytes);
-      output = Core.c_true;
-    } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("boolean-write<-file-string", err);
+    Core.Type_boolean output = Core.e_boolean;
+    if (Core.f_boolean_permission_from_func(File.t_boolean_write_from_file_string, context).vx_boolean()) {
+      try {
+        Core.Type_string fullpath = File.f_pathfull_from_file(file);
+        String sfullpath = fullpath.vx_string();
+        Path path = Paths.get(sfullpath);
+        String stext = text.vx_string();
+        byte[] bytes = stext.getBytes();
+        java.nio.file.Files.write(path, bytes);
+        output = Core.c_true;
+      } catch (Exception err) {
+        Core.Type_msg msg = Core.vx_msg_from_exception("boolean-write<-file-string", err);
+        output = output.vx_copy(msg);
+      }
+    } else {
+      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: boolean-write<-file-string");
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
   /**
@@ -638,13 +660,18 @@ public final class File {
 
   public static File.Type_file f_file_read_from_file(final File.Type_file file, final Core.Type_context context) {
     File.Type_file output = File.e_file;
-    output = Core.f_copy(
-      file,
-      Core.t_anylist.vx_new(
-        Core.vx_new_string(":text"),
-        File.f_string_read_from_file(file, context)
-      )
-    );
+    if (Core.f_boolean_permission_from_func(File.t_file_read_from_file, context).vx_boolean()) {
+      output = Core.f_copy(
+        file,
+        Core.t_anylist.vx_new(
+          Core.vx_new_string(":text"),
+          File.f_string_read_from_file(file, context)
+        )
+      );
+    } else {
+      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: file-read<-file");
+      output = output.vx_copy(msg);
+    }
     return output;
   }
 
@@ -1102,25 +1129,19 @@ public final class File {
   public static final Func_string_read_from_file t_string_read_from_file = new File.Class_string_read_from_file();
 
   public static Core.Type_string f_string_read_from_file(final File.Type_file file, final Core.Type_context context) {
-      Core.Type_string output = Core.e_string;
-    try {
-      Core.Type_string fullpath = File.f_pathfull_from_file(file);
-      String sfullpath = fullpath.vx_string();
-      Path path = Paths.get(sfullpath);
-      if (Files.exists(path)) {
-        byte[] bytes = Files.readAllBytes(path);
-        String scontent = new String(bytes);
-        Core.Type_string valcontent = Core.vx_new_string(scontent);
-        output = valcontent;
-      } else {
-        Core.Type_msg msg = Core.t_msg.vx_new_error("File Not Found: " + sfullpath);
-        output = Core.t_string.vx_copy(output, msg);
-      };
-    } catch (Exception err) {
-      Core.Type_msg msg = Core.t_msg.vx_new_from_exception("string-read<-file", err);
+    Core.Type_string output = Core.e_string;
+    if (Core.f_boolean_permission_from_func(File.t_string_read_from_file, context).vx_boolean()) {
+      try {
+        output = vx_string_read_from_file(file);
+      } catch (Exception err) {
+        Core.Type_msg msg = Core.vx_msg_from_exception("string-read<-file", err);
+        output = output.vx_copy(msg);
+      }
+    } else {
+      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: string-read<-file");
       output = output.vx_copy(msg);
     }
-      return output;
+    return output;
   }
 
 

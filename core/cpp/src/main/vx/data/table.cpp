@@ -73,7 +73,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cell::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cell output = vx_data_table::e_cell;
       vx_data_table::Type_cell val = vx_core::vx_any_from_any(vx_data_table::t_cell, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_any vx_p_value = val->value();
       std::string key = "";
@@ -95,7 +95,7 @@ namespace vx_data_table {
           } else if (testkey == ":value") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new cell) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new cell) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -104,13 +104,13 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new cell :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new cell :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":value") {
             vx_p_value = valsub;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new cell) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new cell) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -223,8 +223,11 @@ namespace vx_data_table {
         if (valtype == vx_data_table::t_cell) {
           vx_data_table::Type_cell castval = vx_core::vx_any_from_any(vx_data_table::t_cell, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_table::t_cell)) {
+          vx_data_table::Type_cell castval = vx_core::vx_any_from_any(vx_data_table::t_cell, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(celllist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(celllist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -248,7 +251,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_celllist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_celllist output = vx_data_table::e_celllist;
       vx_data_table::Type_celllist val = vx_core::vx_any_from_any(vx_data_table::t_celllist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_cell> listval = val->vx_listcell();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -264,7 +267,7 @@ namespace vx_data_table {
           vx_data_table::Type_celllist multi = vx_core::vx_any_from_any(vx_data_table::t_celllist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listcell());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new celllist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new celllist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -362,7 +365,7 @@ namespace vx_data_table {
           vx_data_table::Type_cell castval = vx_core::vx_any_from_any(vx_data_table::t_cell, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(cellmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(cellmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -388,7 +391,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cellmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cellmap output = vx_data_table::e_cellmap;
       vx_data_table::Type_cellmap valmap = vx_core::vx_any_from_any(vx_data_table::t_cellmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_data_table::Type_cell> mapval;
       std::string key = "";
@@ -403,7 +406,7 @@ namespace vx_data_table {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -413,7 +416,7 @@ namespace vx_data_table {
           } else if (valsubtype == vx_data_table::t_cell) {
             valany = vx_core::vx_any_from_any(vx_data_table::t_cell, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -541,7 +544,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_field::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_field output = vx_data_table::e_field;
       vx_data_table::Type_field val = vx_core::vx_any_from_any(vx_data_table::t_field, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_any vx_p_fldtype = val->fldtype();
@@ -566,7 +569,7 @@ namespace vx_data_table {
           } else if (testkey == ":fldtype") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new field) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new field) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -575,20 +578,20 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new field :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new field :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new field :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new field :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fldtype") {
             vx_p_fldtype = valsub;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new field) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new field) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -712,8 +715,11 @@ namespace vx_data_table {
         if (valtype == vx_data_table::t_field) {
           vx_data_table::Type_field castval = vx_core::vx_any_from_any(vx_data_table::t_field, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_table::t_field)) {
+          vx_data_table::Type_field castval = vx_core::vx_any_from_any(vx_data_table::t_field, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(fieldlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(fieldlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -737,7 +743,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldlist output = vx_data_table::e_fieldlist;
       vx_data_table::Type_fieldlist val = vx_core::vx_any_from_any(vx_data_table::t_fieldlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_field> listval = val->vx_listfield();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -753,7 +759,7 @@ namespace vx_data_table {
           vx_data_table::Type_fieldlist multi = vx_core::vx_any_from_any(vx_data_table::t_fieldlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listfield());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new fieldlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new fieldlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -845,8 +851,11 @@ namespace vx_data_table {
         if (valtype == vx_data_table::t_field) {
           vx_data_table::Type_field castval = vx_core::vx_any_from_any(vx_data_table::t_field, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_table::t_field)) {
+          vx_data_table::Type_field castval = vx_core::vx_any_from_any(vx_data_table::t_field, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(fieldmap) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(fieldmap) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -870,7 +879,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldmap output = vx_data_table::e_fieldmap;
       vx_data_table::Type_fieldmap val = vx_core::vx_any_from_any(vx_data_table::t_fieldmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_field> listval = val->vx_listfield();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -886,7 +895,7 @@ namespace vx_data_table {
           vx_data_table::Type_fieldmap multi = vx_core::vx_any_from_any(vx_data_table::t_fieldmap, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listfield());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new fieldmap) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new fieldmap) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -1007,7 +1016,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_filter::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_filter output = vx_data_table::e_filter;
       vx_data_table::Type_filter val = vx_core::vx_any_from_any(vx_data_table::t_filter, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_stringlist vx_p_idlist = val->idlist();
@@ -1032,7 +1041,7 @@ namespace vx_data_table {
           } else if (testkey == ":idlist") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new filter) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filter) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1041,25 +1050,25 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new filter :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filter :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new filter :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filter :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":idlist") {
             if (valsubtype == vx_core::t_stringlist) {
               vx_p_idlist = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new filter :idlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filter :idlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new filter) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filter) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1212,7 +1221,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_row::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_row output = vx_data_table::e_row;
       vx_data_table::Type_row val = vx_core::vx_any_from_any(vx_data_table::t_row, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_data_table::Type_cellmap vx_p_cellmap = val->cellmap();
       vx_data_table::Type_sort vx_p_cellsort = val->cellsort();
@@ -1237,7 +1246,7 @@ namespace vx_data_table {
           } else if (testkey == ":cellsort") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new row) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new row) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1246,25 +1255,25 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new row :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new row :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":cellmap") {
             if (valsubtype == vx_data_table::t_cellmap) {
               vx_p_cellmap = vx_core::vx_any_from_any(vx_data_table::t_cellmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new row :cellmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new row :cellmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":cellsort") {
             if (valsubtype == vx_data_table::t_sort) {
               vx_p_cellsort = vx_core::vx_any_from_any(vx_data_table::t_sort, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new row :cellsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new row :cellsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new row) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new row) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1388,8 +1397,11 @@ namespace vx_data_table {
         if (valtype == vx_data_table::t_row) {
           vx_data_table::Type_row castval = vx_core::vx_any_from_any(vx_data_table::t_row, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_table::t_row)) {
+          vx_data_table::Type_row castval = vx_core::vx_any_from_any(vx_data_table::t_row, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(rowlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(rowlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1413,7 +1425,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowlist output = vx_data_table::e_rowlist;
       vx_data_table::Type_rowlist val = vx_core::vx_any_from_any(vx_data_table::t_rowlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_table::Type_row> listval = val->vx_listrow();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1429,7 +1441,7 @@ namespace vx_data_table {
           vx_data_table::Type_rowlist multi = vx_core::vx_any_from_any(vx_data_table::t_rowlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listrow());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new rowlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new rowlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -1527,7 +1539,7 @@ namespace vx_data_table {
           vx_data_table::Type_row castval = vx_core::vx_any_from_any(vx_data_table::t_row, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(rowmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(rowmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1553,7 +1565,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowmap output = vx_data_table::e_rowmap;
       vx_data_table::Type_rowmap valmap = vx_core::vx_any_from_any(vx_data_table::t_rowmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_data_table::Type_row> mapval;
       std::string key = "";
@@ -1568,7 +1580,7 @@ namespace vx_data_table {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1578,7 +1590,7 @@ namespace vx_data_table {
           } else if (valsubtype == vx_data_table::t_row) {
             valany = vx_core::vx_any_from_any(vx_data_table::t_row, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -1706,7 +1718,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_sort::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_sort output = vx_data_table::e_sort;
       vx_data_table::Type_sort val = vx_core::vx_any_from_any(vx_data_table::t_sort, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_stringlist vx_p_idlist = val->idlist();
@@ -1731,7 +1743,7 @@ namespace vx_data_table {
           } else if (testkey == ":idlist") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new sort) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new sort) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1740,25 +1752,25 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new sort :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new sort :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new sort :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new sort :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":idlist") {
             if (valsubtype == vx_core::t_stringlist) {
               vx_p_idlist = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new sort :idlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new sort :idlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new sort) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new sort) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1963,7 +1975,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_table::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_table output = vx_data_table::e_table;
       vx_data_table::Type_table val = vx_core::vx_any_from_any(vx_data_table::t_table, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
       vx_data_table::Type_fieldmap vx_p_fieldmap = val->fieldmap();
@@ -2000,7 +2012,7 @@ namespace vx_data_table {
           } else if (testkey == ":rowsort") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -2009,53 +2021,53 @@ namespace vx_data_table {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fieldmap") {
             if (valsubtype == vx_data_table::t_fieldmap) {
               vx_p_fieldmap = vx_core::vx_any_from_any(vx_data_table::t_fieldmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :fieldmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :fieldmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fieldsort") {
             if (valsubtype == vx_data_table::t_sort) {
               vx_p_fieldsort = vx_core::vx_any_from_any(vx_data_table::t_sort, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :fieldsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :fieldsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":rowmap") {
             if (valsubtype == vx_data_table::t_rowmap) {
               vx_p_rowmap = vx_core::vx_any_from_any(vx_data_table::t_rowmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :rowmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :rowmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":rowfilter") {
             if (valsubtype == vx_data_table::t_filter) {
               vx_p_rowfilter = vx_core::vx_any_from_any(vx_data_table::t_filter, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :rowfilter " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :rowfilter " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":rowsort") {
             if (valsubtype == vx_data_table::t_sort) {
               vx_p_rowsort = vx_core::vx_any_from_any(vx_data_table::t_sort, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :rowsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :rowsort " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";

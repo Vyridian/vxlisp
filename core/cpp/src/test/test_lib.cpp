@@ -168,11 +168,10 @@ namespace test_lib {
       std::string expected = vx_core::vx_string_from_any(valexpected);
       std::string actual = vx_core::vx_string_from_any(valactual);
       std::string msg = testpkg + "/" + testname + "\n" + message;
-      vx_core::vx_debug("--Test Result Fail-- " + msg);
-      vx_core::vx_debug("---Expected---\n" + expected);
-      vx_core::vx_debug("---Actual---\n" + actual);
-      //vx_core::vx_debug(testresult);
-      vx_core::vx_debug("");
+      vx_core::vx_log("--Test Result Fail-- " + msg);
+      vx_core::vx_log("---Expected---\n" + expected);
+      vx_core::vx_log("---Actual---\n" + actual);
+      //vx_core::vx_log(testresult);
     }
     return testresult;
   }
@@ -370,12 +369,12 @@ namespace test_lib {
   bool test(std::string testname, std::string expected, std::string actual) {
     bool output = false;
     if (expected == actual) {
-      vx_core::vx_debug("Test Pass: " + testname);
+      vx_core::vx_log("Test Pass: " + testname);
       output = true;
     } else {
-      vx_core::vx_debug("Test Fail: " + testname);
-      vx_core::vx_debug("Expected:\n" + expected);
-      vx_core::vx_debug("Actual:\n" + actual);
+      vx_core::vx_log("Test Fail: " + testname);
+      vx_core::vx_log("Expected:\n" + expected);
+      vx_core::vx_log("Actual:\n" + actual);
     }
     return output;
   }

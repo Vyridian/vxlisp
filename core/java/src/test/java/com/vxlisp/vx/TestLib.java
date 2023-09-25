@@ -20,7 +20,7 @@ public class TestLib {
   // Only use if running a single testcase
   public static boolean run_testcase_async(final Test.Type_testcase testcase) {
     CompletableFuture<Test.Type_testcase> async_testcase = Test.f_resolve_testcase(testcase);
-    Core.Type_any work = Core.sync_from_async(Test.t_testcase, async_testcase);
+    Core.Type_any work = Core.vx_sync_from_async(Test.t_testcase, async_testcase);
     Test.Type_testcase testcase_resolved = (Test.Type_testcase)work;
     return run_testcase(testcase_resolved);
   }
@@ -44,7 +44,7 @@ public class TestLib {
   // Only use if running a single testdescribe
   public static boolean run_testdescribe_async(final String testpkg, final String casename, final Test.Type_testdescribe testdescribe) {
     CompletableFuture<Test.Type_testdescribe> async_testdescribe = Test.f_resolve_testdescribe(testdescribe);
-    Test.Type_testdescribe testdescribe_resolved = Core.sync_from_async(Test.t_testdescribe, async_testdescribe);
+    Test.Type_testdescribe testdescribe_resolved = Core.vx_sync_from_async(Test.t_testdescribe, async_testdescribe);
     return run_testdescribe(testpkg, casename, testdescribe_resolved);
   }
 
@@ -81,7 +81,7 @@ public class TestLib {
   // This is the preferred way of calling test (1 block per package)
   public static boolean run_testpackage_async(final Test.Type_testpackage testpackage) {
     CompletableFuture<Test.Type_testpackage> async_testpackage = Test.f_resolve_testpackage(testpackage);
-    Test.Type_testpackage testpackage_resolved = Core.sync_from_async(Test.t_testpackage, async_testpackage);
+    Test.Type_testpackage testpackage_resolved = Core.vx_sync_from_async(Test.t_testpackage, async_testpackage);
     return run_testpackage(testpackage_resolved);
   }
 
@@ -89,7 +89,7 @@ public class TestLib {
   // This is the preferred way of calling testsuite (1 block per testsuite)
   public static boolean run_testpackagelist_async(final Test.Type_testpackagelist testpackagelist) {
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = Core.sync_from_async(Test.t_testpackagelist, async_testpackagelist);
+    Test.Type_testpackagelist testpackagelist_resolved = Core.vx_sync_from_async(Test.t_testpackagelist, async_testpackagelist);
     return run_testpackagelist(testpackagelist_resolved);
   }
 
@@ -121,7 +121,7 @@ public class TestLib {
   // Blocking
   public static boolean run_testresult_async(final String testpkg, final String testname, final String message, Test.Type_testresult testresult) {
     CompletableFuture<Test.Type_testresult> async_testresult = Test.f_resolve_testresult(testresult);
-    Test.Type_testresult testresult_resolved = Core.sync_from_async(Test.t_testresult, async_testresult);
+    Test.Type_testresult testresult_resolved = Core.vx_sync_from_async(Test.t_testresult, async_testresult);
     return run_testresult(testpkg, testname, message, testresult_resolved);
   }
 
@@ -130,7 +130,7 @@ public class TestLib {
   public static boolean write_testpackagelist_async(final Test.Type_testpackagelist testpackagelist, final Core.Type_context context) {
     boolean output = false;
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = Core.sync_from_async(Test.t_testpackagelist, async_testpackagelist);
+    Test.Type_testpackagelist testpackagelist_resolved = Core.vx_sync_from_async(Test.t_testpackagelist, async_testpackagelist);
     File.Type_file filetest = Test.f_file_test();
     Core.Type_boolean valboolean = File.f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
     output = valboolean.vx_boolean();

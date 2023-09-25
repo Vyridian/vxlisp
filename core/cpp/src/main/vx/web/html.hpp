@@ -133,14 +133,6 @@ namespace vx_web_html {
   typedef Abstract_trlist* Type_trlist;
   extern Type_trlist e_trlist;
   extern Type_trlist t_trlist;
-  class Abstract_boolean_write_from_id_htmltext;
-  typedef Abstract_boolean_write_from_id_htmltext* Func_boolean_write_from_id_htmltext;
-  extern Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext;
-  extern Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext;
-  class Abstract_boolean_write_from_stylesheet;
-  typedef Abstract_boolean_write_from_stylesheet* Func_boolean_write_from_stylesheet;
-  extern Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet;
-  extern Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet;
   class Abstract_htmlstring_from_string;
   typedef Abstract_htmlstring_from_string* Func_htmlstring_from_string;
   extern Func_htmlstring_from_string e_htmlstring_from_string;
@@ -346,12 +338,6 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
   };
-
-  // (func boolean-write<-id-htmltext)
-  vx_core::Type_boolean f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext);
-
-  // (func boolean-write<-stylesheet)
-  vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
 
   // (func htmlstring<-string)
   vx_core::Type_string f_htmlstring_from_string(vx_core::Type_string text);
@@ -1494,54 +1480,6 @@ namespace vx_web_html {
     virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
     virtual std::vector<vx_web_html::Type_tr> vx_listtr() const override;
     virtual vx_web_html::Type_tr vx_get_tr(vx_core::Type_int index) const override;
-  };
-
-  // (func boolean-write<-id-htmltext)
-  class Abstract_boolean_write_from_id_htmltext : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
-  public:
-    Abstract_boolean_write_from_id_htmltext() {};
-    virtual ~Abstract_boolean_write_from_id_htmltext() = 0;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_boolean_write_from_id_htmltext : public virtual Abstract_boolean_write_from_id_htmltext {
-  public:
-    Class_boolean_write_from_id_htmltext();
-    virtual ~Class_boolean_write_from_id_htmltext() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
-  // (func boolean-write<-stylesheet)
-  class Abstract_boolean_write_from_stylesheet : public vx_core::Abstract_any_from_any_async, public virtual vx_core::Abstract_replfunc_async {
-  public:
-    Abstract_boolean_write_from_stylesheet() {};
-    virtual ~Abstract_boolean_write_from_stylesheet() = 0;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override = 0;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_boolean_write_from_stylesheet : public virtual Abstract_boolean_write_from_stylesheet {
-  public:
-    Class_boolean_write_from_stylesheet();
-    virtual ~Class_boolean_write_from_stylesheet() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
-    virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func htmlstring<-string)

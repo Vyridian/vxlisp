@@ -84,16 +84,22 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFilesFromProjectCmd")
 	var files []*vxfile
-	pkgs := project.listpackage
 	cmdpath := PathFromProjectCmd(project, command)
 	switch command.code {
+	case ":source":
+		file := NewFile()
+		file.name = "app.js"
+		file.path = cmdpath
+		file.text = JsApp(project, command)
+		files = append(files, file)
 	case ":test":
 		file := NewFile()
-		file.name = "testlib.js"
-		file.path = cmdpath + "/vx"
-		file.text = JsTestLib(pkgs)
+		file.name = "app_test.js"
+		file.path = cmdpath
+		file.text = JsAppTest(project, command)
 		files = append(files, file)
 	}
+	pkgs := project.listpackage
 	for _, pkg := range pkgs {
 		pkgname := pkg.name
 		pkgpath := ""
@@ -850,6 +856,15 @@ func JsNameEFromType(typ *vxtype) string {
 	return name
 }
 
+func JsNameFFromFunc(fnc *vxfunc) string {
+	name := ""
+	name = "f_" + JsFromName(fnc.name)
+	if fnc.pkgname != "" {
+		name = JsNameFromPkgName(fnc.pkgname) + "." + name
+	}
+	return name
+}
+
 func JsNameFromPkgName(pkgname string) string {
 	output := JsFromName(pkgname)
 	return output
@@ -1309,38 +1324,125 @@ func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
 	return msgblock
 }
 
-func JsTestLib(listpackage []*vxpackage) string {
+func JsApp(project *vxproject, cmd *vxcommand) string {
+	includetext := ""
+	contexttext := `
+    const context = vx_core.f_context_main(arglist)`
+	maintext := `
+    const output = vx_core::f_main(arglist)`
+	if cmd.context == "" && cmd.main == "" {
+	} else {
+		contextfunc := FuncFromProjectFuncname(project, cmd.context)
+		mainfunc := FuncFromProjectFuncname(project, cmd.main)
+		if cmd.context != "" && contextfunc == emptyfunc {
+			MsgLog("Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
+		}
+		if cmd.main != "" && mainfunc == emptyfunc {
+			MsgLog("Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
+		}
+		if contextfunc != emptyfunc {
+			if contextfunc.pkgname != mainfunc.pkgname {
+				switch contextfunc.pkgname {
+				case "", "vx/core":
+				default:
+					importname := StringFromStringFindReplace(mainfunc.pkgname, "/", "_")
+					includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\""
+				}
+			}
+			if contextfunc.async {
+				contexttext = `
+    const context = await ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+			} else {
+				contexttext = `
+    const context = ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+			}
+		}
+		if mainfunc != emptyfunc {
+			switch mainfunc.pkgname {
+			case "", "vx/core":
+			default:
+				importname := StringFromStringFindReplace(mainfunc.pkgname, "/", "_")
+				includetext += "\nimport " + importname + " from \"../src/" + mainfunc.pkgname + ".js\""
+			}
+			params := "...arglist"
+			if mainfunc.context {
+				params += ", context"
+			}
+			mainfunctext := JsNameFFromFunc(mainfunc) + "(" + params + ")"
+			if mainfunc.async {
+				maintext = `
+    const output = await ` + mainfunctext
+			} else {
+				maintext = `
+    const output = ` + mainfunctext
+			}
+		}
+	}
+
+	output := "" +
+		`'strict mode'
+
+import vx_core from "../src/vx/core.js"
+import vx_type from "../src/vx/type.js"
+import vx_web_htmldoc from "../src/vx/web/htmldoc.js"` +
+		includetext + `
+
+export default class app {
+
+  static async f_main(arglist) {` +
+		contexttext +
+		maintext + `
+		return output
+	}
+
+	static async f_htmlmain() {
+    const argtext = vx_web_htmldoc.f_string_from_id("args")
+    const elem = document.getElementById("args")
+    const arglist = vx_type.f_stringlist_from_string_split(argtext, " ")
+    const mainstring = await app.f_main(arglist)
+    vx_web_htmldoc.f_boolean_write_from_id_htmltext("display", mainstring)
+  }
+
+}
+
+`
+	return output
+}
+
+func JsAppTest(project *vxproject, command *vxcommand) string {
+	listpackage := project.listpackage
 	var listimport []string
 	var listtest []string
 	for _, pkg := range listpackage {
 		importname := StringFromStringFindReplace(pkg.name, "/", "_")
 		importpath := StringFromStringFindReplace(pkg.name, "/", "/")
-		packageimport := "import " + importname + "_test from \"../" + importpath + "_test.js\""
-		packagetest := "      " + importname + "_test.test_package(context)"
+		packageimport := "import " + importname + "_test from \"./" + importpath + "_test.js\""
+		packagetest := importname + "_test.test_package(context)"
 		listimport = append(listimport, packageimport)
 		listtest = append(listtest, packagetest)
 	}
 	packageimports := StringFromListStringJoin(listimport, "\n")
-	packagetests := StringFromListStringJoin(listtest, ",\n")
-	return "" +
+	packagetests := StringFromListStringJoin(listtest, ",\n      ")
+	output := "" +
 		`'strict mode'
 
-import vx_core from "../../src/vx/core.js"
-import vx_test from "../../src/vx/test.js"
-import vx_web_html from "../../src/vx/web/html.js"
+import vx_core from "../src/vx/core.js"
+import vx_test from "../src/vx/test.js"
+import vx_web_html from "../src/vx/web/html.js"
+import vx_web_htmldoc from "../src/vx/web/htmldoc.js"
 ` + packageimports + `
 
-export default class testlib {
+export default class app_test {
 
   static async f_displaytestsuite() {
     const context = vx_core.e_context
     const stylesheet = vx_test.c_stylesheet_test
-    const testpackagelist = testlib.f_testpackagelist_from_all_test(context)
+    const testpackagelist = app_test.f_testpackagelist_from_all_test(context)
     const resolvedtestpackagelist = await vx_test.f_resolve_testpackagelist(testpackagelist)
     const div = vx_test.f_div_from_testpackagelist(resolvedtestpackagelist)
     const htmltext = vx_web_html.f_string_from_div_indent(div, 0)
-    vx_web_html.f_boolean_write_from_stylesheet(stylesheet)
-    vx_web_html.f_boolean_write_from_id_htmltext("testdisplay", htmltext)
+    vx_web_htmldoc.f_boolean_write_from_stylesheet(stylesheet)
+    vx_web_htmldoc.f_boolean_write_from_id_htmltext("testdisplay", htmltext)
   }
 
   static f_testpackagelist_from_all_test(context) {
@@ -1352,5 +1454,5 @@ export default class testlib {
   }
 
 }`
-
+	return output
 }

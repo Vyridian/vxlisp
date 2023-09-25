@@ -268,6 +268,16 @@
  (list<-list testpackagelist div<-testpackage)
  :doc "Returns a divlist from a testpackagelist.")
 
+(func context-test : context
+ [args : anylist :...]
+ (context
+  :session
+   (session
+    :user
+     (user
+      :security (security-test))))
+ :doc "Returns the default context for test case execution. Arguments come from the command line.")
+
 (func file-test : file/file
  (file
   :name "testsuite.vxlisp"
@@ -422,6 +432,16 @@
   )
  )
  :doc "Resolves a testresult")
+
+(func security-test : security
+ (security
+  :allowfuncs
+   (funclist
+    file/boolean-write<-file-any
+    file/boolean-write<-file-string
+    file/file-read<-file
+    file/string-read<-file))
+ :doc "Returns the default security for test case execution. Arguments come from the command line.")
 
 (func test : testresult
  [expected : any-1

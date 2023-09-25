@@ -452,7 +452,7 @@ public final class TypeTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"a$b$c\" (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
+          ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
           ":testresult",
             Test.f_test(
               Core.vx_new_string("a$b$c"),
@@ -475,6 +475,34 @@ public final class TypeTest {
     return output;
   }
 
+  static Test.Type_testcase f_stringlist_from_string_split(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "stringlist<-string-split",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split \"a$b$c\" \"$\"))",
+          ":testresult",
+            Test.f_test(
+              Core.f_new(
+                Core.t_stringlist,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("a"),
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c")
+                )
+              ),
+              Type.f_stringlist_from_string_split(Core.vx_new_string("a$b$c"), Core.vx_new_string("$")),
+              context
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       TypeTest.f_int_from_string_find(context),
@@ -487,7 +515,8 @@ public final class TypeTest {
       TypeTest.f_string_from_string_end(context),
       TypeTest.f_string_from_string_start(context),
       TypeTest.f_string_from_string_start_end(context),
-      TypeTest.f_string_from_stringlist_join(context)
+      TypeTest.f_string_from_stringlist_join(context),
+      TypeTest.f_stringlist_from_string_split(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
@@ -497,11 +526,11 @@ public final class TypeTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/type", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 13, ":total", 20), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 11, ":total", 20), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 11, ":total", 20), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 15, ":total", 21), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 57, ":tests", 12, ":total", 21), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 57, ":tests", 12, ":total", 21), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -533,6 +562,7 @@ public final class TypeTest {
         ":string<-string-start", 2,
         ":string<-string-start-end", 4,
         ":string<-stringlist-join", 1,
+        ":stringlist<-string-split", 1,
         ":traitnames<-any", 0,
         ":traits<-any", 0,
         ":traits<-typedef", 0

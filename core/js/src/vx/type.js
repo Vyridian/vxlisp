@@ -37,7 +37,14 @@ export default class vx_type {
       }
     }
     return output
-  }  /**
+  }
+
+  static vx_stringlist_from_string_split(text, delim) {
+    const liststring = text.split(delim)
+    const output = vx_core.f_new(vx_core.t_stringlist, ...liststring)
+    return output
+  }
+  /**
    * @function allowtypenames_from_type
    * Get the name of a given type
    * @param  {any} type
@@ -349,6 +356,7 @@ export default class vx_type {
 
   /**
    * @function string_from_stringlist_join
+   * Returns a string by joining a stringlist by the delimiter
    * @param  {stringlist} vals
    * @param  {string} delim
    * @return {string}
@@ -359,6 +367,22 @@ export default class vx_type {
   static f_string_from_stringlist_join(vals, delim) {
     let output = vx_core.e_string
     output = vals.join(delim)
+    return output
+  }
+
+  /**
+   * @function stringlist_from_string_split
+   * Returns a stringlist by splitting a string by the delimiter
+   * @param  {string} text
+   * @param  {string} delim
+   * @return {stringlist}
+   */
+  static t_stringlist_from_string_split = {}
+  static e_stringlist_from_string_split = {vx_type: vx_type.t_stringlist_from_string_split}
+
+  static f_stringlist_from_string_split(text, delim) {
+    let output = vx_core.e_stringlist
+    output = vx_type.vx_stringlist_from_string_split(text, delim)
     return output
   }
 
@@ -431,6 +455,7 @@ export default class vx_type {
     "string<-string-start": vx_type.e_string_from_string_start,
     "string<-string-start-end": vx_type.e_string_from_string_start_end,
     "string<-stringlist-join": vx_type.e_string_from_stringlist_join,
+    "stringlist<-string-split": vx_type.e_stringlist_from_string_split,
     "traitnames<-any": vx_type.e_traitnames_from_any,
     "traits<-any": vx_type.e_traits_from_any,
     "traits<-typedef": vx_type.e_traits_from_typedef
@@ -761,6 +786,25 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_string_from_stringlist_join
+    }
+
+    // (func stringlist_from_string_split)
+    vx_type.t_stringlist_from_string_split['vx_type'] = vx_core.t_type
+    vx_type.t_stringlist_from_string_split['vx_value'] = {
+      name          : "stringlist<-string-split",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_stringlist_from_string_split
     }
 
     // (func traitnames_from_any)

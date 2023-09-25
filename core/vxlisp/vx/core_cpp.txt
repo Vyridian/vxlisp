@@ -117,6 +117,9 @@ let-async
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
 
+  // vx_anylist_from_arraystring(long, array<string>)
+  vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[]);
+
   // vx_argmap_from_listarg(List<arg>)
   vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg);
 
@@ -146,33 +149,6 @@ let-async
 
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
-
-  // vx_debug()
-  void vx_debug();
-
-  // vx_debug(int)
-  void vx_debug(long ival);
-
-  // vx_debug(text)
-  void vx_debug(std::string sval);
-
-  // vx_debug(any)
-  void vx_debug(vx_core::Type_any val);
-
-  // vx_debug(async)
-  void vx_debug(vx_core::vx_Type_async async);
-
-  // vx_debug(list<any>)
-  void vx_debug(vx_core::vx_Type_listany listany);
-
-  // vx_debug(string, string)
-  void vx_debug(std::string code, std::string text);
-
-  // vx_debug(string, any)
-  void vx_debug(std::string code, vx_core::Type_any val);
-
-  // vx_debug(string, async)
-  void vx_debug(std::string code, vx_core::vx_Type_async async);
 
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
@@ -219,6 +195,33 @@ let-async
   // vx_liststring_from_arraystring(long, array<string>)
   std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
 
+  // vx_log()
+  void vx_log();
+
+  // vx_log(int)
+  void vx_log(long ival);
+
+  // vx_log(text)
+  void vx_log(std::string sval);
+
+  // vx_log(any)
+  void vx_log(vx_core::Type_any val);
+
+  // vx_log(async)
+  void vx_log(vx_core::vx_Type_async async);
+
+  // vx_log(list<any>)
+  void vx_log(vx_core::vx_Type_listany listany);
+
+  // vx_log(string, string)
+  void vx_log(std::string code, std::string text);
+
+  // vx_log(string, any)
+  void vx_log(std::string code, vx_core::Type_any val);
+
+  // vx_log(string, async)
+  void vx_log(std::string code, vx_core::vx_Type_async async);
+
   // vx_map_from_list(listany, any<-any)
   vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any);
 
@@ -230,6 +233,15 @@ let-async
 
   // vx_memory_leak_test(string, int, int)
   bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount);
+
+  // vx_msg_from_errortext(string)
+  vx_core::Type_msg vx_msg_from_errortext(const std::string errortext);
+
+  // vx_msg_from_exception(string, exception)
+  vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err);
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals);
 
   // vx_new_arg(string, type)
   vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
@@ -314,6 +326,9 @@ let-async
 
   // vx_reserve_async(listasync)
   void vx_reserve_async(vx_core::vx_Type_listasync listasync);
+
+  // vx_reserve_context(context)
+  void vx_reserve_context(vx_core::Type_context context);
 
   // vx_reserve_empty(any)
   void vx_reserve_empty(vx_core::Type_any any);
@@ -415,6 +430,7 @@ let-async
   // vx_listaddall(list, listadd)
   template <class T> static std::vector<T*> vx_listaddall(std::vector<T*> listtarget, std::vector<T*> listadd) {
     std::vector<T*> list;
+    list.insert(list.end(), listtarget.begin(), listtarget.end());
     list.insert(list.end(), listadd.begin(), listadd.end());
     return list;
   }
@@ -590,6 +606,20 @@ let-async
     return output;
   }
 
+  // vx_anylist_from_arraystring(long, array<string>)
+  vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[]) {
+    std::vector<std::string> liststring = vx_core::vx_liststring_from_arraystring(ilen, arraystring);
+    std::vector<vx_core::Type_any> listval;
+    for (std::string sval : liststring) {
+      vx_core::Type_string val = vx_core::vx_new_string(sval);
+      listval.push_back(val);
+    }
+    vx_core::Class_anylist* anylist = new vx_core::Class_anylist();
+    anylist->vx_p_list = listval;
+    vx_core::Type_anylist output = anylist;
+    return output;
+  }
+
   // vx_argmap_from_listarg(List<arg>)
   vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg) {
     std::vector<std::string> listkey;
@@ -679,11 +709,16 @@ let-async
 
   // vx_boolean_from_type_trait(type, type)
   bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait) {
-    vx_core::Type_typedef typdef = type->vx_typedef();
-    vx_core::Type_typelist traits = typdef->traits();
-    vx_core::vx_Type_listany list = traits->vx_list();
-    bool output = (std::find(list.begin(), list.end(), trait) != list.end());
-    vx_core::vx_release(typdef);
+    bool output = false;
+    if (type == trait) {
+      output = true;
+    } else {
+      vx_core::Type_typedef typdef = type->vx_typedef();
+      vx_core::Type_typelist traits = typdef->traits();
+      vx_core::vx_Type_listany list = traits->vx_list();
+      output = (std::find(list.begin(), list.end(), trait) != list.end());
+      vx_core::vx_release(typdef);
+    }
     return output;
   }
 
@@ -714,73 +749,6 @@ let-async
     }
     vx_core::vx_release({isnumber1, isnumber2});
     return output;
-  }
-
-  // vx_debug()
-  void vx_debug() {
-    std::cout << vx_core::refcount << std::endl;
-  }
-
-  // vx_debug(int)
-  void vx_debug(long ival) {
-    std::cout << ival << std::endl;
-  }
-
-  // vx_debug(text)
-  void vx_debug(std::string sval) {
-    std::cout << sval << std::endl;
-  }
-
-  // vx_debug(any)
-  void vx_debug(vx_core::Type_any val) {
-    if (!val) {
-      vx_debug("null");
-    } else {
-      std::string sval = vx_core::vx_string_from_any(val);
-      vx_debug(sval);
-    }
-  }
-
-  // vx_debug(async)
-  void vx_debug(vx_core::vx_Type_async async) {
-    if (!async) {
-      vx_debug("null");
-    } else {
-      std::string sval = vx_core::vx_string_from_async(async);
-      vx_debug(sval);
-    }
-  }
-
-  // vx_debug(list<any>)
-  void vx_debug(vx_core::vx_Type_listany listany) {
-    for (vx_core::Type_any any : listany) {
-      vx_core::vx_debug(any);
-    }
-  }
-
-  // vx_debug(string, string)
-  void vx_debug(std::string code, std::string text) {
-    vx_core::vx_debug(code + ": " + vx_core::vx_string_from_int(vx_core::refcount) + "\n" + text);
-  }
-
-  // vx_debug(string, any)
-  void vx_debug(std::string code, vx_core::Type_any val) {
-    if (!val) {
-      vx_core::vx_debug(code, "null");
-    } else {
-      std::string sval = vx_core::vx_string_from_any_refcount(val);
-      vx_core::vx_debug(code, sval);
-    }
-  }
-
-  // vx_debug(string, async)
-  void vx_debug(std::string code, vx_core::vx_Type_async async) {
-    if (!async) {
-      vx_core::vx_debug(code, "null");
-    } else {
-      std::string sval = vx_core::vx_string_from_async_refcount(async);
-      vx_core::vx_debug(code, sval);
-    }
   }
 
   // vx_float_from_number(number)
@@ -1011,6 +979,73 @@ let-async
     return output;
   }
 
+  // vx_log()
+  void vx_log() {
+    std::cout << vx_core::refcount << std::endl;
+  }
+
+  // vx_log(int)
+  void vx_log(long ival) {
+    std::cout << ival << std::endl;
+  }
+
+  // vx_log(text)
+  void vx_log(std::string sval) {
+    std::cout << sval << std::endl;
+  }
+
+  // vx_log(any)
+  void vx_log(vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_log("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any(val);
+      vx_core::vx_log(sval);
+    }
+  }
+
+  // vx_log(async)
+  void vx_log(vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_core::vx_log("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async(async);
+      vx_core::vx_log(sval);
+    }
+  }
+
+  // vx_log(list<any>)
+  void vx_log(vx_core::vx_Type_listany listany) {
+    for (vx_core::Type_any any : listany) {
+      vx_core::vx_log(any);
+    }
+  }
+
+  // vx_log(string, string)
+  void vx_log(std::string code, std::string text) {
+    vx_core::vx_log(code + ": " + vx_core::vx_string_from_int(vx_core::refcount) + "\n" + text);
+  }
+
+  // vx_log(string, any)
+  void vx_log(std::string code, vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_log(code, "null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any_refcount(val);
+      vx_core::vx_log(code, sval);
+    }
+  }
+
+  // vx_log(string, async)
+  void vx_log(std::string code, vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_core::vx_log(code, "null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async_refcount(async);
+      vx_core::vx_log(code, sval);
+    }
+  }
+
   // vx_map_from_list(listany, any<-any)
   vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_mapany output;
@@ -1035,7 +1070,7 @@ let-async
   bool vx_memory_leak_test() {
     bool output = true;
     if (vx_core::refcount > 0) {
-      vx_core::vx_debug("Error: Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      vx_core::vx_log("Error: Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
       output = false;
     }
     return output;
@@ -1045,7 +1080,7 @@ let-async
   bool vx_memory_leak_test(std::string id, long initialcount) {
     bool output = true;
     if (vx_core::refcount - initialcount != 0) {
-      vx_core::vx_debug("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      vx_core::vx_log("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
       output = false;
     }
     return output;
@@ -1056,8 +1091,60 @@ let-async
     bool output = true;
     long actualcount = vx_core::refcount - initialcount;
     if (actualcount != expectedcount) {
-      vx_core::vx_debug("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
+      vx_core::vx_log("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
       output = false;
+    }
+    return output;
+  }
+
+  // vx_msg_from_errortext(string)
+  vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) {
+    vx_core::Type_msg output = new vx_core::Class_msg();
+    vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
+    vx_core::vx_reserve(string_error);
+    output->vx_p_text = string_error;
+    output->vx_p_severity = vx_core::c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception(string, exception)
+  vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) {
+    vx_core::Type_msg output = new vx_core::Class_msg();
+    output->vx_p_text = vx_core::vx_new_string(text);
+    output->vx_p_severity = vx_core::c_msg_severe;
+    output->err = err;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) {
+    vx_core::Type_msgblock output = vx_core::e_msgblock;
+    std::vector<vx_core::Type_msgblock> listmsgblock;
+    if (msgblock) {
+      vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
+      if (origmsgblock) {
+        std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
+        listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
+      }
+    }
+    for (vx_core::Type_any subval : vals) {
+      vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
+      if (submsgblock) {
+        listmsgblock.push_back(submsgblock);
+      }
+    }
+    vx_core::Type_msgblocklist msgblocks;
+    if (listmsgblock.size() > 0) {
+      for (vx_core::Type_any any : listmsgblock) {
+        vx_core::vx_reserve(any);
+      }
+      msgblocks = new vx_core::Class_msgblocklist();
+      msgblocks->vx_p_list = listmsgblock;
+      output = new vx_core::Class_msgblock();
+      output->vx_p_msgblocks = msgblocks;
+    } else if (msgblock) {
+      vx_core::vx_reserve(msgblock);
+      output = msgblock;
     }
     return output;
   }
@@ -1296,6 +1383,12 @@ let-async
     for (vx_core::vx_Type_async async : listasync) {
       vx_core::vx_reserve_async(async);
     }
+  }
+
+  // vx_reserve_context(context)
+  void vx_reserve_context(vx_core::Type_context context) {
+    context->vx_p_iref = -2;
+    vx_core::refcount = 0;
   }
 
   // vx_reserve_empty(any)
@@ -1726,61 +1819,6 @@ let-async
 
   //class Class_int {
     long Class_int::vx_int() const {return this->vx_p_int;}
-  //}
-
-  //class Class_msg {
-    vx_core::Type_msg Class_msg::vx_msg_from_errortext(const std::string errortext) const {
-      vx_core::Type_msg output = new vx_core::Class_msg();
-      vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
-      vx_core::vx_reserve(string_error);
-      output->vx_p_text = string_error;
-      output->vx_p_severity = vx_core::c_msg_severe;
-      return output;
-    }
-
-    vx_core::Type_msg Class_msg::vx_msg_from_exception(const std::string text, std::exception err) const {
-      vx_core::Type_msg output = new vx_core::Class_msg();
-      output->vx_p_text = vx_core::vx_new_string(text);
-      output->vx_p_severity = vx_core::c_msg_severe;
-      output->err = err;
-      return output;
-    }
-  //}
-
-  //class Class_msgblock {
-    vx_core::Type_msgblock Class_msgblock::vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const {
-      vx_core::Type_msgblock output = vx_core::e_msgblock;
-      std::vector<vx_core::Type_msgblock> listmsgblock;
-      if (msgblock) {
-        vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
-        if (origmsgblock) {
-          std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
-          listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
-        }
-      }
-      for (vx_core::Type_any subval : vals) {
-        vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
-        if (submsgblock) {
-          listmsgblock.push_back(submsgblock);
-        }
-      }
-      vx_core::Type_msgblocklist msgblocks;
-      if (listmsgblock.size() > 0) {
-        for (vx_core::Type_any any : listmsgblock) {
-          vx_core::vx_reserve(any);
-        }
-        msgblocks = new vx_core::Class_msgblocklist();
-        msgblocks->vx_p_list = listmsgblock;
-        if (!msgblock) {
-          output = vx_core::vx_new(vx_core::t_msgblock, {msgblocks});
-        } else {
-          output = vx_core::vx_copy(msgblock, {msgblocks});
-        }
-      } else if (msgblock) {
-        output = vx_core::vx_copy(msgblock, {});
-      }
-      return output;
-    }
   //}
 
   //class Class_string {

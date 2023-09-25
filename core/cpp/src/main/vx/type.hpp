@@ -74,6 +74,10 @@ namespace vx_type {
   typedef Abstract_string_from_stringlist_join* Func_string_from_stringlist_join;
   extern Func_string_from_stringlist_join e_string_from_stringlist_join;
   extern Func_string_from_stringlist_join t_string_from_stringlist_join;
+  class Abstract_stringlist_from_string_split;
+  typedef Abstract_stringlist_from_string_split* Func_stringlist_from_string_split;
+  extern Func_stringlist_from_string_split e_stringlist_from_string_split;
+  extern Func_stringlist_from_string_split t_stringlist_from_string_split;
   class Abstract_traitnames_from_any;
   typedef Abstract_traitnames_from_any* Func_traitnames_from_any;
   extern Func_traitnames_from_any e_traitnames_from_any;
@@ -93,6 +97,9 @@ namespace vx_type {
 
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
+
+  // vx_stringlist_from_string_split(string, string)
+  vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
 
   // (func allowtypenames<-type)
@@ -145,6 +152,9 @@ namespace vx_type {
 
   // (func string<-stringlist-join)
   vx_core::Type_string f_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
+
+  // (func stringlist<-string-split)
+  vx_core::Type_stringlist f_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
   // (func traitnames<-any)
   vx_core::Type_stringlist f_traitnames_from_any(vx_core::Type_any val);
@@ -554,6 +564,28 @@ namespace vx_type {
   public:
     Class_string_from_stringlist_join();
     virtual ~Class_string_from_stringlist_join() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func stringlist<-string-split)
+  class Abstract_stringlist_from_string_split : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_stringlist_from_string_split() {};
+    virtual ~Abstract_stringlist_from_string_split() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_stringlist_from_string_split : public virtual Abstract_stringlist_from_string_split {
+  public:
+    Class_stringlist_from_string_split();
+    virtual ~Class_stringlist_from_string_split() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

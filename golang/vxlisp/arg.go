@@ -21,6 +21,8 @@ type vxarg struct {
 
 var emptyarg = NewArg("")
 
+var argcontext = NewArgContext()
+
 func NewArg(name string) vxarg {
 	output := *new(vxarg)
 	output.name = name
@@ -41,6 +43,18 @@ func NewArgCopy(arg vxarg) vxarg {
 	output.generictype = arg.generictype
 	output.mapgeneric = arg.mapgeneric
 	output.vxtype = arg.vxtype
+	output.value = emptyvalue
+	return output
+}
+
+func NewArgContext() vxarg {
+	contexttype := NewType("context")
+	contexttype.pkgname = "vx/core"
+	contexttype.extends = ":struct"
+	output := *new(vxarg)
+	output.name = "context"
+	output.alias = "context"
+	output.vxtype = contexttype
 	output.value = emptyvalue
 	return output
 }

@@ -8,6 +8,30 @@
 namespace vx_data_file_test {
 
   vx_test::Type_testcase f_boolean_exists_from_file(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_boolean_exists_from_file");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      vx_data_file::f_boolean_exists_from_file(
+        vx_core::f_new(
+          vx_data_file::t_file,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("boolean_exists_from_file.txt"),
+            vx_core::vx_new_string(":path"),
+            vx_core::vx_new_string("src/test/resources/vx")
+          })
+        )
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
@@ -15,33 +39,40 @@ namespace vx_data_file_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test_true(
-              vx_data_file::f_boolean_exists_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":name"),
-                    vx_core::vx_new_string("boolean_exists_from_file.txt"),
-                    vx_core::vx_new_string(":path"),
-                    vx_core::vx_new_string("src/test/resources/vx")
-                  })
-                )
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_boolean_exists_from_file");
     return output;
   }
 
   vx_test::Type_testcase f_boolean_write_from_file_string(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_boolean_write_from_file_string");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      vx_data_file::f_boolean_write_from_file_string(
+        vx_core::f_new(
+          vx_data_file::t_file,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("boolean_write_from_file_string.txt"),
+            vx_core::vx_new_string(":path"),
+            vx_core::vx_new_string("src/test/resources/vx")
+          })
+        ),
+        vx_core::vx_new_string("writetext"),
+        context
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
@@ -49,35 +80,50 @@ namespace vx_data_file_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test_true(
-              vx_data_file::f_boolean_write_from_file_string(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":name"),
-                    vx_core::vx_new_string("boolean_write_from_file_string.txt"),
-                    vx_core::vx_new_string(":path"),
-                    vx_core::vx_new_string("src/test/resources/vx")
-                  })
-                ),
-                vx_core::vx_new_string("writetext"),
-                context
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_boolean_write_from_file_string");
     return output;
   }
 
   vx_test::Type_testcase f_file_read_from_file(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_file_read_from_file");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::f_new(
+        vx_data_file::t_file,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string("string_read_from_file.txt"),
+          vx_core::vx_new_string(":path"),
+          vx_core::vx_new_string("src/test/resources/vx"),
+          vx_core::vx_new_string(":text"),
+          vx_core::vx_new_string("testdata")
+        })
+      ),
+      vx_data_file::f_file_read_from_file(
+        vx_core::f_new(
+          vx_data_file::t_file,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("string_read_from_file.txt"),
+            vx_core::vx_new_string(":path"),
+            vx_core::vx_new_string("src/test/resources/vx")
+          })
+        ),
+        context
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
@@ -85,45 +131,40 @@ namespace vx_data_file_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::f_new(
-                vx_data_file::t_file,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":name"),
-                  vx_core::vx_new_string("string_read_from_file.txt"),
-                  vx_core::vx_new_string(":path"),
-                  vx_core::vx_new_string("src/test/resources/vx"),
-                  vx_core::vx_new_string(":text"),
-                  vx_core::vx_new_string("testdata")
-                })
-              ),
-              vx_data_file::f_file_read_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":name"),
-                    vx_core::vx_new_string("string_read_from_file.txt"),
-                    vx_core::vx_new_string(":path"),
-                    vx_core::vx_new_string("src/test/resources/vx")
-                  })
-                ),
-                context
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_file_read_from_file");
     return output;
   }
 
   vx_test::Type_testcase f_string_read_from_file(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_string_read_from_file");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      vx_core::vx_new_string("testdata"),
+      vx_data_file::f_string_read_from_file(
+        vx_core::f_new(
+          vx_data_file::t_file,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("string_read_from_file.txt"),
+            vx_core::vx_new_string(":path"),
+            vx_core::vx_new_string("src/test/resources/vx")
+          })
+        ),
+        context
+      ),
+      context
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
@@ -131,31 +172,10 @@ namespace vx_data_file_test {
       vx_core::vx_new_string(":describelist"),
       vx_core::vx_any_from_any(
         vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list({
-          vx_core::vx_new(vx_test::t_testdescribe, {
-            vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
-            vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
-            vx_core::vx_new_string(":testresult"),
-            vx_test::f_test(
-              vx_core::vx_new_string("testdata"),
-              vx_data_file::f_string_read_from_file(
-                vx_core::f_new(
-                  vx_data_file::t_file,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":name"),
-                    vx_core::vx_new_string("string_read_from_file.txt"),
-                    vx_core::vx_new_string(":path"),
-                    vx_core::vx_new_string("src/test/resources/vx")
-                  })
-                ),
-                context
-              ),
-              context
-            )
-          })
-        })
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
       )
     });
+    vx_core::vx_log("Test End  : f_string_read_from_file");
     return output;
   }
 

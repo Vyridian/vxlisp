@@ -1,7 +1,7 @@
 (project core
  :version    "0.5"
- :author     ""
- :doc        "This is the vx/core project"
+ :author     "Vyridian"
+ :doc        "The vx/core project"
  :javadomain "com.vxlisp"
  :libs
   (lib javaniofile
@@ -30,32 +30,39 @@
    :code    :source
    :lang    :cpp
    :path    ../cpp/src/main
-   :context ""
-   :main    vx/core/string
+   :main    vx/core/main
+   :context vx/core/context-main
    :doc     "Build C++ Source Code")
   (cmd testcpp
-   :code :test
-   :lang :cpp
-   :path ../cpp/src/test
-   :doc  "Build C++ Test Code")
+   :code    :test
+   :lang    :cpp
+   :path    ../cpp/src/test
+   :context vx/test/context-test
+   :doc     "Build C++ Test Code")
   (cmd srcjs
-   :code :source
-   :lang :js
-   :path ../js/src
-   :doc  "Build JavaScript Source Code")
+   :code    :source
+   :lang    :js
+   :path    ../js/src
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build JavaScript Source Code")
   (cmd testjs
-   :code :test
-   :lang :js
-   :path ../js/test
-   :doc  "Build JavaScript Test Code")
+   :code    :test
+   :lang    :js
+   :path    ../js/test
+   :context vx/test/context-test
+   :doc     "Build JavaScript Test Code")
   (cmd srcjava
-   :code :source
-   :lang :java
-   :path ../java/src/main/java
-   :doc  "Build Java Source Code")
+   :code    :source
+   :lang    :java
+   :path    ../java/src/main/java
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build Java Source Code")
   (cmd testjava
-   :code :test
-   :lang :java
-   :path ../java/src/test/java
+   :code    :test
+   :lang    :java
+   :path    ../java/src/test/java
+   :context vx/test/context-test
    :doc  "Build Java Test Code")
 )

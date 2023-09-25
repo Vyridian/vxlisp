@@ -48,7 +48,7 @@ public final class State {
           Core.Type_any castval = (Core.Type_any)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(value_map) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(value_map) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -81,7 +81,7 @@ public final class State {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -91,7 +91,7 @@ public final class State {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {

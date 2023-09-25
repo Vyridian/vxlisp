@@ -2,6 +2,7 @@ package vxlisp
 
 type vxscope struct {
 	pkgname  string
+	pkgshort string
 	maparg   map[string]vxarg
 	mapconst map[string]*vxconst
 	mapfunc  map[string][]*vxfunc
@@ -41,7 +42,7 @@ func ConstFromListScope(listscope []vxscope, pkgname string, cnstname string) (*
 			if ok {
 				break
 			}
-		} else if scope.pkgname == pkgname {
+		} else if (scope.pkgname == pkgname) || (scope.pkgshort == pkgname) {
 			mapconst := scope.mapconst
 			cnst, ok = mapconst[cnstname]
 			break
@@ -55,7 +56,7 @@ func FuncFromListScope(listscope []vxscope, pkgname string, fncname string, sign
 	var listfunc []*vxfunc
 	var ok = false
 	for _, scope := range listscope {
-		if (pkgname == "") || (scope.pkgname == pkgname) {
+		if (pkgname == "") || (scope.pkgname == pkgname) || (scope.pkgshort == pkgname) {
 			mapfunc := scope.mapfunc
 			listfunc, ok = mapfunc[fncname]
 			if ok {
@@ -91,8 +92,8 @@ func FuncFromListScope(listscope []vxscope, pkgname string, fncname string, sign
 
 func ListScopeAddFuncArg(listscope []vxscope, fnc *vxfunc) []vxscope {
 	output := listscope
-	if len(fnc.listarg) > 0 {
-		funcscope := ScopeFromListFuncArg(fnc.listarg)
+	if len(fnc.listarg) > 0 || fnc.context {
+		funcscope := ScopeFromFunc(fnc)
 		funcscope.pkgname = ":args"
 		output = append([]vxscope{funcscope}, listscope...)
 	}
@@ -164,7 +165,7 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 			if ok {
 				break
 			}
-		} else if scope.pkgname == pkgname {
+		} else if (scope.pkgname == pkgname) || (scope.pkgshort == pkgname) {
 			typmap := scope.maptype
 			typ, ok = typmap[typename]
 			break

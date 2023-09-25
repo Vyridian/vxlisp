@@ -164,6 +164,7 @@ func ListScopeFromPackage(pkg *vxpackage, pkgmap map[string]*vxpackage) []vxscop
 			if ok {
 				scope := ScopeNew()
 				scope.pkgname = libpath
+				scope.pkgshort = libname
 				scope.mapconst = libpkg.mapconst
 				scope.mapfunc = libpkg.mapfunc
 				scope.maptype = libpkg.maptype

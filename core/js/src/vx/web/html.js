@@ -191,46 +191,6 @@ export default class vx_web_html {
    */
   static t_trlist = {}
   /**
-   * @function boolean_write_from_id_htmltext
-   * Writes to an html node with given id and text.
-   * @param  {string} id
-   * @param  {string} htmltext
-   * @return {boolean}
-   */
-  static t_boolean_write_from_id_htmltext = {}
-  static e_boolean_write_from_id_htmltext = {vx_type: vx_web_html.t_boolean_write_from_id_htmltext}
-
-  static f_boolean_write_from_id_htmltext(id, htmltext) {
-    let output = vx_core.e_boolean
-    const elem = document.getElementById(id)
-    if (elem != null) {
-      elem.innerHTML = htmltext
-      output = vx_core.c_true
-    }
-    return output
-  }
-
-  /**
-   * 
-   * @async @function boolean_write_from_stylesheet
-   * Writes to an html node with given id and text.
-   * @param  {stylesheet} stylesheet
-   * @return {boolean}
-   */
-  static t_boolean_write_from_stylesheet = {}
-  static e_boolean_write_from_stylesheet = {vx_type: vx_web_html.t_boolean_write_from_stylesheet}
-
-  static async f_boolean_write_from_stylesheet(stylesheet) {
-    let output = Promise.resolve(vx_core.e_boolean)
-    const stylelist = vx_web_html.f_styles_from_stylesheet(stylesheet)
-    const text = vx_web_html.f_string_from_stylelist_indent(stylelist, 0)
-    const cssstylesheet = new CSSStyleSheet()
-    document.adoptedStyleSheets = [cssstylesheet]
-    output = await cssstylesheet.replace(text)
-    return output
-  }
-
-  /**
    * @function htmlstring_from_string
    * Convert text to HTML string
    * @param  {string} text
@@ -1437,8 +1397,6 @@ export default class vx_web_html {
     "title": vx_web_html.e_title,
     "tr": vx_web_html.e_tr,
     "trlist": vx_web_html.e_trlist,
-    "boolean-write<-id-htmltext": vx_web_html.e_boolean_write_from_id_htmltext,
-    "boolean-write<-stylesheet": vx_web_html.e_boolean_write_from_stylesheet,
     "htmlstring<-string": vx_web_html.e_htmlstring_from_string,
     "string-indent": vx_web_html.e_string_indent,
     "string<-body-indent": vx_web_html.e_string_from_body_indent,
@@ -2447,44 +2405,6 @@ export default class vx_web_html {
       proplast      : {}
     }
     vx_web_html.e_trlist['vx_type'] = vx_web_html.t_trlist
-
-    // (func boolean_write_from_id_htmltext)
-    vx_web_html.t_boolean_write_from_id_htmltext['vx_type'] = vx_core.t_type
-    vx_web_html.t_boolean_write_from_id_htmltext['vx_value'] = {
-      name          : "boolean-write<-id-htmltext",
-      pkgname       : "vx/web/html",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_web_html.f_boolean_write_from_id_htmltext
-    }
-
-    // (func boolean_write_from_stylesheet)
-    vx_web_html.t_boolean_write_from_stylesheet['vx_type'] = vx_core.t_type
-    vx_web_html.t_boolean_write_from_stylesheet['vx_value'] = {
-      name          : "boolean-write<-stylesheet",
-      pkgname       : "vx/web/html",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_web_html.f_boolean_write_from_stylesheet
-    }
 
     // (func htmlstring_from_string)
     vx_web_html.t_htmlstring_from_string['vx_type'] = vx_core.t_type

@@ -91,7 +91,7 @@ public final class Sample {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new mytype) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new mytype) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -102,7 +102,7 @@ public final class Sample {
             } else if (valsub instanceof Integer) {
               output.vx_p_mynum = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new mytype :mynum " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new mytype :mynum " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -112,12 +112,12 @@ public final class Sample {
             } else if (valsub instanceof String) {
               output.vx_p_mystr = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new mytype :mystr " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new mytype :mystr " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new mytype) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new mytype) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

@@ -41,3 +41,12 @@
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
 	}
+
+  public static Core.Type_stringlist vx_stringlist_from_string_split(Core.Type_string text, Core.Type_string delim) {
+    Core.Type_stringlist output = Core.e_stringlist;
+    String stext = text.vx_string();
+    String sdelim = delim.vx_string();
+    Object[] arraystring = stext.split(java.util.regex.Pattern.quote(sdelim));
+    output = Core.t_stringlist.vx_new(arraystring);
+    return output;
+  }

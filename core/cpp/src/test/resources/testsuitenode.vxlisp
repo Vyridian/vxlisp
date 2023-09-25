@@ -597,19 +597,19 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "31% 63/199")
+                  :text "30% 63/205")
                  (vx/web/html/p
                   :text "6% 4/66")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "47% 57/119")
+                  :text "45% 57/125")
                  (vx/web/html/p
-                  :text "81% 180/222")
+                  :text "81% 186/228")
                  (vx/web/html/p
-                  :text "0% 0/142")
+                  :text "0% 0/148")
                  (vx/web/html/p
-                  :text "0% 0/142"))
+                  :text "0% 0/148"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -4411,15 +4411,15 @@
                  (vx/web/html/p
                   :text "vx/data/db")
                  (vx/web/html/p
-                  :text "0% 0/6")
+                  :text "0% 0/12")
                  (vx/web/html/p
-                  :text "0% 0/6")
-                 (vx/web/html/p
-                  :text "100% 0/0")
+                  :text "0% 0/12")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "100% 6/6")
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "100% 12/12")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
@@ -5294,21 +5294,86 @@
                  (vx/web/html/p
                   :text "Pass")
                  (vx/web/html/p
+                  :text "vx/event")
+                 (vx/web/html/p
+                  :text "0% 0/4")
+                 (vx/web/html/p
+                  :text "0% 0/1")
+                 (vx/web/html/p
+                  :text "0% 0/2")
+                 (vx/web/html/p
+                  :text "0% 0/1")
+                 (vx/web/html/p
+                  :text "100% 4/4")
+                 (vx/web/html/p
+                  :text "0% 0/1")
+                 (vx/web/html/p
+                  :text "0% 0/1"))
+               :nodes
+                (vx/web/html/divchildlist
+                 (vx/web/html/div
+                  :nodes
+                   (vx/web/html/divchildlist
+                    (vx/web/html/table
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes (vx/web/html/trlist))
+                     :thead
+                      (vx/web/html/thead
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass?")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Name")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Test")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Expected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Actual"))))))))))))))
+           (vx/web/html/div
+            :nodes
+             (vx/web/html/divchildlist
+              (vx/web/html/details
+               :summary
+                (vx/web/html/divchildlist
+                 (vx/web/html/p
+                  :text "Pass")
+                 (vx/web/html/p
                   :text "vx/repl")
                  (vx/web/html/p
-                  :text "10% 1/10")
+                  :text "9% 1/11")
                  (vx/web/html/p
                   :text "0% 0/3")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "14% 1/7")
+                  :text "12% 1/8")
                  (vx/web/html/p
-                  :text "100% 10/10")
+                  :text "100% 11/11")
                  (vx/web/html/p
-                  :text "0% 0/7")
+                  :text "0% 0/8")
                  (vx/web/html/p
-                  :text "0% 0/7"))
+                  :text "0% 0/8"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -5625,19 +5690,19 @@
                  (vx/web/html/p
                   :text "vx/test")
                  (vx/web/html/p
-                  :text "7% 3/38")
+                  :text "7% 3/40")
                  (vx/web/html/p
                   :text "0% 0/11")
                  (vx/web/html/p
                   :text "0% 0/1")
                  (vx/web/html/p
-                  :text "11% 3/26")
+                  :text "10% 3/28")
                  (vx/web/html/p
-                  :text "93% 41/44")
+                  :text "93% 43/46")
                  (vx/web/html/p
-                  :text "0% 0/32")
+                  :text "0% 0/34")
                  (vx/web/html/p
-                  :text "0% 0/32"))
+                  :text "0% 0/34"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -5790,19 +5855,19 @@
                  (vx/web/html/p
                   :text "vx/type")
                  (vx/web/html/p
-                  :text "55% 11/20")
+                  :text "57% 12/21")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "55% 11/20")
+                  :text "57% 12/21")
                  (vx/web/html/p
-                  :text "65% 13/20")
+                  :text "71% 15/21")
                  (vx/web/html/p
-                  :text "0% 0/20")
+                  :text "0% 0/21")
                  (vx/web/html/p
-                  :text "0% 0/20"))
+                  :text "0% 0/21"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -6692,7 +6757,10 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "(test \"a$b$c\" (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))")))
+                                :text
+                                 "(test
+ \"a$b$c\"
+ (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -6702,7 +6770,46 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "\"a$b$c\"")))))))
+                                :text "\"a$b$c\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "stringlist<-string-split")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringlist \"a\" \"b\" \"c\")
+ (stringlist<-string-split \"a$b$c\" \"$\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringlist
+ \"a\"
+ \"b\"
+ \"c\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringlist
+ \"a\"
+ \"b\"
+ \"c\")")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes
@@ -6746,19 +6853,19 @@
                  (vx/web/html/p
                   :text "vx/web/html")
                  (vx/web/html/p
-                  :text "8% 6/69")
+                  :text "8% 6/67")
                  (vx/web/html/p
                   :text "0% 0/31")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "15% 6/38")
+                  :text "16% 6/36")
                  (vx/web/html/p
-                  :text "98% 68/69")
+                  :text "98% 66/67")
                  (vx/web/html/p
-                  :text "0% 0/38")
+                  :text "0% 0/36")
                  (vx/web/html/p
-                  :text "0% 0/38"))
+                  :text "0% 0/36"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -7076,6 +7183,71 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "\"<p id=\\"myid\\">data</p>\"")))))))
+                     :thead
+                      (vx/web/html/thead
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass?")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Name")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Test")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Expected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Actual"))))))))))))))
+           (vx/web/html/div
+            :nodes
+             (vx/web/html/divchildlist
+              (vx/web/html/details
+               :summary
+                (vx/web/html/divchildlist
+                 (vx/web/html/p
+                  :text "Pass")
+                 (vx/web/html/p
+                  :text "vx/web/htmldoc")
+                 (vx/web/html/p
+                  :text "0% 0/3")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "0% 0/3")
+                 (vx/web/html/p
+                  :text "100% 3/3")
+                 (vx/web/html/p
+                  :text "0% 0/3")
+                 (vx/web/html/p
+                  :text "0% 0/3"))
+               :nodes
+                (vx/web/html/divchildlist
+                 (vx/web/html/div
+                  :nodes
+                   (vx/web/html/divchildlist
+                    (vx/web/html/table
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes (vx/web/html/trlist))
                      :thead
                       (vx/web/html/thead
                        :nodes

@@ -1,16 +1,19 @@
 
 #include <iostream>
 #include "vx/core.hpp"
-#include "vx/repl.hpp"
 
 int main(int iarglen, char* arrayarg[]) {
   int output = 0;
 	try {
+		vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg);
 		vx_core::Type_context context = vx_core::e_context;
-    std::vector<std::string> listarg = vx_core::vx_liststring_from_arraystring(iarglen, arrayarg);
-    std::string output = vx_repl::vx_string_from_listarg(vx_core::t_string, listarg, context);
-    std::cout << output << std::endl;
-		vx_core::vx_release(context);
+		std::string soutput = "";
+    context = vx_core::f_context_main(arglist);
+		vx_core::vx_reserve_context(context);
+    vx_core::Type_string mainstring = vx_core::f_main(arglist);
+    soutput = mainstring->vx_string();
+    vx_core::vx_release(mainstring);
+    std::cout << soutput << std::endl;
 	  vx_core::vx_memory_leak_test();
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;

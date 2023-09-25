@@ -2,17 +2,17 @@
 <html>
   <title>Run Results</title>
   <head>
-    <script type="module" src="../js/src/vx/core.js"></script>
-    <script type="module" src="../js/src/vx/type.js"></script>
-    <script type="module" src="../js/src/vx/collection.js"></script>
-    <script type="module" src="../js/src/vx/message.js"></script>
-    <script type="module" src="../js/src/vx/state.js"></script>
-    <script type="module" src="../js/src/vx/data/csv.js"></script>
-    <script type="module" src="../js/src/vx/web/html.js"></script>
-    <script type="module" src="../js/src/vx/web/http.js"></script>
   </head>
   <body>
-    <script type="text/javascript">
+    <div>Main Arguments:</div>
+    <div>
+      <input id="args" value="Hello World" size="30" />
+      <button onclick="app.f_htmlmain()">Go</button>
+    </div>
+    <div id="display"></div>
+    <script type="module">
+      import app from "../js/src/app.js"
+      window.app = app
     </script>
   </body>
 </html>

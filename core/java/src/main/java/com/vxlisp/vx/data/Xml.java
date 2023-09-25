@@ -80,7 +80,7 @@ public final class Xml {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new xml) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new xml) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -89,12 +89,12 @@ public final class Xml {
             if (valsub instanceof Xml.Type_xmlnodelist) {
               output.vx_p_nodes = (Xml.Type_xmlnodelist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new xml :nodes " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new xml :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new xml) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new xml) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -244,7 +244,7 @@ public final class Xml {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new xmlnode) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -253,7 +253,7 @@ public final class Xml {
             if (valsub instanceof Xml.Type_xmlnode) {
               output.vx_p_nodes = (Xml.Type_xmlnode)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode :nodes " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -261,7 +261,7 @@ public final class Xml {
             if (valsub instanceof Xml.Type_xmlpropmap) {
               output.vx_p_props = (Xml.Type_xmlpropmap)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode :props " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :props " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -271,7 +271,7 @@ public final class Xml {
             } else if (valsub instanceof String) {
               output.vx_p_tag = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode :tag " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :tag " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -281,12 +281,12 @@ public final class Xml {
             } else if (valsub instanceof String) {
               output.vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode :text " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnode) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new xmlnode) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -340,17 +340,17 @@ public final class Xml {
 
   public static class Class_xmlnodelist extends Core.Class_base implements Type_xmlnodelist {
 
-    protected List<Xml.Type_xmlnode> vxlist = Core.immutablelist(new ArrayList<Xml.Type_xmlnode>());
+    protected List<Xml.Type_xmlnode> vx_p_list = Core.immutablelist(new ArrayList<Xml.Type_xmlnode>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Xml.Type_xmlnode vx_xmlnode(final Core.Type_int index) {
       Xml.Type_xmlnode output = Xml.e_xmlnode;
       Class_xmlnodelist list = this;
       int iindex = index.vx_int();
-      List<Xml.Type_xmlnode> listval = list.vxlist;
+      List<Xml.Type_xmlnode> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -358,7 +358,7 @@ public final class Xml {
     }
 
     @Override
-    public List<Xml.Type_xmlnode> vx_listxmlnode() {return vxlist;}
+    public List<Xml.Type_xmlnode> vx_listxmlnode() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -395,11 +395,11 @@ public final class Xml {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new xmlnodelist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new xmlnodelist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -483,7 +483,7 @@ public final class Xml {
           Core.Type_string castval = (Core.Type_string)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(xmlpropmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_error("(xmlpropmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -516,7 +516,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Key Expected: " + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -526,7 +526,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {

@@ -16,6 +16,7 @@ namespace vx_type_test {
   vx_test::Type_testcase f_string_from_string_start(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_string_start_end(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_stringlist_join(vx_core::Type_context context);
+  vx_test::Type_testcase f_stringlist_from_string_split(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
   vx_test::Type_testcoveragesummary test_coveragesummary();

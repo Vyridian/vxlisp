@@ -209,7 +209,7 @@ func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgb
 					case ":parallel":
 						fnc.parallel = true
 					case ":permission":
-						fnc.parallel = true
+						fnc.permission = true
 					case ":test":
 						testcls = true
 					default:
@@ -369,7 +369,7 @@ func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfu
 			msg := NewMsgFromTextblock(fnc.textblock, subpath, "Type Not Found:", typ.pkgname, typ.name)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
-		if len(fnc.listarg) > 0 {
+		if len(fnc.listarg) > 0 || fnc.context {
 			argscope := ScopeFromFunc(fnc)
 			argscope.pkgname = ""
 			argscopes := append([]vxscope{argscope}, listscope...)
@@ -478,7 +478,11 @@ func NameFromFunc(fnc *vxfunc) string {
 
 func ScopeFromFunc(fnc *vxfunc) vxscope {
 	scope := ScopeNew()
-	scope.maparg = ArgMapFromArgList(fnc.listarg)
+	maparg := ArgMapFromArgList(fnc.listarg)
+	if fnc.context {
+		maparg["context"] = argcontext
+	}
+	scope.maparg = maparg
 	return scope
 }
 

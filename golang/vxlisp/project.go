@@ -227,6 +227,25 @@ func ExecuteProjectFromArgs(listarg []string) *vxmsgblock {
 	return msgblock
 }
 
+func FuncFromProjectFuncname(project *vxproject, funcname string) *vxfunc {
+	output := emptyfunc
+	if funcname != "" {
+		pos := IntFromStringFindLast(funcname, "/")
+		if pos > 0 {
+			packagename := funcname[0:pos]
+			fncname := funcname[pos+1:]
+			pkg, ok := PackageFromProjectName(project, packagename)
+			if ok {
+				fncs, ok := pkg.mapfunc[fncname]
+				if ok {
+					output = fncs[0]
+				}
+			}
+		}
+	}
+	return output
+}
+
 func ListPackageFromProject(project *vxproject) []*vxpackage {
 	var output []*vxpackage
 	for _, subproject := range project.listproject {

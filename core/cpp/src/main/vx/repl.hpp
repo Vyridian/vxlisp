@@ -44,6 +44,10 @@ namespace vx_repl {
   typedef Abstract_anylist_from_repllist* Func_anylist_from_repllist;
   extern Func_anylist_from_repllist e_anylist_from_repllist;
   extern Func_anylist_from_repllist t_anylist_from_repllist;
+  class Abstract_macro;
+  typedef Abstract_macro* Func_macro;
+  extern Func_macro e_macro;
+  extern Func_macro t_macro;
   class Abstract_repl_from_liblist_string;
   typedef Abstract_repl_from_liblist_string* Func_repl_from_liblist_string;
   extern Func_repl_from_liblist_string e_repl_from_liblist_string;
@@ -330,6 +334,32 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func macro)
+  class Abstract_macro : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_macro() {};
+    virtual ~Abstract_macro() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_macro : public virtual Abstract_macro {
+  public:
+    Class_macro();
+    virtual ~Class_macro() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func repl<-liblist-string)
   class Abstract_repl_from_liblist_string : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -351,6 +381,14 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  // (func macro)
+  template <class T> T* f_macro(T* generic_any_1, vx_core::Type_anylist anylist) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(anylist);
+    vx_core::vx_release_one_except(anylist, output);
+    return output;
+  }
 
   class vx_Class_package : vx_core::vx_Abstract_package {
   public:

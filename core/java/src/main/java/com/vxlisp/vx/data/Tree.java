@@ -149,7 +149,7 @@ public final class Tree {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new branch) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -160,7 +160,7 @@ public final class Tree {
             } else if (valsub instanceof String) {
               output.vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :id " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -168,7 +168,7 @@ public final class Tree {
             if (valsub instanceof Tree.Type_brancharrow) {
               output.vx_p_brancharrow = (Tree.Type_brancharrow)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :brancharrow " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :brancharrow " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -176,7 +176,7 @@ public final class Tree {
             if (valsub instanceof Tree.Type_branchlist) {
               output.vx_p_branchlist = (Tree.Type_branchlist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :branchlist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :branchlist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -184,7 +184,7 @@ public final class Tree {
             if (valsub instanceof Tree.Type_leaflist) {
               output.vx_p_leaflist = (Tree.Type_leaflist)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :leaflist " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :leaflist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -192,7 +192,7 @@ public final class Tree {
             if (valsub instanceof Tree.Type_branch) {
               output.vx_p_parentbranch = (Tree.Type_branch)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :parentbranch " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :parentbranch " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -200,12 +200,12 @@ public final class Tree {
             if (valsub instanceof Tree.Type_tree) {
               output.vx_p_tree = (Tree.Type_tree)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch :tree " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new branch :tree " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new branch) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new branch) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -308,17 +308,17 @@ public final class Tree {
 
   public static class Class_branchlist extends Core.Class_base implements Type_branchlist {
 
-    protected List<Tree.Type_branch> vxlist = Core.immutablelist(new ArrayList<Tree.Type_branch>());
+    protected List<Tree.Type_branch> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_branch>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Tree.Type_branch vx_branch(final Core.Type_int index) {
       Tree.Type_branch output = Tree.e_branch;
       Class_branchlist list = this;
       int iindex = index.vx_int();
-      List<Tree.Type_branch> listval = list.vxlist;
+      List<Tree.Type_branch> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -326,7 +326,7 @@ public final class Tree {
     }
 
     @Override
-    public List<Tree.Type_branch> vx_listbranch() {return vxlist;}
+    public List<Tree.Type_branch> vx_listbranch() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -363,11 +363,11 @@ public final class Tree {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new branchlist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new branchlist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -498,7 +498,7 @@ public final class Tree {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaf) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new leaf) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -509,7 +509,7 @@ public final class Tree {
             } else if (valsub instanceof String) {
               output.vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaf :id " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new leaf :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -519,7 +519,7 @@ public final class Tree {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaf :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new leaf :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -527,12 +527,12 @@ public final class Tree {
             if (valsub instanceof Core.Type_any) {
               output.vx_p_value = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaf :value " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new leaf :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaf) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new leaf) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -586,17 +586,17 @@ public final class Tree {
 
   public static class Class_leaflist extends Core.Class_base implements Type_leaflist {
 
-    protected List<Tree.Type_leaf> vxlist = Core.immutablelist(new ArrayList<Tree.Type_leaf>());
+    protected List<Tree.Type_leaf> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_leaf>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vxlist));}
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
 
     @Override
     public Tree.Type_leaf vx_leaf(final Core.Type_int index) {
       Tree.Type_leaf output = Tree.e_leaf;
       Class_leaflist list = this;
       int iindex = index.vx_int();
-      List<Tree.Type_leaf> listval = list.vxlist;
+      List<Tree.Type_leaf> listval = list.vx_p_list;
       if (iindex < listval.size()) {
         output = listval.get(iindex);
       }
@@ -604,7 +604,7 @@ public final class Tree {
     }
 
     @Override
-    public List<Tree.Type_leaf> vx_listleaf() {return vxlist;}
+    public List<Tree.Type_leaf> vx_listleaf() {return vx_p_list;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -641,11 +641,11 @@ public final class Tree {
             }
           }
         } else {
-          Core.Type_msg msg = Core.t_msg.vx_new_error("(new leaflist) - Invalid Type: " + valsub.toString());
+          Core.Type_msg msg = Core.vx_msg_error("(new leaflist) - Invalid Type: " + valsub.toString());
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vxlist = Core.immutablelist(listval);
+      output.vx_p_list = Core.immutablelist(listval);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -776,7 +776,7 @@ public final class Tree {
           if (isvalidkey) {
             key = testkey;
           } else {
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new tree) - Invalid Key Type: " + valsub.toString());
+            Core.Type_msg msg = Core.vx_msg_error("(new tree) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
           }
         } else {
@@ -787,7 +787,7 @@ public final class Tree {
             } else if (valsub instanceof String) {
               output.vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new tree :id " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new tree :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -797,7 +797,7 @@ public final class Tree {
             } else if (valsub instanceof String) {
               output.vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new tree :name " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new tree :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -805,12 +805,12 @@ public final class Tree {
             if (valsub instanceof Tree.Type_branch) {
               output.vx_p_branch = (Tree.Type_branch)valsub;
             } else {
-              Core.Type_msg msg = Core.t_msg.vx_new_error("(new tree :branch " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new tree :branch " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.t_msg.vx_new_error("(new tree) - Invalid Key: " + key);
+            Core.Type_msg msg = Core.vx_msg_error("(new tree) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

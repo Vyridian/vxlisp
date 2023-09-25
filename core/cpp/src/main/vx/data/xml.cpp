@@ -61,7 +61,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xml::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xml output = vx_data_xml::e_xml;
       vx_data_xml::Type_xml val = vx_core::vx_any_from_any(vx_data_xml::t_xml, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_data_xml::Type_xmlnodelist vx_p_nodes = val->nodes();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -80,7 +80,7 @@ namespace vx_data_xml {
           } else if (testkey == ":nodes") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xml) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xml) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -89,11 +89,11 @@ namespace vx_data_xml {
             if (valsubtype == vx_data_xml::t_xmlnodelist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xml :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xml :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xml) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xml) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -237,7 +237,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnode::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnode output = vx_data_xml::e_xmlnode;
       vx_data_xml::Type_xmlnode val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_data_xml::Type_xmlnode vx_p_nodes = val->nodes();
       vx_data_xml::Type_xmlpropmap vx_p_props = val->props();
       vx_core::Type_string vx_p_tag = val->tag();
@@ -265,7 +265,7 @@ namespace vx_data_xml {
           } else if (testkey == ":text") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -274,32 +274,32 @@ namespace vx_data_xml {
             if (valsubtype == vx_data_xml::t_xmlnode) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":props") {
             if (valsubtype == vx_data_xml::t_xmlpropmap) {
               vx_p_props = vx_core::vx_any_from_any(vx_data_xml::t_xmlpropmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode :props " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode :props " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":tag") {
             if (valsubtype == vx_core::t_string) {
               vx_p_tag = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode :tag " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode :tag " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnode) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnode) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -434,8 +434,11 @@ namespace vx_data_xml {
         if (valtype == vx_data_xml::t_xmlnode) {
           vx_data_xml::Type_xmlnode castval = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_xml::t_xmlnode)) {
+          vx_data_xml::Type_xmlnode castval = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(xmlnodelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(xmlnodelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -459,7 +462,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnodelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnodelist output = vx_data_xml::e_xmlnodelist;
       vx_data_xml::Type_xmlnodelist val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_xml::Type_xmlnode> listval = val->vx_listxmlnode();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -475,7 +478,7 @@ namespace vx_data_xml {
           vx_data_xml::Type_xmlnodelist multi = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listxmlnode());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new xmlnodelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new xmlnodelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -573,7 +576,7 @@ namespace vx_data_xml {
           vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(xmlpropmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(xmlpropmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -599,7 +602,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlpropmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlpropmap output = vx_data_xml::e_xmlpropmap;
       vx_data_xml::Type_xmlpropmap valmap = vx_core::vx_any_from_any(vx_data_xml::t_xmlpropmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
@@ -614,7 +617,7 @@ namespace vx_data_xml {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -624,7 +627,7 @@ namespace vx_data_xml {
           } else if (valsubtype == vx_core::t_string) {
             valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -717,7 +720,7 @@ namespace vx_data_xml {
         "vx/data/xml", // pkgname
         "xml<-textblock", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs

@@ -104,6 +104,20 @@ namespace vx_core {
     return output;
   }
 
+  // vx_anylist_from_arraystring(long, array<string>)
+  vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[]) {
+    std::vector<std::string> liststring = vx_core::vx_liststring_from_arraystring(ilen, arraystring);
+    std::vector<vx_core::Type_any> listval;
+    for (std::string sval : liststring) {
+      vx_core::Type_string val = vx_core::vx_new_string(sval);
+      listval.push_back(val);
+    }
+    vx_core::Class_anylist* anylist = new vx_core::Class_anylist();
+    anylist->vx_p_list = listval;
+    vx_core::Type_anylist output = anylist;
+    return output;
+  }
+
   // vx_argmap_from_listarg(List<arg>)
   vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg) {
     std::vector<std::string> listkey;
@@ -193,11 +207,16 @@ namespace vx_core {
 
   // vx_boolean_from_type_trait(type, type)
   bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait) {
-    vx_core::Type_typedef typdef = type->vx_typedef();
-    vx_core::Type_typelist traits = typdef->traits();
-    vx_core::vx_Type_listany list = traits->vx_list();
-    bool output = (std::find(list.begin(), list.end(), trait) != list.end());
-    vx_core::vx_release(typdef);
+    bool output = false;
+    if (type == trait) {
+      output = true;
+    } else {
+      vx_core::Type_typedef typdef = type->vx_typedef();
+      vx_core::Type_typelist traits = typdef->traits();
+      vx_core::vx_Type_listany list = traits->vx_list();
+      output = (std::find(list.begin(), list.end(), trait) != list.end());
+      vx_core::vx_release(typdef);
+    }
     return output;
   }
 
@@ -228,73 +247,6 @@ namespace vx_core {
     }
     vx_core::vx_release({isnumber1, isnumber2});
     return output;
-  }
-
-  // vx_debug()
-  void vx_debug() {
-    std::cout << vx_core::refcount << std::endl;
-  }
-
-  // vx_debug(int)
-  void vx_debug(long ival) {
-    std::cout << ival << std::endl;
-  }
-
-  // vx_debug(text)
-  void vx_debug(std::string sval) {
-    std::cout << sval << std::endl;
-  }
-
-  // vx_debug(any)
-  void vx_debug(vx_core::Type_any val) {
-    if (!val) {
-      vx_debug("null");
-    } else {
-      std::string sval = vx_core::vx_string_from_any(val);
-      vx_debug(sval);
-    }
-  }
-
-  // vx_debug(async)
-  void vx_debug(vx_core::vx_Type_async async) {
-    if (!async) {
-      vx_debug("null");
-    } else {
-      std::string sval = vx_core::vx_string_from_async(async);
-      vx_debug(sval);
-    }
-  }
-
-  // vx_debug(list<any>)
-  void vx_debug(vx_core::vx_Type_listany listany) {
-    for (vx_core::Type_any any : listany) {
-      vx_core::vx_debug(any);
-    }
-  }
-
-  // vx_debug(string, string)
-  void vx_debug(std::string code, std::string text) {
-    vx_core::vx_debug(code + ": " + vx_core::vx_string_from_int(vx_core::refcount) + "\n" + text);
-  }
-
-  // vx_debug(string, any)
-  void vx_debug(std::string code, vx_core::Type_any val) {
-    if (!val) {
-      vx_core::vx_debug(code, "null");
-    } else {
-      std::string sval = vx_core::vx_string_from_any_refcount(val);
-      vx_core::vx_debug(code, sval);
-    }
-  }
-
-  // vx_debug(string, async)
-  void vx_debug(std::string code, vx_core::vx_Type_async async) {
-    if (!async) {
-      vx_core::vx_debug(code, "null");
-    } else {
-      std::string sval = vx_core::vx_string_from_async_refcount(async);
-      vx_core::vx_debug(code, sval);
-    }
   }
 
   // vx_float_from_number(number)
@@ -525,6 +477,73 @@ namespace vx_core {
     return output;
   }
 
+  // vx_log()
+  void vx_log() {
+    std::cout << vx_core::refcount << std::endl;
+  }
+
+  // vx_log(int)
+  void vx_log(long ival) {
+    std::cout << ival << std::endl;
+  }
+
+  // vx_log(text)
+  void vx_log(std::string sval) {
+    std::cout << sval << std::endl;
+  }
+
+  // vx_log(any)
+  void vx_log(vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_log("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any(val);
+      vx_core::vx_log(sval);
+    }
+  }
+
+  // vx_log(async)
+  void vx_log(vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_core::vx_log("null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async(async);
+      vx_core::vx_log(sval);
+    }
+  }
+
+  // vx_log(list<any>)
+  void vx_log(vx_core::vx_Type_listany listany) {
+    for (vx_core::Type_any any : listany) {
+      vx_core::vx_log(any);
+    }
+  }
+
+  // vx_log(string, string)
+  void vx_log(std::string code, std::string text) {
+    vx_core::vx_log(code + ": " + vx_core::vx_string_from_int(vx_core::refcount) + "\n" + text);
+  }
+
+  // vx_log(string, any)
+  void vx_log(std::string code, vx_core::Type_any val) {
+    if (!val) {
+      vx_core::vx_log(code, "null");
+    } else {
+      std::string sval = vx_core::vx_string_from_any_refcount(val);
+      vx_core::vx_log(code, sval);
+    }
+  }
+
+  // vx_log(string, async)
+  void vx_log(std::string code, vx_core::vx_Type_async async) {
+    if (!async) {
+      vx_core::vx_log(code, "null");
+    } else {
+      std::string sval = vx_core::vx_string_from_async_refcount(async);
+      vx_core::vx_log(code, sval);
+    }
+  }
+
   // vx_map_from_list(listany, any<-any)
   vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_mapany output;
@@ -549,7 +568,7 @@ namespace vx_core {
   bool vx_memory_leak_test() {
     bool output = true;
     if (vx_core::refcount > 0) {
-      vx_core::vx_debug("Error: Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      vx_core::vx_log("Error: Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
       output = false;
     }
     return output;
@@ -559,7 +578,7 @@ namespace vx_core {
   bool vx_memory_leak_test(std::string id, long initialcount) {
     bool output = true;
     if (vx_core::refcount - initialcount != 0) {
-      vx_core::vx_debug("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
+      vx_core::vx_log("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
       output = false;
     }
     return output;
@@ -570,8 +589,60 @@ namespace vx_core {
     bool output = true;
     long actualcount = vx_core::refcount - initialcount;
     if (actualcount != expectedcount) {
-      vx_core::vx_debug("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
+      vx_core::vx_log("Error: " + id + ", Memory Leak, Expected:" + vx_core::vx_string_from_int(expectedcount) + ", Actual:" + vx_core::vx_string_from_int(actualcount));
       output = false;
+    }
+    return output;
+  }
+
+  // vx_msg_from_errortext(string)
+  vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) {
+    vx_core::Type_msg output = new vx_core::Class_msg();
+    vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
+    vx_core::vx_reserve(string_error);
+    output->vx_p_text = string_error;
+    output->vx_p_severity = vx_core::c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception(string, exception)
+  vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) {
+    vx_core::Type_msg output = new vx_core::Class_msg();
+    output->vx_p_text = vx_core::vx_new_string(text);
+    output->vx_p_severity = vx_core::c_msg_severe;
+    output->err = err;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) {
+    vx_core::Type_msgblock output = vx_core::e_msgblock;
+    std::vector<vx_core::Type_msgblock> listmsgblock;
+    if (msgblock) {
+      vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
+      if (origmsgblock) {
+        std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
+        listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
+      }
+    }
+    for (vx_core::Type_any subval : vals) {
+      vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
+      if (submsgblock) {
+        listmsgblock.push_back(submsgblock);
+      }
+    }
+    vx_core::Type_msgblocklist msgblocks;
+    if (listmsgblock.size() > 0) {
+      for (vx_core::Type_any any : listmsgblock) {
+        vx_core::vx_reserve(any);
+      }
+      msgblocks = new vx_core::Class_msgblocklist();
+      msgblocks->vx_p_list = listmsgblock;
+      output = new vx_core::Class_msgblock();
+      output->vx_p_msgblocks = msgblocks;
+    } else if (msgblock) {
+      vx_core::vx_reserve(msgblock);
+      output = msgblock;
     }
     return output;
   }
@@ -810,6 +881,12 @@ namespace vx_core {
     for (vx_core::vx_Type_async async : listasync) {
       vx_core::vx_reserve_async(async);
     }
+  }
+
+  // vx_reserve_context(context)
+  void vx_reserve_context(vx_core::Type_context context) {
+    context->vx_p_iref = -2;
+    vx_core::refcount = 0;
   }
 
   // vx_reserve_empty(any)
@@ -1242,61 +1319,6 @@ namespace vx_core {
     long Class_int::vx_int() const {return this->vx_p_int;}
   //}
 
-  //class Class_msg {
-    vx_core::Type_msg Class_msg::vx_msg_from_errortext(const std::string errortext) const {
-      vx_core::Type_msg output = new vx_core::Class_msg();
-      vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
-      vx_core::vx_reserve(string_error);
-      output->vx_p_text = string_error;
-      output->vx_p_severity = vx_core::c_msg_severe;
-      return output;
-    }
-
-    vx_core::Type_msg Class_msg::vx_msg_from_exception(const std::string text, std::exception err) const {
-      vx_core::Type_msg output = new vx_core::Class_msg();
-      output->vx_p_text = vx_core::vx_new_string(text);
-      output->vx_p_severity = vx_core::c_msg_severe;
-      output->err = err;
-      return output;
-    }
-  //}
-
-  //class Class_msgblock {
-    vx_core::Type_msgblock Class_msgblock::vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) const {
-      vx_core::Type_msgblock output = vx_core::e_msgblock;
-      std::vector<vx_core::Type_msgblock> listmsgblock;
-      if (msgblock) {
-        vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
-        if (origmsgblock) {
-          std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
-          listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
-        }
-      }
-      for (vx_core::Type_any subval : vals) {
-        vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
-        if (submsgblock) {
-          listmsgblock.push_back(submsgblock);
-        }
-      }
-      vx_core::Type_msgblocklist msgblocks;
-      if (listmsgblock.size() > 0) {
-        for (vx_core::Type_any any : listmsgblock) {
-          vx_core::vx_reserve(any);
-        }
-        msgblocks = new vx_core::Class_msgblocklist();
-        msgblocks->vx_p_list = listmsgblock;
-        if (!msgblock) {
-          output = vx_core::vx_new(vx_core::t_msgblock, {msgblocks});
-        } else {
-          output = vx_core::vx_copy(msgblock, {msgblocks});
-        }
-      } else if (msgblock) {
-        output = vx_core::vx_copy(msgblock, {});
-      }
-      return output;
-    }
-  //}
-
   //class Class_string {
     std::string Class_string::vx_string() const {
       return this->vx_p_string;
@@ -1478,7 +1500,7 @@ namespace vx_core {
     vx_core::Type_any Class_list::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_list output = vx_core::e_list;
       vx_core::Type_list val = vx_core::vx_any_from_any(vx_core::t_list, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1595,7 +1617,7 @@ namespace vx_core {
     vx_core::Type_any Class_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_map output = vx_core::e_map;
       vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
@@ -1610,7 +1632,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1702,7 +1724,7 @@ namespace vx_core {
     vx_core::Type_any Class_struct::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_struct output = vx_core::e_struct;
       vx_core::Type_struct val = vx_core::vx_any_from_any(vx_core::t_struct, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -1937,8 +1959,11 @@ namespace vx_core {
         if (valtype == vx_core::t_msg) {
           vx_core::Type_msg castval = vx_core::vx_any_from_any(vx_core::t_msg, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_msg)) {
+          vx_core::Type_msg castval = vx_core::vx_any_from_any(vx_core::t_msg, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(msglist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(msglist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1962,7 +1987,7 @@ namespace vx_core {
     vx_core::Type_any Class_msglist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msglist output = vx_core::e_msglist;
       vx_core::Type_msglist val = vx_core::vx_any_from_any(vx_core::t_msglist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_msg> listval = val->vx_listmsg();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1976,7 +2001,7 @@ namespace vx_core {
           vx_core::Type_msglist multi = vx_core::vx_any_from_any(vx_core::t_msglist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listmsg());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new msglist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new msglist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2216,8 +2241,11 @@ namespace vx_core {
         if (valtype == vx_core::t_msgblock) {
           vx_core::Type_msgblock castval = vx_core::vx_any_from_any(vx_core::t_msgblock, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_msgblock)) {
+          vx_core::Type_msgblock castval = vx_core::vx_any_from_any(vx_core::t_msgblock, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(msgblocklist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(msgblocklist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -2241,7 +2269,7 @@ namespace vx_core {
     vx_core::Type_any Class_msgblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_msgblocklist output = vx_core::e_msgblocklist;
       vx_core::Type_msgblocklist val = vx_core::vx_any_from_any(vx_core::t_msgblocklist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_msgblock> listval = val->vx_listmsgblock();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2255,7 +2283,7 @@ namespace vx_core {
           vx_core::Type_msgblocklist multi = vx_core::vx_any_from_any(vx_core::t_msgblocklist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listmsgblock());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new msgblocklist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new msgblocklist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2319,7 +2347,7 @@ namespace vx_core {
     vx_core::Type_any Class_boolean::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_boolean output = vx_core::e_boolean;
       vx_core::Type_boolean val = vx_core::vx_any_from_any(vx_core::t_boolean, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       bool booleanval = val->vx_boolean();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2443,7 +2471,7 @@ namespace vx_core {
     vx_core::Type_any Class_decimal::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_decimal output = vx_core::e_decimal;
       vx_core::Type_decimal val = vx_core::vx_any_from_any(vx_core::t_decimal, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::string sval = val->vx_string();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2513,7 +2541,7 @@ namespace vx_core {
     vx_core::Type_any Class_float::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_float output = vx_core::e_float;
       vx_core::Type_float val = vx_core::vx_any_from_any(vx_core::t_float, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       float floatval = val->vx_float();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2592,7 +2620,7 @@ namespace vx_core {
     vx_core::Type_any Class_int::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_int output = vx_core::e_int;
       vx_core::Type_int val = vx_core::vx_any_from_any(vx_core::t_int, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       long intval = val->vx_int();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2665,7 +2693,7 @@ namespace vx_core {
     vx_core::Type_any Class_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_string output = vx_core::e_string;
       vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::string sb = val->vx_string();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2686,7 +2714,7 @@ namespace vx_core {
           vx_core::Type_decimal valdecimal = vx_core::vx_any_from_any(vx_core::t_decimal, valsub);
           sb += valdecimal->vx_string();
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new string) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new string) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2974,7 +3002,7 @@ namespace vx_core {
     vx_core::Type_any Class_typedef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typedef output = vx_core::e_typedef;
       vx_core::Type_typedef val = vx_core::vx_any_from_any(vx_core::t_typedef, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_pkgname = val->pkgname();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_string vx_p_extend = val->extend();
@@ -3026,7 +3054,7 @@ namespace vx_core {
           } else if (testkey == ":traits") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3035,88 +3063,88 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_pkgname = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":extends") {
             if (valsubtype == vx_core::t_string) {
               vx_p_extend = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :extends " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :extends " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":allowfuncs") {
             if (valsubtype == vx_core::t_funclist) {
               vx_p_allowfuncs = vx_core::vx_any_from_any(vx_core::t_funclist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :allowfuncs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :allowfuncs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":allowtypes") {
             if (valsubtype == vx_core::t_typelist) {
               vx_p_allowtypes = vx_core::vx_any_from_any(vx_core::t_typelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :allowtypes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :allowtypes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":allowvalues") {
             if (valsubtype == vx_core::t_anylist) {
               vx_p_allowvalues = vx_core::vx_any_from_any(vx_core::t_anylist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :allowvalues " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :allowvalues " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":disallowfuncs") {
             if (valsubtype == vx_core::t_funclist) {
               vx_p_disallowfuncs = vx_core::vx_any_from_any(vx_core::t_funclist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :disallowfuncs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :disallowfuncs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":disallowtypes") {
             if (valsubtype == vx_core::t_typelist) {
               vx_p_disallowtypes = vx_core::vx_any_from_any(vx_core::t_typelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :disallowtypes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :disallowtypes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":disallowvalues") {
             if (valsubtype == vx_core::t_anylist) {
               vx_p_disallowvalues = vx_core::vx_any_from_any(vx_core::t_anylist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :disallowvalues " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :disallowvalues " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":properties") {
             if (valsubtype == vx_core::t_argmap) {
               vx_p_properties = vx_core::vx_any_from_any(vx_core::t_argmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :properties " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :properties " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":proplast") {
             if (valsubtype == vx_core::t_arg) {
               vx_p_proplast = vx_core::vx_any_from_any(vx_core::t_arg, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :proplast " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :proplast " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":traits") {
             if (valsubtype == vx_core::t_typelist) {
               vx_p_traits = vx_core::vx_any_from_any(vx_core::t_typelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef :traits " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef :traits " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new typedef) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new typedef) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -3394,7 +3422,7 @@ namespace vx_core {
     vx_core::Type_any Class_funcdef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funcdef output = vx_core::e_funcdef;
       vx_core::Type_funcdef val = vx_core::vx_any_from_any(vx_core::t_funcdef, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_pkgname = val->pkgname();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_int vx_p_idx = val->idx();
@@ -3425,7 +3453,7 @@ namespace vx_core {
           } else if (testkey == ":async") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3434,21 +3462,21 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_pkgname = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":idx") {
             if (valsubtype == vx_core::t_int) {
               vx_p_idx = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef :idx " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef :idx " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":type") {
@@ -3457,11 +3485,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_boolean) {
               vx_p_async = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef :async " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef :async " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funcdef) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funcdef) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -3657,8 +3685,11 @@ namespace vx_core {
         if (valtype == vx_core::t_any_from_any) {
           vx_core::Func_any_from_any castval = vx_core::vx_any_from_any(vx_core::t_any_from_any, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_any_from_any)) {
+          vx_core::Func_any_from_any castval = vx_core::vx_any_from_any(vx_core::t_any_from_any, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(any_from_anylist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(any_from_anylist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -3682,7 +3713,7 @@ namespace vx_core {
     vx_core::Type_any Class_any_from_anylist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_any_from_anylist output = vx_core::e_any_from_anylist;
       vx_core::Type_any_from_anylist val = vx_core::vx_any_from_any(vx_core::t_any_from_anylist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Func_any_from_any> listval = val->vx_listany_from_any();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3694,7 +3725,7 @@ namespace vx_core {
           vx_core::Type_any_from_anylist multi = vx_core::vx_any_from_any(vx_core::t_any_from_anylist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listany_from_any());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new any<-anylist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new any<-anylist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -3799,7 +3830,7 @@ namespace vx_core {
     vx_core::Type_any Class_anylist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_anylist output = vx_core::e_anylist;
       vx_core::Type_anylist val = vx_core::vx_any_from_any(vx_core::t_anylist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3981,7 +4012,7 @@ namespace vx_core {
     vx_core::Type_any Class_arg::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_arg output = vx_core::e_arg;
       vx_core::Type_arg val = vx_core::vx_any_from_any(vx_core::t_arg, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_type vx_p_argtype = val->argtype();
       vx_core::Func_any_from_func vx_p_fn_any = val->fn_any();
@@ -4006,7 +4037,7 @@ namespace vx_core {
           } else if (testkey == ":fn-any") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arg) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4015,25 +4046,25 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arg :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":argtype") {
             if (valsubtype == vx_core::t_type) {
               vx_p_argtype = vx_core::vx_any_from_any(vx_core::t_type, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arg :argtype " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :argtype " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fn-any") {
             if (valsubtype == vx_core::t_any_from_func) {
               vx_p_fn_any = vx_core::vx_any_from_any(vx_core::t_any_from_func, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arg :fn-any " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :fn-any " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arg) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -4157,8 +4188,11 @@ namespace vx_core {
         if (valtype == vx_core::t_arg) {
           vx_core::Type_arg castval = vx_core::vx_any_from_any(vx_core::t_arg, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_arg)) {
+          vx_core::Type_arg castval = vx_core::vx_any_from_any(vx_core::t_arg, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(arglist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(arglist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4182,7 +4216,7 @@ namespace vx_core {
     vx_core::Type_any Class_arglist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_arglist output = vx_core::e_arglist;
       vx_core::Type_arglist val = vx_core::vx_any_from_any(vx_core::t_arglist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_arg> listval = val->vx_listarg();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4198,7 +4232,7 @@ namespace vx_core {
           vx_core::Type_arglist multi = vx_core::vx_any_from_any(vx_core::t_arglist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listarg());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new arglist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arglist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -4296,7 +4330,7 @@ namespace vx_core {
           vx_core::Type_arg castval = vx_core::vx_any_from_any(vx_core::t_arg, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(argmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(argmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4322,7 +4356,7 @@ namespace vx_core {
     vx_core::Type_any Class_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_argmap output = vx_core::e_argmap;
       vx_core::Type_argmap valmap = vx_core::vx_any_from_any(vx_core::t_argmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_arg> mapval;
       std::string key = "";
@@ -4337,7 +4371,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4347,7 +4381,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_arg) {
             valany = vx_core::vx_any_from_any(vx_core::t_arg, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -4446,8 +4480,11 @@ namespace vx_core {
         if (valtype == vx_core::t_boolean) {
           vx_core::Type_boolean castval = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_boolean)) {
+          vx_core::Type_boolean castval = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(booleanlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(booleanlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4471,7 +4508,7 @@ namespace vx_core {
     vx_core::Type_any Class_booleanlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_booleanlist output = vx_core::e_booleanlist;
       vx_core::Type_booleanlist val = vx_core::vx_any_from_any(vx_core::t_booleanlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_boolean> listval = val->vx_listboolean();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4487,7 +4524,7 @@ namespace vx_core {
           vx_core::Type_booleanlist multi = vx_core::vx_any_from_any(vx_core::t_booleanlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listboolean());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new booleanlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new booleanlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -4729,8 +4766,11 @@ namespace vx_core {
         if (valtype == vx_core::t_connect) {
           vx_core::Type_connect castval = vx_core::vx_any_from_any(vx_core::t_connect, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_connect)) {
+          vx_core::Type_connect castval = vx_core::vx_any_from_any(vx_core::t_connect, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(connectlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(connectlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4754,7 +4794,7 @@ namespace vx_core {
     vx_core::Type_any Class_connectlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_connectlist output = vx_core::e_connectlist;
       vx_core::Type_connectlist val = vx_core::vx_any_from_any(vx_core::t_connectlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_connect> listval = val->vx_listconnect();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4770,7 +4810,7 @@ namespace vx_core {
           vx_core::Type_connectlist multi = vx_core::vx_any_from_any(vx_core::t_connectlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listconnect());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new connectlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new connectlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -4868,7 +4908,7 @@ namespace vx_core {
           vx_core::Type_connect castval = vx_core::vx_any_from_any(vx_core::t_connect, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(connectmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(connectmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4894,7 +4934,7 @@ namespace vx_core {
     vx_core::Type_any Class_connectmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_connectmap output = vx_core::e_connectmap;
       vx_core::Type_connectmap valmap = vx_core::vx_any_from_any(vx_core::t_connectmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_connect> mapval;
       std::string key = "";
@@ -4909,7 +4949,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4919,7 +4959,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_connect) {
             valany = vx_core::vx_any_from_any(vx_core::t_connect, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -5097,7 +5137,7 @@ namespace vx_core {
     vx_core::Type_any Class_constdef::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constdef output = vx_core::e_constdef;
       vx_core::Type_constdef val = vx_core::vx_any_from_any(vx_core::t_constdef, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_pkgname = val->pkgname();
       vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_any vx_p_type = val->type();
@@ -5122,7 +5162,7 @@ namespace vx_core {
           } else if (testkey == ":type") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new constdef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new constdef) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -5131,20 +5171,20 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_pkgname = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new constdef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new constdef :pkgname " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new constdef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new constdef :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":type") {
             vx_p_type = valsub;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new constdef) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new constdef) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -5268,8 +5308,11 @@ namespace vx_core {
         if (valtype == vx_core::t_const) {
           vx_core::Type_const castval = vx_core::vx_any_from_any(vx_core::t_const, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_const)) {
+          vx_core::Type_const castval = vx_core::vx_any_from_any(vx_core::t_const, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(constlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(constlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -5293,7 +5336,7 @@ namespace vx_core {
     vx_core::Type_any Class_constlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constlist output = vx_core::e_constlist;
       vx_core::Type_constlist val = vx_core::vx_any_from_any(vx_core::t_constlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_const> listval = val->vx_listconst();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -5309,7 +5352,7 @@ namespace vx_core {
           vx_core::Type_constlist multi = vx_core::vx_any_from_any(vx_core::t_constlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listconst());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new constlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new constlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -5407,7 +5450,7 @@ namespace vx_core {
           vx_core::Type_const castval = vx_core::vx_any_from_any(vx_core::t_const, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(constmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(constmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -5433,7 +5476,7 @@ namespace vx_core {
     vx_core::Type_any Class_constmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_constmap output = vx_core::e_constmap;
       vx_core::Type_constmap valmap = vx_core::vx_any_from_any(vx_core::t_constmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_const> mapval;
       std::string key = "";
@@ -5448,7 +5491,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -5458,7 +5501,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_const) {
             valany = vx_core::vx_any_from_any(vx_core::t_const, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -5599,7 +5642,7 @@ namespace vx_core {
     vx_core::Type_any Class_context::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_context output = vx_core::e_context;
       vx_core::Type_context val = vx_core::vx_any_from_any(vx_core::t_context, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_code = val->code();
       vx_core::Type_session vx_p_session = val->session();
       vx_core::Type_setting vx_p_setting = val->setting();
@@ -5627,7 +5670,7 @@ namespace vx_core {
           } else if (testkey == ":state") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -5636,32 +5679,32 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_code = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":session") {
             if (valsubtype == vx_core::t_session) {
               vx_p_session = vx_core::vx_any_from_any(vx_core::t_session, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context :session " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context :session " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":setting") {
             if (valsubtype == vx_core::t_setting) {
               vx_p_setting = vx_core::vx_any_from_any(vx_core::t_setting, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context :setting " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context :setting " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":state") {
             if (valsubtype == vx_core::t_state) {
               vx_p_state = vx_core::vx_any_from_any(vx_core::t_state, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context :state " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context :state " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new context) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new context) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -5846,8 +5889,11 @@ namespace vx_core {
         if (valtype == vx_core::t_func) {
           vx_core::Type_func castval = vx_core::vx_any_from_any(vx_core::t_func, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_func)) {
+          vx_core::Type_func castval = vx_core::vx_any_from_any(vx_core::t_func, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(funclist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(funclist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -5871,7 +5917,7 @@ namespace vx_core {
     vx_core::Type_any Class_funclist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funclist output = vx_core::e_funclist;
       vx_core::Type_funclist val = vx_core::vx_any_from_any(vx_core::t_funclist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_func> listval = val->vx_listfunc();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -5887,7 +5933,7 @@ namespace vx_core {
           vx_core::Type_funclist multi = vx_core::vx_any_from_any(vx_core::t_funclist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listfunc());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new funclist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new funclist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -5985,7 +6031,7 @@ namespace vx_core {
           vx_core::Type_func castval = vx_core::vx_any_from_any(vx_core::t_func, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(funcmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(funcmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -6011,7 +6057,7 @@ namespace vx_core {
     vx_core::Type_any Class_funcmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_funcmap output = vx_core::e_funcmap;
       vx_core::Type_funcmap valmap = vx_core::vx_any_from_any(vx_core::t_funcmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_func> mapval;
       std::string key = "";
@@ -6026,7 +6072,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -6036,7 +6082,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_func) {
             valany = vx_core::vx_any_from_any(vx_core::t_func, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -6135,8 +6181,11 @@ namespace vx_core {
         if (valtype == vx_core::t_int) {
           vx_core::Type_int castval = vx_core::vx_any_from_any(vx_core::t_int, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_int)) {
+          vx_core::Type_int castval = vx_core::vx_any_from_any(vx_core::t_int, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(intlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(intlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -6160,7 +6209,7 @@ namespace vx_core {
     vx_core::Type_any Class_intlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_intlist output = vx_core::e_intlist;
       vx_core::Type_intlist val = vx_core::vx_any_from_any(vx_core::t_intlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_int> listval = val->vx_listint();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -6176,7 +6225,7 @@ namespace vx_core {
           vx_core::Type_intlist multi = vx_core::vx_any_from_any(vx_core::t_intlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listint());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new intlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new intlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -6274,7 +6323,7 @@ namespace vx_core {
           vx_core::Type_int castval = vx_core::vx_any_from_any(vx_core::t_int, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(intmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(intmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -6300,7 +6349,7 @@ namespace vx_core {
     vx_core::Type_any Class_intmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_intmap output = vx_core::e_intmap;
       vx_core::Type_intmap valmap = vx_core::vx_any_from_any(vx_core::t_intmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_int> mapval;
       std::string key = "";
@@ -6315,7 +6364,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -6325,7 +6374,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_int) {
             valany = vx_core::vx_any_from_any(vx_core::t_int, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -6527,7 +6576,7 @@ namespace vx_core {
     vx_core::Type_any Class_mempool::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_mempool output = vx_core::e_mempool;
       vx_core::Type_mempool val = vx_core::vx_any_from_any(vx_core::t_mempool, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_value vx_p_valuepool = val->valuepool();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -6546,7 +6595,7 @@ namespace vx_core {
           } else if (testkey == ":valuepool") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mempool) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mempool) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -6555,11 +6604,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_value) {
               vx_p_valuepool = vx_core::vx_any_from_any(vx_core::t_value, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mempool :valuepool " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mempool :valuepool " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new mempool) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mempool) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -6761,8 +6810,11 @@ namespace vx_core {
         if (valtype == vx_core::t_number) {
           vx_core::Type_number castval = vx_core::vx_any_from_any(vx_core::t_number, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_number)) {
+          vx_core::Type_number castval = vx_core::vx_any_from_any(vx_core::t_number, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(numberlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(numberlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -6786,7 +6838,7 @@ namespace vx_core {
     vx_core::Type_any Class_numberlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_numberlist output = vx_core::e_numberlist;
       vx_core::Type_numberlist val = vx_core::vx_any_from_any(vx_core::t_numberlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_number> listval = val->vx_listnumber();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -6802,7 +6854,7 @@ namespace vx_core {
           vx_core::Type_numberlist multi = vx_core::vx_any_from_any(vx_core::t_numberlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listnumber());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new numberlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new numberlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -6900,7 +6952,7 @@ namespace vx_core {
           vx_core::Type_number castval = vx_core::vx_any_from_any(vx_core::t_number, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(numbermap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(numbermap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -6926,7 +6978,7 @@ namespace vx_core {
     vx_core::Type_any Class_numbermap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_numbermap output = vx_core::e_numbermap;
       vx_core::Type_numbermap valmap = vx_core::vx_any_from_any(vx_core::t_numbermap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_number> mapval;
       std::string key = "";
@@ -6941,7 +6993,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -6951,7 +7003,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_number) {
             valany = vx_core::vx_any_from_any(vx_core::t_number, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -7041,7 +7093,7 @@ namespace vx_core {
     vx_core::Type_any Class_package::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_package output = vx_core::e_package;
       vx_core::Type_package val = vx_core::vx_any_from_any(vx_core::t_package, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -7131,7 +7183,7 @@ namespace vx_core {
           vx_core::Type_package castval = vx_core::vx_any_from_any(vx_core::t_package, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(packagemap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(packagemap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -7157,7 +7209,7 @@ namespace vx_core {
     vx_core::Type_any Class_packagemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_packagemap output = vx_core::e_packagemap;
       vx_core::Type_packagemap valmap = vx_core::vx_any_from_any(vx_core::t_packagemap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_package> mapval;
       std::string key = "";
@@ -7172,7 +7224,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -7182,7 +7234,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_package) {
             valany = vx_core::vx_any_from_any(vx_core::t_package, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -7284,7 +7336,7 @@ namespace vx_core {
     vx_core::Type_any Class_permission::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permission output = vx_core::e_permission;
       vx_core::Type_permission val = vx_core::vx_any_from_any(vx_core::t_permission, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -7303,7 +7355,7 @@ namespace vx_core {
           } else if (testkey == ":id") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new permission) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new permission) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -7312,11 +7364,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new permission :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new permission :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new permission) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new permission) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -7418,8 +7470,11 @@ namespace vx_core {
         if (valtype == vx_core::t_permission) {
           vx_core::Type_permission castval = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_permission)) {
+          vx_core::Type_permission castval = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(permissionlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(permissionlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -7443,7 +7498,7 @@ namespace vx_core {
     vx_core::Type_any Class_permissionlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permissionlist output = vx_core::e_permissionlist;
       vx_core::Type_permissionlist val = vx_core::vx_any_from_any(vx_core::t_permissionlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_permission> listval = val->vx_listpermission();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -7459,7 +7514,7 @@ namespace vx_core {
           vx_core::Type_permissionlist multi = vx_core::vx_any_from_any(vx_core::t_permissionlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listpermission());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new permissionlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new permissionlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -7557,7 +7612,7 @@ namespace vx_core {
           vx_core::Type_permission castval = vx_core::vx_any_from_any(vx_core::t_permission, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(permissionmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(permissionmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -7583,7 +7638,7 @@ namespace vx_core {
     vx_core::Type_any Class_permissionmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_permissionmap output = vx_core::e_permissionmap;
       vx_core::Type_permissionmap valmap = vx_core::vx_any_from_any(vx_core::t_permissionmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_permission> mapval;
       std::string key = "";
@@ -7598,7 +7653,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -7608,7 +7663,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_permission) {
             valany = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -7671,9 +7726,19 @@ namespace vx_core {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
       vx_core::vx_release_one({
+        this->vx_p_allowfuncs,
         this->vx_p_permissions,
         this->vx_p_permissionmap
       });
+    }
+
+    // allowfuncs()
+    vx_core::Type_funclist Class_security::allowfuncs() const {
+      vx_core::Type_funclist output = this->vx_p_allowfuncs;
+      if (!output) {
+        output = vx_core::e_funclist;
+      }
+      return output;
     }
 
     // permissions()
@@ -7699,6 +7764,8 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
+      } else if (skey == ":allowfuncs") {
+        output = this->allowfuncs();
       } else if (skey == ":permissions") {
         output = this->permissions();
       } else if (skey == ":permissionmap") {
@@ -7711,6 +7778,7 @@ namespace vx_core {
     // vx_map()
     vx_core::vx_Type_mapany Class_security::vx_map() const {
       vx_core::vx_Type_mapany output;
+      output[":allowfuncs"] = this->allowfuncs();
       output[":permissions"] = this->permissions();
       output[":permissionmap"] = this->permissionmap();
       return output;
@@ -7723,7 +7791,8 @@ namespace vx_core {
     vx_core::Type_any Class_security::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_security output = vx_core::e_security;
       vx_core::Type_security val = vx_core::vx_any_from_any(vx_core::t_security, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_funclist vx_p_allowfuncs = val->allowfuncs();
       vx_core::Type_permissionlist vx_p_permissions = val->permissions();
       vx_core::Type_permissionmap vx_p_permissionmap = val->permissionmap();
       std::string key = "";
@@ -7740,38 +7809,54 @@ namespace vx_core {
             testkey = valstr->vx_string();
           }
           if (false) {
+          } else if (testkey == ":allowfuncs") {
+            key = testkey;
           } else if (testkey == ":permissions") {
             key = testkey;
           } else if (testkey == ":permissionmap") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new security) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new security) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
           if (false) {
+          } else if (key == ":allowfuncs") {
+            if (valsubtype == vx_core::t_funclist) {
+              vx_p_allowfuncs = vx_core::vx_any_from_any(vx_core::t_funclist, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new security :allowfuncs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
           } else if (key == ":permissions") {
             if (valsubtype == vx_core::t_permissionlist) {
               vx_p_permissions = vx_core::vx_any_from_any(vx_core::t_permissionlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new security :permissions " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new security :permissions " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":permissionmap") {
             if (valsubtype == vx_core::t_permissionmap) {
               vx_p_permissionmap = vx_core::vx_any_from_any(vx_core::t_permissionmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new security :permissionmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new security :permissionmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new security) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new security) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
         }
       }
       output = new vx_core::Class_security();
+      if (output->vx_p_allowfuncs != vx_p_allowfuncs) {
+        if (output->vx_p_allowfuncs) {
+          vx_core::vx_release_one(output->vx_p_allowfuncs);
+        }
+        output->vx_p_allowfuncs = vx_p_allowfuncs;
+        vx_core::vx_reserve(vx_p_allowfuncs);
+      }
       if (output->vx_p_permissions != vx_p_permissions) {
         if (output->vx_p_permissions) {
           vx_core::vx_release_one(output->vx_p_permissions);
@@ -7813,6 +7898,10 @@ namespace vx_core {
         vx_core::e_anylist, // allowvalues
         vx_core::e_anylist, // disallowvalues
         vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "allowfuncs", // name
+            vx_core::t_funclist // type
+          ),
           vx_core::vx_new_arg(
             "permissions", // name
             vx_core::t_permissionlist // type
@@ -7907,7 +7996,7 @@ namespace vx_core {
     vx_core::Type_any Class_session::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_session output = vx_core::e_session;
       vx_core::Type_session val = vx_core::vx_any_from_any(vx_core::t_session, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_user vx_p_user = val->user();
       vx_core::Type_connectlist vx_p_connectlist = val->connectlist();
       vx_core::Type_connectmap vx_p_connectmap = val->connectmap();
@@ -7932,7 +8021,7 @@ namespace vx_core {
           } else if (testkey == ":connectmap") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new session) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -7941,25 +8030,25 @@ namespace vx_core {
             if (valsubtype == vx_core::t_user) {
               vx_p_user = vx_core::vx_any_from_any(vx_core::t_user, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new session :user " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :user " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":connectlist") {
             if (valsubtype == vx_core::t_connectlist) {
               vx_p_connectlist = vx_core::vx_any_from_any(vx_core::t_connectlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new session :connectlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :connectlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":connectmap") {
             if (valsubtype == vx_core::t_connectmap) {
               vx_p_connectmap = vx_core::vx_any_from_any(vx_core::t_connectmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new session :connectmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :connectmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new session) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -8086,7 +8175,7 @@ namespace vx_core {
     vx_core::Type_any Class_setting::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_setting output = vx_core::e_setting;
       vx_core::Type_setting val = vx_core::vx_any_from_any(vx_core::t_setting, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_stringmap vx_p_pathmap = val->pathmap();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -8105,7 +8194,7 @@ namespace vx_core {
           } else if (testkey == ":pathmap") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new setting) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new setting) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -8114,11 +8203,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_stringmap) {
               vx_p_pathmap = vx_core::vx_any_from_any(vx_core::t_stringmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new setting :pathmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new setting :pathmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new setting) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new setting) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -8226,7 +8315,7 @@ namespace vx_core {
           vx_core::Type_statelistener castval = vx_core::vx_any_from_any(vx_core::t_statelistener, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(state) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(state) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -8252,7 +8341,7 @@ namespace vx_core {
     vx_core::Type_any Class_state::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_state output = vx_core::e_state;
       vx_core::Type_state valmap = vx_core::vx_any_from_any(vx_core::t_state, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_statelistener> mapval;
       std::string key = "";
@@ -8267,7 +8356,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -8277,7 +8366,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_statelistener) {
             valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -8405,7 +8494,7 @@ namespace vx_core {
     vx_core::Type_any Class_statelistener::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_statelistener output = vx_core::e_statelistener;
       vx_core::Type_statelistener val = vx_core::vx_any_from_any(vx_core::t_statelistener, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_path = val->path();
       vx_core::Type_any vx_p_value = val->value();
       vx_core::Func_boolean_from_none vx_p_fn_boolean = val->fn_boolean();
@@ -8430,7 +8519,7 @@ namespace vx_core {
           } else if (testkey == ":fn-boolean") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new statelistener) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -8439,7 +8528,7 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_path = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new statelistener :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":value") {
@@ -8448,11 +8537,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_boolean_from_none) {
               vx_p_fn_boolean = vx_core::vx_any_from_any(vx_core::t_boolean_from_none, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new statelistener :fn-boolean " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener :fn-boolean " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new statelistener) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -8576,8 +8665,11 @@ namespace vx_core {
         if (valtype == vx_core::t_string) {
           vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_string)) {
+          vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(stringlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(stringlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -8601,7 +8693,7 @@ namespace vx_core {
     vx_core::Type_any Class_stringlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_stringlist output = vx_core::e_stringlist;
       vx_core::Type_stringlist val = vx_core::vx_any_from_any(vx_core::t_stringlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_string> listval = val->vx_liststring();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -8617,7 +8709,7 @@ namespace vx_core {
           vx_core::Type_stringlist multi = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststring());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stringlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stringlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -8715,7 +8807,7 @@ namespace vx_core {
           vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(stringmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(stringmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -8741,7 +8833,7 @@ namespace vx_core {
     vx_core::Type_any Class_stringmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_stringmap output = vx_core::e_stringmap;
       vx_core::Type_stringmap valmap = vx_core::vx_any_from_any(vx_core::t_stringmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
@@ -8756,7 +8848,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -8766,7 +8858,7 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_string) {
             valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -8920,7 +9012,7 @@ namespace vx_core {
     vx_core::Type_any Class_thenelse::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_thenelse output = vx_core::e_thenelse;
       vx_core::Type_thenelse val = vx_core::vx_any_from_any(vx_core::t_thenelse, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_code = val->code();
       vx_core::Type_any vx_p_value = val->value();
       vx_core::Type_list vx_p_values = val->values();
@@ -8951,7 +9043,7 @@ namespace vx_core {
           } else if (testkey == ":fn-any") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -8960,7 +9052,7 @@ namespace vx_core {
             if (valsubtype == vx_core::t_string) {
               vx_p_code = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse :code " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":value") {
@@ -8969,25 +9061,25 @@ namespace vx_core {
             if (valsubtype == vx_core::t_list) {
               vx_p_values = vx_core::vx_any_from_any(vx_core::t_list, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse :values " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse :values " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fn-cond") {
             if (valsubtype == vx_core::t_boolean_from_func) {
               vx_p_fn_cond = vx_core::vx_any_from_any(vx_core::t_boolean_from_func, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse :fn-cond " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse :fn-cond " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":fn-any") {
             if (valsubtype == vx_core::t_any_from_func) {
               vx_p_fn_any = vx_core::vx_any_from_any(vx_core::t_any_from_func, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse :fn-any " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse :fn-any " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelse) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelse) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -9133,8 +9225,11 @@ namespace vx_core {
         if (valtype == vx_core::t_thenelse) {
           vx_core::Type_thenelse castval = vx_core::vx_any_from_any(vx_core::t_thenelse, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_thenelse)) {
+          vx_core::Type_thenelse castval = vx_core::vx_any_from_any(vx_core::t_thenelse, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(thenelselist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(thenelselist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -9158,7 +9253,7 @@ namespace vx_core {
     vx_core::Type_any Class_thenelselist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_thenelselist output = vx_core::e_thenelselist;
       vx_core::Type_thenelselist val = vx_core::vx_any_from_any(vx_core::t_thenelselist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_thenelse> listval = val->vx_listthenelse();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -9174,7 +9269,7 @@ namespace vx_core {
           vx_core::Type_thenelselist multi = vx_core::vx_any_from_any(vx_core::t_thenelselist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listthenelse());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thenelselist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thenelselist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -9329,7 +9424,7 @@ namespace vx_core {
     vx_core::Type_any Class_typelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typelist output = vx_core::e_typelist;
       vx_core::Type_typelist val = vx_core::vx_any_from_any(vx_core::t_typelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_any> listval = val->vx_list();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -9449,7 +9544,7 @@ namespace vx_core {
     vx_core::Type_any Class_typemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_typemap output = vx_core::e_typemap;
       vx_core::Type_typemap valmap = vx_core::vx_any_from_any(vx_core::t_typemap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
       std::string key = "";
@@ -9464,7 +9559,7 @@ namespace vx_core {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -9594,7 +9689,7 @@ namespace vx_core {
     vx_core::Type_any Class_user::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_user output = vx_core::e_user;
       vx_core::Type_user val = vx_core::vx_any_from_any(vx_core::t_user, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_security vx_p_security = val->security();
       vx_core::Type_string vx_p_username = val->username();
       vx_core::Type_string vx_p_token = val->token();
@@ -9619,7 +9714,7 @@ namespace vx_core {
           } else if (testkey == ":token") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new user) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new user) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -9628,25 +9723,25 @@ namespace vx_core {
             if (valsubtype == vx_core::t_security) {
               vx_p_security = vx_core::vx_any_from_any(vx_core::t_security, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new user :security " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new user :security " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":username") {
             if (valsubtype == vx_core::t_string) {
               vx_p_username = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new user :username " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new user :username " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":token") {
             if (valsubtype == vx_core::t_string) {
               vx_p_token = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new user :token " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new user :token " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new user) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new user) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -9786,7 +9881,7 @@ namespace vx_core {
     vx_core::Type_any Class_value::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_core::Type_value output = vx_core::e_value;
       vx_core::Type_value val = vx_core::vx_any_from_any(vx_core::t_value, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_any vx_p_next = val->next();
       vx_core::Type_int vx_p_refs = val->refs();
       std::string key = "";
@@ -9808,7 +9903,7 @@ namespace vx_core {
           } else if (testkey == ":refs") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new value) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new value) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -9819,11 +9914,11 @@ namespace vx_core {
             if (valsubtype == vx_core::t_int) {
               vx_p_refs = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new value :refs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new value :refs " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new value) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new value) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -10437,7 +10532,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10529,7 +10624,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-any-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10618,7 +10713,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-any-context", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10711,7 +10806,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-any-context-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10801,7 +10896,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10892,7 +10987,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-func-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -10980,7 +11075,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-key-value", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11073,7 +11168,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-key-value-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11146,7 +11241,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11236,7 +11331,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-list-reduce", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11327,7 +11422,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-list-reduce-next", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11401,7 +11496,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-map", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11491,7 +11586,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-none", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11582,7 +11677,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-none-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11670,7 +11765,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-reduce", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11763,7 +11858,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-reduce-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11853,7 +11948,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-reduce-next", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -11947,7 +12042,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-reduce-next-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12021,7 +12116,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "any<-struct", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12094,7 +12189,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12184,7 +12279,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "boolean<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12274,7 +12369,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "boolean<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12367,7 +12462,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "boolean<-none", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12453,7 +12548,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "empty", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12536,7 +12631,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "new", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12608,7 +12703,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "copy", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12692,7 +12787,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-empty", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12786,7 +12881,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-empty", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12878,7 +12973,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "!", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -12972,7 +13067,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "!-empty", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13066,7 +13161,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "!-empty", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13168,7 +13263,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13262,7 +13357,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13356,7 +13451,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "!=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13447,7 +13542,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "then", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13536,7 +13631,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "else", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13619,7 +13714,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "if", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13692,7 +13787,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "if", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13766,7 +13861,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "if", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13869,7 +13964,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "case", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -13960,7 +14055,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "case", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14032,7 +14127,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "switch", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14117,7 +14212,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "length<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14213,7 +14308,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "and", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14334,7 +14429,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "and", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14430,7 +14525,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "or", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14526,7 +14621,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "or", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14609,7 +14704,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "let", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14681,7 +14776,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "let-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14763,7 +14858,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "*", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14845,7 +14940,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "*", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -14937,7 +15032,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "*", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15040,7 +15135,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "*", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15133,7 +15228,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "+", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15215,7 +15310,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "+", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15307,7 +15402,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "+", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15410,7 +15505,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "+", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15503,7 +15598,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "+1", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15596,7 +15691,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15678,7 +15773,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15770,7 +15865,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15873,7 +15968,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -15964,7 +16059,7 @@ namespace vx_core {
         "vx/core", // pkgname
         ".", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16054,7 +16149,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "/", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16153,7 +16248,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16247,7 +16342,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16330,7 +16425,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16403,7 +16498,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<<-", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16487,7 +16582,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16570,7 +16665,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "<=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16680,7 +16775,7 @@ namespace vx_core {
         "vx/core", // pkgname
         ">", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16774,7 +16869,7 @@ namespace vx_core {
         "vx/core", // pkgname
         ">", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16868,7 +16963,7 @@ namespace vx_core {
         "vx/core", // pkgname
         ">=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16951,7 +17046,7 @@ namespace vx_core {
         "vx/core", // pkgname
         ">=", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -16995,6 +17090,98 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_anylist args = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_core::f_ge_1(args);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func allowfuncs<-security)
+  vx_core::Type_funclist f_allowfuncs_from_security(vx_core::Type_security security) {
+    vx_core::Type_funclist output = vx_core::e_funclist;
+    vx_core::vx_reserve(security);
+    output = security->allowfuncs();
+    vx_core::vx_release_one_except(security, output);
+    return output;
+  }
+
+  // (func allowfuncs<-security)
+  // class Class_allowfuncs_from_security {
+    Abstract_allowfuncs_from_security::~Abstract_allowfuncs_from_security() {}
+
+    Class_allowfuncs_from_security::Class_allowfuncs_from_security() : Abstract_allowfuncs_from_security::Abstract_allowfuncs_from_security() {
+      vx_core::refcount += 1;
+    }
+
+    Class_allowfuncs_from_security::~Class_allowfuncs_from_security() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_allowfuncs_from_security::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_allowfuncs_from_security output = vx_core::e_allowfuncs_from_security;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_allowfuncs_from_security::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_allowfuncs_from_security output = vx_core::e_allowfuncs_from_security;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_allowfuncs_from_security::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "allowfuncs<-security", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_allowfuncs_from_security::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "allowfuncs<-security", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_allowfuncs_from_security::vx_empty() const {return vx_core::e_allowfuncs_from_security;}
+    vx_core::Type_any Class_allowfuncs_from_security::vx_type() const {return vx_core::t_allowfuncs_from_security;}
+    vx_core::Type_msgblock Class_allowfuncs_from_security::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_allowfuncs_from_security::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_allowfuncs_from_security::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_allowfuncs_from_security::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_security inputval = vx_core::vx_any_from_any(vx_core::t_security, val);
+      output = vx_core::f_allowfuncs_from_security(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_allowfuncs_from_security::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_security security = vx_core::vx_any_from_any(vx_core::t_security, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_allowfuncs_from_security(security);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -17045,7 +17232,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "allowtypenames<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17137,7 +17324,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "allowtypes<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17187,6 +17374,104 @@ namespace vx_core {
 
   //}
 
+  // (func boolean-permission<-func)
+  vx_core::Type_boolean f_boolean_permission_from_func(vx_core::Type_func func, vx_core::Type_context context) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(func);
+    output = vx_core::f_contains_1(
+      vx_core::f_allowfuncs_from_security(
+        vx_core::f_security_from_context(context)
+      ),
+      func
+    );
+    vx_core::vx_release_one_except(func, output);
+    return output;
+  }
+
+  // (func boolean-permission<-func)
+  // class Class_boolean_permission_from_func {
+    Abstract_boolean_permission_from_func::~Abstract_boolean_permission_from_func() {}
+
+    Class_boolean_permission_from_func::Class_boolean_permission_from_func() : Abstract_boolean_permission_from_func::Abstract_boolean_permission_from_func() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_permission_from_func::~Class_boolean_permission_from_func() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_permission_from_func::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_boolean_permission_from_func output = vx_core::e_boolean_permission_from_func;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_permission_from_func::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_boolean_permission_from_func output = vx_core::e_boolean_permission_from_func;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_permission_from_func::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean-permission<-func", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_boolean_permission_from_func::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "boolean-permission<-func", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_permission_from_func::vx_empty() const {return vx_core::e_boolean_permission_from_func;}
+    vx_core::Type_any Class_boolean_permission_from_func::vx_type() const {return vx_core::t_boolean_permission_from_func;}
+    vx_core::Type_msgblock Class_boolean_permission_from_func::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_permission_from_func::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_boolean_permission_from_func::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_boolean_permission_from_func::vx_any_from_any_context(vx_core::Type_any val, vx_core::Type_context context) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_func inputval = vx_core::vx_any_from_any(vx_core::t_func, val);
+      output = vx_core::f_boolean_permission_from_func(inputval, context);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_permission_from_func::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_func func = vx_core::vx_any_from_any(vx_core::t_func, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_boolean_permission_from_func(func, context);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func compare)
   vx_core::Type_int f_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
     vx_core::Type_int output = vx_core::e_int;
@@ -17230,7 +17515,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "compare", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17312,7 +17597,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "contains", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17402,7 +17687,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "contains", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17435,6 +17720,100 @@ namespace vx_core {
       vx_core::Type_list values = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_any find = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_core::f_contains_1(values, find);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func context-main)
+  vx_core::Type_context f_context_main(vx_core::Type_anylist args) {
+    vx_core::Type_context output = vx_core::e_context;
+    vx_core::vx_reserve(args);
+    output = vx_core::f_empty(
+      vx_core::t_context
+    );
+    vx_core::vx_release_one_except(args, output);
+    return output;
+  }
+
+  // (func context-main)
+  // class Class_context_main {
+    Abstract_context_main::~Abstract_context_main() {}
+
+    Class_context_main::Class_context_main() : Abstract_context_main::Abstract_context_main() {
+      vx_core::refcount += 1;
+    }
+
+    Class_context_main::~Class_context_main() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_context_main::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_context_main output = vx_core::e_context_main;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_main::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_context_main output = vx_core::e_context_main;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_context_main::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "context-main", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_context_main::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "context-main", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_context_main::vx_empty() const {return vx_core::e_context_main;}
+    vx_core::Type_any Class_context_main::vx_type() const {return vx_core::t_context_main;}
+    vx_core::Type_msgblock Class_context_main::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_context_main::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_context_main::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_context_main::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist inputval = vx_core::vx_any_from_any(vx_core::t_anylist, val);
+      output = vx_core::f_context_main(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_main::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist args = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_context_main(args);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -17485,7 +17864,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "extends<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17577,7 +17956,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "extends<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17660,7 +18039,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "first<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17744,7 +18123,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "first<-list-fn-any<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17817,7 +18196,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "fn", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17899,7 +18278,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "funcdef<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -17998,7 +18377,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "funcname<-funcdef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18089,7 +18468,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "global-package-get", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18178,7 +18557,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "global-package-set", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18257,7 +18636,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "int<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18391,7 +18770,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "int<-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18487,7 +18866,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-endswith", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18573,7 +18952,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18666,7 +19045,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-int", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18784,7 +19163,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-number", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18887,7 +19266,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "is-pass<-permission", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -18971,7 +19350,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "last<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19055,7 +19434,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list-join<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19128,7 +19507,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19201,7 +19580,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list<-list-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19274,7 +19653,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list<-map", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19347,7 +19726,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list<-map-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19428,7 +19807,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "list<-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19482,7 +19861,7 @@ namespace vx_core {
   vx_core::Type_any f_log(vx_core::Type_any value) {
     vx_core::Type_any output = vx_core::e_any;
     vx_core::vx_reserve(value);
-    vx_core::vx_debug(value);
+    vx_core::vx_log(value);
     output = value;
     vx_core::vx_release_one_except(value, output);
     return output;
@@ -19521,7 +19900,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "log", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19571,6 +19950,101 @@ namespace vx_core {
 
   //}
 
+  // (func main)
+  vx_core::Type_string f_main(vx_core::Type_anylist args) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(args);
+    output = vx_core::f_new(
+      vx_core::t_string,
+      args
+    );
+    vx_core::vx_release_one_except(args, output);
+    return output;
+  }
+
+  // (func main)
+  // class Class_main {
+    Abstract_main::~Abstract_main() {}
+
+    Class_main::Class_main() : Abstract_main::Abstract_main() {
+      vx_core::refcount += 1;
+    }
+
+    Class_main::~Class_main() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_main::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_main output = vx_core::e_main;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_main::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_main output = vx_core::e_main;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_main::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "main", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_main::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "main", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_main::vx_empty() const {return vx_core::e_main;}
+    vx_core::Type_any Class_main::vx_type() const {return vx_core::t_main;}
+    vx_core::Type_msgblock Class_main::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_main::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_main::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_main::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist inputval = vx_core::vx_any_from_any(vx_core::t_anylist, val);
+      output = vx_core::f_main(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_main::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_anylist args = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_main(args);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func map<-list)
   // class Class_map_from_list {
     Abstract_map_from_list::~Abstract_map_from_list() {}
@@ -19604,7 +20078,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "map<-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19683,7 +20157,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "mempool-addref", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19760,7 +20234,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "mempool-release", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19837,7 +20311,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "mempool-removeref", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19914,7 +20388,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "mempool-removerefchildren", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -19991,7 +20465,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "mempool-reserve", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20078,7 +20552,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "msg<-error", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20171,7 +20645,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "msgblock<-msgblock-msg", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20258,7 +20732,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "msgblock<-msgblock-msgblock", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20339,7 +20813,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "name<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20422,7 +20896,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "native", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20514,7 +20988,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "native<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20603,7 +21077,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "number<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20682,7 +21156,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "packagename<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20777,7 +21251,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "path<-context-path", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20869,7 +21343,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "path<-setting-path", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -20963,7 +21437,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "permission<-id-context", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21056,7 +21530,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "properties<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21148,7 +21622,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "proplast<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21231,7 +21705,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "resolve", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21315,7 +21789,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "resolve", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21399,7 +21873,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "resolve-async", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21481,7 +21955,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "resolve-first", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21565,7 +22039,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "resolve-list", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21616,14 +22090,182 @@ namespace vx_core {
 
   //}
 
+  // (func security<-context)
+  vx_core::Type_security f_security_from_context(vx_core::Type_context context) {
+    vx_core::Type_security output = vx_core::e_security;
+    output = vx_core::f_security_from_user(
+      vx_core::f_user_from_context(context)
+    );
+    return output;
+  }
+
+  // (func security<-context)
+  // class Class_security_from_context {
+    Abstract_security_from_context::~Abstract_security_from_context() {}
+
+    Class_security_from_context::Class_security_from_context() : Abstract_security_from_context::Abstract_security_from_context() {
+      vx_core::refcount += 1;
+    }
+
+    Class_security_from_context::~Class_security_from_context() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_security_from_context::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_security_from_context output = vx_core::e_security_from_context;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_security_from_context::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_security_from_context output = vx_core::e_security_from_context;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_security_from_context::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "security<-context", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_security_from_context::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "security<-context", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_security_from_context::vx_empty() const {return vx_core::e_security_from_context;}
+    vx_core::Type_any Class_security_from_context::vx_type() const {return vx_core::t_security_from_context;}
+    vx_core::Type_msgblock Class_security_from_context::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_security_from_context::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_security_from_context::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_security_from_context(context);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func security<-user)
+  vx_core::Type_security f_security_from_user(vx_core::Type_user user) {
+    vx_core::Type_security output = vx_core::e_security;
+    vx_core::vx_reserve(user);
+    output = user->security();
+    vx_core::vx_release_one_except(user, output);
+    return output;
+  }
+
+  // (func security<-user)
+  // class Class_security_from_user {
+    Abstract_security_from_user::~Abstract_security_from_user() {}
+
+    Class_security_from_user::Class_security_from_user() : Abstract_security_from_user::Abstract_security_from_user() {
+      vx_core::refcount += 1;
+    }
+
+    Class_security_from_user::~Class_security_from_user() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_security_from_user::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_security_from_user output = vx_core::e_security_from_user;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_security_from_user::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_security_from_user output = vx_core::e_security_from_user;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_security_from_user::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "security<-user", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_security_from_user::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "security<-user", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_security_from_user::vx_empty() const {return vx_core::e_security_from_user;}
+    vx_core::Type_any Class_security_from_user::vx_type() const {return vx_core::t_security_from_user;}
+    vx_core::Type_msgblock Class_security_from_user::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_security_from_user::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_security_from_user::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_security_from_user::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_user inputval = vx_core::vx_any_from_any(vx_core::t_user, val);
+      output = vx_core::f_security_from_user(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_security_from_user::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_user user = vx_core::vx_any_from_any(vx_core::t_user, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_security_from_user(user);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func session<-context)
   vx_core::Type_session f_session_from_context(vx_core::Type_context context) {
     vx_core::Type_session output = vx_core::e_session;
-    output = vx_core::f_any_from_struct(
-      vx_core::t_session,
-      vx_core::t_context,
-      vx_core::vx_new_string(":session")
-    );
+    output = context->session();
     return output;
   }
 
@@ -21660,7 +22302,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "session<-context", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21701,11 +22343,7 @@ namespace vx_core {
   // (func setting<-context)
   vx_core::Type_setting f_setting_from_context(vx_core::Type_context context) {
     vx_core::Type_setting output = vx_core::e_setting;
-    output = vx_core::f_any_from_struct(
-      vx_core::t_setting,
-      vx_core::t_context,
-      vx_core::vx_new_string(":setting")
-    );
+    output = context->setting();
     return output;
   }
 
@@ -21742,7 +22380,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "setting<-context", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21823,7 +22461,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "string-repeat", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -21908,7 +22546,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "string<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22001,7 +22639,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "string<-any-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22081,7 +22719,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "string<-func", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22176,7 +22814,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "traits<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22268,7 +22906,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "type<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22362,7 +23000,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typedef<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22454,7 +23092,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typedef<-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22548,7 +23186,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typename<-any", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22642,7 +23280,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typename<-type", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22741,7 +23379,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typename<-typedef", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22841,7 +23479,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "typenames<-typelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -22935,7 +23573,7 @@ namespace vx_core {
         "vx/core", // pkgname
         "user<-context", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -23267,16 +23905,22 @@ namespace vx_core {
   vx_core::Func_ge t_ge = NULL;
   vx_core::Func_ge_1 e_ge_1 = NULL;
   vx_core::Func_ge_1 t_ge_1 = NULL;
+  vx_core::Func_allowfuncs_from_security e_allowfuncs_from_security = NULL;
+  vx_core::Func_allowfuncs_from_security t_allowfuncs_from_security = NULL;
   vx_core::Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = NULL;
   vx_core::Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = NULL;
   vx_core::Func_allowtypes_from_typedef e_allowtypes_from_typedef = NULL;
   vx_core::Func_allowtypes_from_typedef t_allowtypes_from_typedef = NULL;
+  vx_core::Func_boolean_permission_from_func e_boolean_permission_from_func = NULL;
+  vx_core::Func_boolean_permission_from_func t_boolean_permission_from_func = NULL;
   vx_core::Func_compare e_compare = NULL;
   vx_core::Func_compare t_compare = NULL;
   vx_core::Func_contains e_contains = NULL;
   vx_core::Func_contains t_contains = NULL;
   vx_core::Func_contains_1 e_contains_1 = NULL;
   vx_core::Func_contains_1 t_contains_1 = NULL;
+  vx_core::Func_context_main e_context_main = NULL;
+  vx_core::Func_context_main t_context_main = NULL;
   vx_core::Func_extends_from_any e_extends_from_any = NULL;
   vx_core::Func_extends_from_any t_extends_from_any = NULL;
   vx_core::Func_extends_from_typedef e_extends_from_typedef = NULL;
@@ -23325,6 +23969,8 @@ namespace vx_core {
   vx_core::Func_list_from_type t_list_from_type = NULL;
   vx_core::Func_log e_log = NULL;
   vx_core::Func_log t_log = NULL;
+  vx_core::Func_main e_main = NULL;
+  vx_core::Func_main t_main = NULL;
   vx_core::Func_map_from_list e_map_from_list = NULL;
   vx_core::Func_map_from_list t_map_from_list = NULL;
   vx_core::Func_mempool_addref e_mempool_addref = NULL;
@@ -23373,6 +24019,10 @@ namespace vx_core {
   vx_core::Func_resolve_first t_resolve_first = NULL;
   vx_core::Func_resolve_list e_resolve_list = NULL;
   vx_core::Func_resolve_list t_resolve_list = NULL;
+  vx_core::Func_security_from_context e_security_from_context = NULL;
+  vx_core::Func_security_from_context t_security_from_context = NULL;
+  vx_core::Func_security_from_user e_security_from_user = NULL;
+  vx_core::Func_security_from_user t_security_from_user = NULL;
   vx_core::Func_session_from_context e_session_from_context = NULL;
   vx_core::Func_session_from_context t_session_from_context = NULL;
   vx_core::Func_setting_from_context e_setting_from_context = NULL;
@@ -23996,6 +24646,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_ge_1);
       vx_core::t_ge_1 = new vx_core::Class_ge_1();
       vx_core::vx_reserve_type(vx_core::t_ge_1);
+      vx_core::e_allowfuncs_from_security = new vx_core::Class_allowfuncs_from_security();
+      vx_core::vx_reserve_empty(vx_core::e_allowfuncs_from_security);
+      vx_core::t_allowfuncs_from_security = new vx_core::Class_allowfuncs_from_security();
+      vx_core::vx_reserve_type(vx_core::t_allowfuncs_from_security);
       vx_core::e_allowtypenames_from_typedef = new vx_core::Class_allowtypenames_from_typedef();
       vx_core::vx_reserve_empty(vx_core::e_allowtypenames_from_typedef);
       vx_core::t_allowtypenames_from_typedef = new vx_core::Class_allowtypenames_from_typedef();
@@ -24004,6 +24658,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_allowtypes_from_typedef);
       vx_core::t_allowtypes_from_typedef = new vx_core::Class_allowtypes_from_typedef();
       vx_core::vx_reserve_type(vx_core::t_allowtypes_from_typedef);
+      vx_core::e_boolean_permission_from_func = new vx_core::Class_boolean_permission_from_func();
+      vx_core::vx_reserve_empty(vx_core::e_boolean_permission_from_func);
+      vx_core::t_boolean_permission_from_func = new vx_core::Class_boolean_permission_from_func();
+      vx_core::vx_reserve_type(vx_core::t_boolean_permission_from_func);
       vx_core::e_compare = new vx_core::Class_compare();
       vx_core::vx_reserve_empty(vx_core::e_compare);
       vx_core::t_compare = new vx_core::Class_compare();
@@ -24016,6 +24674,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_contains_1);
       vx_core::t_contains_1 = new vx_core::Class_contains_1();
       vx_core::vx_reserve_type(vx_core::t_contains_1);
+      vx_core::e_context_main = new vx_core::Class_context_main();
+      vx_core::vx_reserve_empty(vx_core::e_context_main);
+      vx_core::t_context_main = new vx_core::Class_context_main();
+      vx_core::vx_reserve_type(vx_core::t_context_main);
       vx_core::e_extends_from_any = new vx_core::Class_extends_from_any();
       vx_core::vx_reserve_empty(vx_core::e_extends_from_any);
       vx_core::t_extends_from_any = new vx_core::Class_extends_from_any();
@@ -24112,6 +24774,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_log);
       vx_core::t_log = new vx_core::Class_log();
       vx_core::vx_reserve_type(vx_core::t_log);
+      vx_core::e_main = new vx_core::Class_main();
+      vx_core::vx_reserve_empty(vx_core::e_main);
+      vx_core::t_main = new vx_core::Class_main();
+      vx_core::vx_reserve_type(vx_core::t_main);
       vx_core::e_map_from_list = new vx_core::Class_map_from_list();
       vx_core::vx_reserve_empty(vx_core::e_map_from_list);
       vx_core::t_map_from_list = new vx_core::Class_map_from_list();
@@ -24208,6 +24874,14 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_resolve_list);
       vx_core::t_resolve_list = new vx_core::Class_resolve_list();
       vx_core::vx_reserve_type(vx_core::t_resolve_list);
+      vx_core::e_security_from_context = new vx_core::Class_security_from_context();
+      vx_core::vx_reserve_empty(vx_core::e_security_from_context);
+      vx_core::t_security_from_context = new vx_core::Class_security_from_context();
+      vx_core::vx_reserve_type(vx_core::t_security_from_context);
+      vx_core::e_security_from_user = new vx_core::Class_security_from_user();
+      vx_core::vx_reserve_empty(vx_core::e_security_from_user);
+      vx_core::t_security_from_user = new vx_core::Class_security_from_user();
+      vx_core::vx_reserve_type(vx_core::t_security_from_user);
       vx_core::e_session_from_context = new vx_core::Class_session_from_context();
       vx_core::vx_reserve_empty(vx_core::e_session_from_context);
       vx_core::t_session_from_context = new vx_core::Class_session_from_context();

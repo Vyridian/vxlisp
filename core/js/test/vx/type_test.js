@@ -23,11 +23,11 @@ export default class vx_type_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/type", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 13, ":total", 20), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 11, ":total", 20), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 71, ":tests", 15, ":total", 21), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 57, ":tests", 12, ":total", 21), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 11, ":total", 20), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 57, ":tests", 12, ":total", 21), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -64,6 +64,7 @@ export default class vx_type_test {
           "string<-string-start", 2,
           "string<-string-start-end", 4,
           "string<-stringlist-join", 1,
+          "stringlist<-string-split", 1,
           "traitnames<-any", 0,
           "traits<-any", 0,
           "traits<-typedef", 0
@@ -560,7 +561,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"a$b$c\" (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
+            ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
             ":testresult",
             vx_test.f_test(
               "a$b$c",
@@ -573,6 +574,35 @@ export default class vx_type_test {
                 ),
                 "$"
               ),
+              context
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_stringlist_from_string_split(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "stringlist<-string-split",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split \"a$b$c\" \"$\"))",
+            ":testresult",
+            vx_test.f_test(
+              vx_core.f_new(
+                vx_core.t_stringlist,
+                "a",
+                "b",
+                "c"
+              ),
+              vx_type.f_stringlist_from_string_split("a$b$c", "$"),
               context
             )
           )
@@ -594,7 +624,8 @@ export default class vx_type_test {
       vx_type_test.f_string_from_string_end(context),
       vx_type_test.f_string_from_string_start(context),
       vx_type_test.f_string_from_string_start_end(context),
-      vx_type_test.f_string_from_stringlist_join(context)
+      vx_type_test.f_string_from_stringlist_join(context),
+      vx_type_test.f_stringlist_from_string_split(context)
     )
     return output
   }

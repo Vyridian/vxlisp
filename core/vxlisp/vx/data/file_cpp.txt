@@ -47,7 +47,7 @@
       filestream.close();
       output = vx_core::c_true;
     } else {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("File not found:" + path);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("File not found:" + path);
       output = vx_core::vx_copy(vx_core::c_false, {msg});
     }
     return output;
@@ -80,7 +80,7 @@
       filestream.close();
       output = vx_core::vx_new_string(text);
     } else {
-      vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("File not found:" + path);
+      vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("File not found:" + path);
       output = vx_core::vx_new(vx_core::t_string, {msg});
     }
     return output;

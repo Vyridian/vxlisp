@@ -55,6 +55,10 @@ namespace vx_test {
   class Class_stylesheet_test;
   typedef Class_stylesheet_test* Const_stylesheet_test;
   extern Const_stylesheet_test c_stylesheet_test;
+  class Abstract_context_test;
+  typedef Abstract_context_test* Func_context_test;
+  extern Func_context_test e_context_test;
+  extern Func_context_test t_context_test;
   class Abstract_div_from_testcaselist;
   typedef Abstract_div_from_testcaselist* Func_div_from_testcaselist;
   extern Func_div_from_testcaselist e_div_from_testcaselist;
@@ -123,6 +127,10 @@ namespace vx_test {
   typedef Abstract_resolve_testresult* Func_resolve_testresult;
   extern Func_resolve_testresult e_resolve_testresult;
   extern Func_resolve_testresult t_resolve_testresult;
+  class Abstract_security_test;
+  typedef Abstract_security_test* Func_security_test;
+  extern Func_security_test e_security_test;
+  extern Func_security_test t_security_test;
   class Abstract_test;
   typedef Abstract_test* Func_test;
   extern Func_test e_test;
@@ -183,6 +191,9 @@ namespace vx_test {
   typedef Abstract_trlist_from_testcaselist* Func_trlist_from_testcaselist;
   extern Func_trlist_from_testcaselist e_trlist_from_testcaselist;
   extern Func_trlist_from_testcaselist t_trlist_from_testcaselist;
+  // (func context-test)
+  vx_core::Type_context f_context_test(vx_core::Type_anylist args);
+
   // (func div<-testcaselist)
   vx_web_html::Type_div f_div_from_testcaselist(vx_test::Type_testcaselist testcaselist);
 
@@ -233,6 +244,9 @@ namespace vx_test {
 
   // (func resolve-testresult)
   vx_core::vx_Type_async f_resolve_testresult(vx_test::Type_testresult testresult);
+
+  // (func security-test)
+  vx_core::Type_security f_security_test();
 
   // (func test)
   vx_test::Type_testresult f_test(vx_core::Type_any expected, vx_core::Type_any actual, vx_core::Type_context context);
@@ -733,6 +747,32 @@ namespace vx_test {
     vx_core::Type_constdef vx_constdef() const;
   };
 
+  // (func context-test)
+  class Abstract_context_test : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_context_test() {};
+    virtual ~Abstract_context_test() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_context_test : public virtual Abstract_context_test {
+  public:
+    Class_context_test();
+    virtual ~Class_context_test() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func div<-testcaselist)
   class Abstract_div_from_testcaselist : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
@@ -1161,6 +1201,28 @@ namespace vx_test {
     virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
     virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func security-test)
+  class Abstract_security_test : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_security_test() {};
+    virtual ~Abstract_security_test() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_security_test : public virtual Abstract_security_test {
+  public:
+    Class_security_test();
+    virtual ~Class_security_test() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func test)

@@ -2,6 +2,7 @@
 #define VX_DATA_DB_HPP
 #include <map>
 #include <string>
+#include <vector>
 #include "../../vx/core.hpp"
 
 namespace vx_data_db {
@@ -27,10 +28,34 @@ namespace vx_data_db {
   typedef Abstract_dbfieldmap* Type_dbfieldmap;
   extern Type_dbfieldmap e_dbfieldmap;
   extern Type_dbfieldmap t_dbfieldmap;
+  class Abstract_dbid;
+  typedef Abstract_dbid* Type_dbid;
+  extern Type_dbid e_dbid;
+  extern Type_dbid t_dbid;
+  class Abstract_dblink;
+  typedef Abstract_dblink* Type_dblink;
+  extern Type_dblink e_dblink;
+  extern Type_dblink t_dblink;
+  class Abstract_dblinklist;
+  typedef Abstract_dblinklist* Type_dblinklist;
+  extern Type_dblinklist e_dblinklist;
+  extern Type_dblinklist t_dblinklist;
+  class Abstract_dbnode;
+  typedef Abstract_dbnode* Type_dbnode;
+  extern Type_dbnode e_dbnode;
+  extern Type_dbnode t_dbnode;
+  class Abstract_dbnote;
+  typedef Abstract_dbnote* Type_dbnote;
+  extern Type_dbnote e_dbnote;
+  extern Type_dbnote t_dbnote;
   class Abstract_dbtable;
   typedef Abstract_dbtable* Type_dbtable;
   extern Type_dbtable e_dbtable;
   extern Type_dbtable t_dbtable;
+  class Abstract_dbvalue;
+  typedef Abstract_dbvalue* Type_dbvalue;
+  extern Type_dbvalue e_dbvalue;
+  extern Type_dbvalue t_dbvalue;
   // (type db)
   class Abstract_db : public virtual vx_core::Abstract_struct {
   public:
@@ -212,6 +237,171 @@ namespace vx_data_db {
     virtual vx_data_db::Type_dbfield vx_get_dbfield(vx_core::Type_string key) const override;
   };
 
+  // (type dbid)
+  class Abstract_dbid : public virtual vx_core::Abstract_any {
+  public:
+    Abstract_dbid() {};
+    virtual ~Abstract_dbid() = 0;
+  };
+  class Class_dbid : public virtual Abstract_dbid {
+  public:
+    Class_dbid();
+    virtual ~Class_dbid() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+  };
+
+  // (type dblink)
+  class Abstract_dblink : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_dblink() {};
+    virtual ~Abstract_dblink() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // fromid()
+    vx_data_db::Type_dbid vx_p_fromid = NULL;
+    virtual vx_data_db::Type_dbid fromid() const = 0;
+    // toid()
+    vx_data_db::Type_dbid vx_p_toid = NULL;
+    virtual vx_data_db::Type_dbid toid() const = 0;
+  };
+  class Class_dblink : public virtual Abstract_dblink {
+  public:
+    Class_dblink();
+    virtual ~Class_dblink() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_data_db::Type_dbid fromid() const override;
+    virtual vx_data_db::Type_dbid toid() const override;
+  };
+
+  // (type dblinklist)
+  class Abstract_dblinklist : public virtual vx_core::Abstract_list {
+  public:
+    Abstract_dblinklist() {};
+    virtual ~Abstract_dblinklist() = 0;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const = 0;
+    // vx_list()
+    virtual vx_core::vx_Type_listany vx_list() const = 0;
+    // vx_new_from_list(T, List<T>)
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const = 0;
+    std::vector<vx_data_db::Type_dblink> vx_p_list;
+    // vx_listdblink()
+    virtual std::vector<vx_data_db::Type_dblink> vx_listdblink() const = 0;
+    // vx_get_dblink(index)
+    virtual vx_data_db::Type_dblink vx_get_dblink(vx_core::Type_int index) const = 0;
+  };
+  class Class_dblinklist : public virtual Abstract_dblinklist {
+  public:
+    Class_dblinklist();
+    virtual ~Class_dblinklist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
+    virtual vx_core::vx_Type_listany vx_list() const override;
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+    virtual std::vector<vx_data_db::Type_dblink> vx_listdblink() const override;
+    virtual vx_data_db::Type_dblink vx_get_dblink(vx_core::Type_int index) const override;
+  };
+
+  // (type dbnode)
+  class Abstract_dbnode : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_dbnode() {};
+    virtual ~Abstract_dbnode() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // dbid()
+    vx_data_db::Type_dbid vx_p_dbid = NULL;
+    virtual vx_data_db::Type_dbid dbid() const = 0;
+    // links()
+    vx_data_db::Type_dblinklist vx_p_links = NULL;
+    virtual vx_data_db::Type_dblinklist links() const = 0;
+  };
+  class Class_dbnode : public virtual Abstract_dbnode {
+  public:
+    Class_dbnode();
+    virtual ~Class_dbnode() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_data_db::Type_dbid dbid() const override;
+    virtual vx_data_db::Type_dblinklist links() const override;
+  };
+
+  // (type dbnote)
+  class Abstract_dbnote : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_dbnote() {};
+    virtual ~Abstract_dbnote() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // dbid()
+    vx_data_db::Type_dbid vx_p_dbid = NULL;
+    virtual vx_data_db::Type_dbid dbid() const = 0;
+    // valid()
+    vx_data_db::Type_dbid vx_p_valid = NULL;
+    virtual vx_data_db::Type_dbid valid() const = 0;
+    // noteid()
+    vx_data_db::Type_dbid vx_p_noteid = NULL;
+    virtual vx_data_db::Type_dbid noteid() const = 0;
+    // valueid()
+    vx_data_db::Type_dbid vx_p_valueid = NULL;
+    virtual vx_data_db::Type_dbid valueid() const = 0;
+    // value()
+    vx_core::Type_string vx_p_value = NULL;
+    virtual vx_core::Type_string value() const = 0;
+  };
+  class Class_dbnote : public virtual Abstract_dbnote {
+  public:
+    Class_dbnote();
+    virtual ~Class_dbnote() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_data_db::Type_dbid dbid() const override;
+    virtual vx_data_db::Type_dbid valid() const override;
+    virtual vx_data_db::Type_dbid noteid() const override;
+    virtual vx_data_db::Type_dbid valueid() const override;
+    virtual vx_core::Type_string value() const override;
+  };
+
   // (type dbtable)
   class Abstract_dbtable : public virtual vx_core::Abstract_struct {
   public:
@@ -251,6 +441,55 @@ namespace vx_data_db {
     virtual vx_data_db::Type_db db() const override;
     virtual vx_data_db::Type_dbcellmap dbcellmap() const override;
     virtual vx_data_db::Type_dbfieldmap dbfieldmap() const override;
+  };
+
+  // (type dbvalue)
+  class Abstract_dbvalue : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_dbvalue() {};
+    virtual ~Abstract_dbvalue() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // dbid()
+    vx_data_db::Type_dbid vx_p_dbid = NULL;
+    virtual vx_data_db::Type_dbid dbid() const = 0;
+    // fromid()
+    vx_data_db::Type_dbid vx_p_fromid = NULL;
+    virtual vx_data_db::Type_dbid fromid() const = 0;
+    // toid()
+    vx_data_db::Type_dbid vx_p_toid = NULL;
+    virtual vx_data_db::Type_dbid toid() const = 0;
+    // noteid()
+    vx_data_db::Type_dbid vx_p_noteid = NULL;
+    virtual vx_data_db::Type_dbid noteid() const = 0;
+    // valid()
+    vx_data_db::Type_dbid vx_p_valid = NULL;
+    virtual vx_data_db::Type_dbid valid() const = 0;
+    // valtext()
+    vx_core::Type_string vx_p_valtext = NULL;
+    virtual vx_core::Type_string valtext() const = 0;
+  };
+  class Class_dbvalue : public virtual Abstract_dbvalue {
+  public:
+    Class_dbvalue();
+    virtual ~Class_dbvalue() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_data_db::Type_dbid dbid() const override;
+    virtual vx_data_db::Type_dbid fromid() const override;
+    virtual vx_data_db::Type_dbid toid() const override;
+    virtual vx_data_db::Type_dbid noteid() const override;
+    virtual vx_data_db::Type_dbid valid() const override;
+    virtual vx_core::Type_string valtext() const override;
   };
 
   class vx_Class_package : vx_core::vx_Abstract_package {

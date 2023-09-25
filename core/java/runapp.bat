@@ -1,2 +1,2 @@
 cls
-gradlew build
+gradlew run --args "Hello World"

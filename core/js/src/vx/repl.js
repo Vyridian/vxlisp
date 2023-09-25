@@ -166,6 +166,23 @@ export default class vx_repl {
   }
 
   /**
+   * @function macro
+   * A function that joins any number of values into a string and then parses and evaluates it.
+   * @param  {typemap} generic
+   * @param  {anylist} ... anylist
+   * @return {any-1}
+   */
+  static t_macro = {}
+  static e_macro = {vx_type: vx_repl.t_macro}
+
+  static f_macro(generic, ...anylist) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    anylist = vx_core.f_new(vx_core.t_anylist, ...anylist)
+    return output
+  }
+
+  /**
    * @function repl_from_liblist_string
    * Returns a repl from the given text.
    * @param  {liblist} liblist
@@ -195,6 +212,7 @@ export default class vx_repl {
     "any<-repl": vx_repl.e_any_from_repl,
     "any<-repl-async": vx_repl.e_any_from_repl_async,
     "anylist<-repllist": vx_repl.e_anylist_from_repllist,
+    "macro": vx_repl.e_macro,
     "repl<-liblist-string": vx_repl.e_repl_from_liblist_string
   }
 
@@ -394,6 +412,25 @@ export default class vx_repl {
       properties    : [],
       proplast      : {},
       fn            : vx_repl.f_anylist_from_repllist
+    }
+
+    // (func macro)
+    vx_repl.t_macro['vx_type'] = vx_core.t_type
+    vx_repl.t_macro['vx_value'] = {
+      name          : "macro",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_macro
     }
 
     // (func repl_from_liblist_string)

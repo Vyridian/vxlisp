@@ -76,7 +76,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csv::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csv output = vx_data_csv::e_csv;
       vx_data_csv::Type_csv val = vx_core::vx_any_from_any(vx_data_csv::t_csv, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_stringlist vx_p_headers = val->headers();
       vx_data_csv::Type_csvrows vx_p_rows = val->rows();
       std::string key = "";
@@ -98,7 +98,7 @@ namespace vx_data_csv {
           } else if (testkey == ":rows") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new csv) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -107,18 +107,18 @@ namespace vx_data_csv {
             if (valsubtype == vx_core::t_stringlist) {
               vx_p_headers = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new csv :headers " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv :headers " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":rows") {
             if (valsubtype == vx_data_csv::t_csvrows) {
               vx_p_rows = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new csv :rows " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv :rows " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new csv) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -231,8 +231,11 @@ namespace vx_data_csv {
         if (valtype == vx_core::t_stringlist) {
           vx_core::Type_stringlist castval = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_core::t_stringlist)) {
+          vx_core::Type_stringlist castval = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(csvrows) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(csvrows) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -256,7 +259,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csvrows::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows;
       vx_data_csv::Type_csvrows val = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_stringlist> listval = val->vx_liststringlist();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -272,7 +275,7 @@ namespace vx_data_csv {
           vx_data_csv::Type_csvrows multi = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststringlist());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new csvrows) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csvrows) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -476,7 +479,7 @@ namespace vx_data_csv {
         "vx/data/csv", // pkgname
         "csv<-textblock", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -589,7 +592,7 @@ namespace vx_data_csv {
         "vx/data/csv", // pkgname
         "csvrows<-textblock", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs

@@ -256,11 +256,11 @@ public final class HtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/html", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 68, ":total", 69), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 15, ":tests", 6, ":total", 38), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 69), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 66, ":total", 67), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 16, ":tests", 6, ":total", 36), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 36), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 36), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 67), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31)
     );
   }
@@ -305,8 +305,6 @@ public final class HtmlTest {
   
       ),
       ":funcmap", Core.t_intmap.vx_new(
-        ":boolean-write<-id-htmltext", 0,
-        ":boolean-write<-stylesheet", 0,
         ":htmlstring<-string", 0,
         ":string-indent", 0,
         ":string<-body-indent", 2,

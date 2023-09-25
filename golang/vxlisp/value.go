@@ -558,19 +558,30 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 			}
 			output = NewValueFromArg(lookuparg)
 		} else {
-			lookupconst, ok := ConstFromListScope(listscope, value.pkg, value.name)
+			pkgname := value.pkg
+			valname := value.name
+			if pkgname == "" {
+				ipos := IntFromStringFindLast(valname, "/")
+				if ipos < 0 {
+				} else if ipos == (len(valname) - 1) {
+				} else {
+					pkgname = valname[0:ipos]
+					valname = valname[ipos+1:]
+				}
+			}
+			lookupconst, ok := ConstFromListScope(listscope, pkgname, valname)
 			if ok {
 				output = NewValueFromConst(lookupconst)
 			} else {
-				lookuptype, ok := TypeFromListScope(listscope, value.pkg, value.name, subpath)
+				lookuptype, ok := TypeFromListScope(listscope, pkgname, valname, subpath)
 				if ok {
 					output = NewValueFromType(lookuptype)
 				} else {
-					lookupfunc, ok := FuncFromListScope(listscope, value.pkg, value.name, emptysignature, subpath)
+					lookupfunc, ok := FuncFromListScope(listscope, pkgname, valname, emptysignature, subpath)
 					if ok {
 						output = NewValueFromFuncRef(lookupfunc)
 					} else {
-						msg := NewMsgFromTextblock(textblock, subpath, "Value Not Found", value.code, value.name)
+						msg := NewMsgFromTextblock(textblock, subpath, "Value Not Found", value.code, pkgname, valname)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}

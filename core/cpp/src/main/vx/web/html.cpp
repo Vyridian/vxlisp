@@ -75,7 +75,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_node::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_node output = vx_web_html::e_node;
       vx_web_html::Type_node val = vx_core::vx_any_from_any(vx_web_html::t_node, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       std::string key = "";
@@ -97,7 +97,7 @@ namespace vx_web_html {
           } else if (testkey == ":style") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new node) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new node) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -106,18 +106,18 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new node :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new node :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new node :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new node :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new node) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new node) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -221,7 +221,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divchild::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divchild output = vx_web_html::e_divchild;
       vx_web_html::Type_divchild val = vx_core::vx_any_from_any(vx_web_html::t_divchild, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -308,7 +308,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_body::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_body output = vx_web_html::e_body;
       vx_web_html::Type_body val = vx_core::vx_any_from_any(vx_web_html::t_body, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_web_html::Type_divchildlist vx_p_nodes = val->nodes();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -335,7 +335,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_divchild)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new body) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new body) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -344,11 +344,11 @@ namespace vx_web_html {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new body :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new body :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new body) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new body) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -492,7 +492,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_details::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_details output = vx_web_html::e_details;
       vx_web_html::Type_details val = vx_core::vx_any_from_any(vx_web_html::t_details, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_divchildlist vx_p_summary = val->summary();
@@ -520,7 +520,7 @@ namespace vx_web_html {
           } else if (testkey == ":nodes") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -529,32 +529,32 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":summary") {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_summary = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details :summary " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details :summary " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new details) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new details) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -710,7 +710,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_div::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_div output = vx_web_html::e_div;
       vx_web_html::Type_div val = vx_core::vx_any_from_any(vx_web_html::t_div, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_divchildlist vx_p_nodes = val->nodes();
@@ -743,7 +743,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_divchild)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new div) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new div) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -752,25 +752,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new div :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new div :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new div :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new div :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new div :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new div :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new div) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new div) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -886,8 +886,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_divchild) {
           vx_web_html::Type_divchild castval = vx_core::vx_any_from_any(vx_web_html::t_divchild, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_divchild)) {
+          vx_web_html::Type_divchild castval = vx_core::vx_any_from_any(vx_web_html::t_divchild, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(divchildlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(divchildlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -911,7 +914,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divchildlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divchildlist output = vx_web_html::e_divchildlist;
       vx_web_html::Type_divchildlist val = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_divchild> listval = val->vx_listdivchild();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -927,7 +930,7 @@ namespace vx_web_html {
           vx_web_html::Type_divchildlist multi = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listdivchild());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new divchildlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new divchildlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -1019,8 +1022,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_div) {
           vx_web_html::Type_div castval = vx_core::vx_any_from_any(vx_web_html::t_div, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_div)) {
+          vx_web_html::Type_div castval = vx_core::vx_any_from_any(vx_web_html::t_div, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(divlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(divlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -1044,7 +1050,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_divlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_divlist output = vx_web_html::e_divlist;
       vx_web_html::Type_divlist val = vx_core::vx_any_from_any(vx_web_html::t_divlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_div> listval = val->vx_listdiv();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -1060,7 +1066,7 @@ namespace vx_web_html {
           vx_web_html::Type_divlist multi = vx_core::vx_any_from_any(vx_web_html::t_divlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listdiv());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new divlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new divlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -1155,7 +1161,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_footer::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_footer output = vx_web_html::e_footer;
       vx_web_html::Type_footer val = vx_core::vx_any_from_any(vx_web_html::t_footer, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_web_html::Type_divchildlist vx_p_nodes = val->nodes();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1182,7 +1188,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_divchild)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new footer) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new footer) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1191,11 +1197,11 @@ namespace vx_web_html {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new footer :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new footer :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new footer) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new footer) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1326,7 +1332,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h1::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h1 output = vx_web_html::e_h1;
       vx_web_html::Type_h1 val = vx_core::vx_any_from_any(vx_web_html::t_h1, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_text = val->text();
@@ -1355,7 +1361,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_string)) { // default property
             vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h1) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h1) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1364,25 +1370,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h1 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h1 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h1 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h1 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h1 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h1 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h1) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h1) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1527,7 +1533,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h2::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h2 output = vx_web_html::e_h2;
       vx_web_html::Type_h2 val = vx_core::vx_any_from_any(vx_web_html::t_h2, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_text = val->text();
@@ -1556,7 +1562,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_string)) { // default property
             vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h2) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h2) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1565,25 +1571,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h2 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h2 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h2 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h2 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h2 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h2 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h2) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h2) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1728,7 +1734,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_h3::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_h3 output = vx_web_html::e_h3;
       vx_web_html::Type_h3 val = vx_core::vx_any_from_any(vx_web_html::t_h3, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_text = val->text();
@@ -1757,7 +1763,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_string)) { // default property
             vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h3) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h3) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1766,25 +1772,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h3 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h3 :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h3 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h3 :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h3 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h3 :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new h3) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new h3) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -1903,7 +1909,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_head::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_head output = vx_web_html::e_head;
       vx_web_html::Type_head val = vx_core::vx_any_from_any(vx_web_html::t_head, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_web_html::Type_headchildlist vx_p_nodes = val->nodes();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -1930,7 +1936,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_headchild)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new head) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new head) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -1939,11 +1945,11 @@ namespace vx_web_html {
             if (valsubtype == vx_web_html::t_headchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_headchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new head :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new head :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new head) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new head) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -2036,7 +2042,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_headchild::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_headchild output = vx_web_html::e_headchild;
       vx_web_html::Type_headchild val = vx_core::vx_any_from_any(vx_web_html::t_headchild, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
         vx_core::vx_reserve(msgblock);
@@ -2120,8 +2126,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_headchild) {
           vx_web_html::Type_headchild castval = vx_core::vx_any_from_any(vx_web_html::t_headchild, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_headchild)) {
+          vx_web_html::Type_headchild castval = vx_core::vx_any_from_any(vx_web_html::t_headchild, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(headchildlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(headchildlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -2145,7 +2154,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_headchildlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_headchildlist output = vx_web_html::e_headchildlist;
       vx_web_html::Type_headchildlist val = vx_core::vx_any_from_any(vx_web_html::t_headchildlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_headchild> listval = val->vx_listheadchild();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2161,7 +2170,7 @@ namespace vx_web_html {
           vx_web_html::Type_headchildlist multi = vx_core::vx_any_from_any(vx_web_html::t_headchildlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listheadchild());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new headchildlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new headchildlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2295,7 +2304,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_html::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_html output = vx_web_html::e_html;
       vx_web_html::Type_html val = vx_core::vx_any_from_any(vx_web_html::t_html, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_lang = val->lang();
       vx_web_html::Type_head vx_p_head = val->head();
       vx_web_html::Type_body vx_p_body = val->body();
@@ -2323,7 +2332,7 @@ namespace vx_web_html {
           } else if (testkey == ":footer") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -2332,32 +2341,32 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_lang = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html :lang " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html :lang " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":head") {
             if (valsubtype == vx_web_html::t_head) {
               vx_p_head = vx_core::vx_any_from_any(vx_web_html::t_head, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html :head " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html :head " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":body") {
             if (valsubtype == vx_web_html::t_body) {
               vx_p_body = vx_core::vx_any_from_any(vx_web_html::t_body, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html :body " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html :body " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":footer") {
             if (valsubtype == vx_web_html::t_footer) {
               vx_p_footer = vx_core::vx_any_from_any(vx_web_html::t_footer, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html :footer " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html :footer " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new html) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new html) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -2521,7 +2530,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_meta::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_meta output = vx_web_html::e_meta;
       vx_web_html::Type_meta val = vx_core::vx_any_from_any(vx_web_html::t_meta, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_charset = val->charset();
@@ -2546,7 +2555,7 @@ namespace vx_web_html {
           } else if (testkey == ":charset") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new meta) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -2555,25 +2564,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new meta :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new meta :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":charset") {
             if (valsubtype == vx_core::t_string) {
               vx_p_charset = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new meta :charset " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :charset " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new meta) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -2689,8 +2698,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_node) {
           vx_web_html::Type_node castval = vx_core::vx_any_from_any(vx_web_html::t_node, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_node)) {
+          vx_web_html::Type_node castval = vx_core::vx_any_from_any(vx_web_html::t_node, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(nodelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(nodelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -2714,7 +2726,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_nodelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_nodelist output = vx_web_html::e_nodelist;
       vx_web_html::Type_nodelist val = vx_core::vx_any_from_any(vx_web_html::t_nodelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_node> listval = val->vx_listnode();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2730,7 +2742,7 @@ namespace vx_web_html {
           vx_web_html::Type_nodelist multi = vx_core::vx_any_from_any(vx_web_html::t_nodelist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listnode());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new nodelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new nodelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -2851,7 +2863,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_p::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_p output = vx_web_html::e_p;
       vx_web_html::Type_p val = vx_core::vx_any_from_any(vx_web_html::t_p, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_text = val->text();
@@ -2880,7 +2892,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_string)) { // default property
             vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new p) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new p) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -2889,25 +2901,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new p :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new p :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new p :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new p :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new p :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new p :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new p) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new p) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -3029,7 +3041,7 @@ namespace vx_web_html {
           vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(propmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(propmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -3055,7 +3067,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_propmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_propmap output = vx_web_html::e_propmap;
       vx_web_html::Type_propmap valmap = vx_core::vx_any_from_any(vx_web_html::t_propmap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
       std::string key = "";
@@ -3070,7 +3082,7 @@ namespace vx_web_html {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3080,7 +3092,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_core::t_string) {
             valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -3195,7 +3207,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_style::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_style output = vx_web_html::e_style;
       vx_web_html::Type_style val = vx_core::vx_any_from_any(vx_web_html::t_style, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
       vx_web_html::Type_propmap vx_p_props = val->props();
       std::string key = "";
@@ -3217,7 +3229,7 @@ namespace vx_web_html {
           } else if (testkey == ":props") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new style) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3226,18 +3238,18 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new style :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":props") {
             if (valsubtype == vx_web_html::t_propmap) {
               vx_p_props = vx_core::vx_any_from_any(vx_web_html::t_propmap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new style :props " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :props " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new style) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -3350,8 +3362,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_style) {
           vx_web_html::Type_style castval = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_style)) {
+          vx_web_html::Type_style castval = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(stylelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(stylelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -3375,7 +3390,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylelist output = vx_web_html::e_stylelist;
       vx_web_html::Type_stylelist val = vx_core::vx_any_from_any(vx_web_html::t_stylelist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_style> listval = val->vx_liststyle();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3391,7 +3406,7 @@ namespace vx_web_html {
           vx_web_html::Type_stylelist multi = vx_core::vx_any_from_any(vx_web_html::t_stylelist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststyle());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -3489,7 +3504,7 @@ namespace vx_web_html {
           vx_web_html::Type_style castval = vx_core::vx_any_from_any(vx_web_html::t_style, val);
           map[key] = castval;
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(stylemap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(stylemap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -3515,7 +3530,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylemap output = vx_web_html::e_stylemap;
       vx_web_html::Type_stylemap valmap = vx_core::vx_any_from_any(vx_web_html::t_stylemap, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_web_html::Type_style> mapval;
       std::string key = "";
@@ -3530,7 +3545,7 @@ namespace vx_web_html {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             key = valstring->vx_string();
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3540,7 +3555,7 @@ namespace vx_web_html {
           } else if (valsubtype == vx_web_html::t_style) {
             valany = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
@@ -3694,7 +3709,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_stylesheet output = vx_web_html::e_stylesheet;
       vx_web_html::Type_stylesheet val = vx_core::vx_any_from_any(vx_web_html::t_stylesheet, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_name = val->name();
@@ -3725,7 +3740,7 @@ namespace vx_web_html {
           } else if (testkey == ":stylemap") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3734,39 +3749,39 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
             if (valsubtype == vx_core::t_string) {
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":styles") {
             if (valsubtype == vx_web_html::t_stylelist) {
               vx_p_styles = vx_core::vx_any_from_any(vx_web_html::t_stylelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet :styles " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet :styles " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":stylemap") {
             if (valsubtype == vx_web_html::t_stylemap) {
               vx_p_stylemap = vx_core::vx_any_from_any(vx_web_html::t_stylemap, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet :stylemap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet :stylemap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new stylesheet) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new stylesheet) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -3946,7 +3961,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_table::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_table output = vx_web_html::e_table;
       vx_web_html::Type_table val = vx_core::vx_any_from_any(vx_web_html::t_table, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_tbody vx_p_tbody = val->tbody();
@@ -3974,7 +3989,7 @@ namespace vx_web_html {
           } else if (testkey == ":thead") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -3983,32 +3998,32 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":tbody") {
             if (valsubtype == vx_web_html::t_tbody) {
               vx_p_tbody = vx_core::vx_any_from_any(vx_web_html::t_tbody, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :tbody " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :tbody " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":thead") {
             if (valsubtype == vx_web_html::t_thead) {
               vx_p_thead = vx_core::vx_any_from_any(vx_web_html::t_thead, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table :thead " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table :thead " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new table) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new table) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -4164,7 +4179,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tbody::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tbody output = vx_web_html::e_tbody;
       vx_web_html::Type_tbody val = vx_core::vx_any_from_any(vx_web_html::t_tbody, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_trlist vx_p_nodes = val->nodes();
@@ -4197,7 +4212,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_tr)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tbody) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tbody) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4206,25 +4221,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tbody :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tbody :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tbody :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tbody :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_trlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_trlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tbody :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tbody :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tbody) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tbody) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -4369,7 +4384,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_td::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_td output = vx_web_html::e_td;
       vx_web_html::Type_td val = vx_core::vx_any_from_any(vx_web_html::t_td, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_divchildlist vx_p_nodes = val->nodes();
@@ -4402,7 +4417,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_divchild)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new td) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new td) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4411,25 +4426,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new td :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new td :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new td :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new td :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_divchildlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_divchildlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new td :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new td :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new td) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new td) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -4545,8 +4560,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_td) {
           vx_web_html::Type_td castval = vx_core::vx_any_from_any(vx_web_html::t_td, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_td)) {
+          vx_web_html::Type_td castval = vx_core::vx_any_from_any(vx_web_html::t_td, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(tdlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(tdlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -4570,7 +4588,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tdlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tdlist output = vx_web_html::e_tdlist;
       vx_web_html::Type_tdlist val = vx_core::vx_any_from_any(vx_web_html::t_tdlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_td> listval = val->vx_listtd();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4586,7 +4604,7 @@ namespace vx_web_html {
           vx_web_html::Type_tdlist multi = vx_core::vx_any_from_any(vx_web_html::t_tdlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtd());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tdlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tdlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -4707,7 +4725,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_thead::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_thead output = vx_web_html::e_thead;
       vx_web_html::Type_thead val = vx_core::vx_any_from_any(vx_web_html::t_thead, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_trlist vx_p_nodes = val->nodes();
@@ -4740,7 +4758,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_tr)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thead) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thead) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4749,25 +4767,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thead :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thead :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thead :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thead :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_trlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_trlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thead :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thead :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new thead) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new thead) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -4912,7 +4930,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_title::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_title output = vx_web_html::e_title;
       vx_web_html::Type_title val = vx_core::vx_any_from_any(vx_web_html::t_title, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_text = val->text();
@@ -4937,7 +4955,7 @@ namespace vx_web_html {
           } else if (testkey == ":text") {
             key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new title) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new title) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -4946,25 +4964,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new title :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new title :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new title :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new title :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new title :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new title :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new title) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new title) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -5109,7 +5127,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_tr::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_tr output = vx_web_html::e_tr;
       vx_web_html::Type_tr val = vx_core::vx_any_from_any(vx_web_html::t_tr, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_web_html::Type_tdlist vx_p_nodes = val->nodes();
@@ -5142,7 +5160,7 @@ namespace vx_web_html {
           } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_web_html::t_td)) { // default property
             vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tr) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tr) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
@@ -5151,25 +5169,25 @@ namespace vx_web_html {
             if (valsubtype == vx_core::t_string) {
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tr :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tr :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":style") {
             if (valsubtype == vx_web_html::t_style) {
               vx_p_style = vx_core::vx_any_from_any(vx_web_html::t_style, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tr :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tr :style " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":nodes") {
             if (valsubtype == vx_web_html::t_tdlist) {
               vx_p_nodes = vx_core::vx_any_from_any(vx_web_html::t_tdlist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tr :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tr :nodes " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
-            vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new tr) - Invalid Key: " + key);
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tr) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           key = "";
@@ -5285,8 +5303,11 @@ namespace vx_web_html {
         if (valtype == vx_web_html::t_tr) {
           vx_web_html::Type_tr castval = vx_core::vx_any_from_any(vx_web_html::t_tr, valsub);
           list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_web_html::t_tr)) {
+          vx_web_html::Type_tr castval = vx_core::vx_any_from_any(vx_web_html::t_tr, valsub);
+          list.push_back(castval);
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(trlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(trlist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
@@ -5310,7 +5331,7 @@ namespace vx_web_html {
     vx_core::Type_any Class_trlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_html::Type_trlist output = vx_web_html::e_trlist;
       vx_web_html::Type_trlist val = vx_core::vx_any_from_any(vx_web_html::t_trlist, copyval);
-      vx_core::Type_msgblock msgblock = vx_core::t_msgblock->vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_web_html::Type_tr> listval = val->vx_listtr();
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -5326,7 +5347,7 @@ namespace vx_web_html {
           vx_web_html::Type_trlist multi = vx_core::vx_any_from_any(vx_web_html::t_trlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listtr());
         } else {
-          vx_core::Type_msg msg = vx_core::t_msg->vx_msg_from_errortext("(new trlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new trlist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
@@ -5363,179 +5384,6 @@ namespace vx_web_html {
         vx_core::e_anylist, // disallowvalues
         vx_core::e_argmap // properties
       );
-      return output;
-    }
-
-  //}
-
-  // (func boolean-write<-id-htmltext)
-  vx_core::Type_boolean f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve({id, htmltext});
-    vx_core::vx_release_one_except({id, htmltext}, output);
-    return output;
-  }
-
-  // (func boolean-write<-id-htmltext)
-  // class Class_boolean_write_from_id_htmltext {
-    Abstract_boolean_write_from_id_htmltext::~Abstract_boolean_write_from_id_htmltext() {}
-
-    Class_boolean_write_from_id_htmltext::Class_boolean_write_from_id_htmltext() : Abstract_boolean_write_from_id_htmltext::Abstract_boolean_write_from_id_htmltext() {
-      vx_core::refcount += 1;
-    }
-
-    Class_boolean_write_from_id_htmltext::~Class_boolean_write_from_id_htmltext() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::e_boolean_write_from_id_htmltext;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_web_html::Func_boolean_write_from_id_htmltext output = vx_web_html::e_boolean_write_from_id_htmltext;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_boolean_write_from_id_htmltext::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/web/html", // pkgname
-        "boolean-write<-id-htmltext", // name
-        ":func", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_funcdef Class_boolean_write_from_id_htmltext::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/web/html", // pkgname
-        "boolean-write<-id-htmltext", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_empty() const {return vx_web_html::e_boolean_write_from_id_htmltext;}
-    vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_type() const {return vx_web_html::t_boolean_write_from_id_htmltext;}
-    vx_core::Type_msgblock Class_boolean_write_from_id_htmltext::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_boolean_write_from_id_htmltext::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_boolean_write_from_id_htmltext::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_string htmltext = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_web_html::f_boolean_write_from_id_htmltext(id, htmltext);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func boolean-write<-stylesheet)
-  vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
-    vx_core::vx_Type_async output = NULL;
-    vx_core::vx_reserve(stylesheet);
-    vx_core::vx_release_one(stylesheet);
-    if (!output) {
-      output = vx_core::vx_async_new_from_value(vx_core::e_boolean);
-    }
-    return output;
-  }
-
-  // (func boolean-write<-stylesheet)
-  // class Class_boolean_write_from_stylesheet {
-    Abstract_boolean_write_from_stylesheet::~Abstract_boolean_write_from_stylesheet() {}
-
-    Class_boolean_write_from_stylesheet::Class_boolean_write_from_stylesheet() : Abstract_boolean_write_from_stylesheet::Abstract_boolean_write_from_stylesheet() {
-      vx_core::refcount += 1;
-    }
-
-    Class_boolean_write_from_stylesheet::~Class_boolean_write_from_stylesheet() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_boolean_write_from_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::e_boolean_write_from_stylesheet;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_boolean_write_from_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_web_html::Func_boolean_write_from_stylesheet output = vx_web_html::e_boolean_write_from_stylesheet;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_boolean_write_from_stylesheet::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/web/html", // pkgname
-        "boolean-write<-stylesheet", // name
-        ":func", // extends
-        vx_core::e_typelist, // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_funcdef Class_boolean_write_from_stylesheet::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/web/html", // pkgname
-        "boolean-write<-stylesheet", // name
-        0, // idx
-        true, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_boolean_write_from_stylesheet::vx_empty() const {return vx_web_html::e_boolean_write_from_stylesheet;}
-    vx_core::Type_any Class_boolean_write_from_stylesheet::vx_type() const {return vx_web_html::t_boolean_write_from_stylesheet;}
-    vx_core::Type_msgblock Class_boolean_write_from_stylesheet::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_boolean_write_from_stylesheet::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Func_any_from_any_async Class_boolean_write_from_stylesheet::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const {
-      return vx_core::e_any_from_any_async;
-    }
-
-    vx_core::vx_Type_async Class_boolean_write_from_stylesheet::vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const {
-      vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet, val);
-      vx_core::vx_Type_async output = vx_web_html::f_boolean_write_from_stylesheet(inputval);
-      vx_core::vx_release(val);
-      return output;
-    }
-
-    vx_core::vx_Type_async Class_boolean_write_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any);
-      vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_web_html::f_boolean_write_from_stylesheet(stylesheet);
-      vx_core::vx_release(arglist);
       return output;
     }
 
@@ -5588,7 +5436,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "htmlstring<-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5680,7 +5528,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5781,7 +5629,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-body-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -5899,7 +5747,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-details-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6009,7 +5857,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-div-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6099,7 +5947,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-footer-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6206,7 +6054,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-h1-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6313,7 +6161,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-h2-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6420,7 +6268,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-h3-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6510,7 +6358,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-head-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6629,7 +6477,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-html", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6732,7 +6580,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -6846,7 +6694,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-meta-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7102,7 +6950,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-node-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7201,7 +7049,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-nodelist-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7342,7 +7190,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-nodelist-tag-prop-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7458,7 +7306,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-p-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7553,7 +7401,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-propname-val", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7649,7 +7497,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-propstyle", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7769,7 +7617,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-style-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7868,7 +7716,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-stylelist-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -7979,7 +7827,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-stylepropmap-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8089,7 +7937,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-stylesheet-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8210,7 +8058,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-table-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8300,7 +8148,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-tbody-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8390,7 +8238,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-td-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8480,7 +8328,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-thead-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8580,7 +8428,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-title-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8670,7 +8518,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-tr-indent", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8750,7 +8598,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "string<-uri", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8846,7 +8694,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "style<-stylesheet-name", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -8936,7 +8784,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "stylemap<-stylelist", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -9028,7 +8876,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "stylemap<-stylesheet", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -9120,7 +8968,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "styles<-stylesheet", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -9221,7 +9069,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "stylesheet-loadmap", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -9312,7 +9160,7 @@ namespace vx_web_html {
         "vx/web/html", // pkgname
         "uri<-string", // name
         ":func", // extends
-        vx_core::e_typelist, // traits
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
@@ -9424,10 +9272,6 @@ namespace vx_web_html {
   vx_web_html::Type_tr t_tr = NULL;
   vx_web_html::Type_trlist e_trlist = NULL;
   vx_web_html::Type_trlist t_trlist = NULL;
-  vx_web_html::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = NULL;
-  vx_web_html::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = NULL;
-  vx_web_html::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = NULL;
-  vx_web_html::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = NULL;
   vx_web_html::Func_htmlstring_from_string e_htmlstring_from_string = NULL;
   vx_web_html::Func_htmlstring_from_string t_htmlstring_from_string = NULL;
   vx_web_html::Func_string_indent e_string_indent = NULL;
@@ -9630,14 +9474,6 @@ namespace vx_web_html {
       vx_core::vx_reserve_empty(vx_web_html::e_trlist);
       vx_web_html::t_trlist = new Class_trlist();
       vx_core::vx_reserve_type(vx_web_html::t_trlist);
-      vx_web_html::e_boolean_write_from_id_htmltext = new vx_web_html::Class_boolean_write_from_id_htmltext();
-      vx_core::vx_reserve_empty(vx_web_html::e_boolean_write_from_id_htmltext);
-      vx_web_html::t_boolean_write_from_id_htmltext = new vx_web_html::Class_boolean_write_from_id_htmltext();
-      vx_core::vx_reserve_type(vx_web_html::t_boolean_write_from_id_htmltext);
-      vx_web_html::e_boolean_write_from_stylesheet = new vx_web_html::Class_boolean_write_from_stylesheet();
-      vx_core::vx_reserve_empty(vx_web_html::e_boolean_write_from_stylesheet);
-      vx_web_html::t_boolean_write_from_stylesheet = new vx_web_html::Class_boolean_write_from_stylesheet();
-      vx_core::vx_reserve_type(vx_web_html::t_boolean_write_from_stylesheet);
       vx_web_html::e_htmlstring_from_string = new vx_web_html::Class_htmlstring_from_string();
       vx_core::vx_reserve_empty(vx_web_html::e_htmlstring_from_string);
       vx_web_html::t_htmlstring_from_string = new vx_web_html::Class_htmlstring_from_string();

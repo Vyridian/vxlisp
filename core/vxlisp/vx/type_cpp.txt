@@ -9,6 +9,9 @@
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
+  // vx_stringlist_from_string_split(string, string)
+  vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
+
 // :body
 
   // vx_int_from_string_findkeyword(string, string)
@@ -61,3 +64,23 @@
     vx_core::Type_string output = vx_core::vx_new_string(str);
     return output;
 	}
+
+  // vx_stringlist_from_string_split(string, string)
+  vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim) {
+    std::string stext = text->vx_string();
+    std::string sdelim = delim->vx_string();
+    vx_core::vx_Type_listany listany;
+    size_t pos = 0;
+    std::string stoken;
+    while ((pos = stext.find(sdelim)) != std::string::npos) {
+      stoken = stext.substr(0, pos);
+      vx_core::Type_string token = vx_core::vx_new_string(stoken);
+      listany.push_back(token);
+      stext.erase(0, pos + sdelim.length());
+    }
+    vx_core::Type_string token = vx_core::vx_new_string(stext);
+    listany.push_back(token);
+    vx_core::Type_stringlist output = vx_core::vx_new(vx_core::t_stringlist, listany);
+    vx_core::vx_release({text, delim});
+    return output;
+  }
