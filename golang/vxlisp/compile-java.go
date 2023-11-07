@@ -140,18 +140,18 @@ func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile,
 	case ":source":
 		file := NewFile()
 		file.name = "App.java"
-		file.path = cmdpath + "/com/vxlisp/vx"
+		file.path = cmdpath
 		file.text = JavaApp(project, command, project.javadomain)
 		files = append(files, file)
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest.java"
-		file.path = cmdpath + "/com/vxlisp/vx"
+		file.path = cmdpath
 		file.text = JavaAppTest(project, command, project.javadomain)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib.java"
-		file.path = cmdpath + "/com/vxlisp/vx"
+		file.path = cmdpath
 		file.text = JavaTestLib()
 		files = append(files, file)
 	}
@@ -262,6 +262,11 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) 
 			"\n      return this.vxint;" +
 			"\n    }"
 	case "vx/core/string":
+		if BooleanFromStringStartsEnds(cnstval, "\"", "\"") {
+			cnstval = cnstval[1 : len(cnstval)-1]
+			cnstval = JavaFromText(cnstval)
+			cnstval = "\"" + cnstval + "\""
+		}
 		cnstval = "\n      this.vxstring = " + cnstval + ";"
 		initval = "" +
 			"\n    @Override" +
@@ -307,23 +312,6 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) 
 
 				}
 			}
-			/*
-				clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, "        ", true, false, path)
-				msgblock = MsgBlockAddBlock(msgblock, msgs)
-				if clstext != "" {
-					cnstval = "" +
-						"\n      if ((this.vxmap == null) || (this.vxmap.size() == 0)) {" +
-						"\n        " + cnsttypeclassname + " orig = " + clstext + ";" +
-						"\n        this.vxmap = orig.vx_map();" +
-						"\n      }"
-					initval = "" +
-						"\n    @Override" +
-						"\n    public Map<String, Core.Type_any> vx_map() {" +
-						cnstval +
-						"\n      return this.vxmap;" +
-						"\n    }"
-				}
-			*/
 		}
 	}
 	extends := JavaNameClassFullFromType(cnsttype)
@@ -381,6 +369,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 		case "vx/core/copy", "vx/core/empty", "vx/core/new":
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+			"vx/core/any<-int",
 			"vx/core/any<-func", "vx/core/any<-func-async",
 			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 			"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
@@ -397,6 +386,10 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 				listargname = append(listargname, genericargname)
 			}
 		}
+	}
+	if fnc.context {
+		listargtype = append(listargtype, "final Core.Type_context context")
+		listargname = append(listargname, "context")
 	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/let":
@@ -425,10 +418,6 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 			}
 		}
 	}
-	if fnc.context {
-		listargtype = append(listargtype, "final Core.Type_context context")
-		listargname = append(listargname, "context")
-	}
 	//var funcgenerics []string
 	functypetext := ""
 	if fnc.generictype != nil {
@@ -446,13 +435,15 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-int",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-async",
 		"vx/core/any<-list-reduce-next", "vx/core/any<-list-reduce-next-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
-		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
+		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
+		"vx/core/boolean<-any":
 		instancevars += "" +
 			"\n    public IFn fn = null;" +
 			"\n" +
@@ -485,17 +476,17 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 				arg := fnc.listarg[0]
 				argtypename = JavaNameTypeFromType(arg.vxtype)
 				subargnames := "inputval"
+				contextname := ""
+				if fnc.context {
+					contextname = "_context"
+					subargnames = "context, inputval"
+				}
 				switch NameFromFunc(fnc) {
 				case "vx/core/empty":
 				default:
 					if fnc.generictype != nil {
-						subargnames = JavaNameTFromType(fnc.vxtype) + ", inputval"
+						subargnames = JavaNameTFromType(fnc.vxtype) + ", " + subargnames
 					}
-				}
-				contextname := ""
-				if fnc.context {
-					contextname = "_context"
-					subargnames += ", context"
 				}
 				if fnc.async {
 					asyncbody := ""
@@ -526,7 +517,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 						"\n    public Core.Func_any_from_any" + contextname + "_async vx_fn_new(Core.Class_any_from_any" + contextname + "_async.IFn fn) {return Core.e_any_from_any" + contextname + "_async;}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1" + contextarg + ", final U value) {" +
 						asyncbody +
 						"\n      return output;" +
 						"\n    }" +
@@ -537,7 +528,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 						"\n    public Core.Func_any_from_any" + contextname + " vx_fn_new(Core.Class_any_from_any" + contextname + ".IFn fn) {return Core.e_any_from_any" + contextname + ";}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any" + contextname + "(final T generic_any_1, final U value" + contextarg + ") {" +
+						"\n    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any" + contextname + "(final T generic_any_1" + contextarg + ", final U value) {" +
 						"\n      T output = Core.f_empty(generic_any_1);" +
 						"\n      " + argtypename + " inputval = (" + argtypename + ")value;" +
 						"\n      Core.Type_any outputval = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
@@ -570,7 +561,7 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	permissiontop := ""
 	permissionbottom := ""
 	if fnc.permission {
-		permissiontop = lineindent + "if (Core.f_boolean_permission_from_func(" + JavaNameTFromFunc(fnc) + ", context).vx_boolean()) {"
+		permissiontop = lineindent + "if (Core.f_boolean_permission_from_func(context, " + JavaNameTFromFunc(fnc) + ").vx_boolean()) {"
 		permissionbottom = "" +
 			lineindent + "} else {" +
 			lineindent + "  Core.Type_msg msg = Core.vx_msg_error(\"Permission Denied: " + fnc.name + "\");" +
@@ -632,6 +623,18 @@ func JavaFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 				"\n      Core.Type_boolean output = Core.c_false;" +
 				"\n      if (fn != null) {" +
 				"\n        output = Core.f_any_from_any(Core.t_boolean, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				"\n      }"
+		} else if BooleanFromStringStarts(fnc.name, "int<-") {
+			returnvalue += "" +
+				"\n      Core.Type_int output = Core.e_int;" +
+				"\n      if (fn != null) {" +
+				"\n        output = Core.f_any_from_any(Core.t_int, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				"\n      }"
+		} else if BooleanFromStringStarts(fnc.name, "string<-") {
+			returnvalue += "" +
+				"\n      Core.Type_string output = Core.e_string;" +
+				"\n      if (fn != null) {" +
+				"\n        output = Core.f_any_from_any(Core.t_string, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
 				"\n      }"
 		} else {
 			returnvalue += "" +
@@ -1734,6 +1737,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 			default:
 				output += JavaNameFromPkgName(fnc.pkgname) + ".f_" + JavaNameFromFunc(fnc) + "("
 			}
+			if fnc.context {
+				argtexts = append(argtexts, "context")
+			}
 			if !isskip {
 				if fnc.isgeneric {
 					switch funcname {
@@ -1803,9 +1809,10 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
-								case "any<-key-value",
+								case "any<-int", "any<-key-value",
 									"any<-list-reduce", "any<-list-reduce-next",
-									"any<-reduce", "any<-reduce-next":
+									"any<-reduce", "any<-reduce-next",
+									"boolean<-any":
 									argtext = "" +
 										JavaNameTFromType(funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
@@ -1996,9 +2003,6 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 					}
 				}
 			}
-			if fnc.context {
-				argtexts = append(argtexts, "context")
-			}
 			if multiline {
 				output += "\n" + sindent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), sindent+"  ")
 				if multiflag {
@@ -2039,7 +2043,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
 			if encode {
-				output = StringFromStringFindReplace(valstr, "\n", "\\n")
+				output = JavaFromText(valstr)
 			} else {
 				output = valstr
 			}
@@ -2413,12 +2417,14 @@ func JavaInterfaceFnFromFunc(fnc *vxfunc) string {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-int",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
+		"vx/core/boolean<-any",
 		"vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/none<-any":
 		returntype := "Core.Type_any"
@@ -2431,14 +2437,14 @@ func JavaInterfaceFnFromFunc(fnc *vxfunc) string {
 			}
 		}
 		var args []string
+		if fnc.context {
+			args = append(args, "Core.Type_context context")
+		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argname := JavaFromName(arg.alias)
 			argtypename := JavaNameTypeFromType(argtype)
 			args = append(args, argtypename+" "+argname)
-		}
-		if fnc.context {
-			args = append(args, "Core.Type_context context")
 		}
 		argnames := StringFromListStringJoin(args, ", ")
 		interfaces = "" +
@@ -2465,6 +2471,9 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 		default:
 			listargtext = append(listargtext, "final "+returntype+" generic_any_1")
 		}
+		if fnc.context {
+			listargtext = append(listargtext, "final Core.Type_context context")
+		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argtypename := ""
@@ -2487,6 +2496,9 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 			}
 		}
 	} else {
+		if fnc.context {
+			listargtext = append(listargtext, "final Core.Type_context context")
+		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argtypename := JavaNameTypeFromType(argtype)
@@ -2507,6 +2519,14 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 		extends = "Core.Type_func"
 		interfaces += "" +
 			"\n    public Func_" + funcname + " vx_fn_new(Core.Class_" + funcname + ".IFn fn);"
+	case "vx/core/any<-int":
+		extends = "Core.Type_func"
+		interfaces += "" +
+			"\n    public Func_" + funcname + " vx_fn_new(Core.Class_any_from_int.IFn fn);"
+	case "vx/core/boolean<-any":
+		extends = "Core.Type_func"
+		interfaces += "" +
+			"\n    public Func_" + funcname + " vx_fn_new(Core.Class_boolean_from_any.IFn fn);"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none",
 		"vx/core/int<-func", "vx/core/int<-none",
 		"vx/core/string<-func", "vx/core/string<-none":
@@ -2538,14 +2558,6 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 	if fnc.async {
 		returntype = "CompletableFuture<" + returntype + ">"
 	}
-	contextarg := ""
-	if fnc.context {
-		if argtext == "" {
-			contextarg = "Core.Type_context context"
-		} else {
-			contextarg = ", Core.Type_context context"
-		}
-	}
 	if extends == "Core.Type_func" {
 		if fnc.async {
 			extends += ", Core.Type_replfunc_async"
@@ -2554,7 +2566,7 @@ func JavaInterfaceFromFunc(fnc *vxfunc) string {
 		}
 	}
 	interfaces += "" +
-		"\n    public " + generictypes + returntype + " f_" + funcname + "(" + argtext + contextarg + ");"
+		"\n    public " + generictypes + returntype + " f_" + funcname + "(" + argtext + ");"
 	output := "" +
 		"\n  public static interface Func_" + funcname + " extends " + extends + " {" +
 		interfaces +
@@ -2740,6 +2752,11 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 			}
 		}
 	}
+	if fnc.context {
+		listargname = append(listargname, "context")
+		replparam := "Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
+		replparams += "\n      " + replparam
+	}
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
@@ -2749,11 +2766,6 @@ func JavaReplFromFunc(fnc *vxfunc) string {
 			listargname = append(listargname, argname)
 			argidx += 1
 		}
-	}
-	if fnc.context {
-		listargname = append(listargname, "context")
-		replparam := "Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
-		replparams += "\n      " + replparam
 	}
 	if fnc.async {
 		output = "" +
@@ -3178,7 +3190,7 @@ func JavaApp(project *vxproject, cmd *vxcommand, pkgprefix string) string {
 			}
 			params := "arglist"
 			if mainfunc.context {
-				params += ", context"
+				params = "context, arglist"
 			}
 			mainfunctext := JavaNameFFromFunc(mainfunc) + "(" + params + ");"
 			if mainfunc.async {
@@ -3193,23 +3205,20 @@ func JavaApp(project *vxproject, cmd *vxcommand, pkgprefix string) string {
       output = mainstring.vx_string();`
 		}
 	}
-	output := "" +
-		`package com.vxlisp.vx;
-
+	output := `
 /**
  * App
  *
  */
 
-import java.util.Arrays;
-import java.util.List;
+import com.vxlisp.vx.*;
  
 public final class App {
 
   public static void main(String[] args) {
     try {
-			String output = "";
-			Core.Type_anylist arglist = Core.vx_anylist_from_arraystring(args);` +
+      String output = "";
+      Core.Type_anylist arglist = Core.vx_anylist_from_arraystring(args);` +
 		contexttext +
 		maintext + `
       System.out.println(output);
@@ -3295,9 +3304,9 @@ func JavaAppTest(project *vxproject, cmd *vxcommand, pkgprefix string) string {
 `
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
-	output := "" +
-		`package com.vxlisp.vx;
+	output := `
 ` + imports + `
+import com.vxlisp.vx.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -3311,13 +3320,13 @@ public class AppTest {
 ` +
 		tests + `
   @Test
-	@DisplayName("writetestsuite")
+  @DisplayName("writetestsuite")
   void test_writetestsuite() {
     com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = com.vxlisp.vx.Test.t_testpackagelist.vx_new(` +
 		testpackages +
 		`
     );
-    TestLib.write_testpackagelist_async(testpackagelist, context);
+    TestLib.write_testpackagelist_async(context, testpackagelist);
   }
 
 }
@@ -3326,12 +3335,11 @@ public class AppTest {
 }
 
 func JavaTestLib() string {
-	return "" +
-		`package com.vxlisp.vx;
-
+	return `
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import static org.junit.jupiter.api.Assertions.*;
+import com.vxlisp.vx.*;
 import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
 import com.vxlisp.vx.web.Html;
@@ -3456,21 +3464,21 @@ public class TestLib {
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  public static boolean write_testpackagelist_async(final Test.Type_testpackagelist testpackagelist, final Core.Type_context context) {
+  public static boolean write_testpackagelist_async(final Core.Type_context context, final Test.Type_testpackagelist testpackagelist) {
     boolean output = false;
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
     Test.Type_testpackagelist testpackagelist_resolved = Core.vx_sync_from_async(Test.t_testpackagelist, async_testpackagelist);
     File.Type_file filetest = Test.f_file_test();
-    Core.Type_boolean valboolean = File.f_boolean_write_from_file_any(filetest, testpackagelist_resolved, context);
+    Core.Type_boolean valboolean = File.f_boolean_write_from_file_any(context, filetest, testpackagelist_resolved);
     output = valboolean.vx_boolean();
     Html.Type_div divtest = Test.f_div_from_testpackagelist(testpackagelist_resolved);
     Html.Type_html htmlnode = Test.f_html_from_divtest(divtest);
     File.Type_file filenode = Test.f_file_testnode();
-    valboolean = File.f_boolean_write_from_file_any(filenode, htmlnode, context);
+    valboolean = File.f_boolean_write_from_file_any(context, filenode, htmlnode);
     output = output && valboolean.vx_boolean();
     File.Type_file filehtml = Test.f_file_testhtml();
     Core.Type_string shtml = Html.f_string_from_html(htmlnode);
-    valboolean = File.f_boolean_write_from_file_string(filehtml, shtml, context);
+    valboolean = File.f_boolean_write_from_file_string(context, filehtml, shtml);
     output = output && valboolean.vx_boolean();
     return output;
   }

@@ -4554,7 +4554,7 @@ public final class Test {
    * (func test)
    */
   public static interface Func_test extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test(final Core.Type_any expected, final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test extends Core.Class_base implements Func_test {
@@ -4604,16 +4604,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test(expected, actual, context);
+      output = Test.f_test(context, expected, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test(expected, actual, context);
+    public Test.Type_testresult f_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+      return Test.f_test(context, expected, actual);
     }
 
   }
@@ -4621,7 +4621,7 @@ public final class Test {
   public static final Func_test e_test = new Test.Class_test();
   public static final Func_test t_test = new Test.Class_test();
 
-  public static Test.Type_testresult f_test(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -4653,7 +4653,7 @@ public final class Test {
    * (func test)
    */
   public static interface Func_test_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_1 extends Core.Class_base implements Func_test_1 {
@@ -4703,16 +4703,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_1(expected, fn_actual, context);
+      output = Test.f_test_1(context, expected, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_1(expected, fn_actual, context);
+    public Test.Type_testresult f_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_1(context, expected, fn_actual);
     }
 
   }
@@ -4720,7 +4720,7 @@ public final class Test {
   public static final Func_test_1 e_test_1 = new Test.Class_test_1();
   public static final Func_test_1 t_test_1 = new Test.Class_test_1();
 
-  public static Test.Type_testresult f_test_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -4749,7 +4749,7 @@ public final class Test {
    * (func test-false)
    */
   public static interface Func_test_false extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_false(final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test_false(final Core.Type_context context, final Core.Type_any actual);
   }
 
   public static class Class_test_false extends Core.Class_base implements Func_test_false {
@@ -4801,25 +4801,25 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
-      Core.Type_any outputval = Test.f_test_false(inputval, context);
+      Core.Type_any outputval = Test.f_test_false(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Test.f_test_false(actual, context);
+      output = Test.f_test_false(context, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_false(final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test_false(actual, context);
+    public Test.Type_testresult f_test_false(final Core.Type_context context, final Core.Type_any actual) {
+      return Test.f_test_false(context, actual);
     }
 
   }
@@ -4827,7 +4827,7 @@ public final class Test {
   public static final Func_test_false e_test_false = new Test.Class_test_false();
   public static final Func_test_false t_test_false = new Test.Class_test_false();
 
-  public static Test.Type_testresult f_test_false(final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_false(final Core.Type_context context, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -4861,7 +4861,7 @@ public final class Test {
    * (func test-false)
    */
   public static interface Func_test_false_1 extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_false_1(final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_false_1 extends Core.Class_base implements Func_test_false_1 {
@@ -4913,25 +4913,25 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Func_any_from_func_async inputval = (Core.Func_any_from_func_async)value;
-      Core.Type_any outputval = Test.f_test_false_1(inputval, context);
+      Core.Type_any outputval = Test.f_test_false_1(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Test.f_test_false_1(fn_actual, context);
+      output = Test.f_test_false_1(context, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_false_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_false_1(fn_actual, context);
+    public Test.Type_testresult f_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_false_1(context, fn_actual);
     }
 
   }
@@ -4939,7 +4939,7 @@ public final class Test {
   public static final Func_test_false_1 e_test_false_1 = new Test.Class_test_false_1();
   public static final Func_test_false_1 t_test_false_1 = new Test.Class_test_false_1();
 
-  public static Test.Type_testresult f_test_false_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -4969,7 +4969,7 @@ public final class Test {
    * (func test-gt)
    */
   public static interface Func_test_gt extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_gt(final Core.Type_any expected, final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_gt extends Core.Class_base implements Func_test_gt {
@@ -5019,16 +5019,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_gt(expected, actual, context);
+      output = Test.f_test_gt(context, expected, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_gt(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test_gt(expected, actual, context);
+    public Test.Type_testresult f_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+      return Test.f_test_gt(context, expected, actual);
     }
 
   }
@@ -5036,7 +5036,7 @@ public final class Test {
   public static final Func_test_gt e_test_gt = new Test.Class_test_gt();
   public static final Func_test_gt t_test_gt = new Test.Class_test_gt();
 
-  public static Test.Type_testresult f_test_gt(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5068,7 +5068,7 @@ public final class Test {
    * (func test-gt)
    */
   public static interface Func_test_gt_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_gt_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_gt_1 extends Core.Class_base implements Func_test_gt_1 {
@@ -5118,16 +5118,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_gt_1(expected, fn_actual, context);
+      output = Test.f_test_gt_1(context, expected, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_gt_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_gt_1(expected, fn_actual, context);
+    public Test.Type_testresult f_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_gt_1(context, expected, fn_actual);
     }
 
   }
@@ -5135,7 +5135,7 @@ public final class Test {
   public static final Func_test_gt_1 e_test_gt_1 = new Test.Class_test_gt_1();
   public static final Func_test_gt_1 t_test_gt_1 = new Test.Class_test_gt_1();
 
-  public static Test.Type_testresult f_test_gt_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5165,7 +5165,7 @@ public final class Test {
    * (func test-ne)
    */
   public static interface Func_test_ne extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_ne(final Core.Type_any expected, final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_ne extends Core.Class_base implements Func_test_ne {
@@ -5215,16 +5215,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_ne(expected, actual, context);
+      output = Test.f_test_ne(context, expected, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_ne(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test_ne(expected, actual, context);
+    public Test.Type_testresult f_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+      return Test.f_test_ne(context, expected, actual);
     }
 
   }
@@ -5232,7 +5232,7 @@ public final class Test {
   public static final Func_test_ne e_test_ne = new Test.Class_test_ne();
   public static final Func_test_ne t_test_ne = new Test.Class_test_ne();
 
-  public static Test.Type_testresult f_test_ne(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5264,7 +5264,7 @@ public final class Test {
    * (func test-ne)
    */
   public static interface Func_test_ne_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_ne_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_ne_1 extends Core.Class_base implements Func_test_ne_1 {
@@ -5314,16 +5314,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_ne_1(expected, fn_actual, context);
+      output = Test.f_test_ne_1(context, expected, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_ne_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_ne_1(expected, fn_actual, context);
+    public Test.Type_testresult f_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_ne_1(context, expected, fn_actual);
     }
 
   }
@@ -5331,7 +5331,7 @@ public final class Test {
   public static final Func_test_ne_1 e_test_ne_1 = new Test.Class_test_ne_1();
   public static final Func_test_ne_1 t_test_ne_1 = new Test.Class_test_ne_1();
 
-  public static Test.Type_testresult f_test_ne_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5361,7 +5361,7 @@ public final class Test {
    * (func test-string)
    */
   public static interface Func_test_string extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_string(final Core.Type_any expected, final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_string extends Core.Class_base implements Func_test_string {
@@ -5411,16 +5411,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_string(expected, actual, context);
+      output = Test.f_test_string(context, expected, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_string(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test_string(expected, actual, context);
+    public Test.Type_testresult f_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+      return Test.f_test_string(context, expected, actual);
     }
 
   }
@@ -5428,7 +5428,7 @@ public final class Test {
   public static final Func_test_string e_test_string = new Test.Class_test_string();
   public static final Func_test_string t_test_string = new Test.Class_test_string();
 
-  public static Test.Type_testresult f_test_string(final Core.Type_any expected, final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5461,7 +5461,7 @@ public final class Test {
    * (func test-string)
    */
   public static interface Func_test_string_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_string_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_string_1 extends Core.Class_base implements Func_test_string_1 {
@@ -5511,16 +5511,16 @@ public final class Test {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any expected = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = Test.f_test_string_1(expected, fn_actual, context);
+      output = Test.f_test_string_1(context, expected, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_string_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_string_1(expected, fn_actual, context);
+    public Test.Type_testresult f_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_string_1(context, expected, fn_actual);
     }
 
   }
@@ -5528,7 +5528,7 @@ public final class Test {
   public static final Func_test_string_1 e_test_string_1 = new Test.Class_test_string_1();
   public static final Func_test_string_1 t_test_string_1 = new Test.Class_test_string_1();
 
-  public static Test.Type_testresult f_test_string_1(final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5557,7 +5557,7 @@ public final class Test {
    * (func test-true)
    */
   public static interface Func_test_true extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_true(final Core.Type_any actual, Core.Type_context context);
+    public Test.Type_testresult f_test_true(final Core.Type_context context, final Core.Type_any actual);
   }
 
   public static class Class_test_true extends Core.Class_base implements Func_test_true {
@@ -5609,25 +5609,25 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
-      Core.Type_any outputval = Test.f_test_true(inputval, context);
+      Core.Type_any outputval = Test.f_test_true(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any actual = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Test.f_test_true(actual, context);
+      output = Test.f_test_true(context, actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_true(final Core.Type_any actual, final Core.Type_context context) {
-      return Test.f_test_true(actual, context);
+    public Test.Type_testresult f_test_true(final Core.Type_context context, final Core.Type_any actual) {
+      return Test.f_test_true(context, actual);
     }
 
   }
@@ -5635,7 +5635,7 @@ public final class Test {
   public static final Func_test_true e_test_true = new Test.Class_test_true();
   public static final Func_test_true t_test_true = new Test.Class_test_true();
 
-  public static Test.Type_testresult f_test_true(final Core.Type_any actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_true(final Core.Type_context context, final Core.Type_any actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(
@@ -5669,7 +5669,7 @@ public final class Test {
    * (func test-true)
    */
   public static interface Func_test_true_1 extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_true_1(final Core.Func_any_from_func_async fn_actual, Core.Type_context context);
+    public Test.Type_testresult f_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_true_1 extends Core.Class_base implements Func_test_true_1 {
@@ -5721,25 +5721,25 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Func_any_from_func_async inputval = (Core.Func_any_from_func_async)value;
-      Core.Type_any outputval = Test.f_test_true_1(inputval, context);
+      Core.Type_any outputval = Test.f_test_true_1(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_actual = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Test.f_test_true_1(fn_actual, context);
+      output = Test.f_test_true_1(context, fn_actual);
       return output;
     }
 
     @Override
-    public Test.Type_testresult f_test_true_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
-      return Test.f_test_true_1(fn_actual, context);
+    public Test.Type_testresult f_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
+      return Test.f_test_true_1(context, fn_actual);
     }
 
   }
@@ -5747,7 +5747,7 @@ public final class Test {
   public static final Func_test_true_1 e_test_true_1 = new Test.Class_test_true_1();
   public static final Func_test_true_1 t_test_true_1 = new Test.Class_test_true_1();
 
-  public static Test.Type_testresult f_test_true_1(final Core.Func_any_from_func_async fn_actual, final Core.Type_context context) {
+  public static Test.Type_testresult f_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
     Test.Type_testresult output = Test.e_testresult;
     try {
       output = Core.f_new(

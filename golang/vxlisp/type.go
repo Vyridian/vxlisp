@@ -69,6 +69,12 @@ var maptype1 = NewTypeMap("vx/core/map1", anytype)
 
 var maptype2 = NewTypeMap("vx/core/map2", anytype)
 
+var contexttype = NewContextType()
+
+var sessiontype = NewTypeStruct("vx/core/session")
+
+var settingtype = NewTypeStruct("vx/core/setting")
+
 var stringtype = NewType("vx/core/string")
 
 var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
@@ -84,6 +90,21 @@ var structtype2 = NewType("vx/core/struct-2")
 var testresulttype = NewTypeStruct("vx/test/testresult")
 
 var unknowntype = NewType("vx/core/unknown")
+
+func NewContextType() *vxtype {
+	var listprop []vxarg
+	prop := NewArg("setting")
+	prop.vxtype = settingtype
+	listprop = append(listprop, prop)
+	prop = NewArg("session")
+	prop.vxtype = sessiontype
+	listprop = append(listprop, prop)
+	output := NewType("context")
+	output.pkgname = "vx/core"
+	output.extends = ":struct"
+	output.properties = listprop
+	return output
+}
 
 func NewMapType() map[string]*vxtype {
 	return make(map[string]*vxtype)
@@ -897,6 +918,7 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 			if testcls {
 				if BooleanFromStringStarts(word, ":") {
 					testcls = false
+					lastword = word
 				} else {
 					testvalue, msgs := ValueFromTextblock(wordtextblock, emptyfunc, pkg)
 					msgblock = MsgblockAddBlock(msgblock, msgs)

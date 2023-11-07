@@ -77,13 +77,26 @@ Sample vxlisp:
 (let
  [text : string := (httpget "http:..")])
 
+## Keywords
+
+:keyword
+Keywords are prefixed with a colon
+
+## Comment
+
+// ignore to end of line
+/* ignore block */
+
+## Strings
+
+"" Quotes treat leading whitespace on a line as a single space.
+`` Block Quotes keep all whitespace
+
 ## Project
 
 * project.vxlisp - There can be only one project file and it must be in the root of your project and it must be named project.vxlisp.
 
 * (project) - The project file must have only one (project) type and nothing else.
-
-Sample Project:
 
 (project core                      // The name of the project
  :version    "0.5"                 // The version of the project
@@ -131,8 +144,82 @@ vxlisp_win64 doc srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
 
 ## Packages
 
+(package name
+ :alias "alias"
+ :libs  [library :path path ...]
+ :doc "Package doc")
+
 ## Types
+
+(type name
+ constraints  ...
+ :properties       [] // Allowed key values [name : type :default value :doc "" :alias ""]
+ :extends          :map // This type is a collection of another type. :list|:map|:struct
+ :allowfuncs     [allowfunc ...] // Allowed Func
+ :disallowfuncs  [disallowfunc ...] // Disallow Funcs
+ :allowtypes     [allowtype ...] // Allowed Types
+ :disallowtypes  [disallowtype ...] // Disallow Types
+ :allowvalues    [allowvalue ...] // Allowed Values
+ :disallowvalues [disallowvalue ...] // Disallow Values
+ :alias            "internal name"
+ :value            clause
+ :deprecated       "Version"
+ :convert          [[fromtype totype clause] ...]
+ :doc              "Type doc"
+ :test             clauses ...)
 
 ## Constants
 
+(const name : type
+ clauses :...
+ :alias      "internal name"
+ :private
+ :protected
+ :mutable
+ :unsafe
+ :deprecated "Version"
+ :doc        "value doc"
+ :test       clauses :...)
+
 ## Functions
+
+(func name : type // explicit type or array of types []. Types may be :1 to :9 representing named generics.
+ [arg : type // explict type or array of generics [] e.g. :1 :2
+  :alias      ""
+  :value      // A value for this argument. This is a default value in regular functions
+  :doc        "arg doc"
+  :fn         // pass as function reference
+  :...]
+ clauses ...
+ :alias       "internal name"
+ :async       // asynchronous function
+ :private
+ :protected
+ :unsafe
+ :wrapper
+ :messages    // use message handling
+ :parallel
+ :1-:9        // generic type :1, :1, :2, etc.
+ :bigospace     1|logn|n|nlogn|2n|n^2|2^n|n^n
+ :bigotime      1|logn|n|nlogn|2n|n^2|2^n|n^n
+ :doc         "function doc"
+ :debug       clause // adds console debug code which outputs [funcname output params] if clause is true
+ :test        clauses ...
+ :deprecated  "version")
+
+## Function Overloading
+
+* Simply define the function multiple times with the same name. The compiler will use the first matching signature.
+
+## Lamba Function
+
+(fn : type
+ [arg : type :doc "arg doc" ...]
+ clauses ...
+ :async
+ :doc "function doc"
+ :test clauses ...)
+
+## Native Code
+
+(native :lang :c|:c++|:clj|:cljs|:go|:java|:js|:rust clauses ...)

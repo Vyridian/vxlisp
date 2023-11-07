@@ -25,6 +25,18 @@ export default class vx_data_xml {
    */
   static t_xmlpropmap = {}
   /**
+   * Constant: delimxml
+   * {delim}
+   */
+  static c_delimxml = {vx_type: vx_data_textblock.t_delim}
+
+  /**
+   * Constant: delimxmlequal
+   * {delim}
+   */
+  static c_delimxmlequal = {vx_type: vx_data_textblock.t_delim}
+
+  /**
    * @function xml_from_textblock
    * @param  {} textblock
    * @return {xml}
@@ -167,6 +179,31 @@ export default class vx_data_xml {
     }
     vx_data_xml.e_xmlpropmap['vx_type'] = vx_data_xml.t_xmlpropmap
     vx_data_xml.e_xmlpropmap['vx_value'] = {}
+
+    // (const delimxml)
+    Object.assign(vx_data_xml.c_delimxml, vx_core.f_new(
+      vx_data_textblock.t_delim,
+      ":delimlist",
+      vx_core.f_new(
+        vx_data_textblock.t_delimlist,
+        vx_core.f_copy(
+          vx_data_textblock.c_delimbracketangle,
+          ":delimlist",
+          vx_core.f_new(
+            vx_data_textblock.t_delimlist,
+            vx_data_xml.c_delimxmlequal,
+            vx_data_textblock.c_delimquote
+          )
+        )
+      )
+    ))
+
+    // (const delimxmlequal)
+    Object.assign(vx_data_xml.c_delimxmlequal, vx_core.f_new(
+      vx_data_textblock.t_delim,
+      ":starttext",
+      "="
+    ))
 
     // (func xml_from_textblock)
     vx_data_xml.t_xml_from_textblock['vx_type'] = vx_core.t_type

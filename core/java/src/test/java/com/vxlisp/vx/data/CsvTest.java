@@ -21,11 +21,11 @@ public final class CsvTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/csv", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 20, ":tests", 1, ":total", 5), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 5), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 2, ":total", 6), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2)
     );
   }
@@ -42,7 +42,8 @@ public final class CsvTest {
       ),
       ":funcmap", Core.t_intmap.vx_new(
         ":csv<-textblock", 0,
-        ":csvrows<-textblock", 0
+        ":csvrows<-textblock", 0,
+        ":textblock-csv<-string", 0
       )
     );
   }

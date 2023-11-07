@@ -268,6 +268,90 @@ namespace vx_type {
 
   //}
 
+  // (func any<-int)
+  // class Class_any_from_int {
+    Abstract_any_from_int::~Abstract_any_from_int() {}
+
+    Class_any_from_int::Class_any_from_int() : Abstract_any_from_int::Abstract_any_from_int() {
+      vx_core::refcount += 1;
+    }
+
+    Class_any_from_int::~Class_any_from_int() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_any_from_int::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_any_from_int output = vx_type::e_any_from_int;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_any_from_int output = vx_type::e_any_from_int;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_any_from_int::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "any<-int", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_any_from_int::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "any<-int", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int::vx_empty() const {return vx_type::e_any_from_int;}
+    vx_core::Type_any Class_any_from_int::vx_type() const {return vx_type::t_any_from_int;}
+    vx_core::Type_msgblock Class_any_from_int::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_any_from_int::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_any_from_int::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_any_from_int::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_int inputval = vx_core::vx_any_from_any(vx_core::t_int, val);
+      output = vx_type::f_any_from_int(vx_core::t_any, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int val = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_any_from_int(generic_any_1, val);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func int<-string-find)
   vx_core::Type_int f_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
     vx_core::Type_int output = vx_core::e_int;
@@ -2016,6 +2100,8 @@ namespace vx_type {
   vx_type::Func_allowtypenames_from_type t_allowtypenames_from_type = NULL;
   vx_type::Func_allowtypes_from_type e_allowtypes_from_type = NULL;
   vx_type::Func_allowtypes_from_type t_allowtypes_from_type = NULL;
+  vx_type::Func_any_from_int e_any_from_int = NULL;
+  vx_type::Func_any_from_int t_any_from_int = NULL;
   vx_type::Func_int_from_string_find e_int_from_string_find = NULL;
   vx_type::Func_int_from_string_find t_int_from_string_find = NULL;
   vx_type::Func_int_from_string_findkeyword e_int_from_string_findkeyword = NULL;
@@ -2068,6 +2154,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_allowtypes_from_type);
       vx_type::t_allowtypes_from_type = new vx_type::Class_allowtypes_from_type();
       vx_core::vx_reserve_type(vx_type::t_allowtypes_from_type);
+      vx_type::e_any_from_int = new vx_type::Class_any_from_int();
+      vx_core::vx_reserve_empty(vx_type::e_any_from_int);
+      vx_type::t_any_from_int = new vx_type::Class_any_from_int();
+      vx_core::vx_reserve_type(vx_type::t_any_from_int);
       vx_type::e_int_from_string_find = new vx_type::Class_int_from_string_find();
       vx_core::vx_reserve_empty(vx_type::e_int_from_string_find);
       vx_type::t_int_from_string_find = new vx_type::Class_int_from_string_find();

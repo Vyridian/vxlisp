@@ -153,11 +153,20 @@ func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 		case ":cpp":
 			msgs := CppWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":csharp":
+			msgs := CSharpWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
 			msgs := JavaWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
 			msgs := WriteJsFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":kotlin":
+			msgs := KotlinWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":swift":
+			msgs := SwiftWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":test":
@@ -165,11 +174,20 @@ func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 		case ":cpp":
 			msgs := CppWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":csharp":
+			msgs := CSharpWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
 			msgs := JavaWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
 			msgs := WriteJsFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":kotlin":
+			msgs := KotlinWriteFromProjectCmd(project, cmd)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+		case ":swift":
+			msgs := SwiftWriteFromProjectCmd(project, cmd)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":webserver":

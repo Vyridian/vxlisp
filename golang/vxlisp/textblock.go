@@ -181,7 +181,6 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				state = phrase.blocktype
 			}
 		case BLOCKTYPE_QUOTEBLOCK:
-			word += char
 			switch char {
 			case "`":
 				wordtextblock := NewTextblockFromText(word)
@@ -194,6 +193,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				startchar = 0
 				word = ""
 				state = phrase.blocktype
+			default:
+				word += char
 			}
 		case BLOCKTYPE_QUOTE:
 			switch char {

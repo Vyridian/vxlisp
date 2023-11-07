@@ -48,9 +48,6 @@ func NewArgCopy(arg vxarg) vxarg {
 }
 
 func NewArgContext() vxarg {
-	contexttype := NewType("context")
-	contexttype.pkgname = "vx/core"
-	contexttype.extends = ":struct"
 	output := *new(vxarg)
 	output.name = "context"
 	output.alias = "context"

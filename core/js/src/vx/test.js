@@ -192,10 +192,10 @@ export default class vx_test {
       {"any-1": vx_web_html.t_div},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const testcoveragesummary = vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragesummary, "struct-1": vx_test.t_testpackage}, testpackage, ":coveragesummary")
-        const pkgname = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_test.t_testpackage}, testpackage, ":testpkg")
-        const caselist = vx_core.f_any_from_struct({"any-1": vx_test.t_testcaselist, "struct-1": vx_test.t_testpackage}, testpackage, ":caselist")
-        const passfail = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-1": vx_test.t_testpackage}, testpackage, ":passfail")
+        const testcoveragesummary = vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragesummary, "struct-2": vx_test.t_testpackage}, testpackage, ":coveragesummary")
+        const pkgname = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_test.t_testpackage}, testpackage, ":testpkg")
+        const caselist = vx_core.f_any_from_struct({"any-1": vx_test.t_testcaselist, "struct-2": vx_test.t_testpackage}, testpackage, ":caselist")
+        const passfail = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_test.t_testpackage}, testpackage, ":passfail")
         const pkgnamestyle = vx_web_html.f_style_from_stylesheet_name(
           vx_test.c_stylesheet_test,
           ".pkgname"
@@ -214,25 +214,25 @@ export default class vx_test {
           pkgname
         )
         const p_totalnums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":totalnums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":totalnums")
         )
         const p_coveragenums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":typenums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":typenums")
         )
         const p_constnums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":constnums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":constnums")
         )
         const p_funcnums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":funcnums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":funcnums")
         )
         const p_docnums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":docnums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":docnums")
         )
         const p_bigospacenums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":bigospacenums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":bigospacenums")
         )
         const p_bigotimenums = vx_test.f_p_from_testcoveragenums(
-          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-1": vx_test.t_testcoveragesummary}, testcoveragesummary, ":bigotimenums")
+          vx_core.f_any_from_struct({"any-1": vx_test.t_testcoveragenums, "struct-2": vx_test.t_testcoveragesummary}, testcoveragesummary, ":bigotimenums")
         )
         const summary = vx_core.f_new(
           vx_web_html.t_divchildlist,
@@ -491,11 +491,11 @@ export default class vx_test {
       ":text",
       vx_core.f_new(
         vx_core.t_string,
-        vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_test.t_testcoveragenums}, nums, ":pct"),
+        vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_test.t_testcoveragenums}, nums, ":pct"),
         "% ",
-        vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_test.t_testcoveragenums}, nums, ":tests"),
+        vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_test.t_testcoveragenums}, nums, ":tests"),
         "/",
-        vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_test.t_testcoveragenums}, nums, ":total")
+        vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_test.t_testcoveragenums}, nums, ":total")
       )
     )
     return output
@@ -517,18 +517,18 @@ export default class vx_test {
       {"any-1": vx_test.t_testcase},
       [],
       vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-1": vx_test.t_testcase}, testcase, ":describelist")
+        const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-2": vx_test.t_testcase}, testcase, ":describelist")
         const resolvedlist = await vx_test.f_resolve_testdescribelist(describelist)
         const passfaillist = vx_core.f_list_from_list(
-          {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testdescribe, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testdescribelist, "struct-1": vx_test.t_testresult},
+          {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testdescribe, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testdescribelist, "struct-2": vx_test.t_testresult},
           resolvedlist,
           vx_core.f_new(vx_core.t_any_from_any, (testdescribe) => 
             vx_core.f_let(
-              {"any-1": vx_core.t_boolean, "struct-1": vx_test.t_testresult},
+              {"any-1": vx_core.t_boolean, "struct-2": vx_test.t_testresult},
               [],
               vx_core.f_new(vx_core.t_any_from_func, () => {
-                const testresult = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-1": vx_test.t_testdescribe}, testdescribe, ":testresult")
-                return vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-1": vx_test.t_testresult}, testresult, ":passfail")
+                const testresult = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-2": vx_test.t_testdescribe}, testdescribe, ":testresult")
+                return vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_test.t_testresult}, testresult, ":passfail")
               })
             ))
         )
@@ -575,7 +575,7 @@ export default class vx_test {
       {"any-1": vx_test.t_testdescribe},
       [],
       vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const testresult = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-1": vx_test.t_testdescribe}, testdescribe, ":testresult")
+        const testresult = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-2": vx_test.t_testdescribe}, testdescribe, ":testresult")
         const resolved = await vx_test.f_resolve_testresult(testresult)
         return vx_core.f_copy(testdescribe, ":testresult", resolved)
       })
@@ -619,13 +619,13 @@ export default class vx_test {
       {"any-1": vx_test.t_testpackage},
       [],
       vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const testcaselist = vx_core.f_any_from_struct({"any-1": vx_test.t_testcaselist, "struct-1": vx_test.t_testpackage}, testpackage, ":caselist")
+        const testcaselist = vx_core.f_any_from_struct({"any-1": vx_test.t_testcaselist, "struct-2": vx_test.t_testpackage}, testpackage, ":caselist")
         const resolvedlist = await vx_test.f_resolve_testcaselist(testcaselist)
         const passfaillist = vx_core.f_list_from_list(
-          {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testcase, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testcaselist, "struct-1": vx_test.t_testcase},
+          {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testcase, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testcaselist, "struct-2": vx_test.t_testcase},
           resolvedlist,
           vx_core.f_new(vx_core.t_any_from_any, (testcase) => 
-            vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-1": vx_test.t_testcase}, testcase, ":passfail"))
+            vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_test.t_testcase}, testcase, ":passfail"))
         )
         const passfail = vx_core.f_and_1(passfaillist)
         return vx_core.f_copy(testpackage, ":passfail", passfail, ":caselist", resolvedlist)
@@ -667,12 +667,12 @@ export default class vx_test {
   static async f_resolve_testresult(testresult) {
     let output = Promise.resolve(vx_test.e_testresult)
     output = await vx_core.f_let_async(
-      {"any-1": vx_test.t_testresult, "struct-1": vx_test.t_testresult},
+      {"any-1": vx_test.t_testresult, "struct-2": vx_test.t_testresult},
       [],
       vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const fn_actual = vx_core.f_any_from_struct({"any-1": vx_core.t_any_from_func_async, "struct-1": vx_test.t_testresult}, testresult, ":fn-actual")
-        const expected = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-1": vx_test.t_testresult}, testresult, ":expected")
-        const actual = await vx_core.f_resolve_async({"any-1": vx_core.t_any}, vx_core.f_new(vx_core.t_any_from_func_async, fn_actual))
+        const fn_actual = vx_core.f_any_from_struct({"any-1": vx_core.t_any_from_func_async, "struct-2": vx_test.t_testresult}, testresult, ":fn-actual")
+        const expected = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_test.t_testresult}, testresult, ":expected")
+        const actual = await vx_core.f_resolve_async({"any-1": vx_core.t_any}, fn_actual)
         return vx_core.f_if_2(
           {"any-1": vx_test.t_testresult},
           vx_core.f_then(
@@ -729,10 +729,10 @@ export default class vx_test {
   static t_test = {}
   static e_test = {vx_type: vx_test.t_test}
 
-  static f_test(expected, actual, context) {
+  static f_test(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":eq",
@@ -759,10 +759,10 @@ export default class vx_test {
   static t_test_1 = {}
   static e_test_1 = {vx_type: vx_test.t_test_1}
 
-  static f_test_1(expected, fn_actual, context) {
+  static f_test_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":eq",
@@ -786,10 +786,10 @@ export default class vx_test {
   static t_test_false = {}
   static e_test_false = {vx_type: vx_test.t_test_false}
 
-  static f_test_false(actual, context) {
+  static f_test_false(context, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":false",
@@ -818,10 +818,10 @@ export default class vx_test {
   static t_test_false_1 = {}
   static e_test_false_1 = {vx_type: vx_test.t_test_false_1}
 
-  static f_test_false_1(fn_actual, context) {
+  static f_test_false_1(context, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":false",
@@ -846,10 +846,10 @@ export default class vx_test {
   static t_test_gt = {}
   static e_test_gt = {vx_type: vx_test.t_test_gt}
 
-  static f_test_gt(expected, actual, context) {
+  static f_test_gt(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":gt",
@@ -876,10 +876,10 @@ export default class vx_test {
   static t_test_gt_1 = {}
   static e_test_gt_1 = {vx_type: vx_test.t_test_gt_1}
 
-  static f_test_gt_1(expected, fn_actual, context) {
+  static f_test_gt_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":gt",
@@ -904,10 +904,10 @@ export default class vx_test {
   static t_test_ne = {}
   static e_test_ne = {vx_type: vx_test.t_test_ne}
 
-  static f_test_ne(expected, actual, context) {
+  static f_test_ne(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":ne",
@@ -934,10 +934,10 @@ export default class vx_test {
   static t_test_ne_1 = {}
   static e_test_ne_1 = {vx_type: vx_test.t_test_ne_1}
 
-  static f_test_ne_1(expected, fn_actual, context) {
+  static f_test_ne_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":ne",
@@ -962,10 +962,10 @@ export default class vx_test {
   static t_test_string = {}
   static e_test_string = {vx_type: vx_test.t_test_string}
 
-  static f_test_string(expected, actual, context) {
+  static f_test_string(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":passfail",
         vx_core.f_eq(
@@ -993,10 +993,10 @@ export default class vx_test {
   static t_test_string_1 = {}
   static e_test_string_1 = {vx_type: vx_test.t_test_string_1}
 
-  static f_test_string_1(expected, fn_actual, context) {
+  static f_test_string_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":string",
@@ -1020,10 +1020,10 @@ export default class vx_test {
   static t_test_true = {}
   static e_test_true = {vx_type: vx_test.t_test_true}
 
-  static f_test_true(actual, context) {
+  static f_test_true(context, actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":true",
@@ -1052,10 +1052,10 @@ export default class vx_test {
   static t_test_true_1 = {}
   static e_test_true_1 = {vx_type: vx_test.t_test_true_1}
 
-  static f_test_true_1(fn_actual, context) {
+  static f_test_true_1(context, fn_actual) {
     let output = vx_test.e_testresult
     try {
-      output = vx_core.f_new(
+    output = vx_core.f_new(
         vx_test.t_testresult,
         ":code",
         ":true",
@@ -1086,14 +1086,14 @@ export default class vx_test {
       {"any-1": vx_web_html.t_tr},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const describename = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_test.t_testdescribe}, testdescribe, ":describename")
-        const result = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-1": vx_test.t_testdescribe}, testdescribe, ":testresult")
-        const passfail = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-1": vx_test.t_testresult}, result, ":passfail")
+        const describename = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_test.t_testdescribe}, testdescribe, ":describename")
+        const result = vx_core.f_any_from_struct({"any-1": vx_test.t_testresult, "struct-2": vx_test.t_testdescribe}, testdescribe, ":testresult")
+        const passfail = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_test.t_testresult}, result, ":passfail")
         const expected = vx_core.f_string_from_any(
-          vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-1": vx_test.t_testresult}, result, ":expected")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_test.t_testresult}, result, ":expected")
         )
         const actual = vx_core.f_string_from_any(
-          vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-1": vx_test.t_testresult}, result, ":actual")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_test.t_testresult}, result, ":actual")
         )
         const prestyle = vx_web_html.f_style_from_stylesheet_name(
           vx_test.c_stylesheet_test,
@@ -1165,8 +1165,8 @@ export default class vx_test {
       {"any-1": vx_web_html.t_trlist, "any-2": vx_test.t_testdescribe, "list-1": vx_web_html.t_trlist, "list-2": vx_test.t_testdescribelist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-1": vx_test.t_testcase}, testcase, ":describelist")
-        const casename = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_test.t_testcase}, testcase, ":casename")
+        const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-2": vx_test.t_testcase}, testcase, ":describelist")
+        const casename = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_test.t_testcase}, testcase, ":casename")
         return vx_core.f_list_from_list(
           {"any-1": vx_web_html.t_tr, "any-2": vx_test.t_testdescribe, "list-1": vx_web_html.t_trlist, "list-2": vx_test.t_testdescribelist},
           describelist,

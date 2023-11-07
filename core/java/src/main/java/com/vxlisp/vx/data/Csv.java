@@ -299,19 +299,9 @@ public final class Csv {
                 Core.f_new(
                   Textblock.t_delimlist,
                   Core.t_anylist.vx_new(
-                    Core.f_copy(
-                      Textblock.c_delimline,
-                      Core.t_anylist.vx_new(
-                        Core.vx_new_string(":delimlist"),
-                        Core.f_new(
-                          Textblock.t_delimlist,
-                          Core.t_anylist.vx_new(
-                            Textblock.c_delimquote,
-                            Textblock.c_delimcomma
-                          )
-                        )
-                      )
-                    )
+                    Textblock.c_delimline,
+                    Textblock.c_delimquote,
+                    Textblock.c_delimcomma
                   )
                 )
         )
@@ -528,8 +518,8 @@ public final class Csv {
           textblock,
           Csv.c_delimcsv
         );
-        final Textblock.Type_textblocklist childtbs = Textblock.f_textblocks_from_textblock(parsedtb);
-        final Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(childtbs);
+        final Textblock.Type_textblocklist children = Textblock.f_children_from_textblock(parsedtb);
+        final Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(children);
         return Core.f_new(
           Csv.t_csvrows,
           Core.t_anylist.vx_new(
@@ -537,6 +527,100 @@ public final class Csv {
           )
         );
       })
+    );
+    return output;
+  }
+
+  /**
+   * @function textblock_csv_from_string
+   * Returns a parsed csv-textblock from a string.
+   * @param  {string} text
+   * @return {textblock}
+   * (func textblock-csv<-string)
+   */
+  public static interface Func_textblock_csv_from_string extends Core.Func_any_from_any {
+    public Textblock.Type_textblock f_textblock_csv_from_string(final Core.Type_string text);
+  }
+
+  public static class Class_textblock_csv_from_string extends Core.Class_base implements Func_textblock_csv_from_string {
+
+    @Override
+    public Func_textblock_csv_from_string vx_new(Object... vals) {
+      Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
+      return output;
+    }
+
+    @Override
+    public Func_textblock_csv_from_string vx_copy(Object... vals) {
+      Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/csv", // pkgname
+        "textblock-csv<-string", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/textblock", // pkgname
+          "textblock", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_textblock_csv_from_string vx_empty() {return e_textblock_csv_from_string;}
+    @Override
+    public Func_textblock_csv_from_string vx_type() {return t_textblock_csv_from_string;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Csv.f_textblock_csv_from_string(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Csv.f_textblock_csv_from_string(text);
+      return output;
+    }
+
+    @Override
+    public Textblock.Type_textblock f_textblock_csv_from_string(final Core.Type_string text) {
+      return Csv.f_textblock_csv_from_string(text);
+    }
+
+  }
+
+  public static final Func_textblock_csv_from_string e_textblock_csv_from_string = new Csv.Class_textblock_csv_from_string();
+  public static final Func_textblock_csv_from_string t_textblock_csv_from_string = new Csv.Class_textblock_csv_from_string();
+
+  public static Textblock.Type_textblock f_textblock_csv_from_string(final Core.Type_string text) {
+    Textblock.Type_textblock output = Textblock.e_textblock;
+    output = Textblock.f_textblock_parse_from_string_delim(
+      text,
+      Csv.c_delimcsv
     );
     return output;
   }

@@ -442,14 +442,16 @@ namespace vx_data_xml {
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
-      output = new vx_data_xml::Class_xmlnodelist();
-      output->vx_p_list = list;
-      for (vx_core::Type_any valadd : list) {
-        vx_core::vx_reserve(valadd);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((list.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_xml::Class_xmlnodelist();
+        output->vx_p_list = list;
+        for (vx_core::Type_any valadd : list) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(listval, output);
       return output;
@@ -482,14 +484,16 @@ namespace vx_data_xml {
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
-      output = new vx_data_xml::Class_xmlnodelist();
-      output->vx_p_list = listval;
-      for (vx_core::Type_any valadd : listval) {
-        vx_core::vx_reserve(valadd);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_xml::Class_xmlnodelist();
+        output->vx_p_list = listval;
+        for (vx_core::Type_any valadd : listval) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -580,14 +584,16 @@ namespace vx_data_xml {
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
-      output = new vx_data_xml::Class_xmlpropmap();
-      output->vx_p_map = map;
-      for (auto const& [key, val] : map) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_xml::Class_xmlpropmap();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       for (auto const& [key, val] : mapval) {
         vx_core::vx_release_except(val, output);
@@ -637,15 +643,17 @@ namespace vx_data_xml {
           }
         }
       }
-      output = new vx_data_xml::Class_xmlpropmap();
-      output->vx_p_keys = keys;
-      output->vx_p_map = mapval;
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_xml::Class_xmlpropmap();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -673,6 +681,182 @@ namespace vx_data_xml {
       );
       return output;
     }
+
+  //}
+
+  // (const delimxml)
+  // class Class_delimxml {
+
+    // vx_const_new()
+    void vx_data_xml::Class_delimxml::vx_const_new(vx_data_xml::Const_delimxml output) {
+      long irefcount = vx_core::refcount;
+      vx_data_textblock::Type_delim val = vx_core::f_new(
+        vx_data_textblock::t_delim,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":delimlist"),
+          vx_core::f_new(
+            vx_data_textblock::t_delimlist,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::f_copy(
+                vx_data_textblock::t_delim,
+                vx_data_textblock::c_delimbracketangle,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::vx_new_string(":delimlist"),
+                  vx_core::f_new(
+                    vx_data_textblock::t_delimlist,
+                    vx_core::vx_new(vx_core::t_anylist, {
+                      vx_data_xml::c_delimxmlequal,
+                      vx_data_textblock::c_delimquote
+                    })
+                  )
+                })
+              )
+            })
+          )
+        })
+      );
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_starttext = val->starttext();
+      vx_core::vx_reserve(output->vx_p_starttext);
+      output->vx_p_endtext = val->endtext();
+      vx_core::vx_reserve(output->vx_p_endtext);
+      output->vx_p_startpos = val->startpos();
+      vx_core::vx_reserve(output->vx_p_startpos);
+      output->vx_p_endpos = val->endpos();
+      vx_core::vx_reserve(output->vx_p_endpos);
+      output->vx_p_delimlist = val->delimlist();
+      vx_core::vx_reserve(output->vx_p_delimlist);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
+      vx_core::vx_reserve_type(output);
+    }
+
+    // vx_constdef()
+    vx_core::Type_constdef vx_data_xml::Class_delimxml::vx_constdef() const {
+      return vx_core::Class_constdef::vx_constdef_new(
+        "vx/data/xml", // pkgname
+        "delimxml", // name
+        vx_core::Class_typedef::vx_typedef_new(
+          "vx/data/textblock", // pkgname
+          "delim", // name
+          ":struct", // extends
+          vx_core::e_typelist, // traits
+          vx_core::e_typelist, // allowtypes
+          vx_core::e_typelist, // disallowtypes
+          vx_core::e_funclist, // allowfuncs
+          vx_core::e_funclist, // disallowfuncs
+          vx_core::e_anylist, // allowvalues
+          vx_core::e_anylist, // disallowvalues
+          vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "starttext", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "endtext", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "startpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "endpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "delimlist", // name
+            vx_data_textblock::t_delimlist // type
+          )
+        }) // properties
+        )
+      );
+    }
+
+
+  //}
+
+  // (const delimxmlequal)
+  // class Class_delimxmlequal {
+
+    // vx_const_new()
+    void vx_data_xml::Class_delimxmlequal::vx_const_new(vx_data_xml::Const_delimxmlequal output) {
+      long irefcount = vx_core::refcount;
+      vx_data_textblock::Type_delim val = vx_core::f_new(
+        vx_data_textblock::t_delim,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":starttext"),
+          vx_core::vx_new_string("=")
+        })
+      );
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_starttext = val->starttext();
+      vx_core::vx_reserve(output->vx_p_starttext);
+      output->vx_p_endtext = val->endtext();
+      vx_core::vx_reserve(output->vx_p_endtext);
+      output->vx_p_startpos = val->startpos();
+      vx_core::vx_reserve(output->vx_p_startpos);
+      output->vx_p_endpos = val->endpos();
+      vx_core::vx_reserve(output->vx_p_endpos);
+      output->vx_p_delimlist = val->delimlist();
+      vx_core::vx_reserve(output->vx_p_delimlist);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
+      vx_core::vx_reserve_type(output);
+    }
+
+    // vx_constdef()
+    vx_core::Type_constdef vx_data_xml::Class_delimxmlequal::vx_constdef() const {
+      return vx_core::Class_constdef::vx_constdef_new(
+        "vx/data/xml", // pkgname
+        "delimxmlequal", // name
+        vx_core::Class_typedef::vx_typedef_new(
+          "vx/data/textblock", // pkgname
+          "delim", // name
+          ":struct", // extends
+          vx_core::e_typelist, // traits
+          vx_core::e_typelist, // allowtypes
+          vx_core::e_typelist, // disallowtypes
+          vx_core::e_funclist, // allowfuncs
+          vx_core::e_funclist, // disallowfuncs
+          vx_core::e_anylist, // allowvalues
+          vx_core::e_anylist, // disallowvalues
+          vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "starttext", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "endtext", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "startpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "endpos", // name
+            vx_core::t_int // type
+          ),
+          vx_core::vx_new_arg(
+            "delimlist", // name
+            vx_data_textblock::t_delimlist // type
+          )
+        }) // properties
+        )
+      );
+    }
+
 
   //}
 
@@ -778,6 +962,8 @@ namespace vx_data_xml {
   vx_data_xml::Type_xmlnodelist t_xmlnodelist = NULL;
   vx_data_xml::Type_xmlpropmap e_xmlpropmap = NULL;
   vx_data_xml::Type_xmlpropmap t_xmlpropmap = NULL;
+  vx_data_xml::Const_delimxml c_delimxml = NULL;
+  vx_data_xml::Const_delimxmlequal c_delimxmlequal = NULL;
   vx_data_xml::Func_xml_from_textblock e_xml_from_textblock = NULL;
   vx_data_xml::Func_xml_from_textblock t_xml_from_textblock = NULL;
 
@@ -786,6 +972,8 @@ namespace vx_data_xml {
       init();
     }
     void vx_Class_package::init() {
+      vx_data_xml::c_delimxml = new vx_data_xml::Class_delimxml();
+      vx_data_xml::c_delimxmlequal = new vx_data_xml::Class_delimxmlequal();
       vx_data_xml::e_xml = new Class_xml();
       vx_core::vx_reserve_empty(vx_data_xml::e_xml);
       vx_data_xml::t_xml = new Class_xml();
@@ -806,6 +994,8 @@ namespace vx_data_xml {
       vx_core::vx_reserve_empty(vx_data_xml::e_xml_from_textblock);
       vx_data_xml::t_xml_from_textblock = new vx_data_xml::Class_xml_from_textblock();
       vx_core::vx_reserve_type(vx_data_xml::t_xml_from_textblock);
+      vx_data_xml::Class_delimxml::vx_const_new(vx_data_xml::c_delimxml);
+      vx_data_xml::Class_delimxmlequal::vx_const_new(vx_data_xml::c_delimxmlequal);
     }
     vx_core::vx_Type_mapany vx_Class_package::maptype() {
       vx_core::vx_Type_mapany output;

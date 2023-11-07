@@ -17,6 +17,21 @@
 (type xmlpropmap : map
  :allowtypes [string])
 
+(const delimxmlequal : tb/delim
+ (delim
+  :starttext "="))
+
+(const delimxml : tb/delim
+ (delim
+  :delimlist
+	 (delimlist
+	  (copy tb/delimbracketangle
+		 :delimlist
+		  (delimlist
+			 delimxmlequal
+			 tb/delimquote)))
+ ))
+
 (func xml<-textblock : xml
  [textblock : tb/textblock]
  (xml))

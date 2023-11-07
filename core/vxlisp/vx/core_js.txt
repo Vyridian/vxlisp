@@ -51,9 +51,6 @@
 
   static vx_new(type, values) {
     let output
-    const typedef = vx_core.f_typedef_from_any(type)
-    const copy = type
-    let msgblock = vx_core.e_msgblock
     if (values.length == 1) {
       // check if anylist passed as the only value
       const val1 = values[0]
@@ -63,6 +60,9 @@
         values = val1
       }
     }
+    const typedef = vx_core.f_typedef_from_any(type)
+    const copy = type
+    let msgblock = vx_core.e_msgblock
     let isfirst = true
     switch (typedef) {
     case vx_core.t_boolean:
@@ -399,7 +399,7 @@
         break
       case ':list':
         // output = vx_core.f_mempool-getvalue()
-        const listvals = []
+        let listvals = []
         if (type == typedef) {
         } else {
           listvals = copy.slice()
@@ -501,7 +501,9 @@
               break
             }
           } else {
-            if (allowany) {
+            if (vx_core.f_is_empty(value)) {
+              delete propmap[key]
+            } else if (allowany) {
               propmap[key] = value
             } else if (allowtypes.includes(valuetype)) {
               propmap[key] = value
@@ -667,7 +669,9 @@
             } else {
               const property = properties[key]
               const propertytype = property['type']
-              if (propertytype == vx_core.t_any) {
+              if (value !== false && value !== 0 && value !== "" && vx_core.f_is_empty_1(value)) {
+                delete propmap[key]
+              } else if (propertytype == vx_core.t_any) {
                 propmap[key] = value
               } else if (propertytype == valuetype) {
                 propmap[key] = value
@@ -745,7 +749,8 @@
         }
         break
       case vx_core.t_string:
-        text = '\"' + value + '\"'
+        text = value.replaceAll("\"", "\\\"")
+        text = '\"' + text + '\"'
         break
       default:
         const typedefname = typedef['vx_value']['name']

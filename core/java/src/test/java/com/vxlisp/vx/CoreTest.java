@@ -19,42 +19,42 @@ public final class CoreTest {
           ":describename", "(test-true true)",
           ":testresult",
             Test.f_test_true(
-              Core.vx_new_boolean(true),
-              context
+              context,
+              Core.vx_new_boolean(true)
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false false)",
           ":testresult",
             Test.f_test_false(
-              Core.vx_new_boolean(false),
-              context
+              context,
+              Core.vx_new_boolean(false)
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (boolean true))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_new(
                 Core.t_boolean,
                 Core.t_anylist.vx_new(
                   Core.vx_new_boolean(true)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (boolean false))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_new(
                 Core.t_boolean,
                 Core.t_anylist.vx_new(
                   Core.vx_new_boolean(false)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -73,14 +73,14 @@ public final class CoreTest {
           ":describename", "(test 4.5 (float 4.5))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_decimal.vx_new_from_string("4.5"),
               Core.f_new(
                 Core.t_float,
                 Core.t_anylist.vx_new(
                   Core.t_decimal.vx_new_from_string("4.5")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -99,62 +99,62 @@ public final class CoreTest {
           ":describename", "(test-true  (is-int 4))",
           ":testresult",
             Test.f_test_true(
-              Core.f_is_int(Core.vx_new_int(4)),
-              context
+              context,
+              Core.f_is_int(Core.vx_new_int(4))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-int \"4\"))",
           ":testresult",
             Test.f_test_true(
-              Core.f_is_int(Core.vx_new_string("4")),
-              context
+              context,
+              Core.f_is_int(Core.vx_new_string("4"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-int infinity))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_is_int(
                 Core.c_infinity
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-int neginfinity))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_is_int(
                 Core.c_neginfinity
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-int notanumber))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_is_int(
                 Core.c_notanumber
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (is-int \"a\"))",
           ":testresult",
             Test.f_test_false(
-              Core.f_is_int(Core.vx_new_string("a")),
-              context
+              context,
+              Core.f_is_int(Core.vx_new_string("a"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (is-int 5.5))",
           ":testresult",
             Test.f_test_false(
-              Core.f_is_int(Core.t_decimal.vx_new_from_string("5.5")),
-              context
+              context,
+              Core.f_is_int(Core.t_decimal.vx_new_from_string("5.5"))
             )
         )
       )
@@ -173,20 +173,21 @@ public final class CoreTest {
           ":describename", "(test \"a\" (string \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("a"),
               Core.f_new(
                 Core.t_string,
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("a")
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"ab\" (string \"a\" \"b\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("ab"),
               Core.f_new(
                 Core.t_string,
@@ -194,8 +195,7 @@ public final class CoreTest {
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -214,8 +214,8 @@ public final class CoreTest {
           ":describename", "(test-false false)",
           ":testresult",
             Test.f_test_false(
-              Core.vx_new_boolean(false),
-              context
+              context,
+              Core.vx_new_boolean(false)
             )
         )
       )
@@ -234,8 +234,8 @@ public final class CoreTest {
           ":describename", "(test-true true)",
           ":testresult",
             Test.f_test_true(
-              Core.vx_new_boolean(true),
-              context
+              context,
+              Core.vx_new_boolean(true)
             )
         )
       )
@@ -254,18 +254,18 @@ public final class CoreTest {
           ":describename", "(test-false false)",
           ":testresult",
             Test.f_test_false(
-              Core.vx_new_boolean(false),
-              context
+              context,
+              Core.vx_new_boolean(false)
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (! true))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_not(
                 Core.vx_new_boolean(true)
-              ),
-              context
+              )
             )
         )
       )
@@ -284,15 +284,15 @@ public final class CoreTest {
           ":describename", "(test-ne true false)",
           ":testresult",
             Test.f_test_ne(
+              context,
               Core.vx_new_boolean(true),
-              Core.vx_new_boolean(false),
-              context
+              Core.vx_new_boolean(false)
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-ne \"a\" \"b\")",
           ":testresult",
-            Test.f_test_ne(Core.vx_new_string("a"), Core.vx_new_string("b"), context)
+            Test.f_test_ne(context, Core.vx_new_string("a"), Core.vx_new_string("b"))
         )
       )
     );
@@ -310,18 +310,18 @@ public final class CoreTest {
           ":describename", "(test 6 (* 3 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(6),
-              Core.f_multiply(Core.vx_new_int(3), Core.vx_new_int(2)),
-              context
+              Core.f_multiply(Core.vx_new_int(3), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -10 (* 5 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(-10),
-              Core.f_multiply(Core.vx_new_int(5), Core.vx_new_int(-2)),
-              context
+              Core.f_multiply(Core.vx_new_int(5), Core.vx_new_int(-2))
             )
         )
       )
@@ -340,18 +340,18 @@ public final class CoreTest {
           ":describename", "(test 6.4 (* 3.2 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_decimal.vx_new_from_string("6.4"),
-              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("3.2"), Core.vx_new_int(2)),
-              context
+              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("3.2"), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -10.2 (* 5.1 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_decimal.vx_new_from_string("-10.2"),
-              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("5.1"), Core.vx_new_int(-2)),
-              context
+              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("5.1"), Core.vx_new_int(-2))
             )
         )
       )
@@ -370,6 +370,7 @@ public final class CoreTest {
           ":describename", "(test 24 (* 3 2 4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(24),
               Core.f_multiply_2(
                 Core.t_intlist.vx_new(
@@ -377,14 +378,14 @@ public final class CoreTest {
                   Core.vx_new_int(2),
                   Core.vx_new_int(4)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -20 (* 5 -2 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(-20),
               Core.f_multiply_2(
                 Core.t_intlist.vx_new(
@@ -392,8 +393,7 @@ public final class CoreTest {
                   Core.vx_new_int(-2),
                   Core.vx_new_int(2)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -412,6 +412,7 @@ public final class CoreTest {
           ":describename", "(test 24 (* 3 2 4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(24),
               Core.f_multiply_2(
                 Core.t_intlist.vx_new(
@@ -419,14 +420,14 @@ public final class CoreTest {
                   Core.vx_new_int(2),
                   Core.vx_new_int(4)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -20 (* 5 -2 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(-20),
               Core.f_multiply_2(
                 Core.t_intlist.vx_new(
@@ -434,8 +435,7 @@ public final class CoreTest {
                   Core.vx_new_int(-2),
                   Core.vx_new_int(2)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -454,18 +454,18 @@ public final class CoreTest {
           ":describename", "(test 5 (+ 2 3))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 3 (+ 5 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2)),
-              context
+              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
             )
         )
       )
@@ -484,18 +484,18 @@ public final class CoreTest {
           ":describename", "(test 5 (+ 2  3))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 3 (+ 5 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2)),
-              context
+              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
             )
         )
       )
@@ -514,18 +514,18 @@ public final class CoreTest {
           ":describename", "(test  3 (+1  2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
-              Core.f_plus1(Core.vx_new_int(2)),
-              context
+              Core.f_plus1(Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -1 (+1 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(-1),
-              Core.f_plus1(Core.vx_new_int(-2)),
-              context
+              Core.f_plus1(Core.vx_new_int(-2))
             )
         )
       )
@@ -544,18 +544,18 @@ public final class CoreTest {
           ":describename", "(test 1 (- 3 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(1),
-              Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(2)),
-              context
+              Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 7 (- 5 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(7),
-              Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(-2)),
-              context
+              Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(-2))
             )
         )
       )
@@ -574,18 +574,18 @@ public final class CoreTest {
           ":describename", "(test 5 (+ 2 3))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 3 (+ 5 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2)),
-              context
+              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
             )
         )
       )
@@ -604,18 +604,18 @@ public final class CoreTest {
           ":describename", "(test 3 (/ 6 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
-              Core.f_divide(Core.vx_new_int(6), Core.vx_new_int(2)),
-              context
+              Core.f_divide(Core.vx_new_int(6), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test -5 (/ 10 -2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(-5),
-              Core.f_divide(Core.vx_new_int(10), Core.vx_new_int(-2)),
-              context
+              Core.f_divide(Core.vx_new_int(10), Core.vx_new_int(-2))
             )
         )
       )
@@ -634,8 +634,8 @@ public final class CoreTest {
           ":describename", "(test-true (< 2 3))",
           ":testresult",
             Test.f_test_true(
-              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              context,
+              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         )
       )
@@ -654,22 +654,22 @@ public final class CoreTest {
           ":describename", "(test-true (< 2 3))",
           ":testresult",
             Test.f_test_true(
-              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              context,
+              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (< \"b\" \"d\" \"z\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_lt_1(
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("b"),
                   Core.vx_new_string("d"),
                   Core.vx_new_string("z")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -688,6 +688,7 @@ public final class CoreTest {
           ":describename", "(test\n (*\n  (+\n   (- 5 3)\n   3)\n  2)\n (<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_multiply(
                 Core.f_plus(
                   Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(3)),
@@ -701,8 +702,7 @@ public final class CoreTest {
                   Core.vx_new_int(3)
                 ),
                 Core.vx_new_int(2)
-              ),
-              context
+              )
             )
         )
       )
@@ -721,6 +721,7 @@ public final class CoreTest {
           ":describename", "(test\n (* (+ (- 3 5) 3) 2)\n (<<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_multiply(
                 Core.f_plus(
                   Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(5)),
@@ -734,8 +735,7 @@ public final class CoreTest {
                   Core.vx_new_int(3),
                   Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(5))
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -754,8 +754,8 @@ public final class CoreTest {
           ":describename", "(test-true (<= 2 3))",
           ":testresult",
             Test.f_test_true(
-              Core.f_le(Core.vx_new_int(2), Core.vx_new_int(3)),
-              context
+              context,
+              Core.f_le(Core.vx_new_int(2), Core.vx_new_int(3))
             )
         )
       )
@@ -774,14 +774,14 @@ public final class CoreTest {
           ":describename", "(test-true (<= \"b\" \"d\" \"z\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_le_1(
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("b"),
                   Core.vx_new_string("d"),
                   Core.vx_new_string("z")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -800,33 +800,34 @@ public final class CoreTest {
           ":describename", "(test-true (= true true))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_eq(
                 Core.vx_new_boolean(true),
                 Core.vx_new_boolean(true)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (= 2 2))",
           ":testresult",
             Test.f_test_true(
-              Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2)),
-              context
+              context,
+              Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (= \"a\" \"a\"))",
           ":testresult",
             Test.f_test_true(
-              Core.f_eq(Core.vx_new_string("a"), Core.vx_new_string("a")),
-              context
+              context,
+              Core.f_eq(Core.vx_new_string("a"), Core.vx_new_string("a"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (= (stringlist \"a\" \"b\" \"c\") (new stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_eq(
                 Core.f_new(
                   Core.t_stringlist,
@@ -844,14 +845,14 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (= (stringmap :a \"1\" :b \"2\") (new stringmap :a \"1\" :b \"2\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_eq(
                 Core.f_new(
                   Core.t_stringmap,
@@ -871,8 +872,7 @@ public final class CoreTest {
                     Core.vx_new_string("2")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -891,14 +891,14 @@ public final class CoreTest {
           ":describename", "(test-false (= 2 2 3))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_eq_1(
                 Core.t_anylist.vx_new(
                   Core.vx_new_int(2),
                   Core.vx_new_int(2),
                   Core.vx_new_int(3)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -917,8 +917,8 @@ public final class CoreTest {
           ":describename", "(test-true (> 3 2))",
           ":testresult",
             Test.f_test_true(
-              Core.f_gt(Core.vx_new_int(3), Core.vx_new_int(2)),
-              context
+              context,
+              Core.f_gt(Core.vx_new_int(3), Core.vx_new_int(2))
             )
         )
       )
@@ -937,14 +937,14 @@ public final class CoreTest {
           ":describename", "(test-true (> \"z\" \"y\" \"b\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_gt_1(
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("z"),
                   Core.vx_new_string("y"),
                   Core.vx_new_string("b")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -963,8 +963,8 @@ public final class CoreTest {
           ":describename", "(test-true (>= 3 2))",
           ":testresult",
             Test.f_test_true(
-              Core.f_ge(Core.vx_new_int(3), Core.vx_new_int(2)),
-              context
+              context,
+              Core.f_ge(Core.vx_new_int(3), Core.vx_new_int(2))
             )
         )
       )
@@ -983,14 +983,14 @@ public final class CoreTest {
           ":describename", "(test-true (>= \"z\" \"b\" \"b\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_ge_1(
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("z"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("b")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1009,22 +1009,22 @@ public final class CoreTest {
           ":describename", "(test-true (and true true))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_and(
                 Core.vx_new_boolean(true),
                 Core.vx_new_boolean(true)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (and true false))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_and(
                 Core.vx_new_boolean(true),
                 Core.vx_new_boolean(false)
-              ),
-              context
+              )
             )
         )
       )
@@ -1043,28 +1043,28 @@ public final class CoreTest {
           ":describename", "(test-true (and true true true))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_and_1(
                 Core.t_booleanlist.vx_new(
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (and true true false))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_and_1(
                 Core.t_booleanlist.vx_new(
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(false)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1083,6 +1083,7 @@ public final class CoreTest {
           ":describename", "(test\n \"b\"\n (any<-list (list \"a\" \"b\" \"c\") 1))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("b"),
               Core.f_any_from_list(
                 Core.t_any,
@@ -1095,14 +1096,14 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_int(1)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("b"),
               Core.f_any_from_list(
                 Core.t_string,
@@ -1115,8 +1116,7 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_int(1)
-              ),
-              context
+              )
             )
         )
       )
@@ -1135,6 +1135,7 @@ public final class CoreTest {
           ":describename", "(test\n 24\n (any<-list-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))\n ))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(24),
               Core.f_any_from_list_reduce(
                 Core.t_int,
@@ -1153,8 +1154,7 @@ public final class CoreTest {
                   return 
                     Core.f_multiply(total, num);
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -1173,6 +1173,7 @@ public final class CoreTest {
           ":describename", "(test\n \"v2\"\n (any<-map (map :a \"v1\" :b \"v2\" :c \"v3\") :b))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("v2"),
               Core.f_any_from_map(
                 Core.t_any,
@@ -1188,8 +1189,7 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_string(":b")
-              ),
-              context
+              )
             )
         )
       )
@@ -1208,18 +1208,18 @@ public final class CoreTest {
           ":describename", "(test 1 (compare 3 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(1),
-              Core.f_compare(Core.vx_new_int(3), Core.vx_new_int(2)),
-              context
+              Core.f_compare(Core.vx_new_int(3), Core.vx_new_int(2))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 1 (compare \"z\" \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(1),
-              Core.f_compare(Core.vx_new_string("z"), Core.vx_new_string("a")),
-              context
+              Core.f_compare(Core.vx_new_string("z"), Core.vx_new_string("a"))
             )
         )
       )
@@ -1238,16 +1238,16 @@ public final class CoreTest {
           ":describename", "(test-true  (contains \"abcde\" \"cd\"))",
           ":testresult",
             Test.f_test_true(
-              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("cd")),
-              context
+              context,
+              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("cd"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (contains \"abcde\" \"dc\"))",
           ":testresult",
             Test.f_test_false(
-              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("dc")),
-              context
+              context,
+              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("dc"))
             )
         )
       )
@@ -1266,6 +1266,7 @@ public final class CoreTest {
           ":describename", "(test-true  (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_stringlist,
@@ -1276,14 +1277,14 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_string("2")
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (contains (intlist 1 2 3) 2))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_intlist,
@@ -1294,14 +1295,14 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_int(2)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (contains (list 1 \"2\" 3) 2))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_list,
@@ -1312,8 +1313,7 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_int(2)
-              ),
-              context
+              )
             )
         )
       )
@@ -1332,37 +1332,37 @@ public final class CoreTest {
           ":describename", "(test \"\"     (empty string))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string(""),
               Core.f_empty(
                 Core.t_string
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test (list) (empty list))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_empty(
                 Core.t_list
               ),
               Core.f_empty(
                 Core.t_list
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test (map)  (empty map))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_empty(
                 Core.t_map
               ),
               Core.f_empty(
                 Core.t_map
-              ),
-              context
+              )
             )
         )
       )
@@ -1381,6 +1381,7 @@ public final class CoreTest {
           ":describename", "(test \"b\" (first<-list (stringlist \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("b"),
               Core.f_first_from_list(
                 Core.t_string,
@@ -1391,8 +1392,7 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1411,6 +1411,7 @@ public final class CoreTest {
           ":describename", "(test \"b\" (first<-list-fn-any<-any (list nothing \"b\" \"c\") resolve))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("b"),
               Core.f_first_from_list_fn_any_from_any(
                 Core.t_any,
@@ -1423,8 +1424,7 @@ public final class CoreTest {
                   )
                 ),
                 Core.t_resolve
-              ),
-              context
+              )
             )
         )
       )
@@ -1443,26 +1443,26 @@ public final class CoreTest {
           ":describename", "(test \"a\" (if (= 2 2) \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("a"),
               Core.f_if(
                 Core.t_string,
                 Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2)),
                 Core.vx_new_string("a")
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"\"  (if : string (= 1 2) \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string(""),
               Core.f_if(
                 Core.t_string,
                 Core.f_eq(Core.vx_new_int(1), Core.vx_new_int(2)),
                 Core.vx_new_string("a")
-              ),
-              context
+              )
             )
         )
       )
@@ -1481,28 +1481,28 @@ public final class CoreTest {
           ":describename", "(test \"a\" (if (= 2 2) \"a\" \"b\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("a"),
               Core.f_if_1(
                 Core.t_string,
                 Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2)),
                 Core.vx_new_string("a"),
                 Core.vx_new_string("b")
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"b\"  (if (= 1 2) \"a\" \"b\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("b"),
               Core.f_if_1(
                 Core.t_string,
                 Core.f_eq(Core.vx_new_int(1), Core.vx_new_int(2)),
                 Core.vx_new_string("a"),
                 Core.vx_new_string("b")
-              ),
-              context
+              )
             )
         )
       )
@@ -1521,6 +1521,7 @@ public final class CoreTest {
           ":describename", "(test-true\n (if\n  (then (= 2 3) false)\n  (then (!= 3 3) false)\n  (else (! false))))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_if_2(
                 Core.t_any,
                 Core.t_thenelselist.vx_new(
@@ -1548,8 +1549,7 @@ public final class CoreTest {
                     })
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1568,54 +1568,54 @@ public final class CoreTest {
           ":describename", "(test 4 (int<-string \"4\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(4),
-              Core.f_int_from_string(Core.vx_new_string("4")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("4"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 5 (int<-string \"5.4\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(5),
-              Core.f_int_from_string(Core.vx_new_string("5.4")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("5.4"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 5 (int<-string \"5.9\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(5),
-              Core.f_int_from_string(Core.vx_new_string("5.9")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("5.9"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test notanumber  (int<-string \"notanumber\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.c_notanumber,
-              Core.f_int_from_string(Core.vx_new_string("notanumber")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("notanumber"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test infinity    (int<-string \"infinity\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.c_infinity,
-              Core.f_int_from_string(Core.vx_new_string("infinity")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("infinity"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test neginfinity (int<-string \"neginfinity\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.c_neginfinity,
-              Core.f_int_from_string(Core.vx_new_string("neginfinity")),
-              context
+              Core.f_int_from_string(Core.vx_new_string("neginfinity"))
             )
         )
       )
@@ -1634,32 +1634,32 @@ public final class CoreTest {
           ":describename", "(test-true (is-empty \"\"))",
           ":testresult",
             Test.f_test_true(
-              Core.f_is_empty(Core.vx_new_string("")),
-              context
+              context,
+              Core.f_is_empty(Core.vx_new_string(""))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-empty (list)))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_is_empty_1(
                 Core.f_empty(
                   Core.t_list
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-empty (map)))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_is_empty_1(
                 Core.f_empty(
                   Core.t_map
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1678,24 +1678,24 @@ public final class CoreTest {
           ":describename", "(test-true  (is-number 5))",
           ":testresult",
             Test.f_test_true(
-              Core.f_is_number(Core.vx_new_int(5)),
-              context
+              context,
+              Core.f_is_number(Core.vx_new_int(5))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true  (is-number 5.5))",
           ":testresult",
             Test.f_test_true(
-              Core.f_is_number(Core.t_decimal.vx_new_from_string("5.5")),
-              context
+              context,
+              Core.f_is_number(Core.t_decimal.vx_new_from_string("5.5"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (is-number \"a\"))",
           ":testresult",
             Test.f_test_false(
-              Core.f_is_number(Core.vx_new_string("a")),
-              context
+              context,
+              Core.f_is_number(Core.vx_new_string("a"))
             )
         )
       )
@@ -1714,6 +1714,7 @@ public final class CoreTest {
           ":describename", "(test \"c\" (last<-list (list \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("c"),
               Core.f_last_from_list(
                 Core.t_any,
@@ -1724,8 +1725,7 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1744,6 +1744,7 @@ public final class CoreTest {
           ":describename", "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(3),
               Core.f_length_from_list(
                 Core.f_new(
@@ -1754,8 +1755,7 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -1774,6 +1774,7 @@ public final class CoreTest {
           ":describename", "(test\n 7\n (let\n  [v1 : int := 2\n   v2 : int := (+ v1 3)]\n  (+ v1 v2)))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(7),
               Core.f_let(
                 Core.t_int,
@@ -1782,8 +1783,7 @@ public final class CoreTest {
                   final Core.Type_int v2 = Core.f_plus(v1, Core.vx_new_int(3));
                   return Core.f_plus(v1, v2);
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -1802,6 +1802,7 @@ public final class CoreTest {
           ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
@@ -1832,8 +1833,7 @@ public final class CoreTest {
                       )
                     );
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -1852,6 +1852,7 @@ public final class CoreTest {
           ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_new(
                 Core.t_stringmap,
                 Core.t_anylist.vx_new(
@@ -1881,8 +1882,7 @@ public final class CoreTest {
                       )
                     );
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -1901,62 +1901,63 @@ public final class CoreTest {
           ":describename", "(test true (new boolean true))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_boolean(true),
               Core.f_new(
                 Core.t_boolean,
                 Core.t_anylist.vx_new(
                   Core.vx_new_boolean(true)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 4 (new int 4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(4),
               Core.f_new(
                 Core.t_int,
                 Core.t_anylist.vx_new(
                   Core.vx_new_int(4)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test 5.4 (new float 5.4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_decimal.vx_new_from_string("5.4"),
               Core.f_new(
                 Core.t_float,
                 Core.t_anylist.vx_new(
                   Core.t_decimal.vx_new_from_string("5.4")
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"a\" (new string \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("a"),
               Core.f_new(
                 Core.t_string,
                 Core.t_anylist.vx_new(
                   Core.vx_new_string("a")
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (new stringlist \"a\" \"b\" \"c\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_new(
                 Core.t_stringlist,
                 Core.t_anylist.vx_new(
@@ -1972,14 +1973,14 @@ public final class CoreTest {
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c")
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test\n (stringmap :a \"1\" :b \"2\")\n (new stringmap :a \"1\" :b \"2\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_new(
                 Core.t_stringmap,
                 Core.t_anylist.vx_new(
@@ -1997,8 +1998,7 @@ public final class CoreTest {
                   Core.vx_new_string(":b"),
                   Core.vx_new_string("2")
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -2017,33 +2017,33 @@ public final class CoreTest {
           ":describename", "(test-true (or true true))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_or(
                 Core.vx_new_boolean(true),
                 Core.vx_new_boolean(true)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (or true false))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_or(
                 Core.vx_new_boolean(true),
                 Core.vx_new_boolean(false)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (or false false))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_or(
                 Core.vx_new_boolean(false),
                 Core.vx_new_boolean(false)
-              ),
-              context
+              )
             )
         )
       )
@@ -2062,28 +2062,28 @@ public final class CoreTest {
           ":describename", "(test-true (or false true false))",
           ":testresult",
             Test.f_test_true(
+              context,
               Core.f_or_1(
                 Core.t_booleanlist.vx_new(
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(false)
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-false (or false false false))",
           ":testresult",
             Test.f_test_false(
+              context,
               Core.f_or_1(
                 Core.t_booleanlist.vx_new(
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(false)
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -2102,9 +2102,9 @@ public final class CoreTest {
           ":describename", "(test \"a\" (resolve \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("a"),
-              Core.f_resolve(Core.t_string, Core.vx_new_string("a")),
-              context
+              Core.f_resolve(Core.t_string, Core.vx_new_string("a"))
             )
         )
       )
@@ -2123,6 +2123,7 @@ public final class CoreTest {
           ":describename", "(test 4 (resolve (fn : int [] (+ 1 3))))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(4),
               Core.f_resolve_1(
                 Core.t_int,
@@ -2131,8 +2132,7 @@ public final class CoreTest {
                   return 
                     Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -2151,6 +2151,7 @@ public final class CoreTest {
           ":describename", "(test 4 (resolve : int (fn : int [] (+ 1 3))))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(4),
               Core.f_resolve_1(
                 Core.t_int,
@@ -2159,8 +2160,7 @@ public final class CoreTest {
                   return 
                     Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
                 })
-              ),
-              context
+              )
             )
         )
       )
@@ -2179,9 +2179,9 @@ public final class CoreTest {
           ":describename", "(test \"abab\" (string-repeat \"ab\" 2))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("abab"),
-              Core.f_string_repeat(Core.vx_new_string("ab"), Core.vx_new_int(2)),
-              context
+              Core.f_string_repeat(Core.vx_new_string("ab"), Core.vx_new_int(2))
             )
         )
       )
@@ -2200,44 +2200,45 @@ public final class CoreTest {
           ":describename", "(test \"true\"  (string<-any true))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("true"),
               Core.f_string_from_any(
                 Core.vx_new_boolean(true)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"4\"     (string<-any 4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("4"),
-              Core.f_string_from_any(Core.vx_new_int(4)),
-              context
+              Core.f_string_from_any(Core.vx_new_int(4))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"5.4\"   (string<-any 5.4))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("5.4"),
-              Core.f_string_from_any(Core.t_decimal.vx_new_from_string("5.4")),
-              context
+              Core.f_string_from_any(Core.t_decimal.vx_new_from_string("5.4"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"\\\"a\\\"\" (string<-any \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("\"a\""),
-              Core.f_string_from_any(Core.vx_new_string("a")),
-              context
+              Core.f_string_from_any(Core.vx_new_string("a"))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test\n \"(stringlist\n   \\\"a\\\"\n   \\\"b\\\"\n   \\\"c\\\")\"\n (string<-any (stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("(stringlist\n \"a\"\n \"b\"\n \"c\")"),
               Core.f_string_from_any(
                 Core.f_new(
@@ -2248,14 +2249,14 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 )
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test\n \"(stringmap\n   :a \\\"1\\\"\n   :b \\\"2\\\")\"\n (string<-any (stringmap :a \"1\" :b \"2\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("(stringmap\n :a \"1\"\n :b \"2\")"),
               Core.f_string_from_any(
                 Core.f_new(
@@ -2267,8 +2268,7 @@ public final class CoreTest {
                     Core.vx_new_string("2")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -2287,6 +2287,7 @@ public final class CoreTest {
           ":describename", "(test 1\n (switch : int\n  \"d\"\n  (case (list \"b\" \"c\" \"d\") 1)\n  (else 2)))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_int(1),
               Core.f_switch(
                 Core.t_int,
@@ -2311,8 +2312,7 @@ public final class CoreTest {
                     })
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -2331,29 +2331,29 @@ public final class CoreTest {
           ":describename", "(test boolean (type<-any false))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_boolean,
               Core.f_type_from_any(
                 Core.vx_new_boolean(false)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test int (type<-any 5))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_int,
-              Core.f_type_from_any(Core.vx_new_int(5)),
-              context
+              Core.f_type_from_any(Core.vx_new_int(5))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test string (type<-any \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.t_string,
-              Core.f_type_from_any(Core.vx_new_string("a")),
-              context
+              Core.f_type_from_any(Core.vx_new_string("a"))
             )
         )
       )
@@ -2372,29 +2372,29 @@ public final class CoreTest {
           ":describename", "(test \"vx/core/boolean\" (typename<-any false))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("vx/core/boolean"),
               Core.f_typename_from_any(
                 Core.vx_new_boolean(false)
-              ),
-              context
+              )
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"vx/core/int\"     (typename<-any 5))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("vx/core/int"),
-              Core.f_typename_from_any(Core.vx_new_int(5)),
-              context
+              Core.f_typename_from_any(Core.vx_new_int(5))
             )
         ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test \"vx/core/string\"  (typename<-any \"a\"))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("vx/core/string"),
-              Core.f_typename_from_any(Core.vx_new_string("a")),
-              context
+              Core.f_typename_from_any(Core.vx_new_string("a"))
             )
         )
       )
@@ -2476,11 +2476,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 81, ":tests", 186, ":total", 228), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 45, ":tests", 57, ":total", 125), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 148), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 148), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 63, ":total", 205), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 196, ":total", 231), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 44, ":tests", 57, ":total", 127), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 151), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 151), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 63, ":total", 207), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 4, ":total", 66)
     );
   }
@@ -2615,6 +2615,7 @@ public final class CoreTest {
         ":any<-any-context-async", 0,
         ":any<-func", 0,
         ":any<-func-async", 0,
+        ":any<-int", 0,
         ":any<-key-value", 0,
         ":any<-key-value-async", 0,
         ":any<-list", 2,
@@ -2674,6 +2675,7 @@ public final class CoreTest {
         ":list<-map-async", 0,
         ":list<-type", 0,
         ":log", 0,
+        ":log_1", 0,
         ":main", 0,
         ":map<-list", 1,
         ":mempool-addref", 0,
@@ -2682,6 +2684,7 @@ public final class CoreTest {
         ":mempool-removerefchildren", 0,
         ":mempool-reserve", 0,
         ":msg<-error", 0,
+        ":msg<-warning", 0,
         ":msgblock<-msgblock-msg", 0,
         ":msgblock<-msgblock-msgblock", 0,
         ":name<-typedef", 0,

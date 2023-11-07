@@ -26,5 +26,8 @@ gradle
 # Ignore Java bin
 bin
 
+# Ignore Visual Studio
+.vs
+
 # Ignore vscode
 .vscode

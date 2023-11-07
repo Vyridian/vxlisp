@@ -70,13 +70,31 @@ export default class vx_data_csv {
           textblock,
           vx_data_csv.c_delimcsv
         )
-        const childtbs = vx_data_textblock.f_textblocks_from_textblock(parsedtb)
-        const strings = vx_data_textblock.f_stringlist_from_textblocklist(childtbs)
+        const children = vx_data_textblock.f_children_from_textblock(parsedtb)
+        const strings = vx_data_textblock.f_stringlist_from_textblocklist(children)
         return vx_core.f_new(
           vx_data_csv.t_csvrows,
           strings
         )
       })
+    )
+    return output
+  }
+
+  /**
+   * @function textblock_csv_from_string
+   * Returns a parsed csv-textblock from a string.
+   * @param  {string} text
+   * @return {textblock}
+   */
+  static t_textblock_csv_from_string = {}
+  static e_textblock_csv_from_string = {vx_type: vx_data_csv.t_textblock_csv_from_string}
+
+  static f_textblock_csv_from_string(text) {
+    let output = vx_data_textblock.e_textblock
+    output = vx_data_textblock.f_textblock_parse_from_string_delim(
+      text,
+      vx_data_csv.c_delimcsv
     )
     return output
   }
@@ -89,7 +107,8 @@ export default class vx_data_csv {
     "csv": vx_data_csv.e_csv,
     "csvrows": vx_data_csv.e_csvrows,
     "csv<-textblock": vx_data_csv.e_csv_from_textblock,
-    "csvrows<-textblock": vx_data_csv.e_csvrows_from_textblock
+    "csvrows<-textblock": vx_data_csv.e_csvrows_from_textblock,
+    "textblock-csv<-string": vx_data_csv.e_textblock_csv_from_string
   }
 
 
@@ -156,15 +175,9 @@ export default class vx_data_csv {
       ":delimlist",
       vx_core.f_new(
         vx_data_textblock.t_delimlist,
-        vx_core.f_copy(
-          vx_data_textblock.c_delimline,
-          ":delimlist",
-          vx_core.f_new(
-            vx_data_textblock.t_delimlist,
-            vx_data_textblock.c_delimquote,
-            vx_data_textblock.c_delimcomma
-          )
-        )
+        vx_data_textblock.c_delimline,
+        vx_data_textblock.c_delimquote,
+        vx_data_textblock.c_delimcomma
       )
     ))
 
@@ -204,6 +217,25 @@ export default class vx_data_csv {
       properties    : [],
       proplast      : {},
       fn            : vx_data_csv.f_csvrows_from_textblock
+    }
+
+    // (func textblock_csv_from_string)
+    vx_data_csv.t_textblock_csv_from_string['vx_type'] = vx_core.t_type
+    vx_data_csv.t_textblock_csv_from_string['vx_value'] = {
+      name          : "textblock-csv<-string",
+      pkgname       : "vx/data/csv",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_csv.f_textblock_csv_from_string
     }
 
   }

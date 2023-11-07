@@ -396,12 +396,11 @@ namespace vx_sample {
       init();
     }
     void vx_Class_package::init() {
+      vx_sample::c_myconst = new vx_sample::Class_myconst();
       vx_sample::e_mytype = new Class_mytype();
       vx_core::vx_reserve_empty(vx_sample::e_mytype);
       vx_sample::t_mytype = new Class_mytype();
       vx_core::vx_reserve_type(vx_sample::t_mytype);
-      vx_sample::c_myconst = new vx_sample::Class_myconst();
-      vx_sample::Class_myconst::vx_const_new(vx_sample::c_myconst);
       vx_sample::e_main = new vx_sample::Class_main();
       vx_core::vx_reserve_empty(vx_sample::e_main);
       vx_sample::t_main = new vx_sample::Class_main();
@@ -410,6 +409,7 @@ namespace vx_sample {
       vx_core::vx_reserve_empty(vx_sample::e_myfunc);
       vx_sample::t_myfunc = new vx_sample::Class_myfunc();
       vx_core::vx_reserve_type(vx_sample::t_myfunc);
+      vx_sample::Class_myconst::vx_const_new(vx_sample::c_myconst);
     }
     vx_core::vx_Type_mapany vx_Class_package::maptype() {
       vx_core::vx_Type_mapany output;

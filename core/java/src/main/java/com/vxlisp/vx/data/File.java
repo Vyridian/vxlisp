@@ -397,7 +397,7 @@ public final class File {
    * (func boolean-write<-file-any)
    */
   public static interface Func_boolean_write_from_file_any extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_boolean_write_from_file_any(final File.Type_file file, final Core.Type_any val, Core.Type_context context);
+    public Core.Type_boolean f_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val);
   }
 
   public static class Class_boolean_write_from_file_any extends Core.Class_base implements Func_boolean_write_from_file_any {
@@ -447,16 +447,16 @@ public final class File {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = File.f_boolean_write_from_file_any(file, val, context);
+      output = File.f_boolean_write_from_file_any(context, file, val);
       return output;
     }
 
     @Override
-    public Core.Type_boolean f_boolean_write_from_file_any(final File.Type_file file, final Core.Type_any val, final Core.Type_context context) {
-      return File.f_boolean_write_from_file_any(file, val, context);
+    public Core.Type_boolean f_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val) {
+      return File.f_boolean_write_from_file_any(context, file, val);
     }
 
   }
@@ -464,12 +464,12 @@ public final class File {
   public static final Func_boolean_write_from_file_any e_boolean_write_from_file_any = new File.Class_boolean_write_from_file_any();
   public static final Func_boolean_write_from_file_any t_boolean_write_from_file_any = new File.Class_boolean_write_from_file_any();
 
-  public static Core.Type_boolean f_boolean_write_from_file_any(final File.Type_file file, final Core.Type_any val, final Core.Type_context context) {
+  public static Core.Type_boolean f_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val) {
     Core.Type_boolean output = Core.e_boolean;
     output = File.f_boolean_write_from_file_string(
+      context,
       file,
-      Core.f_string_from_any(val),
-      context
+      Core.f_string_from_any(val)
     );
     return output;
   }
@@ -483,7 +483,7 @@ public final class File {
    * (func boolean-write<-file-string)
    */
   public static interface Func_boolean_write_from_file_string extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_boolean_write_from_file_string(final File.Type_file file, final Core.Type_string text, Core.Type_context context);
+    public Core.Type_boolean f_boolean_write_from_file_string(final Core.Type_context context, final File.Type_file file, final Core.Type_string text);
   }
 
   public static class Class_boolean_write_from_file_string extends Core.Class_base implements Func_boolean_write_from_file_string {
@@ -533,16 +533,16 @@ public final class File {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(2)));
-      output = File.f_boolean_write_from_file_string(file, text, context);
+      output = File.f_boolean_write_from_file_string(context, file, text);
       return output;
     }
 
     @Override
-    public Core.Type_boolean f_boolean_write_from_file_string(final File.Type_file file, final Core.Type_string text, final Core.Type_context context) {
-      return File.f_boolean_write_from_file_string(file, text, context);
+    public Core.Type_boolean f_boolean_write_from_file_string(final Core.Type_context context, final File.Type_file file, final Core.Type_string text) {
+      return File.f_boolean_write_from_file_string(context, file, text);
     }
 
   }
@@ -550,9 +550,9 @@ public final class File {
   public static final Func_boolean_write_from_file_string e_boolean_write_from_file_string = new File.Class_boolean_write_from_file_string();
   public static final Func_boolean_write_from_file_string t_boolean_write_from_file_string = new File.Class_boolean_write_from_file_string();
 
-  public static Core.Type_boolean f_boolean_write_from_file_string(final File.Type_file file, final Core.Type_string text, final Core.Type_context context) {
+  public static Core.Type_boolean f_boolean_write_from_file_string(final Core.Type_context context, final File.Type_file file, final Core.Type_string text) {
     Core.Type_boolean output = Core.e_boolean;
-    if (Core.f_boolean_permission_from_func(File.t_boolean_write_from_file_string, context).vx_boolean()) {
+    if (Core.f_boolean_permission_from_func(context, File.t_boolean_write_from_file_string).vx_boolean()) {
       try {
         Core.Type_string fullpath = File.f_pathfull_from_file(file);
         String sfullpath = fullpath.vx_string();
@@ -580,7 +580,7 @@ public final class File {
    * (func file-read<-file)
    */
   public static interface Func_file_read_from_file extends Core.Func_any_from_any_context {
-    public File.Type_file f_file_read_from_file(final File.Type_file file, Core.Type_context context);
+    public File.Type_file f_file_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
   public static class Class_file_read_from_file extends Core.Class_base implements Func_file_read_from_file {
@@ -632,25 +632,25 @@ public final class File {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       File.Type_file inputval = (File.Type_file)value;
-      Core.Type_any outputval = File.f_file_read_from_file(inputval, context);
+      Core.Type_any outputval = File.f_file_read_from_file(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = File.f_file_read_from_file(file, context);
+      output = File.f_file_read_from_file(context, file);
       return output;
     }
 
     @Override
-    public File.Type_file f_file_read_from_file(final File.Type_file file, final Core.Type_context context) {
-      return File.f_file_read_from_file(file, context);
+    public File.Type_file f_file_read_from_file(final Core.Type_context context, final File.Type_file file) {
+      return File.f_file_read_from_file(context, file);
     }
 
   }
@@ -658,14 +658,14 @@ public final class File {
   public static final Func_file_read_from_file e_file_read_from_file = new File.Class_file_read_from_file();
   public static final Func_file_read_from_file t_file_read_from_file = new File.Class_file_read_from_file();
 
-  public static File.Type_file f_file_read_from_file(final File.Type_file file, final Core.Type_context context) {
+  public static File.Type_file f_file_read_from_file(final Core.Type_context context, final File.Type_file file) {
     File.Type_file output = File.e_file;
-    if (Core.f_boolean_permission_from_func(File.t_file_read_from_file, context).vx_boolean()) {
+    if (Core.f_boolean_permission_from_func(context, File.t_file_read_from_file).vx_boolean()) {
       output = Core.f_copy(
         file,
         Core.t_anylist.vx_new(
           Core.vx_new_string(":text"),
-          File.f_string_read_from_file(file, context)
+          File.f_string_read_from_file(context, file)
         )
       );
     } else {
@@ -1050,7 +1050,7 @@ public final class File {
    * (func string-read<-file)
    */
   public static interface Func_string_read_from_file extends Core.Func_any_from_any_context {
-    public Core.Type_string f_string_read_from_file(final File.Type_file file, Core.Type_context context);
+    public Core.Type_string f_string_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
   public static class Class_string_read_from_file extends Core.Class_base implements Func_string_read_from_file {
@@ -1102,25 +1102,25 @@ public final class File {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       File.Type_file inputval = (File.Type_file)value;
-      Core.Type_any outputval = File.f_string_read_from_file(inputval, context);
+      Core.Type_any outputval = File.f_string_read_from_file(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = File.f_string_read_from_file(file, context);
+      output = File.f_string_read_from_file(context, file);
       return output;
     }
 
     @Override
-    public Core.Type_string f_string_read_from_file(final File.Type_file file, final Core.Type_context context) {
-      return File.f_string_read_from_file(file, context);
+    public Core.Type_string f_string_read_from_file(final Core.Type_context context, final File.Type_file file) {
+      return File.f_string_read_from_file(context, file);
     }
 
   }
@@ -1128,9 +1128,9 @@ public final class File {
   public static final Func_string_read_from_file e_string_read_from_file = new File.Class_string_read_from_file();
   public static final Func_string_read_from_file t_string_read_from_file = new File.Class_string_read_from_file();
 
-  public static Core.Type_string f_string_read_from_file(final File.Type_file file, final Core.Type_context context) {
+  public static Core.Type_string f_string_read_from_file(final Core.Type_context context, final File.Type_file file) {
     Core.Type_string output = Core.e_string;
-    if (Core.f_boolean_permission_from_func(File.t_string_read_from_file, context).vx_boolean()) {
+    if (Core.f_boolean_permission_from_func(context, File.t_string_read_from_file).vx_boolean()) {
       try {
         output = vx_string_read_from_file(file);
       } catch (Exception err) {

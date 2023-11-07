@@ -26,11 +26,11 @@ export default class vx_data_csv_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/csv", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 20, ":tests", 1, ":total", 5), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 2, ":total", 6), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 5), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2)
     )
   }
@@ -54,7 +54,8 @@ export default class vx_data_csv_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "csv<-textblock", 0,
-          "csvrows<-textblock", 0
+          "csvrows<-textblock", 0,
+          "textblock-csv<-string", 0
         )
     )
   }

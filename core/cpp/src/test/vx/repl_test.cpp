@@ -1,6 +1,7 @@
 #include "../../main/vx/repl.hpp"
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
+#include "../../main/vx/type.hpp"
 #include "../../main/vx/data/textblock.hpp"
 
 #include "repl_test.hpp"
@@ -121,34 +122,34 @@ namespace vx_repl_test {
     vx_test::Type_testcoveragesummary output = vx_core::vx_new(vx_test::t_testcoveragesummary, {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(11), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(16), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(12), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(10), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(8)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(8)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(8)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(9), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(6), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -168,7 +169,9 @@ namespace vx_repl_test {
         vx_core::vx_new_string(":repllist"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
-        
+        vx_core::vx_new_string(":delimvxlisp"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":delimvxlispbracket"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":delimvxlispparen"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":any-repl<-functype-args"), vx_core::vx_new_int(0),
@@ -178,7 +181,9 @@ namespace vx_repl_test {
         vx_core::vx_new_string(":any<-repl-async"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":anylist<-repllist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":macro"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":repl<-liblist-string"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":repl<-liblist-string"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":repl<-textblock"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":textblock-repl<-string"), vx_core::vx_new_int(0)
       })
     });
     return output;

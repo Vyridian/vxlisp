@@ -52,14 +52,16 @@ namespace vx_state {
         vx_core::Type_any val = iter.second;
         map[key] = val;
       }
-      output = new vx_state::Class_value_map();
-      output->vx_p_map = map;
-      for (auto const& [key, val] : map) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_state::Class_value_map();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       for (auto const& [key, val] : mapval) {
         vx_core::vx_release_except(val, output);
@@ -101,15 +103,17 @@ namespace vx_state {
           }
         }
       }
-      output = new vx_state::Class_value_map();
-      output->vx_p_keys = keys;
-      output->vx_p_map = mapval;
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_state::Class_value_map();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);

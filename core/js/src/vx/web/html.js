@@ -240,7 +240,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_divchildlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_body}, body, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_body}, body, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "body", "", indent)
       })
     )
@@ -264,8 +264,8 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const summary = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_details}, details, ":summary")
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_details}, details, ":nodes")
+        const summary = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_details}, details, ":summary")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_details}, details, ":nodes")
         const ssummary = vx_web_html.f_string_from_nodelist_indent(
           summary,
           vx_core.f_plus(indent, 2)
@@ -308,13 +308,13 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_divchildlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_div}, div, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_div}, div, ":nodes")
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_div}, div, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_div}, div, ":id")
         )
         const sstyle = vx_web_html.f_string_from_propstyle(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-1": vx_web_html.t_div}, div, ":style")
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_div}, div, ":style")
         )
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(
           nodes,
@@ -347,7 +347,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_divchildlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_footer}, footer, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_footer}, footer, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "footer", "", indent)
       })
     )
@@ -371,10 +371,10 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h1}, h1, ":text")
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h1}, h1, ":text")
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h1}, h1, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h1}, h1, ":id")
         )
         return vx_core.f_new(
           vx_core.t_string,
@@ -406,11 +406,11 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h2}, h2, ":text")
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h2}, h2, ":text")
         const sindent = vx_web_html.f_string_from_indent(indent)
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h2}, h2, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h2}, h2, ":id")
         )
         return vx_core.f_new(
           vx_core.t_string,
@@ -442,11 +442,11 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h3}, h3, ":text")
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h3}, h3, ":text")
         const sindent = vx_web_html.f_string_from_indent(indent)
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_h3}, h3, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_h3}, h3, ":id")
         )
         return vx_core.f_new(
           vx_core.t_string,
@@ -478,7 +478,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_headchildlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_headchildlist, "struct-1": vx_web_html.t_head}, head, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_headchildlist, "struct-2": vx_web_html.t_head}, head, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "head", "", indent)
       })
     )
@@ -502,11 +502,11 @@ export default class vx_web_html {
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const lang = vx_web_html.f_string_from_propname_val(
           "lang",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_html}, html, ":lang")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_html}, html, ":lang")
         )
-        const head = vx_core.f_any_from_struct({"any-1": vx_web_html.t_head, "struct-1": vx_web_html.t_html}, html, ":head")
-        const body = vx_core.f_any_from_struct({"any-1": vx_web_html.t_body, "struct-1": vx_web_html.t_html}, html, ":body")
-        const footer = vx_core.f_any_from_struct({"any-1": vx_web_html.t_footer, "struct-1": vx_web_html.t_html}, html, ":footer")
+        const head = vx_core.f_any_from_struct({"any-1": vx_web_html.t_head, "struct-2": vx_web_html.t_html}, html, ":head")
+        const body = vx_core.f_any_from_struct({"any-1": vx_web_html.t_body, "struct-2": vx_web_html.t_html}, html, ":body")
+        const footer = vx_core.f_any_from_struct({"any-1": vx_web_html.t_footer, "struct-2": vx_web_html.t_html}, html, ":footer")
         const shead = vx_web_html.f_string_from_head_indent(head, 1)
         const sbody = vx_web_html.f_string_from_body_indent(body, 1)
         const sfooter = vx_web_html.f_string_from_footer_indent(footer, 1)
@@ -571,7 +571,7 @@ export default class vx_web_html {
         const sindent = vx_web_html.f_string_from_indent(indent)
         const charset = vx_web_html.f_string_from_propname_val(
           "charset",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_meta}, meta, ":charset")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_meta}, meta, ":charset")
         )
         return vx_core.f_new(
           vx_core.t_string,
@@ -822,14 +822,14 @@ export default class vx_web_html {
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
         const text = vx_web_html.f_htmlstring_from_string(
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_p}, p, ":text")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_p}, p, ":text")
         )
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_p}, p, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_p}, p, ":id")
         )
         const sstyle = vx_web_html.f_string_from_propstyle(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-1": vx_web_html.t_p}, p, ":style")
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style")
         )
         return vx_core.f_new(
           vx_core.t_string,
@@ -893,7 +893,7 @@ export default class vx_web_html {
         " class=",
         vx_core.c_quote,
         vx_type.f_string_from_string_start(
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_style}, style, ":name"),
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name"),
           1
         ),
         vx_core.c_quote
@@ -919,8 +919,8 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_style}, style, ":name")
-        const propmap = vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-1": vx_web_html.t_style}, style, ":props")
+        const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name")
+        const propmap = vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-2": vx_web_html.t_style}, style, ":props")
         const stext = vx_web_html.f_string_from_stylepropmap_indent(
           propmap,
           vx_core.f_plus1(indent)
@@ -1020,7 +1020,7 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const text = vx_web_html.f_string_from_stylelist_indent(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-1": vx_web_html.t_stylesheet}, stylesheet, ":styles"),
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":styles"),
           vx_core.f_plus1(indent)
         )
         const sindent = vx_web_html.f_string_from_indent(indent)
@@ -1061,10 +1061,10 @@ export default class vx_web_html {
         const sindent = vx_web_html.f_string_from_indent(indent)
         const sid = vx_web_html.f_string_from_propname_val(
           "id",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_table}, table, ":id")
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_table}, table, ":id")
         )
-        const thead = vx_core.f_any_from_struct({"any-1": vx_web_html.t_thead, "struct-1": vx_web_html.t_table}, table, ":thead")
-        const tbody = vx_core.f_any_from_struct({"any-1": vx_web_html.t_tbody, "struct-1": vx_web_html.t_table}, table, ":tbody")
+        const thead = vx_core.f_any_from_struct({"any-1": vx_web_html.t_thead, "struct-2": vx_web_html.t_table}, table, ":thead")
+        const tbody = vx_core.f_any_from_struct({"any-1": vx_web_html.t_tbody, "struct-2": vx_web_html.t_table}, table, ":tbody")
         const shead = vx_web_html.f_string_from_thead_indent(
           thead,
           vx_core.f_plus1(indent)
@@ -1105,7 +1105,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_trlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_trlist, "struct-1": vx_web_html.t_tbody}, tbody, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_trlist, "struct-2": vx_web_html.t_tbody}, tbody, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "tbody", "", indent)
       })
     )
@@ -1128,7 +1128,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_divchildlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-1": vx_web_html.t_td}, td, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_divchildlist, "struct-2": vx_web_html.t_td}, td, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "td", "", indent)
       })
     )
@@ -1151,7 +1151,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_trlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_trlist, "struct-1": vx_web_html.t_thead}, thead, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_trlist, "struct-2": vx_web_html.t_thead}, thead, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "thead", "", indent)
       })
     )
@@ -1175,7 +1175,7 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_title}, title, ":text")
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_title}, title, ":text")
         return vx_core.f_new(
           vx_core.t_string,
           sindent,
@@ -1204,7 +1204,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string, "list-1": vx_web_html.t_tdlist},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_tdlist, "struct-1": vx_web_html.t_tr}, tr, ":nodes")
+        const nodes = vx_core.f_any_from_struct({"any-1": vx_web_html.t_tdlist, "struct-2": vx_web_html.t_tr}, tr, ":nodes")
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(nodes, "tr", "", indent)
       })
     )
@@ -1258,10 +1258,10 @@ export default class vx_web_html {
   static f_stylemap_from_stylelist(stylelist) {
     let output = vx_web_html.e_stylemap
     output = vx_core.f_map_from_list(
-      {"any-1": vx_web_html.t_style, "any-2": vx_web_html.t_style, "list-2": vx_web_html.t_stylelist, "map-1": vx_web_html.t_stylemap, "struct-1": vx_web_html.t_style},
+      {"any-1": vx_web_html.t_style, "any-2": vx_web_html.t_style, "list-2": vx_web_html.t_stylelist, "map-1": vx_web_html.t_stylemap, "struct-2": vx_web_html.t_style},
       stylelist,
       vx_core.f_new(vx_core.t_any_from_any, (style) => 
-        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_web_html.t_style}, style, ":name"))
+        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name"))
     )
     return output
   }
@@ -1277,7 +1277,7 @@ export default class vx_web_html {
 
   static f_stylemap_from_stylesheet(stylesheet) {
     let output = vx_web_html.e_stylemap
-    output = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylemap, "struct-1": vx_web_html.t_stylesheet}, stylesheet, ":stylemap")
+    output = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylemap, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":stylemap")
     return output
   }
 
@@ -1292,7 +1292,7 @@ export default class vx_web_html {
 
   static f_styles_from_stylesheet(stylesheet) {
     let output = vx_web_html.e_stylelist
-    output = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-1": vx_web_html.t_stylesheet}, stylesheet, ":styles")
+    output = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":styles")
     return output
   }
 
@@ -1311,7 +1311,7 @@ export default class vx_web_html {
       stylesheet,
       ":stylemap",
       vx_web_html.f_stylemap_from_stylelist(
-        vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-1": vx_web_html.t_stylesheet}, stylesheet, ":styles")
+        vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":styles")
       )
     )
     return output

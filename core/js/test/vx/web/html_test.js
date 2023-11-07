@@ -133,14 +133,14 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<body></body>\"\n (string<-body-indent (body) 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<body></body>",
               vx_web_html.f_string_from_body_indent(
                 vx_core.f_empty(
                   vx_web_html.t_body
                 ),
                 0
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -148,6 +148,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<body>\n  <div></div>\n</body>",
               vx_web_html.f_string_from_body_indent(
                 vx_core.f_new(
@@ -157,8 +158,7 @@ export default class vx_web_html_test {
                   )
                 ),
                 0
-              ),
-              context
+              )
             )
           )
         )
@@ -180,14 +180,14 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<div></div>\"\n (string<-div-indent (div) 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<div></div>",
               vx_web_html.f_string_from_div_indent(
                 vx_core.f_empty(
                   vx_web_html.t_div
                 ),
                 0
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -195,6 +195,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<div id=\"myid\"></div>",
               vx_web_html.f_string_from_div_indent(
                 vx_core.f_new(
@@ -203,8 +204,7 @@ export default class vx_web_html_test {
                   "myid"
                 ),
                 0
-              ),
-              context
+              )
             )
           )
         )
@@ -226,14 +226,14 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<head></head>\"\n (string<-head-indent (head) 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<head></head>",
               vx_web_html.f_string_from_head_indent(
                 vx_core.f_empty(
                   vx_web_html.t_head
                 ),
                 0
-              ),
-              context
+              )
             )
           )
         )
@@ -255,6 +255,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>",
               vx_web_html.f_string_from_html(
                 vx_core.f_new(
@@ -268,8 +269,7 @@ export default class vx_web_html_test {
                     vx_web_html.t_body
                   )
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -291,6 +291,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<meta charset=\"utf-8\" />",
               vx_web_html.f_string_from_meta_indent(
                 vx_core.f_new(
@@ -299,8 +300,7 @@ export default class vx_web_html_test {
                   "utf-8"
                 ),
                 0
-              ),
-              context
+              )
             )
           )
         )
@@ -322,6 +322,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<p>data</p>",
               vx_web_html.f_string_from_p_indent(
                 vx_core.f_new(
@@ -330,8 +331,7 @@ export default class vx_web_html_test {
                   "data"
                 ),
                 0
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -339,6 +339,7 @@ export default class vx_web_html_test {
             ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))",
             ":testresult",
             vx_test.f_test(
+              context,
               "<p id=\"myid\">data</p>",
               vx_web_html.f_string_from_p_indent(
                 vx_core.f_new(
@@ -349,8 +350,7 @@ export default class vx_web_html_test {
                   "data"
                 ),
                 0
-              ),
-              context
+              )
             )
           )
         )

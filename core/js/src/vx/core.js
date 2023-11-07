@@ -55,9 +55,6 @@ export default class vx_core {
 
   static vx_new(type, values) {
     let output
-    const typedef = vx_core.f_typedef_from_any(type)
-    const copy = type
-    let msgblock = vx_core.e_msgblock
     if (values.length == 1) {
       // check if anylist passed as the only value
       const val1 = values[0]
@@ -67,6 +64,9 @@ export default class vx_core {
         values = val1
       }
     }
+    const typedef = vx_core.f_typedef_from_any(type)
+    const copy = type
+    let msgblock = vx_core.e_msgblock
     let isfirst = true
     switch (typedef) {
     case vx_core.t_boolean:
@@ -403,7 +403,7 @@ export default class vx_core {
         break
       case ':list':
         // output = vx_core.f_mempool-getvalue()
-        const listvals = []
+        let listvals = []
         if (type == typedef) {
         } else {
           listvals = copy.slice()
@@ -505,7 +505,9 @@ export default class vx_core {
               break
             }
           } else {
-            if (allowany) {
+            if (vx_core.f_is_empty(value)) {
+              delete propmap[key]
+            } else if (allowany) {
               propmap[key] = value
             } else if (allowtypes.includes(valuetype)) {
               propmap[key] = value
@@ -671,7 +673,9 @@ export default class vx_core {
             } else {
               const property = properties[key]
               const propertytype = property['type']
-              if (propertytype == vx_core.t_any) {
+              if (value !== false && value !== 0 && value !== "" && vx_core.f_is_empty_1(value)) {
+                delete propmap[key]
+              } else if (propertytype == vx_core.t_any) {
                 propmap[key] = value
               } else if (propertytype == valuetype) {
                 propmap[key] = value
@@ -749,7 +753,8 @@ export default class vx_core {
         }
         break
       case vx_core.t_string:
-        text = '\"' + value + '\"'
+        text = value.replaceAll("\"", "\\\"")
+        text = '\"' + text + '\"'
         break
       default:
         const typedefname = typedef['vx_value']['name']
@@ -867,6 +872,7 @@ export default class vx_core {
 
   /**
    * type: boolean
+   * Standard Boolean Type
    */
   static t_boolean = {}
 
@@ -947,6 +953,7 @@ export default class vx_core {
 
   /**
    * type: float
+   * Standard Floating Point Number
    */
   static t_float = {}
 
@@ -976,6 +983,7 @@ export default class vx_core {
 
   /**
    * type: int
+   * A simple integer.
    */
   static t_int = {}
 
@@ -1134,6 +1142,7 @@ export default class vx_core {
 
   /**
    * type: string
+   * A simple string.
    */
   static t_string = {}
 
@@ -1904,7 +1913,7 @@ export default class vx_core {
 
   static f_allowfuncs_from_security(security) {
     let output = vx_core.e_funclist
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_funclist, "struct-1": vx_core.t_security}, security, ":allowfuncs")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_funclist, "struct-2": vx_core.t_security}, security, ":allowfuncs")
     return output
   }
 
@@ -2043,7 +2052,7 @@ export default class vx_core {
   static t_any_from_any_context = {}
   static e_any_from_any_context = {vx_type: vx_core.t_any_from_any_context}
 
-  static f_any_from_any_context(generic, value, context) {
+  static f_any_from_any_context(generic, context, value) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     return output
@@ -2052,7 +2061,7 @@ export default class vx_core {
   /**
    * 
    * @async @function any_from_any_context_async
-   * Function Type taking any value any-2 and returning generic any-1
+   * Generic Function taking any value any-2 and returning generic any-1
    * @param  {typemap} generic
    * @param  {any} value
    * @return {any-1}
@@ -2060,7 +2069,7 @@ export default class vx_core {
   static t_any_from_any_context_async = {}
   static e_any_from_any_context_async = {vx_type: vx_core.t_any_from_any_context_async}
 
-  static async f_any_from_any_context_async(generic, value, context) {
+  static async f_any_from_any_context_async(generic, context, value) {
     const generic_any_1 = generic["any-1"]
     let output = Promise.resolve(vx_core.f_empty(generic_any_1))
     return output
@@ -2068,7 +2077,7 @@ export default class vx_core {
 
   /**
    * @function any_from_func
-   * Function Type returning Generic any-1 with any parameters
+   * Generic Function returning Generic any-1 with any parameters
    * @param  {typemap} generic
    * @return {any-1}
    */
@@ -2084,7 +2093,7 @@ export default class vx_core {
   /**
    * 
    * @async @function any_from_func_async
-   * Function Type returning Generic any-1 with any parameters
+   * Generic Function returning Generic any-1 with any parameters
    * @param  {typemap} generic
    * @return {any-1}
    */
@@ -2098,7 +2107,24 @@ export default class vx_core {
   }
 
   /**
+   * @function any_from_int
+   * Generic Function returning Generic any-1 from an int
+   * @param  {typemap} generic
+   * @param  {int} value
+   * @return {any-1}
+   */
+  static t_any_from_int = {}
+  static e_any_from_int = {vx_type: vx_core.t_any_from_int}
+
+  static f_any_from_int(generic, value) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    return output
+  }
+
+  /**
    * @function any_from_key_value
+   * Generic Function returning Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
    * @param  {any} val
@@ -2116,6 +2142,7 @@ export default class vx_core {
   /**
    * 
    * @async @function any_from_key_value_async
+   * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
    * @param  {any} val
@@ -2385,7 +2412,7 @@ export default class vx_core {
   static t_boolean_permission_from_func = {}
   static e_boolean_permission_from_func = {vx_type: vx_core.t_boolean_permission_from_func}
 
-  static f_boolean_permission_from_func(func, context) {
+  static f_boolean_permission_from_func(context, func) {
     let output = vx_core.e_boolean
     output = vx_core.f_contains_1(
       vx_core.f_allowfuncs_from_security(
@@ -2398,7 +2425,7 @@ export default class vx_core {
 
   /**
    * @function boolean_from_any
-   * Function Type taking generic any-2 and returning boolean
+   * Function Type taking generic any-1 and returning boolean
    * @param  {any} value
    * @return {boolean}
    */
@@ -2632,7 +2659,7 @@ export default class vx_core {
 
   static f_extends_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":extends")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_typedef}, vtypedef, ":extends")
     return output
   }
 
@@ -2723,9 +2750,9 @@ export default class vx_core {
     let output = vx_core.e_string
     output = vx_core.f_new(
       vx_core.t_string,
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_funcdef}, funcdef, ":pkgname"),
+      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_funcdef}, funcdef, ":pkgname"),
       "/",
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_funcdef}, funcdef, ":name")
+      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_funcdef}, funcdef, ":name")
     )
     return output
   }
@@ -3039,14 +3066,14 @@ export default class vx_core {
   static t_is_pass_from_permission = {}
   static e_is_pass_from_permission = {vx_type: vx_core.t_is_pass_from_permission}
 
-  static f_is_pass_from_permission(permission, context) {
+  static f_is_pass_from_permission(context, permission) {
     let output = vx_core.e_boolean
     output = vx_core.f_let(
       {"any-1": vx_core.t_boolean},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const id = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_permission}, permission, ":id")
-        const lookup = vx_core.f_permission_from_id_context(id, context)
+        const id = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_permission}, permission, ":id")
+        const lookup = vx_core.f_permission_from_id_context(context, id)
         return vx_core.f_eq(lookup, permission)
       })
     )
@@ -3268,6 +3295,7 @@ export default class vx_core {
 
   /**
    * @function log
+   * Writes a value to the console.
    * @param  {any} value
    * @return {any}
    */
@@ -3278,6 +3306,25 @@ export default class vx_core {
     let output = vx_core.e_any
     const text = vx_core.f_string_from_any(value)
     console.log(text)
+    output = value
+    return output
+  }
+
+  /**
+   * @function log
+   * Writes a string and a value to the console.
+   * @param  {string} text
+   * @param  {any} value
+   * @return {any}
+   */
+  static t_log_1 = {}
+  static e_log_1 = {vx_type: vx_core.t_log_1}
+
+  static f_log_1(text, value) {
+    let output = vx_core.e_any
+    console.log(text)
+    const svalue = vx_core.f_string_from_any(value)
+    console.log(svalue)
     output = value
     return output
   }
@@ -3470,6 +3517,27 @@ export default class vx_core {
   }
 
   /**
+   * @function msg_from_warning
+   * Returns a msg from a warning string
+   * @param  {string} warning
+   * @return {msg}
+   */
+  static t_msg_from_warning = {}
+  static e_msg_from_warning = {vx_type: vx_core.t_msg_from_warning}
+
+  static f_msg_from_warning(warning) {
+    let output = vx_core.e_msg
+    output = vx_core.f_new(
+      vx_core.t_msg,
+      ":severity",
+      vx_core.c_msg_warning,
+      ":text",
+      warning
+    )
+    return output
+  }
+
+  /**
    * @function msgblock_from_msgblock_msg
    * Return a new Msgblock with the added msg
    * @param  {msgblock} origblock
@@ -3516,7 +3584,7 @@ export default class vx_core {
 
   static f_name_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":name")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_typedef}, vtypedef, ":name")
     return output
   }
 
@@ -3656,7 +3724,7 @@ export default class vx_core {
 
   static f_packagename_from_typedef(vtypedef) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_core.t_typedef}, vtypedef, ":pkgname")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_typedef}, vtypedef, ":pkgname")
     return output
   }
 
@@ -3669,7 +3737,7 @@ export default class vx_core {
   static t_path_from_context_path = {}
   static e_path_from_context_path = {vx_type: vx_core.t_path_from_context_path}
 
-  static f_path_from_context_path(path, context) {
+  static f_path_from_context_path(context, path) {
     let output = vx_core.e_string
     output = vx_core.f_path_from_setting_path(
       vx_core.f_setting_from_context(context),
@@ -3702,15 +3770,15 @@ export default class vx_core {
   static t_permission_from_id_context = {}
   static e_permission_from_id_context = {vx_type: vx_core.t_permission_from_id_context}
 
-  static f_permission_from_id_context(id, context) {
+  static f_permission_from_id_context(context, id) {
     let output = vx_core.e_permission
     output = vx_core.f_let(
       {"any-1": vx_core.t_permission, "map-1": vx_core.t_permissionmap},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const user = vx_core.f_user_from_context(context)
-        const security = vx_core.f_any_from_struct({"any-1": vx_core.t_security, "struct-1": vx_core.t_user}, user, ":security")
-        const permissionmap = vx_core.f_any_from_struct({"any-1": vx_core.t_permissionmap, "struct-1": vx_core.t_security}, security, ":permissionmap")
+        const security = vx_core.f_any_from_struct({"any-1": vx_core.t_security, "struct-2": vx_core.t_user}, user, ":security")
+        const permissionmap = vx_core.f_any_from_struct({"any-1": vx_core.t_permissionmap, "struct-2": vx_core.t_security}, security, ":permissionmap")
         return vx_core.f_any_from_map({"any-1": vx_core.t_permission, "map-1": vx_core.t_permissionmap}, permissionmap, ":id")
       })
     )
@@ -3728,7 +3796,7 @@ export default class vx_core {
 
   static f_properties_from_typedef(vtypedef) {
     let output = vx_core.e_argmap
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_argmap, "struct-1": vx_core.t_typedef}, vtypedef, ":properties")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_argmap, "struct-2": vx_core.t_typedef}, vtypedef, ":properties")
     return output
   }
 
@@ -3743,7 +3811,7 @@ export default class vx_core {
 
   static f_proplast_from_typedef(vtypedef) {
     let output = vx_core.e_arg
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_arg, "struct-1": vx_core.t_typedef}, vtypedef, ":proplast")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_arg, "struct-2": vx_core.t_typedef}, vtypedef, ":proplast")
     return output
   }
 
@@ -3890,7 +3958,7 @@ export default class vx_core {
 
   static f_security_from_user(user) {
     let output = vx_core.e_security
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_security, "struct-1": vx_core.t_user}, user, ":security")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_security, "struct-2": vx_core.t_user}, user, ":security")
     return output
   }
 
@@ -3904,7 +3972,7 @@ export default class vx_core {
 
   static f_session_from_context(context) {
     let output = vx_core.e_session
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_session, "struct-1": vx_core.t_context}, context, ":session")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_session, "struct-2": vx_core.t_context}, context, ":session")
     return output
   }
 
@@ -3918,7 +3986,7 @@ export default class vx_core {
 
   static f_setting_from_context(context) {
     let output = vx_core.e_setting
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_setting, "struct-1": vx_core.t_context}, context, ":setting")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_setting, "struct-2": vx_core.t_context}, context, ":setting")
     return output
   }
 
@@ -4204,9 +4272,9 @@ export default class vx_core {
     let output = vx_core.e_string
     output = vx_core.f_new(
       vx_core.t_string,
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, vtypedef, ":pkgname"),
+      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_typedef}, vtypedef, ":pkgname"),
       "/",
-      vx_core.f_any_from_struct({"any-1": vx_core.t_anylist, "struct-1": vx_core.t_typedef}, vtypedef, ":name")
+      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_typedef}, vtypedef, ":name")
     )
     return output
   }
@@ -4242,7 +4310,7 @@ export default class vx_core {
   static f_user_from_context(context) {
     let output = vx_core.e_user
     output = vx_core.f_any_from_struct(
-      {"any-1": vx_core.t_user, "struct-1": vx_core.t_session},
+      {"any-1": vx_core.t_user, "struct-2": vx_core.t_session},
       vx_core.f_session_from_context(context),
       ":user"
     )
@@ -4426,6 +4494,7 @@ export default class vx_core {
     "any<-any-context-async": vx_core.e_any_from_any_context_async,
     "any<-func": vx_core.e_any_from_func,
     "any<-func-async": vx_core.e_any_from_func_async,
+    "any<-int": vx_core.e_any_from_int,
     "any<-key-value": vx_core.e_any_from_key_value,
     "any<-key-value-async": vx_core.e_any_from_key_value_async,
     "any<-list": vx_core.e_any_from_list,
@@ -4485,6 +4554,7 @@ export default class vx_core {
     "list<-map-async": vx_core.e_list_from_map_async,
     "list<-type": vx_core.e_list_from_type,
     "log": vx_core.e_log,
+    "log_1": vx_core.e_log_1,
     "main": vx_core.e_main,
     "map<-list": vx_core.e_map_from_list,
     "mempool-addref": vx_core.e_mempool_addref,
@@ -4493,6 +4563,7 @@ export default class vx_core {
     "mempool-removerefchildren": vx_core.e_mempool_removerefchildren,
     "mempool-reserve": vx_core.e_mempool_reserve,
     "msg<-error": vx_core.e_msg_from_error,
+    "msg<-warning": vx_core.e_msg_from_warning,
     "msgblock<-msgblock-msg": vx_core.e_msgblock_from_msgblock_msg,
     "msgblock<-msgblock-msgblock": vx_core.e_msgblock_from_msgblock_msgblock,
     "name<-typedef": vx_core.e_name_from_typedef,
@@ -6920,6 +6991,25 @@ export default class vx_core {
       fn            : vx_core.f_any_from_func_async
     }
 
+    // (func any_from_int)
+    vx_core.t_any_from_int['vx_type'] = vx_core.t_type
+    vx_core.t_any_from_int['vx_value'] = {
+      name          : "any<-int",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_any_from_int
+    }
+
     // (func any_from_key_value)
     vx_core.t_any_from_key_value['vx_type'] = vx_core.t_type
     vx_core.t_any_from_key_value['vx_value'] = {
@@ -8041,6 +8131,25 @@ export default class vx_core {
       fn            : vx_core.f_log
     }
 
+    // (func log_1)
+    vx_core.t_log_1['vx_type'] = vx_core.t_type
+    vx_core.t_log_1['vx_value'] = {
+      name          : "log",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_log_1
+    }
+
     // (func main)
     vx_core.t_main['vx_type'] = vx_core.t_type
     vx_core.t_main['vx_value'] = {
@@ -8191,6 +8300,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_msg_from_error
+    }
+
+    // (func msg_from_warning)
+    vx_core.t_msg_from_warning['vx_type'] = vx_core.t_type
+    vx_core.t_msg_from_warning['vx_value'] = {
+      name          : "msg<-warning",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_msg_from_warning
     }
 
     // (func msgblock_from_msgblock_msg)

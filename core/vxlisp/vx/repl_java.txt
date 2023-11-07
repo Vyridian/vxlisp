@@ -1,5 +1,5 @@
-  // vx_string_from_listarg(type, liststring, context)
-  public static String vx_string_from_listarg(Core.Type_any type, List<String> listarg, Core.Type_context context) {
+  // vx_string_from_listarg(type, context, liststring)
+  public static String vx_string_from_listarg(Core.Type_any type, Core.Type_context context, List<String> listarg) {
     String output = "";
     List<Core.Type_any> listrepl = new ArrayList<>();
     boolean isfirst = true;
@@ -25,7 +25,7 @@
       Core.vx_new_string(":type"), type,
       Core.vx_new_string(":repllist"), Repl.t_repllist.vx_new(listrepl)
     );
-    Core.Type_any any = Repl.f_any_from_repl(repl, context);
+    Core.Type_any any = Repl.f_any_from_repl(context, repl);
     Core.Type_any anytype = any.vx_type();
     if (anytype == Core.t_string) {
       Core.Type_string text = Core.f_any_from_any(Core.t_string, any);

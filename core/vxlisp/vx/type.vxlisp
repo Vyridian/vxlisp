@@ -9,7 +9,11 @@
 (func allowtypes<-type : typelist
  [type : any]
  (:allowtypes (typedef<-type type))
- :doc "Get the name of a given type")
+ :doc "Returns the allowed types from a given type")
+
+(func any<-int : any-1
+ [val : int]
+ :doc "Generic function returns any from an int.")
 
 (func int<-string-find : int
  [text : string

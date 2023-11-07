@@ -1332,6 +1332,7 @@ public final class Core {
 
   /**
    * type: boolean
+   * Standard Boolean Type
    * (type boolean)
    */
   public interface Type_boolean extends Core.Type_any {
@@ -2707,6 +2708,7 @@ public final class Core {
 
   /**
    * type: float
+   * Standard Floating Point Number
    * (type float)
    */
   public interface Type_float extends Core.Type_number {
@@ -3314,6 +3316,7 @@ public final class Core {
 
   /**
    * type: int
+   * A simple integer.
    * (type int)
    */
   public interface Type_int extends Core.Type_number {
@@ -6436,6 +6439,7 @@ public final class Core {
 
   /**
    * type: string
+   * A simple string.
    * (type string)
    */
   public interface Type_string extends Core.Type_any {
@@ -12234,7 +12238,7 @@ public final class Core {
    */
   public static interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, Core.Type_context context);
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value);
   }
 
   public static class Class_any_from_any_context extends Core.Class_base implements Func_any_from_any_context {
@@ -12293,23 +12297,23 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public Core.Type_any resolve(Core.Type_any value, Core.Type_context context);
+      public Core.Type_any resolve(Core.Type_context context, Core.Type_any value);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_any_from_any_context(generic_any_1, value, context);
+      output = Core.f_any_from_any_context(generic_any_1, context, value);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(value, context));
+        output = Core.f_any_from_any(generic_any_1, fn.resolve(context, value));
       }
       return output;
     }
@@ -12320,7 +12324,7 @@ public final class Core {
   public static final Func_any_from_any_context t_any_from_any_context = new Core.Class_any_from_any_context();
 
   @SuppressWarnings("unchecked")
-  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
     T output = Core.f_empty(generic_any_1);
     output = (T)value;
     return output;
@@ -12330,14 +12334,14 @@ public final class Core {
    * 
    * @async
    * @function any_from_any_context_async
-   * Function Type taking any value any-2 and returning generic any-1
+   * Generic Function taking any value any-2 and returning generic any-1
    * @param  {any-2} value
    * @return {any-1}
    * (func any<-any-context-async)
    */
   public static interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final U value, Core.Type_context context);
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value);
   }
 
   public static class Class_any_from_any_context_async extends Core.Class_base implements Func_any_from_any_context_async {
@@ -12396,26 +12400,26 @@ public final class Core {
 
     @FunctionalInterface
     public static interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_any value, Core.Type_context context);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_context context, Core.Type_any value);
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      CompletableFuture<Core.Type_any> future = Core.f_any_from_any_context_async(generic_any_1, value, context);
+      CompletableFuture<Core.Type_any> future = Core.f_any_from_any_context_async(generic_any_1, context, value);
       output = Core.async_from_async(Core.t_any, future);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(Core.f_empty(generic_any_1));
       } else {
-        CompletableFuture<Core.Type_any> future = fn.resolve(value, context);
+        CompletableFuture<Core.Type_any> future = fn.resolve(context, value);
         output = Core.async_from_async(generic_any_1, future);
       }
       return output;
@@ -12426,14 +12430,14 @@ public final class Core {
   public static final Func_any_from_any_context_async e_any_from_any_context_async = new Core.Class_any_from_any_context_async();
   public static final Func_any_from_any_context_async t_any_from_any_context_async = new Core.Class_any_from_any_context_async();
 
-  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final U value, final Core.Type_context context) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
     CompletableFuture<T> output = Core.async_new_completed(Core.f_empty(generic_any_1));
     return output;
   }
 
   /**
    * @function any_from_func
-   * Function Type returning Generic any-1 with any parameters
+   * Generic Function returning Generic any-1 with any parameters
    * @return {any-1}
    * (func any<-func)
    */
@@ -12531,7 +12535,7 @@ public final class Core {
    * 
    * @async
    * @function any_from_func_async
-   * Function Type returning Generic any-1 with any parameters
+   * Generic Function returning Generic any-1 with any parameters
    * @return {any-1}
    * (func any<-func-async)
    */
@@ -12630,7 +12634,106 @@ public final class Core {
   }
 
   /**
+   * @function any_from_int
+   * Generic Function returning Generic any-1 from an int
+   * @param  {int} value
+   * @return {any-1}
+   * (func any<-int)
+   */
+  public static interface Func_any_from_int extends Core.Type_func, Core.Type_replfunc {
+    public Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
+    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int value);
+  }
+
+  public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn) {
+      Class_any_from_int output = new Class_any_from_int();
+      output.fn = fn;
+      return output;
+    }
+
+    @Override
+    public Func_any_from_int vx_new(Object... vals) {
+      Class_any_from_int output = new Class_any_from_int();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_int vx_copy(Object... vals) {
+      Class_any_from_int output = new Class_any_from_int();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "any<-int", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_int vx_empty() {return e_any_from_int;}
+    @Override
+    public Func_any_from_int vx_type() {return t_any_from_int;}
+
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_int value);
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int value = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_any_from_int(generic_any_1, value);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int value) {
+      T output = Core.f_empty(generic_any_1);
+      if (fn != null) {
+        output = Core.f_any_from_any(generic_any_1, fn.resolve(value));
+      }
+      return output;
+    }
+
+  }
+
+  public static final Func_any_from_int e_any_from_int = new Core.Class_any_from_int();
+  public static final Func_any_from_int t_any_from_int = new Core.Class_any_from_int();
+
+  public static <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int value) {
+    T output = Core.f_empty(generic_any_1);
+    return output;
+  }
+
+  /**
    * @function any_from_key_value
+   * Generic Function returning Generic any-1 from a key and a value
    * @param  {string} key
    * @param  {any-2} val
    * @return {any-1}
@@ -12732,6 +12835,7 @@ public final class Core {
    * 
    * @async
    * @function any_from_key_value_async
+   * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {string} key
    * @param  {any-2} val
    * @return {any-1}
@@ -14019,7 +14123,7 @@ public final class Core {
    * (func boolean-permission<-func)
    */
   public static interface Func_boolean_permission_from_func extends Core.Func_any_from_any_context {
-    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, Core.Type_context context);
+    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func);
   }
 
   public static class Class_boolean_permission_from_func extends Core.Class_base implements Func_boolean_permission_from_func {
@@ -14071,25 +14175,25 @@ public final class Core {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_func inputval = (Core.Type_func)value;
-      Core.Type_any outputval = Core.f_boolean_permission_from_func(inputval, context);
+      Core.Type_any outputval = Core.f_boolean_permission_from_func(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_func func = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_boolean_permission_from_func(func, context);
+      output = Core.f_boolean_permission_from_func(context, func);
       return output;
     }
 
     @Override
-    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, final Core.Type_context context) {
-      return Core.f_boolean_permission_from_func(func, context);
+    public Core.Type_boolean f_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func) {
+      return Core.f_boolean_permission_from_func(context, func);
     }
 
   }
@@ -14097,7 +14201,7 @@ public final class Core {
   public static final Func_boolean_permission_from_func e_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
   public static final Func_boolean_permission_from_func t_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
 
-  public static Core.Type_boolean f_boolean_permission_from_func(final Core.Type_func func, final Core.Type_context context) {
+  public static Core.Type_boolean f_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_contains_1(
       Core.f_allowfuncs_from_security(
@@ -14110,16 +14214,26 @@ public final class Core {
 
   /**
    * @function boolean_from_any
-   * Function Type taking generic any-2 and returning boolean
+   * Function Type taking generic any-1 and returning boolean
    * @param  {any-1} value
    * @return {boolean}
    * (func boolean<-any)
    */
-  public static interface Func_boolean_from_any extends Core.Func_any_from_any {
+  public static interface Func_boolean_from_any extends Core.Type_func, Core.Type_replfunc {
+    public Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
     public Core.Type_boolean f_boolean_from_any(final Core.Type_any value);
   }
 
   public static class Class_boolean_from_any extends Core.Class_base implements Func_boolean_from_any {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn) {
+      Class_boolean_from_any output = new Class_boolean_from_any();
+      output.fn = fn;
+      return output;
+    }
 
     @Override
     public Func_boolean_from_any vx_new(Object... vals) {
@@ -14164,16 +14278,9 @@ public final class Core {
     @Override
     public Func_boolean_from_any vx_type() {return t_boolean_from_any;}
 
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Core.Type_any inputval = (Core.Type_any)value;
-      Core.Type_any outputval = Core.f_boolean_from_any(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_any value);
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -14185,7 +14292,11 @@ public final class Core {
 
     @Override
     public Core.Type_boolean f_boolean_from_any(final Core.Type_any value) {
-      return Core.f_boolean_from_any(value);
+      Core.Type_boolean output = Core.c_false;
+      if (fn != null) {
+        output = Core.f_any_from_any(Core.t_boolean, fn.resolve(value));
+      }
+      return output;
     }
 
   }
@@ -17086,7 +17197,7 @@ public final class Core {
    * (func is-pass<-permission)
    */
   public static interface Func_is_pass_from_permission extends Core.Func_any_from_any_context {
-    public Core.Type_boolean f_is_pass_from_permission(final Core.Type_permission permission, Core.Type_context context);
+    public Core.Type_boolean f_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission);
   }
 
   public static class Class_is_pass_from_permission extends Core.Class_base implements Func_is_pass_from_permission {
@@ -17138,25 +17249,25 @@ public final class Core {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_permission inputval = (Core.Type_permission)value;
-      Core.Type_any outputval = Core.f_is_pass_from_permission(inputval, context);
+      Core.Type_any outputval = Core.f_is_pass_from_permission(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_permission permission = Core.f_any_from_any(Core.t_permission, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_is_pass_from_permission(permission, context);
+      output = Core.f_is_pass_from_permission(context, permission);
       return output;
     }
 
     @Override
-    public Core.Type_boolean f_is_pass_from_permission(final Core.Type_permission permission, final Core.Type_context context) {
-      return Core.f_is_pass_from_permission(permission, context);
+    public Core.Type_boolean f_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission) {
+      return Core.f_is_pass_from_permission(context, permission);
     }
 
   }
@@ -17164,13 +17275,13 @@ public final class Core {
   public static final Func_is_pass_from_permission e_is_pass_from_permission = new Core.Class_is_pass_from_permission();
   public static final Func_is_pass_from_permission t_is_pass_from_permission = new Core.Class_is_pass_from_permission();
 
-  public static Core.Type_boolean f_is_pass_from_permission(final Core.Type_permission permission, final Core.Type_context context) {
+  public static Core.Type_boolean f_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string id = permission.id();
-        final Core.Type_permission lookup = Core.f_permission_from_id_context(id, context);
+        final Core.Type_permission lookup = Core.f_permission_from_id_context(context, id);
         return Core.f_eq(lookup, permission);
       })
     );
@@ -18065,6 +18176,7 @@ public final class Core {
 
   /**
    * @function log
+   * Writes a value to the console.
    * @param  {any} value
    * @return {any}
    * (func log)
@@ -18152,6 +18264,91 @@ public final class Core {
     Core.Type_string stringtext = Core.f_string_from_any(value);
     String text = stringtext.vx_string();
     System.out.println(text);
+    output = value;
+    return output;
+  }
+
+  /**
+   * @function log 1
+   * Writes a string and a value to the console.
+   * @param  {string} text
+   * @param  {any} value
+   * @return {any}
+   * (func log)
+   */
+  public static interface Func_log_1 extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_any f_log_1(final Core.Type_string text, final Core.Type_any value);
+  }
+
+  public static class Class_log_1 extends Core.Class_base implements Func_log_1 {
+
+    @Override
+    public Func_log_1 vx_new(Object... vals) {
+      Class_log_1 output = new Class_log_1();
+      return output;
+    }
+
+    @Override
+    public Func_log_1 vx_copy(Object... vals) {
+      Class_log_1 output = new Class_log_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "log", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_log_1 vx_empty() {return e_log_1;}
+    @Override
+    public Func_log_1 vx_type() {return t_log_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_log_1(text, value);
+      return output;
+    }
+
+    @Override
+    public Core.Type_any f_log_1(final Core.Type_string text, final Core.Type_any value) {
+      return Core.f_log_1(text, value);
+    }
+
+  }
+
+  public static final Func_log_1 e_log_1 = new Core.Class_log_1();
+  public static final Func_log_1 t_log_1 = new Core.Class_log_1();
+
+  public static Core.Type_any f_log_1(final Core.Type_string text, final Core.Type_any value) {
+    Core.Type_any output = Core.e_any;
+    System.out.println(text);
+    Core.Type_string valuestring = Core.f_string_from_any(value);
+    String svalue = valuestring.vx_string();
+    System.out.println(svalue);
     output = value;
     return output;
   }
@@ -18806,6 +19003,105 @@ public final class Core {
         Core.c_msg_error,
         Core.vx_new_string(":text"),
         error
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function msg_from_warning
+   * Returns a msg from a warning string
+   * @param  {string} warning
+   * @return {msg}
+   * (func msg<-warning)
+   */
+  public static interface Func_msg_from_warning extends Core.Func_any_from_any {
+    public Core.Type_msg f_msg_from_warning(final Core.Type_string warning);
+  }
+
+  public static class Class_msg_from_warning extends Core.Class_base implements Func_msg_from_warning {
+
+    @Override
+    public Func_msg_from_warning vx_new(Object... vals) {
+      Class_msg_from_warning output = new Class_msg_from_warning();
+      return output;
+    }
+
+    @Override
+    public Func_msg_from_warning vx_copy(Object... vals) {
+      Class_msg_from_warning output = new Class_msg_from_warning();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "msg<-warning", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "msg", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_msg_from_warning vx_empty() {return e_msg_from_warning;}
+    @Override
+    public Func_msg_from_warning vx_type() {return t_msg_from_warning;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Core.f_msg_from_warning(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string warning = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_msg_from_warning(warning);
+      return output;
+    }
+
+    @Override
+    public Core.Type_msg f_msg_from_warning(final Core.Type_string warning) {
+      return Core.f_msg_from_warning(warning);
+    }
+
+  }
+
+  public static final Func_msg_from_warning e_msg_from_warning = new Core.Class_msg_from_warning();
+  public static final Func_msg_from_warning t_msg_from_warning = new Core.Class_msg_from_warning();
+
+  public static Core.Type_msg f_msg_from_warning(final Core.Type_string warning) {
+    Core.Type_msg output = Core.e_msg;
+    output = Core.f_new(
+      Core.t_msg,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":severity"),
+        Core.c_msg_warning,
+        Core.vx_new_string(":text"),
+        warning
       )
     );
     return output;
@@ -19700,7 +19996,7 @@ public final class Core {
    * (func path<-context-path)
    */
   public static interface Func_path_from_context_path extends Core.Func_any_from_any_context {
-    public Core.Type_string f_path_from_context_path(final Core.Type_string path, Core.Type_context context);
+    public Core.Type_string f_path_from_context_path(final Core.Type_context context, final Core.Type_string path);
   }
 
   public static class Class_path_from_context_path extends Core.Class_base implements Func_path_from_context_path {
@@ -19752,25 +20048,25 @@ public final class Core {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
-      Core.Type_any outputval = Core.f_path_from_context_path(inputval, context);
+      Core.Type_any outputval = Core.f_path_from_context_path(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_path_from_context_path(path, context);
+      output = Core.f_path_from_context_path(context, path);
       return output;
     }
 
     @Override
-    public Core.Type_string f_path_from_context_path(final Core.Type_string path, final Core.Type_context context) {
-      return Core.f_path_from_context_path(path, context);
+    public Core.Type_string f_path_from_context_path(final Core.Type_context context, final Core.Type_string path) {
+      return Core.f_path_from_context_path(context, path);
     }
 
   }
@@ -19778,7 +20074,7 @@ public final class Core {
   public static final Func_path_from_context_path e_path_from_context_path = new Core.Class_path_from_context_path();
   public static final Func_path_from_context_path t_path_from_context_path = new Core.Class_path_from_context_path();
 
-  public static Core.Type_string f_path_from_context_path(final Core.Type_string path, final Core.Type_context context) {
+  public static Core.Type_string f_path_from_context_path(final Core.Type_context context, final Core.Type_string path) {
     Core.Type_string output = Core.e_string;
     output = Core.f_path_from_setting_path(
       Core.f_setting_from_context(context),
@@ -19875,7 +20171,7 @@ public final class Core {
    * (func permission<-id-context)
    */
   public static interface Func_permission_from_id_context extends Core.Func_any_from_any_context {
-    public Core.Type_permission f_permission_from_id_context(final Core.Type_string id, Core.Type_context context);
+    public Core.Type_permission f_permission_from_id_context(final Core.Type_context context, final Core.Type_string id);
   }
 
   public static class Class_permission_from_id_context extends Core.Class_base implements Func_permission_from_id_context {
@@ -19927,25 +20223,25 @@ public final class Core {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final U value, final Core.Type_context context) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
-      Core.Type_any outputval = Core.f_permission_from_id_context(inputval, context);
+      Core.Type_any outputval = Core.f_permission_from_id_context(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_permission_from_id_context(id, context);
+      output = Core.f_permission_from_id_context(context, id);
       return output;
     }
 
     @Override
-    public Core.Type_permission f_permission_from_id_context(final Core.Type_string id, final Core.Type_context context) {
-      return Core.f_permission_from_id_context(id, context);
+    public Core.Type_permission f_permission_from_id_context(final Core.Type_context context, final Core.Type_string id) {
+      return Core.f_permission_from_id_context(context, id);
     }
 
   }
@@ -19953,7 +20249,7 @@ public final class Core {
   public static final Func_permission_from_id_context e_permission_from_id_context = new Core.Class_permission_from_id_context();
   public static final Func_permission_from_id_context t_permission_from_id_context = new Core.Class_permission_from_id_context();
 
-  public static Core.Type_permission f_permission_from_id_context(final Core.Type_string id, final Core.Type_context context) {
+  public static Core.Type_permission f_permission_from_id_context(final Core.Type_context context, final Core.Type_string id) {
     Core.Type_permission output = Core.e_permission;
     output = Core.f_let(
       Core.t_permission,
@@ -20625,7 +20921,7 @@ public final class Core {
    * (func security<-context)
    */
   public static interface Func_security_from_context extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_security f_security_from_context(Core.Type_context context);
+    public Core.Type_security f_security_from_context(final Core.Type_context context);
   }
 
   public static class Class_security_from_context extends Core.Class_base implements Func_security_from_context {
@@ -20796,7 +21092,7 @@ public final class Core {
    * (func session<-context)
    */
   public static interface Func_session_from_context extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_session f_session_from_context(Core.Type_context context);
+    public Core.Type_session f_session_from_context(final Core.Type_context context);
   }
 
   public static class Class_session_from_context extends Core.Class_base implements Func_session_from_context {
@@ -20874,7 +21170,7 @@ public final class Core {
    * (func setting<-context)
    */
   public static interface Func_setting_from_context extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_setting f_setting_from_context(Core.Type_context context);
+    public Core.Type_setting f_setting_from_context(final Core.Type_context context);
   }
 
   public static class Class_setting_from_context extends Core.Class_base implements Func_setting_from_context {
@@ -22247,7 +22543,7 @@ public final class Core {
    * (func user<-context)
    */
   public static interface Func_user_from_context extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_user f_user_from_context(Core.Type_context context);
+    public Core.Type_user f_user_from_context(final Core.Type_context context);
   }
 
   public static class Class_user_from_context extends Core.Class_base implements Func_user_from_context {

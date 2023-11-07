@@ -17,8 +17,7 @@
   :name "delimcsv"
   :delimlist
    (tb/delimlist
-    (copy delimline
-     :delimlist (tb/delimlist tb/delimquote tb/delimcomma))))
+    tb/delimline tb/delimquote tb/delimcomma))
  :doc "Csv File Delimiters")
 
 (func csv<-textblock : csv
@@ -33,6 +32,87 @@
  [textblock : tb/textblock]
  (let
   [parsedtb : tb/textblock     := (tb/textblock<-textblock-delim textblock delimcsv)
-   childtbs : tb/textblocklist := (tb/textblocks<-textblock parsedtb)
-   strings  : stringlist       := (tb/stringlist<-textblocklist childtbs)]
+   children : tb/textblocklist := (tb/children<-textblock parsedtb)
+   strings  : stringlist       := (tb/stringlist<-textblocklist children)]
   (csvrows strings)))
+
+(func textblock-csv<-string : textblock
+ [text : string]
+ (tb/textblock-parse<-string-delim
+  text
+  delimcsv)
+/*
+ :test
+  (test
+   (tb/textblock
+    :text
+`"a","b"
+1,"2"`
+    :endpos 13
+    :delim delimcsv
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text `"a"`
+       :endpos 3
+       :delim
+        (copy tb/delimquote
+         :endpos 2)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "a"
+          :startpos 1
+          :endpos 2)))
+      (tb/textblock
+       :text ","
+       :startpos 3
+       :endpos 4
+       :delim tb/delimcomma)
+      (tb/textblock
+       :text `"b"`
+       :startpos 3
+       :endpos 6
+       :delim
+        (copy tb/delimquote
+         :endpos 2)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "b"
+          :startpos 4
+          :endpos 5)))
+      (tb/textblock
+       :text "\n"
+       :startpos 6
+       :endpos 7
+       :delim tb/delimline)
+      (tb/textblock
+       :text "1"
+       :startpos 8
+       :endpos 9)
+      (tb/textblock
+       :text ","
+       :startpos 9
+       :endpos 10
+       :delim tb/delimcomma)
+      (tb/textblock
+       :text `"2"`
+       :startpos 11
+       :endpos 14
+       :delim
+        (copy tb/delimquote
+         :endpos 3)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "2"
+          :startpos 12
+          :endpos 13)))))
+   (textblock-csv<-string
+`"a","b"
+1,"2"`
+   )
+  )
+*/
+ :doc "Returns a parsed csv-textblock from a string.")

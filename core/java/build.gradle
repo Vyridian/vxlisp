@@ -23,7 +23,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.vxlisp.vx.App'
+    mainClass = 'App'
 }
 
 test {

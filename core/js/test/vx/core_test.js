@@ -22,11 +22,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 81, ":tests", 186, ":total", 228), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 45, ":tests", 57, ":total", 125), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 196, ":total", 231), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 44, ":tests", 57, ":total", 127), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 63, ":total", 205), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 63, ":total", 207), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 4, ":total", 66)
     )
   }
@@ -168,6 +168,7 @@ export default class vx_core_test {
           "any<-any-context-async", 0,
           "any<-func", 0,
           "any<-func-async", 0,
+          "any<-int", 0,
           "any<-key-value", 0,
           "any<-key-value-async", 0,
           "any<-list", 2,
@@ -227,6 +228,7 @@ export default class vx_core_test {
           "list<-map-async", 0,
           "list<-type", 0,
           "log", 0,
+          "log_1", 0,
           "main", 0,
           "map<-list", 1,
           "mempool-addref", 0,
@@ -235,6 +237,7 @@ export default class vx_core_test {
           "mempool-removerefchildren", 0,
           "mempool-reserve", 0,
           "msg<-error", 0,
+          "msg<-warning", 0,
           "msgblock<-msgblock-msg", 0,
           "msgblock<-msgblock-msgblock", 0,
           "name<-typedef", 0,
@@ -291,38 +294,38 @@ export default class vx_core_test {
             vx_test.t_testdescribe,
             ":describename", "(test-true true)",
             ":testresult", vx_test.f_test_true(
-              true,
-              context
+              context,
+              true
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-false false)",
             ":testresult", vx_test.f_test_false(
-              false,
-              context
+              context,
+              false
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true (boolean true))",
             ":testresult", vx_test.f_test_true(
+              context,
               vx_core.f_new(
                 vx_core.t_boolean,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-false (boolean false))",
             ":testresult", vx_test.f_test_false(
+              context,
               vx_core.f_new(
                 vx_core.t_boolean,
                 false
-              ),
-              context
+              )
             )
           )
         )
@@ -343,12 +346,12 @@ export default class vx_core_test {
             vx_test.t_testdescribe,
             ":describename", "(test 4.5 (float 4.5))",
             ":testresult", vx_test.f_test(
+              context,
               4.5,
               vx_core.f_new(
                 vx_core.t_float,
                 4.5
-              ),
-              context
+              )
             )
           )
         )
@@ -369,62 +372,62 @@ export default class vx_core_test {
             vx_test.t_testdescribe,
             ":describename", "(test-true  (is-int 4))",
             ":testresult", vx_test.f_test_true(
-              vx_core.f_is_int(4),
-              context
+              context,
+              vx_core.f_is_int(4)
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true  (is-int \"4\"))",
             ":testresult", vx_test.f_test_true(
-              vx_core.f_is_int("4"),
-              context
+              context,
+              vx_core.f_is_int("4")
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true  (is-int infinity))",
             ":testresult", vx_test.f_test_true(
+              context,
               vx_core.f_is_int(
                 vx_core.c_infinity
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true  (is-int neginfinity))",
             ":testresult", vx_test.f_test_true(
+              context,
               vx_core.f_is_int(
                 vx_core.c_neginfinity
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true  (is-int notanumber))",
             ":testresult", vx_test.f_test_true(
+              context,
               vx_core.f_is_int(
                 vx_core.c_notanumber
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-false (is-int \"a\"))",
             ":testresult", vx_test.f_test_false(
-              vx_core.f_is_int("a"),
-              context
+              context,
+              vx_core.f_is_int("a")
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-false (is-int 5.5))",
             ":testresult", vx_test.f_test_false(
-              vx_core.f_is_int(5.5),
-              context
+              context,
+              vx_core.f_is_int(5.5)
             )
           )
         )
@@ -445,25 +448,25 @@ export default class vx_core_test {
             vx_test.t_testdescribe,
             ":describename", "(test \"a\" (string \"a\"))",
             ":testresult", vx_test.f_test(
+              context,
               "a",
               vx_core.f_new(
                 vx_core.t_string,
                 "a"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test \"ab\" (string \"a\" \"b\"))",
             ":testresult", vx_test.f_test(
+              context,
               "ab",
               vx_core.f_new(
                 vx_core.t_string,
                 "a",
                 "b"
-              ),
-              context
+              )
             )
           )
         )
@@ -485,8 +488,8 @@ export default class vx_core_test {
             ":describename", "(test-false false)",
             ":testresult",
             vx_test.f_test_false(
-                false,
-                context
+                context,
+                false
               )
           )
         )
@@ -508,8 +511,8 @@ export default class vx_core_test {
             ":describename", "(test-true true)",
             ":testresult",
             vx_test.f_test_true(
-                true,
-                context
+                context,
+                true
               )
           )
         )
@@ -531,8 +534,8 @@ export default class vx_core_test {
             ":describename", "(test-false false)",
             ":testresult",
             vx_test.f_test_false(
-              false,
-              context
+              context,
+              false
             )
           ),
           vx_core.f_new(
@@ -540,10 +543,10 @@ export default class vx_core_test {
             ":describename", "(test-false (! true))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_not(
                 true
-              ),
-              context
+              )
             )
           )
         )
@@ -565,16 +568,16 @@ export default class vx_core_test {
             ":describename", "(test-ne true false)",
             ":testresult",
             vx_test.f_test_ne(
+              context,
               true,
-              false,
-              context
+              false
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-ne \"a\" \"b\")",
             ":testresult",
-            vx_test.f_test_ne("a", "b", context)
+            vx_test.f_test_ne(context, "a", "b")
           )
         )
     )
@@ -595,9 +598,9 @@ export default class vx_core_test {
             ":describename", "(test 6 (* 3 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               6,
-              vx_core.f_multiply(3, 2),
-              context
+              vx_core.f_multiply(3, 2)
             )
           ),
           vx_core.f_new(
@@ -605,9 +608,9 @@ export default class vx_core_test {
             ":describename", "(test -10 (* 5 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -10,
-              vx_core.f_multiply(5, -2),
-              context
+              vx_core.f_multiply(5, -2)
             )
           )
         )
@@ -629,9 +632,9 @@ export default class vx_core_test {
             ":describename", "(test 6.4 (* 3.2 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               6.4,
-              vx_core.f_multiply_1(3.2, 2),
-              context
+              vx_core.f_multiply_1(3.2, 2)
             )
           ),
           vx_core.f_new(
@@ -639,9 +642,9 @@ export default class vx_core_test {
             ":describename", "(test -10.2 (* 5.1 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -10.2,
-              vx_core.f_multiply_1(5.1, -2),
-              context
+              vx_core.f_multiply_1(5.1, -2)
             )
           )
         )
@@ -663,9 +666,9 @@ export default class vx_core_test {
             ":describename", "(test 24 (* 3 2 4))",
             ":testresult",
             vx_test.f_test(
+              context,
               24,
-              vx_core.f_multiply_2(3, 2, 4),
-              context
+              vx_core.f_multiply_2(3, 2, 4)
             )
           ),
           vx_core.f_new(
@@ -673,9 +676,9 @@ export default class vx_core_test {
             ":describename", "(test -20 (* 5 -2 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -20,
-              vx_core.f_multiply_2(5, -2, 2),
-              context
+              vx_core.f_multiply_2(5, -2, 2)
             )
           )
         )
@@ -697,9 +700,9 @@ export default class vx_core_test {
             ":describename", "(test 24 (* 3 2 4))",
             ":testresult",
             vx_test.f_test(
+              context,
               24,
-              vx_core.f_multiply_2(3, 2, 4),
-              context
+              vx_core.f_multiply_2(3, 2, 4)
             )
           ),
           vx_core.f_new(
@@ -707,9 +710,9 @@ export default class vx_core_test {
             ":describename", "(test -20 (* 5 -2 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -20,
-              vx_core.f_multiply_2(5, -2, 2),
-              context
+              vx_core.f_multiply_2(5, -2, 2)
             )
           )
         )
@@ -731,9 +734,9 @@ export default class vx_core_test {
             ":describename", "(test 5 (+ 2 3))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_core.f_plus(2, 3),
-              context
+              vx_core.f_plus(2, 3)
             )
           ),
           vx_core.f_new(
@@ -741,9 +744,9 @@ export default class vx_core_test {
             ":describename", "(test 3 (+ 5 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
-              vx_core.f_plus(5, -2),
-              context
+              vx_core.f_plus(5, -2)
             )
           )
         )
@@ -765,9 +768,9 @@ export default class vx_core_test {
             ":describename", "(test 5 (+ 2  3))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_core.f_plus(2, 3),
-              context
+              vx_core.f_plus(2, 3)
             )
           ),
           vx_core.f_new(
@@ -775,9 +778,9 @@ export default class vx_core_test {
             ":describename", "(test 3 (+ 5 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
-              vx_core.f_plus(5, -2),
-              context
+              vx_core.f_plus(5, -2)
             )
           )
         )
@@ -799,9 +802,9 @@ export default class vx_core_test {
             ":describename", "(test  3 (+1  2))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
-              vx_core.f_plus1(2),
-              context
+              vx_core.f_plus1(2)
             )
           ),
           vx_core.f_new(
@@ -809,9 +812,9 @@ export default class vx_core_test {
             ":describename", "(test -1 (+1 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -1,
-              vx_core.f_plus1(-2),
-              context
+              vx_core.f_plus1(-2)
             )
           )
         )
@@ -833,9 +836,9 @@ export default class vx_core_test {
             ":describename", "(test 1 (- 3 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               1,
-              vx_core.f_minus(3, 2),
-              context
+              vx_core.f_minus(3, 2)
             )
           ),
           vx_core.f_new(
@@ -843,9 +846,9 @@ export default class vx_core_test {
             ":describename", "(test 7 (- 5 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               7,
-              vx_core.f_minus(5, -2),
-              context
+              vx_core.f_minus(5, -2)
             )
           )
         )
@@ -867,9 +870,9 @@ export default class vx_core_test {
             ":describename", "(test 5 (+ 2 3))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_core.f_plus(2, 3),
-              context
+              vx_core.f_plus(2, 3)
             )
           ),
           vx_core.f_new(
@@ -877,9 +880,9 @@ export default class vx_core_test {
             ":describename", "(test 3 (+ 5 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
-              vx_core.f_plus(5, -2),
-              context
+              vx_core.f_plus(5, -2)
             )
           )
         )
@@ -901,9 +904,9 @@ export default class vx_core_test {
             ":describename", "(test 3 (/ 6 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
-              vx_core.f_divide(6, 2),
-              context
+              vx_core.f_divide(6, 2)
             )
           ),
           vx_core.f_new(
@@ -911,9 +914,9 @@ export default class vx_core_test {
             ":describename", "(test -5 (/ 10 -2))",
             ":testresult",
             vx_test.f_test(
+              context,
               -5,
-              vx_core.f_divide(10, -2),
-              context
+              vx_core.f_divide(10, -2)
             )
           )
         )
@@ -935,8 +938,8 @@ export default class vx_core_test {
             ":describename", "(test-true (< 2 3))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_lt(2, 3),
-              context
+              context,
+              vx_core.f_lt(2, 3)
             )
           )
         )
@@ -958,8 +961,8 @@ export default class vx_core_test {
             ":describename", "(test-true (< 2 3))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_lt(2, 3),
-              context
+              context,
+              vx_core.f_lt(2, 3)
             )
           ),
           vx_core.f_new(
@@ -967,8 +970,8 @@ export default class vx_core_test {
             ":describename", "(test-true (< \"b\" \"d\" \"z\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_lt_1("b", "d", "z"),
-              context
+              context,
+              vx_core.f_lt_1("b", "d", "z")
             )
           )
         )
@@ -990,6 +993,7 @@ export default class vx_core_test {
             ":describename", "(test\n (*\n  (+\n   (- 5 3)\n   3)\n  2)\n (<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_multiply(
                 vx_core.f_plus(
                   vx_core.f_minus(5, 3),
@@ -1003,8 +1007,7 @@ export default class vx_core_test {
                   3
                 ),
                 2
-              ),
-              context
+              )
             )
           )
         )
@@ -1026,6 +1029,7 @@ export default class vx_core_test {
             ":describename", "(test\n (* (+ (- 3 5) 3) 2)\n (<<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_multiply(
                 vx_core.f_plus(
                   vx_core.f_minus(3, 5),
@@ -1039,8 +1043,7 @@ export default class vx_core_test {
                   3,
                   vx_core.f_minus(3, 5)
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -1062,8 +1065,8 @@ export default class vx_core_test {
             ":describename", "(test-true (<= 2 3))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_le(2, 3),
-              context
+              context,
+              vx_core.f_le(2, 3)
             )
           )
         )
@@ -1085,8 +1088,8 @@ export default class vx_core_test {
             ":describename", "(test-true (<= \"b\" \"d\" \"z\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_le_1("b", "d", "z"),
-              context
+              context,
+              vx_core.f_le_1("b", "d", "z")
             )
           )
         )
@@ -1108,11 +1111,11 @@ export default class vx_core_test {
             ":describename", "(test-true (= true true))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_eq(
                 true,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1120,8 +1123,8 @@ export default class vx_core_test {
             ":describename", "(test-true (= 2 2))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_eq(2, 2),
-              context
+              context,
+              vx_core.f_eq(2, 2)
             )
           ),
           vx_core.f_new(
@@ -1129,8 +1132,8 @@ export default class vx_core_test {
             ":describename", "(test-true (= \"a\" \"a\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_eq("a", "a"),
-              context
+              context,
+              vx_core.f_eq("a", "a")
             )
           ),
           vx_core.f_new(
@@ -1138,6 +1141,7 @@ export default class vx_core_test {
             ":describename", "(test-true (= (stringlist \"a\" \"b\" \"c\") (new stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_eq(
                 vx_core.f_new(
                   vx_core.t_stringlist,
@@ -1151,8 +1155,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 )
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1160,6 +1163,7 @@ export default class vx_core_test {
             ":describename", "(test-true (= (stringmap :a \"1\" :b \"2\") (new stringmap :a \"1\" :b \"2\")))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_eq(
                 vx_core.f_new(
                   vx_core.t_stringmap,
@@ -1175,8 +1179,7 @@ export default class vx_core_test {
                   ":b",
                   "2"
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -1198,8 +1201,8 @@ export default class vx_core_test {
             ":describename", "(test-false (= 2 2 3))",
             ":testresult",
             vx_test.f_test_false(
-              vx_core.f_eq_1(2, 2, 3),
-              context
+              context,
+              vx_core.f_eq_1(2, 2, 3)
             )
           )
         )
@@ -1221,8 +1224,8 @@ export default class vx_core_test {
             ":describename", "(test-true (> 3 2))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_gt(3, 2),
-              context
+              context,
+              vx_core.f_gt(3, 2)
             )
           )
         )
@@ -1244,8 +1247,8 @@ export default class vx_core_test {
             ":describename", "(test-true (> \"z\" \"y\" \"b\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_gt_1("z", "y", "b"),
-              context
+              context,
+              vx_core.f_gt_1("z", "y", "b")
             )
           )
         )
@@ -1267,8 +1270,8 @@ export default class vx_core_test {
             ":describename", "(test-true (>= 3 2))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_ge(3, 2),
-              context
+              context,
+              vx_core.f_ge(3, 2)
             )
           )
         )
@@ -1290,8 +1293,8 @@ export default class vx_core_test {
             ":describename", "(test-true (>= \"z\" \"b\" \"b\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_ge_1("z", "b", "b"),
-              context
+              context,
+              vx_core.f_ge_1("z", "b", "b")
             )
           )
         )
@@ -1313,11 +1316,11 @@ export default class vx_core_test {
             ":describename", "(test-true (and true true))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_and(
                 true,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1325,11 +1328,11 @@ export default class vx_core_test {
             ":describename", "(test-false (and true false))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_and(
                 true,
                 false
-              ),
-              context
+              )
             )
           )
         )
@@ -1351,12 +1354,12 @@ export default class vx_core_test {
             ":describename", "(test-true (and true true true))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_and_1(
                 true,
                 true,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1364,12 +1367,12 @@ export default class vx_core_test {
             ":describename", "(test-false (and true true false))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_and_1(
                 true,
                 true,
                 false
-              ),
-              context
+              )
             )
           )
         )
@@ -1391,6 +1394,7 @@ export default class vx_core_test {
             ":describename", "(test\n \"b\"\n (any<-list (list \"a\" \"b\" \"c\") 1))",
             ":testresult",
             vx_test.f_test(
+              context,
               "b",
               vx_core.f_any_from_list(
                 {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
@@ -1401,8 +1405,7 @@ export default class vx_core_test {
                   "c"
                 ),
                 1
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1410,6 +1413,7 @@ export default class vx_core_test {
             ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               "b",
               vx_core.f_any_from_list(
                 {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
@@ -1420,8 +1424,7 @@ export default class vx_core_test {
                   "c"
                 ),
                 1
-              ),
-              context
+              )
             )
           )
         )
@@ -1443,6 +1446,7 @@ export default class vx_core_test {
             ":describename", "(test\n 24\n (any<-list-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))\n ))",
             ":testresult",
             vx_test.f_test(
+              context,
               24,
               vx_core.f_any_from_list_reduce(
                 {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-2": vx_core.t_intlist},
@@ -1455,8 +1459,7 @@ export default class vx_core_test {
                 1,
                 vx_core.f_new(vx_core.t_any_from_reduce, (total, num) => 
                   vx_core.f_multiply(total, num))
-              ),
-              context
+              )
             )
           )
         )
@@ -1478,6 +1481,7 @@ export default class vx_core_test {
             ":describename", "(test\n \"v2\"\n (any<-map (map :a \"v1\" :b \"v2\" :c \"v3\") :b))",
             ":testresult",
             vx_test.f_test(
+              context,
               "v2",
               vx_core.f_any_from_map(
                 {"any-1": vx_core.t_any, "map-1": vx_core.t_map},
@@ -1491,8 +1495,7 @@ export default class vx_core_test {
                   "v3"
                 ),
                 ":b"
-              ),
-              context
+              )
             )
           )
         )
@@ -1514,9 +1517,9 @@ export default class vx_core_test {
             ":describename", "(test 1 (compare 3 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               1,
-              vx_core.f_compare(3, 2),
-              context
+              vx_core.f_compare(3, 2)
             )
           ),
           vx_core.f_new(
@@ -1524,9 +1527,9 @@ export default class vx_core_test {
             ":describename", "(test 1 (compare \"z\" \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               1,
-              vx_core.f_compare("z", "a"),
-              context
+              vx_core.f_compare("z", "a")
             )
           )
         )
@@ -1548,8 +1551,8 @@ export default class vx_core_test {
             ":describename", "(test-true  (contains \"abcde\" \"cd\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_contains("abcde", "cd"),
-              context
+              context,
+              vx_core.f_contains("abcde", "cd")
             )
           ),
           vx_core.f_new(
@@ -1557,8 +1560,8 @@ export default class vx_core_test {
             ":describename", "(test-false (contains \"abcde\" \"dc\"))",
             ":testresult",
             vx_test.f_test_false(
-              vx_core.f_contains("abcde", "dc"),
-              context
+              context,
+              vx_core.f_contains("abcde", "dc")
             )
           )
         )
@@ -1580,6 +1583,7 @@ export default class vx_core_test {
             ":describename", "(test-true  (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_contains_1(
                 vx_core.f_new(
                   vx_core.t_stringlist,
@@ -1588,8 +1592,7 @@ export default class vx_core_test {
                   "3"
                 ),
                 "2"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1597,6 +1600,7 @@ export default class vx_core_test {
             ":describename", "(test-true  (contains (intlist 1 2 3) 2))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_contains_1(
                 vx_core.f_new(
                   vx_core.t_intlist,
@@ -1605,8 +1609,7 @@ export default class vx_core_test {
                   3
                 ),
                 2
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1614,6 +1617,7 @@ export default class vx_core_test {
             ":describename", "(test-false (contains (list 1 \"2\" 3) 2))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_contains_1(
                 vx_core.f_new(
                   vx_core.t_list,
@@ -1622,8 +1626,7 @@ export default class vx_core_test {
                   3
                 ),
                 2
-              ),
-              context
+              )
             )
           )
         )
@@ -1645,11 +1648,11 @@ export default class vx_core_test {
             ":describename", "(test \"\"     (empty string))",
             ":testresult",
             vx_test.f_test(
+              context,
               "",
               vx_core.f_empty(
                 vx_core.t_string
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1657,13 +1660,13 @@ export default class vx_core_test {
             ":describename", "(test (list) (empty list))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_empty(
                 vx_core.t_list
               ),
               vx_core.f_empty(
                 vx_core.t_list
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1671,13 +1674,13 @@ export default class vx_core_test {
             ":describename", "(test (map)  (empty map))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_empty(
                 vx_core.t_map
               ),
               vx_core.f_empty(
                 vx_core.t_map
-              ),
-              context
+              )
             )
           )
         )
@@ -1699,6 +1702,7 @@ export default class vx_core_test {
             ":describename", "(test \"b\" (first<-list (stringlist \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               "b",
               vx_core.f_first_from_list(
                 {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
@@ -1707,8 +1711,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -1730,6 +1733,7 @@ export default class vx_core_test {
             ":describename", "(test \"b\" (first<-list-fn-any<-any (list nothing \"b\" \"c\") resolve))",
             ":testresult",
             vx_test.f_test(
+              context,
               "b",
               vx_core.f_first_from_list_fn_any_from_any(
                 {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
@@ -1740,8 +1744,7 @@ export default class vx_core_test {
                   "c"
                 ),
                 vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
-              ),
-              context
+              )
             )
           )
         )
@@ -1763,13 +1766,13 @@ export default class vx_core_test {
             ":describename", "(test \"a\" (if (= 2 2) \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "a",
               vx_core.f_if(
                 {"any-1": vx_core.t_string},
                 vx_core.f_eq(2, 2),
                 "a"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1777,13 +1780,13 @@ export default class vx_core_test {
             ":describename", "(test \"\"  (if : string (= 1 2) \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "",
               vx_core.f_if(
                 {"any-1": vx_core.t_string},
                 vx_core.f_eq(1, 2),
                 "a"
-              ),
-              context
+              )
             )
           )
         )
@@ -1805,14 +1808,14 @@ export default class vx_core_test {
             ":describename", "(test \"a\" (if (= 2 2) \"a\" \"b\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "a",
               vx_core.f_if_1(
                 {"any-1": vx_core.t_string},
                 vx_core.f_eq(2, 2),
                 "a",
                 "b"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1820,14 +1823,14 @@ export default class vx_core_test {
             ":describename", "(test \"b\"  (if (= 1 2) \"a\" \"b\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "b",
               vx_core.f_if_1(
                 {"any-1": vx_core.t_string},
                 vx_core.f_eq(1, 2),
                 "a",
                 "b"
-              ),
-              context
+              )
             )
           )
         )
@@ -1849,6 +1852,7 @@ export default class vx_core_test {
             ":describename", "(test-true\n (if\n  (then (= 2 3) false)\n  (then (!= 3 3) false)\n  (else (! false))))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_if_2(
                 {"any-1": vx_core.t_any},
                 vx_core.f_then(
@@ -1864,8 +1868,7 @@ export default class vx_core_test {
                     false
                   )})
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -1887,9 +1890,9 @@ export default class vx_core_test {
             ":describename", "(test 4 (int<-string \"4\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               4,
-              vx_core.f_int_from_string("4"),
-              context
+              vx_core.f_int_from_string("4")
             )
           ),
           vx_core.f_new(
@@ -1897,9 +1900,9 @@ export default class vx_core_test {
             ":describename", "(test 5 (int<-string \"5.4\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_core.f_int_from_string("5.4"),
-              context
+              vx_core.f_int_from_string("5.4")
             )
           ),
           vx_core.f_new(
@@ -1907,9 +1910,9 @@ export default class vx_core_test {
             ":describename", "(test 5 (int<-string \"5.9\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_core.f_int_from_string("5.9"),
-              context
+              vx_core.f_int_from_string("5.9")
             )
           ),
           vx_core.f_new(
@@ -1917,9 +1920,9 @@ export default class vx_core_test {
             ":describename", "(test notanumber  (int<-string \"notanumber\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.c_notanumber,
-              vx_core.f_int_from_string("notanumber"),
-              context
+              vx_core.f_int_from_string("notanumber")
             )
           ),
           vx_core.f_new(
@@ -1927,9 +1930,9 @@ export default class vx_core_test {
             ":describename", "(test infinity    (int<-string \"infinity\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.c_infinity,
-              vx_core.f_int_from_string("infinity"),
-              context
+              vx_core.f_int_from_string("infinity")
             )
           ),
           vx_core.f_new(
@@ -1937,9 +1940,9 @@ export default class vx_core_test {
             ":describename", "(test neginfinity (int<-string \"neginfinity\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.c_neginfinity,
-              vx_core.f_int_from_string("neginfinity"),
-              context
+              vx_core.f_int_from_string("neginfinity")
             )
           )
         )
@@ -1961,8 +1964,8 @@ export default class vx_core_test {
             ":describename", "(test-true (is-empty \"\"))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_is_empty(""),
-              context
+              context,
+              vx_core.f_is_empty("")
             )
           ),
           vx_core.f_new(
@@ -1970,12 +1973,12 @@ export default class vx_core_test {
             ":describename", "(test-true (is-empty (list)))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_is_empty_1(
                 vx_core.f_empty(
                   vx_core.t_list
                 )
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -1983,12 +1986,12 @@ export default class vx_core_test {
             ":describename", "(test-true (is-empty (map)))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_is_empty_1(
                 vx_core.f_empty(
                   vx_core.t_map
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -2010,8 +2013,8 @@ export default class vx_core_test {
             ":describename", "(test-true  (is-number 5))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_is_number(5),
-              context
+              context,
+              vx_core.f_is_number(5)
             )
           ),
           vx_core.f_new(
@@ -2019,8 +2022,8 @@ export default class vx_core_test {
             ":describename", "(test-true  (is-number 5.5))",
             ":testresult",
             vx_test.f_test_true(
-              vx_core.f_is_number(5.5),
-              context
+              context,
+              vx_core.f_is_number(5.5)
             )
           ),
           vx_core.f_new(
@@ -2028,8 +2031,8 @@ export default class vx_core_test {
             ":describename", "(test-false (is-number \"a\"))",
             ":testresult",
             vx_test.f_test_false(
-              vx_core.f_is_number("a"),
-              context
+              context,
+              vx_core.f_is_number("a")
             )
           )
         )
@@ -2051,6 +2054,7 @@ export default class vx_core_test {
             ":describename", "(test \"c\" (last<-list (list \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               "c",
               vx_core.f_last_from_list(
                 {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
@@ -2059,8 +2063,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -2082,6 +2085,7 @@ export default class vx_core_test {
             ":describename", "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               3,
               vx_core.f_length_from_list(
                 vx_core.f_new(
@@ -2090,8 +2094,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -2113,6 +2116,7 @@ export default class vx_core_test {
             ":describename", "(test\n 7\n (let\n  [v1 : int := 2\n   v2 : int := (+ v1 3)]\n  (+ v1 v2)))",
             ":testresult",
             vx_test.f_test(
+              context,
               7,
               vx_core.f_let(
                 {"any-1": vx_core.t_int},
@@ -2122,8 +2126,7 @@ export default class vx_core_test {
                   const v2 = vx_core.f_plus(v1, 3)
                   return vx_core.f_plus(v1, v2)
                 })
-              ),
-              context
+              )
             )
           )
         )
@@ -2145,6 +2148,7 @@ export default class vx_core_test {
             ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_new(
                 vx_core.t_stringlist,
                 "a1",
@@ -2165,8 +2169,7 @@ export default class vx_core_test {
                     key,
                     val
                   ))
-              ),
-              context
+              )
             )
           )
         )
@@ -2188,6 +2191,7 @@ export default class vx_core_test {
             ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_new(
                 vx_core.t_stringmap,
                 "keya",
@@ -2208,8 +2212,7 @@ export default class vx_core_test {
                     "key",
                     val
                   ))
-              ),
-              context
+              )
             )
           )
         )
@@ -2231,12 +2234,12 @@ export default class vx_core_test {
             ":describename", "(test true (new boolean true))",
             ":testresult",
             vx_test.f_test(
+              context,
               true,
               vx_core.f_new(
                 vx_core.t_boolean,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2244,12 +2247,12 @@ export default class vx_core_test {
             ":describename", "(test 4 (new int 4))",
             ":testresult",
             vx_test.f_test(
+              context,
               4,
               vx_core.f_new(
                 vx_core.t_int,
                 4
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2257,12 +2260,12 @@ export default class vx_core_test {
             ":describename", "(test 5.4 (new float 5.4))",
             ":testresult",
             vx_test.f_test(
+              context,
               5.4,
               vx_core.f_new(
                 vx_core.t_float,
                 5.4
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2270,12 +2273,12 @@ export default class vx_core_test {
             ":describename", "(test \"a\" (new string \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "a",
               vx_core.f_new(
                 vx_core.t_string,
                 "a"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2283,6 +2286,7 @@ export default class vx_core_test {
             ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (new stringlist \"a\" \"b\" \"c\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_new(
                 vx_core.t_stringlist,
                 "a",
@@ -2294,8 +2298,7 @@ export default class vx_core_test {
                 "a",
                 "b",
                 "c"
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2303,6 +2306,7 @@ export default class vx_core_test {
             ":describename", "(test\n (stringmap :a \"1\" :b \"2\")\n (new stringmap :a \"1\" :b \"2\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.f_new(
                 vx_core.t_stringmap,
                 ":a",
@@ -2316,8 +2320,7 @@ export default class vx_core_test {
                 "1",
                 ":b",
                 "2"
-              ),
-              context
+              )
             )
           )
         )
@@ -2339,11 +2342,11 @@ export default class vx_core_test {
             ":describename", "(test-true (or true true))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_or(
                 true,
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2351,11 +2354,11 @@ export default class vx_core_test {
             ":describename", "(test-true (or true false))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_or(
                 true,
                 false
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2363,11 +2366,11 @@ export default class vx_core_test {
             ":describename", "(test-false (or false false))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_or(
                 false,
                 false
-              ),
-              context
+              )
             )
           )
         )
@@ -2389,12 +2392,12 @@ export default class vx_core_test {
             ":describename", "(test-true (or false true false))",
             ":testresult",
             vx_test.f_test_true(
+              context,
               vx_core.f_or_1(
                 false,
                 true,
                 false
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2402,12 +2405,12 @@ export default class vx_core_test {
             ":describename", "(test-false (or false false false))",
             ":testresult",
             vx_test.f_test_false(
+              context,
               vx_core.f_or_1(
                 false,
                 false,
                 false
-              ),
-              context
+              )
             )
           )
         )
@@ -2429,9 +2432,9 @@ export default class vx_core_test {
             ":describename", "(test \"a\" (resolve \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "a",
-              vx_core.f_resolve({"any-1": vx_core.t_string}, "a"),
-              context
+              vx_core.f_resolve({"any-1": vx_core.t_string}, "a")
             )
           )
         )
@@ -2453,13 +2456,13 @@ export default class vx_core_test {
             ":describename", "(test 4 (resolve (fn : int [] (+ 1 3))))",
             ":testresult",
             vx_test.f_test(
+              context,
               4,
               vx_core.f_resolve_1(
                 {"any-1": vx_core.t_int},
                 vx_core.f_new(vx_core.t_any_from_func, () => 
                   vx_core.f_plus(1, 3))
-              ),
-              context
+              )
             )
           )
         )
@@ -2481,13 +2484,13 @@ export default class vx_core_test {
             ":describename", "(test 4 (resolve : int (fn : int [] (+ 1 3))))",
             ":testresult",
             vx_test.f_test(
+              context,
               4,
               vx_core.f_resolve_1(
                 {"any-1": vx_core.t_int},
                 vx_core.f_new(vx_core.t_any_from_func, () => 
                   vx_core.f_plus(1, 3))
-              ),
-              context
+              )
             )
           )
         )
@@ -2509,9 +2512,9 @@ export default class vx_core_test {
             ":describename", "(test \"abab\" (string-repeat \"ab\" 2))",
             ":testresult",
             vx_test.f_test(
+              context,
               "abab",
-              vx_core.f_string_repeat("ab", 2),
-              context
+              vx_core.f_string_repeat("ab", 2)
             )
           )
         )
@@ -2533,11 +2536,11 @@ export default class vx_core_test {
             ":describename", "(test \"true\"  (string<-any true))",
             ":testresult",
             vx_test.f_test(
+              context,
               "true",
               vx_core.f_string_from_any(
                 true
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2545,9 +2548,9 @@ export default class vx_core_test {
             ":describename", "(test \"4\"     (string<-any 4))",
             ":testresult",
             vx_test.f_test(
+              context,
               "4",
-              vx_core.f_string_from_any(4),
-              context
+              vx_core.f_string_from_any(4)
             )
           ),
           vx_core.f_new(
@@ -2555,9 +2558,9 @@ export default class vx_core_test {
             ":describename", "(test \"5.4\"   (string<-any 5.4))",
             ":testresult",
             vx_test.f_test(
+              context,
               "5.4",
-              vx_core.f_string_from_any(5.4),
-              context
+              vx_core.f_string_from_any(5.4)
             )
           ),
           vx_core.f_new(
@@ -2565,9 +2568,9 @@ export default class vx_core_test {
             ":describename", "(test \"\\\"a\\\"\" (string<-any \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "\"a\"",
-              vx_core.f_string_from_any("a"),
-              context
+              vx_core.f_string_from_any("a")
             )
           ),
           vx_core.f_new(
@@ -2575,6 +2578,7 @@ export default class vx_core_test {
             ":describename", "(test\n \"(stringlist\n   \\\"a\\\"\n   \\\"b\\\"\n   \\\"c\\\")\"\n (string<-any (stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               "(stringlist\n \"a\"\n \"b\"\n \"c\")",
               vx_core.f_string_from_any(
                 vx_core.f_new(
@@ -2583,8 +2587,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 )
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2592,6 +2595,7 @@ export default class vx_core_test {
             ":describename", "(test\n \"(stringmap\n   :a \\\"1\\\"\n   :b \\\"2\\\")\"\n (string<-any (stringmap :a \"1\" :b \"2\")))",
             ":testresult",
             vx_test.f_test(
+              context,
               "(stringmap\n :a \"1\"\n :b \"2\")",
               vx_core.f_string_from_any(
                 vx_core.f_new(
@@ -2601,8 +2605,7 @@ export default class vx_core_test {
                   ":b",
                   "2"
                 )
-              ),
-              context
+              )
             )
           )
         )
@@ -2624,6 +2627,7 @@ export default class vx_core_test {
             ":describename", "(test 1\n (switch : int\n  \"d\"\n  (case (list \"b\" \"c\" \"d\") 1)\n  (else 2)))",
             ":testresult",
             vx_test.f_test(
+              context,
               1,
               vx_core.f_switch(
                 {"any-1": vx_core.t_int, "any-2": vx_core.t_string},
@@ -2638,8 +2642,7 @@ export default class vx_core_test {
                   vx_core.f_new(vx_core.t_any_from_func, () => {return 1})
                 ),
                 vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return 2}))
-              ),
-              context
+              )
             )
           )
         )
@@ -2661,11 +2664,11 @@ export default class vx_core_test {
             ":describename", "(test boolean (type<-any false))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.t_boolean,
               vx_core.f_type_from_any(
                 false
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2673,9 +2676,9 @@ export default class vx_core_test {
             ":describename", "(test int (type<-any 5))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.t_int,
-              vx_core.f_type_from_any(5),
-              context
+              vx_core.f_type_from_any(5)
             )
           ),
           vx_core.f_new(
@@ -2683,9 +2686,9 @@ export default class vx_core_test {
             ":describename", "(test string (type<-any \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               vx_core.t_string,
-              vx_core.f_type_from_any("a"),
-              context
+              vx_core.f_type_from_any("a")
             )
           )
         )
@@ -2707,11 +2710,11 @@ export default class vx_core_test {
             ":describename", "(test \"vx/core/boolean\" (typename<-any false))",
             ":testresult",
             vx_test.f_test(
+              context,
               "vx/core/boolean",
               vx_core.f_typename_from_any(
                 false
-              ),
-              context
+              )
             )
           ),
           vx_core.f_new(
@@ -2719,9 +2722,9 @@ export default class vx_core_test {
             ":describename", "(test \"vx/core/int\"     (typename<-any 5))",
             ":testresult",
             vx_test.f_test(
+              context,
               "vx/core/int",
-              vx_core.f_typename_from_any(5),
-              context
+              vx_core.f_typename_from_any(5)
             )
           ),
           vx_core.f_new(
@@ -2729,9 +2732,9 @@ export default class vx_core_test {
             ":describename", "(test \"vx/core/string\"  (typename<-any \"a\"))",
             ":testresult",
             vx_test.f_test(
+              context,
               "vx/core/string",
-              vx_core.f_typename_from_any("a"),
-              context
+              vx_core.f_typename_from_any("a")
             )
           )
         )

@@ -63,6 +63,7 @@ func NewFuncCopy(fnc *vxfunc) *vxfunc {
 	output.sideeffects = fnc.sideeffects
 	output.textblock = fnc.textblock
 	output.value = emptyvalue
+	output.debug = fnc.debug
 	return output
 }
 

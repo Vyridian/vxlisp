@@ -568,6 +568,119 @@ public final class Xml {
 
   public static final Type_xmlpropmap e_xmlpropmap = new Class_xmlpropmap();
   public static final Type_xmlpropmap t_xmlpropmap = new Class_xmlpropmap();
+
+  /**
+   * Constant: delimxml
+   * {delim}
+   */
+  public static class Const_delimxml extends Textblock.Class_delim {
+
+    public Core.Type_constdef constdef() {
+      return Core.constdef_new(
+        "vx/data/xml", // pkgname
+        "delimxml", // name
+        Core.typedef_new(
+          "vx/data/textblock", // pkgname
+          "delim", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_delimxml output) {
+      Textblock.Type_delim val = Core.f_new(
+        Textblock.t_delim,
+        Core.t_anylist.vx_new(
+                Core.vx_new_string(":delimlist"),
+                Core.f_new(
+                  Textblock.t_delimlist,
+                  Core.t_anylist.vx_new(
+                    Core.f_copy(
+                      Textblock.c_delimbracketangle,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":delimlist"),
+                        Core.f_new(
+                          Textblock.t_delimlist,
+                          Core.t_anylist.vx_new(
+                            Xml.c_delimxmlequal,
+                            Textblock.c_delimquote
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+        )
+      );
+      output.vx_p_name = val.name();
+      output.vx_p_starttext = val.starttext();
+      output.vx_p_endtext = val.endtext();
+      output.vx_p_startpos = val.startpos();
+      output.vx_p_endpos = val.endpos();
+      output.vx_p_delimlist = val.delimlist();
+    }
+
+
+  }
+
+  public static final Const_delimxml c_delimxml = new Const_delimxml();
+
+
+  /**
+   * Constant: delimxmlequal
+   * {delim}
+   */
+  public static class Const_delimxmlequal extends Textblock.Class_delim {
+
+    public Core.Type_constdef constdef() {
+      return Core.constdef_new(
+        "vx/data/xml", // pkgname
+        "delimxmlequal", // name
+        Core.typedef_new(
+          "vx/data/textblock", // pkgname
+          "delim", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_delimxmlequal output) {
+      Textblock.Type_delim val = Core.f_new(
+        Textblock.t_delim,
+        Core.t_anylist.vx_new(
+                Core.vx_new_string(":starttext"),
+                Core.vx_new_string("=")
+        )
+      );
+      output.vx_p_name = val.name();
+      output.vx_p_starttext = val.starttext();
+      output.vx_p_endtext = val.endtext();
+      output.vx_p_startpos = val.startpos();
+      output.vx_p_endpos = val.endpos();
+      output.vx_p_delimlist = val.delimlist();
+    }
+
+
+  }
+
+  public static final Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
+
   /**
    * @function xml_from_textblock
    * @param  {textblock} textblock
@@ -662,6 +775,8 @@ public final class Xml {
 
 
   static {
+    Const_delimxml.const_new(c_delimxml);
+    Const_delimxmlequal.const_new(c_delimxmlequal);
   }
 
 }

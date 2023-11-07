@@ -477,14 +477,16 @@ namespace vx_data_db {
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
-      output = new vx_data_db::Class_dbcellmap();
-      output->vx_p_map = map;
-      for (auto const& [key, val] : map) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dbcellmap();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       for (auto const& [key, val] : mapval) {
         vx_core::vx_release_except(val, output);
@@ -534,15 +536,17 @@ namespace vx_data_db {
           }
         }
       }
-      output = new vx_data_db::Class_dbcellmap();
-      output->vx_p_keys = keys;
-      output->vx_p_map = mapval;
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dbcellmap();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -828,14 +832,16 @@ namespace vx_data_db {
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
-      output = new vx_data_db::Class_dbfieldmap();
-      output->vx_p_map = map;
-      for (auto const& [key, val] : map) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dbfieldmap();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       for (auto const& [key, val] : mapval) {
         vx_core::vx_release_except(val, output);
@@ -885,15 +891,17 @@ namespace vx_data_db {
           }
         }
       }
-      output = new vx_data_db::Class_dbfieldmap();
-      output->vx_p_keys = keys;
-      output->vx_p_map = mapval;
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_reserve(val);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dbfieldmap();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -1203,14 +1211,16 @@ namespace vx_data_db {
           msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
         }
       }
-      output = new vx_data_db::Class_dblinklist();
-      output->vx_p_list = list;
-      for (vx_core::Type_any valadd : list) {
-        vx_core::vx_reserve(valadd);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((list.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dblinklist();
+        output->vx_p_list = list;
+        for (vx_core::Type_any valadd : list) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(listval, output);
       return output;
@@ -1243,14 +1253,16 @@ namespace vx_data_db {
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
-      output = new vx_data_db::Class_dblinklist();
-      output->vx_p_list = listval;
-      for (vx_core::Type_any valadd : listval) {
-        vx_core::vx_reserve(valadd);
-      }
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
+      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_db::Class_dblinklist();
+        output->vx_p_list = listval;
+        for (vx_core::Type_any valadd : listval) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);

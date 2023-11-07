@@ -500,6 +500,8 @@ namespace vx_event {
       init();
     }
     void vx_Class_package::init() {
+      vx_event::c_event_click = new vx_event::Class_event_click();
+      vx_event::c_event_move = new vx_event::Class_event_move();
       vx_event::e_event = new Class_event();
       vx_core::vx_reserve_empty(vx_event::e_event);
       vx_event::t_event = new Class_event();
@@ -508,9 +510,7 @@ namespace vx_event {
       vx_core::vx_reserve_empty(vx_event::e_any_from_from_to);
       vx_event::t_any_from_from_to = new vx_event::Class_any_from_from_to();
       vx_core::vx_reserve_type(vx_event::t_any_from_from_to);
-      vx_event::c_event_click = new vx_event::Class_event_click();
       vx_event::Class_event_click::vx_const_new(vx_event::c_event_click);
-      vx_event::c_event_move = new vx_event::Class_event_move();
       vx_event::Class_event_move::vx_const_new(vx_event::c_event_move);
     }
     vx_core::vx_Type_mapany vx_Class_package::maptype() {

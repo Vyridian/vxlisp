@@ -25,6 +25,12 @@ namespace vx_data_xml {
   typedef Abstract_xmlpropmap* Type_xmlpropmap;
   extern Type_xmlpropmap e_xmlpropmap;
   extern Type_xmlpropmap t_xmlpropmap;
+  class Class_delimxml;
+  typedef Class_delimxml* Const_delimxml;
+  extern Const_delimxml c_delimxml;
+  class Class_delimxmlequal;
+  typedef Class_delimxmlequal* Const_delimxmlequal;
+  extern Const_delimxmlequal c_delimxmlequal;
   class Abstract_xml_from_textblock;
   typedef Abstract_xml_from_textblock* Func_xml_from_textblock;
   extern Func_xml_from_textblock e_xml_from_textblock;
@@ -170,6 +176,20 @@ namespace vx_data_xml {
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_string> vx_mapstring() const override;
     virtual vx_core::Type_string vx_get_string(vx_core::Type_string key) const override;
+  };
+
+  // (const delimxml)
+  class Class_delimxml : public vx_data_textblock::Class_delim {
+  public:
+    static void vx_const_new(vx_data_xml::Const_delimxml output);
+    vx_core::Type_constdef vx_constdef() const;
+  };
+
+  // (const delimxmlequal)
+  class Class_delimxmlequal : public vx_data_textblock::Class_delim {
+  public:
+    static void vx_const_new(vx_data_xml::Const_delimxmlequal output);
+    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (func xml<-textblock)

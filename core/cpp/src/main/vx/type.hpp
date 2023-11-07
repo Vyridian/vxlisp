@@ -14,6 +14,10 @@ namespace vx_type {
   typedef Abstract_allowtypes_from_type* Func_allowtypes_from_type;
   extern Func_allowtypes_from_type e_allowtypes_from_type;
   extern Func_allowtypes_from_type t_allowtypes_from_type;
+  class Abstract_any_from_int;
+  typedef Abstract_any_from_int* Func_any_from_int;
+  extern Func_any_from_int e_any_from_int;
+  extern Func_any_from_int t_any_from_int;
   class Abstract_int_from_string_find;
   typedef Abstract_int_from_string_find* Func_int_from_string_find;
   extern Func_int_from_string_find e_int_from_string_find;
@@ -204,6 +208,32 @@ namespace vx_type {
   public:
     Class_allowtypes_from_type();
     virtual ~Class_allowtypes_from_type() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func any<-int)
+  class Abstract_any_from_int : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_int() {};
+    virtual ~Abstract_any_from_int() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_int : public virtual Abstract_any_from_int {
+  public:
+    Class_any_from_int();
+    virtual ~Class_any_from_int() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -674,6 +704,14 @@ namespace vx_type {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  // (func any<-int)
+  template <class T> T* f_any_from_int(T* generic_any_1, vx_core::Type_int val) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(val);
+    vx_core::vx_release_one_except(val, output);
+    return output;
+  }
 
   class vx_Class_package : vx_core::vx_Abstract_package {
   public:

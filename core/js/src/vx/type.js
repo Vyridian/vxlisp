@@ -63,7 +63,7 @@ export default class vx_type {
 
   /**
    * @function allowtypes_from_type
-   * Get the name of a given type
+   * Returns the allowed types from a given type
    * @param  {any} type
    * @return {typelist}
    */
@@ -73,10 +73,26 @@ export default class vx_type {
   static f_allowtypes_from_type(type) {
     let output = vx_core.e_typelist
     output = vx_core.f_any_from_struct(
-      {"any-1": vx_core.t_typelist, "struct-1": vx_core.t_typedef},
+      {"any-1": vx_core.t_typelist, "struct-2": vx_core.t_typedef},
       vx_core.f_typedef_from_type(type),
       ":allowtypes"
     )
+    return output
+  }
+
+  /**
+   * @function any_from_int
+   * Generic function returns any from an int.
+   * @param  {typemap} generic
+   * @param  {int} val
+   * @return {any-1}
+   */
+  static t_any_from_int = {}
+  static e_any_from_int = {vx_type: vx_type.t_any_from_int}
+
+  static f_any_from_int(generic, val) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
     return output
   }
 
@@ -431,7 +447,7 @@ export default class vx_type {
 
   static f_traits_from_typedef(vtypedef) {
     let output = vx_core.e_typelist
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_typelist, "struct-1": vx_core.t_typedef}, vtypedef, ":traits")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_typelist, "struct-2": vx_core.t_typedef}, vtypedef, ":traits")
     return output
   }
 
@@ -440,6 +456,7 @@ export default class vx_type {
   static c_empty = {
     "allowtypenames<-type": vx_type.e_allowtypenames_from_type,
     "allowtypes<-type": vx_type.e_allowtypes_from_type,
+    "any<-int": vx_type.e_any_from_int,
     "int<-string-find": vx_type.e_int_from_string_find,
     "int<-string-findkeyword": vx_type.e_int_from_string_findkeyword,
     "is-boolean": vx_type.e_is_boolean,
@@ -501,6 +518,25 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_allowtypes_from_type
+    }
+
+    // (func any_from_int)
+    vx_type.t_any_from_int['vx_type'] = vx_core.t_type
+    vx_type.t_any_from_int['vx_value'] = {
+      name          : "any<-int",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_any_from_int
     }
 
     // (func int_from_string_find)

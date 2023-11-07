@@ -39,6 +39,19 @@
    :path    ../cpp/src/test
    :context vx/test/context-test
    :doc     "Build C++ Test Code")
+  (cmd srccsharp
+   :code    :source
+   :lang    :csharp
+   :path    ../csharp/src/main
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build C# Source Code")
+  (cmd testcsharp
+   :code    :test
+   :lang    :csharp
+   :path    ../csharp/src/test
+   :context vx/test/context-test
+   :doc     "Build C# Test Code")
   (cmd srcjs
    :code    :source
    :lang    :js
@@ -65,4 +78,30 @@
    :path    ../java/src/test/java
    :context vx/test/context-test
    :doc  "Build Java Test Code")
+  (cmd srckotlin
+   :code    :source
+   :lang    :kotlin
+   :path    ../kotlin/app/src/main/kotlin
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build Kotlin Source Code")
+  (cmd testkotlin
+   :code    :test
+   :lang    :kotlin
+   :path    ../kotlin/app/src/test/kotlin
+   :context vx/test/context-test
+   :doc     "Build Kotlin Test Code")
+  (cmd srcswift
+   :code    :source
+   :lang    :swift
+   :path    ../swift/src/main
+   :main    vx/core/main
+   :context vx/core/context-main
+   :doc     "Build Swift Source Code")
+  (cmd testswift
+   :code    :test
+   :lang    :swift
+   :path    ../swift/src/test
+   :context vx/test/context-test
+   :doc     "Build Swift Test Code")
 )

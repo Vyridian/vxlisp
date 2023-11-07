@@ -152,7 +152,7 @@ public final class Type {
 
   /**
    * @function allowtypes_from_type
-   * Get the name of a given type
+   * Returns the allowed types from a given type
    * @param  {any} type
    * @return {typelist}
    * (func allowtypes<-type)
@@ -238,6 +238,97 @@ public final class Type {
   public static Core.Type_typelist f_allowtypes_from_type(final Core.Type_any type) {
     Core.Type_typelist output = Core.e_typelist;
     output = Core.f_typedef_from_type(type).allowtypes();
+    return output;
+  }
+
+  /**
+   * @function any_from_int
+   * Generic function returns any from an int.
+   * @param  {int} val
+   * @return {any-1}
+   * (func any<-int)
+   */
+  public static interface Func_any_from_int extends Core.Func_any_from_any {
+    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val);
+  }
+
+  public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
+
+    @Override
+    public Func_any_from_int vx_new(Object... vals) {
+      Class_any_from_int output = new Class_any_from_int();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_int vx_copy(Object... vals) {
+      Class_any_from_int output = new Class_any_from_int();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "any<-int", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_int vx_empty() {return e_any_from_int;}
+    @Override
+    public Func_any_from_int vx_type() {return t_any_from_int;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_int inputval = (Core.Type_int)value;
+      Core.Type_any outputval = Type.f_any_from_int(Core.t_any, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int val = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      output = Type.f_any_from_int(generic_any_1, val);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val) {
+      return Type.f_any_from_int(generic_any_1, val);
+    }
+
+  }
+
+  public static final Func_any_from_int e_any_from_int = new Type.Class_any_from_int();
+  public static final Func_any_from_int t_any_from_int = new Type.Class_any_from_int();
+
+  public static <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val) {
+    T output = Core.f_empty(generic_any_1);
     return output;
   }
 

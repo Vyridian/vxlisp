@@ -2,7 +2,7 @@
 
 ## Overview
 
-* vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere'. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
+* vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere' by writing in one language and publishing to any other one. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
 
 ## Sample
 
@@ -38,7 +38,7 @@
 
 * Aren't there already too many languages? - I agree completely. The ubiquity of beutiful, niche languages is exactly the inspiration for this one. vxlisp is a model for a new language that can break the hamster-wheel of shifting languages.
 
-1. Choosing a Language - The first problem with existing languages is you need to choose one for your task. You could choose the most used languages to be safe (e.g. JavaScript, Java, C++), or you could choose a more niche language that might fit your coding style or the project requirements (e.g. Typescript, Scala, Clojure, Rust, Dart).
+1. Choosing a Language - The first problem with existing languages is you need to choose one for your task. You could choose the most used languages to be safe (e.g. JavaScript, Java, C++), or you could choose a more niche language that might fit your coding style or the project requirements (e.g. Typescript, Scala, Clojure, Rust, Dart). My answer: don't choose. Write in one language and publish to any other language.
 
 2. Language Limitiations - Now you are working through your project and realize that a key feature you need is not available in your language or is extremely convoluted (e.g. futures) or has poor performance for your use case (e.g. distributed systems). Too bad. You are committed to the language. Changing now is not realistic, or... you start from scratch.
 

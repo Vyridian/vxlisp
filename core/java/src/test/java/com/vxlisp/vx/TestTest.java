@@ -21,6 +21,7 @@ public final class TestTest {
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
@@ -31,8 +32,7 @@ public final class TestTest {
                     Core.vx_new_string("src/test/resources")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -51,6 +51,7 @@ public final class TestTest {
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
@@ -61,8 +62,7 @@ public final class TestTest {
                     Core.vx_new_string("src/test/resources")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -81,6 +81,7 @@ public final class TestTest {
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
@@ -91,8 +92,7 @@ public final class TestTest {
                     Core.vx_new_string("src/test/resources")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )

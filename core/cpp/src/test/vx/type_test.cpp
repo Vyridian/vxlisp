@@ -699,29 +699,29 @@ namespace vx_type_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(71), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(15), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(72), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(16), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(57), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(54), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(57), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(54), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
@@ -744,6 +744,7 @@ namespace vx_type_test {
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":allowtypenames<-type"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":allowtypes<-type"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":any<-int"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":int<-string-find"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":int<-string-findkeyword"), vx_core::vx_new_int(2),
         vx_core::vx_new_string(":is-boolean"), vx_core::vx_new_int(0),

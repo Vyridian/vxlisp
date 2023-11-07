@@ -37,6 +37,6 @@
  [textblock : tb/textblock]
  (let
   [parsedtb : tb/textblock := (tb/parse textblock delims)
-   childtbs : tb/textblocklist := (tb/textblocks<-textblock parsedtb)
+   childtbs : tb/textblocklist := (tb/textblocklist<-textblock parsedtb)
    strings  : stringlist := (tb/stringlist<-textblocklist childtbs)]
   (csvrows strings)))

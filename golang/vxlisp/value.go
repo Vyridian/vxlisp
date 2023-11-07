@@ -422,6 +422,8 @@ func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpacka
 						case ":":
 							lastword = clausepart
 						case ":native":
+						case ":debug":
+							fnc.debug = true
 						default:
 							if idx < (partslen-1) && (clausetextblocks[idx+1].text == ":native") {
 								nativeconst := NewConst()
@@ -506,9 +508,12 @@ func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpacka
 			}
 			output = NewValueFromFunc(fnc)
 		}
-	case "\"", "`":
+	case "\"":
 		text = StringFromStringFindReplace(text, "“", "\"")
 		text = StringFromStringFindReplace(text, "”", "\"")
+		text = StringFromStringFindReplace(text, "\\\"", "\"")
+		output = NewValueFromString("\"" + text + "\"")
+	case "`":
 		output = NewValueFromString("\"" + text + "\"")
 	case "text":
 		if BooleanFromStringStarts(text, ":") {
@@ -621,6 +626,36 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 		chgargs, msgs := ListArgLink(fnc.listarg, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = chgargs
+		if fnc.name == "any<-map" {
+			if len(fnc.listarg) == 2 {
+				typearg1 := fnc.listarg[0].value.vxtype
+				switch typearg1.extends {
+				case ":map":
+				case ":struct":
+					fnc.name = "any<-struct"
+					fnc.alias = "any<-struct"
+					valuearg2 := fnc.listarg[1].value
+					if valuearg2.code == "string" {
+						keyarg2 := StringValueFromValue(valuearg2)
+						if !BooleanFromStringStarts(keyarg2, ":") {
+							//msg := NewMsgFromTextblock(textblock, subpath, "any<-struct property must be a :keyword. (type "+typearg1.name+" "+keyarg2+")")
+							//msgblock = MsgblockAddError(msgblock, msg)
+						} else {
+							listprop := ListPropertyTraitFromType(typearg1)
+							mapprop := ArgMapFromArgList(listprop)
+							key := keyarg2[1:]
+							prop, ok := mapprop[key]
+							if ok {
+								fnc.vxtype = prop.vxtype
+							} else {
+								msg := NewMsgFromTextblock(textblock, subpath, "any<-struct does not contain property. (type "+typearg1.name+" "+keyarg2+")")
+								msgblock = MsgblockAddError(msgblock, msg)
+							}
+						}
+					}
+				}
+			}
+		}
 		origfunc := fnc
 		if !fnc.iscopied {
 			signature := SignatureFromFunc(fnc, subpath)
@@ -628,6 +663,7 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 			if ok {
 				fnc = NewFuncCopy(lookupfunc)
 				fnc.textblock = origfunc.textblock
+				fnc.debug = origfunc.debug
 				if origfunc.vxtype.name != "" {
 					fnc.vxtype = origfunc.vxtype
 				}
@@ -640,6 +676,7 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 						if ok {
 							fnc = NewFuncCopy(lookupfunc)
 							fnc.textblock = origfunc.textblock
+							fnc.debug = origfunc.debug
 							fnc = FuncSetType(fnc, lookuptype)
 							typearg := NewArgFromType(lookuptype)
 							origfunc.listarg = []vxarg{typearg}
@@ -653,6 +690,7 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 						if ok {
 							fnc = NewFuncCopy(lookupfunc)
 							fnc.textblock = origfunc.textblock
+							fnc.debug = origfunc.debug
 							fnc = FuncSetType(fnc, lookuptype)
 							typearg := NewArgFromType(lookuptype)
 							origfunc.listarg = append([]vxarg{typearg}, origfunc.listarg...)
@@ -779,13 +817,17 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 			case "":
 				pass = true
 			default:
-				if actualtype.isfunc {
-					actualfunc := actualtype.vxfunc
-					actualtype = actualfunc.vxtype
+				if NameFromType(expectedtype) == NameFromType(actualtype) {
+					pass = true
+				} else {
+					if actualtype.isfunc {
+						actualfunc := actualtype.vxfunc
+						actualtype = actualfunc.vxtype
+					}
+					subtype := expectedfuncref.vxtype
+					actualtype, pass, msgs = BooleanMatchFromTypeType(subtype, actualtype, multi, 0, path)
+					msgblock = MsgblockAddBlock(msgblock, msgs)
 				}
-				subtype := expectedfuncref.vxtype
-				actualtype, pass, msgs = BooleanMatchFromTypeType(subtype, actualtype, multi, 0, path)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
 			}
 			if IsErrorFromMsgblock(msgblock) {
 			} else if pass {

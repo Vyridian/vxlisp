@@ -564,7 +564,7 @@
  :doc "Nothing Value. Opposite of every other value. e.g. Nil, Null")
 
 (const quote : string
- "\""
+ `"`
  :doc "Quotation mark constant")
 
 (const true : boolean
@@ -1158,23 +1158,31 @@
  [value : any-2]
  :async
  :context
- :doc "Function Type taking any value any-2 and returning generic any-1")
+ :doc "Generic Function taking any value any-2 and returning generic any-1")
+
+(func any<-int : any-1
+ [value : int]
+ :doc "Generic Function returning Generic any-1 from an int")
 
 (func any<-func : any-1
  []
- :doc "Function Type returning Generic any-1 with any parameters")
+ :doc "Generic Function returning Generic any-1 with any parameters")
 
-(func any<-func-async : any-1 :async
+(func any<-func-async : any-1
  []
- :doc "Function Type returning Generic any-1 with any parameters")
+ :async
+ :doc "Generic Function returning Generic any-1 with any parameters")
 
 (func any<-key-value : any-1
  [key : string
-  val : any-2])
+  val : any-2]
+ :doc "Generic Function returning Generic any-1 from a key and a value")
 
-(func any<-key-value-async : any-1 :async
+(func any<-key-value-async : any-1
  [key : string
-  val : any-2])
+  val : any-2]
+ :async
+ :doc "Generic Function returning Asynchronous Generic any-1 from a key and a value")
 
 (func any<-list : any-1
  [values : list-1
@@ -1336,7 +1344,7 @@
 
 (func any<-struct : any-1
  [vstruct : struct-2
-  key    : string]
+  key     : string]
  (native
   :cpp
    "vx_core::Type_any val = vstruct->vx_get_any(key);
@@ -1368,7 +1376,7 @@
 
 (func boolean<-any : boolean
  [value : any-1]
- :doc "Function Type taking generic any-2 and returning boolean")
+ :doc "Function Type taking generic any-1 and returning boolean")
 
 (func boolean<-func : boolean
  []
@@ -2116,20 +2124,6 @@
  [valuemap                : map-2
   fn-any<-key-value-async : any<-key-value-async])
 
-/*
-(func any<-start-end-fn : any-1
- [start : int
-  end   : int
-  fn-any<-int-any : any<-int-any ::any-1]
- :doc "Returns a list by for-nexting from start to end.")
-
-(func list<-start-end-fn : list-1
- [start : int
-  end   : int
-  fn-any<-int : any<-int ::any-1]
- :doc "Returns a list by for-nexting from start to end.")
-*/
-
 (func list<-type : any
  [type : any]
  (native
@@ -2152,7 +2146,29 @@
    "Core.Type_string stringtext = Core.f_string_from_any(value);
     String text = stringtext.vx_string();
     System.out.println(text);
-    output = value;"))
+    output = value;")
+ :doc "Writes a value to the console.")
+
+(func log : any
+ [text  : string
+  value : any]
+ (native
+  :cpp
+   "vx_core::vx_log(text);
+    vx_core::vx_log(value);
+    output = value;"
+  :js
+   "console.log(text)
+    const svalue = vx_core.f_string_from_any(value)
+    console.log(svalue)
+    output = value"
+  :java
+   "System.out.println(text);
+    Core.Type_string valuestring = Core.f_string_from_any(value);
+    String svalue = valuestring.vx_string();
+    System.out.println(svalue);
+    output = value;")
+ :doc "Writes a string and a value to the console.")
 
 (func main : string
  [args : anylist :...]
@@ -2284,6 +2300,13 @@
   :severity msg-error
   :text error)
  :doc "Returns a msg from error string")
+
+(func msg<-warning : msg
+ [warning : string]
+ (msg
+  :severity msg-warning
+  :text warning)
+ :doc "Returns a msg from a warning string")
 
 (func msgblock<-msgblock-msg : msgblock
  [origblock : msgblock

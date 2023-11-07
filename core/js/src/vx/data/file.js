@@ -26,7 +26,7 @@ export default class vx_data_file {
 
   static f_name_from_file(file) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_data_file.t_file}, file, ":name")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":name")
     return output
   }
 
@@ -41,7 +41,7 @@ export default class vx_data_file {
 
   static f_path_from_file(file) {
     let output = vx_core.e_string
-    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-1": vx_data_file.t_file}, file, ":path")
+    output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":path")
     return output
   }
 

@@ -69,9 +69,9 @@ export default class vx_sample_test {
             ":describename", "(test 4 myconst)",
             ":testresult",
             vx_test.f_test(
+                context,
                 4,
-                vx_sample.c_myconst,
-                context
+                vx_sample.c_myconst
               )
           )
         )
@@ -93,9 +93,9 @@ export default class vx_sample_test {
             ":describename", "(test 5 (myfunc 1))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
-              vx_sample.f_myfunc(1),
-              context
+              vx_sample.f_myfunc(1)
             )
           )
         )

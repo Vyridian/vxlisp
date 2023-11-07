@@ -1,5 +1,6 @@
 (package vx/repl
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib type :path vx/type)
+       (lib tb   :path vx/data/textblock)
        (lib javafuture)
 
  :doc "Read-Evaluate-Print-Loop processor.")
@@ -19,7 +20,6 @@
  :allowtypes [repl]
  :doc "List of repl")
 
-/*
 (const delimvxlisp : tb/delim
  (tb/delim
   :name "delimvxlisp"
@@ -58,7 +58,6 @@
     delimvxlispbracket
     delimvxlispparen))
  :doc "vxlisp Paren Delimiters")
-*/
 
 (func any<-liblist-string : any
  [liblist : liblist
@@ -104,15 +103,19 @@
 
 (func any<-repl : any
  [repl : repl]
- (let
+ (let : any
   [val      : any      := (:val repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist<-repllist repllist)]
-  (if : any
+  (if
    (then (!-empty val) val)
-   (then (is-func repltype) (any-repl<-functype-args repltype args))
-   (else (new repltype args))))
+   (then (is-func repltype)
+    (any-repl<-functype-args
+     repltype
+     args))
+   (else
+    (new repltype args))))
  :context
  :test (test
         "HelloWorld"
@@ -154,9 +157,33 @@
 
 (func macro : any-1
  [anylist : anylist :...]
+ (let : any-1
+  [textlist : stringlist   := (list<-list
+                               anylist
+                               (fn [item : any]
+                                (string<-any item)))
+   text     : string       := (type/string<-stringlist-join
+                               textlist
+                               "")
+   tb       : tb/textblock := (textblock-repl<-string
+                               text)
+   repl     : repl         := (repl<-textblock tb)]
+  (any<-any : any-1
+   (any<-repl repl))
+ )
+ :context
  :doc "A function that joins any number of values into a string and then parses and evaluates it.")
 
 (func repl<-liblist-string : repl
  [liblist : liblist
   text    : string :doc "Program to run"]
  :doc "Returns a repl from the given text.")
+
+(func repl<-textblock : repl
+ [textblock : tb/textblock]
+ :doc "Returns a parsed repl from a parsed textblock")
+
+(func textblock-repl<-string : tb/textblock
+ [text : string]
+ (tb/textblock-parse<-string-delim text delimvxlisp)
+ :doc "Returns a parsed textblock from a string")

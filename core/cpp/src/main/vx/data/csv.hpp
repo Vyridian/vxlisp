@@ -28,11 +28,18 @@ namespace vx_data_csv {
   typedef Abstract_csvrows_from_textblock* Func_csvrows_from_textblock;
   extern Func_csvrows_from_textblock e_csvrows_from_textblock;
   extern Func_csvrows_from_textblock t_csvrows_from_textblock;
+  class Abstract_textblock_csv_from_string;
+  typedef Abstract_textblock_csv_from_string* Func_textblock_csv_from_string;
+  extern Func_textblock_csv_from_string e_textblock_csv_from_string;
+  extern Func_textblock_csv_from_string t_textblock_csv_from_string;
   // (func csv<-textblock)
   vx_data_csv::Type_csv f_csv_from_textblock(vx_data_textblock::Type_textblock textblock);
 
   // (func csvrows<-textblock)
   vx_data_csv::Type_csvrows f_csvrows_from_textblock(vx_data_textblock::Type_textblock textblock);
+
+  // (func textblock-csv<-string)
+  vx_data_textblock::Type_textblock f_textblock_csv_from_string(vx_core::Type_string text);
 
   // (type csv)
   class Abstract_csv : public virtual vx_core::Abstract_struct {
@@ -148,6 +155,32 @@ namespace vx_data_csv {
   public:
     Class_csvrows_from_textblock();
     virtual ~Class_csvrows_from_textblock() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func textblock-csv<-string)
+  class Abstract_textblock_csv_from_string : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_textblock_csv_from_string() {};
+    virtual ~Abstract_textblock_csv_from_string() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_textblock_csv_from_string : public virtual Abstract_textblock_csv_from_string {
+  public:
+    Class_textblock_csv_from_string();
+    virtual ~Class_textblock_csv_from_string() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

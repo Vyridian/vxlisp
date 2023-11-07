@@ -20,14 +20,14 @@ namespace vx_data_xml_test {
     vx_test::Type_testcoveragesummary output = vx_core::vx_new(vx_test::t_testcoveragesummary, {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/xml"),
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(2)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -47,7 +47,7 @@ namespace vx_data_xml_test {
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -68,7 +68,8 @@ namespace vx_data_xml_test {
         vx_core::vx_new_string(":xmlpropmap"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
-        
+        vx_core::vx_new_string(":delimxml"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":delimxmlequal"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":xml<-textblock"), vx_core::vx_new_int(0)

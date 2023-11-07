@@ -3,6 +3,7 @@
 import vx_repl from "../../src/vx/repl.js"
 import vx_core from "../../src/vx/core.js"
 import vx_test from "../../src/vx/test.js"
+import vx_type from "../../src/vx/type.js"
 import vx_data_textblock from "../../src/vx/data/textblock.js"
 
 export default class vx_repl_test {
@@ -23,12 +24,12 @@ export default class vx_repl_test {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/repl", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 11, ":total", 11), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 12, ":tests", 1, ":total", 8), 
+      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 16, ":total", 16), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 10, ":tests", 1, ":total", 10), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 1, ":total", 16), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -46,7 +47,10 @@ export default class vx_repl_test {
         ),
       "constmap",
         vx_core.f_new(
-          vx_core.t_intmap
+          vx_core.t_intmap,
+          "delimvxlisp", 0,
+          "delimvxlispbracket", 0,
+          "delimvxlispparen", 0
         ),
       "funcmap",
         vx_core.f_new(
@@ -58,7 +62,9 @@ export default class vx_repl_test {
           "any<-repl-async", 0,
           "anylist<-repllist", 0,
           "macro", 0,
-          "repl<-liblist-string", 0
+          "repl<-liblist-string", 0,
+          "repl<-textblock", 0,
+          "textblock-repl<-string", 0
         )
     )
   }
@@ -77,8 +83,10 @@ export default class vx_repl_test {
             ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))",
             ":testresult",
             vx_test.f_test(
+              context,
               "HelloWorld",
               vx_repl.f_any_from_repl(
+                context,
                 vx_core.f_new(
                   vx_repl.t_repl,
                   ":type",
@@ -97,10 +105,8 @@ export default class vx_repl_test {
                       "World"
                     )
                   )
-                ),
-                context
-              ),
-              context
+                )
+              )
             )
           ),
           vx_core.f_new(
@@ -108,8 +114,10 @@ export default class vx_repl_test {
             ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))",
             ":testresult",
             vx_test.f_test(
+              context,
               5,
               vx_repl.f_any_from_repl(
+                context,
                 vx_core.f_new(
                   vx_repl.t_repl,
                   ":type",
@@ -128,10 +136,8 @@ export default class vx_repl_test {
                       3
                     )
                   )
-                ),
-                context
-              ),
-              context
+                )
+              )
             )
           )
         )

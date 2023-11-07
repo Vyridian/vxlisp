@@ -20,6 +20,7 @@ public final class FileTest {
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
           ":testresult",
             Test.f_test_true(
+              context,
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
@@ -30,8 +31,7 @@ public final class FileTest {
                     Core.vx_new_string("src/test/resources/vx")
                   )
                 )
-              ),
-              context
+              )
             )
         )
       )
@@ -50,7 +50,9 @@ public final class FileTest {
           ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))",
           ":testresult",
             Test.f_test_true(
+              context,
               File.f_boolean_write_from_file_string(
+                context,
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
@@ -60,10 +62,8 @@ public final class FileTest {
                     Core.vx_new_string("src/test/resources/vx")
                   )
                 ),
-                Core.vx_new_string("writetext"),
-                context
-              ),
-              context
+                Core.vx_new_string("writetext")
+              )
             )
         )
       )
@@ -82,6 +82,7 @@ public final class FileTest {
           ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.f_new(
                 File.t_file,
                 Core.t_anylist.vx_new(
@@ -94,6 +95,7 @@ public final class FileTest {
                 )
               ),
               File.f_file_read_from_file(
+                context,
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
@@ -102,10 +104,8 @@ public final class FileTest {
                     Core.vx_new_string(":path"),
                     Core.vx_new_string("src/test/resources/vx")
                   )
-                ),
-                context
-              ),
-              context
+                )
+              )
             )
         )
       )
@@ -124,8 +124,10 @@ public final class FileTest {
           ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
           ":testresult",
             Test.f_test(
+              context,
               Core.vx_new_string("testdata"),
               File.f_string_read_from_file(
+                context,
                 Core.f_new(
                   File.t_file,
                   Core.t_anylist.vx_new(
@@ -134,10 +136,8 @@ public final class FileTest {
                     Core.vx_new_string(":path"),
                     Core.vx_new_string("src/test/resources/vx")
                   )
-                ),
-                context
-              ),
-              context
+                )
+              )
             )
         )
       )
