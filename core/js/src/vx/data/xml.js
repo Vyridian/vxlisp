@@ -44,6 +44,7 @@ export default class vx_data_xml {
   static t_xml_from_textblock = {}
   static e_xml_from_textblock = {vx_type: vx_data_xml.t_xml_from_textblock}
 
+  // (func xml<-textblock)
   static f_xml_from_textblock(textblock) {
     let output = vx_data_xml.e_xml
     output = vx_core.f_empty(
@@ -205,7 +206,7 @@ export default class vx_data_xml {
       "="
     ))
 
-    // (func xml_from_textblock)
+    // (func xml<-textblock)
     vx_data_xml.t_xml_from_textblock['vx_type'] = vx_core.t_type
     vx_data_xml.t_xml_from_textblock['vx_value'] = {
       name          : "xml<-textblock",

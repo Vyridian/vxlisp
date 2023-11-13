@@ -22,11 +22,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 196, ":total", 231), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 44, ":tests", 57, ":total", 127), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 198, ":total", 233), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 44, ":tests", 58, ":total", 129), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 63, ":total", 207), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 64, ":total", 209), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 4, ":total", 66)
     )
   }
@@ -130,6 +130,7 @@ export default class vx_core_test {
           "!-empty", 0,
           "!-empty_1", 0,
           "!=", 2,
+          "!==", 0,
           "*", 2,
           "*_1", 2,
           "*_2", 2,
@@ -153,6 +154,7 @@ export default class vx_core_test {
           "<=_1", 1,
           "=", 5,
           "=_1", 1,
+          "==", 2,
           ">", 1,
           ">_1", 1,
           ">=", 1,
@@ -1203,6 +1205,38 @@ export default class vx_core_test {
             vx_test.f_test_false(
               context,
               vx_core.f_eq_1(2, 2, 3)
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_eqeq(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "==",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true (== 0 0))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_eqeq(0, 0)
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true (== \"2\" \"2\"))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_eqeq("2", "2")
             )
           )
         )
@@ -2771,6 +2805,7 @@ export default class vx_core_test {
       vx_core_test.f_le_1(context),
       vx_core_test.f_eq(context),
       vx_core_test.f_eq_1(context),
+      vx_core_test.f_eqeq(context),
       vx_core_test.f_gt(context),
       vx_core_test.f_gt_1(context),
       vx_core_test.f_ge(context),

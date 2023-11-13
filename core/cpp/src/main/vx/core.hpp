@@ -333,6 +333,10 @@ namespace vx_core {
   typedef Abstract_ne* Func_ne;
   extern Func_ne e_ne;
   extern Func_ne t_ne;
+  class Abstract_neqeq;
+  typedef Abstract_neqeq* Func_neqeq;
+  extern Func_neqeq e_neqeq;
+  extern Func_neqeq t_neqeq;
   class Abstract_multiply;
   typedef Abstract_multiply* Func_multiply;
   extern Func_multiply e_multiply;
@@ -425,6 +429,10 @@ namespace vx_core {
   typedef Abstract_eq_1* Func_eq_1;
   extern Func_eq_1 e_eq_1;
   extern Func_eq_1 t_eq_1;
+  class Abstract_eqeq;
+  typedef Abstract_eqeq* Func_eqeq;
+  extern Func_eqeq e_eqeq;
+  extern Func_eqeq t_eqeq;
   class Abstract_gt;
   typedef Abstract_gt* Func_gt;
   extern Func_gt e_gt;
@@ -1009,6 +1017,9 @@ namespace vx_core {
 
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
+
+  // vx_eqeq(any, any)
+  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2);
 
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
@@ -3228,6 +3239,9 @@ namespace vx_core {
   // (func or)
   vx_core::Type_boolean f_or_1(vx_core::Type_booleanlist values);
 
+  // (func !==)
+  vx_core::Type_boolean f_neqeq(vx_core::Type_any val1, vx_core::Type_any val2);
+
   // (func *)
   vx_core::Type_int f_multiply(vx_core::Type_int num1, vx_core::Type_int num2);
 
@@ -3284,6 +3298,9 @@ namespace vx_core {
 
   // (func <=)
   vx_core::Type_boolean f_le_1(vx_core::Type_anylist args);
+
+  // (func ==)
+  vx_core::Type_boolean f_eqeq(vx_core::Type_any val1, vx_core::Type_any val2);
 
   // (func >)
   vx_core::Type_boolean f_gt(vx_core::Type_any val1, vx_core::Type_any val2);
@@ -5094,6 +5111,28 @@ namespace vx_core {
     bool vx_boolean() const override;
   };
 
+  // (func !==)
+  class Abstract_neqeq : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_neqeq() {};
+    virtual ~Abstract_neqeq() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_neqeq : public virtual Abstract_neqeq {
+  public:
+    Class_neqeq();
+    virtual ~Class_neqeq() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func *)
   class Abstract_multiply : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -5589,6 +5628,28 @@ namespace vx_core {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ==)
+  class Abstract_eqeq : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_eqeq() {};
+    virtual ~Abstract_eqeq() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_eqeq : public virtual Abstract_eqeq {
+  public:
+    Class_eqeq();
+    virtual ~Class_eqeq() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

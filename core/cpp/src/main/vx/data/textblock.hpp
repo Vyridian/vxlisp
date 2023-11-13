@@ -101,14 +101,22 @@ namespace vx_data_textblock {
   typedef Abstract_text_from_textblock* Func_text_from_textblock;
   extern Func_text_from_textblock e_text_from_textblock;
   extern Func_text_from_textblock t_text_from_textblock;
-  class Abstract_textblock_addchild_from_textblock_child;
-  typedef Abstract_textblock_addchild_from_textblock_child* Func_textblock_addchild_from_textblock_child;
-  extern Func_textblock_addchild_from_textblock_child e_textblock_addchild_from_textblock_child;
-  extern Func_textblock_addchild_from_textblock_child t_textblock_addchild_from_textblock_child;
+  class Abstract_textblock_addchild_from_textblock_find_child;
+  typedef Abstract_textblock_addchild_from_textblock_find_child* Func_textblock_addchild_from_textblock_find_child;
+  extern Func_textblock_addchild_from_textblock_find_child e_textblock_addchild_from_textblock_find_child;
+  extern Func_textblock_addchild_from_textblock_find_child t_textblock_addchild_from_textblock_find_child;
   class Abstract_textblock_delimnotfound;
   typedef Abstract_textblock_delimnotfound* Func_textblock_delimnotfound;
   extern Func_textblock_delimnotfound e_textblock_delimnotfound;
   extern Func_textblock_delimnotfound t_textblock_delimnotfound;
+  class Abstract_textblock_findparent_from_textblock;
+  typedef Abstract_textblock_findparent_from_textblock* Func_textblock_findparent_from_textblock;
+  extern Func_textblock_findparent_from_textblock e_textblock_findparent_from_textblock;
+  extern Func_textblock_findparent_from_textblock t_textblock_findparent_from_textblock;
+  class Abstract_textblock_groupby_from_textblock_delim;
+  typedef Abstract_textblock_groupby_from_textblock_delim* Func_textblock_groupby_from_textblock_delim;
+  extern Func_textblock_groupby_from_textblock_delim e_textblock_groupby_from_textblock_delim;
+  extern Func_textblock_groupby_from_textblock_delim t_textblock_groupby_from_textblock_delim;
   class Abstract_textblock_parse;
   typedef Abstract_textblock_parse* Func_textblock_parse;
   extern Func_textblock_parse e_textblock_parse;
@@ -177,11 +185,17 @@ namespace vx_data_textblock {
   // (func text<-textblock)
   vx_core::Type_string f_text_from_textblock(vx_data_textblock::Type_textblock block);
 
-  // (func textblock-addchild<-textblock-child)
-  vx_data_textblock::Type_textblock f_textblock_addchild_from_textblock_child(vx_data_textblock::Type_textblock textblockarg, vx_data_textblock::Type_textblock child);
+  // (func textblock-addchild<-textblock-find-child)
+  vx_data_textblock::Type_textblock f_textblock_addchild_from_textblock_find_child(vx_data_textblock::Type_textblock textblockarg, vx_data_textblock::Type_textblock find, vx_data_textblock::Type_textblock child);
 
   // (func textblock-delimnotfound)
   vx_data_textblock::Type_textblock f_textblock_delimnotfound(vx_data_textblock::Type_textblock textblockin);
+
+  // (func textblock-findparent<-textblock)
+  vx_data_textblock::Type_textblock f_textblock_findparent_from_textblock(vx_data_textblock::Type_textblock textblockarg);
+
+  // (func textblock-groupby<-textblock-delim)
+  vx_data_textblock::Type_textblock f_textblock_groupby_from_textblock_delim(vx_data_textblock::Type_textblock textblockarg, vx_data_textblock::Type_delim delimarg);
 
   // (func textblock-parse)
   vx_data_textblock::Type_textblock f_textblock_parse(vx_data_textblock::Type_textblock textblock);
@@ -333,6 +347,9 @@ namespace vx_data_textblock {
     // delim()
     vx_data_textblock::Type_delim vx_p_delim = NULL;
     virtual vx_data_textblock::Type_delim delim() const = 0;
+    // close()
+    vx_data_textblock::Type_delim vx_p_close = NULL;
+    virtual vx_data_textblock::Type_delim close() const = 0;
     // parent()
     vx_data_textblock::Type_textblock vx_p_parent = NULL;
     virtual vx_data_textblock::Type_textblock parent() const = 0;
@@ -361,6 +378,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_int line() const override;
     virtual vx_core::Type_int column() const override;
     virtual vx_data_textblock::Type_delim delim() const override;
+    virtual vx_data_textblock::Type_delim close() const override;
     virtual vx_data_textblock::Type_textblock parent() const override;
     virtual vx_data_textblock::Type_textblocklist children() const override;
   };
@@ -697,17 +715,17 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func textblock-addchild<-textblock-child)
-  class Abstract_textblock_addchild_from_textblock_child : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func textblock-addchild<-textblock-find-child)
+  class Abstract_textblock_addchild_from_textblock_find_child : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_textblock_addchild_from_textblock_child() {};
-    virtual ~Abstract_textblock_addchild_from_textblock_child() = 0;
+    Abstract_textblock_addchild_from_textblock_find_child() {};
+    virtual ~Abstract_textblock_addchild_from_textblock_find_child() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_textblock_addchild_from_textblock_child : public virtual Abstract_textblock_addchild_from_textblock_child {
+  class Class_textblock_addchild_from_textblock_find_child : public virtual Abstract_textblock_addchild_from_textblock_find_child {
   public:
-    Class_textblock_addchild_from_textblock_child();
-    virtual ~Class_textblock_addchild_from_textblock_child() override;
+    Class_textblock_addchild_from_textblock_find_child();
+    virtual ~Class_textblock_addchild_from_textblock_find_child() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -742,6 +760,54 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func textblock-findparent<-textblock)
+  class Abstract_textblock_findparent_from_textblock : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_textblock_findparent_from_textblock() {};
+    virtual ~Abstract_textblock_findparent_from_textblock() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_textblock_findparent_from_textblock : public virtual Abstract_textblock_findparent_from_textblock {
+  public:
+    Class_textblock_findparent_from_textblock();
+    virtual ~Class_textblock_findparent_from_textblock() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func textblock-groupby<-textblock-delim)
+  class Abstract_textblock_groupby_from_textblock_delim : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_textblock_groupby_from_textblock_delim() {};
+    virtual ~Abstract_textblock_groupby_from_textblock_delim() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_textblock_groupby_from_textblock_delim : public virtual Abstract_textblock_groupby_from_textblock_delim {
+  public:
+    Class_textblock_groupby_from_textblock_delim();
+    virtual ~Class_textblock_groupby_from_textblock_delim() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

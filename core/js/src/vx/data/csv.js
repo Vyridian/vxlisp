@@ -31,6 +31,7 @@ export default class vx_data_csv {
   static t_csv_from_textblock = {}
   static e_csv_from_textblock = {vx_type: vx_data_csv.t_csv_from_textblock}
 
+  // (func csv<-textblock)
   static f_csv_from_textblock(textblock) {
     let output = vx_data_csv.e_csv
     output = vx_core.f_let(
@@ -60,6 +61,7 @@ export default class vx_data_csv {
   static t_csvrows_from_textblock = {}
   static e_csvrows_from_textblock = {vx_type: vx_data_csv.t_csvrows_from_textblock}
 
+  // (func csvrows<-textblock)
   static f_csvrows_from_textblock(textblock) {
     let output = vx_data_csv.e_csvrows
     output = vx_core.f_let(
@@ -90,6 +92,7 @@ export default class vx_data_csv {
   static t_textblock_csv_from_string = {}
   static e_textblock_csv_from_string = {vx_type: vx_data_csv.t_textblock_csv_from_string}
 
+  // (func textblock-csv<-string)
   static f_textblock_csv_from_string(text) {
     let output = vx_data_textblock.e_textblock
     output = vx_data_textblock.f_textblock_parse_from_string_delim(
@@ -181,7 +184,7 @@ export default class vx_data_csv {
       )
     ))
 
-    // (func csv_from_textblock)
+    // (func csv<-textblock)
     vx_data_csv.t_csv_from_textblock['vx_type'] = vx_core.t_type
     vx_data_csv.t_csv_from_textblock['vx_value'] = {
       name          : "csv<-textblock",
@@ -200,7 +203,7 @@ export default class vx_data_csv {
       fn            : vx_data_csv.f_csv_from_textblock
     }
 
-    // (func csvrows_from_textblock)
+    // (func csvrows<-textblock)
     vx_data_csv.t_csvrows_from_textblock['vx_type'] = vx_core.t_type
     vx_data_csv.t_csvrows_from_textblock['vx_value'] = {
       name          : "csvrows<-textblock",
@@ -219,7 +222,7 @@ export default class vx_data_csv {
       fn            : vx_data_csv.f_csvrows_from_textblock
     }
 
-    // (func textblock_csv_from_string)
+    // (func textblock-csv<-string)
     vx_data_csv.t_textblock_csv_from_string['vx_type'] = vx_core.t_type
     vx_data_csv.t_textblock_csv_from_string['vx_value'] = {
       name          : "textblock-csv<-string",

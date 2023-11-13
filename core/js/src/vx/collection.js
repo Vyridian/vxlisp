@@ -138,6 +138,7 @@ export default class vx_collection {
   static t_any_from_for_until_loop = {}
   static e_any_from_for_until_loop = {vx_type: vx_collection.t_any_from_for_until_loop}
 
+  // (func any<-for-until-loop)
   static f_any_from_for_until_loop(generic, start, fn_until, fn_loop) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
@@ -166,6 +167,7 @@ export default class vx_collection {
   static t_any_from_for_until_loop_max = {}
   static e_any_from_for_until_loop_max = {vx_type: vx_collection.t_any_from_for_until_loop_max}
 
+  // (func any<-for-until-loop-max)
   static f_any_from_for_until_loop_max(generic, start, fn_until, fn_loop, max) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
@@ -185,6 +187,7 @@ export default class vx_collection {
   static t_any_from_for_while_loop = {}
   static e_any_from_for_while_loop = {vx_type: vx_collection.t_any_from_for_while_loop}
 
+  // (func any<-for-while-loop)
   static f_any_from_for_while_loop(generic, start, fn_while, fn_loop) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
@@ -214,6 +217,7 @@ export default class vx_collection {
   static t_any_from_for_while_loop_max = {}
   static e_any_from_for_while_loop_max = {vx_type: vx_collection.t_any_from_for_while_loop_max}
 
+  // (func any<-for-while-loop-max)
   static f_any_from_for_while_loop_max(generic, start, fn_while, fn_loop, max) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
@@ -230,6 +234,7 @@ export default class vx_collection {
   static t_is_list = {}
   static e_is_list = {vx_type: vx_collection.t_is_list}
 
+  // (func is-list)
   static f_is_list(val) {
     let output = vx_core.e_boolean
     output = vx_core.f_eq(
@@ -248,6 +253,7 @@ export default class vx_collection {
   static t_is_map = {}
   static e_is_map = {vx_type: vx_collection.t_is_map}
 
+  // (func is-map)
   static f_is_map(val) {
     let output = vx_core.e_boolean
     output = vx_core.f_eq(
@@ -280,6 +286,7 @@ export default class vx_collection {
   static t_list_from_for_end_loop = {}
   static e_list_from_for_end_loop = {vx_type: vx_collection.t_list_from_for_end_loop}
 
+  // (func list<-for-end-loop)
   static f_list_from_for_end_loop(generic, start, end, fn_loop) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -300,6 +307,7 @@ export default class vx_collection {
   static t_list_from_for_while_loop = {}
   static e_list_from_for_while_loop = {vx_type: vx_collection.t_list_from_for_while_loop}
 
+  // (func list<-for-while-loop)
   static f_list_from_for_while_loop(generic, start, fn_while, fn_loop) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -327,6 +335,7 @@ export default class vx_collection {
   static t_list_from_for_while_loop_max = {}
   static e_list_from_for_while_loop_max = {vx_type: vx_collection.t_list_from_for_while_loop_max}
 
+  // (func list<-for-while-loop-max)
   static f_list_from_for_while_loop_max(generic, start, fn_while, fn_loop, max) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -346,6 +355,7 @@ export default class vx_collection {
   static t_list_from_list_end = {}
   static e_list_from_list_end = {vx_type: vx_collection.t_list_from_list_end}
 
+  // (func list<-list-end)
   static f_list_from_list_end(generic, values, end) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -365,6 +375,7 @@ export default class vx_collection {
   static t_list_from_list_filtertypes = {}
   static e_list_from_list_filtertypes = {vx_type: vx_collection.t_list_from_list_filtertypes}
 
+  // (func list<-list-filtertypes)
   static f_list_from_list_filtertypes(generic, vallist, ...filtertypes) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -394,6 +405,7 @@ export default class vx_collection {
   static t_list_from_list_fn_filter = {}
   static e_list_from_list_fn_filter = {vx_type: vx_collection.t_list_from_list_fn_filter}
 
+  // (func list<-list-fn-filter)
   static f_list_from_list_fn_filter(generic, vallist, fn_filter) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -413,6 +425,7 @@ export default class vx_collection {
   static t_list_from_list_start = {}
   static e_list_from_list_start = {vx_type: vx_collection.t_list_from_list_start}
 
+  // (func list<-list-start)
   static f_list_from_list_start(generic, values, start) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -438,6 +451,7 @@ export default class vx_collection {
   static t_list_from_list_start_end = {}
   static e_list_from_list_start_end = {vx_type: vx_collection.t_list_from_list_start_end}
 
+  // (func list<-list-start-end)
   static f_list_from_list_start_end(generic, values, start, end) {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
@@ -469,7 +483,7 @@ export default class vx_collection {
   static {
     vx_core.f_global_package_set("vx/collection", vx_collection)
 
-    // (func any_from_for_until_loop)
+    // (func any<-for-until-loop)
     vx_collection.t_any_from_for_until_loop['vx_type'] = vx_core.t_type
     vx_collection.t_any_from_for_until_loop['vx_value'] = {
       name          : "any<-for-until-loop",
@@ -488,7 +502,7 @@ export default class vx_collection {
       fn            : vx_collection.f_any_from_for_until_loop
     }
 
-    // (func any_from_for_until_loop_max)
+    // (func any<-for-until-loop-max)
     vx_collection.t_any_from_for_until_loop_max['vx_type'] = vx_core.t_type
     vx_collection.t_any_from_for_until_loop_max['vx_value'] = {
       name          : "any<-for-until-loop-max",
@@ -507,7 +521,7 @@ export default class vx_collection {
       fn            : vx_collection.f_any_from_for_until_loop_max
     }
 
-    // (func any_from_for_while_loop)
+    // (func any<-for-while-loop)
     vx_collection.t_any_from_for_while_loop['vx_type'] = vx_core.t_type
     vx_collection.t_any_from_for_while_loop['vx_value'] = {
       name          : "any<-for-while-loop",
@@ -526,7 +540,7 @@ export default class vx_collection {
       fn            : vx_collection.f_any_from_for_while_loop
     }
 
-    // (func any_from_for_while_loop_max)
+    // (func any<-for-while-loop-max)
     vx_collection.t_any_from_for_while_loop_max['vx_type'] = vx_core.t_type
     vx_collection.t_any_from_for_while_loop_max['vx_value'] = {
       name          : "any<-for-while-loop-max",
@@ -545,7 +559,7 @@ export default class vx_collection {
       fn            : vx_collection.f_any_from_for_while_loop_max
     }
 
-    // (func is_list)
+    // (func is-list)
     vx_collection.t_is_list['vx_type'] = vx_core.t_type
     vx_collection.t_is_list['vx_value'] = {
       name          : "is-list",
@@ -564,7 +578,7 @@ export default class vx_collection {
       fn            : vx_collection.f_is_list
     }
 
-    // (func is_map)
+    // (func is-map)
     vx_collection.t_is_map['vx_type'] = vx_core.t_type
     vx_collection.t_is_map['vx_value'] = {
       name          : "is-map",
@@ -583,7 +597,7 @@ export default class vx_collection {
       fn            : vx_collection.f_is_map
     }
 
-    // (func list_from_for_end_loop)
+    // (func list<-for-end-loop)
     vx_collection.t_list_from_for_end_loop['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_for_end_loop['vx_value'] = {
       name          : "list<-for-end-loop",
@@ -602,7 +616,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_for_end_loop
     }
 
-    // (func list_from_for_while_loop)
+    // (func list<-for-while-loop)
     vx_collection.t_list_from_for_while_loop['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_for_while_loop['vx_value'] = {
       name          : "list<-for-while-loop",
@@ -621,7 +635,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_for_while_loop
     }
 
-    // (func list_from_for_while_loop_max)
+    // (func list<-for-while-loop-max)
     vx_collection.t_list_from_for_while_loop_max['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_for_while_loop_max['vx_value'] = {
       name          : "list<-for-while-loop-max",
@@ -640,7 +654,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_for_while_loop_max
     }
 
-    // (func list_from_list_end)
+    // (func list<-list-end)
     vx_collection.t_list_from_list_end['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_list_end['vx_value'] = {
       name          : "list<-list-end",
@@ -659,7 +673,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_list_end
     }
 
-    // (func list_from_list_filtertypes)
+    // (func list<-list-filtertypes)
     vx_collection.t_list_from_list_filtertypes['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_list_filtertypes['vx_value'] = {
       name          : "list<-list-filtertypes",
@@ -678,7 +692,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_list_filtertypes
     }
 
-    // (func list_from_list_fn_filter)
+    // (func list<-list-fn-filter)
     vx_collection.t_list_from_list_fn_filter['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_list_fn_filter['vx_value'] = {
       name          : "list<-list-fn-filter",
@@ -697,7 +711,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_list_fn_filter
     }
 
-    // (func list_from_list_start)
+    // (func list<-list-start)
     vx_collection.t_list_from_list_start['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_list_start['vx_value'] = {
       name          : "list<-list-start",
@@ -716,7 +730,7 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_list_start
     }
 
-    // (func list_from_list_start_end)
+    // (func list<-list-start-end)
     vx_collection.t_list_from_list_start_end['vx_type'] = vx_core.t_type
     vx_collection.t_list_from_list_start_end['vx_value'] = {
       name          : "list<-list-start-end",

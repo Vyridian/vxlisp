@@ -118,7 +118,7 @@ func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *
 			file.text = jstext
 			files = append(files, file)
 		case ":test":
-			jstext, msgs := JsTestFromPackage(pkg, project)
+			jstext, msgs := JsTestFromPackage(pkg, project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "_test.js"
@@ -280,7 +280,7 @@ func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 	}
 	jstname := JsFromName(fnc.pkgname) + ".t_" + jsfuncname
 	statics := "" +
-		"\n    // (func " + jsfuncname + ")" +
+		"\n    // (func " + fnc.name + ")" +
 		"\n    " + jstname + "['vx_type'] = vx_core.t_type" +
 		"\n    " + jstname + "['vx_value'] = {" +
 		proptext +
@@ -293,6 +293,7 @@ func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 	}
 	footer += "\n  }\n\n"
 	header := "" +
+		"\n  // (func " + fnc.name + ")" +
 		"\n  static "
 	if fnc.async {
 		header += "async "
@@ -1039,7 +1040,7 @@ func JsTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JsTestFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
+func JsTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromPackage")
 	imports := ""
 	depth := IntCountFromStringFind(pkg.name, "/") + 1
@@ -1077,6 +1078,10 @@ func JsTestFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		test, msgs := JsTestFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(covertype, "\""+typid+"\", "+StringFromInt(len(typ.testvalues)))
+		if command.filter == "" {
+		} else if NameFromType(typ) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			covertypecnt += 1
 			testdescribes += test
@@ -1098,6 +1103,10 @@ func JsTestFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		test, msgs := JsTestFromConst(cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(coverconst, "\""+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
+		if command.filter == "" {
+		} else if NameFromConst(cnst) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			coverconstcnt += 1
 			testdescribes += test
@@ -1127,6 +1136,10 @@ func JsTestFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				coverfunc = append(coverfunc, "\""+fncid+JsIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+				if command.filter == "" {
+				} else if NameFromFunc(fnc) != command.filter {
+					test = ""
+				}
 				if test != "" {
 					coverfunccnt += 1
 					testdescribes += test
@@ -1317,17 +1330,17 @@ func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
 		")"
 }
 
-func WriteJsFromProjectCmd(prj *vxproject, cmd *vxcommand) *vxmsgblock {
+func WriteJsFromProjectCmd(project *vxproject, command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteJsFromProjectCmd")
-	files, msgs := JsFilesFromProjectCmd(prj, cmd)
+	files, msgs := JsFilesFromProjectCmd(project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
-	switch cmd.code {
+	switch command.code {
 	case ":test":
-		sourcepath := PathFromProjectPath(prj, "./testdata")
+		sourcepath := PathFromProjectPath(project, "./testdata")
 		if BooleanExistsFromPath(sourcepath) {
-			targetpath := PathFromProjectCmd(prj, cmd)
+			targetpath := PathFromProjectCmd(project, command)
 			targetpath += "/resources"
 			msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1428,12 +1441,19 @@ func JsAppTest(project *vxproject, command *vxcommand) string {
 	var listimport []string
 	var listtest []string
 	for _, pkg := range listpackage {
-		importname := StringFromStringFindReplace(pkg.name, "/", "_")
-		importpath := StringFromStringFindReplace(pkg.name, "/", "/")
-		packageimport := "import " + importname + "_test from \"./" + importpath + "_test.js\""
-		packagetest := importname + "_test.test_package(context)"
-		listimport = append(listimport, packageimport)
-		listtest = append(listtest, packagetest)
+		iscontinue := true
+		if command.filter == "" {
+		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+			iscontinue = false
+		}
+		if iscontinue {
+			importname := StringFromStringFindReplace(pkg.name, "/", "_")
+			importpath := StringFromStringFindReplace(pkg.name, "/", "/")
+			packageimport := "import " + importname + "_test from \"./" + importpath + "_test.js\""
+			packagetest := importname + "_test.test_package(context)"
+			listimport = append(listimport, packageimport)
+			listtest = append(listtest, packagetest)
+		}
 	}
 	packageimports := StringFromListStringJoin(listimport, "\n")
 	packagetests := StringFromListStringJoin(listtest, ",\n      ")

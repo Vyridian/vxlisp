@@ -34,6 +34,7 @@ export default class vx_event {
   static t_any_from_from_to = {}
   static e_any_from_from_to = {vx_type: vx_event.t_any_from_from_to}
 
+  // (func any<-from-to)
   static f_any_from_from_to(generic, from, to) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
@@ -115,7 +116,7 @@ export default class vx_event {
       ":move"
     ))
 
-    // (func any_from_from_to)
+    // (func any<-from-to)
     vx_event.t_any_from_from_to['vx_type'] = vx_core.t_type
     vx_event.t_any_from_from_to['vx_value'] = {
       name          : "any<-from-to",

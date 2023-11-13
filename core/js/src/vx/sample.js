@@ -22,6 +22,7 @@ export default class vx_sample {
   static t_main = {}
   static e_main = {vx_type: vx_sample.t_main}
 
+  // (func main)
   static f_main() {
     vx_sample.f_myfunc(2)
   }
@@ -35,6 +36,7 @@ export default class vx_sample {
   static t_myfunc = {}
   static e_myfunc = {vx_type: vx_sample.t_myfunc}
 
+  // (func myfunc)
   static f_myfunc(myarg) {
     let output = vx_core.e_int
     output = vx_core.f_plus(

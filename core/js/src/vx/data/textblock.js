@@ -143,6 +143,7 @@ export default class vx_data_textblock {
   static t_children_from_textblock = {}
   static e_children_from_textblock = {vx_type: vx_data_textblock.t_children_from_textblock}
 
+  // (func children<-textblock)
   static f_children_from_textblock(textblock) {
     let output = vx_data_textblock.e_textblocklist
     output = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblock, ":children")
@@ -158,6 +159,7 @@ export default class vx_data_textblock {
   static t_delim_close_from_delim = {}
   static e_delim_close_from_delim = {vx_type: vx_data_textblock.t_delim_close_from_delim}
 
+  // (func delim-close<-delim)
   static f_delim_close_from_delim(delim) {
     let output = vx_data_textblock.e_delim
     output = vx_core.f_let(
@@ -208,6 +210,7 @@ export default class vx_data_textblock {
   static t_delim_first_from_delim_delim = {}
   static e_delim_first_from_delim_delim = {vx_type: vx_data_textblock.t_delim_first_from_delim_delim}
 
+  // (func delim-first<-delim-delim)
   static f_delim_first_from_delim_delim(delim1, delim2) {
     let output = vx_data_textblock.e_delim
     output = vx_core.f_let(
@@ -256,6 +259,7 @@ export default class vx_data_textblock {
   static t_delim_first_from_string_delimlist_offset = {}
   static e_delim_first_from_string_delimlist_offset = {vx_type: vx_data_textblock.t_delim_first_from_string_delimlist_offset}
 
+  // (func delim-first<-string-delimlist-offset)
   static f_delim_first_from_string_delimlist_offset(text, delimlist, start) {
     let output = vx_data_textblock.e_delim
     output = vx_core.f_if_2(
@@ -298,6 +302,7 @@ export default class vx_data_textblock {
   static t_delim_pos_from_string_delim_offset = {}
   static e_delim_pos_from_string_delim_offset = {vx_type: vx_data_textblock.t_delim_pos_from_string_delim_offset}
 
+  // (func delim-pos<-string-delim-offset)
   static f_delim_pos_from_string_delim_offset(text, delim, start) {
     let output = vx_data_textblock.e_delim
     output = vx_core.f_let(
@@ -333,6 +338,7 @@ export default class vx_data_textblock {
   static t_delimlist_pos_from_string_delimlist_offset = {}
   static e_delimlist_pos_from_string_delimlist_offset = {vx_type: vx_data_textblock.t_delimlist_pos_from_string_delimlist_offset}
 
+  // (func delimlist-pos<-string-delimlist-offset)
   static f_delimlist_pos_from_string_delimlist_offset(text, delimlist, start) {
     let output = vx_data_textblock.e_delimlist
     output = vx_core.f_list_from_list(
@@ -353,6 +359,7 @@ export default class vx_data_textblock {
   static t_stringlist_from_textblocklist = {}
   static e_stringlist_from_textblocklist = {vx_type: vx_data_textblock.t_stringlist_from_textblocklist}
 
+  // (func stringlist<-textblocklist)
   static f_stringlist_from_textblocklist(textblocklist) {
     let output = vx_core.e_stringlist
     output = vx_core.f_list_from_list(
@@ -372,6 +379,7 @@ export default class vx_data_textblock {
   static t_text_from_textblock = {}
   static e_text_from_textblock = {vx_type: vx_data_textblock.t_text_from_textblock}
 
+  // (func text<-textblock)
   static f_text_from_textblock(block) {
     let output = vx_core.e_string
     output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_textblock}, block, ":text")
@@ -379,54 +387,51 @@ export default class vx_data_textblock {
   }
 
   /**
-   * @function textblock_addchild_from_textblock_child
-   * Add the child to the correct parent textblock.
+   * @function textblock_addchild_from_textblock_find_child
+   * Add the child to the given parent textblock.
    * @param  {textblock} textblockarg
+   * @param  {textblock} find
    * @param  {textblock} child
    * @return {textblock}
    */
-  static t_textblock_addchild_from_textblock_child = {}
-  static e_textblock_addchild_from_textblock_child = {vx_type: vx_data_textblock.t_textblock_addchild_from_textblock_child}
+  static t_textblock_addchild_from_textblock_find_child = {}
+  static e_textblock_addchild_from_textblock_find_child = {vx_type: vx_data_textblock.t_textblock_addchild_from_textblock_find_child}
 
-  static f_textblock_addchild_from_textblock_child(textblockarg, child) {
+  // (func textblock-addchild<-textblock-find-child)
+  static f_textblock_addchild_from_textblock_find_child(textblockarg, find, child) {
     let output = vx_data_textblock.e_textblock
-    output = vx_core.f_let(
+    output = vx_core.f_if_2(
       {"any-1": vx_data_textblock.t_textblock},
-      [],
-      vx_core.f_new(vx_core.t_any_from_func, () => {
-        const delimcurr = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":delim")
-        const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":parent")
-        const children = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":children")
-        const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcurr, ":starttext")
-        const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcurr, ":endtext")
-        return vx_core.f_if_2(
-          {"any-1": vx_data_textblock.t_textblock},
-          vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(textblockarg)}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_empty(
-              vx_data_textblock.t_textblock
-            )})
-          ),
-          vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_and(
-              vx_core.f_eq(starttext, ""),
-              vx_core.f_eq(endtext, "")
-            )}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
-              textblockarg,
-              ":children",
-              vx_core.f_copy(children, child)
-            )})
-          ),
-          vx_core.f_else(
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
-              textblockarg,
-              ":parent",
-              vx_data_textblock.f_textblock_addchild_from_textblock_child(parent, child)
-            )})
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(textblockarg)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_empty(
+          vx_data_textblock.t_textblock
+        )})
+      ),
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_and_1(
+          vx_core.f_eqeq(find, textblockarg)
+        )}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+          textblockarg,
+          ":children",
+          vx_core.f_copy(
+            vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":children"),
+            child
           )
-        )
-      })
+        )})
+      ),
+      vx_core.f_else(
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+          textblockarg,
+          ":parent",
+          vx_data_textblock.f_textblock_addchild_from_textblock_find_child(
+            vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":parent"),
+            find,
+            child
+          )
+        )})
+      )
     )
     return output
   }
@@ -440,6 +445,7 @@ export default class vx_data_textblock {
   static t_textblock_delimnotfound = {}
   static e_textblock_delimnotfound = {vx_type: vx_data_textblock.t_textblock_delimnotfound}
 
+  // (func textblock-delimnotfound)
   static f_textblock_delimnotfound(textblockin) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -497,6 +503,72 @@ export default class vx_data_textblock {
   }
 
   /**
+   * @function textblock_findparent_from_textblock
+   * Find a parent that accepts a child.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   */
+  static t_textblock_findparent_from_textblock = {}
+  static e_textblock_findparent_from_textblock = {vx_type: vx_data_textblock.t_textblock_findparent_from_textblock}
+
+  // (func textblock-findparent<-textblock)
+  static f_textblock_findparent_from_textblock(textblockarg) {
+    let output = vx_data_textblock.e_textblock
+    output = vx_core.f_let(
+      {"any-1": vx_data_textblock.t_textblock},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const delimcurr = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":delim")
+        const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":parent")
+        const children = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":children")
+        const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcurr, ":starttext")
+        const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcurr, ":endtext")
+        return vx_core.f_if_2(
+          {"any-1": vx_data_textblock.t_textblock},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(textblockarg)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_empty(
+              vx_data_textblock.t_textblock
+            )})
+          ),
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_and(
+              vx_core.f_eq(starttext, ""),
+              vx_core.f_eq(endtext, "")
+            )}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return textblockarg})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_data_textblock.f_textblock_findparent_from_textblock(parent)})
+          )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function textblock_groupby_from_textblock_delim
+   * Returns a textblock grouped by the given delim.
+   * @param  {textblock} textblockarg
+   * @param  {delim} delimarg
+   * @return {textblock}
+   */
+  static t_textblock_groupby_from_textblock_delim = {}
+  static e_textblock_groupby_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_groupby_from_textblock_delim}
+
+  // (func textblock-groupby<-textblock-delim)
+  static f_textblock_groupby_from_textblock_delim(textblockarg, delimarg) {
+    let output = vx_data_textblock.e_textblock
+    output = vx_core.f_new(
+      vx_data_textblock.t_textblock,
+      ":delim",
+      delimarg
+    )
+    return output
+  }
+
+  /**
    * @function textblock_parse
    * Returns a fully parsed textblock from an initialized textblock.
    * @param  {textblock} textblock
@@ -505,6 +577,7 @@ export default class vx_data_textblock {
   static t_textblock_parse = {}
   static e_textblock_parse = {vx_type: vx_data_textblock.t_textblock_parse}
 
+  // (func textblock-parse)
   static f_textblock_parse(textblock) {
     let output = vx_data_textblock.e_textblock
     output = vx_collection.f_any_from_for_until_loop(
@@ -529,6 +602,7 @@ export default class vx_data_textblock {
   static t_textblock_parse_one = {}
   static e_textblock_parse_one = {vx_type: vx_data_textblock.t_textblock_parse_one}
 
+  // (func textblock-parse-one)
   static f_textblock_parse_one(textblockin) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -536,10 +610,14 @@ export default class vx_data_textblock {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const delimin = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":delim")
+        const close = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":close")
         const startpos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":startpos")
         const curpos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":curpos")
         const textin = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":text")
         const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":parent")
+        const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":starttext")
+        const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":endtext")
+        const delimlistin = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delimin, ":delimlist")
         const tbchg = vx_core.f_copy(
           textblockin,
           ":endpos",
@@ -548,12 +626,19 @@ export default class vx_data_textblock {
             vx_type.f_length_from_string(textin)
           )
         )
-        const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":starttext")
-        const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":endtext")
-        const delimlistin = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delimin, ":delimlist")
-        const delimfirst = vx_data_textblock.f_delim_first_from_string_delimlist_offset(textin, delimlistin, curpos)
+        const delimlistcl = vx_core.f_if_1(
+          {"any-1": vx_data_textblock.t_delimlist},
+          vx_core.f_is_empty_1(close),
+          delimlistin,
+          vx_core.f_copy(delimlistin, close)
+        )
+        const delimfirst = vx_data_textblock.f_delim_first_from_string_delimlist_offset(textin, delimlistcl, curpos)
         return vx_core.f_if_2(
           {"any-1": vx_data_textblock.t_textblock},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq("", textin)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return parent})
+          ),
           vx_core.f_then(
             vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_and(
               vx_core.f_ne("", starttext),
@@ -562,12 +647,7 @@ export default class vx_data_textblock {
             vx_core.f_new(vx_core.t_any_from_func, () => {return vx_data_textblock.f_textblock_push(tbchg)})
           ),
           vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(
-              delimlistin,
-              vx_core.f_empty(
-                vx_data_textblock.t_delimlist
-              )
-            )}),
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(delimlistcl)}),
             vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_if_2(
               {"any-1": vx_data_textblock.t_textblock},
               vx_core.f_then(
@@ -623,6 +703,7 @@ export default class vx_data_textblock {
   static t_textblock_parse_from_string_delim = {}
   static e_textblock_parse_from_string_delim = {vx_type: vx_data_textblock.t_textblock_parse_from_string_delim}
 
+  // (func textblock-parse<-string-delim)
   static f_textblock_parse_from_string_delim(text, delim) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -645,6 +726,7 @@ export default class vx_data_textblock {
   static t_textblock_pop = {}
   static e_textblock_pop = {vx_type: vx_data_textblock.t_textblock_pop}
 
+  // (func textblock-pop)
   static f_textblock_pop(textblockarg) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -672,7 +754,8 @@ export default class vx_data_textblock {
             vx_data_textblock.t_textblock
           )
         )
-        return vx_data_textblock.f_textblock_addchild_from_textblock_child(parent, child)
+        const parenttgt = vx_data_textblock.f_textblock_findparent_from_textblock(parent)
+        return vx_data_textblock.f_textblock_addchild_from_textblock_find_child(parent, parenttgt, child)
       })
     )
     return output
@@ -688,6 +771,7 @@ export default class vx_data_textblock {
   static t_textblock_pop_from_textblock_delim = {}
   static e_textblock_pop_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_pop_from_textblock_delim}
 
+  // (func textblock-pop<-textblock-delim)
   static f_textblock_pop_from_textblock_delim(textblockarg, delimarg) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_if_2(
@@ -710,7 +794,6 @@ export default class vx_data_textblock {
           [],
           vx_core.f_new(vx_core.t_any_from_func, () => {
             const parentcur = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":parent")
-            const childrenpar = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, parentcur, ":children")
             const delimcur = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":delim")
             const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcur, ":starttext")
             const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcur, ":endtext")
@@ -723,7 +806,6 @@ export default class vx_data_textblock {
             )
             const endsub = delimpos
             const textcur = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":text")
-            const childrencur = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":children")
             const textout = vx_type.f_string_from_string_start(textcur, endpos)
             const textsub = vx_type.f_string_from_string_start_end(textcur, startsub, endsub)
             const textdelim = vx_type.f_string_from_string_start_end(textcur, 0, endpos)
@@ -738,12 +820,18 @@ export default class vx_data_textblock {
               ":delim",
               vx_core.f_copy(
                 delimcur,
+                ":startpos",
+                0,
                 ":endpos",
-                vx_core.f_plus(startpos, delimpos),
+                0,
                 ":delimlist",
                 vx_core.f_empty(
                   vx_data_textblock.t_delimlist
                 )
+              ),
+              ":close",
+              vx_core.f_empty(
+                vx_data_textblock.t_delim
               ),
               ":parent",
               vx_core.f_empty(
@@ -765,13 +853,16 @@ export default class vx_data_textblock {
                 )
               )
             )
-            const parentchg = vx_data_textblock.f_textblock_addchild_from_textblock_child(parentcur, childchg)
+            const parenttgt = vx_data_textblock.f_textblock_findparent_from_textblock(parentcur)
+            const parentchg = vx_data_textblock.f_textblock_addchild_from_textblock_find_child(parentcur, parenttgt, childchg)
             return vx_core.f_new(
               vx_data_textblock.t_textblock,
               ":text",
               textout,
+              ":delim",
+              vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, parenttgt, ":delim"),
               ":startpos",
-              vx_core.f_plus1(endpos),
+              vx_core.f_plus(startpos, endpos),
               ":parent",
               parentchg
             )
@@ -812,6 +903,7 @@ export default class vx_data_textblock {
   static t_textblock_push = {}
   static e_textblock_push = {vx_type: vx_data_textblock.t_textblock_push}
 
+  // (func textblock-push)
   static f_textblock_push(textblockin) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -823,16 +915,18 @@ export default class vx_data_textblock {
         const offset = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":startpos")
         const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcur, ":starttext")
         const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcur, ":endtext")
+        const startlen = vx_type.f_length_from_string(starttext)
         const issingle = vx_core.f_and(
           vx_core.f_ne("", starttext),
           vx_core.f_eq("", endtext)
         )
-        const curpos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":curpos")
         const delimsplit = vx_core.f_if_1(
           {"any-1": vx_data_textblock.t_delim},
           issingle,
           vx_core.f_copy(
             delimcur,
+            ":startpos",
+            startlen,
             ":delimlist",
             vx_core.f_empty(
               vx_data_textblock.t_delimlist
@@ -850,7 +944,8 @@ export default class vx_data_textblock {
         const tbright = vx_data_textblock.f_textblock_startright_from_string_delim_offset(text, delimsplit, offset)
         const tbchg = vx_core.f_copy(tbleft, ":delim", delimchg)
         const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":parent")
-        const parentchg = vx_data_textblock.f_textblock_addchild_from_textblock_child(parent, tbchg)
+        const parenttgt = vx_data_textblock.f_textblock_findparent_from_textblock(parent)
+        const parentchg = vx_data_textblock.f_textblock_addchild_from_textblock_find_child(parent, parenttgt, tbchg)
         const delimright = vx_core.f_if_1(
           {"any-1": vx_data_textblock.t_delim},
           issingle,
@@ -879,6 +974,7 @@ export default class vx_data_textblock {
   static t_textblock_push_from_textblock_delim = {}
   static e_textblock_push_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_push_from_textblock_delim}
 
+  // (func textblock-push<-textblock-delim)
   static f_textblock_push_from_textblock_delim(textblockin, delimin) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_if_2(
@@ -896,6 +992,7 @@ export default class vx_data_textblock {
             const offset = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":startpos")
             const delimcur = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":delim")
             const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockin, ":parent")
+            const startpos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_delim}, delimin, ":startpos")
             const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":starttext")
             const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":endtext")
             const issingle = vx_core.f_and(
@@ -934,7 +1031,16 @@ export default class vx_data_textblock {
                 delims
               )
             )
-            return vx_core.f_copy(tbleft, ":delim", delimchg, ":parent", tbparent)
+            return vx_core.f_if_2(
+              {"any-1": vx_data_textblock.t_textblock},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(0, startpos)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return tbparent})
+              ),
+              vx_core.f_else(
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(tbleft, ":delim", delimchg, ":parent", tbparent)})
+              )
+            )
           })
         )})
       )
@@ -953,6 +1059,7 @@ export default class vx_data_textblock {
   static t_textblock_startleft_from_string_delim_offset = {}
   static e_textblock_startleft_from_string_delim_offset = {vx_type: vx_data_textblock.t_textblock_startleft_from_string_delim_offset}
 
+  // (func textblock-startleft<-string-delim-offset)
   static f_textblock_startleft_from_string_delim_offset(text, delim, offset) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -1004,6 +1111,7 @@ export default class vx_data_textblock {
   static t_textblock_startright_from_string_delim_offset = {}
   static e_textblock_startright_from_string_delim_offset = {vx_type: vx_data_textblock.t_textblock_startright_from_string_delim_offset}
 
+  // (func textblock-startright<-string-delim-offset)
   static f_textblock_startright_from_string_delim_offset(text, delimin, offset) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_let(
@@ -1014,7 +1122,7 @@ export default class vx_data_textblock {
         const starttext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":starttext")
         const endtext = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimin, ":endtext")
         const delimlist = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delimin, ":delimlist")
-        const delimclose = vx_core.f_if_2(
+        const close = vx_core.f_if_2(
           {"any-1": vx_data_textblock.t_delim},
           vx_core.f_then(
             vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(endtext, "")}),
@@ -1023,37 +1131,15 @@ export default class vx_data_textblock {
             )})
           ),
           vx_core.f_else(
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
-              vx_data_textblock.t_delim,
-              ":name",
-              "delimclose",
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              vx_data_textblock.c_delimclose,
               ":starttext",
               endtext
             )})
           )
         )
-        const delims = vx_core.f_if_2(
-          {"any-1": vx_data_textblock.t_delimlist},
-          vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(delimclose)}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return delimlist})
-          ),
-          vx_core.f_else(
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(delimlist, delimclose)})
-          )
-        )
         const delimlen = vx_type.f_length_from_string(starttext)
         const curpos = delimlen
-        const delimnew = vx_core.f_if_2(
-          {"any-1": vx_data_textblock.t_delim},
-          vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(delims)}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return delimin})
-          ),
-          vx_core.f_else(
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(delimin, ":delimlist", delims)})
-          )
-        )
         return vx_core.f_if_2(
           {"any-1": vx_data_textblock.t_textblock},
           vx_core.f_then(
@@ -1078,7 +1164,9 @@ export default class vx_data_textblock {
               ":curpos",
               curpos,
               ":delim",
-              delimnew
+              delimin,
+              ":close",
+              close
             )})
           )
         )
@@ -1097,6 +1185,7 @@ export default class vx_data_textblock {
   static t_textblock_from_string_delim = {}
   static e_textblock_from_string_delim = {vx_type: vx_data_textblock.t_textblock_from_string_delim}
 
+  // (func textblock<-string-delim)
   static f_textblock_from_string_delim(text, delim) {
     let output = vx_data_textblock.e_textblock
     output = vx_core.f_new(
@@ -1123,6 +1212,7 @@ export default class vx_data_textblock {
   static t_textblock_from_textblock_delim = {}
   static e_textblock_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_from_textblock_delim}
 
+  // (func textblock<-textblock-delim)
   static f_textblock_from_textblock_delim(textblock, delim) {
     let output = vx_data_textblock.e_textblock
     return output
@@ -1147,8 +1237,10 @@ export default class vx_data_textblock {
     "delimlist-pos<-string-delimlist-offset": vx_data_textblock.e_delimlist_pos_from_string_delimlist_offset,
     "stringlist<-textblocklist": vx_data_textblock.e_stringlist_from_textblocklist,
     "text<-textblock": vx_data_textblock.e_text_from_textblock,
-    "textblock-addchild<-textblock-child": vx_data_textblock.e_textblock_addchild_from_textblock_child,
+    "textblock-addchild<-textblock-find-child": vx_data_textblock.e_textblock_addchild_from_textblock_find_child,
     "textblock-delimnotfound": vx_data_textblock.e_textblock_delimnotfound,
+    "textblock-findparent<-textblock": vx_data_textblock.e_textblock_findparent_from_textblock,
+    "textblock-groupby<-textblock-delim": vx_data_textblock.e_textblock_groupby_from_textblock_delim,
     "textblock-parse": vx_data_textblock.e_textblock_parse,
     "textblock-parse-one": vx_data_textblock.e_textblock_parse_one,
     "textblock-parse<-string-delim": vx_data_textblock.e_textblock_parse_from_string_delim,
@@ -1289,6 +1381,11 @@ export default class vx_data_textblock {
         },
         "delim": {
           "name" : "delim",
+          "type" : vx_data_textblock.t_delim,
+          "multi": false
+        },
+        "close": {
+          "name" : "close",
           "type" : vx_data_textblock.t_delim,
           "multi": false
         },
@@ -1487,7 +1584,7 @@ export default class vx_data_textblock {
       ":nonwhitespace"
     ))
 
-    // (func children_from_textblock)
+    // (func children<-textblock)
     vx_data_textblock.t_children_from_textblock['vx_type'] = vx_core.t_type
     vx_data_textblock.t_children_from_textblock['vx_value'] = {
       name          : "children<-textblock",
@@ -1506,7 +1603,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_children_from_textblock
     }
 
-    // (func delim_close_from_delim)
+    // (func delim-close<-delim)
     vx_data_textblock.t_delim_close_from_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_delim_close_from_delim['vx_value'] = {
       name          : "delim-close<-delim",
@@ -1525,7 +1622,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_delim_close_from_delim
     }
 
-    // (func delim_first_from_delim_delim)
+    // (func delim-first<-delim-delim)
     vx_data_textblock.t_delim_first_from_delim_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_delim_first_from_delim_delim['vx_value'] = {
       name          : "delim-first<-delim-delim",
@@ -1544,7 +1641,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_delim_first_from_delim_delim
     }
 
-    // (func delim_first_from_string_delimlist_offset)
+    // (func delim-first<-string-delimlist-offset)
     vx_data_textblock.t_delim_first_from_string_delimlist_offset['vx_type'] = vx_core.t_type
     vx_data_textblock.t_delim_first_from_string_delimlist_offset['vx_value'] = {
       name          : "delim-first<-string-delimlist-offset",
@@ -1563,7 +1660,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_delim_first_from_string_delimlist_offset
     }
 
-    // (func delim_pos_from_string_delim_offset)
+    // (func delim-pos<-string-delim-offset)
     vx_data_textblock.t_delim_pos_from_string_delim_offset['vx_type'] = vx_core.t_type
     vx_data_textblock.t_delim_pos_from_string_delim_offset['vx_value'] = {
       name          : "delim-pos<-string-delim-offset",
@@ -1582,7 +1679,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_delim_pos_from_string_delim_offset
     }
 
-    // (func delimlist_pos_from_string_delimlist_offset)
+    // (func delimlist-pos<-string-delimlist-offset)
     vx_data_textblock.t_delimlist_pos_from_string_delimlist_offset['vx_type'] = vx_core.t_type
     vx_data_textblock.t_delimlist_pos_from_string_delimlist_offset['vx_value'] = {
       name          : "delimlist-pos<-string-delimlist-offset",
@@ -1601,7 +1698,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_delimlist_pos_from_string_delimlist_offset
     }
 
-    // (func stringlist_from_textblocklist)
+    // (func stringlist<-textblocklist)
     vx_data_textblock.t_stringlist_from_textblocklist['vx_type'] = vx_core.t_type
     vx_data_textblock.t_stringlist_from_textblocklist['vx_value'] = {
       name          : "stringlist<-textblocklist",
@@ -1620,7 +1717,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_stringlist_from_textblocklist
     }
 
-    // (func text_from_textblock)
+    // (func text<-textblock)
     vx_data_textblock.t_text_from_textblock['vx_type'] = vx_core.t_type
     vx_data_textblock.t_text_from_textblock['vx_value'] = {
       name          : "text<-textblock",
@@ -1639,10 +1736,10 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_text_from_textblock
     }
 
-    // (func textblock_addchild_from_textblock_child)
-    vx_data_textblock.t_textblock_addchild_from_textblock_child['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_addchild_from_textblock_child['vx_value'] = {
-      name          : "textblock-addchild<-textblock-child",
+    // (func textblock-addchild<-textblock-find-child)
+    vx_data_textblock.t_textblock_addchild_from_textblock_find_child['vx_type'] = vx_core.t_type
+    vx_data_textblock.t_textblock_addchild_from_textblock_find_child['vx_value'] = {
+      name          : "textblock-addchild<-textblock-find-child",
       pkgname       : "vx/data/textblock",
       extends       : ":func",
       idx           : 0,
@@ -1655,10 +1752,10 @@ export default class vx_data_textblock {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_data_textblock.f_textblock_addchild_from_textblock_child
+      fn            : vx_data_textblock.f_textblock_addchild_from_textblock_find_child
     }
 
-    // (func textblock_delimnotfound)
+    // (func textblock-delimnotfound)
     vx_data_textblock.t_textblock_delimnotfound['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_delimnotfound['vx_value'] = {
       name          : "textblock-delimnotfound",
@@ -1677,7 +1774,45 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_delimnotfound
     }
 
-    // (func textblock_parse)
+    // (func textblock-findparent<-textblock)
+    vx_data_textblock.t_textblock_findparent_from_textblock['vx_type'] = vx_core.t_type
+    vx_data_textblock.t_textblock_findparent_from_textblock['vx_value'] = {
+      name          : "textblock-findparent<-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_findparent_from_textblock
+    }
+
+    // (func textblock-groupby<-textblock-delim)
+    vx_data_textblock.t_textblock_groupby_from_textblock_delim['vx_type'] = vx_core.t_type
+    vx_data_textblock.t_textblock_groupby_from_textblock_delim['vx_value'] = {
+      name          : "textblock-groupby<-textblock-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_groupby_from_textblock_delim
+    }
+
+    // (func textblock-parse)
     vx_data_textblock.t_textblock_parse['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_parse['vx_value'] = {
       name          : "textblock-parse",
@@ -1696,7 +1831,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_parse
     }
 
-    // (func textblock_parse_one)
+    // (func textblock-parse-one)
     vx_data_textblock.t_textblock_parse_one['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_parse_one['vx_value'] = {
       name          : "textblock-parse-one",
@@ -1715,7 +1850,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_parse_one
     }
 
-    // (func textblock_parse_from_string_delim)
+    // (func textblock-parse<-string-delim)
     vx_data_textblock.t_textblock_parse_from_string_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_parse_from_string_delim['vx_value'] = {
       name          : "textblock-parse<-string-delim",
@@ -1734,7 +1869,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_parse_from_string_delim
     }
 
-    // (func textblock_pop)
+    // (func textblock-pop)
     vx_data_textblock.t_textblock_pop['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_pop['vx_value'] = {
       name          : "textblock-pop",
@@ -1753,7 +1888,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_pop
     }
 
-    // (func textblock_pop_from_textblock_delim)
+    // (func textblock-pop<-textblock-delim)
     vx_data_textblock.t_textblock_pop_from_textblock_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_pop_from_textblock_delim['vx_value'] = {
       name          : "textblock-pop<-textblock-delim",
@@ -1772,7 +1907,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_pop_from_textblock_delim
     }
 
-    // (func textblock_push)
+    // (func textblock-push)
     vx_data_textblock.t_textblock_push['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_push['vx_value'] = {
       name          : "textblock-push",
@@ -1791,7 +1926,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_push
     }
 
-    // (func textblock_push_from_textblock_delim)
+    // (func textblock-push<-textblock-delim)
     vx_data_textblock.t_textblock_push_from_textblock_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_push_from_textblock_delim['vx_value'] = {
       name          : "textblock-push<-textblock-delim",
@@ -1810,7 +1945,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_push_from_textblock_delim
     }
 
-    // (func textblock_startleft_from_string_delim_offset)
+    // (func textblock-startleft<-string-delim-offset)
     vx_data_textblock.t_textblock_startleft_from_string_delim_offset['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_startleft_from_string_delim_offset['vx_value'] = {
       name          : "textblock-startleft<-string-delim-offset",
@@ -1829,7 +1964,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_startleft_from_string_delim_offset
     }
 
-    // (func textblock_startright_from_string_delim_offset)
+    // (func textblock-startright<-string-delim-offset)
     vx_data_textblock.t_textblock_startright_from_string_delim_offset['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_startright_from_string_delim_offset['vx_value'] = {
       name          : "textblock-startright<-string-delim-offset",
@@ -1848,7 +1983,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_startright_from_string_delim_offset
     }
 
-    // (func textblock_from_string_delim)
+    // (func textblock<-string-delim)
     vx_data_textblock.t_textblock_from_string_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_from_string_delim['vx_value'] = {
       name          : "textblock<-string-delim",
@@ -1867,7 +2002,7 @@ export default class vx_data_textblock {
       fn            : vx_data_textblock.f_textblock_from_string_delim
     }
 
-    // (func textblock_from_textblock_delim)
+    // (func textblock<-textblock-delim)
     vx_data_textblock.t_textblock_from_textblock_delim['vx_type'] = vx_core.t_type
     vx_data_textblock.t_textblock_from_textblock_delim['vx_value'] = {
       name          : "textblock<-textblock-delim",

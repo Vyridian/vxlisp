@@ -41,7 +41,6 @@
  (tb/textblock-parse<-string-delim
   text
   delimcsv)
-/*
  :test
   (test
    (tb/textblock
@@ -55,9 +54,7 @@
       (tb/textblock
        :text `"a"`
        :endpos 3
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
@@ -71,21 +68,19 @@
        :delim tb/delimcomma)
       (tb/textblock
        :text `"b"`
-       :startpos 3
-       :endpos 6
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :startpos 4
+       :endpos 7
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text "b"
-          :startpos 4
-          :endpos 5)))
+          :startpos 5
+          :endpos 6)))
       (tb/textblock
        :text "\n"
-       :startpos 6
-       :endpos 7
+       :startpos 7
+       :endpos 8
        :delim tb/delimline)
       (tb/textblock
        :text "1"
@@ -98,21 +93,18 @@
        :delim tb/delimcomma)
       (tb/textblock
        :text `"2"`
-       :startpos 11
-       :endpos 14
-       :delim
-        (copy tb/delimquote
-         :endpos 3)
+       :startpos 10
+       :endpos 13
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text "2"
-          :startpos 12
-          :endpos 13)))))
+          :startpos 11
+          :endpos 12)))))
    (textblock-csv<-string
 `"a","b"
 1,"2"`
    )
   )
-*/
  :doc "Returns a parsed csv-textblock from a string.")

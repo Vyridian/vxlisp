@@ -17,6 +17,7 @@ export default class vx_state {
   static t_change = {}
   static e_change = {vx_type: vx_state.t_change}
 
+  // (func change)
   static f_change(valuemap) {
     let output = vx_core.e_boolean
     return output
@@ -30,6 +31,7 @@ export default class vx_state {
   static t_register = {}
   static e_register = {vx_type: vx_state.t_register}
 
+  // (func register)
   static f_register(listener) {
     let output = vx_core.e_boolean
     return output

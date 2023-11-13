@@ -906,6 +906,34 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_eqeq(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "==",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true (== 0 0))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_eqeq(Core.vx_new_int(0), Core.vx_new_int(0))
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true (== \"\" \"\"))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_eqeq(Core.vx_new_string(""), Core.vx_new_string(""))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_gt(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -2430,6 +2458,7 @@ public final class CoreTest {
       CoreTest.f_le_1(context),
       CoreTest.f_eq(context),
       CoreTest.f_eq_1(context),
+      CoreTest.f_eqeq(context),
       CoreTest.f_gt(context),
       CoreTest.f_gt_1(context),
       CoreTest.f_ge(context),
@@ -2476,11 +2505,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 196, ":total", 231), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 44, ":tests", 57, ":total", 127), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 151), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 151), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 63, ":total", 207), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 198, ":total", 233), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 44, ":tests", 58, ":total", 129), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 153), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 153), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 64, ":total", 209), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 4, ":total", 66)
     );
   }
@@ -2577,6 +2606,7 @@ public final class CoreTest {
         ":!-empty", 0,
         ":!-empty_1", 0,
         ":!=", 2,
+        ":!==", 0,
         ":*", 2,
         ":*_1", 2,
         ":*_2", 2,
@@ -2600,6 +2630,7 @@ public final class CoreTest {
         ":<=_1", 1,
         ":=", 5,
         ":=_1", 1,
+        ":==", 2,
         ":>", 1,
         ":>_1", 1,
         ":>=", 1,

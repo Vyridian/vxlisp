@@ -87,6 +87,7 @@ export default class vx_test {
   static t_context_test = {}
   static e_context_test = {vx_type: vx_test.t_context_test}
 
+  // (func context-test)
   static f_context_test(...args) {
     let output = vx_core.e_context
     args = vx_core.f_new(vx_core.t_anylist, ...args)
@@ -114,6 +115,7 @@ export default class vx_test {
   static t_div_from_testcaselist = {}
   static e_div_from_testcaselist = {vx_type: vx_test.t_div_from_testcaselist}
 
+  // (func div<-testcaselist)
   static f_div_from_testcaselist(testcaselist) {
     let output = vx_web_html.e_div
     output = vx_core.f_new(
@@ -186,6 +188,7 @@ export default class vx_test {
   static t_div_from_testpackage = {}
   static e_div_from_testpackage = {vx_type: vx_test.t_div_from_testpackage}
 
+  // (func div<-testpackage)
   static f_div_from_testpackage(testpackage) {
     let output = vx_web_html.e_div
     output = vx_core.f_let(
@@ -270,6 +273,7 @@ export default class vx_test {
   static t_div_from_testpackagelist = {}
   static e_div_from_testpackagelist = {vx_type: vx_test.t_div_from_testpackagelist}
 
+  // (func div<-testpackagelist)
   static f_div_from_testpackagelist(testpackagelist) {
     let output = vx_web_html.e_div
     output = vx_core.f_let(
@@ -381,6 +385,7 @@ export default class vx_test {
   static t_divchildlist_from_testpackagelist = {}
   static e_divchildlist_from_testpackagelist = {vx_type: vx_test.t_divchildlist_from_testpackagelist}
 
+  // (func divchildlist<-testpackagelist)
   static f_divchildlist_from_testpackagelist(testpackagelist) {
     let output = vx_web_html.e_divchildlist
     output = vx_core.f_list_from_list(
@@ -400,6 +405,7 @@ export default class vx_test {
   static t_html_from_divtest = {}
   static e_html_from_divtest = {vx_type: vx_test.t_html_from_divtest}
 
+  // (func html<-divtest)
   static f_html_from_divtest(divtest) {
     let output = vx_web_html.e_html
     output = vx_core.f_new(
@@ -446,6 +452,7 @@ export default class vx_test {
   static t_p_from_passfail = {}
   static e_p_from_passfail = {vx_type: vx_test.t_p_from_passfail}
 
+  // (func p<-passfail)
   static f_p_from_passfail(passfail) {
     let output = vx_web_html.e_p
     output = vx_core.f_let(
@@ -479,6 +486,7 @@ export default class vx_test {
   static t_p_from_testcoveragenums = {}
   static e_p_from_testcoveragenums = {vx_type: vx_test.t_p_from_testcoveragenums}
 
+  // (func p<-testcoveragenums)
   static f_p_from_testcoveragenums(nums) {
     let output = vx_web_html.e_p
     output = vx_core.f_new(
@@ -511,6 +519,7 @@ export default class vx_test {
   static t_resolve_testcase = {}
   static e_resolve_testcase = {vx_type: vx_test.t_resolve_testcase}
 
+  // (func resolve-testcase)
   static async f_resolve_testcase(testcase) {
     let output = Promise.resolve(vx_test.e_testcase)
     output = await vx_core.f_let_async(
@@ -549,6 +558,7 @@ export default class vx_test {
   static t_resolve_testcaselist = {}
   static e_resolve_testcaselist = {vx_type: vx_test.t_resolve_testcaselist}
 
+  // (func resolve-testcaselist)
   static async f_resolve_testcaselist(testcaselist) {
     let output = Promise.resolve(vx_test.e_testcaselist)
     output = await vx_core.f_list_from_list_async(
@@ -569,6 +579,7 @@ export default class vx_test {
   static t_resolve_testdescribe = {}
   static e_resolve_testdescribe = {vx_type: vx_test.t_resolve_testdescribe}
 
+  // (func resolve-testdescribe)
   static async f_resolve_testdescribe(testdescribe) {
     let output = Promise.resolve(vx_test.e_testdescribe)
     output = await vx_core.f_let_async(
@@ -593,6 +604,7 @@ export default class vx_test {
   static t_resolve_testdescribelist = {}
   static e_resolve_testdescribelist = {vx_type: vx_test.t_resolve_testdescribelist}
 
+  // (func resolve-testdescribelist)
   static async f_resolve_testdescribelist(testdescribelist) {
     let output = Promise.resolve(vx_test.e_testdescribelist)
     output = await vx_core.f_list_from_list_async(
@@ -613,6 +625,7 @@ export default class vx_test {
   static t_resolve_testpackage = {}
   static e_resolve_testpackage = {vx_type: vx_test.t_resolve_testpackage}
 
+  // (func resolve-testpackage)
   static async f_resolve_testpackage(testpackage) {
     let output = Promise.resolve(vx_test.e_testpackage)
     output = await vx_core.f_let_async(
@@ -644,6 +657,7 @@ export default class vx_test {
   static t_resolve_testpackagelist = {}
   static e_resolve_testpackagelist = {vx_type: vx_test.t_resolve_testpackagelist}
 
+  // (func resolve-testpackagelist)
   static async f_resolve_testpackagelist(testpackagelist) {
     let output = Promise.resolve(vx_test.e_testpackagelist)
     output = await vx_core.f_list_from_list_async(
@@ -664,6 +678,7 @@ export default class vx_test {
   static t_resolve_testresult = {}
   static e_resolve_testresult = {vx_type: vx_test.t_resolve_testresult}
 
+  // (func resolve-testresult)
   static async f_resolve_testresult(testresult) {
     let output = Promise.resolve(vx_test.e_testresult)
     output = await vx_core.f_let_async(
@@ -703,6 +718,7 @@ export default class vx_test {
   static t_security_test = {}
   static e_security_test = {vx_type: vx_test.t_security_test}
 
+  // (func security-test)
   static f_security_test() {
     let output = vx_core.e_security
     output = vx_core.f_new(
@@ -729,6 +745,7 @@ export default class vx_test {
   static t_test = {}
   static e_test = {vx_type: vx_test.t_test}
 
+  // (func test)
   static f_test(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
@@ -759,6 +776,7 @@ export default class vx_test {
   static t_test_1 = {}
   static e_test_1 = {vx_type: vx_test.t_test_1}
 
+  // (func test)
   static f_test_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -786,6 +804,7 @@ export default class vx_test {
   static t_test_false = {}
   static e_test_false = {vx_type: vx_test.t_test_false}
 
+  // (func test-false)
   static f_test_false(context, actual) {
     let output = vx_test.e_testresult
     try {
@@ -818,6 +837,7 @@ export default class vx_test {
   static t_test_false_1 = {}
   static e_test_false_1 = {vx_type: vx_test.t_test_false_1}
 
+  // (func test-false)
   static f_test_false_1(context, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -846,6 +866,7 @@ export default class vx_test {
   static t_test_gt = {}
   static e_test_gt = {vx_type: vx_test.t_test_gt}
 
+  // (func test-gt)
   static f_test_gt(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
@@ -876,6 +897,7 @@ export default class vx_test {
   static t_test_gt_1 = {}
   static e_test_gt_1 = {vx_type: vx_test.t_test_gt_1}
 
+  // (func test-gt)
   static f_test_gt_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -904,6 +926,7 @@ export default class vx_test {
   static t_test_ne = {}
   static e_test_ne = {vx_type: vx_test.t_test_ne}
 
+  // (func test-ne)
   static f_test_ne(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
@@ -934,6 +957,7 @@ export default class vx_test {
   static t_test_ne_1 = {}
   static e_test_ne_1 = {vx_type: vx_test.t_test_ne_1}
 
+  // (func test-ne)
   static f_test_ne_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -962,6 +986,7 @@ export default class vx_test {
   static t_test_string = {}
   static e_test_string = {vx_type: vx_test.t_test_string}
 
+  // (func test-string)
   static f_test_string(context, expected, actual) {
     let output = vx_test.e_testresult
     try {
@@ -993,6 +1018,7 @@ export default class vx_test {
   static t_test_string_1 = {}
   static e_test_string_1 = {vx_type: vx_test.t_test_string_1}
 
+  // (func test-string)
   static f_test_string_1(context, expected, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -1020,6 +1046,7 @@ export default class vx_test {
   static t_test_true = {}
   static e_test_true = {vx_type: vx_test.t_test_true}
 
+  // (func test-true)
   static f_test_true(context, actual) {
     let output = vx_test.e_testresult
     try {
@@ -1052,6 +1079,7 @@ export default class vx_test {
   static t_test_true_1 = {}
   static e_test_true_1 = {vx_type: vx_test.t_test_true_1}
 
+  // (func test-true)
   static f_test_true_1(context, fn_actual) {
     let output = vx_test.e_testresult
     try {
@@ -1080,6 +1108,7 @@ export default class vx_test {
   static t_tr_from_testdescribe_casename = {}
   static e_tr_from_testdescribe_casename = {vx_type: vx_test.t_tr_from_testdescribe_casename}
 
+  // (func tr<-testdescribe-casename)
   static f_tr_from_testdescribe_casename(testdescribe, casename) {
     let output = vx_web_html.e_tr
     output = vx_core.f_let(
@@ -1159,6 +1188,7 @@ export default class vx_test {
   static t_trlist_from_testcase = {}
   static e_trlist_from_testcase = {vx_type: vx_test.t_trlist_from_testcase}
 
+  // (func trlist<-testcase)
   static f_trlist_from_testcase(testcase) {
     let output = vx_web_html.e_trlist
     output = vx_core.f_let(
@@ -1187,6 +1217,7 @@ export default class vx_test {
   static t_trlist_from_testcaselist = {}
   static e_trlist_from_testcaselist = {vx_type: vx_test.t_trlist_from_testcaselist}
 
+  // (func trlist<-testcaselist)
   static f_trlist_from_testcaselist(testcaselist) {
     let output = vx_web_html.e_trlist
     output = vx_core.f_list_join_from_list(
@@ -1938,7 +1969,7 @@ export default class vx_test {
       )
     ))
 
-    // (func context_test)
+    // (func context-test)
     vx_test.t_context_test['vx_type'] = vx_core.t_type
     vx_test.t_context_test['vx_value'] = {
       name          : "context-test",
@@ -1957,7 +1988,7 @@ export default class vx_test {
       fn            : vx_test.f_context_test
     }
 
-    // (func div_from_testcaselist)
+    // (func div<-testcaselist)
     vx_test.t_div_from_testcaselist['vx_type'] = vx_core.t_type
     vx_test.t_div_from_testcaselist['vx_value'] = {
       name          : "div<-testcaselist",
@@ -1976,7 +2007,7 @@ export default class vx_test {
       fn            : vx_test.f_div_from_testcaselist
     }
 
-    // (func div_from_testpackage)
+    // (func div<-testpackage)
     vx_test.t_div_from_testpackage['vx_type'] = vx_core.t_type
     vx_test.t_div_from_testpackage['vx_value'] = {
       name          : "div<-testpackage",
@@ -1995,7 +2026,7 @@ export default class vx_test {
       fn            : vx_test.f_div_from_testpackage
     }
 
-    // (func div_from_testpackagelist)
+    // (func div<-testpackagelist)
     vx_test.t_div_from_testpackagelist['vx_type'] = vx_core.t_type
     vx_test.t_div_from_testpackagelist['vx_value'] = {
       name          : "div<-testpackagelist",
@@ -2014,7 +2045,7 @@ export default class vx_test {
       fn            : vx_test.f_div_from_testpackagelist
     }
 
-    // (func divchildlist_from_testpackagelist)
+    // (func divchildlist<-testpackagelist)
     vx_test.t_divchildlist_from_testpackagelist['vx_type'] = vx_core.t_type
     vx_test.t_divchildlist_from_testpackagelist['vx_value'] = {
       name          : "divchildlist<-testpackagelist",
@@ -2033,7 +2064,7 @@ export default class vx_test {
       fn            : vx_test.f_divchildlist_from_testpackagelist
     }
 
-    // (func html_from_divtest)
+    // (func html<-divtest)
     vx_test.t_html_from_divtest['vx_type'] = vx_core.t_type
     vx_test.t_html_from_divtest['vx_value'] = {
       name          : "html<-divtest",
@@ -2052,7 +2083,7 @@ export default class vx_test {
       fn            : vx_test.f_html_from_divtest
     }
 
-    // (func p_from_passfail)
+    // (func p<-passfail)
     vx_test.t_p_from_passfail['vx_type'] = vx_core.t_type
     vx_test.t_p_from_passfail['vx_value'] = {
       name          : "p<-passfail",
@@ -2071,7 +2102,7 @@ export default class vx_test {
       fn            : vx_test.f_p_from_passfail
     }
 
-    // (func p_from_testcoveragenums)
+    // (func p<-testcoveragenums)
     vx_test.t_p_from_testcoveragenums['vx_type'] = vx_core.t_type
     vx_test.t_p_from_testcoveragenums['vx_value'] = {
       name          : "p<-testcoveragenums",
@@ -2090,7 +2121,7 @@ export default class vx_test {
       fn            : vx_test.f_p_from_testcoveragenums
     }
 
-    // (func resolve_testcase)
+    // (func resolve-testcase)
     vx_test.t_resolve_testcase['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testcase['vx_value'] = {
       name          : "resolve-testcase",
@@ -2109,7 +2140,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testcase
     }
 
-    // (func resolve_testcaselist)
+    // (func resolve-testcaselist)
     vx_test.t_resolve_testcaselist['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testcaselist['vx_value'] = {
       name          : "resolve-testcaselist",
@@ -2128,7 +2159,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testcaselist
     }
 
-    // (func resolve_testdescribe)
+    // (func resolve-testdescribe)
     vx_test.t_resolve_testdescribe['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testdescribe['vx_value'] = {
       name          : "resolve-testdescribe",
@@ -2147,7 +2178,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testdescribe
     }
 
-    // (func resolve_testdescribelist)
+    // (func resolve-testdescribelist)
     vx_test.t_resolve_testdescribelist['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testdescribelist['vx_value'] = {
       name          : "resolve-testdescribelist",
@@ -2166,7 +2197,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testdescribelist
     }
 
-    // (func resolve_testpackage)
+    // (func resolve-testpackage)
     vx_test.t_resolve_testpackage['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testpackage['vx_value'] = {
       name          : "resolve-testpackage",
@@ -2185,7 +2216,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testpackage
     }
 
-    // (func resolve_testpackagelist)
+    // (func resolve-testpackagelist)
     vx_test.t_resolve_testpackagelist['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testpackagelist['vx_value'] = {
       name          : "resolve-testpackagelist",
@@ -2204,7 +2235,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testpackagelist
     }
 
-    // (func resolve_testresult)
+    // (func resolve-testresult)
     vx_test.t_resolve_testresult['vx_type'] = vx_core.t_type
     vx_test.t_resolve_testresult['vx_value'] = {
       name          : "resolve-testresult",
@@ -2223,7 +2254,7 @@ export default class vx_test {
       fn            : vx_test.f_resolve_testresult
     }
 
-    // (func security_test)
+    // (func security-test)
     vx_test.t_security_test['vx_type'] = vx_core.t_type
     vx_test.t_security_test['vx_value'] = {
       name          : "security-test",
@@ -2261,7 +2292,7 @@ export default class vx_test {
       fn            : vx_test.f_test
     }
 
-    // (func test_1)
+    // (func test)
     vx_test.t_test_1['vx_type'] = vx_core.t_type
     vx_test.t_test_1['vx_value'] = {
       name          : "test",
@@ -2280,7 +2311,7 @@ export default class vx_test {
       fn            : vx_test.f_test_1
     }
 
-    // (func test_false)
+    // (func test-false)
     vx_test.t_test_false['vx_type'] = vx_core.t_type
     vx_test.t_test_false['vx_value'] = {
       name          : "test-false",
@@ -2299,7 +2330,7 @@ export default class vx_test {
       fn            : vx_test.f_test_false
     }
 
-    // (func test_false_1)
+    // (func test-false)
     vx_test.t_test_false_1['vx_type'] = vx_core.t_type
     vx_test.t_test_false_1['vx_value'] = {
       name          : "test-false",
@@ -2318,7 +2349,7 @@ export default class vx_test {
       fn            : vx_test.f_test_false_1
     }
 
-    // (func test_gt)
+    // (func test-gt)
     vx_test.t_test_gt['vx_type'] = vx_core.t_type
     vx_test.t_test_gt['vx_value'] = {
       name          : "test-gt",
@@ -2337,7 +2368,7 @@ export default class vx_test {
       fn            : vx_test.f_test_gt
     }
 
-    // (func test_gt_1)
+    // (func test-gt)
     vx_test.t_test_gt_1['vx_type'] = vx_core.t_type
     vx_test.t_test_gt_1['vx_value'] = {
       name          : "test-gt",
@@ -2356,7 +2387,7 @@ export default class vx_test {
       fn            : vx_test.f_test_gt_1
     }
 
-    // (func test_ne)
+    // (func test-ne)
     vx_test.t_test_ne['vx_type'] = vx_core.t_type
     vx_test.t_test_ne['vx_value'] = {
       name          : "test-ne",
@@ -2375,7 +2406,7 @@ export default class vx_test {
       fn            : vx_test.f_test_ne
     }
 
-    // (func test_ne_1)
+    // (func test-ne)
     vx_test.t_test_ne_1['vx_type'] = vx_core.t_type
     vx_test.t_test_ne_1['vx_value'] = {
       name          : "test-ne",
@@ -2394,7 +2425,7 @@ export default class vx_test {
       fn            : vx_test.f_test_ne_1
     }
 
-    // (func test_string)
+    // (func test-string)
     vx_test.t_test_string['vx_type'] = vx_core.t_type
     vx_test.t_test_string['vx_value'] = {
       name          : "test-string",
@@ -2413,7 +2444,7 @@ export default class vx_test {
       fn            : vx_test.f_test_string
     }
 
-    // (func test_string_1)
+    // (func test-string)
     vx_test.t_test_string_1['vx_type'] = vx_core.t_type
     vx_test.t_test_string_1['vx_value'] = {
       name          : "test-string",
@@ -2432,7 +2463,7 @@ export default class vx_test {
       fn            : vx_test.f_test_string_1
     }
 
-    // (func test_true)
+    // (func test-true)
     vx_test.t_test_true['vx_type'] = vx_core.t_type
     vx_test.t_test_true['vx_value'] = {
       name          : "test-true",
@@ -2451,7 +2482,7 @@ export default class vx_test {
       fn            : vx_test.f_test_true
     }
 
-    // (func test_true_1)
+    // (func test-true)
     vx_test.t_test_true_1['vx_type'] = vx_core.t_type
     vx_test.t_test_true_1['vx_value'] = {
       name          : "test-true",
@@ -2470,7 +2501,7 @@ export default class vx_test {
       fn            : vx_test.f_test_true_1
     }
 
-    // (func tr_from_testdescribe_casename)
+    // (func tr<-testdescribe-casename)
     vx_test.t_tr_from_testdescribe_casename['vx_type'] = vx_core.t_type
     vx_test.t_tr_from_testdescribe_casename['vx_value'] = {
       name          : "tr<-testdescribe-casename",
@@ -2489,7 +2520,7 @@ export default class vx_test {
       fn            : vx_test.f_tr_from_testdescribe_casename
     }
 
-    // (func trlist_from_testcase)
+    // (func trlist<-testcase)
     vx_test.t_trlist_from_testcase['vx_type'] = vx_core.t_type
     vx_test.t_trlist_from_testcase['vx_value'] = {
       name          : "trlist<-testcase",
@@ -2508,7 +2539,7 @@ export default class vx_test {
       fn            : vx_test.f_trlist_from_testcase
     }
 
-    // (func trlist_from_testcaselist)
+    // (func trlist<-testcaselist)
     vx_test.t_trlist_from_testcaselist['vx_type'] = vx_core.t_type
     vx_test.t_trlist_from_testcaselist['vx_value'] = {
       name          : "trlist<-testcaselist",

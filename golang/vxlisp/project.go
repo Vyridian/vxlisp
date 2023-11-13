@@ -1,17 +1,5 @@
 package vxlisp
 
-type vxcommand struct {
-	name    string
-	code    string
-	doc     string
-	lang    string
-	path    string
-	port    int
-	config  string
-	context string
-	main    string
-}
-
 type vxpath struct {
 	doc  string
 	name string
@@ -37,23 +25,6 @@ type vxproject struct {
 
 var emptyproject = NewProject()
 
-func NewCmd() *vxcommand {
-	return new(vxcommand)
-}
-
-func NewCmdCopy(cmd *vxcommand) *vxcommand {
-	output := NewCmd()
-	output.code = cmd.code
-	output.context = cmd.context
-	output.doc = cmd.doc
-	output.lang = cmd.lang
-	output.main = cmd.main
-	output.name = cmd.name
-	output.path = cmd.path
-	output.port = cmd.port
-	return output
-}
-
 func NewPath() *vxpath {
 	return new(vxpath)
 }
@@ -62,136 +33,59 @@ func NewProject() *vxproject {
 	return new(vxproject)
 }
 
-func CmdFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
-	msgblock := NewMsgBlock("CmdTextblock")
-	cmd := NewCmd()
-	switch textblock.blocktype {
-	case "(":
-		var lastprop = ""
-		for idx, proptextblock := range textblock.listtextblock {
-			prop := proptextblock.text
-			switch idx {
-			case 0:
-				switch prop {
-				case "cmd":
-				default:
-					msg := NewMsgFromTextblock(textblock, "Cmds may only contain (cmd):", prop)
-					msgblock = MsgblockAddError(msgblock, msg)
-				}
-			case 1:
-				cmd.name = prop
-			default:
-				switch lastprop {
-				case "":
-					switch proptextblock.blocktype {
-					case "//":
-					default:
-						if BooleanFromStringStarts(prop, ":") {
-							switch prop {
-							case ":code", ":config", ":context", ":doc", ":lang", ":main", ":name", ":path", ":port":
-								lastprop = prop
-							default:
-								msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", prop)
-								msgblock = MsgblockAddError(msgblock, msg)
-							}
-						} else {
-							msg := NewMsgFromTextblock(textblock, "Invalid Cmd Property:", prop)
-							msgblock = MsgblockAddError(msgblock, msg)
-						}
-					}
-				default:
-					switch lastprop {
-					case ":code":
-						cmd.code = prop
-					case ":config":
-						cmd.config = prop
-					case ":context":
-						cmd.context = prop
-					case ":doc":
-						cmd.doc = prop
-					case ":lang":
-						cmd.lang = prop
-					case ":main":
-						cmd.main = prop
-					case ":path":
-						cmd.path = prop
-					case ":port":
-						cmd.port = IntFromString(prop)
-					}
-					lastprop = ""
-				}
-			}
-		}
-	default:
-		msg := NewMsgFromTextblock(textblock, "Cmd properties must be enclosed in (cmd)")
-		msgblock = MsgblockAddError(msgblock, msg)
-	}
-	return cmd, msgblock
-}
-
-func CmdsFromProject(prj *vxproject, cmdtexts []string) []*vxcommand {
-	var output []*vxcommand
-	for _, cmd := range prj.listcmd {
-		if BooleanFromListStringContains(cmdtexts, cmd.name) {
-			output = append(output, cmd)
-		}
-	}
-	return output
-}
-
-func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
-	msgblock := NewMsgBlock("ExecutProjectCmd")
-	path := StringPathFromProjectCmd(project, origcmd)
-	cmd := NewCmdCopy(origcmd)
-	cmd.path = path
-	switch cmd.code {
+func ExecuteProjectCommand(project *vxproject, origcommand *vxcommand) *vxmsgblock {
+	msgblock := NewMsgBlock("ExecutProjectCommand")
+	path := StringPathFromProjectCmd(project, origcommand)
+	command := NewCommandCopy(origcommand)
+	command.path = path
+	switch command.code {
 	case ":doc":
-		msgs := WriteDocFromProjectCmd(project, cmd)
+		msgs := WriteDocFromProjectCmd(project, command)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source":
-		switch cmd.lang {
+		switch command.lang {
 		case ":cpp":
-			msgs := CppWriteFromProjectCmd(project, cmd)
+			msgs := CppWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":csharp":
-			msgs := CSharpWriteFromProjectCmd(project, cmd)
+			msgs := CSharpWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
-			msgs := JavaWriteFromProjectCmd(project, cmd)
+			msgs := JavaWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
-			msgs := WriteJsFromProjectCmd(project, cmd)
+			msgs := WriteJsFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":kotlin":
-			msgs := KotlinWriteFromProjectCmd(project, cmd)
+			msgs := KotlinWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":swift":
-			msgs := SwiftWriteFromProjectCmd(project, cmd)
+			msgs := SwiftWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":test":
-		switch cmd.lang {
+		switch command.lang {
 		case ":cpp":
-			msgs := CppWriteFromProjectCmd(project, cmd)
+			msgs := CppWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":csharp":
-			msgs := CSharpWriteFromProjectCmd(project, cmd)
+			msgs := CSharpWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":java":
-			msgs := JavaWriteFromProjectCmd(project, cmd)
+			msgs := JavaWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":js":
-			msgs := WriteJsFromProjectCmd(project, cmd)
+			msgs := WriteJsFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":kotlin":
-			msgs := KotlinWriteFromProjectCmd(project, cmd)
+			msgs := KotlinWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		case ":swift":
-			msgs := SwiftWriteFromProjectCmd(project, cmd)
+			msgs := SwiftWriteFromProjectCmd(project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 	case ":webserver":
-		WebServerStart(project, cmd)
+		WebServerStart(project, command)
 	}
 	return msgblock
 }
@@ -199,7 +93,7 @@ func ExecuteProjectCmd(project *vxproject, origcmd *vxcommand) *vxmsgblock {
 func ExecuteProjectCmds(project *vxproject, listcommand []*vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCmds")
 	for _, command := range listcommand {
-		msgs := ExecuteProjectCmd(project, command)
+		msgs := ExecuteProjectCommand(project, command)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
@@ -232,7 +126,7 @@ func ExecuteProjectFromArgs(listarg []string) *vxmsgblock {
 	project, msgs := ProjectReadFromPath(projectpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !IsErrorFromMsgblock(msgblock) {
-		cmds := CmdsFromProject(project, cmdtexts)
+		cmds := ListCommandFromProject(project, cmdtexts)
 		msgs := ExecuteProjectCmds(project, cmds)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
@@ -502,7 +396,7 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 										prj.version = word
 										lastword = ""
 									case ":cmds":
-										cmd, msgs := CmdFromTextblock(wordtextblock)
+										cmd, msgs := CommandFromTextblock(wordtextblock)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
 										prj.listcmd = append(prj.listcmd, cmd)
 									case ":libs":

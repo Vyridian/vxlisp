@@ -27,10 +27,10 @@ export default class vx_data_csv_test {
       "testpkg",   "vx/data/csv", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
       "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 2, ":total", 6), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 1, ":total", 3), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 16, ":tests", 1, ":total", 6), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2)
     )
   }
@@ -55,14 +55,163 @@ export default class vx_data_csv_test {
           vx_core.t_intmap,
           "csv<-textblock", 0,
           "csvrows<-textblock", 0,
-          "textblock-csv<-string", 0
+          "textblock-csv<-string", 1
         )
     )
   }
 
+  static f_textblock_csv_from_string(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/data/csv",
+      ":casename", "textblock-csv<-string",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (tb/textblock\n  :text\n`\"a\",\"b\"\n1,\"2\"`\n  :endpos 13\n  :delim delimcsv\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text `\"a\"`\n     :endpos 3\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"a\"\n        :startpos 1\n        :endpos 2)))\n    (tb/textblock\n     :text \",\"\n     :startpos 3\n     :endpos 4\n     :delim tb/delimcomma)\n    (tb/textblock\n     :text `\"b\"`\n     :startpos 4\n     :endpos 7\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"b\"\n        :startpos 5\n        :endpos 6)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 7\n     :endpos 8\n     :delim tb/delimline)\n    (tb/textblock\n     :text \"1\"\n     :startpos 8\n     :endpos 9)\n    (tb/textblock\n     :text \",\"\n     :startpos 9\n     :endpos 10\n     :delim tb/delimcomma)\n    (tb/textblock\n     :text `\"2\"`\n     :startpos 10\n     :endpos 13\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"2\"\n        :startpos 11\n        :endpos 12)))))\n (textblock-csv<-string\n`\"a\",\"b\"\n1,\"2\"`\n )\n)",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_data_textblock.t_textblock,
+                ":text",
+                "\"a\",\"b\"\n1,\"2\"",
+                ":endpos",
+                13,
+                ":delim",
+                vx_data_csv.c_delimcsv,
+                ":children",
+                vx_core.f_new(
+                  vx_data_textblock.t_textblocklist,
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "\"a\"",
+                    ":endpos",
+                    3,
+                    ":delim",
+                    vx_data_textblock.c_delimquote,
+                    ":children",
+                    vx_core.f_new(
+                      vx_data_textblock.t_textblocklist,
+                      vx_core.f_new(
+                        vx_data_textblock.t_textblock,
+                        ":text",
+                        "a",
+                        ":startpos",
+                        1,
+                        ":endpos",
+                        2
+                      )
+                    )
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    ",",
+                    ":startpos",
+                    3,
+                    ":endpos",
+                    4,
+                    ":delim",
+                    vx_data_textblock.c_delimcomma
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "\"b\"",
+                    ":startpos",
+                    4,
+                    ":endpos",
+                    7,
+                    ":delim",
+                    vx_data_textblock.c_delimquote,
+                    ":children",
+                    vx_core.f_new(
+                      vx_data_textblock.t_textblocklist,
+                      vx_core.f_new(
+                        vx_data_textblock.t_textblock,
+                        ":text",
+                        "b",
+                        ":startpos",
+                        5,
+                        ":endpos",
+                        6
+                      )
+                    )
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "\n",
+                    ":startpos",
+                    7,
+                    ":endpos",
+                    8,
+                    ":delim",
+                    vx_data_textblock.c_delimline
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "1",
+                    ":startpos",
+                    8,
+                    ":endpos",
+                    9
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    ",",
+                    ":startpos",
+                    9,
+                    ":endpos",
+                    10,
+                    ":delim",
+                    vx_data_textblock.c_delimcomma
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "\"2\"",
+                    ":startpos",
+                    10,
+                    ":endpos",
+                    13,
+                    ":delim",
+                    vx_data_textblock.c_delimquote,
+                    ":children",
+                    vx_core.f_new(
+                      vx_data_textblock.t_textblocklist,
+                      vx_core.f_new(
+                        vx_data_textblock.t_textblock,
+                        ":text",
+                        "2",
+                        ":startpos",
+                        11,
+                        ":endpos",
+                        12
+                      )
+                    )
+                  )
+                )
+              ),
+              vx_data_csv.f_textblock_csv_from_string("\"a\",\"b\"\n1,\"2\"")
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static test_cases(context) {
     const output = vx_core.f_new(
-      vx_test.t_testcaselist
+      vx_test.t_testcaselist,
+      vx_data_csv_test.f_textblock_csv_from_string(context)
     )
     return output
   }

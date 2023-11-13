@@ -35,6 +35,7 @@
    line      : int
    column    : int
    delim     : delim
+   close     : delim
    parent    : textblock
    children  : textblocklist]
  :doc "A textblock is a tree of text used for parsing by delimter.")
@@ -324,29 +325,29 @@
   delim     : delim]
  :doc "Returns a parsed textblock from an unparsed one.")
 
-(func textblock-addchild<-textblock-child : textblock
+(func textblock-addchild<-textblock-find-child : textblock
  [textblockarg : textblock
+  find         : textblock
   child        : textblock]
- (let : textblock
-  [delimcurr : delim         := (:delim     textblockarg)
-   parent    : textblock     := (:parent    textblockarg)
-   children  : textblocklist := (:children  textblockarg)
-   starttext : string        := (:starttext delimcurr)
-   endtext   : string        := (:endtext   delimcurr)]
-  (if : textblock
-   (then // empty
-    (is-empty textblockarg) (empty textblock))
-   (then // allows childen
-    (and (= starttext "") (= endtext ""))
-    (copy textblockarg
-     :children (copy children child)))
-   (else // recursion
-    (copy textblockarg
-     :parent
-      (textblock-addchild<-textblock-child
-       parent
-       child)))))
-:doc "Add the child to the correct parent textblock.")
+ (if : textblock
+  (then // empty
+   (is-empty textblockarg)
+   (empty textblock))
+  (then // found
+   (and (== find textblockarg))
+   (copy textblockarg
+    :children
+     (copy
+      (:children textblockarg)
+      child)))
+  (else // recursion
+   (copy textblockarg
+    :parent
+     (textblock-addchild<-textblock-find-child
+      (:parent textblockarg)
+      find
+      child))))
+:doc "Add the child to the given parent textblock.")
 
 (func textblock-delimnotfound : textblock
  [textblockin : textblock]
@@ -375,6 +376,41 @@
    )))
  :doc "Returns a textblock when a delim is not found.")
 
+(func textblock-findparent<-textblock : textblock
+ [textblockarg : textblock]
+ (let : textblock
+  [delimcurr : delim         := (:delim     textblockarg)
+   parent    : textblock     := (:parent    textblockarg)
+   children  : textblocklist := (:children  textblockarg)
+   starttext : string        := (:starttext delimcurr)
+   endtext   : string        := (:endtext   delimcurr)]
+  (if : textblock
+   (then // empty
+    (is-empty textblockarg) (empty textblock))
+   (then // allows childen
+    (and (= starttext "") (= endtext ""))
+    textblockarg)
+   (else // recursion
+    (textblock-findparent<-textblock
+     parent))))
+:doc "Find a parent that accepts a child.")
+
+(func textblock-groupby<-textblock-delim : textblock
+ [textblockarg : textblock
+  delimarg     : delim]
+ (textblock
+  :delim delimarg)
+ // until (is-empty list)
+ //   find from list
+ //   if (< find 0)
+ //     addlist list
+ //   else
+ //     left pos
+ //     right pos
+ //     addlist left
+ //     list = right
+:doc "Returns a textblock grouped by the given delim.")
+
 (func textblock-parse : textblock
  [textblock : textblock]
  (collection/any<-for-until-loop : textblock
@@ -386,6 +422,8 @@
   (fn : textblock
    [current : textblock]
    (textblock-parse-one current)))
+ :bigospace :n^n
+ :bigotime  :n^n
  :test
   (test
    (textblock
@@ -451,10 +489,7 @@
        :text "<b>"
        :startpos 1
        :endpos 4
-       :delim
-        (copy delimbracketangle
-         :startpos 1
-         :endpos 3)
+       :delim delimbracketangle
        :children
         (textblocklist
          (textblock
@@ -488,20 +523,31 @@
  [textblockin : textblock]
  (let : textblock
   [delimin     : delim     := (:delim     textblockin)
+   close       : delim     := (:close     textblockin)
    startpos    : int       := (:startpos  textblockin)
    curpos      : int       := (:curpos    textblockin)
    textin      : string    := (:text      textblockin)
    parent      : textblock := (:parent    textblockin)
-   tbchg       : textblock := (copy textblockin
-                               :endpos (+ startpos (length<-string textin)))
    starttext   : string    := (:starttext delimin)
    endtext     : string    := (:endtext   delimin)
    delimlistin : delimlist := (:delimlist delimin)
+   tbchg       : textblock := (copy textblockin
+                               :endpos
+                                (+
+                                 startpos
+                                 (length<-string textin)))
+   delimlistcl : delimlist := (if : delimlist
+                               (is-empty close)
+                               delimlistin
+                               (copy delimlistin close))
    delimfirst  : delim     := (delim-first<-string-delimlist-offset
                                textin
-                               delimlistin
+                               delimlistcl
                                curpos)]
   (if : textblock
+   (then // empty text
+    (= "" textin)
+    parent)
    (then // single value delim
     (and
      (!= "" starttext)
@@ -509,7 +555,7 @@
     (textblock-push
      tbchg))
    (then // empty delimlist
-    (= delimlistin (empty delimlist))
+    (is-empty delimlistcl)
     (if : textblock
      (then // no parent, return textblockin
       (= parent (empty textblock))
@@ -760,12 +806,10 @@
            :text "<b>c"
            :delim
             (copy delimbracketangle
-             :startpos 1
-             :delimlist
-              (delimlist
-               (delim
-                :name "delimclose"
-                :starttext ">")))
+             :startpos 1)
+           :close
+            (copy delimclose
+             :starttext ">")
            :startpos 1
            :curpos 1
            :parent
@@ -792,12 +836,10 @@
          :curpos 1
          :delim
           (copy delimbracketangle
-           :startpos 1
-           :delimlist
-            (delimlist
-             (delim
-              :name "delimclose"
-              :starttext ">")))
+           :startpos 1)
+         :close
+          (copy delimclose
+           :starttext ">")
          :parent
           (textblock
            :text "a<b>c"
@@ -822,12 +864,10 @@
             :curpos 1
             :delim
              (copy delimbracketangle
-              :startpos 1
-              :delimlist
-               (delimlist
-                (delim
-                 :name "delimclose"
-                 :starttext ">")))
+              :startpos 1)
+            :close
+             (copy delimclose
+              :starttext ">")
             :parent
              (textblock
               :text "a<b>c"
@@ -840,6 +880,11 @@
         (textblock
          :text "c"
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text "a<b>c"
@@ -855,31 +900,26 @@
               :endpos 1)
              (textblock
               :text "<b>"
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 4)
-              :startpos 2
-              :endpos 5
+              :delim delimbracketangle
+              :startpos 1
+              :endpos 4
               :children
                (textblocklist
                 (textblock
                  :text "b"
-                 :startpos 3
-                 :endpos 4))))))
+                 :startpos 2
+                 :endpos 3))))))
         (textblock-parse-one
          (textblock
           :text "<b>c"
-          :startpos 2
+          :startpos 1
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name "delimclose"
-               :starttext ">")))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext ">")
           :parent
            (textblock
             :text "a<b>c"
@@ -902,13 +942,16 @@
    text      : string    := (:text     textblockarg)
    startpos  : int       := (:startpos textblockarg)
    endpos    : int       := (+ startpos (length<-string text))
-   delimpar  : delim     := (:delim  parent)
+   delimpar  : delim     := (:delim parent)
    child     : textblock := (copy textblockarg
                              :endpos endpos
                              :delim  (empty delim)
-                             :parent (empty textblock))]
-  (textblock-addchild<-textblock-child
+                             :parent (empty textblock))
+   parenttgt : textblock := (textblock-findparent<-textblock
+                             parent)]
+  (textblock-addchild<-textblock-find-child
    parent
+   parenttgt
    child))
  :test (test
         (textblock
@@ -1017,54 +1060,65 @@
  [textblockarg : textblock
   delimarg     : delim]
  (if : textblock
-  (then (is-empty delimarg) textblockarg)
-  (then (= (:name delimarg) (:name delimclose))
+  (then // empty delim
+   (is-empty delimarg)
+   textblockarg)
+  (then // close delim
+   (=
+    (:name delimarg)
+    (:name delimclose))
    (let : textblock
-    [parentcur   : textblock     := (:parent textblockarg)
-     childrenpar : textblocklist := (:children parentcur)
-     delimcur    : delim         := (:delim textblockarg)
-     starttext   : string        := (:starttext delimcur)
-     endtext     : string        := (:endtext delimcur)
-     delimpos    : int           := (:startpos delimarg)
-     startpos    : int           := (:startpos textblockarg)
-     startsub    : int           := (length<-string starttext)
-     endpos      : int           := (+ delimpos (length<-string endtext))
-     endsub      : int           := delimpos
-     textcur     : string        := (:text textblockarg)
-     childrencur : textblocklist := (:children textblockarg)
-     textout     : string        := (string<-string-start
-                                     textcur endpos)
-     textsub     : string        :=  (string<-string-start-end
-                                      textcur
-                                      startsub
-                                      endsub)
-     textdelim   : string        := (string<-string-start-end
-                                     textcur
-                                     0
-                                     endpos)
-     childchg    : textblock     := (copy textblockarg
-                                     :text textdelim
-                                     :endpos (+ startpos endpos)
-                                     :curpos 0
-                                     :delim
-                                      (copy 
-                                       delimcur
-                                       :endpos (+ startpos delimpos)
-                                       :delimlist (empty delimlist))
-                                     :parent (empty textblock)
-                                     :children
-                                      (textblocklist
-                                       (textblock
-                                        :text textsub
-                                        :startpos (+ startpos startsub)
-                                        :endpos (+ startpos endsub)
-                                        :curpos 0)))
-     parentchg   : textblock     := (textblock-addchild<-textblock-child
-                                     parentcur
-                                     childchg)]
+    [parentcur : textblock := (:parent textblockarg)
+     delimcur  : delim     := (:delim textblockarg)
+     starttext : string    := (:starttext delimcur)
+     endtext   : string    := (:endtext delimcur)
+     delimpos  : int       := (:startpos delimarg)
+     startpos  : int       := (:startpos textblockarg)
+     startsub  : int       := (length<-string starttext)
+     endpos    : int       := (+
+                               delimpos
+                               (length<-string endtext))
+     endsub    : int       := delimpos
+     textcur   : string    := (:text textblockarg)
+     textout   : string    := (string<-string-start
+                               textcur endpos)
+     textsub   : string    := (string<-string-start-end
+                               textcur
+                               startsub
+                               endsub)
+     textdelim : string    := (string<-string-start-end
+                               textcur
+                               0
+                               endpos)
+     childchg  : textblock := (copy textblockarg
+                               :text textdelim
+                               :endpos (+ startpos endpos)
+                               :curpos 0
+                               :delim
+                                (copy
+                                 delimcur
+                                 :startpos 0
+                                 :endpos 0
+                                 :delimlist (empty delimlist))
+                               :close  (empty delim)
+                               :parent (empty textblock)
+                               :children
+                                (textblocklist
+                                 (textblock
+                                  :text textsub
+                                  :startpos (+ startpos startsub)
+                                  :endpos (+ startpos endsub)
+                                  :curpos 0)))
+     parenttgt : textblock := (textblock-findparent<-textblock
+                               parentcur)
+     parentchg : textblock := (textblock-addchild<-textblock-find-child
+                               parentcur
+                               parenttgt
+                               childchg)]
     (textblock
      :text textout
-     :startpos (+1 endpos)
+     :delim (:delim parenttgt)
+     :startpos (+ startpos endpos)
      :parent parentchg)))
   (else
    (let : textblock
@@ -1096,6 +1150,11 @@
         (textblock
          :text "c"
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text "a<b>c"
@@ -1114,10 +1173,7 @@
               :text "<b>"
               :startpos 1
               :endpos 4
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 3)
+              :delim delimbracketangle
               :children
                (textblocklist
                 (textblock
@@ -1131,12 +1187,10 @@
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name "delimclose"
-               :starttext ">")))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext ">")
           :parent
            (textblock
             :text "a<b>c"
@@ -1150,8 +1204,7 @@
               (textblock
                :text "a"
                :endpos 1))))
-         (delim
-          :name "delimclose"
+         (copy delimclose
           :starttext ">"
           :startpos 2)))
  :doc "Returns the parent of a textblock with the current textblock added to textblocklist.")
@@ -1164,13 +1217,14 @@
    offset     : int       := (:startpos textblockin)
    starttext  : string    := (:starttext delimcur)
    endtext    : string    := (:endtext delimcur)
+   startlen   : int       := (length<-string starttext)
    issingle   : boolean   := (and
                               (!= "" starttext)
                               (=  "" endtext))
-   curpos     : int       := (:curpos textblockin)
    delimsplit : delim     := (if : delim
                               issingle
                               (copy delimcur
+                               :startpos startlen
                                :delimlist
                                 (empty delimlist))
                               delimcur)
@@ -1186,8 +1240,11 @@
    tbchg      : textblock := (copy tbleft
                               :delim delimchg)
    parent     : textblock := (:parent textblockin)
-   parentchg  : textblock := (textblock-addchild<-textblock-child
+   parenttgt  : textblock := (textblock-findparent<-textblock
+                              parent)
+   parentchg  : textblock := (textblock-addchild<-textblock-find-child
                               parent
+                              parenttgt
                               tbchg)
    delimright : delim     := (if : delim
                               issingle
@@ -1240,7 +1297,6 @@
           :curpos 1
           :delim
            (copy delimcomma
-            :startpos 1
             :delimlist
              (delimlist
               (copy delimcomma
@@ -1263,6 +1319,92 @@
               (textblock
                :text "a"
                :endpos 1))))))
+       (test
+        (textblock
+         :text `"b"
+1,"2"`
+         :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimline
+             delimquote
+             delimcomma))
+         :parent
+          (textblock
+           :text `"a","b"
+1,"2"`
+           :endpos 13
+           :delim
+            (delim
+             :name "delimcsv"
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+         :children
+          (textblocklist
+           (textblock
+            :text `"a"`
+            :endpos 3
+            :delim
+             (copy delimquote
+              :endpos 2)
+            :children
+             (textblocklist
+              (textblock
+               :text "a"
+               :startpos 1
+               :endpos 2)))
+           (textblock
+            :text ","
+            :startpos 3
+            :endpos 4           
+            :delim
+             delimcomma
+              ))))
+        (textblock-push
+         (textblock
+          :text `,"b"
+1,"2"`
+           :startpos 3
+           :curpos 1
+           :delim
+            (copy delimcomma
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+           :parent
+            (textblock
+             :text `"a","b"
+1,"2"`
+             :endpos 13
+             :delim
+              (delim
+               :name "delimcsv"
+               :delimlist
+                (delimlist
+                 delimline
+                 delimquote
+                 delimcomma))
+             :children
+              (textblocklist
+               (textblock
+                :text "\"a\""
+                :endpos 3
+                :delim
+                 (copy delimquote
+                  :endpos 2)
+                :children
+                 (textblocklist
+                  (textblock
+                   :text "a"
+                   :startpos 1
+                   :endpos 2))))))))
 :doc "Returns a a textblock using the textblocks current delim.")
 
 (func textblock-push<-textblock-delim : textblock
@@ -1278,6 +1420,7 @@
      offset    : int       := (:startpos  textblockin)
      delimcur  : delim     := (:delim     textblockin)
      parent    : textblock := (:parent    textblockin)
+     startpos  : int       := (:startpos  delimin)
      starttext : string    := (:starttext delimin)
      endtext   : string    := (:endtext   delimin)
      issingle  : boolean   := (and
@@ -1305,9 +1448,13 @@
                               (empty delim)
                               (delim
                                :delimlist delims))]
-    (copy tbleft
-     :delim delimchg
-     :parent tbparent))))
+    (if : textblock
+     (then (= 0 startpos)
+      tbparent)
+     (else
+      (copy tbleft
+       :delim delimchg
+       :parent tbparent))))))
  :test (test
         (textblock
          :text "a"
@@ -1363,6 +1510,11 @@
          :text "b"
          :startpos 2
          :endpos 3
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text ",c"
@@ -1441,7 +1593,10 @@
                  :startpos 1
                  :endpos 2)))))
          (copy delimcomma
-          :startpos 1)))
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketangle))))
  :doc "Returns the parent of a textblock with the current textblock added to textblocklist.")
 
 (func textblock-startleft<-string-delim-offset : textblock
@@ -1480,32 +1635,25 @@
    starttext  : string    := (:starttext delimin)
    endtext    : string    := (:endtext delimin)
    delimlist  : delimlist := (:delimlist delimin)
-   delimclose : delim     := (if : delim
+   close      : delim     := (if : delim
                               (then (= endtext "") (empty delim))
                               (else
-                               (delim
-                                :name "delimclose"
+                               (copy delimclose
                                 :starttext endtext)))
-   delims     : delimlist := (if : delimlist
-                              (then (is-empty delimclose) delimlist)
-                              (else
-                               (copy delimlist delimclose)))
    delimlen   : int       := (length<-string starttext)
-   curpos     : int       := delimlen
-   delimnew   : delim     := (if : delim
-                              (then (is-empty delims) delimin)
-                              (else
-                               (copy delimin
-                                :delimlist delims)))]
+   curpos     : int       := delimlen]
   (if
    (then (= text "")    (empty textblock))
    (then (< startpos 0) (empty textblock))
    (else
     (textblock
-     :text (string<-string-start text startpos)
-     :startpos (+ offset startpos)
+     :text
+      (string<-string-start text startpos)
+     :startpos
+      (+ offset startpos)
      :curpos curpos
-     :delim delimnew))))
+     :delim delimin
+     :close close))))
  :test (test
         (textblock
          :text ",b"
@@ -1520,42 +1668,27 @@
          (delim
           :starttext ","
           :startpos  1)
-          0))
-       (test
-        (textblock
-         :text ",b"
-         :startpos 1
-         :curpos 1
-         :delim
-          (delim
-           :starttext ","
-           :startpos 1))
-        (textblock-startright<-string-delim-offset
-         "a,b"
-         (delim
-          :starttext ","
-          :startpos 1)
-          0))
+         0))
        (test
         (textblock
          :text "<b>c"
          :startpos 1
          :curpos 1
          :delim
-          (delim
-           :starttext "<"
-           :endtext ">"
+          (copy delimbracketangle
            :startpos 1
            :delimlist
             (delimlist
-             (delim
-              :name "delimclose"
-              :starttext ">"))))
+             delimbracketcurly))
+         :close
+          (copy delimclose
+           :starttext ">"))
         (textblock-startright<-string-delim-offset
          "a<b>c"
-         (delim
-          :starttext "<"
-          :endtext ">"
-          :startpos 1)
-          0))
+         (copy delimbracketangle
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketcurly))
+         0))
  :doc "Returns a textblock constructed from the text after the current delimiter start.")

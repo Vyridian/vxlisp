@@ -16,9 +16,9 @@
 ## Keywords
 
 * Like Clojure, keywords in vxlisp are prefixed with a colon ":".
-* ":" - A single colon means the following value is a type. e.g. : string
-* ":=" - A colon followed by "=" means the following value will be assigned. e.g. myvar : string := "ab"
-* ":{name}" - A colon followed by any other name or int means the value is a keyword. These can be used in the following ways:
+* : - A single colon means the following value is a type. e.g. : string
+* := - A colon followed by "=" means the following value will be assigned. e.g. myvar : string := "ab"
+* :{name} - A colon followed by any other name or int means the value is a keyword. These can be used in the following ways:
 
 1. (:2 mylist) - For a given list is the same as mylist[2].
 2. (:mykey mymap) - For a given map is the same as mymap[mykey].
@@ -77,11 +77,6 @@ Sample vxlisp:
 (let
  [text : string := (httpget "http:..")])
 
-## Keywords
-
-:keyword
-Keywords are prefixed with a colon
-
 ## Comment
 
 // ignore to end of line
@@ -114,6 +109,7 @@ Keywords are prefixed with a colon
    :path    ../cpp/src/main
    :main    vx/core/main
    :context vx/core/context-main
+   :filter  vx/core/myfunc         // For debugging test. Filters test to only a single function.
    :doc     "Build C++ Source Code")
 )
 
@@ -195,15 +191,14 @@ vxlisp_win64 doc srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
  :async       // asynchronous function
  :private
  :protected
- :unsafe
+ :unsafe      // denotes function with hidden sideeffects
  :wrapper
  :messages    // use message handling
  :parallel
- :1-:9        // generic type :1, :1, :2, etc.
- :bigospace     1|logn|n|nlogn|2n|n^2|2^n|n^n
- :bigotime      1|logn|n|nlogn|2n|n^2|2^n|n^n
+ :bigospace   // :1 :logn :n :nlogn :2n :n^2 :2^n :n^n
+ :bigotime    // :1 :logn :n :nlogn :2n :n^2 :2^n :n^n
  :doc         "function doc"
- :debug       clause // adds console debug code which outputs [funcname output params] if clause is true
+ :debug       // adds console debug code which outputs [funcname output params] if clause is true
  :test        clauses ...
  :deprecated  "version")
 

@@ -14,6 +14,7 @@ export default class vx_web_htmldoc {
   static t_boolean_write_from_id_htmltext = {}
   static e_boolean_write_from_id_htmltext = {vx_type: vx_web_htmldoc.t_boolean_write_from_id_htmltext}
 
+  // (func boolean-write<-id-htmltext)
   static f_boolean_write_from_id_htmltext(id, htmltext) {
     let output = vx_core.e_boolean
     const elem = document.getElementById(id)
@@ -34,6 +35,7 @@ export default class vx_web_htmldoc {
   static t_boolean_write_from_stylesheet = {}
   static e_boolean_write_from_stylesheet = {vx_type: vx_web_htmldoc.t_boolean_write_from_stylesheet}
 
+  // (func boolean-write<-stylesheet)
   static async f_boolean_write_from_stylesheet(stylesheet) {
     let output = Promise.resolve(vx_core.e_boolean)
     const stylelist = vx_web_html.f_styles_from_stylesheet(stylesheet)
@@ -53,6 +55,7 @@ export default class vx_web_htmldoc {
   static t_string_from_id = {}
   static e_string_from_id = {vx_type: vx_web_htmldoc.t_string_from_id}
 
+  // (func string<-id)
   static f_string_from_id(id) {
     let output = vx_core.e_string
     const elem = document.getElementById(id)
@@ -77,7 +80,7 @@ export default class vx_web_htmldoc {
   static {
     vx_core.f_global_package_set("vx/web/htmldoc", vx_web_htmldoc)
 
-    // (func boolean_write_from_id_htmltext)
+    // (func boolean-write<-id-htmltext)
     vx_web_htmldoc.t_boolean_write_from_id_htmltext['vx_type'] = vx_core.t_type
     vx_web_htmldoc.t_boolean_write_from_id_htmltext['vx_value'] = {
       name          : "boolean-write<-id-htmltext",
@@ -96,7 +99,7 @@ export default class vx_web_htmldoc {
       fn            : vx_web_htmldoc.f_boolean_write_from_id_htmltext
     }
 
-    // (func boolean_write_from_stylesheet)
+    // (func boolean-write<-stylesheet)
     vx_web_htmldoc.t_boolean_write_from_stylesheet['vx_type'] = vx_core.t_type
     vx_web_htmldoc.t_boolean_write_from_stylesheet['vx_value'] = {
       name          : "boolean-write<-stylesheet",
@@ -115,7 +118,7 @@ export default class vx_web_htmldoc {
       fn            : vx_web_htmldoc.f_boolean_write_from_stylesheet
     }
 
-    // (func string_from_id)
+    // (func string<-id)
     vx_web_htmldoc.t_string_from_id['vx_type'] = vx_core.t_type
     vx_web_htmldoc.t_string_from_id['vx_value'] = {
       name          : "string<-id",

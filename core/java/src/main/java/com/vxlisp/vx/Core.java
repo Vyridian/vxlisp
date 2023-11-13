@@ -221,6 +221,46 @@ public final class Core {
     return output;
   }
 
+  // vx_eqeq(any, any)
+  public static boolean vx_eqeq(Core.Type_any val1, Core.Type_any val2) {
+    boolean output = false;
+    if (val1 == val2) {
+      output = true;
+    } else if (val1.vx_msgblock() != Core.e_msgblock) {
+    } else if (val2.vx_msgblock() != Core.e_msgblock) {
+    } else {
+      Core.Type_any type1 = val1.vx_type();
+      Core.Type_any type2 = val2.vx_type();
+      if (type1 != type2) {
+      } else if (type1 == Core.t_int) {
+        Core.Type_int valint1 = (Core.Type_int)val1;
+        Core.Type_int valint2 = (Core.Type_int)val2;
+        if (valint1.vx_int() == valint2.vx_int()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_float) {
+        Core.Type_float valfloat1 = (Core.Type_float)val1;
+        Core.Type_float valfloat2 = (Core.Type_float)val2;
+        if (valfloat1.vx_float() == valfloat2.vx_float()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_decimal) {
+        Core.Type_decimal valdecimal1 = (Core.Type_decimal)val1;
+        Core.Type_decimal valdecimal2 = (Core.Type_decimal)val2;
+        if (valdecimal1.vx_string() == valdecimal2.vx_string()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_string) {
+        Core.Type_string valstring1 = (Core.Type_string)val1;
+        Core.Type_string valstring2 = (Core.Type_string)val2;
+        if (valstring1.vx_string() == valstring2.vx_string()) {
+          output = true;
+        }
+      }
+    }
+    return output;
+  }
+
   // vx_float_from_string(string)
   public static float vx_float_from_string(String text) {
     float output = 0;
@@ -347,14 +387,21 @@ public final class Core {
   }
 
   public static Type_int vx_new_int(final int ival) {
-    Class_int output = new Core.Class_int();
-    output.vxint = ival;
+    Type_int output;
+    if ((ival == 0) && Core.e_int != null) {
+      output = Core.e_int;
+    } else {
+      Class_int work = new Core.Class_int();
+      work.vxint = ival;
+      output = work;
+
+    }
     return output;
   }
 
   public static Type_string vx_new_string(final String text) {
     Type_string output;
-    if (text == "" && Core.e_string != null) {
+    if (text.equals("") && Core.e_string != null) {
       output = Core.e_string;
     } else {
       Class_string work = new Core.Class_string();
@@ -460,9 +507,30 @@ public final class Core {
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
-      String valtext = Core.vx_string_from_any_indent(valmap, indent, linefeed);
-      output = valtext.replaceFirst("map", typedefname.vx_string());
+      int indentint2 = indent;
+      indentint2 += 2;
+      Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
+      Set<String> keys2 = mapval2.keySet();
+      for (String key : keys2) {
+        Core.Type_any valsub2 = mapval2.get(key);
+        if (!Core.f_is_empty_1(valsub2).vx_boolean()) {
+          if (!key.startsWith(":")) {
+            key = ":" + key;
+          }
+          String strval2 = Core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
+          if (strval2.contains("\n")) {
+            strval2 = "\n  " + indenttext + strval2;
+          } else {
+            strval2 = " " + strval2;
+          }
+          output += "\n" + indenttext + " " + key + strval2;
+        }
+      }
+      if (valstruct.vx_msgblock() != null) {
+        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
     } else if (value instanceof Core.Type_func) {
       Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();
@@ -8972,7 +9040,7 @@ public final class Core {
 
   /**
    * @function ne
-   * Returns true if the first arg is not equal to any of the other args
+   * Returns true if the first arg is not equal to any of the other arg.
    * @param  {any} val1
    * @param  {any} val2
    * @return {boolean}
@@ -9049,6 +9117,89 @@ public final class Core {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
       Core.f_eq(val1, val2)
+    );
+    return output;
+  }
+
+  /**
+   * @function neqeq
+   * Returns true if the first arg is not strictly equal to any of the other arg.
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func !==)
+   */
+  public static interface Func_neqeq extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean f_neqeq(final Core.Type_any val1, final Core.Type_any val2);
+  }
+
+  public static class Class_neqeq extends Core.Class_base implements Func_neqeq {
+
+    @Override
+    public Func_neqeq vx_new(Object... vals) {
+      Class_neqeq output = new Class_neqeq();
+      return output;
+    }
+
+    @Override
+    public Func_neqeq vx_copy(Object... vals) {
+      Class_neqeq output = new Class_neqeq();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "!==", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_neqeq vx_empty() {return e_neqeq;}
+    @Override
+    public Func_neqeq vx_type() {return t_neqeq;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_neqeq(val1, val2);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean f_neqeq(final Core.Type_any val1, final Core.Type_any val2) {
+      return Core.f_neqeq(val1, val2);
+    }
+
+  }
+
+  public static final Func_neqeq e_neqeq = new Core.Class_neqeq();
+  public static final Func_neqeq t_neqeq = new Core.Class_neqeq();
+
+  public static Core.Type_boolean f_neqeq(final Core.Type_any val1, final Core.Type_any val2) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_not(
+      Core.f_eqeq(val1, val2)
     );
     return output;
   }
@@ -11157,6 +11308,88 @@ public final class Core {
           );
       })
     );
+    return output;
+  }
+
+  /**
+   * @function eqeq
+   * Strict equality check. Note that all non-empty, non-constants will not be equal.
+   * @param  {any} val1
+   * @param  {any} val2
+   * @return {boolean}
+   * (func ==)
+   */
+  public static interface Func_eqeq extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean f_eqeq(final Core.Type_any val1, final Core.Type_any val2);
+  }
+
+  public static class Class_eqeq extends Core.Class_base implements Func_eqeq {
+
+    @Override
+    public Func_eqeq vx_new(Object... vals) {
+      Class_eqeq output = new Class_eqeq();
+      return output;
+    }
+
+    @Override
+    public Func_eqeq vx_copy(Object... vals) {
+      Class_eqeq output = new Class_eqeq();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "==", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_eqeq vx_empty() {return e_eqeq;}
+    @Override
+    public Func_eqeq vx_type() {return t_eqeq;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val2 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_eqeq(val1, val2);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean f_eqeq(final Core.Type_any val1, final Core.Type_any val2) {
+      return Core.f_eqeq(val1, val2);
+    }
+
+  }
+
+  public static final Func_eqeq e_eqeq = new Core.Class_eqeq();
+  public static final Func_eqeq t_eqeq = new Core.Class_eqeq();
+
+  public static Core.Type_boolean f_eqeq(final Core.Type_any val1, final Core.Type_any val2) {
+    Core.Type_boolean output = Core.e_boolean;
+    boolean isequal = Core.vx_eqeq(val1, val2);
+    output = Core.vx_new_boolean(isequal);
     return output;
   }
 

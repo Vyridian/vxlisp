@@ -522,11 +522,17 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">
             (f) =
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/==')">
+            (f) ==
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/!')">
             (f) !
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">
             (f) !=
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">
+            (f) !==
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">
             (f) !-empty
@@ -1169,11 +1175,17 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock&lt;-textblock-delim')">
             (f) textblock&lt;-textblock-delim
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-child')">
-            (f) textblock-addchild&lt;-textblock-child
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-find-child')">
+            (f) textblock-addchild&lt;-textblock-find-child
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-delimnotfound')">
             (f) textblock-delimnotfound
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-findparent&lt;-textblock')">
+            (f) textblock-findparent&lt;-textblock
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-groupby&lt;-textblock-delim')">
+            (f) textblock-groupby&lt;-textblock-delim
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse')">
             (f) textblock-parse
@@ -2182,6 +2194,7 @@
    :code    :test
    :lang    :js
    :path    ../js/test
+//   :filter  vx/data/csv/textblock-csv&lt;-string
    :context vx/test/context-test
    :doc     &quot;Build JavaScript Test Code&quot;)
   (cmd srcjava
@@ -3923,7 +3936,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-fn-any&lt;-any')">first&lt;-list-fn-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/global-package-get')">global-package-get</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/global-package-set')">global-package-set</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-fn-any&lt;-any')">first&lt;-list-fn-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/global-package-get')">global-package-get</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/global-package-set')">global-package-set</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
             </li>
           </ul>
         </details>
@@ -4787,12 +4800,12 @@ output : list-1 := (empty list-1)
     }
     output = Core.vx_new_boolean(isequal);&quot;)
  :alias &quot;eq&quot;
- :doc   &quot;Boolean equal/equivalent&quot;
  :test  (test-true (= true true))
         (test-true (= 2 2))
         (test-true (= &quot;a&quot; &quot;a&quot;))
         (test-true (= (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;) (new stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))
-        (test-true (= (stringmap :a &quot;1&quot; :b &quot;2&quot;) (new stringmap :a &quot;1&quot; :b &quot;2&quot;))))
+        (test-true (= (stringmap :a &quot;1&quot; :b &quot;2&quot;) (new stringmap :a &quot;1&quot; :b &quot;2&quot;)))
+ :doc   &quot;Boolean equal/equivalent&quot;)
 
 (func = : boolean
  [values : anylist :...]
@@ -4806,46 +4819,25 @@ output : list-1 := (empty list-1)
    (and reduce (= current next)))
  )
  :alias &quot;eq&quot;
- :doc   &quot;Boolean equal/equivalent&quot;
- :test  (test-false (= 2 2 3)))
+ :test  (test-false (= 2 2 3))
+ :doc   &quot;Boolean equal/equivalent&quot;)
 
-/*
 (func == : boolean
- [values : anylist :...]
+ [val1 : any
+  val2 : any]
  (native
+  :cpp
+   &quot;boolean isequal = vx_core::vx_eqeq(val1, val2);
+    output = vx_core.vx_new_boolean(isequal);&quot;
   :js
-   &quot;const firstval = values[0]
-    const firstnative = &quot; (native&lt;-any firstval :native) &quot;
-    output = true
-    for (let i = 1; i &lt; values.length; i++) {
-      let value = values[i]
-      if (firstval === value) {
-      } else if (firstnative === &quot; (native&lt;-any value :native) &quot;) {
-      } else {
-        output = false
-        break
-      }
-    }&quot;
+   &quot;output = val1 == val2&quot;
   :java
-   &quot;boolean isequal = true;
-    List&lt;Core.Type_any&gt; listvalue = values.vx_list();
-    if (listvalue == null) {
-    } else if (listvalue.size() &gt; 0) {
-      Core.Type_any val = listvalue.get(0);
-      for (Core.Type_any subval : listvalue) {
-        if (val != subval) {
-          isequal = false;
-        }
-      }
-    }
+   &quot;boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);&quot;)
  :alias &quot;eqeq&quot;
- :doc   &quot;Strict Boolean equality&quot;
- :test  (test-true (== true true))
-        (test-true (== 2 2))
-        (test-false (== 2 2 3))
-        (test-true (== &quot;a&quot; &quot;a&quot;)))
-*/
+ :test  (test-true (== 0 0))
+        (test-true (== &quot;&quot; &quot;&quot;))
+ :doc &quot;Strict equality check. Note that all non-empty, non-constants will not be equal.&quot;)
 
 (func ! : boolean
  [val : boolean :doc &quot;Thing to not&quot;]
@@ -4865,7 +4857,14 @@ output : list-1 := (empty list-1)
  :alias &quot;ne&quot;
  :test  (test-ne true false)
         (test-ne &quot;a&quot; &quot;b&quot;)
- :doc   &quot;Returns true if the first arg is not equal to any of the other args&quot;)
+ :doc   &quot;Returns true if the first arg is not equal to any of the other arg.&quot;)
+
+(func !== : boolean
+ [val1 : any
+  val2 : any]
+ (! (== val1 val2))
+ :alias &quot;neqeq&quot;
+ :doc   &quot;Returns true if the first arg is not strictly equal to any of the other arg.&quot;)
 
 (func !-empty : boolean
  [text : string]
@@ -12744,12 +12743,12 @@ output : list-1 := (empty list-1)
     }
     output = Core.vx_new_boolean(isequal);&quot;)
  :alias &quot;eq&quot;
- :doc   &quot;Boolean equal/equivalent&quot;
  :test  (test-true (= true true))
         (test-true (= 2 2))
         (test-true (= &quot;a&quot; &quot;a&quot;))
         (test-true (= (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;) (new stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))
-        (test-true (= (stringmap :a &quot;1&quot; :b &quot;2&quot;) (new stringmap :a &quot;1&quot; :b &quot;2&quot;))))</div>
+        (test-true (= (stringmap :a &quot;1&quot; :b &quot;2&quot;) (new stringmap :a &quot;1&quot; :b &quot;2&quot;)))
+ :doc   &quot;Boolean equal/equivalent&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -12822,8 +12821,90 @@ output : list-1 := (empty list-1)
    (and reduce (= current next)))
  )
  :alias &quot;eq&quot;
- :doc   &quot;Boolean equal/equivalent&quot;
- :test  (test-false (= 2 2 3)))</div>
+ :test  (test-false (= 2 2 3))
+ :doc   &quot;Boolean equal/equivalent&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/==">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Strict equality check. Note that all non-empty, non-constants will not be equal.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">== (alias: eqeq)</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">val1</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">val2</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test-true (== 0 0))</div></li>
+                <li><div class="test">(test-true (== &quot;&quot; &quot;&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func == : boolean
+ [val1 : any
+  val2 : any]
+ (native
+  :cpp
+   &quot;boolean isequal = vx_core::vx_eqeq(val1, val2);
+    output = vx_core.vx_new_boolean(isequal);&quot;
+  :js
+   &quot;output = val1 == val2&quot;
+  :java
+   &quot;boolean isequal = Core.vx_eqeq(val1, val2);
+    output = Core.vx_new_boolean(isequal);&quot;)
+ :alias &quot;eqeq&quot;
+ :test  (test-true (== 0 0))
+        (test-true (== &quot;&quot; &quot;&quot;))
+ :doc &quot;Strict equality check. Note that all non-empty, non-constants will not be equal.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -12904,7 +12985,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns true if the first arg is not equal to any of the other args</div>
+                <div class="txt">Returns true if the first arg is not equal to any of the other arg.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -12968,7 +13049,77 @@ output : list-1 := (empty list-1)
  :alias &quot;ne&quot;
  :test  (test-ne true false)
         (test-ne &quot;a&quot; &quot;b&quot;)
- :doc   &quot;Returns true if the first arg is not equal to any of the other args&quot;)</div>
+ :doc   &quot;Returns true if the first arg is not equal to any of the other arg.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/!==">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns true if the first arg is not strictly equal to any of the other arg.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">!== (alias: neqeq)</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">val1</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">val2</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func !== : boolean
+ [val1 : any
+  val2 : any]
+ (! (== val1 val2))
+ :alias &quot;neqeq&quot;
+ :doc   &quot;Returns true if the first arg is not strictly equal to any of the other arg.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -22966,7 +23117,6 @@ improves readability.</div>
  (tb/textblock-parse&lt;-string-delim
   text
   delimcsv)
-/*
  :test
   (test
    (tb/textblock
@@ -22980,9 +23130,7 @@ improves readability.</div>
       (tb/textblock
        :text `&quot;a&quot;`
        :endpos 3
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
@@ -22996,21 +23144,19 @@ improves readability.</div>
        :delim tb/delimcomma)
       (tb/textblock
        :text `&quot;b&quot;`
-       :startpos 3
-       :endpos 6
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :startpos 4
+       :endpos 7
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text &quot;b&quot;
-          :startpos 4
-          :endpos 5)))
+          :startpos 5
+          :endpos 6)))
       (tb/textblock
        :text &quot;\n&quot;
-       :startpos 6
-       :endpos 7
+       :startpos 7
+       :endpos 8
        :delim tb/delimline)
       (tb/textblock
        :text &quot;1&quot;
@@ -23023,23 +23169,20 @@ improves readability.</div>
        :delim tb/delimcomma)
       (tb/textblock
        :text `&quot;2&quot;`
-       :startpos 11
-       :endpos 14
-       :delim
-        (copy tb/delimquote
-         :endpos 3)
+       :startpos 10
+       :endpos 13
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text &quot;2&quot;
-          :startpos 12
-          :endpos 13)))))
+          :startpos 11
+          :endpos 12)))))
    (textblock-csv&lt;-string
 `&quot;a&quot;,&quot;b&quot;
 1,&quot;2&quot;`
    )
   )
-*/
  :doc &quot;Returns a parsed csv-textblock from a string.&quot;)
 </div>
             </li>
@@ -23399,6 +23542,71 @@ improves readability.</div>
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
+                <li><div class="test">(test
+ (tb/textblock
+  :text
+`&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+  :endpos 13
+  :delim delimcsv
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text `&quot;a&quot;`
+     :endpos 3
+     :delim tb/delimquote
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text &quot;a&quot;
+        :startpos 1
+        :endpos 2)))
+    (tb/textblock
+     :text &quot;,&quot;
+     :startpos 3
+     :endpos 4
+     :delim tb/delimcomma)
+    (tb/textblock
+     :text `&quot;b&quot;`
+     :startpos 4
+     :endpos 7
+     :delim tb/delimquote
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text &quot;b&quot;
+        :startpos 5
+        :endpos 6)))
+    (tb/textblock
+     :text &quot;\n&quot;
+     :startpos 7
+     :endpos 8
+     :delim tb/delimline)
+    (tb/textblock
+     :text &quot;1&quot;
+     :startpos 8
+     :endpos 9)
+    (tb/textblock
+     :text &quot;,&quot;
+     :startpos 9
+     :endpos 10
+     :delim tb/delimcomma)
+    (tb/textblock
+     :text `&quot;2&quot;`
+     :startpos 10
+     :endpos 13
+     :delim tb/delimquote
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text &quot;2&quot;
+        :startpos 11
+        :endpos 12)))))
+ (textblock-csv&lt;-string
+`&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+ )
+)</div></li>
               </ul>
             </details>
             <details open="true">
@@ -23412,7 +23620,6 @@ improves readability.</div>
  (tb/textblock-parse&lt;-string-delim
   text
   delimcsv)
-/*
  :test
   (test
    (tb/textblock
@@ -23426,9 +23633,7 @@ improves readability.</div>
       (tb/textblock
        :text `&quot;a&quot;`
        :endpos 3
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
@@ -23442,21 +23647,19 @@ improves readability.</div>
        :delim tb/delimcomma)
       (tb/textblock
        :text `&quot;b&quot;`
-       :startpos 3
-       :endpos 6
-       :delim
-        (copy tb/delimquote
-         :endpos 2)
+       :startpos 4
+       :endpos 7
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text &quot;b&quot;
-          :startpos 4
-          :endpos 5)))
+          :startpos 5
+          :endpos 6)))
       (tb/textblock
        :text &quot;\n&quot;
-       :startpos 6
-       :endpos 7
+       :startpos 7
+       :endpos 8
        :delim tb/delimline)
       (tb/textblock
        :text &quot;1&quot;
@@ -23469,23 +23672,20 @@ improves readability.</div>
        :delim tb/delimcomma)
       (tb/textblock
        :text `&quot;2&quot;`
-       :startpos 11
-       :endpos 14
-       :delim
-        (copy tb/delimquote
-         :endpos 3)
+       :startpos 10
+       :endpos 13
+       :delim tb/delimquote
        :children
         (tb/textblocklist
          (tb/textblock
           :text &quot;2&quot;
-          :startpos 12
-          :endpos 13)))))
+          :startpos 11
+          :endpos 12)))))
    (textblock-csv&lt;-string
 `&quot;a&quot;,&quot;b&quot;
 1,&quot;2&quot;`
    )
   )
-*/
  :doc &quot;Returns a parsed csv-textblock from a string.&quot;)</div>
                 </li>
               </ul>
@@ -26677,7 +26877,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/children&lt;-textblock')">children&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-close&lt;-delim')">delim-close&lt;-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-first&lt;-delim-delim')">delim-first&lt;-delim-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-first&lt;-string-delimlist-offset')">delim-first&lt;-string-delimlist-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-pos&lt;-string-delim-offset')">delim-pos&lt;-string-delim-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delimlist-pos&lt;-string-delimlist-offset')">delimlist-pos&lt;-string-delimlist-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/stringlist&lt;-textblocklist')">stringlist&lt;-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/text&lt;-textblock')">text&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock&lt;-string-delim')">textblock&lt;-string-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock&lt;-textblock-delim')">textblock&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-child')">textblock-addchild&lt;-textblock-child</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-delimnotfound')">textblock-delimnotfound</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse')">textblock-parse</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse&lt;-string-delim')">textblock-parse&lt;-string-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse-one')">textblock-parse-one</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-pop')">textblock-pop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-pop&lt;-textblock-delim')">textblock-pop&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-push')">textblock-push</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-push&lt;-textblock-delim')">textblock-push&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-startleft&lt;-string-delim-offset')">textblock-startleft&lt;-string-delim-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-startright&lt;-string-delim-offset')">textblock-startright&lt;-string-delim-offset</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/children&lt;-textblock')">children&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-close&lt;-delim')">delim-close&lt;-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-first&lt;-delim-delim')">delim-first&lt;-delim-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-first&lt;-string-delimlist-offset')">delim-first&lt;-string-delimlist-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delim-pos&lt;-string-delim-offset')">delim-pos&lt;-string-delim-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/delimlist-pos&lt;-string-delimlist-offset')">delimlist-pos&lt;-string-delimlist-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/stringlist&lt;-textblocklist')">stringlist&lt;-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/text&lt;-textblock')">text&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock&lt;-string-delim')">textblock&lt;-string-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock&lt;-textblock-delim')">textblock&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-find-child')">textblock-addchild&lt;-textblock-find-child</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-delimnotfound')">textblock-delimnotfound</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-findparent&lt;-textblock')">textblock-findparent&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-groupby&lt;-textblock-delim')">textblock-groupby&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse')">textblock-parse</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse&lt;-string-delim')">textblock-parse&lt;-string-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-parse-one')">textblock-parse-one</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-pop')">textblock-pop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-pop&lt;-textblock-delim')">textblock-pop&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-push')">textblock-push</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-push&lt;-textblock-delim')">textblock-push&lt;-textblock-delim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-startleft&lt;-string-delim-offset')">textblock-startleft&lt;-string-delim-offset</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-startright&lt;-string-delim-offset')">textblock-startright&lt;-string-delim-offset</span>
             </li>
           </ul>
         </details>
@@ -26724,6 +26924,7 @@ improves readability.</div>
    line      : int
    column    : int
    delim     : delim
+   close     : delim
    parent    : textblock
    children  : textblocklist]
  :doc &quot;A textblock is a tree of text used for parsing by delimter.&quot;)
@@ -27013,29 +27214,29 @@ improves readability.</div>
   delim     : delim]
  :doc &quot;Returns a parsed textblock from an unparsed one.&quot;)
 
-(func textblock-addchild&lt;-textblock-child : textblock
+(func textblock-addchild&lt;-textblock-find-child : textblock
  [textblockarg : textblock
+  find         : textblock
   child        : textblock]
- (let : textblock
-  [delimcurr : delim         := (:delim     textblockarg)
-   parent    : textblock     := (:parent    textblockarg)
-   children  : textblocklist := (:children  textblockarg)
-   starttext : string        := (:starttext delimcurr)
-   endtext   : string        := (:endtext   delimcurr)]
-  (if : textblock
-   (then // empty
-    (is-empty textblockarg) (empty textblock))
-   (then // allows childen
-    (and (= starttext &quot;&quot;) (= endtext &quot;&quot;))
-    (copy textblockarg
-     :children (copy children child)))
-   (else // recursion
-    (copy textblockarg
-     :parent
-      (textblock-addchild&lt;-textblock-child
-       parent
-       child)))))
-:doc &quot;Add the child to the correct parent textblock.&quot;)
+ (if : textblock
+  (then // empty
+   (is-empty textblockarg)
+   (empty textblock))
+  (then // found
+   (and (== find textblockarg))
+   (copy textblockarg
+    :children
+     (copy
+      (:children textblockarg)
+      child)))
+  (else // recursion
+   (copy textblockarg
+    :parent
+     (textblock-addchild&lt;-textblock-find-child
+      (:parent textblockarg)
+      find
+      child))))
+:doc &quot;Add the child to the given parent textblock.&quot;)
 
 (func textblock-delimnotfound : textblock
  [textblockin : textblock]
@@ -27064,6 +27265,41 @@ improves readability.</div>
    )))
  :doc &quot;Returns a textblock when a delim is not found.&quot;)
 
+(func textblock-findparent&lt;-textblock : textblock
+ [textblockarg : textblock]
+ (let : textblock
+  [delimcurr : delim         := (:delim     textblockarg)
+   parent    : textblock     := (:parent    textblockarg)
+   children  : textblocklist := (:children  textblockarg)
+   starttext : string        := (:starttext delimcurr)
+   endtext   : string        := (:endtext   delimcurr)]
+  (if : textblock
+   (then // empty
+    (is-empty textblockarg) (empty textblock))
+   (then // allows childen
+    (and (= starttext &quot;&quot;) (= endtext &quot;&quot;))
+    textblockarg)
+   (else // recursion
+    (textblock-findparent&lt;-textblock
+     parent))))
+:doc &quot;Find a parent that accepts a child.&quot;)
+
+(func textblock-groupby&lt;-textblock-delim : textblock
+ [textblockarg : textblock
+  delimarg     : delim]
+ (textblock
+  :delim delimarg)
+ // until (is-empty list)
+ //   find from list
+ //   if (&lt; find 0)
+ //     addlist list
+ //   else
+ //     left pos
+ //     right pos
+ //     addlist left
+ //     list = right
+:doc &quot;Returns a textblock grouped by the given delim.&quot;)
+
 (func textblock-parse : textblock
  [textblock : textblock]
  (collection/any&lt;-for-until-loop : textblock
@@ -27075,6 +27311,8 @@ improves readability.</div>
   (fn : textblock
    [current : textblock]
    (textblock-parse-one current)))
+ :bigospace :n^n
+ :bigotime  :n^n
  :test
   (test
    (textblock
@@ -27140,10 +27378,7 @@ improves readability.</div>
        :text &quot;&lt;b&gt;&quot;
        :startpos 1
        :endpos 4
-       :delim
-        (copy delimbracketangle
-         :startpos 1
-         :endpos 3)
+       :delim delimbracketangle
        :children
         (textblocklist
          (textblock
@@ -27177,20 +27412,31 @@ improves readability.</div>
  [textblockin : textblock]
  (let : textblock
   [delimin     : delim     := (:delim     textblockin)
+   close       : delim     := (:close     textblockin)
    startpos    : int       := (:startpos  textblockin)
    curpos      : int       := (:curpos    textblockin)
    textin      : string    := (:text      textblockin)
    parent      : textblock := (:parent    textblockin)
-   tbchg       : textblock := (copy textblockin
-                               :endpos (+ startpos (length&lt;-string textin)))
    starttext   : string    := (:starttext delimin)
    endtext     : string    := (:endtext   delimin)
    delimlistin : delimlist := (:delimlist delimin)
+   tbchg       : textblock := (copy textblockin
+                               :endpos
+                                (+
+                                 startpos
+                                 (length&lt;-string textin)))
+   delimlistcl : delimlist := (if : delimlist
+                               (is-empty close)
+                               delimlistin
+                               (copy delimlistin close))
    delimfirst  : delim     := (delim-first&lt;-string-delimlist-offset
                                textin
-                               delimlistin
+                               delimlistcl
                                curpos)]
   (if : textblock
+   (then // empty text
+    (= &quot;&quot; textin)
+    parent)
    (then // single value delim
     (and
      (!= &quot;&quot; starttext)
@@ -27198,7 +27444,7 @@ improves readability.</div>
     (textblock-push
      tbchg))
    (then // empty delimlist
-    (= delimlistin (empty delimlist))
+    (is-empty delimlistcl)
     (if : textblock
      (then // no parent, return textblockin
       (= parent (empty textblock))
@@ -27449,12 +27695,10 @@ improves readability.</div>
            :text &quot;&lt;b&gt;c&quot;
            :delim
             (copy delimbracketangle
-             :startpos 1
-             :delimlist
-              (delimlist
-               (delim
-                :name &quot;delimclose&quot;
-                :starttext &quot;&gt;&quot;)))
+             :startpos 1)
+           :close
+            (copy delimclose
+             :starttext &quot;&gt;&quot;)
            :startpos 1
            :curpos 1
            :parent
@@ -27481,12 +27725,10 @@ improves readability.</div>
          :curpos 1
          :delim
           (copy delimbracketangle
-           :startpos 1
-           :delimlist
-            (delimlist
-             (delim
-              :name &quot;delimclose&quot;
-              :starttext &quot;&gt;&quot;)))
+           :startpos 1)
+         :close
+          (copy delimclose
+           :starttext &quot;&gt;&quot;)
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -27511,12 +27753,10 @@ improves readability.</div>
             :curpos 1
             :delim
              (copy delimbracketangle
-              :startpos 1
-              :delimlist
-               (delimlist
-                (delim
-                 :name &quot;delimclose&quot;
-                 :starttext &quot;&gt;&quot;)))
+              :startpos 1)
+            :close
+             (copy delimclose
+              :starttext &quot;&gt;&quot;)
             :parent
              (textblock
               :text &quot;a&lt;b&gt;c&quot;
@@ -27529,6 +27769,11 @@ improves readability.</div>
         (textblock
          :text &quot;c&quot;
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -27544,31 +27789,26 @@ improves readability.</div>
               :endpos 1)
              (textblock
               :text &quot;&lt;b&gt;&quot;
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 4)
-              :startpos 2
-              :endpos 5
+              :delim delimbracketangle
+              :startpos 1
+              :endpos 4
               :children
                (textblocklist
                 (textblock
                  :text &quot;b&quot;
-                 :startpos 3
-                 :endpos 4))))))
+                 :startpos 2
+                 :endpos 3))))))
         (textblock-parse-one
          (textblock
           :text &quot;&lt;b&gt;c&quot;
-          :startpos 2
+          :startpos 1
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name &quot;delimclose&quot;
-               :starttext &quot;&gt;&quot;)))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
           :parent
            (textblock
             :text &quot;a&lt;b&gt;c&quot;
@@ -27591,13 +27831,16 @@ improves readability.</div>
    text      : string    := (:text     textblockarg)
    startpos  : int       := (:startpos textblockarg)
    endpos    : int       := (+ startpos (length&lt;-string text))
-   delimpar  : delim     := (:delim  parent)
+   delimpar  : delim     := (:delim parent)
    child     : textblock := (copy textblockarg
                              :endpos endpos
                              :delim  (empty delim)
-                             :parent (empty textblock))]
-  (textblock-addchild&lt;-textblock-child
+                             :parent (empty textblock))
+   parenttgt : textblock := (textblock-findparent&lt;-textblock
+                             parent)]
+  (textblock-addchild&lt;-textblock-find-child
    parent
+   parenttgt
    child))
  :test (test
         (textblock
@@ -27706,54 +27949,65 @@ improves readability.</div>
  [textblockarg : textblock
   delimarg     : delim]
  (if : textblock
-  (then (is-empty delimarg) textblockarg)
-  (then (= (:name delimarg) (:name delimclose))
+  (then // empty delim
+   (is-empty delimarg)
+   textblockarg)
+  (then // close delim
+   (=
+    (:name delimarg)
+    (:name delimclose))
    (let : textblock
-    [parentcur   : textblock     := (:parent textblockarg)
-     childrenpar : textblocklist := (:children parentcur)
-     delimcur    : delim         := (:delim textblockarg)
-     starttext   : string        := (:starttext delimcur)
-     endtext     : string        := (:endtext delimcur)
-     delimpos    : int           := (:startpos delimarg)
-     startpos    : int           := (:startpos textblockarg)
-     startsub    : int           := (length&lt;-string starttext)
-     endpos      : int           := (+ delimpos (length&lt;-string endtext))
-     endsub      : int           := delimpos
-     textcur     : string        := (:text textblockarg)
-     childrencur : textblocklist := (:children textblockarg)
-     textout     : string        := (string&lt;-string-start
-                                     textcur endpos)
-     textsub     : string        :=  (string&lt;-string-start-end
-                                      textcur
-                                      startsub
-                                      endsub)
-     textdelim   : string        := (string&lt;-string-start-end
-                                     textcur
-                                     0
-                                     endpos)
-     childchg    : textblock     := (copy textblockarg
-                                     :text textdelim
-                                     :endpos (+ startpos endpos)
-                                     :curpos 0
-                                     :delim
-                                      (copy 
-                                       delimcur
-                                       :endpos (+ startpos delimpos)
-                                       :delimlist (empty delimlist))
-                                     :parent (empty textblock)
-                                     :children
-                                      (textblocklist
-                                       (textblock
-                                        :text textsub
-                                        :startpos (+ startpos startsub)
-                                        :endpos (+ startpos endsub)
-                                        :curpos 0)))
-     parentchg   : textblock     := (textblock-addchild&lt;-textblock-child
-                                     parentcur
-                                     childchg)]
+    [parentcur : textblock := (:parent textblockarg)
+     delimcur  : delim     := (:delim textblockarg)
+     starttext : string    := (:starttext delimcur)
+     endtext   : string    := (:endtext delimcur)
+     delimpos  : int       := (:startpos delimarg)
+     startpos  : int       := (:startpos textblockarg)
+     startsub  : int       := (length&lt;-string starttext)
+     endpos    : int       := (+
+                               delimpos
+                               (length&lt;-string endtext))
+     endsub    : int       := delimpos
+     textcur   : string    := (:text textblockarg)
+     textout   : string    := (string&lt;-string-start
+                               textcur endpos)
+     textsub   : string    := (string&lt;-string-start-end
+                               textcur
+                               startsub
+                               endsub)
+     textdelim : string    := (string&lt;-string-start-end
+                               textcur
+                               0
+                               endpos)
+     childchg  : textblock := (copy textblockarg
+                               :text textdelim
+                               :endpos (+ startpos endpos)
+                               :curpos 0
+                               :delim
+                                (copy
+                                 delimcur
+                                 :startpos 0
+                                 :endpos 0
+                                 :delimlist (empty delimlist))
+                               :close  (empty delim)
+                               :parent (empty textblock)
+                               :children
+                                (textblocklist
+                                 (textblock
+                                  :text textsub
+                                  :startpos (+ startpos startsub)
+                                  :endpos (+ startpos endsub)
+                                  :curpos 0)))
+     parenttgt : textblock := (textblock-findparent&lt;-textblock
+                               parentcur)
+     parentchg : textblock := (textblock-addchild&lt;-textblock-find-child
+                               parentcur
+                               parenttgt
+                               childchg)]
     (textblock
      :text textout
-     :startpos (+1 endpos)
+     :delim (:delim parenttgt)
+     :startpos (+ startpos endpos)
      :parent parentchg)))
   (else
    (let : textblock
@@ -27785,6 +28039,11 @@ improves readability.</div>
         (textblock
          :text &quot;c&quot;
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -27803,10 +28062,7 @@ improves readability.</div>
               :text &quot;&lt;b&gt;&quot;
               :startpos 1
               :endpos 4
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 3)
+              :delim delimbracketangle
               :children
                (textblocklist
                 (textblock
@@ -27820,12 +28076,10 @@ improves readability.</div>
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name &quot;delimclose&quot;
-               :starttext &quot;&gt;&quot;)))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
           :parent
            (textblock
             :text &quot;a&lt;b&gt;c&quot;
@@ -27839,8 +28093,7 @@ improves readability.</div>
               (textblock
                :text &quot;a&quot;
                :endpos 1))))
-         (delim
-          :name &quot;delimclose&quot;
+         (copy delimclose
           :starttext &quot;&gt;&quot;
           :startpos 2)))
  :doc &quot;Returns the parent of a textblock with the current textblock added to textblocklist.&quot;)
@@ -27853,13 +28106,14 @@ improves readability.</div>
    offset     : int       := (:startpos textblockin)
    starttext  : string    := (:starttext delimcur)
    endtext    : string    := (:endtext delimcur)
+   startlen   : int       := (length&lt;-string starttext)
    issingle   : boolean   := (and
                               (!= &quot;&quot; starttext)
                               (=  &quot;&quot; endtext))
-   curpos     : int       := (:curpos textblockin)
    delimsplit : delim     := (if : delim
                               issingle
                               (copy delimcur
+                               :startpos startlen
                                :delimlist
                                 (empty delimlist))
                               delimcur)
@@ -27875,8 +28129,11 @@ improves readability.</div>
    tbchg      : textblock := (copy tbleft
                               :delim delimchg)
    parent     : textblock := (:parent textblockin)
-   parentchg  : textblock := (textblock-addchild&lt;-textblock-child
+   parenttgt  : textblock := (textblock-findparent&lt;-textblock
+                              parent)
+   parentchg  : textblock := (textblock-addchild&lt;-textblock-find-child
                               parent
+                              parenttgt
                               tbchg)
    delimright : delim     := (if : delim
                               issingle
@@ -27929,7 +28186,6 @@ improves readability.</div>
           :curpos 1
           :delim
            (copy delimcomma
-            :startpos 1
             :delimlist
              (delimlist
               (copy delimcomma
@@ -27952,6 +28208,92 @@ improves readability.</div>
               (textblock
                :text &quot;a&quot;
                :endpos 1))))))
+       (test
+        (textblock
+         :text `&quot;b&quot;
+1,&quot;2&quot;`
+         :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimline
+             delimquote
+             delimcomma))
+         :parent
+          (textblock
+           :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+           :endpos 13
+           :delim
+            (delim
+             :name &quot;delimcsv&quot;
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+         :children
+          (textblocklist
+           (textblock
+            :text `&quot;a&quot;`
+            :endpos 3
+            :delim
+             (copy delimquote
+              :endpos 2)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 1
+               :endpos 2)))
+           (textblock
+            :text &quot;,&quot;
+            :startpos 3
+            :endpos 4           
+            :delim
+             delimcomma
+              ))))
+        (textblock-push
+         (textblock
+          :text `,&quot;b&quot;
+1,&quot;2&quot;`
+           :startpos 3
+           :curpos 1
+           :delim
+            (copy delimcomma
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+           :parent
+            (textblock
+             :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+             :endpos 13
+             :delim
+              (delim
+               :name &quot;delimcsv&quot;
+               :delimlist
+                (delimlist
+                 delimline
+                 delimquote
+                 delimcomma))
+             :children
+              (textblocklist
+               (textblock
+                :text &quot;\&quot;a\&quot;&quot;
+                :endpos 3
+                :delim
+                 (copy delimquote
+                  :endpos 2)
+                :children
+                 (textblocklist
+                  (textblock
+                   :text &quot;a&quot;
+                   :startpos 1
+                   :endpos 2))))))))
 :doc &quot;Returns a a textblock using the textblocks current delim.&quot;)
 
 (func textblock-push&lt;-textblock-delim : textblock
@@ -27967,6 +28309,7 @@ improves readability.</div>
      offset    : int       := (:startpos  textblockin)
      delimcur  : delim     := (:delim     textblockin)
      parent    : textblock := (:parent    textblockin)
+     startpos  : int       := (:startpos  delimin)
      starttext : string    := (:starttext delimin)
      endtext   : string    := (:endtext   delimin)
      issingle  : boolean   := (and
@@ -27994,9 +28337,13 @@ improves readability.</div>
                               (empty delim)
                               (delim
                                :delimlist delims))]
-    (copy tbleft
-     :delim delimchg
-     :parent tbparent))))
+    (if : textblock
+     (then (= 0 startpos)
+      tbparent)
+     (else
+      (copy tbleft
+       :delim delimchg
+       :parent tbparent))))))
  :test (test
         (textblock
          :text &quot;a&quot;
@@ -28052,6 +28399,11 @@ improves readability.</div>
          :text &quot;b&quot;
          :startpos 2
          :endpos 3
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;,c&quot;
@@ -28130,7 +28482,10 @@ improves readability.</div>
                  :startpos 1
                  :endpos 2)))))
          (copy delimcomma
-          :startpos 1)))
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketangle))))
  :doc &quot;Returns the parent of a textblock with the current textblock added to textblocklist.&quot;)
 
 (func textblock-startleft&lt;-string-delim-offset : textblock
@@ -28169,32 +28524,25 @@ improves readability.</div>
    starttext  : string    := (:starttext delimin)
    endtext    : string    := (:endtext delimin)
    delimlist  : delimlist := (:delimlist delimin)
-   delimclose : delim     := (if : delim
+   close      : delim     := (if : delim
                               (then (= endtext &quot;&quot;) (empty delim))
                               (else
-                               (delim
-                                :name &quot;delimclose&quot;
+                               (copy delimclose
                                 :starttext endtext)))
-   delims     : delimlist := (if : delimlist
-                              (then (is-empty delimclose) delimlist)
-                              (else
-                               (copy delimlist delimclose)))
    delimlen   : int       := (length&lt;-string starttext)
-   curpos     : int       := delimlen
-   delimnew   : delim     := (if : delim
-                              (then (is-empty delims) delimin)
-                              (else
-                               (copy delimin
-                                :delimlist delims)))]
+   curpos     : int       := delimlen]
   (if
    (then (= text &quot;&quot;)    (empty textblock))
    (then (&lt; startpos 0) (empty textblock))
    (else
     (textblock
-     :text (string&lt;-string-start text startpos)
-     :startpos (+ offset startpos)
+     :text
+      (string&lt;-string-start text startpos)
+     :startpos
+      (+ offset startpos)
      :curpos curpos
-     :delim delimnew))))
+     :delim delimin
+     :close close))))
  :test (test
         (textblock
          :text &quot;,b&quot;
@@ -28209,44 +28557,29 @@ improves readability.</div>
          (delim
           :starttext &quot;,&quot;
           :startpos  1)
-          0))
-       (test
-        (textblock
-         :text &quot;,b&quot;
-         :startpos 1
-         :curpos 1
-         :delim
-          (delim
-           :starttext &quot;,&quot;
-           :startpos 1))
-        (textblock-startright&lt;-string-delim-offset
-         &quot;a,b&quot;
-         (delim
-          :starttext &quot;,&quot;
-          :startpos 1)
-          0))
+         0))
        (test
         (textblock
          :text &quot;&lt;b&gt;c&quot;
          :startpos 1
          :curpos 1
          :delim
-          (delim
-           :starttext &quot;&lt;&quot;
-           :endtext &quot;&gt;&quot;
+          (copy delimbracketangle
            :startpos 1
            :delimlist
             (delimlist
-             (delim
-              :name &quot;delimclose&quot;
-              :starttext &quot;&gt;&quot;))))
+             delimbracketcurly))
+         :close
+          (copy delimclose
+           :starttext &quot;&gt;&quot;))
         (textblock-startright&lt;-string-delim-offset
          &quot;a&lt;b&gt;c&quot;
-         (delim
-          :starttext &quot;&lt;&quot;
-          :endtext &quot;&gt;&quot;
-          :startpos 1)
-          0))
+         (copy delimbracketangle
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketcurly))
+         0))
  :doc &quot;Returns a textblock constructed from the text after the current delimiter start.&quot;)
 </div>
             </li>
@@ -28528,6 +28861,13 @@ improves readability.</div>
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
+                      <div class="td">close</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/delim')">vx/data/textblock/delim</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
                       <div class="td">parent</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
                       <div class="td"></div>
@@ -28568,6 +28908,7 @@ improves readability.</div>
    line      : int
    column    : int
    delim     : delim
+   close     : delim
    parent    : textblock
    children  : textblocklist]
  :doc &quot;A textblock is a tree of text used for parsing by delimter.&quot;)</div>
@@ -30138,18 +30479,18 @@ improves readability.</div>
               </ul>
             </details>
           </div>
-          <div class="d" id="d_func_vx/data/textblock/textblock-addchild&lt;-textblock-child">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/textblock')">vx/data/textblock</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-child')">textblock-addchild&lt;-textblock-child</span></div>
+          <div class="d" id="d_func_vx/data/textblock/textblock-addchild&lt;-textblock-find-child">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/textblock')">vx/data/textblock</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-addchild&lt;-textblock-find-child')">textblock-addchild&lt;-textblock-find-child</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Add the child to the correct parent textblock.</div>
+                <div class="txt">Add the child to the given parent textblock.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
             <ul>
               <li>
-                <div class="txt">textblock-addchild&lt;-textblock-child</div>
+                <div class="txt">textblock-addchild&lt;-textblock-find-child</div>
               </li>
             </ul>
             <div class="lbl">Return Type:</div>
@@ -30177,6 +30518,11 @@ improves readability.</div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
+                    <div class="td">find</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
                     <div class="td">child</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
                     <div class="td"></div>
@@ -30198,29 +30544,29 @@ improves readability.</div>
               </summary>
               <ul>
                 <li>
-                  <div class="source">(func textblock-addchild&lt;-textblock-child : textblock
+                  <div class="source">(func textblock-addchild&lt;-textblock-find-child : textblock
  [textblockarg : textblock
+  find         : textblock
   child        : textblock]
- (let : textblock
-  [delimcurr : delim         := (:delim     textblockarg)
-   parent    : textblock     := (:parent    textblockarg)
-   children  : textblocklist := (:children  textblockarg)
-   starttext : string        := (:starttext delimcurr)
-   endtext   : string        := (:endtext   delimcurr)]
-  (if : textblock
-   (then // empty
-    (is-empty textblockarg) (empty textblock))
-   (then // allows childen
-    (and (= starttext &quot;&quot;) (= endtext &quot;&quot;))
-    (copy textblockarg
-     :children (copy children child)))
-   (else // recursion
-    (copy textblockarg
-     :parent
-      (textblock-addchild&lt;-textblock-child
-       parent
-       child)))))
-:doc &quot;Add the child to the correct parent textblock.&quot;)</div>
+ (if : textblock
+  (then // empty
+   (is-empty textblockarg)
+   (empty textblock))
+  (then // found
+   (and (== find textblockarg))
+   (copy textblockarg
+    :children
+     (copy
+      (:children textblockarg)
+      child)))
+  (else // recursion
+   (copy textblockarg
+    :parent
+     (textblock-addchild&lt;-textblock-find-child
+      (:parent textblockarg)
+      find
+      child))))
+:doc &quot;Add the child to the given parent textblock.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -30306,6 +30652,162 @@ improves readability.</div>
     (textblock-pop textblockin)
    )))
  :doc &quot;Returns a textblock when a delim is not found.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/textblock/textblock-findparent&lt;-textblock">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/textblock')">vx/data/textblock</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-findparent&lt;-textblock')">textblock-findparent&lt;-textblock</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Find a parent that accepts a child.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">textblock-findparent&lt;-textblock</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">textblockarg</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func textblock-findparent&lt;-textblock : textblock
+ [textblockarg : textblock]
+ (let : textblock
+  [delimcurr : delim         := (:delim     textblockarg)
+   parent    : textblock     := (:parent    textblockarg)
+   children  : textblocklist := (:children  textblockarg)
+   starttext : string        := (:starttext delimcurr)
+   endtext   : string        := (:endtext   delimcurr)]
+  (if : textblock
+   (then // empty
+    (is-empty textblockarg) (empty textblock))
+   (then // allows childen
+    (and (= starttext &quot;&quot;) (= endtext &quot;&quot;))
+    textblockarg)
+   (else // recursion
+    (textblock-findparent&lt;-textblock
+     parent))))
+:doc &quot;Find a parent that accepts a child.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/textblock/textblock-groupby&lt;-textblock-delim">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/textblock')">vx/data/textblock</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/textblock/textblock-groupby&lt;-textblock-delim')">textblock-groupby&lt;-textblock-delim</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a textblock grouped by the given delim.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">textblock-groupby&lt;-textblock-delim</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">textblockarg</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/textblock')">vx/data/textblock/textblock</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">delimarg</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/textblock/delim')">vx/data/textblock/delim</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func textblock-groupby&lt;-textblock-delim : textblock
+ [textblockarg : textblock
+  delimarg     : delim]
+ (textblock
+  :delim delimarg)
+ // until (is-empty list)
+ //   find from list
+ //   if (&lt; find 0)
+ //     addlist list
+ //   else
+ //     left pos
+ //     right pos
+ //     addlist left
+ //     list = right
+:doc &quot;Returns a textblock grouped by the given delim.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -30421,10 +30923,7 @@ improves readability.</div>
      :text &quot;&lt;b&gt;&quot;
      :startpos 1
      :endpos 4
-     :delim
-      (copy delimbracketangle
-       :startpos 1
-       :endpos 3)
+     :delim delimbracketangle
      :children
       (textblocklist
        (textblock
@@ -30462,6 +30961,8 @@ improves readability.</div>
   (fn : textblock
    [current : textblock]
    (textblock-parse-one current)))
+ :bigospace :n^n
+ :bigotime  :n^n
  :test
   (test
    (textblock
@@ -30527,10 +31028,7 @@ improves readability.</div>
        :text &quot;&lt;b&gt;&quot;
        :startpos 1
        :endpos 4
-       :delim
-        (copy delimbracketangle
-         :startpos 1
-         :endpos 3)
+       :delim delimbracketangle
        :children
         (textblocklist
          (textblock
@@ -30901,12 +31399,10 @@ improves readability.</div>
     :text &quot;&lt;b&gt;c&quot;
     :delim
      (copy delimbracketangle
-      :startpos 1
-      :delimlist
-       (delimlist
-        (delim
-         :name &quot;delimclose&quot;
-         :starttext &quot;&gt;&quot;)))
+      :startpos 1)
+    :close
+     (copy delimclose
+      :starttext &quot;&gt;&quot;)
     :startpos 1
     :curpos 1
     :parent
@@ -30933,12 +31429,10 @@ improves readability.</div>
   :curpos 1
   :delim
    (copy delimbracketangle
-    :startpos 1
-    :delimlist
-     (delimlist
-      (delim
-       :name &quot;delimclose&quot;
-       :starttext &quot;&gt;&quot;)))
+    :startpos 1)
+  :close
+   (copy delimclose
+    :starttext &quot;&gt;&quot;)
   :parent
    (textblock
     :text &quot;a&lt;b&gt;c&quot;
@@ -30963,12 +31457,10 @@ improves readability.</div>
      :curpos 1
      :delim
       (copy delimbracketangle
-       :startpos 1
-       :delimlist
-        (delimlist
-         (delim
-          :name &quot;delimclose&quot;
-          :starttext &quot;&gt;&quot;)))
+       :startpos 1)
+     :close
+      (copy delimclose
+       :starttext &quot;&gt;&quot;)
      :parent
       (textblock
        :text &quot;a&lt;b&gt;c&quot;
@@ -30981,6 +31473,11 @@ improves readability.</div>
  (textblock
   :text &quot;c&quot;
   :startpos 4
+  :delim
+   (delim
+    :delimlist
+     (delimlist
+      delimbracketangle))
   :parent
    (textblock
     :text &quot;a&lt;b&gt;c&quot;
@@ -30996,31 +31493,26 @@ improves readability.</div>
        :endpos 1)
       (textblock
        :text &quot;&lt;b&gt;&quot;
-       :delim
-        (copy delimbracketangle
-         :startpos 1
-         :endpos 4)
-       :startpos 2
-       :endpos 5
+       :delim delimbracketangle
+       :startpos 1
+       :endpos 4
        :children
         (textblocklist
          (textblock
           :text &quot;b&quot;
-          :startpos 3
-          :endpos 4))))))
+          :startpos 2
+          :endpos 3))))))
  (textblock-parse-one
   (textblock
    :text &quot;&lt;b&gt;c&quot;
-   :startpos 2
+   :startpos 1
    :curpos 1
    :delim
     (copy delimbracketangle
-     :startpos 1
-     :delimlist
-      (delimlist
-       (delim
-        :name &quot;delimclose&quot;
-        :starttext &quot;&gt;&quot;)))
+     :startpos 1)
+   :close
+    (copy delimclose
+     :starttext &quot;&gt;&quot;)
    :parent
     (textblock
      :text &quot;a&lt;b&gt;c&quot;
@@ -31046,20 +31538,31 @@ improves readability.</div>
  [textblockin : textblock]
  (let : textblock
   [delimin     : delim     := (:delim     textblockin)
+   close       : delim     := (:close     textblockin)
    startpos    : int       := (:startpos  textblockin)
    curpos      : int       := (:curpos    textblockin)
    textin      : string    := (:text      textblockin)
    parent      : textblock := (:parent    textblockin)
-   tbchg       : textblock := (copy textblockin
-                               :endpos (+ startpos (length&lt;-string textin)))
    starttext   : string    := (:starttext delimin)
    endtext     : string    := (:endtext   delimin)
    delimlistin : delimlist := (:delimlist delimin)
+   tbchg       : textblock := (copy textblockin
+                               :endpos
+                                (+
+                                 startpos
+                                 (length&lt;-string textin)))
+   delimlistcl : delimlist := (if : delimlist
+                               (is-empty close)
+                               delimlistin
+                               (copy delimlistin close))
    delimfirst  : delim     := (delim-first&lt;-string-delimlist-offset
                                textin
-                               delimlistin
+                               delimlistcl
                                curpos)]
   (if : textblock
+   (then // empty text
+    (= &quot;&quot; textin)
+    parent)
    (then // single value delim
     (and
      (!= &quot;&quot; starttext)
@@ -31067,7 +31570,7 @@ improves readability.</div>
     (textblock-push
      tbchg))
    (then // empty delimlist
-    (= delimlistin (empty delimlist))
+    (is-empty delimlistcl)
     (if : textblock
      (then // no parent, return textblockin
       (= parent (empty textblock))
@@ -31318,12 +31821,10 @@ improves readability.</div>
            :text &quot;&lt;b&gt;c&quot;
            :delim
             (copy delimbracketangle
-             :startpos 1
-             :delimlist
-              (delimlist
-               (delim
-                :name &quot;delimclose&quot;
-                :starttext &quot;&gt;&quot;)))
+             :startpos 1)
+           :close
+            (copy delimclose
+             :starttext &quot;&gt;&quot;)
            :startpos 1
            :curpos 1
            :parent
@@ -31350,12 +31851,10 @@ improves readability.</div>
          :curpos 1
          :delim
           (copy delimbracketangle
-           :startpos 1
-           :delimlist
-            (delimlist
-             (delim
-              :name &quot;delimclose&quot;
-              :starttext &quot;&gt;&quot;)))
+           :startpos 1)
+         :close
+          (copy delimclose
+           :starttext &quot;&gt;&quot;)
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -31380,12 +31879,10 @@ improves readability.</div>
             :curpos 1
             :delim
              (copy delimbracketangle
-              :startpos 1
-              :delimlist
-               (delimlist
-                (delim
-                 :name &quot;delimclose&quot;
-                 :starttext &quot;&gt;&quot;)))
+              :startpos 1)
+            :close
+             (copy delimclose
+              :starttext &quot;&gt;&quot;)
             :parent
              (textblock
               :text &quot;a&lt;b&gt;c&quot;
@@ -31398,6 +31895,11 @@ improves readability.</div>
         (textblock
          :text &quot;c&quot;
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -31413,31 +31915,26 @@ improves readability.</div>
               :endpos 1)
              (textblock
               :text &quot;&lt;b&gt;&quot;
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 4)
-              :startpos 2
-              :endpos 5
+              :delim delimbracketangle
+              :startpos 1
+              :endpos 4
               :children
                (textblocklist
                 (textblock
                  :text &quot;b&quot;
-                 :startpos 3
-                 :endpos 4))))))
+                 :startpos 2
+                 :endpos 3))))))
         (textblock-parse-one
          (textblock
           :text &quot;&lt;b&gt;c&quot;
-          :startpos 2
+          :startpos 1
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name &quot;delimclose&quot;
-               :starttext &quot;&gt;&quot;)))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
           :parent
            (textblock
             :text &quot;a&lt;b&gt;c&quot;
@@ -31619,13 +32116,16 @@ improves readability.</div>
    text      : string    := (:text     textblockarg)
    startpos  : int       := (:startpos textblockarg)
    endpos    : int       := (+ startpos (length&lt;-string text))
-   delimpar  : delim     := (:delim  parent)
+   delimpar  : delim     := (:delim parent)
    child     : textblock := (copy textblockarg
                              :endpos endpos
                              :delim  (empty delim)
-                             :parent (empty textblock))]
-  (textblock-addchild&lt;-textblock-child
+                             :parent (empty textblock))
+   parenttgt : textblock := (textblock-findparent&lt;-textblock
+                             parent)]
+  (textblock-addchild&lt;-textblock-find-child
    parent
+   parenttgt
    child))
  :test (test
         (textblock
@@ -31804,6 +32304,11 @@ improves readability.</div>
  (textblock
   :text &quot;c&quot;
   :startpos 4
+  :delim
+   (delim
+    :delimlist
+     (delimlist
+      delimbracketangle))
   :parent
    (textblock
     :text &quot;a&lt;b&gt;c&quot;
@@ -31822,10 +32327,7 @@ improves readability.</div>
        :text &quot;&lt;b&gt;&quot;
        :startpos 1
        :endpos 4
-       :delim
-        (copy delimbracketangle
-         :startpos 1
-         :endpos 3)
+       :delim delimbracketangle
        :children
         (textblocklist
          (textblock
@@ -31839,12 +32341,10 @@ improves readability.</div>
    :curpos 1
    :delim
     (copy delimbracketangle
-     :startpos 1
-     :delimlist
-      (delimlist
-       (delim
-        :name &quot;delimclose&quot;
-        :starttext &quot;&gt;&quot;)))
+     :startpos 1)
+   :close
+    (copy delimclose
+     :starttext &quot;&gt;&quot;)
    :parent
     (textblock
      :text &quot;a&lt;b&gt;c&quot;
@@ -31858,8 +32358,7 @@ improves readability.</div>
        (textblock
         :text &quot;a&quot;
         :endpos 1))))
-  (delim
-   :name &quot;delimclose&quot;
+  (copy delimclose
    :starttext &quot;&gt;&quot;
    :startpos 2)))</div></li>
               </ul>
@@ -31874,54 +32373,65 @@ improves readability.</div>
  [textblockarg : textblock
   delimarg     : delim]
  (if : textblock
-  (then (is-empty delimarg) textblockarg)
-  (then (= (:name delimarg) (:name delimclose))
+  (then // empty delim
+   (is-empty delimarg)
+   textblockarg)
+  (then // close delim
+   (=
+    (:name delimarg)
+    (:name delimclose))
    (let : textblock
-    [parentcur   : textblock     := (:parent textblockarg)
-     childrenpar : textblocklist := (:children parentcur)
-     delimcur    : delim         := (:delim textblockarg)
-     starttext   : string        := (:starttext delimcur)
-     endtext     : string        := (:endtext delimcur)
-     delimpos    : int           := (:startpos delimarg)
-     startpos    : int           := (:startpos textblockarg)
-     startsub    : int           := (length&lt;-string starttext)
-     endpos      : int           := (+ delimpos (length&lt;-string endtext))
-     endsub      : int           := delimpos
-     textcur     : string        := (:text textblockarg)
-     childrencur : textblocklist := (:children textblockarg)
-     textout     : string        := (string&lt;-string-start
-                                     textcur endpos)
-     textsub     : string        :=  (string&lt;-string-start-end
-                                      textcur
-                                      startsub
-                                      endsub)
-     textdelim   : string        := (string&lt;-string-start-end
-                                     textcur
-                                     0
-                                     endpos)
-     childchg    : textblock     := (copy textblockarg
-                                     :text textdelim
-                                     :endpos (+ startpos endpos)
-                                     :curpos 0
-                                     :delim
-                                      (copy 
-                                       delimcur
-                                       :endpos (+ startpos delimpos)
-                                       :delimlist (empty delimlist))
-                                     :parent (empty textblock)
-                                     :children
-                                      (textblocklist
-                                       (textblock
-                                        :text textsub
-                                        :startpos (+ startpos startsub)
-                                        :endpos (+ startpos endsub)
-                                        :curpos 0)))
-     parentchg   : textblock     := (textblock-addchild&lt;-textblock-child
-                                     parentcur
-                                     childchg)]
+    [parentcur : textblock := (:parent textblockarg)
+     delimcur  : delim     := (:delim textblockarg)
+     starttext : string    := (:starttext delimcur)
+     endtext   : string    := (:endtext delimcur)
+     delimpos  : int       := (:startpos delimarg)
+     startpos  : int       := (:startpos textblockarg)
+     startsub  : int       := (length&lt;-string starttext)
+     endpos    : int       := (+
+                               delimpos
+                               (length&lt;-string endtext))
+     endsub    : int       := delimpos
+     textcur   : string    := (:text textblockarg)
+     textout   : string    := (string&lt;-string-start
+                               textcur endpos)
+     textsub   : string    := (string&lt;-string-start-end
+                               textcur
+                               startsub
+                               endsub)
+     textdelim : string    := (string&lt;-string-start-end
+                               textcur
+                               0
+                               endpos)
+     childchg  : textblock := (copy textblockarg
+                               :text textdelim
+                               :endpos (+ startpos endpos)
+                               :curpos 0
+                               :delim
+                                (copy
+                                 delimcur
+                                 :startpos 0
+                                 :endpos 0
+                                 :delimlist (empty delimlist))
+                               :close  (empty delim)
+                               :parent (empty textblock)
+                               :children
+                                (textblocklist
+                                 (textblock
+                                  :text textsub
+                                  :startpos (+ startpos startsub)
+                                  :endpos (+ startpos endsub)
+                                  :curpos 0)))
+     parenttgt : textblock := (textblock-findparent&lt;-textblock
+                               parentcur)
+     parentchg : textblock := (textblock-addchild&lt;-textblock-find-child
+                               parentcur
+                               parenttgt
+                               childchg)]
     (textblock
      :text textout
-     :startpos (+1 endpos)
+     :delim (:delim parenttgt)
+     :startpos (+ startpos endpos)
      :parent parentchg)))
   (else
    (let : textblock
@@ -31953,6 +32463,11 @@ improves readability.</div>
         (textblock
          :text &quot;c&quot;
          :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;a&lt;b&gt;c&quot;
@@ -31971,10 +32486,7 @@ improves readability.</div>
               :text &quot;&lt;b&gt;&quot;
               :startpos 1
               :endpos 4
-              :delim
-               (copy delimbracketangle
-                :startpos 1
-                :endpos 3)
+              :delim delimbracketangle
               :children
                (textblocklist
                 (textblock
@@ -31988,12 +32500,10 @@ improves readability.</div>
           :curpos 1
           :delim
            (copy delimbracketangle
-            :startpos 1
-            :delimlist
-             (delimlist
-              (delim
-               :name &quot;delimclose&quot;
-               :starttext &quot;&gt;&quot;)))
+            :startpos 1)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
           :parent
            (textblock
             :text &quot;a&lt;b&gt;c&quot;
@@ -32007,8 +32517,7 @@ improves readability.</div>
               (textblock
                :text &quot;a&quot;
                :endpos 1))))
-         (delim
-          :name &quot;delimclose&quot;
+         (copy delimclose
           :starttext &quot;&gt;&quot;
           :startpos 2)))
  :doc &quot;Returns the parent of a textblock with the current textblock added to textblocklist.&quot;)</div>
@@ -32104,7 +32613,6 @@ improves readability.</div>
    :curpos 1
    :delim
     (copy delimcomma
-     :startpos 1
      :delimlist
       (delimlist
        (copy delimcomma
@@ -32127,6 +32635,92 @@ improves readability.</div>
        (textblock
         :text &quot;a&quot;
         :endpos 1))))))</div></li>
+                <li><div class="test">(test
+ (textblock
+  :text `&quot;b&quot;
+1,&quot;2&quot;`
+  :startpos 4
+  :delim
+   (delim
+    :delimlist
+     (delimlist
+      delimline
+      delimquote
+      delimcomma))
+  :parent
+   (textblock
+    :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+    :endpos 13
+    :delim
+     (delim
+      :name &quot;delimcsv&quot;
+      :delimlist
+       (delimlist
+        delimline
+        delimquote
+        delimcomma))
+  :children
+   (textblocklist
+    (textblock
+     :text `&quot;a&quot;`
+     :endpos 3
+     :delim
+      (copy delimquote
+       :endpos 2)
+     :children
+      (textblocklist
+       (textblock
+        :text &quot;a&quot;
+        :startpos 1
+        :endpos 2)))
+    (textblock
+     :text &quot;,&quot;
+     :startpos 3
+     :endpos 4           
+     :delim
+      delimcomma
+       ))))
+ (textblock-push
+  (textblock
+   :text `,&quot;b&quot;
+1,&quot;2&quot;`
+    :startpos 3
+    :curpos 1
+    :delim
+     (copy delimcomma
+      :delimlist
+       (delimlist
+        delimline
+        delimquote
+        delimcomma))
+    :parent
+     (textblock
+      :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+      :endpos 13
+      :delim
+       (delim
+        :name &quot;delimcsv&quot;
+        :delimlist
+         (delimlist
+          delimline
+          delimquote
+          delimcomma))
+      :children
+       (textblocklist
+        (textblock
+         :text &quot;\&quot;a\&quot;&quot;
+         :endpos 3
+         :delim
+          (copy delimquote
+           :endpos 2)
+         :children
+          (textblocklist
+           (textblock
+            :text &quot;a&quot;
+            :startpos 1
+            :endpos 2))))))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -32143,13 +32737,14 @@ improves readability.</div>
    offset     : int       := (:startpos textblockin)
    starttext  : string    := (:starttext delimcur)
    endtext    : string    := (:endtext delimcur)
+   startlen   : int       := (length&lt;-string starttext)
    issingle   : boolean   := (and
                               (!= &quot;&quot; starttext)
                               (=  &quot;&quot; endtext))
-   curpos     : int       := (:curpos textblockin)
    delimsplit : delim     := (if : delim
                               issingle
                               (copy delimcur
+                               :startpos startlen
                                :delimlist
                                 (empty delimlist))
                               delimcur)
@@ -32165,8 +32760,11 @@ improves readability.</div>
    tbchg      : textblock := (copy tbleft
                               :delim delimchg)
    parent     : textblock := (:parent textblockin)
-   parentchg  : textblock := (textblock-addchild&lt;-textblock-child
+   parenttgt  : textblock := (textblock-findparent&lt;-textblock
+                              parent)
+   parentchg  : textblock := (textblock-addchild&lt;-textblock-find-child
                               parent
+                              parenttgt
                               tbchg)
    delimright : delim     := (if : delim
                               issingle
@@ -32219,7 +32817,6 @@ improves readability.</div>
           :curpos 1
           :delim
            (copy delimcomma
-            :startpos 1
             :delimlist
              (delimlist
               (copy delimcomma
@@ -32242,6 +32839,92 @@ improves readability.</div>
               (textblock
                :text &quot;a&quot;
                :endpos 1))))))
+       (test
+        (textblock
+         :text `&quot;b&quot;
+1,&quot;2&quot;`
+         :startpos 4
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimline
+             delimquote
+             delimcomma))
+         :parent
+          (textblock
+           :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+           :endpos 13
+           :delim
+            (delim
+             :name &quot;delimcsv&quot;
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+         :children
+          (textblocklist
+           (textblock
+            :text `&quot;a&quot;`
+            :endpos 3
+            :delim
+             (copy delimquote
+              :endpos 2)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 1
+               :endpos 2)))
+           (textblock
+            :text &quot;,&quot;
+            :startpos 3
+            :endpos 4           
+            :delim
+             delimcomma
+              ))))
+        (textblock-push
+         (textblock
+          :text `,&quot;b&quot;
+1,&quot;2&quot;`
+           :startpos 3
+           :curpos 1
+           :delim
+            (copy delimcomma
+             :delimlist
+              (delimlist
+               delimline
+               delimquote
+               delimcomma))
+           :parent
+            (textblock
+             :text `&quot;a&quot;,&quot;b&quot;
+1,&quot;2&quot;`
+             :endpos 13
+             :delim
+              (delim
+               :name &quot;delimcsv&quot;
+               :delimlist
+                (delimlist
+                 delimline
+                 delimquote
+                 delimcomma))
+             :children
+              (textblocklist
+               (textblock
+                :text &quot;\&quot;a\&quot;&quot;
+                :endpos 3
+                :delim
+                 (copy delimquote
+                  :endpos 2)
+                :children
+                 (textblocklist
+                  (textblock
+                   :text &quot;a&quot;
+                   :startpos 1
+                   :endpos 2))))))))
 :doc &quot;Returns a a textblock using the textblocks current delim.&quot;)</div>
                 </li>
               </ul>
@@ -32354,6 +33037,11 @@ improves readability.</div>
   :text &quot;b&quot;
   :startpos 2
   :endpos 3
+  :delim
+   (delim
+    :delimlist
+     (delimlist
+      delimbracketangle))
   :parent
    (textblock
     :text &quot;,c&quot;
@@ -32432,7 +33120,10 @@ improves readability.</div>
           :startpos 1
           :endpos 2)))))
   (copy delimcomma
-   :startpos 1)))</div></li>
+   :startpos 1
+   :delimlist
+    (delimlist
+     delimbracketangle))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -32454,6 +33145,7 @@ improves readability.</div>
      offset    : int       := (:startpos  textblockin)
      delimcur  : delim     := (:delim     textblockin)
      parent    : textblock := (:parent    textblockin)
+     startpos  : int       := (:startpos  delimin)
      starttext : string    := (:starttext delimin)
      endtext   : string    := (:endtext   delimin)
      issingle  : boolean   := (and
@@ -32481,9 +33173,13 @@ improves readability.</div>
                               (empty delim)
                               (delim
                                :delimlist delims))]
-    (copy tbleft
-     :delim delimchg
-     :parent tbparent))))
+    (if : textblock
+     (then (= 0 startpos)
+      tbparent)
+     (else
+      (copy tbleft
+       :delim delimchg
+       :parent tbparent))))))
  :test (test
         (textblock
          :text &quot;a&quot;
@@ -32539,6 +33235,11 @@ improves readability.</div>
          :text &quot;b&quot;
          :startpos 2
          :endpos 3
+         :delim
+          (delim
+           :delimlist
+            (delimlist
+             delimbracketangle))
          :parent
           (textblock
            :text &quot;,c&quot;
@@ -32617,7 +33318,10 @@ improves readability.</div>
                  :startpos 1
                  :endpos 2)))))
          (copy delimcomma
-          :startpos 1)))
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketangle))))
  :doc &quot;Returns the parent of a textblock with the current textblock added to textblocklist.&quot;)</div>
                 </li>
               </ul>
@@ -32799,44 +33503,29 @@ improves readability.</div>
   (delim
    :starttext &quot;,&quot;
    :startpos  1)
-   0))</div></li>
-                <li><div class="test">(test
- (textblock
-  :text &quot;,b&quot;
-  :startpos 1
-  :curpos 1
-  :delim
-   (delim
-    :starttext &quot;,&quot;
-    :startpos 1))
- (textblock-startright&lt;-string-delim-offset
-  &quot;a,b&quot;
-  (delim
-   :starttext &quot;,&quot;
-   :startpos 1)
-   0))</div></li>
+  0))</div></li>
                 <li><div class="test">(test
  (textblock
   :text &quot;&lt;b&gt;c&quot;
   :startpos 1
   :curpos 1
   :delim
-   (delim
-    :starttext &quot;&lt;&quot;
-    :endtext &quot;&gt;&quot;
+   (copy delimbracketangle
     :startpos 1
     :delimlist
      (delimlist
-      (delim
-       :name &quot;delimclose&quot;
-       :starttext &quot;&gt;&quot;))))
+      delimbracketcurly))
+  :close
+   (copy delimclose
+    :starttext &quot;&gt;&quot;))
  (textblock-startright&lt;-string-delim-offset
   &quot;a&lt;b&gt;c&quot;
-  (delim
-   :starttext &quot;&lt;&quot;
-   :endtext &quot;&gt;&quot;
-   :startpos 1)
-   0))</div></li>
+  (copy delimbracketangle
+   :startpos 1
+   :delimlist
+    (delimlist
+     delimbracketcurly))
+  0))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -32854,32 +33543,25 @@ improves readability.</div>
    starttext  : string    := (:starttext delimin)
    endtext    : string    := (:endtext delimin)
    delimlist  : delimlist := (:delimlist delimin)
-   delimclose : delim     := (if : delim
+   close      : delim     := (if : delim
                               (then (= endtext &quot;&quot;) (empty delim))
                               (else
-                               (delim
-                                :name &quot;delimclose&quot;
+                               (copy delimclose
                                 :starttext endtext)))
-   delims     : delimlist := (if : delimlist
-                              (then (is-empty delimclose) delimlist)
-                              (else
-                               (copy delimlist delimclose)))
    delimlen   : int       := (length&lt;-string starttext)
-   curpos     : int       := delimlen
-   delimnew   : delim     := (if : delim
-                              (then (is-empty delims) delimin)
-                              (else
-                               (copy delimin
-                                :delimlist delims)))]
+   curpos     : int       := delimlen]
   (if
    (then (= text &quot;&quot;)    (empty textblock))
    (then (&lt; startpos 0) (empty textblock))
    (else
     (textblock
-     :text (string&lt;-string-start text startpos)
-     :startpos (+ offset startpos)
+     :text
+      (string&lt;-string-start text startpos)
+     :startpos
+      (+ offset startpos)
      :curpos curpos
-     :delim delimnew))))
+     :delim delimin
+     :close close))))
  :test (test
         (textblock
          :text &quot;,b&quot;
@@ -32894,44 +33576,29 @@ improves readability.</div>
          (delim
           :starttext &quot;,&quot;
           :startpos  1)
-          0))
-       (test
-        (textblock
-         :text &quot;,b&quot;
-         :startpos 1
-         :curpos 1
-         :delim
-          (delim
-           :starttext &quot;,&quot;
-           :startpos 1))
-        (textblock-startright&lt;-string-delim-offset
-         &quot;a,b&quot;
-         (delim
-          :starttext &quot;,&quot;
-          :startpos 1)
-          0))
+         0))
        (test
         (textblock
          :text &quot;&lt;b&gt;c&quot;
          :startpos 1
          :curpos 1
          :delim
-          (delim
-           :starttext &quot;&lt;&quot;
-           :endtext &quot;&gt;&quot;
+          (copy delimbracketangle
            :startpos 1
            :delimlist
             (delimlist
-             (delim
-              :name &quot;delimclose&quot;
-              :starttext &quot;&gt;&quot;))))
+             delimbracketcurly))
+         :close
+          (copy delimclose
+           :starttext &quot;&gt;&quot;))
         (textblock-startright&lt;-string-delim-offset
          &quot;a&lt;b&gt;c&quot;
-         (delim
-          :starttext &quot;&lt;&quot;
-          :endtext &quot;&gt;&quot;
-          :startpos 1)
-          0))
+         (copy delimbracketangle
+          :startpos 1
+          :delimlist
+           (delimlist
+            delimbracketcurly))
+         0))
  :doc &quot;Returns a textblock constructed from the text after the current delimiter start.&quot;)</div>
                 </li>
               </ul>

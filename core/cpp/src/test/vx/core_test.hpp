@@ -31,6 +31,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_le(vx_core::Type_context context);
   vx_test::Type_testcase f_eq(vx_core::Type_context context);
   vx_test::Type_testcase f_eq(vx_core::Type_context context);
+  vx_test::Type_testcase f_eqeq(vx_core::Type_context context);
   vx_test::Type_testcase f_gt(vx_core::Type_context context);
   vx_test::Type_testcase f_gt(vx_core::Type_context context);
   vx_test::Type_testcase f_ge(vx_core::Type_context context);

@@ -24,6 +24,7 @@ export default class vx_data_file {
   static t_name_from_file = {}
   static e_name_from_file = {vx_type: vx_data_file.t_name_from_file}
 
+  // (func name<-file)
   static f_name_from_file(file) {
     let output = vx_core.e_string
     output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":name")
@@ -39,6 +40,7 @@ export default class vx_data_file {
   static t_path_from_file = {}
   static e_path_from_file = {vx_type: vx_data_file.t_path_from_file}
 
+  // (func path<-file)
   static f_path_from_file(file) {
     let output = vx_core.e_string
     output = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":path")
@@ -54,6 +56,7 @@ export default class vx_data_file {
   static t_pathfull_from_file = {}
   static e_pathfull_from_file = {vx_type: vx_data_file.t_pathfull_from_file}
 
+  // (func pathfull<-file)
   static f_pathfull_from_file(file) {
     let output = vx_core.e_string
     output = vx_core.f_let(
@@ -163,7 +166,7 @@ export default class vx_data_file {
     vx_data_file.e_fileformat['vx_type'] = vx_data_file.t_fileformat
     vx_data_file.e_fileformat['vx_value'] = {}
 
-    // (func name_from_file)
+    // (func name<-file)
     vx_data_file.t_name_from_file['vx_type'] = vx_core.t_type
     vx_data_file.t_name_from_file['vx_value'] = {
       name          : "name<-file",
@@ -182,7 +185,7 @@ export default class vx_data_file {
       fn            : vx_data_file.f_name_from_file
     }
 
-    // (func path_from_file)
+    // (func path<-file)
     vx_data_file.t_path_from_file['vx_type'] = vx_core.t_type
     vx_data_file.t_path_from_file['vx_value'] = {
       name          : "path<-file",
@@ -201,7 +204,7 @@ export default class vx_data_file {
       fn            : vx_data_file.f_path_from_file
     }
 
-    // (func pathfull_from_file)
+    // (func pathfull<-file)
     vx_data_file.t_pathfull_from_file['vx_type'] = vx_core.t_type
     vx_data_file.t_pathfull_from_file['vx_value'] = {
       name          : "pathfull<-file",

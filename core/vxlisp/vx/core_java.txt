@@ -202,6 +202,46 @@
     return output;
   }
 
+  // vx_eqeq(any, any)
+  public static boolean vx_eqeq(Core.Type_any val1, Core.Type_any val2) {
+    boolean output = false;
+    if (val1 == val2) {
+      output = true;
+    } else if (val1.vx_msgblock() != Core.e_msgblock) {
+    } else if (val2.vx_msgblock() != Core.e_msgblock) {
+    } else {
+      Core.Type_any type1 = val1.vx_type();
+      Core.Type_any type2 = val2.vx_type();
+      if (type1 != type2) {
+      } else if (type1 == Core.t_int) {
+        Core.Type_int valint1 = (Core.Type_int)val1;
+        Core.Type_int valint2 = (Core.Type_int)val2;
+        if (valint1.vx_int() == valint2.vx_int()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_float) {
+        Core.Type_float valfloat1 = (Core.Type_float)val1;
+        Core.Type_float valfloat2 = (Core.Type_float)val2;
+        if (valfloat1.vx_float() == valfloat2.vx_float()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_decimal) {
+        Core.Type_decimal valdecimal1 = (Core.Type_decimal)val1;
+        Core.Type_decimal valdecimal2 = (Core.Type_decimal)val2;
+        if (valdecimal1.vx_string() == valdecimal2.vx_string()) {
+          output = true;
+        }
+      } else if (type1 == Core.t_string) {
+        Core.Type_string valstring1 = (Core.Type_string)val1;
+        Core.Type_string valstring2 = (Core.Type_string)val2;
+        if (valstring1.vx_string() == valstring2.vx_string()) {
+          output = true;
+        }
+      }
+    }
+    return output;
+  }
+
   // vx_float_from_string(string)
   public static float vx_float_from_string(String text) {
     float output = 0;
@@ -328,14 +368,21 @@
   }
 
   public static Type_int vx_new_int(final int ival) {
-    Class_int output = new Core.Class_int();
-    output.vxint = ival;
+    Type_int output;
+    if ((ival == 0) && Core.e_int != null) {
+      output = Core.e_int;
+    } else {
+      Class_int work = new Core.Class_int();
+      work.vxint = ival;
+      output = work;
+
+    }
     return output;
   }
 
   public static Type_string vx_new_string(final String text) {
     Type_string output;
-    if (text == "" && Core.e_string != null) {
+    if (text.equals("") && Core.e_string != null) {
       output = Core.e_string;
     } else {
       Class_string work = new Core.Class_string();
@@ -441,9 +488,30 @@
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-      Core.Type_map valmap = Core.t_map.vx_new_from_map(valstruct.vx_map());
-      String valtext = Core.vx_string_from_any_indent(valmap, indent, linefeed);
-      output = valtext.replaceFirst("map", typedefname.vx_string());
+      int indentint2 = indent;
+      indentint2 += 2;
+      Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
+      Set<String> keys2 = mapval2.keySet();
+      for (String key : keys2) {
+        Core.Type_any valsub2 = mapval2.get(key);
+        if (!Core.f_is_empty_1(valsub2).vx_boolean()) {
+          if (!key.startsWith(":")) {
+            key = ":" + key;
+          }
+          String strval2 = Core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
+          if (strval2.contains("\n")) {
+            strval2 = "\n  " + indenttext + strval2;
+          } else {
+            strval2 = " " + strval2;
+          }
+          output += "\n" + indenttext + " " + key + strval2;
+        }
+      }
+      if (valstruct.vx_msgblock() != null) {
+        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
+      }
+      output = "(" + typedefname.vx_string() + output + ")";
     } else if (value instanceof Core.Type_func) {
       Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();

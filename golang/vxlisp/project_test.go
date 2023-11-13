@@ -58,41 +58,41 @@ func TestProjectFromTextblock(t *testing.T) {
 	lib.lang = ":java"
 	expectedprj.listlib = append(expectedprj.listlib, lib)
 
-	cmd := NewCmd()
+	cmd := NewCommand()
 	cmd.name = "doc"
 	cmd.code = ":doc"
 	cmd.path = "*projectpath*/build/doc"
 	cmd.doc = "Build documentation html"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
-	cmd = NewCmd()
+	cmd = NewCommand()
 	cmd.name = "webserver"
 	cmd.code = ":webserver"
 	cmd.doc = "Run Simple Web Server"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
-	cmd = NewCmd()
+	cmd = NewCommand()
 	cmd.name = "srcjs"
 	cmd.code = ":source"
 	cmd.lang = ":js"
 	cmd.path = "*projectpath*/build/js/src"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
-	cmd = NewCmd()
+	cmd = NewCommand()
 	cmd.name = "testjs"
 	cmd.code = ":test"
 	cmd.lang = ":js"
 	cmd.path = "*projectpath*/build/js/test"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
-	cmd = NewCmd()
+	cmd = NewCommand()
 	cmd.name = "srcjava"
 	cmd.code = ":source"
 	cmd.lang = ":java"
 	cmd.path = "*projectpath*/build/java/src"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
-	cmd = NewCmd()
+	cmd = NewCommand()
 	cmd.name = "testjava"
 	cmd.code = ":test"
 	cmd.lang = ":java"
@@ -125,7 +125,7 @@ func TestProjectFromTextblock(t *testing.T) {
   :path *projectpath*/build/js/test
   :doc  ))`
 	cmdtexts := []string{"doc", "testjs"}
-	cmds := CmdsFromProject(prj, cmdtexts)
+	cmds := ListCommandFromProject(prj, cmdtexts)
 	actual = StringFromListCmd(cmds)
 	errortext = CompareText(expected, actual, 20, msgblock)
 	if errortext != "" {

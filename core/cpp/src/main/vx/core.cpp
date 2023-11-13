@@ -249,6 +249,46 @@ namespace vx_core {
     return output;
   }
 
+  // vx_eqeq(any, any)
+  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2) {
+    bool output = false;
+    if (val1 == val2) {
+      output = true;
+    } else if (val1->vx_msgblock() != vx_core::e_msgblock) {
+    } else if (val2->vx_msgblock() != vx_core::e_msgblock) {
+    } else {
+      vx_core::Type_any type1 = val1->vx_type();
+      vx_core::Type_any type2 = val2->vx_type();
+      if (type1 != type2) {
+      } else if (type1 == vx_core::t_int) {
+        vx_core::Type_int valint1 = vx_core::vx_any_from_any(vx_core::t_int, val1);
+        vx_core::Type_int valint2 = vx_core::vx_any_from_any(vx_core::t_int, val2);
+        if (valint1->vx_int() == valint2->vx_int()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_float) {
+        vx_core::Type_float valfloat1 = vx_core::vx_any_from_any(vx_core::t_float, val1);
+        vx_core::Type_float valfloat2 = vx_core::vx_any_from_any(vx_core::t_float, val2);
+        if (valfloat1->vx_float() == valfloat2->vx_float()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_decimal) {
+        vx_core::Type_decimal valdecimal1 = vx_core::vx_any_from_any(vx_core::t_decimal, val1);
+        vx_core::Type_decimal valdecimal2 = vx_core::vx_any_from_any(vx_core::t_decimal, val2);
+        if (valdecimal1->vx_string() == valdecimal2->vx_string()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_string) {
+        vx_core::Type_string valstring1 = vx_core::vx_any_from_any(vx_core::t_string, val1);
+        vx_core::Type_string valstring2 = vx_core::vx_any_from_any(vx_core::t_string, val2);
+        if (valstring1->vx_string() == valstring2->vx_string()) {
+          output = true;
+        }
+      }
+    }
+    return output;
+  }
+
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num) {
     float output = 0;
@@ -14987,6 +15027,89 @@ namespace vx_core {
 
   //}
 
+  // (func !==)
+  vx_core::Type_boolean f_neqeq(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({val1, val2});
+    output = vx_core::f_not(
+      vx_core::f_eqeq(val1, val2)
+    );
+    vx_core::vx_release_one_except({val1, val2}, output);
+    return output;
+  }
+
+  // (func !==)
+  // class Class_neqeq {
+    Abstract_neqeq::~Abstract_neqeq() {}
+
+    Class_neqeq::Class_neqeq() : Abstract_neqeq::Abstract_neqeq() {
+      vx_core::refcount += 1;
+    }
+
+    Class_neqeq::~Class_neqeq() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_neqeq::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_neqeq output = vx_core::e_neqeq;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_neqeq::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_neqeq output = vx_core::e_neqeq;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_neqeq::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "!==", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_neqeq::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "!==", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_neqeq::vx_empty() const {return vx_core::e_neqeq;}
+    vx_core::Type_any Class_neqeq::vx_type() const {return vx_core::t_neqeq;}
+    vx_core::Type_msgblock Class_neqeq::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_neqeq::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_neqeq::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any val1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any val2 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_neqeq(val1, val2);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func *)
   vx_core::Type_int f_multiply(vx_core::Type_int num1, vx_core::Type_int num2) {
     vx_core::Type_int output = vx_core::e_int;
@@ -16881,6 +17004,88 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_anylist args = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_core::f_le_1(args);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func ==)
+  vx_core::Type_boolean f_eqeq(vx_core::Type_any val1, vx_core::Type_any val2) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({val1, val2});
+    bool isequal = vx_core::vx_eqeq(val1, val2);
+    output = vx_core::vx_new_boolean(isequal);
+    vx_core::vx_release_one_except({val1, val2}, output);
+    return output;
+  }
+
+  // (func ==)
+  // class Class_eqeq {
+    Abstract_eqeq::~Abstract_eqeq() {}
+
+    Class_eqeq::Class_eqeq() : Abstract_eqeq::Abstract_eqeq() {
+      vx_core::refcount += 1;
+    }
+
+    Class_eqeq::~Class_eqeq() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_eqeq::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_eqeq output = vx_core::e_eqeq;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_eqeq::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_eqeq output = vx_core::e_eqeq;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_eqeq::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "==", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_funcdef Class_eqeq::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "==", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_eqeq::vx_empty() const {return vx_core::e_eqeq;}
+    vx_core::Type_any Class_eqeq::vx_type() const {return vx_core::t_eqeq;}
+    vx_core::Type_msgblock Class_eqeq::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_eqeq::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_eqeq::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any val1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any val2 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_eqeq(val1, val2);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -24299,6 +24504,8 @@ namespace vx_core {
   vx_core::Func_let t_let = NULL;
   vx_core::Func_let_async e_let_async = NULL;
   vx_core::Func_let_async t_let_async = NULL;
+  vx_core::Func_neqeq e_neqeq = NULL;
+  vx_core::Func_neqeq t_neqeq = NULL;
   vx_core::Func_multiply e_multiply = NULL;
   vx_core::Func_multiply t_multiply = NULL;
   vx_core::Func_multiply_1 e_multiply_1 = NULL;
@@ -24341,6 +24548,8 @@ namespace vx_core {
   vx_core::Func_le t_le = NULL;
   vx_core::Func_le_1 e_le_1 = NULL;
   vx_core::Func_le_1 t_le_1 = NULL;
+  vx_core::Func_eqeq e_eqeq = NULL;
+  vx_core::Func_eqeq t_eqeq = NULL;
   vx_core::Func_gt e_gt = NULL;
   vx_core::Func_gt t_gt = NULL;
   vx_core::Func_gt_1 e_gt_1 = NULL;
@@ -24982,6 +25191,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_let_async);
       vx_core::t_let_async = new vx_core::Class_let_async();
       vx_core::vx_reserve_type(vx_core::t_let_async);
+      vx_core::e_neqeq = new vx_core::Class_neqeq();
+      vx_core::vx_reserve_empty(vx_core::e_neqeq);
+      vx_core::t_neqeq = new vx_core::Class_neqeq();
+      vx_core::vx_reserve_type(vx_core::t_neqeq);
       vx_core::e_multiply = new vx_core::Class_multiply();
       vx_core::vx_reserve_empty(vx_core::e_multiply);
       vx_core::t_multiply = new vx_core::Class_multiply();
@@ -25066,6 +25279,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_le_1);
       vx_core::t_le_1 = new vx_core::Class_le_1();
       vx_core::vx_reserve_type(vx_core::t_le_1);
+      vx_core::e_eqeq = new vx_core::Class_eqeq();
+      vx_core::vx_reserve_empty(vx_core::e_eqeq);
+      vx_core::t_eqeq = new vx_core::Class_eqeq();
+      vx_core::vx_reserve_type(vx_core::t_eqeq);
       vx_core::e_gt = new vx_core::Class_gt();
       vx_core::vx_reserve_empty(vx_core::e_gt);
       vx_core::t_gt = new vx_core::Class_gt();

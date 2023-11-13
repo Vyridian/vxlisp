@@ -150,6 +150,9 @@ let-async
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
 
+  // vx_eqeq(any, any)
+  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2);
+
   // vx_float_from_number(number)
   float vx_float_from_number(vx_core::Type_number num);
 
@@ -748,6 +751,46 @@ let-async
       }
     }
     vx_core::vx_release({isnumber1, isnumber2});
+    return output;
+  }
+
+  // vx_eqeq(any, any)
+  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2) {
+    bool output = false;
+    if (val1 == val2) {
+      output = true;
+    } else if (val1->vx_msgblock() != vx_core::e_msgblock) {
+    } else if (val2->vx_msgblock() != vx_core::e_msgblock) {
+    } else {
+      vx_core::Type_any type1 = val1->vx_type();
+      vx_core::Type_any type2 = val2->vx_type();
+      if (type1 != type2) {
+      } else if (type1 == vx_core::t_int) {
+        vx_core::Type_int valint1 = vx_core::vx_any_from_any(vx_core::t_int, val1);
+        vx_core::Type_int valint2 = vx_core::vx_any_from_any(vx_core::t_int, val2);
+        if (valint1->vx_int() == valint2->vx_int()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_float) {
+        vx_core::Type_float valfloat1 = vx_core::vx_any_from_any(vx_core::t_float, val1);
+        vx_core::Type_float valfloat2 = vx_core::vx_any_from_any(vx_core::t_float, val2);
+        if (valfloat1->vx_float() == valfloat2->vx_float()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_decimal) {
+        vx_core::Type_decimal valdecimal1 = vx_core::vx_any_from_any(vx_core::t_decimal, val1);
+        vx_core::Type_decimal valdecimal2 = vx_core::vx_any_from_any(vx_core::t_decimal, val2);
+        if (valdecimal1->vx_string() == valdecimal2->vx_string()) {
+          output = true;
+        }
+      } else if (type1 == vx_core::t_string) {
+        vx_core::Type_string valstring1 = vx_core::vx_any_from_any(vx_core::t_string, val1);
+        vx_core::Type_string valstring2 = vx_core::vx_any_from_any(vx_core::t_string, val2);
+        if (valstring1->vx_string() == valstring2->vx_string()) {
+          output = true;
+        }
+      }
+    }
     return output;
   }
 

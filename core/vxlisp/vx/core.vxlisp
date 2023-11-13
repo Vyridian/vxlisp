@@ -852,12 +852,12 @@
     }
     output = Core.vx_new_boolean(isequal);")
  :alias "eq"
- :doc   "Boolean equal/equivalent"
  :test  (test-true (= true true))
         (test-true (= 2 2))
         (test-true (= "a" "a"))
         (test-true (= (stringlist "a" "b" "c") (new stringlist "a" "b" "c")))
-        (test-true (= (stringmap :a "1" :b "2") (new stringmap :a "1" :b "2"))))
+        (test-true (= (stringmap :a "1" :b "2") (new stringmap :a "1" :b "2")))
+ :doc   "Boolean equal/equivalent")
 
 (func = : boolean
  [values : anylist :...]
@@ -871,46 +871,25 @@
    (and reduce (= current next)))
  )
  :alias "eq"
- :doc   "Boolean equal/equivalent"
- :test  (test-false (= 2 2 3)))
+ :test  (test-false (= 2 2 3))
+ :doc   "Boolean equal/equivalent")
 
-/*
 (func == : boolean
- [values : anylist :...]
+ [val1 : any
+  val2 : any]
  (native
+  :cpp
+   "bool isequal = vx_core::vx_eqeq(val1, val2);
+    output = vx_core::vx_new_boolean(isequal);"
   :js
-   "const firstval = values[0]
-    const firstnative = " (native<-any firstval :native) "
-    output = true
-    for (let i = 1; i < values.length; i++) {
-      let value = values[i]
-      if (firstval === value) {
-      } else if (firstnative === " (native<-any value :native) ") {
-      } else {
-        output = false
-        break
-      }
-    }"
+   "output = val1 == val2"
   :java
-   "boolean isequal = true;
-    List<Core.Type_any> listvalue = values.vx_list();
-    if (listvalue == null) {
-    } else if (listvalue.size() > 0) {
-      Core.Type_any val = listvalue.get(0);
-      for (Core.Type_any subval : listvalue) {
-        if (val != subval) {
-          isequal = false;
-        }
-      }
-    }
+   "boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);")
  :alias "eqeq"
- :doc   "Strict Boolean equality"
- :test  (test-true (== true true))
-        (test-true (== 2 2))
-        (test-false (== 2 2 3))
-        (test-true (== "a" "a")))
-*/
+ :test  (test-true (== 0 0))
+        (test-true (== "" ""))
+ :doc "Strict equality check. Note that all non-empty, non-constants will not be equal.")
 
 (func ! : boolean
  [val : boolean :doc "Thing to not"]
@@ -930,7 +909,14 @@
  :alias "ne"
  :test  (test-ne true false)
         (test-ne "a" "b")
- :doc   "Returns true if the first arg is not equal to any of the other args")
+ :doc   "Returns true if the first arg is not equal to any of the other arg.")
+
+(func !== : boolean
+ [val1 : any
+  val2 : any]
+ (! (== val1 val2))
+ :alias "neqeq"
+ :doc   "Returns true if the first arg is not strictly equal to any of the other arg.")
 
 (func !-empty : boolean
  [text : string]
