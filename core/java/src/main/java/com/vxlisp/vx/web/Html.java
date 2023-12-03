@@ -57,10 +57,14 @@ public final class Html {
 
     @Override
     public Type_body vx_copy(final Object... vals) {
-      Class_body output = new Class_body();
+      Type_body output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_body val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_nodes = val.nodes();
+      Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
       String key = "";
@@ -81,16 +85,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_divchildlist) { // default property
-            output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_divchildlist)valsub;
           } else if (valsub instanceof Html.Type_divchild) { // default property
             Html.Type_divchild valdefault = (Html.Type_divchild)valsub;
-            Html.Type_divchildlist vallist = output.vx_p_nodes;
+            Html.Type_divchildlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_divchildlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new body) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -98,8 +104,10 @@ public final class Html {
         } else {
           switch (key) {
           case ":nodes":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new body :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -112,8 +120,13 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_body work = new Class_body();
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -227,13 +240,17 @@ public final class Html {
 
     @Override
     public Type_details vx_copy(final Object... vals) {
-      Class_details output = new Class_details();
+      Type_details output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_details val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_summary = val.summary();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_divchildlist vx_p_summary = val.summary();
+      Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -263,34 +280,43 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new details :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new details :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":summary":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_summary = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_summary) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_summary = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new details :summary " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new details :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -303,8 +329,16 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_details work = new Class_details();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_summary = vx_p_summary;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -406,12 +440,16 @@ public final class Html {
 
     @Override
     public Type_div vx_copy(final Object... vals) {
-      Class_div output = new Class_div();
+      Type_div output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_div val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -434,16 +472,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_divchildlist) { // default property
-            output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_divchildlist)valsub;
           } else if (valsub instanceof Html.Type_divchild) { // default property
             Html.Type_divchild valdefault = (Html.Type_divchild)valsub;
-            Html.Type_divchildlist vallist = output.vx_p_nodes;
+            Html.Type_divchildlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_divchildlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new div) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -451,26 +491,33 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new div :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new div :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new div :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -483,8 +530,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_div work = new Class_div();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -550,11 +604,19 @@ public final class Html {
 
     @Override
     public Type_divchild vx_copy(final Object... vals) {
-      Class_divchild output = new Class_divchild();
+      Type_divchild output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_divchild val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+        Class_divchild work = new Class_divchild();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -632,7 +694,11 @@ public final class Html {
 
     @Override
     public Type_divchildlist vx_copy(final Object... vals) {
-      Class_divchildlist output = new Class_divchildlist();
+      Type_divchildlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_divchildlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_divchild> listval = new ArrayList<>(val.vx_listdivchild());
@@ -642,17 +708,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_divchild) {
+          ischanged = true;
           listval.add((Html.Type_divchild)valsub);
         } else if (valsub instanceof Html.Type_divchild) {
+          ischanged = true;
           listval.add((Html.Type_divchild)valsub);
         } else if (valsub instanceof Type_divchildlist) {
           Type_divchildlist multi = (Type_divchildlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listdivchild());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_divchild) {
               Html.Type_divchild valitem = (Html.Type_divchild)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -661,9 +731,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_divchildlist work = new Class_divchildlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -741,7 +815,11 @@ public final class Html {
 
     @Override
     public Type_divlist vx_copy(final Object... vals) {
-      Class_divlist output = new Class_divlist();
+      Type_divlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_divlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_div> listval = new ArrayList<>(val.vx_listdiv());
@@ -751,17 +829,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_div) {
+          ischanged = true;
           listval.add((Html.Type_div)valsub);
         } else if (valsub instanceof Html.Type_div) {
+          ischanged = true;
           listval.add((Html.Type_div)valsub);
         } else if (valsub instanceof Type_divlist) {
           Type_divlist multi = (Type_divlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listdiv());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_div) {
               Html.Type_div valitem = (Html.Type_div)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -770,9 +852,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_divlist work = new Class_divlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -850,10 +936,14 @@ public final class Html {
 
     @Override
     public Type_footer vx_copy(final Object... vals) {
-      Class_footer output = new Class_footer();
+      Type_footer output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_footer val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_nodes = val.nodes();
+      Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
       String key = "";
@@ -874,16 +964,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_divchildlist) { // default property
-            output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_divchildlist)valsub;
           } else if (valsub instanceof Html.Type_divchild) { // default property
             Html.Type_divchild valdefault = (Html.Type_divchild)valsub;
-            Html.Type_divchildlist vallist = output.vx_p_nodes;
+            Html.Type_divchildlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_divchildlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new footer) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -891,8 +983,10 @@ public final class Html {
         } else {
           switch (key) {
           case ":nodes":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new footer :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -905,8 +999,13 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_footer work = new Class_footer();
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1008,12 +1107,16 @@ public final class Html {
 
     @Override
     public Type_h1 vx_copy(final Object... vals) {
-      Class_h1 output = new Class_h1();
+      Type_h1 output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_h1 val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -1036,9 +1139,11 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Core.Type_string) { // default property
-            output.vx_p_text = (Core.Type_string)valsub;
+            ischanged = true;
+            vx_p_text = (Core.Type_string)valsub;
           } else if (valsub instanceof String) { // default property
-            output.vx_p_text = Core.t_string.vx_new(valsub);
+            ischanged = true;
+            vx_p_text = Core.t_string.vx_new(valsub);
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new h1) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -1046,28 +1151,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h1 :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h1 :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h1 :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1080,8 +1193,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_h1 work = new Class_h1();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1183,12 +1303,16 @@ public final class Html {
 
     @Override
     public Type_h2 vx_copy(final Object... vals) {
-      Class_h2 output = new Class_h2();
+      Type_h2 output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_h2 val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -1211,9 +1335,11 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Core.Type_string) { // default property
-            output.vx_p_text = (Core.Type_string)valsub;
+            ischanged = true;
+            vx_p_text = (Core.Type_string)valsub;
           } else if (valsub instanceof String) { // default property
-            output.vx_p_text = Core.t_string.vx_new(valsub);
+            ischanged = true;
+            vx_p_text = Core.t_string.vx_new(valsub);
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new h2) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -1221,28 +1347,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h2 :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h2 :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h2 :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1255,8 +1389,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_h2 work = new Class_h2();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1358,12 +1499,16 @@ public final class Html {
 
     @Override
     public Type_h3 vx_copy(final Object... vals) {
-      Class_h3 output = new Class_h3();
+      Type_h3 output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_h3 val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -1386,9 +1531,11 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Core.Type_string) { // default property
-            output.vx_p_text = (Core.Type_string)valsub;
+            ischanged = true;
+            vx_p_text = (Core.Type_string)valsub;
           } else if (valsub instanceof String) { // default property
-            output.vx_p_text = Core.t_string.vx_new(valsub);
+            ischanged = true;
+            vx_p_text = Core.t_string.vx_new(valsub);
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new h3) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -1396,28 +1543,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h3 :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h3 :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new h3 :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1430,8 +1585,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_h3 work = new Class_h3();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1509,10 +1671,14 @@ public final class Html {
 
     @Override
     public Type_head vx_copy(final Object... vals) {
-      Class_head output = new Class_head();
+      Type_head output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_head val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_nodes = val.nodes();
+      Html.Type_headchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
       String key = "";
@@ -1533,16 +1699,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_headchildlist) { // default property
-            output.vx_p_nodes = (Html.Type_headchildlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_headchildlist)valsub;
           } else if (valsub instanceof Html.Type_headchild) { // default property
             Html.Type_headchild valdefault = (Html.Type_headchild)valsub;
-            Html.Type_headchildlist vallist = output.vx_p_nodes;
+            Html.Type_headchildlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_headchildlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new head) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -1550,8 +1718,10 @@ public final class Html {
         } else {
           switch (key) {
           case ":nodes":
-            if (valsub instanceof Html.Type_headchildlist) {
-              output.vx_p_nodes = (Html.Type_headchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_headchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_headchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new head :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1564,8 +1734,13 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_head work = new Class_head();
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1631,11 +1806,19 @@ public final class Html {
 
     @Override
     public Type_headchild vx_copy(final Object... vals) {
-      Class_headchild output = new Class_headchild();
+      Type_headchild output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_headchild val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+        Class_headchild work = new Class_headchild();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1713,7 +1896,11 @@ public final class Html {
 
     @Override
     public Type_headchildlist vx_copy(final Object... vals) {
-      Class_headchildlist output = new Class_headchildlist();
+      Type_headchildlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_headchildlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_headchild> listval = new ArrayList<>(val.vx_listheadchild());
@@ -1723,17 +1910,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_headchild) {
+          ischanged = true;
           listval.add((Html.Type_headchild)valsub);
         } else if (valsub instanceof Html.Type_headchild) {
+          ischanged = true;
           listval.add((Html.Type_headchild)valsub);
         } else if (valsub instanceof Type_headchildlist) {
           Type_headchildlist multi = (Type_headchildlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listheadchild());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_headchild) {
               Html.Type_headchild valitem = (Html.Type_headchild)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1742,9 +1933,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_headchildlist work = new Class_headchildlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1858,13 +2053,17 @@ public final class Html {
 
     @Override
     public Type_html vx_copy(final Object... vals) {
-      Class_html output = new Class_html();
+      Type_html output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_html val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_lang = val.lang();
-      output.vx_p_head = val.head();
-      output.vx_p_body = val.body();
-      output.vx_p_footer = val.footer();
+      Core.Type_string vx_p_lang = val.lang();
+      Html.Type_head vx_p_head = val.head();
+      Html.Type_body vx_p_body = val.body();
+      Html.Type_footer vx_p_footer = val.footer();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":lang");
       validkeys.add(":head");
@@ -1894,34 +2093,43 @@ public final class Html {
         } else {
           switch (key) {
           case ":lang":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_lang = (Core.Type_string)valsub;
+            if (valsub == vx_p_lang) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_lang = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_lang = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_lang = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new html :lang " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":head":
-            if (valsub instanceof Html.Type_head) {
-              output.vx_p_head = (Html.Type_head)valsub;
+            if (valsub == vx_p_head) {
+            } else if (valsub instanceof Html.Type_head) {
+              ischanged = true;
+              vx_p_head = (Html.Type_head)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new html :head " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":body":
-            if (valsub instanceof Html.Type_body) {
-              output.vx_p_body = (Html.Type_body)valsub;
+            if (valsub == vx_p_body) {
+            } else if (valsub instanceof Html.Type_body) {
+              ischanged = true;
+              vx_p_body = (Html.Type_body)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new html :body " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":footer":
-            if (valsub instanceof Html.Type_footer) {
-              output.vx_p_footer = (Html.Type_footer)valsub;
+            if (valsub == vx_p_footer) {
+            } else if (valsub instanceof Html.Type_footer) {
+              ischanged = true;
+              vx_p_footer = (Html.Type_footer)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new html :footer " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1934,8 +2142,16 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_html work = new Class_html();
+        work.vx_p_lang = vx_p_lang;
+        work.vx_p_head = vx_p_head;
+        work.vx_p_body = vx_p_body;
+        work.vx_p_footer = vx_p_footer;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2037,12 +2253,16 @@ public final class Html {
 
     @Override
     public Type_meta vx_copy(final Object... vals) {
-      Class_meta output = new Class_meta();
+      Type_meta output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_meta val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_charset = val.charset();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_charset = val.charset();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -2071,28 +2291,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new meta :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new meta :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":charset":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_charset = (Core.Type_string)valsub;
+            if (valsub == vx_p_charset) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_charset = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_charset = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_charset = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new meta :charset " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -2105,8 +2333,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_meta work = new Class_meta();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_charset = vx_p_charset;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2196,11 +2431,15 @@ public final class Html {
 
     @Override
     public Type_node vx_copy(final Object... vals) {
-      Class_node output = new Class_node();
+      Type_node output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_node val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -2228,18 +2467,23 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new node :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new node :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -2252,8 +2496,14 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_node work = new Class_node();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2331,7 +2581,11 @@ public final class Html {
 
     @Override
     public Type_nodelist vx_copy(final Object... vals) {
-      Class_nodelist output = new Class_nodelist();
+      Type_nodelist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_nodelist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_node> listval = new ArrayList<>(val.vx_listnode());
@@ -2341,17 +2595,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_node) {
+          ischanged = true;
           listval.add((Html.Type_node)valsub);
         } else if (valsub instanceof Html.Type_node) {
+          ischanged = true;
           listval.add((Html.Type_node)valsub);
         } else if (valsub instanceof Type_nodelist) {
           Type_nodelist multi = (Type_nodelist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listnode());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_node) {
               Html.Type_node valitem = (Html.Type_node)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -2360,9 +2618,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_nodelist work = new Class_nodelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2464,12 +2726,16 @@ public final class Html {
 
     @Override
     public Type_p vx_copy(final Object... vals) {
-      Class_p output = new Class_p();
+      Type_p output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_p val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -2492,9 +2758,11 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Core.Type_string) { // default property
-            output.vx_p_text = (Core.Type_string)valsub;
+            ischanged = true;
+            vx_p_text = (Core.Type_string)valsub;
           } else if (valsub instanceof String) { // default property
-            output.vx_p_text = Core.t_string.vx_new(valsub);
+            ischanged = true;
+            vx_p_text = Core.t_string.vx_new(valsub);
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new p) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -2502,28 +2770,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new p :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new p :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new p :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -2536,8 +2812,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_p work = new Class_p();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2636,7 +2919,11 @@ public final class Html {
 
     @Override
     public Type_propmap vx_copy(final Object... vals) {
-      Class_propmap output = new Class_propmap();
+      Type_propmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_propmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Core.Type_string> mapval = new LinkedHashMap<>(valmap.vx_mapstring());
@@ -2667,14 +2954,19 @@ public final class Html {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_propmap work = new Class_propmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2764,11 +3056,15 @@ public final class Html {
 
     @Override
     public Type_style vx_copy(final Object... vals) {
-      Class_style output = new Class_style();
+      Type_style output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_style val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_name = val.name();
-      output.vx_p_props = val.props();
+      Core.Type_string vx_p_name = val.name();
+      Html.Type_propmap vx_p_props = val.props();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":props");
@@ -2796,18 +3092,23 @@ public final class Html {
         } else {
           switch (key) {
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new style :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":props":
-            if (valsub instanceof Html.Type_propmap) {
-              output.vx_p_props = (Html.Type_propmap)valsub;
+            if (valsub == vx_p_props) {
+            } else if (valsub instanceof Html.Type_propmap) {
+              ischanged = true;
+              vx_p_props = (Html.Type_propmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new style :props " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -2820,8 +3121,14 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_style work = new Class_style();
+        work.vx_p_name = vx_p_name;
+        work.vx_p_props = vx_p_props;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -2899,7 +3206,11 @@ public final class Html {
 
     @Override
     public Type_stylelist vx_copy(final Object... vals) {
-      Class_stylelist output = new Class_stylelist();
+      Type_stylelist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_stylelist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_style> listval = new ArrayList<>(val.vx_liststyle());
@@ -2909,17 +3220,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_style) {
+          ischanged = true;
           listval.add((Html.Type_style)valsub);
         } else if (valsub instanceof Html.Type_style) {
+          ischanged = true;
           listval.add((Html.Type_style)valsub);
         } else if (valsub instanceof Type_stylelist) {
           Type_stylelist multi = (Type_stylelist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_liststyle());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_style) {
               Html.Type_style valitem = (Html.Type_style)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -2928,9 +3243,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_stylelist work = new Class_stylelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3029,7 +3348,11 @@ public final class Html {
 
     @Override
     public Type_stylemap vx_copy(final Object... vals) {
-      Class_stylemap output = new Class_stylemap();
+      Type_stylemap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_stylemap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Html.Type_style> mapval = new LinkedHashMap<>(valmap.vx_mapstyle());
@@ -3060,14 +3383,19 @@ public final class Html {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_stylemap work = new Class_stylemap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3193,14 +3521,18 @@ public final class Html {
 
     @Override
     public Type_stylesheet vx_copy(final Object... vals) {
-      Class_stylesheet output = new Class_stylesheet();
+      Type_stylesheet output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_stylesheet val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_name = val.name();
-      output.vx_p_styles = val.styles();
-      output.vx_p_stylemap = val.stylemap();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_name = val.name();
+      Html.Type_stylelist vx_p_styles = val.styles();
+      Html.Type_stylemap vx_p_stylemap = val.stylemap();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -3231,44 +3563,56 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new stylesheet :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new stylesheet :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new stylesheet :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":styles":
-            if (valsub instanceof Html.Type_stylelist) {
-              output.vx_p_styles = (Html.Type_stylelist)valsub;
+            if (valsub == vx_p_styles) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_styles = (Html.Type_stylelist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new stylesheet :styles " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":stylemap":
-            if (valsub instanceof Html.Type_stylemap) {
-              output.vx_p_stylemap = (Html.Type_stylemap)valsub;
+            if (valsub == vx_p_stylemap) {
+            } else if (valsub instanceof Html.Type_stylemap) {
+              ischanged = true;
+              vx_p_stylemap = (Html.Type_stylemap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new stylesheet :stylemap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -3281,8 +3625,17 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_stylesheet work = new Class_stylesheet();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_styles = vx_p_styles;
+        work.vx_p_stylemap = vx_p_stylemap;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3396,13 +3749,17 @@ public final class Html {
 
     @Override
     public Type_table vx_copy(final Object... vals) {
-      Class_table output = new Class_table();
+      Type_table output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_table val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_tbody = val.tbody();
-      output.vx_p_thead = val.thead();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_tbody vx_p_tbody = val.tbody();
+      Html.Type_thead vx_p_thead = val.thead();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -3432,34 +3789,43 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":tbody":
-            if (valsub instanceof Html.Type_tbody) {
-              output.vx_p_tbody = (Html.Type_tbody)valsub;
+            if (valsub == vx_p_tbody) {
+            } else if (valsub instanceof Html.Type_tbody) {
+              ischanged = true;
+              vx_p_tbody = (Html.Type_tbody)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :tbody " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":thead":
-            if (valsub instanceof Html.Type_thead) {
-              output.vx_p_thead = (Html.Type_thead)valsub;
+            if (valsub == vx_p_thead) {
+            } else if (valsub instanceof Html.Type_thead) {
+              ischanged = true;
+              vx_p_thead = (Html.Type_thead)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :thead " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -3472,8 +3838,16 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_table work = new Class_table();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_tbody = vx_p_tbody;
+        work.vx_p_thead = vx_p_thead;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3575,12 +3949,16 @@ public final class Html {
 
     @Override
     public Type_tbody vx_copy(final Object... vals) {
-      Class_tbody output = new Class_tbody();
+      Type_tbody output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_tbody val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_trlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -3603,16 +3981,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_trlist) { // default property
-            output.vx_p_nodes = (Html.Type_trlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_trlist)valsub;
           } else if (valsub instanceof Html.Type_tr) { // default property
             Html.Type_tr valdefault = (Html.Type_tr)valsub;
-            Html.Type_trlist vallist = output.vx_p_nodes;
+            Html.Type_trlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_trlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new tbody) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -3620,26 +4000,33 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tbody :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tbody :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_trlist) {
-              output.vx_p_nodes = (Html.Type_trlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_trlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_trlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tbody :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -3652,8 +4039,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_tbody work = new Class_tbody();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3755,12 +4149,16 @@ public final class Html {
 
     @Override
     public Type_td vx_copy(final Object... vals) {
-      Class_td output = new Class_td();
+      Type_td output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_td val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -3783,16 +4181,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_divchildlist) { // default property
-            output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_divchildlist)valsub;
           } else if (valsub instanceof Html.Type_divchild) { // default property
             Html.Type_divchild valdefault = (Html.Type_divchild)valsub;
-            Html.Type_divchildlist vallist = output.vx_p_nodes;
+            Html.Type_divchildlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_divchildlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new td) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -3800,26 +4200,33 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new td :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new td :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_divchildlist) {
-              output.vx_p_nodes = (Html.Type_divchildlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_divchildlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new td :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -3832,8 +4239,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_td work = new Class_td();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -3911,7 +4325,11 @@ public final class Html {
 
     @Override
     public Type_tdlist vx_copy(final Object... vals) {
-      Class_tdlist output = new Class_tdlist();
+      Type_tdlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_tdlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_td> listval = new ArrayList<>(val.vx_listtd());
@@ -3921,17 +4339,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_td) {
+          ischanged = true;
           listval.add((Html.Type_td)valsub);
         } else if (valsub instanceof Html.Type_td) {
+          ischanged = true;
           listval.add((Html.Type_td)valsub);
         } else if (valsub instanceof Type_tdlist) {
           Type_tdlist multi = (Type_tdlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtd());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_td) {
               Html.Type_td valitem = (Html.Type_td)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -3940,9 +4362,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_tdlist work = new Class_tdlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -4044,12 +4470,16 @@ public final class Html {
 
     @Override
     public Type_thead vx_copy(final Object... vals) {
-      Class_thead output = new Class_thead();
+      Type_thead output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_thead val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_trlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -4072,16 +4502,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_trlist) { // default property
-            output.vx_p_nodes = (Html.Type_trlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_trlist)valsub;
           } else if (valsub instanceof Html.Type_tr) { // default property
             Html.Type_tr valdefault = (Html.Type_tr)valsub;
-            Html.Type_trlist vallist = output.vx_p_nodes;
+            Html.Type_trlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_trlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new thead) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -4089,26 +4521,33 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new thead :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new thead :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_trlist) {
-              output.vx_p_nodes = (Html.Type_trlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_trlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_trlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new thead :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -4121,8 +4560,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_thead work = new Class_thead();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -4224,12 +4670,16 @@ public final class Html {
 
     @Override
     public Type_title vx_copy(final Object... vals) {
-      Class_title output = new Class_title();
+      Type_title output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_title val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -4258,28 +4708,36 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new title :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new title :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new title :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -4292,8 +4750,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_title work = new Class_title();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -4395,12 +4860,16 @@ public final class Html {
 
     @Override
     public Type_tr vx_copy(final Object... vals) {
-      Class_tr output = new Class_tr();
+      Type_tr output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_tr val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_style = val.style();
-      output.vx_p_nodes = val.nodes();
+      Core.Type_string vx_p_id = val.id();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_tdlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
@@ -4423,16 +4892,18 @@ public final class Html {
           if (isvalidkey) {
             key = testkey;
           } else if (valsub instanceof Html.Type_tdlist) { // default property
-            output.vx_p_nodes = (Html.Type_tdlist)valsub;
+            ischanged = true;
+            vx_p_nodes = (Html.Type_tdlist)valsub;
           } else if (valsub instanceof Html.Type_td) { // default property
             Html.Type_td valdefault = (Html.Type_td)valsub;
-            Html.Type_tdlist vallist = output.vx_p_nodes;
+            Html.Type_tdlist vallist = vx_p_nodes;
             if (vallist == null) {
               vallist = Html.t_tdlist.vx_new(valdefault);
             } else {
               vallist = vallist.vx_copy(valdefault);
             }
-            output.vx_p_nodes = vallist;
+            ischanged = true;
+            vx_p_nodes = vallist;
           } else {
             Core.Type_msg msg = Core.vx_msg_error("(new tr) - Invalid Key Type: " + valsub.toString());
             msgblock = msgblock.vx_copy(msg);
@@ -4440,26 +4911,33 @@ public final class Html {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tr :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":style":
-            if (valsub instanceof Html.Type_style) {
-              output.vx_p_style = (Html.Type_style)valsub;
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tr :style " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":nodes":
-            if (valsub instanceof Html.Type_tdlist) {
-              output.vx_p_nodes = (Html.Type_tdlist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Html.Type_tdlist) {
+              ischanged = true;
+              vx_p_nodes = (Html.Type_tdlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new tr :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -4472,8 +4950,15 @@ public final class Html {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_tr work = new Class_tr();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -4551,7 +5036,11 @@ public final class Html {
 
     @Override
     public Type_trlist vx_copy(final Object... vals) {
-      Class_trlist output = new Class_trlist();
+      Type_trlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_trlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_tr> listval = new ArrayList<>(val.vx_listtr());
@@ -4561,17 +5050,21 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_tr) {
+          ischanged = true;
           listval.add((Html.Type_tr)valsub);
         } else if (valsub instanceof Html.Type_tr) {
+          ischanged = true;
           listval.add((Html.Type_tr)valsub);
         } else if (valsub instanceof Type_trlist) {
           Type_trlist multi = (Type_trlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtr());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Html.Type_tr) {
               Html.Type_tr valitem = (Html.Type_tr)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -4580,9 +5073,13 @@ public final class Html {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_trlist work = new Class_trlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -6673,7 +7170,7 @@ public final class Html {
           Core.c_quote,
           Type.f_string_from_string_start(
             style.name(),
-            Core.vx_new_int(1)
+            Core.vx_new_int(2)
           ),
           Core.c_quote
         )

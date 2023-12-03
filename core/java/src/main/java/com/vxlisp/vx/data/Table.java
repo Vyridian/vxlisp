@@ -68,11 +68,15 @@ public final class Table {
 
     @Override
     public Type_cell vx_copy(final Object... vals) {
-      Class_cell output = new Class_cell();
+      Type_cell output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_cell val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_value = val.value();
+      Core.Type_string vx_p_id = val.id();
+      Core.Type_any vx_p_value = val.value();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":value");
@@ -100,18 +104,23 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new cell :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":value":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_value = (Core.Type_any)valsub;
+            if (valsub == vx_p_value) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_value = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new cell :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -124,8 +133,14 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_cell work = new Class_cell();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_value = vx_p_value;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -202,7 +217,11 @@ public final class Table {
 
     @Override
     public Type_celllist vx_copy(final Object... vals) {
-      Class_celllist output = new Class_celllist();
+      Type_celllist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_celllist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_cell> listval = new ArrayList<>(val.vx_listcell());
@@ -212,17 +231,21 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_cell) {
+          ischanged = true;
           listval.add((Table.Type_cell)valsub);
         } else if (valsub instanceof Table.Type_cell) {
+          ischanged = true;
           listval.add((Table.Type_cell)valsub);
         } else if (valsub instanceof Type_celllist) {
           Type_celllist multi = (Type_celllist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listcell());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Table.Type_cell) {
               Table.Type_cell valitem = (Table.Type_cell)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -231,9 +254,13 @@ public final class Table {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_celllist work = new Class_celllist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -331,7 +358,11 @@ public final class Table {
 
     @Override
     public Type_cellmap vx_copy(final Object... vals) {
-      Class_cellmap output = new Class_cellmap();
+      Type_cellmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_cellmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Table.Type_cell> mapval = new LinkedHashMap<>(valmap.vx_mapcell());
@@ -362,14 +393,19 @@ public final class Table {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_cellmap work = new Class_cellmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -470,12 +506,16 @@ public final class Table {
 
     @Override
     public Type_field vx_copy(final Object... vals) {
-      Class_field output = new Class_field();
+      Type_field output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_field val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_name = val.name();
-      output.vx_p_fldtype = val.fldtype();
+      Core.Type_string vx_p_id = val.id();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_any vx_p_fldtype = val.fldtype();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":name");
@@ -504,28 +544,36 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new field :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new field :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fldtype":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_fldtype = (Core.Type_any)valsub;
+            if (valsub == vx_p_fldtype) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_fldtype = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new field :fldtype " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -538,8 +586,15 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_field work = new Class_field();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_fldtype = vx_p_fldtype;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -616,7 +671,11 @@ public final class Table {
 
     @Override
     public Type_fieldlist vx_copy(final Object... vals) {
-      Class_fieldlist output = new Class_fieldlist();
+      Type_fieldlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_fieldlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
@@ -626,17 +685,21 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_field) {
+          ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Table.Type_field) {
+          ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Type_fieldlist) {
           Type_fieldlist multi = (Type_fieldlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Table.Type_field) {
               Table.Type_field valitem = (Table.Type_field)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -645,9 +708,13 @@ public final class Table {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_fieldlist work = new Class_fieldlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -724,7 +791,11 @@ public final class Table {
 
     @Override
     public Type_fieldmap vx_copy(final Object... vals) {
-      Class_fieldmap output = new Class_fieldmap();
+      Type_fieldmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_fieldmap val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
@@ -734,17 +805,21 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_field) {
+          ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Table.Type_field) {
+          ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Type_fieldmap) {
           Type_fieldmap multi = (Type_fieldmap)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Table.Type_field) {
               Table.Type_field valitem = (Table.Type_field)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -753,9 +828,13 @@ public final class Table {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_fieldmap work = new Class_fieldmap();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -856,12 +935,16 @@ public final class Table {
 
     @Override
     public Type_filter vx_copy(final Object... vals) {
-      Class_filter output = new Class_filter();
+      Type_filter output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_filter val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_name = val.name();
-      output.vx_p_idlist = val.idlist();
+      Core.Type_string vx_p_id = val.id();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_stringlist vx_p_idlist = val.idlist();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":name");
@@ -890,28 +973,36 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new filter :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new filter :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":idlist":
-            if (valsub instanceof Core.Type_stringlist) {
-              output.vx_p_idlist = (Core.Type_stringlist)valsub;
+            if (valsub == vx_p_idlist) {
+            } else if (valsub instanceof Core.Type_stringlist) {
+              ischanged = true;
+              vx_p_idlist = (Core.Type_stringlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new filter :idlist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -924,8 +1015,15 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_filter work = new Class_filter();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_idlist = vx_p_idlist;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1026,12 +1124,16 @@ public final class Table {
 
     @Override
     public Type_row vx_copy(final Object... vals) {
-      Class_row output = new Class_row();
+      Type_row output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_row val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_cellmap = val.cellmap();
-      output.vx_p_cellsort = val.cellsort();
+      Core.Type_string vx_p_id = val.id();
+      Table.Type_cellmap vx_p_cellmap = val.cellmap();
+      Table.Type_sort vx_p_cellsort = val.cellsort();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":cellmap");
@@ -1060,26 +1162,33 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new row :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":cellmap":
-            if (valsub instanceof Table.Type_cellmap) {
-              output.vx_p_cellmap = (Table.Type_cellmap)valsub;
+            if (valsub == vx_p_cellmap) {
+            } else if (valsub instanceof Table.Type_cellmap) {
+              ischanged = true;
+              vx_p_cellmap = (Table.Type_cellmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new row :cellmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":cellsort":
-            if (valsub instanceof Table.Type_sort) {
-              output.vx_p_cellsort = (Table.Type_sort)valsub;
+            if (valsub == vx_p_cellsort) {
+            } else if (valsub instanceof Table.Type_sort) {
+              ischanged = true;
+              vx_p_cellsort = (Table.Type_sort)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new row :cellsort " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1092,8 +1201,15 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_row work = new Class_row();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_cellmap = vx_p_cellmap;
+        work.vx_p_cellsort = vx_p_cellsort;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1170,7 +1286,11 @@ public final class Table {
 
     @Override
     public Type_rowlist vx_copy(final Object... vals) {
-      Class_rowlist output = new Class_rowlist();
+      Type_rowlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_rowlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_row> listval = new ArrayList<>(val.vx_listrow());
@@ -1180,17 +1300,21 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_row) {
+          ischanged = true;
           listval.add((Table.Type_row)valsub);
         } else if (valsub instanceof Table.Type_row) {
+          ischanged = true;
           listval.add((Table.Type_row)valsub);
         } else if (valsub instanceof Type_rowlist) {
           Type_rowlist multi = (Type_rowlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listrow());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Table.Type_row) {
               Table.Type_row valitem = (Table.Type_row)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1199,9 +1323,13 @@ public final class Table {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_rowlist work = new Class_rowlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1299,7 +1427,11 @@ public final class Table {
 
     @Override
     public Type_rowmap vx_copy(final Object... vals) {
-      Class_rowmap output = new Class_rowmap();
+      Type_rowmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_rowmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Table.Type_row> mapval = new LinkedHashMap<>(valmap.vx_maprow());
@@ -1330,14 +1462,19 @@ public final class Table {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_rowmap work = new Class_rowmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1438,12 +1575,16 @@ public final class Table {
 
     @Override
     public Type_sort vx_copy(final Object... vals) {
-      Class_sort output = new Class_sort();
+      Type_sort output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_sort val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_name = val.name();
-      output.vx_p_idlist = val.idlist();
+      Core.Type_string vx_p_id = val.id();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_stringlist vx_p_idlist = val.idlist();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":name");
@@ -1472,28 +1613,36 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new sort :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new sort :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":idlist":
-            if (valsub instanceof Core.Type_stringlist) {
-              output.vx_p_idlist = (Core.Type_stringlist)valsub;
+            if (valsub == vx_p_idlist) {
+            } else if (valsub instanceof Core.Type_stringlist) {
+              ischanged = true;
+              vx_p_idlist = (Core.Type_stringlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new sort :idlist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1506,8 +1655,15 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_sort work = new Class_sort();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_idlist = vx_p_idlist;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1656,16 +1812,20 @@ public final class Table {
 
     @Override
     public Type_table vx_copy(final Object... vals) {
-      Class_table output = new Class_table();
+      Type_table output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_table val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_id = val.id();
-      output.vx_p_name = val.name();
-      output.vx_p_fieldmap = val.fieldmap();
-      output.vx_p_fieldsort = val.fieldsort();
-      output.vx_p_rowmap = val.rowmap();
-      output.vx_p_rowfilter = val.rowfilter();
-      output.vx_p_rowsort = val.rowsort();
+      Core.Type_string vx_p_id = val.id();
+      Core.Type_string vx_p_name = val.name();
+      Table.Type_fieldmap vx_p_fieldmap = val.fieldmap();
+      Table.Type_sort vx_p_fieldsort = val.fieldsort();
+      Table.Type_rowmap vx_p_rowmap = val.rowmap();
+      Table.Type_filter vx_p_rowfilter = val.rowfilter();
+      Table.Type_sort vx_p_rowsort = val.rowsort();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":name");
@@ -1698,60 +1858,76 @@ public final class Table {
         } else {
           switch (key) {
           case ":id":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_id = (Core.Type_string)valsub;
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_id = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :id " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fieldmap":
-            if (valsub instanceof Table.Type_fieldmap) {
-              output.vx_p_fieldmap = (Table.Type_fieldmap)valsub;
+            if (valsub == vx_p_fieldmap) {
+            } else if (valsub instanceof Table.Type_fieldmap) {
+              ischanged = true;
+              vx_p_fieldmap = (Table.Type_fieldmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :fieldmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fieldsort":
-            if (valsub instanceof Table.Type_sort) {
-              output.vx_p_fieldsort = (Table.Type_sort)valsub;
+            if (valsub == vx_p_fieldsort) {
+            } else if (valsub instanceof Table.Type_sort) {
+              ischanged = true;
+              vx_p_fieldsort = (Table.Type_sort)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :fieldsort " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":rowmap":
-            if (valsub instanceof Table.Type_rowmap) {
-              output.vx_p_rowmap = (Table.Type_rowmap)valsub;
+            if (valsub == vx_p_rowmap) {
+            } else if (valsub instanceof Table.Type_rowmap) {
+              ischanged = true;
+              vx_p_rowmap = (Table.Type_rowmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :rowmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":rowfilter":
-            if (valsub instanceof Table.Type_filter) {
-              output.vx_p_rowfilter = (Table.Type_filter)valsub;
+            if (valsub == vx_p_rowfilter) {
+            } else if (valsub instanceof Table.Type_filter) {
+              ischanged = true;
+              vx_p_rowfilter = (Table.Type_filter)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :rowfilter " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":rowsort":
-            if (valsub instanceof Table.Type_sort) {
-              output.vx_p_rowsort = (Table.Type_sort)valsub;
+            if (valsub == vx_p_rowsort) {
+            } else if (valsub instanceof Table.Type_sort) {
+              ischanged = true;
+              vx_p_rowsort = (Table.Type_sort)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new table :rowsort " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1764,8 +1940,19 @@ public final class Table {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_table work = new Class_table();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_fieldmap = vx_p_fieldmap;
+        work.vx_p_fieldsort = vx_p_fieldsort;
+        work.vx_p_rowmap = vx_p_rowmap;
+        work.vx_p_rowfilter = vx_p_rowfilter;
+        work.vx_p_rowsort = vx_p_rowsort;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }

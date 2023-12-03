@@ -124,7 +124,12 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_branch::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branch output = vx_data_tree::e_branch;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_tree::Type_branch val = vx_core::vx_any_from_any(vx_data_tree::t_branch, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_data_tree::Type_brancharrow vx_p_brancharrow = val->brancharrow();
@@ -165,42 +170,54 @@ namespace vx_data_tree {
         } else {
           if (false) {
           } else if (key == ":id") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_id == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":brancharrow") {
-            if (valsubtype == vx_data_tree::t_brancharrow) {
+            if (vx_p_brancharrow == valsub) {
+            } else if (valsubtype == vx_data_tree::t_brancharrow) {
+              ischanged = true;
               vx_p_brancharrow = vx_core::vx_any_from_any(vx_data_tree::t_brancharrow, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :brancharrow " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":branchlist") {
-            if (valsubtype == vx_data_tree::t_branchlist) {
+            if (vx_p_branchlist == valsub) {
+            } else if (valsubtype == vx_data_tree::t_branchlist) {
+              ischanged = true;
               vx_p_branchlist = vx_core::vx_any_from_any(vx_data_tree::t_branchlist, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :branchlist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":leaflist") {
-            if (valsubtype == vx_data_tree::t_leaflist) {
+            if (vx_p_leaflist == valsub) {
+            } else if (valsubtype == vx_data_tree::t_leaflist) {
+              ischanged = true;
               vx_p_leaflist = vx_core::vx_any_from_any(vx_data_tree::t_leaflist, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :leaflist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":parentbranch") {
-            if (valsubtype == vx_data_tree::t_branch) {
+            if (vx_p_parentbranch == valsub) {
+            } else if (valsubtype == vx_data_tree::t_branch) {
+              ischanged = true;
               vx_p_parentbranch = vx_core::vx_any_from_any(vx_data_tree::t_branch, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :parentbranch " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":tree") {
-            if (valsubtype == vx_data_tree::t_tree) {
+            if (vx_p_tree == valsub) {
+            } else if (valsubtype == vx_data_tree::t_tree) {
+              ischanged = true;
               vx_p_tree = vx_core::vx_any_from_any(vx_data_tree::t_tree, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new branch :tree " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -213,48 +230,50 @@ namespace vx_data_tree {
           key = "";
         }
       }
-      output = new vx_data_tree::Class_branch();
-      if (output->vx_p_id != vx_p_id) {
-        if (output->vx_p_id) {
-          vx_core::vx_release_one(output->vx_p_id);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_tree::Class_branch();
+        if (output->vx_p_id != vx_p_id) {
+          if (output->vx_p_id) {
+            vx_core::vx_release_one(output->vx_p_id);
+          }
+          output->vx_p_id = vx_p_id;
+          vx_core::vx_reserve(vx_p_id);
         }
-        output->vx_p_id = vx_p_id;
-        vx_core::vx_reserve(vx_p_id);
-      }
-      if (output->vx_p_brancharrow != vx_p_brancharrow) {
-        if (output->vx_p_brancharrow) {
-          vx_core::vx_release_one(output->vx_p_brancharrow);
+        if (output->vx_p_brancharrow != vx_p_brancharrow) {
+          if (output->vx_p_brancharrow) {
+            vx_core::vx_release_one(output->vx_p_brancharrow);
+          }
+          output->vx_p_brancharrow = vx_p_brancharrow;
+          vx_core::vx_reserve(vx_p_brancharrow);
         }
-        output->vx_p_brancharrow = vx_p_brancharrow;
-        vx_core::vx_reserve(vx_p_brancharrow);
-      }
-      if (output->vx_p_branchlist != vx_p_branchlist) {
-        if (output->vx_p_branchlist) {
-          vx_core::vx_release_one(output->vx_p_branchlist);
+        if (output->vx_p_branchlist != vx_p_branchlist) {
+          if (output->vx_p_branchlist) {
+            vx_core::vx_release_one(output->vx_p_branchlist);
+          }
+          output->vx_p_branchlist = vx_p_branchlist;
+          vx_core::vx_reserve(vx_p_branchlist);
         }
-        output->vx_p_branchlist = vx_p_branchlist;
-        vx_core::vx_reserve(vx_p_branchlist);
-      }
-      if (output->vx_p_leaflist != vx_p_leaflist) {
-        if (output->vx_p_leaflist) {
-          vx_core::vx_release_one(output->vx_p_leaflist);
+        if (output->vx_p_leaflist != vx_p_leaflist) {
+          if (output->vx_p_leaflist) {
+            vx_core::vx_release_one(output->vx_p_leaflist);
+          }
+          output->vx_p_leaflist = vx_p_leaflist;
+          vx_core::vx_reserve(vx_p_leaflist);
         }
-        output->vx_p_leaflist = vx_p_leaflist;
-        vx_core::vx_reserve(vx_p_leaflist);
-      }
-      if (output->vx_p_parentbranch != vx_p_parentbranch) {
-        if (output->vx_p_parentbranch) {
-          vx_core::vx_release_one(output->vx_p_parentbranch);
+        if (output->vx_p_parentbranch != vx_p_parentbranch) {
+          if (output->vx_p_parentbranch) {
+            vx_core::vx_release_one(output->vx_p_parentbranch);
+          }
+          output->vx_p_parentbranch = vx_p_parentbranch;
+          vx_core::vx_reserve(vx_p_parentbranch);
         }
-        output->vx_p_parentbranch = vx_p_parentbranch;
-        vx_core::vx_reserve(vx_p_parentbranch);
-      }
-      if (output->vx_p_tree != vx_p_tree) {
-        if (output->vx_p_tree) {
-          vx_core::vx_release_one(output->vx_p_tree);
+        if (output->vx_p_tree != vx_p_tree) {
+          if (output->vx_p_tree) {
+            vx_core::vx_release_one(output->vx_p_tree);
+          }
+          output->vx_p_tree = vx_p_tree;
+          vx_core::vx_reserve(vx_p_tree);
         }
-        output->vx_p_tree = vx_p_tree;
-        vx_core::vx_reserve(vx_p_tree);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -335,6 +354,10 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_brancharrow::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_brancharrow output = vx_data_tree::e_brancharrow;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
@@ -443,7 +466,12 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_branchlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branchlist output = vx_data_tree::e_branchlist;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_tree::Type_branchlist val = vx_core::vx_any_from_any(vx_data_tree::t_branchlist, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_tree::Type_branch> listval = val->vx_listbranch();
       for (vx_core::Type_any valsub : vals) {
@@ -453,10 +481,13 @@ namespace vx_data_tree {
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_tree::t_branch) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_branch, valsub));
         } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_tree::t_branch)) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_branch, valsub));
         } else if (valsubtype == vx_data_tree::t_branchlist) {
+          ischanged = true;
           vx_data_tree::Type_branchlist multi = vx_core::vx_any_from_any(vx_data_tree::t_branchlist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listbranch());
         } else {
@@ -464,7 +495,7 @@ namespace vx_data_tree {
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
-      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
         output = new vx_data_tree::Class_branchlist();
         output->vx_p_list = listval;
         for (vx_core::Type_any valadd : listval) {
@@ -582,7 +613,12 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_leaf::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaf output = vx_data_tree::e_leaf;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_tree::Type_leaf val = vx_core::vx_any_from_any(vx_data_tree::t_leaf, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
@@ -614,21 +650,28 @@ namespace vx_data_tree {
         } else {
           if (false) {
           } else if (key == ":id") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_id == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new leaf :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_name == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new leaf :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":value") {
-            vx_p_value = valsub;
+            if (vx_p_value != valsub) {
+              ischanged = true;
+              vx_p_value = valsub;
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new leaf) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -636,27 +679,29 @@ namespace vx_data_tree {
           key = "";
         }
       }
-      output = new vx_data_tree::Class_leaf();
-      if (output->vx_p_id != vx_p_id) {
-        if (output->vx_p_id) {
-          vx_core::vx_release_one(output->vx_p_id);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_tree::Class_leaf();
+        if (output->vx_p_id != vx_p_id) {
+          if (output->vx_p_id) {
+            vx_core::vx_release_one(output->vx_p_id);
+          }
+          output->vx_p_id = vx_p_id;
+          vx_core::vx_reserve(vx_p_id);
         }
-        output->vx_p_id = vx_p_id;
-        vx_core::vx_reserve(vx_p_id);
-      }
-      if (output->vx_p_name != vx_p_name) {
-        if (output->vx_p_name) {
-          vx_core::vx_release_one(output->vx_p_name);
+        if (output->vx_p_name != vx_p_name) {
+          if (output->vx_p_name) {
+            vx_core::vx_release_one(output->vx_p_name);
+          }
+          output->vx_p_name = vx_p_name;
+          vx_core::vx_reserve(vx_p_name);
         }
-        output->vx_p_name = vx_p_name;
-        vx_core::vx_reserve(vx_p_name);
-      }
-      if (output->vx_p_value != vx_p_value) {
-        if (output->vx_p_value) {
-          vx_core::vx_release_one(output->vx_p_value);
+        if (output->vx_p_value != vx_p_value) {
+          if (output->vx_p_value) {
+            vx_core::vx_release_one(output->vx_p_value);
+          }
+          output->vx_p_value = vx_p_value;
+          vx_core::vx_reserve(vx_p_value);
         }
-        output->vx_p_value = vx_p_value;
-        vx_core::vx_reserve(vx_p_value);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -783,7 +828,12 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_leaflist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaflist output = vx_data_tree::e_leaflist;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_tree::Type_leaflist val = vx_core::vx_any_from_any(vx_data_tree::t_leaflist, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_data_tree::Type_leaf> listval = val->vx_listleaf();
       for (vx_core::Type_any valsub : vals) {
@@ -793,10 +843,13 @@ namespace vx_data_tree {
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_data_tree::t_leaf) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_leaf, valsub));
         } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_tree::t_leaf)) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_data_tree::t_leaf, valsub));
         } else if (valsubtype == vx_data_tree::t_leaflist) {
+          ischanged = true;
           vx_data_tree::Type_leaflist multi = vx_core::vx_any_from_any(vx_data_tree::t_leaflist, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_listleaf());
         } else {
@@ -804,7 +857,7 @@ namespace vx_data_tree {
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
-      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
         output = new vx_data_tree::Class_leaflist();
         output->vx_p_list = listval;
         for (vx_core::Type_any valadd : listval) {
@@ -922,7 +975,12 @@ namespace vx_data_tree {
 
     vx_core::Type_any Class_tree::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_tree output = vx_data_tree::e_tree;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_tree::Type_tree val = vx_core::vx_any_from_any(vx_data_tree::t_tree, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_id = val->id();
       vx_core::Type_string vx_p_name = val->name();
@@ -954,21 +1012,27 @@ namespace vx_data_tree {
         } else {
           if (false) {
           } else if (key == ":id") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_id == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_id = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tree :id " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":name") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_name == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tree :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":branch") {
-            if (valsubtype == vx_data_tree::t_branch) {
+            if (vx_p_branch == valsub) {
+            } else if (valsubtype == vx_data_tree::t_branch) {
+              ischanged = true;
               vx_p_branch = vx_core::vx_any_from_any(vx_data_tree::t_branch, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new tree :branch " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -981,27 +1045,29 @@ namespace vx_data_tree {
           key = "";
         }
       }
-      output = new vx_data_tree::Class_tree();
-      if (output->vx_p_id != vx_p_id) {
-        if (output->vx_p_id) {
-          vx_core::vx_release_one(output->vx_p_id);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_tree::Class_tree();
+        if (output->vx_p_id != vx_p_id) {
+          if (output->vx_p_id) {
+            vx_core::vx_release_one(output->vx_p_id);
+          }
+          output->vx_p_id = vx_p_id;
+          vx_core::vx_reserve(vx_p_id);
         }
-        output->vx_p_id = vx_p_id;
-        vx_core::vx_reserve(vx_p_id);
-      }
-      if (output->vx_p_name != vx_p_name) {
-        if (output->vx_p_name) {
-          vx_core::vx_release_one(output->vx_p_name);
+        if (output->vx_p_name != vx_p_name) {
+          if (output->vx_p_name) {
+            vx_core::vx_release_one(output->vx_p_name);
+          }
+          output->vx_p_name = vx_p_name;
+          vx_core::vx_reserve(vx_p_name);
         }
-        output->vx_p_name = vx_p_name;
-        vx_core::vx_reserve(vx_p_name);
-      }
-      if (output->vx_p_branch != vx_p_branch) {
-        if (output->vx_p_branch) {
-          vx_core::vx_release_one(output->vx_p_branch);
+        if (output->vx_p_branch != vx_p_branch) {
+          if (output->vx_p_branch) {
+            vx_core::vx_release_one(output->vx_p_branch);
+          }
+          output->vx_p_branch = vx_p_branch;
+          vx_core::vx_reserve(vx_p_branch);
         }
-        output->vx_p_branch = vx_p_branch;
-        vx_core::vx_reserve(vx_p_branch);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -1052,11 +1118,6 @@ namespace vx_data_tree {
   // (const brancharrow-down)
   // class Class_brancharrow_down {
 
-    // vx_const_new()
-    void vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::Const_brancharrow_down output) {
-      vx_core::vx_reserve_type(output);
-    }
-
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_down::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -1078,16 +1139,17 @@ namespace vx_data_tree {
       );
     }
 
+    // vx_const_new()
+    void vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::Const_brancharrow_down output) {
+      output->vx_p_constname = "vx/data/tree/brancharrow-down";
+      vx_core::vx_reserve_type(output);
+    }
+
 
   //}
 
   // (const brancharrow-up)
   // class Class_brancharrow_up {
-
-    // vx_const_new()
-    void vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::Const_brancharrow_up output) {
-      vx_core::vx_reserve_type(output);
-    }
 
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_up::vx_constdef() const {
@@ -1110,16 +1172,17 @@ namespace vx_data_tree {
       );
     }
 
+    // vx_const_new()
+    void vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::Const_brancharrow_up output) {
+      output->vx_p_constname = "vx/data/tree/brancharrow-up";
+      vx_core::vx_reserve_type(output);
+    }
+
 
   //}
 
   // (const brancharrow-updown)
   // class Class_brancharrow_updown {
-
-    // vx_const_new()
-    void vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::Const_brancharrow_updown output) {
-      vx_core::vx_reserve_type(output);
-    }
 
     // vx_constdef()
     vx_core::Type_constdef vx_data_tree::Class_brancharrow_updown::vx_constdef() const {
@@ -1140,6 +1203,12 @@ namespace vx_data_tree {
           vx_core::e_argmap // properties
         )
       );
+    }
+
+    // vx_const_new()
+    void vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::Const_brancharrow_updown output) {
+      output->vx_p_constname = "vx/data/tree/brancharrow-updown";
+      vx_core::vx_reserve_type(output);
     }
 
 

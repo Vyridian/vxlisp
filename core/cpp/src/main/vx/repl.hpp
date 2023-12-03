@@ -38,18 +38,14 @@ namespace vx_repl {
   typedef Abstract_any_from_liblist_string* Func_any_from_liblist_string;
   extern Func_any_from_liblist_string e_any_from_liblist_string;
   extern Func_any_from_liblist_string t_any_from_liblist_string;
-  class Abstract_any_from_liblist_string_async;
-  typedef Abstract_any_from_liblist_string_async* Func_any_from_liblist_string_async;
-  extern Func_any_from_liblist_string_async e_any_from_liblist_string_async;
-  extern Func_any_from_liblist_string_async t_any_from_liblist_string_async;
   class Abstract_any_from_repl;
   typedef Abstract_any_from_repl* Func_any_from_repl;
   extern Func_any_from_repl e_any_from_repl;
   extern Func_any_from_repl t_any_from_repl;
-  class Abstract_any_from_repl_async;
-  typedef Abstract_any_from_repl_async* Func_any_from_repl_async;
-  extern Func_any_from_repl_async e_any_from_repl_async;
-  extern Func_any_from_repl_async t_any_from_repl_async;
+  class Abstract_any_from_script;
+  typedef Abstract_any_from_script* Func_any_from_script;
+  extern Func_any_from_script e_any_from_script;
+  extern Func_any_from_script t_any_from_script;
   class Abstract_anylist_from_repllist;
   typedef Abstract_anylist_from_repllist* Func_anylist_from_repllist;
   extern Func_anylist_from_repllist e_anylist_from_repllist;
@@ -66,10 +62,10 @@ namespace vx_repl {
   typedef Abstract_repl_from_textblock* Func_repl_from_textblock;
   extern Func_repl_from_textblock e_repl_from_textblock;
   extern Func_repl_from_textblock t_repl_from_textblock;
-  class Abstract_textblock_repl_from_string;
-  typedef Abstract_textblock_repl_from_string* Func_textblock_repl_from_string;
-  extern Func_textblock_repl_from_string e_textblock_repl_from_string;
-  extern Func_textblock_repl_from_string t_textblock_repl_from_string;// :headerfirst
+  class Abstract_textblock_repl_from_script;
+  typedef Abstract_textblock_repl_from_script* Func_textblock_repl_from_script;
+  extern Func_textblock_repl_from_script e_textblock_repl_from_script;
+  extern Func_textblock_repl_from_script t_textblock_repl_from_script;// :headerfirst
 // :header
 
   // vx_string_from_listarg(type, liststring, context)
@@ -82,14 +78,11 @@ namespace vx_repl {
   // (func any<-liblist-string)
   vx_core::Type_any f_any_from_liblist_string(vx_repl::Type_liblist liblist, vx_core::Type_string text, vx_core::Type_context context);
 
-  // (func any<-liblist-string-async)
-  vx_core::vx_Type_async f_any_from_liblist_string_async(vx_repl::Type_liblist liblist, vx_core::Type_string text, vx_core::Type_context context);
-
   // (func any<-repl)
   vx_core::Type_any f_any_from_repl(vx_repl::Type_repl repl, vx_core::Type_context context);
 
-  // (func any<-repl-async)
-  vx_core::vx_Type_async f_any_from_repl_async(vx_repl::Type_repl repl, vx_core::Type_context context);
+  // (func any<-script)
+  vx_core::Type_any f_any_from_script(vx_core::Type_string script, vx_core::Type_context context);
 
   // (func anylist<-repllist)
   vx_core::Type_anylist f_anylist_from_repllist(vx_repl::Type_repllist repllist, vx_core::Type_context context);
@@ -100,8 +93,8 @@ namespace vx_repl {
   // (func repl<-textblock)
   vx_repl::Type_repl f_repl_from_textblock(vx_data_textblock::Type_textblock textblock);
 
-  // (func textblock-repl<-string)
-  vx_data_textblock::Type_textblock f_textblock_repl_from_string(vx_core::Type_string text);
+  // (func textblock-repl<-script)
+  vx_data_textblock::Type_textblock f_textblock_repl_from_script(vx_core::Type_string script);
 
   // (type liblist)
   class Abstract_liblist : public virtual vx_core::Abstract_list {
@@ -215,21 +208,21 @@ namespace vx_repl {
   };
 
   // (const delimvxlisp)
-  class Class_delimvxlisp : public vx_data_textblock::Class_delim {
+  class Class_delimvxlisp : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_repl::Const_delimvxlisp output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimvxlispbracket)
-  class Class_delimvxlispbracket : public vx_data_textblock::Class_delim {
+  class Class_delimvxlispbracket : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_repl::Const_delimvxlispbracket output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimvxlispparen)
-  class Class_delimvxlispparen : public vx_data_textblock::Class_delim {
+  class Class_delimvxlispparen : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_repl::Const_delimvxlispparen output);
     vx_core::Type_constdef vx_constdef() const;
@@ -279,28 +272,6 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func any<-liblist-string-async)
-  class Abstract_any_from_liblist_string_async : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc_async {
-  public:
-    Abstract_any_from_liblist_string_async() {};
-    virtual ~Abstract_any_from_liblist_string_async() = 0;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_any_from_liblist_string_async : public virtual Abstract_any_from_liblist_string_async {
-  public:
-    Class_any_from_liblist_string_async();
-    virtual ~Class_any_from_liblist_string_async() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
   // (func any<-repl)
   class Abstract_any_from_repl : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
@@ -327,19 +298,19 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func any<-repl-async)
-  class Abstract_any_from_repl_async : public vx_core::Abstract_any_from_any_context_async, public virtual vx_core::Abstract_replfunc_async {
+  // (func any<-script)
+  class Abstract_any_from_script : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_any_from_repl_async() {};
-    virtual ~Abstract_any_from_repl_async() = 0;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override = 0;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_context context) const override = 0;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
+    Abstract_any_from_script() {};
+    virtual ~Abstract_any_from_script() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_any_from_repl_async : public virtual Abstract_any_from_repl_async {
+  class Class_any_from_script : public virtual Abstract_any_from_script {
   public:
-    Class_any_from_repl_async();
-    virtual ~Class_any_from_repl_async() override;
+    Class_any_from_script();
+    virtual ~Class_any_from_script() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -348,9 +319,9 @@ namespace vx_repl {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override;
-    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_context context) const override;
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func anylist<-repllist)
@@ -453,19 +424,19 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func textblock-repl<-string)
-  class Abstract_textblock_repl_from_string : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  // (func textblock-repl<-script)
+  class Abstract_textblock_repl_from_script : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_textblock_repl_from_string() {};
-    virtual ~Abstract_textblock_repl_from_string() = 0;
+    Abstract_textblock_repl_from_script() {};
+    virtual ~Abstract_textblock_repl_from_script() = 0;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_textblock_repl_from_string : public virtual Abstract_textblock_repl_from_string {
+  class Class_textblock_repl_from_script : public virtual Abstract_textblock_repl_from_script {
   public:
-    Class_textblock_repl_from_string();
-    virtual ~Class_textblock_repl_from_string() override;
+    Class_textblock_repl_from_script();
+    virtual ~Class_textblock_repl_from_script() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -496,9 +467,9 @@ namespace vx_repl {
           })
         );
         vx_core::vx_ref_plus(textlist);
-        vx_core::Type_string text = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));
-        vx_core::vx_ref_plus(text);
-        vx_data_textblock::Type_textblock tb = vx_repl::f_textblock_repl_from_string(text);
+        vx_core::Type_string script = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));
+        vx_core::vx_ref_plus(script);
+        vx_data_textblock::Type_textblock tb = vx_repl::f_textblock_repl_from_script(script);
         vx_core::vx_ref_plus(tb);
         vx_repl::Type_repl repl = vx_repl::f_repl_from_textblock(tb);
         vx_core::vx_ref_plus(repl);
@@ -506,7 +477,7 @@ namespace vx_repl {
           generic_any_1,
           vx_repl::f_any_from_repl(repl, context)
         );
-        vx_core::vx_release_one_except({textlist, text, tb, repl}, output_1);
+        vx_core::vx_release_one_except({textlist, script, tb, repl}, output_1);
         return output_1;
       })
     );

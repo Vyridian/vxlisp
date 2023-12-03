@@ -84,11 +84,11 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 2\n (int<-string-find \"abcdefg\" \"cd\"))",
+            ":describename", "(test\n 3\n (int<-string-find\n  \"abcdefg\"\n  \"cd\"))",
             ":testresult",
             vx_test.f_test(
               context,
-              2,
+              3,
               vx_type.f_int_from_string_find("abcdefg", "cd")
             )
           )
@@ -108,21 +108,21 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 2\n (int<-string-findkeyword \"ab\tcdefg\" \":whitespace\"))",
+            ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
             ":testresult",
             vx_test.f_test(
               context,
-              2,
+              3,
               vx_type.f_int_from_string_findkeyword("ab\tcdefg", ":whitespace")
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 4\n (int<-string-findkeyword \" \t\n\rab\" \":nonwhitespace\"))",
+            ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
             ":testresult",
             vx_test.f_test(
               context,
-              4,
+              5,
               vx_type.f_int_from_string_findkeyword(" \t\n\rab", ":nonwhitespace")
             )
           )
@@ -142,7 +142,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true  (is-string \"\"))",
+            ":describename", "(test-true\n (is-string \"\"))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -151,7 +151,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true  (is-string \"a\"))",
+            ":describename", "(test-true\n (is-string \"a\"))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -160,7 +160,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-false (is-string 5))",
+            ":describename", "(test-false\n (is-string 5))",
             ":testresult",
             vx_test.f_test_false(
               context,
@@ -169,7 +169,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-false (is-string (list)))",
+            ":describename", "(test-false\n (is-string (list)))",
             ":testresult",
             vx_test.f_test_false(
               context,
@@ -196,7 +196,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (is-type false boolean))",
+            ":describename", "(test-true\n (is-type false boolean))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -208,7 +208,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (is-type \"a\"   string))",
+            ":describename", "(test-true\n (is-type \"a\" string))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -220,7 +220,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (is-type 5.5   number))",
+            ":describename", "(test-true\n (is-type 5.5 number))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -232,7 +232,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (is-type 4     int))",
+            ":describename", "(test-true\n (is-type 4 int))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -258,7 +258,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true\n (is-type<-any-typelist\n  false (typelist int boolean)))",
+            ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -274,7 +274,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"   (typelist number string)))",
+            ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -290,7 +290,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true\n (is-type<-any-typelist\n  5.5   (typelist string number)))",
+            ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -306,7 +306,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true\n (is-type<-any-typelist\n  4     (typelist string int)))",
+            ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -336,7 +336,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test 4 (length<-string \"abcd\"))",
+            ":describename", "(test\n 4\n (length<-string \"abcd\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -346,7 +346,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test 0 (length<-string \"\"))",
+            ":describename", "(test\n 0\n (length<-string \"\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -370,7 +370,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"4\"           (string<-int 4))",
+            ":describename", "(test\n \"4\"\n (string<-int 4))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -380,7 +380,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"51\"          (string<-int 51))",
+            ":describename", "(test\n \"51\"\n (string<-int 51))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -390,7 +390,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"notanumber\"  (string<-int notanumber))",
+            ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -402,7 +402,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"infinity\"    (string<-int infinity))",
+            ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -414,7 +414,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"neginfinity\" (string<-int neginfinity))",
+            ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -440,7 +440,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"abc\" (string<-string-end \"abcd\" 3))",
+            ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -450,7 +450,7 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"ab\"  (string<-string-end \"abcd\" 2))",
+            ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -474,22 +474,22 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"abcd\" (string<-string-start \"abcd\" 0))",
+            ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
             ":testresult",
             vx_test.f_test(
               context,
               "abcd",
-              vx_type.f_string_from_string_start("abcd", 0)
+              vx_type.f_string_from_string_start("abcd", 1)
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"bcd\"  (string<-string-start \"abcd\" 1))",
+            ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
             ":testresult",
             vx_test.f_test(
               context,
               "bcd",
-              vx_type.f_string_from_string_start("abcd", 1)
+              vx_type.f_string_from_string_start("abcd", 2)
             )
           )
         )
@@ -508,27 +508,27 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"abc\" (string<-string-start-end \"abcd\" 0 3))",
+            ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
             ":testresult",
             vx_test.f_test(
               context,
               "abc",
-              vx_type.f_string_from_string_start_end("abcd", 0, 3)
-            )
-          ),
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test \"bc\"  (string<-string-start-end \"abcd\" 1 3))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              "bc",
               vx_type.f_string_from_string_start_end("abcd", 1, 3)
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"\"    (string<-string-start-end \"abcd\" 5 6))",
+            ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "bc",
+              vx_type.f_string_from_string_start_end("abcd", 2, 3)
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -538,12 +538,12 @@ export default class vx_type_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"bcd\" (string<-string-start-end \"abcd\" 1 5))",
+            ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
             ":testresult",
             vx_test.f_test(
               context,
               "bcd",
-              vx_type.f_string_from_string_start_end("abcd", 1, 5)
+              vx_type.f_string_from_string_start_end("abcd", 2, 5)
             )
           )
         )
@@ -562,7 +562,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))",
+            ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -594,7 +594,7 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split \"a$b$c\" \"$\"))",
+            ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
             ":testresult",
             vx_test.f_test(
               context,

@@ -10,12 +10,12 @@ namespace vx_type_test {
     vx_core::vx_log("Test Start: f_int_from_string_find");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
-      vx_core::vx_new_int(2),
+      vx_core::vx_new_int(3),
       vx_type::f_int_from_string_find(vx_core::vx_new_string("abcdefg"), vx_core::vx_new_string("cd")),
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 2\n (int<-string-find \"abcdefg\" \"cd\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 3\n (int<-string-find\n  \"abcdefg\"\n  \"cd\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -40,23 +40,23 @@ namespace vx_type_test {
     vx_core::vx_log("Test Start: f_int_from_string_findkeyword");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
-      vx_core::vx_new_int(2),
+      vx_core::vx_new_int(3),
       vx_type::f_int_from_string_findkeyword(vx_core::vx_new_string("ab\tcdefg"), vx_core::vx_new_string(":whitespace")),
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 2\n (int<-string-findkeyword \"ab\tcdefg\" \":whitespace\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
-      vx_core::vx_new_int(4),
+      vx_core::vx_new_int(5),
       vx_type::f_int_from_string_findkeyword(vx_core::vx_new_string(" \t\n\rab"), vx_core::vx_new_string(":nonwhitespace")),
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 4\n (int<-string-findkeyword \" \t\n\rab\" \":nonwhitespace\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -86,7 +86,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true  (is-string \"\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-string \"\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -96,7 +96,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true  (is-string \"a\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-string \"a\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -106,7 +106,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false (is-string 5))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false\n (is-string 5))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -120,7 +120,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false (is-string (list)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-false\n (is-string (list)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -155,7 +155,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-type false boolean))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type false boolean))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -168,7 +168,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-type \"a\"   string))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type \"a\" string))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -181,7 +181,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-type 5.5   number))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type 5.5 number))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -194,7 +194,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-type 4     int))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type 4 int))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -235,7 +235,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  false (typelist int boolean)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -254,7 +254,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  \"a\"   (typelist number string)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -273,7 +273,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  5.5   (typelist string number)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -292,7 +292,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  4     (typelist string int)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -325,7 +325,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4 (length<-string \"abcd\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 4\n (length<-string \"abcd\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -336,7 +336,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 0 (length<-string \"\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 0\n (length<-string \"\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -367,7 +367,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"4\"           (string<-int 4))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"4\"\n (string<-int 4))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -378,7 +378,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"51\"          (string<-int 51))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"51\"\n (string<-int 51))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -391,7 +391,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"notanumber\"  (string<-int notanumber))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"notanumber\"\n (string<-int notanumber))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -404,7 +404,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"infinity\"    (string<-int infinity))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"infinity\"\n (string<-int infinity))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -417,7 +417,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_5 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"neginfinity\" (string<-int neginfinity))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"neginfinity\"\n (string<-int neginfinity))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_5
     });
@@ -451,7 +451,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"abc\" (string<-string-end \"abcd\" 3))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -462,7 +462,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"ab\"  (string<-string-end \"abcd\" 2))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -489,22 +489,22 @@ namespace vx_type_test {
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
       vx_core::vx_new_string("abcd"),
-      vx_type::f_string_from_string_start(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(0)),
+      vx_type::f_string_from_string_start(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(1)),
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"abcd\" (string<-string-start \"abcd\" 0))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
       vx_core::vx_new_string("bcd"),
-      vx_type::f_string_from_string_start(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(1)),
+      vx_type::f_string_from_string_start(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(2)),
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"bcd\"  (string<-string-start \"abcd\" 1))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -531,22 +531,22 @@ namespace vx_type_test {
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
       vx_core::vx_new_string("abc"),
-      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(0), vx_core::vx_new_int(3)),
+      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(1), vx_core::vx_new_int(3)),
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"abc\" (string<-string-start-end \"abcd\" 0 3))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
       vx_core::vx_new_string("bc"),
-      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(1), vx_core::vx_new_int(3)),
+      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(2), vx_core::vx_new_int(3)),
       context
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"bc\"  (string<-string-start-end \"abcd\" 1 3))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -557,18 +557,18 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"\"    (string<-string-start-end \"abcd\" 5 6))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
     // testdescribe_4
     vx_test::Type_testresult testresult_4 = vx_test::f_test(
       vx_core::vx_new_string("bcd"),
-      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(1), vx_core::vx_new_int(5)),
+      vx_type::f_string_from_string_start_end(vx_core::vx_new_string("abcd"), vx_core::vx_new_int(2), vx_core::vx_new_int(5)),
       context
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"bcd\" (string<-string-start-end \"abcd\" 1 5))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -611,7 +611,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"a$b$c\"\n (string<-stringlist-join (stringlist \"a\" \"b\" \"c\") \"$\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -648,7 +648,7 @@ namespace vx_type_test {
       context
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split \"a$b$c\" \"$\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/type"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

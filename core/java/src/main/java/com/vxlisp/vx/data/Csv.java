@@ -67,11 +67,15 @@ public final class Csv {
 
     @Override
     public Type_csv vx_copy(final Object... vals) {
-      Class_csv output = new Class_csv();
+      Type_csv output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_csv val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_headers = val.headers();
-      output.vx_p_rows = val.rows();
+      Core.Type_stringlist vx_p_headers = val.headers();
+      Csv.Type_csvrows vx_p_rows = val.rows();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":headers");
       validkeys.add(":rows");
@@ -99,16 +103,20 @@ public final class Csv {
         } else {
           switch (key) {
           case ":headers":
-            if (valsub instanceof Core.Type_stringlist) {
-              output.vx_p_headers = (Core.Type_stringlist)valsub;
+            if (valsub == vx_p_headers) {
+            } else if (valsub instanceof Core.Type_stringlist) {
+              ischanged = true;
+              vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":rows":
-            if (valsub instanceof Csv.Type_csvrows) {
-              output.vx_p_rows = (Csv.Type_csvrows)valsub;
+            if (valsub == vx_p_rows) {
+            } else if (valsub instanceof Csv.Type_csvrows) {
+              ischanged = true;
+              vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -121,8 +129,14 @@ public final class Csv {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_csv work = new Class_csv();
+        work.vx_p_headers = vx_p_headers;
+        work.vx_p_rows = vx_p_rows;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -199,7 +213,11 @@ public final class Csv {
 
     @Override
     public Type_csvrows vx_copy(final Object... vals) {
-      Class_csvrows output = new Class_csvrows();
+      Type_csvrows output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_csvrows val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
@@ -209,17 +227,21 @@ public final class Csv {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
+          ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
+          ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
         } else if (valsub instanceof Type_csvrows) {
           Type_csvrows multi = (Type_csvrows)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Core.Type_stringlist) {
               Core.Type_stringlist valitem = (Core.Type_stringlist)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -228,9 +250,13 @@ public final class Csv {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_csvrows work = new Class_csvrows();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -267,9 +293,10 @@ public final class Csv {
    * Csv File Delimiters
    * {delim}
    */
-  public static class Const_delimcsv extends Textblock.Class_delim {
+  public static class Const_delimcsv extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/data/csv", // pkgname
         "delimcsv", // name
@@ -309,8 +336,7 @@ public final class Csv {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 
@@ -409,8 +435,8 @@ public final class Csv {
       Csv.t_csv,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Csv.Type_csvrows allrows = Csv.f_csvrows_from_textblock(textblock);
-        final Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.vx_new_int(0));
-        final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(1));
+        final Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.vx_new_int(1));
+        final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(2));
         return Core.f_new(
           Csv.t_csv,
           Core.t_anylist.vx_new(

@@ -14,14 +14,14 @@ export default class vx_event {
    * Click Event
    * {event}
    */
-  static c_event_click = {vx_type: vx_event.t_event}
+  static c_event_click = {vx_type: vx_event.t_event, vx_constdef: {pkgname: 'vx/event', name: 'event-click'}}
 
   /**
    * Constant: event-move
    * Move Event
    * {event}
    */
-  static c_event_move = {vx_type: vx_event.t_event}
+  static c_event_move = {vx_type: vx_event.t_event, vx_constdef: {pkgname: 'vx/event', name: 'event-move'}}
 
   /**
    * @function any_from_from_to

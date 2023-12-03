@@ -593,6 +593,36 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_minus1(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "-1",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test  1 (-1  2))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(1),
+              Core.f_minus1(Core.vx_new_int(2))
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test -3 (-1 -2))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(-3),
+              Core.f_minus1(Core.vx_new_int(-2))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_divide(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -651,7 +681,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (< 2 3))",
+          ":describename", "(test-true\n (< 2 3))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -659,7 +689,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (< \"b\" \"d\" \"z\"))",
+          ":describename", "(test-true\n (< \"b\" \"d\" \"z\"))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -824,7 +854,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (= (stringlist \"a\" \"b\" \"c\") (new stringlist \"a\" \"b\" \"c\")))",
+          ":describename", "(test-true\n (=\n  (stringlist \"a\" \"b\" \"c\")\n  (new stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -849,7 +879,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (= (stringmap :a \"1\" :b \"2\") (new stringmap :a \"1\" :b \"2\")))",
+          ":describename", "(test-true\n (=\n  (stringmap :a \"1\" :b \"2\")\n  (new stringmap :a \"1\" :b \"2\")))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -1034,7 +1064,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (and true true))",
+          ":describename", "(test-true\n (and true true))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -1045,7 +1075,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-false (and true false))",
+          ":describename", "(test-false\n (and true false))",
           ":testresult",
             Test.f_test_false(
               context,
@@ -1068,7 +1098,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true (and true true true))",
+          ":describename", "(test-true\n (and true true true))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -1082,7 +1112,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-false (and true true false))",
+          ":describename", "(test-false\n (and true true false))",
           ":testresult",
             Test.f_test_false(
               context,
@@ -1108,7 +1138,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"b\"\n (any<-list (list \"a\" \"b\" \"c\") 1))",
+          ":describename", "(test\n \"b\"\n (any<-list\n  (list \"a\" \"b\" \"c\")\n  2))",
           ":testresult",
             Test.f_test(
               context,
@@ -1123,12 +1153,12 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 ),
-                Core.vx_new_int(1)
+                Core.vx_new_int(2)
               )
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
+          ":describename", "(test\n \"b\"\n (:2 (stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
               context,
@@ -1143,7 +1173,7 @@ public final class CoreTest {
                     Core.vx_new_string("c")
                   )
                 ),
-                Core.vx_new_int(1)
+                Core.vx_new_int(2)
               )
             )
         )
@@ -1291,7 +1321,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true  (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
+          ":describename", "(test-true\n (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -1309,7 +1339,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-true  (contains (intlist 1 2 3) 2))",
+          ":describename", "(test-true\n (contains (intlist 1 2 3) 2))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -1327,7 +1357,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test-false (contains (list 1 \"2\" 3) 2))",
+          ":describename", "(test-false\n (contains (list 1 \"2\" 3) 2))",
           ":testresult",
             Test.f_test_false(
               context,
@@ -1406,7 +1436,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"b\" (first<-list (stringlist \"b\" \"c\")))",
+          ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
               context,
@@ -1436,7 +1466,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"b\" (first<-list-fn-any<-any (list nothing \"b\" \"c\") resolve))",
+          ":describename", "(test\n \"b\"\n (first<-list-fn-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
           ":testresult",
             Test.f_test(
               context,
@@ -1468,7 +1498,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"a\" (if (= 2 2) \"a\"))",
+          ":describename", "(test\n \"a\"\n (if (= 2 2) \"a\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -1481,7 +1511,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"\"  (if : string (= 1 2) \"a\"))",
+          ":describename", "(test\n \"\"\n (if : string\n  (= 1 2)\n  \"a\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -1506,7 +1536,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"a\" (if (= 2 2) \"a\" \"b\"))",
+          ":describename", "(test\n \"a\"\n (if\n  (= 2 2)\n  \"a\"\n  \"b\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -1520,7 +1550,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"b\"  (if (= 1 2) \"a\" \"b\"))",
+          ":describename", "(test\n \"b\"\n (if\n  (= 1 2)\n  \"a\"\n  \"b\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -2449,6 +2479,7 @@ public final class CoreTest {
       CoreTest.f_plus1(context),
       CoreTest.f_minus(context),
       CoreTest.f_minus_1(context),
+      CoreTest.f_minus1(context),
       CoreTest.f_divide(context),
       CoreTest.f_lt(context),
       CoreTest.f_lt_1(context),
@@ -2505,11 +2536,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 198, ":total", 233), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 44, ":tests", 58, ":total", 129), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 153), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 153), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 64, ":total", 209), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 85, ":tests", 199, ":total", 234), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 45, ":tests", 59, ":total", 130), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 154), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 154), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 65, ":total", 210), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 4, ":total", 66)
     );
   }
@@ -2620,6 +2651,7 @@ public final class CoreTest {
         ":-_1", 2,
         ":-_2", 0,
         ":-_3", 0,
+        ":-1", 2,
         ":.", 0,
         ":/", 2,
         ":<", 1,

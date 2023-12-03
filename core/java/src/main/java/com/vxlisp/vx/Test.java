@@ -94,13 +94,17 @@ public final class Test {
 
     @Override
     public Type_testcase vx_copy(final Object... vals) {
-      Class_testcase output = new Class_testcase();
+      Type_testcase output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testcase val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_passfail = val.passfail();
-      output.vx_p_testpkg = val.testpkg();
-      output.vx_p_casename = val.casename();
-      output.vx_p_describelist = val.describelist();
+      Core.Type_boolean vx_p_passfail = val.passfail();
+      Core.Type_string vx_p_testpkg = val.testpkg();
+      Core.Type_string vx_p_casename = val.casename();
+      Test.Type_testdescribelist vx_p_describelist = val.describelist();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":passfail");
       validkeys.add(":testpkg");
@@ -130,38 +134,49 @@ public final class Test {
         } else {
           switch (key) {
           case ":passfail":
-            if (valsub instanceof Core.Type_boolean) {
-              output.vx_p_passfail = (Core.Type_boolean)valsub;
+            if (valsub == vx_p_passfail) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
-              output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              ischanged = true;
+              vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcase :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcase :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":casename":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_casename = (Core.Type_string)valsub;
+            if (valsub == vx_p_casename) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_casename = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_casename = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_casename = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcase :casename " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":describelist":
-            if (valsub instanceof Test.Type_testdescribelist) {
-              output.vx_p_describelist = (Test.Type_testdescribelist)valsub;
+            if (valsub == vx_p_describelist) {
+            } else if (valsub instanceof Test.Type_testdescribelist) {
+              ischanged = true;
+              vx_p_describelist = (Test.Type_testdescribelist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcase :describelist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -174,8 +189,16 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testcase work = new Class_testcase();
+        work.vx_p_passfail = vx_p_passfail;
+        work.vx_p_testpkg = vx_p_testpkg;
+        work.vx_p_casename = vx_p_casename;
+        work.vx_p_describelist = vx_p_describelist;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -253,7 +276,11 @@ public final class Test {
 
     @Override
     public Type_testcaselist vx_copy(final Object... vals) {
-      Class_testcaselist output = new Class_testcaselist();
+      Type_testcaselist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testcaselist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testcase> listval = new ArrayList<>(val.vx_listtestcase());
@@ -263,17 +290,21 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testcase) {
+          ischanged = true;
           listval.add((Test.Type_testcase)valsub);
         } else if (valsub instanceof Test.Type_testcase) {
+          ischanged = true;
           listval.add((Test.Type_testcase)valsub);
         } else if (valsub instanceof Type_testcaselist) {
           Type_testcaselist multi = (Type_testcaselist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtestcase());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testcase) {
               Test.Type_testcase valitem = (Test.Type_testcase)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -282,9 +313,13 @@ public final class Test {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testcaselist work = new Class_testcaselist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -398,13 +433,17 @@ public final class Test {
 
     @Override
     public Type_testcoveragedetail vx_copy(final Object... vals) {
-      Class_testcoveragedetail output = new Class_testcoveragedetail();
+      Type_testcoveragedetail output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testcoveragedetail val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_constmap = val.constmap();
-      output.vx_p_funcmap = val.funcmap();
-      output.vx_p_testpkg = val.testpkg();
-      output.vx_p_typemap = val.typemap();
+      Core.Type_intmap vx_p_constmap = val.constmap();
+      Core.Type_intmap vx_p_funcmap = val.funcmap();
+      Core.Type_string vx_p_testpkg = val.testpkg();
+      Core.Type_intmap vx_p_typemap = val.typemap();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":constmap");
       validkeys.add(":funcmap");
@@ -434,34 +473,43 @@ public final class Test {
         } else {
           switch (key) {
           case ":constmap":
-            if (valsub instanceof Core.Type_intmap) {
-              output.vx_p_constmap = (Core.Type_intmap)valsub;
+            if (valsub == vx_p_constmap) {
+            } else if (valsub instanceof Core.Type_intmap) {
+              ischanged = true;
+              vx_p_constmap = (Core.Type_intmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :constmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":funcmap":
-            if (valsub instanceof Core.Type_intmap) {
-              output.vx_p_funcmap = (Core.Type_intmap)valsub;
+            if (valsub == vx_p_funcmap) {
+            } else if (valsub instanceof Core.Type_intmap) {
+              ischanged = true;
+              vx_p_funcmap = (Core.Type_intmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :funcmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":typemap":
-            if (valsub instanceof Core.Type_intmap) {
-              output.vx_p_typemap = (Core.Type_intmap)valsub;
+            if (valsub == vx_p_typemap) {
+            } else if (valsub instanceof Core.Type_intmap) {
+              ischanged = true;
+              vx_p_typemap = (Core.Type_intmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragedetail :typemap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -474,8 +522,16 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testcoveragedetail work = new Class_testcoveragedetail();
+        work.vx_p_constmap = vx_p_constmap;
+        work.vx_p_funcmap = vx_p_funcmap;
+        work.vx_p_testpkg = vx_p_testpkg;
+        work.vx_p_typemap = vx_p_typemap;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -589,13 +645,17 @@ public final class Test {
 
     @Override
     public Type_testcoveragenums vx_copy(final Object... vals) {
-      Class_testcoveragenums output = new Class_testcoveragenums();
+      Type_testcoveragenums output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testcoveragenums val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_pct = val.pct();
-      output.vx_p_testpkg = val.testpkg();
-      output.vx_p_tests = val.tests();
-      output.vx_p_total = val.total();
+      Core.Type_int vx_p_pct = val.pct();
+      Core.Type_string vx_p_testpkg = val.testpkg();
+      Core.Type_int vx_p_tests = val.tests();
+      Core.Type_int vx_p_total = val.total();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":pct");
       validkeys.add(":testpkg");
@@ -625,40 +685,52 @@ public final class Test {
         } else {
           switch (key) {
           case ":pct":
-            if (valsub instanceof Core.Type_int) {
-              output.vx_p_pct = (Core.Type_int)valsub;
+            if (valsub == vx_p_pct) {
+            } else if (valsub instanceof Core.Type_int) {
+              ischanged = true;
+              vx_p_pct = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
-              output.vx_p_pct = Core.t_int.vx_new(valsub);
+              ischanged = true;
+              vx_p_pct = Core.t_int.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :pct " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":tests":
-            if (valsub instanceof Core.Type_int) {
-              output.vx_p_tests = (Core.Type_int)valsub;
+            if (valsub == vx_p_tests) {
+            } else if (valsub instanceof Core.Type_int) {
+              ischanged = true;
+              vx_p_tests = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
-              output.vx_p_tests = Core.t_int.vx_new(valsub);
+              ischanged = true;
+              vx_p_tests = Core.t_int.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :tests " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":total":
-            if (valsub instanceof Core.Type_int) {
-              output.vx_p_total = (Core.Type_int)valsub;
+            if (valsub == vx_p_total) {
+            } else if (valsub instanceof Core.Type_int) {
+              ischanged = true;
+              vx_p_total = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
-              output.vx_p_total = Core.t_int.vx_new(valsub);
+              ischanged = true;
+              vx_p_total = Core.t_int.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragenums :total " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -671,8 +743,16 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testcoveragenums work = new Class_testcoveragenums();
+        work.vx_p_pct = vx_p_pct;
+        work.vx_p_testpkg = vx_p_testpkg;
+        work.vx_p_tests = vx_p_tests;
+        work.vx_p_total = vx_p_total;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -834,17 +914,21 @@ public final class Test {
 
     @Override
     public Type_testcoveragesummary vx_copy(final Object... vals) {
-      Class_testcoveragesummary output = new Class_testcoveragesummary();
+      Type_testcoveragesummary output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testcoveragesummary val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_bigospacenums = val.bigospacenums();
-      output.vx_p_bigotimenums = val.bigotimenums();
-      output.vx_p_constnums = val.constnums();
-      output.vx_p_docnums = val.docnums();
-      output.vx_p_funcnums = val.funcnums();
-      output.vx_p_testpkg = val.testpkg();
-      output.vx_p_totalnums = val.totalnums();
-      output.vx_p_typenums = val.typenums();
+      Test.Type_testcoveragenums vx_p_bigospacenums = val.bigospacenums();
+      Test.Type_testcoveragenums vx_p_bigotimenums = val.bigotimenums();
+      Test.Type_testcoveragenums vx_p_constnums = val.constnums();
+      Test.Type_testcoveragenums vx_p_docnums = val.docnums();
+      Test.Type_testcoveragenums vx_p_funcnums = val.funcnums();
+      Core.Type_string vx_p_testpkg = val.testpkg();
+      Test.Type_testcoveragenums vx_p_totalnums = val.totalnums();
+      Test.Type_testcoveragenums vx_p_typenums = val.typenums();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":bigospacenums");
       validkeys.add(":bigotimenums");
@@ -878,66 +962,83 @@ public final class Test {
         } else {
           switch (key) {
           case ":bigospacenums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_bigospacenums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :bigospacenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":bigotimenums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_bigotimenums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :bigotimenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":constnums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_constnums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_constnums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_constnums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :constnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":docnums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_docnums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_docnums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_docnums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :docnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":funcnums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_funcnums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :funcnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":totalnums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_totalnums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :totalnums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":typenums":
-            if (valsub instanceof Test.Type_testcoveragenums) {
-              output.vx_p_typenums = (Test.Type_testcoveragenums)valsub;
+            if (valsub == vx_p_typenums) {
+            } else if (valsub instanceof Test.Type_testcoveragenums) {
+              ischanged = true;
+              vx_p_typenums = (Test.Type_testcoveragenums)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testcoveragesummary :typenums " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -950,8 +1051,20 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testcoveragesummary work = new Class_testcoveragesummary();
+        work.vx_p_bigospacenums = vx_p_bigospacenums;
+        work.vx_p_bigotimenums = vx_p_bigotimenums;
+        work.vx_p_constnums = vx_p_constnums;
+        work.vx_p_docnums = vx_p_docnums;
+        work.vx_p_funcnums = vx_p_funcnums;
+        work.vx_p_testpkg = vx_p_testpkg;
+        work.vx_p_totalnums = vx_p_totalnums;
+        work.vx_p_typenums = vx_p_typenums;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1053,12 +1166,16 @@ public final class Test {
 
     @Override
     public Type_testdescribe vx_copy(final Object... vals) {
-      Class_testdescribe output = new Class_testdescribe();
+      Type_testdescribe output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testdescribe val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_describename = val.describename();
-      output.vx_p_testpkg = val.testpkg();
-      output.vx_p_testresult = val.testresult();
+      Core.Type_string vx_p_describename = val.describename();
+      Core.Type_string vx_p_testpkg = val.testpkg();
+      Test.Type_testresult vx_p_testresult = val.testresult();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":describename");
       validkeys.add(":testpkg");
@@ -1087,28 +1204,36 @@ public final class Test {
         } else {
           switch (key) {
           case ":describename":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_describename = (Core.Type_string)valsub;
+            if (valsub == vx_p_describename) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_describename = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_describename = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_describename = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :describename " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testresult":
-            if (valsub instanceof Test.Type_testresult) {
-              output.vx_p_testresult = (Test.Type_testresult)valsub;
+            if (valsub == vx_p_testresult) {
+            } else if (valsub instanceof Test.Type_testresult) {
+              ischanged = true;
+              vx_p_testresult = (Test.Type_testresult)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testdescribe :testresult " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1121,8 +1246,15 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testdescribe work = new Class_testdescribe();
+        work.vx_p_describename = vx_p_describename;
+        work.vx_p_testpkg = vx_p_testpkg;
+        work.vx_p_testresult = vx_p_testresult;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1200,7 +1332,11 @@ public final class Test {
 
     @Override
     public Type_testdescribelist vx_copy(final Object... vals) {
-      Class_testdescribelist output = new Class_testdescribelist();
+      Type_testdescribelist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testdescribelist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testdescribe> listval = new ArrayList<>(val.vx_listtestdescribe());
@@ -1210,17 +1346,21 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
+          ischanged = true;
           listval.add((Test.Type_testdescribe)valsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
+          ischanged = true;
           listval.add((Test.Type_testdescribe)valsub);
         } else if (valsub instanceof Type_testdescribelist) {
           Type_testdescribelist multi = (Type_testdescribelist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtestdescribe());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testdescribe) {
               Test.Type_testdescribe valitem = (Test.Type_testdescribe)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1229,9 +1369,13 @@ public final class Test {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testdescribelist work = new Class_testdescribelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1357,14 +1501,18 @@ public final class Test {
 
     @Override
     public Type_testpackage vx_copy(final Object... vals) {
-      Class_testpackage output = new Class_testpackage();
+      Type_testpackage output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testpackage val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_caselist = val.caselist();
-      output.vx_p_coveragedetail = val.coveragedetail();
-      output.vx_p_coveragesummary = val.coveragesummary();
-      output.vx_p_passfail = val.passfail();
-      output.vx_p_testpkg = val.testpkg();
+      Test.Type_testcaselist vx_p_caselist = val.caselist();
+      Test.Type_testcoveragedetail vx_p_coveragedetail = val.coveragedetail();
+      Test.Type_testcoveragesummary vx_p_coveragesummary = val.coveragesummary();
+      Core.Type_boolean vx_p_passfail = val.passfail();
+      Core.Type_string vx_p_testpkg = val.testpkg();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":caselist");
       validkeys.add(":coveragedetail");
@@ -1395,44 +1543,56 @@ public final class Test {
         } else {
           switch (key) {
           case ":caselist":
-            if (valsub instanceof Test.Type_testcaselist) {
-              output.vx_p_caselist = (Test.Type_testcaselist)valsub;
+            if (valsub == vx_p_caselist) {
+            } else if (valsub instanceof Test.Type_testcaselist) {
+              ischanged = true;
+              vx_p_caselist = (Test.Type_testcaselist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testpackage :caselist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":coveragedetail":
-            if (valsub instanceof Test.Type_testcoveragedetail) {
-              output.vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
+            if (valsub == vx_p_coveragedetail) {
+            } else if (valsub instanceof Test.Type_testcoveragedetail) {
+              ischanged = true;
+              vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testpackage :coveragedetail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":coveragesummary":
-            if (valsub instanceof Test.Type_testcoveragesummary) {
-              output.vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
+            if (valsub == vx_p_coveragesummary) {
+            } else if (valsub instanceof Test.Type_testcoveragesummary) {
+              ischanged = true;
+              vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testpackage :coveragesummary " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":passfail":
-            if (valsub instanceof Core.Type_boolean) {
-              output.vx_p_passfail = (Core.Type_boolean)valsub;
+            if (valsub == vx_p_passfail) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
-              output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              ischanged = true;
+              vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testpackage :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":testpkg":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_testpkg = (Core.Type_string)valsub;
+            if (valsub == vx_p_testpkg) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_testpkg = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testpackage :testpkg " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1445,8 +1605,17 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testpackage work = new Class_testpackage();
+        work.vx_p_caselist = vx_p_caselist;
+        work.vx_p_coveragedetail = vx_p_coveragedetail;
+        work.vx_p_coveragesummary = vx_p_coveragesummary;
+        work.vx_p_passfail = vx_p_passfail;
+        work.vx_p_testpkg = vx_p_testpkg;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1524,7 +1693,11 @@ public final class Test {
 
     @Override
     public Type_testpackagelist vx_copy(final Object... vals) {
-      Class_testpackagelist output = new Class_testpackagelist();
+      Type_testpackagelist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testpackagelist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testpackage> listval = new ArrayList<>(val.vx_listtestpackage());
@@ -1534,17 +1707,21 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testpackage) {
+          ischanged = true;
           listval.add((Test.Type_testpackage)valsub);
         } else if (valsub instanceof Test.Type_testpackage) {
+          ischanged = true;
           listval.add((Test.Type_testpackage)valsub);
         } else if (valsub instanceof Type_testpackagelist) {
           Type_testpackagelist multi = (Type_testpackagelist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtestpackage());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testpackage) {
               Test.Type_testpackage valitem = (Test.Type_testpackage)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1553,9 +1730,13 @@ public final class Test {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testpackagelist work = new Class_testpackagelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1681,14 +1862,18 @@ public final class Test {
 
     @Override
     public Type_testresult vx_copy(final Object... vals) {
-      Class_testresult output = new Class_testresult();
+      Type_testresult output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testresult val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_code = val.code();
-      output.vx_p_passfail = val.passfail();
-      output.vx_p_expected = val.expected();
-      output.vx_p_actual = val.actual();
-      output.vx_p_fn_actual = val.fn_actual();
+      Core.Type_string vx_p_code = val.code();
+      Core.Type_boolean vx_p_passfail = val.passfail();
+      Core.Type_any vx_p_expected = val.expected();
+      Core.Type_any vx_p_actual = val.actual();
+      Core.Func_any_from_func_async vx_p_fn_actual = val.fn_actual();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":code");
       validkeys.add(":passfail");
@@ -1719,44 +1904,56 @@ public final class Test {
         } else {
           switch (key) {
           case ":code":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_code = (Core.Type_string)valsub;
+            if (valsub == vx_p_code) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_code = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_code = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_code = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testresult :code " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":passfail":
-            if (valsub instanceof Core.Type_boolean) {
-              output.vx_p_passfail = (Core.Type_boolean)valsub;
+            if (valsub == vx_p_passfail) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
-              output.vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              ischanged = true;
+              vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testresult :passfail " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":expected":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_expected = (Core.Type_any)valsub;
+            if (valsub == vx_p_expected) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_expected = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testresult :expected " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":actual":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_actual = (Core.Type_any)valsub;
+            if (valsub == vx_p_actual) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_actual = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testresult :actual " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fn-actual":
-            if (valsub instanceof Core.Func_any_from_func_async) {
-              output.vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
+            if (valsub == vx_p_fn_actual) {
+            } else if (valsub instanceof Core.Func_any_from_func_async) {
+              ischanged = true;
+              vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new testresult :fn-actual " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1769,8 +1966,17 @@ public final class Test {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testresult work = new Class_testresult();
+        work.vx_p_code = vx_p_code;
+        work.vx_p_passfail = vx_p_passfail;
+        work.vx_p_expected = vx_p_expected;
+        work.vx_p_actual = vx_p_actual;
+        work.vx_p_fn_actual = vx_p_fn_actual;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1848,7 +2054,11 @@ public final class Test {
 
     @Override
     public Type_testresultlist vx_copy(final Object... vals) {
-      Class_testresultlist output = new Class_testresultlist();
+      Type_testresultlist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_testresultlist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testresult> listval = new ArrayList<>(val.vx_listtestresult());
@@ -1858,17 +2068,21 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testresult) {
+          ischanged = true;
           listval.add((Test.Type_testresult)valsub);
         } else if (valsub instanceof Test.Type_testresult) {
+          ischanged = true;
           listval.add((Test.Type_testresult)valsub);
         } else if (valsub instanceof Type_testresultlist) {
           Type_testresultlist multi = (Type_testresultlist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listtestresult());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testresult) {
               Test.Type_testresult valitem = (Test.Type_testresult)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1877,9 +2091,13 @@ public final class Test {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_testresultlist work = new Class_testresultlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1916,9 +2134,10 @@ public final class Test {
    * The default Test Stylesheet
    * {stylesheet}
    */
-  public static class Const_stylesheet_test extends Html.Class_stylesheet {
+  public static class Const_stylesheet_test extends Html.Class_stylesheet implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/test", // pkgname
         "stylesheet-test", // name

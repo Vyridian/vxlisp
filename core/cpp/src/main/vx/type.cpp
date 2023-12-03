@@ -12,12 +12,12 @@ namespace vx_type {
     if (text != "") {
       if (find == ":nonwhitespace") {
         std::string wschars1 = " \n\r\t";
-				int ilen = text.length();
+        int ilen = text.length();
         for (int i = 0; i < ilen; i++) {
-					char cchar = text[i];
+          char cchar = text[i];
           int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
-					if (pos < 0) {
-						output = i;
+          if (pos < 0) {
+            output = i;
             break;
           }
         }
@@ -31,13 +31,14 @@ namespace vx_type {
           } else if (pos < output) {
            output = pos;
           }
-				}
+        }
       } else {
-			  output = text.find(find);
-			}
-		}
-		return output;
-	}
+        output = text.find(find);
+      }
+    }
+    output += 1;
+    return output;
+  }
 
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
@@ -358,7 +359,7 @@ namespace vx_type {
     vx_core::vx_reserve({text, find});
     std::string stext = text->vx_string();
     std::string sfind = find->vx_string();
-    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind));
+    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind)) + 1;
     output = vx_core::vx_new_int(ipos);
     vx_core::vx_release_one_except({text, find}, output);
     return output;
@@ -1409,7 +1410,7 @@ namespace vx_type {
   vx_core::Type_string f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos) {
     vx_core::Type_string output = vx_core::e_string;
     vx_core::vx_reserve({text, endpos});
-    output = vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(0), endpos);
+    output = vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(1), endpos);
     vx_core::vx_release_one_except({text, endpos}, output);
     return output;
   }

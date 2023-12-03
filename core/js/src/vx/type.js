@@ -36,6 +36,7 @@ export default class vx_type {
         break
       }
     }
+    output += 1
     return output
   }
 
@@ -112,7 +113,7 @@ export default class vx_type {
   // (func int<-string-find)
   static f_int_from_string_find(text, find) {
     let output = vx_core.e_int
-    output = text.indexOf(find)
+    output = text.indexOf(find) + 1
     return output
   }
 
@@ -344,7 +345,7 @@ export default class vx_type {
   // (func string<-string-end)
   static f_string_from_string_end(text, endpos) {
     let output = vx_core.e_string
-    output = vx_type.f_string_from_string_start_end(text, 0, endpos)
+    output = vx_type.f_string_from_string_start_end(text, 1, endpos)
     return output
   }
 
@@ -383,7 +384,7 @@ export default class vx_type {
   // (func string<-string-start-end)
   static f_string_from_string_start_end(text, start, end) {
     let output = vx_core.e_string
-    output = text.substring(start, end)
+    output = vx_core.vx_string_from_string_start_end(text, start, end)
     return output
   }
 

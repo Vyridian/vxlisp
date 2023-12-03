@@ -71,7 +71,7 @@ export default class vx_data_csv_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (tb/textblock\n  :text\n`\"a\",\"b\"\n1,\"2\"`\n  :endpos 13\n  :delim delimcsv\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text `\"a\"`\n     :endpos 3\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"a\"\n        :startpos 1\n        :endpos 2)))\n    (tb/textblock\n     :text \",\"\n     :startpos 3\n     :endpos 4\n     :delim tb/delimcomma)\n    (tb/textblock\n     :text `\"b\"`\n     :startpos 4\n     :endpos 7\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"b\"\n        :startpos 5\n        :endpos 6)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 7\n     :endpos 8\n     :delim tb/delimline)\n    (tb/textblock\n     :text \"1\"\n     :startpos 8\n     :endpos 9)\n    (tb/textblock\n     :text \",\"\n     :startpos 9\n     :endpos 10\n     :delim tb/delimcomma)\n    (tb/textblock\n     :text `\"2\"`\n     :startpos 10\n     :endpos 13\n     :delim tb/delimquote\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"2\"\n        :startpos 11\n        :endpos 12)))))\n (textblock-csv<-string\n`\"a\",\"b\"\n1,\"2\"`\n )\n)",
+            ":describename", "(test\n (tb/textblock\n  :text\n`\"a\",\"b\"\n1,\"2\"`\n  :startpos 1\n  :endpos 13\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text `\"a\"`\n     :startpos 1\n     :endpos 3\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2)))\n    (tb/textblock\n     :text \",\"\n     :startpos 4\n     :endpos 4\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"b\"`\n     :startpos 5\n     :endpos 7\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"b\"\n        :startpos 6\n        :endpos 6)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 8\n     :endpos 8\n     :delim\n      (copy tb/delimline\n       :pos 0))\n    (tb/textblock\n     :text \"1\"\n     :startpos 9\n     :endpos 9)\n    (tb/textblock\n     :text \",\"\n     :startpos 10\n     :endpos 10\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"2\"`\n     :startpos 11\n     :endpos 13\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"2\"\n        :startpos 12\n        :endpos 12)))))\n (textblock-csv<-string\n  `\"a\",\"b\"\n1,\"2\"`))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -79,10 +79,10 @@ export default class vx_data_csv_test {
                 vx_data_textblock.t_textblock,
                 ":text",
                 "\"a\",\"b\"\n1,\"2\"",
+                ":startpos",
+                1,
                 ":endpos",
                 13,
-                ":delim",
-                vx_data_csv.c_delimcsv,
                 ":children",
                 vx_core.f_new(
                   vx_data_textblock.t_textblocklist,
@@ -90,10 +90,16 @@ export default class vx_data_csv_test {
                     vx_data_textblock.t_textblock,
                     ":text",
                     "\"a\"",
+                    ":startpos",
+                    1,
                     ":endpos",
                     3,
                     ":delim",
-                    vx_data_textblock.c_delimquote,
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimquote,
+                      ":pos",
+                      0
+                    ),
                     ":children",
                     vx_core.f_new(
                       vx_data_textblock.t_textblocklist,
@@ -102,7 +108,7 @@ export default class vx_data_csv_test {
                         ":text",
                         "a",
                         ":startpos",
-                        1,
+                        2,
                         ":endpos",
                         2
                       )
@@ -113,22 +119,30 @@ export default class vx_data_csv_test {
                     ":text",
                     ",",
                     ":startpos",
-                    3,
+                    4,
                     ":endpos",
                     4,
                     ":delim",
-                    vx_data_textblock.c_delimcomma
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimcomma,
+                      ":pos",
+                      0
+                    )
                   ),
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
                     "\"b\"",
                     ":startpos",
-                    4,
+                    5,
                     ":endpos",
                     7,
                     ":delim",
-                    vx_data_textblock.c_delimquote,
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimquote,
+                      ":pos",
+                      0
+                    ),
                     ":children",
                     vx_core.f_new(
                       vx_data_textblock.t_textblocklist,
@@ -137,7 +151,7 @@ export default class vx_data_csv_test {
                         ":text",
                         "b",
                         ":startpos",
-                        5,
+                        6,
                         ":endpos",
                         6
                       )
@@ -148,18 +162,22 @@ export default class vx_data_csv_test {
                     ":text",
                     "\n",
                     ":startpos",
-                    7,
+                    8,
                     ":endpos",
                     8,
                     ":delim",
-                    vx_data_textblock.c_delimline
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimline,
+                      ":pos",
+                      0
+                    )
                   ),
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
                     "1",
                     ":startpos",
-                    8,
+                    9,
                     ":endpos",
                     9
                   ),
@@ -168,22 +186,30 @@ export default class vx_data_csv_test {
                     ":text",
                     ",",
                     ":startpos",
-                    9,
+                    10,
                     ":endpos",
                     10,
                     ":delim",
-                    vx_data_textblock.c_delimcomma
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimcomma,
+                      ":pos",
+                      0
+                    )
                   ),
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
                     "\"2\"",
                     ":startpos",
-                    10,
+                    11,
                     ":endpos",
                     13,
                     ":delim",
-                    vx_data_textblock.c_delimquote,
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimquote,
+                      ":pos",
+                      0
+                    ),
                     ":children",
                     vx_core.f_new(
                       vx_data_textblock.t_textblocklist,
@@ -192,7 +218,7 @@ export default class vx_data_csv_test {
                         ":text",
                         "2",
                         ":startpos",
-                        11,
+                        12,
                         ":endpos",
                         12
                       )

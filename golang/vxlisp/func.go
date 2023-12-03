@@ -221,7 +221,7 @@ func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgb
 					msg := NewMsgFromTextblock(textblock, "Function Type Missing:", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				} else if valuefound {
-					msg := NewMsgFromTextblock(textblock, "Functions Cannot Have More than 1 Result. Perhaps your parentheses are arranged incorrectly:", word)
+					msg := NewMsgFromTextblock(textblock, "Functions Cannot Have More than 1 Result. Perhaps you have missed a :test keyword or parentheses are arranged incorrectly:", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				} else {
 					valuefound = true

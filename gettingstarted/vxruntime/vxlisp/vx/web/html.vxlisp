@@ -466,7 +466,7 @@
  [style : style]
  (if
   (!-empty style)
-  (string " class=" quote (string<-string-start (:name style) 1) quote))
+  (string " class=" quote (string<-string-start (:name style) 2) quote))
  :doc "Returns ' class=\"style.name\"' if style is not empty.")
 
 (func string<-style-indent : string

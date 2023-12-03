@@ -22,6 +22,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_plus1(vx_core::Type_context context);
   vx_test::Type_testcase f_minus(vx_core::Type_context context);
   vx_test::Type_testcase f_minus(vx_core::Type_context context);
+  vx_test::Type_testcase f_minus1(vx_core::Type_context context);
   vx_test::Type_testcase f_divide(vx_core::Type_context context);
   vx_test::Type_testcase f_lt(vx_core::Type_context context);
   vx_test::Type_testcase f_lt(vx_core::Type_context context);

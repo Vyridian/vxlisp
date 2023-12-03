@@ -178,7 +178,7 @@ func JavaFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile,
 			file.text = text
 			files = append(files, file)
 		case ":test":
-			text, msgs := JavaTestFromPackage(pkg, project, javadomain)
+			text, msgs := JavaTestFromPackage(pkg, project, command, javadomain)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "Test.java"
@@ -206,7 +206,6 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) 
 	doc += "{" + cnsttype.name + "}"
 	cnstname := JavaFromName(cnst.alias)
 	cnstclassname := "Const_" + cnstname
-	cnsttypename := JavaNameFromType(cnst.vxtype)
 	cnsttypeclassname := JavaNameTypeFullFromType(cnsttype)
 	initval := ""
 	const_new := ""
@@ -280,25 +279,27 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) 
 			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
-				listtypename := cnsttypename
+				allowtype, _ := TypeAllowFromType(cnsttype)
+				listtypename := JavaNameFromType(allowtype)
 				if listtypename == "any" {
 					listtypename = ""
 				}
 				const_new += "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
-					"\n      output.vx_p_list" + listtypename + " = val.vx_list" + listtypename + "();"
+					"\n      output.vx_p_list = val.vx_list" + listtypename + "();"
 			}
 		case ":map":
 			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
-				maptypename := cnsttypename
+				allowtype, _ := TypeAllowFromType(cnsttype)
+				maptypename := JavaNameFromType(allowtype)
 				if maptypename == "any" {
 					maptypename = ""
 				}
 				const_new += "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
-					"\n      output.vxmap" + maptypename + " = val.vx_map" + maptypename + "();"
+					"\n      output.vx_p_map = val.vx_map" + maptypename + "();"
 			}
 		case ":struct":
 			clstext, msgs := JavaFromValue(cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
@@ -319,9 +320,10 @@ func JavaFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) 
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
-		"\n  public static class " + cnstclassname + " extends " + extends + " {" +
+		"\n  public static class " + cnstclassname + " extends " + extends + " implements Core.vx_Type_const {" +
 		"\n" +
-		"\n    public Core.Type_constdef constdef() {" +
+		"\n    @Override" +
+		"\n    public Core.Type_constdef vx_constdef() {" +
 		"\n      return Core.constdef_new(" +
 		"\n        \"" + cnst.pkgname + "\", // pkgname" +
 		"\n        \"" + cnst.name + "\", // name" +
@@ -857,7 +859,11 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	valnew := ""
 	extendinterface := ""
 	extendsclass := " extends Core.Class_base"
-	valcopy := ""
+	valcopy := "" +
+		"\n      boolean ischanged = false;" +
+		"\n      if (this instanceof Core.vx_Type_const) {" +
+		"\n        ischanged = true;" +
+		"\n      }"
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		valnew += "" +
@@ -870,7 +876,9 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }" +
 			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n        Class_any work = new Class_any();" +
+			"\n        work.vxmsgblock = msgblock;" +
+			"\n        output = work;" +
 			"\n      }"
 	case "vx/core/anytype":
 		extendinterface = "Core.Type_any"
@@ -928,12 +936,11 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	case "vx/core/type":
 		extendinterface = "Core.Type_anytype"
 	case "vx/core/boolean":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Core.Type_boolean val = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      output.vxboolean = val.vx_boolean();"
+			"\n      boolean booleanval = val.vx_boolean();"
 		valnew = "" +
-			"\n      boolean booleanval = false;" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -946,18 +953,23 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          booleanval = booleanval || (Boolean)valsub;" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxboolean = booleanval;" +
 			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n        Class_boolean work = new Class_boolean();" +
+			"\n        work.vxboolean = booleanval;" +
+			"\n        work.vxmsgblock = msgblock;" +
+			"\n        output = work;" +
+			"\n      } else if (booleanval) {" +
+			"\n        output = Core.c_true;" +
+			"\n      } else {" +
+			"\n        output = Core.c_false;" +
 			"\n      }"
 	case "vx/core/decimal":
 		extendinterface = "Core.Type_number"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Core.Type_decimal val = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      output.vxdecimal = val.vx_string();"
+			"\n      String sval = val.vx_string();"
 		valnew = "" +
-			"\n      String sval = \"\";" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -965,23 +977,28 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_string) {" +
 			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          sval = valstring.vx_string();" +
 			"\n        } else if (valsub instanceof String) {" +
+			"\n          ischanged = true;" +
 			"\n          sval = (String)valsub;" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxdecimal = sval;" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        Class_decimal work = new Class_decimal();" +
+			"\n        work.vxdecimal = sval;" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 	case "vx/core/float":
 		extendinterface = "Core.Type_number"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Core.Type_float val = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      output.vxfloat = val.vx_float();"
+			"\n      float floatval = val.vx_float();"
 		valnew = "" +
-			"\n      float floatval = 0;" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -989,61 +1006,76 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_decimal) {" +
 			"\n          Core.Type_decimal valnum = (Core.Type_decimal)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          floatval += valnum.vx_float();" +
 			"\n        } else if (valsub instanceof Core.Type_float) {" +
 			"\n          Core.Type_float valnum = (Core.Type_float)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          floatval += valnum.vx_float();" +
 			"\n        } else if (valsub instanceof Core.Type_int) {" +
 			"\n          Core.Type_int valnum = (Core.Type_int)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          floatval += valnum.vx_int();" +
 			"\n        } else if (valsub instanceof Core.Type_string) {" +
 			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          floatval += Float.parseFloat(valstring.vx_string());" +
 			"\n        } else if (valsub instanceof Float) {" +
+			"\n          ischanged = true;" +
 			"\n          floatval += (Float)valsub;" +
 			"\n        } else if (valsub instanceof Integer) {" +
+			"\n          ischanged = true;" +
 			"\n          floatval += (Integer)valsub;" +
 			"\n        } else if (valsub instanceof String) {" +
+			"\n          ischanged = true;" +
 			"\n          floatval += Float.parseFloat((String)valsub);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxfloat = floatval;" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        Class_float work = new Class_float();" +
+			"\n        work.vxfloat = floatval;" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 	case "vx/core/int":
 		extendinterface = "Core.Type_number"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Core.Type_int val = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      output.vxint = val.vx_int();"
+			"\n      int intval = val.vx_int();"
 		valnew = "" +
-			"\n      int intval = 0;" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_msg) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_int) {" +
+			"\n          ischanged = true;" +
 			"\n          Core.Type_int valnum = (Core.Type_int)valsub;" +
 			"\n          intval += valnum.vx_int();" +
 			"\n        } else if (valsub instanceof Integer) {" +
+			"\n          ischanged = true;" +
 			"\n          intval += (Integer)valsub;" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxint = intval;" +
-			"\n      if (msgblock != Core.t_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        Class_int work = new Class_int();" +
+			"\n        work.vxint = intval;" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 	case "vx/core/msg":
 	case "vx/core/msgblock":
 	case "vx/core/string":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Core.Class_string val = this;" +
-			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
-			"\n      output.vxstring = val.vx_string();"
+			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);"
 		valnew = "" +
-			"\n      StringBuilder sb = new StringBuilder(output.vx_string());" +
+			"\n      StringBuilder sb = new StringBuilder(val.vx_string());" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -1051,30 +1083,48 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_string) {" +
 			"\n          Core.Type_string valstring = (Core.Type_string)valsub;" +
-			"\n          sb.append(valstring.vx_string());" +
+			"\n          String ssub = valstring.vx_string();" +
+			"\n          if (!ssub.equals(\"\")) {" +
+			"\n            ischanged = true;" +
+			"\n            sb.append(ssub);" +
+			"\n          }" +
 			"\n        } else if (valsub instanceof Core.Type_int) {" +
 			"\n          Core.Type_int valint = (Core.Type_int)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          sb.append(valint.vx_int());" +
 			"\n        } else if (valsub instanceof Core.Type_float) {" +
 			"\n          Core.Type_float valfloat = (Core.Type_float)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          sb.append(valfloat.vx_float());" +
 			"\n        } else if (valsub instanceof Core.Type_decimal) {" +
 			"\n          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;" +
+			"\n          ischanged = true;" +
 			"\n          sb.append(valdecimal.vx_string());" +
 			"\n        } else if (valsub instanceof String) {" +
-			"\n          sb.append((String)valsub);" +
+			"\n          String ssub2 = (String)valsub;" +
+			"\n          if (!ssub2.equals(\"\")) {" +
+			"\n            ischanged = true;" +
+			"\n            sb.append(ssub2);" +
+			"\n          }" +
 			"\n        } else if (valsub instanceof Integer) {" +
+			"\n          ischanged = true;" +
 			"\n          sb.append((Integer)valsub);" +
 			"\n        } else if (valsub instanceof Float) {" +
+			"\n          ischanged = true;" +
 			"\n          sb.append((Float)valsub);" +
 			"\n        } else {" +
 			"\n          Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxstring = sb.toString();" +
-			"\n      if (msgblock != Core.t_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        String vxstring = sb.toString();" +
+			"\n        Class_string work = new Class_string();" +
+			"\n        work.vxstring = vxstring;" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 	}
 	switch typ.extends {
@@ -1122,7 +1172,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}" +
 			"\n" +
 			allowcode
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Type_" + typename + " val = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
 			"\n      List<" + allowclass + "> listval = new ArrayList<>(val.vx_list" + allowname + "());"
@@ -1145,6 +1195,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n        } else if (valsub instanceof Core.Type_msg) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);" +
 				"\n        } else if (valsub instanceof " + allowclass + ") {" +
+				"\n          ischanged = true;" +
 				"\n          listval.add((" + allowclass + ")valsub);"
 		}
 		for _, allowedtype := range typ.allowtypes {
@@ -1169,18 +1220,21 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			if allowedtypename != "" {
 				valnew += "" +
 					"\n        } else if (valsub instanceof " + allowedtypename + ") {" +
+					"\n          ischanged = true;" +
 					"\n          listval.add(" + castval + ");"
 			}
 		}
 		valnew += "" +
 			"\n        } else if (valsub instanceof Type_" + typename + ") {" +
 			"\n          Type_" + typename + " multi = (Type_" + typename + ")valsub;" +
+			"\n          ischanged = true;" +
 			"\n          listval.addAll(multi.vx_list" + allowname + "());" +
 			"\n        } else if (valsub instanceof List) {" +
 			"\n          List<?> listunknown = (List<?>)valsub;" +
 			"\n          for (Object item : listunknown) {" +
 			"\n            if (item instanceof " + allowclass + ") {" +
 			"\n              " + allowclass + " valitem = (" + allowclass + ")item;" +
+			"\n              ischanged = true;" +
 			"\n              listval.add(valitem);" +
 			"\n            }" +
 			"\n          }" +
@@ -1189,9 +1243,13 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vx_p_list = Core.immutablelist(listval);" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        Class_" + typename + " work = new Class_" + typename + "();" +
+			"\n        work.vx_p_list = Core.immutablelist(listval);" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 		if extendinterface == "" {
 			extendinterface = "Core.Type_list"
@@ -1264,7 +1322,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      Type_" + typename + " valmap = this;" +
 			"\n      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);"
 		valnew = "" +
@@ -1320,14 +1378,19 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n          if (valany != null) {" +
+			"\n            ischanged = true;" +
 			"\n            mapval.put(key, valany);" +
 			"\n            key = \"\";" +
 			"\n          }" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxmap = Core.immutablemap(mapval);" +
-			"\n      if (msgblock != Core.e_msgblock) {" +
-			"\n        output.vxmsgblock = msgblock;" +
+			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+			"\n        Class_" + typename + " work = new Class_" + typename + "();" +
+			"\n        work.vxmap = Core.immutablemap(mapval);" +
+			"\n        if (msgblock != Core.e_msgblock) {" +
+			"\n          work.vxmsgblock = msgblock;" +
+			"\n        }" +
+			"\n        output = work;" +
 			"\n      }"
 		if extendinterface == "" {
 			extendinterface = "Core.Type_map"
@@ -1338,7 +1401,8 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 	case ":struct":
 		vx_any := ""
 		vx_map := ""
-		valcopy = "" +
+		valcopyend := ""
+		valcopy += "" +
 			"\n      Type_" + typename + " val = this;"
 		switch NameFromType(typ) {
 		case "vx/core/msgblock":
@@ -1356,7 +1420,11 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		case 0:
 			valnew = "" +
 				"\n      if (msgblock != Core.e_msgblock) {" +
-				"\n        output.vxmsgblock = msgblock;" +
+				"\n        Class_" + typename + " work = new Class_" + typename + "();" +
+				"\n        if (msgblock != Core.e_msgblock) {" +
+				"\n          work.vxmsgblock = msgblock;" +
+				"\n        }" +
+				"\n        output = work;" +
 				"\n      }"
 		default:
 			validkeys := "\n      ArrayList<String> validkeys = new ArrayList<>();"
@@ -1364,7 +1432,8 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			for _, arg := range props {
 				validkeys += "\n      validkeys.add(\":" + arg.name + "\");"
 				argname := JavaFromName(arg.name)
-				valcopy += "\n      output.vx_p_" + argname + " = val." + argname + "();"
+				valcopy += "\n      " + JavaNameTypeFromType(arg.vxtype) + " vx_p_" + argname + " = val." + argname + "();"
+				valcopyend += "\n        work.vx_p_" + argname + " = vx_p_" + argname + ";"
 				vx_map += "\n      output.put(\":" + arg.name + "\", this." + argname + "());"
 				vx_any += "" +
 					"\n      case \":" + arg.name + "\":" +
@@ -1376,24 +1445,30 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				case "vx/core/boolean":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Boolean) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_boolean.vx_new(valsub);"
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + argname + " = Core.t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Integer) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_int.vx_new(valsub);"
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + argname + " = Core.t_int.vx_new(valsub);"
 				case "vx/core/float":
 					argalt = "" +
 						"\n            } else if (valsub instanceof Float) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_float.vx_new(valsub);"
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + argname + " = Core.t_float.vx_new(valsub);"
 				case "vx/core/string":
 					argalt = "" +
 						"\n            } else if (valsub instanceof String) {" +
-						"\n              output.vx_p_" + argname + " = Core.t_string.vx_new(valsub);"
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + argname + " = Core.t_string.vx_new(valsub);"
 				}
 				valnewswitch += "" +
 					"\n          case \":" + arg.name + "\":" +
-					"\n            if (valsub instanceof " + argclassname + ") {" +
-					"\n              output.vx_p_" + argname + " = (" + argclassname + ")valsub;" +
+					"\n            if (valsub == vx_p_" + argname + ") {" +
+					"\n            } else if (valsub instanceof " + argclassname + ") {" +
+					"\n              ischanged = true;" +
+					"\n              vx_p_" + argname + " = (" + argclassname + ")valsub;" +
 					argalt +
 					"\n            } else {" +
 					"\n              Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
@@ -1418,24 +1493,29 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				argclassname := JavaNameTypeFromType(lastarg.vxtype)
 				defaultkey += "" +
 					"\n          } else if (valsub instanceof " + argclassname + ") { // default property" +
-					"\n            output.vx_p_" + lastargname + " = (" + argclassname + ")valsub;"
+					"\n            ischanged = true;" +
+					"\n            vx_p_" + lastargname + " = (" + argclassname + ")valsub;"
 				switch NameFromType(lastarg.vxtype) {
 				case "vx/core/boolean":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Boolean) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_boolean.vx_new(valsub);"
+						"\n            ischanged = true;" +
+						"\n            vx_p_" + lastargname + " = Core.t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Integer) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_int.vx_new(valsub);"
+						"\n            ischanged = true;" +
+						"\n            vx_p_" + lastargname + " = Core.t_int.vx_new(valsub);"
 				case "vx/core/float":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof Float) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_float.vx_new(valsub);"
+						"\n            ischanged = true;" +
+						"\n            vx_p_" + lastargname + " = Core.t_float.vx_new(valsub);"
 				case "vx/core/string":
 					defaultkey += "" +
 						"\n          } else if (valsub instanceof String) { // default property" +
-						"\n            output.vx_p_" + lastargname + " = Core.t_string.vx_new(valsub);"
+						"\n            ischanged = true;" +
+						"\n            vx_p_" + lastargname + " = Core.t_string.vx_new(valsub);"
 				}
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
@@ -1443,13 +1523,14 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 						defaultkey += "" +
 							"\n          } else if (valsub instanceof " + subargclassname + ") { // default property" +
 							"\n            " + subargclassname + " valdefault = (" + subargclassname + ")valsub;" +
-							"\n            " + argclassname + " vallist = output.vx_p_" + lastargname + ";" +
+							"\n            " + argclassname + " vallist = vx_p_" + lastargname + ";" +
 							"\n            if (vallist == null) {" +
 							"\n              vallist = " + JavaNameTFromType(lastarg.vxtype) + ".vx_new(valdefault);" +
 							"\n            } else {" +
 							"\n              vallist = vallist.vx_copy(valdefault);" +
 							"\n            }" +
-							"\n            output.vx_p_" + lastargname + " = vallist;"
+							"\n            ischanged = true;" +
+							"\n            vx_p_" + lastargname + " = vallist;"
 					}
 				}
 			}
@@ -1482,19 +1563,19 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n        if (valsub instanceof Core.Type_msgblock) {" +
 					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
-					"\n          output.vx_p_msgblocks = msgblocks;" +
+					"\n          vx_p_msgblocks = msgblocks;" +
 					"\n        } else if (valsub instanceof Core.Type_msg) {" +
 					"\n          Core.Type_msglist msgs = this.msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
-					"\n          output.vx_p_msgs = msgs;" +
+					"\n          vx_p_msgs = msgs;" +
 					"\n        } else if (valsub instanceof Core.Type_msgblocklist) {" +
 					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
 					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
-					"\n          output.vx_p_msgblocks = msgblocks;" +
+					"\n          vx_p_msgblocks = msgblocks;" +
 					"\n        } else if (valsub instanceof Core.Type_msglist) {" +
 					"\n          Core.Type_msglist msgs = this.msgs();" +
 					"\n          msgs = msgs.vx_copy(valsub);" +
-					"\n          output.vx_p_msgs = msgs;" +
+					"\n          vx_p_msgs = msgs;" +
 					"\n        } else if (key == \"\") {" +
 					"\n          if (valsub instanceof Core.Type_string) {" +
 					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
@@ -1511,6 +1592,9 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n          }" +
 					"\n          key = \"\";" +
 					"\n        }" +
+					"\n        Class_" + typename + " work = new Class_" + typename + "();" +
+					"\n        work.vxmsgblock = msgblock;" +
+					"\n        output = work;" +
 					"\n      }"
 			default:
 				valnew = "" +
@@ -1547,8 +1631,13 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 					"\n          key = \"\";" +
 					"\n        }" +
 					"\n      }" +
-					"\n      if (msgblock != Core.e_msgblock) {" +
-					"\n        output.vxmsgblock = msgblock;" +
+					"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
+					"\n        Class_" + typename + " work = new Class_" + typename + "();" +
+					valcopyend +
+					"\n        if (msgblock != Core.e_msgblock) {" +
+					"\n          work.vxmsgblock = msgblock;" +
+					"\n        }" +
+					"\n        output = work;" +
 					"\n      }"
 			}
 		}
@@ -1607,7 +1696,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		"\n" +
 		"\n    @Override" +
 		"\n    public Type_" + typename + " vx_copy(final Object... vals) {" +
-		"\n      Class_" + typename + " output = new Class_" + typename + "();" +
+		"\n      Type_" + typename + " output = this;" +
 		valcopy +
 		valnew +
 		"\n      return output;" +
@@ -1656,6 +1745,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 		fnc := FuncFromValue(value)
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
+		if fnc.debug {
+			output += "Core.f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", '" + funcname + "', "
+		}
 		switch fnc.name {
 		case "native":
 			// (native :java)
@@ -1902,8 +1994,13 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 								if !argvaluearg.vxtype.isfunc {
 									work, msgs := JavaFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
+									argvaluefuncname := "any_from_func"
+									switch NameFromType(funcarg.vxtype) {
+									case "vx/core/boolean<-func":
+										argvaluefuncname = "boolean_from_func"
+									}
 									argtext = "" +
-										"Core.t_any_from_func.vx_fn_new(() -> {" +
+										"Core.t_" + argvaluefuncname + ".vx_fn_new(() -> {" +
 										"\n  return " + work + ";" +
 										"\n})"
 								}
@@ -2026,6 +2123,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 					}
 				}
 			}
+		}
+		if fnc.debug {
+			output += ")"
 		}
 	case ":funcref":
 		valfunc := FuncFromValue(value)
@@ -2860,7 +2960,7 @@ func JavaTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand, pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JavaTestFromPackage")
 	pkgpath, pkgname := JavaPackagePathFromPrefixName(pkgprefix, pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
@@ -2877,6 +2977,10 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		test, msgs := JavaTestFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(covertype, "      \":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
+		if command.filter == "" {
+		} else if NameFromType(typ) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
@@ -2899,6 +3003,10 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 		test, msgs := JavaTestFromConst(cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(coverconst, "      \":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
+		if command.filter == "" {
+		} else if NameFromConst(cnst) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
@@ -2925,6 +3033,10 @@ func JavaTestFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (stri
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			coverfunc = append(coverfunc, "      \":"+fncid+JavaIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+			if command.filter == "" {
+			} else if NameFromFunc(fnc) != command.filter {
+				test = ""
+			}
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
@@ -3232,16 +3344,16 @@ public final class App {
 	return output
 }
 
-func JavaAppTest(project *vxproject, cmd *vxcommand, pkgprefix string) string {
+func JavaAppTest(project *vxproject, command *vxcommand, pkgprefix string) string {
 	imports := ""
 	contexttext := `
   Core.Type_anylist arglist = Core.e_anylist;
   Core.Type_context context = ` + project.javadomain + `.vx.Test.f_context_test(arglist);`
-	if cmd.context == "" {
+	if command.context == "" {
 	} else {
-		contextfunc := FuncFromProjectFuncname(project, cmd.context)
-		if cmd.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
+		contextfunc := FuncFromProjectFuncname(project, command.context)
+		if command.context != "" && contextfunc == emptyfunc {
+			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
 			libprefix := project.javadomain
@@ -3276,24 +3388,30 @@ func JavaAppTest(project *vxproject, cmd *vxcommand, pkgprefix string) string {
 	listpackage := project.listpackage
 	var listtestpackage []string
 	for _, pkg := range listpackage {
-		pkgname := pkg.name
-		pkgpath := ""
-		pos := strings.LastIndex(pkgname, "/")
-		if pos >= 0 {
-			pkgpath = pkgname[0:pos]
-			pkgname = pkgname[pos+1:]
+		iscontinue := true
+		if command.filter == "" {
+		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+			iscontinue = false
 		}
-		pkgname = StringUCaseFirst(pkgname)
-		testpackage := "\n    " + pkgname + "Test.test_package(context)"
-		listtestpackage = append(listtestpackage, testpackage)
-		libprefix := pkg.project.javadomain
-		importline := "\nimport " + libprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;"
-		if importline == "\nimport com.vxlisp.vx.*;" {
-		} else if BooleanFromStringContains(imports, importline) {
-		} else {
-			imports += importline
-		}
-		tests += `
+		if iscontinue {
+			pkgname := pkg.name
+			pkgpath := ""
+			pos := strings.LastIndex(pkgname, "/")
+			if pos >= 0 {
+				pkgpath = pkgname[0:pos]
+				pkgname = pkgname[pos+1:]
+			}
+			pkgname = StringUCaseFirst(pkgname)
+			testpackage := "\n    " + pkgname + "Test.test_package(context)"
+			listtestpackage = append(listtestpackage, testpackage)
+			libprefix := pkg.project.javadomain
+			importline := "\nimport " + libprefix + "." + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;"
+			if importline == "\nimport com.vxlisp.vx.*;" {
+			} else if BooleanFromStringContains(imports, importline) {
+			} else {
+				imports += importline
+			}
+			tests += `
   @Test
   @DisplayName("` + pkg.name + `")
   void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
@@ -3302,6 +3420,7 @@ func JavaAppTest(project *vxproject, cmd *vxcommand, pkgprefix string) string {
   }
 
 `
+		}
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
 	output := `

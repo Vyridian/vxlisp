@@ -21,7 +21,7 @@ export default class vx_data_csv {
    * Csv File Delimiters
    * {delim}
    */
-  static c_delimcsv = {vx_type: vx_data_textblock.t_delim}
+  static c_delimcsv = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/data/csv', name: 'delimcsv'}}
 
   /**
    * @function csv_from_textblock
@@ -39,8 +39,8 @@ export default class vx_data_csv {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const allrows = vx_data_csv.f_csvrows_from_textblock(textblock)
-        const headers = vx_core.f_any_from_list({"any-1": vx_core.t_stringlist, "list-1": vx_data_csv.t_csvrows}, allrows, 0)
-        const rows = vx_collection.f_list_from_list_end({"any-1": vx_core.t_stringlist, "list-1": vx_data_csv.t_csvrows}, allrows, 1)
+        const headers = vx_core.f_any_from_list({"any-1": vx_core.t_stringlist, "list-1": vx_data_csv.t_csvrows}, allrows, 1)
+        const rows = vx_collection.f_list_from_list_end({"any-1": vx_core.t_stringlist, "list-1": vx_data_csv.t_csvrows}, allrows, 2)
         return vx_core.f_new(
           vx_data_csv.t_csv,
           ":headers",

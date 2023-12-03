@@ -28,13 +28,13 @@ export default class vx_data_xml {
    * Constant: delimxml
    * {delim}
    */
-  static c_delimxml = {vx_type: vx_data_textblock.t_delim}
+  static c_delimxml = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/data/xml', name: 'delimxml'}}
 
   /**
    * Constant: delimxmlequal
    * {delim}
    */
-  static c_delimxmlequal = {vx_type: vx_data_textblock.t_delim}
+  static c_delimxmlequal = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/data/xml', name: 'delimxmlequal'}}
 
   /**
    * @function xml_from_textblock

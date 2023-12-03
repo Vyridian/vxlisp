@@ -723,6 +723,15 @@ export default class vx_core {
       text = 'null'
     } else if (value == typedef) {
       text = vx_core.f_typename_from_typedef(typedef)
+    } else if (value['vx_constdef']) {
+      const constdef = value['vx_constdef']
+      const constpkg = constdef['pkgname']
+      const constname = constdef['name']
+      if (constpkg == 'vx/core') {
+        text = constname
+      } else {
+        text = constpkg + '/' + constname
+      }
     } else {
       switch (typedef) {
       case vx_core.t_boolean:
@@ -821,6 +830,21 @@ export default class vx_core {
     }
     output = text
 		return output
+  }
+
+  static vx_string_from_string_start_end(text, start, end) {
+    let output = ""
+    const maxlen = text.length;
+    if (start < 1) {
+    } else if (start > end) {
+    } else if (start > maxlen) {
+    } else {
+      if (end > maxlen) {
+        end = maxlen
+      }
+      output = text.substring(start - 1, end);
+    }
+    return output
   }
 
   /**
@@ -1218,7 +1242,7 @@ export default class vx_core {
    * Constant: globalpackagemap
    * {packagemap}
    */
-  static c_globalpackagemap = {vx_type: vx_core.t_packagemap}
+  static c_globalpackagemap = {vx_type: vx_core.t_packagemap, vx_constdef: {pkgname: 'vx/core', name: 'globalpackagemap'}}
 
   /**
    * Constant: infinity
@@ -1232,7 +1256,7 @@ export default class vx_core {
    * Active Value Memory Pool
    * {mempool}
    */
-  static c_mempool_active = {vx_type: vx_core.t_mempool}
+  static c_mempool_active = {vx_type: vx_core.t_mempool, vx_constdef: {pkgname: 'vx/core', name: 'mempool-active'}}
 
   /**
    * Constant: msg-error
@@ -1565,7 +1589,7 @@ export default class vx_core {
   // (func +1)
   static f_plus1(num) {
     let output = vx_core.e_int
-    output = num + 1
+    output = vx_core.f_plus(num, 1)
     return output
   }
 
@@ -1646,6 +1670,22 @@ export default class vx_core {
       vx_core.f_new(vx_core.t_any_from_reduce, (total, num) => 
         vx_core.f_minus_1(total, num))
     )
+    return output
+  }
+
+  /**
+   * @function minus1
+   * Math int minus 1
+   * @param  {int} num
+   * @return {int}
+   */
+  static t_minus1 = {}
+  static e_minus1 = {vx_type: vx_core.t_minus1}
+
+  // (func -1)
+  static f_minus1(num) {
+    let output = vx_core.e_int
+    output = vx_core.f_minus(num, 1)
     return output
   }
 
@@ -2062,7 +2102,7 @@ export default class vx_core {
       ),
       vx_core.f_case_1(
         1,
-        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list({"any-1": vx_core.t_boolean, "list-1": vx_core.t_booleanlist}, values, 0)})
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list({"any-1": vx_core.t_boolean, "list-1": vx_core.t_booleanlist}, values, 1)})
       ),
       vx_core.f_else(
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list_reduce_next(
@@ -2253,8 +2293,8 @@ export default class vx_core {
   static f_any_from_list(generic, values, index) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    if (index < values.length) {
-      output = values[index]
+    if (index <= values.length) {
+      output = values[index - 1]
     }
     return output
   }
@@ -2785,7 +2825,7 @@ export default class vx_core {
   static f_first_from_list(generic, values) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, 0)
+    output = vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, 1)
     return output
   }
 
@@ -3226,8 +3266,7 @@ export default class vx_core {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const len = vx_core.f_length_from_list(values)
-        const last = vx_core.f_minus(len, 1)
-        return vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, last)
+        return vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, len)
       })
     )
     return output
@@ -4657,6 +4696,7 @@ export default class vx_core {
     "-_1": vx_core.e_minus_1,
     "-_2": vx_core.e_minus_2,
     "-_3": vx_core.e_minus_3,
+    "-1": vx_core.e_minus1,
     ".": vx_core.e_dotmethod,
     "/": vx_core.e_divide,
     "<": vx_core.e_lt,
@@ -6722,6 +6762,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_minus_3
+    }
+
+    // (func -1)
+    vx_core.t_minus1['vx_type'] = vx_core.t_type
+    vx_core.t_minus1['vx_value'] = {
+      name          : "-1",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_minus1
     }
 
     // (func .)

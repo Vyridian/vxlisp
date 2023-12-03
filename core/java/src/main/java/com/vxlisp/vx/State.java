@@ -64,7 +64,11 @@ public final class State {
 
     @Override
     public Type_value_map vx_copy(final Object... vals) {
-      Class_value_map output = new Class_value_map();
+      Type_value_map output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_value_map valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Core.Type_any> mapval = new LinkedHashMap<>(valmap.vx_map());
@@ -95,14 +99,19 @@ public final class State {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_value_map work = new Class_value_map();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }

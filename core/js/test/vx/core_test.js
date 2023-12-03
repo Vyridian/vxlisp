@@ -22,11 +22,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 198, ":total", 233), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 44, ":tests", 58, ":total", 129), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 85, ":tests", 199, ":total", 234), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 45, ":tests", 59, ":total", 130), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 64, ":total", 209), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 65, ":total", 210), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 4, ":total", 66)
     )
   }
@@ -144,6 +144,7 @@ export default class vx_core_test {
           "-_1", 2,
           "-_2", 0,
           "-_3", 0,
+          "-1", 2,
           ".", 0,
           "/", 2,
           "<", 1,
@@ -892,6 +893,40 @@ export default class vx_core_test {
     return output
   }
 
+  static f_minus1(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "-1",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test  1 (-1  2))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              1,
+              vx_core.f_minus1(2)
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test -3 (-1 -2))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              -3,
+              vx_core.f_minus1(-2)
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_divide(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -960,7 +995,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (< 2 3))",
+            ":describename", "(test-true\n (< 2 3))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -969,7 +1004,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (< \"b\" \"d\" \"z\"))",
+            ":describename", "(test-true\n (< \"b\" \"d\" \"z\"))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1140,7 +1175,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (= (stringlist \"a\" \"b\" \"c\") (new stringlist \"a\" \"b\" \"c\")))",
+            ":describename", "(test-true\n (=\n  (stringlist \"a\" \"b\" \"c\")\n  (new stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1162,7 +1197,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (= (stringmap :a \"1\" :b \"2\") (new stringmap :a \"1\" :b \"2\")))",
+            ":describename", "(test-true\n (=\n  (stringmap :a \"1\" :b \"2\")\n  (new stringmap :a \"1\" :b \"2\")))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1232,11 +1267,11 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (== \"2\" \"2\"))",
+            ":describename", "(test-true (== \"\" \"\"))",
             ":testresult",
             vx_test.f_test_true(
               context,
-              vx_core.f_eqeq("2", "2")
+              vx_core.f_eqeq("", "")
             )
           )
         )
@@ -1347,7 +1382,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (and true true))",
+            ":describename", "(test-true\n (and true true))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1359,7 +1394,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-false (and true false))",
+            ":describename", "(test-false\n (and true false))",
             ":testresult",
             vx_test.f_test_false(
               context,
@@ -1385,7 +1420,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true (and true true true))",
+            ":describename", "(test-true\n (and true true true))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1398,7 +1433,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-false (and true true false))",
+            ":describename", "(test-false\n (and true true false))",
             ":testresult",
             vx_test.f_test_false(
               context,
@@ -1425,7 +1460,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"b\"\n (any<-list (list \"a\" \"b\" \"c\") 1))",
+            ":describename", "(test\n \"b\"\n (any<-list\n  (list \"a\" \"b\" \"c\")\n  2))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1438,13 +1473,13 @@ export default class vx_core_test {
                   "b",
                   "c"
                 ),
-                1
+                2
               )
             )
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"b\"\n (:1 (stringlist \"a\" \"b\" \"c\")))",
+            ":describename", "(test\n \"b\"\n (:2 (stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1457,7 +1492,7 @@ export default class vx_core_test {
                   "b",
                   "c"
                 ),
-                1
+                2
               )
             )
           )
@@ -1614,7 +1649,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true  (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
+            ":describename", "(test-true\n (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1631,7 +1666,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-true  (contains (intlist 1 2 3) 2))",
+            ":describename", "(test-true\n (contains (intlist 1 2 3) 2))",
             ":testresult",
             vx_test.f_test_true(
               context,
@@ -1648,7 +1683,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test-false (contains (list 1 \"2\" 3) 2))",
+            ":describename", "(test-false\n (contains (list 1 \"2\" 3) 2))",
             ":testresult",
             vx_test.f_test_false(
               context,
@@ -1733,7 +1768,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"b\" (first<-list (stringlist \"b\" \"c\")))",
+            ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1764,7 +1799,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"b\" (first<-list-fn-any<-any (list nothing \"b\" \"c\") resolve))",
+            ":describename", "(test\n \"b\"\n (first<-list-fn-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1797,7 +1832,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"a\" (if (= 2 2) \"a\"))",
+            ":describename", "(test\n \"a\"\n (if (= 2 2) \"a\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1811,7 +1846,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"\"  (if : string (= 1 2) \"a\"))",
+            ":describename", "(test\n \"\"\n (if : string\n  (= 1 2)\n  \"a\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1839,7 +1874,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"a\" (if (= 2 2) \"a\" \"b\"))",
+            ":describename", "(test\n \"a\"\n (if\n  (= 2 2)\n  \"a\"\n  \"b\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1854,7 +1889,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"b\"  (if (= 1 2) \"a\" \"b\"))",
+            ":describename", "(test\n \"b\"\n (if\n  (= 1 2)\n  \"a\"\n  \"b\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2796,6 +2831,7 @@ export default class vx_core_test {
       vx_core_test.f_plus1(context),
       vx_core_test.f_minus(context),
       vx_core_test.f_minus_1(context),
+      vx_core_test.f_minus1(context),
       vx_core_test.f_divide(context),
       vx_core_test.f_lt(context),
       vx_core_test.f_lt_1(context),

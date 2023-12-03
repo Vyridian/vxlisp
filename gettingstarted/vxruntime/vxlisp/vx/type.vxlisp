@@ -100,7 +100,7 @@
 (func string<-string-end : string
  [text   : string
   endpos : int]
- (string<-string-start-end text 0 endpos)
+ (string<-string-start-end text 1 endpos)
  :test (test "abc" (string<-string-end "abcd" 3))
        (test "ab"  (string<-string-end "abcd" 2))
  :doc "Returns a substring between 0 end position.")
@@ -109,8 +109,8 @@
  [text     : string
   startpos : int]
  (string<-string-start-end text startpos (length<-string text))
- :test (test "abcd" (string<-string-start "abcd" 0))
-       (test "bcd"  (string<-string-start "abcd" 1))
+ :test (test "abcd" (string<-string-start "abcd" 1))
+       (test "bcd"  (string<-string-start "abcd" 2))
  :doc "Returns a substring between start string end.")
 
 (func string<-string-start-end : string
@@ -134,10 +134,10 @@
       stext = stext.substring(istart, iend);
     }
     output = Core.t_string.vx_new_from_string(stext);")
- :test (test "abc" (string<-string-start-end "abcd" 0 3))
-       (test "bc"  (string<-string-start-end "abcd" 1 3))
+ :test (test "abc" (string<-string-start-end "abcd" 1 3))
+       (test "bc"  (string<-string-start-end "abcd" 2 3))
        (test ""    (string<-string-start-end "abcd" 5 6))
-       (test "bcd" (string<-string-start-end "abcd" 1 5))
+       (test "bcd" (string<-string-start-end "abcd" 2 5))
  :doc "Returns a substring between start and end positions.")
 
 (func string<-stringlist-join : string

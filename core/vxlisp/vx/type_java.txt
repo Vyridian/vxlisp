@@ -29,6 +29,7 @@
 			  output = text.indexOf(find);
 			}
 		}
+    output += 1;
 		return output;
 	}
 

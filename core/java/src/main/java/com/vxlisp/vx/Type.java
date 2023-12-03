@@ -36,6 +36,7 @@ public final class Type {
 			  output = text.indexOf(find);
 			}
 		}
+    output += 1;
 		return output;
 	}
 
@@ -411,7 +412,7 @@ public final class Type {
     Core.Type_int output = Core.e_int;
     String stext = text.vx_string();
     String sfind = find.vx_string();
-    int ipos = stext.indexOf(sfind);
+    int ipos = stext.indexOf(sfind) + 1;
     output = Core.vx_new_int(ipos);
     return output;
   }
@@ -1445,7 +1446,7 @@ public final class Type {
 
   public static Core.Type_string f_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos) {
     Core.Type_string output = Core.e_string;
-    output = Type.f_string_from_string_start_end(text, Core.vx_new_int(0), endpos);
+    output = Type.f_string_from_string_start_end(text, Core.vx_new_int(1), endpos);
     return output;
   }
 

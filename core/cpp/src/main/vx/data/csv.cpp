@@ -75,7 +75,12 @@ namespace vx_data_csv {
 
     vx_core::Type_any Class_csv::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csv output = vx_data_csv::e_csv;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_csv::Type_csv val = vx_core::vx_any_from_any(vx_data_csv::t_csv, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_stringlist vx_p_headers = val->headers();
       vx_data_csv::Type_csvrows vx_p_rows = val->rows();
@@ -104,14 +109,18 @@ namespace vx_data_csv {
         } else {
           if (false) {
           } else if (key == ":headers") {
-            if (valsubtype == vx_core::t_stringlist) {
+            if (vx_p_headers == valsub) {
+            } else if (valsubtype == vx_core::t_stringlist) {
+              ischanged = true;
               vx_p_headers = vx_core::vx_any_from_any(vx_core::t_stringlist, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv :headers " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":rows") {
-            if (valsubtype == vx_data_csv::t_csvrows) {
+            if (vx_p_rows == valsub) {
+            } else if (valsubtype == vx_data_csv::t_csvrows) {
+              ischanged = true;
               vx_p_rows = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new csv :rows " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -124,20 +133,22 @@ namespace vx_data_csv {
           key = "";
         }
       }
-      output = new vx_data_csv::Class_csv();
-      if (output->vx_p_headers != vx_p_headers) {
-        if (output->vx_p_headers) {
-          vx_core::vx_release_one(output->vx_p_headers);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_csv::Class_csv();
+        if (output->vx_p_headers != vx_p_headers) {
+          if (output->vx_p_headers) {
+            vx_core::vx_release_one(output->vx_p_headers);
+          }
+          output->vx_p_headers = vx_p_headers;
+          vx_core::vx_reserve(vx_p_headers);
         }
-        output->vx_p_headers = vx_p_headers;
-        vx_core::vx_reserve(vx_p_headers);
-      }
-      if (output->vx_p_rows != vx_p_rows) {
-        if (output->vx_p_rows) {
-          vx_core::vx_release_one(output->vx_p_rows);
+        if (output->vx_p_rows != vx_p_rows) {
+          if (output->vx_p_rows) {
+            vx_core::vx_release_one(output->vx_p_rows);
+          }
+          output->vx_p_rows = vx_p_rows;
+          vx_core::vx_reserve(vx_p_rows);
         }
-        output->vx_p_rows = vx_p_rows;
-        vx_core::vx_reserve(vx_p_rows);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -260,7 +271,12 @@ namespace vx_data_csv {
 
     vx_core::Type_any Class_csvrows::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_csv::Type_csvrows val = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       std::vector<vx_core::Type_stringlist> listval = val->vx_liststringlist();
       for (vx_core::Type_any valsub : vals) {
@@ -270,10 +286,13 @@ namespace vx_data_csv {
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_stringlist) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_core::t_stringlist, valsub));
         } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_core::t_stringlist)) {
+          ischanged = true;
           listval.push_back(vx_core::vx_any_from_any(vx_core::t_stringlist, valsub));
         } else if (valsubtype == vx_data_csv::t_csvrows) {
+          ischanged = true;
           vx_data_csv::Type_csvrows multi = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, valsub);
           listval = vx_core::vx_listaddall(listval, multi->vx_liststringlist());
         } else {
@@ -281,7 +300,7 @@ namespace vx_data_csv {
           msgblock = vx_core::vx_copy(msgblock, {msg});
         }
       }
-      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
         output = new vx_data_csv::Class_csvrows();
         output->vx_p_list = listval;
         for (vx_core::Type_any valadd : listval) {
@@ -324,42 +343,6 @@ namespace vx_data_csv {
   // (const delimcsv)
   // class Class_delimcsv {
 
-    // vx_const_new()
-    void vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::Const_delimcsv output) {
-      long irefcount = vx_core::refcount;
-      vx_data_textblock::Type_delim val = vx_core::f_new(
-        vx_data_textblock::t_delim,
-        vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":name"),
-          vx_core::vx_new_string("delimcsv"),
-          vx_core::vx_new_string(":delimlist"),
-          vx_core::f_new(
-            vx_data_textblock::t_delimlist,
-            vx_core::vx_new(vx_core::t_anylist, {
-              vx_data_textblock::c_delimline,
-              vx_data_textblock::c_delimquote,
-              vx_data_textblock::c_delimcomma
-            })
-          )
-        })
-      );
-      output->vx_p_name = val->name();
-      vx_core::vx_reserve(output->vx_p_name);
-      output->vx_p_starttext = val->starttext();
-      vx_core::vx_reserve(output->vx_p_starttext);
-      output->vx_p_endtext = val->endtext();
-      vx_core::vx_reserve(output->vx_p_endtext);
-      output->vx_p_startpos = val->startpos();
-      vx_core::vx_reserve(output->vx_p_startpos);
-      output->vx_p_endpos = val->endpos();
-      vx_core::vx_reserve(output->vx_p_endpos);
-      output->vx_p_delimlist = val->delimlist();
-      vx_core::vx_reserve(output->vx_p_delimlist);
-      vx_core::vx_release(val);
-      vx_core::refcount = irefcount;
-      vx_core::vx_reserve_type(output);
-    }
-
     // vx_constdef()
     vx_core::Type_constdef vx_data_csv::Class_delimcsv::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -390,11 +373,7 @@ namespace vx_data_csv {
             vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
-            "startpos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "endpos", // name
+            "pos", // name
             vx_core::t_int // type
           ),
           vx_core::vx_new_arg(
@@ -404,6 +383,41 @@ namespace vx_data_csv {
         }) // properties
         )
       );
+    }
+
+    // vx_const_new()
+    void vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::Const_delimcsv output) {
+      output->vx_p_constname = "vx/data/csv/delimcsv";
+      long irefcount = vx_core::refcount;
+      vx_data_textblock::Type_delim val = vx_core::f_new(
+        vx_data_textblock::t_delim,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string("delimcsv"),
+          vx_core::vx_new_string(":delimlist"),
+          vx_core::f_new(
+            vx_data_textblock::t_delimlist,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_data_textblock::c_delimline,
+              vx_data_textblock::c_delimquote,
+              vx_data_textblock::c_delimcomma
+            })
+          )
+        })
+      );
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_starttext = val->starttext();
+      vx_core::vx_reserve(output->vx_p_starttext);
+      output->vx_p_endtext = val->endtext();
+      vx_core::vx_reserve(output->vx_p_endtext);
+      output->vx_p_pos = val->pos();
+      vx_core::vx_reserve(output->vx_p_pos);
+      output->vx_p_delimlist = val->delimlist();
+      vx_core::vx_reserve(output->vx_p_delimlist);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
+      vx_core::vx_reserve_type(output);
     }
 
 
@@ -418,9 +432,9 @@ namespace vx_data_csv {
       vx_core::t_any_from_func->vx_fn_new({textblock}, [textblock]() {
         vx_data_csv::Type_csvrows allrows = vx_data_csv::f_csvrows_from_textblock(textblock);
         vx_core::vx_ref_plus(allrows);
-        vx_core::Type_stringlist headers = vx_core::f_any_from_list(vx_core::t_stringlist, allrows, vx_core::vx_new_int(0));
+        vx_core::Type_stringlist headers = vx_core::f_any_from_list(vx_core::t_stringlist, allrows, vx_core::vx_new_int(1));
         vx_core::vx_ref_plus(headers);
-        vx_data_csv::Type_csvrows rows = vx_collection::f_list_from_list_end(vx_data_csv::t_csvrows, allrows, vx_core::vx_new_int(1));
+        vx_data_csv::Type_csvrows rows = vx_collection::f_list_from_list_end(vx_data_csv::t_csvrows, allrows, vx_core::vx_new_int(2));
         vx_core::vx_ref_plus(rows);
         vx_data_csv::Type_csv output_1 = vx_core::f_new(
           vx_data_csv::t_csv,

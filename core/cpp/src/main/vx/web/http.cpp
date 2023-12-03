@@ -74,7 +74,12 @@ namespace vx_web_http {
 
     vx_core::Type_any Class_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Type_response output = vx_web_http::e_response;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_web_http::Type_response val = vx_core::vx_any_from_any(vx_web_http::t_response, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_boolean vx_p_ok = val->ok();
       vx_core::Type_int vx_p_status = val->status();
@@ -103,14 +108,18 @@ namespace vx_web_http {
         } else {
           if (false) {
           } else if (key == ":ok") {
-            if (valsubtype == vx_core::t_boolean) {
+            if (vx_p_ok == valsub) {
+            } else if (valsubtype == vx_core::t_boolean) {
+              ischanged = true;
               vx_p_ok = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response :ok " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":status") {
-            if (valsubtype == vx_core::t_int) {
+            if (vx_p_status == valsub) {
+            } else if (valsubtype == vx_core::t_int) {
+              ischanged = true;
               vx_p_status = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new response :status " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -123,20 +132,22 @@ namespace vx_web_http {
           key = "";
         }
       }
-      output = new vx_web_http::Class_response();
-      if (output->vx_p_ok != vx_p_ok) {
-        if (output->vx_p_ok) {
-          vx_core::vx_release_one(output->vx_p_ok);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_web_http::Class_response();
+        if (output->vx_p_ok != vx_p_ok) {
+          if (output->vx_p_ok) {
+            vx_core::vx_release_one(output->vx_p_ok);
+          }
+          output->vx_p_ok = vx_p_ok;
+          vx_core::vx_reserve(vx_p_ok);
         }
-        output->vx_p_ok = vx_p_ok;
-        vx_core::vx_reserve(vx_p_ok);
-      }
-      if (output->vx_p_status != vx_p_status) {
-        if (output->vx_p_status) {
-          vx_core::vx_release_one(output->vx_p_status);
+        if (output->vx_p_status != vx_p_status) {
+          if (output->vx_p_status) {
+            vx_core::vx_release_one(output->vx_p_status);
+          }
+          output->vx_p_status = vx_p_status;
+          vx_core::vx_reserve(vx_p_status);
         }
-        output->vx_p_status = vx_p_status;
-        vx_core::vx_reserve(vx_p_status);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;

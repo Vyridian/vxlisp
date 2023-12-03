@@ -422,7 +422,7 @@ func CppFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, 
 			file.text = header
 			files = append(files, file)
 		case ":test":
-			text, header, msgs := CppTestFromPackage(pkg, project)
+			text, header, msgs := CppTestFromPackage(pkg, project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "_test.cpp"
@@ -542,13 +542,14 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
-				listtypename := cnsttypename
+				allowtype, _ := TypeAllowFromType(cnsttype)
+				listtypename := JavaNameFromType(allowtype)
 				if listtypename == "any" {
 					listtypename = ""
 				}
 				cnstval = "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
-					"\n      output->vx_p_list" + listtypename + " = val->vx_list" + listtypename + "();"
+					"\n      output->vx_p_list = val->vx_list" + listtypename + "();"
 			}
 		case ":map":
 			clstext, msgs := CppFromValue(cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
@@ -583,7 +584,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 	extends := CppNameClassFullFromType(cnsttype)
 	headers := "" +
 		"\n  // (const " + cnst.name + ")" +
-		"\n  class Class_" + cnstname + " : public " + extends + " {" +
+		"\n  class Class_" + cnstname + " : public " + extends + ", public vx_core::vx_Abstract_const {" +
 		"\n  public:" +
 		"\n    static void vx_const_new(" + fullconstname + " output);" +
 		"\n    vx_core::Type_constdef vx_constdef() const;" +
@@ -597,12 +598,6 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 		"\n  // (const " + cnst.name + ")" +
 		"\n  // class " + cnstclassname + " {" +
 		"\n" +
-		"\n    // vx_const_new()" +
-		"\n    void " + fullclassname + "::vx_const_new(" + fullconstname + " output) {" +
-		cnstval +
-		"\n      vx_core::vx_reserve_type(output);" +
-		"\n    }" +
-		"\n" +
 		"\n    // vx_constdef()" +
 		"\n    vx_core::Type_constdef " + fullclassname + "::vx_constdef() const {" +
 		"\n      return vx_core::Class_constdef::vx_constdef_new(" +
@@ -610,6 +605,13 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 		"\n        \"" + cnst.name + "\", // name" +
 		"\n        " + CppTypeDefFromType(cnsttype, "        ") +
 		"\n      );" +
+		"\n    }" +
+		"\n" +
+		"\n    // vx_const_new()" +
+		"\n    void " + fullclassname + "::vx_const_new(" + fullconstname + " output) {" +
+		"\n      output->vx_p_constname = \"" + cnst.pkgname + "/" + cnst.name + "\";" +
+		cnstval +
+		"\n      vx_core::vx_reserve_type(output);" +
 		"\n    }" +
 		"\n" +
 		initval +
@@ -1490,7 +1492,11 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	}
 	staticfuncs := ""
 	valnew := ""
-	valcopy := ""
+	valcopy := "" +
+		"\n      bool ischanged = false;" +
+		"\n      if (copyval->vx_p_constname != \"\") {" +
+		"\n        ischanged = true;" +
+		"\n      }"
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		valnew += "" +
@@ -1520,8 +1526,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n    }"
 	case "vx/core/type":
 	case "vx/core/boolean":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      vx_core::Type_boolean val = vx_core::vx_any_from_any(vx_core::t_boolean, copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		valnew = "" +
 			"\n      bool booleanval = val->vx_boolean();" +
@@ -1547,8 +1554,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        output = vx_core::c_false;" +
 			"\n      }"
 	case "vx/core/decimal":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      vx_core::Type_decimal val = vx_core::vx_any_from_any(vx_core::t_decimal, copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		valnew = "" +
 			"\n      std::string sval = val->vx_string();" +
@@ -1563,7 +1571,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          sval = valstring->vx_string();" +
 			"\n        }" +
 			"\n      }" +
-			"\n      if ((sval != \"\") || (msgblock != vx_core::e_msgblock)) {" +
+			"\n      if (ischanged || (sval != \"\") || (msgblock != vx_core::e_msgblock)) {" +
 			"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
 			"\n        output->vx_p_decimal = sval;" +
 			"\n        if (msgblock != vx_core::e_msgblock) {" +
@@ -1572,11 +1580,13 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }"
 	case "vx/core/float":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      vx_core::Type_float val = vx_core::vx_any_from_any(vx_core::t_float, copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		valnew = "" +
 			"\n      float floatval = val->vx_float();" +
+			"\n      float origval = floatval;" +
 			"\n      for (vx_core::Type_any valsub : vals) {" +
 			"\n        vx_core::Type_any valsubtype = valsub->vx_type();" +
 			"\n        if (valsubtype == vx_core::t_msgblock) {" +
@@ -1597,7 +1607,10 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          floatval += vx_core::vx_float_from_string(valstring->vx_string());" +
 			"\n        }" +
 			"\n      }" +
-			"\n      if ((floatval != 0) || (msgblock != vx_core::e_msgblock)) {" +
+			"\n      if (floatval != origval) {" +
+			"\n        ischanged = true;" +
+			"\n      }" +
+			"\n      if (ischanged || (floatval != 0) || (msgblock != vx_core::e_msgblock)) {" +
 			"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
 			"\n        output->vx_p_float = floatval;" +
 			"\n        if (msgblock != vx_core::e_msgblock) {" +
@@ -1606,8 +1619,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }"
 	case "vx/core/int":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      vx_core::Type_int val = vx_core::vx_any_from_any(vx_core::t_int, copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		valnew = "" +
 			"\n      long intval = val->vx_int();" +
@@ -1636,8 +1650,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	case "vx/core/msg":
 	case "vx/core/msgblock":
 	case "vx/core/string":
-		valcopy = "" +
+		valcopy += "" +
 			"\n      vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		valnew = "" +
 			"\n      std::string sb = val->vx_string();" +
@@ -1785,8 +1800,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      " + fulltypename + " val = vx_core::vx_any_from_any(" + fulltname + ", copyval);" +
+			"\n      output = val;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);" +
 			"\n      std::vector<" + allowclass + "> listval = val->vx_list" + allowname + "();"
 		switch typ.name {
@@ -1831,8 +1847,10 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			default:
 				valnew += "" +
 					"\n        } else if (valsubtype == " + allowedtypename + ") {" +
+					"\n          ischanged = true;" +
 					"\n          listval.push_back(" + castval + ");" +
 					"\n        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + allowedtypename + ")) {" +
+					"\n          ischanged = true;" +
 					"\n          listval.push_back(" + castval + ");"
 			}
 		}
@@ -1841,6 +1859,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		default:
 			valnew += "" +
 				"\n        } else if (valsubtype == " + fulltname + ") {" +
+				"\n          ischanged = true;" +
 				"\n          " + fulltypename + " multi = vx_core::vx_any_from_any(" + fulltname + ", valsub);" +
 				"\n          listval = vx_core::vx_listaddall(listval, multi->vx_list" + allowname + "());"
 		}
@@ -1849,7 +1868,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			valnewelse +
 			"\n        }" +
 			"\n      }" +
-			"\n      if ((listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {" +
+			"\n      if (ischanged || (listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {" +
 			"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
 			"\n        output->vx_p_list = listval;" +
 			"\n        for (vx_core::Type_any valadd : listval) {" +
@@ -1959,8 +1978,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
-		valcopy = "" +
+		valcopy += "" +
 			"\n      " + fulltypename + " valmap = vx_core::vx_any_from_any(" + fulltname + ", copyval);" +
+			"\n      output = valmap;" +
 			"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);"
 		allowsub := ""
 		if allowname == "any" {
@@ -2007,13 +2027,14 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        } else {" +
 			allowsub +
 			"\n          if (valany) {" +
+			"\n            ischanged = true;" +
 			"\n            mapval[key] = valany;" +
 			"\n            keys.push_back(key);" +
 			"\n            key = \"\";" +
 			"\n          }" +
 			"\n        }" +
 			"\n      }" +
-			"\n      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {" +
+			"\n      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {" +
 			"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
 			"\n        output->vx_p_keys = keys;" +
 			"\n        output->vx_p_map = mapval;" +
@@ -2031,7 +2052,6 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	case ":struct":
 		vx_any := ""
 		vx_map := ""
-		valcopy = ""
 		switch NameFromType(typ) {
 		case "vx/core/msg":
 			valcopy += "" +
@@ -2045,6 +2065,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		default:
 			valcopy += "" +
 				"\n      " + fulltypename + " val = vx_core::vx_any_from_any(" + fulltname + ", copyval);" +
+				"\n      output = val;" +
 				"\n      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);"
 		}
 		props := ListPropertyTraitFromType(typ)
@@ -2062,13 +2083,13 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 				argname := CppFromName(arg.name)
 				destroyfields = append(destroyfields, "this->vx_p_"+argname)
 				argassign += "" +
-					"\n      if (output->vx_p_" + argname + " != vx_p_" + argname + ") {" +
-					"\n        if (output->vx_p_" + argname + ") {" +
-					"\n          vx_core::vx_release_one(output->vx_p_" + argname + ");" +
-					"\n        }" +
-					"\n        output->vx_p_" + argname + " = vx_p_" + argname + ";" +
-					"\n        vx_core::vx_reserve(vx_p_" + argname + ");" +
-					"\n      }"
+					"\n        if (output->vx_p_" + argname + " != vx_p_" + argname + ") {" +
+					"\n          if (output->vx_p_" + argname + ") {" +
+					"\n            vx_core::vx_release_one(output->vx_p_" + argname + ");" +
+					"\n          }" +
+					"\n          output->vx_p_" + argname + " = vx_p_" + argname + ";" +
+					"\n          vx_core::vx_reserve(vx_p_" + argname + ");" +
+					"\n        }"
 				argclassname := CppNameTypeFromType(arg.vxtype)
 				valcopy += "\n      " + argclassname + " vx_p_" + argname + " = val->" + argname + "();"
 				vx_map += "\n      output[\":" + arg.name + "\"] = this->" + argname + "();"
@@ -2089,10 +2110,15 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					switch NameFromType(arg.vxtype) {
 					case "vx/core/any":
 						valnewswitch += "" +
-							"\n            vx_p_" + argname + " = valsub;"
+							"\n            if (vx_p_" + argname + " != valsub) {" +
+							"\n              ischanged = true;" +
+							"\n              vx_p_" + argname + " = valsub;" +
+							"\n            }"
 					default:
 						valnewswitch += "" +
-							"\n            if (valsubtype == " + argttype + ") {" +
+							"\n            if (vx_p_" + argname + " == valsub) {" +
+							"\n            } else if (valsubtype == " + argttype + ") {" +
+							"\n              ischanged = true;" +
 							"\n              vx_p_" + argname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
 							"\n            } else {" +
 							"\n              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext(\"(new " + typ.name + " :" + arg.name + " \" + vx_core::vx_string_from_any(valsub) + \") - Invalid Value\");" +
@@ -2119,16 +2145,20 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 				argttype := CppNameTFromType(lastarg.vxtype)
 				defaultkey += "" +
 					"\n          } else if (valsubtype == " + argttype + ") { // default property" +
+					"\n            ischanged = true;" +
 					"\n            vx_p_" + lastargname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
 					"\n          } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + argttype + ")) { // default property" +
+					"\n            ischanged = true;" +
 					"\n            vx_p_" + lastargname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);"
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
 						subargttype := CppNameTFromType(allowtype)
 						defaultkey += "" +
 							"\n          } else if (valsubtype == " + subargttype + ") { // default property" +
+							"\n            ischanged = true;" +
 							"\n            vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});" +
 							"\n          } else if (vx_core::vx_boolean_from_type_trait(valsubtype, " + subargttype + ")) { // default property" +
+							"\n            ischanged = true;" +
 							"\n            vx_p_nodes = vx_core::vx_copy(vx_p_nodes, {valsub});"
 					}
 				}
@@ -2218,8 +2248,10 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          key = \"\";" +
 					"\n        }" +
 					"\n      }" +
-					"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";" +
-					argassign
+					"\n      if (ischanged || (msgblock != vx_core::e_msgblock)) {" +
+					"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
+					argassign +
+					"\n      }"
 			}
 		}
 		switch NameFromType(typ) {
@@ -2360,6 +2392,9 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 		fnc := FuncFromValue(value)
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
+		if fnc.debug {
+			output += "vx_core::f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", '" + funcname + "', "
+		}
 		switch fnc.name {
 		case "native":
 			// (native :cpp)
@@ -2666,9 +2701,16 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 								if !argvaluearg.vxtype.isfunc {
 									work, msgs := CppFromValue(argvalue, pkgname, fnc, subindent, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
+									argvaluefuncname := "any_from_func"
+									argvaluetypename := "vx_core::Type_any"
+									switch NameFromType(funcarg.vxtype) {
+									case "vx/core/boolean<-func":
+										argvaluefuncname = "boolean_from_func"
+										argvaluetypename = "vx_core::Type_boolean"
+									}
 									argtext = "" +
-										"vx_core::t_any_from_func->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
-										"\n  vx_core::Type_any output_" + StringFromInt(subindent) + " = " + work + ";" +
+										"vx_core::t_" + argvaluefuncname + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
+										"\n  " + argvaluetypename + " output_" + StringFromInt(subindent) + " = " + work + ";" +
 										"\n  return output_" + StringFromInt(subindent) + ";" +
 										"\n})"
 								}
@@ -2804,6 +2846,9 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 					}
 				}
 			}
+		}
+		if fnc.debug {
+			output += ")"
 		}
 	case ":funcref":
 		valfunc := FuncFromValue(value)
@@ -2999,6 +3044,9 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 	if BooleanFromStringContains(body, "std::string") {
 		output += "#include <string>\n"
 	}
+	if BooleanFromStringContains(body, "std::isclass<") {
+		output += "#include <type_traits>\n"
+	}
 	if BooleanFromStringContains(body, "std::vector<") {
 		output += "#include <vector>\n"
 	}
@@ -3081,6 +3129,7 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    Abstract_any() {};" +
 			"\n    virtual ~Abstract_any() = 0;" +
 			"\n    long vx_p_iref = 0;" +
+			"\n    std::string vx_p_constname = \"\";" +
 			"\n    vx_core::Type_msgblock vx_p_msgblock = NULL;" +
 			"\n    virtual vx_core::Type_msgblock vx_msgblock() const {return this->vx_p_msgblock;};" +
 			"\n    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const = 0;" +
@@ -4007,7 +4056,7 @@ func CppTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
+func CppTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppTestFromPackage")
 	pkgname := CppNameFromPkgName(pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
@@ -4025,6 +4074,10 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		test, msgs := CppTestFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(covertype, "vx_core::vx_new_string(\":"+typid+"\"), vx_core::vx_new_int("+StringFromInt(len(typ.testvalues))+")")
+		if command.filter == "" {
+		} else if NameFromType(typ) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
@@ -4049,6 +4102,10 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 		test, msgs := CppTestFromConst(cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(coverconst, "vx_core::vx_new_string(\":"+cnstid+"\"), vx_core::vx_new_int("+StringFromInt(len(cnst.listtestvalue))+")")
+		if command.filter == "" {
+		} else if NameFromConst(cnst) != command.filter {
+			test = ""
+		}
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
@@ -4077,6 +4134,10 @@ func CppTestFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgb
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+CppIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+StringFromInt(len(fnc.listtestvalue))+")")
+			if command.filter == "" {
+			} else if NameFromFunc(fnc) != command.filter {
+				test = ""
+			}
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
@@ -4462,15 +4523,15 @@ int main(int iarglen, char* arrayarg[]) {
 	return output
 }
 
-func CppAppTest(project *vxproject, cmd *vxcommand) string {
+func CppAppTest(project *vxproject, command *vxcommand) string {
 	listpackage := project.listpackage
 	includetext := ""
 	contexttext := `
     vx_core::Type_context context = vx_test::f_context_test(arglist);`
-	if cmd.context != "" {
-		contextfunc := FuncFromProjectFuncname(project, cmd.context)
-		if cmd.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
+	if command.context != "" {
+		contextfunc := FuncFromProjectFuncname(project, command.context)
+		if command.context != "" && contextfunc == emptyfunc {
+			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
 			switch contextfunc.pkgname {
@@ -4500,11 +4561,18 @@ func CppAppTest(project *vxproject, cmd *vxcommand) string {
 		includetext +
 		"\n"
 	for _, pkg := range listpackage {
-		pkgname := StringFromStringFindReplace(pkg.name, "/", "_")
-		testpackage := pkgname + "_test::test_package(context)"
-		listtestpackage = append(listtestpackage, testpackage)
-		importline := "#include \"" + pkg.name + "_test.hpp\"\n"
-		imports += importline
+		iscontinue := true
+		if command.filter == "" {
+		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+			iscontinue = false
+		}
+		if iscontinue {
+			pkgname := StringFromStringFindReplace(pkg.name, "/", "_")
+			testpackage := pkgname + "_test::test_package(context)"
+			listtestpackage = append(listtestpackage, testpackage)
+			importline := "#include \"" + pkg.name + "_test.hpp\"\n"
+			imports += importline
+		}
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",\n    ")
 	tests := ""

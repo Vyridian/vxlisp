@@ -719,6 +719,15 @@
       text = 'null'
     } else if (value == typedef) {
       text = vx_core.f_typename_from_typedef(typedef)
+    } else if (value['vx_constdef']) {
+      const constdef = value['vx_constdef']
+      const constpkg = constdef['pkgname']
+      const constname = constdef['name']
+      if (constpkg == 'vx/core') {
+        text = constname
+      } else {
+        text = constpkg + '/' + constname
+      }
     } else {
       switch (typedef) {
       case vx_core.t_boolean:
@@ -817,4 +826,19 @@
     }
     output = text
 		return output
+  }
+
+  static vx_string_from_string_start_end(text, start, end) {
+    let output = ""
+    const maxlen = text.length;
+    if (start < 1) {
+    } else if (start > end) {
+    } else if (start > maxlen) {
+    } else {
+      if (end > maxlen) {
+        end = maxlen
+      }
+      output = text.substring(start - 1, end);
+    }
+    return output
   }

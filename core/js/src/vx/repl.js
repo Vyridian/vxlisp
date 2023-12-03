@@ -28,21 +28,21 @@ export default class vx_repl {
    * vxlisp File Delimiters
    * {delim}
    */
-  static c_delimvxlisp = {vx_type: vx_data_textblock.t_delim}
+  static c_delimvxlisp = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/repl', name: 'delimvxlisp'}}
 
   /**
    * Constant: delimvxlispbracket
    * vxlisp Square Bracket Delimiters
    * {delim}
    */
-  static c_delimvxlispbracket = {vx_type: vx_data_textblock.t_delim}
+  static c_delimvxlispbracket = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/repl', name: 'delimvxlispbracket'}}
 
   /**
    * Constant: delimvxlispparen
    * vxlisp Paren Delimiters
    * {delim}
    */
-  static c_delimvxlispparen = {vx_type: vx_data_textblock.t_delim}
+  static c_delimvxlispparen = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/repl', name: 'delimvxlispparen'}}
 
   /**
    * @function any_repl_from_functype_args
@@ -92,32 +92,6 @@ export default class vx_repl {
   }
 
   /**
-   * 
-   * @async @function any_from_liblist_string_async
-   * Run an arbitrary program in the REPL asynchrously.
-   * @param  {liblist} liblist
-   * @param  {string} text Program to run
-   * @return {any}
-   */
-  static t_any_from_liblist_string_async = {}
-  static e_any_from_liblist_string_async = {vx_type: vx_repl.t_any_from_liblist_string_async}
-
-  // (func any<-liblist-string-async)
-  static async f_any_from_liblist_string_async(context, liblist, text) {
-    let output = Promise.resolve(vx_core.e_any)
-    output = await vx_core.f_let_async(
-      {"any-1": vx_core.t_any},
-      [],
-      vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const repl = vx_repl.f_repl_from_liblist_string(liblist, text)
-        const val = await vx_repl.f_any_from_repl_async(context, repl)
-        return val
-      })
-    )
-    return output
-  }
-
-  /**
    * @function any_from_repl
    * Run an arbitrary program in the REPL.
    * @param  {repl} repl
@@ -157,18 +131,26 @@ export default class vx_repl {
   }
 
   /**
-   * 
-   * @async @function any_from_repl_async
-   * Run an arbitrary program in the REPL.
-   * @param  {repl} repl
+   * @function any_from_script
+   * Run an arbitrary script.
+   * @param  {string} script
    * @return {any}
    */
-  static t_any_from_repl_async = {}
-  static e_any_from_repl_async = {vx_type: vx_repl.t_any_from_repl_async}
+  static t_any_from_script = {}
+  static e_any_from_script = {vx_type: vx_repl.t_any_from_script}
 
-  // (func any<-repl-async)
-  static async f_any_from_repl_async(context, repl) {
-    let output = Promise.resolve(vx_core.e_any)
+  // (func any<-script)
+  static f_any_from_script(context, script) {
+    let output = vx_core.e_any
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_any},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const textblock = vx_repl.f_textblock_repl_from_script(script)
+        const repl = vx_repl.f_repl_from_textblock(textblock)
+        return vx_repl.f_any_from_repl(context, repl)
+      })
+    )
     return output
   }
 
@@ -218,8 +200,8 @@ export default class vx_repl {
           vx_core.f_new(vx_core.t_any_from_any, (item) => 
             vx_core.f_string_from_any(item))
         )
-        const text = vx_type.f_string_from_stringlist_join(textlist, "")
-        const tb = vx_repl.f_textblock_repl_from_string(text)
+        const script = vx_type.f_string_from_stringlist_join(textlist, "")
+        const tb = vx_repl.f_textblock_repl_from_script(script)
         const repl = vx_repl.f_repl_from_textblock(tb)
         return vx_core.f_any_from_any(
           {"any-1": vx_core.t_any, "any-2": vx_core.t_any},
@@ -262,19 +244,19 @@ export default class vx_repl {
   }
 
   /**
-   * @function textblock_repl_from_string
+   * @function textblock_repl_from_script
    * Returns a parsed textblock from a string
-   * @param  {string} text
+   * @param  {string} script
    * @return {textblock}
    */
-  static t_textblock_repl_from_string = {}
-  static e_textblock_repl_from_string = {vx_type: vx_repl.t_textblock_repl_from_string}
+  static t_textblock_repl_from_script = {}
+  static e_textblock_repl_from_script = {vx_type: vx_repl.t_textblock_repl_from_script}
 
-  // (func textblock-repl<-string)
-  static f_textblock_repl_from_string(text) {
+  // (func textblock-repl<-script)
+  static f_textblock_repl_from_script(script) {
     let output = vx_data_textblock.e_textblock
     output = vx_data_textblock.f_textblock_parse_from_string_delim(
-      text,
+      script,
       vx_repl.c_delimvxlisp
     )
     return output
@@ -291,14 +273,13 @@ export default class vx_repl {
     "repllist": vx_repl.e_repllist,
     "any-repl<-functype-args": vx_repl.e_any_repl_from_functype_args,
     "any<-liblist-string": vx_repl.e_any_from_liblist_string,
-    "any<-liblist-string-async": vx_repl.e_any_from_liblist_string_async,
     "any<-repl": vx_repl.e_any_from_repl,
-    "any<-repl-async": vx_repl.e_any_from_repl_async,
+    "any<-script": vx_repl.e_any_from_script,
     "anylist<-repllist": vx_repl.e_anylist_from_repllist,
     "macro": vx_repl.e_macro,
     "repl<-liblist-string": vx_repl.e_repl_from_liblist_string,
     "repl<-textblock": vx_repl.e_repl_from_textblock,
-    "textblock-repl<-string": vx_repl.e_textblock_repl_from_string
+    "textblock-repl<-script": vx_repl.e_textblock_repl_from_script
   }
 
 
@@ -393,10 +374,9 @@ export default class vx_repl {
       ":delimlist",
       vx_core.f_new(
         vx_data_textblock.t_delimlist,
+        vx_repl.c_delimvxlispparen,
         vx_data_textblock.c_delimcomment,
-        vx_data_textblock.c_delimcommentblock,
-        vx_data_textblock.c_delimwhitespace,
-        vx_repl.c_delimvxlispparen
+        vx_data_textblock.c_delimcommentblock
       )
     ))
 
@@ -474,25 +454,6 @@ export default class vx_repl {
       fn            : vx_repl.f_any_from_liblist_string
     }
 
-    // (func any<-liblist-string-async)
-    vx_repl.t_any_from_liblist_string_async['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_liblist_string_async['vx_value'] = {
-      name          : "any<-liblist-string-async",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_from_liblist_string_async
-    }
-
     // (func any<-repl)
     vx_repl.t_any_from_repl['vx_type'] = vx_core.t_type
     vx_repl.t_any_from_repl['vx_value'] = {
@@ -512,10 +473,10 @@ export default class vx_repl {
       fn            : vx_repl.f_any_from_repl
     }
 
-    // (func any<-repl-async)
-    vx_repl.t_any_from_repl_async['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_repl_async['vx_value'] = {
-      name          : "any<-repl-async",
+    // (func any<-script)
+    vx_repl.t_any_from_script['vx_type'] = vx_core.t_type
+    vx_repl.t_any_from_script['vx_value'] = {
+      name          : "any<-script",
       pkgname       : "vx/repl",
       extends       : ":func",
       idx           : 0,
@@ -528,7 +489,7 @@ export default class vx_repl {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_repl.f_any_from_repl_async
+      fn            : vx_repl.f_any_from_script
     }
 
     // (func anylist<-repllist)
@@ -607,10 +568,10 @@ export default class vx_repl {
       fn            : vx_repl.f_repl_from_textblock
     }
 
-    // (func textblock-repl<-string)
-    vx_repl.t_textblock_repl_from_string['vx_type'] = vx_core.t_type
-    vx_repl.t_textblock_repl_from_string['vx_value'] = {
-      name          : "textblock-repl<-string",
+    // (func textblock-repl<-script)
+    vx_repl.t_textblock_repl_from_script['vx_type'] = vx_core.t_type
+    vx_repl.t_textblock_repl_from_script['vx_value'] = {
+      name          : "textblock-repl<-script",
       pkgname       : "vx/repl",
       extends       : ":func",
       idx           : 0,
@@ -623,7 +584,7 @@ export default class vx_repl {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_repl.f_textblock_repl_from_string
+      fn            : vx_repl.f_textblock_repl_from_script
     }
 
   }

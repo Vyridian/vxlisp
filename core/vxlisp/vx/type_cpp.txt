@@ -20,12 +20,12 @@
     if (text != "") {
       if (find == ":nonwhitespace") {
         std::string wschars1 = " \n\r\t";
-				int ilen = text.length();
+        int ilen = text.length();
         for (int i = 0; i < ilen; i++) {
-					char cchar = text[i];
+          char cchar = text[i];
           int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
-					if (pos < 0) {
-						output = i;
+          if (pos < 0) {
+            output = i;
             break;
           }
         }
@@ -39,13 +39,14 @@
           } else if (pos < output) {
            output = pos;
           }
-				}
+        }
       } else {
-			  output = text.find(find);
-			}
-		}
-		return output;
-	}
+        output = text.find(find);
+      }
+    }
+    output += 1;
+    return output;
+  }
 
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {

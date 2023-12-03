@@ -179,14 +179,14 @@ namespace vx_data_xml {
   };
 
   // (const delimxml)
-  class Class_delimxml : public vx_data_textblock::Class_delim {
+  class Class_delimxml : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_data_xml::Const_delimxml output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimxmlequal)
-  class Class_delimxmlequal : public vx_data_textblock::Class_delim {
+  class Class_delimxmlequal : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_data_xml::Const_delimxmlequal output);
     vx_core::Type_constdef vx_constdef() const;

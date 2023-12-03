@@ -192,7 +192,12 @@ namespace vx_data_file {
 
     vx_core::Type_any Class_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_file output = vx_data_file::e_file;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_data_file::Type_file val = vx_core::vx_any_from_any(vx_data_file::t_file, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
       vx_data_file::Type_fileformat vx_p_format = val->format();
@@ -230,35 +235,45 @@ namespace vx_data_file {
         } else {
           if (false) {
           } else if (key == ":name") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_name == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":format") {
-            if (valsubtype == vx_data_file::t_fileformat) {
+            if (vx_p_format == valsub) {
+            } else if (valsubtype == vx_data_file::t_fileformat) {
+              ischanged = true;
               vx_p_format = vx_core::vx_any_from_any(vx_data_file::t_fileformat, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :format " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":path") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_path == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_path = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":permission") {
-            if (valsubtype == vx_core::t_permission) {
+            if (vx_p_permission == valsub) {
+            } else if (valsubtype == vx_core::t_permission) {
+              ischanged = true;
               vx_p_permission = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :permission " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":text") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_text == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new file :text " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -271,41 +286,43 @@ namespace vx_data_file {
           key = "";
         }
       }
-      output = new vx_data_file::Class_file();
-      if (output->vx_p_name != vx_p_name) {
-        if (output->vx_p_name) {
-          vx_core::vx_release_one(output->vx_p_name);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_file::Class_file();
+        if (output->vx_p_name != vx_p_name) {
+          if (output->vx_p_name) {
+            vx_core::vx_release_one(output->vx_p_name);
+          }
+          output->vx_p_name = vx_p_name;
+          vx_core::vx_reserve(vx_p_name);
         }
-        output->vx_p_name = vx_p_name;
-        vx_core::vx_reserve(vx_p_name);
-      }
-      if (output->vx_p_format != vx_p_format) {
-        if (output->vx_p_format) {
-          vx_core::vx_release_one(output->vx_p_format);
+        if (output->vx_p_format != vx_p_format) {
+          if (output->vx_p_format) {
+            vx_core::vx_release_one(output->vx_p_format);
+          }
+          output->vx_p_format = vx_p_format;
+          vx_core::vx_reserve(vx_p_format);
         }
-        output->vx_p_format = vx_p_format;
-        vx_core::vx_reserve(vx_p_format);
-      }
-      if (output->vx_p_path != vx_p_path) {
-        if (output->vx_p_path) {
-          vx_core::vx_release_one(output->vx_p_path);
+        if (output->vx_p_path != vx_p_path) {
+          if (output->vx_p_path) {
+            vx_core::vx_release_one(output->vx_p_path);
+          }
+          output->vx_p_path = vx_p_path;
+          vx_core::vx_reserve(vx_p_path);
         }
-        output->vx_p_path = vx_p_path;
-        vx_core::vx_reserve(vx_p_path);
-      }
-      if (output->vx_p_permission != vx_p_permission) {
-        if (output->vx_p_permission) {
-          vx_core::vx_release_one(output->vx_p_permission);
+        if (output->vx_p_permission != vx_p_permission) {
+          if (output->vx_p_permission) {
+            vx_core::vx_release_one(output->vx_p_permission);
+          }
+          output->vx_p_permission = vx_p_permission;
+          vx_core::vx_reserve(vx_p_permission);
         }
-        output->vx_p_permission = vx_p_permission;
-        vx_core::vx_reserve(vx_p_permission);
-      }
-      if (output->vx_p_text != vx_p_text) {
-        if (output->vx_p_text) {
-          vx_core::vx_release_one(output->vx_p_text);
+        if (output->vx_p_text != vx_p_text) {
+          if (output->vx_p_text) {
+            vx_core::vx_release_one(output->vx_p_text);
+          }
+          output->vx_p_text = vx_p_text;
+          vx_core::vx_reserve(vx_p_text);
         }
-        output->vx_p_text = vx_p_text;
-        vx_core::vx_reserve(vx_p_text);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -382,6 +399,10 @@ namespace vx_data_file {
 
     vx_core::Type_any Class_fileformat::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_file::Type_fileformat output = vx_data_file::e_fileformat;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;

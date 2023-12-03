@@ -63,7 +63,6 @@
    :code    :test
    :lang    :js
    :path    ../js/test
-//   :filter  vx/data/csv/textblock-csv<-string
    :context vx/test/context-test
    :doc     "Build JavaScript Test Code")
   (cmd srcjava
@@ -78,7 +77,7 @@
    :lang    :java
    :path    ../java/src/test/java
    :context vx/test/context-test
-   :doc  "Build Java Test Code")
+   :doc     "Build Java Test Code")
   (cmd srckotlin
    :code    :source
    :lang    :kotlin

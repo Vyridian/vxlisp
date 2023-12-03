@@ -86,6 +86,13 @@ let-async
     virtual vx_core::vx_Type_mapfunc mapfunc() = 0;
   };
 
+  // class vx_Abstract_const
+  class vx_Abstract_const {
+  public:
+    virtual vx_core::Type_constdef vx_constdef() const = 0;
+  };
+  typedef vx_core::vx_Abstract_const* vx_Type_const;
+
   // class vx_Class_async
   class vx_Class_async {
   public:
@@ -170,6 +177,12 @@ let-async
 
   // vx_int_from_string(string)
   int vx_int_from_string(std::string text);
+
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find);
+
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find);
 
   // vx_is_float(string)
   bool vx_is_float(std::string value);
@@ -876,6 +889,20 @@ let-async
     return output;
   }
 
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find) {
+    size_t pos = text.find(find);
+    int output = vx_core::vx_int_from_sizet(pos);
+    return output;
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find) {
+    size_t pos = text.rfind(find);
+    int output = vx_core::vx_int_from_sizet(pos);
+    return output;
+  }
+
   // vx_is_float(string)
   bool vx_is_float(std::string value) {
     bool output = true;
@@ -1566,61 +1593,48 @@ let-async
       } else if (value == type->vx_empty()) {
         text = "(" + typedefname + ")";
       } else {
-        std::string extend = typdef->extend()->vx_string();
-        if (extend == ":list") {
-          vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, value);
-          long indentint = indent;
-          indentint += 1;
-          vx_core::vx_Type_listany listval = vallist->vx_list();
-          for (vx_core::Type_any valsub : listval) {
-            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
-            text += "\n " + indenttext + ssub;
+        std::string constname = value->vx_p_constname;
+        if (constname != "") {
+          int lastpos = vx_core::vx_int_from_string_findlast(constname, "/");
+          std::string constpkg = "";
+          if (lastpos >= 0) {
+            constpkg = constname.substr(0, lastpos);
+            constname = constname.substr(lastpos + 1, constname.length());
           }
-          if (vallist->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+          if (constpkg == "vx/core") {
+            text = constname;
+          } else {
+            text = constpkg + "/" + constname;
           }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vallist->vx_p_iref);
-          }
-          text = "(" + typedefname + text + ")";
-        } else if (extend == ":map") {
-          vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map, value);
-          long indentint = indent;
-          indentint += 2;
-          vx_core::vx_Type_mapany mapval = valmap->vx_map();
-          for (auto const& [ckey, valsub] : mapval) {
-            std::string key = ckey;
-            if (!vx_boolean_from_string_starts(key, ":")) {
-              key = ":" + key;
+        } else {
+          std::string extend = typdef->extend()->vx_string();
+          if (extend == ":list") {
+            vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, value);
+            long indentint = indent;
+            indentint += 1;
+            vx_core::vx_Type_listany listval = vallist->vx_list();
+            for (vx_core::Type_any valsub : listval) {
+              std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
+              text += "\n " + indenttext + ssub;
             }
-            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
-            if (vx_boolean_from_string_find(strval, "\n")) {
-              strval = "\n  " + indenttext + strval;
-            } else {
-              strval = " " + strval;
+            if (vallist->vx_p_msgblock) {
+              std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed, refcount);
+              text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
             }
-            text += "\n" + indenttext + " " + key + strval;
-          }
-          if (valmap->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valmap->vx_p_iref);
-          }
-          text = "(" + typedefname + text + ")";
-        } else if (extend == ":struct") {
-          vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct, value);
-          vx_core::vx_Type_mapany mapval = valstruct->vx_map();
-          vx_core::Type_argmap properties = typdef->properties();
-          std::vector<std::string> keys = properties->vx_p_keys;
-          long indentint = indent;
-          indentint += 2;
-          for (std::string key : keys) {
-            vx_core::Type_any valsub = mapval[key];
-            if (!valsub) {
-            } else if (valsub != valsub->vx_empty()) {
+            if (refcount) {
+              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vallist->vx_p_iref);
+            }
+            text = "(" + typedefname + text + ")";
+          } else if (extend == ":map") {
+            vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map, value);
+            long indentint = indent;
+            indentint += 2;
+            vx_core::vx_Type_mapany mapval = valmap->vx_map();
+            for (auto const& [ckey, valsub] : mapval) {
+              std::string key = ckey;
+              if (!vx_boolean_from_string_starts(key, ":")) {
+                key = ":" + key;
+              }
               std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
@@ -1629,26 +1643,54 @@ let-async
               }
               text += "\n" + indenttext + " " + key + strval;
             }
+            if (valmap->vx_p_msgblock) {
+              std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed, refcount);
+              text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+            }
+            if (refcount) {
+              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valmap->vx_p_iref);
+            }
+            text = "(" + typedefname + text + ")";
+          } else if (extend == ":struct") {
+            vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct, value);
+            vx_core::vx_Type_mapany mapval = valstruct->vx_map();
+            vx_core::Type_argmap properties = typdef->properties();
+            std::vector<std::string> keys = properties->vx_p_keys;
+            long indentint = indent;
+            indentint += 2;
+            for (std::string key : keys) {
+              vx_core::Type_any valsub = mapval[key];
+              if (!valsub) {
+              } else if (valsub != valsub->vx_empty()) {
+                std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
+                if (vx_boolean_from_string_find(strval, "\n")) {
+                  strval = "\n  " + indenttext + strval;
+                } else {
+                  strval = " " + strval;
+                }
+                text += "\n" + indenttext + " " + key + strval;
+              }
+            }
+            if (valstruct->vx_p_msgblock) {
+              std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed, refcount);
+              text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+            }
+            if (refcount) {
+              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valstruct->vx_p_iref);
+            }
+            text = "(" + typedefname + text + ")";
+          } else if (extend == ":func") {
+            vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func, value);
+            text = typedefname;
+            if (valfunc->vx_p_msgblock) {
+              text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
+              text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
+            }
+            if (refcount) {
+              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valfunc->vx_p_iref);
+            }
+            text = "(" + text + ")";
           }
-          if (valstruct->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valstruct->vx_p_iref);
-          }
-          text = "(" + typedefname + text + ")";
-        } else if (extend == ":func") {
-          vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func, value);
-          text = typedefname;
-          if (valfunc->vx_p_msgblock) {
-            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valfunc->vx_p_iref);
-          }
-          text = "(" + text + ")";
         }
       }
       vx_core::vx_release(typdef);
@@ -1795,15 +1837,15 @@ let-async
   std::string vx_string_from_string_start_end(std::string text, long start, long end) {
     std::string output = "";
     int maxlen = text.length();
-    if (start < 0) {
-    } else if (start >= end) {
-    } else if (start >= maxlen) {
+    if (start < 1) {
+    } else if (start > end) {
+    } else if (start > maxlen) {
     } else {
       if (end >= maxlen) {
         end = maxlen;
       }
-      int len = end-start;
-      output = text.substr(start, len);
+      int len = end - start + 1;
+      output = text.substr(start - 1, len);
     }
     return output;
   }

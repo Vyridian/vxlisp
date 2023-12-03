@@ -68,11 +68,15 @@ public final class Http {
 
     @Override
     public Type_response vx_copy(final Object... vals) {
-      Class_response output = new Class_response();
+      Type_response output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_response val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_ok = val.ok();
-      output.vx_p_status = val.status();
+      Core.Type_boolean vx_p_ok = val.ok();
+      Core.Type_int vx_p_status = val.status();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":ok");
       validkeys.add(":status");
@@ -100,20 +104,26 @@ public final class Http {
         } else {
           switch (key) {
           case ":ok":
-            if (valsub instanceof Core.Type_boolean) {
-              output.vx_p_ok = (Core.Type_boolean)valsub;
+            if (valsub == vx_p_ok) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_ok = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
-              output.vx_p_ok = Core.t_boolean.vx_new(valsub);
+              ischanged = true;
+              vx_p_ok = Core.t_boolean.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new response :ok " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":status":
-            if (valsub instanceof Core.Type_int) {
-              output.vx_p_status = (Core.Type_int)valsub;
+            if (valsub == vx_p_status) {
+            } else if (valsub instanceof Core.Type_int) {
+              ischanged = true;
+              vx_p_status = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
-              output.vx_p_status = Core.t_int.vx_new(valsub);
+              ischanged = true;
+              vx_p_status = Core.t_int.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new response :status " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -126,8 +136,14 @@ public final class Http {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_response work = new Class_response();
+        work.vx_p_ok = vx_p_ok;
+        work.vx_p_status = vx_p_status;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }

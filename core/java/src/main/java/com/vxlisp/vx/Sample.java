@@ -65,11 +65,15 @@ public final class Sample {
 
     @Override
     public Type_mytype vx_copy(final Object... vals) {
-      Class_mytype output = new Class_mytype();
+      Type_mytype output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_mytype val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_mynum = val.mynum();
-      output.vx_p_mystr = val.mystr();
+      Core.Type_int vx_p_mynum = val.mynum();
+      Core.Type_string vx_p_mystr = val.mystr();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":mynum");
       validkeys.add(":mystr");
@@ -97,20 +101,26 @@ public final class Sample {
         } else {
           switch (key) {
           case ":mynum":
-            if (valsub instanceof Core.Type_int) {
-              output.vx_p_mynum = (Core.Type_int)valsub;
+            if (valsub == vx_p_mynum) {
+            } else if (valsub instanceof Core.Type_int) {
+              ischanged = true;
+              vx_p_mynum = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
-              output.vx_p_mynum = Core.t_int.vx_new(valsub);
+              ischanged = true;
+              vx_p_mynum = Core.t_int.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new mytype :mynum " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":mystr":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_mystr = (Core.Type_string)valsub;
+            if (valsub == vx_p_mystr) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_mystr = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_mystr = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_mystr = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new mytype :mystr " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -123,8 +133,14 @@ public final class Sample {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_mytype work = new Class_mytype();
+        work.vx_p_mynum = vx_p_mynum;
+        work.vx_p_mystr = vx_p_mystr;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -161,9 +177,10 @@ public final class Sample {
    * My Constant
    * {int}
    */
-  public static class Const_myconst extends Core.Class_int {
+  public static class Const_myconst extends Core.Class_int implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/sample", // pkgname
         "myconst", // name

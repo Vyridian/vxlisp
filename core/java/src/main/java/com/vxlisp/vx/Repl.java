@@ -1,11 +1,11 @@
 package com.vxlisp.vx;
 
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import com.vxlisp.vx.data.*;
+import java.util.concurrent.CompletableFuture;
 
 
 public final class Repl {
@@ -94,7 +94,11 @@ public final class Repl {
 
     @Override
     public Type_liblist vx_copy(final Object... vals) {
-      Class_liblist output = new Class_liblist();
+      Type_liblist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_liblist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Core.Type_string> listval = new ArrayList<>(val.vx_liststring());
@@ -104,17 +108,21 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_string) {
+          ischanged = true;
           listval.add((Core.Type_string)valsub);
         } else if (valsub instanceof String) {
+          ischanged = true;
           listval.add(Core.t_string.vx_new(valsub));
         } else if (valsub instanceof Type_liblist) {
           Type_liblist multi = (Type_liblist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Core.Type_string) {
               Core.Type_string valitem = (Core.Type_string)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -123,9 +131,13 @@ public final class Repl {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_liblist work = new Class_liblist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -239,13 +251,17 @@ public final class Repl {
 
     @Override
     public Type_repl vx_copy(final Object... vals) {
-      Class_repl output = new Class_repl();
+      Type_repl output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_repl val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_type = val.type();
-      output.vx_p_repllist = val.repllist();
-      output.vx_p_async = val.async();
-      output.vx_p_val = val.val();
+      Core.Type_any vx_p_type = val.type();
+      Repl.Type_repllist vx_p_repllist = val.repllist();
+      Core.Type_boolean vx_p_async = val.async();
+      Core.Type_any vx_p_val = val.val();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":type");
       validkeys.add(":repllist");
@@ -275,34 +291,43 @@ public final class Repl {
         } else {
           switch (key) {
           case ":type":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_type = (Core.Type_any)valsub;
+            if (valsub == vx_p_type) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_type = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new repl :type " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":repllist":
-            if (valsub instanceof Repl.Type_repllist) {
-              output.vx_p_repllist = (Repl.Type_repllist)valsub;
+            if (valsub == vx_p_repllist) {
+            } else if (valsub instanceof Repl.Type_repllist) {
+              ischanged = true;
+              vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new repl :repllist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":async":
-            if (valsub instanceof Core.Type_boolean) {
-              output.vx_p_async = (Core.Type_boolean)valsub;
+            if (valsub == vx_p_async) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_async = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
-              output.vx_p_async = Core.t_boolean.vx_new(valsub);
+              ischanged = true;
+              vx_p_async = Core.t_boolean.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new repl :async " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":val":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_val = (Core.Type_any)valsub;
+            if (valsub == vx_p_val) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_val = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new repl :val " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -315,8 +340,16 @@ public final class Repl {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_repl work = new Class_repl();
+        work.vx_p_type = vx_p_type;
+        work.vx_p_repllist = vx_p_repllist;
+        work.vx_p_async = vx_p_async;
+        work.vx_p_val = vx_p_val;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -394,7 +427,11 @@ public final class Repl {
 
     @Override
     public Type_repllist vx_copy(final Object... vals) {
-      Class_repllist output = new Class_repllist();
+      Type_repllist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_repllist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Repl.Type_repl> listval = new ArrayList<>(val.vx_listrepl());
@@ -404,17 +441,21 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Repl.Type_repl) {
+          ischanged = true;
           listval.add((Repl.Type_repl)valsub);
         } else if (valsub instanceof Repl.Type_repl) {
+          ischanged = true;
           listval.add((Repl.Type_repl)valsub);
         } else if (valsub instanceof Type_repllist) {
           Type_repllist multi = (Type_repllist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listrepl());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Repl.Type_repl) {
               Repl.Type_repl valitem = (Repl.Type_repl)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -423,9 +464,13 @@ public final class Repl {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_repllist work = new Class_repllist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -462,9 +507,10 @@ public final class Repl {
    * vxlisp File Delimiters
    * {delim}
    */
-  public static class Const_delimvxlisp extends Textblock.Class_delim {
+  public static class Const_delimvxlisp extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlisp", // name
@@ -494,10 +540,9 @@ public final class Repl {
                 Core.f_new(
                   Textblock.t_delimlist,
                   Core.t_anylist.vx_new(
+                    Repl.c_delimvxlispparen,
                     Textblock.c_delimcomment,
-                    Textblock.c_delimcommentblock,
-                    Textblock.c_delimwhitespace,
-                    Repl.c_delimvxlispparen
+                    Textblock.c_delimcommentblock
                   )
                 )
         )
@@ -505,8 +550,7 @@ public final class Repl {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 
@@ -521,9 +565,10 @@ public final class Repl {
    * vxlisp Square Bracket Delimiters
    * {delim}
    */
-  public static class Const_delimvxlispbracket extends Textblock.Class_delim {
+  public static class Const_delimvxlispbracket extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlispbracket", // name
@@ -567,8 +612,7 @@ public final class Repl {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 
@@ -583,9 +627,10 @@ public final class Repl {
    * vxlisp Paren Delimiters
    * {delim}
    */
-  public static class Const_delimvxlispparen extends Textblock.Class_delim {
+  public static class Const_delimvxlispparen extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlispparen", // name
@@ -629,8 +674,7 @@ public final class Repl {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 
@@ -812,100 +856,6 @@ public final class Repl {
   }
 
   /**
-   * 
-   * @async
-   * @function any_from_liblist_string_async
-   * Run an arbitrary program in the REPL asynchrously.
-   * @param  {liblist} liblist
-   * @param  {string} text Program to run
-   * @return {any}
-   * (func any<-liblist-string-async)
-   */
-  public static interface Func_any_from_liblist_string_async extends Core.Type_func, Core.Type_replfunc_async {
-    public CompletableFuture<Core.Type_any> f_any_from_liblist_string_async(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text);
-  }
-
-  public static class Class_any_from_liblist_string_async extends Core.Class_base implements Func_any_from_liblist_string_async {
-
-    @Override
-    public Func_any_from_liblist_string_async vx_new(Object... vals) {
-      Class_any_from_liblist_string_async output = new Class_any_from_liblist_string_async();
-      return output;
-    }
-
-    @Override
-    public Func_any_from_liblist_string_async vx_copy(Object... vals) {
-      Class_any_from_liblist_string_async output = new Class_any_from_liblist_string_async();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/repl", // pkgname
-        "any<-liblist-string-async", // name
-        0, // idx
-        true, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "any", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_any_from_liblist_string_async vx_empty() {return e_any_from_liblist_string_async;}
-    @Override
-    public Func_any_from_liblist_string_async vx_type() {return t_any_from_liblist_string_async;}
-
-    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
-      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Repl.Type_liblist liblist = Core.f_any_from_any(Repl.t_liblist, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      CompletableFuture<Core.Type_any> future = Repl.f_any_from_liblist_string_async(context, liblist, text);
-      output = Core.async_from_async(Core.t_any, future);
-      return output;
-    }
-
-    @Override
-    public CompletableFuture<Core.Type_any> f_any_from_liblist_string_async(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text) {
-      return Repl.f_any_from_liblist_string_async(context, liblist, text);
-    }
-
-  }
-
-  public static final Func_any_from_liblist_string_async e_any_from_liblist_string_async = new Repl.Class_any_from_liblist_string_async();
-  public static final Func_any_from_liblist_string_async t_any_from_liblist_string_async = new Repl.Class_any_from_liblist_string_async();
-
-  public static CompletableFuture<Core.Type_any> f_any_from_liblist_string_async(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text) {
-    CompletableFuture<Core.Type_any> output = Core.async_new_completed(Core.e_any);
-    output = Core.f_let_async(
-      Core.t_any,
-      Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Repl.Type_repl repl = Repl.f_repl_from_liblist_string(liblist, text);
-        final CompletableFuture<Core.Type_any> future_val = Repl.f_any_from_repl_async(context, repl);
-        return Core.async_from_async_fn(future_val, (val) -> {
-          return val;
-        });
-      })
-    );
-    return output;
-  }
-
-  /**
    * @function any_from_repl
    * Run an arbitrary program in the REPL.
    * @param  {repl} repl
@@ -1032,29 +982,27 @@ public final class Repl {
   }
 
   /**
-   * 
-   * @async
-   * @function any_from_repl_async
-   * Run an arbitrary program in the REPL.
-   * @param  {repl} repl
+   * @function any_from_script
+   * Run an arbitrary script.
+   * @param  {string} script
    * @return {any}
-   * (func any<-repl-async)
+   * (func any<-script)
    */
-  public static interface Func_any_from_repl_async extends Core.Func_any_from_any_context_async {
-    public CompletableFuture<Core.Type_any> f_any_from_repl_async(final Core.Type_context context, final Repl.Type_repl repl);
+  public static interface Func_any_from_script extends Core.Func_any_from_any_context {
+    public Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script);
   }
 
-  public static class Class_any_from_repl_async extends Core.Class_base implements Func_any_from_repl_async {
+  public static class Class_any_from_script extends Core.Class_base implements Func_any_from_script {
 
     @Override
-    public Func_any_from_repl_async vx_new(Object... vals) {
-      Class_any_from_repl_async output = new Class_any_from_repl_async();
+    public Func_any_from_script vx_new(Object... vals) {
+      Class_any_from_script output = new Class_any_from_script();
       return output;
     }
 
     @Override
-    public Func_any_from_repl_async vx_copy(Object... vals) {
-      Class_any_from_repl_async output = new Class_any_from_repl_async();
+    public Func_any_from_script vx_copy(Object... vals) {
+      Class_any_from_script output = new Class_any_from_script();
       return output;
     }
 
@@ -1065,9 +1013,9 @@ public final class Repl {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/repl", // pkgname
-        "any<-repl-async", // name
+        "any<-script", // name
         0, // idx
-        true, // async
+        false, // async
         Core.typedef_new(
           "vx/core", // pkgname
           "any", // name
@@ -1085,43 +1033,50 @@ public final class Repl {
     }
 
     @Override
-    public Func_any_from_repl_async vx_empty() {return e_any_from_repl_async;}
+    public Func_any_from_script vx_empty() {return e_any_from_script;}
     @Override
-    public Func_any_from_repl_async vx_type() {return t_any_from_repl_async;}
+    public Func_any_from_script vx_type() {return t_any_from_script;}
 
     @Override
-    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {return Core.e_any_from_any_context_async;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
-      Repl.Type_repl inputval = Core.f_any_from_any(Repl.t_repl, value);
-      CompletableFuture<Core.Type_any> future = Repl.f_any_from_repl_async(context, inputval);
-      @SuppressWarnings("unchecked")
-      CompletableFuture<T> output = (CompletableFuture<T>)future;
+    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Repl.f_any_from_script(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
-    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, arglist.vx_any(Core.vx_new_int(0)));
-      CompletableFuture<Core.Type_any> future = Repl.f_any_from_repl_async(context, repl);
-      output = Core.async_from_async(Core.t_any, future);
+      Core.Type_string script = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Repl.f_any_from_script(context, script);
       return output;
     }
 
     @Override
-    public CompletableFuture<Core.Type_any> f_any_from_repl_async(final Core.Type_context context, final Repl.Type_repl repl) {
-      return Repl.f_any_from_repl_async(context, repl);
+    public Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script) {
+      return Repl.f_any_from_script(context, script);
     }
 
   }
 
-  public static final Func_any_from_repl_async e_any_from_repl_async = new Repl.Class_any_from_repl_async();
-  public static final Func_any_from_repl_async t_any_from_repl_async = new Repl.Class_any_from_repl_async();
+  public static final Func_any_from_script e_any_from_script = new Repl.Class_any_from_script();
+  public static final Func_any_from_script t_any_from_script = new Repl.Class_any_from_script();
 
-  public static CompletableFuture<Core.Type_any> f_any_from_repl_async(final Core.Type_context context, final Repl.Type_repl repl) {
-    CompletableFuture<Core.Type_any> output = Core.async_new_completed(Core.e_any);
+  public static Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script) {
+    Core.Type_any output = Core.e_any;
+    output = Core.f_let(
+      Core.t_any,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Textblock.Type_textblock textblock = Repl.f_textblock_repl_from_script(script);
+        final Repl.Type_repl repl = Repl.f_repl_from_textblock(textblock);
+        return Repl.f_any_from_repl(context, repl);
+      })
+    );
     return output;
   }
 
@@ -1326,8 +1281,8 @@ public final class Repl {
                 Core.f_string_from_any(item);
           })
         );
-        final Core.Type_string text = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
-        final Textblock.Type_textblock tb = Repl.f_textblock_repl_from_string(text);
+        final Core.Type_string script = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
+        final Textblock.Type_textblock tb = Repl.f_textblock_repl_from_script(script);
         final Repl.Type_repl repl = Repl.f_repl_from_textblock(tb);
         return Core.f_any_from_any(
           generic_any_1,
@@ -1509,27 +1464,27 @@ public final class Repl {
   }
 
   /**
-   * @function textblock_repl_from_string
+   * @function textblock_repl_from_script
    * Returns a parsed textblock from a string
-   * @param  {string} text
+   * @param  {string} script
    * @return {textblock}
-   * (func textblock-repl<-string)
+   * (func textblock-repl<-script)
    */
-  public static interface Func_textblock_repl_from_string extends Core.Func_any_from_any {
-    public Textblock.Type_textblock f_textblock_repl_from_string(final Core.Type_string text);
+  public static interface Func_textblock_repl_from_script extends Core.Func_any_from_any {
+    public Textblock.Type_textblock f_textblock_repl_from_script(final Core.Type_string script);
   }
 
-  public static class Class_textblock_repl_from_string extends Core.Class_base implements Func_textblock_repl_from_string {
+  public static class Class_textblock_repl_from_script extends Core.Class_base implements Func_textblock_repl_from_script {
 
     @Override
-    public Func_textblock_repl_from_string vx_new(Object... vals) {
-      Class_textblock_repl_from_string output = new Class_textblock_repl_from_string();
+    public Func_textblock_repl_from_script vx_new(Object... vals) {
+      Class_textblock_repl_from_script output = new Class_textblock_repl_from_script();
       return output;
     }
 
     @Override
-    public Func_textblock_repl_from_string vx_copy(Object... vals) {
-      Class_textblock_repl_from_string output = new Class_textblock_repl_from_string();
+    public Func_textblock_repl_from_script vx_copy(Object... vals) {
+      Class_textblock_repl_from_script output = new Class_textblock_repl_from_script();
       return output;
     }
 
@@ -1540,7 +1495,7 @@ public final class Repl {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/repl", // pkgname
-        "textblock-repl<-string", // name
+        "textblock-repl<-script", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -1560,9 +1515,9 @@ public final class Repl {
     }
 
     @Override
-    public Func_textblock_repl_from_string vx_empty() {return e_textblock_repl_from_string;}
+    public Func_textblock_repl_from_script vx_empty() {return e_textblock_repl_from_script;}
     @Override
-    public Func_textblock_repl_from_string vx_type() {return t_textblock_repl_from_string;}
+    public Func_textblock_repl_from_script vx_type() {return t_textblock_repl_from_script;}
 
     @Override
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
@@ -1571,32 +1526,32 @@ public final class Repl {
     public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
-      Core.Type_any outputval = Repl.f_textblock_repl_from_string(inputval);
+      Core.Type_any outputval = Repl.f_textblock_repl_from_script(inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      output = Repl.f_textblock_repl_from_string(text);
+      Core.Type_string script = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Repl.f_textblock_repl_from_script(script);
       return output;
     }
 
     @Override
-    public Textblock.Type_textblock f_textblock_repl_from_string(final Core.Type_string text) {
-      return Repl.f_textblock_repl_from_string(text);
+    public Textblock.Type_textblock f_textblock_repl_from_script(final Core.Type_string script) {
+      return Repl.f_textblock_repl_from_script(script);
     }
 
   }
 
-  public static final Func_textblock_repl_from_string e_textblock_repl_from_string = new Repl.Class_textblock_repl_from_string();
-  public static final Func_textblock_repl_from_string t_textblock_repl_from_string = new Repl.Class_textblock_repl_from_string();
+  public static final Func_textblock_repl_from_script e_textblock_repl_from_script = new Repl.Class_textblock_repl_from_script();
+  public static final Func_textblock_repl_from_script t_textblock_repl_from_script = new Repl.Class_textblock_repl_from_script();
 
-  public static Textblock.Type_textblock f_textblock_repl_from_string(final Core.Type_string text) {
+  public static Textblock.Type_textblock f_textblock_repl_from_script(final Core.Type_string script) {
     Textblock.Type_textblock output = Textblock.e_textblock;
     output = Textblock.f_textblock_parse_from_string_delim(
-      text,
+      script,
       Repl.c_delimvxlisp
     );
     return output;

@@ -60,7 +60,7 @@ namespace vx_sample {
   };
 
   // (const myconst)
-  class Class_myconst : public vx_core::Class_int {
+  class Class_myconst : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_sample::Const_myconst output);
     vx_core::Type_constdef vx_constdef() const;

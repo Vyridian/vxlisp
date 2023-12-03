@@ -45,7 +45,7 @@
 * Test as Examples - In addition to the normal documentation, it is very useful to have known, current working examples right next to your code as well as published to documentation. These cases should be readable by managers and support staff as well to increase team transparency and free developer time from questions.
 * Multiline Strings - Double quotes may be multiline without special notation. Indentation on subsequent lines are relative to the position of the opening double quote. Backticks can be used instead when you want to capture exact whitespace.
 * :debug - Adding the :debug keyword into a function automatically logs the output of that function for console debugging.
-* :unsafe - The :unsafe keyword is used to mark functions that have side effects.
+* :sideeffects - The :sideeffects keyword is used to mark functions that have side effects.
 * :bigocomplexity
 * :bigotime
 

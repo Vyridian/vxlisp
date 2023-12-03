@@ -71,7 +71,12 @@ namespace vx_sample {
 
     vx_core::Type_any Class_mytype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Type_mytype output = vx_sample::e_mytype;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_sample::Type_mytype val = vx_core::vx_any_from_any(vx_sample::t_mytype, copyval);
+      output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_int vx_p_mynum = val->mynum();
       vx_core::Type_string vx_p_mystr = val->mystr();
@@ -100,14 +105,18 @@ namespace vx_sample {
         } else {
           if (false) {
           } else if (key == ":mynum") {
-            if (valsubtype == vx_core::t_int) {
+            if (vx_p_mynum == valsub) {
+            } else if (valsubtype == vx_core::t_int) {
+              ischanged = true;
               vx_p_mynum = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mytype :mynum " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":mystr") {
-            if (valsubtype == vx_core::t_string) {
+            if (vx_p_mystr == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_mystr = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new mytype :mystr " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
@@ -120,20 +129,22 @@ namespace vx_sample {
           key = "";
         }
       }
-      output = new vx_sample::Class_mytype();
-      if (output->vx_p_mynum != vx_p_mynum) {
-        if (output->vx_p_mynum) {
-          vx_core::vx_release_one(output->vx_p_mynum);
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_sample::Class_mytype();
+        if (output->vx_p_mynum != vx_p_mynum) {
+          if (output->vx_p_mynum) {
+            vx_core::vx_release_one(output->vx_p_mynum);
+          }
+          output->vx_p_mynum = vx_p_mynum;
+          vx_core::vx_reserve(vx_p_mynum);
         }
-        output->vx_p_mynum = vx_p_mynum;
-        vx_core::vx_reserve(vx_p_mynum);
-      }
-      if (output->vx_p_mystr != vx_p_mystr) {
-        if (output->vx_p_mystr) {
-          vx_core::vx_release_one(output->vx_p_mystr);
+        if (output->vx_p_mystr != vx_p_mystr) {
+          if (output->vx_p_mystr) {
+            vx_core::vx_release_one(output->vx_p_mystr);
+          }
+          output->vx_p_mystr = vx_p_mystr;
+          vx_core::vx_reserve(vx_p_mystr);
         }
-        output->vx_p_mystr = vx_p_mystr;
-        vx_core::vx_reserve(vx_p_mystr);
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -180,12 +191,6 @@ namespace vx_sample {
   // (const myconst)
   // class Class_myconst {
 
-    // vx_const_new()
-    void vx_sample::Class_myconst::vx_const_new(vx_sample::Const_myconst output) {
-      output->vx_p_int = 4;
-      vx_core::vx_reserve_type(output);
-    }
-
     // vx_constdef()
     vx_core::Type_constdef vx_sample::Class_myconst::vx_constdef() const {
       return vx_core::Class_constdef::vx_constdef_new(
@@ -205,6 +210,13 @@ namespace vx_sample {
           vx_core::e_argmap // properties
         )
       );
+    }
+
+    // vx_const_new()
+    void vx_sample::Class_myconst::vx_const_new(vx_sample::Const_myconst output) {
+      output->vx_p_constname = "vx/sample/myconst";
+      output->vx_p_int = 4;
+      vx_core::vx_reserve_type(output);
     }
 
     long vx_sample::Class_myconst::vx_int() const {

@@ -57,10 +57,14 @@ public final class Db {
 
     @Override
     public Type_db vx_copy(final Object... vals) {
-      Class_db output = new Class_db();
+      Type_db output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_db val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbid = val.dbid();
+      Core.Type_string vx_p_dbid = val.dbid();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbid");
       String key = "";
@@ -87,10 +91,13 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbid":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_dbid = (Core.Type_string)valsub;
+            if (valsub == vx_p_dbid) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_dbid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_dbid = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_dbid = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new db :dbid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -103,8 +110,13 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_db work = new Class_db();
+        work.vx_p_dbid = vx_p_dbid;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -230,14 +242,18 @@ public final class Db {
 
     @Override
     public Type_dbcell vx_copy(final Object... vals) {
-      Class_dbcell output = new Class_dbcell();
+      Type_dbcell output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbcell val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbcellid = val.dbcellid();
-      output.vx_p_dbcellmap = val.dbcellmap();
-      output.vx_p_dbfieldmap = val.dbfieldmap();
-      output.vx_p_dbparent = val.dbparent();
-      output.vx_p_dbtable = val.dbtable();
+      Core.Type_string vx_p_dbcellid = val.dbcellid();
+      Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
+      Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
+      Db.Type_dbcell vx_p_dbparent = val.dbparent();
+      Db.Type_dbtable vx_p_dbtable = val.dbtable();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbcellid");
       validkeys.add(":dbcellmap");
@@ -268,42 +284,53 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbcellid":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_dbcellid = (Core.Type_string)valsub;
+            if (valsub == vx_p_dbcellid) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_dbcellid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_dbcellid = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_dbcellid = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbcell :dbcellid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbcellmap":
-            if (valsub instanceof Db.Type_dbcellmap) {
-              output.vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
+            if (valsub == vx_p_dbcellmap) {
+            } else if (valsub instanceof Db.Type_dbcellmap) {
+              ischanged = true;
+              vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbcell :dbcellmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbfieldmap":
-            if (valsub instanceof Db.Type_dbfieldmap) {
-              output.vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
+            if (valsub == vx_p_dbfieldmap) {
+            } else if (valsub instanceof Db.Type_dbfieldmap) {
+              ischanged = true;
+              vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbcell :dbfieldmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbparent":
-            if (valsub instanceof Db.Type_dbcell) {
-              output.vx_p_dbparent = (Db.Type_dbcell)valsub;
+            if (valsub == vx_p_dbparent) {
+            } else if (valsub instanceof Db.Type_dbcell) {
+              ischanged = true;
+              vx_p_dbparent = (Db.Type_dbcell)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbcell :dbparent " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbtable":
-            if (valsub instanceof Db.Type_dbtable) {
-              output.vx_p_dbtable = (Db.Type_dbtable)valsub;
+            if (valsub == vx_p_dbtable) {
+            } else if (valsub instanceof Db.Type_dbtable) {
+              ischanged = true;
+              vx_p_dbtable = (Db.Type_dbtable)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbcell :dbtable " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -316,8 +343,17 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbcell work = new Class_dbcell();
+        work.vx_p_dbcellid = vx_p_dbcellid;
+        work.vx_p_dbcellmap = vx_p_dbcellmap;
+        work.vx_p_dbfieldmap = vx_p_dbfieldmap;
+        work.vx_p_dbparent = vx_p_dbparent;
+        work.vx_p_dbtable = vx_p_dbtable;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -416,7 +452,11 @@ public final class Db {
 
     @Override
     public Type_dbcellmap vx_copy(final Object... vals) {
-      Class_dbcellmap output = new Class_dbcellmap();
+      Type_dbcellmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbcellmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<>(valmap.vx_mapdbcell());
@@ -447,14 +487,19 @@ public final class Db {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbcellmap work = new Class_dbcellmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -556,12 +601,16 @@ public final class Db {
 
     @Override
     public Type_dbfield vx_copy(final Object... vals) {
-      Class_dbfield output = new Class_dbfield();
+      Type_dbfield output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbfield val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbfieldid = val.dbfieldid();
-      output.vx_p_type = val.type();
-      output.vx_p_value = val.value();
+      Core.Type_string vx_p_dbfieldid = val.dbfieldid();
+      Core.Type_any vx_p_type = val.type();
+      Core.Type_any vx_p_value = val.value();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbfieldid");
       validkeys.add(":type");
@@ -590,26 +639,33 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbfieldid":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_dbfieldid = (Core.Type_string)valsub;
+            if (valsub == vx_p_dbfieldid) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_dbfieldid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_dbfieldid = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_dbfieldid = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbfield :dbfieldid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":type":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_type = (Core.Type_any)valsub;
+            if (valsub == vx_p_type) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_type = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbfield :type " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":value":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_value = (Core.Type_any)valsub;
+            if (valsub == vx_p_value) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_value = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbfield :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -622,8 +678,15 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbfield work = new Class_dbfield();
+        work.vx_p_dbfieldid = vx_p_dbfieldid;
+        work.vx_p_type = vx_p_type;
+        work.vx_p_value = vx_p_value;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -722,7 +785,11 @@ public final class Db {
 
     @Override
     public Type_dbfieldmap vx_copy(final Object... vals) {
-      Class_dbfieldmap output = new Class_dbfieldmap();
+      Type_dbfieldmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbfieldmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<>(valmap.vx_mapdbfield());
@@ -753,14 +820,19 @@ public final class Db {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbfieldmap work = new Class_dbfieldmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -811,7 +883,11 @@ public final class Db {
 
     @Override
     public Type_dbid vx_copy(final Object... vals) {
-      Class_dbid output = new Class_dbid();
+      Type_dbid output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       return output;
     }
 
@@ -900,11 +976,15 @@ public final class Db {
 
     @Override
     public Type_dblink vx_copy(final Object... vals) {
-      Class_dblink output = new Class_dblink();
+      Type_dblink output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dblink val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_fromid = val.fromid();
-      output.vx_p_toid = val.toid();
+      Db.Type_dbid vx_p_fromid = val.fromid();
+      Db.Type_dbid vx_p_toid = val.toid();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":fromid");
       validkeys.add(":toid");
@@ -932,16 +1012,20 @@ public final class Db {
         } else {
           switch (key) {
           case ":fromid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_fromid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_fromid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dblink :fromid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":toid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_toid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_toid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_toid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dblink :toid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -954,8 +1038,14 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dblink work = new Class_dblink();
+        work.vx_p_fromid = vx_p_fromid;
+        work.vx_p_toid = vx_p_toid;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1033,7 +1123,11 @@ public final class Db {
 
     @Override
     public Type_dblinklist vx_copy(final Object... vals) {
-      Class_dblinklist output = new Class_dblinklist();
+      Type_dblinklist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dblinklist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Db.Type_dblink> listval = new ArrayList<>(val.vx_listdblink());
@@ -1043,17 +1137,21 @@ public final class Db {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Db.Type_dblink) {
+          ischanged = true;
           listval.add((Db.Type_dblink)valsub);
         } else if (valsub instanceof Db.Type_dblink) {
+          ischanged = true;
           listval.add((Db.Type_dblink)valsub);
         } else if (valsub instanceof Type_dblinklist) {
           Type_dblinklist multi = (Type_dblinklist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listdblink());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Db.Type_dblink) {
               Db.Type_dblink valitem = (Db.Type_dblink)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -1062,9 +1160,13 @@ public final class Db {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dblinklist work = new Class_dblinklist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1154,11 +1256,15 @@ public final class Db {
 
     @Override
     public Type_dbnode vx_copy(final Object... vals) {
-      Class_dbnode output = new Class_dbnode();
+      Type_dbnode output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbnode val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbid = val.dbid();
-      output.vx_p_links = val.links();
+      Db.Type_dbid vx_p_dbid = val.dbid();
+      Db.Type_dblinklist vx_p_links = val.links();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbid");
       validkeys.add(":links");
@@ -1186,16 +1292,20 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_dbid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnode :dbid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":links":
-            if (valsub instanceof Db.Type_dblinklist) {
-              output.vx_p_links = (Db.Type_dblinklist)valsub;
+            if (valsub == vx_p_links) {
+            } else if (valsub instanceof Db.Type_dblinklist) {
+              ischanged = true;
+              vx_p_links = (Db.Type_dblinklist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnode :links " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1208,8 +1318,14 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbnode work = new Class_dbnode();
+        work.vx_p_dbid = vx_p_dbid;
+        work.vx_p_links = vx_p_links;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1335,14 +1451,18 @@ public final class Db {
 
     @Override
     public Type_dbnote vx_copy(final Object... vals) {
-      Class_dbnote output = new Class_dbnote();
+      Type_dbnote output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbnote val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbid = val.dbid();
-      output.vx_p_valid = val.valid();
-      output.vx_p_noteid = val.noteid();
-      output.vx_p_valueid = val.valueid();
-      output.vx_p_value = val.value();
+      Db.Type_dbid vx_p_dbid = val.dbid();
+      Db.Type_dbid vx_p_valid = val.valid();
+      Db.Type_dbid vx_p_noteid = val.noteid();
+      Db.Type_dbid vx_p_valueid = val.valueid();
+      Core.Type_string vx_p_value = val.value();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbid");
       validkeys.add(":valid");
@@ -1373,42 +1493,53 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_dbid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnote :dbid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":valid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_valid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_valid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_valid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnote :valid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":noteid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_noteid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_noteid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnote :noteid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":valueid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_valueid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_valueid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_valueid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnote :valueid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":value":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_value = (Core.Type_string)valsub;
+            if (valsub == vx_p_value) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_value = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_value = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_value = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbnote :value " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1421,8 +1552,17 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbnote work = new Class_dbnote();
+        work.vx_p_dbid = vx_p_dbid;
+        work.vx_p_valid = vx_p_valid;
+        work.vx_p_noteid = vx_p_noteid;
+        work.vx_p_valueid = vx_p_valueid;
+        work.vx_p_value = vx_p_value;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1536,13 +1676,17 @@ public final class Db {
 
     @Override
     public Type_dbtable vx_copy(final Object... vals) {
-      Class_dbtable output = new Class_dbtable();
+      Type_dbtable output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbtable val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbtableid = val.dbtableid();
-      output.vx_p_db = val.db();
-      output.vx_p_dbcellmap = val.dbcellmap();
-      output.vx_p_dbfieldmap = val.dbfieldmap();
+      Core.Type_string vx_p_dbtableid = val.dbtableid();
+      Db.Type_db vx_p_db = val.db();
+      Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
+      Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbtableid");
       validkeys.add(":db");
@@ -1572,34 +1716,43 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbtableid":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_dbtableid = (Core.Type_string)valsub;
+            if (valsub == vx_p_dbtableid) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_dbtableid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_dbtableid = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_dbtableid = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbtable :dbtableid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":db":
-            if (valsub instanceof Db.Type_db) {
-              output.vx_p_db = (Db.Type_db)valsub;
+            if (valsub == vx_p_db) {
+            } else if (valsub instanceof Db.Type_db) {
+              ischanged = true;
+              vx_p_db = (Db.Type_db)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbtable :db " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbcellmap":
-            if (valsub instanceof Db.Type_dbcellmap) {
-              output.vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
+            if (valsub == vx_p_dbcellmap) {
+            } else if (valsub instanceof Db.Type_dbcellmap) {
+              ischanged = true;
+              vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbtable :dbcellmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":dbfieldmap":
-            if (valsub instanceof Db.Type_dbfieldmap) {
-              output.vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
+            if (valsub == vx_p_dbfieldmap) {
+            } else if (valsub instanceof Db.Type_dbfieldmap) {
+              ischanged = true;
+              vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbtable :dbfieldmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1612,8 +1765,16 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbtable work = new Class_dbtable();
+        work.vx_p_dbtableid = vx_p_dbtableid;
+        work.vx_p_db = vx_p_db;
+        work.vx_p_dbcellmap = vx_p_dbcellmap;
+        work.vx_p_dbfieldmap = vx_p_dbfieldmap;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -1751,15 +1912,19 @@ public final class Db {
 
     @Override
     public Type_dbvalue vx_copy(final Object... vals) {
-      Class_dbvalue output = new Class_dbvalue();
+      Type_dbvalue output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_dbvalue val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_dbid = val.dbid();
-      output.vx_p_fromid = val.fromid();
-      output.vx_p_toid = val.toid();
-      output.vx_p_noteid = val.noteid();
-      output.vx_p_valid = val.valid();
-      output.vx_p_valtext = val.valtext();
+      Db.Type_dbid vx_p_dbid = val.dbid();
+      Db.Type_dbid vx_p_fromid = val.fromid();
+      Db.Type_dbid vx_p_toid = val.toid();
+      Db.Type_dbid vx_p_noteid = val.noteid();
+      Db.Type_dbid vx_p_valid = val.valid();
+      Core.Type_string vx_p_valtext = val.valtext();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbid");
       validkeys.add(":fromid");
@@ -1791,50 +1956,63 @@ public final class Db {
         } else {
           switch (key) {
           case ":dbid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_dbid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_dbid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :dbid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fromid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_fromid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_fromid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :fromid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":toid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_toid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_toid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_toid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :toid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":noteid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_noteid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_noteid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :noteid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":valid":
-            if (valsub instanceof Db.Type_dbid) {
-              output.vx_p_valid = (Db.Type_dbid)valsub;
+            if (valsub == vx_p_valid) {
+            } else if (valsub instanceof Db.Type_dbid) {
+              ischanged = true;
+              vx_p_valid = (Db.Type_dbid)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :valid " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":valtext":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_valtext = (Core.Type_string)valsub;
+            if (valsub == vx_p_valtext) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_valtext = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_valtext = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_valtext = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new dbvalue :valtext " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1847,8 +2025,18 @@ public final class Db {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbvalue work = new Class_dbvalue();
+        work.vx_p_dbid = vx_p_dbid;
+        work.vx_p_fromid = vx_p_fromid;
+        work.vx_p_toid = vx_p_toid;
+        work.vx_p_noteid = vx_p_noteid;
+        work.vx_p_valid = vx_p_valid;
+        work.vx_p_valtext = vx_p_valtext;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }

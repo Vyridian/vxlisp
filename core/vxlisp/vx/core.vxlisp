@@ -569,8 +569,8 @@
 
 (const true : boolean
  (native
-  :cpp "true"
-  :js "true"
+  :cpp  "true"
+  :js   "true"
   :java "true")
  :test (test-true true))
 
@@ -581,8 +581,8 @@
  (native
   :js "object[method].apply(params)")
  :alias       "dotmethod"
- :doc         "Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')"
- :sideeffects "Depends on object")
+ :sideeffects "Depends on object"
+ :doc "Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')")
 
 (func + : int
  [num1 : int
@@ -597,9 +597,9 @@
    "int result = num1.vx_int() + num2.vx_int();
     output = Core.vx_new_int(result);")
  :alias "plus"
- :doc   "Math int plus"
- :test  (test 5 (+ 2 3))
-        (test 3 (+ 5 -2)))
+ :test (test 5 (+ 2 3))
+       (test 3 (+ 5 -2))
+ :doc "Math int plus")
 
 (func + : number
  [num1 : number
@@ -616,9 +616,9 @@
     float result = float1.vx_float() + float2.vx_float();
     output = Core.vx_new_float(result);")
  :alias "plus"
- :test  (test 5 (+ 2  3))
-        (test 3 (+ 5 -2))
- :doc   "Math number plus")
+ :test (test 5 (+ 2  3))
+       (test 3 (+ 5 -2))
+ :doc "Math number plus")
 
 (func + : int
  [nums : intlist :...]
@@ -648,19 +648,11 @@
 
 (func +1 : int
  [num : int]
- (native
-  :cpp
-   "long result = num->vx_int() + 1;
-    output = vx_core::vx_new_int(result);"
-  :js
-   "num + 1"
-  :java
-   "int result = num.vx_int() + 1;
-    output = Core.vx_new_int(result);")
+ (+ num 1)
  :alias "plus1"
- :test  (test  3 (+1  2))
-        (test -1 (+1 -2))
- :doc   "Math int plus 1")
+ :test (test  3 (+1  2))
+       (test -1 (+1 -2))
+ :doc "Math int plus 1")
 
 (func - : int
  [num1 : int
@@ -675,9 +667,9 @@
    "int result = num1.vx_int() - num2.vx_int();
     output = Core.vx_new_int(result);")
  :alias "minus"
- :doc   "Math int minus"
- :test  (test 1 (- 3 2))
-        (test 7 (- 5 -2)))
+ :test (test 1 (- 3 2))
+       (test 7 (- 5 -2))
+ :doc "Math int minus")
 
 (func - : number
  [num1 : number
@@ -694,9 +686,9 @@
     float result = float1.vx_float() - float2.vx_float();
     output = Core.vx_new_float(result);")
  :alias "minus"
- :doc   "Math number minus"
- :test  (test 5 (+ 2 3))
-        (test 3 (+ 5 -2)))
+ :test (test 5 (+ 2 3))
+       (test 3 (+ 5 -2))
+ :doc "Math number minus")
 
 (func - : int
  [nums : intlist :...]
@@ -706,8 +698,7 @@
   (fn : int
    [total : int
     num   : int]
-   (- total num))
- )
+   (- total num)))
  :alias "minus"
  :doc   "Math integer minus")
 
@@ -724,6 +715,14 @@
  :alias "minus"
  :doc   "Math number minus")
 
+(func -1 : int
+ [num : int]
+ (- num 1)
+ :alias "minus1"
+ :test (test  1 (-1  2))
+       (test -3 (-1 -2))
+ :doc "Math int minus 1")
+
 (func * : int
  [num1 : int
   num2 : int]
@@ -737,9 +736,9 @@
    "int result = num1.vx_int() * num2.vx_int();
     output = Core.vx_new_int(result);")
  :alias "multiply"
- :test  (test 6 (* 3 2))
-        (test -10 (* 5 -2))
- :doc   "Math int multiply")
+ :test (test 6 (* 3 2))
+       (test -10 (* 5 -2))
+ :doc "Math int multiply")
 
 (func * : number
  [num1 : number
@@ -756,9 +755,9 @@
     float result = float1.vx_float() * float2.vx_float();
     output = Core.vx_new_float(result);")
  :alias "multiply"
- :test  (test 6.4 (* 3.2 2))
-        (test -10.2 (* 5.1 -2))
- :doc   "Math multipy")
+ :test (test 6.4 (* 3.2 2))
+       (test -10.2 (* 5.1 -2))
+ :doc "Math multipy")
 
 (func * : int
  [nums : intlist :...]
@@ -771,9 +770,9 @@
    (* total num))
  )
  :alias "multiply"
- :test  (test 24 (* 3 2 4))
-        (test -20 (* 5 -2 2))
- :doc   "Math multiply")
+ :test (test 24 (* 3 2 4))
+       (test -20 (* 5 -2 2))
+ :doc "Math multiply")
 
 (func * : number
  [nums : numberlist :...]
@@ -786,9 +785,9 @@
    (* total num))
  )
  :alias "multiply"
- :test  (test 24 (* 3 2 4))
-        (test -20 (* 5 -2 2))
- :doc   "Math multiply")
+ :test (test 24 (* 3 2 4))
+       (test -20 (* 5 -2 2))
+ :doc "Math multiply")
 
 (func / : number
  [num1 : number
@@ -817,9 +816,9 @@
       output = Core.vx_new_float(result);
     }")
  :alias "divide"
- :test  (test 3 (/ 6 2))
-        (test -5 (/ 10 -2))
- :doc   "Math divide")
+ :test (test 3 (/ 6 2))
+       (test -5 (/ 10 -2))
+ :doc "Math divide")
 
 (func = : boolean
  [val1 : any
@@ -852,12 +851,18 @@
     }
     output = Core.vx_new_boolean(isequal);")
  :alias "eq"
- :test  (test-true (= true true))
-        (test-true (= 2 2))
-        (test-true (= "a" "a"))
-        (test-true (= (stringlist "a" "b" "c") (new stringlist "a" "b" "c")))
-        (test-true (= (stringmap :a "1" :b "2") (new stringmap :a "1" :b "2")))
- :doc   "Boolean equal/equivalent")
+ :test (test-true (= true true))
+       (test-true (= 2 2))
+       (test-true (= "a" "a"))
+       (test-true
+        (=
+         (stringlist "a" "b" "c")
+         (new stringlist "a" "b" "c")))
+       (test-true
+        (=
+         (stringmap :a "1" :b "2")
+         (new stringmap :a "1" :b "2")))
+ :doc "Boolean equal/equivalent")
 
 (func = : boolean
  [values : anylist :...]
@@ -871,8 +876,8 @@
    (and reduce (= current next)))
  )
  :alias "eq"
- :test  (test-false (= 2 2 3))
- :doc   "Boolean equal/equivalent")
+ :test (test-false (= 2 2 3))
+ :doc "Boolean equal/equivalent")
 
 (func == : boolean
  [val1 : any
@@ -887,8 +892,8 @@
    "boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);")
  :alias "eqeq"
- :test  (test-true (== 0 0))
-        (test-true (== "" ""))
+ :test (test-true (== 0 0))
+       (test-true (== "" ""))
  :doc "Strict equality check. Note that all non-empty, non-constants will not be equal.")
 
 (func ! : boolean
@@ -898,18 +903,18 @@
   :js   "!val"
   :java "Core.vx_new_boolean(!val.vx_boolean());")
  :alias "not"
- :test  (test-false false)
-        (test-false (! true))
- :doc   "Boolean not")
+ :test (test-false false)
+       (test-false (! true))
+ :doc "Boolean not")
 
 (func != : boolean
  [val1 : any
   val2 : any]
  (! (= val1 val2))
  :alias "ne"
- :test  (test-ne true false)
-        (test-ne "a" "b")
- :doc   "Returns true if the first arg is not equal to any of the other arg.")
+ :test (test-ne true false)
+       (test-ne "a" "b")
+ :doc "Returns true if the first arg is not equal to any of the other arg.")
 
 (func !== : boolean
  [val1 : any
@@ -928,7 +933,7 @@
  [val : any]
  (! (is-empty val))
  :alias "notempty"
- :doc   "Returns true if val is not empty.")
+ :doc "Returns true if val is not empty.")
 
 (func < : boolean
  [val1 : any
@@ -938,8 +943,8 @@
   (case -1 true)
   (else    false))
  :alias "lt"
- :doc   "Returns true if the first arg is less than all of the other args"
- :test  (test-true (< 2 3)))
+ :test (test-true (< 2 3))
+ :doc "Returns true if the first arg is less than all of the other args")
 
 (func < : boolean
  [values : anylist :...]
@@ -953,9 +958,11 @@
    (and reduce (< current next)))
  )
  :alias "lt"
- :doc   "Returns true if the first arg is less than all of the other args"
- :test  (test-true (< 2 3))
-        (test-true (< "b" "d" "z")))
+ :test (test-true
+        (< 2 3))
+       (test-true
+        (< "b" "d" "z"))
+ :doc "Returns true if the first arg is less than all of the other args")
 
 (func <= : boolean
  [val1 : any
@@ -987,9 +994,9 @@
           (- 3)
           (+ 3)
           (* 2)))
- :doc   "This is a special function that applies a value as the first argument for the first function.
-         The result is then used as the first argument on the next function, etc. Sometimes this
-         improves readability.")
+ :doc "This is a special function that applies a value as the first argument for the first function.
+       The result is then used as the first argument on the next function, etc. Sometimes this
+       improves readability.")
 
 (func <<- : any-1
  [value  : any-1
@@ -1002,9 +1009,9 @@
           (- 3)
           (+ 3)
           (* 2)))
- :doc   "This is a special function that applies a value as the last argument for the first function.
-         The result is then used as the last argument on the next function, etc. Sometimes this
-         improves readability.")
+ :doc "This is a special function that applies a value as the last argument for the first function.
+       The result is then used as the last argument on the next function, etc. Sometimes this
+       improves readability.")
 
 (func > : boolean
  [val1 : any
@@ -1090,16 +1097,18 @@
     } else {
       output = Core.c_false;
     }")
- :doc   "Returns true if all values are true"
- :test  (test-true (and true true))
-        (test-false (and true false)))
+ :test (test-true
+        (and true true))
+       (test-false
+        (and true false))
+ :doc "Returns true if all values are true")
 
 (func and : boolean
  [values : booleanlist :...]
  (switch : boolean
   (length<-list values)
   (case 0 true)
-  (case 1 (:0 values))
+  (case 1 (:1 values))
   (else
    (any<-list-reduce-next : boolean
     values
@@ -1110,9 +1119,11 @@
       next    : boolean]
      (and reduce (and current next)))
    )))
- :doc   "Returns true if all values are true"
- :test  (test-true (and true true true))
-        (test-false (and true true false)))
+ :test (test-true
+        (and true true true))
+       (test-false
+        (and true true false))
+ :doc "Returns true if all values are true")
 
 (func any<-any : any-1
  [value : any-2]
@@ -1178,28 +1189,30 @@
    "long intindex = index->vx_int();
     vx_core::vx_Type_listany listvalue = values->vx_list();
     long intsize = vx_core::vx_int_from_sizet(listvalue.size());
-    if (intindex < intsize) {
-      vx_core::Type_any value = listvalue[intindex];
+    if (intindex <= intsize) {
+      vx_core::Type_any value = listvalue[intindex - 1];
       output = vx_core::vx_any_from_any(generic_any_1, value);
     }"
   :js
-   "if (index < values.length) {
-      output = values[index]
+   "if (index <= values.length) {
+      output = values[index - 1]
     }"
   :java
    "int intindex = index.vx_int();
     int intsize = values.vx_list().size();
-    if (intindex < intsize) {
+    if (intindex <= intsize) {
       List<Core.Type_any> listvalue = values.vx_list();
-      Core.Type_any value = listvalue.get(intindex);
+      Core.Type_any value = listvalue.get(intindex - 1);
       output = Core.f_any_from_any(generic_any_1, value);
     }")
  :test (test
         "b"
-        (any<-list (list "a" "b" "c") 1))
+        (any<-list
+         (list "a" "b" "c")
+         2))
        (test
         "b"
-        (:1 (stringlist "a" "b" "c")))
+        (:2 (stringlist "a" "b" "c")))
  :doc "Returns nth value from a list or none if out of bounds")
 
 (func any<-list-reduce : any-1
@@ -1485,9 +1498,12 @@
       }
     }
     output = Core.vx_new_boolean(booleanresult);")
- :test (test-true  (contains (stringlist "1" "2" "3") "2"))
-       (test-true  (contains (intlist 1 2 3) 2))
-       (test-false (contains (list 1 "2" 3) 2))
+ :test (test-true
+        (contains (stringlist "1" "2" "3") "2"))
+       (test-true
+        (contains (intlist 1 2 3) 2))
+       (test-false
+        (contains (list 1 "2" 3) 2))
  :doc  "Returns true if the given list contains the given value.")
 
 (func context-main : context
@@ -1542,9 +1558,12 @@
 
 (func first<-list : any-1
  [values : list-1]
- (any<-list values 0)
+ (any<-list values 1)
  :doc "Returns first value"
- :test (test "b" (first<-list (stringlist "b" "c"))))
+ :test (test
+        "b"
+        (first<-list
+         (stringlist "b" "c"))))
 
 (func first<-list-fn-any<-any : any-1
  [values      : list-1
@@ -1579,7 +1598,11 @@
       }
     }")
  :doc "Returns first value that is not nothing"
- :test (test "b" (first<-list-fn-any<-any (list nothing "b" "c") resolve)))
+ :test (test
+        "b"
+        (first<-list-fn-any<-any
+         (list nothing "b" "c")
+         resolve)))
 
 /*
 (func float<-any : float
@@ -1646,8 +1669,14 @@
    "if (clause.vx_boolean()) {
       output = then;
     }")
- :test (test "a" (if (= 2 2) "a"))
-       (test ""  (if : string (= 1 2) "a"))
+ :test (test
+        "a"
+        (if (= 2 2) "a"))
+       (test
+        ""
+        (if : string
+         (= 1 2)
+         "a"))
  :doc  "Logical If function")
 
 (func if : any-1
@@ -1673,9 +1702,19 @@
     } else {
       output = elseval;
     }")
- :test (test "a" (if (= 2 2) "a" "b"))
-       (test "b"  (if (= 1 2) "a" "b"))
- :doc  "Logical If function")
+ :test (test
+        "a"
+        (if
+         (= 2 2)
+         "a"
+         "b"))
+       (test
+        "b"
+        (if
+         (= 1 2)
+         "a"
+         "b"))
+ :doc "Logical If function")
 
 (func if : any-1
  [thenelselist : thenelselist :...]
@@ -1935,9 +1974,8 @@
 (func last<-list : any-1
  [values : list-1]
  (let
-  [len  : int := (length<-list values)
-   last : int := (- len 1)]
-  (any<-list values last))
+  [len  : int := (length<-list values)]
+  (any<-list values len))
  :doc  "Returns last value"
  :test (test "c" (last<-list (list "b" "c"))))
 

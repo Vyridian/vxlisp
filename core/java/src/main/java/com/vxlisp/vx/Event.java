@@ -102,14 +102,18 @@ public final class Event {
 
     @Override
     public Type_event vx_copy(final Object... vals) {
-      Class_event output = new Class_event();
+      Type_event output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_event val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_name = val.name();
-      output.vx_p_from = val.from();
-      output.vx_p_to = val.to();
-      output.vx_p_fn_any_from_any = val.fn_any_from_any();
-      output.vx_p_fn_any_from_from_to = val.fn_any_from_from_to();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_any vx_p_from = val.from();
+      Core.Type_any vx_p_to = val.to();
+      Core.Func_any_from_any vx_p_fn_any_from_any = val.fn_any_from_any();
+      Event.Func_any_from_from_to vx_p_fn_any_from_from_to = val.fn_any_from_from_to();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":from");
@@ -140,42 +144,53 @@ public final class Event {
         } else {
           switch (key) {
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new event :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":from":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_from = (Core.Type_any)valsub;
+            if (valsub == vx_p_from) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_from = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new event :from " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":to":
-            if (valsub instanceof Core.Type_any) {
-              output.vx_p_to = (Core.Type_any)valsub;
+            if (valsub == vx_p_to) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_to = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new event :to " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fn-any<-any":
-            if (valsub instanceof Core.Func_any_from_any) {
-              output.vx_p_fn_any_from_any = (Core.Func_any_from_any)valsub;
+            if (valsub == vx_p_fn_any_from_any) {
+            } else if (valsub instanceof Core.Func_any_from_any) {
+              ischanged = true;
+              vx_p_fn_any_from_any = (Core.Func_any_from_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new event :fn-any<-any " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":fn-any<-from-to":
-            if (valsub instanceof Event.Func_any_from_from_to) {
-              output.vx_p_fn_any_from_from_to = (Event.Func_any_from_from_to)valsub;
+            if (valsub == vx_p_fn_any_from_from_to) {
+            } else if (valsub instanceof Event.Func_any_from_from_to) {
+              ischanged = true;
+              vx_p_fn_any_from_from_to = (Event.Func_any_from_from_to)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new event :fn-any<-from-to " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -188,8 +203,17 @@ public final class Event {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_event work = new Class_event();
+        work.vx_p_name = vx_p_name;
+        work.vx_p_from = vx_p_from;
+        work.vx_p_to = vx_p_to;
+        work.vx_p_fn_any_from_any = vx_p_fn_any_from_any;
+        work.vx_p_fn_any_from_from_to = vx_p_fn_any_from_from_to;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -226,9 +250,10 @@ public final class Event {
    * Click Event
    * {event}
    */
-  public static class Const_event_click extends Event.Class_event {
+  public static class Const_event_click extends Event.Class_event implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-click", // name
@@ -274,9 +299,10 @@ public final class Event {
    * Move Event
    * {event}
    */
-  public static class Const_event_move extends Event.Class_event {
+  public static class Const_event_move extends Event.Class_event implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-move", // name

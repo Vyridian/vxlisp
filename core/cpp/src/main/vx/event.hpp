@@ -65,14 +65,14 @@ namespace vx_event {
   };
 
   // (const event-click)
-  class Class_event_click : public vx_event::Class_event {
+  class Class_event_click : public vx_event::Class_event, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_event::Const_event_click output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const event-move)
-  class Class_event_move : public vx_event::Class_event {
+  class Class_event_move : public vx_event::Class_event, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_event::Const_event_move output);
     vx_core::Type_constdef vx_constdef() const;

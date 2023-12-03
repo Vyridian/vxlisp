@@ -56,10 +56,14 @@ public final class Xml {
 
     @Override
     public Type_xml vx_copy(final Object... vals) {
-      Class_xml output = new Class_xml();
+      Type_xml output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_xml val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_nodes = val.nodes();
+      Xml.Type_xmlnodelist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
       String key = "";
@@ -86,8 +90,10 @@ public final class Xml {
         } else {
           switch (key) {
           case ":nodes":
-            if (valsub instanceof Xml.Type_xmlnodelist) {
-              output.vx_p_nodes = (Xml.Type_xmlnodelist)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Xml.Type_xmlnodelist) {
+              ischanged = true;
+              vx_p_nodes = (Xml.Type_xmlnodelist)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new xml :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -100,8 +106,13 @@ public final class Xml {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_xml work = new Class_xml();
+        work.vx_p_nodes = vx_p_nodes;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -214,13 +225,17 @@ public final class Xml {
 
     @Override
     public Type_xmlnode vx_copy(final Object... vals) {
-      Class_xmlnode output = new Class_xmlnode();
+      Type_xmlnode output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_xmlnode val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_nodes = val.nodes();
-      output.vx_p_props = val.props();
-      output.vx_p_tag = val.tag();
-      output.vx_p_text = val.text();
+      Xml.Type_xmlnode vx_p_nodes = val.nodes();
+      Xml.Type_xmlpropmap vx_p_props = val.props();
+      Core.Type_string vx_p_tag = val.tag();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
       validkeys.add(":props");
@@ -250,36 +265,46 @@ public final class Xml {
         } else {
           switch (key) {
           case ":nodes":
-            if (valsub instanceof Xml.Type_xmlnode) {
-              output.vx_p_nodes = (Xml.Type_xmlnode)valsub;
+            if (valsub == vx_p_nodes) {
+            } else if (valsub instanceof Xml.Type_xmlnode) {
+              ischanged = true;
+              vx_p_nodes = (Xml.Type_xmlnode)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :nodes " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":props":
-            if (valsub instanceof Xml.Type_xmlpropmap) {
-              output.vx_p_props = (Xml.Type_xmlpropmap)valsub;
+            if (valsub == vx_p_props) {
+            } else if (valsub instanceof Xml.Type_xmlpropmap) {
+              ischanged = true;
+              vx_p_props = (Xml.Type_xmlpropmap)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :props " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":tag":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_tag = (Core.Type_string)valsub;
+            if (valsub == vx_p_tag) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_tag = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_tag = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_tag = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :tag " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new xmlnode :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -292,8 +317,16 @@ public final class Xml {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_xmlnode work = new Class_xmlnode();
+        work.vx_p_nodes = vx_p_nodes;
+        work.vx_p_props = vx_p_props;
+        work.vx_p_tag = vx_p_tag;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -370,7 +403,11 @@ public final class Xml {
 
     @Override
     public Type_xmlnodelist vx_copy(final Object... vals) {
-      Class_xmlnodelist output = new Class_xmlnodelist();
+      Type_xmlnodelist output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_xmlnodelist val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Xml.Type_xmlnode> listval = new ArrayList<>(val.vx_listxmlnode());
@@ -380,17 +417,21 @@ public final class Xml {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Xml.Type_xmlnode) {
+          ischanged = true;
           listval.add((Xml.Type_xmlnode)valsub);
         } else if (valsub instanceof Xml.Type_xmlnode) {
+          ischanged = true;
           listval.add((Xml.Type_xmlnode)valsub);
         } else if (valsub instanceof Type_xmlnodelist) {
           Type_xmlnodelist multi = (Type_xmlnodelist)valsub;
+          ischanged = true;
           listval.addAll(multi.vx_listxmlnode());
         } else if (valsub instanceof List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (item instanceof Xml.Type_xmlnode) {
               Xml.Type_xmlnode valitem = (Xml.Type_xmlnode)item;
+              ischanged = true;
               listval.add(valitem);
             }
           }
@@ -399,9 +440,13 @@ public final class Xml {
           msgblock = msgblock.vx_copy(msg);
         }
       }
-      output.vx_p_list = Core.immutablelist(listval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_xmlnodelist work = new Class_xmlnodelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -499,7 +544,11 @@ public final class Xml {
 
     @Override
     public Type_xmlpropmap vx_copy(final Object... vals) {
-      Class_xmlpropmap output = new Class_xmlpropmap();
+      Type_xmlpropmap output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_xmlpropmap valmap = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
       Map<String, Core.Type_string> mapval = new LinkedHashMap<>(valmap.vx_mapstring());
@@ -530,14 +579,19 @@ public final class Xml {
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
+            ischanged = true;
             mapval.put(key, valany);
             key = "";
           }
         }
       }
-      output.vxmap = Core.immutablemap(mapval);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_xmlpropmap work = new Class_xmlpropmap();
+        work.vxmap = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -573,9 +627,10 @@ public final class Xml {
    * Constant: delimxml
    * {delim}
    */
-  public static class Const_delimxml extends Textblock.Class_delim {
+  public static class Const_delimxml extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxml", // name
@@ -623,8 +678,7 @@ public final class Xml {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 
@@ -638,9 +692,10 @@ public final class Xml {
    * Constant: delimxmlequal
    * {delim}
    */
-  public static class Const_delimxmlequal extends Textblock.Class_delim {
+  public static class Const_delimxmlequal extends Textblock.Class_delim implements Core.vx_Type_const {
 
-    public Core.Type_constdef constdef() {
+    @Override
+    public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlequal", // name
@@ -671,8 +726,7 @@ public final class Xml {
       output.vx_p_name = val.name();
       output.vx_p_starttext = val.starttext();
       output.vx_p_endtext = val.endtext();
-      output.vx_p_startpos = val.startpos();
-      output.vx_p_endpos = val.endpos();
+      output.vx_p_pos = val.pos();
       output.vx_p_delimlist = val.delimlist();
     }
 

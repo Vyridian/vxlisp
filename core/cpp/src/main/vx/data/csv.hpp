@@ -110,7 +110,7 @@ namespace vx_data_csv {
   };
 
   // (const delimcsv)
-  class Class_delimcsv : public vx_data_textblock::Class_delim {
+  class Class_delimcsv : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_data_csv::Const_delimcsv output);
     vx_core::Type_constdef vx_constdef() const;

@@ -20,41 +20,40 @@
  :allowtypes [repl]
  :doc "List of repl")
 
-(const delimvxlisp : tb/delim
- (tb/delim
+(const delimvxlisp : delim
+ (delim
   :name "delimvxlisp"
   :delimlist
-   (tb/delimlist
-    tb/delimcomment
-    tb/delimcommentblock
-    tb/delimwhitespace
-    delimvxlispparen))
+   (delimlist
+    delimvxlispparen
+    delimcomment
+    delimcommentblock))
  :doc "vxlisp File Delimiters")
 
-(const delimvxlispbracket : tb/delim
- (copy tb/delimbracketsquare
+(const delimvxlispbracket : delim
+ (copy delimbracketsquare
   :name "delimvxlispbracketsquare"
   :delimlist
-   (tb/delimlist
-    tb/delimcomment
-    tb/delimcommentblock
-    tb/delimquote
-    tb/delimquoteblock
-    tb/delimwhitespace
+   (delimlist
+    delimcomment
+    delimcommentblock
+    delimquote
+    delimquoteblock
+    delimwhitespace
     delimvxlispbracket
     delimvxlispparen))
  :doc "vxlisp Square Bracket Delimiters")
 
-(const delimvxlispparen : tb/delim
- (copy tb/delimparen
+(const delimvxlispparen : delim
+ (copy delimparen
   :name "delimvxlispparen"
   :delimlist
-   (tb/delimlist
-    tb/delimcomment
-    tb/delimcommentblock
-    tb/delimquote
-    tb/delimquoteblock
-    tb/delimwhitespace
+   (delimlist
+    delimcomment
+    delimcommentblock
+    delimquote
+    delimquoteblock
+    delimwhitespace
     delimvxlispbracket
     delimvxlispparen))
  :doc "vxlisp Paren Delimiters")
@@ -68,6 +67,7 @@
  :context
  :doc   "Run an arbitrary program in the REPL.")
 
+/*
 (func any<-liblist-string-async : any
  [liblist : liblist
   text    : string :doc "Program to run"]
@@ -78,6 +78,7 @@
  :async
  :context
  :doc   "Run an arbitrary program in the REPL asynchrously.")
+*/
 
 (func any-repl<-functype-args : any
  [type : any
@@ -139,11 +140,49 @@
            ))))           
  :doc "Run an arbitrary program in the REPL.")
 
+/*
 (func any<-repl-async : any
  [repl : repl]
+ (let-async : any
+  [val      : any      := (:val repl)
+   repltype : any      := (:type repl)
+   repllist : repllist := (:repllist repl)
+   args     : anylist  := (anylist<-repllist repllist)]
+  (if
+   (then (!-empty val) val)
+   (then (is-func repltype)
+    (any-repl<-functype-args
+     repltype
+     args))
+   (else
+    (new repltype args))))
  :async
  :context
  :doc "Run an arbitrary program in the REPL.")
+*/
+
+(func any<-script : any
+ [script : string]
+ (let : any
+  [textblock : tb/textblock := (textblock-repl<-script script)
+   repl      : repl         := (repl<-textblock textblock)]
+  (any<-repl repl))
+ :context
+ :sideeffects "Since any code can be run. This is unsafe by nature."
+ :doc "Run an arbitrary script.")
+
+/*
+(func any<-script-async : any
+ [text : string]
+ (let-async : any
+  [textblock : tb/textblock := (textblock-repl<-string text)
+   repl      : repl         := (repl<-textblock textblock)]
+  (any<-repl-async repl))
+ :context
+ :async
+ :sideeffects "Since any code can be run. This is unsafe by nature."
+ :doc "Run an arbitrary script asynchronously.")
+*/
 
 (func anylist<-repllist : anylist
  [repllist : repllist]
@@ -162,15 +201,14 @@
                                anylist
                                (fn [item : any]
                                 (string<-any item)))
-   text     : string       := (type/string<-stringlist-join
+   script   : string       := (type/string<-stringlist-join
                                textlist
                                "")
-   tb       : tb/textblock := (textblock-repl<-string
-                               text)
+   tb       : tb/textblock := (textblock-repl<-script
+                               script)
    repl     : repl         := (repl<-textblock tb)]
   (any<-any : any-1
-   (any<-repl repl))
- )
+   (any<-repl repl)))
  :context
  :doc "A function that joins any number of values into a string and then parses and evaluates it.")
 
@@ -183,7 +221,54 @@
  [textblock : tb/textblock]
  :doc "Returns a parsed repl from a parsed textblock")
 
-(func textblock-repl<-string : tb/textblock
- [text : string]
- (tb/textblock-parse<-string-delim text delimvxlisp)
+(func textblock-repl<-script : tb/textblock
+ [script : string]
+ (tb/textblock-parse<-string-delim
+  script
+  delimvxlisp)
+ :test (test
+        (tb/textblock
+         :text "(+ 2 3)"
+         :startpos 1
+         :endpos 7
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text "(+ 2 3)"
+            :startpos 1
+            :endpos 7
+            :delim
+             (copy delimvxlispparen
+              :delimlist
+               (empty delimlist))
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "+"
+               :startpos 2
+               :endpos 2)
+              (tb/textblock
+               :text " "
+               :startpos 3
+               :endpos 3
+               :delim
+                (copy tb/delimwhitespace
+                 :pos 0))
+              (tb/textblock
+               :text "2"
+               :startpos 4
+               :endpos 4)
+              (tb/textblock
+               :text " "
+               :startpos 5
+               :endpos 5
+               :delim
+                (copy tb/delimwhitespace
+                 :pos 0))
+              (tb/textblock
+               :text "3"
+               :startpos 6
+               :endpos 6)))))
+        (textblock-repl<-script
+         "(+ 2 3)"))
  :doc "Returns a parsed textblock from a string")

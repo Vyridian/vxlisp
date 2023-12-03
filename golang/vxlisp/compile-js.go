@@ -199,11 +199,10 @@ func JsFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	case "vx/core/string":
 		startval = value
 	default:
+		startval = "{vx_type: " + JsNameTFromType(cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
 		switch cnst.vxtype.extends {
 		case ":list":
-			startval = "Object.assign([], {vx_type: " + JsNameTFromType(cnsttype) + "})"
-		default:
-			startval = "{vx_type: " + JsNameTFromType(cnsttype) + "}"
+			startval = "Object.assign([], " + startval + ")"
 		}
 		if value != "\"\"" {
 			properties = append(properties, "Object.assign("+propertyprefix+", "+value+")")

@@ -389,6 +389,10 @@ namespace vx_core {
   typedef Abstract_minus_3* Func_minus_3;
   extern Func_minus_3 e_minus_3;
   extern Func_minus_3 t_minus_3;
+  class Abstract_minus1;
+  typedef Abstract_minus1* Func_minus1;
+  extern Func_minus1 e_minus1;
+  extern Func_minus1 t_minus1;
   class Abstract_dotmethod;
   typedef Abstract_dotmethod* Func_dotmethod;
   extern Func_dotmethod e_dotmethod;
@@ -954,6 +958,13 @@ namespace vx_core {
     virtual vx_core::vx_Type_mapfunc mapfunc() = 0;
   };
 
+  // class vx_Abstract_const
+  class vx_Abstract_const {
+  public:
+    virtual vx_core::Type_constdef vx_constdef() const = 0;
+  };
+  typedef vx_core::vx_Abstract_const* vx_Type_const;
+
   // class vx_Class_async
   class vx_Class_async {
   public:
@@ -1038,6 +1049,12 @@ namespace vx_core {
 
   // vx_int_from_string(string)
   int vx_int_from_string(std::string text);
+
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find);
+
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find);
 
   // vx_is_float(string)
   bool vx_is_float(std::string value);
@@ -1387,6 +1404,7 @@ namespace vx_core {
     Abstract_any() {};
     virtual ~Abstract_any() = 0;
     long vx_p_iref = 0;
+    std::string vx_p_constname = "";
     vx_core::Type_msgblock vx_p_msgblock = NULL;
     virtual vx_core::Type_msgblock vx_msgblock() const {return this->vx_p_msgblock;};
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const = 0;
@@ -3281,6 +3299,9 @@ namespace vx_core {
   // (func -)
   vx_core::Type_number f_minus_3(vx_core::Type_numberlist nums);
 
+  // (func -1)
+  vx_core::Type_int f_minus1(vx_core::Type_int num);
+
   // (func .)
   vx_core::Type_any f_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params);
 
@@ -5002,7 +5023,7 @@ namespace vx_core {
   };
 
   // (const false)
-  class Class_false : public vx_core::Class_boolean {
+  class Class_false : public vx_core::Class_boolean, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_false output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5010,14 +5031,14 @@ namespace vx_core {
   };
 
   // (const globalpackagemap)
-  class Class_globalpackagemap : public vx_core::Class_packagemap {
+  class Class_globalpackagemap : public vx_core::Class_packagemap, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_globalpackagemap output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const infinity)
-  class Class_infinity : public vx_core::Class_int {
+  class Class_infinity : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_infinity output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5025,14 +5046,14 @@ namespace vx_core {
   };
 
   // (const mempool-active)
-  class Class_mempool_active : public vx_core::Class_mempool {
+  class Class_mempool_active : public vx_core::Class_mempool, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_mempool_active output);
     vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const msg-error)
-  class Class_msg_error : public vx_core::Class_int {
+  class Class_msg_error : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_msg_error output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5040,7 +5061,7 @@ namespace vx_core {
   };
 
   // (const msg-info)
-  class Class_msg_info : public vx_core::Class_int {
+  class Class_msg_info : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_msg_info output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5048,7 +5069,7 @@ namespace vx_core {
   };
 
   // (const msg-severe)
-  class Class_msg_severe : public vx_core::Class_int {
+  class Class_msg_severe : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_msg_severe output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5056,7 +5077,7 @@ namespace vx_core {
   };
 
   // (const msg-warning)
-  class Class_msg_warning : public vx_core::Class_int {
+  class Class_msg_warning : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_msg_warning output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5064,7 +5085,7 @@ namespace vx_core {
   };
 
   // (const neginfinity)
-  class Class_neginfinity : public vx_core::Class_int {
+  class Class_neginfinity : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_neginfinity output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5072,7 +5093,7 @@ namespace vx_core {
   };
 
   // (const newline)
-  class Class_newline : public vx_core::Class_string {
+  class Class_newline : public vx_core::Class_string, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_newline output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5080,7 +5101,7 @@ namespace vx_core {
   };
 
   // (const notanumber)
-  class Class_notanumber : public vx_core::Class_int {
+  class Class_notanumber : public vx_core::Class_int, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_notanumber output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5088,7 +5109,7 @@ namespace vx_core {
   };
 
   // (const nothing)
-  class Class_nothing : public vx_core::Class_string {
+  class Class_nothing : public vx_core::Class_string, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_nothing output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5096,7 +5117,7 @@ namespace vx_core {
   };
 
   // (const quote)
-  class Class_quote : public vx_core::Class_string {
+  class Class_quote : public vx_core::Class_string, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_quote output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5104,7 +5125,7 @@ namespace vx_core {
   };
 
   // (const true)
-  class Class_true : public vx_core::Class_boolean {
+  class Class_true : public vx_core::Class_boolean, public vx_core::vx_Abstract_const {
   public:
     static void vx_const_new(vx_core::Const_true output);
     vx_core::Type_constdef vx_constdef() const;
@@ -5434,6 +5455,32 @@ namespace vx_core {
   public:
     Class_minus_3();
     virtual ~Class_minus_3() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func -1)
+  class Abstract_minus1 : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_minus1() {};
+    virtual ~Abstract_minus1() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_minus1 : public virtual Abstract_minus1 {
+  public:
+    Class_minus1();
+    virtual ~Class_minus1() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -7724,8 +7771,8 @@ namespace vx_core {
     long intindex = index->vx_int();
     vx_core::vx_Type_listany listvalue = values->vx_list();
     long intsize = vx_core::vx_int_from_sizet(listvalue.size());
-    if (intindex < intsize) {
-      vx_core::Type_any value = listvalue[intindex];
+    if (intindex <= intsize) {
+      vx_core::Type_any value = listvalue[intindex - 1];
       output = vx_core::vx_any_from_any(generic_any_1, value);
     };
     vx_core::vx_release_one_except({values, index}, output);
@@ -7958,7 +8005,7 @@ namespace vx_core {
   template <class T, class X> T* f_first_from_list(T* generic_any_1, X* values) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve(values);
-    output = vx_core::f_any_from_list(generic_any_1, values, vx_core::vx_new_int(0));
+    output = vx_core::f_any_from_list(generic_any_1, values, vx_core::vx_new_int(1));
     vx_core::vx_release_one_except(values, output);
     return output;
   }
@@ -7996,10 +8043,8 @@ namespace vx_core {
       vx_core::t_any_from_func->vx_fn_new({values, generic_any_1}, [values, generic_any_1]() {
         vx_core::Type_int len = vx_core::f_length_from_list(values);
         vx_core::vx_ref_plus(len);
-        vx_core::Type_int last = vx_core::f_minus(len, vx_core::vx_new_int(1));
-        vx_core::vx_ref_plus(last);
-        vx_core::Type_any output_1 = vx_core::f_any_from_list(generic_any_1, values, last);
-        vx_core::vx_release_one_except({len, last}, output_1);
+        vx_core::Type_any output_1 = vx_core::f_any_from_list(generic_any_1, values, len);
+        vx_core::vx_release_one_except(len, output_1);
         return output_1;
       })
     );

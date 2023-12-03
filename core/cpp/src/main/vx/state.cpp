@@ -75,7 +75,12 @@ namespace vx_state {
 
     vx_core::Type_any Class_value_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Type_value_map output = vx_state::e_value_map;
+      bool ischanged = false;
+      if (copyval->vx_p_constname != "") {
+        ischanged = true;
+      }
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map, copyval);
+      output = valmap;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
@@ -97,13 +102,14 @@ namespace vx_state {
         } else {
           vx_core::Type_any valany = valsub;
           if (valany) {
+            ischanged = true;
             mapval[key] = valany;
             keys.push_back(key);
             key = "";
           }
         }
       }
-      if ((mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
         output = new vx_state::Class_value_map();
         output->vx_p_keys = keys;
         output->vx_p_map = mapval;

@@ -76,7 +76,7 @@ export default class vx_test {
    * The default Test Stylesheet
    * {stylesheet}
    */
-  static c_stylesheet_test = {vx_type: vx_web_html.t_stylesheet}
+  static c_stylesheet_test = {vx_type: vx_web_html.t_stylesheet, vx_constdef: {pkgname: 'vx/test', name: 'stylesheet-test'}}
 
   /**
    * @function context_test

@@ -172,7 +172,6 @@ vxlisp_win64 doc srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
  :private
  :protected
  :mutable
- :unsafe
  :deprecated "Version"
  :doc        "value doc"
  :test       clauses :...)
@@ -191,7 +190,7 @@ vxlisp_win64 doc srcjs testjs srcjava testjava --path %currentfolder%/vxlisp
  :async       // asynchronous function
  :private
  :protected
- :unsafe      // denotes function with hidden sideeffects
+ :sideeffects // denotes function with hidden sideeffects
  :wrapper
  :messages    // use message handling
  :parallel

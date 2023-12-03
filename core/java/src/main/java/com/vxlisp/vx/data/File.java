@@ -121,14 +121,18 @@ public final class File {
 
     @Override
     public Type_file vx_copy(final Object... vals) {
-      Class_file output = new Class_file();
+      Type_file output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       Type_file val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      output.vx_p_name = val.name();
-      output.vx_p_format = val.format();
-      output.vx_p_path = val.path();
-      output.vx_p_permission = val.permission();
-      output.vx_p_text = val.text();
+      Core.Type_string vx_p_name = val.name();
+      File.Type_fileformat vx_p_format = val.format();
+      Core.Type_string vx_p_path = val.path();
+      Core.Type_permission vx_p_permission = val.permission();
+      Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":format");
@@ -159,46 +163,59 @@ public final class File {
         } else {
           switch (key) {
           case ":name":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_name = (Core.Type_string)valsub;
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_name = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new file :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":format":
-            if (valsub instanceof File.Type_fileformat) {
-              output.vx_p_format = (File.Type_fileformat)valsub;
+            if (valsub == vx_p_format) {
+            } else if (valsub instanceof File.Type_fileformat) {
+              ischanged = true;
+              vx_p_format = (File.Type_fileformat)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new file :format " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":path":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_path = (Core.Type_string)valsub;
+            if (valsub == vx_p_path) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_path = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_path = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_path = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new file :path " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":permission":
-            if (valsub instanceof Core.Type_permission) {
-              output.vx_p_permission = (Core.Type_permission)valsub;
+            if (valsub == vx_p_permission) {
+            } else if (valsub instanceof Core.Type_permission) {
+              ischanged = true;
+              vx_p_permission = (Core.Type_permission)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
-            if (valsub instanceof Core.Type_string) {
-              output.vx_p_text = (Core.Type_string)valsub;
+            if (valsub == vx_p_text) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_text = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
-              output.vx_p_text = Core.t_string.vx_new(valsub);
+              ischanged = true;
+              vx_p_text = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new file :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -211,8 +228,17 @@ public final class File {
           key = "";
         }
       }
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_file work = new Class_file();
+        work.vx_p_name = vx_p_name;
+        work.vx_p_format = vx_p_format;
+        work.vx_p_path = vx_p_path;
+        work.vx_p_permission = vx_p_permission;
+        work.vx_p_text = vx_p_text;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -262,7 +288,11 @@ public final class File {
 
     @Override
     public Type_fileformat vx_copy(final Object... vals) {
-      Class_fileformat output = new Class_fileformat();
+      Type_fileformat output = this;
+      boolean ischanged = false;
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
       return output;
     }
 
