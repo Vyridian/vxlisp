@@ -20,8 +20,8 @@ namespace test_lib {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
     output = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
+					 context,
+      vx_core::vx_new_boolean(true)
     );
     vx_core::vx_memory_leak_test("sample_testresult1", irefcount, 2);
     return output;
@@ -31,8 +31,8 @@ namespace test_lib {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
     output = vx_test::f_test_false(
-      vx_core::vx_new_boolean(false),
-      context
+					 context,
+      vx_core::vx_new_boolean(false)
     );
     vx_core::vx_memory_leak_test("sample_testresult2", irefcount, 2);
     return output;
@@ -105,14 +105,14 @@ namespace test_lib {
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
-              vx_core::vx_new_decimal_from_string("4.5"),
+ 													context,
+	 												vx_core::vx_new_decimal_from_string("4.5"),
               vx_core::f_new(
                 vx_core::t_float,
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_decimal_from_string("4.5")
                 })
-              ),
-              context
+              )
             )
           })
         })
@@ -338,7 +338,7 @@ namespace test_lib {
     return output;
   }
 
-  vx_core::Type_boolean write_testpackagelist(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+  vx_core::Type_boolean write_testpackagelist(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
     vx_core::Type_string string_node = vx_core::f_string_from_any(testpackagelist);
     vx_data_file::Type_file file = vx_test::f_file_test();
     vx_core::Type_boolean output = vx_data_file::vx_boolean_write_from_file_string(file, string_node);
@@ -347,10 +347,10 @@ namespace test_lib {
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+  vx_core::Type_boolean write_testpackagelist_async(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
     vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
     vx_core::vx_reserve(testpackagelist_resolved);
-    vx_core::Type_boolean write_testpackagelist = test_lib::write_testpackagelist(testpackagelist_resolved, context);
+    vx_core::Type_boolean write_testpackagelist = test_lib::write_testpackagelist(context, testpackagelist_resolved);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
     vx_core::vx_release_one(testpackagelist_resolved);
     vx_web_html::Type_html htmlnode = vx_test::f_html_from_divtest(divtest);
@@ -499,8 +499,8 @@ namespace test_lib {
     return output;
   }
 
-  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
-    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
+  bool test_run_all(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
+    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(context, testpackagelist);
     std::string expected = "true";
     std::string actual = vx_core::vx_string_from_any(issuccess);
     vx_core::vx_release(issuccess);
@@ -567,9 +567,9 @@ namespace test_lib {
     vx_core::Type_any testresult_resolved = async_testresult->sync_value();
     vx_core::vx_memory_leak_test(testname + "-2", irefcount, 21);
     vx_core::Type_any testdescribe_resolved = async_testdescribe->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 21);
+    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 20);
     vx_core::Type_any testdescribelist_resolved = async_testdescribelist->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 19);
+    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 17);
     vx_core::Type_any testcase_resolved = async_testcase->sync_value();
     vx_core::vx_memory_leak_test(testname + "-5", irefcount, 15);
     std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");

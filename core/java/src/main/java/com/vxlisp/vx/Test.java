@@ -6355,6 +6355,56 @@ public final class Test {
 
   static {
     Const_stylesheet_test.const_new(c_stylesheet_test);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("testcase", Test.t_testcase);
+    maptype.put("testcaselist", Test.t_testcaselist);
+    maptype.put("testcoveragedetail", Test.t_testcoveragedetail);
+    maptype.put("testcoveragenums", Test.t_testcoveragenums);
+    maptype.put("testcoveragesummary", Test.t_testcoveragesummary);
+    maptype.put("testdescribe", Test.t_testdescribe);
+    maptype.put("testdescribelist", Test.t_testdescribelist);
+    maptype.put("testpackage", Test.t_testpackage);
+    maptype.put("testpackagelist", Test.t_testpackagelist);
+    maptype.put("testresult", Test.t_testresult);
+    maptype.put("testresultlist", Test.t_testresultlist);
+    mapconst.put("stylesheet-test", Test.c_stylesheet_test);
+    mapfunc.put("context-test", Test.t_context_test);
+    mapfunc.put("div<-testcaselist", Test.t_div_from_testcaselist);
+    mapfunc.put("div<-testpackage", Test.t_div_from_testpackage);
+    mapfunc.put("div<-testpackagelist", Test.t_div_from_testpackagelist);
+    mapfunc.put("divchildlist<-testpackagelist", Test.t_divchildlist_from_testpackagelist);
+    mapfunc.put("file-test", Test.t_file_test);
+    mapfunc.put("file-testhtml", Test.t_file_testhtml);
+    mapfunc.put("file-testnode", Test.t_file_testnode);
+    mapfunc.put("html<-divtest", Test.t_html_from_divtest);
+    mapfunc.put("p<-passfail", Test.t_p_from_passfail);
+    mapfunc.put("p<-testcoveragenums", Test.t_p_from_testcoveragenums);
+    mapfunc.put("resolve-testcase", Test.t_resolve_testcase);
+    mapfunc.put("resolve-testcaselist", Test.t_resolve_testcaselist);
+    mapfunc.put("resolve-testdescribe", Test.t_resolve_testdescribe);
+    mapfunc.put("resolve-testdescribelist", Test.t_resolve_testdescribelist);
+    mapfunc.put("resolve-testpackage", Test.t_resolve_testpackage);
+    mapfunc.put("resolve-testpackagelist", Test.t_resolve_testpackagelist);
+    mapfunc.put("resolve-testresult", Test.t_resolve_testresult);
+    mapfunc.put("security-test", Test.t_security_test);
+    mapfunc.put("test", Test.t_test);
+    mapfunc.put("test_1", Test.t_test_1);
+    mapfunc.put("test-false", Test.t_test_false);
+    mapfunc.put("test-false_1", Test.t_test_false_1);
+    mapfunc.put("test-gt", Test.t_test_gt);
+    mapfunc.put("test-gt_1", Test.t_test_gt_1);
+    mapfunc.put("test-ne", Test.t_test_ne);
+    mapfunc.put("test-ne_1", Test.t_test_ne_1);
+    mapfunc.put("test-string", Test.t_test_string);
+    mapfunc.put("test-string_1", Test.t_test_string_1);
+    mapfunc.put("test-true", Test.t_test_true);
+    mapfunc.put("test-true_1", Test.t_test_true_1);
+    mapfunc.put("tr<-testdescribe-casename", Test.t_tr_from_testdescribe_casename);
+    mapfunc.put("trlist<-testcase", Test.t_trlist_from_testcase);
+    mapfunc.put("trlist<-testcaselist", Test.t_trlist_from_testcaselist);
+    Core.vx_global_package_set("vx/test", maptype, mapconst, mapfunc);
   }
 
 }

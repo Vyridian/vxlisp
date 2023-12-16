@@ -11394,6 +11394,110 @@ public final class TextblockTest {
     return output;
   }
 
+  static Test.Type_testcase f_textblocklist_from_textblocklist_remove(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/data/textblock",
+      ":casename", "textblocklist<-textblocklist-remove",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (textblocklist\n  (textblock\n   :text \"+\")\n  (textblock\n   :text \"2\")\n  (textblock\n   :text \"3\"))\n (textblocklist<-textblocklist-remove\n  (textblocklist\n   (textblock\n    :text \"+\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"2\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"3\"))\n  delimwhitespace))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Textblock.t_textblocklist,
+                Core.t_anylist.vx_new(
+                  Core.f_new(
+                    Textblock.t_textblock,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(":text"),
+                      Core.vx_new_string("+")
+                    )
+                  ),
+                  Core.f_new(
+                    Textblock.t_textblock,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(":text"),
+                      Core.vx_new_string("2")
+                    )
+                  ),
+                  Core.f_new(
+                    Textblock.t_textblock,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(":text"),
+                      Core.vx_new_string("3")
+                    )
+                  )
+                )
+              ),
+              Textblock.f_textblocklist_from_textblocklist_remove(
+                Core.f_new(
+                  Textblock.t_textblocklist,
+                  Core.t_anylist.vx_new(
+                    Core.f_new(
+                      Textblock.t_textblock,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":text"),
+                        Core.vx_new_string("+")
+                      )
+                    ),
+                    Core.f_new(
+                      Textblock.t_textblock,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":text"),
+                        Core.vx_new_string(" "),
+                        Core.vx_new_string(":delim"),
+                        Core.f_copy(
+                          Textblock.c_delimwhitespace,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":pos"),
+                            Core.vx_new_int(0)
+                          )
+                        )
+                      )
+                    ),
+                    Core.f_new(
+                      Textblock.t_textblock,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":text"),
+                        Core.vx_new_string("2")
+                      )
+                    ),
+                    Core.f_new(
+                      Textblock.t_textblock,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":text"),
+                        Core.vx_new_string(" "),
+                        Core.vx_new_string(":delim"),
+                        Core.f_copy(
+                          Textblock.c_delimwhitespace,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":pos"),
+                            Core.vx_new_int(0)
+                          )
+                        )
+                      )
+                    ),
+                    Core.f_new(
+                      Textblock.t_textblock,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":text"),
+                        Core.vx_new_string("3")
+                      )
+                    )
+                  )
+                ),
+                Textblock.c_delimwhitespace
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       TextblockTest.t_delimlist(context),
@@ -11412,7 +11516,8 @@ public final class TextblockTest {
       TextblockTest.f_textblock_from_close_textblock(context),
       TextblockTest.f_textblock_from_open_textblock(context),
       TextblockTest.f_textblock_from_single_textblock(context),
-      TextblockTest.f_textblock_from_string_delim(context)
+      TextblockTest.f_textblock_from_string_delim(context),
+      TextblockTest.f_textblocklist_from_textblocklist_remove(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
@@ -11422,11 +11527,11 @@ public final class TextblockTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/textblock", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 52, ":total", 52), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 16, ":total", 26), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 17, ":total", 52), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 53, ":total", 53), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 62, ":tests", 17, ":total", 27), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 27), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 27), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 18, ":total", 53), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 25, ":tests", 1, ":total", 4)
     );
   }
@@ -11490,7 +11595,8 @@ public final class TextblockTest {
         ":textblock<-open-textblock", 2,
         ":textblock<-single-textblock", 3,
         ":textblock<-string-delim", 1,
-        ":textblock<-textblock-delim", 0
+        ":textblock<-textblock-delim", 0,
+        ":textblocklist<-textblocklist-remove", 1
       )
     );
   }

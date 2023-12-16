@@ -22,12 +22,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 85, ":tests", 199, ":total", 234), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 45, ":tests", 59, ":total", 130), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 204, ":total", 236), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 61, ":total", 131), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 30, ":tests", 65, ":total", 210), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 4, ":total", 66)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 67, ":total", 212), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 67)
     )
   }
 
@@ -87,6 +87,7 @@ export default class vx_core_test {
           "permission", 0,
           "permissionlist", 0,
           "permissionmap", 0,
+          "project", 0,
           "security", 0,
           "session", 0,
           "setting", 0,
@@ -109,7 +110,7 @@ export default class vx_core_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "false", 1,
-          "globalpackagemap", 0,
+          "global", 0,
           "infinity", 0,
           "mempool-active", 0,
           "msg-error", 0,
@@ -202,12 +203,11 @@ export default class vx_core_test {
           "extends<-any", 0,
           "extends<-typedef", 0,
           "first<-list", 1,
-          "first<-list-fn-any<-any", 1,
+          "first<-list-any<-any", 1,
+          "float<-string", 1,
           "fn", 0,
           "funcdef<-func", 0,
           "funcname<-funcdef", 0,
-          "global-package-get", 0,
-          "global-package-set", 0,
           "if", 2,
           "if_1", 2,
           "if_2", 1,
@@ -216,8 +216,9 @@ export default class vx_core_test {
           "is-empty", 0,
           "is-empty_1", 3,
           "is-endswith", 0,
+          "is-float", 0,
           "is-func", 0,
-          "is-int", 0,
+          "is-int", 4,
           "is-number", 3,
           "is-pass<-permission", 0,
           "last<-list", 1,
@@ -250,6 +251,7 @@ export default class vx_core_test {
           "number<-func", 0,
           "or", 3,
           "or_1", 2,
+          "package-global<-name", 0,
           "packagename<-typedef", 0,
           "path<-context-path", 0,
           "path<-setting-path", 0,
@@ -1547,7 +1549,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"v2\"\n (any<-map (map :a \"v1\" :b \"v2\" :c \"v3\") :b))",
+            ":describename", "(test\n \"v2\"\n (any<-map\n  (map\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1788,23 +1790,23 @@ export default class vx_core_test {
     return output
   }
 
-  static f_first_from_list_fn_any_from_any(context) {
+  static f_first_from_list_any_from_any(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "first<-list-fn-any<-any",
+      ":casename", "first<-list-any<-any",
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"b\"\n (first<-list-fn-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
+            ":describename", "(test\n \"b\"\n (first<-list-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
             ":testresult",
             vx_test.f_test(
               context,
               "b",
-              vx_core.f_first_from_list_fn_any_from_any(
+              vx_core.f_first_from_list_any_from_any(
                 {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
@@ -1814,6 +1816,33 @@ export default class vx_core_test {
                 ),
                 vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
               )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_float_from_string(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "float<-string",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (float 2.3)\n (float<-string\n  \"2.3\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_float,
+                2.3
+              ),
+              vx_core.f_float_from_string("2.3")
             )
           )
         )
@@ -2061,6 +2090,58 @@ export default class vx_core_test {
                   vx_core.t_map
                 )
               )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_is_int(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "is-int",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (is-int 2))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_is_int(2)
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (is-int \"2\"))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_is_int("2")
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (is-int infinity))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_is_int(
+                vx_core.c_infinity
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (is-int \"infinity\"))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_is_int("infinity")
             )
           )
         )
@@ -2730,7 +2811,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test boolean (type<-any false))",
+            ":describename", "(test\n boolean\n (type<-any false))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2742,7 +2823,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test int (type<-any 5))",
+            ":describename", "(test\n int\n (type<-any 5))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2752,7 +2833,7 @@ export default class vx_core_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test string (type<-any \"a\"))",
+            ":describename", "(test\n string\n (type<-any \"a\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2856,12 +2937,14 @@ export default class vx_core_test {
       vx_core_test.f_contains_1(context),
       vx_core_test.f_empty(context),
       vx_core_test.f_first_from_list(context),
-      vx_core_test.f_first_from_list_fn_any_from_any(context),
+      vx_core_test.f_first_from_list_any_from_any(context),
+      vx_core_test.f_float_from_string(context),
       vx_core_test.f_if(context),
       vx_core_test.f_if_1(context),
       vx_core_test.f_if_2(context),
       vx_core_test.f_int_from_string(context),
       vx_core_test.f_is_empty_1(context),
+      vx_core_test.f_is_int(context),
       vx_core_test.f_is_number(context),
       vx_core_test.f_last_from_list(context),
       vx_core_test.f_length_from_list(context),

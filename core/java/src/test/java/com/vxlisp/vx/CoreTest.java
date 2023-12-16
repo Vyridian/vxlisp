@@ -1228,7 +1228,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"v2\"\n (any<-map (map :a \"v1\" :b \"v2\" :c \"v3\") :b))",
+          ":describename", "(test\n \"v2\"\n (any<-map\n  (map\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
           ":testresult",
             Test.f_test(
               context,
@@ -1458,20 +1458,20 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_first_from_list_fn_any_from_any(final Core.Type_context context) {
+  static Test.Type_testcase f_first_from_list_any_from_any(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "first<-list-fn-any<-any",
+      ":casename", "first<-list-any<-any",
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"b\"\n (first<-list-fn-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
+          ":describename", "(test\n \"b\"\n (first<-list-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_string("b"),
-              Core.f_first_from_list_fn_any_from_any(
+              Core.f_first_from_list_any_from_any(
                 Core.t_any,
                 Core.f_new(
                   Core.t_list,
@@ -1483,6 +1483,32 @@ public final class CoreTest {
                 ),
                 Core.t_resolve
               )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_float_from_string(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "float<-string",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (float 2.3)\n (float<-string\n  \"2.3\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_float,
+                Core.t_anylist.vx_new(
+                  Core.t_decimal.vx_new_from_string("2.3")
+                )
+              ),
+              Core.f_float_from_string(Core.vx_new_string("2.3"))
             )
         )
       )
@@ -1718,6 +1744,52 @@ public final class CoreTest {
                   Core.t_map
                 )
               )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_is_int(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "is-int",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (is-int 2))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_is_int(Core.vx_new_int(2))
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (is-int \"2\"))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_is_int(Core.vx_new_string("2"))
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (is-int infinity))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_is_int(
+                Core.c_infinity
+              )
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (is-int \"infinity\"))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_is_int(Core.vx_new_string("infinity"))
             )
         )
       )
@@ -2386,7 +2458,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test boolean (type<-any false))",
+          ":describename", "(test\n boolean\n (type<-any false))",
           ":testresult",
             Test.f_test(
               context,
@@ -2397,7 +2469,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test int (type<-any 5))",
+          ":describename", "(test\n int\n (type<-any 5))",
           ":testresult",
             Test.f_test(
               context,
@@ -2406,7 +2478,7 @@ public final class CoreTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test string (type<-any \"a\"))",
+          ":describename", "(test\n string\n (type<-any \"a\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -2504,12 +2576,14 @@ public final class CoreTest {
       CoreTest.f_contains_1(context),
       CoreTest.f_empty(context),
       CoreTest.f_first_from_list(context),
-      CoreTest.f_first_from_list_fn_any_from_any(context),
+      CoreTest.f_first_from_list_any_from_any(context),
+      CoreTest.f_float_from_string(context),
       CoreTest.f_if(context),
       CoreTest.f_if_1(context),
       CoreTest.f_if_2(context),
       CoreTest.f_int_from_string(context),
       CoreTest.f_is_empty_1(context),
+      CoreTest.f_is_int(context),
       CoreTest.f_is_number(context),
       CoreTest.f_last_from_list(context),
       CoreTest.f_length_from_list(context),
@@ -2536,12 +2610,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 85, ":tests", 199, ":total", 234), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 45, ":tests", 59, ":total", 130), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 154), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 154), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 65, ":total", 210), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 4, ":total", 66)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 204, ":total", 236), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 61, ":total", 131), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 67, ":total", 212), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 67)
     );
   }
 
@@ -2598,6 +2672,7 @@ public final class CoreTest {
         ":permission", 0,
         ":permissionlist", 0,
         ":permissionmap", 0,
+        ":project", 0,
         ":security", 0,
         ":session", 0,
         ":setting", 0,
@@ -2618,7 +2693,7 @@ public final class CoreTest {
       ),
       ":constmap", Core.t_intmap.vx_new(
         ":false", 1,
-        ":globalpackagemap", 0,
+        ":global", 0,
         ":infinity", 0,
         ":mempool-active", 0,
         ":msg-error", 0,
@@ -2709,12 +2784,11 @@ public final class CoreTest {
         ":extends<-any", 0,
         ":extends<-typedef", 0,
         ":first<-list", 1,
-        ":first<-list-fn-any<-any", 1,
+        ":first<-list-any<-any", 1,
+        ":float<-string", 1,
         ":fn", 0,
         ":funcdef<-func", 0,
         ":funcname<-funcdef", 0,
-        ":global-package-get", 0,
-        ":global-package-set", 0,
         ":if", 2,
         ":if_1", 2,
         ":if_2", 1,
@@ -2723,8 +2797,9 @@ public final class CoreTest {
         ":is-empty", 0,
         ":is-empty_1", 3,
         ":is-endswith", 0,
+        ":is-float", 0,
         ":is-func", 0,
-        ":is-int", 0,
+        ":is-int", 4,
         ":is-number", 3,
         ":is-pass<-permission", 0,
         ":last<-list", 1,
@@ -2757,6 +2832,7 @@ public final class CoreTest {
         ":number<-func", 0,
         ":or", 3,
         ":or_1", 2,
+        ":package-global<-name", 0,
         ":packagename<-typedef", 0,
         ":path<-context-path", 0,
         ":path<-setting-path", 0,

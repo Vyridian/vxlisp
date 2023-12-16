@@ -21,17 +21,17 @@ public final class State {
 
   public static class Class_value_map extends Core.Class_base implements Type_value_map {
 
-    protected Map<String, Core.Type_any> vxmap = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       Class_value_map map = this;
       String skey = key.vx_string();
-      Map<String, Core.Type_any> mapval = map.vxmap;
+      Map<String, Core.Type_any> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Core.e_any);
       return output;
     }
@@ -52,7 +52,7 @@ public final class State {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -107,7 +107,7 @@ public final class State {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_value_map work = new Class_value_map();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -323,6 +323,13 @@ public final class State {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("value-map", State.t_value_map);
+    mapfunc.put("change", State.t_change);
+    mapfunc.put("register", State.t_register);
+    Core.vx_global_package_set("vx/state", maptype, mapconst, mapfunc);
   }
 
 }

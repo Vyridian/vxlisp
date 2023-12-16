@@ -1,6 +1,8 @@
 package com.vxlisp.vx;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public final class Type {
@@ -334,6 +336,170 @@ public final class Type {
   }
 
   /**
+   * @function boolean_from_string_ends
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} ends
+   * @return {boolean}
+   * (func boolean<-string-ends)
+   */
+  public static interface Func_boolean_from_string_ends extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends);
+  }
+
+  public static class Class_boolean_from_string_ends extends Core.Class_base implements Func_boolean_from_string_ends {
+
+    @Override
+    public Func_boolean_from_string_ends vx_new(Object... vals) {
+      Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_from_string_ends vx_copy(Object... vals) {
+      Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "boolean<-string-ends", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_from_string_ends vx_empty() {return e_boolean_from_string_ends;}
+    @Override
+    public Func_boolean_from_string_ends vx_type() {return t_boolean_from_string_ends;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string ends = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Type.f_boolean_from_string_ends(text, ends);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends) {
+      return Type.f_boolean_from_string_ends(text, ends);
+    }
+
+  }
+
+  public static final Func_boolean_from_string_ends e_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
+  public static final Func_boolean_from_string_ends t_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
+
+  public static Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends) {
+    Core.Type_boolean output = Core.e_boolean;
+    boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
+    output = Core.vx_new_boolean(check);
+    return output;
+  }
+
+  /**
+   * @function boolean_from_string_starts
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} starts
+   * @return {boolean}
+   * (func boolean<-string-starts)
+   */
+  public static interface Func_boolean_from_string_starts extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts);
+  }
+
+  public static class Class_boolean_from_string_starts extends Core.Class_base implements Func_boolean_from_string_starts {
+
+    @Override
+    public Func_boolean_from_string_starts vx_new(Object... vals) {
+      Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_from_string_starts vx_copy(Object... vals) {
+      Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "boolean<-string-starts", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_from_string_starts vx_empty() {return e_boolean_from_string_starts;}
+    @Override
+    public Func_boolean_from_string_starts vx_type() {return t_boolean_from_string_starts;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string starts = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Type.f_boolean_from_string_starts(text, starts);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts) {
+      return Type.f_boolean_from_string_starts(text, starts);
+    }
+
+  }
+
+  public static final Func_boolean_from_string_starts e_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
+  public static final Func_boolean_from_string_starts t_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
+
+  public static Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts) {
+    Core.Type_boolean output = Core.e_boolean;
+    boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
+    output = Core.vx_new_boolean(check);
+    return output;
+  }
+
+  /**
    * @function int_from_string_find
    * Returns integer position of find string in text string.
    * @param  {string} text
@@ -410,9 +576,7 @@ public final class Type {
 
   public static Core.Type_int f_int_from_string_find(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
-    String stext = text.vx_string();
-    String sfind = find.vx_string();
-    int ipos = stext.indexOf(sfind) + 1;
+    int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
     output = Core.vx_new_int(ipos);
     return output;
   }
@@ -495,6 +659,88 @@ public final class Type {
   public static Core.Type_int f_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
     int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
+    output = Core.vx_new_int(ipos);
+    return output;
+  }
+
+  /**
+   * @function int_from_string_findlast
+   * Returns integer position of find string in text string.
+   * @param  {string} text
+   * @param  {string} findlast
+   * @return {int}
+   * (func int<-string-findlast)
+   */
+  public static interface Func_int_from_string_findlast extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast);
+  }
+
+  public static class Class_int_from_string_findlast extends Core.Class_base implements Func_int_from_string_findlast {
+
+    @Override
+    public Func_int_from_string_findlast vx_new(Object... vals) {
+      Class_int_from_string_findlast output = new Class_int_from_string_findlast();
+      return output;
+    }
+
+    @Override
+    public Func_int_from_string_findlast vx_copy(Object... vals) {
+      Class_int_from_string_findlast output = new Class_int_from_string_findlast();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "int<-string-findlast", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_int_from_string_findlast vx_empty() {return e_int_from_string_findlast;}
+    @Override
+    public Func_int_from_string_findlast vx_type() {return t_int_from_string_findlast;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string findlast = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Type.f_int_from_string_findlast(text, findlast);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
+      return Type.f_int_from_string_findlast(text, findlast);
+    }
+
+  }
+
+  public static final Func_int_from_string_findlast e_int_from_string_findlast = new Type.Class_int_from_string_findlast();
+  public static final Func_int_from_string_findlast t_int_from_string_findlast = new Type.Class_int_from_string_findlast();
+
+  public static Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
+    Core.Type_int output = Core.e_int;
+    int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
     output = Core.vx_new_int(ipos);
     return output;
   }
@@ -680,99 +926,6 @@ public final class Type {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_eq(
       Core.vx_new_string("decimal"),
-      Core.f_typename_from_any(value)
-    );
-    return output;
-  }
-
-  /**
-   * @function is_float
-   * @param  {any} value
-   * @return {boolean}
-   * (func is-float)
-   */
-  public static interface Func_is_float extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_float(final Core.Type_any value);
-  }
-
-  public static class Class_is_float extends Core.Class_base implements Func_is_float {
-
-    @Override
-    public Func_is_float vx_new(Object... vals) {
-      Class_is_float output = new Class_is_float();
-      return output;
-    }
-
-    @Override
-    public Func_is_float vx_copy(Object... vals) {
-      Class_is_float output = new Class_is_float();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/type", // pkgname
-        "is-float", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "boolean", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_is_float vx_empty() {return e_is_float;}
-    @Override
-    public Func_is_float vx_type() {return t_is_float;}
-
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Core.Type_any inputval = (Core.Type_any)value;
-      Core.Type_any outputval = Type.f_is_float(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Type.f_is_float(value);
-      return output;
-    }
-
-    @Override
-    public Core.Type_boolean f_is_float(final Core.Type_any value) {
-      return Type.f_is_float(value);
-    }
-
-  }
-
-  public static final Func_is_float e_is_float = new Type.Class_is_float();
-  public static final Func_is_float t_is_float = new Type.Class_is_float();
-
-  public static Core.Type_boolean f_is_float(final Core.Type_any value) {
-    Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_eq(
-      Core.vx_new_string("float"),
       Core.f_typename_from_any(value)
     );
     return output;
@@ -2060,6 +2213,34 @@ public final class Type {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    mapfunc.put("allowtypenames<-type", Type.t_allowtypenames_from_type);
+    mapfunc.put("allowtypes<-type", Type.t_allowtypes_from_type);
+    mapfunc.put("any<-int", Type.t_any_from_int);
+    mapfunc.put("boolean<-string-ends", Type.t_boolean_from_string_ends);
+    mapfunc.put("boolean<-string-starts", Type.t_boolean_from_string_starts);
+    mapfunc.put("int<-string-find", Type.t_int_from_string_find);
+    mapfunc.put("int<-string-findkeyword", Type.t_int_from_string_findkeyword);
+    mapfunc.put("int<-string-findlast", Type.t_int_from_string_findlast);
+    mapfunc.put("is-boolean", Type.t_is_boolean);
+    mapfunc.put("is-decimal", Type.t_is_decimal);
+    mapfunc.put("is-none", Type.t_is_none);
+    mapfunc.put("is-string", Type.t_is_string);
+    mapfunc.put("is-type", Type.t_is_type);
+    mapfunc.put("is-type<-any-typelist", Type.t_is_type_from_any_typelist);
+    mapfunc.put("length<-string", Type.t_length_from_string);
+    mapfunc.put("string<-int", Type.t_string_from_int);
+    mapfunc.put("string<-string-end", Type.t_string_from_string_end);
+    mapfunc.put("string<-string-start", Type.t_string_from_string_start);
+    mapfunc.put("string<-string-start-end", Type.t_string_from_string_start_end);
+    mapfunc.put("string<-stringlist-join", Type.t_string_from_stringlist_join);
+    mapfunc.put("stringlist<-string-split", Type.t_stringlist_from_string_split);
+    mapfunc.put("traitnames<-any", Type.t_traitnames_from_any);
+    mapfunc.put("traits<-any", Type.t_traits_from_any);
+    mapfunc.put("traits<-typedef", Type.t_traits_from_typedef);
+    Core.vx_global_package_set("vx/type", maptype, mapconst, mapfunc);
   }
 
 }

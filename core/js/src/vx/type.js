@@ -101,6 +101,40 @@ export default class vx_type {
   }
 
   /**
+   * @function boolean_from_string_ends
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} ends
+   * @return {boolean}
+   */
+  static t_boolean_from_string_ends = {}
+  static e_boolean_from_string_ends = {vx_type: vx_type.t_boolean_from_string_ends}
+
+  // (func boolean<-string-ends)
+  static f_boolean_from_string_ends(text, ends) {
+    let output = vx_core.e_boolean
+    output = vx_core.vx_boolean_from_string_ends(text, ends)
+    return output
+  }
+
+  /**
+   * @function boolean_from_string_starts
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} starts
+   * @return {boolean}
+   */
+  static t_boolean_from_string_starts = {}
+  static e_boolean_from_string_starts = {vx_type: vx_type.t_boolean_from_string_starts}
+
+  // (func boolean<-string-starts)
+  static f_boolean_from_string_starts(text, starts) {
+    let output = vx_core.e_boolean
+    output = vx_core.vx_boolean_from_string_starts(text, starts)
+    return output
+  }
+
+  /**
    * @function int_from_string_find
    * Returns integer position of find string in text string.
    * @param  {string} text
@@ -113,7 +147,7 @@ export default class vx_type {
   // (func int<-string-find)
   static f_int_from_string_find(text, find) {
     let output = vx_core.e_int
-    output = text.indexOf(find) + 1
+    output = vx_core.vx_int_from_string_find(text, find) + 1
     return output
   }
 
@@ -131,6 +165,23 @@ export default class vx_type {
   static f_int_from_string_findkeyword(text, find) {
     let output = vx_core.e_int
     output = vx_type.vx_int_from_string_findkeyword(text, find)
+    return output
+  }
+
+  /**
+   * @function int_from_string_findlast
+   * Returns integer position of find string in text string.
+   * @param  {string} text
+   * @param  {string} findlast
+   * @return {int}
+   */
+  static t_int_from_string_findlast = {}
+  static e_int_from_string_findlast = {vx_type: vx_type.t_int_from_string_findlast}
+
+  // (func int<-string-findlast)
+  static f_int_from_string_findlast(text, findlast) {
+    let output = vx_core.e_int
+    output = vx_core.vx_int_from_string_findlast(text, findlast) + 1
     return output
   }
 
@@ -165,24 +216,6 @@ export default class vx_type {
     let output = vx_core.e_boolean
     output = vx_core.f_eq(
       "decimal",
-      vx_core.f_typename_from_any(value)
-    )
-    return output
-  }
-
-  /**
-   * @function is_float
-   * @param  {any} value
-   * @return {boolean}
-   */
-  static t_is_float = {}
-  static e_is_float = {vx_type: vx_type.t_is_float}
-
-  // (func is-float)
-  static f_is_float(value) {
-    let output = vx_core.e_boolean
-    output = vx_core.f_eq(
-      "float",
       vx_core.f_typename_from_any(value)
     )
     return output
@@ -476,34 +509,74 @@ export default class vx_type {
 
   // empty types
 
-  static c_empty = {
-    "allowtypenames<-type": vx_type.e_allowtypenames_from_type,
-    "allowtypes<-type": vx_type.e_allowtypes_from_type,
-    "any<-int": vx_type.e_any_from_int,
-    "int<-string-find": vx_type.e_int_from_string_find,
-    "int<-string-findkeyword": vx_type.e_int_from_string_findkeyword,
-    "is-boolean": vx_type.e_is_boolean,
-    "is-decimal": vx_type.e_is_decimal,
-    "is-float": vx_type.e_is_float,
-    "is-none": vx_type.e_is_none,
-    "is-string": vx_type.e_is_string,
-    "is-type": vx_type.e_is_type,
-    "is-type<-any-typelist": vx_type.e_is_type_from_any_typelist,
-    "length<-string": vx_type.e_length_from_string,
-    "string<-int": vx_type.e_string_from_int,
-    "string<-string-end": vx_type.e_string_from_string_end,
-    "string<-string-start": vx_type.e_string_from_string_start,
-    "string<-string-start-end": vx_type.e_string_from_string_start_end,
-    "string<-stringlist-join": vx_type.e_string_from_stringlist_join,
-    "stringlist<-string-split": vx_type.e_stringlist_from_string_split,
-    "traitnames<-any": vx_type.e_traitnames_from_any,
-    "traits<-any": vx_type.e_traits_from_any,
-    "traits<-typedef": vx_type.e_traits_from_typedef
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/type", vx_type)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "allowtypenames<-type": vx_type.e_allowtypenames_from_type,
+      "allowtypes<-type": vx_type.e_allowtypes_from_type,
+      "any<-int": vx_type.e_any_from_int,
+      "boolean<-string-ends": vx_type.e_boolean_from_string_ends,
+      "boolean<-string-starts": vx_type.e_boolean_from_string_starts,
+      "int<-string-find": vx_type.e_int_from_string_find,
+      "int<-string-findkeyword": vx_type.e_int_from_string_findkeyword,
+      "int<-string-findlast": vx_type.e_int_from_string_findlast,
+      "is-boolean": vx_type.e_is_boolean,
+      "is-decimal": vx_type.e_is_decimal,
+      "is-none": vx_type.e_is_none,
+      "is-string": vx_type.e_is_string,
+      "is-type": vx_type.e_is_type,
+      "is-type<-any-typelist": vx_type.e_is_type_from_any_typelist,
+      "length<-string": vx_type.e_length_from_string,
+      "string<-int": vx_type.e_string_from_int,
+      "string<-string-end": vx_type.e_string_from_string_end,
+      "string<-string-start": vx_type.e_string_from_string_start,
+      "string<-string-start-end": vx_type.e_string_from_string_start_end,
+      "string<-stringlist-join": vx_type.e_string_from_stringlist_join,
+      "stringlist<-string-split": vx_type.e_stringlist_from_string_split,
+      "traitnames<-any": vx_type.e_traitnames_from_any,
+      "traits<-any": vx_type.e_traits_from_any,
+      "traits<-typedef": vx_type.e_traits_from_typedef
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "allowtypenames<-type": vx_type.t_allowtypenames_from_type,
+      "allowtypes<-type": vx_type.t_allowtypes_from_type,
+      "any<-int": vx_type.t_any_from_int,
+      "boolean<-string-ends": vx_type.t_boolean_from_string_ends,
+      "boolean<-string-starts": vx_type.t_boolean_from_string_starts,
+      "int<-string-find": vx_type.t_int_from_string_find,
+      "int<-string-findkeyword": vx_type.t_int_from_string_findkeyword,
+      "int<-string-findlast": vx_type.t_int_from_string_findlast,
+      "is-boolean": vx_type.t_is_boolean,
+      "is-decimal": vx_type.t_is_decimal,
+      "is-none": vx_type.t_is_none,
+      "is-string": vx_type.t_is_string,
+      "is-type": vx_type.t_is_type,
+      "is-type<-any-typelist": vx_type.t_is_type_from_any_typelist,
+      "length<-string": vx_type.t_length_from_string,
+      "string<-int": vx_type.t_string_from_int,
+      "string<-string-end": vx_type.t_string_from_string_end,
+      "string<-string-start": vx_type.t_string_from_string_start,
+      "string<-string-start-end": vx_type.t_string_from_string_start_end,
+      "string<-stringlist-join": vx_type.t_string_from_stringlist_join,
+      "stringlist<-string-split": vx_type.t_stringlist_from_string_split,
+      "traitnames<-any": vx_type.t_traitnames_from_any,
+      "traits<-any": vx_type.t_traits_from_any,
+      "traits<-typedef": vx_type.t_traits_from_typedef
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/type",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (func allowtypenames<-type)
     vx_type.t_allowtypenames_from_type['vx_type'] = vx_core.t_type
@@ -562,6 +635,44 @@ export default class vx_type {
       fn            : vx_type.f_any_from_int
     }
 
+    // (func boolean<-string-ends)
+    vx_type.t_boolean_from_string_ends['vx_type'] = vx_core.t_type
+    vx_type.t_boolean_from_string_ends['vx_value'] = {
+      name          : "boolean<-string-ends",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_boolean_from_string_ends
+    }
+
+    // (func boolean<-string-starts)
+    vx_type.t_boolean_from_string_starts['vx_type'] = vx_core.t_type
+    vx_type.t_boolean_from_string_starts['vx_value'] = {
+      name          : "boolean<-string-starts",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_boolean_from_string_starts
+    }
+
     // (func int<-string-find)
     vx_type.t_int_from_string_find['vx_type'] = vx_core.t_type
     vx_type.t_int_from_string_find['vx_value'] = {
@@ -600,6 +711,25 @@ export default class vx_type {
       fn            : vx_type.f_int_from_string_findkeyword
     }
 
+    // (func int<-string-findlast)
+    vx_type.t_int_from_string_findlast['vx_type'] = vx_core.t_type
+    vx_type.t_int_from_string_findlast['vx_value'] = {
+      name          : "int<-string-findlast",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_int_from_string_findlast
+    }
+
     // (func is-boolean)
     vx_type.t_is_boolean['vx_type'] = vx_core.t_type
     vx_type.t_is_boolean['vx_value'] = {
@@ -636,25 +766,6 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_is_decimal
-    }
-
-    // (func is-float)
-    vx_type.t_is_float['vx_type'] = vx_core.t_type
-    vx_type.t_is_float['vx_value'] = {
-      name          : "is-float",
-      pkgname       : "vx/type",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_type.f_is_float
     }
 
     // (func is-none)

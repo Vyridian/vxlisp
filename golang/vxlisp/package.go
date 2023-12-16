@@ -26,6 +26,37 @@ func NewPackage() *vxpackage {
 	return output
 }
 
+func FuncFromListPackage(listpkg []*vxpackage, pkgname string, funcname string, funcidx int) (*vxfunc, bool) {
+	found := false
+	var output *vxfunc
+	for _, pkg := range listpkg {
+		if pkg.name == pkgname {
+			fnc, pkgfound := FuncFromPackage(pkg, funcname, funcidx)
+			if pkgfound {
+				found = true
+				output = fnc
+				break
+			}
+		}
+	}
+	return output, found
+}
+
+func FuncFromPackage(pkg *vxpackage, funcname string, funcidx int) (*vxfunc, bool) {
+	found := false
+	var output *vxfunc
+	mapfunc := MapFuncFromListFunc(pkg.listfunc)
+	listfunc, funcfound := mapfunc[funcname]
+	if funcfound {
+		len := len(listfunc)
+		if funcidx < len {
+			found = true
+			output = listfunc[funcidx]
+		}
+	}
+	return output, found
+}
+
 func LibraryPathFromPackage(pkg *vxpackage, libname string) string {
 	output := ""
 	if libname == pkg.name {
@@ -363,4 +394,28 @@ func StringFromPackageIndent(pkg *vxpackage, indent string) string {
 		")"
 	StringFromTextblock(pkg.textblock)
 	return output
+}
+
+func TypeFromListPackage(listpkg []*vxpackage, pkgname string, typename string) (*vxtype, bool) {
+	found := false
+	var output *vxtype
+	for _, pkg := range listpkg {
+		if pkg.name == pkgname {
+			typ, pkgfound := TypeFromPackage(pkg, typename)
+			if pkgfound {
+				found = true
+				output = typ
+				break
+			}
+		}
+	}
+	return output, found
+}
+
+func TypeFromPackage(pkg *vxpackage, typename string) (*vxtype, bool) {
+	found := false
+	var output *vxtype
+	maptype := MapTypeFromListType(pkg.listtype)
+	output, found = maptype[typename]
+	return output, found
 }

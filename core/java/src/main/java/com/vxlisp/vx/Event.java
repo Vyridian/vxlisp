@@ -427,6 +427,14 @@ public final class Event {
   static {
     Const_event_click.const_new(c_event_click);
     Const_event_move.const_new(c_event_move);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("event", Event.t_event);
+    mapconst.put("event-click", Event.c_event_click);
+    mapconst.put("event-move", Event.c_event_move);
+    mapfunc.put("any<-from-to", Event.t_any_from_from_to);
+    Core.vx_global_package_set("vx/event", maptype, mapconst, mapfunc);
   }
 
 }

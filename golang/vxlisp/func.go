@@ -371,10 +371,7 @@ func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfu
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 		if len(fnc.listarg) > 0 || fnc.context {
-			argscope := ScopeFromFunc(fnc)
-			argscope.pkgname = ""
-			argscopes := append([]vxscope{argscope}, listscope...)
-			args, msgs := ListArgLink(fnc.listarg, argscopes, fnc.textblock, subpath)
+			args, msgs := ListArgLink(fnc.listarg, listscope, fnc.textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			fnc.listarg = args
 		}

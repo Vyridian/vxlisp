@@ -77,24 +77,50 @@ export default class vx_data_table {
   static e_sort = {}
   static e_table = {}
 
-  static c_empty = {
-    "cell": vx_data_table.e_cell,
-    "celllist": vx_data_table.e_celllist,
-    "cellmap": vx_data_table.e_cellmap,
-    "field": vx_data_table.e_field,
-    "fieldlist": vx_data_table.e_fieldlist,
-    "fieldmap": vx_data_table.e_fieldmap,
-    "filter": vx_data_table.e_filter,
-    "row": vx_data_table.e_row,
-    "rowlist": vx_data_table.e_rowlist,
-    "rowmap": vx_data_table.e_rowmap,
-    "sort": vx_data_table.e_sort,
-    "table": vx_data_table.e_table
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/table", vx_data_table)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "cell": vx_data_table.e_cell,
+      "celllist": vx_data_table.e_celllist,
+      "cellmap": vx_data_table.e_cellmap,
+      "field": vx_data_table.e_field,
+      "fieldlist": vx_data_table.e_fieldlist,
+      "fieldmap": vx_data_table.e_fieldmap,
+      "filter": vx_data_table.e_filter,
+      "row": vx_data_table.e_row,
+      "rowlist": vx_data_table.e_rowlist,
+      "rowmap": vx_data_table.e_rowmap,
+      "sort": vx_data_table.e_sort,
+      "table": vx_data_table.e_table
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "cell": vx_data_table.t_cell,
+      "celllist": vx_data_table.t_celllist,
+      "cellmap": vx_data_table.t_cellmap,
+      "field": vx_data_table.t_field,
+      "fieldlist": vx_data_table.t_fieldlist,
+      "fieldmap": vx_data_table.t_fieldmap,
+      "filter": vx_data_table.t_filter,
+      "row": vx_data_table.t_row,
+      "rowlist": vx_data_table.t_rowlist,
+      "rowmap": vx_data_table.t_rowmap,
+      "sort": vx_data_table.t_sort,
+      "table": vx_data_table.t_table
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/table",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type cell)
     vx_data_table.t_cell['vx_type'] = vx_core.t_type

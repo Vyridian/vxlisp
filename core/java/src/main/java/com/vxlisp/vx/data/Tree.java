@@ -1054,6 +1054,19 @@ public final class Tree {
     Const_brancharrow_down.const_new(c_brancharrow_down);
     Const_brancharrow_up.const_new(c_brancharrow_up);
     Const_brancharrow_updown.const_new(c_brancharrow_updown);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("branch", Tree.t_branch);
+    maptype.put("brancharrow", Tree.t_brancharrow);
+    maptype.put("branchlist", Tree.t_branchlist);
+    maptype.put("leaf", Tree.t_leaf);
+    maptype.put("leaflist", Tree.t_leaflist);
+    maptype.put("tree", Tree.t_tree);
+    mapconst.put("brancharrow-down", Tree.c_brancharrow_down);
+    mapconst.put("brancharrow-up", Tree.c_brancharrow_up);
+    mapconst.put("brancharrow-updown", Tree.c_brancharrow_updown);
+    Core.vx_global_package_set("vx/data/tree", maptype, mapconst, mapfunc);
   }
 
 }

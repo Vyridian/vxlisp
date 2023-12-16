@@ -47,12 +47,14 @@ namespace vx_core_test {
   vx_test::Type_testcase f_contains(vx_core::Type_context context);
   vx_test::Type_testcase f_empty(vx_core::Type_context context);
   vx_test::Type_testcase f_first_from_list(vx_core::Type_context context);
-  vx_test::Type_testcase f_first_from_list_fn_any_from_any(vx_core::Type_context context);
+  vx_test::Type_testcase f_first_from_list_any_from_any(vx_core::Type_context context);
+  vx_test::Type_testcase f_float_from_string(vx_core::Type_context context);
   vx_test::Type_testcase f_if(vx_core::Type_context context);
   vx_test::Type_testcase f_if(vx_core::Type_context context);
   vx_test::Type_testcase f_if(vx_core::Type_context context);
   vx_test::Type_testcase f_int_from_string(vx_core::Type_context context);
   vx_test::Type_testcase f_is_empty(vx_core::Type_context context);
+  vx_test::Type_testcase f_is_int(vx_core::Type_context context);
   vx_test::Type_testcase f_is_number(vx_core::Type_context context);
   vx_test::Type_testcase f_last_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_length_from_list(vx_core::Type_context context);

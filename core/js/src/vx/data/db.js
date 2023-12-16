@@ -89,24 +89,50 @@ export default class vx_data_db {
   static e_dbtable = {}
   static e_dbvalue = {}
 
-  static c_empty = {
-    "db": vx_data_db.e_db,
-    "dbcell": vx_data_db.e_dbcell,
-    "dbcellmap": vx_data_db.e_dbcellmap,
-    "dbfield": vx_data_db.e_dbfield,
-    "dbfieldmap": vx_data_db.e_dbfieldmap,
-    "dbid": vx_data_db.e_dbid,
-    "dblink": vx_data_db.e_dblink,
-    "dblinklist": vx_data_db.e_dblinklist,
-    "dbnode": vx_data_db.e_dbnode,
-    "dbnote": vx_data_db.e_dbnote,
-    "dbtable": vx_data_db.e_dbtable,
-    "dbvalue": vx_data_db.e_dbvalue
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/db", vx_data_db)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "db": vx_data_db.e_db,
+      "dbcell": vx_data_db.e_dbcell,
+      "dbcellmap": vx_data_db.e_dbcellmap,
+      "dbfield": vx_data_db.e_dbfield,
+      "dbfieldmap": vx_data_db.e_dbfieldmap,
+      "dbid": vx_data_db.e_dbid,
+      "dblink": vx_data_db.e_dblink,
+      "dblinklist": vx_data_db.e_dblinklist,
+      "dbnode": vx_data_db.e_dbnode,
+      "dbnote": vx_data_db.e_dbnote,
+      "dbtable": vx_data_db.e_dbtable,
+      "dbvalue": vx_data_db.e_dbvalue
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "db": vx_data_db.t_db,
+      "dbcell": vx_data_db.t_dbcell,
+      "dbcellmap": vx_data_db.t_dbcellmap,
+      "dbfield": vx_data_db.t_dbfield,
+      "dbfieldmap": vx_data_db.t_dbfieldmap,
+      "dbid": vx_data_db.t_dbid,
+      "dblink": vx_data_db.t_dblink,
+      "dblinklist": vx_data_db.t_dblinklist,
+      "dbnode": vx_data_db.t_dbnode,
+      "dbnote": vx_data_db.t_dbnote,
+      "dbtable": vx_data_db.t_dbtable,
+      "dbvalue": vx_data_db.t_dbvalue
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/db",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type db)
     vx_data_db.t_db['vx_type'] = vx_core.t_type

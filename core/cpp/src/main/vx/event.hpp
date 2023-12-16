@@ -53,6 +53,7 @@ namespace vx_event {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -65,17 +66,15 @@ namespace vx_event {
   };
 
   // (const event-click)
-  class Class_event_click : public vx_event::Class_event, public vx_core::vx_Abstract_const {
+  class Class_event_click : public vx_event::Class_event {
   public:
     static void vx_const_new(vx_event::Const_event_click output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const event-move)
-  class Class_event_move : public vx_event::Class_event, public vx_core::vx_Abstract_const {
+  class Class_event_move : public vx_event::Class_event {
   public:
     static void vx_const_new(vx_event::Const_event_move output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (func any<-from-to)
@@ -93,6 +92,7 @@ namespace vx_event {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -108,13 +108,10 @@ namespace vx_event {
     return output;
   }
 
-  class vx_Class_package : vx_core::vx_Abstract_package {
+  class vx_Class_package {
   public:
     vx_Class_package();
     void init();
-    vx_core::vx_Type_mapany maptype();
-    vx_core::vx_Type_mapany mapconst();
-    vx_core::vx_Type_mapfunc mapfunc();
   };
   inline vx_Class_package const vx_package;
 

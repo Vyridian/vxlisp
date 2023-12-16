@@ -38,7 +38,7 @@ export default class vx_data_xml {
 
   /**
    * @function xml_from_textblock
-   * @param  {} textblock
+   * @param  {textblock} textblock
    * @return {xml}
    */
   static t_xml_from_textblock = {}
@@ -59,17 +59,36 @@ export default class vx_data_xml {
   static e_xmlnodelist = []
   static e_xmlpropmap = {}
 
-  static c_empty = {
-    "xml": vx_data_xml.e_xml,
-    "xmlnode": vx_data_xml.e_xmlnode,
-    "xmlnodelist": vx_data_xml.e_xmlnodelist,
-    "xmlpropmap": vx_data_xml.e_xmlpropmap,
-    "xml<-textblock": vx_data_xml.e_xml_from_textblock
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/xml", vx_data_xml)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "delimxml": vx_data_xml.c_delimxml,
+      "delimxmlequal": vx_data_xml.c_delimxmlequal
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "xml": vx_data_xml.e_xml,
+      "xmlnode": vx_data_xml.e_xmlnode,
+      "xmlnodelist": vx_data_xml.e_xmlnodelist,
+      "xmlpropmap": vx_data_xml.e_xmlpropmap,
+      "xml<-textblock": vx_data_xml.e_xml_from_textblock
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "xml<-textblock": vx_data_xml.t_xml_from_textblock
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "xml": vx_data_xml.t_xml,
+      "xmlnode": vx_data_xml.t_xmlnode,
+      "xmlnodelist": vx_data_xml.t_xmlnodelist,
+      "xmlpropmap": vx_data_xml.t_xmlpropmap
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/xml",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type xml)
     vx_data_xml.t_xml['vx_type'] = vx_core.t_type

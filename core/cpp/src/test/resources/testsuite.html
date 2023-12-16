@@ -267,9 +267,11 @@
                     </td>
                     <td>
                       <p class="preformatted">(test
- (stringlist "a" "b" "c")
+ (stringlist
+  "a" "b" "c")
  (list&lt;-list-end
-  (stringlist "a" "b" "c" "d")
+  (stringlist
+   "a" "b" "c" "d")
   3))</p>
                     </td>
                     <td>
@@ -290,42 +292,15 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">list&lt;-list-filtertypes</p>
+                      <p class="preformatted">list&lt;-list-filter</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
- (list "a" 1 "b" "c")
- (list&lt;-list-filtertypes : list
-  (list "a" 1 "b" "c" 4.5)
-  string int))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(list
- "a"
- 1
- "b"
- "c")</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(list
- "a"
- 1
- "b"
- "c")</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="passflag">Pass</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">list&lt;-list-fn-filter</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(test
- (stringlist "a1" "b1" "c1" "d1")
- (list&lt;-list-fn-filter : stringlist
-  (list "a" 4 "b" (list) "c" (map) "d")
+ (stringlist
+  "a1" "b1" "c1" "d1")
+ (list&lt;-list-filter : stringlist
+  (list
+   "a" 4 "b" (list) "c" (map) "d")
   (fn : string
    [val : any]
    (if
@@ -353,14 +328,47 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
+                      <p class="preformatted">list&lt;-list-filtertypes</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (list
+  "a" 1 "b" "c")
+ (list&lt;-list-filtertypes : list
+  (list
+   "a" 1 "b" "c" 4.5)
+  string int))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(list
+ "a"
+ 1
+ "b"
+ "c")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(list
+ "a"
+ 1
+ "b"
+ "c")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
                       <p class="preformatted">list&lt;-list-start</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
- (stringlist "b" "c" "d")
+ (stringlist
+  "b" "c" "d")
  (list&lt;-list-start
-  (stringlist "a" "b" "c" "d")
-  1))</p>
+  (stringlist
+   "a" "b" "c" "d")
+  2))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringlist
@@ -384,10 +392,12 @@
                     </td>
                     <td>
                       <p class="preformatted">(test
- (stringlist "b" "c")
+ (stringlist
+  "b" "c")
  (list&lt;-list-start-end
-  (stringlist "a" "b" "c" "d")
-  1 3))</p>
+  (stringlist
+   "a" "b" "c" "d")
+  2 3))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringlist
@@ -410,13 +420,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">30% 65/210</p>
-              <p class="coveragenums">6% 4/66</p>
+              <p class="coveragenums">31% 67/212</p>
+              <p class="coveragenums">5% 4/67</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">45% 59/130</p>
-              <p class="coveragenums">85% 199/234</p>
-              <p class="coveragenums">0% 0/154</p>
-              <p class="coveragenums">0% 0/154</p>
+              <p class="coveragenums">46% 61/131</p>
+              <p class="coveragenums">86% 204/236</p>
+              <p class="coveragenums">0% 0/155</p>
+              <p class="coveragenums">0% 0/155</p>
             </summary>
             <div>
               <table>
@@ -1649,7 +1659,12 @@
                     <td>
                       <p class="preformatted">(test
  "v2"
- (any&lt;-map (map :a "v1" :b "v2" :c "v3") :b))</p>
+ (any&lt;-map
+  (map
+   :a "v1"
+   :b "v2"
+   :c "v3")
+  :b))</p>
                     </td>
                     <td>
                       <p class="preformatted">"v2"</p>
@@ -1856,12 +1871,12 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">first&lt;-list-fn-any&lt;-any</p>
+                      <p class="preformatted">first&lt;-list-any&lt;-any</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
  "b"
- (first&lt;-list-fn-any&lt;-any
+ (first&lt;-list-any&lt;-any
   (list nothing "b" "c")
   resolve))</p>
                     </td>
@@ -1870,6 +1885,26 @@
                     </td>
                     <td>
                       <p class="preformatted">"b"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">float&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (float 2.3)
+ (float&lt;-string
+  "2.3"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">2.3</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">2.3</p>
                     </td>
                   </tr>
                   <tr>
@@ -2122,6 +2157,78 @@
                     </td>
                     <td>
                       <p class="preformatted">(test-true (is-empty (map)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">is-int</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (is-int 2))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">is-int</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (is-int "2"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">is-int</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (is-int infinity))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">is-int</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (is-int "infinity"))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>
@@ -2713,7 +2820,9 @@
                       <p class="preformatted">type&lt;-any</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test boolean (type&lt;-any false))</p>
+                      <p class="preformatted">(test
+ boolean
+ (type&lt;-any false))</p>
                     </td>
                     <td>
                       <p class="preformatted">boolean</p>
@@ -2730,7 +2839,9 @@
                       <p class="preformatted">type&lt;-any</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test int (type&lt;-any 5))</p>
+                      <p class="preformatted">(test
+ int
+ (type&lt;-any 5))</p>
                     </td>
                     <td>
                       <p class="preformatted">int</p>
@@ -2747,7 +2858,9 @@
                       <p class="preformatted">type&lt;-any</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test string (type&lt;-any "a"))</p>
+                      <p class="preformatted">(test
+ string
+ (type&lt;-any "a"))</p>
                     </td>
                     <td>
                       <p class="preformatted">string</p>
@@ -2949,8 +3062,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -2972,8 +3085,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -3011,8 +3124,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -3036,8 +3149,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -3059,8 +3172,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -3098,8 +3211,8 @@
     :delim
      (vx/data/textblock/delim
       :name "delimquote"
-      :starttext "\""
-      :endtext "\"")
+      :starttext quote
+      :endtext quote)
     :children
      (vx/data/textblock/textblocklist
       (vx/data/textblock/textblock
@@ -3332,13 +3445,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/textblock</p>
-              <p class="coveragenums">32% 17/52</p>
+              <p class="coveragenums">33% 18/53</p>
               <p class="coveragenums">25% 1/4</p>
               <p class="coveragenums">0% 0/22</p>
-              <p class="coveragenums">61% 16/26</p>
-              <p class="coveragenums">100% 52/52</p>
-              <p class="coveragenums">3% 1/26</p>
-              <p class="coveragenums">3% 1/26</p>
+              <p class="coveragenums">62% 17/27</p>
+              <p class="coveragenums">100% 53/53</p>
+              <p class="coveragenums">3% 1/27</p>
+              <p class="coveragenums">3% 1/27</p>
             </summary>
             <div>
               <table>
@@ -13083,6 +13196,61 @@
  :delim vx/data/textblock/delimcomma)</p>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblocklist&lt;-textblocklist-remove</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (textblocklist
+  (textblock
+   :text "+")
+  (textblock
+   :text "2")
+  (textblock
+   :text "3"))
+ (textblocklist&lt;-textblocklist-remove
+  (textblocklist
+   (textblock
+    :text "+")
+   (textblock
+    :text " "
+    :delim
+     (copy delimwhitespace
+      :pos 0))
+   (textblock
+    :text "2")
+   (textblock
+    :text " "
+    :delim
+     (copy delimwhitespace
+      :pos 0))
+   (textblock
+    :text "3"))
+  delimwhitespace))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/data/textblock/textblocklist
+ (vx/data/textblock/textblock
+  :text "+")
+ (vx/data/textblock/textblock
+  :text "2")
+ (vx/data/textblock/textblock
+  :text "3"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/data/textblock/textblocklist
+ (vx/data/textblock/textblock
+  :text "+")
+ (vx/data/textblock/textblock
+  :text "2")
+ (vx/data/textblock/textblock
+  :text "3"))</p>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -13210,13 +13378,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/repl</p>
-              <p class="coveragenums">13% 2/15</p>
+              <p class="coveragenums">50% 12/24</p>
               <p class="coveragenums">0% 0/3</p>
               <p class="coveragenums">0% 0/3</p>
-              <p class="coveragenums">22% 2/9</p>
-              <p class="coveragenums">100% 15/15</p>
-              <p class="coveragenums">0% 0/9</p>
-              <p class="coveragenums">0% 0/9</p>
+              <p class="coveragenums">66% 12/18</p>
+              <p class="coveragenums">100% 24/24</p>
+              <p class="coveragenums">0% 0/18</p>
+              <p class="coveragenums">0% 0/18</p>
             </summary>
             <div>
               <table>
@@ -13297,7 +13465,964 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">textblock-repl&lt;-script</p>
+                      <p class="preformatted">any&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ 5
+ (any&lt;-script
+  "(+ 2 3)"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">const&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ infinity
+ (const&lt;-string
+  "infinity"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">infinity</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">infinity</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">const&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ tb/delimcomma
+ (const&lt;-string
+  "vx/data/textblock/delimcomma"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">vx/data/textblock/delimcomma</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">vx/data/textblock/delimcomma</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">macro</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ 5
+ (macro : int
+  "(+ "
+  (- 7 5)
+  " 3)"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl-empty&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val 2)
+ (repl-empty&lt;-textblock-argmap
+  (tb/textblock
+   :text "2")
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl-empty&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type +)
+ (repl-empty&lt;-textblock-argmap
+  (tb/textblock
+   :text "+")
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl-empty&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val 2)
+ (repl-empty&lt;-textblock-argmap
+  (tb/textblock
+   :text "1"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "2")))
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl-empty&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  (msg&lt;-error "Empty delim cannot have more than one child."))
+ (repl-empty&lt;-textblock-argmap
+  (tb/textblock
+   :text "1"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl-paren&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type vx/core/+
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl-paren&lt;-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :val 2)
+ (repl&lt;-script
+  "2"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :val infinity)
+ (repl&lt;-script
+  "infinity"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val infinity)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val infinity)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +)
+ (repl&lt;-script
+  "+"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl&lt;-script
+  "(+ 2 3)"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val "Hello")
+ (repl&lt;-string-argmap
+  `"Hello"`
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val "Hello")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val "Hello")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :val 2)
+ (repl&lt;-string-argmap
+  "2"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val 2.3)
+ (repl&lt;-string-argmap
+  "2.3"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2.3)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2.3)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :val infinity)
+ (repl&lt;-string-argmap
+  "infinity"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val infinity)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val infinity)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :val tb/delimcomma)
+ (repl&lt;-string-argmap
+  "vx/data/textblock/delimcomma"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val vx/data/textblock/delimcomma)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val vx/data/textblock/delimcomma)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type string)
+ (repl&lt;-string-argmap
+  "string"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type string)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type string)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-string-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type +)
+ (repl&lt;-string-argmap
+  "+"
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val 2)
+ (repl&lt;-textblock
+  (tb/textblock
+   :text "2")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type +)
+ (repl&lt;-textblock
+  (tb/textblock
+   :text "+")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type +)
+ (repl&lt;-textblock
+  (tb/textblock
+   :text "+")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl&lt;-textblock
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl&lt;-textblock
+  (tb/textblock
+   :text "(+ 2 3)"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "(+ 2 3)"
+      :delim
+       (copy delimvxlispparen
+        :delimlist
+         (empty delimlist))
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "+")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "2")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "3")))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :val 2)
+ (repl&lt;-textblock-argmap
+  (tb/textblock
+   :text "2")
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :val 2)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl :type +)
+ (repl&lt;-textblock-argmap
+  (tb/textblock
+   :text "+")
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl&lt;-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">repl&lt;-textblock-argmap</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl&lt;-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "(+ 2 3)"
+      :delim
+       (copy delimvxlispparen
+        :delimlist
+         (empty delimlist))
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "+")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "2")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "3")))))
+  (empty argmap)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/repl/repl
+ :type +
+ :repllist
+  (vx/repl/repllist
+   (vx/repl/repl
+    :val 2)
+   (vx/repl/repl
+    :val 3)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblock&lt;-script</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (tb/textblock
+  :text "infinity"
+  :startpos 1
+  :endpos 8
+  :children
+   (tb/textblocklist
+    (tb/textblock
+    :text "infinity"
+    :startpos 1
+    :endpos 8
+    :delim
+     (delim
+      :name "delimvxlisp"))))
+ (textblock&lt;-script
+  "infinity"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/data/textblock/textblock
+ :text "infinity"
+ :startpos 1
+ :endpos 8
+ :children
+  (vx/data/textblock/textblocklist
+   (vx/data/textblock/textblock
+    :text "infinity"
+    :startpos 1
+    :endpos 8
+    :delim
+     (vx/data/textblock/delim
+      :name "delimvxlisp"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/data/textblock/textblock
+ :text "infinity"
+ :startpos 1
+ :endpos 8
+ :children
+  (vx/data/textblock/textblocklist
+   (vx/data/textblock/textblock
+    :text "infinity"
+    :startpos 1
+    :endpos 8
+    :delim
+     (vx/data/textblock/delim
+      :name "delimvxlisp"))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblock&lt;-script</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
@@ -13343,7 +14468,7 @@
         :text "3"
         :startpos 6
         :endpos 6)))))
- (textblock-repl&lt;-script
+ (textblock&lt;-script
   "(+ 2 3)"))</p>
                     </td>
                     <td>
@@ -13441,6 +14566,46 @@
        :endpos 6)))))</p>
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">typefunc&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ string
+ (typefunc&lt;-string
+  "string"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">typefunc&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ +
+ (typefunc&lt;-string
+  "+"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">+</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">+</p>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -13489,13 +14654,15 @@
                       <p class="preformatted">myconst</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test 4 myconst)</p>
+                      <p class="preformatted">(test
+ myconst
+ myconst)</p>
                     </td>
                     <td>
-                      <p class="preformatted">4</p>
+                      <p class="preformatted">vx/sample/myconst</p>
                     </td>
                     <td>
-                      <p class="preformatted">4</p>
+                      <p class="preformatted">vx/sample/myconst</p>
                     </td>
                   </tr>
                   <tr>
@@ -13667,13 +14834,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/type</p>
-              <p class="coveragenums">54% 12/22</p>
+              <p class="coveragenums">62% 15/24</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">54% 12/22</p>
-              <p class="coveragenums">72% 16/22</p>
-              <p class="coveragenums">0% 0/22</p>
-              <p class="coveragenums">0% 0/22</p>
+              <p class="coveragenums">62% 15/24</p>
+              <p class="coveragenums">79% 19/24</p>
+              <p class="coveragenums">0% 0/24</p>
+              <p class="coveragenums">0% 0/24</p>
             </summary>
             <div>
               <table>
@@ -13702,13 +14869,53 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
+                      <p class="preformatted">boolean&lt;-string-ends</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (boolean&lt;-string-ends
+  "abcd"
+  "cd"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">boolean&lt;-string-starts</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true
+ (boolean&lt;-string-starts
+  "abcd"
+  "ab"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
                       <p class="preformatted">int&lt;-string-find</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
  3
  (int&lt;-string-find
-  "abcdefg"
+  "abcdcdg"
   "cd"))</p>
                     </td>
                     <td>
@@ -13753,6 +14960,27 @@
   " 	
 ab"
   ":nonwhitespace"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">5</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">int&lt;-string-findlast</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ 5
+ (int&lt;-string-findlast
+  "abcdcdg"
+  "cd"))</p>
                     </td>
                     <td>
                       <p class="preformatted">5</p>
@@ -14288,6 +15516,28 @@
                     </td>
                     <td>
                       <p class="preformatted">"bcd"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string&lt;-string-start-end</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "bc"
+ (string&lt;-string-start-end
+  "abcd"
+  2
+  -1))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"bc"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"bc"</p>
                     </td>
                   </tr>
                   <tr>

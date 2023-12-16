@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include "../vx/core.hpp"
 #include "event.hpp"
@@ -111,7 +110,7 @@ namespace vx_event {
     vx_core::Type_any Class_event::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_event::Type_event output = vx_event::e_event;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_event::Type_event val = vx_core::vx_any_from_any(vx_event::t_event, copyval);
@@ -286,56 +285,16 @@ namespace vx_event {
       return output;
     }
 
+    vx_core::Type_constdef Class_event::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const event-click)
   // class Class_event_click {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_event::Class_event_click::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/event", // pkgname
-        "event-click", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/event", // pkgname
-          "event", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "from", // name
-            vx_core::t_any // type
-          ),
-          vx_core::vx_new_arg(
-            "to", // name
-            vx_core::t_any // type
-          ),
-          vx_core::vx_new_arg(
-            "fn-any<-any", // name
-            vx_core::t_any_from_any // type
-          ),
-          vx_core::vx_new_arg(
-            "fn-any<-from-to", // name
-            vx_event::t_any_from_from_to // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_event::Class_event_click::vx_const_new(vx_event::Const_event_click output) {
-      output->vx_p_constname = "vx/event/event-click";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/event", "event-click");
       long irefcount = vx_core::refcount;
       vx_event::Type_event val = vx_core::f_new(
         vx_event::t_event,
@@ -364,52 +323,9 @@ namespace vx_event {
 
   // (const event-move)
   // class Class_event_move {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_event::Class_event_move::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/event", // pkgname
-        "event-move", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/event", // pkgname
-          "event", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "from", // name
-            vx_core::t_any // type
-          ),
-          vx_core::vx_new_arg(
-            "to", // name
-            vx_core::t_any // type
-          ),
-          vx_core::vx_new_arg(
-            "fn-any<-any", // name
-            vx_core::t_any_from_any // type
-          ),
-          vx_core::vx_new_arg(
-            "fn-any<-from-to", // name
-            vx_event::t_any_from_from_to // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_event::Class_event_move::vx_const_new(vx_event::Const_event_move output) {
-      output->vx_p_constname = "vx/event/event-move";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/event", "event-move");
       long irefcount = vx_core::refcount;
       vx_event::Type_event val = vx_core::f_new(
         vx_event::t_event,
@@ -481,6 +397,8 @@ namespace vx_event {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_from_to::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_from_to::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/event", // pkgname
@@ -533,20 +451,16 @@ namespace vx_event {
       vx_core::vx_reserve_type(vx_event::t_any_from_from_to);
       vx_event::Class_event_click::vx_const_new(vx_event::c_event_click);
       vx_event::Class_event_move::vx_const_new(vx_event::c_event_move);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["event"] = vx_event::t_event;
+      mapconst["event-click"] = vx_event::c_event_click;
+      mapconst["event-move"] = vx_event::c_event_move;
+      mapfunc["any<-from-to"] = vx_event::t_any_from_from_to;
+      vx_core::vx_global_package_set("vx/event", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

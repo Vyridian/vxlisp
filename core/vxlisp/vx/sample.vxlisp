@@ -9,7 +9,9 @@
 (const myconst : int
  4
  :doc  "My Constant"
- :test (test 4 myconst))
+ :test (test
+        myconst
+        myconst))
 
 (func main : none []
  (myfunc 2))

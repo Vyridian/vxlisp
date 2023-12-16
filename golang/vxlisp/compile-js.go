@@ -63,13 +63,18 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 				var proptexts []string
 				for _, property := range properties {
 					propdefault := JsEmptyValueFromTypeIndent(property.vxtype, indent+"  ")
-					proptext := "\"" + property.name + "\": " + propdefault + ","
-					if property.doc != "" {
-						proptext += " // " + property.doc
+					if propdefault != "\"\"" {
+						proptext := "\"" + property.name + "\": " + propdefault
+						if property.doc != "" {
+							proptext += " // " + property.doc
+						}
+						proptexts = append(proptexts, proptext)
 					}
-					proptexts = append(proptexts, proptext)
 				}
-				output = "{\n" + indent + "    " + StringFromListStringJoin(proptexts, "\n"+indent+"    ") + "\n" + indent + "  }"
+				output = "" +
+					"{" +
+					"\n" + indent + "    " + StringFromListStringJoin(proptexts, ",\n"+indent+"    ") +
+					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
 				//			if !strings.HasPrefix(defaultvalue, "\"") {
@@ -310,7 +315,7 @@ func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 	}
 	defaultvalue := ""
 	switch funcname {
-	case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/global-package-get":
+	case "vx/core/new", "vx/core/copy", "vx/core/empty":
 		defaultvalue = lineindent + "let output"
 	default:
 		if fnc.vxtype.name == "none" {
@@ -411,15 +416,21 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 	}
 	allempty := ""
 	emptytypes := ""
-	// empty values
 	pkgname := JsFromName(pkg.name)
 	specialcode := prj.maptext[pkg.name+"_js.txt"]
-	statics := "" +
-		"\n    vx_core.f_global_package_set(\"" + pkg.name + "\", " + pkgname + ")" +
-		"\n"
+	statics := ""
+	constkeys := ListKeyFromMapConst(pkg.mapconst)
+	var constvalues []string
+	for _, constid := range constkeys {
+		cnst := pkg.mapconst[constid]
+		constname := JsFromName(cnst.alias)
+		constvalue := "\"" + cnst.name + "\": " + pkgname + ".c_" + constname
+		constvalues = append(constvalues, constvalue)
+	}
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	alltypes := ""
 	var emptyvalues []string
+	var typevalues []string
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
 		typetext, statictext, msgs := JsFromType(typ)
@@ -453,7 +464,10 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 			"\n  static e_" + typename + " = " + typeval
 		emptyvalue := "\"" + typ.name + "\": " + pkgname + ".e_" + typename
 		emptyvalues = append(emptyvalues, emptyvalue)
+		typevalue := "\"" + typ.name + "\": " + pkgname + ".t_" + typename
+		typevalues = append(typevalues, typevalue)
 	}
+	var funcvalues []string
 	funckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	for _, fncid := range funckeys {
 		fncs := pkg.mapfunc[fncid]
@@ -461,15 +475,39 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 			jsfuncname := JsFromName(fnc.alias) + JsIndexFromFunc(fnc)
 			emptyvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".e_" + jsfuncname
 			emptyvalues = append(emptyvalues, emptyvalue)
+			funcvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".t_" + jsfuncname
+			funcvalues = append(funcvalues, funcvalue)
 		}
 	}
+	pkgdef := "" +
+		"\n    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {" +
+		"\n      " + StringFromListStringJoin(constvalues, ",\n      ") +
+		"\n    })" +
+		"\n    const emptymap = vx_core.vx_new_map(vx_core.t_map, {" +
+		"\n      " + StringFromListStringJoin(emptyvalues, ",\n      ") +
+		"\n    })" +
+		"\n    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {" +
+		"\n      " + StringFromListStringJoin(funcvalues, ",\n      ") +
+		"\n    })" +
+		"\n    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {" +
+		"\n      " + StringFromListStringJoin(typevalues, ",\n      ") +
+		"\n    })" +
+		"\n    const pkg = vx_core.vx_new_struct(vx_core.t_package, {" +
+		"\n      \"name\": \"" + pkg.name + "\"," +
+		"\n      \"constmap\": constmap," +
+		"\n      \"emptymap\": emptymap," +
+		"\n      \"funcmap\": funcmap," +
+		"\n      \"typemap\": typemap" +
+		"\n    })" +
+		"\n    vx_core.vx_global_package_set(pkg)" +
+		"\n"
 	allempty += "" +
 		"  // empty types" +
 		emptytypes +
-		"\n" +
-		"\n  static c_empty = {" +
-		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
-		"\n  }" +
+		//		"\n" +
+		//		"\n  static c_empty = {" +
+		//		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
+		//		"\n  }" +
 		"\n"
 	allconsts := ""
 	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
@@ -507,6 +545,7 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		allempty +
 		"\n" +
 		"\n  static {" +
+		pkgdef +
 		statics +
 		"\n  }" +
 		"\n}" +
@@ -623,7 +662,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core.f_log_1('" + funcname + "', "
+			output += "vx_core.f_log_1({\"any-1\": " + JsNameTFromType(fnc.vxtype) + "}, \"" + funcname + "\", "
 		}
 		switch fnc.name {
 		case "native":
@@ -1481,7 +1520,7 @@ export default class app_test {
   static f_testpackagelist_from_all_test(context) {
     const testpackagelist = vx_core.f_new(
       vx_test.t_testpackagelist,
-			` + packagetests + `
+      ` + packagetests + `
     )
     return testpackagelist
   }

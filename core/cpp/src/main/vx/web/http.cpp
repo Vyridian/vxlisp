@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include "../../vx/core.hpp"
 #include "../../vx/data/csv.hpp"
@@ -75,7 +74,7 @@ namespace vx_web_http {
     vx_core::Type_any Class_response::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_web_http::Type_response output = vx_web_http::e_response;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_web_http::Type_response val = vx_core::vx_any_from_any(vx_web_http::t_response, copyval);
@@ -189,6 +188,9 @@ namespace vx_web_http {
       return output;
     }
 
+    vx_core::Type_constdef Class_response::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (func csv<-httpget)
@@ -261,6 +263,8 @@ namespace vx_web_http {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_csv_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_csv_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -370,6 +374,8 @@ namespace vx_web_http {
       return output;
     }
 
+    vx_core::Type_constdef Class_json_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_json_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
@@ -462,6 +468,8 @@ namespace vx_web_http {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_response_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_response_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -561,6 +569,8 @@ namespace vx_web_http {
       return output;
     }
 
+    vx_core::Type_constdef Class_text_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_text_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
@@ -650,6 +660,8 @@ namespace vx_web_http {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_text_from_response::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_text_from_response::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -760,6 +772,8 @@ namespace vx_web_http {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
@@ -846,6 +860,8 @@ namespace vx_web_http {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_from_response::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_from_response::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -956,6 +972,8 @@ namespace vx_web_http {
       return output;
     }
 
+    vx_core::Type_constdef Class_xml_from_httpget::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_xml_from_httpget::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/http", // pkgname
@@ -1053,20 +1071,21 @@ namespace vx_web_http {
       vx_core::vx_reserve_empty(vx_web_http::e_xml_from_httpget);
       vx_web_http::t_xml_from_httpget = new vx_web_http::Class_xml_from_httpget();
       vx_core::vx_reserve_type(vx_web_http::t_xml_from_httpget);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["response"] = vx_web_http::t_response;
+      mapfunc["csv<-httpget"] = vx_web_http::t_csv_from_httpget;
+      mapfunc["json<-httpget"] = vx_web_http::t_json_from_httpget;
+      mapfunc["response<-httpget"] = vx_web_http::t_response_from_httpget;
+      mapfunc["text<-httpget"] = vx_web_http::t_text_from_httpget;
+      mapfunc["text<-response"] = vx_web_http::t_text_from_response;
+      mapfunc["textblock<-httpget"] = vx_web_http::t_textblock_from_httpget;
+      mapfunc["textblock<-response"] = vx_web_http::t_textblock_from_response;
+      mapfunc["xml<-httpget"] = vx_web_http::t_xml_from_httpget;
+      vx_core::vx_global_package_set("vx/web/http", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

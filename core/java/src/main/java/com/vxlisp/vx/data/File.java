@@ -1176,6 +1176,21 @@ public final class File {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("file", File.t_file);
+    maptype.put("fileformat", File.t_fileformat);
+    mapfunc.put("boolean-exists<-file", File.t_boolean_exists_from_file);
+    mapfunc.put("boolean-write<-file-any", File.t_boolean_write_from_file_any);
+    mapfunc.put("boolean-write<-file-string", File.t_boolean_write_from_file_string);
+    mapfunc.put("file-read<-file", File.t_file_read_from_file);
+    mapfunc.put("name<-file", File.t_name_from_file);
+    mapfunc.put("path<-file", File.t_path_from_file);
+    mapfunc.put("pathcurrent<-os", File.t_pathcurrent_from_os);
+    mapfunc.put("pathfull<-file", File.t_pathfull_from_file);
+    mapfunc.put("string-read<-file", File.t_string_read_from_file);
+    Core.vx_global_package_set("vx/data/file", maptype, mapconst, mapfunc);
   }
 
 }

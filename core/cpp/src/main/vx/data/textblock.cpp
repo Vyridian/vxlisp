@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
@@ -114,7 +113,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_delim::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_delim output = vx_data_textblock::e_delim;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_textblock::Type_delim val = vx_core::vx_any_from_any(vx_data_textblock::t_delim, copyval);
@@ -297,6 +296,9 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_delim::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type delimlist)
@@ -379,7 +381,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_delimlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_delimlist output = vx_data_textblock::e_delimlist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_textblock::Type_delimlist val = vx_core::vx_any_from_any(vx_data_textblock::t_delimlist, copyval);
@@ -444,6 +446,9 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_delimlist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -630,7 +635,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_textblock::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_textblock::Type_textblock val = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, copyval);
@@ -951,6 +956,9 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type textblocklist)
@@ -1033,7 +1041,7 @@ namespace vx_data_textblock {
     vx_core::Type_any Class_textblocklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_textblock::Type_textblocklist output = vx_data_textblock::e_textblocklist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_textblock::Type_textblocklist val = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist, copyval);
@@ -1099,56 +1107,16 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblocklist::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const delimbracketangle)
   // class Class_delimbracketangle {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimbracketangle::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimbracketangle", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimbracketangle::vx_const_new(vx_data_textblock::Const_delimbracketangle output) {
-      output->vx_p_constname = "vx/data/textblock/delimbracketangle";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimbracketangle");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1181,52 +1149,9 @@ namespace vx_data_textblock {
 
   // (const delimbracketcurly)
   // class Class_delimbracketcurly {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimbracketcurly::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimbracketcurly", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimbracketcurly::vx_const_new(vx_data_textblock::Const_delimbracketcurly output) {
-      output->vx_p_constname = "vx/data/textblock/delimbracketcurly";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimbracketcurly");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1259,52 +1184,9 @@ namespace vx_data_textblock {
 
   // (const delimbracketsquare)
   // class Class_delimbracketsquare {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimbracketsquare::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimbracketsquare", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimbracketsquare::vx_const_new(vx_data_textblock::Const_delimbracketsquare output) {
-      output->vx_p_constname = "vx/data/textblock/delimbracketsquare";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimbracketsquare");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1337,52 +1219,9 @@ namespace vx_data_textblock {
 
   // (const delimclose)
   // class Class_delimclose {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimclose::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimclose", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimclose::vx_const_new(vx_data_textblock::Const_delimclose output) {
-      output->vx_p_constname = "vx/data/textblock/delimclose";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimclose");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1411,52 +1250,9 @@ namespace vx_data_textblock {
 
   // (const delimclosing)
   // class Class_delimclosing {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimclosing::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimclosing", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimclosing::vx_const_new(vx_data_textblock::Const_delimclosing output) {
-      output->vx_p_constname = "vx/data/textblock/delimclosing";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimclosing");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1485,52 +1281,9 @@ namespace vx_data_textblock {
 
   // (const delimcomma)
   // class Class_delimcomma {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimcomma::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimcomma", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimcomma::vx_const_new(vx_data_textblock::Const_delimcomma output) {
-      output->vx_p_constname = "vx/data/textblock/delimcomma";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimcomma");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1561,52 +1314,9 @@ namespace vx_data_textblock {
 
   // (const delimcomment)
   // class Class_delimcomment {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimcomment::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimcomment", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimcomment::vx_const_new(vx_data_textblock::Const_delimcomment output) {
-      output->vx_p_constname = "vx/data/textblock/delimcomment";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimcomment");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1639,52 +1349,9 @@ namespace vx_data_textblock {
 
   // (const delimcommentblock)
   // class Class_delimcommentblock {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimcommentblock::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimcommentblock", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimcommentblock::vx_const_new(vx_data_textblock::Const_delimcommentblock output) {
-      output->vx_p_constname = "vx/data/textblock/delimcommentblock";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimcommentblock");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1717,52 +1384,9 @@ namespace vx_data_textblock {
 
   // (const delimline)
   // class Class_delimline {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimline::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimline", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimline::vx_const_new(vx_data_textblock::Const_delimline output) {
-      output->vx_p_constname = "vx/data/textblock/delimline";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimline");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1793,31 +1417,9 @@ namespace vx_data_textblock {
 
   // (const delimlisttest1)
   // class Class_delimlisttest1 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimlisttest1::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimlisttest1", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delimlist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::vx_typelist_from_listany({vx_data_textblock::t_delim}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimlisttest1::vx_const_new(vx_data_textblock::Const_delimlisttest1 output) {
-      output->vx_p_constname = "vx/data/textblock/delimlisttest1";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimlisttest1");
       vx_data_textblock::Type_delimlist val = vx_core::f_new(
         vx_data_textblock::t_delimlist,
         vx_core::vx_new(vx_core::t_anylist, {
@@ -1833,31 +1435,9 @@ namespace vx_data_textblock {
 
   // (const delimlisttest2)
   // class Class_delimlisttest2 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimlisttest2::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimlisttest2", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delimlist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::vx_typelist_from_listany({vx_data_textblock::t_delim}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimlisttest2::vx_const_new(vx_data_textblock::Const_delimlisttest2 output) {
-      output->vx_p_constname = "vx/data/textblock/delimlisttest2";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimlisttest2");
       vx_data_textblock::Type_delimlist val = vx_core::f_new(
         vx_data_textblock::t_delimlist,
         vx_core::vx_new(vx_core::t_anylist, {
@@ -1874,31 +1454,9 @@ namespace vx_data_textblock {
 
   // (const delimlisttest3)
   // class Class_delimlisttest3 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimlisttest3::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimlisttest3", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delimlist", // name
-          ":list", // extends
-          vx_core::e_typelist, // traits
-          vx_core::vx_typelist_from_listany({vx_data_textblock::t_delim}), // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimlisttest3::vx_const_new(vx_data_textblock::Const_delimlisttest3 output) {
-      output->vx_p_constname = "vx/data/textblock/delimlisttest3";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimlisttest3");
       vx_data_textblock::Type_delimlist val = vx_core::f_new(
         vx_data_textblock::t_delimlist,
         vx_core::vx_new(vx_core::t_anylist, {
@@ -1915,52 +1473,9 @@ namespace vx_data_textblock {
 
   // (const delimnonwhitespace)
   // class Class_delimnonwhitespace {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimnonwhitespace::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimnonwhitespace", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimnonwhitespace::vx_const_new(vx_data_textblock::Const_delimnonwhitespace output) {
-      output->vx_p_constname = "vx/data/textblock/delimnonwhitespace";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimnonwhitespace");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -1993,52 +1508,9 @@ namespace vx_data_textblock {
 
   // (const delimparen)
   // class Class_delimparen {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimparen::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimparen", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimparen::vx_const_new(vx_data_textblock::Const_delimparen output) {
-      output->vx_p_constname = "vx/data/textblock/delimparen";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimparen");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2071,52 +1543,9 @@ namespace vx_data_textblock {
 
   // (const delimquote)
   // class Class_delimquote {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimquote::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimquote", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimquote::vx_const_new(vx_data_textblock::Const_delimquote output) {
-      output->vx_p_constname = "vx/data/textblock/delimquote";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimquote");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2149,52 +1578,9 @@ namespace vx_data_textblock {
 
   // (const delimquoteblock)
   // class Class_delimquoteblock {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimquoteblock::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimquoteblock", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimquoteblock::vx_const_new(vx_data_textblock::Const_delimquoteblock output) {
-      output->vx_p_constname = "vx/data/textblock/delimquoteblock";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimquoteblock");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2227,52 +1613,9 @@ namespace vx_data_textblock {
 
   // (const delimspace)
   // class Class_delimspace {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimspace::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimspace", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimspace::vx_const_new(vx_data_textblock::Const_delimspace output) {
-      output->vx_p_constname = "vx/data/textblock/delimspace";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimspace");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2305,52 +1648,9 @@ namespace vx_data_textblock {
 
   // (const delimtest1)
   // class Class_delimtest1 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimtest1::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimtest1", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimtest1::vx_const_new(vx_data_textblock::Const_delimtest1 output) {
-      output->vx_p_constname = "vx/data/textblock/delimtest1";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimtest1");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2379,52 +1679,9 @@ namespace vx_data_textblock {
 
   // (const delimtest2)
   // class Class_delimtest2 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimtest2::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimtest2", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimtest2::vx_const_new(vx_data_textblock::Const_delimtest2 output) {
-      output->vx_p_constname = "vx/data/textblock/delimtest2";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimtest2");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_copy(
         vx_data_textblock::t_delim,
@@ -2454,52 +1711,9 @@ namespace vx_data_textblock {
 
   // (const delimtest3)
   // class Class_delimtest3 {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimtest3::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimtest3", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimtest3::vx_const_new(vx_data_textblock::Const_delimtest3 output) {
-      output->vx_p_constname = "vx/data/textblock/delimtest3";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimtest3");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_copy(
         vx_data_textblock::t_delim,
@@ -2529,52 +1743,9 @@ namespace vx_data_textblock {
 
   // (const delimtext)
   // class Class_delimtext {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimtext::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimtext", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimtext::vx_const_new(vx_data_textblock::Const_delimtext output) {
-      output->vx_p_constname = "vx/data/textblock/delimtext";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimtext");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2603,52 +1774,9 @@ namespace vx_data_textblock {
 
   // (const delimwhitespace)
   // class Class_delimwhitespace {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_textblock::Class_delimwhitespace::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/textblock", // pkgname
-        "delimwhitespace", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_textblock::Class_delimwhitespace::vx_const_new(vx_data_textblock::Const_delimwhitespace output) {
-      output->vx_p_constname = "vx/data/textblock/delimwhitespace";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/textblock", "delimwhitespace");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -2730,6 +1858,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_children_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_children_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -2894,6 +2024,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_delim_first_from_delim_delim::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_delim_first_from_delim_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3018,6 +2150,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_delim_first_from_string_delimlist::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_delim_first_from_string_delimlist::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3122,6 +2256,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_delim_pos_from_string_delim::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_delim_pos_from_string_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3212,6 +2348,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_delimlist_pos_from_string_delimlist::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_delimlist_pos_from_string_delimlist::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3299,6 +2437,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_is_close::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_is_close::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -3401,6 +2541,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_is_single::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_is_single::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3501,6 +2643,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_stringlist_from_textblocklist::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_stringlist_from_textblocklist::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -3592,6 +2736,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_text_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_text_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -3744,6 +2890,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_addchild_from_textblock_find_child::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_addchild_from_textblock_find_child::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -4108,6 +3256,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_delimnotfound::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_delimnotfound::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -4255,6 +3405,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_findparent_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_findparent_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -4352,6 +3504,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_groupby_from_textblock_delim::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_groupby_from_textblock_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -4481,6 +3635,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_init::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_init::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -4589,6 +3745,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_parse::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_parse::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -4812,6 +3970,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_parse_one::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_parse_one::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -4912,6 +4072,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_parse_from_string_delim::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_parse_from_string_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -5040,6 +4202,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_replace_from_textblock_find_replace::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_replace_from_textblock_find_replace::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -5181,6 +4345,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_startleft_from_string_delim_offset::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_startleft_from_string_delim_offset::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -5386,6 +4552,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_startright_from_string_delim_offset::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_startright_from_string_delim_offset::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -5622,6 +4790,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_from_close_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_from_close_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -5701,6 +4871,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_from_empty_textblock::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_from_empty_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -5905,6 +5077,8 @@ namespace vx_data_textblock {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_textblock_from_open_textblock::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_textblock_from_open_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -6151,6 +5325,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_from_single_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_from_single_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -6244,6 +5420,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_from_string_delim::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_from_string_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -6324,6 +5502,8 @@ namespace vx_data_textblock {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_from_textblock_delim::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_from_textblock_delim::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/textblock", // pkgname
@@ -6345,6 +5525,115 @@ namespace vx_data_textblock {
       vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_data_textblock::Type_delim delim = vx_core::vx_any_from_any(vx_data_textblock::t_delim, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_data_textblock::f_textblock_from_textblock_delim(textblock, delim);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func textblocklist<-textblocklist-remove)
+  vx_data_textblock::Type_textblocklist f_textblocklist_from_textblocklist_remove(vx_data_textblock::Type_textblocklist tblist, vx_data_textblock::Type_delim remove) {
+    vx_data_textblock::Type_textblocklist output = vx_data_textblock::e_textblocklist;
+    vx_core::vx_reserve({tblist, remove});
+    output = vx_collection::f_list_from_list_filter(
+      vx_data_textblock::t_textblocklist,
+      tblist,
+      vx_core::t_any_from_any->vx_fn_new({remove}, [remove](vx_core::Type_any textblock_any) {
+        vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, textblock_any);
+        vx_core::Type_any output_1 = 
+          vx_core::f_let(
+            vx_data_textblock::t_textblock,
+            vx_core::t_any_from_func->vx_fn_new({textblock, remove}, [textblock, remove]() {
+              vx_data_textblock::Type_delim delimcurr = textblock->delim();
+              vx_core::vx_ref_plus(delimcurr);
+              vx_core::Type_string namecurr = delimcurr->name();
+              vx_core::vx_ref_plus(namecurr);
+              vx_core::Type_string nameremove = remove->name();
+              vx_core::vx_ref_plus(nameremove);
+              vx_data_textblock::Type_textblock output_1 = vx_core::f_if(
+                vx_data_textblock::t_textblock,
+                vx_core::f_ne(namecurr, nameremove),
+                textblock
+              );
+              vx_core::vx_release_one_except({delimcurr, namecurr, nameremove}, output_1);
+              return output_1;
+            })
+          );
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({tblist, remove}, output);
+    return output;
+  }
+
+  // (func textblocklist<-textblocklist-remove)
+  // class Class_textblocklist_from_textblocklist_remove {
+    Abstract_textblocklist_from_textblocklist_remove::~Abstract_textblocklist_from_textblocklist_remove() {}
+
+    Class_textblocklist_from_textblocklist_remove::Class_textblocklist_from_textblocklist_remove() : Abstract_textblocklist_from_textblocklist_remove::Abstract_textblocklist_from_textblocklist_remove() {
+      vx_core::refcount += 1;
+    }
+
+    Class_textblocklist_from_textblocklist_remove::~Class_textblocklist_from_textblocklist_remove() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_textblocklist_from_textblocklist_remove::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_textblock::Func_textblocklist_from_textblocklist_remove output = vx_data_textblock::e_textblocklist_from_textblocklist_remove;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_textblocklist_from_textblocklist_remove::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_textblock::Func_textblocklist_from_textblocklist_remove output = vx_data_textblock::e_textblocklist_from_textblocklist_remove;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_textblocklist_from_textblocklist_remove::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/textblock", // pkgname
+        "textblocklist<-textblocklist-remove", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_textblocklist_from_textblocklist_remove::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_textblocklist_from_textblocklist_remove::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/textblock", // pkgname
+        "textblocklist<-textblocklist-remove", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_textblocklist_from_textblocklist_remove::vx_empty() const {return vx_data_textblock::e_textblocklist_from_textblocklist_remove;}
+    vx_core::Type_any Class_textblocklist_from_textblocklist_remove::vx_type() const {return vx_data_textblock::t_textblocklist_from_textblocklist_remove;}
+    vx_core::Type_msgblock Class_textblocklist_from_textblocklist_remove::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_textblocklist_from_textblocklist_remove::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_textblocklist_from_textblocklist_remove::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblocklist tblist = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_data_textblock::Type_delim remove = vx_core::vx_any_from_any(vx_data_textblock::t_delim, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_data_textblock::f_textblocklist_from_textblocklist_remove(tblist, remove);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -6433,6 +5722,8 @@ namespace vx_data_textblock {
   vx_data_textblock::Func_textblock_from_string_delim t_textblock_from_string_delim = NULL;
   vx_data_textblock::Func_textblock_from_textblock_delim e_textblock_from_textblock_delim = NULL;
   vx_data_textblock::Func_textblock_from_textblock_delim t_textblock_from_textblock_delim = NULL;
+  vx_data_textblock::Func_textblocklist_from_textblocklist_remove e_textblocklist_from_textblocklist_remove = NULL;
+  vx_data_textblock::Func_textblocklist_from_textblocklist_remove t_textblocklist_from_textblocklist_remove = NULL;
 
   // class vx_Class_package {
     vx_Class_package::vx_Class_package() {
@@ -6581,6 +5872,10 @@ namespace vx_data_textblock {
       vx_core::vx_reserve_empty(vx_data_textblock::e_textblock_from_textblock_delim);
       vx_data_textblock::t_textblock_from_textblock_delim = new vx_data_textblock::Class_textblock_from_textblock_delim();
       vx_core::vx_reserve_type(vx_data_textblock::t_textblock_from_textblock_delim);
+      vx_data_textblock::e_textblocklist_from_textblocklist_remove = new vx_data_textblock::Class_textblocklist_from_textblocklist_remove();
+      vx_core::vx_reserve_empty(vx_data_textblock::e_textblocklist_from_textblocklist_remove);
+      vx_data_textblock::t_textblocklist_from_textblocklist_remove = new vx_data_textblock::Class_textblocklist_from_textblocklist_remove();
+      vx_core::vx_reserve_type(vx_data_textblock::t_textblocklist_from_textblocklist_remove);
       vx_data_textblock::Class_delimbracketangle::vx_const_new(vx_data_textblock::c_delimbracketangle);
       vx_data_textblock::Class_delimbracketcurly::vx_const_new(vx_data_textblock::c_delimbracketcurly);
       vx_data_textblock::Class_delimbracketsquare::vx_const_new(vx_data_textblock::c_delimbracketsquare);
@@ -6603,20 +5898,65 @@ namespace vx_data_textblock {
       vx_data_textblock::Class_delimtest3::vx_const_new(vx_data_textblock::c_delimtest3);
       vx_data_textblock::Class_delimtext::vx_const_new(vx_data_textblock::c_delimtext);
       vx_data_textblock::Class_delimwhitespace::vx_const_new(vx_data_textblock::c_delimwhitespace);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["delim"] = vx_data_textblock::t_delim;
+      maptype["delimlist"] = vx_data_textblock::t_delimlist;
+      maptype["textblock"] = vx_data_textblock::t_textblock;
+      maptype["textblocklist"] = vx_data_textblock::t_textblocklist;
+      mapconst["delimbracketangle"] = vx_data_textblock::c_delimbracketangle;
+      mapconst["delimbracketcurly"] = vx_data_textblock::c_delimbracketcurly;
+      mapconst["delimbracketsquare"] = vx_data_textblock::c_delimbracketsquare;
+      mapconst["delimclose"] = vx_data_textblock::c_delimclose;
+      mapconst["delimclosing"] = vx_data_textblock::c_delimclosing;
+      mapconst["delimcomma"] = vx_data_textblock::c_delimcomma;
+      mapconst["delimcomment"] = vx_data_textblock::c_delimcomment;
+      mapconst["delimcommentblock"] = vx_data_textblock::c_delimcommentblock;
+      mapconst["delimline"] = vx_data_textblock::c_delimline;
+      mapconst["delimlisttest1"] = vx_data_textblock::c_delimlisttest1;
+      mapconst["delimlisttest2"] = vx_data_textblock::c_delimlisttest2;
+      mapconst["delimlisttest3"] = vx_data_textblock::c_delimlisttest3;
+      mapconst["delimnonwhitespace"] = vx_data_textblock::c_delimnonwhitespace;
+      mapconst["delimparen"] = vx_data_textblock::c_delimparen;
+      mapconst["delimquote"] = vx_data_textblock::c_delimquote;
+      mapconst["delimquoteblock"] = vx_data_textblock::c_delimquoteblock;
+      mapconst["delimspace"] = vx_data_textblock::c_delimspace;
+      mapconst["delimtest1"] = vx_data_textblock::c_delimtest1;
+      mapconst["delimtest2"] = vx_data_textblock::c_delimtest2;
+      mapconst["delimtest3"] = vx_data_textblock::c_delimtest3;
+      mapconst["delimtext"] = vx_data_textblock::c_delimtext;
+      mapconst["delimwhitespace"] = vx_data_textblock::c_delimwhitespace;
+      mapfunc["children<-textblock"] = vx_data_textblock::t_children_from_textblock;
+      mapfunc["delim-first<-delim-delim"] = vx_data_textblock::t_delim_first_from_delim_delim;
+      mapfunc["delim-first<-string-delimlist"] = vx_data_textblock::t_delim_first_from_string_delimlist;
+      mapfunc["delim-pos<-string-delim"] = vx_data_textblock::t_delim_pos_from_string_delim;
+      mapfunc["delimlist-pos<-string-delimlist"] = vx_data_textblock::t_delimlist_pos_from_string_delimlist;
+      mapfunc["is-close"] = vx_data_textblock::t_is_close;
+      mapfunc["is-single"] = vx_data_textblock::t_is_single;
+      mapfunc["stringlist<-textblocklist"] = vx_data_textblock::t_stringlist_from_textblocklist;
+      mapfunc["text<-textblock"] = vx_data_textblock::t_text_from_textblock;
+      mapfunc["textblock-addchild<-textblock-find-child"] = vx_data_textblock::t_textblock_addchild_from_textblock_find_child;
+      mapfunc["textblock-delimnotfound"] = vx_data_textblock::t_textblock_delimnotfound;
+      mapfunc["textblock-findparent<-textblock"] = vx_data_textblock::t_textblock_findparent_from_textblock;
+      mapfunc["textblock-groupby<-textblock-delim"] = vx_data_textblock::t_textblock_groupby_from_textblock_delim;
+      mapfunc["textblock-init"] = vx_data_textblock::t_textblock_init;
+      mapfunc["textblock-parse"] = vx_data_textblock::t_textblock_parse;
+      mapfunc["textblock-parse-one"] = vx_data_textblock::t_textblock_parse_one;
+      mapfunc["textblock-parse<-string-delim"] = vx_data_textblock::t_textblock_parse_from_string_delim;
+      mapfunc["textblock-replace<-textblock-find-replace"] = vx_data_textblock::t_textblock_replace_from_textblock_find_replace;
+      mapfunc["textblock-startleft<-string-delim-offset"] = vx_data_textblock::t_textblock_startleft_from_string_delim_offset;
+      mapfunc["textblock-startright<-string-delim-offset"] = vx_data_textblock::t_textblock_startright_from_string_delim_offset;
+      mapfunc["textblock<-close-textblock"] = vx_data_textblock::t_textblock_from_close_textblock;
+      mapfunc["textblock<-empty-textblock"] = vx_data_textblock::t_textblock_from_empty_textblock;
+      mapfunc["textblock<-open-textblock"] = vx_data_textblock::t_textblock_from_open_textblock;
+      mapfunc["textblock<-single-textblock"] = vx_data_textblock::t_textblock_from_single_textblock;
+      mapfunc["textblock<-string-delim"] = vx_data_textblock::t_textblock_from_string_delim;
+      mapfunc["textblock<-textblock-delim"] = vx_data_textblock::t_textblock_from_textblock_delim;
+      mapfunc["textblocklist<-textblocklist-remove"] = vx_data_textblock::t_textblocklist_from_textblocklist_remove;
+      vx_core::vx_global_package_set("vx/data/textblock", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

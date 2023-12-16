@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
@@ -125,7 +124,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_branch::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branch output = vx_data_tree::e_branch;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_tree::Type_branch val = vx_core::vx_any_from_any(vx_data_tree::t_branch, copyval);
@@ -331,6 +330,9 @@ namespace vx_data_tree {
       return output;
     }
 
+    vx_core::Type_constdef Class_branch::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type brancharrow)
@@ -355,7 +357,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_brancharrow::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_brancharrow output = vx_data_tree::e_brancharrow;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_core::vx_release_except(copyval, output);
@@ -384,6 +386,9 @@ namespace vx_data_tree {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_brancharrow::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -467,7 +472,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_branchlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_branchlist output = vx_data_tree::e_branchlist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_tree::Type_branchlist val = vx_core::vx_any_from_any(vx_data_tree::t_branchlist, copyval);
@@ -532,6 +537,9 @@ namespace vx_data_tree {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_branchlist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -614,7 +622,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_leaf::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaf output = vx_data_tree::e_leaf;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_tree::Type_leaf val = vx_core::vx_any_from_any(vx_data_tree::t_leaf, copyval);
@@ -747,6 +755,9 @@ namespace vx_data_tree {
       return output;
     }
 
+    vx_core::Type_constdef Class_leaf::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type leaflist)
@@ -829,7 +840,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_leaflist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_leaflist output = vx_data_tree::e_leaflist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_tree::Type_leaflist val = vx_core::vx_any_from_any(vx_data_tree::t_leaflist, copyval);
@@ -894,6 +905,9 @@ namespace vx_data_tree {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_leaflist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -976,7 +990,7 @@ namespace vx_data_tree {
     vx_core::Type_any Class_tree::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_tree::Type_tree output = vx_data_tree::e_tree;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_tree::Type_tree val = vx_core::vx_any_from_any(vx_data_tree::t_tree, copyval);
@@ -1113,35 +1127,16 @@ namespace vx_data_tree {
       return output;
     }
 
+    vx_core::Type_constdef Class_tree::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const brancharrow-down)
   // class Class_brancharrow_down {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_tree::Class_brancharrow_down::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/tree", // pkgname
-        "brancharrow-down", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/tree", // pkgname
-          "brancharrow", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::Const_brancharrow_down output) {
-      output->vx_p_constname = "vx/data/tree/brancharrow-down";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/tree", "brancharrow-down");
       vx_core::vx_reserve_type(output);
     }
 
@@ -1150,31 +1145,9 @@ namespace vx_data_tree {
 
   // (const brancharrow-up)
   // class Class_brancharrow_up {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_tree::Class_brancharrow_up::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/tree", // pkgname
-        "brancharrow-up", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/tree", // pkgname
-          "brancharrow", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::Const_brancharrow_up output) {
-      output->vx_p_constname = "vx/data/tree/brancharrow-up";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/tree", "brancharrow-up");
       vx_core::vx_reserve_type(output);
     }
 
@@ -1183,31 +1156,9 @@ namespace vx_data_tree {
 
   // (const brancharrow-updown)
   // class Class_brancharrow_updown {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_tree::Class_brancharrow_updown::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/tree", // pkgname
-        "brancharrow-updown", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/tree", // pkgname
-          "brancharrow", // name
-          "", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::Const_brancharrow_updown output) {
-      output->vx_p_constname = "vx/data/tree/brancharrow-updown";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/tree", "brancharrow-updown");
       vx_core::vx_reserve_type(output);
     }
 
@@ -1265,20 +1216,21 @@ namespace vx_data_tree {
       vx_data_tree::Class_brancharrow_down::vx_const_new(vx_data_tree::c_brancharrow_down);
       vx_data_tree::Class_brancharrow_up::vx_const_new(vx_data_tree::c_brancharrow_up);
       vx_data_tree::Class_brancharrow_updown::vx_const_new(vx_data_tree::c_brancharrow_updown);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["branch"] = vx_data_tree::t_branch;
+      maptype["brancharrow"] = vx_data_tree::t_brancharrow;
+      maptype["branchlist"] = vx_data_tree::t_branchlist;
+      maptype["leaf"] = vx_data_tree::t_leaf;
+      maptype["leaflist"] = vx_data_tree::t_leaflist;
+      maptype["tree"] = vx_data_tree::t_tree;
+      mapconst["brancharrow-down"] = vx_data_tree::c_brancharrow_down;
+      mapconst["brancharrow-up"] = vx_data_tree::c_brancharrow_up;
+      mapconst["brancharrow-updown"] = vx_data_tree::c_brancharrow_updown;
+      vx_core::vx_global_package_set("vx/data/tree", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

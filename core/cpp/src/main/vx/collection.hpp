@@ -46,14 +46,14 @@ namespace vx_collection {
   typedef Abstract_list_from_list_end* Func_list_from_list_end;
   extern Func_list_from_list_end e_list_from_list_end;
   extern Func_list_from_list_end t_list_from_list_end;
+  class Abstract_list_from_list_filter;
+  typedef Abstract_list_from_list_filter* Func_list_from_list_filter;
+  extern Func_list_from_list_filter e_list_from_list_filter;
+  extern Func_list_from_list_filter t_list_from_list_filter;
   class Abstract_list_from_list_filtertypes;
   typedef Abstract_list_from_list_filtertypes* Func_list_from_list_filtertypes;
   extern Func_list_from_list_filtertypes e_list_from_list_filtertypes;
   extern Func_list_from_list_filtertypes t_list_from_list_filtertypes;
-  class Abstract_list_from_list_fn_filter;
-  typedef Abstract_list_from_list_fn_filter* Func_list_from_list_fn_filter;
-  extern Func_list_from_list_fn_filter e_list_from_list_fn_filter;
-  extern Func_list_from_list_fn_filter t_list_from_list_fn_filter;
   class Abstract_list_from_list_start;
   typedef Abstract_list_from_list_start* Func_list_from_list_start;
   extern Func_list_from_list_start e_list_from_list_start;
@@ -76,8 +76,8 @@ namespace vx_collection {
   // vx_list_from_for_while_loop_max(generic_list_1, start, fn-while, fn-loop, max)
   vx_core::Type_any vx_list_from_for_while_loop_max(vx_core::Type_any generic_list_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
 
-  // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_from_list_fn_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
+  // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
 
   // vx_list_from_list_start_end(generic_list_1, list, int, int)
   vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end);
@@ -98,6 +98,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -120,6 +121,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -142,6 +144,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -164,6 +167,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -186,6 +190,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -208,6 +213,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -215,21 +221,22 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func list<-list-fn-filter)
-  class Abstract_list_from_list_fn_filter : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func list<-list-filter)
+  class Abstract_list_from_list_filter : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_list_from_list_fn_filter() {};
-    virtual ~Abstract_list_from_list_fn_filter() = 0;
+    Abstract_list_from_list_filter() {};
+    virtual ~Abstract_list_from_list_filter() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_list_from_list_fn_filter : public virtual Abstract_list_from_list_fn_filter {
+  class Class_list_from_list_filter : public virtual Abstract_list_from_list_filter {
   public:
-    Class_list_from_list_fn_filter();
-    virtual ~Class_list_from_list_fn_filter() override;
+    Class_list_from_list_filter();
+    virtual ~Class_list_from_list_filter() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -252,6 +259,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -282,6 +290,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -308,6 +317,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -332,6 +342,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -354,6 +365,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -376,6 +388,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -398,6 +411,7 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -462,11 +476,11 @@ namespace vx_collection {
     return output;
   }
 
-  // (func list<-list-fn-filter)
-  template <class X, class Y> X* f_list_from_list_fn_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
+  // (func list<-list-filter)
+  template <class X, class Y> X* f_list_from_list_filter(X* generic_list_1, Y* vallist, vx_core::Func_any_from_any fn_filter) {
     X* output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_reserve({vallist, fn_filter});
-    vx_core::Type_any list = vx_collection::vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+    vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     output = vx_core::vx_any_from_any(generic_list_1, list);
     vx_core::vx_release_one_except({vallist, fn_filter}, output);
     return output;
@@ -496,7 +510,7 @@ namespace vx_collection {
   template <class X> X* f_list_from_list_end(X* generic_list_1, X* values, vx_core::Type_int end) {
     X* output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_reserve({values, end});
-    output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(0), end);
+    output = vx_collection::f_list_from_list_start_end(generic_list_1, values, vx_core::vx_new_int(1), end);
     vx_core::vx_release_one_except({values, end}, output);
     return output;
   }
@@ -505,7 +519,7 @@ namespace vx_collection {
   template <class X, class Y> X* f_list_from_list_filtertypes(X* generic_list_1, Y* vallist, vx_core::Type_typelist filtertypes) {
     X* output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_reserve({vallist, filtertypes});
-    output = vx_collection::f_list_from_list_fn_filter(
+    output = vx_collection::f_list_from_list_filter(
       generic_list_1,
       vallist,
       vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val) {
@@ -536,13 +550,10 @@ namespace vx_collection {
     return output;
   }
 
-  class vx_Class_package : vx_core::vx_Abstract_package {
+  class vx_Class_package {
   public:
     vx_Class_package();
     void init();
-    vx_core::vx_Type_mapany maptype();
-    vx_core::vx_Type_mapany mapconst();
-    vx_core::vx_Type_mapfunc mapfunc();
   };
   inline vx_Class_package const vx_package;
 

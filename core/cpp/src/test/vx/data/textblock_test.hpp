@@ -22,6 +22,7 @@ namespace vx_data_textblock_test {
   vx_test::Type_testcase f_textblock_from_open_textblock(vx_core::Type_context context);
   vx_test::Type_testcase f_textblock_from_single_textblock(vx_core::Type_context context);
   vx_test::Type_testcase f_textblock_from_string_delim(vx_core::Type_context context);
+  vx_test::Type_testcase f_textblocklist_from_textblocklist_remove(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
   vx_test::Type_testcoveragesummary test_coveragesummary();

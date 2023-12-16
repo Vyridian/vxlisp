@@ -194,6 +194,10 @@ namespace vx_data_textblock {
   typedef Abstract_textblock_from_textblock_delim* Func_textblock_from_textblock_delim;
   extern Func_textblock_from_textblock_delim e_textblock_from_textblock_delim;
   extern Func_textblock_from_textblock_delim t_textblock_from_textblock_delim;
+  class Abstract_textblocklist_from_textblocklist_remove;
+  typedef Abstract_textblocklist_from_textblocklist_remove* Func_textblocklist_from_textblocklist_remove;
+  extern Func_textblocklist_from_textblocklist_remove e_textblocklist_from_textblocklist_remove;
+  extern Func_textblocklist_from_textblocklist_remove t_textblocklist_from_textblocklist_remove;
   // (func children<-textblock)
   vx_data_textblock::Type_textblocklist f_children_from_textblock(vx_data_textblock::Type_textblock textblock);
 
@@ -272,6 +276,9 @@ namespace vx_data_textblock {
   // (func textblock<-textblock-delim)
   vx_data_textblock::Type_textblock f_textblock_from_textblock_delim(vx_data_textblock::Type_textblock textblock, vx_data_textblock::Type_delim delim);
 
+  // (func textblocklist<-textblocklist-remove)
+  vx_data_textblock::Type_textblocklist f_textblocklist_from_textblocklist_remove(vx_data_textblock::Type_textblocklist tblist, vx_data_textblock::Type_delim remove);
+
   // (type delim)
   class Abstract_delim : public virtual vx_core::Abstract_struct {
   public:
@@ -306,6 +313,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -343,6 +351,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
@@ -404,6 +413,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -447,6 +457,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
@@ -457,157 +468,135 @@ namespace vx_data_textblock {
   };
 
   // (const delimbracketangle)
-  class Class_delimbracketangle : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimbracketangle : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimbracketangle output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimbracketcurly)
-  class Class_delimbracketcurly : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimbracketcurly : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimbracketcurly output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimbracketsquare)
-  class Class_delimbracketsquare : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimbracketsquare : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimbracketsquare output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimclose)
-  class Class_delimclose : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimclose : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimclose output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimclosing)
-  class Class_delimclosing : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimclosing : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimclosing output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimcomma)
-  class Class_delimcomma : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimcomma : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimcomma output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimcomment)
-  class Class_delimcomment : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimcomment : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimcomment output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimcommentblock)
-  class Class_delimcommentblock : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimcommentblock : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimcommentblock output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimline)
-  class Class_delimline : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimline : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimline output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimlisttest1)
-  class Class_delimlisttest1 : public vx_data_textblock::Class_delimlist, public vx_core::vx_Abstract_const {
+  class Class_delimlisttest1 : public vx_data_textblock::Class_delimlist {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimlisttest1 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimlisttest2)
-  class Class_delimlisttest2 : public vx_data_textblock::Class_delimlist, public vx_core::vx_Abstract_const {
+  class Class_delimlisttest2 : public vx_data_textblock::Class_delimlist {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimlisttest2 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimlisttest3)
-  class Class_delimlisttest3 : public vx_data_textblock::Class_delimlist, public vx_core::vx_Abstract_const {
+  class Class_delimlisttest3 : public vx_data_textblock::Class_delimlist {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimlisttest3 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimnonwhitespace)
-  class Class_delimnonwhitespace : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimnonwhitespace : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimnonwhitespace output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimparen)
-  class Class_delimparen : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimparen : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimparen output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimquote)
-  class Class_delimquote : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimquote : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimquote output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimquoteblock)
-  class Class_delimquoteblock : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimquoteblock : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimquoteblock output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimspace)
-  class Class_delimspace : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimspace : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimspace output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimtest1)
-  class Class_delimtest1 : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimtest1 : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimtest1 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimtest2)
-  class Class_delimtest2 : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimtest2 : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimtest2 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimtest3)
-  class Class_delimtest3 : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimtest3 : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimtest3 output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimtext)
-  class Class_delimtext : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimtext : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimtext output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const delimwhitespace)
-  class Class_delimwhitespace : public vx_data_textblock::Class_delim, public vx_core::vx_Abstract_const {
+  class Class_delimwhitespace : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_textblock::Const_delimwhitespace output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (func children<-textblock)
@@ -627,6 +616,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -651,6 +641,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -673,6 +664,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -695,6 +687,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -717,6 +710,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -741,6 +735,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -767,6 +762,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -793,6 +789,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -819,6 +816,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -843,6 +841,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -867,6 +866,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -893,6 +893,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -917,6 +918,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -941,6 +943,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -967,6 +970,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -993,6 +997,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1017,6 +1022,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1039,6 +1045,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1061,6 +1068,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1083,6 +1091,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1105,6 +1114,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1127,6 +1137,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1149,6 +1160,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1171,6 +1183,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1193,6 +1206,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1215,6 +1229,7 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1222,13 +1237,33 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  class vx_Class_package : vx_core::vx_Abstract_package {
+  // (func textblocklist<-textblocklist-remove)
+  class Abstract_textblocklist_from_textblocklist_remove : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_textblocklist_from_textblocklist_remove() {};
+    virtual ~Abstract_textblocklist_from_textblocklist_remove() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_textblocklist_from_textblocklist_remove : public virtual Abstract_textblocklist_from_textblocklist_remove {
+  public:
+    Class_textblocklist_from_textblocklist_remove();
+    virtual ~Class_textblocklist_from_textblocklist_remove() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  class vx_Class_package {
   public:
     vx_Class_package();
     void init();
-    vx_core::vx_Type_mapany maptype();
-    vx_core::vx_Type_mapany mapconst();
-    vx_core::vx_Type_mapfunc mapfunc();
   };
   inline vx_Class_package const vx_package;
 

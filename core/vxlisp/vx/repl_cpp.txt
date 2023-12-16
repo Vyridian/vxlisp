@@ -3,13 +3,13 @@
 // :headerfunc
 // :header
 
-  // vx_string_from_listarg(type, liststring, context)
-  std::string vx_string_from_listarg(vx_core::Type_any type, std::vector<std::string> listarg, vx_core::Type_context context);
+  // vx_string_from_listarg(context, type, liststring)
+  std::string vx_string_from_listarg(vx_core::Type_context context, vx_core::Type_any type, std::vector<std::string> listarg);
 
 // :body
 
-  // vx_string_from_listarg(type, liststring, context)
-  std::string vx_string_from_listarg(vx_core::Type_any type, std::vector<std::string> listarg, vx_core::Type_context context) {
+  // vx_string_from_listarg(context, type, liststring)
+  std::string vx_string_from_listarg(vx_core::Type_context context, vx_core::Type_any type, std::vector<std::string> listarg) {
     std::string output = "";
     std::vector<vx_core::Type_any> listrepl;
     bool isfirst = true;
@@ -35,7 +35,7 @@
       vx_core::vx_new_string(":type"), type,
       vx_core::vx_new_string(":repllist"), vx_core::vx_new(vx_repl::t_repllist, listrepl)
     });
-    vx_core::Type_any any = vx_repl::f_any_from_repl(repl, context);
+    vx_core::Type_any any = vx_repl::f_any_from_repl(context, repl);
     vx_core::Type_any anytype = any->vx_type();
     if (anytype == vx_core::t_string) {
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, any);

@@ -2868,23 +2868,23 @@ public final class Html {
 
   public static class Class_propmap extends Core.Class_base implements Type_propmap {
 
-    protected Map<String, Core.Type_string> vxmap = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Core.Type_string vx_string(final Core.Type_string key) {
       Core.Type_string output = Core.e_string;
       Class_propmap map = this;
       String skey = key.vx_string();
-      Map<String, Core.Type_string> mapval = map.vxmap;
+      Map<String, Core.Type_string> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Core.e_string);
       return output;
     }
 
     @Override
-    public Map<String, Core.Type_string> vx_mapstring() {return vxmap;}
+    public Map<String, Core.Type_string> vx_mapstring() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -2907,7 +2907,7 @@ public final class Html {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -2962,7 +2962,7 @@ public final class Html {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_propmap work = new Class_propmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -3297,23 +3297,23 @@ public final class Html {
 
   public static class Class_stylemap extends Core.Class_base implements Type_stylemap {
 
-    protected Map<String, Html.Type_style> vxmap = Core.immutablemap(new LinkedHashMap<String, Html.Type_style>());
+    protected Map<String, Html.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Html.Type_style>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Html.Type_style vx_style(final Core.Type_string key) {
       Html.Type_style output = Html.e_style;
       Class_stylemap map = this;
       String skey = key.vx_string();
-      Map<String, Html.Type_style> mapval = map.vxmap;
+      Map<String, Html.Type_style> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Html.e_style);
       return output;
     }
 
     @Override
-    public Map<String, Html.Type_style> vx_mapstyle() {return vxmap;}
+    public Map<String, Html.Type_style> vx_mapstyle() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -3336,7 +3336,7 @@ public final class Html {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -3391,7 +3391,7 @@ public final class Html {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_stylemap work = new Class_stylemap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -8792,6 +8792,77 @@ public final class Html {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("body", Html.t_body);
+    maptype.put("details", Html.t_details);
+    maptype.put("div", Html.t_div);
+    maptype.put("divchild", Html.t_divchild);
+    maptype.put("divchildlist", Html.t_divchildlist);
+    maptype.put("divlist", Html.t_divlist);
+    maptype.put("footer", Html.t_footer);
+    maptype.put("h1", Html.t_h1);
+    maptype.put("h2", Html.t_h2);
+    maptype.put("h3", Html.t_h3);
+    maptype.put("head", Html.t_head);
+    maptype.put("headchild", Html.t_headchild);
+    maptype.put("headchildlist", Html.t_headchildlist);
+    maptype.put("html", Html.t_html);
+    maptype.put("meta", Html.t_meta);
+    maptype.put("node", Html.t_node);
+    maptype.put("nodelist", Html.t_nodelist);
+    maptype.put("p", Html.t_p);
+    maptype.put("propmap", Html.t_propmap);
+    maptype.put("style", Html.t_style);
+    maptype.put("stylelist", Html.t_stylelist);
+    maptype.put("stylemap", Html.t_stylemap);
+    maptype.put("stylesheet", Html.t_stylesheet);
+    maptype.put("table", Html.t_table);
+    maptype.put("tbody", Html.t_tbody);
+    maptype.put("td", Html.t_td);
+    maptype.put("tdlist", Html.t_tdlist);
+    maptype.put("thead", Html.t_thead);
+    maptype.put("title", Html.t_title);
+    maptype.put("tr", Html.t_tr);
+    maptype.put("trlist", Html.t_trlist);
+    mapfunc.put("htmlstring<-string", Html.t_htmlstring_from_string);
+    mapfunc.put("string-indent", Html.t_string_indent);
+    mapfunc.put("string<-body-indent", Html.t_string_from_body_indent);
+    mapfunc.put("string<-details-indent", Html.t_string_from_details_indent);
+    mapfunc.put("string<-div-indent", Html.t_string_from_div_indent);
+    mapfunc.put("string<-footer-indent", Html.t_string_from_footer_indent);
+    mapfunc.put("string<-h1-indent", Html.t_string_from_h1_indent);
+    mapfunc.put("string<-h2-indent", Html.t_string_from_h2_indent);
+    mapfunc.put("string<-h3-indent", Html.t_string_from_h3_indent);
+    mapfunc.put("string<-head-indent", Html.t_string_from_head_indent);
+    mapfunc.put("string<-html", Html.t_string_from_html);
+    mapfunc.put("string<-indent", Html.t_string_from_indent);
+    mapfunc.put("string<-meta-indent", Html.t_string_from_meta_indent);
+    mapfunc.put("string<-node-indent", Html.t_string_from_node_indent);
+    mapfunc.put("string<-nodelist-indent", Html.t_string_from_nodelist_indent);
+    mapfunc.put("string<-nodelist-tag-prop-indent", Html.t_string_from_nodelist_tag_prop_indent);
+    mapfunc.put("string<-p-indent", Html.t_string_from_p_indent);
+    mapfunc.put("string<-propname-val", Html.t_string_from_propname_val);
+    mapfunc.put("string<-propstyle", Html.t_string_from_propstyle);
+    mapfunc.put("string<-style-indent", Html.t_string_from_style_indent);
+    mapfunc.put("string<-stylelist-indent", Html.t_string_from_stylelist_indent);
+    mapfunc.put("string<-stylepropmap-indent", Html.t_string_from_stylepropmap_indent);
+    mapfunc.put("string<-stylesheet-indent", Html.t_string_from_stylesheet_indent);
+    mapfunc.put("string<-table-indent", Html.t_string_from_table_indent);
+    mapfunc.put("string<-tbody-indent", Html.t_string_from_tbody_indent);
+    mapfunc.put("string<-td-indent", Html.t_string_from_td_indent);
+    mapfunc.put("string<-thead-indent", Html.t_string_from_thead_indent);
+    mapfunc.put("string<-title-indent", Html.t_string_from_title_indent);
+    mapfunc.put("string<-tr-indent", Html.t_string_from_tr_indent);
+    mapfunc.put("string<-uri", Html.t_string_from_uri);
+    mapfunc.put("style<-stylesheet-name", Html.t_style_from_stylesheet_name);
+    mapfunc.put("stylemap<-stylelist", Html.t_stylemap_from_stylelist);
+    mapfunc.put("stylemap<-stylesheet", Html.t_stylemap_from_stylesheet);
+    mapfunc.put("styles<-stylesheet", Html.t_styles_from_stylesheet);
+    mapfunc.put("stylesheet-loadmap", Html.t_stylesheet_loadmap);
+    mapfunc.put("uri<-string", Html.t_uri_from_string);
+    Core.vx_global_package_set("vx/web/html", maptype, mapconst, mapfunc);
   }
 
 }

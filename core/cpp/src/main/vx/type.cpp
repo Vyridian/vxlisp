@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include "../vx/core.hpp"
 #include "type.hpp"
@@ -135,6 +134,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_allowtypenames_from_type::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_allowtypenames_from_type::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -231,6 +232,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_allowtypes_from_type::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_allowtypes_from_type::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -314,6 +317,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_int::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_int::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -353,13 +358,179 @@ namespace vx_type {
 
   //}
 
+  // (func boolean<-string-ends)
+  vx_core::Type_boolean f_boolean_from_string_ends(vx_core::Type_string text, vx_core::Type_string ends) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({text, ends});
+    bool check = vx_core::vx_boolean_from_string_ends(text->vx_string(), ends->vx_string());
+    output = vx_core::vx_new_boolean(check);
+    vx_core::vx_release_one_except({text, ends}, output);
+    return output;
+  }
+
+  // (func boolean<-string-ends)
+  // class Class_boolean_from_string_ends {
+    Abstract_boolean_from_string_ends::~Abstract_boolean_from_string_ends() {}
+
+    Class_boolean_from_string_ends::Class_boolean_from_string_ends() : Abstract_boolean_from_string_ends::Abstract_boolean_from_string_ends() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_from_string_ends::~Class_boolean_from_string_ends() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_from_string_ends::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_boolean_from_string_ends output = vx_type::e_boolean_from_string_ends;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_from_string_ends::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_boolean_from_string_ends output = vx_type::e_boolean_from_string_ends;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_from_string_ends::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "boolean<-string-ends", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_from_string_ends::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_from_string_ends::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "boolean<-string-ends", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_from_string_ends::vx_empty() const {return vx_type::e_boolean_from_string_ends;}
+    vx_core::Type_any Class_boolean_from_string_ends::vx_type() const {return vx_type::t_boolean_from_string_ends;}
+    vx_core::Type_msgblock Class_boolean_from_string_ends::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_from_string_ends::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_from_string_ends::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string ends = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_boolean_from_string_ends(text, ends);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func boolean<-string-starts)
+  vx_core::Type_boolean f_boolean_from_string_starts(vx_core::Type_string text, vx_core::Type_string starts) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({text, starts});
+    bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
+    output = vx_core::vx_new_boolean(check);
+    vx_core::vx_release_one_except({text, starts}, output);
+    return output;
+  }
+
+  // (func boolean<-string-starts)
+  // class Class_boolean_from_string_starts {
+    Abstract_boolean_from_string_starts::~Abstract_boolean_from_string_starts() {}
+
+    Class_boolean_from_string_starts::Class_boolean_from_string_starts() : Abstract_boolean_from_string_starts::Abstract_boolean_from_string_starts() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_from_string_starts::~Class_boolean_from_string_starts() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_from_string_starts::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_boolean_from_string_starts output = vx_type::e_boolean_from_string_starts;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_from_string_starts::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_boolean_from_string_starts output = vx_type::e_boolean_from_string_starts;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_from_string_starts::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "boolean<-string-starts", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_from_string_starts::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_from_string_starts::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "boolean<-string-starts", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_from_string_starts::vx_empty() const {return vx_type::e_boolean_from_string_starts;}
+    vx_core::Type_any Class_boolean_from_string_starts::vx_type() const {return vx_type::t_boolean_from_string_starts;}
+    vx_core::Type_msgblock Class_boolean_from_string_starts::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_from_string_starts::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_from_string_starts::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string starts = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_boolean_from_string_starts(text, starts);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func int<-string-find)
   vx_core::Type_int f_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
     vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve({text, find});
-    std::string stext = text->vx_string();
-    std::string sfind = find->vx_string();
-    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind)) + 1;
+    int ipos = vx_core::vx_int_from_string_find(text->vx_string(), find->vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);
     vx_core::vx_release_one_except({text, find}, output);
     return output;
@@ -409,6 +580,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_int_from_string_find::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_int_from_string_find::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -492,6 +665,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_int_from_string_findkeyword::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_int_from_string_findkeyword::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -513,6 +688,90 @@ namespace vx_type {
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string find = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_type::f_int_from_string_findkeyword(text, find);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func int<-string-findlast)
+  vx_core::Type_int f_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve({text, findlast});
+    int ipos = vx_core::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string()) + 1;
+    output = vx_core::vx_new_int(ipos);
+    vx_core::vx_release_one_except({text, findlast}, output);
+    return output;
+  }
+
+  // (func int<-string-findlast)
+  // class Class_int_from_string_findlast {
+    Abstract_int_from_string_findlast::~Abstract_int_from_string_findlast() {}
+
+    Class_int_from_string_findlast::Class_int_from_string_findlast() : Abstract_int_from_string_findlast::Abstract_int_from_string_findlast() {
+      vx_core::refcount += 1;
+    }
+
+    Class_int_from_string_findlast::~Class_int_from_string_findlast() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_int_from_string_findlast::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_findlast output = vx_type::e_int_from_string_findlast;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_findlast::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_int_from_string_findlast output = vx_type::e_int_from_string_findlast;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_int_from_string_findlast::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "int<-string-findlast", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_int_from_string_findlast::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_int_from_string_findlast::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "int<-string-findlast", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_string_findlast::vx_empty() const {return vx_type::e_int_from_string_findlast;}
+    vx_core::Type_any Class_int_from_string_findlast::vx_type() const {return vx_type::t_int_from_string_findlast;}
+    vx_core::Type_msgblock Class_int_from_string_findlast::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_int_from_string_findlast::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_int_from_string_findlast::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string findlast = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_type::f_int_from_string_findlast(text, findlast);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -575,6 +834,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_is_boolean::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_is_boolean::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -671,6 +932,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_is_decimal::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_is_decimal::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -703,101 +966,6 @@ namespace vx_type {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_is_decimal(value);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func is-float)
-  vx_core::Type_boolean f_is_float(vx_core::Type_any value) {
-    vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(value);
-    output = vx_core::f_eq(
-      vx_core::vx_new_string("float"),
-      vx_core::f_typename_from_any(value)
-    );
-    vx_core::vx_release_one_except(value, output);
-    return output;
-  }
-
-  // (func is-float)
-  // class Class_is_float {
-    Abstract_is_float::~Abstract_is_float() {}
-
-    Class_is_float::Class_is_float() : Abstract_is_float::Abstract_is_float() {
-      vx_core::refcount += 1;
-    }
-
-    Class_is_float::~Class_is_float() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_is_float::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_type::Func_is_float output = vx_type::e_is_float;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_is_float::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_type::Func_is_float output = vx_type::e_is_float;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_is_float::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/type", // pkgname
-        "is-float", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_funcdef Class_is_float::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/type", // pkgname
-        "is-float", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_is_float::vx_empty() const {return vx_type::e_is_float;}
-    vx_core::Type_any Class_is_float::vx_type() const {return vx_type::t_is_float;}
-    vx_core::Type_msgblock Class_is_float::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_is_float::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Func_any_from_any Class_is_float::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
-      return vx_core::e_any_from_any;
-    }
-
-    vx_core::Type_any Class_is_float::vx_any_from_any(vx_core::Type_any val) const {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any, val);
-      output = vx_type::f_is_float(inputval);
-      vx_core::vx_release_except(val, output);
-      return output;
-    }
-
-    vx_core::Type_any Class_is_float::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_type::f_is_float(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -860,6 +1028,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_is_none::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_is_none::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -955,6 +1125,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_is_string::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_is_string::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1063,6 +1235,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_is_type::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_is_type::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1157,6 +1331,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_is_type_from_any_typelist::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_is_type_from_any_typelist::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1238,6 +1414,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_length_from_string::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_length_from_string::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1368,6 +1546,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_string_from_int::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_string_from_int::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1460,6 +1640,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_string_from_string_end::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_string_from_string_end::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1545,6 +1727,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_string_from_string_start::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_string_from_string_start::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1626,6 +1810,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_string_from_string_start_end::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_string_from_string_start_end::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1709,6 +1895,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_string_from_stringlist_join::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_string_from_stringlist_join::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -1789,6 +1977,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_stringlist_from_string_split::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_stringlist_from_string_split::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1872,6 +2062,8 @@ namespace vx_type {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_traitnames_from_any::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_traitnames_from_any::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1967,6 +2159,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_traits_from_any::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_traits_from_any::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -2059,6 +2253,8 @@ namespace vx_type {
       return output;
     }
 
+    vx_core::Type_constdef Class_traits_from_typedef::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_traits_from_typedef::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/type", // pkgname
@@ -2103,16 +2299,20 @@ namespace vx_type {
   vx_type::Func_allowtypes_from_type t_allowtypes_from_type = NULL;
   vx_type::Func_any_from_int e_any_from_int = NULL;
   vx_type::Func_any_from_int t_any_from_int = NULL;
+  vx_type::Func_boolean_from_string_ends e_boolean_from_string_ends = NULL;
+  vx_type::Func_boolean_from_string_ends t_boolean_from_string_ends = NULL;
+  vx_type::Func_boolean_from_string_starts e_boolean_from_string_starts = NULL;
+  vx_type::Func_boolean_from_string_starts t_boolean_from_string_starts = NULL;
   vx_type::Func_int_from_string_find e_int_from_string_find = NULL;
   vx_type::Func_int_from_string_find t_int_from_string_find = NULL;
   vx_type::Func_int_from_string_findkeyword e_int_from_string_findkeyword = NULL;
   vx_type::Func_int_from_string_findkeyword t_int_from_string_findkeyword = NULL;
+  vx_type::Func_int_from_string_findlast e_int_from_string_findlast = NULL;
+  vx_type::Func_int_from_string_findlast t_int_from_string_findlast = NULL;
   vx_type::Func_is_boolean e_is_boolean = NULL;
   vx_type::Func_is_boolean t_is_boolean = NULL;
   vx_type::Func_is_decimal e_is_decimal = NULL;
   vx_type::Func_is_decimal t_is_decimal = NULL;
-  vx_type::Func_is_float e_is_float = NULL;
-  vx_type::Func_is_float t_is_float = NULL;
   vx_type::Func_is_none e_is_none = NULL;
   vx_type::Func_is_none t_is_none = NULL;
   vx_type::Func_is_string e_is_string = NULL;
@@ -2159,6 +2359,14 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_any_from_int);
       vx_type::t_any_from_int = new vx_type::Class_any_from_int();
       vx_core::vx_reserve_type(vx_type::t_any_from_int);
+      vx_type::e_boolean_from_string_ends = new vx_type::Class_boolean_from_string_ends();
+      vx_core::vx_reserve_empty(vx_type::e_boolean_from_string_ends);
+      vx_type::t_boolean_from_string_ends = new vx_type::Class_boolean_from_string_ends();
+      vx_core::vx_reserve_type(vx_type::t_boolean_from_string_ends);
+      vx_type::e_boolean_from_string_starts = new vx_type::Class_boolean_from_string_starts();
+      vx_core::vx_reserve_empty(vx_type::e_boolean_from_string_starts);
+      vx_type::t_boolean_from_string_starts = new vx_type::Class_boolean_from_string_starts();
+      vx_core::vx_reserve_type(vx_type::t_boolean_from_string_starts);
       vx_type::e_int_from_string_find = new vx_type::Class_int_from_string_find();
       vx_core::vx_reserve_empty(vx_type::e_int_from_string_find);
       vx_type::t_int_from_string_find = new vx_type::Class_int_from_string_find();
@@ -2167,6 +2375,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_int_from_string_findkeyword);
       vx_type::t_int_from_string_findkeyword = new vx_type::Class_int_from_string_findkeyword();
       vx_core::vx_reserve_type(vx_type::t_int_from_string_findkeyword);
+      vx_type::e_int_from_string_findlast = new vx_type::Class_int_from_string_findlast();
+      vx_core::vx_reserve_empty(vx_type::e_int_from_string_findlast);
+      vx_type::t_int_from_string_findlast = new vx_type::Class_int_from_string_findlast();
+      vx_core::vx_reserve_type(vx_type::t_int_from_string_findlast);
       vx_type::e_is_boolean = new vx_type::Class_is_boolean();
       vx_core::vx_reserve_empty(vx_type::e_is_boolean);
       vx_type::t_is_boolean = new vx_type::Class_is_boolean();
@@ -2175,10 +2387,6 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_is_decimal);
       vx_type::t_is_decimal = new vx_type::Class_is_decimal();
       vx_core::vx_reserve_type(vx_type::t_is_decimal);
-      vx_type::e_is_float = new vx_type::Class_is_float();
-      vx_core::vx_reserve_empty(vx_type::e_is_float);
-      vx_type::t_is_float = new vx_type::Class_is_float();
-      vx_core::vx_reserve_type(vx_type::t_is_float);
       vx_type::e_is_none = new vx_type::Class_is_none();
       vx_core::vx_reserve_empty(vx_type::e_is_none);
       vx_type::t_is_none = new vx_type::Class_is_none();
@@ -2235,20 +2443,36 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_traits_from_typedef);
       vx_type::t_traits_from_typedef = new vx_type::Class_traits_from_typedef();
       vx_core::vx_reserve_type(vx_type::t_traits_from_typedef);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      mapfunc["allowtypenames<-type"] = vx_type::t_allowtypenames_from_type;
+      mapfunc["allowtypes<-type"] = vx_type::t_allowtypes_from_type;
+      mapfunc["any<-int"] = vx_type::t_any_from_int;
+      mapfunc["boolean<-string-ends"] = vx_type::t_boolean_from_string_ends;
+      mapfunc["boolean<-string-starts"] = vx_type::t_boolean_from_string_starts;
+      mapfunc["int<-string-find"] = vx_type::t_int_from_string_find;
+      mapfunc["int<-string-findkeyword"] = vx_type::t_int_from_string_findkeyword;
+      mapfunc["int<-string-findlast"] = vx_type::t_int_from_string_findlast;
+      mapfunc["is-boolean"] = vx_type::t_is_boolean;
+      mapfunc["is-decimal"] = vx_type::t_is_decimal;
+      mapfunc["is-none"] = vx_type::t_is_none;
+      mapfunc["is-string"] = vx_type::t_is_string;
+      mapfunc["is-type"] = vx_type::t_is_type;
+      mapfunc["is-type<-any-typelist"] = vx_type::t_is_type_from_any_typelist;
+      mapfunc["length<-string"] = vx_type::t_length_from_string;
+      mapfunc["string<-int"] = vx_type::t_string_from_int;
+      mapfunc["string<-string-end"] = vx_type::t_string_from_string_end;
+      mapfunc["string<-string-start"] = vx_type::t_string_from_string_start;
+      mapfunc["string<-string-start-end"] = vx_type::t_string_from_string_start_end;
+      mapfunc["string<-stringlist-join"] = vx_type::t_string_from_stringlist_join;
+      mapfunc["stringlist<-string-split"] = vx_type::t_stringlist_from_string_split;
+      mapfunc["traitnames<-any"] = vx_type::t_traitnames_from_any;
+      mapfunc["traits<-any"] = vx_type::t_traits_from_any;
+      mapfunc["traits<-typedef"] = vx_type::t_traits_from_typedef;
+      vx_core::vx_global_package_set("vx/type", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

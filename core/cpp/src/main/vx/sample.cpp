@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include "../vx/core.hpp"
 #include "sample.hpp"
@@ -72,7 +71,7 @@ namespace vx_sample {
     vx_core::Type_any Class_mytype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_sample::Type_mytype output = vx_sample::e_mytype;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_sample::Type_mytype val = vx_core::vx_any_from_any(vx_sample::t_mytype, copyval);
@@ -186,35 +185,16 @@ namespace vx_sample {
       return output;
     }
 
+    vx_core::Type_constdef Class_mytype::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const myconst)
   // class Class_myconst {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_sample::Class_myconst::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/sample", // pkgname
-        "myconst", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/core", // pkgname
-          "int", // name
-          "", // extends
-          vx_core::vx_typelist_from_listany({vx_core::t_number}), // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::e_argmap // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_sample::Class_myconst::vx_const_new(vx_sample::Const_myconst output) {
-      output->vx_p_constname = "vx/sample/myconst";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/sample", "myconst");
       output->vx_p_int = 4;
       vx_core::vx_reserve_type(output);
     }
@@ -274,6 +254,8 @@ namespace vx_sample {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_main::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_main::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -357,6 +339,8 @@ namespace vx_sample {
       return output;
     }
 
+    vx_core::Type_constdef Class_myfunc::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_myfunc::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/sample", // pkgname
@@ -422,20 +406,16 @@ namespace vx_sample {
       vx_sample::t_myfunc = new vx_sample::Class_myfunc();
       vx_core::vx_reserve_type(vx_sample::t_myfunc);
       vx_sample::Class_myconst::vx_const_new(vx_sample::c_myconst);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["mytype"] = vx_sample::t_mytype;
+      mapconst["myconst"] = vx_sample::c_myconst;
+      mapfunc["main"] = vx_sample::t_main;
+      mapfunc["myfunc"] = vx_sample::t_myfunc;
+      vx_core::vx_global_package_set("vx/sample", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

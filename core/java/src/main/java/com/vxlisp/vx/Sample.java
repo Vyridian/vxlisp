@@ -383,6 +383,14 @@ public final class Sample {
 
   static {
     Const_myconst.const_new(c_myconst);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("mytype", Sample.t_mytype);
+    mapconst.put("myconst", Sample.c_myconst);
+    mapfunc.put("main", Sample.t_main);
+    mapfunc.put("myfunc", Sample.t_myfunc);
+    Core.vx_global_package_set("vx/sample", maptype, mapconst, mapfunc);
   }
 
 }

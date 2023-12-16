@@ -1,5 +1,3 @@
-#include <map>
-#include <string>
 #include "../../vx/core.hpp"
 #include "../../vx/web/html.hpp"
 #include "htmldoc.hpp"
@@ -59,6 +57,8 @@ namespace vx_web_htmldoc {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_boolean_write_from_id_htmltext::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_boolean_write_from_id_htmltext::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -142,6 +142,8 @@ namespace vx_web_htmldoc {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_boolean_write_from_stylesheet::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_boolean_write_from_stylesheet::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -233,6 +235,8 @@ namespace vx_web_htmldoc {
       return output;
     }
 
+    vx_core::Type_constdef Class_string_from_id::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_string_from_id::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/htmldoc", // pkgname
@@ -295,20 +299,15 @@ namespace vx_web_htmldoc {
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_string_from_id);
       vx_web_htmldoc::t_string_from_id = new vx_web_htmldoc::Class_string_from_id();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_string_from_id);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      mapfunc["boolean-write<-id-htmltext"] = vx_web_htmldoc::t_boolean_write_from_id_htmltext;
+      mapfunc["boolean-write<-stylesheet"] = vx_web_htmldoc::t_boolean_write_from_stylesheet;
+      mapfunc["string<-id"] = vx_web_htmldoc::t_string_from_id;
+      vx_core::vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

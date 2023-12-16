@@ -73,7 +73,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cell::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cell output = vx_data_table::e_cell;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_cell val = vx_core::vx_any_from_any(vx_data_table::t_cell, copyval);
@@ -183,6 +183,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_cell::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type celllist)
@@ -265,7 +268,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_celllist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_celllist output = vx_data_table::e_celllist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_celllist val = vx_core::vx_any_from_any(vx_data_table::t_celllist, copyval);
@@ -330,6 +333,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_celllist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -417,7 +423,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_cellmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_cellmap output = vx_data_table::e_cellmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_cellmap valmap = vx_core::vx_any_from_any(vx_data_table::t_cellmap, copyval);
@@ -496,6 +502,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_cellmap::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -578,7 +587,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_field::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_field output = vx_data_table::e_field;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_field val = vx_core::vx_any_from_any(vx_data_table::t_field, copyval);
@@ -711,6 +720,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_field::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type fieldlist)
@@ -793,7 +805,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldlist output = vx_data_table::e_fieldlist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_fieldlist val = vx_core::vx_any_from_any(vx_data_table::t_fieldlist, copyval);
@@ -858,6 +870,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_fieldlist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -941,7 +956,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_fieldmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_fieldmap output = vx_data_table::e_fieldmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_fieldmap val = vx_core::vx_any_from_any(vx_data_table::t_fieldmap, copyval);
@@ -1006,6 +1021,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_fieldmap::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -1088,7 +1106,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_filter::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_filter output = vx_data_table::e_filter;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_filter val = vx_core::vx_any_from_any(vx_data_table::t_filter, copyval);
@@ -1225,6 +1243,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_filter::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type row)
@@ -1306,7 +1327,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_row::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_row output = vx_data_table::e_row;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_row val = vx_core::vx_any_from_any(vx_data_table::t_row, copyval);
@@ -1443,6 +1464,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_row::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type rowlist)
@@ -1525,7 +1549,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowlist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowlist output = vx_data_table::e_rowlist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_rowlist val = vx_core::vx_any_from_any(vx_data_table::t_rowlist, copyval);
@@ -1590,6 +1614,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_rowlist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -1677,7 +1704,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_rowmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_rowmap output = vx_data_table::e_rowmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_rowmap valmap = vx_core::vx_any_from_any(vx_data_table::t_rowmap, copyval);
@@ -1756,6 +1783,9 @@ namespace vx_data_table {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_rowmap::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -1838,7 +1868,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_sort::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_sort output = vx_data_table::e_sort;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_sort val = vx_core::vx_any_from_any(vx_data_table::t_sort, copyval);
@@ -1975,6 +2005,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_sort::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type table)
@@ -2108,7 +2141,7 @@ namespace vx_data_table {
     vx_core::Type_any Class_table::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_table::Type_table output = vx_data_table::e_table;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_table::Type_table val = vx_core::vx_any_from_any(vx_data_table::t_table, copyval);
@@ -2337,6 +2370,9 @@ namespace vx_data_table {
       return output;
     }
 
+    vx_core::Type_constdef Class_table::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   vx_data_table::Type_cell e_cell = NULL;
@@ -2417,20 +2453,24 @@ namespace vx_data_table {
       vx_core::vx_reserve_empty(vx_data_table::e_table);
       vx_data_table::t_table = new Class_table();
       vx_core::vx_reserve_type(vx_data_table::t_table);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["cell"] = vx_data_table::t_cell;
+      maptype["celllist"] = vx_data_table::t_celllist;
+      maptype["cellmap"] = vx_data_table::t_cellmap;
+      maptype["field"] = vx_data_table::t_field;
+      maptype["fieldlist"] = vx_data_table::t_fieldlist;
+      maptype["fieldmap"] = vx_data_table::t_fieldmap;
+      maptype["filter"] = vx_data_table::t_filter;
+      maptype["row"] = vx_data_table::t_row;
+      maptype["rowlist"] = vx_data_table::t_rowlist;
+      maptype["rowmap"] = vx_data_table::t_rowmap;
+      maptype["sort"] = vx_data_table::t_sort;
+      maptype["table"] = vx_data_table::t_table;
+      vx_core::vx_global_package_set("vx/data/table", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

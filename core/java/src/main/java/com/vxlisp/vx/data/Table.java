@@ -307,23 +307,23 @@ public final class Table {
 
   public static class Class_cellmap extends Core.Class_base implements Type_cellmap {
 
-    protected Map<String, Table.Type_cell> vxmap = Core.immutablemap(new LinkedHashMap<String, Table.Type_cell>());
+    protected Map<String, Table.Type_cell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_cell>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Table.Type_cell vx_cell(final Core.Type_string key) {
       Table.Type_cell output = Table.e_cell;
       Class_cellmap map = this;
       String skey = key.vx_string();
-      Map<String, Table.Type_cell> mapval = map.vxmap;
+      Map<String, Table.Type_cell> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Table.e_cell);
       return output;
     }
 
     @Override
-    public Map<String, Table.Type_cell> vx_mapcell() {return vxmap;}
+    public Map<String, Table.Type_cell> vx_mapcell() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -346,7 +346,7 @@ public final class Table {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -401,7 +401,7 @@ public final class Table {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_cellmap work = new Class_cellmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1376,23 +1376,23 @@ public final class Table {
 
   public static class Class_rowmap extends Core.Class_base implements Type_rowmap {
 
-    protected Map<String, Table.Type_row> vxmap = Core.immutablemap(new LinkedHashMap<String, Table.Type_row>());
+    protected Map<String, Table.Type_row> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_row>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Table.Type_row vx_row(final Core.Type_string key) {
       Table.Type_row output = Table.e_row;
       Class_rowmap map = this;
       String skey = key.vx_string();
-      Map<String, Table.Type_row> mapval = map.vxmap;
+      Map<String, Table.Type_row> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Table.e_row);
       return output;
     }
 
     @Override
-    public Map<String, Table.Type_row> vx_maprow() {return vxmap;}
+    public Map<String, Table.Type_row> vx_maprow() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -1415,7 +1415,7 @@ public final class Table {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -1470,7 +1470,7 @@ public final class Table {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_rowmap work = new Class_rowmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1985,6 +1985,22 @@ public final class Table {
   public static final Type_table t_table = new Class_table();
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("cell", Table.t_cell);
+    maptype.put("celllist", Table.t_celllist);
+    maptype.put("cellmap", Table.t_cellmap);
+    maptype.put("field", Table.t_field);
+    maptype.put("fieldlist", Table.t_fieldlist);
+    maptype.put("fieldmap", Table.t_fieldmap);
+    maptype.put("filter", Table.t_filter);
+    maptype.put("row", Table.t_row);
+    maptype.put("rowlist", Table.t_rowlist);
+    maptype.put("rowmap", Table.t_rowmap);
+    maptype.put("sort", Table.t_sort);
+    maptype.put("table", Table.t_table);
+    Core.vx_global_package_set("vx/data/table", maptype, mapconst, mapfunc);
   }
 
 }

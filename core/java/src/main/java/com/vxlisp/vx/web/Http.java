@@ -946,6 +946,19 @@ public final class Http {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("response", Http.t_response);
+    mapfunc.put("csv<-httpget", Http.t_csv_from_httpget);
+    mapfunc.put("json<-httpget", Http.t_json_from_httpget);
+    mapfunc.put("response<-httpget", Http.t_response_from_httpget);
+    mapfunc.put("text<-httpget", Http.t_text_from_httpget);
+    mapfunc.put("text<-response", Http.t_text_from_response);
+    mapfunc.put("textblock<-httpget", Http.t_textblock_from_httpget);
+    mapfunc.put("textblock<-response", Http.t_textblock_from_response);
+    mapfunc.put("xml<-httpget", Http.t_xml_from_httpget);
+    Core.vx_global_package_set("vx/web/http", maptype, mapconst, mapfunc);
   }
 
 }

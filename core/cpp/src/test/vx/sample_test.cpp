@@ -10,12 +10,12 @@ namespace vx_sample_test {
     vx_core::vx_log("Test Start: c_myconst");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
-      vx_core::vx_new_int(4),
+      context,
       vx_sample::c_myconst,
-      context
+      vx_sample::c_myconst
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4 myconst)"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n myconst\n myconst)"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/sample"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -40,9 +40,9 @@ namespace vx_sample_test {
     vx_core::vx_log("Test Start: f_myfunc");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_int(5),
-      vx_sample::f_myfunc(vx_core::vx_new_int(1)),
-      context
+      vx_sample::f_myfunc(vx_core::vx_new_int(1))
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 5 (myfunc 1))"),

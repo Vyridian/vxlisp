@@ -76,6 +76,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -103,6 +104,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
   };
@@ -133,6 +135,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
@@ -170,6 +173,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -205,6 +209,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
@@ -242,6 +247,7 @@ namespace vx_data_tree {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
@@ -252,33 +258,27 @@ namespace vx_data_tree {
   };
 
   // (const brancharrow-down)
-  class Class_brancharrow_down : public vx_data_tree::Class_brancharrow, public vx_core::vx_Abstract_const {
+  class Class_brancharrow_down : public vx_data_tree::Class_brancharrow {
   public:
     static void vx_const_new(vx_data_tree::Const_brancharrow_down output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const brancharrow-up)
-  class Class_brancharrow_up : public vx_data_tree::Class_brancharrow, public vx_core::vx_Abstract_const {
+  class Class_brancharrow_up : public vx_data_tree::Class_brancharrow {
   public:
     static void vx_const_new(vx_data_tree::Const_brancharrow_up output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
   // (const brancharrow-updown)
-  class Class_brancharrow_updown : public vx_data_tree::Class_brancharrow, public vx_core::vx_Abstract_const {
+  class Class_brancharrow_updown : public vx_data_tree::Class_brancharrow {
   public:
     static void vx_const_new(vx_data_tree::Const_brancharrow_updown output);
-    vx_core::Type_constdef vx_constdef() const;
   };
 
-  class vx_Class_package : vx_core::vx_Abstract_package {
+  class vx_Class_package {
   public:
     vx_Class_package();
     void init();
-    vx_core::vx_Type_mapany maptype();
-    vx_core::vx_Type_mapany mapconst();
-    vx_core::vx_Type_mapfunc mapfunc();
   };
   inline vx_Class_package const vx_package;
 

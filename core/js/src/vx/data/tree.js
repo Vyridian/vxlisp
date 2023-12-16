@@ -59,18 +59,40 @@ export default class vx_data_tree {
   static e_leaflist = []
   static e_tree = {}
 
-  static c_empty = {
-    "branch": vx_data_tree.e_branch,
-    "brancharrow": vx_data_tree.e_brancharrow,
-    "branchlist": vx_data_tree.e_branchlist,
-    "leaf": vx_data_tree.e_leaf,
-    "leaflist": vx_data_tree.e_leaflist,
-    "tree": vx_data_tree.e_tree
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/tree", vx_data_tree)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "brancharrow-down": vx_data_tree.c_brancharrow_down,
+      "brancharrow-up": vx_data_tree.c_brancharrow_up,
+      "brancharrow-updown": vx_data_tree.c_brancharrow_updown
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "branch": vx_data_tree.e_branch,
+      "brancharrow": vx_data_tree.e_brancharrow,
+      "branchlist": vx_data_tree.e_branchlist,
+      "leaf": vx_data_tree.e_leaf,
+      "leaflist": vx_data_tree.e_leaflist,
+      "tree": vx_data_tree.e_tree
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "branch": vx_data_tree.t_branch,
+      "brancharrow": vx_data_tree.t_brancharrow,
+      "branchlist": vx_data_tree.t_branchlist,
+      "leaf": vx_data_tree.t_leaf,
+      "leaflist": vx_data_tree.t_leaflist,
+      "tree": vx_data_tree.t_tree
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/tree",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type branch)
     vx_data_tree.t_branch['vx_type'] = vx_core.t_type

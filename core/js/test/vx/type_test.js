@@ -23,11 +23,11 @@ export default class vx_type_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/type", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 72, ":tests", 16, ":total", 22), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 54, ":tests", 12, ":total", 22), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 79, ":tests", 19, ":total", 24), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 15, ":total", 24), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 54, ":tests", 12, ":total", 22), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 15, ":total", 24), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -50,11 +50,13 @@ export default class vx_type_test {
           "allowtypenames<-type", 0,
           "allowtypes<-type", 0,
           "any<-int", 0,
+          "boolean<-string-ends", 1,
+          "boolean<-string-starts", 1,
           "int<-string-find", 1,
           "int<-string-findkeyword", 2,
+          "int<-string-findlast", 1,
           "is-boolean", 0,
           "is-decimal", 0,
-          "is-float", 0,
           "is-none", 0,
           "is-string", 4,
           "is-type", 4,
@@ -63,7 +65,7 @@ export default class vx_type_test {
           "string<-int", 5,
           "string<-string-end", 2,
           "string<-string-start", 2,
-          "string<-string-start-end", 4,
+          "string<-string-start-end", 5,
           "string<-stringlist-join", 1,
           "stringlist<-string-split", 1,
           "traitnames<-any", 0,
@@ -71,6 +73,52 @@ export default class vx_type_test {
           "traits<-typedef", 0
         )
     )
+  }
+
+  static f_boolean_from_string_ends(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "boolean<-string-ends",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_type.f_boolean_from_string_ends("abcd", "cd")
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_boolean_from_string_starts(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "boolean<-string-starts",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_type.f_boolean_from_string_starts("abcd", "ab")
+            )
+          )
+        )
+    )
+    return output
   }
 
   static f_int_from_string_find(context) {
@@ -84,12 +132,12 @@ export default class vx_type_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 3\n (int<-string-find\n  \"abcdefg\"\n  \"cd\"))",
+            ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
             ":testresult",
             vx_test.f_test(
               context,
               3,
-              vx_type.f_int_from_string_find("abcdefg", "cd")
+              vx_type.f_int_from_string_find("abcdcdg", "cd")
             )
           )
         )
@@ -124,6 +172,30 @@ export default class vx_type_test {
               context,
               5,
               vx_type.f_int_from_string_findkeyword(" \t\n\rab", ":nonwhitespace")
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_int_from_string_findlast(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "int<-string-findlast",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              5,
+              vx_type.f_int_from_string_findlast("abcdcdg", "cd")
             )
           )
         )
@@ -545,6 +617,16 @@ export default class vx_type_test {
               "bcd",
               vx_type.f_string_from_string_start_end("abcd", 2, 5)
             )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "bc",
+              vx_type.f_string_from_string_start_end("abcd", 2, -1)
+            )
           )
         )
     )
@@ -615,8 +697,11 @@ export default class vx_type_test {
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
+      vx_type_test.f_boolean_from_string_ends(context),
+      vx_type_test.f_boolean_from_string_starts(context),
       vx_type_test.f_int_from_string_find(context),
       vx_type_test.f_int_from_string_findkeyword(context),
+      vx_type_test.f_int_from_string_findlast(context),
       vx_type_test.f_is_string(context),
       vx_type_test.f_is_type(context),
       vx_type_test.f_is_type_from_any_typelist(context),

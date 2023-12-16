@@ -11,14 +11,14 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_body_indent");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<body></body>"),
       vx_web_html::f_string_from_body_indent(
         vx_core::f_empty(
           vx_web_html::t_body
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<body></body>\"\n (string<-body-indent (body) 0))"),
@@ -27,6 +27,7 @@ namespace vx_web_html_test {
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<body>\n  <div></div>\n</body>"),
       vx_web_html::f_string_from_body_indent(
         vx_core::f_new(
@@ -38,8 +39,7 @@ namespace vx_web_html_test {
           })
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))"),
@@ -68,14 +68,14 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_div_indent");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<div></div>"),
       vx_web_html::f_string_from_div_indent(
         vx_core::f_empty(
           vx_web_html::t_div
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<div></div>\"\n (string<-div-indent (div) 0))"),
@@ -84,6 +84,7 @@ namespace vx_web_html_test {
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<div id=\"myid\"></div>"),
       vx_web_html::f_string_from_div_indent(
         vx_core::f_new(
@@ -94,8 +95,7 @@ namespace vx_web_html_test {
           })
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))"),
@@ -124,14 +124,14 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_head_indent");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<head></head>"),
       vx_web_html::f_string_from_head_indent(
         vx_core::f_empty(
           vx_web_html::t_head
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<head></head>\"\n (string<-head-indent (head) 0))"),
@@ -159,6 +159,7 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_html");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
       vx_web_html::f_string_from_html(
         vx_core::f_new(
@@ -174,8 +175,7 @@ namespace vx_web_html_test {
             )
           })
         )
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))"),
@@ -203,6 +203,7 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_meta_indent");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<meta charset=\"utf-8\" />"),
       vx_web_html::f_string_from_meta_indent(
         vx_core::f_new(
@@ -213,8 +214,7 @@ namespace vx_web_html_test {
           })
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))"),
@@ -242,6 +242,7 @@ namespace vx_web_html_test {
     vx_core::vx_log("Test Start: f_string_from_p_indent");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<p>data</p>"),
       vx_web_html::f_string_from_p_indent(
         vx_core::f_new(
@@ -252,8 +253,7 @@ namespace vx_web_html_test {
           })
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))"),
@@ -262,6 +262,7 @@ namespace vx_web_html_test {
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("<p id=\"myid\">data</p>"),
       vx_web_html::f_string_from_p_indent(
         vx_core::f_new(
@@ -274,8 +275,7 @@ namespace vx_web_html_test {
           })
         ),
         vx_core::vx_new_int(0)
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))"),

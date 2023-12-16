@@ -8,6 +8,46 @@ import java.util.List;
 
 public final class TypeTest {
 
+  static Test.Type_testcase f_boolean_from_string_ends(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "boolean<-string-ends",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Type.f_boolean_from_string_ends(Core.vx_new_string("abcd"), Core.vx_new_string("cd"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_boolean_from_string_starts(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "boolean<-string-starts",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Type.f_boolean_from_string_starts(Core.vx_new_string("abcd"), Core.vx_new_string("ab"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_int_from_string_find(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -16,12 +56,12 @@ public final class TypeTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 3\n (int<-string-find\n  \"abcdefg\"\n  \"cd\"))",
+          ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Type.f_int_from_string_find(Core.vx_new_string("abcdefg"), Core.vx_new_string("cd"))
+              Type.f_int_from_string_find(Core.vx_new_string("abcdcdg"), Core.vx_new_string("cd"))
             )
         )
       )
@@ -52,6 +92,27 @@ public final class TypeTest {
               context,
               Core.vx_new_int(5),
               Type.f_int_from_string_findkeyword(Core.vx_new_string(" \t\n\rab"), Core.vx_new_string(":nonwhitespace"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_int_from_string_findlast(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "int<-string-findlast",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(5),
+              Type.f_int_from_string_findlast(Core.vx_new_string("abcdcdg"), Core.vx_new_string("cd"))
             )
         )
       )
@@ -438,6 +499,15 @@ public final class TypeTest {
               Core.vx_new_string("bcd"),
               Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(2), Core.vx_new_int(5))
             )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("bc"),
+              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(2), Core.vx_new_int(-1))
+            )
         )
       )
     );
@@ -505,8 +575,11 @@ public final class TypeTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+      TypeTest.f_boolean_from_string_ends(context),
+      TypeTest.f_boolean_from_string_starts(context),
       TypeTest.f_int_from_string_find(context),
       TypeTest.f_int_from_string_findkeyword(context),
+      TypeTest.f_int_from_string_findlast(context),
       TypeTest.f_is_string(context),
       TypeTest.f_is_type(context),
       TypeTest.f_is_type_from_any_typelist(context),
@@ -526,11 +599,11 @@ public final class TypeTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/type", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 72, ":tests", 16, ":total", 22), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 12, ":total", 22), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 12, ":total", 22), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 79, ":tests", 19, ":total", 24), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 62, ":tests", 15, ":total", 24), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 24), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 24), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 62, ":tests", 15, ":total", 24), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -548,11 +621,13 @@ public final class TypeTest {
         ":allowtypenames<-type", 0,
         ":allowtypes<-type", 0,
         ":any<-int", 0,
+        ":boolean<-string-ends", 1,
+        ":boolean<-string-starts", 1,
         ":int<-string-find", 1,
         ":int<-string-findkeyword", 2,
+        ":int<-string-findlast", 1,
         ":is-boolean", 0,
         ":is-decimal", 0,
-        ":is-float", 0,
         ":is-none", 0,
         ":is-string", 4,
         ":is-type", 4,
@@ -561,7 +636,7 @@ public final class TypeTest {
         ":string<-int", 5,
         ":string<-string-end", 2,
         ":string<-string-start", 2,
-        ":string<-string-start-end", 4,
+        ":string<-string-start-end", 5,
         ":string<-stringlist-join", 1,
         ":stringlist<-string-split", 1,
         ":traitnames<-any", 0,

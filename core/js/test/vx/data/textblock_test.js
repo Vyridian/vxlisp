@@ -25,11 +25,11 @@ export default class vx_data_textblock_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/textblock", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 52, ":total", 52), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 61, ":tests", 16, ":total", 26), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 53, ":total", 53), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 17, ":total", 27), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 17, ":total", 52), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 18, ":total", 53), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4)
     )
   }
@@ -100,7 +100,8 @@ export default class vx_data_textblock_test {
           "textblock<-open-textblock", 2,
           "textblock<-single-textblock", 3,
           "textblock<-string-delim", 1,
-          "textblock<-textblock-delim", 0
+          "textblock<-textblock-delim", 0,
+          "textblocklist<-textblocklist-remove", 1
         )
     )
   }
@@ -9296,6 +9297,89 @@ export default class vx_data_textblock_test {
     return output
   }
 
+  static f_textblocklist_from_textblocklist_remove(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/data/textblock",
+      ":casename", "textblocklist<-textblocklist-remove",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (textblocklist\n  (textblock\n   :text \"+\")\n  (textblock\n   :text \"2\")\n  (textblock\n   :text \"3\"))\n (textblocklist<-textblocklist-remove\n  (textblocklist\n   (textblock\n    :text \"+\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"2\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"3\"))\n  delimwhitespace))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_data_textblock.t_textblocklist,
+                vx_core.f_new(
+                  vx_data_textblock.t_textblock,
+                  ":text",
+                  "+"
+                ),
+                vx_core.f_new(
+                  vx_data_textblock.t_textblock,
+                  ":text",
+                  "2"
+                ),
+                vx_core.f_new(
+                  vx_data_textblock.t_textblock,
+                  ":text",
+                  "3"
+                )
+              ),
+              vx_data_textblock.f_textblocklist_from_textblocklist_remove(
+                vx_core.f_new(
+                  vx_data_textblock.t_textblocklist,
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "+"
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    " ",
+                    ":delim",
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimwhitespace,
+                      ":pos",
+                      0
+                    )
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "2"
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    " ",
+                    ":delim",
+                    vx_core.f_copy(
+                      vx_data_textblock.c_delimwhitespace,
+                      ":pos",
+                      0
+                    )
+                  ),
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "3"
+                  )
+                ),
+                vx_data_textblock.c_delimwhitespace
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
@@ -9315,7 +9399,8 @@ export default class vx_data_textblock_test {
       vx_data_textblock_test.f_textblock_from_close_textblock(context),
       vx_data_textblock_test.f_textblock_from_open_textblock(context),
       vx_data_textblock_test.f_textblock_from_single_textblock(context),
-      vx_data_textblock_test.f_textblock_from_string_delim(context)
+      vx_data_textblock_test.f_textblock_from_string_delim(context),
+      vx_data_textblock_test.f_textblocklist_from_textblocklist_remove(context)
     )
     return output
   }

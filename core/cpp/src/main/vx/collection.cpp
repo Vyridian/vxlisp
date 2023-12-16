@@ -1,5 +1,3 @@
-#include <map>
-#include <string>
 #include "../vx/core.hpp"
 #include "../vx/type.hpp"
 #include "collection.hpp"
@@ -9,11 +7,11 @@ namespace vx_collection {
 
   // vx_any_from_for_until_loop_max(generic_any_1, start, fn-until, fn-loop, max)
   vx_core::Type_any vx_any_from_for_until_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
-		vx_core::Type_any output = start;
+		  vx_core::Type_any output = start;
     bool iscontinue = true;
     int icount = 0;
     int imax = max->vx_int();
-		vx_core::Type_any current = start;
+		  vx_core::Type_any current = start;
     while (iscontinue) {
       if (icount >= imax) {
         iscontinue = false;
@@ -32,8 +30,8 @@ namespace vx_collection {
       }
     }
     vx_core::vx_release_except({start, fn_until, fn_loop, max}, output);
-		return output;
-	}
+	  	return output;
+	 }
 
   // vx_any_from_for_while_loop_max(generic_any_1, start, fn-while, fn-loop, max)
   vx_core::Type_any vx_any_from_for_while_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
@@ -41,7 +39,7 @@ namespace vx_collection {
     bool iscontinue = true;
     long icount = 0;
     long imax = max->vx_int();
-		vx_core::Type_any current = start;
+		  vx_core::Type_any current = start;
     while (iscontinue) {
       if (icount >= imax) {
         iscontinue = false;
@@ -62,12 +60,12 @@ namespace vx_collection {
     }
     output = current;
     vx_core::vx_release_except({start, fn_while, fn_loop, max}, output);
-		return output;
-	}
+		  return output;
+ 	}
 
   // vx_list_from_for_end_loop(generic_list_1, start, end, fn-loop)
   vx_core::Type_any vx_list_from_for_end_loop(vx_core::Type_any generic_list_1, vx_core::Type_int start, vx_core::Type_int end, vx_core::Func_any_from_int fn_loop) {
-		vx_core::Type_any output = vx_core::f_empty(generic_list_1);
+  		vx_core::Type_any output = vx_core::f_empty(generic_list_1);
     vx_core::vx_Type_listany listvals;
     long istart = start->vx_int();
     long iend = end->vx_int();
@@ -86,12 +84,12 @@ namespace vx_collection {
       output = generic_list_1->vx_new(listvals);
     }
     vx_core::vx_release_except({start, end, fn_loop}, output);
-		return output;
-	}
+		  return output;
+	 }
 
   // vx_list_from_for_while_loop_max(generic_list_1, start, fn-while, fn-loop, max)
   vx_core::Type_any vx_list_from_for_while_loop_max(vx_core::Type_any generic_list_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
-		vx_core::Type_any output = vx_core::f_empty(generic_list_1);
+		  vx_core::Type_any output = vx_core::f_empty(generic_list_1);
     vx_core::vx_Type_listany listvals;
     bool iscontinue = true;
     long icount = 0;
@@ -115,12 +113,12 @@ namespace vx_collection {
       output = generic_list_1->vx_new(listvals);
     }
     vx_core::vx_release_except({start, fn_while, fn_loop, max}, output);
-		return output;
-	}
+		  return output;
+ 	}
 
-  // vx_list_from_list_fn_filter(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_from_list_fn_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter) {
-		vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+  // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
+  vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter) {
+	  	vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_Type_listany listval = vallist->vx_list();
     vx_core::vx_Type_listany items;
     for (vx_core::Type_any val : listval) {
@@ -135,30 +133,33 @@ namespace vx_collection {
     }
     output = generic_list_1->vx_new(items);
     vx_core::vx_release_except({vallist, fn_filter}, output);
-		return output;
-	}
+		  return output;
+ 	}
 
   // vx_list_from_list_start_end(generic_list_1, list, int, int)
   vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end) {
-		vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+	  	vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
     long istart = start->vx_int();
     long iend = end->vx_int();
     vx_core::vx_Type_listany listval = values->vx_list();
-    long isize = vx_core::vx_int_from_sizet(listval.size());
-    if (isize > 0) {
-      if (istart < 0) {
-        istart = 0;
+    long maxlen = vx_core::vx_int_from_sizet(listval.size());
+    if (iend < 0) {
+      iend += maxlen;
+    }
+    if (istart < 1) {
+    } else if (istart > iend) {
+    } else if (istart > maxlen) {
+    } else {
+      if (iend >= maxlen) {
+        iend = maxlen;
       }
-      if (iend > isize) {
-        iend = isize;
-      }
-			auto first = listval.begin() + istart;
+	   		auto first = listval.begin() + istart - 1;
       auto last = listval.begin() + iend;
       vx_core::vx_Type_listany listsub = std::vector(first, last);
       output = generic_list_1->vx_new(listsub);
     }
     vx_core::vx_release_except({values, start, end}, output);
-		return output;
+		  return output;
 	}
 
 
@@ -206,6 +207,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_any_from_for_until_loop_max::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_any_from_for_until_loop_max::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -282,6 +285,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_for_until_loop::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_for_until_loop::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -355,6 +360,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_any_from_for_while_loop_max::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_any_from_for_while_loop_max::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -431,6 +438,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_for_while_loop::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_for_while_loop::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -504,6 +513,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_list_from_for_while_loop_max::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_list_from_for_while_loop_max::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -580,6 +591,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_list_from_for_while_loop::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_list_from_for_while_loop::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -609,38 +622,38 @@ namespace vx_collection {
 
   //}
 
-  // (func list<-list-fn-filter)
-  // class Class_list_from_list_fn_filter {
-    Abstract_list_from_list_fn_filter::~Abstract_list_from_list_fn_filter() {}
+  // (func list<-list-filter)
+  // class Class_list_from_list_filter {
+    Abstract_list_from_list_filter::~Abstract_list_from_list_filter() {}
 
-    Class_list_from_list_fn_filter::Class_list_from_list_fn_filter() : Abstract_list_from_list_fn_filter::Abstract_list_from_list_fn_filter() {
+    Class_list_from_list_filter::Class_list_from_list_filter() : Abstract_list_from_list_filter::Abstract_list_from_list_filter() {
       vx_core::refcount += 1;
     }
 
-    Class_list_from_list_fn_filter::~Class_list_from_list_fn_filter() {
+    Class_list_from_list_filter::~Class_list_from_list_filter() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_list_from_list_fn_filter::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_collection::Func_list_from_list_fn_filter output = vx_collection::e_list_from_list_fn_filter;
+    vx_core::Type_any Class_list_from_list_filter::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_list_from_list_filter output = vx_collection::e_list_from_list_filter;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_list_from_list_fn_filter::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_collection::Func_list_from_list_fn_filter output = vx_collection::e_list_from_list_fn_filter;
+    vx_core::Type_any Class_list_from_list_filter::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_list_from_list_filter output = vx_collection::e_list_from_list_filter;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_list_from_list_fn_filter::vx_typedef() const {
+    vx_core::Type_typedef Class_list_from_list_filter::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/collection", // pkgname
-        "list<-list-fn-filter", // name
+        "list<-list-filter", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -654,10 +667,12 @@ namespace vx_collection {
       return output;
     }
 
-    vx_core::Type_funcdef Class_list_from_list_fn_filter::vx_funcdef() const {
+    vx_core::Type_constdef Class_list_from_list_filter::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_list_from_list_filter::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
-        "list<-list-fn-filter", // name
+        "list<-list-filter", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -665,17 +680,17 @@ namespace vx_collection {
       return output;
     }
 
-    vx_core::Type_any Class_list_from_list_fn_filter::vx_empty() const {return vx_collection::e_list_from_list_fn_filter;}
-    vx_core::Type_any Class_list_from_list_fn_filter::vx_type() const {return vx_collection::t_list_from_list_fn_filter;}
-    vx_core::Type_msgblock Class_list_from_list_fn_filter::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_list_from_list_fn_filter::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_list_from_list_filter::vx_empty() const {return vx_collection::e_list_from_list_filter;}
+    vx_core::Type_any Class_list_from_list_filter::vx_type() const {return vx_collection::t_list_from_list_filter;}
+    vx_core::Type_msgblock Class_list_from_list_filter::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_list_from_list_filter::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_list_from_list_fn_filter::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_list_from_list_filter::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_list generic_list_1 = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Func_any_from_any fn_filter = vx_core::vx_any_from_any(vx_core::t_any_from_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_collection::f_list_from_list_fn_filter(generic_list_1, vallist, fn_filter);
+      output = vx_collection::f_list_from_list_filter(generic_list_1, vallist, fn_filter);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -726,6 +741,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_list_from_list_start_end::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_list_from_list_start_end::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -812,6 +829,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_is_list::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_is_list::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -908,6 +927,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_is_map::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_is_map::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -991,6 +1012,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_list_from_for_end_loop::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_list_from_for_end_loop::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -1065,6 +1088,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_list_from_list_end::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_list_from_list_end::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -1137,6 +1162,8 @@ namespace vx_collection {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_list_from_list_filtertypes::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_list_from_list_filtertypes::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -1211,6 +1238,8 @@ namespace vx_collection {
       return output;
     }
 
+    vx_core::Type_constdef Class_list_from_list_start::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_list_from_list_start::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/collection", // pkgname
@@ -1251,8 +1280,8 @@ namespace vx_collection {
   vx_collection::Func_list_from_for_while_loop_max t_list_from_for_while_loop_max = NULL;
   vx_collection::Func_list_from_for_while_loop e_list_from_for_while_loop = NULL;
   vx_collection::Func_list_from_for_while_loop t_list_from_for_while_loop = NULL;
-  vx_collection::Func_list_from_list_fn_filter e_list_from_list_fn_filter = NULL;
-  vx_collection::Func_list_from_list_fn_filter t_list_from_list_fn_filter = NULL;
+  vx_collection::Func_list_from_list_filter e_list_from_list_filter = NULL;
+  vx_collection::Func_list_from_list_filter t_list_from_list_filter = NULL;
   vx_collection::Func_list_from_list_start_end e_list_from_list_start_end = NULL;
   vx_collection::Func_list_from_list_start_end t_list_from_list_start_end = NULL;
   vx_collection::Func_is_list e_is_list = NULL;
@@ -1297,10 +1326,10 @@ namespace vx_collection {
       vx_core::vx_reserve_empty(vx_collection::e_list_from_for_while_loop);
       vx_collection::t_list_from_for_while_loop = new vx_collection::Class_list_from_for_while_loop();
       vx_core::vx_reserve_type(vx_collection::t_list_from_for_while_loop);
-      vx_collection::e_list_from_list_fn_filter = new vx_collection::Class_list_from_list_fn_filter();
-      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_fn_filter);
-      vx_collection::t_list_from_list_fn_filter = new vx_collection::Class_list_from_list_fn_filter();
-      vx_core::vx_reserve_type(vx_collection::t_list_from_list_fn_filter);
+      vx_collection::e_list_from_list_filter = new vx_collection::Class_list_from_list_filter();
+      vx_core::vx_reserve_empty(vx_collection::e_list_from_list_filter);
+      vx_collection::t_list_from_list_filter = new vx_collection::Class_list_from_list_filter();
+      vx_core::vx_reserve_type(vx_collection::t_list_from_list_filter);
       vx_collection::e_list_from_list_start_end = new vx_collection::Class_list_from_list_start_end();
       vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start_end);
       vx_collection::t_list_from_list_start_end = new vx_collection::Class_list_from_list_start_end();
@@ -1329,20 +1358,26 @@ namespace vx_collection {
       vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start);
       vx_collection::t_list_from_list_start = new vx_collection::Class_list_from_list_start();
       vx_core::vx_reserve_type(vx_collection::t_list_from_list_start);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      mapfunc["any<-for-until-loop-max"] = vx_collection::t_any_from_for_until_loop_max;
+      mapfunc["any<-for-until-loop"] = vx_collection::t_any_from_for_until_loop;
+      mapfunc["any<-for-while-loop-max"] = vx_collection::t_any_from_for_while_loop_max;
+      mapfunc["any<-for-while-loop"] = vx_collection::t_any_from_for_while_loop;
+      mapfunc["list<-for-while-loop-max"] = vx_collection::t_list_from_for_while_loop_max;
+      mapfunc["list<-for-while-loop"] = vx_collection::t_list_from_for_while_loop;
+      mapfunc["list<-list-filter"] = vx_collection::t_list_from_list_filter;
+      mapfunc["list<-list-start-end"] = vx_collection::t_list_from_list_start_end;
+      mapfunc["is-list"] = vx_collection::t_is_list;
+      mapfunc["is-map"] = vx_collection::t_is_map;
+      mapfunc["list<-for-end-loop"] = vx_collection::t_list_from_for_end_loop;
+      mapfunc["list<-list-end"] = vx_collection::t_list_from_list_end;
+      mapfunc["list<-list-filtertypes"] = vx_collection::t_list_from_list_filtertypes;
+      mapfunc["list<-list-start"] = vx_collection::t_list_from_list_start;
+      vx_core::vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

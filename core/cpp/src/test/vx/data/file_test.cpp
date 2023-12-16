@@ -11,6 +11,7 @@ namespace vx_data_file_test {
     vx_core::vx_log("Test Start: f_boolean_exists_from_file");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      context,
       vx_data_file::f_boolean_exists_from_file(
         vx_core::f_new(
           vx_data_file::t_file,
@@ -21,8 +22,7 @@ namespace vx_data_file_test {
             vx_core::vx_new_string("src/test/resources/vx")
           })
         )
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
@@ -50,7 +50,9 @@ namespace vx_data_file_test {
     vx_core::vx_log("Test Start: f_boolean_write_from_file_string");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      context,
       vx_data_file::f_boolean_write_from_file_string(
+        context,
         vx_core::f_new(
           vx_data_file::t_file,
           vx_core::vx_new(vx_core::t_anylist, {
@@ -60,10 +62,8 @@ namespace vx_data_file_test {
             vx_core::vx_new_string("src/test/resources/vx")
           })
         ),
-        vx_core::vx_new_string("writetext"),
-        context
-      ),
-      context
+        vx_core::vx_new_string("writetext")
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))"),
@@ -91,6 +91,7 @@ namespace vx_data_file_test {
     vx_core::vx_log("Test Start: f_file_read_from_file");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::f_new(
         vx_data_file::t_file,
         vx_core::vx_new(vx_core::t_anylist, {
@@ -103,6 +104,7 @@ namespace vx_data_file_test {
         })
       ),
       vx_data_file::f_file_read_from_file(
+        context,
         vx_core::f_new(
           vx_data_file::t_file,
           vx_core::vx_new(vx_core::t_anylist, {
@@ -111,10 +113,8 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":path"),
             vx_core::vx_new_string("src/test/resources/vx")
           })
-        ),
-        context
-      ),
-      context
+        )
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
@@ -142,8 +142,10 @@ namespace vx_data_file_test {
     vx_core::vx_log("Test Start: f_string_read_from_file");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
       vx_core::vx_new_string("testdata"),
       vx_data_file::f_string_read_from_file(
+        context,
         vx_core::f_new(
           vx_data_file::t_file,
           vx_core::vx_new(vx_core::t_anylist, {
@@ -152,10 +154,8 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":path"),
             vx_core::vx_new_string("src/test/resources/vx")
           })
-        ),
-        context
-      ),
-      context
+        )
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),

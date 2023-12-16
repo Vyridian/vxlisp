@@ -40,15 +40,31 @@ export default class vx_state {
   // empty types
   static e_value_map = {}
 
-  static c_empty = {
-    "value-map": vx_state.e_value_map,
-    "change": vx_state.e_change,
-    "register": vx_state.e_register
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/state", vx_state)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "value-map": vx_state.e_value_map,
+      "change": vx_state.e_change,
+      "register": vx_state.e_register
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "change": vx_state.t_change,
+      "register": vx_state.t_register
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "value-map": vx_state.t_value_map
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/state",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type value-map)
     vx_state.t_value_map['vx_type'] = vx_core.t_type

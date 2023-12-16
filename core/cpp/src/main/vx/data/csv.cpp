@@ -1,4 +1,3 @@
-#include <map>
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
@@ -76,7 +75,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csv::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csv output = vx_data_csv::e_csv;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_csv::Type_csv val = vx_core::vx_any_from_any(vx_data_csv::t_csv, copyval);
@@ -190,6 +189,9 @@ namespace vx_data_csv {
       return output;
     }
 
+    vx_core::Type_constdef Class_csv::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type csvrows)
@@ -272,7 +274,7 @@ namespace vx_data_csv {
     vx_core::Type_any Class_csvrows::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_csv::Type_csvrows output = vx_data_csv::e_csvrows;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_csv::Type_csvrows val = vx_core::vx_any_from_any(vx_data_csv::t_csvrows, copyval);
@@ -338,56 +340,16 @@ namespace vx_data_csv {
       return output;
     }
 
+    vx_core::Type_constdef Class_csvrows::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const delimcsv)
   // class Class_delimcsv {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_csv::Class_delimcsv::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/csv", // pkgname
-        "delimcsv", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::Const_delimcsv output) {
-      output->vx_p_constname = "vx/data/csv/delimcsv";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/csv", "delimcsv");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -497,6 +459,8 @@ namespace vx_data_csv {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_csv_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_csv_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -611,6 +575,8 @@ namespace vx_data_csv {
       return output;
     }
 
+    vx_core::Type_constdef Class_csvrows_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_csvrows_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/csv", // pkgname
@@ -706,6 +672,8 @@ namespace vx_data_csv {
       return output;
     }
 
+    vx_core::Type_constdef Class_textblock_csv_from_string::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_textblock_csv_from_string::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/csv", // pkgname
@@ -783,20 +751,18 @@ namespace vx_data_csv {
       vx_data_csv::t_textblock_csv_from_string = new vx_data_csv::Class_textblock_csv_from_string();
       vx_core::vx_reserve_type(vx_data_csv::t_textblock_csv_from_string);
       vx_data_csv::Class_delimcsv::vx_const_new(vx_data_csv::c_delimcsv);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["csv"] = vx_data_csv::t_csv;
+      maptype["csvrows"] = vx_data_csv::t_csvrows;
+      mapconst["delimcsv"] = vx_data_csv::c_delimcsv;
+      mapfunc["csv<-textblock"] = vx_data_csv::t_csv_from_textblock;
+      mapfunc["csvrows<-textblock"] = vx_data_csv::t_csvrows_from_textblock;
+      mapfunc["textblock-csv<-string"] = vx_data_csv::t_textblock_csv_from_string;
+      vx_core::vx_global_package_set("vx/data/csv", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

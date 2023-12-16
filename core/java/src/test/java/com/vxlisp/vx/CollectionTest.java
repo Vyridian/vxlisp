@@ -168,7 +168,7 @@ public final class CollectionTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  3))",
+          ":describename", "(test\n (stringlist\n  \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  3))",
           ":testresult",
             Test.f_test(
               context,
@@ -200,60 +200,15 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
+  static Test.Type_testcase f_list_from_list_filter(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
-      ":casename", "list<-list-filtertypes",
+      ":casename", "list<-list-filter",
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (list \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Core.t_list,
-                Core.t_anylist.vx_new(
-                  Core.vx_new_string("a"),
-                  Core.vx_new_int(1),
-                  Core.vx_new_string("b"),
-                  Core.vx_new_string("c")
-                )
-              ),
-              Collection.f_list_from_list_filtertypes(
-                Core.t_list,
-                Core.f_new(
-                  Core.t_list,
-                  Core.t_anylist.vx_new(
-                    Core.vx_new_string("a"),
-                    Core.vx_new_int(1),
-                    Core.vx_new_string("b"),
-                    Core.vx_new_string("c"),
-                    Core.t_decimal.vx_new_from_string("4.5")
-                  )
-                ),
-                Core.t_typelist.vx_new(
-                  Core.t_string,
-                  Core.t_int
-                )
-              )
-            )
-        )
-      )
-    );
-    return output;
-  }
-
-  static Test.Type_testcase f_list_from_list_fn_filter(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
-      ":passfail", false,
-      ":testpkg", "vx/collection",
-      ":casename", "list<-list-fn-filter",
-      ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-fn-filter : stringlist\n  (list \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
+          ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
           ":testresult",
             Test.f_test(
               context,
@@ -266,7 +221,7 @@ public final class CollectionTest {
                   Core.vx_new_string("d1")
                 )
               ),
-              Collection.f_list_from_list_fn_filter(
+              Collection.f_list_from_list_filter(
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_list,
@@ -315,6 +270,51 @@ public final class CollectionTest {
     return output;
   }
 
+  static Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "list<-list-filtertypes",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (list\n  \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list\n   \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_list,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("a"),
+                  Core.vx_new_int(1),
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("c")
+                )
+              ),
+              Collection.f_list_from_list_filtertypes(
+                Core.t_list,
+                Core.f_new(
+                  Core.t_list,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string("a"),
+                    Core.vx_new_int(1),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string("c"),
+                    Core.t_decimal.vx_new_from_string("4.5")
+                  )
+                ),
+                Core.t_typelist.vx_new(
+                  Core.t_string,
+                  Core.t_int
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_list_from_list_start(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -323,7 +323,7 @@ public final class CollectionTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1))",
+          ":describename", "(test\n (stringlist\n  \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2))",
           ":testresult",
             Test.f_test(
               context,
@@ -346,7 +346,7 @@ public final class CollectionTest {
                     Core.vx_new_string("d")
                   )
                 ),
-                Core.vx_new_int(1)
+                Core.vx_new_int(2)
               )
             )
         )
@@ -363,7 +363,7 @@ public final class CollectionTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"b\" \"c\")\n (list<-list-start-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1 3))",
+          ":describename", "(test\n (stringlist\n  \"b\" \"c\")\n (list<-list-start-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2 3))",
           ":testresult",
             Test.f_test(
               context,
@@ -385,7 +385,7 @@ public final class CollectionTest {
                     Core.vx_new_string("d")
                   )
                 ),
-                Core.vx_new_int(1),
+                Core.vx_new_int(2),
                 Core.vx_new_int(3)
               )
             )
@@ -403,8 +403,8 @@ public final class CollectionTest {
       CollectionTest.f_is_map(context),
       CollectionTest.f_list_from_for_end_loop(context),
       CollectionTest.f_list_from_list_end(context),
+      CollectionTest.f_list_from_list_filter(context),
       CollectionTest.f_list_from_list_filtertypes(context),
-      CollectionTest.f_list_from_list_fn_filter(context),
       CollectionTest.f_list_from_list_start(context),
       CollectionTest.f_list_from_list_start_end(context)
     ));
@@ -445,8 +445,8 @@ public final class CollectionTest {
         ":list<-for-while-loop", 0,
         ":list<-for-while-loop-max", 0,
         ":list<-list-end", 1,
+        ":list<-list-filter", 1,
         ":list<-list-filtertypes", 1,
-        ":list<-list-fn-filter", 1,
         ":list<-list-start", 1,
         ":list<-list-start-end", 1
       )

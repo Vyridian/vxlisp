@@ -1481,48 +1481,149 @@ export default class vx_data_textblock {
     return output
   }
 
+  /**
+   * @function textblocklist_from_textblocklist_remove
+   * Return a textblocklist with all removedelims removed.
+   * @param  {textblocklist} tblist
+   * @param  {delim} remove
+   * @return {textblocklist}
+   */
+  static t_textblocklist_from_textblocklist_remove = {}
+  static e_textblocklist_from_textblocklist_remove = {vx_type: vx_data_textblock.t_textblocklist_from_textblocklist_remove}
+
+  // (func textblocklist<-textblocklist-remove)
+  static f_textblocklist_from_textblocklist_remove(tblist, remove) {
+    let output = vx_data_textblock.e_textblocklist
+    output = vx_collection.f_list_from_list_filter(
+      {"any-1": vx_data_textblock.t_textblock, "any-2": vx_data_textblock.t_textblock, "list-1": vx_data_textblock.t_textblocklist, "list-2": vx_data_textblock.t_textblocklist},
+      tblist,
+      vx_core.f_new(vx_core.t_any_from_any, (textblock) => 
+        vx_core.f_let(
+          {"any-1": vx_data_textblock.t_textblock},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const delimcurr = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblock, ":delim")
+            const namecurr = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delimcurr, ":name")
+            const nameremove = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, remove, ":name")
+            return vx_core.f_if(
+              {"any-1": vx_data_textblock.t_textblock},
+              vx_core.f_ne(namecurr, nameremove),
+              textblock
+            )
+          })
+        ))
+    )
+    return output
+  }
+
   // empty types
   static e_delim = {}
   static e_delimlist = []
   static e_textblock = {}
   static e_textblocklist = []
 
-  static c_empty = {
-    "delim": vx_data_textblock.e_delim,
-    "delimlist": vx_data_textblock.e_delimlist,
-    "textblock": vx_data_textblock.e_textblock,
-    "textblocklist": vx_data_textblock.e_textblocklist,
-    "children<-textblock": vx_data_textblock.e_children_from_textblock,
-    "delim-first<-delim-delim": vx_data_textblock.e_delim_first_from_delim_delim,
-    "delim-first<-string-delimlist": vx_data_textblock.e_delim_first_from_string_delimlist,
-    "delim-pos<-string-delim": vx_data_textblock.e_delim_pos_from_string_delim,
-    "delimlist-pos<-string-delimlist": vx_data_textblock.e_delimlist_pos_from_string_delimlist,
-    "is-close": vx_data_textblock.e_is_close,
-    "is-single": vx_data_textblock.e_is_single,
-    "stringlist<-textblocklist": vx_data_textblock.e_stringlist_from_textblocklist,
-    "text<-textblock": vx_data_textblock.e_text_from_textblock,
-    "textblock-addchild<-textblock-find-child": vx_data_textblock.e_textblock_addchild_from_textblock_find_child,
-    "textblock-delimnotfound": vx_data_textblock.e_textblock_delimnotfound,
-    "textblock-findparent<-textblock": vx_data_textblock.e_textblock_findparent_from_textblock,
-    "textblock-groupby<-textblock-delim": vx_data_textblock.e_textblock_groupby_from_textblock_delim,
-    "textblock-init": vx_data_textblock.e_textblock_init,
-    "textblock-parse": vx_data_textblock.e_textblock_parse,
-    "textblock-parse-one": vx_data_textblock.e_textblock_parse_one,
-    "textblock-parse<-string-delim": vx_data_textblock.e_textblock_parse_from_string_delim,
-    "textblock-replace<-textblock-find-replace": vx_data_textblock.e_textblock_replace_from_textblock_find_replace,
-    "textblock-startleft<-string-delim-offset": vx_data_textblock.e_textblock_startleft_from_string_delim_offset,
-    "textblock-startright<-string-delim-offset": vx_data_textblock.e_textblock_startright_from_string_delim_offset,
-    "textblock<-close-textblock": vx_data_textblock.e_textblock_from_close_textblock,
-    "textblock<-empty-textblock": vx_data_textblock.e_textblock_from_empty_textblock,
-    "textblock<-open-textblock": vx_data_textblock.e_textblock_from_open_textblock,
-    "textblock<-single-textblock": vx_data_textblock.e_textblock_from_single_textblock,
-    "textblock<-string-delim": vx_data_textblock.e_textblock_from_string_delim,
-    "textblock<-textblock-delim": vx_data_textblock.e_textblock_from_textblock_delim
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/textblock", vx_data_textblock)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "delimbracketangle": vx_data_textblock.c_delimbracketangle,
+      "delimbracketcurly": vx_data_textblock.c_delimbracketcurly,
+      "delimbracketsquare": vx_data_textblock.c_delimbracketsquare,
+      "delimclose": vx_data_textblock.c_delimclose,
+      "delimclosing": vx_data_textblock.c_delimclosing,
+      "delimcomma": vx_data_textblock.c_delimcomma,
+      "delimcomment": vx_data_textblock.c_delimcomment,
+      "delimcommentblock": vx_data_textblock.c_delimcommentblock,
+      "delimline": vx_data_textblock.c_delimline,
+      "delimlisttest1": vx_data_textblock.c_delimlisttest1,
+      "delimlisttest2": vx_data_textblock.c_delimlisttest2,
+      "delimlisttest3": vx_data_textblock.c_delimlisttest3,
+      "delimnonwhitespace": vx_data_textblock.c_delimnonwhitespace,
+      "delimparen": vx_data_textblock.c_delimparen,
+      "delimquote": vx_data_textblock.c_delimquote,
+      "delimquoteblock": vx_data_textblock.c_delimquoteblock,
+      "delimspace": vx_data_textblock.c_delimspace,
+      "delimtest1": vx_data_textblock.c_delimtest1,
+      "delimtest2": vx_data_textblock.c_delimtest2,
+      "delimtest3": vx_data_textblock.c_delimtest3,
+      "delimtext": vx_data_textblock.c_delimtext,
+      "delimwhitespace": vx_data_textblock.c_delimwhitespace
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "delim": vx_data_textblock.e_delim,
+      "delimlist": vx_data_textblock.e_delimlist,
+      "textblock": vx_data_textblock.e_textblock,
+      "textblocklist": vx_data_textblock.e_textblocklist,
+      "children<-textblock": vx_data_textblock.e_children_from_textblock,
+      "delim-first<-delim-delim": vx_data_textblock.e_delim_first_from_delim_delim,
+      "delim-first<-string-delimlist": vx_data_textblock.e_delim_first_from_string_delimlist,
+      "delim-pos<-string-delim": vx_data_textblock.e_delim_pos_from_string_delim,
+      "delimlist-pos<-string-delimlist": vx_data_textblock.e_delimlist_pos_from_string_delimlist,
+      "is-close": vx_data_textblock.e_is_close,
+      "is-single": vx_data_textblock.e_is_single,
+      "stringlist<-textblocklist": vx_data_textblock.e_stringlist_from_textblocklist,
+      "text<-textblock": vx_data_textblock.e_text_from_textblock,
+      "textblock-addchild<-textblock-find-child": vx_data_textblock.e_textblock_addchild_from_textblock_find_child,
+      "textblock-delimnotfound": vx_data_textblock.e_textblock_delimnotfound,
+      "textblock-findparent<-textblock": vx_data_textblock.e_textblock_findparent_from_textblock,
+      "textblock-groupby<-textblock-delim": vx_data_textblock.e_textblock_groupby_from_textblock_delim,
+      "textblock-init": vx_data_textblock.e_textblock_init,
+      "textblock-parse": vx_data_textblock.e_textblock_parse,
+      "textblock-parse-one": vx_data_textblock.e_textblock_parse_one,
+      "textblock-parse<-string-delim": vx_data_textblock.e_textblock_parse_from_string_delim,
+      "textblock-replace<-textblock-find-replace": vx_data_textblock.e_textblock_replace_from_textblock_find_replace,
+      "textblock-startleft<-string-delim-offset": vx_data_textblock.e_textblock_startleft_from_string_delim_offset,
+      "textblock-startright<-string-delim-offset": vx_data_textblock.e_textblock_startright_from_string_delim_offset,
+      "textblock<-close-textblock": vx_data_textblock.e_textblock_from_close_textblock,
+      "textblock<-empty-textblock": vx_data_textblock.e_textblock_from_empty_textblock,
+      "textblock<-open-textblock": vx_data_textblock.e_textblock_from_open_textblock,
+      "textblock<-single-textblock": vx_data_textblock.e_textblock_from_single_textblock,
+      "textblock<-string-delim": vx_data_textblock.e_textblock_from_string_delim,
+      "textblock<-textblock-delim": vx_data_textblock.e_textblock_from_textblock_delim,
+      "textblocklist<-textblocklist-remove": vx_data_textblock.e_textblocklist_from_textblocklist_remove
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "children<-textblock": vx_data_textblock.t_children_from_textblock,
+      "delim-first<-delim-delim": vx_data_textblock.t_delim_first_from_delim_delim,
+      "delim-first<-string-delimlist": vx_data_textblock.t_delim_first_from_string_delimlist,
+      "delim-pos<-string-delim": vx_data_textblock.t_delim_pos_from_string_delim,
+      "delimlist-pos<-string-delimlist": vx_data_textblock.t_delimlist_pos_from_string_delimlist,
+      "is-close": vx_data_textblock.t_is_close,
+      "is-single": vx_data_textblock.t_is_single,
+      "stringlist<-textblocklist": vx_data_textblock.t_stringlist_from_textblocklist,
+      "text<-textblock": vx_data_textblock.t_text_from_textblock,
+      "textblock-addchild<-textblock-find-child": vx_data_textblock.t_textblock_addchild_from_textblock_find_child,
+      "textblock-delimnotfound": vx_data_textblock.t_textblock_delimnotfound,
+      "textblock-findparent<-textblock": vx_data_textblock.t_textblock_findparent_from_textblock,
+      "textblock-groupby<-textblock-delim": vx_data_textblock.t_textblock_groupby_from_textblock_delim,
+      "textblock-init": vx_data_textblock.t_textblock_init,
+      "textblock-parse": vx_data_textblock.t_textblock_parse,
+      "textblock-parse-one": vx_data_textblock.t_textblock_parse_one,
+      "textblock-parse<-string-delim": vx_data_textblock.t_textblock_parse_from_string_delim,
+      "textblock-replace<-textblock-find-replace": vx_data_textblock.t_textblock_replace_from_textblock_find_replace,
+      "textblock-startleft<-string-delim-offset": vx_data_textblock.t_textblock_startleft_from_string_delim_offset,
+      "textblock-startright<-string-delim-offset": vx_data_textblock.t_textblock_startright_from_string_delim_offset,
+      "textblock<-close-textblock": vx_data_textblock.t_textblock_from_close_textblock,
+      "textblock<-empty-textblock": vx_data_textblock.t_textblock_from_empty_textblock,
+      "textblock<-open-textblock": vx_data_textblock.t_textblock_from_open_textblock,
+      "textblock<-single-textblock": vx_data_textblock.t_textblock_from_single_textblock,
+      "textblock<-string-delim": vx_data_textblock.t_textblock_from_string_delim,
+      "textblock<-textblock-delim": vx_data_textblock.t_textblock_from_textblock_delim,
+      "textblocklist<-textblocklist-remove": vx_data_textblock.t_textblocklist_from_textblocklist_remove
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "delim": vx_data_textblock.t_delim,
+      "delimlist": vx_data_textblock.t_delimlist,
+      "textblock": vx_data_textblock.t_textblock,
+      "textblocklist": vx_data_textblock.t_textblocklist
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/textblock",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type delim)
     vx_data_textblock.t_delim['vx_type'] = vx_core.t_type
@@ -2379,6 +2480,25 @@ export default class vx_data_textblock {
       properties    : [],
       proplast      : {},
       fn            : vx_data_textblock.f_textblock_from_textblock_delim
+    }
+
+    // (func textblocklist<-textblocklist-remove)
+    vx_data_textblock.t_textblocklist_from_textblocklist_remove['vx_type'] = vx_core.t_type
+    vx_data_textblock.t_textblocklist_from_textblocklist_remove['vx_value'] = {
+      name          : "textblocklist<-textblocklist-remove",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblocklist_from_textblocklist_remove
     }
 
   }

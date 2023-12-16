@@ -777,25 +777,30 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 	specialcode := prj.maptext[pkg.name+"_java.txt"]
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
+	packagestatic := "" +
+		"\n    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();" +
+		"\n    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();" +
+		"\n    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();"
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
 		typetext, msgs := JavaFromType(typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		typetexts += typetext
+		packagestatic += "" +
+			"\n    maptype.put(\"" + typ.name + "\", " + JavaNameTFromType(typ) + ");"
 	}
 	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
 	consttexts := ""
-	constlates := "\n  static {"
+	statics := "\n  static {"
 	for _, cnstid := range cnstkeys {
 		cnst := pkg.mapconst[cnstid]
 		consttext, constlate, msgs := JavaFromConst(cnst, pkg)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		consttexts += consttext
-		constlates += constlate
+		statics += constlate
+		packagestatic += "" +
+			"\n    mapconst.put(\"" + cnst.name + "\", " + JavaNameCFromConst(cnst) + ");"
 	}
-	constlates += "" +
-		"\n  }" +
-		"\n"
 	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	functexts := ""
 	for _, fncid := range fnckeys {
@@ -804,15 +809,23 @@ func JavaFromPackage(pkg *vxpackage, prj *vxproject, pkgprefix string) (string, 
 			fnctext, msgs := JavaFromFunc(fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			functexts += fnctext
+			packagestatic += "" +
+				"\n    mapfunc.put(\"" + fnc.name + JavaIndexFromFunc(fnc) + "\", " + JavaNameTFromFunc(fnc) + ");"
 		}
 	}
+	packagestatic += "" +
+		"\n    Core.vx_global_package_set(\"" + pkg.name + "\", maptype, mapconst, mapfunc);"
+	statics += "" +
+		packagestatic +
+		"\n  }" +
+		"\n"
 	body := "" +
 		"\n" +
 		specialcode +
 		typetexts +
 		consttexts +
 		functexts +
-		constlates
+		statics
 		//		emptytypes
 	imports := JavaImportsFromPackage(pkg, pkgprefix, body, false)
 	output := "" +
@@ -1273,7 +1286,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n      " + allowclass + " output = " + allowempty + ";" +
 				"\n      Class_" + typename + " map = this;" +
 				"\n      String skey = key.vx_string();" +
-				"\n      Map<String, " + allowclass + "> mapval = map.vxmap;" +
+				"\n      Map<String, " + allowclass + "> mapval = map.vx_p_map;" +
 				"\n      output = mapval.getOrDefault(skey, " + allowempty + ");" +
 				"\n      return output;" +
 				"\n    }" +
@@ -1284,7 +1297,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 		} else {
 			allowcode += "" +
 				"\n    @Override" +
-				"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "() {return vxmap;}" +
+				"\n    public Map<String, " + allowclass + "> vx_map" + allowname + "() {return vx_p_map;}" +
 				"\n" +
 				"\n    @Override" +
 				"\n    public Core.Type_any vx_any(final Core.Type_string key) {" +
@@ -1293,10 +1306,10 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 				"\n"
 		}
 		instancefuncs += "" +
-			"\n    protected Map<String, " + allowclass + "> vxmap = Core.immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
+			"\n    protected Map<String, " + allowclass + "> vx_p_map = Core.immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}" +
+			"\n    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}" +
 			"\n" +
 			allowcode +
 			"\n    @Override" +
@@ -1315,7 +1328,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n        }" +
 			"\n      }" +
-			"\n      output.vxmap = Core.immutablemap(map);" +
+			"\n      output.vx_p_map = Core.immutablemap(map);" +
 			"\n      if (msgblock != Core.e_msgblock) {" +
 			"\n        output.vxmsgblock = msgblock;" +
 			"\n      }" +
@@ -1386,7 +1399,7 @@ func JavaFromType(typ *vxtype) (string, *vxmsgblock) {
 			"\n      }" +
 			"\n      if (ischanged || (msgblock != Core.e_msgblock)) {" +
 			"\n        Class_" + typename + " work = new Class_" + typename + "();" +
-			"\n        work.vxmap = Core.immutablemap(mapval);" +
+			"\n        work.vx_p_map = Core.immutablemap(mapval);" +
 			"\n        if (msgblock != Core.e_msgblock) {" +
 			"\n          work.vxmsgblock = msgblock;" +
 			"\n        }" +
@@ -1746,7 +1759,7 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "Core.f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", '" + funcname + "', "
+			output += "Core.f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", Core.vx_new_string(\"" + funcname + "\"), "
 		}
 		switch fnc.name {
 		case "native":
@@ -1829,9 +1842,6 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 			default:
 				output += JavaNameFromPkgName(fnc.pkgname) + ".f_" + JavaNameFromFunc(fnc) + "("
 			}
-			if fnc.context {
-				argtexts = append(argtexts, "context")
-			}
 			if !isskip {
 				if fnc.isgeneric {
 					switch funcname {
@@ -1842,6 +1852,9 @@ func JavaFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, 
 							argtexts = append(argtexts, genericarg)
 						}
 					}
+				}
+				if fnc.context {
+					argtexts = append(argtexts, "context")
 				}
 				subindent := indent + 1
 				ssubindent := StringRepeat("  ", subindent)
@@ -2705,6 +2718,14 @@ func JavaLambdaFromArgList(arglist []vxarg, isgeneric bool) (string, string, str
 		lambdavartext = "\n  " + StringFromListStringJoin(lambdavars, "\n  ")
 	}
 	return lambdatext, lambdavartext, lambdanames
+}
+
+func JavaNameCFromConst(cnst *vxconst) string {
+	name := "c_" + JavaFromName(cnst.alias)
+	if cnst.pkgname != "" {
+		name = JavaNameFromPkgName(cnst.pkgname) + "." + name
+	}
+	return name
 }
 
 func JavaNameClassFullFromType(typ *vxtype) string {

@@ -76,7 +76,7 @@ namespace vx_state {
     vx_core::Type_any Class_value_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_state::Type_value_map output = vx_state::e_value_map;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map, copyval);
@@ -148,6 +148,9 @@ namespace vx_state {
       return output;
     }
 
+    vx_core::Type_constdef Class_value_map::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (func change)
@@ -202,6 +205,8 @@ namespace vx_state {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_change::vx_constdef() const {return this->vx_p_constdef;}
 
     vx_core::Type_funcdef Class_change::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
@@ -294,6 +299,8 @@ namespace vx_state {
       return output;
     }
 
+    vx_core::Type_constdef Class_register::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_register::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/state", // pkgname
@@ -356,20 +363,15 @@ namespace vx_state {
       vx_core::vx_reserve_empty(vx_state::e_register);
       vx_state::t_register = new vx_state::Class_register();
       vx_core::vx_reserve_type(vx_state::t_register);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["value-map"] = vx_state::t_value_map;
+      mapfunc["change"] = vx_state::t_change;
+      mapfunc["register"] = vx_state::t_register;
+      vx_core::vx_global_package_set("vx/state", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

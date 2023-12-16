@@ -207,6 +207,21 @@
     return output;
   }
 
+  // vx_boolean_from_string_ends(string, string)
+  public static boolean vx_boolean_from_string_ends(String text, String ends) {
+    return text.endsWith(ends);
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  public static boolean vx_boolean_from_string_find(String text, String find) {
+    return text.contains(find);
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  public static boolean vx_boolean_from_string_starts(String text, String starts) {
+    return text.startsWith(starts);
+  }
+
   // vx_eqeq(any, any)
   public static boolean vx_eqeq(Core.Type_any val1, Core.Type_any val2) {
     boolean output = false;
@@ -257,6 +272,29 @@
     return output;
   }
 
+  // vx_global_package_set(string, map<any>, map<any>, map<func>)
+  public static void vx_global_package_set(String pkgname, Map<String, Core.Type_any> maptype, Map<String, Core.Type_any> mapconst, Map<String, Core.Type_func> mapfunc) {
+    Core.Class_typemap typemap = new Core.Class_typemap();
+		  typemap.vx_p_map = Core.immutablemap(maptype);
+	   Core.Class_constmap constmap = new Core.Class_constmap();
+		  constmap.vx_p_map = Core.immutablemap(mapconst);
+		  Core.Class_funcmap funcmap = new Core.Class_funcmap();
+		  funcmap.vx_p_map = Core.immutablemap(mapfunc);
+    Core.Class_project global = (Core.Class_project)Core.c_global;
+    Core.Class_packagemap packagemap = (Core.Class_packagemap)global.vx_p_packagemap;
+    if (packagemap == null) {
+      packagemap = new Core.Class_packagemap();
+      global.vx_p_packagemap = packagemap;
+    }
+    Map<String, Core.Type_package> mappackage = new LinkedHashMap<>(packagemap.vx_p_map);
+		  Core.Class_package pkg = new Core.Class_package();
+		  pkg.vx_p_constmap = constmap;
+		  pkg.vx_p_typemap = typemap;
+		  pkg.vx_p_funcmap = funcmap;
+    mappackage.put(pkgname, pkg);
+    packagemap.vx_p_map = Core.immutablemap(mappackage);
+  }
+
   // vx_int_from_string(string)
   public static int vx_int_from_string(String text) {
     int output = 0;
@@ -265,6 +303,16 @@
     } catch (Exception e) {
     }    
     return output;
+  }
+
+  // vx_int_from_string_find(string, string)
+  public static int vx_int_from_string_find(String text, String find) {
+    return text.indexOf(find);
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  public static int vx_int_from_string_findlast(String text, String findlast) {
+    return text.lastIndexOf(findlast);
   }
 
   // vx_is_float(string)
@@ -278,14 +326,35 @@
     return output;
   }
 
+  // vx_is_float(any)
+  public static boolean vx_is_float(Core.Type_any value) {
+    boolean output = false;
+    if (value instanceof Core.Type_number) {
+      output = true;
+    } else if (value instanceof Core.Type_string) {
+      Core.Type_string valuestring = (Core.Type_string)value;
+      output = Core.vx_is_float(valuestring.vx_string());
+    }
+    return output;
+  }
+
   // vx_is_int(string)
   public static boolean vx_is_int(String text) {
     boolean output = false;
-    try {
-      Integer.parseInt(text);
+    switch (text) {
+    case "notanumber":
+    case "infinity":
+    case "neginfinity":
       output = true;
-    } catch (Exception e) {
-    }    
+      break;
+    default:
+      try {
+        Integer.parseInt(text);
+        output = true;
+      } catch (Exception e) {
+      }
+      break;
+    }
     return output;
   }
 
@@ -329,9 +398,12 @@
       String text = "";
       if (value == null) {
         text = "null";
+      } else if (value instanceof Core.Type_string) {
+        Core.Type_string valstring = (Core.Type_string)value;
+        text = valstring.vx_string();
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any val_any = (Core.Type_any)value;
-        Core.Type_string valstring = Core.f_string_from_any(val_any);
+        Core.Type_any valany = (Core.Type_any)value;
+        Core.Type_string valstring = Core.f_string_from_any(valany);
         text = valstring.vx_string();
       } else {
         text = value.toString();
@@ -544,6 +616,9 @@
   public static String vx_string_from_string_start_end(String text, int start, int end) {
     String output = "";
     int maxlen = text.length();
+    if (end < 0) {
+     end += maxlen;
+    }
     if (start < 1) {
     } else if (start > end) {
     } else if (start > maxlen) {
@@ -553,7 +628,7 @@
       }
       output = text.substring(start - 1, end);
     }
-    return output;   
+    return output;
   }
 
   public static Core.Type_typedef typedef_new(

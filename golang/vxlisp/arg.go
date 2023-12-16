@@ -77,9 +77,27 @@ func NewMapArg() map[string]vxarg {
 
 func ArgLink(arg vxarg, listscope []vxscope, textblock *vxtextblock, path string) (vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ArgLink")
+	arg, msgs := ArgLinkType(arg, listscope, textblock, path)
+	msgblock = MsgblockAddBlock(msgblock, msgs)
+	subpath := path + "/:arg/" + arg.name
+	value, msgs := ValueLink(arg.value, arg.vxtype, listscope, textblock, subpath)
+	switch value.code {
+	case ":func", ":funcref":
+		valuefnc := FuncFromValue(value)
+		if valuefnc.async {
+			arg.async = true
+		}
+	}
+	msgblock = MsgblockAddBlock(msgblock, msgs)
+	arg.value = value
+	return arg, msgblock
+}
+
+func ArgLinkType(arg vxarg, listscope []vxscope, textblock *vxtextblock, path string) (vxarg, *vxmsgblock) {
+	msgblock := NewMsgBlock("ArgLinkType")
 	subpath := path + "/:arg/" + arg.name
 	typ := arg.vxtype
-	if typ.pkgname != "" {
+	if typ.extends != "" {
 	} else if typ.name != "" {
 		lookuptype, ok := TypeOrFuncFromListScope(listscope, typ.pkgname, typ.name, subpath)
 		if ok {
@@ -105,16 +123,6 @@ func ArgLink(arg vxarg, listscope []vxscope, textblock *vxtextblock, path string
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
-	value, msgs := ValueLink(arg.value, arg.vxtype, listscope, textblock, subpath)
-	switch value.code {
-	case ":func", ":funcref":
-		valuefnc := FuncFromValue(value)
-		if valuefnc.async {
-			arg.async = true
-		}
-	}
-	msgblock = MsgblockAddBlock(msgblock, msgs)
-	arg.value = value
 	return arg, msgblock
 }
 
@@ -258,11 +266,22 @@ func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) (
 	return listarg, msgblock
 }
 
-func ListArgLink(listarg []vxarg, scopes []vxscope, textblock *vxtextblock, path string) ([]vxarg, *vxmsgblock) {
+func ListArgLink(listarg []vxarg, listscope []vxscope, textblock *vxtextblock, path string) ([]vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListArgLink")
 	var output []vxarg
 	for _, arg := range listarg {
-		arg, msgs := ArgLink(arg, scopes, textblock, path)
+		arg, msgs := ArgLink(arg, listscope, textblock, path)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+		output = append(output, arg)
+	}
+	return output, msgblock
+}
+
+func ListArgLinkType(listarg []vxarg, listscope []vxscope, textblock *vxtextblock, path string) ([]vxarg, *vxmsgblock) {
+	msgblock := NewMsgBlock("ListArgLinkType")
+	var output []vxarg
+	for _, arg := range listarg {
+		arg, msgs := ArgLinkType(arg, listscope, textblock, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		output = append(output, arg)
 	}

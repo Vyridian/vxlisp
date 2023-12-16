@@ -5020,3 +5020,46 @@
             delimbracketcurly))
          0))
  :doc "Returns a textblock constructed from the text after the current delimiter start.")
+
+(func textblocklist<-textblocklist-remove : textblocklist
+ [tblist : textblocklist
+  remove : delim]
+ (list<-list-filter : textblocklist
+  tblist
+  (fn : textblock
+   [textblock : textblock]
+   (let : textblock
+    [delimcurr  : delim  := (:delim textblock)
+     namecurr   : string := (:name  delimcurr)
+     nameremove : string := (:name  remove)]
+    (if
+     (!= namecurr nameremove)
+     textblock))))
+ :test (test
+        (textblocklist
+         (textblock
+          :text "+")
+         (textblock
+          :text "2")
+         (textblock
+          :text "3"))
+        (textblocklist<-textblocklist-remove
+         (textblocklist
+          (textblock
+           :text "+")
+          (textblock
+           :text " "
+           :delim
+            (copy delimwhitespace
+             :pos 0))
+          (textblock
+           :text "2")
+          (textblock
+           :text " "
+           :delim
+            (copy delimwhitespace
+             :pos 0))
+          (textblock
+           :text "3"))
+         delimwhitespace))
+ :doc "Return a textblocklist with all removedelims removed.")

@@ -654,6 +654,16 @@ public final class Csv {
 
   static {
     Const_delimcsv.const_new(c_delimcsv);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("csv", Csv.t_csv);
+    maptype.put("csvrows", Csv.t_csvrows);
+    mapconst.put("delimcsv", Csv.c_delimcsv);
+    mapfunc.put("csv<-textblock", Csv.t_csv_from_textblock);
+    mapfunc.put("csvrows<-textblock", Csv.t_csvrows_from_textblock);
+    mapfunc.put("textblock-csv<-string", Csv.t_textblock_csv_from_string);
+    Core.vx_global_package_set("vx/data/csv", maptype, mapconst, mapfunc);
   }
 
 }

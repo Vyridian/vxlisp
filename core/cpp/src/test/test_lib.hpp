@@ -48,7 +48,7 @@ namespace test_lib {
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
+  vx_core::Type_boolean write_testpackagelist_async(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist);
 
   bool test(std::string testname, std::string expected, std::string actual);
 
@@ -84,7 +84,7 @@ namespace test_lib {
 
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
 
-  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
+  bool test_run_all(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist);
 
   bool test_run_testcase(vx_core::Type_context context);
 

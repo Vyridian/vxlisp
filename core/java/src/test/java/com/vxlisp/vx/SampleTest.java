@@ -16,11 +16,11 @@ public final class SampleTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test 4 myconst)",
+          ":describename", "(test\n myconst\n myconst)",
           ":testresult",
             Test.f_test(
               context,
-              Core.vx_new_int(4),
+              Sample.c_myconst,
               Sample.c_myconst
             )
         )

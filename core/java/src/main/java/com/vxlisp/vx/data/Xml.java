@@ -493,23 +493,23 @@ public final class Xml {
 
   public static class Class_xmlpropmap extends Core.Class_base implements Type_xmlpropmap {
 
-    protected Map<String, Core.Type_string> vxmap = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Core.Type_string vx_string(final Core.Type_string key) {
       Core.Type_string output = Core.e_string;
       Class_xmlpropmap map = this;
       String skey = key.vx_string();
-      Map<String, Core.Type_string> mapval = map.vxmap;
+      Map<String, Core.Type_string> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Core.e_string);
       return output;
     }
 
     @Override
-    public Map<String, Core.Type_string> vx_mapstring() {return vxmap;}
+    public Map<String, Core.Type_string> vx_mapstring() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -532,7 +532,7 @@ public final class Xml {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -587,7 +587,7 @@ public final class Xml {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_xmlpropmap work = new Class_xmlpropmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -831,6 +831,17 @@ public final class Xml {
   static {
     Const_delimxml.const_new(c_delimxml);
     Const_delimxmlequal.const_new(c_delimxmlequal);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("xml", Xml.t_xml);
+    maptype.put("xmlnode", Xml.t_xmlnode);
+    maptype.put("xmlnodelist", Xml.t_xmlnodelist);
+    maptype.put("xmlpropmap", Xml.t_xmlpropmap);
+    mapconst.put("delimxml", Xml.c_delimxml);
+    mapconst.put("delimxmlequal", Xml.c_delimxmlequal);
+    mapfunc.put("xml<-textblock", Xml.t_xml_from_textblock);
+    Core.vx_global_package_set("vx/data/xml", maptype, mapconst, mapfunc);
   }
 
 }

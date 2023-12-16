@@ -58,8 +58,8 @@ export default class vx_collection_test {
           "list<-for-while-loop", 0,
           "list<-for-while-loop-max", 0,
           "list<-list-end", 1,
+          "list<-list-filter", 1,
           "list<-list-filtertypes", 1,
-          "list<-list-fn-filter", 1,
           "list<-list-start", 1,
           "list<-list-start-end", 1
         )
@@ -227,7 +227,7 @@ export default class vx_collection_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  3))",
+            ":describename", "(test\n (stringlist\n  \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  3))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -255,60 +255,18 @@ export default class vx_collection_test {
     return output
   }
 
-  static f_list_from_list_filtertypes(context) {
+  static f_list_from_list_filter(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/collection",
-      ":casename", "list<-list-filtertypes",
+      ":casename", "list<-list-filter",
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (list \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_list,
-                "a",
-                1,
-                "b",
-                "c"
-              ),
-              vx_collection.f_list_from_list_filtertypes(
-                {"any-1": vx_core.t_any, "any-2": vx_core.t_any, "list-1": vx_core.t_list, "list-2": vx_core.t_list},
-                vx_core.f_new(
-                  vx_core.t_list,
-                  "a",
-                  1,
-                  "b",
-                  "c",
-                  4.5
-                ),
-                vx_core.t_string,
-                vx_core.t_int
-              )
-            )
-          )
-        )
-    )
-    return output
-  }
-
-  static f_list_from_list_fn_filter(context) {
-    const output = vx_core.f_new(
-      vx_test.t_testcase,
-      ":passfail", false,
-      ":testpkg", "vx/collection",
-      ":casename", "list<-list-fn-filter",
-      ":describelist",
-        vx_core.f_new(
-          vx_test.t_testdescribelist,
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-fn-filter : stringlist\n  (list \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
+            ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -319,7 +277,7 @@ export default class vx_collection_test {
                 "c1",
                 "d1"
               ),
-              vx_collection.f_list_from_list_fn_filter(
+              vx_collection.f_list_from_list_filter(
                 {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
@@ -355,6 +313,48 @@ export default class vx_collection_test {
     return output
   }
 
+  static f_list_from_list_filtertypes(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "list<-list-filtertypes",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (list\n  \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list\n   \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_list,
+                "a",
+                1,
+                "b",
+                "c"
+              ),
+              vx_collection.f_list_from_list_filtertypes(
+                {"any-1": vx_core.t_any, "any-2": vx_core.t_any, "list-1": vx_core.t_list, "list-2": vx_core.t_list},
+                vx_core.f_new(
+                  vx_core.t_list,
+                  "a",
+                  1,
+                  "b",
+                  "c",
+                  4.5
+                ),
+                vx_core.t_string,
+                vx_core.t_int
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_list_from_list_start(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -366,7 +366,7 @@ export default class vx_collection_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1))",
+            ":describename", "(test\n (stringlist\n  \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -385,7 +385,7 @@ export default class vx_collection_test {
                   "c",
                   "d"
                 ),
-                1
+                2
               )
             )
           )
@@ -405,7 +405,7 @@ export default class vx_collection_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"b\" \"c\")\n (list<-list-start-end\n  (stringlist \"a\" \"b\" \"c\" \"d\")\n  1 3))",
+            ":describename", "(test\n (stringlist\n  \"b\" \"c\")\n (list<-list-start-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2 3))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -423,7 +423,7 @@ export default class vx_collection_test {
                   "c",
                   "d"
                 ),
-                1,
+                2,
                 3
               )
             )
@@ -442,8 +442,8 @@ export default class vx_collection_test {
       vx_collection_test.f_is_map(context),
       vx_collection_test.f_list_from_for_end_loop(context),
       vx_collection_test.f_list_from_list_end(context),
+      vx_collection_test.f_list_from_list_filter(context),
       vx_collection_test.f_list_from_list_filtertypes(context),
-      vx_collection_test.f_list_from_list_fn_filter(context),
       vx_collection_test.f_list_from_list_start(context),
       vx_collection_test.f_list_from_list_start_end(context)
     )

@@ -38,6 +38,7 @@
    :lang    :cpp
    :path    ../cpp/src/test
    :context vx/test/context-test
+//   :filter  vx/repl/repl<-string-argmap
    :doc     "Build C++ Test Code")
   (cmd srccsharp
    :code    :source
@@ -64,6 +65,7 @@
    :lang    :js
    :path    ../js/test
    :context vx/test/context-test
+//   :filter  vx/repl/repl<-textblock-argmap
    :doc     "Build JavaScript Test Code")
   (cmd srcjava
    :code    :source
@@ -77,6 +79,7 @@
    :lang    :java
    :path    ../java/src/test/java
    :context vx/test/context-test
+   //:filter  vx/repl/any<-script
    :doc     "Build Java Test Code")
   (cmd srckotlin
    :code    :source

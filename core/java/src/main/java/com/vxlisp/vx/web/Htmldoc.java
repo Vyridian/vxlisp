@@ -1,6 +1,8 @@
 package com.vxlisp.vx.web;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import com.vxlisp.vx.*;
 
 
@@ -271,6 +273,13 @@ public final class Htmldoc {
 
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    mapfunc.put("boolean-write<-id-htmltext", Htmldoc.t_boolean_write_from_id_htmltext);
+    mapfunc.put("boolean-write<-stylesheet", Htmldoc.t_boolean_write_from_stylesheet);
+    mapfunc.put("string<-id", Htmldoc.t_string_from_id);
+    Core.vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
   }
 
 }

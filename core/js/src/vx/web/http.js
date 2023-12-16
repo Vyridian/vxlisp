@@ -194,21 +194,43 @@ export default class vx_web_http {
   // empty types
   static e_response = {}
 
-  static c_empty = {
-    "response": vx_web_http.e_response,
-    "csv<-httpget": vx_web_http.e_csv_from_httpget,
-    "json<-httpget": vx_web_http.e_json_from_httpget,
-    "response<-httpget": vx_web_http.e_response_from_httpget,
-    "text<-httpget": vx_web_http.e_text_from_httpget,
-    "text<-response": vx_web_http.e_text_from_response,
-    "textblock<-httpget": vx_web_http.e_textblock_from_httpget,
-    "textblock<-response": vx_web_http.e_textblock_from_response,
-    "xml<-httpget": vx_web_http.e_xml_from_httpget
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/web/http", vx_web_http)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "response": vx_web_http.e_response,
+      "csv<-httpget": vx_web_http.e_csv_from_httpget,
+      "json<-httpget": vx_web_http.e_json_from_httpget,
+      "response<-httpget": vx_web_http.e_response_from_httpget,
+      "text<-httpget": vx_web_http.e_text_from_httpget,
+      "text<-response": vx_web_http.e_text_from_response,
+      "textblock<-httpget": vx_web_http.e_textblock_from_httpget,
+      "textblock<-response": vx_web_http.e_textblock_from_response,
+      "xml<-httpget": vx_web_http.e_xml_from_httpget
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "csv<-httpget": vx_web_http.t_csv_from_httpget,
+      "json<-httpget": vx_web_http.t_json_from_httpget,
+      "response<-httpget": vx_web_http.t_response_from_httpget,
+      "text<-httpget": vx_web_http.t_text_from_httpget,
+      "text<-response": vx_web_http.t_text_from_response,
+      "textblock<-httpget": vx_web_http.t_textblock_from_httpget,
+      "textblock<-response": vx_web_http.t_textblock_from_response,
+      "xml<-httpget": vx_web_http.t_xml_from_httpget
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "response": vx_web_http.t_response
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/web/http",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type response)
     vx_web_http.t_response['vx_type'] = vx_core.t_type

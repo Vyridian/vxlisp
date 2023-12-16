@@ -5409,6 +5409,107 @@ public final class Textblock {
     return output;
   }
 
+  /**
+   * @function textblocklist_from_textblocklist_remove
+   * Return a textblocklist with all removedelims removed.
+   * @param  {textblocklist} tblist
+   * @param  {delim} remove
+   * @return {textblocklist}
+   * (func textblocklist<-textblocklist-remove)
+   */
+  public static interface Func_textblocklist_from_textblocklist_remove extends Core.Type_func, Core.Type_replfunc {
+    public Textblock.Type_textblocklist f_textblocklist_from_textblocklist_remove(final Textblock.Type_textblocklist tblist, final Textblock.Type_delim remove);
+  }
+
+  public static class Class_textblocklist_from_textblocklist_remove extends Core.Class_base implements Func_textblocklist_from_textblocklist_remove {
+
+    @Override
+    public Func_textblocklist_from_textblocklist_remove vx_new(Object... vals) {
+      Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
+      return output;
+    }
+
+    @Override
+    public Func_textblocklist_from_textblocklist_remove vx_copy(Object... vals) {
+      Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/textblock", // pkgname
+        "textblocklist<-textblocklist-remove", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/textblock", // pkgname
+          "textblocklist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Textblock.t_textblock), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_textblocklist_from_textblocklist_remove vx_empty() {return e_textblocklist_from_textblocklist_remove;}
+    @Override
+    public Func_textblocklist_from_textblocklist_remove vx_type() {return t_textblocklist_from_textblocklist_remove;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Textblock.Type_textblocklist tblist = Core.f_any_from_any(Textblock.t_textblocklist, arglist.vx_any(Core.vx_new_int(0)));
+      Textblock.Type_delim remove = Core.f_any_from_any(Textblock.t_delim, arglist.vx_any(Core.vx_new_int(1)));
+      output = Textblock.f_textblocklist_from_textblocklist_remove(tblist, remove);
+      return output;
+    }
+
+    @Override
+    public Textblock.Type_textblocklist f_textblocklist_from_textblocklist_remove(final Textblock.Type_textblocklist tblist, final Textblock.Type_delim remove) {
+      return Textblock.f_textblocklist_from_textblocklist_remove(tblist, remove);
+    }
+
+  }
+
+  public static final Func_textblocklist_from_textblocklist_remove e_textblocklist_from_textblocklist_remove = new Textblock.Class_textblocklist_from_textblocklist_remove();
+  public static final Func_textblocklist_from_textblocklist_remove t_textblocklist_from_textblocklist_remove = new Textblock.Class_textblocklist_from_textblocklist_remove();
+
+  public static Textblock.Type_textblocklist f_textblocklist_from_textblocklist_remove(final Textblock.Type_textblocklist tblist, final Textblock.Type_delim remove) {
+    Textblock.Type_textblocklist output = Textblock.e_textblocklist;
+    output = Collection.f_list_from_list_filter(
+      Textblock.t_textblocklist,
+      tblist,
+      Core.t_any_from_any.vx_fn_new((textblock_any) -> {
+        Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, textblock_any);
+        return 
+          Core.f_let(
+            Textblock.t_textblock,
+            Core.t_any_from_func.vx_fn_new(() -> {
+              final Textblock.Type_delim delimcurr = textblock.delim();
+              final Core.Type_string namecurr = delimcurr.name();
+              final Core.Type_string nameremove = remove.name();
+              return Core.f_if(
+                Textblock.t_textblock,
+                Core.f_ne(namecurr, nameremove),
+                textblock
+              );
+            })
+          );
+      })
+    );
+    return output;
+  }
+
 
   static {
     Const_delimbracketangle.const_new(c_delimbracketangle);
@@ -5433,6 +5534,63 @@ public final class Textblock {
     Const_delimtest3.const_new(c_delimtest3);
     Const_delimtext.const_new(c_delimtext);
     Const_delimwhitespace.const_new(c_delimwhitespace);
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("delim", Textblock.t_delim);
+    maptype.put("delimlist", Textblock.t_delimlist);
+    maptype.put("textblock", Textblock.t_textblock);
+    maptype.put("textblocklist", Textblock.t_textblocklist);
+    mapconst.put("delimbracketangle", Textblock.c_delimbracketangle);
+    mapconst.put("delimbracketcurly", Textblock.c_delimbracketcurly);
+    mapconst.put("delimbracketsquare", Textblock.c_delimbracketsquare);
+    mapconst.put("delimclose", Textblock.c_delimclose);
+    mapconst.put("delimclosing", Textblock.c_delimclosing);
+    mapconst.put("delimcomma", Textblock.c_delimcomma);
+    mapconst.put("delimcomment", Textblock.c_delimcomment);
+    mapconst.put("delimcommentblock", Textblock.c_delimcommentblock);
+    mapconst.put("delimline", Textblock.c_delimline);
+    mapconst.put("delimlisttest1", Textblock.c_delimlisttest1);
+    mapconst.put("delimlisttest2", Textblock.c_delimlisttest2);
+    mapconst.put("delimlisttest3", Textblock.c_delimlisttest3);
+    mapconst.put("delimnonwhitespace", Textblock.c_delimnonwhitespace);
+    mapconst.put("delimparen", Textblock.c_delimparen);
+    mapconst.put("delimquote", Textblock.c_delimquote);
+    mapconst.put("delimquoteblock", Textblock.c_delimquoteblock);
+    mapconst.put("delimspace", Textblock.c_delimspace);
+    mapconst.put("delimtest1", Textblock.c_delimtest1);
+    mapconst.put("delimtest2", Textblock.c_delimtest2);
+    mapconst.put("delimtest3", Textblock.c_delimtest3);
+    mapconst.put("delimtext", Textblock.c_delimtext);
+    mapconst.put("delimwhitespace", Textblock.c_delimwhitespace);
+    mapfunc.put("children<-textblock", Textblock.t_children_from_textblock);
+    mapfunc.put("delim-first<-delim-delim", Textblock.t_delim_first_from_delim_delim);
+    mapfunc.put("delim-first<-string-delimlist", Textblock.t_delim_first_from_string_delimlist);
+    mapfunc.put("delim-pos<-string-delim", Textblock.t_delim_pos_from_string_delim);
+    mapfunc.put("delimlist-pos<-string-delimlist", Textblock.t_delimlist_pos_from_string_delimlist);
+    mapfunc.put("is-close", Textblock.t_is_close);
+    mapfunc.put("is-single", Textblock.t_is_single);
+    mapfunc.put("stringlist<-textblocklist", Textblock.t_stringlist_from_textblocklist);
+    mapfunc.put("text<-textblock", Textblock.t_text_from_textblock);
+    mapfunc.put("textblock-addchild<-textblock-find-child", Textblock.t_textblock_addchild_from_textblock_find_child);
+    mapfunc.put("textblock-delimnotfound", Textblock.t_textblock_delimnotfound);
+    mapfunc.put("textblock-findparent<-textblock", Textblock.t_textblock_findparent_from_textblock);
+    mapfunc.put("textblock-groupby<-textblock-delim", Textblock.t_textblock_groupby_from_textblock_delim);
+    mapfunc.put("textblock-init", Textblock.t_textblock_init);
+    mapfunc.put("textblock-parse", Textblock.t_textblock_parse);
+    mapfunc.put("textblock-parse-one", Textblock.t_textblock_parse_one);
+    mapfunc.put("textblock-parse<-string-delim", Textblock.t_textblock_parse_from_string_delim);
+    mapfunc.put("textblock-replace<-textblock-find-replace", Textblock.t_textblock_replace_from_textblock_find_replace);
+    mapfunc.put("textblock-startleft<-string-delim-offset", Textblock.t_textblock_startleft_from_string_delim_offset);
+    mapfunc.put("textblock-startright<-string-delim-offset", Textblock.t_textblock_startright_from_string_delim_offset);
+    mapfunc.put("textblock<-close-textblock", Textblock.t_textblock_from_close_textblock);
+    mapfunc.put("textblock<-empty-textblock", Textblock.t_textblock_from_empty_textblock);
+    mapfunc.put("textblock<-open-textblock", Textblock.t_textblock_from_open_textblock);
+    mapfunc.put("textblock<-single-textblock", Textblock.t_textblock_from_single_textblock);
+    mapfunc.put("textblock<-string-delim", Textblock.t_textblock_from_string_delim);
+    mapfunc.put("textblock<-textblock-delim", Textblock.t_textblock_from_textblock_delim);
+    mapfunc.put("textblocklist<-textblocklist-remove", Textblock.t_textblocklist_from_textblocklist_remove);
+    Core.vx_global_package_set("vx/data/textblock", maptype, mapconst, mapfunc);
   }
 
 }

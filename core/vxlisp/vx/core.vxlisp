@@ -90,23 +90,14 @@
  :properties [pkgname : string
               name    : string
               type    : any]
- :create
-  (native
-   :cpp
-    "// :header
-     static vx_core::Type_constdef vx_constdef_new(
-       std::string pkgname,
-       std::string name,
-       vx_core::Type_typedef typ
-     );")
  :doc "Const Definition Class for inspecting properties.")
 
 (type constlist : list
- :allowtypes [const]
+ :allowtypes [any]
  :doc        "List of Const.")
 
 (type constmap : map
- :allowtypes [const]
+ :allowtypes [any]
  :doc        "Map of Const.")
 
 (type context : struct
@@ -114,7 +105,7 @@
               session : session
               setting : setting
               state   : state]
- :doc        "Context")
+ :doc "Context")
 
 (type decimal
  :traits  [number]
@@ -368,29 +359,38 @@
 
 (type numberlist : list
  :allowtypes [number]
- :doc        "A list of number.")
+ :doc "A list of number.")
 
 (type numbermap : map
  :allowtypes [number]
- :doc        "A map of number.")
+ :doc "A map of number.")
 
 (type package : struct
- :doc     "A package that store types, consts and funcs.")
+ :properties [pkgname  : string
+              constmap : constmap
+              funcmap  : funcmap
+              typemap  : typemap
+              emptymap : map]
+ :doc "A package that store types, consts and funcs.")
 
 (type packagemap : map
  :allowtypes [package])
 
 (type permission : struct
  :properties [id : string]
- :doc        "Permission")
+ :doc "Permission")
 
 (type permissionlist : list
  :allowtypes [permission]
- :doc        "List of Permission")
+ :doc "List of Permission")
 
 (type permissionmap : map
  :allowtypes [permission]
- :doc        "Map of Permission")
+ :doc "Map of Permission")
+
+(type project : struct
+ :properties [packagemap : packagemap]
+ :doc "A project.")
 
 (type security : struct
  :properties [allowfuncs    : funclist
@@ -519,7 +519,8 @@
 (const false : boolean
  :test (test-false false))
 
-(const globalpackagemap : packagemap)
+(const global : project
+ :doc "Global variable for project data.")
 
 (const infinity : int
  (native
@@ -1312,7 +1313,12 @@
     output = Core.f_any_from_any(generic_any_1, val);")
  :test (test
         "v2"
-        (any<-map (map :a "v1" :b "v2" :c "v3") :b))
+        (any<-map
+         (map
+          :a "v1"
+          :b "v2"
+          :c "v3")
+         :b))
  :doc "Returns value from a map or empty if not found")
 
 (func any<-none : any-1
@@ -1388,7 +1394,8 @@
 (func boolean-permission<-func : boolean
  [func : func]
  (contains
-  (allowfuncs<-security (security<-context))
+  (allowfuncs<-security
+   (security<-context))
   func)
  :context
  :doc "Returns true if the given func has permission.")
@@ -1456,16 +1463,13 @@
   find : string]
  (native
   :cpp
-   "bool booleanresult = vx_boolean_from_string_find(text->vx_string(), find->vx_string());
-    output = vx_core::vx_new_boolean(booleanresult);"
+   "bool check = vx_boolean_from_string_find(text->vx_string(), find->vx_string());
+    output = vx_core::vx_new_boolean(check);"
   :js
-   "text.includes(find)"
+   "vx_core.vx_boolean_from_string_find(text, find)"
   :java
-   "boolean booleanresult = false;
-    String stext = text.vx_string();
-    String sfind = find.vx_string();
-    booleanresult = stext.contains(sfind);
-    output = Core.vx_new_boolean(booleanresult);")
+   "boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+    output = Core.vx_new_boolean(check);")
  :test (test-true  (contains "abcde" "cd"))
        (test-false (contains "abcde" "dc"))
  :doc  "Returns true if the given list contains the given value.")
@@ -1565,7 +1569,7 @@
         (first<-list
          (stringlist "b" "c"))))
 
-(func first<-list-fn-any<-any : any-1
+(func first<-list-any<-any : any-1
  [values      : list-1
   fn-any<-any : any<-any]
  (native
@@ -1600,26 +1604,26 @@
  :doc "Returns first value that is not nothing"
  :test (test
         "b"
-        (first<-list-fn-any<-any
+        (first<-list-any<-any
          (list nothing "b" "c")
          resolve)))
 
-/*
-(func float<-any : float
- [value : any-1]
+(func float<-string : float
+ [text : string]
  (native
+  :cpp
+   "float num = vx_core::vx_float_from_string(text->vx_string());
+    output = vx_core::vx_new_float(num);"
+  :js
+   "vx_core.vx_float_from_string(text);"
   :java
-   "float num = 0;
-    if (value instanceof Core.Type_int) {
-      Core.Type_int valint = (Core.Type_int)value;
-      num = valint.vx_int();
-    } else if (value instanceof Core.Type_float) {
-      Core.Type_float valfloat = (Core.Type_float)value;
-      num = valfloat.vx_float();
-    }
+   "float num = Core.vx_float_from_string(text.vx_string());
     output = Core.vx_new_float(num);")
- :doc "Function Type taking generic any_1 and returning float")
-*/
+ :test (test
+        (float 2.3)
+        (float<-string
+         "2.3"))
+ :doc "Returns float from a given string.")
 
 (func fn : any-1
  [params : arglist
@@ -1638,20 +1642,6 @@
  [funcdef : funcdef]
  (string (:pkgname funcdef) "/" (:name funcdef))
  :doc "Get the name of a given funcdef")
-
-(func global-package-get : package
- [pkgname : string]
- (native
-  :js
-   "vx_core.c_globalpackagemap[pkgname]"))
-
-(func global-package-set : none
- [pkgname : string
-  pkg : package]
- (native
-  :js
-   "vx_core.c_globalpackagemap[pkgname] = pkg")
- :sideeffects "Changes globalpackagemap")
 
 (func if : any-1
  [clause : boolean
@@ -1915,37 +1905,31 @@
   :cpp
    "bool result = vx_core::vx_is_int(value);
     output = vx_core::vx_new_boolean(result);"
-  :js
-   "output = false
-    switch (value) {
-    case " infinity ":
-    case " neginfinity ":
-    case " notanumber ":
-      output = true
-      break
-    default:
-      const typename = " (typename<-any value) "
-      switch (typename) {
-      case 'vx/core/int':
-        output = true
-        break
-      case 'vx/core/number':
-        if (parseInt(value) == value) {
-          output = true
-        }
-        break
-      case 'vx/core/string':
-        if (parseInt(value) == parseFloat(value)) {
-          output = true
-        }
-        break
-      }
-      break
-    }"
+  :js "vx_core.vx_is_int(value)"
   :java
    "boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);")
+ :test (test-true
+        (is-int 2))
+       (test-true
+        (is-int "2"))
+       (test-true
+        (is-int infinity))
+       (test-true
+        (is-int "infinity"))
  :doc "Returns true if the value is an integer.")
+
+(func is-float : boolean
+ [value : any]
+ (native
+  :cpp
+   "bool result = vx_core::vx_is_float(value);
+    output = vx_core::vx_new_boolean(result);"
+  :js "vx_core.vx_is_float(value)"
+  :java
+   "boolean result = Core.vx_is_float(value);
+    output = Core.vx_new_boolean(result);")
+ :doc "Returns true if the value is a float.")
 
 (func is-number : boolean
  [value : any]
@@ -2173,9 +2157,9 @@
     output = value;")
  :doc "Writes a value to the console.")
 
-(func log : any
+(func log : any-1
  [text  : string
-  value : any]
+  value : any-1]
  (native
   :cpp
    "vx_core::vx_log(text);
@@ -2187,10 +2171,8 @@
     console.log(svalue)
     output = value"
   :java
-   "System.out.println(text);
-    Core.Type_string valuestring = Core.f_string_from_any(value);
-    String svalue = valuestring.vx_string();
-    System.out.println(svalue);
+   "Core.vx_log(text);
+    Core.vx_log(value);
     output = value;")
  :doc "Writes a string and a value to the console.")
 
@@ -2449,6 +2431,13 @@
  :test (test-true (or false true false))
        (test-false (or false false false)))
 
+(func package-global<-name : package
+ [name : string]
+ (any<-map
+  (:packagemap global)
+  name)
+ :doc "Returns a package from global with the given name.")
+
 (func packagename<-typedef : string
  [vtypedef : typedef]
  (:pkgname vtypedef)
@@ -2549,7 +2538,7 @@
 
 (func resolve-first : any-1
  [clauses : list-1 :...]
- (first<-list-fn-any<-any clauses resolve)
+ (first<-list-any<-any clauses resolve)
  :doc "Returns the first value that is not nothing")
 
 (func resolve-list : list-1
@@ -2774,9 +2763,15 @@
     }"
   :java
    "output = value.vx_type();")
- :test (test boolean (type<-any false))
-       (test int (type<-any 5))
-       (test string (type<-any "a"))
+ :test (test
+        boolean
+        (type<-any false))
+       (test
+        int
+        (type<-any 5))
+       (test
+        string
+        (type<-any "a"))
  :doc  "Gets the Type of a given Value")
 
 (func typedef<-any : typedef

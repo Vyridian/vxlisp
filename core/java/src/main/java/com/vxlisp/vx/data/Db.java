@@ -401,23 +401,23 @@ public final class Db {
 
   public static class Class_dbcellmap extends Core.Class_base implements Type_dbcellmap {
 
-    protected Map<String, Db.Type_dbcell> vxmap = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbcell>());
+    protected Map<String, Db.Type_dbcell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbcell>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Db.Type_dbcell vx_dbcell(final Core.Type_string key) {
       Db.Type_dbcell output = Db.e_dbcell;
       Class_dbcellmap map = this;
       String skey = key.vx_string();
-      Map<String, Db.Type_dbcell> mapval = map.vxmap;
+      Map<String, Db.Type_dbcell> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Db.e_dbcell);
       return output;
     }
 
     @Override
-    public Map<String, Db.Type_dbcell> vx_mapdbcell() {return vxmap;}
+    public Map<String, Db.Type_dbcell> vx_mapdbcell() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -440,7 +440,7 @@ public final class Db {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -495,7 +495,7 @@ public final class Db {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_dbcellmap work = new Class_dbcellmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -734,23 +734,23 @@ public final class Db {
 
   public static class Class_dbfieldmap extends Core.Class_base implements Type_dbfieldmap {
 
-    protected Map<String, Db.Type_dbfield> vxmap = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbfield>());
+    protected Map<String, Db.Type_dbfield> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbfield>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vxmap));}
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
 
     @Override
     public Db.Type_dbfield vx_dbfield(final Core.Type_string key) {
       Db.Type_dbfield output = Db.e_dbfield;
       Class_dbfieldmap map = this;
       String skey = key.vx_string();
-      Map<String, Db.Type_dbfield> mapval = map.vxmap;
+      Map<String, Db.Type_dbfield> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Db.e_dbfield);
       return output;
     }
 
     @Override
-    public Map<String, Db.Type_dbfield> vx_mapdbfield() {return vxmap;}
+    public Map<String, Db.Type_dbfield> vx_mapdbfield() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -773,7 +773,7 @@ public final class Db {
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
-      output.vxmap = Core.immutablemap(map);
+      output.vx_p_map = Core.immutablemap(map);
       if (msgblock != Core.e_msgblock) {
         output.vxmsgblock = msgblock;
       }
@@ -828,7 +828,7 @@ public final class Db {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_dbfieldmap work = new Class_dbfieldmap();
-        work.vxmap = Core.immutablemap(mapval);
+        work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -2069,6 +2069,22 @@ public final class Db {
   public static final Type_dbvalue t_dbvalue = new Class_dbvalue();
 
   static {
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    maptype.put("db", Db.t_db);
+    maptype.put("dbcell", Db.t_dbcell);
+    maptype.put("dbcellmap", Db.t_dbcellmap);
+    maptype.put("dbfield", Db.t_dbfield);
+    maptype.put("dbfieldmap", Db.t_dbfieldmap);
+    maptype.put("dbid", Db.t_dbid);
+    maptype.put("dblink", Db.t_dblink);
+    maptype.put("dblinklist", Db.t_dblinklist);
+    maptype.put("dbnode", Db.t_dbnode);
+    maptype.put("dbnote", Db.t_dbnote);
+    maptype.put("dbtable", Db.t_dbtable);
+    maptype.put("dbvalue", Db.t_dbvalue);
+    Core.vx_global_package_set("vx/data/db", maptype, mapconst, mapfunc);
   }
 
 }

@@ -80,23 +80,47 @@ export default class vx_data_file {
   static e_file = {}
   static e_fileformat = {}
 
-  static c_empty = {
-    "file": vx_data_file.e_file,
-    "fileformat": vx_data_file.e_fileformat,
-    "boolean-exists<-file": vx_data_file.e_boolean_exists_from_file,
-    "boolean-write<-file-any": vx_data_file.e_boolean_write_from_file_any,
-    "boolean-write<-file-string": vx_data_file.e_boolean_write_from_file_string,
-    "file-read<-file": vx_data_file.e_file_read_from_file,
-    "name<-file": vx_data_file.e_name_from_file,
-    "path<-file": vx_data_file.e_path_from_file,
-    "pathcurrent<-os": vx_data_file.e_pathcurrent_from_os,
-    "pathfull<-file": vx_data_file.e_pathfull_from_file,
-    "string-read<-file": vx_data_file.e_string_read_from_file
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/file", vx_data_file)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "file": vx_data_file.e_file,
+      "fileformat": vx_data_file.e_fileformat,
+      "boolean-exists<-file": vx_data_file.e_boolean_exists_from_file,
+      "boolean-write<-file-any": vx_data_file.e_boolean_write_from_file_any,
+      "boolean-write<-file-string": vx_data_file.e_boolean_write_from_file_string,
+      "file-read<-file": vx_data_file.e_file_read_from_file,
+      "name<-file": vx_data_file.e_name_from_file,
+      "path<-file": vx_data_file.e_path_from_file,
+      "pathcurrent<-os": vx_data_file.e_pathcurrent_from_os,
+      "pathfull<-file": vx_data_file.e_pathfull_from_file,
+      "string-read<-file": vx_data_file.e_string_read_from_file
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "boolean-exists<-file": vx_data_file.t_boolean_exists_from_file,
+      "boolean-write<-file-any": vx_data_file.t_boolean_write_from_file_any,
+      "boolean-write<-file-string": vx_data_file.t_boolean_write_from_file_string,
+      "file-read<-file": vx_data_file.t_file_read_from_file,
+      "name<-file": vx_data_file.t_name_from_file,
+      "path<-file": vx_data_file.t_path_from_file,
+      "pathcurrent<-os": vx_data_file.t_pathcurrent_from_os,
+      "pathfull<-file": vx_data_file.t_pathfull_from_file,
+      "string-read<-file": vx_data_file.t_string_read_from_file
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "file": vx_data_file.t_file,
+      "fileformat": vx_data_file.t_fileformat
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/file",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type file)
     vx_data_file.t_file['vx_type'] = vx_core.t_type

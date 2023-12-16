@@ -29,7 +29,7 @@ export default class vx_web_htmldoc {
    * 
    * @async @function boolean_write_from_stylesheet
    * Writes to an html node with given id and text.
-   * @param  {} stylesheet
+   * @param  {stylesheet} stylesheet
    * @return {boolean}
    */
   static t_boolean_write_from_stylesheet = {}
@@ -70,15 +70,32 @@ export default class vx_web_htmldoc {
 
   // empty types
 
-  static c_empty = {
-    "boolean-write<-id-htmltext": vx_web_htmldoc.e_boolean_write_from_id_htmltext,
-    "boolean-write<-stylesheet": vx_web_htmldoc.e_boolean_write_from_stylesheet,
-    "string<-id": vx_web_htmldoc.e_string_from_id
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/web/htmldoc", vx_web_htmldoc)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "boolean-write<-id-htmltext": vx_web_htmldoc.e_boolean_write_from_id_htmltext,
+      "boolean-write<-stylesheet": vx_web_htmldoc.e_boolean_write_from_stylesheet,
+      "string<-id": vx_web_htmldoc.e_string_from_id
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "boolean-write<-id-htmltext": vx_web_htmldoc.t_boolean_write_from_id_htmltext,
+      "boolean-write<-stylesheet": vx_web_htmldoc.t_boolean_write_from_stylesheet,
+      "string<-id": vx_web_htmldoc.t_string_from_id
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/web/htmldoc",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (func boolean-write<-id-htmltext)
     vx_web_htmldoc.t_boolean_write_from_id_htmltext['vx_type'] = vx_core.t_type

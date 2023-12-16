@@ -15,26 +15,56 @@
  [val : int]
  :doc "Generic function returns any from an int.")
 
+(func boolean<-string-ends : boolean
+ [text : string
+  ends : string]
+ (native
+  :cpp
+   "bool check = vx_core::vx_boolean_from_string_ends(text->vx_string(), ends->vx_string());
+    output = vx_core::vx_new_boolean(check);"
+  :js "vx_core.vx_boolean_from_string_ends(text, ends)"
+  :java
+   "boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
+    output = Core.vx_new_boolean(check);")
+ :test (test-true
+        (boolean<-string-ends
+         "abcd"
+         "cd"))
+ :doc "Returns true if string starts with find.")
+
+(func boolean<-string-starts : boolean
+ [text   : string
+  starts : string]
+ (native
+  :cpp
+   "bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
+    output = vx_core::vx_new_boolean(check);"
+  :js "vx_core.vx_boolean_from_string_starts(text, starts)"
+  :java
+   "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
+    output = Core.vx_new_boolean(check);")
+ :test (test-true
+        (boolean<-string-starts
+         "abcd"
+         "ab"))
+ :doc "Returns true if string starts with find.")
+
 (func int<-string-find : int
  [text : string
   find : string]
  (native
   :cpp
-   "std::string stext = text->vx_string();
-    std::string sfind = find->vx_string();
-    int ipos = vx_core::vx_int_from_sizet(stext.find(sfind)) + 1;
+   "int ipos = vx_core::vx_int_from_string_find(text->vx_string(), find->vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);"
   :js
-   "text.indexOf(find) + 1"
+   "vx_core.vx_int_from_string_find(text, find) + 1"
   :java
-   "String stext = text.vx_string();
-    String sfind = find.vx_string();
-    int ipos = stext.indexOf(sfind) + 1;
+   "int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
     output = Core.vx_new_int(ipos);")
  :test (test
         3
         (int<-string-find
-         "abcdefg"
+         "abcdcdg"
          "cd"))
  :doc "Returns integer position of find string in text string.")
 
@@ -62,15 +92,32 @@
          ":nonwhitespace"))
  :doc "Returns integer position of find string in text string. Note: the find terms :whitespace and :nonwhitespace have special meaning.")
 
-(func is-boolean : boolean [value : any]
+(func int<-string-findlast : int
+ [text     : string
+  findlast : string]
+ (native
+  :cpp
+   "int ipos = vx_core::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string()) + 1;
+    output = vx_core::vx_new_int(ipos);"
+  :js
+   "vx_core.vx_int_from_string_findlast(text, findlast) + 1"
+  :java
+   "int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
+    output = Core.vx_new_int(ipos);")
+ :test (test
+        5
+        (int<-string-findlast
+         "abcdcdg"
+         "cd"))
+ :doc "Returns integer position of find string in text string.")
+
+(func is-boolean : boolean
+ [value : any]
  (= "boolean" (typename<-any value)))
 
-(func is-decimal : boolean [value : any]
- (= "decimal" (typename<-any value)))
-
-(func is-float : boolean
+(func is-decimal : boolean
  [value : any]
- (= "float" (typename<-any value)))
+ (= "decimal" (typename<-any value)))
 
 (func is-none : boolean
  [value : any]
@@ -246,6 +293,12 @@
          "abcd"
          2
          5))
+       (test
+        "bc"
+        (string<-string-start-end
+         "abcd"
+         2
+         -1))
  :doc "Returns a substring between start and end positions.")
 
 (func string<-stringlist-join : string

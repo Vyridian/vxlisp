@@ -61,7 +61,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xml::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xml output = vx_data_xml::e_xml;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_xml::Type_xml val = vx_core::vx_any_from_any(vx_data_xml::t_xml, copyval);
@@ -151,6 +151,9 @@ namespace vx_data_xml {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_xml::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -246,7 +249,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnode::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnode output = vx_data_xml::e_xmlnode;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_xml::Type_xmlnode val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnode, copyval);
@@ -406,6 +409,9 @@ namespace vx_data_xml {
       return output;
     }
 
+    vx_core::Type_constdef Class_xmlnode::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type xmlnodelist)
@@ -488,7 +494,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlnodelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlnodelist output = vx_data_xml::e_xmlnodelist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_xml::Type_xmlnodelist val = vx_core::vx_any_from_any(vx_data_xml::t_xmlnodelist, copyval);
@@ -553,6 +559,9 @@ namespace vx_data_xml {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_xmlnodelist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -640,7 +649,7 @@ namespace vx_data_xml {
     vx_core::Type_any Class_xmlpropmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_xml::Type_xmlpropmap output = vx_data_xml::e_xmlpropmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_xml::Type_xmlpropmap valmap = vx_core::vx_any_from_any(vx_data_xml::t_xmlpropmap, copyval);
@@ -720,56 +729,16 @@ namespace vx_data_xml {
       return output;
     }
 
+    vx_core::Type_constdef Class_xmlpropmap::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const delimxml)
   // class Class_delimxml {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_xml::Class_delimxml::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/xml", // pkgname
-        "delimxml", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_xml::Class_delimxml::vx_const_new(vx_data_xml::Const_delimxml output) {
-      output->vx_p_constname = "vx/data/xml/delimxml";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/xml", "delimxml");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -816,52 +785,9 @@ namespace vx_data_xml {
 
   // (const delimxmlequal)
   // class Class_delimxmlequal {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_data_xml::Class_delimxmlequal::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/data/xml", // pkgname
-        "delimxmlequal", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_data_xml::Class_delimxmlequal::vx_const_new(vx_data_xml::Const_delimxmlequal output) {
-      output->vx_p_constname = "vx/data/xml/delimxmlequal";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/data/xml", "delimxmlequal");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -944,6 +870,8 @@ namespace vx_data_xml {
       return output;
     }
 
+    vx_core::Type_constdef Class_xml_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_xml_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/data/xml", // pkgname
@@ -1024,20 +952,19 @@ namespace vx_data_xml {
       vx_core::vx_reserve_type(vx_data_xml::t_xml_from_textblock);
       vx_data_xml::Class_delimxml::vx_const_new(vx_data_xml::c_delimxml);
       vx_data_xml::Class_delimxmlequal::vx_const_new(vx_data_xml::c_delimxmlequal);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["xml"] = vx_data_xml::t_xml;
+      maptype["xmlnode"] = vx_data_xml::t_xmlnode;
+      maptype["xmlnodelist"] = vx_data_xml::t_xmlnodelist;
+      maptype["xmlpropmap"] = vx_data_xml::t_xmlpropmap;
+      mapconst["delimxml"] = vx_data_xml::c_delimxml;
+      mapconst["delimxmlequal"] = vx_data_xml::c_delimxmlequal;
+      mapfunc["xml<-textblock"] = vx_data_xml::t_xml_from_textblock;
+      vx_core::vx_global_package_set("vx/data/xml", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

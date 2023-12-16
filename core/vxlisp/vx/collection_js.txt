@@ -83,7 +83,7 @@
     return output
   }
 
-  static vx_list_from_list_fn_filter(generic_list_1, vallist, fn_filter) {
+  static vx_list_from_list_filter(generic_list_1, vallist, fn_filter) {
     let output = vx_core.vx_empty(generic_list_1)
     const fn = fn_filter['vx_value']
     if (fn) {
@@ -102,17 +102,18 @@
 
   static vx_list_from_list_start_end(generic_list_1, values, start, end) {
     let output = vx_core.vx_empty(generic_list_1)
-    let istart = start
-    let iend = end
-    const isize = values.length
-    if (isize > 0) {
-      if (istart < 0) {
-        istart = 0
+    const maxlen = values.length
+    if (end < 0) {
+     end += maxlen
+    }
+    if (start < 1) {
+    } else if (start > end) {
+    } else if (start > maxlen) {
+    } else {
+      if (end > maxlen) {
+        end = maxlen
       }
-      if (iend > isize) {
-        iend = isize
-      }
-      output = values.slice(istart, iend)
+      output = values.slice(start - 1, end)
       const typ = values['vx_type']
       if (typ) {
         output['vx_type'] = typ

@@ -1,10 +1,30 @@
 
+  // vx_boolean_from_string_ends(string, string)
+  static vx_boolean_from_string_ends(text, ends) {
+    return text.endsWith(ends)
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  static vx_boolean_from_string_find(text, find) {
+    return text.includes(find)
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  static vx_boolean_from_string_starts(text, starts) {
+    return text.startsWith(starts);
+  }
+
   static vx_empty(type) {
     const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
     const typename = typedef['vx_value'].name
-    const pkg = vx_core.f_global_package_get(pkgname)
-    const output = pkg.c_empty[typename]
+    const global = vx_core.c_global
+    const globalvalue = global['vx_value']
+    const pkgmap = globalvalue['packagemap']
+    const mappkg = pkgmap['vx_value']
+    const pkg = mappkg[pkgname]
+    const emptymap = pkg['vx_value']['emptymap']
+    const output = emptymap['vx_value'][typename]
     return output
   }
 
@@ -45,6 +65,108 @@
         }
         break
       }
+    }
+    return output
+  }
+
+  static vx_float_from_string(text) {
+   let output = 0
+   output = parseFloat(text)
+   return output
+  }
+
+  // vx_global_package_set(package)
+  static vx_global_package_set(pkg) {
+    const global = vx_core.c_global
+    let globalvalue = global['vx_value']
+    if (globalvalue == undefined) {
+      globalvalue = {}
+      global['vx_value'] = globalvalue
+    }
+    const pkgname = pkg['vx_value']['name']
+    let mappackage = {}
+    let packagemap = globalvalue['packagemap']
+    if (packagemap == undefined) {
+      mappackage[pkgname] = pkg
+      packagemap = vx_core.vx_new_map(vx_core.t_packagemap, mappackage)
+      globalvalue['packagemap'] = packagemap
+    } else {
+      mappackage = packagemap['vx_value']
+      mappackage[pkgname] = pkg
+    }
+  }
+
+  // vx_int_from_string_find(string, string)
+  static vx_int_from_string_find(text, find) {
+    return text.indexOf(find)
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  static vx_int_from_string_findlast(text, findlast) {
+    return text.lastIndexOf(findlast)
+  }
+
+  // vx_is_float(any)
+  static vx_is_float(value) {
+    let output = false
+    const typename = vx_core.f_typename_from_any(value)
+    switch (typename) {
+    case 'vx/core/int':
+      output = true
+      break
+    case 'vx/core/number':
+      if (parseInt(value) == value) {
+        output = true
+      }
+      break
+    case 'vx/core/string':
+      const floatval = parseFloat(value)
+      if (!isNaN(floatval)) {
+        output = true
+      }
+      break
+    }
+    return output
+  }
+
+  // vx_is_int(any)
+  static vx_is_int(value) {
+    let output = false
+    switch (value) {
+    case vx_core.c_infinity:
+    case vx_core.c_neginfinity:
+    case vx_core.c_notanumber:
+      output = true
+      break
+    default:
+      const typename = vx_core.f_typename_from_any(value)
+      switch (typename) {
+      case 'vx/core/int':
+        output = true
+        break
+      case 'vx/core/number':
+        if (parseInt(value) == value) {
+          output = true
+        }
+        break
+      case 'vx/core/string':
+        switch (value) {
+        case 'notanumber':
+        case 'infinity':
+        case 'neginfinity':
+          output = true
+          break
+        default:
+          const parseint = parseInt(value)
+          if (Number.isNaN(parseint)) {
+          } else if (parseInt(value) == parseFloat(value)) {
+            output = true
+          }
+          break
+        }
+        break
+      }
+      break
     }
     return output
   }
@@ -703,9 +825,31 @@
     return output
   }
 
+  static vx_new_list(type, listvalue) {
+    const output = listvalue.slice()
+    output['vx_type'] = type
+    return output
+  }
+
+  static vx_new_map(type, mapvalue) {
+    const output = {
+      vx_type: type,
+      vx_value: mapvalue
+    }
+    return output
+  }
+
+  static vx_new_struct(type, mapvalue) {
+    const output = {
+      vx_type: type,
+      vx_value: mapvalue
+    }
+    return output
+  }
+
   static vx_string_from_any(value) {
     const output = vx_core.vx_string_from_any_indent(value, 0, false)
-		return output
+    return output
   }
 
   static vx_string_from_any_indent(value, indent, linefeed) {
@@ -825,12 +969,15 @@
       }
     }
     output = text
-		return output
+    return output
   }
 
   static vx_string_from_string_start_end(text, start, end) {
     let output = ""
-    const maxlen = text.length;
+    const maxlen = text.length
+    if (end < 0) {
+     end += maxlen
+    }
     if (start < 1) {
     } else if (start > end) {
     } else if (start > maxlen) {
@@ -838,7 +985,7 @@
       if (end > maxlen) {
         end = maxlen
       }
-      output = text.substring(start - 1, end);
+      output = text.substring(start - 1, end)
     }
     return output
   }

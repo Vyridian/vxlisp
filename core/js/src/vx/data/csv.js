@@ -25,7 +25,7 @@ export default class vx_data_csv {
 
   /**
    * @function csv_from_textblock
-   * @param  {} textblock
+   * @param  {textblock} textblock
    * @return {csv}
    */
   static t_csv_from_textblock = {}
@@ -55,7 +55,7 @@ export default class vx_data_csv {
 
   /**
    * @function csvrows_from_textblock
-   * @param  {} textblock
+   * @param  {textblock} textblock
    * @return {csvrows}
    */
   static t_csvrows_from_textblock = {}
@@ -106,17 +106,35 @@ export default class vx_data_csv {
   static e_csv = {}
   static e_csvrows = []
 
-  static c_empty = {
-    "csv": vx_data_csv.e_csv,
-    "csvrows": vx_data_csv.e_csvrows,
-    "csv<-textblock": vx_data_csv.e_csv_from_textblock,
-    "csvrows<-textblock": vx_data_csv.e_csvrows_from_textblock,
-    "textblock-csv<-string": vx_data_csv.e_textblock_csv_from_string
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/data/csv", vx_data_csv)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "delimcsv": vx_data_csv.c_delimcsv
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "csv": vx_data_csv.e_csv,
+      "csvrows": vx_data_csv.e_csvrows,
+      "csv<-textblock": vx_data_csv.e_csv_from_textblock,
+      "csvrows<-textblock": vx_data_csv.e_csvrows_from_textblock,
+      "textblock-csv<-string": vx_data_csv.e_textblock_csv_from_string
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "csv<-textblock": vx_data_csv.t_csv_from_textblock,
+      "csvrows<-textblock": vx_data_csv.t_csvrows_from_textblock,
+      "textblock-csv<-string": vx_data_csv.t_textblock_csv_from_string
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "csv": vx_data_csv.t_csv,
+      "csvrows": vx_data_csv.t_csvrows
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/data/csv",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type csv)
     vx_data_csv.t_csv['vx_type'] = vx_core.t_type

@@ -141,6 +141,9 @@ func ListCaptureFromValue(value vxvalue, listinnerarg []string, path string) []s
 	case ":func":
 		fnc := FuncFromValue(value)
 		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)
+		if fnc.context {
+			output = append(output, "context")
+		}
 		listmore := ListCaptureFromFunc(fnc, listinnerarg, subpath)
 		for _, more := range listmore {
 			if BooleanFromListStringContains(listinnerarg, more) {
@@ -148,9 +151,6 @@ func ListCaptureFromValue(value vxvalue, listinnerarg []string, path string) []s
 			} else {
 				output = append(output, more)
 			}
-		}
-		if fnc.context {
-			output = append(output, "context")
 		}
 	}
 	return output
@@ -261,8 +261,7 @@ func CppConstDefsFromListConst(values []*vxconst, indent string) string {
 			name := "" +
 				lineindent + "vx_core::Class_constdef::vx_constdef_new(" +
 				lineindent + "  \"" + val.pkgname + "\"," +
-				lineindent + "  \"" + val.name + "\"," +
-				lineindent + "  null" +
+				lineindent + "  \"" + val.name + "\"" +
 				lineindent + ")"
 			outputvalues = append(outputvalues, name)
 		}
@@ -584,10 +583,10 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 	extends := CppNameClassFullFromType(cnsttype)
 	headers := "" +
 		"\n  // (const " + cnst.name + ")" +
-		"\n  class Class_" + cnstname + " : public " + extends + ", public vx_core::vx_Abstract_const {" +
+		"\n  class Class_" + cnstname + " : public " + extends + " {" +
 		"\n  public:" +
 		"\n    static void vx_const_new(" + fullconstname + " output);" +
-		"\n    vx_core::Type_constdef vx_constdef() const;" +
+		//		"\n    vx_core::Type_constdef vx_constdef() const;" +
 		headerextras +
 		"\n  };" +
 		"\n"
@@ -597,19 +596,21 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 		//"\n   */" +
 		"\n  // (const " + cnst.name + ")" +
 		"\n  // class " + cnstclassname + " {" +
-		"\n" +
-		"\n    // vx_constdef()" +
-		"\n    vx_core::Type_constdef " + fullclassname + "::vx_constdef() const {" +
-		"\n      return vx_core::Class_constdef::vx_constdef_new(" +
-		"\n        \"" + cnst.pkgname + "\", // pkgname" +
-		"\n        \"" + cnst.name + "\", // name" +
-		"\n        " + CppTypeDefFromType(cnsttype, "        ") +
-		"\n      );" +
-		"\n    }" +
-		"\n" +
+		/*
+			"\n" +
+			"\n    // vx_constdef()" +
+			"\n    vx_core::Type_constdef " + fullclassname + "::vx_constdef() const {" +
+			"\n      return vx_core::Class_constdef::vx_constdef_new(" +
+			"\n        \"" + cnst.pkgname + "\", // pkgname" +
+			"\n        \"" + cnst.name + "\", // name" +
+			"\n        " + CppTypeDefFromType(cnsttype, "        ") +
+			"\n      );" +
+			"\n    }" +
+			"\n" +
+		*/
 		"\n    // vx_const_new()" +
 		"\n    void " + fullclassname + "::vx_const_new(" + fullconstname + " output) {" +
-		"\n      output->vx_p_constname = \"" + cnst.pkgname + "/" + cnst.name + "\";" +
+		"\n      output->vx_p_constdef = vx_core::vx_constdef_new(\"" + cnst.pkgname + "\", \"" + cnst.name + "\");" +
 		cnstval +
 		"\n      vx_core::vx_reserve_type(output);" +
 		"\n    }" +
@@ -688,6 +689,12 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 			}
 		}
 	}
+	contextarg := ""
+	if fnc.context {
+		listargtype = append(listargtype, "vx_core::Type_context context")
+		listargname = append(listargname, "context")
+		listsimplearg = append(listsimplearg, "vx_core::Type_context context")
+	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/let":
 		argtext := "vx_core::Func_any_from_func fn_any"
@@ -718,13 +725,6 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 				listargtype = append(listargtype, argtext)
 			}
 		}
-	}
-	contextarg := ""
-	if fnc.context {
-		contextarg = ", vx_core::Type_context context"
-		listargtype = append(listargtype, "vx_core::Type_context context")
-		listargname = append(listargname, "context")
-		listsimplearg = append(listsimplearg, "vx_core::Type_context context")
 	}
 	//var funcgenerics []string
 	functypetext := ""
@@ -839,19 +839,22 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 				arg := fnc.listarg[0]
 				argtypename = CppNameTypeFromType(arg.vxtype)
 				argtname := CppNameTFromType(arg.vxtype)
-				subargnames := "inputval"
+				var listsubargname []string
 				switch NameFromFunc(fnc) {
 				case "vx/core/empty":
 				default:
 					if fnc.generictype != nil {
-						subargnames = CppNameTFromType(fnc.vxtype) + ", inputval"
+						listsubargname = append(listsubargname, CppNameTFromType(fnc.vxtype))
 					}
 				}
 				contextname := ""
 				if fnc.context {
+					contextarg = "vx_core::Type_context context, "
 					contextname = "_context"
-					subargnames += ", context"
+					listsubargname = append(listsubargname, "context")
 				}
+				listsubargname = append(listsubargname, "inputval")
+				subargnames := StringFromListStringJoin(listsubargname, ", ")
 				if fnc.async {
 					asyncbody := ""
 					issamegeneric := false
@@ -878,7 +881,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 						"\n      return vx_core::e_any_from_any" + contextname + "_async;" +
 						"\n    }" +
 						"\n" +
-						"\n    vx_core::vx_Type_async " + classname + "::vx_any_from_any" + contextname + "_async(vx_core::Type_any generic_any_1, vx_core::Type_any val" + contextarg + ") const {" +
+						"\n    vx_core::vx_Type_async " + classname + "::vx_any_from_any" + contextname + "_async(vx_core::Type_any generic_any_1, " + contextarg + "vx_core::Type_any val) const {" +
 						asyncbody +
 						"\n      vx_core::vx_release(val);" +
 						"\n      return output;" +
@@ -890,7 +893,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 						"\n      return vx_core::e_any_from_any" + contextname + ";" +
 						"\n    }" +
 						"\n" +
-						"\n    vx_core::Type_any " + classname + "::vx_any_from_any" + contextname + "(vx_core::Type_any val" + contextarg + ") const {" +
+						"\n    vx_core::Type_any " + classname + "::vx_any_from_any" + contextname + "(" + contextarg + "vx_core::Type_any val) const {" +
 						"\n      vx_core::Type_any output = vx_core::e_any;" +
 						"\n      " + argtypename + " inputval = vx_core::vx_any_from_any(" + argtname + ", val);" +
 						"\n      output = " + pkgname + "::f_" + funcname + "(" + subargnames + ");" +
@@ -917,7 +920,7 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 	permissiontop := ""
 	permissionbottom := ""
 	if fnc.permission {
-		permissiontop = lineindent + "if (vx_core::f_boolean_permission_from_func(" + fulltname + ", context)) {"
+		permissiontop = lineindent + "if (vx_core::f_boolean_permission_from_func(context, " + fulltname + ")) {"
 		permissionbottom = "" +
 			lineindent + "} else {" +
 			lineindent + "  vx_core::Type_msg msg = vx_core::vx_msg_from_errortext(\"Permission Denied: " + fnc.name + "\");" +
@@ -1104,6 +1107,8 @@ func CppBodyFromFunc(fnc *vxfunc) (string, string, string, *vxmsgblock) {
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
+		"\n    vx_core::Type_constdef " + classname + "::vx_constdef() const {return this->vx_p_constdef;}" +
+		"\n" +
 		"\n    vx_core::Type_funcdef " + classname + "::vx_funcdef() const {" +
 		"\n      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(" +
 		"\n        \"" + fnc.pkgname + "\", // pkgname" +
@@ -1247,6 +1252,11 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 				"\n  extern Func_" + funcname + " t_" + funcname + ";"
 		}
 	}
+	packagestatic := "" +
+		"\n      vx_core::vx_Type_mapany maptype;" +
+		"\n      vx_core::vx_Type_mapany mapconst;" +
+		"\n      vx_core::vx_Type_mapfunc mapfunc;" +
+		"\n      vx_core::vx_Type_mapany mapempty;"
 	packageheader := ""
 	typeheaders := ""
 	typebodyfooters := ""
@@ -1268,6 +1278,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 			packageheader += "" +
 				"\n  " + CppNameTypeFullFromType(typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
 				"\n  " + CppNameTypeFullFromType(typ) + " t_" + CppNameFromType(typ) + " = NULL;"
+			packagestatic += "" +
+				"\n      maptype[\"" + typ.name + "\"] = " + CppNameTFromType(typ) + ";"
 		}
 	}
 	remainingkeys := ListStringFromListStringNotMatch(typkeys, specialtypeorder)
@@ -1282,6 +1294,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		packageheader += "" +
 			"\n  " + CppNameTypeFullFromType(typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
 			"\n  " + CppNameTypeFullFromType(typ) + " t_" + CppNameFromType(typ) + " = NULL;"
+		packagestatic += "" +
+			"\n      maptype[\"" + typ.name + "\"] = " + CppNameTFromType(typ) + ";"
 	}
 	constheaders := ""
 	constbodys := ""
@@ -1305,6 +1319,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		//}
 		packageheader += "" +
 			"\n  " + CppNameTypeFullFromConst(cnst) + " c_" + CppNameFromConst(cnst) + " = NULL;"
+		packagestatic += "" +
+			"\n      mapconst[\"" + cnst.name + "\"] = " + CppNameCFromConst(cnst) + ";"
 	}
 	funcheaders := ""
 	funcstaticdeclaration := ""
@@ -1330,6 +1346,8 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 					packageheader += "" +
 						"\n  " + CppNameTypeFullFromFunc(fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
 						"\n  " + CppNameTypeFullFromFunc(fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
+					packagestatic += "" +
+						"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + CppNameTFromFunc(fnc) + ";"
 				}
 			}
 		}
@@ -1349,8 +1367,12 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 			packageheader += "" +
 				"\n  " + CppNameTypeFullFromFunc(fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
 				"\n  " + CppNameTypeFullFromFunc(fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
+			packagestatic += "" +
+				"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + CppNameTFromFunc(fnc) + ";"
 		}
 	}
+	packagestatic += "" +
+		"\n      vx_core::vx_global_package_set(\"" + pkg.name + "\", maptype, mapconst, mapfunc);"
 	headerfilename := pkg.name
 	ipos := IntFromStringFindLast(headerfilename, "/")
 	if ipos >= 0 {
@@ -1373,21 +1395,9 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		typebodyfooters +
 		constbodyfooters +
 		funcbodyfooters +
-		constbodyfooterslate + `
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+		constbodyfooterslate +
+		packagestatic + `
+	   }
   // }
 `
 	header := "" +
@@ -1399,13 +1409,10 @@ func CppFromPackage(pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock
 		constheaders +
 		funcheaders +
 		funcstaticbody + `
-  class vx_Class_package : vx_core::vx_Abstract_package {
+  class vx_Class_package {
   public:
     vx_Class_package();
     void init();
-    vx_core::vx_Type_mapany maptype();
-    vx_core::vx_Type_mapany mapconst();
-    vx_core::vx_Type_mapfunc mapfunc();
   };
   inline vx_Class_package const vx_package;
 `
@@ -1494,7 +1501,7 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	valnew := ""
 	valcopy := "" +
 		"\n      bool ischanged = false;" +
-		"\n      if (copyval->vx_p_constname != \"\") {" +
+		"\n      if (copyval->vx_p_constdef != NULL) {" +
 		"\n        ischanged = true;" +
 		"\n      }"
 	switch NameFromType(typ) {
@@ -2305,6 +2312,9 @@ func CppBodyFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		"\n      vx_core::Type_typedef output = " + CppTypeDefFromType(typ, "      ") + ";" +
 		"\n      return output;" +
 		"\n    }" +
+		"\n" +
+		"\n    vx_core::Type_constdef " + classname + "::vx_constdef() const {return this->vx_p_constdef;}" +
+		"\n" +
 		"\n"
 	tname := pkgname + "::t_" + typename
 	ename := pkgname + "::e_" + typename
@@ -2393,7 +2403,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core::f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", '" + funcname + "', "
+			output += "vx_core::f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", vx_core::vx_new_string(\"" + funcname + "\"), "
 		}
 		switch fnc.name {
 		case "native":
@@ -2492,6 +2502,9 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 							argtexts = append(argtexts, genericarg)
 						}
 					}
+				}
+				if fnc.context {
+					argtexts = append(argtexts, "context")
 				}
 				subindent := indent + 1
 				for fncidx, funcarg := range funcargs {
@@ -2820,9 +2833,6 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 					}
 				}
 			}
-			if fnc.context {
-				argtexts = append(argtexts, "context")
-			}
 			if multiline {
 				output += "\n" + sindent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), sindent+"  ")
 				if multiflag {
@@ -3093,6 +3103,7 @@ func CppHeaderFromType(typ *vxtype) string {
 		"\n    virtual vx_core::Type_any vx_empty() const override;" +
 		"\n    virtual vx_core::Type_any vx_type() const override;" +
 		"\n    virtual vx_core::Type_typedef vx_typedef() const override;" +
+		"\n    virtual vx_core::Type_constdef vx_constdef() const override;" +
 		"\n    virtual vx_core::Type_msgblock vx_msgblock() const override;" +
 		"\n    virtual vx_core::vx_Type_listany vx_dispose() override;"
 	interfaces := ""
@@ -3129,7 +3140,7 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    Abstract_any() {};" +
 			"\n    virtual ~Abstract_any() = 0;" +
 			"\n    long vx_p_iref = 0;" +
-			"\n    std::string vx_p_constname = \"\";" +
+			"\n    vx_core::Type_constdef vx_p_constdef = NULL;" +
 			"\n    vx_core::Type_msgblock vx_p_msgblock = NULL;" +
 			"\n    virtual vx_core::Type_msgblock vx_msgblock() const {return this->vx_p_msgblock;};" +
 			"\n    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const = 0;" +
@@ -3137,6 +3148,7 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    virtual vx_core::Type_any vx_empty() const = 0;" +
 			"\n    virtual vx_core::Type_any vx_type() const = 0;" +
 			"\n    virtual vx_core::Type_typedef vx_typedef() const = 0;" +
+			"\n    virtual vx_core::Type_constdef vx_constdef() const = 0;" +
 			"\n    virtual vx_core::vx_Type_listany vx_dispose() = 0;" +
 			"\n  };" +
 			"\n  class Class_any : public virtual Abstract_any {" +
@@ -3148,6 +3160,7 @@ func CppHeaderFromType(typ *vxtype) string {
 			"\n    virtual vx_core::Type_any vx_empty() const override;" +
 			"\n    virtual vx_core::Type_any vx_type() const override;" +
 			"\n    virtual vx_core::Type_typedef vx_typedef() const override;" +
+			"\n    virtual vx_core::Type_constdef vx_constdef() const override;" +
 			"\n    virtual vx_core::Type_msgblock vx_msgblock() const override;" +
 			"\n    virtual vx_core::vx_Type_listany vx_dispose() override;" +
 			"\n  };" +
@@ -3392,12 +3405,12 @@ func CppHeaderFnFromFunc(fnc *vxfunc) string {
 			"\n    vx_core::vx_Type_listany lambdavars;"
 	case "vx/core/any<-any-context":
 		interfaces = "" +
-			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_context)> IFn;" +
+			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_context, vx_core::Type_any)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
 	case "vx/core/any<-any-context-async":
 		interfaces = "" +
-			"\n    typedef std::function<vx_core::vx_Type_async(vx_core::Type_any, vx_core::Type_context)> IFn;" +
+			"\n    typedef std::function<vx_core::vx_Type_async(vx_core::Type_context, vx_core::Type_any)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
 	case "vx/core/any<-func", "vx/core/any<-none":
@@ -3506,6 +3519,10 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		default:
 			listargtext = append(listargtext, returntype+" generic_any_1")
 		}
+		if fnc.context {
+			listargtext = append(listargtext, "vx_core::Type_context context")
+			listsimpleargtext = append(listsimpleargtext, "vx_core::Type_context context")
+		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argtypename := ""
@@ -3529,6 +3546,10 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 			}
 		}
 	} else {
+		if fnc.context {
+			listargtext = append(listargtext, "vx_core::Type_context context")
+			listsimpleargtext = append(listsimpleargtext, "vx_core::Type_context context")
+		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argtypename := CppNameTypeFromType(argtype)
@@ -3539,14 +3560,6 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 	}
 	argtext := StringFromListStringJoin(listargtext, ", ")
 	simpleargtext := StringFromListStringJoin(listsimpleargtext, ", ")
-	contextarg := ""
-	if fnc.context {
-		if argtext == "" {
-			contextarg = "vx_core::Type_context context"
-		} else {
-			contextarg = ", vx_core::Type_context context"
-		}
-	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context",
 		"vx/core/any<-int",
@@ -3557,7 +3570,7 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + funcname + "::IFn fn) const = 0;" +
-			"\n    virtual vx_core::Type_any vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::Type_any vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/any<-any-async", "vx/core/any<-any-context-async",
 		"vx/core/any<-func-async", "vx/core/any<-key-value-async",
 		"vx/core/any<-list-reduce-async", "vx/core/any<-list-reduce-next-async",
@@ -3566,31 +3579,31 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + funcname + "::IFn fn) const = 0;" +
-			"\n    virtual vx_core::vx_Type_async vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::vx_Type_async vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/boolean<-any":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_any::IFn fn) const = 0;" +
-			"\n    virtual vx_core::Type_boolean vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::Type_boolean vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/boolean<-func", "vx/core/boolean<-none":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_boolean_from_func::IFn fn) const = 0;" +
-			"\n    virtual vx_core::Type_boolean vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::Type_boolean vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/int<-func", "vx/core/int<-none":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_int_from_func::IFn fn) const = 0;" +
-			"\n    virtual vx_core::Type_int vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::Type_int vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/string<-func", "vx/core/string<-none":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_string_from_func::IFn fn) const = 0;" +
-			"\n    virtual vx_core::Type_string vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    virtual vx_core::Type_string vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/none<-any":
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + funcname + "::IFn fn) const = 0;" +
-			"\n    vitrual vx_core::Type_none vx_" + funcname + "(" + simpleargtext + contextarg + ") const = 0;"
+			"\n    vitrual vx_core::Type_none vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	default:
 		if extends == "" {
 			extends = "public vx_core::Abstract_func"
@@ -3604,7 +3617,7 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 							extends = "public vx_core::Abstract_any_from_any_context_async"
 							abstractinterfaces += "" +
 								"\n    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override = 0;" +
-								"\n    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_context context) const override = 0;"
+								"\n    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_context context, vx_core::Type_any val) const override = 0;"
 						} else {
 							extends = "public vx_core::Abstract_any_from_any_async"
 							abstractinterfaces += "" +
@@ -3616,7 +3629,7 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 							extends = "public vx_core::Abstract_any_from_any_context"
 							abstractinterfaces += "" +
 								"\n    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;" +
-								"\n    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_any value, vx_core::Type_context context) const override = 0;"
+								"\n    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;"
 						} else {
 							extends = "public vx_core::Abstract_any_from_any"
 							abstractinterfaces += "" +
@@ -3659,6 +3672,7 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 		"\n    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;" +
 		"\n    virtual vx_core::Type_funcdef vx_funcdef() const override;" +
 		"\n    virtual vx_core::Type_typedef vx_typedef() const override;" +
+		"\n    virtual vx_core::Type_constdef vx_constdef() const override;" +
 		"\n    virtual vx_core::Type_msgblock vx_msgblock() const override;" +
 		"\n    virtual vx_core::vx_Type_listany vx_dispose() override;" +
 		"\n    virtual vx_core::Type_any vx_empty() const override;" +
@@ -3671,7 +3685,7 @@ func CppHeaderFromFunc(fnc *vxfunc) (string, string) {
 	if genericdefinition == "" {
 		headerfooter = "" +
 			"\n  // (func " + fnc.name + ")" +
-			"\n  " + genericdefinition + returntype + " f_" + funcname + "(" + argtext + contextarg + ");" +
+			"\n  " + genericdefinition + returntype + " f_" + funcname + "(" + argtext + ");" +
 			"\n"
 	}
 	return output, headerfooter
@@ -3731,6 +3745,14 @@ func CppNameAbstractFullFromType(typ *vxtype) string {
 	name := CppNameFromPkgName(typ.pkgname)
 	name += "::Abstract_"
 	name += CppNameFromType(typ)
+	return name
+}
+
+func CppNameCFromConst(cnst *vxconst) string {
+	name := "c_" + CppFromName(cnst.alias)
+	if cnst.pkgname != "" {
+		name = CppNameFromPkgName(cnst.pkgname) + "::" + name
+	}
 	return name
 }
 
@@ -3931,6 +3953,11 @@ func CppReplFromFunc(fnc *vxfunc) string {
 			}
 		}
 	}
+	if fnc.context {
+		listargname = append(listargname, "context")
+		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+		replparams += "\n      " + replparam
+	}
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
@@ -3940,11 +3967,6 @@ func CppReplFromFunc(fnc *vxfunc) string {
 			listargname = append(listargname, argname)
 			argidx += 1
 		}
-	}
-	if fnc.context {
-		listargname = append(listargname, "context")
-		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
-		replparams += "\n      " + replparam
 	}
 	if fnc.async {
 		output = "" +
@@ -4478,7 +4500,7 @@ func CppApp(project *vxproject, cmd *vxcommand) string {
 			}
 			params := "arglist"
 			if mainfunc.context {
-				params += ", context"
+				params = "context, arglist"
 			}
 			mainfunctext := CppNameFFromFunc(mainfunc) + "(" + params + ");"
 			if mainfunc.async {
@@ -4503,12 +4525,14 @@ func CppApp(project *vxproject, cmd *vxcommand) string {
 int main(int iarglen, char* arrayarg[]) {
   int output = 0;
   try {
-    vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg);
+    vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg, true);
+				vx_core::vx_reserve(arglist);
     vx_core::Type_context context = vx_core::e_context;
     std::string soutput = "";` +
 		contexttext +
 		maintext + `
-    std::cout << soutput << std::endl;
+		  vx_core::vx_release_one(arglist);
+  		std::cout << soutput << std::endl;
     vx_core::vx_memory_leak_test();
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
@@ -4578,7 +4602,7 @@ func CppAppTest(project *vxproject, command *vxcommand) string {
 	tests := ""
 	if project.name == "core" {
 		tests += "" + `
-		test_lib::test_helloworld();
+		  test_lib::test_helloworld();
     test_lib::test_async_new_from_value();
     test_lib::test_async_from_async_fn();
     test_lib::test_run_testresult(context);
@@ -4638,10 +4662,12 @@ int main(int iarglen, char* arrayarg[]) {
   int output = 0;
   try {
     vx_core::vx_log("Test Start");
-    vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg);` +
+    vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg, true);
+				vx_core::vx_reserve(arglist);` +
 		contexttext +
 		tests + `
-    test_lib::test_run_all(testsuite(context), context);
+		  vx_core::vx_release_one(arglist); +
+  		test_lib::test_run_all(context, testsuite(context));
     vx_core::vx_memory_leak_test();
     vx_core::vx_log("Test End");
   } catch (std::exception& e) {
@@ -4709,7 +4735,7 @@ namespace test_lib {
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
+  vx_core::Type_boolean write_testpackagelist_async(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist);
 
   bool test(std::string testname, std::string expected, std::string actual);
 
@@ -4745,7 +4771,7 @@ namespace test_lib {
 
   bool test_resolve_testresult_thenelselist(vx_core::Type_context context);
 
-  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context);
+  bool test_run_all(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist);
 
   bool test_run_testcase(vx_core::Type_context context);
 
@@ -4823,8 +4849,8 @@ namespace test_lib {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
     output = vx_test::f_test_true(
-      vx_core::vx_new_boolean(true),
-      context
+					 context,
+      vx_core::vx_new_boolean(true)
     );
     vx_core::vx_memory_leak_test("sample_testresult1", irefcount, 2);
     return output;
@@ -4834,8 +4860,8 @@ namespace test_lib {
     vx_test::Type_testresult output;
     long irefcount = vx_core::refcount;
     output = vx_test::f_test_false(
-      vx_core::vx_new_boolean(false),
-      context
+					 context,
+      vx_core::vx_new_boolean(false)
     );
     vx_core::vx_memory_leak_test("sample_testresult2", irefcount, 2);
     return output;
@@ -4908,14 +4934,14 @@ namespace test_lib {
             vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
             vx_core::vx_new_string(":testresult"),
             vx_test::f_test(
-              vx_core::vx_new_decimal_from_string("4.5"),
+ 													context,
+	 												vx_core::vx_new_decimal_from_string("4.5"),
               vx_core::f_new(
                 vx_core::t_float,
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_decimal_from_string("4.5")
                 })
-              ),
-              context
+              )
             )
           })
         })
@@ -5141,7 +5167,7 @@ namespace test_lib {
     return output;
   }
 
-  vx_core::Type_boolean write_testpackagelist(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+  vx_core::Type_boolean write_testpackagelist(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
     vx_core::Type_string string_node = vx_core::f_string_from_any(testpackagelist);
     vx_data_file::Type_file file = vx_test::f_file_test();
     vx_core::Type_boolean output = vx_data_file::vx_boolean_write_from_file_string(file, string_node);
@@ -5150,10 +5176,10 @@ namespace test_lib {
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  vx_core::Type_boolean write_testpackagelist_async(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
+  vx_core::Type_boolean write_testpackagelist_async(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
     vx_test::Type_testpackagelist testpackagelist_resolved = test_lib::run_testpackagelist_async(testpackagelist);
     vx_core::vx_reserve(testpackagelist_resolved);
-    vx_core::Type_boolean write_testpackagelist = test_lib::write_testpackagelist(testpackagelist_resolved, context);
+    vx_core::Type_boolean write_testpackagelist = test_lib::write_testpackagelist(context, testpackagelist_resolved);
     vx_web_html::Type_div divtest = vx_test::f_div_from_testpackagelist(testpackagelist_resolved);
     vx_core::vx_release_one(testpackagelist_resolved);
     vx_web_html::Type_html htmlnode = vx_test::f_html_from_divtest(divtest);
@@ -5302,8 +5328,8 @@ namespace test_lib {
     return output;
   }
 
-  bool test_run_all(vx_test::Type_testpackagelist testpackagelist, vx_core::Type_context context) {
-    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(testpackagelist, context);
+  bool test_run_all(vx_core::Type_context context, vx_test::Type_testpackagelist testpackagelist) {
+    vx_core::Type_boolean issuccess = test_lib::write_testpackagelist_async(context, testpackagelist);
     std::string expected = "true";
     std::string actual = vx_core::vx_string_from_any(issuccess);
     vx_core::vx_release(issuccess);
@@ -5370,9 +5396,9 @@ namespace test_lib {
     vx_core::Type_any testresult_resolved = async_testresult->sync_value();
     vx_core::vx_memory_leak_test(testname + "-2", irefcount, 21);
     vx_core::Type_any testdescribe_resolved = async_testdescribe->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 21);
+    vx_core::vx_memory_leak_test(testname + "-3", irefcount, 20);
     vx_core::Type_any testdescribelist_resolved = async_testdescribelist->sync_value();
-    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 19);
+    vx_core::vx_memory_leak_test(testname + "-4", irefcount, 17);
     vx_core::Type_any testcase_resolved = async_testcase->sync_value();
     vx_core::vx_memory_leak_test(testname + "-5", irefcount, 15);
     std::string expected = read_test_file("src/test/resources/vx", testname + ".txt");

@@ -3,12 +3,32 @@
 
 export default class vx_core {
 
+  // vx_boolean_from_string_ends(string, string)
+  static vx_boolean_from_string_ends(text, ends) {
+    return text.endsWith(ends)
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  static vx_boolean_from_string_find(text, find) {
+    return text.includes(find)
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  static vx_boolean_from_string_starts(text, starts) {
+    return text.startsWith(starts);
+  }
+
   static vx_empty(type) {
     const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
     const typename = typedef['vx_value'].name
-    const pkg = vx_core.f_global_package_get(pkgname)
-    const output = pkg.c_empty[typename]
+    const global = vx_core.c_global
+    const globalvalue = global['vx_value']
+    const pkgmap = globalvalue['packagemap']
+    const mappkg = pkgmap['vx_value']
+    const pkg = mappkg[pkgname]
+    const emptymap = pkg['vx_value']['emptymap']
+    const output = emptymap['vx_value'][typename]
     return output
   }
 
@@ -49,6 +69,108 @@ export default class vx_core {
         }
         break
       }
+    }
+    return output
+  }
+
+  static vx_float_from_string(text) {
+   let output = 0
+   output = parseFloat(text)
+   return output
+  }
+
+  // vx_global_package_set(package)
+  static vx_global_package_set(pkg) {
+    const global = vx_core.c_global
+    let globalvalue = global['vx_value']
+    if (globalvalue == undefined) {
+      globalvalue = {}
+      global['vx_value'] = globalvalue
+    }
+    const pkgname = pkg['vx_value']['name']
+    let mappackage = {}
+    let packagemap = globalvalue['packagemap']
+    if (packagemap == undefined) {
+      mappackage[pkgname] = pkg
+      packagemap = vx_core.vx_new_map(vx_core.t_packagemap, mappackage)
+      globalvalue['packagemap'] = packagemap
+    } else {
+      mappackage = packagemap['vx_value']
+      mappackage[pkgname] = pkg
+    }
+  }
+
+  // vx_int_from_string_find(string, string)
+  static vx_int_from_string_find(text, find) {
+    return text.indexOf(find)
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  static vx_int_from_string_findlast(text, findlast) {
+    return text.lastIndexOf(findlast)
+  }
+
+  // vx_is_float(any)
+  static vx_is_float(value) {
+    let output = false
+    const typename = vx_core.f_typename_from_any(value)
+    switch (typename) {
+    case 'vx/core/int':
+      output = true
+      break
+    case 'vx/core/number':
+      if (parseInt(value) == value) {
+        output = true
+      }
+      break
+    case 'vx/core/string':
+      const floatval = parseFloat(value)
+      if (!isNaN(floatval)) {
+        output = true
+      }
+      break
+    }
+    return output
+  }
+
+  // vx_is_int(any)
+  static vx_is_int(value) {
+    let output = false
+    switch (value) {
+    case vx_core.c_infinity:
+    case vx_core.c_neginfinity:
+    case vx_core.c_notanumber:
+      output = true
+      break
+    default:
+      const typename = vx_core.f_typename_from_any(value)
+      switch (typename) {
+      case 'vx/core/int':
+        output = true
+        break
+      case 'vx/core/number':
+        if (parseInt(value) == value) {
+          output = true
+        }
+        break
+      case 'vx/core/string':
+        switch (value) {
+        case 'notanumber':
+        case 'infinity':
+        case 'neginfinity':
+          output = true
+          break
+        default:
+          const parseint = parseInt(value)
+          if (Number.isNaN(parseint)) {
+          } else if (parseInt(value) == parseFloat(value)) {
+            output = true
+          }
+          break
+        }
+        break
+      }
+      break
     }
     return output
   }
@@ -707,9 +829,31 @@ export default class vx_core {
     return output
   }
 
+  static vx_new_list(type, listvalue) {
+    const output = listvalue.slice()
+    output['vx_type'] = type
+    return output
+  }
+
+  static vx_new_map(type, mapvalue) {
+    const output = {
+      vx_type: type,
+      vx_value: mapvalue
+    }
+    return output
+  }
+
+  static vx_new_struct(type, mapvalue) {
+    const output = {
+      vx_type: type,
+      vx_value: mapvalue
+    }
+    return output
+  }
+
   static vx_string_from_any(value) {
     const output = vx_core.vx_string_from_any_indent(value, 0, false)
-		return output
+    return output
   }
 
   static vx_string_from_any_indent(value, indent, linefeed) {
@@ -829,12 +973,15 @@ export default class vx_core {
       }
     }
     output = text
-		return output
+    return output
   }
 
   static vx_string_from_string_start_end(text, start, end) {
     let output = ""
-    const maxlen = text.length;
+    const maxlen = text.length
+    if (end < 0) {
+     end += maxlen
+    }
     if (start < 1) {
     } else if (start > end) {
     } else if (start > maxlen) {
@@ -842,7 +989,7 @@ export default class vx_core {
       if (end > maxlen) {
         end = maxlen
       }
-      output = text.substring(start - 1, end);
+      output = text.substring(start - 1, end)
     }
     return output
   }
@@ -1137,6 +1284,12 @@ export default class vx_core {
   static t_permissionmap = {}
 
   /**
+   * type: project
+   * A project.
+   */
+  static t_project = {}
+
+  /**
    * type: security
    * Security rules
    */
@@ -1239,10 +1392,11 @@ export default class vx_core {
   static c_false = false
 
   /**
-   * Constant: globalpackagemap
-   * {packagemap}
+   * Constant: global
+   * Global variable for project data.
+   * {project}
    */
-  static c_globalpackagemap = {vx_type: vx_core.t_packagemap, vx_constdef: {pkgname: 'vx/core', name: 'globalpackagemap'}}
+  static c_global = {vx_type: vx_core.t_project, vx_constdef: {pkgname: 'vx/core', name: 'global'}}
 
   /**
    * Constant: infinity
@@ -2684,7 +2838,7 @@ export default class vx_core {
   // (func contains)
   static f_contains(text, find) {
     let output = vx_core.e_boolean
-    output = text.includes(find)
+    output = vx_core.vx_boolean_from_string_find(text, find)
     return output
   }
 
@@ -2830,18 +2984,18 @@ export default class vx_core {
   }
 
   /**
-   * @function first_from_list_fn_any_from_any
+   * @function first_from_list_any_from_any
    * Returns first value that is not nothing
    * @param  {typemap} generic
    * @param  {list} values
    * @param  {any_from_any} fn_any_from_any
    * @return {any-1}
    */
-  static t_first_from_list_fn_any_from_any = {}
-  static e_first_from_list_fn_any_from_any = {vx_type: vx_core.t_first_from_list_fn_any_from_any}
+  static t_first_from_list_any_from_any = {}
+  static e_first_from_list_any_from_any = {vx_type: vx_core.t_first_from_list_any_from_any}
 
-  // (func first<-list-fn-any<-any)
-  static f_first_from_list_fn_any_from_any(generic, values, fn_any_from_any) {
+  // (func first<-list-any<-any)
+  static f_first_from_list_any_from_any(generic, values, fn_any_from_any) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     output = output = vx_core.c_nothing
@@ -2854,6 +3008,22 @@ export default class vx_core {
         }
       }
     }
+    return output
+  }
+
+  /**
+   * @function float_from_string
+   * Returns float from a given string.
+   * @param  {string} text
+   * @return {float}
+   */
+  static t_float_from_string = {}
+  static e_float_from_string = {vx_type: vx_core.t_float_from_string}
+
+  // (func float<-string)
+  static f_float_from_string(text) {
+    let output = vx_core.e_float
+    output = vx_core.vx_float_from_string(text);
     return output
   }
 
@@ -2908,35 +3078,6 @@ export default class vx_core {
       vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_funcdef}, funcdef, ":name")
     )
     return output
-  }
-
-  /**
-   * @function global_package_get
-   * @param  {string} pkgname
-   * @return {package}
-   */
-  static t_global_package_get = {}
-  static e_global_package_get = {vx_type: vx_core.t_global_package_get}
-
-  // (func global-package-get)
-  static f_global_package_get(pkgname) {
-    let output
-    output = vx_core.c_globalpackagemap[pkgname]
-    return output
-  }
-
-  /**
-   * @function global_package_set
-   * @param  {string} pkgname
-   * @param  {package} pkg
-   * @return {none}
-   */
-  static t_global_package_set = {}
-  static e_global_package_set = {vx_type: vx_core.t_global_package_set}
-
-  // (func global-package-set)
-  static f_global_package_set(pkgname, pkg) {
-    vx_core.c_globalpackagemap[pkgname] = pkg
   }
 
   /**
@@ -3132,6 +3273,22 @@ export default class vx_core {
   }
 
   /**
+   * @function is_float
+   * Returns true if the value is a float.
+   * @param  {any} value
+   * @return {boolean}
+   */
+  static t_is_float = {}
+  static e_is_float = {vx_type: vx_core.t_is_float}
+
+  // (func is-float)
+  static f_is_float(value) {
+    let output = vx_core.e_boolean
+    output = vx_core.vx_is_float(value)
+    return output
+  }
+
+  /**
    * @function is_func
    * Returns true if val is a function.
    * @param  {any} val
@@ -3162,32 +3319,7 @@ export default class vx_core {
   // (func is-int)
   static f_is_int(value) {
     let output = vx_core.e_boolean
-    output = output = false
-    switch (value) {
-    case vx_core.c_infinity:
-    case vx_core.c_neginfinity:
-    case vx_core.c_notanumber:
-      output = true
-      break
-    default:
-      const typename = vx_core.f_typename_from_any(value)
-      switch (typename) {
-      case 'vx/core/int':
-        output = true
-        break
-      case 'vx/core/number':
-        if (parseInt(value) == value) {
-          output = true
-        }
-        break
-      case 'vx/core/string':
-        if (parseInt(value) == parseFloat(value)) {
-          output = true
-        }
-        break
-      }
-      break
-    }
+    output = vx_core.vx_is_int(value)
     return output
   }
 
@@ -3490,16 +3622,18 @@ export default class vx_core {
   /**
    * @function log
    * Writes a string and a value to the console.
+   * @param  {typemap} generic
    * @param  {string} text
    * @param  {any} value
-   * @return {any}
+   * @return {any-1}
    */
   static t_log_1 = {}
   static e_log_1 = {vx_type: vx_core.t_log_1}
 
   // (func log)
-  static f_log_1(text, value) {
-    let output = vx_core.e_any
+  static f_log_1(generic, text, value) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
     console.log(text)
     const svalue = vx_core.f_string_from_any(value)
     console.log(svalue)
@@ -3910,6 +4044,30 @@ export default class vx_core {
   }
 
   /**
+   * @function package_global_from_name
+   * Returns a package from global with the given name.
+   * @param  {string} name
+   * @return {package}
+   */
+  static t_package_global_from_name = {}
+  static e_package_global_from_name = {vx_type: vx_core.t_package_global_from_name}
+
+  // (func package-global<-name)
+  static f_package_global_from_name(name) {
+    let output = vx_core.e_package
+    output = vx_core.f_any_from_map(
+      {"any-1": vx_core.t_package, "map-1": vx_core.t_packagemap},
+      vx_core.f_any_from_struct(
+        {"any-1": vx_core.t_packagemap, "struct-2": vx_core.t_project},
+        vx_core.c_global,
+        ":packagemap"
+      ),
+      name
+    )
+    return output
+  }
+
+  /**
    * @function packagename_from_typedef
    * Returns the package name from a typedef.
    * @param  {typedef} vtypedef
@@ -4108,7 +4266,7 @@ export default class vx_core {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     clauses = vx_core.f_new(vx_core.t_list, ...clauses)
-    output = vx_core.f_first_from_list_fn_any_from_any(
+    output = vx_core.f_first_from_list_any_from_any(
       {"any-1": vx_core.t_any},
       clauses,
       vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
@@ -4593,6 +4751,7 @@ export default class vx_core {
   static e_permission = {}
   static e_permissionlist = []
   static e_permissionmap = {}
+  static e_project = {}
   static e_security = {}
   static e_session = {}
   static e_setting = {}
@@ -4611,232 +4770,482 @@ export default class vx_core {
   static e_user = {}
   static e_value = {}
 
-  static c_empty = {
-    "any": vx_core.e_any,
-    "any-async<-func": vx_core.e_any_async_from_func,
-    "any<-anylist": vx_core.e_any_from_anylist,
-    "anylist": vx_core.e_anylist,
-    "anytype": vx_core.e_anytype,
-    "arg": vx_core.e_arg,
-    "arglist": vx_core.e_arglist,
-    "argmap": vx_core.e_argmap,
-    "boolean": vx_core.e_boolean,
-    "booleanlist": vx_core.e_booleanlist,
-    "collection": vx_core.e_collection,
-    "compilelanguages": vx_core.e_compilelanguages,
-    "connect": vx_core.e_connect,
-    "connectlist": vx_core.e_connectlist,
-    "connectmap": vx_core.e_connectmap,
-    "const": vx_core.e_const,
-    "constdef": vx_core.e_constdef,
-    "constlist": vx_core.e_constlist,
-    "constmap": vx_core.e_constmap,
-    "context": vx_core.e_context,
-    "decimal": vx_core.e_decimal,
-    "error": vx_core.e_error,
-    "float": vx_core.e_float,
-    "func": vx_core.e_func,
-    "funcdef": vx_core.e_funcdef,
-    "funclist": vx_core.e_funclist,
-    "funcmap": vx_core.e_funcmap,
-    "int": vx_core.e_int,
-    "intlist": vx_core.e_intlist,
-    "intmap": vx_core.e_intmap,
-    "list": vx_core.e_list,
-    "listtype": vx_core.e_listtype,
-    "map": vx_core.e_map,
-    "maptype": vx_core.e_maptype,
-    "mempool": vx_core.e_mempool,
-    "msg": vx_core.e_msg,
-    "msgblock": vx_core.e_msgblock,
-    "msgblocklist": vx_core.e_msgblocklist,
-    "msglist": vx_core.e_msglist,
-    "none": vx_core.e_none,
-    "notype": vx_core.e_notype,
-    "number": vx_core.e_number,
-    "numberlist": vx_core.e_numberlist,
-    "numbermap": vx_core.e_numbermap,
-    "package": vx_core.e_package,
-    "packagemap": vx_core.e_packagemap,
-    "permission": vx_core.e_permission,
-    "permissionlist": vx_core.e_permissionlist,
-    "permissionmap": vx_core.e_permissionmap,
-    "security": vx_core.e_security,
-    "session": vx_core.e_session,
-    "setting": vx_core.e_setting,
-    "state": vx_core.e_state,
-    "statelistener": vx_core.e_statelistener,
-    "string": vx_core.e_string,
-    "stringlist": vx_core.e_stringlist,
-    "stringmap": vx_core.e_stringmap,
-    "struct": vx_core.e_struct,
-    "thenelse": vx_core.e_thenelse,
-    "thenelselist": vx_core.e_thenelselist,
-    "type": vx_core.e_type,
-    "typedef": vx_core.e_typedef,
-    "typelist": vx_core.e_typelist,
-    "typemap": vx_core.e_typemap,
-    "user": vx_core.e_user,
-    "value": vx_core.e_value,
-    "!": vx_core.e_not,
-    "!-empty": vx_core.e_notempty,
-    "!-empty_1": vx_core.e_notempty_1,
-    "!=": vx_core.e_ne,
-    "!==": vx_core.e_neqeq,
-    "*": vx_core.e_multiply,
-    "*_1": vx_core.e_multiply_1,
-    "*_2": vx_core.e_multiply_2,
-    "*_3": vx_core.e_multiply_3,
-    "+": vx_core.e_plus,
-    "+_1": vx_core.e_plus_1,
-    "+_2": vx_core.e_plus_2,
-    "+_3": vx_core.e_plus_3,
-    "+1": vx_core.e_plus1,
-    "-": vx_core.e_minus,
-    "-_1": vx_core.e_minus_1,
-    "-_2": vx_core.e_minus_2,
-    "-_3": vx_core.e_minus_3,
-    "-1": vx_core.e_minus1,
-    ".": vx_core.e_dotmethod,
-    "/": vx_core.e_divide,
-    "<": vx_core.e_lt,
-    "<_1": vx_core.e_lt_1,
-    "<-": vx_core.e_chainfirst,
-    "<<-": vx_core.e_chainlast,
-    "<=": vx_core.e_le,
-    "<=_1": vx_core.e_le_1,
-    "=": vx_core.e_eq,
-    "=_1": vx_core.e_eq_1,
-    "==": vx_core.e_eqeq,
-    ">": vx_core.e_gt,
-    ">_1": vx_core.e_gt_1,
-    ">=": vx_core.e_ge,
-    ">=_1": vx_core.e_ge_1,
-    "allowfuncs<-security": vx_core.e_allowfuncs_from_security,
-    "allowtypenames<-typedef": vx_core.e_allowtypenames_from_typedef,
-    "allowtypes<-typedef": vx_core.e_allowtypes_from_typedef,
-    "and": vx_core.e_and,
-    "and_1": vx_core.e_and_1,
-    "any<-any": vx_core.e_any_from_any,
-    "any<-any-async": vx_core.e_any_from_any_async,
-    "any<-any-context": vx_core.e_any_from_any_context,
-    "any<-any-context-async": vx_core.e_any_from_any_context_async,
-    "any<-func": vx_core.e_any_from_func,
-    "any<-func-async": vx_core.e_any_from_func_async,
-    "any<-int": vx_core.e_any_from_int,
-    "any<-key-value": vx_core.e_any_from_key_value,
-    "any<-key-value-async": vx_core.e_any_from_key_value_async,
-    "any<-list": vx_core.e_any_from_list,
-    "any<-list-reduce": vx_core.e_any_from_list_reduce,
-    "any<-list-reduce-next": vx_core.e_any_from_list_reduce_next,
-    "any<-map": vx_core.e_any_from_map,
-    "any<-none": vx_core.e_any_from_none,
-    "any<-none-async": vx_core.e_any_from_none_async,
-    "any<-reduce": vx_core.e_any_from_reduce,
-    "any<-reduce-async": vx_core.e_any_from_reduce_async,
-    "any<-reduce-next": vx_core.e_any_from_reduce_next,
-    "any<-reduce-next-async": vx_core.e_any_from_reduce_next_async,
-    "any<-struct": vx_core.e_any_from_struct,
-    "async": vx_core.e_async,
-    "boolean-permission<-func": vx_core.e_boolean_permission_from_func,
-    "boolean<-any": vx_core.e_boolean_from_any,
-    "boolean<-func": vx_core.e_boolean_from_func,
-    "boolean<-none": vx_core.e_boolean_from_none,
-    "case": vx_core.e_case,
-    "case_1": vx_core.e_case_1,
-    "compare": vx_core.e_compare,
-    "contains": vx_core.e_contains,
-    "contains_1": vx_core.e_contains_1,
-    "context-main": vx_core.e_context_main,
-    "copy": vx_core.e_copy,
-    "else": vx_core.e_else,
-    "empty": vx_core.e_empty,
-    "extends<-any": vx_core.e_extends_from_any,
-    "extends<-typedef": vx_core.e_extends_from_typedef,
-    "first<-list": vx_core.e_first_from_list,
-    "first<-list-fn-any<-any": vx_core.e_first_from_list_fn_any_from_any,
-    "fn": vx_core.e_fn,
-    "funcdef<-func": vx_core.e_funcdef_from_func,
-    "funcname<-funcdef": vx_core.e_funcname_from_funcdef,
-    "global-package-get": vx_core.e_global_package_get,
-    "global-package-set": vx_core.e_global_package_set,
-    "if": vx_core.e_if,
-    "if_1": vx_core.e_if_1,
-    "if_2": vx_core.e_if_2,
-    "int<-func": vx_core.e_int_from_func,
-    "int<-string": vx_core.e_int_from_string,
-    "is-empty": vx_core.e_is_empty,
-    "is-empty_1": vx_core.e_is_empty_1,
-    "is-endswith": vx_core.e_is_endswith,
-    "is-func": vx_core.e_is_func,
-    "is-int": vx_core.e_is_int,
-    "is-number": vx_core.e_is_number,
-    "is-pass<-permission": vx_core.e_is_pass_from_permission,
-    "last<-list": vx_core.e_last_from_list,
-    "length<-list": vx_core.e_length_from_list,
-    "let": vx_core.e_let,
-    "let-async": vx_core.e_let_async,
-    "list-join<-list": vx_core.e_list_join_from_list,
-    "list<-list": vx_core.e_list_from_list,
-    "list<-list-async": vx_core.e_list_from_list_async,
-    "list<-map": vx_core.e_list_from_map,
-    "list<-map-async": vx_core.e_list_from_map_async,
-    "list<-type": vx_core.e_list_from_type,
-    "log": vx_core.e_log,
-    "log_1": vx_core.e_log_1,
-    "main": vx_core.e_main,
-    "map<-list": vx_core.e_map_from_list,
-    "mempool-addref": vx_core.e_mempool_addref,
-    "mempool-release": vx_core.e_mempool_release,
-    "mempool-removeref": vx_core.e_mempool_removeref,
-    "mempool-removerefchildren": vx_core.e_mempool_removerefchildren,
-    "mempool-reserve": vx_core.e_mempool_reserve,
-    "msg<-error": vx_core.e_msg_from_error,
-    "msg<-warning": vx_core.e_msg_from_warning,
-    "msgblock<-msgblock-msg": vx_core.e_msgblock_from_msgblock_msg,
-    "msgblock<-msgblock-msgblock": vx_core.e_msgblock_from_msgblock_msgblock,
-    "name<-typedef": vx_core.e_name_from_typedef,
-    "native": vx_core.e_native,
-    "native<-any": vx_core.e_native_from_any,
-    "new": vx_core.e_new,
-    "number<-func": vx_core.e_number_from_func,
-    "or": vx_core.e_or,
-    "or_1": vx_core.e_or_1,
-    "packagename<-typedef": vx_core.e_packagename_from_typedef,
-    "path<-context-path": vx_core.e_path_from_context_path,
-    "path<-setting-path": vx_core.e_path_from_setting_path,
-    "permission<-id-context": vx_core.e_permission_from_id_context,
-    "properties<-typedef": vx_core.e_properties_from_typedef,
-    "proplast<-typedef": vx_core.e_proplast_from_typedef,
-    "resolve": vx_core.e_resolve,
-    "resolve_1": vx_core.e_resolve_1,
-    "resolve-async": vx_core.e_resolve_async,
-    "resolve-first": vx_core.e_resolve_first,
-    "resolve-list": vx_core.e_resolve_list,
-    "security<-context": vx_core.e_security_from_context,
-    "security<-user": vx_core.e_security_from_user,
-    "session<-context": vx_core.e_session_from_context,
-    "setting<-context": vx_core.e_setting_from_context,
-    "string-repeat": vx_core.e_string_repeat,
-    "string<-any": vx_core.e_string_from_any,
-    "string<-any-indent": vx_core.e_string_from_any_indent,
-    "string<-func": vx_core.e_string_from_func,
-    "switch": vx_core.e_switch,
-    "then": vx_core.e_then,
-    "traits<-typedef": vx_core.e_traits_from_typedef,
-    "type<-any": vx_core.e_type_from_any,
-    "typedef<-any": vx_core.e_typedef_from_any,
-    "typedef<-type": vx_core.e_typedef_from_type,
-    "typename<-any": vx_core.e_typename_from_any,
-    "typename<-type": vx_core.e_typename_from_type,
-    "typename<-typedef": vx_core.e_typename_from_typedef,
-    "typenames<-typelist": vx_core.e_typenames_from_typelist,
-    "user<-context": vx_core.e_user_from_context
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/core", vx_core)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "false": vx_core.c_false,
+      "global": vx_core.c_global,
+      "infinity": vx_core.c_infinity,
+      "mempool-active": vx_core.c_mempool_active,
+      "msg-error": vx_core.c_msg_error,
+      "msg-info": vx_core.c_msg_info,
+      "msg-severe": vx_core.c_msg_severe,
+      "msg-warning": vx_core.c_msg_warning,
+      "neginfinity": vx_core.c_neginfinity,
+      "newline": vx_core.c_newline,
+      "notanumber": vx_core.c_notanumber,
+      "nothing": vx_core.c_nothing,
+      "quote": vx_core.c_quote,
+      "true": vx_core.c_true
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "any": vx_core.e_any,
+      "any-async<-func": vx_core.e_any_async_from_func,
+      "any<-anylist": vx_core.e_any_from_anylist,
+      "anylist": vx_core.e_anylist,
+      "anytype": vx_core.e_anytype,
+      "arg": vx_core.e_arg,
+      "arglist": vx_core.e_arglist,
+      "argmap": vx_core.e_argmap,
+      "boolean": vx_core.e_boolean,
+      "booleanlist": vx_core.e_booleanlist,
+      "collection": vx_core.e_collection,
+      "compilelanguages": vx_core.e_compilelanguages,
+      "connect": vx_core.e_connect,
+      "connectlist": vx_core.e_connectlist,
+      "connectmap": vx_core.e_connectmap,
+      "const": vx_core.e_const,
+      "constdef": vx_core.e_constdef,
+      "constlist": vx_core.e_constlist,
+      "constmap": vx_core.e_constmap,
+      "context": vx_core.e_context,
+      "decimal": vx_core.e_decimal,
+      "error": vx_core.e_error,
+      "float": vx_core.e_float,
+      "func": vx_core.e_func,
+      "funcdef": vx_core.e_funcdef,
+      "funclist": vx_core.e_funclist,
+      "funcmap": vx_core.e_funcmap,
+      "int": vx_core.e_int,
+      "intlist": vx_core.e_intlist,
+      "intmap": vx_core.e_intmap,
+      "list": vx_core.e_list,
+      "listtype": vx_core.e_listtype,
+      "map": vx_core.e_map,
+      "maptype": vx_core.e_maptype,
+      "mempool": vx_core.e_mempool,
+      "msg": vx_core.e_msg,
+      "msgblock": vx_core.e_msgblock,
+      "msgblocklist": vx_core.e_msgblocklist,
+      "msglist": vx_core.e_msglist,
+      "none": vx_core.e_none,
+      "notype": vx_core.e_notype,
+      "number": vx_core.e_number,
+      "numberlist": vx_core.e_numberlist,
+      "numbermap": vx_core.e_numbermap,
+      "package": vx_core.e_package,
+      "packagemap": vx_core.e_packagemap,
+      "permission": vx_core.e_permission,
+      "permissionlist": vx_core.e_permissionlist,
+      "permissionmap": vx_core.e_permissionmap,
+      "project": vx_core.e_project,
+      "security": vx_core.e_security,
+      "session": vx_core.e_session,
+      "setting": vx_core.e_setting,
+      "state": vx_core.e_state,
+      "statelistener": vx_core.e_statelistener,
+      "string": vx_core.e_string,
+      "stringlist": vx_core.e_stringlist,
+      "stringmap": vx_core.e_stringmap,
+      "struct": vx_core.e_struct,
+      "thenelse": vx_core.e_thenelse,
+      "thenelselist": vx_core.e_thenelselist,
+      "type": vx_core.e_type,
+      "typedef": vx_core.e_typedef,
+      "typelist": vx_core.e_typelist,
+      "typemap": vx_core.e_typemap,
+      "user": vx_core.e_user,
+      "value": vx_core.e_value,
+      "!": vx_core.e_not,
+      "!-empty": vx_core.e_notempty,
+      "!-empty_1": vx_core.e_notempty_1,
+      "!=": vx_core.e_ne,
+      "!==": vx_core.e_neqeq,
+      "*": vx_core.e_multiply,
+      "*_1": vx_core.e_multiply_1,
+      "*_2": vx_core.e_multiply_2,
+      "*_3": vx_core.e_multiply_3,
+      "+": vx_core.e_plus,
+      "+_1": vx_core.e_plus_1,
+      "+_2": vx_core.e_plus_2,
+      "+_3": vx_core.e_plus_3,
+      "+1": vx_core.e_plus1,
+      "-": vx_core.e_minus,
+      "-_1": vx_core.e_minus_1,
+      "-_2": vx_core.e_minus_2,
+      "-_3": vx_core.e_minus_3,
+      "-1": vx_core.e_minus1,
+      ".": vx_core.e_dotmethod,
+      "/": vx_core.e_divide,
+      "<": vx_core.e_lt,
+      "<_1": vx_core.e_lt_1,
+      "<-": vx_core.e_chainfirst,
+      "<<-": vx_core.e_chainlast,
+      "<=": vx_core.e_le,
+      "<=_1": vx_core.e_le_1,
+      "=": vx_core.e_eq,
+      "=_1": vx_core.e_eq_1,
+      "==": vx_core.e_eqeq,
+      ">": vx_core.e_gt,
+      ">_1": vx_core.e_gt_1,
+      ">=": vx_core.e_ge,
+      ">=_1": vx_core.e_ge_1,
+      "allowfuncs<-security": vx_core.e_allowfuncs_from_security,
+      "allowtypenames<-typedef": vx_core.e_allowtypenames_from_typedef,
+      "allowtypes<-typedef": vx_core.e_allowtypes_from_typedef,
+      "and": vx_core.e_and,
+      "and_1": vx_core.e_and_1,
+      "any<-any": vx_core.e_any_from_any,
+      "any<-any-async": vx_core.e_any_from_any_async,
+      "any<-any-context": vx_core.e_any_from_any_context,
+      "any<-any-context-async": vx_core.e_any_from_any_context_async,
+      "any<-func": vx_core.e_any_from_func,
+      "any<-func-async": vx_core.e_any_from_func_async,
+      "any<-int": vx_core.e_any_from_int,
+      "any<-key-value": vx_core.e_any_from_key_value,
+      "any<-key-value-async": vx_core.e_any_from_key_value_async,
+      "any<-list": vx_core.e_any_from_list,
+      "any<-list-reduce": vx_core.e_any_from_list_reduce,
+      "any<-list-reduce-next": vx_core.e_any_from_list_reduce_next,
+      "any<-map": vx_core.e_any_from_map,
+      "any<-none": vx_core.e_any_from_none,
+      "any<-none-async": vx_core.e_any_from_none_async,
+      "any<-reduce": vx_core.e_any_from_reduce,
+      "any<-reduce-async": vx_core.e_any_from_reduce_async,
+      "any<-reduce-next": vx_core.e_any_from_reduce_next,
+      "any<-reduce-next-async": vx_core.e_any_from_reduce_next_async,
+      "any<-struct": vx_core.e_any_from_struct,
+      "async": vx_core.e_async,
+      "boolean-permission<-func": vx_core.e_boolean_permission_from_func,
+      "boolean<-any": vx_core.e_boolean_from_any,
+      "boolean<-func": vx_core.e_boolean_from_func,
+      "boolean<-none": vx_core.e_boolean_from_none,
+      "case": vx_core.e_case,
+      "case_1": vx_core.e_case_1,
+      "compare": vx_core.e_compare,
+      "contains": vx_core.e_contains,
+      "contains_1": vx_core.e_contains_1,
+      "context-main": vx_core.e_context_main,
+      "copy": vx_core.e_copy,
+      "else": vx_core.e_else,
+      "empty": vx_core.e_empty,
+      "extends<-any": vx_core.e_extends_from_any,
+      "extends<-typedef": vx_core.e_extends_from_typedef,
+      "first<-list": vx_core.e_first_from_list,
+      "first<-list-any<-any": vx_core.e_first_from_list_any_from_any,
+      "float<-string": vx_core.e_float_from_string,
+      "fn": vx_core.e_fn,
+      "funcdef<-func": vx_core.e_funcdef_from_func,
+      "funcname<-funcdef": vx_core.e_funcname_from_funcdef,
+      "if": vx_core.e_if,
+      "if_1": vx_core.e_if_1,
+      "if_2": vx_core.e_if_2,
+      "int<-func": vx_core.e_int_from_func,
+      "int<-string": vx_core.e_int_from_string,
+      "is-empty": vx_core.e_is_empty,
+      "is-empty_1": vx_core.e_is_empty_1,
+      "is-endswith": vx_core.e_is_endswith,
+      "is-float": vx_core.e_is_float,
+      "is-func": vx_core.e_is_func,
+      "is-int": vx_core.e_is_int,
+      "is-number": vx_core.e_is_number,
+      "is-pass<-permission": vx_core.e_is_pass_from_permission,
+      "last<-list": vx_core.e_last_from_list,
+      "length<-list": vx_core.e_length_from_list,
+      "let": vx_core.e_let,
+      "let-async": vx_core.e_let_async,
+      "list-join<-list": vx_core.e_list_join_from_list,
+      "list<-list": vx_core.e_list_from_list,
+      "list<-list-async": vx_core.e_list_from_list_async,
+      "list<-map": vx_core.e_list_from_map,
+      "list<-map-async": vx_core.e_list_from_map_async,
+      "list<-type": vx_core.e_list_from_type,
+      "log": vx_core.e_log,
+      "log_1": vx_core.e_log_1,
+      "main": vx_core.e_main,
+      "map<-list": vx_core.e_map_from_list,
+      "mempool-addref": vx_core.e_mempool_addref,
+      "mempool-release": vx_core.e_mempool_release,
+      "mempool-removeref": vx_core.e_mempool_removeref,
+      "mempool-removerefchildren": vx_core.e_mempool_removerefchildren,
+      "mempool-reserve": vx_core.e_mempool_reserve,
+      "msg<-error": vx_core.e_msg_from_error,
+      "msg<-warning": vx_core.e_msg_from_warning,
+      "msgblock<-msgblock-msg": vx_core.e_msgblock_from_msgblock_msg,
+      "msgblock<-msgblock-msgblock": vx_core.e_msgblock_from_msgblock_msgblock,
+      "name<-typedef": vx_core.e_name_from_typedef,
+      "native": vx_core.e_native,
+      "native<-any": vx_core.e_native_from_any,
+      "new": vx_core.e_new,
+      "number<-func": vx_core.e_number_from_func,
+      "or": vx_core.e_or,
+      "or_1": vx_core.e_or_1,
+      "package-global<-name": vx_core.e_package_global_from_name,
+      "packagename<-typedef": vx_core.e_packagename_from_typedef,
+      "path<-context-path": vx_core.e_path_from_context_path,
+      "path<-setting-path": vx_core.e_path_from_setting_path,
+      "permission<-id-context": vx_core.e_permission_from_id_context,
+      "properties<-typedef": vx_core.e_properties_from_typedef,
+      "proplast<-typedef": vx_core.e_proplast_from_typedef,
+      "resolve": vx_core.e_resolve,
+      "resolve_1": vx_core.e_resolve_1,
+      "resolve-async": vx_core.e_resolve_async,
+      "resolve-first": vx_core.e_resolve_first,
+      "resolve-list": vx_core.e_resolve_list,
+      "security<-context": vx_core.e_security_from_context,
+      "security<-user": vx_core.e_security_from_user,
+      "session<-context": vx_core.e_session_from_context,
+      "setting<-context": vx_core.e_setting_from_context,
+      "string-repeat": vx_core.e_string_repeat,
+      "string<-any": vx_core.e_string_from_any,
+      "string<-any-indent": vx_core.e_string_from_any_indent,
+      "string<-func": vx_core.e_string_from_func,
+      "switch": vx_core.e_switch,
+      "then": vx_core.e_then,
+      "traits<-typedef": vx_core.e_traits_from_typedef,
+      "type<-any": vx_core.e_type_from_any,
+      "typedef<-any": vx_core.e_typedef_from_any,
+      "typedef<-type": vx_core.e_typedef_from_type,
+      "typename<-any": vx_core.e_typename_from_any,
+      "typename<-type": vx_core.e_typename_from_type,
+      "typename<-typedef": vx_core.e_typename_from_typedef,
+      "typenames<-typelist": vx_core.e_typenames_from_typelist,
+      "user<-context": vx_core.e_user_from_context
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "!": vx_core.t_not,
+      "!-empty": vx_core.t_notempty,
+      "!-empty_1": vx_core.t_notempty_1,
+      "!=": vx_core.t_ne,
+      "!==": vx_core.t_neqeq,
+      "*": vx_core.t_multiply,
+      "*_1": vx_core.t_multiply_1,
+      "*_2": vx_core.t_multiply_2,
+      "*_3": vx_core.t_multiply_3,
+      "+": vx_core.t_plus,
+      "+_1": vx_core.t_plus_1,
+      "+_2": vx_core.t_plus_2,
+      "+_3": vx_core.t_plus_3,
+      "+1": vx_core.t_plus1,
+      "-": vx_core.t_minus,
+      "-_1": vx_core.t_minus_1,
+      "-_2": vx_core.t_minus_2,
+      "-_3": vx_core.t_minus_3,
+      "-1": vx_core.t_minus1,
+      ".": vx_core.t_dotmethod,
+      "/": vx_core.t_divide,
+      "<": vx_core.t_lt,
+      "<_1": vx_core.t_lt_1,
+      "<-": vx_core.t_chainfirst,
+      "<<-": vx_core.t_chainlast,
+      "<=": vx_core.t_le,
+      "<=_1": vx_core.t_le_1,
+      "=": vx_core.t_eq,
+      "=_1": vx_core.t_eq_1,
+      "==": vx_core.t_eqeq,
+      ">": vx_core.t_gt,
+      ">_1": vx_core.t_gt_1,
+      ">=": vx_core.t_ge,
+      ">=_1": vx_core.t_ge_1,
+      "allowfuncs<-security": vx_core.t_allowfuncs_from_security,
+      "allowtypenames<-typedef": vx_core.t_allowtypenames_from_typedef,
+      "allowtypes<-typedef": vx_core.t_allowtypes_from_typedef,
+      "and": vx_core.t_and,
+      "and_1": vx_core.t_and_1,
+      "any<-any": vx_core.t_any_from_any,
+      "any<-any-async": vx_core.t_any_from_any_async,
+      "any<-any-context": vx_core.t_any_from_any_context,
+      "any<-any-context-async": vx_core.t_any_from_any_context_async,
+      "any<-func": vx_core.t_any_from_func,
+      "any<-func-async": vx_core.t_any_from_func_async,
+      "any<-int": vx_core.t_any_from_int,
+      "any<-key-value": vx_core.t_any_from_key_value,
+      "any<-key-value-async": vx_core.t_any_from_key_value_async,
+      "any<-list": vx_core.t_any_from_list,
+      "any<-list-reduce": vx_core.t_any_from_list_reduce,
+      "any<-list-reduce-next": vx_core.t_any_from_list_reduce_next,
+      "any<-map": vx_core.t_any_from_map,
+      "any<-none": vx_core.t_any_from_none,
+      "any<-none-async": vx_core.t_any_from_none_async,
+      "any<-reduce": vx_core.t_any_from_reduce,
+      "any<-reduce-async": vx_core.t_any_from_reduce_async,
+      "any<-reduce-next": vx_core.t_any_from_reduce_next,
+      "any<-reduce-next-async": vx_core.t_any_from_reduce_next_async,
+      "any<-struct": vx_core.t_any_from_struct,
+      "async": vx_core.t_async,
+      "boolean-permission<-func": vx_core.t_boolean_permission_from_func,
+      "boolean<-any": vx_core.t_boolean_from_any,
+      "boolean<-func": vx_core.t_boolean_from_func,
+      "boolean<-none": vx_core.t_boolean_from_none,
+      "case": vx_core.t_case,
+      "case_1": vx_core.t_case_1,
+      "compare": vx_core.t_compare,
+      "contains": vx_core.t_contains,
+      "contains_1": vx_core.t_contains_1,
+      "context-main": vx_core.t_context_main,
+      "copy": vx_core.t_copy,
+      "else": vx_core.t_else,
+      "empty": vx_core.t_empty,
+      "extends<-any": vx_core.t_extends_from_any,
+      "extends<-typedef": vx_core.t_extends_from_typedef,
+      "first<-list": vx_core.t_first_from_list,
+      "first<-list-any<-any": vx_core.t_first_from_list_any_from_any,
+      "float<-string": vx_core.t_float_from_string,
+      "fn": vx_core.t_fn,
+      "funcdef<-func": vx_core.t_funcdef_from_func,
+      "funcname<-funcdef": vx_core.t_funcname_from_funcdef,
+      "if": vx_core.t_if,
+      "if_1": vx_core.t_if_1,
+      "if_2": vx_core.t_if_2,
+      "int<-func": vx_core.t_int_from_func,
+      "int<-string": vx_core.t_int_from_string,
+      "is-empty": vx_core.t_is_empty,
+      "is-empty_1": vx_core.t_is_empty_1,
+      "is-endswith": vx_core.t_is_endswith,
+      "is-float": vx_core.t_is_float,
+      "is-func": vx_core.t_is_func,
+      "is-int": vx_core.t_is_int,
+      "is-number": vx_core.t_is_number,
+      "is-pass<-permission": vx_core.t_is_pass_from_permission,
+      "last<-list": vx_core.t_last_from_list,
+      "length<-list": vx_core.t_length_from_list,
+      "let": vx_core.t_let,
+      "let-async": vx_core.t_let_async,
+      "list-join<-list": vx_core.t_list_join_from_list,
+      "list<-list": vx_core.t_list_from_list,
+      "list<-list-async": vx_core.t_list_from_list_async,
+      "list<-map": vx_core.t_list_from_map,
+      "list<-map-async": vx_core.t_list_from_map_async,
+      "list<-type": vx_core.t_list_from_type,
+      "log": vx_core.t_log,
+      "log_1": vx_core.t_log_1,
+      "main": vx_core.t_main,
+      "map<-list": vx_core.t_map_from_list,
+      "mempool-addref": vx_core.t_mempool_addref,
+      "mempool-release": vx_core.t_mempool_release,
+      "mempool-removeref": vx_core.t_mempool_removeref,
+      "mempool-removerefchildren": vx_core.t_mempool_removerefchildren,
+      "mempool-reserve": vx_core.t_mempool_reserve,
+      "msg<-error": vx_core.t_msg_from_error,
+      "msg<-warning": vx_core.t_msg_from_warning,
+      "msgblock<-msgblock-msg": vx_core.t_msgblock_from_msgblock_msg,
+      "msgblock<-msgblock-msgblock": vx_core.t_msgblock_from_msgblock_msgblock,
+      "name<-typedef": vx_core.t_name_from_typedef,
+      "native": vx_core.t_native,
+      "native<-any": vx_core.t_native_from_any,
+      "new": vx_core.t_new,
+      "number<-func": vx_core.t_number_from_func,
+      "or": vx_core.t_or,
+      "or_1": vx_core.t_or_1,
+      "package-global<-name": vx_core.t_package_global_from_name,
+      "packagename<-typedef": vx_core.t_packagename_from_typedef,
+      "path<-context-path": vx_core.t_path_from_context_path,
+      "path<-setting-path": vx_core.t_path_from_setting_path,
+      "permission<-id-context": vx_core.t_permission_from_id_context,
+      "properties<-typedef": vx_core.t_properties_from_typedef,
+      "proplast<-typedef": vx_core.t_proplast_from_typedef,
+      "resolve": vx_core.t_resolve,
+      "resolve_1": vx_core.t_resolve_1,
+      "resolve-async": vx_core.t_resolve_async,
+      "resolve-first": vx_core.t_resolve_first,
+      "resolve-list": vx_core.t_resolve_list,
+      "security<-context": vx_core.t_security_from_context,
+      "security<-user": vx_core.t_security_from_user,
+      "session<-context": vx_core.t_session_from_context,
+      "setting<-context": vx_core.t_setting_from_context,
+      "string-repeat": vx_core.t_string_repeat,
+      "string<-any": vx_core.t_string_from_any,
+      "string<-any-indent": vx_core.t_string_from_any_indent,
+      "string<-func": vx_core.t_string_from_func,
+      "switch": vx_core.t_switch,
+      "then": vx_core.t_then,
+      "traits<-typedef": vx_core.t_traits_from_typedef,
+      "type<-any": vx_core.t_type_from_any,
+      "typedef<-any": vx_core.t_typedef_from_any,
+      "typedef<-type": vx_core.t_typedef_from_type,
+      "typename<-any": vx_core.t_typename_from_any,
+      "typename<-type": vx_core.t_typename_from_type,
+      "typename<-typedef": vx_core.t_typename_from_typedef,
+      "typenames<-typelist": vx_core.t_typenames_from_typelist,
+      "user<-context": vx_core.t_user_from_context
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "any": vx_core.t_any,
+      "any-async<-func": vx_core.t_any_async_from_func,
+      "any<-anylist": vx_core.t_any_from_anylist,
+      "anylist": vx_core.t_anylist,
+      "anytype": vx_core.t_anytype,
+      "arg": vx_core.t_arg,
+      "arglist": vx_core.t_arglist,
+      "argmap": vx_core.t_argmap,
+      "boolean": vx_core.t_boolean,
+      "booleanlist": vx_core.t_booleanlist,
+      "collection": vx_core.t_collection,
+      "compilelanguages": vx_core.t_compilelanguages,
+      "connect": vx_core.t_connect,
+      "connectlist": vx_core.t_connectlist,
+      "connectmap": vx_core.t_connectmap,
+      "const": vx_core.t_const,
+      "constdef": vx_core.t_constdef,
+      "constlist": vx_core.t_constlist,
+      "constmap": vx_core.t_constmap,
+      "context": vx_core.t_context,
+      "decimal": vx_core.t_decimal,
+      "error": vx_core.t_error,
+      "float": vx_core.t_float,
+      "func": vx_core.t_func,
+      "funcdef": vx_core.t_funcdef,
+      "funclist": vx_core.t_funclist,
+      "funcmap": vx_core.t_funcmap,
+      "int": vx_core.t_int,
+      "intlist": vx_core.t_intlist,
+      "intmap": vx_core.t_intmap,
+      "list": vx_core.t_list,
+      "listtype": vx_core.t_listtype,
+      "map": vx_core.t_map,
+      "maptype": vx_core.t_maptype,
+      "mempool": vx_core.t_mempool,
+      "msg": vx_core.t_msg,
+      "msgblock": vx_core.t_msgblock,
+      "msgblocklist": vx_core.t_msgblocklist,
+      "msglist": vx_core.t_msglist,
+      "none": vx_core.t_none,
+      "notype": vx_core.t_notype,
+      "number": vx_core.t_number,
+      "numberlist": vx_core.t_numberlist,
+      "numbermap": vx_core.t_numbermap,
+      "package": vx_core.t_package,
+      "packagemap": vx_core.t_packagemap,
+      "permission": vx_core.t_permission,
+      "permissionlist": vx_core.t_permissionlist,
+      "permissionmap": vx_core.t_permissionmap,
+      "project": vx_core.t_project,
+      "security": vx_core.t_security,
+      "session": vx_core.t_session,
+      "setting": vx_core.t_setting,
+      "state": vx_core.t_state,
+      "statelistener": vx_core.t_statelistener,
+      "string": vx_core.t_string,
+      "stringlist": vx_core.t_stringlist,
+      "stringmap": vx_core.t_stringmap,
+      "struct": vx_core.t_struct,
+      "thenelse": vx_core.t_thenelse,
+      "thenelselist": vx_core.t_thenelselist,
+      "type": vx_core.t_type,
+      "typedef": vx_core.t_typedef,
+      "typelist": vx_core.t_typelist,
+      "typemap": vx_core.t_typemap,
+      "user": vx_core.t_user,
+      "value": vx_core.t_value
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/core",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type any)
     vx_core.t_any['vx_type'] = vx_core.t_type
@@ -5201,7 +5610,7 @@ export default class vx_core {
       extends       : ":list",
       allowfuncs    : [],
       disallowfuncs : [],
-      allowtypes    : [vx_core.t_const],
+      allowtypes    : [vx_core.t_any],
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
@@ -5219,7 +5628,7 @@ export default class vx_core {
       extends       : ":map",
       allowfuncs    : [],
       disallowfuncs : [],
-      allowtypes    : [vx_core.t_const],
+      allowtypes    : [vx_core.t_any],
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
@@ -5806,8 +6215,38 @@ export default class vx_core {
       allowvalues   : [],
       disallowvalues: [],
       traits        : [],
-      properties    : {},
-      proplast      : {}
+      properties    : {
+        "pkgname": {
+          "name" : "pkgname",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "constmap": {
+          "name" : "constmap",
+          "type" : vx_core.t_constmap,
+          "multi": false
+        },
+        "funcmap": {
+          "name" : "funcmap",
+          "type" : vx_core.t_funcmap,
+          "multi": false
+        },
+        "typemap": {
+          "name" : "typemap",
+          "type" : vx_core.t_typemap,
+          "multi": false
+        },
+        "emptymap": {
+          "name" : "emptymap",
+          "type" : vx_core.t_map,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "emptymap",
+        "type" : vx_core.t_map,
+        "multi": false
+      }
     }
     vx_core.e_package['vx_type'] = vx_core.t_package
     vx_core.e_package['vx_value'] = {}
@@ -5896,6 +6335,35 @@ export default class vx_core {
     }
     vx_core.e_permissionmap['vx_type'] = vx_core.t_permissionmap
     vx_core.e_permissionmap['vx_value'] = {}
+
+    // (type project)
+    vx_core.t_project['vx_type'] = vx_core.t_type
+    vx_core.t_project['vx_value'] = {
+      name          : "project",
+      pkgname       : "vx/core",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "packagemap": {
+          "name" : "packagemap",
+          "type" : vx_core.t_packagemap,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "packagemap",
+        "type" : vx_core.t_packagemap,
+        "multi": false
+      }
+    }
+    vx_core.e_project['vx_type'] = vx_core.t_project
+    vx_core.e_project['vx_value'] = {}
 
     // (type security)
     vx_core.t_security['vx_type'] = vx_core.t_type
@@ -6414,12 +6882,16 @@ export default class vx_core {
     vx_core.e_value['vx_type'] = vx_core.t_value
     vx_core.e_value['vx_value'] = {}
 
+    // (const global)
+    Object.assign(vx_core.c_global, {
+      
+    })
+
     // (const mempool-active)
     Object.assign(vx_core.c_mempool_active, {
       "valuepool": {
-        "next": "",
-        "refs": 0,
-      },
+        "refs": 0
+      }
     })
 
     // (func !)
@@ -7866,10 +8338,10 @@ export default class vx_core {
       fn            : vx_core.f_first_from_list
     }
 
-    // (func first<-list-fn-any<-any)
-    vx_core.t_first_from_list_fn_any_from_any['vx_type'] = vx_core.t_type
-    vx_core.t_first_from_list_fn_any_from_any['vx_value'] = {
-      name          : "first<-list-fn-any<-any",
+    // (func first<-list-any<-any)
+    vx_core.t_first_from_list_any_from_any['vx_type'] = vx_core.t_type
+    vx_core.t_first_from_list_any_from_any['vx_value'] = {
+      name          : "first<-list-any<-any",
       pkgname       : "vx/core",
       extends       : ":func",
       idx           : 0,
@@ -7882,7 +8354,26 @@ export default class vx_core {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_core.f_first_from_list_fn_any_from_any
+      fn            : vx_core.f_first_from_list_any_from_any
+    }
+
+    // (func float<-string)
+    vx_core.t_float_from_string['vx_type'] = vx_core.t_type
+    vx_core.t_float_from_string['vx_value'] = {
+      name          : "float<-string",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_float_from_string
     }
 
     // (func fn)
@@ -7940,44 +8431,6 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_funcname_from_funcdef
-    }
-
-    // (func global-package-get)
-    vx_core.t_global_package_get['vx_type'] = vx_core.t_type
-    vx_core.t_global_package_get['vx_value'] = {
-      name          : "global-package-get",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_global_package_get
-    }
-
-    // (func global-package-set)
-    vx_core.t_global_package_set['vx_type'] = vx_core.t_type
-    vx_core.t_global_package_set['vx_value'] = {
-      name          : "global-package-set",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_global_package_set
     }
 
     // (func if)
@@ -8130,6 +8583,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_is_endswith
+    }
+
+    // (func is-float)
+    vx_core.t_is_float['vx_type'] = vx_core.t_type
+    vx_core.t_is_float['vx_value'] = {
+      name          : "is-float",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_is_float
     }
 
     // (func is-func)
@@ -8776,6 +9248,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_or_1
+    }
+
+    // (func package-global<-name)
+    vx_core.t_package_global_from_name['vx_type'] = vx_core.t_type
+    vx_core.t_package_global_from_name['vx_value'] = {
+      name          : "package-global<-name",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_package_global_from_name
     }
 
     // (func packagename<-typedef)

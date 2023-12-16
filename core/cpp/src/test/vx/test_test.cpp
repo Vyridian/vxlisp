@@ -11,6 +11,7 @@ namespace vx_test_test {
     vx_core::vx_log("Test Start: f_file_test");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      context,
       vx_data_file::f_boolean_exists_from_file(
         vx_core::f_new(
           vx_data_file::t_file,
@@ -21,8 +22,7 @@ namespace vx_test_test {
             vx_core::vx_new_string("src/test/resources")
           })
         )
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))"),
@@ -50,6 +50,7 @@ namespace vx_test_test {
     vx_core::vx_log("Test Start: f_file_testhtml");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      context,
       vx_data_file::f_boolean_exists_from_file(
         vx_core::f_new(
           vx_data_file::t_file,
@@ -60,8 +61,7 @@ namespace vx_test_test {
             vx_core::vx_new_string("src/test/resources")
           })
         )
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))"),
@@ -89,6 +89,7 @@ namespace vx_test_test {
     vx_core::vx_log("Test Start: f_file_testnode");
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
+      context,
       vx_data_file::f_boolean_exists_from_file(
         vx_core::f_new(
           vx_data_file::t_file,
@@ -99,8 +100,7 @@ namespace vx_test_test {
             vx_core::vx_new_string("src/test/resources")
           })
         )
-      ),
-      context
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))"),

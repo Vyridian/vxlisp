@@ -60,7 +60,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_db::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_db output = vx_data_db::e_db;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_db val = vx_core::vx_any_from_any(vx_data_db::t_db, copyval);
@@ -150,6 +150,9 @@ namespace vx_data_db {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_db::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -258,7 +261,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcell::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbcell output = vx_data_db::e_dbcell;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbcell val = vx_core::vx_any_from_any(vx_data_db::t_dbcell, copyval);
@@ -441,6 +444,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbcell::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbcellmap)
@@ -527,7 +533,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbcellmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbcellmap output = vx_data_db::e_dbcellmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbcellmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbcellmap, copyval);
@@ -606,6 +612,9 @@ namespace vx_data_db {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_dbcellmap::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -688,7 +697,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfield::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbfield output = vx_data_db::e_dbfield;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbfield val = vx_core::vx_any_from_any(vx_data_db::t_dbfield, copyval);
@@ -817,6 +826,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbfield::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbfieldmap)
@@ -903,7 +915,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbfieldmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbfieldmap output = vx_data_db::e_dbfieldmap;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbfieldmap valmap = vx_core::vx_any_from_any(vx_data_db::t_dbfieldmap, copyval);
@@ -983,6 +995,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbfieldmap::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbid)
@@ -1007,7 +1022,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbid::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbid output = vx_data_db::e_dbid;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_core::vx_release_except(copyval, output);
@@ -1036,6 +1051,9 @@ namespace vx_data_db {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_dbid::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -1105,7 +1123,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dblink::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dblink output = vx_data_db::e_dblink;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dblink val = vx_core::vx_any_from_any(vx_data_db::t_dblink, copyval);
@@ -1219,6 +1237,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dblink::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dblinklist)
@@ -1301,7 +1322,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dblinklist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dblinklist output = vx_data_db::e_dblinklist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dblinklist val = vx_core::vx_any_from_any(vx_data_db::t_dblinklist, copyval);
@@ -1366,6 +1387,9 @@ namespace vx_data_db {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_dblinklist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -1435,7 +1459,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbnode::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbnode output = vx_data_db::e_dbnode;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbnode val = vx_core::vx_any_from_any(vx_data_db::t_dbnode, copyval);
@@ -1549,6 +1573,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbnode::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbnote)
@@ -1656,7 +1683,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbnote::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbnote output = vx_data_db::e_dbnote;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbnote val = vx_core::vx_any_from_any(vx_data_db::t_dbnote, copyval);
@@ -1839,6 +1866,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbnote::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbtable)
@@ -1933,7 +1963,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbtable::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbtable output = vx_data_db::e_dbtable;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbtable val = vx_core::vx_any_from_any(vx_data_db::t_dbtable, copyval);
@@ -2093,6 +2123,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbtable::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type dbvalue)
@@ -2213,7 +2246,7 @@ namespace vx_data_db {
     vx_core::Type_any Class_dbvalue::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_data_db::Type_dbvalue output = vx_data_db::e_dbvalue;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_data_db::Type_dbvalue val = vx_core::vx_any_from_any(vx_data_db::t_dbvalue, copyval);
@@ -2419,6 +2452,9 @@ namespace vx_data_db {
       return output;
     }
 
+    vx_core::Type_constdef Class_dbvalue::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   vx_data_db::Type_db e_db = NULL;
@@ -2499,20 +2535,24 @@ namespace vx_data_db {
       vx_core::vx_reserve_empty(vx_data_db::e_dbvalue);
       vx_data_db::t_dbvalue = new Class_dbvalue();
       vx_core::vx_reserve_type(vx_data_db::t_dbvalue);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["db"] = vx_data_db::t_db;
+      maptype["dbcell"] = vx_data_db::t_dbcell;
+      maptype["dbcellmap"] = vx_data_db::t_dbcellmap;
+      maptype["dbfield"] = vx_data_db::t_dbfield;
+      maptype["dbfieldmap"] = vx_data_db::t_dbfieldmap;
+      maptype["dbid"] = vx_data_db::t_dbid;
+      maptype["dblink"] = vx_data_db::t_dblink;
+      maptype["dblinklist"] = vx_data_db::t_dblinklist;
+      maptype["dbnode"] = vx_data_db::t_dbnode;
+      maptype["dbnote"] = vx_data_db::t_dbnote;
+      maptype["dbtable"] = vx_data_db::t_dbtable;
+      maptype["dbvalue"] = vx_data_db::t_dbvalue;
+      vx_core::vx_global_package_set("vx/data/db", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }

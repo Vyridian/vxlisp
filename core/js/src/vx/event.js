@@ -44,14 +44,30 @@ export default class vx_event {
   // empty types
   static e_event = {}
 
-  static c_empty = {
-    "event": vx_event.e_event,
-    "any<-from-to": vx_event.e_any_from_from_to
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/event", vx_event)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "event-click": vx_event.c_event_click,
+      "event-move": vx_event.c_event_move
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "event": vx_event.e_event,
+      "any<-from-to": vx_event.e_any_from_from_to
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "any<-from-to": vx_event.t_any_from_from_to
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "event": vx_event.t_event
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/event",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type event)
     vx_event.t_event['vx_type'] = vx_core.t_type

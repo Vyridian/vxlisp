@@ -49,15 +49,31 @@ export default class vx_sample {
   // empty types
   static e_mytype = {}
 
-  static c_empty = {
-    "mytype": vx_sample.e_mytype,
-    "main": vx_sample.e_main,
-    "myfunc": vx_sample.e_myfunc
-  }
-
 
   static {
-    vx_core.f_global_package_set("vx/sample", vx_sample)
+    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "myconst": vx_sample.c_myconst
+    })
+    const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "mytype": vx_sample.e_mytype,
+      "main": vx_sample.e_main,
+      "myfunc": vx_sample.e_myfunc
+    })
+    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "main": vx_sample.t_main,
+      "myfunc": vx_sample.t_myfunc
+    })
+    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "mytype": vx_sample.t_mytype
+    })
+    const pkg = vx_core.vx_new_struct(vx_core.t_package, {
+      "name": "vx/sample",
+      "constmap": constmap,
+      "emptymap": emptymap,
+      "funcmap": funcmap,
+      "typemap": typemap
+    })
+    vx_core.vx_global_package_set(pkg)
 
     // (type mytype)
     vx_sample.t_mytype['vx_type'] = vx_core.t_type

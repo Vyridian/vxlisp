@@ -622,13 +622,23 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 				fnc.listarg = args
 			}
 		}
+		switch fnc.name {
+		case "let":
+			arglet := fnc.listarg[0]
+			listarglet := ListArgFromValue(arglet.value)
+			listarglet, msgs := ListArgLinkType(listarglet, listscope, textblock, path)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			arglet.value = NewValueFromArgList(listarglet)
+			fnc.listarg[0] = arglet
+		}
 		listscope = ListScopeAddFuncLocalArg(listscope, fnc)
 		chgargs, msgs := ListArgLink(fnc.listarg, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = chgargs
 		if fnc.name == "any<-map" {
 			if len(fnc.listarg) == 2 {
-				typearg1 := fnc.listarg[0].value.vxtype
+				arg1 := fnc.listarg[0]
+				typearg1 := arg1.value.vxtype
 				switch typearg1.extends {
 				case ":map":
 				case ":struct":

@@ -1,7 +1,7 @@
-#include <map>
 #include <string>
 #include <vector>
 #include "../vx/core.hpp"
+#include "../vx/collection.hpp"
 #include "../vx/type.hpp"
 #include "../vx/data/textblock.hpp"
 #include "repl.hpp"
@@ -9,8 +9,8 @@
 namespace vx_repl {
 // :body
 
-  // vx_string_from_listarg(type, liststring, context)
-  std::string vx_string_from_listarg(vx_core::Type_any type, std::vector<std::string> listarg, vx_core::Type_context context) {
+  // vx_string_from_listarg(context, type, liststring)
+  std::string vx_string_from_listarg(vx_core::Type_context context, vx_core::Type_any type, std::vector<std::string> listarg) {
     std::string output = "";
     std::vector<vx_core::Type_any> listrepl;
     bool isfirst = true;
@@ -36,7 +36,7 @@ namespace vx_repl {
       vx_core::vx_new_string(":type"), type,
       vx_core::vx_new_string(":repllist"), vx_core::vx_new(vx_repl::t_repllist, listrepl)
     });
-    vx_core::Type_any any = vx_repl::f_any_from_repl(repl, context);
+    vx_core::Type_any any = vx_repl::f_any_from_repl(context, repl);
     vx_core::Type_any anytype = any->vx_type();
     if (anytype == vx_core::t_string) {
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, any);
@@ -129,7 +129,7 @@ namespace vx_repl {
     vx_core::Type_any Class_liblist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_repl::Type_liblist output = vx_repl::e_liblist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_repl::Type_liblist val = vx_core::vx_any_from_any(vx_repl::t_liblist, copyval);
@@ -194,6 +194,9 @@ namespace vx_repl {
       );
       return output;
     }
+
+    vx_core::Type_constdef Class_liblist::vx_constdef() const {return this->vx_p_constdef;}
+
 
   //}
 
@@ -289,7 +292,7 @@ namespace vx_repl {
     vx_core::Type_any Class_repl::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_repl::Type_repl output = vx_repl::e_repl;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_repl::Type_repl val = vx_core::vx_any_from_any(vx_repl::t_repl, copyval);
@@ -441,6 +444,9 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_repl::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (type repllist)
@@ -523,7 +529,7 @@ namespace vx_repl {
     vx_core::Type_any Class_repllist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
       vx_repl::Type_repllist output = vx_repl::e_repllist;
       bool ischanged = false;
-      if (copyval->vx_p_constname != "") {
+      if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
       vx_repl::Type_repllist val = vx_core::vx_any_from_any(vx_repl::t_repllist, copyval);
@@ -589,56 +595,16 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_repllist::vx_constdef() const {return this->vx_p_constdef;}
+
+
   //}
 
   // (const delimvxlisp)
   // class Class_delimvxlisp {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_repl::Class_delimvxlisp::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/repl", // pkgname
-        "delimvxlisp", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_repl::Class_delimvxlisp::vx_const_new(vx_repl::Const_delimvxlisp output) {
-      output->vx_p_constname = "vx/repl/delimvxlisp";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/repl", "delimvxlisp");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_new(
         vx_data_textblock::t_delim,
@@ -676,52 +642,9 @@ namespace vx_repl {
 
   // (const delimvxlispbracket)
   // class Class_delimvxlispbracket {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_repl::Class_delimvxlispbracket::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/repl", // pkgname
-        "delimvxlispbracket", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_repl::Class_delimvxlispbracket::vx_const_new(vx_repl::Const_delimvxlispbracket output) {
-      output->vx_p_constname = "vx/repl/delimvxlispbracket";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/repl", "delimvxlispbracket");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_copy(
         vx_data_textblock::t_delim,
@@ -764,52 +687,9 @@ namespace vx_repl {
 
   // (const delimvxlispparen)
   // class Class_delimvxlispparen {
-
-    // vx_constdef()
-    vx_core::Type_constdef vx_repl::Class_delimvxlispparen::vx_constdef() const {
-      return vx_core::Class_constdef::vx_constdef_new(
-        "vx/repl", // pkgname
-        "delimvxlispparen", // name
-        vx_core::Class_typedef::vx_typedef_new(
-          "vx/data/textblock", // pkgname
-          "delim", // name
-          ":struct", // extends
-          vx_core::e_typelist, // traits
-          vx_core::e_typelist, // allowtypes
-          vx_core::e_typelist, // disallowtypes
-          vx_core::e_funclist, // allowfuncs
-          vx_core::e_funclist, // disallowfuncs
-          vx_core::e_anylist, // allowvalues
-          vx_core::e_anylist, // disallowvalues
-          vx_core::vx_argmap_from_listarg({
-          vx_core::vx_new_arg(
-            "name", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "starttext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "endtext", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
-            "pos", // name
-            vx_core::t_int // type
-          ),
-          vx_core::vx_new_arg(
-            "delimlist", // name
-            vx_data_textblock::t_delimlist // type
-          )
-        }) // properties
-        )
-      );
-    }
-
     // vx_const_new()
     void vx_repl::Class_delimvxlispparen::vx_const_new(vx_repl::Const_delimvxlispparen output) {
-      output->vx_p_constname = "vx/repl/delimvxlispparen";
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/repl", "delimvxlispparen");
       long irefcount = vx_core::refcount;
       vx_data_textblock::Type_delim val = vx_core::f_copy(
         vx_data_textblock::t_delim,
@@ -905,6 +785,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_repl_from_functype_args::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_repl_from_functype_args::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -933,7 +815,7 @@ namespace vx_repl {
   //}
 
   // (func any<-liblist-string)
-  vx_core::Type_any f_any_from_liblist_string(vx_repl::Type_liblist liblist, vx_core::Type_string text, vx_core::Type_context context) {
+  vx_core::Type_any f_any_from_liblist_string(vx_core::Type_context context, vx_repl::Type_liblist liblist, vx_core::Type_string text) {
     vx_core::Type_any output = vx_core::e_any;
     vx_core::vx_reserve({liblist, text});
     output = vx_core::f_let(
@@ -941,7 +823,7 @@ namespace vx_repl {
       vx_core::t_any_from_func->vx_fn_new({liblist, text, context}, [liblist, text, context]() {
         vx_repl::Type_repl repl = vx_repl::f_repl_from_liblist_string(liblist, text);
         vx_core::vx_ref_plus(repl);
-        vx_core::Type_any output_1 = vx_repl::f_any_from_repl(repl, context);
+        vx_core::Type_any output_1 = vx_repl::f_any_from_repl(context, repl);
         vx_core::vx_release_one_except(repl, output_1);
         return output_1;
       })
@@ -995,6 +877,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_liblist_string::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_liblist_string::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1013,10 +897,10 @@ namespace vx_repl {
 
     vx_core::Type_any Class_any_from_liblist_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_repl::Type_liblist liblist = vx_core::vx_any_from_any(vx_repl::t_liblist, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_repl::f_any_from_liblist_string(liblist, text, context);
+      output = vx_repl::f_any_from_liblist_string(context, liblist, text);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1024,7 +908,7 @@ namespace vx_repl {
   //}
 
   // (func any<-repl)
-  vx_core::Type_any f_any_from_repl(vx_repl::Type_repl repl, vx_core::Type_context context) {
+  vx_core::Type_any f_any_from_repl(vx_core::Type_context context, vx_repl::Type_repl repl) {
     vx_core::Type_any output = vx_core::e_any;
     vx_core::vx_reserve(repl);
     output = vx_core::f_let(
@@ -1036,7 +920,7 @@ namespace vx_repl {
         vx_core::vx_ref_plus(repltype);
         vx_repl::Type_repllist repllist = repl->repllist();
         vx_core::vx_ref_plus(repllist);
-        vx_core::Type_anylist args = vx_repl::f_anylist_from_repllist(repllist, context);
+        vx_core::Type_anylist args = vx_repl::f_anylist_from_repllist(context, repllist);
         vx_core::vx_ref_plus(args);
         vx_core::Type_any output_1 = vx_core::f_if_2(
           vx_core::t_any,
@@ -1122,6 +1006,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_repl::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_repl::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1142,19 +1028,19 @@ namespace vx_repl {
       return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_any_from_repl::vx_any_from_any_context(vx_core::Type_any val, vx_core::Type_context context) const {
+    vx_core::Type_any Class_any_from_repl::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_repl::Type_repl inputval = vx_core::vx_any_from_any(vx_repl::t_repl, val);
-      output = vx_repl::f_any_from_repl(inputval, context);
+      output = vx_repl::f_any_from_repl(context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_any_from_repl::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_repl::Type_repl repl = vx_core::vx_any_from_any(vx_repl::t_repl, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_repl::f_any_from_repl(repl, context);
+      output = vx_repl::f_any_from_repl(context, repl);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1162,17 +1048,17 @@ namespace vx_repl {
   //}
 
   // (func any<-script)
-  vx_core::Type_any f_any_from_script(vx_core::Type_string script, vx_core::Type_context context) {
+  vx_core::Type_any f_any_from_script(vx_core::Type_context context, vx_core::Type_string script) {
     vx_core::Type_any output = vx_core::e_any;
     vx_core::vx_reserve(script);
     output = vx_core::f_let(
       vx_core::t_any,
       vx_core::t_any_from_func->vx_fn_new({script, context}, [script, context]() {
-        vx_data_textblock::Type_textblock textblock = vx_repl::f_textblock_repl_from_script(script);
+        vx_data_textblock::Type_textblock textblock = vx_repl::f_textblock_from_script(script);
         vx_core::vx_ref_plus(textblock);
         vx_repl::Type_repl repl = vx_repl::f_repl_from_textblock(textblock);
         vx_core::vx_ref_plus(repl);
-        vx_core::Type_any output_1 = vx_repl::f_any_from_repl(repl, context);
+        vx_core::Type_any output_1 = vx_repl::f_any_from_repl(context, repl);
         vx_core::vx_release_one_except({textblock, repl}, output_1);
         return output_1;
       })
@@ -1226,6 +1112,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_any_from_script::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_any_from_script::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1246,19 +1134,19 @@ namespace vx_repl {
       return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_any_from_script::vx_any_from_any_context(vx_core::Type_any val, vx_core::Type_context context) const {
+    vx_core::Type_any Class_any_from_script::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
-      output = vx_repl::f_any_from_script(inputval, context);
+      output = vx_repl::f_any_from_script(context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_any_from_script::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string script = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_repl::f_any_from_script(script, context);
+      output = vx_repl::f_any_from_script(context, script);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1266,7 +1154,7 @@ namespace vx_repl {
   //}
 
   // (func anylist<-repllist)
-  vx_core::Type_anylist f_anylist_from_repllist(vx_repl::Type_repllist repllist, vx_core::Type_context context) {
+  vx_core::Type_anylist f_anylist_from_repllist(vx_core::Type_context context, vx_repl::Type_repllist repllist) {
     vx_core::Type_anylist output = vx_core::e_anylist;
     vx_core::vx_reserve(repllist);
     output = vx_core::f_list_from_list(
@@ -1275,7 +1163,7 @@ namespace vx_repl {
       vx_core::t_any_from_any->vx_fn_new({context}, [context](vx_core::Type_any repl_any) {
         vx_repl::Type_repl repl = vx_core::vx_any_from_any(vx_repl::t_repl, repl_any);
         vx_core::Type_any output_1 = 
-          vx_repl::f_any_from_repl(repl, context);
+          vx_repl::f_any_from_repl(context, repl);
         return output_1;
       })
     );
@@ -1328,6 +1216,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_anylist_from_repllist::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_anylist_from_repllist::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1348,19 +1238,250 @@ namespace vx_repl {
       return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_anylist_from_repllist::vx_any_from_any_context(vx_core::Type_any val, vx_core::Type_context context) const {
+    vx_core::Type_any Class_anylist_from_repllist::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_repl::Type_repllist inputval = vx_core::vx_any_from_any(vx_repl::t_repllist, val);
-      output = vx_repl::f_anylist_from_repllist(inputval, context);
+      output = vx_repl::f_anylist_from_repllist(context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_anylist_from_repllist::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_repl::Type_repllist repllist = vx_core::vx_any_from_any(vx_repl::t_repllist, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_repl::f_anylist_from_repllist(repllist, context);
+      output = vx_repl::f_anylist_from_repllist(context, repllist);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func argmap<-textblock-argmap)
+  vx_core::Type_argmap f_argmap_from_textblock_argmap(vx_data_textblock::Type_textblock textblock, vx_core::Type_argmap argmap) {
+    vx_core::Type_argmap output = vx_core::e_argmap;
+    vx_core::vx_reserve({textblock, argmap});
+    output = vx_core::f_if_1(
+      vx_core::t_argmap,
+      vx_core::f_ne(
+        vx_core::vx_new_string("delimbracketsquare"),
+        vx_core::f_any_from_struct(
+          vx_core::t_string,
+          textblock->delim(),
+          vx_core::vx_new_string(":name")
+        )
+      ),
+      argmap,
+      argmap
+    );
+    vx_core::vx_release_one_except({textblock, argmap}, output);
+    return output;
+  }
+
+  // (func argmap<-textblock-argmap)
+  // class Class_argmap_from_textblock_argmap {
+    Abstract_argmap_from_textblock_argmap::~Abstract_argmap_from_textblock_argmap() {}
+
+    Class_argmap_from_textblock_argmap::Class_argmap_from_textblock_argmap() : Abstract_argmap_from_textblock_argmap::Abstract_argmap_from_textblock_argmap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_argmap_from_textblock_argmap::~Class_argmap_from_textblock_argmap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_argmap_from_textblock_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_argmap_from_textblock_argmap output = vx_repl::e_argmap_from_textblock_argmap;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_argmap_from_textblock_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_argmap_from_textblock_argmap output = vx_repl::e_argmap_from_textblock_argmap;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_argmap_from_textblock_argmap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "argmap<-textblock-argmap", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_argmap_from_textblock_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_argmap_from_textblock_argmap::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "argmap<-textblock-argmap", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_argmap_from_textblock_argmap::vx_empty() const {return vx_repl::e_argmap_from_textblock_argmap;}
+    vx_core::Type_any Class_argmap_from_textblock_argmap::vx_type() const {return vx_repl::t_argmap_from_textblock_argmap;}
+    vx_core::Type_msgblock Class_argmap_from_textblock_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_argmap_from_textblock_argmap::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_argmap_from_textblock_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_argmap_from_textblock_argmap(textblock, argmap);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func const<-string)
+  vx_core::Type_any f_const_from_string(vx_core::Type_string text) {
+    vx_core::Type_any output = vx_core::e_any;
+    vx_core::vx_reserve(text);
+    output = vx_core::f_let(
+      vx_core::t_any,
+      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+        vx_core::Type_int pkgpos = vx_type::f_int_from_string_findlast(text, vx_core::vx_new_string("/"));
+        vx_core::vx_ref_plus(pkgpos);
+        vx_core::Type_string pkgname = vx_core::f_if_1(
+          vx_core::t_string,
+          vx_core::f_eq(vx_core::vx_new_int(0), pkgpos),
+          vx_core::vx_new_string("vx/core"),
+          vx_type::f_string_from_string_end(
+            text,
+            vx_core::f_minus1(pkgpos)
+          )
+        );
+        vx_core::vx_ref_plus(pkgname);
+        vx_core::Type_string name = vx_core::f_if_1(
+          vx_core::t_string,
+          vx_core::f_eq(vx_core::vx_new_int(0), pkgpos),
+          text,
+          vx_type::f_string_from_string_start(
+            text,
+            vx_core::f_plus1(pkgpos)
+          )
+        );
+        vx_core::vx_ref_plus(name);
+        vx_core::Type_package pkg = vx_core::f_package_global_from_name(pkgname);
+        vx_core::vx_ref_plus(pkg);
+        vx_core::Type_constmap constmap = pkg->constmap();
+        vx_core::vx_ref_plus(constmap);
+        vx_core::Type_any constval = vx_core::f_any_from_map(vx_core::t_any, constmap, name);
+        vx_core::vx_ref_plus(constval);
+        vx_core::Type_any output_1 = vx_core::f_if_1(
+          vx_core::t_any,
+          vx_core::f_notempty_1(constval),
+          constval,
+          vx_core::f_empty(
+            vx_core::t_any
+          )
+        );
+        vx_core::vx_release_one_except({pkgpos, pkgname, name, pkg, constmap, constval}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func const<-string)
+  // class Class_const_from_string {
+    Abstract_const_from_string::~Abstract_const_from_string() {}
+
+    Class_const_from_string::Class_const_from_string() : Abstract_const_from_string::Abstract_const_from_string() {
+      vx_core::refcount += 1;
+    }
+
+    Class_const_from_string::~Class_const_from_string() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_const_from_string::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_const_from_string output = vx_repl::e_const_from_string;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_const_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_const_from_string output = vx_repl::e_const_from_string;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_const_from_string::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "const<-string", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_const_from_string::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_const_from_string::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "const<-string", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_const_from_string::vx_empty() const {return vx_repl::e_const_from_string;}
+    vx_core::Type_any Class_const_from_string::vx_type() const {return vx_repl::t_const_from_string;}
+    vx_core::Type_msgblock Class_const_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_const_from_string::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_const_from_string::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_const_from_string::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_repl::f_const_from_string(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_const_from_string::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_repl::f_const_from_string(text);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1412,6 +1533,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_macro::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_macro::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1432,10 +1555,10 @@ namespace vx_repl {
       return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_macro::vx_any_from_any_context(vx_core::Type_any val, vx_core::Type_context context) const {
+    vx_core::Type_any Class_macro::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_anylist inputval = vx_core::vx_any_from_any(vx_core::t_anylist, val);
-      output = vx_repl::f_macro(vx_core::t_any, inputval, context);
+      output = vx_repl::f_macro(vx_core::t_any, context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
@@ -1443,9 +1566,315 @@ namespace vx_repl {
     vx_core::Type_any Class_macro::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_anylist anylist = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_repl::f_macro(generic_any_1, anylist, context);
+      output = vx_repl::f_macro(generic_any_1, context, anylist);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func repl-empty<-textblock-argmap)
+  vx_repl::Type_repl f_repl_empty_from_textblock_argmap(vx_data_textblock::Type_textblock textblock, vx_core::Type_argmap argmap) {
+    vx_repl::Type_repl output = vx_repl::e_repl;
+    vx_core::vx_reserve({textblock, argmap});
+    output = vx_core::f_let(
+      vx_repl::t_repl,
+      vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+        vx_data_textblock::Type_textblocklist children = textblock->children();
+        vx_core::vx_ref_plus(children);
+        vx_core::Type_int len = vx_core::f_length_from_list(children);
+        vx_core::vx_ref_plus(len);
+        vx_repl::Type_repl output_1 = vx_core::f_switch(
+          vx_repl::t_repl,
+          len,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_case_1(
+              vx_core::vx_new_int(0),
+              vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+                vx_repl::Type_repl output_1 = vx_repl::f_repl_from_string_argmap(
+                  textblock->text(),
+                  argmap
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_case_1(
+              vx_core::vx_new_int(1),
+              vx_core::t_any_from_func->vx_fn_new({children, argmap}, [children, argmap]() {
+                vx_repl::Type_repl output_1 = vx_repl::f_repl_from_textblock_argmap(
+                  vx_core::f_any_from_list(vx_data_textblock::t_textblock, children, vx_core::vx_new_int(1)),
+                  argmap
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_repl::Type_repl output_1 = vx_core::f_new(
+                  vx_repl::t_repl,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::f_msg_from_error(vx_core::vx_new_string("Empty delim cannot have more than one child."))
+                  })
+                );
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_release_one_except({children, len}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({textblock, argmap}, output);
+    return output;
+  }
+
+  // (func repl-empty<-textblock-argmap)
+  // class Class_repl_empty_from_textblock_argmap {
+    Abstract_repl_empty_from_textblock_argmap::~Abstract_repl_empty_from_textblock_argmap() {}
+
+    Class_repl_empty_from_textblock_argmap::Class_repl_empty_from_textblock_argmap() : Abstract_repl_empty_from_textblock_argmap::Abstract_repl_empty_from_textblock_argmap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_repl_empty_from_textblock_argmap::~Class_repl_empty_from_textblock_argmap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_repl_empty_from_textblock_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_empty_from_textblock_argmap output = vx_repl::e_repl_empty_from_textblock_argmap;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_empty_from_textblock_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_empty_from_textblock_argmap output = vx_repl::e_repl_empty_from_textblock_argmap;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_repl_empty_from_textblock_argmap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "repl-empty<-textblock-argmap", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_repl_empty_from_textblock_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repl_empty_from_textblock_argmap::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "repl-empty<-textblock-argmap", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_empty_from_textblock_argmap::vx_empty() const {return vx_repl::e_repl_empty_from_textblock_argmap;}
+    vx_core::Type_any Class_repl_empty_from_textblock_argmap::vx_type() const {return vx_repl::t_repl_empty_from_textblock_argmap;}
+    vx_core::Type_msgblock Class_repl_empty_from_textblock_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repl_empty_from_textblock_argmap::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_repl_empty_from_textblock_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_repl_empty_from_textblock_argmap(textblock, argmap);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func repl-paren<-textblock-argmap)
+  vx_repl::Type_repl f_repl_paren_from_textblock_argmap(vx_data_textblock::Type_textblock textblock, vx_core::Type_argmap argmap) {
+    vx_repl::Type_repl output = vx_repl::e_repl;
+    vx_core::vx_reserve({textblock, argmap});
+    output = vx_core::f_let(
+      vx_repl::t_repl,
+      vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+        vx_data_textblock::Type_textblocklist childlst = textblock->children();
+        vx_core::vx_ref_plus(childlst);
+        vx_data_textblock::Type_textblocklist children = vx_data_textblock::f_textblocklist_from_textblocklist_remove(
+          childlst,
+          vx_data_textblock::c_delimwhitespace
+        );
+        vx_core::vx_ref_plus(children);
+        vx_data_textblock::Type_textblock tbfunc = vx_core::f_any_from_list(vx_data_textblock::t_textblock, children, vx_core::vx_new_int(1));
+        vx_core::vx_ref_plus(tbfunc);
+        vx_core::Type_string sfunc = tbfunc->text();
+        vx_core::vx_ref_plus(sfunc);
+        vx_repl::Type_repl replfunc = vx_repl::f_repl_from_string_argmap(sfunc, argmap);
+        vx_core::vx_ref_plus(replfunc);
+        vx_core::Type_any typefunc = replfunc->type();
+        vx_core::vx_ref_plus(typefunc);
+        vx_core::Type_int posarg = vx_core::f_switch(
+          vx_core::t_int,
+          typefunc,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_case_1(
+              vx_core::t_let,
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_core::Type_int output_1 = vx_core::vx_new_int(3);
+                return output_1;
+              })
+            ),
+            vx_core::f_case_1(
+              vx_core::t_fn,
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_core::Type_int output_1 = vx_core::vx_new_int(3);
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_core::Type_int output_1 = vx_core::vx_new_int(2);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(posarg);
+        vx_core::Type_argmap argmap2 = vx_core::f_switch(
+          vx_core::t_argmap,
+          typefunc,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_case_1(
+              vx_core::t_let,
+              vx_core::t_any_from_func->vx_fn_new({children, argmap}, [children, argmap]() {
+                vx_core::Type_argmap output_1 = vx_repl::f_argmap_from_textblock_argmap(
+                  vx_core::f_any_from_list(vx_data_textblock::t_textblock, children, vx_core::vx_new_int(3)),
+                  argmap
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_case_1(
+              vx_core::t_fn,
+              vx_core::t_any_from_func->vx_fn_new({children, argmap}, [children, argmap]() {
+                vx_core::Type_argmap output_1 = vx_repl::f_argmap_from_textblock_argmap(
+                  vx_core::f_any_from_list(vx_data_textblock::t_textblock, children, vx_core::vx_new_int(3)),
+                  argmap
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({argmap}, [argmap]() {
+                vx_core::Type_any output_1 = argmap;
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(argmap2);
+        vx_data_textblock::Type_textblocklist tbargs = vx_collection::f_list_from_list_start(vx_data_textblock::t_textblocklist, children, posarg);
+        vx_core::vx_ref_plus(tbargs);
+        vx_repl::Type_repllist replargs = vx_repl::f_repllist_from_textblocklist_argmap(tbargs, argmap);
+        vx_core::vx_ref_plus(replargs);
+        vx_repl::Type_repl output_1 = vx_core::f_copy(
+          vx_repl::t_repl,
+          replfunc,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":repllist"),
+            replargs
+          })
+        );
+        vx_core::vx_release_one_except({childlst, children, tbfunc, sfunc, replfunc, typefunc, posarg, argmap2, tbargs, replargs}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({textblock, argmap}, output);
+    return output;
+  }
+
+  // (func repl-paren<-textblock-argmap)
+  // class Class_repl_paren_from_textblock_argmap {
+    Abstract_repl_paren_from_textblock_argmap::~Abstract_repl_paren_from_textblock_argmap() {}
+
+    Class_repl_paren_from_textblock_argmap::Class_repl_paren_from_textblock_argmap() : Abstract_repl_paren_from_textblock_argmap::Abstract_repl_paren_from_textblock_argmap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_repl_paren_from_textblock_argmap::~Class_repl_paren_from_textblock_argmap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_repl_paren_from_textblock_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_paren_from_textblock_argmap output = vx_repl::e_repl_paren_from_textblock_argmap;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_paren_from_textblock_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_paren_from_textblock_argmap output = vx_repl::e_repl_paren_from_textblock_argmap;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_repl_paren_from_textblock_argmap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "repl-paren<-textblock-argmap", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_repl_paren_from_textblock_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repl_paren_from_textblock_argmap::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "repl-paren<-textblock-argmap", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_paren_from_textblock_argmap::vx_empty() const {return vx_repl::e_repl_paren_from_textblock_argmap;}
+    vx_core::Type_any Class_repl_paren_from_textblock_argmap::vx_type() const {return vx_repl::t_repl_paren_from_textblock_argmap;}
+    vx_core::Type_msgblock Class_repl_paren_from_textblock_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repl_paren_from_textblock_argmap::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_repl_paren_from_textblock_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_repl_paren_from_textblock_argmap(textblock, argmap);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1505,6 +1934,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_repl_from_liblist_string::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_repl_from_liblist_string::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1532,10 +1963,387 @@ namespace vx_repl {
 
   //}
 
+  // (func repl<-script)
+  vx_repl::Type_repl f_repl_from_script(vx_core::Type_string script) {
+    vx_repl::Type_repl output = vx_repl::e_repl;
+    vx_core::vx_reserve(script);
+    output = vx_core::f_let(
+      vx_repl::t_repl,
+      vx_core::t_any_from_func->vx_fn_new({script}, [script]() {
+        vx_data_textblock::Type_textblock textblock = vx_repl::f_textblock_from_script(script);
+        vx_core::vx_ref_plus(textblock);
+        vx_repl::Type_repl output_1 = vx_repl::f_repl_from_textblock(textblock);
+        vx_core::vx_release_one_except(textblock, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(script, output);
+    return output;
+  }
+
+  // (func repl<-script)
+  // class Class_repl_from_script {
+    Abstract_repl_from_script::~Abstract_repl_from_script() {}
+
+    Class_repl_from_script::Class_repl_from_script() : Abstract_repl_from_script::Abstract_repl_from_script() {
+      vx_core::refcount += 1;
+    }
+
+    Class_repl_from_script::~Class_repl_from_script() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_repl_from_script::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_script output = vx_repl::e_repl_from_script;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_from_script::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_script output = vx_repl::e_repl_from_script;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_repl_from_script::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "repl<-script", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_repl_from_script::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repl_from_script::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "repl<-script", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_from_script::vx_empty() const {return vx_repl::e_repl_from_script;}
+    vx_core::Type_any Class_repl_from_script::vx_type() const {return vx_repl::t_repl_from_script;}
+    vx_core::Type_msgblock Class_repl_from_script::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repl_from_script::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_repl_from_script::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_repl_from_script::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_repl::f_repl_from_script(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_from_script::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string script = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_repl::f_repl_from_script(script);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func repl<-string-argmap)
+  vx_repl::Type_repl f_repl_from_string_argmap(vx_core::Type_string text, vx_core::Type_argmap argmap) {
+    vx_repl::Type_repl output = vx_repl::e_repl;
+    vx_core::vx_reserve({text, argmap});
+    output = vx_core::f_if_2(
+      vx_repl::t_repl,
+      vx_core::vx_new(vx_core::t_thenelselist, {
+        vx_core::f_then(
+          vx_core::t_boolean_from_func->vx_fn_new({text}, [text]() {
+            vx_core::Type_boolean output_1 = vx_core::f_and(
+              vx_type::f_boolean_from_string_starts(
+                text,
+                vx_core::c_quote
+              ),
+              vx_type::f_boolean_from_string_ends(
+                text,
+                vx_core::c_quote
+              )
+            );
+            return output_1;
+          }),
+          vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+            vx_repl::Type_repl output_1 = vx_core::f_new(
+              vx_repl::t_repl,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":val"),
+                vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(2), vx_core::vx_new_int(-1))
+              })
+            );
+            return output_1;
+          })
+        ),
+        vx_core::f_then(
+          vx_core::t_boolean_from_func->vx_fn_new({text}, [text]() {
+            vx_core::Type_boolean output_1 = vx_core::f_is_int(text);
+            return output_1;
+          }),
+          vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+            vx_repl::Type_repl output_1 = vx_core::f_new(
+              vx_repl::t_repl,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":val"),
+                vx_core::f_int_from_string(text)
+              })
+            );
+            return output_1;
+          })
+        ),
+        vx_core::f_then(
+          vx_core::t_boolean_from_func->vx_fn_new({text}, [text]() {
+            vx_core::Type_boolean output_1 = vx_core::f_is_float(text);
+            return output_1;
+          }),
+          vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+            vx_repl::Type_repl output_1 = vx_core::f_new(
+              vx_repl::t_repl,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":val"),
+                vx_core::f_float_from_string(text)
+              })
+            );
+            return output_1;
+          })
+        ),
+        vx_core::f_else(
+          vx_core::t_any_from_func->vx_fn_new({argmap, text}, [argmap, text]() {
+            vx_repl::Type_repl output_1 = vx_core::f_let(
+              vx_repl::t_repl,
+              vx_core::t_any_from_func->vx_fn_new({argmap, text}, [argmap, text]() {
+                vx_core::Type_any arg = vx_core::f_any_from_map(vx_core::t_arg, argmap, text);
+                vx_core::vx_ref_plus(arg);
+                vx_repl::Type_repl output_1 = vx_core::f_if_2(
+                  vx_repl::t_repl,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({arg}, [arg]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty_1(arg);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({arg}, [arg]() {
+                        vx_repl::Type_repl output_1 = vx_core::f_new(
+                          vx_repl::t_repl,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::vx_new_string(":val"),
+                            arg
+                          })
+                        );
+                        return output_1;
+                      })
+                    ),
+                    vx_core::f_else(
+                      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                        vx_repl::Type_repl output_1 = vx_core::f_let(
+                          vx_repl::t_repl,
+                          vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                            vx_core::Type_any cnst = vx_repl::f_const_from_string(text);
+                            vx_core::vx_ref_plus(cnst);
+                            vx_repl::Type_repl output_1 = vx_core::f_if_2(
+                              vx_repl::t_repl,
+                              vx_core::vx_new(vx_core::t_thenelselist, {
+                                vx_core::f_then(
+                                  vx_core::t_boolean_from_func->vx_fn_new({cnst}, [cnst]() {
+                                    vx_core::Type_boolean output_1 = vx_core::f_notempty_1(cnst);
+                                    return output_1;
+                                  }),
+                                  vx_core::t_any_from_func->vx_fn_new({cnst}, [cnst]() {
+                                    vx_repl::Type_repl output_1 = vx_core::f_new(
+                                      vx_repl::t_repl,
+                                      vx_core::vx_new(vx_core::t_anylist, {
+                                        vx_core::vx_new_string(":val"),
+                                        cnst
+                                      })
+                                    );
+                                    return output_1;
+                                  })
+                                ),
+                                vx_core::f_else(
+                                  vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                                    vx_repl::Type_repl output_1 = vx_core::f_let(
+                                      vx_repl::t_repl,
+                                      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                                        vx_core::Type_any typefunc = vx_repl::f_typefunc_from_string(text);
+                                        vx_core::vx_ref_plus(typefunc);
+                                        vx_repl::Type_repl output_1 = vx_core::f_if_2(
+                                          vx_repl::t_repl,
+                                          vx_core::vx_new(vx_core::t_thenelselist, {
+                                            vx_core::f_then(
+                                              vx_core::t_boolean_from_func->vx_fn_new({typefunc}, [typefunc]() {
+                                                vx_core::Type_boolean output_1 = vx_core::f_notempty_1(typefunc);
+                                                return output_1;
+                                              }),
+                                              vx_core::t_any_from_func->vx_fn_new({typefunc}, [typefunc]() {
+                                                vx_repl::Type_repl output_1 = vx_core::f_new(
+                                                  vx_repl::t_repl,
+                                                  vx_core::vx_new(vx_core::t_anylist, {
+                                                    vx_core::vx_new_string(":type"),
+                                                    typefunc
+                                                  })
+                                                );
+                                                return output_1;
+                                              })
+                                            ),
+                                            vx_core::f_else(
+                                              vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                                                vx_repl::Type_repl output_1 = vx_core::f_new(
+                                                  vx_repl::t_repl,
+                                                  vx_core::vx_new(vx_core::t_anylist, {
+                                                    vx_core::f_msg_from_error(
+                                                      vx_core::f_new(
+                                                        vx_core::t_string,
+                                                        vx_core::vx_new(vx_core::t_anylist, {
+                                                          vx_core::vx_new_string("Repl Type Not Found: "),
+                                                          text
+                                                        })
+                                                      )
+                                                    )
+                                                  })
+                                                );
+                                                return output_1;
+                                              })
+                                            )
+                                          })
+                                        );
+                                        vx_core::vx_release_one_except(typefunc, output_1);
+                                        return output_1;
+                                      })
+                                    );
+                                    return output_1;
+                                  })
+                                )
+                              })
+                            );
+                            vx_core::vx_release_one_except(cnst, output_1);
+                            return output_1;
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_release_one_except(arg, output_1);
+                return output_1;
+              })
+            );
+            return output_1;
+          })
+        )
+      })
+    );
+    vx_core::vx_release_one_except({text, argmap}, output);
+    return output;
+  }
+
+  // (func repl<-string-argmap)
+  // class Class_repl_from_string_argmap {
+    Abstract_repl_from_string_argmap::~Abstract_repl_from_string_argmap() {}
+
+    Class_repl_from_string_argmap::Class_repl_from_string_argmap() : Abstract_repl_from_string_argmap::Abstract_repl_from_string_argmap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_repl_from_string_argmap::~Class_repl_from_string_argmap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_repl_from_string_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_string_argmap output = vx_repl::e_repl_from_string_argmap;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_from_string_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_string_argmap output = vx_repl::e_repl_from_string_argmap;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_repl_from_string_argmap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "repl<-string-argmap", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_repl_from_string_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repl_from_string_argmap::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "repl<-string-argmap", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_repl_from_string_argmap::vx_empty() const {return vx_repl::e_repl_from_string_argmap;}
+    vx_core::Type_any Class_repl_from_string_argmap::vx_type() const {return vx_repl::t_repl_from_string_argmap;}
+    vx_core::Type_msgblock Class_repl_from_string_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repl_from_string_argmap::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_repl_from_string_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_repl_from_string_argmap(text, argmap);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func repl<-textblock)
   vx_repl::Type_repl f_repl_from_textblock(vx_data_textblock::Type_textblock textblock) {
     vx_repl::Type_repl output = vx_repl::e_repl;
     vx_core::vx_reserve(textblock);
+    output = vx_repl::f_repl_from_textblock_argmap(
+      textblock,
+      vx_core::f_empty(
+        vx_core::t_argmap
+      )
+    );
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
@@ -1585,6 +2393,8 @@ namespace vx_repl {
       return output;
     }
 
+    vx_core::Type_constdef Class_repl_from_textblock::vx_constdef() const {return this->vx_p_constdef;}
+
     vx_core::Type_funcdef Class_repl_from_textblock::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
@@ -1623,50 +2433,81 @@ namespace vx_repl {
 
   //}
 
-  // (func textblock-repl<-script)
-  vx_data_textblock::Type_textblock f_textblock_repl_from_script(vx_core::Type_string script) {
-    vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
-    vx_core::vx_reserve(script);
-    output = vx_data_textblock::f_textblock_parse_from_string_delim(
-      script,
-      vx_repl::c_delimvxlisp
+  // (func repl<-textblock-argmap)
+  vx_repl::Type_repl f_repl_from_textblock_argmap(vx_data_textblock::Type_textblock textblock, vx_core::Type_argmap argmap) {
+    vx_repl::Type_repl output = vx_repl::e_repl;
+    vx_core::vx_reserve({textblock, argmap});
+    output = vx_core::f_let(
+      vx_repl::t_repl,
+      vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+        vx_data_textblock::Type_delim delim = textblock->delim();
+        vx_core::vx_ref_plus(delim);
+        vx_core::Type_string starttext = delim->starttext();
+        vx_core::vx_ref_plus(starttext);
+        vx_repl::Type_repl output_1 = vx_core::f_switch(
+          vx_repl::t_repl,
+          starttext,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_case_1(
+              vx_core::vx_new_string(""),
+              vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+                vx_repl::Type_repl output_1 = vx_repl::f_repl_empty_from_textblock_argmap(textblock, argmap);
+                return output_1;
+              })
+            ),
+            vx_core::f_case_1(
+              vx_core::f_any_from_struct(
+                vx_core::t_string,
+                vx_data_textblock::c_delimparen,
+                vx_core::vx_new_string(":starttext")
+              ),
+              vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
+                vx_repl::Type_repl output_1 = vx_repl::f_repl_paren_from_textblock_argmap(textblock, argmap);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_release_one_except({delim, starttext}, output_1);
+        return output_1;
+      })
     );
-    vx_core::vx_release_one_except(script, output);
+    vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
 
-  // (func textblock-repl<-script)
-  // class Class_textblock_repl_from_script {
-    Abstract_textblock_repl_from_script::~Abstract_textblock_repl_from_script() {}
+  // (func repl<-textblock-argmap)
+  // class Class_repl_from_textblock_argmap {
+    Abstract_repl_from_textblock_argmap::~Abstract_repl_from_textblock_argmap() {}
 
-    Class_textblock_repl_from_script::Class_textblock_repl_from_script() : Abstract_textblock_repl_from_script::Abstract_textblock_repl_from_script() {
+    Class_repl_from_textblock_argmap::Class_repl_from_textblock_argmap() : Abstract_repl_from_textblock_argmap::Abstract_repl_from_textblock_argmap() {
       vx_core::refcount += 1;
     }
 
-    Class_textblock_repl_from_script::~Class_textblock_repl_from_script() {
+    Class_repl_from_textblock_argmap::~Class_repl_from_textblock_argmap() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_textblock_repl_from_script::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_repl::Func_textblock_repl_from_script output = vx_repl::e_textblock_repl_from_script;
+    vx_core::Type_any Class_repl_from_textblock_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_textblock_argmap output = vx_repl::e_repl_from_textblock_argmap;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_textblock_repl_from_script::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_repl::Func_textblock_repl_from_script output = vx_repl::e_textblock_repl_from_script;
+    vx_core::Type_any Class_repl_from_textblock_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repl_from_textblock_argmap output = vx_repl::e_repl_from_textblock_argmap;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_textblock_repl_from_script::vx_typedef() const {
+    vx_core::Type_typedef Class_repl_from_textblock_argmap::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/repl", // pkgname
-        "textblock-repl<-script", // name
+        "repl<-textblock-argmap", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -1680,10 +2521,12 @@ namespace vx_repl {
       return output;
     }
 
-    vx_core::Type_funcdef Class_textblock_repl_from_script::vx_funcdef() const {
+    vx_core::Type_constdef Class_repl_from_textblock_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repl_from_textblock_argmap::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/repl", // pkgname
-        "textblock-repl<-script", // name
+        "repl<-textblock-argmap", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -1691,27 +2534,357 @@ namespace vx_repl {
       return output;
     }
 
-    vx_core::Type_any Class_textblock_repl_from_script::vx_empty() const {return vx_repl::e_textblock_repl_from_script;}
-    vx_core::Type_any Class_textblock_repl_from_script::vx_type() const {return vx_repl::t_textblock_repl_from_script;}
-    vx_core::Type_msgblock Class_textblock_repl_from_script::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_textblock_repl_from_script::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_repl_from_textblock_argmap::vx_empty() const {return vx_repl::e_repl_from_textblock_argmap;}
+    vx_core::Type_any Class_repl_from_textblock_argmap::vx_type() const {return vx_repl::t_repl_from_textblock_argmap;}
+    vx_core::Type_msgblock Class_repl_from_textblock_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repl_from_textblock_argmap::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_textblock_repl_from_script::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Type_any Class_repl_from_textblock_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_repl_from_textblock_argmap(textblock, argmap);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func repllist<-textblocklist-argmap)
+  vx_repl::Type_repllist f_repllist_from_textblocklist_argmap(vx_data_textblock::Type_textblocklist textblocklist, vx_core::Type_argmap argmap) {
+    vx_repl::Type_repllist output = vx_repl::e_repllist;
+    vx_core::vx_reserve({textblocklist, argmap});
+    output = vx_core::f_list_from_list(
+      vx_repl::t_repllist,
+      textblocklist,
+      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any textblock_any) {
+        vx_data_textblock::Type_textblock textblock = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, textblock_any);
+        vx_core::Type_any output_1 = 
+          vx_repl::f_repl_from_textblock(textblock);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({textblocklist, argmap}, output);
+    return output;
+  }
+
+  // (func repllist<-textblocklist-argmap)
+  // class Class_repllist_from_textblocklist_argmap {
+    Abstract_repllist_from_textblocklist_argmap::~Abstract_repllist_from_textblocklist_argmap() {}
+
+    Class_repllist_from_textblocklist_argmap::Class_repllist_from_textblocklist_argmap() : Abstract_repllist_from_textblocklist_argmap::Abstract_repllist_from_textblocklist_argmap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_repllist_from_textblocklist_argmap::~Class_repllist_from_textblocklist_argmap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_repllist_from_textblocklist_argmap::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repllist_from_textblocklist_argmap output = vx_repl::e_repllist_from_textblocklist_argmap;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_repllist_from_textblocklist_argmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_repllist_from_textblocklist_argmap output = vx_repl::e_repllist_from_textblocklist_argmap;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_repllist_from_textblocklist_argmap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "repllist<-textblocklist-argmap", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_repllist_from_textblocklist_argmap::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_repllist_from_textblocklist_argmap::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "repllist<-textblocklist-argmap", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_repllist_from_textblocklist_argmap::vx_empty() const {return vx_repl::e_repllist_from_textblocklist_argmap;}
+    vx_core::Type_any Class_repllist_from_textblocklist_argmap::vx_type() const {return vx_repl::t_repllist_from_textblocklist_argmap;}
+    vx_core::Type_msgblock Class_repllist_from_textblocklist_argmap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_repllist_from_textblocklist_argmap::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_repllist_from_textblocklist_argmap::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_textblock::Type_textblocklist textblocklist = vx_core::vx_any_from_any(vx_data_textblock::t_textblocklist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_argmap argmap = vx_core::vx_any_from_any(vx_core::t_argmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_repl::f_repllist_from_textblocklist_argmap(textblocklist, argmap);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func textblock<-script)
+  vx_data_textblock::Type_textblock f_textblock_from_script(vx_core::Type_string script) {
+    vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
+    vx_core::vx_reserve(script);
+    output = vx_data_textblock::f_textblock_parse_from_string_delim(
+      script,
+      vx_repl::c_delimvxlisp
+    );
+    vx_core::vx_release_one_except(script, output);
+    return output;
+  }
+
+  // (func textblock<-script)
+  // class Class_textblock_from_script {
+    Abstract_textblock_from_script::~Abstract_textblock_from_script() {}
+
+    Class_textblock_from_script::Class_textblock_from_script() : Abstract_textblock_from_script::Abstract_textblock_from_script() {
+      vx_core::refcount += 1;
+    }
+
+    Class_textblock_from_script::~Class_textblock_from_script() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_textblock_from_script::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_textblock_from_script output = vx_repl::e_textblock_from_script;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_textblock_from_script::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_textblock_from_script output = vx_repl::e_textblock_from_script;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_textblock_from_script::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "textblock<-script", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_textblock_from_script::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_textblock_from_script::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "textblock<-script", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_textblock_from_script::vx_empty() const {return vx_repl::e_textblock_from_script;}
+    vx_core::Type_any Class_textblock_from_script::vx_type() const {return vx_repl::t_textblock_from_script;}
+    vx_core::Type_msgblock Class_textblock_from_script::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_textblock_from_script::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_textblock_from_script::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any;
     }
 
-    vx_core::Type_any Class_textblock_repl_from_script::vx_any_from_any(vx_core::Type_any val) const {
+    vx_core::Type_any Class_textblock_from_script::vx_any_from_any(vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
-      output = vx_repl::f_textblock_repl_from_script(inputval);
+      output = vx_repl::f_textblock_from_script(inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
-    vx_core::Type_any Class_textblock_repl_from_script::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_textblock_from_script::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string script = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_repl::f_textblock_repl_from_script(script);
+      output = vx_repl::f_textblock_from_script(script);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func typefunc<-string)
+  vx_core::Type_any f_typefunc_from_string(vx_core::Type_string text) {
+    vx_core::Type_any output = vx_core::e_any;
+    vx_core::vx_reserve(text);
+    output = vx_core::f_let(
+      vx_core::t_any,
+      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+        vx_core::Type_int pkgpos = vx_type::f_int_from_string_findlast(text, vx_core::vx_new_string("/"));
+        vx_core::vx_ref_plus(pkgpos);
+        vx_core::Type_string pkgname = vx_core::f_if_1(
+          vx_core::t_string,
+          vx_core::f_eq(vx_core::vx_new_int(0), pkgpos),
+          vx_core::vx_new_string("vx/core"),
+          vx_type::f_string_from_string_end(
+            text,
+            vx_core::f_minus1(pkgpos)
+          )
+        );
+        vx_core::vx_ref_plus(pkgname);
+        vx_core::Type_string name = vx_core::f_if_1(
+          vx_core::t_string,
+          vx_core::f_eq(vx_core::vx_new_int(0), pkgpos),
+          text,
+          vx_type::f_string_from_string_start(
+            text,
+            vx_core::f_plus1(pkgpos)
+          )
+        );
+        vx_core::vx_ref_plus(name);
+        vx_core::Type_package pkg = vx_core::f_package_global_from_name(pkgname);
+        vx_core::vx_ref_plus(pkg);
+        vx_core::Type_typemap typemap = pkg->typemap();
+        vx_core::vx_ref_plus(typemap);
+        vx_core::Type_any typeval = vx_core::f_any_from_map(vx_core::t_any, typemap, name);
+        vx_core::vx_ref_plus(typeval);
+        vx_core::Type_any output_1 = vx_core::f_if_1(
+          vx_core::t_any,
+          vx_core::f_notempty_1(typeval),
+          typeval,
+          vx_core::f_let(
+            vx_core::t_any,
+            vx_core::t_any_from_func->vx_fn_new({pkg, name}, [pkg, name]() {
+              vx_core::Type_funcmap funcmap = pkg->funcmap();
+              vx_core::vx_ref_plus(funcmap);
+              vx_core::Type_any funcval = vx_core::f_any_from_map(vx_core::t_func, funcmap, name);
+              vx_core::vx_ref_plus(funcval);
+              vx_core::Type_any output_1 = vx_core::f_if_1(
+                vx_core::t_any,
+                vx_core::f_notempty_1(funcval),
+                funcval,
+                vx_core::f_empty(
+                  vx_core::t_any
+                )
+              );
+              vx_core::vx_release_one_except({funcmap, funcval}, output_1);
+              return output_1;
+            })
+          )
+        );
+        vx_core::vx_release_one_except({pkgpos, pkgname, name, pkg, typemap, typeval}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func typefunc<-string)
+  // class Class_typefunc_from_string {
+    Abstract_typefunc_from_string::~Abstract_typefunc_from_string() {}
+
+    Class_typefunc_from_string::Class_typefunc_from_string() : Abstract_typefunc_from_string::Abstract_typefunc_from_string() {
+      vx_core::refcount += 1;
+    }
+
+    Class_typefunc_from_string::~Class_typefunc_from_string() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_typefunc_from_string::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_typefunc_from_string output = vx_repl::e_typefunc_from_string;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_typefunc_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_repl::Func_typefunc_from_string output = vx_repl::e_typefunc_from_string;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_typefunc_from_string::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/repl", // pkgname
+        "typefunc<-string", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_typefunc_from_string::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_typefunc_from_string::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/repl", // pkgname
+        "typefunc<-string", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_typefunc_from_string::vx_empty() const {return vx_repl::e_typefunc_from_string;}
+    vx_core::Type_any Class_typefunc_from_string::vx_type() const {return vx_repl::t_typefunc_from_string;}
+    vx_core::Type_msgblock Class_typefunc_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_typefunc_from_string::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_typefunc_from_string::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_typefunc_from_string::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_repl::f_typefunc_from_string(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_typefunc_from_string::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_repl::f_typefunc_from_string(text);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1737,14 +2910,32 @@ namespace vx_repl {
   vx_repl::Func_any_from_script t_any_from_script = NULL;
   vx_repl::Func_anylist_from_repllist e_anylist_from_repllist = NULL;
   vx_repl::Func_anylist_from_repllist t_anylist_from_repllist = NULL;
+  vx_repl::Func_argmap_from_textblock_argmap e_argmap_from_textblock_argmap = NULL;
+  vx_repl::Func_argmap_from_textblock_argmap t_argmap_from_textblock_argmap = NULL;
+  vx_repl::Func_const_from_string e_const_from_string = NULL;
+  vx_repl::Func_const_from_string t_const_from_string = NULL;
   vx_repl::Func_macro e_macro = NULL;
   vx_repl::Func_macro t_macro = NULL;
+  vx_repl::Func_repl_empty_from_textblock_argmap e_repl_empty_from_textblock_argmap = NULL;
+  vx_repl::Func_repl_empty_from_textblock_argmap t_repl_empty_from_textblock_argmap = NULL;
+  vx_repl::Func_repl_paren_from_textblock_argmap e_repl_paren_from_textblock_argmap = NULL;
+  vx_repl::Func_repl_paren_from_textblock_argmap t_repl_paren_from_textblock_argmap = NULL;
   vx_repl::Func_repl_from_liblist_string e_repl_from_liblist_string = NULL;
   vx_repl::Func_repl_from_liblist_string t_repl_from_liblist_string = NULL;
+  vx_repl::Func_repl_from_script e_repl_from_script = NULL;
+  vx_repl::Func_repl_from_script t_repl_from_script = NULL;
+  vx_repl::Func_repl_from_string_argmap e_repl_from_string_argmap = NULL;
+  vx_repl::Func_repl_from_string_argmap t_repl_from_string_argmap = NULL;
   vx_repl::Func_repl_from_textblock e_repl_from_textblock = NULL;
   vx_repl::Func_repl_from_textblock t_repl_from_textblock = NULL;
-  vx_repl::Func_textblock_repl_from_script e_textblock_repl_from_script = NULL;
-  vx_repl::Func_textblock_repl_from_script t_textblock_repl_from_script = NULL;
+  vx_repl::Func_repl_from_textblock_argmap e_repl_from_textblock_argmap = NULL;
+  vx_repl::Func_repl_from_textblock_argmap t_repl_from_textblock_argmap = NULL;
+  vx_repl::Func_repllist_from_textblocklist_argmap e_repllist_from_textblocklist_argmap = NULL;
+  vx_repl::Func_repllist_from_textblocklist_argmap t_repllist_from_textblocklist_argmap = NULL;
+  vx_repl::Func_textblock_from_script e_textblock_from_script = NULL;
+  vx_repl::Func_textblock_from_script t_textblock_from_script = NULL;
+  vx_repl::Func_typefunc_from_string e_typefunc_from_string = NULL;
+  vx_repl::Func_typefunc_from_string t_typefunc_from_string = NULL;
 
   // class vx_Class_package {
     vx_Class_package::vx_Class_package() {
@@ -1786,39 +2977,91 @@ namespace vx_repl {
       vx_core::vx_reserve_empty(vx_repl::e_anylist_from_repllist);
       vx_repl::t_anylist_from_repllist = new vx_repl::Class_anylist_from_repllist();
       vx_core::vx_reserve_type(vx_repl::t_anylist_from_repllist);
+      vx_repl::e_argmap_from_textblock_argmap = new vx_repl::Class_argmap_from_textblock_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_argmap_from_textblock_argmap);
+      vx_repl::t_argmap_from_textblock_argmap = new vx_repl::Class_argmap_from_textblock_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_argmap_from_textblock_argmap);
+      vx_repl::e_const_from_string = new vx_repl::Class_const_from_string();
+      vx_core::vx_reserve_empty(vx_repl::e_const_from_string);
+      vx_repl::t_const_from_string = new vx_repl::Class_const_from_string();
+      vx_core::vx_reserve_type(vx_repl::t_const_from_string);
       vx_repl::e_macro = new vx_repl::Class_macro();
       vx_core::vx_reserve_empty(vx_repl::e_macro);
       vx_repl::t_macro = new vx_repl::Class_macro();
       vx_core::vx_reserve_type(vx_repl::t_macro);
+      vx_repl::e_repl_empty_from_textblock_argmap = new vx_repl::Class_repl_empty_from_textblock_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_empty_from_textblock_argmap);
+      vx_repl::t_repl_empty_from_textblock_argmap = new vx_repl::Class_repl_empty_from_textblock_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_repl_empty_from_textblock_argmap);
+      vx_repl::e_repl_paren_from_textblock_argmap = new vx_repl::Class_repl_paren_from_textblock_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_paren_from_textblock_argmap);
+      vx_repl::t_repl_paren_from_textblock_argmap = new vx_repl::Class_repl_paren_from_textblock_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_repl_paren_from_textblock_argmap);
       vx_repl::e_repl_from_liblist_string = new vx_repl::Class_repl_from_liblist_string();
       vx_core::vx_reserve_empty(vx_repl::e_repl_from_liblist_string);
       vx_repl::t_repl_from_liblist_string = new vx_repl::Class_repl_from_liblist_string();
       vx_core::vx_reserve_type(vx_repl::t_repl_from_liblist_string);
+      vx_repl::e_repl_from_script = new vx_repl::Class_repl_from_script();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_from_script);
+      vx_repl::t_repl_from_script = new vx_repl::Class_repl_from_script();
+      vx_core::vx_reserve_type(vx_repl::t_repl_from_script);
+      vx_repl::e_repl_from_string_argmap = new vx_repl::Class_repl_from_string_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_from_string_argmap);
+      vx_repl::t_repl_from_string_argmap = new vx_repl::Class_repl_from_string_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_repl_from_string_argmap);
       vx_repl::e_repl_from_textblock = new vx_repl::Class_repl_from_textblock();
       vx_core::vx_reserve_empty(vx_repl::e_repl_from_textblock);
       vx_repl::t_repl_from_textblock = new vx_repl::Class_repl_from_textblock();
       vx_core::vx_reserve_type(vx_repl::t_repl_from_textblock);
-      vx_repl::e_textblock_repl_from_script = new vx_repl::Class_textblock_repl_from_script();
-      vx_core::vx_reserve_empty(vx_repl::e_textblock_repl_from_script);
-      vx_repl::t_textblock_repl_from_script = new vx_repl::Class_textblock_repl_from_script();
-      vx_core::vx_reserve_type(vx_repl::t_textblock_repl_from_script);
+      vx_repl::e_repl_from_textblock_argmap = new vx_repl::Class_repl_from_textblock_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_repl_from_textblock_argmap);
+      vx_repl::t_repl_from_textblock_argmap = new vx_repl::Class_repl_from_textblock_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_repl_from_textblock_argmap);
+      vx_repl::e_repllist_from_textblocklist_argmap = new vx_repl::Class_repllist_from_textblocklist_argmap();
+      vx_core::vx_reserve_empty(vx_repl::e_repllist_from_textblocklist_argmap);
+      vx_repl::t_repllist_from_textblocklist_argmap = new vx_repl::Class_repllist_from_textblocklist_argmap();
+      vx_core::vx_reserve_type(vx_repl::t_repllist_from_textblocklist_argmap);
+      vx_repl::e_textblock_from_script = new vx_repl::Class_textblock_from_script();
+      vx_core::vx_reserve_empty(vx_repl::e_textblock_from_script);
+      vx_repl::t_textblock_from_script = new vx_repl::Class_textblock_from_script();
+      vx_core::vx_reserve_type(vx_repl::t_textblock_from_script);
+      vx_repl::e_typefunc_from_string = new vx_repl::Class_typefunc_from_string();
+      vx_core::vx_reserve_empty(vx_repl::e_typefunc_from_string);
+      vx_repl::t_typefunc_from_string = new vx_repl::Class_typefunc_from_string();
+      vx_core::vx_reserve_type(vx_repl::t_typefunc_from_string);
       vx_repl::Class_delimvxlisp::vx_const_new(vx_repl::c_delimvxlisp);
       vx_repl::Class_delimvxlispbracket::vx_const_new(vx_repl::c_delimvxlispbracket);
       vx_repl::Class_delimvxlispparen::vx_const_new(vx_repl::c_delimvxlispparen);
-    }
-    vx_core::vx_Type_mapany vx_Class_package::maptype() {
-      vx_core::vx_Type_mapany output;
-      output["anylist"] = vx_core::t_anylist;
-      return output;
-    }
-    vx_core::vx_Type_mapany vx_Class_package::mapconst() {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-    std::map<std::string, vx_core::Type_func> vx_Class_package::mapfunc() {
-      vx_core::vx_Type_mapfunc output;
-      return output;
-    }
+      vx_core::vx_Type_mapany maptype;
+      vx_core::vx_Type_mapany mapconst;
+      vx_core::vx_Type_mapfunc mapfunc;
+      vx_core::vx_Type_mapany mapempty;
+      maptype["liblist"] = vx_repl::t_liblist;
+      maptype["repl"] = vx_repl::t_repl;
+      maptype["repllist"] = vx_repl::t_repllist;
+      mapconst["delimvxlisp"] = vx_repl::c_delimvxlisp;
+      mapconst["delimvxlispbracket"] = vx_repl::c_delimvxlispbracket;
+      mapconst["delimvxlispparen"] = vx_repl::c_delimvxlispparen;
+      mapfunc["any-repl<-functype-args"] = vx_repl::t_any_repl_from_functype_args;
+      mapfunc["any<-liblist-string"] = vx_repl::t_any_from_liblist_string;
+      mapfunc["any<-repl"] = vx_repl::t_any_from_repl;
+      mapfunc["any<-script"] = vx_repl::t_any_from_script;
+      mapfunc["anylist<-repllist"] = vx_repl::t_anylist_from_repllist;
+      mapfunc["argmap<-textblock-argmap"] = vx_repl::t_argmap_from_textblock_argmap;
+      mapfunc["const<-string"] = vx_repl::t_const_from_string;
+      mapfunc["macro"] = vx_repl::t_macro;
+      mapfunc["repl-empty<-textblock-argmap"] = vx_repl::t_repl_empty_from_textblock_argmap;
+      mapfunc["repl-paren<-textblock-argmap"] = vx_repl::t_repl_paren_from_textblock_argmap;
+      mapfunc["repl<-liblist-string"] = vx_repl::t_repl_from_liblist_string;
+      mapfunc["repl<-script"] = vx_repl::t_repl_from_script;
+      mapfunc["repl<-string-argmap"] = vx_repl::t_repl_from_string_argmap;
+      mapfunc["repl<-textblock"] = vx_repl::t_repl_from_textblock;
+      mapfunc["repl<-textblock-argmap"] = vx_repl::t_repl_from_textblock_argmap;
+      mapfunc["repllist<-textblocklist-argmap"] = vx_repl::t_repllist_from_textblocklist_argmap;
+      mapfunc["textblock<-script"] = vx_repl::t_textblock_from_script;
+      mapfunc["typefunc<-string"] = vx_repl::t_typefunc_from_string;
+      vx_core::vx_global_package_set("vx/repl", maptype, mapconst, mapfunc);
+	   }
   // }
 
 }
