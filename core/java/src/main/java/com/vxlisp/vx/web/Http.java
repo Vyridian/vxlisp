@@ -70,11 +70,11 @@ public final class Http {
     public Type_response vx_copy(final Object... vals) {
       Type_response output = this;
       boolean ischanged = false;
+      Class_response val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_response val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_boolean vx_p_ok = val.ok();
       Core.Type_int vx_p_status = val.status();
       ArrayList<String> validkeys = new ArrayList<>();

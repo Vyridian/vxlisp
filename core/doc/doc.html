@@ -291,6 +291,9 @@
           <li class="ntype" onclick="docjs.navigate('type_vx/core/context')">
             (t) context
           </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/core/date')">
+            (t) date
+          </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">
             (t) decimal
           </li>
@@ -326,6 +329,9 @@
           </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/listtype')">
             (t) listtype
+          </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/core/locale')">
+            (t) locale
           </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/map')">
             (t) map
@@ -413,6 +419,9 @@
           </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/thenelselist')">
             (t) thenelselist
+          </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/core/translation')">
+            (t) translation
           </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/type')">
             (t) type
@@ -1365,6 +1374,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-liblist-string')">
             (f) any&lt;-liblist-string
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-macro')">
+            (f) any&lt;-macro
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/repl/any-repl&lt;-functype-args')">
             (f) any-repl&lt;-functype-args
           </li>
@@ -1383,11 +1395,11 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/repl/const&lt;-string')">
             (f) const&lt;-string
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/repl/macro')">
-            (f) macro
-          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-liblist-string')">
             (f) repl&lt;-liblist-string
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-macro')">
+            (f) repl&lt;-macro
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-script')">
             (f) repl&lt;-script
@@ -2129,7 +2141,7 @@
                 <div class="tr">
                   <div class="td">srckotlin</div>
                   <div class="td">:source</div>
-                  <div class="td">../kotlin/app/src/main/kotlin</div>
+                  <div class="td">../kotlin/app/src/main/kotlin/app</div>
                   <div class="td">:kotlin</div>
                   <div class="td">vx/core/main</div>
                   <div class="td">vx/core/context-main</div>
@@ -2139,7 +2151,7 @@
                 <div class="tr">
                   <div class="td">testkotlin</div>
                   <div class="td">:test</div>
-                  <div class="td">../kotlin/app/src/test/kotlin</div>
+                  <div class="td">../kotlin/app/src/test/kotlin/app</div>
                   <div class="td">:kotlin</div>
                   <div class="td"></div>
                   <div class="td">vx/test/context-test</div>
@@ -2287,14 +2299,14 @@
   (cmd srckotlin
    :code    :source
    :lang    :kotlin
-   :path    ../kotlin/app/src/main/kotlin
+   :path    ../kotlin/app/src/main/kotlin/app
    :main    vx/core/main
    :context vx/core/context-main
    :doc     &quot;Build Kotlin Source Code&quot;)
   (cmd testkotlin
    :code    :test
    :lang    :kotlin
-   :path    ../kotlin/app/src/test/kotlin
+   :path    ../kotlin/app/src/test/kotlin/app
    :context vx/test/context-test
    :doc     &quot;Build Kotlin Test Code&quot;)
   (cmd srcswift
@@ -3976,7 +3988,7 @@ output : list-1 := (empty list-1)
         <div class="lbl">Description:</div>
         <ul>
           <li>
-            <div class="txt">Core VxLisp Library. Unfortunately large because of interdependencies.</div>
+            <div class="txt">Core vxlisp Library. Unfortunately large because of interdependencies.</div>
           </li>
         </ul>
         <div class="lbl">Package Name:</div>
@@ -4001,16 +4013,16 @@ output : list-1 := (empty list-1)
                 <div class="td">vx/test</div>
               </div>
               <div class="tr">
-                <div class="td">javafuture</div>
-                <div class="td">java.util.concurrent.CompletableFuture</div>
-              </div>
-              <div class="tr">
                 <div class="td">javafunction</div>
                 <div class="td">java.util.function.*</div>
               </div>
               <div class="tr">
                 <div class="td">javacollectors</div>
                 <div class="td">java.util.stream.Collectors</div>
+              </div>
+              <div class="tr">
+                <div class="td">javafuture</div>
+                <div class="td">java.util.concurrent.CompletableFuture</div>
               </div>
             </div>
           </li>
@@ -4022,7 +4034,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/core/any')">any</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any-async&lt;-func')">any-async&lt;-func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-anylist')">any&lt;-anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anytype')">anytype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arg')">arg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arglist')">arglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/argmap')">argmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">boolean</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/booleanlist')">booleanlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/collection')">collection</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/compilelanguages')">compilelanguages</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connect')">connect</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectlist')">connectlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectmap')">connectmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/const')">const</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constdef')">constdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constlist')">constlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constmap')">constmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/context')">context</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">decimal</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/error')">error</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/float')">float</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/func')">func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcdef')">funcdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funclist')">funclist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcmap')">funcmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/int')">int</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intlist')">intlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intmap')">intmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/list')">list</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/listtype')">listtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/map')">map</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/maptype')">maptype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/mempool')">mempool</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msg')">msg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblock')">msgblock</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblocklist')">msgblocklist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msglist')">msglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/none')">none</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/notype')">notype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/number')">number</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numberlist')">numberlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numbermap')">numbermap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/package')">package</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/packagemap')">packagemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permission')">permission</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionlist')">permissionlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionmap')">permissionmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/project')">project</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/security')">security</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/session')">session</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/setting')">setting</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/state')">state</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/string')">string</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringlist')">stringlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">stringmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/struct')">struct</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelse')">thenelse</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelselist')">thenelselist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/type')">type</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">typedef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typelist')">typelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typemap')">typemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/user')">user</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/value')">value</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/core/any')">any</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any-async&lt;-func')">any-async&lt;-func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-anylist')">any&lt;-anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anytype')">anytype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arg')">arg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arglist')">arglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/argmap')">argmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">boolean</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/booleanlist')">booleanlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/collection')">collection</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/compilelanguages')">compilelanguages</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connect')">connect</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectlist')">connectlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectmap')">connectmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/const')">const</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constdef')">constdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constlist')">constlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constmap')">constmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/context')">context</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/date')">date</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">decimal</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/error')">error</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/float')">float</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/func')">func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcdef')">funcdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funclist')">funclist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcmap')">funcmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/int')">int</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intlist')">intlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intmap')">intmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/list')">list</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/listtype')">listtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/locale')">locale</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/map')">map</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/maptype')">maptype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/mempool')">mempool</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msg')">msg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblock')">msgblock</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblocklist')">msgblocklist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msglist')">msglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/none')">none</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/notype')">notype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/number')">number</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numberlist')">numberlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numbermap')">numbermap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/package')">package</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/packagemap')">packagemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permission')">permission</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionlist')">permissionlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionmap')">permissionmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/project')">project</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/security')">security</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/session')">session</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/setting')">setting</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/state')">state</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/string')">string</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringlist')">stringlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">stringmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/struct')">struct</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelse')">thenelse</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelselist')">thenelselist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">translation</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/type')">type</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">typedef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typelist')">typelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typemap')">typemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/user')">user</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/value')">value</span>
             </li>
           </ul>
         </details>
@@ -4053,14 +4065,12 @@ output : list-1 := (empty list-1)
           <ul>
             <li>
               <div class="source">(package vx/core
- :libs (lib javafuture)
-       (lib javafunction)
+ :libs (lib javafunction)
        (lib javacollectors)
- :doc &quot;Core VxLisp Library. Unfortunately large because of interdependencies.&quot;)
+       (lib javafuture)
+ :doc &quot;Core vxlisp Library. Unfortunately large because of interdependencies.&quot;)
 
 (type any
- :convert [int    string string&lt;-int
-           string int    int&lt;-string]
  :create
   (native
    :cpp
@@ -4160,6 +4170,9 @@ output : list-1 := (empty list-1)
               setting : setting
               state   : state]
  :doc &quot;Context&quot;)
+
+(type date : string
+ :doc &quot;A simple UTC date.&quot;)
 
 (type decimal
  :traits  [number]
@@ -4291,6 +4304,9 @@ output : list-1 := (empty list-1)
 
 (type listtype : type
  :doc     &quot;A generic type that extends :list.&quot;)
+
+(type locale : struct
+ :doc &quot;Localization data.&quot;)
 
 (type map : map
  :allowtypes [any]
@@ -4455,7 +4471,9 @@ output : list-1 := (empty list-1)
 (type session : struct
  :properties [user        : user
               connectlist : connectlist
-              connectmap : connectmap]
+              connectmap  : connectmap
+              locale      : locale
+              translation : translation]
  :doc        &quot;Session&quot;)
 
 (type setting : struct
@@ -4516,6 +4534,10 @@ output : list-1 := (empty list-1)
 
 (type thenelselist : list
  :allowtypes [thenelse])
+
+(type translation : struct
+ :properties [translationmap : stringmap]
+ :doc &quot;i18 language translation.&quot;)
 
 (type type : type
  :doc     &quot;Original Type Class&quot;)
@@ -6918,8 +6940,6 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type any
- :convert [int    string string&lt;-int
-           string int    int&lt;-string]
  :create
   (native
    :cpp
@@ -8021,6 +8041,51 @@ output : list-1 := (empty list-1)
               </ul>
             </details>
           </div>
+          <div class="d" id="d_type_vx/core/date">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="ntype" onclick="docjs.navigate('type_vx/core/date')">date</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">A simple UTC date.</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">date</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:string</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type date : string
+ :doc &quot;A simple UTC date.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_type_vx/core/decimal">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">decimal</span></div>
             <div class="lbl">Description:</div>
@@ -8743,6 +8808,51 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(type listtype : type
  :doc     &quot;A generic type that extends :list.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_type_vx/core/locale">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="ntype" onclick="docjs.navigate('type_vx/core/locale')">locale</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Localization data.</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">locale</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type locale : struct
+ :doc &quot;Localization data.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -10064,6 +10174,20 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                       <div class="td">false</div>
                     </div>
+                    <div class="tr">
+                      <div class="td">locale</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/locale')">vx/core/locale</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">translation</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -10084,7 +10208,9 @@ output : list-1 := (empty list-1)
                   <div class="source">(type session : struct
  :properties [user        : user
               connectlist : connectlist
-              connectmap : connectmap]
+              connectmap  : connectmap
+              locale      : locale
+              translation : translation]
  :doc        &quot;Session&quot;)</div>
                 </li>
               </ul>
@@ -10666,6 +10792,77 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(type thenelselist : list
  :allowtypes [thenelse])</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_type_vx/core/translation">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">translation</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">i18 language translation.</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translation</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <details>
+              <summary>
+                <span class="lbl">Properties:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="table">
+                    <div class="th">
+                      <div class="td">Name</div>
+                      <div class="td">Type</div>
+                      <div class="td">Description</div>
+                      <div class="td">Is Multi</div>
+                      <div class="td">Is Default</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">translationmap</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">vx/core/stringmap</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type translation : struct
+ :properties [translationmap : stringmap]
+ :doc &quot;i18 language translation.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -46147,7 +46344,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-liblist-string')">any&lt;-liblist-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any-repl&lt;-functype-args')">any-repl&lt;-functype-args</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-repl')">any&lt;-repl</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-script')">any&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/anylist&lt;-repllist')">anylist&lt;-repllist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/argmap&lt;-textblock-argmap')">argmap&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/const&lt;-string')">const&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/macro')">macro</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-liblist-string')">repl&lt;-liblist-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-script')">repl&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-string-argmap')">repl&lt;-string-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-textblock')">repl&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-textblock-argmap')">repl&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl-empty&lt;-textblock-argmap')">repl-empty&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl-paren&lt;-textblock-argmap')">repl-paren&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repllist&lt;-textblocklist-argmap')">repllist&lt;-textblocklist-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/textblock&lt;-script')">textblock&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/typefunc&lt;-string')">typefunc&lt;-string</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-liblist-string')">any&lt;-liblist-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-macro')">any&lt;-macro</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any-repl&lt;-functype-args')">any-repl&lt;-functype-args</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-repl')">any&lt;-repl</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-script')">any&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/anylist&lt;-repllist')">anylist&lt;-repllist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/argmap&lt;-textblock-argmap')">argmap&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/const&lt;-string')">const&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-liblist-string')">repl&lt;-liblist-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-macro')">repl&lt;-macro</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-script')">repl&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-string-argmap')">repl&lt;-string-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-textblock')">repl&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-textblock-argmap')">repl&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl-empty&lt;-textblock-argmap')">repl-empty&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl-paren&lt;-textblock-argmap')">repl-paren&lt;-textblock-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repllist&lt;-textblocklist-argmap')">repllist&lt;-textblocklist-argmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/textblock&lt;-script')">textblock&lt;-script</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/repl/typefunc&lt;-string')">typefunc&lt;-string</span>
             </li>
           </ul>
         </details>
@@ -46227,18 +46424,21 @@ improves readability.</div>
  :context
  :doc &quot;Run an arbitrary program in the REPL.&quot;)
 
-/*
-(func any&lt;-liblist-string-async : any
- [liblist : liblist
-  text    : string :doc &quot;Program to run&quot;]
- (let : any
-  [repl : repl := (repl&lt;-liblist-string liblist text)
-   val  : any  := (any&lt;-repl-async repl)]
-  val)
- :async
+(func any&lt;-macro : any-1
+ [anylist : anylist :...]
+ (let : any-1
+  [repl : repl := (repl&lt;-macro anylist)
+   val  : any  := (any&lt;-repl repl)]
+  (any&lt;-any : any-1
+   val))
  :context
- :doc   &quot;Run an arbitrary program in the REPL asynchrously.&quot;)
-*/
+ :test (test
+        5
+        (any&lt;-macro : int
+         &quot;(+ &quot;
+         (- 7 5)
+         &quot; 3)&quot;))
+ :doc &quot;A function that joins any number of values into a string and then parses and evaluates it.&quot;)
 
 (func any-repl&lt;-functype-args : any
  [type : any
@@ -46296,8 +46496,7 @@ improves readability.</div>
           :repllist
            (repllist
             (repl :val 2)
-            (repl :val 3)
-           ))))           
+            (repl :val 3)))))
  :doc &quot;Run an arbitrary program in the REPL.&quot;)
 
 /*
@@ -46418,9 +46617,14 @@ improves readability.</div>
          &quot;vx/data/textblock/delimcomma&quot;))
  :doc &quot;Returns a constant from a fully qualified name.&quot;)
 
-(func macro : any-1
+(func repl&lt;-liblist-string : repl
+ [liblist : liblist
+  text    : string :doc &quot;Program to run&quot;]
+ :doc &quot;Returns a repl from the given text.&quot;)
+
+(func repl&lt;-macro : repl
  [anylist : anylist :...]
- (let : any-1
+ (let : repl
   [textlist : stringlist   := (list&lt;-list : stringlist
                                anylist
                                (fn [item : any] : string
@@ -46437,23 +46641,23 @@ improves readability.</div>
                                textlist
                                &quot;&quot;)
    tb       : tb/textblock := (textblock&lt;-script
-                               script)
-   repl     : repl         := (repl&lt;-textblock tb)]
-  (any&lt;-any : any-1
-   (any&lt;-repl repl)))
+                               script)]
+  (repl&lt;-textblock tb))
  :context
  :test (test
-        5
-        (macro : int
+        (repl
+         :type vx/core/+
+         :repllist
+          (repllist
+           (repl
+            :val 2)
+           (repl
+            :val 3)))
+        (repl&lt;-macro
          &quot;(+ &quot;
          (- 7 5)
          &quot; 3)&quot;))
- :doc &quot;A function that joins any number of values into a string and then parses and evaluates it.&quot;)
-
-(func repl&lt;-liblist-string : repl
- [liblist : liblist
-  text    : string :doc &quot;Program to run&quot;]
- :doc &quot;Returns a repl from the given text.&quot;)
+ :doc &quot;A function that joins any number of values into a string and then parses it.&quot;)
 
 (func repl&lt;-script : repl
  [script : string]
@@ -47455,6 +47659,86 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/repl/any&lt;-macro">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/repl')">vx/repl</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any&lt;-macro')">any&lt;-macro</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">A function that joins any number of values into a string and then parses and evaluates it.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any&lt;-macro</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">anylist</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">vx/core/anylist</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ 5
+ (any&lt;-macro : int
+  &quot;(+ &quot;
+  (- 7 5)
+  &quot; 3)&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any&lt;-macro : any-1
+ [anylist : anylist :...]
+ (let : any-1
+  [repl : repl := (repl&lt;-macro anylist)
+   val  : any  := (any&lt;-repl repl)]
+  (any&lt;-any : any-1
+   val))
+ :context
+ :test (test
+        5
+        (any&lt;-macro : int
+         &quot;(+ &quot;
+         (- 7 5)
+         &quot; 3)&quot;))
+ :doc &quot;A function that joins any number of values into a string and then parses and evaluates it.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/repl/any-repl&lt;-functype-args">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/repl')">vx/repl</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/repl/any-repl&lt;-functype-args')">any-repl&lt;-functype-args</span></div>
             <div class="lbl">Description:</div>
@@ -47605,8 +47889,7 @@ improves readability.</div>
    :repllist
     (repllist
      (repl :val 2)
-     (repl :val 3)
-    ))))</div></li>
+     (repl :val 3)))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -47649,8 +47932,7 @@ improves readability.</div>
           :repllist
            (repllist
             (repl :val 2)
-            (repl :val 3)
-           ))))           
+            (repl :val 3)))))
  :doc &quot;Run an arbitrary program in the REPL.&quot;)</div>
                 </li>
               </ul>
@@ -47989,102 +48271,6 @@ improves readability.</div>
               </ul>
             </details>
           </div>
-          <div class="d" id="d_func_vx/repl/macro">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/repl')">vx/repl</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/repl/macro')">macro</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt">A function that joins any number of values into a string and then parses and evaluates it.</div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">macro</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">anylist</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">vx/core/anylist</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-                <li><div class="test">(test
- 5
- (macro : int
-  &quot;(+ &quot;
-  (- 7 5)
-  &quot; 3)&quot;))</div></li>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func macro : any-1
- [anylist : anylist :...]
- (let : any-1
-  [textlist : stringlist   := (list&lt;-list : stringlist
-                               anylist
-                               (fn [item : any] : string
-                                (let : string
-                                 [typ : any := (type&lt;-any item)]
-                                 (switch : string
-                                  typ
-                                  (case string
-                                   (any&lt;-any : string
-                                    item))
-                                  (else
-                                   (string&lt;-any item))))))
-   script   : string       := (type/string&lt;-stringlist-join
-                               textlist
-                               &quot;&quot;)
-   tb       : tb/textblock := (textblock&lt;-script
-                               script)
-   repl     : repl         := (repl&lt;-textblock tb)]
-  (any&lt;-any : any-1
-   (any&lt;-repl repl)))
- :context
- :test (test
-        5
-        (macro : int
-         &quot;(+ &quot;
-         (- 7 5)
-         &quot; 3)&quot;))
- :doc &quot;A function that joins any number of values into a string and then parses and evaluates it.&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
           <div class="d" id="d_func_vx/repl/repl&lt;-liblist-string">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/repl')">vx/repl</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-liblist-string')">repl&lt;-liblist-string</span></div>
             <div class="lbl">Description:</div>
@@ -48149,6 +48335,114 @@ improves readability.</div>
  [liblist : liblist
   text    : string :doc &quot;Program to run&quot;]
  :doc &quot;Returns a repl from the given text.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/repl/repl&lt;-macro">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/repl')">vx/repl</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/repl/repl&lt;-macro')">repl&lt;-macro</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">A function that joins any number of values into a string and then parses it.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">repl&lt;-macro</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/repl/repl')">vx/repl/repl</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">anylist</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">vx/core/anylist</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ (repl
+  :type vx/core/+
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl&lt;-macro
+  &quot;(+ &quot;
+  (- 7 5)
+  &quot; 3)&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func repl&lt;-macro : repl
+ [anylist : anylist :...]
+ (let : repl
+  [textlist : stringlist   := (list&lt;-list : stringlist
+                               anylist
+                               (fn [item : any] : string
+                                (let : string
+                                 [typ : any := (type&lt;-any item)]
+                                 (switch : string
+                                  typ
+                                  (case string
+                                   (any&lt;-any : string
+                                    item))
+                                  (else
+                                   (string&lt;-any item))))))
+   script   : string       := (type/string&lt;-stringlist-join
+                               textlist
+                               &quot;&quot;)
+   tb       : tb/textblock := (textblock&lt;-script
+                               script)]
+  (repl&lt;-textblock tb))
+ :context
+ :test (test
+        (repl
+         :type vx/core/+
+         :repllist
+          (repllist
+           (repl
+            :val 2)
+           (repl
+            :val 3)))
+        (repl&lt;-macro
+         &quot;(+ &quot;
+         (- 7 5)
+         &quot; 3)&quot;))
+ :doc &quot;A function that joins any number of values into a string and then parses it.&quot;)</div>
                 </li>
               </ul>
             </details>

@@ -58,11 +58,11 @@ public final class Xml {
     public Type_xml vx_copy(final Object... vals) {
       Type_xml output = this;
       boolean ischanged = false;
+      Class_xml val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_xml val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Xml.Type_xmlnodelist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
@@ -227,11 +227,11 @@ public final class Xml {
     public Type_xmlnode vx_copy(final Object... vals) {
       Type_xmlnode output = this;
       boolean ischanged = false;
+      Class_xmlnode val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_xmlnode val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Xml.Type_xmlnode vx_p_nodes = val.nodes();
       Xml.Type_xmlpropmap vx_p_props = val.props();
       Core.Type_string vx_p_tag = val.tag();
@@ -405,11 +405,11 @@ public final class Xml {
     public Type_xmlnodelist vx_copy(final Object... vals) {
       Type_xmlnodelist output = this;
       boolean ischanged = false;
+      Class_xmlnodelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_xmlnodelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Xml.Type_xmlnode> listval = new ArrayList<>(val.vx_listxmlnode());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -546,12 +546,12 @@ public final class Xml {
     public Type_xmlpropmap vx_copy(final Object... vals) {
       Type_xmlpropmap output = this;
       boolean ischanged = false;
+      Class_xmlpropmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_xmlpropmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(valmap.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

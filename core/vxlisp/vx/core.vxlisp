@@ -1,12 +1,10 @@
 (package vx/core
- :libs (lib javafuture)
-       (lib javafunction)
+ :libs (lib javafunction)
        (lib javacollectors)
- :doc "Core VxLisp Library. Unfortunately large because of interdependencies.")
+       (lib javafuture)
+ :doc "Core vxlisp Library. Unfortunately large because of interdependencies.")
 
 (type any
- :convert [int    string string<-int
-           string int    int<-string]
  :create
   (native
    :cpp
@@ -106,6 +104,9 @@
               setting : setting
               state   : state]
  :doc "Context")
+
+(type date : string
+ :doc "A simple UTC date.")
 
 (type decimal
  :traits  [number]
@@ -237,6 +238,9 @@
 
 (type listtype : type
  :doc     "A generic type that extends :list.")
+
+(type locale : struct
+ :doc "Localization data.")
 
 (type map : map
  :allowtypes [any]
@@ -401,7 +405,9 @@
 (type session : struct
  :properties [user        : user
               connectlist : connectlist
-              connectmap : connectmap]
+              connectmap  : connectmap
+              locale      : locale
+              translation : translation]
  :doc        "Session")
 
 (type setting : struct
@@ -462,6 +468,10 @@
 
 (type thenelselist : list
  :allowtypes [thenelse])
+
+(type translation : struct
+ :properties [translationmap : stringmap]
+ :doc "i18 language translation.")
 
 (type type : type
  :doc     "Original Type Class")

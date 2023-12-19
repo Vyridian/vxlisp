@@ -70,11 +70,11 @@ public final class Table {
     public Type_cell vx_copy(final Object... vals) {
       Type_cell output = this;
       boolean ischanged = false;
+      Class_cell val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_cell val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_any vx_p_value = val.value();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -219,11 +219,11 @@ public final class Table {
     public Type_celllist vx_copy(final Object... vals) {
       Type_celllist output = this;
       boolean ischanged = false;
+      Class_celllist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_celllist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_cell> listval = new ArrayList<>(val.vx_listcell());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -360,12 +360,12 @@ public final class Table {
     public Type_cellmap vx_copy(final Object... vals) {
       Type_cellmap output = this;
       boolean ischanged = false;
+      Class_cellmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_cellmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Table.Type_cell> mapval = new LinkedHashMap<>(valmap.vx_mapcell());
+      Map<String, Table.Type_cell> mapval = new LinkedHashMap<>(val.vx_mapcell());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -508,11 +508,11 @@ public final class Table {
     public Type_field vx_copy(final Object... vals) {
       Type_field output = this;
       boolean ischanged = false;
+      Class_field val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_field val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Core.Type_any vx_p_fldtype = val.fldtype();
@@ -673,11 +673,11 @@ public final class Table {
     public Type_fieldlist vx_copy(final Object... vals) {
       Type_fieldlist output = this;
       boolean ischanged = false;
+      Class_fieldlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_fieldlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -793,11 +793,11 @@ public final class Table {
     public Type_fieldmap vx_copy(final Object... vals) {
       Type_fieldmap output = this;
       boolean ischanged = false;
+      Class_fieldmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_fieldmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -937,11 +937,11 @@ public final class Table {
     public Type_filter vx_copy(final Object... vals) {
       Type_filter output = this;
       boolean ischanged = false;
+      Class_filter val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_filter val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Core.Type_stringlist vx_p_idlist = val.idlist();
@@ -1126,11 +1126,11 @@ public final class Table {
     public Type_row vx_copy(final Object... vals) {
       Type_row output = this;
       boolean ischanged = false;
+      Class_row val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_row val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Table.Type_cellmap vx_p_cellmap = val.cellmap();
       Table.Type_sort vx_p_cellsort = val.cellsort();
@@ -1288,11 +1288,11 @@ public final class Table {
     public Type_rowlist vx_copy(final Object... vals) {
       Type_rowlist output = this;
       boolean ischanged = false;
+      Class_rowlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_rowlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Table.Type_row> listval = new ArrayList<>(val.vx_listrow());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1429,12 +1429,12 @@ public final class Table {
     public Type_rowmap vx_copy(final Object... vals) {
       Type_rowmap output = this;
       boolean ischanged = false;
+      Class_rowmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_rowmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Table.Type_row> mapval = new LinkedHashMap<>(valmap.vx_maprow());
+      Map<String, Table.Type_row> mapval = new LinkedHashMap<>(val.vx_maprow());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1577,11 +1577,11 @@ public final class Table {
     public Type_sort vx_copy(final Object... vals) {
       Type_sort output = this;
       boolean ischanged = false;
+      Class_sort val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_sort val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Core.Type_stringlist vx_p_idlist = val.idlist();
@@ -1814,11 +1814,11 @@ public final class Table {
     public Type_table vx_copy(final Object... vals) {
       Type_table output = this;
       boolean ischanged = false;
+      Class_table val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_table val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Table.Type_fieldmap vx_p_fieldmap = val.fieldmap();

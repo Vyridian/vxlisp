@@ -26,11 +26,11 @@ export default class vx_repl_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/repl", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 24, ":total", 24), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 12, ":total", 18), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 25, ":total", 25), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 68, ":tests", 13, ":total", 19), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 50, ":tests", 12, ":total", 24), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 52, ":tests", 13, ":total", 25), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -58,15 +58,16 @@ export default class vx_repl_test {
           vx_core.t_intmap,
           "any-repl<-functype-args", 0,
           "any<-liblist-string", 0,
+          "any<-macro", 1,
           "any<-repl", 2,
           "any<-script", 1,
           "anylist<-repllist", 0,
           "argmap<-textblock-argmap", 0,
           "const<-string", 2,
-          "macro", 1,
           "repl-empty<-textblock-argmap", 4,
           "repl-paren<-textblock-argmap", 1,
           "repl<-liblist-string", 0,
+          "repl<-macro", 1,
           "repl<-script", 4,
           "repl<-string-argmap", 7,
           "repl<-textblock", 5,
@@ -76,6 +77,36 @@ export default class vx_repl_test {
           "typefunc<-string", 2
         )
     )
+  }
+
+  static f_any_from_macro(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/repl",
+      ":casename", "any<-macro",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 5\n (any<-macro : int\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              5,
+              vx_repl.f_any_from_macro(
+                {"any-1": vx_core.t_int},
+                context,
+                "(+ ",
+                vx_core.f_minus(7, 5),
+                " 3)"
+              )
+            )
+          )
+        )
+    )
+    return output
   }
 
   static f_any_from_repl(context) {
@@ -120,7 +151,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))",
+            ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -205,36 +236,6 @@ export default class vx_repl_test {
               context,
               vx_data_textblock.c_delimcomma,
               vx_repl.f_const_from_string("vx/data/textblock/delimcomma")
-            )
-          )
-        )
-    )
-    return output
-  }
-
-  static f_macro(context) {
-    const output = vx_core.f_new(
-      vx_test.t_testcase,
-      ":passfail", false,
-      ":testpkg", "vx/repl",
-      ":casename", "macro",
-      ":describelist",
-        vx_core.f_new(
-          vx_test.t_testdescribelist,
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n 5\n (macro : int\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              5,
-              vx_repl.f_macro(
-                {"any-1": vx_core.t_int},
-                context,
-                "(+ ",
-                vx_core.f_minus(7, 5),
-                " 3)"
-              )
             )
           )
         )
@@ -462,6 +463,53 @@ export default class vx_repl_test {
                 vx_core.f_empty(
                   vx_core.t_argmap
                 )
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_repl_from_macro(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/repl",
+      ":casename", "repl<-macro",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_repl.t_repl,
+                ":type",
+                vx_core.t_plus,
+                ":repllist",
+                vx_core.f_new(
+                  vx_repl.t_repllist,
+                  vx_core.f_new(
+                    vx_repl.t_repl,
+                    ":val",
+                    2
+                  ),
+                  vx_core.f_new(
+                    vx_repl.t_repl,
+                    ":val",
+                    3
+                  )
+                )
+              ),
+              vx_repl.f_repl_from_macro(
+                context,
+                "(+ ",
+                vx_core.f_minus(7, 5),
+                " 3)"
               )
             )
           )
@@ -1379,12 +1427,13 @@ export default class vx_repl_test {
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
+      vx_repl_test.f_any_from_macro(context),
       vx_repl_test.f_any_from_repl(context),
       vx_repl_test.f_any_from_script(context),
       vx_repl_test.f_const_from_string(context),
-      vx_repl_test.f_macro(context),
       vx_repl_test.f_repl_empty_from_textblock_argmap(context),
       vx_repl_test.f_repl_paren_from_textblock_argmap(context),
+      vx_repl_test.f_repl_from_macro(context),
       vx_repl_test.f_repl_from_script(context),
       vx_repl_test.f_repl_from_string_argmap(context),
       vx_repl_test.f_repl_from_textblock(context),

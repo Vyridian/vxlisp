@@ -106,11 +106,11 @@ public final class Textblock {
     public Type_delim vx_copy(final Object... vals) {
       Type_delim output = this;
       boolean ischanged = false;
+      Class_delim val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_delim val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_name = val.name();
       Core.Type_string vx_p_starttext = val.starttext();
       Core.Type_string vx_p_endtext = val.endtext();
@@ -304,11 +304,11 @@ public final class Textblock {
     public Type_delimlist vx_copy(final Object... vals) {
       Type_delimlist output = this;
       boolean ischanged = false;
+      Class_delimlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_delimlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Textblock.Type_delim> listval = new ArrayList<>(val.vx_listdelim());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -545,11 +545,11 @@ public final class Textblock {
     public Type_textblock vx_copy(final Object... vals) {
       Type_textblock output = this;
       boolean ischanged = false;
+      Class_textblock val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_textblock val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_name = val.name();
       Core.Type_string vx_p_text = val.text();
       Core.Type_int vx_p_startpos = val.startpos();
@@ -830,11 +830,11 @@ public final class Textblock {
     public Type_textblocklist vx_copy(final Object... vals) {
       Type_textblocklist output = this;
       boolean ischanged = false;
+      Class_textblocklist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_textblocklist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Textblock.Type_textblock> listval = new ArrayList<>(val.vx_listtextblock());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

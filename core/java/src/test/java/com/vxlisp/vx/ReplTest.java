@@ -9,6 +9,35 @@ import com.vxlisp.vx.data.*;
 
 public final class ReplTest {
 
+  static Test.Type_testcase f_any_from_macro(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/repl",
+      ":casename", "any<-macro",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n 5\n (any<-macro : int\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(5),
+              Repl.f_any_from_macro(
+                Core.t_int,
+                context,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("(+ "),
+                  Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
+                  Core.vx_new_string(" 3)")
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_any_from_repl(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -55,7 +84,7 @@ public final class ReplTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)\n    ))))",
+          ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))",
           ":testresult",
             Test.f_test(
               context,
@@ -141,35 +170,6 @@ public final class ReplTest {
               context,
               Textblock.c_delimcomma,
               Repl.f_const_from_string(Core.vx_new_string("vx/data/textblock/delimcomma"))
-            )
-        )
-      )
-    );
-    return output;
-  }
-
-  static Test.Type_testcase f_macro(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
-      ":passfail", false,
-      ":testpkg", "vx/repl",
-      ":casename", "macro",
-      ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 5\n (macro : int\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(5),
-              Repl.f_macro(
-                Core.t_int,
-                context,
-                Core.t_anylist.vx_new(
-                  Core.vx_new_string("(+ "),
-                  Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
-                  Core.vx_new_string(" 3)")
-                )
-              )
             )
         )
       )
@@ -441,6 +441,60 @@ public final class ReplTest {
                 ),
                 Core.f_empty(
                   Core.t_argmap
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_repl_from_macro(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/repl",
+      ":casename", "repl<-macro",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Repl.t_repl,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":type"),
+                  Core.t_plus,
+                  Core.vx_new_string(":repllist"),
+                  Core.f_new(
+                    Repl.t_repllist,
+                    Core.t_anylist.vx_new(
+                      Core.f_new(
+                        Repl.t_repl,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":val"),
+                          Core.vx_new_int(2)
+                        )
+                      ),
+                      Core.f_new(
+                        Repl.t_repl,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":val"),
+                          Core.vx_new_int(3)
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              Repl.f_repl_from_macro(
+                context,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("(+ "),
+                  Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
+                  Core.vx_new_string(" 3)")
                 )
               )
             )
@@ -1522,12 +1576,13 @@ public final class ReplTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+      ReplTest.f_any_from_macro(context),
       ReplTest.f_any_from_repl(context),
       ReplTest.f_any_from_script(context),
       ReplTest.f_const_from_string(context),
-      ReplTest.f_macro(context),
       ReplTest.f_repl_empty_from_textblock_argmap(context),
       ReplTest.f_repl_paren_from_textblock_argmap(context),
+      ReplTest.f_repl_from_macro(context),
       ReplTest.f_repl_from_script(context),
       ReplTest.f_repl_from_string_argmap(context),
       ReplTest.f_repl_from_textblock(context),
@@ -1543,11 +1598,11 @@ public final class ReplTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/repl", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 24, ":total", 24), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 12, ":total", 18), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 12, ":total", 24), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 25, ":total", 25), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 68, ":tests", 13, ":total", 19), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 52, ":tests", 13, ":total", 25), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -1568,15 +1623,16 @@ public final class ReplTest {
       ":funcmap", Core.t_intmap.vx_new(
         ":any-repl<-functype-args", 0,
         ":any<-liblist-string", 0,
+        ":any<-macro", 1,
         ":any<-repl", 2,
         ":any<-script", 1,
         ":anylist<-repllist", 0,
         ":argmap<-textblock-argmap", 0,
         ":const<-string", 2,
-        ":macro", 1,
         ":repl-empty<-textblock-argmap", 4,
         ":repl-paren<-textblock-argmap", 1,
         ":repl<-liblist-string", 0,
+        ":repl<-macro", 1,
         ":repl<-script", 4,
         ":repl<-string-argmap", 7,
         ":repl<-textblock", 5,

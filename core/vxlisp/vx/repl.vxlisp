@@ -68,18 +68,21 @@
  :context
  :doc "Run an arbitrary program in the REPL.")
 
-/*
-(func any<-liblist-string-async : any
- [liblist : liblist
-  text    : string :doc "Program to run"]
- (let : any
-  [repl : repl := (repl<-liblist-string liblist text)
-   val  : any  := (any<-repl-async repl)]
-  val)
- :async
+(func any<-macro : any-1
+ [anylist : anylist :...]
+ (let : any-1
+  [repl : repl := (repl<-macro anylist)
+   val  : any  := (any<-repl repl)]
+  (any<-any : any-1
+   val))
  :context
- :doc   "Run an arbitrary program in the REPL asynchrously.")
-*/
+ :test (test
+        5
+        (any<-macro : int
+         "(+ "
+         (- 7 5)
+         " 3)"))
+ :doc "A function that joins any number of values into a string and then parses and evaluates it.")
 
 (func any-repl<-functype-args : any
  [type : any
@@ -137,8 +140,7 @@
           :repllist
            (repllist
             (repl :val 2)
-            (repl :val 3)
-           ))))           
+            (repl :val 3)))))
  :doc "Run an arbitrary program in the REPL.")
 
 /*
@@ -259,9 +261,14 @@
          "vx/data/textblock/delimcomma"))
  :doc "Returns a constant from a fully qualified name.")
 
-(func macro : any-1
+(func repl<-liblist-string : repl
+ [liblist : liblist
+  text    : string :doc "Program to run"]
+ :doc "Returns a repl from the given text.")
+
+(func repl<-macro : repl
  [anylist : anylist :...]
- (let : any-1
+ (let : repl
   [textlist : stringlist   := (list<-list : stringlist
                                anylist
                                (fn [item : any] : string
@@ -278,23 +285,23 @@
                                textlist
                                "")
    tb       : tb/textblock := (textblock<-script
-                               script)
-   repl     : repl         := (repl<-textblock tb)]
-  (any<-any : any-1
-   (any<-repl repl)))
+                               script)]
+  (repl<-textblock tb))
  :context
  :test (test
-        5
-        (macro : int
+        (repl
+         :type vx/core/+
+         :repllist
+          (repllist
+           (repl
+            :val 2)
+           (repl
+            :val 3)))
+        (repl<-macro
          "(+ "
          (- 7 5)
          " 3)"))
- :doc "A function that joins any number of values into a string and then parses and evaluates it.")
-
-(func repl<-liblist-string : repl
- [liblist : liblist
-  text    : string :doc "Program to run"]
- :doc "Returns a repl from the given text.")
+ :doc "A function that joins any number of values into a string and then parses it.")
 
 (func repl<-script : repl
  [script : string]

@@ -2610,12 +2610,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 204, ":total", 236), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 207, ":total", 239), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 61, ":total", 131), 
       ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
       ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 67, ":total", 212), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 67)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 67, ":total", 215), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 70)
     );
   }
 
@@ -2643,6 +2643,7 @@ public final class CoreTest {
         ":constlist", 0,
         ":constmap", 0,
         ":context", 0,
+        ":date", 0,
         ":decimal", 0,
         ":error", 0,
         ":float", 1,
@@ -2655,6 +2656,7 @@ public final class CoreTest {
         ":intmap", 0,
         ":list", 0,
         ":listtype", 0,
+        ":locale", 0,
         ":map", 0,
         ":maptype", 0,
         ":mempool", 0,
@@ -2684,6 +2686,7 @@ public final class CoreTest {
         ":struct", 0,
         ":thenelse", 0,
         ":thenelselist", 0,
+        ":translation", 0,
         ":type", 0,
         ":typedef", 0,
         ":typelist", 0,

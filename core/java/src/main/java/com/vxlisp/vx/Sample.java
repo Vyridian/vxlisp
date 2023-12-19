@@ -67,11 +67,11 @@ public final class Sample {
     public Type_mytype vx_copy(final Object... vals) {
       Type_mytype output = this;
       boolean ischanged = false;
+      Class_mytype val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_mytype val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_int vx_p_mynum = val.mynum();
       Core.Type_string vx_p_mystr = val.mystr();
       ArrayList<String> validkeys = new ArrayList<>();

@@ -2321,6 +2321,7 @@
       :constlist 0
       :constmap 0
       :context 0
+      :date 0
       :decimal 0
       :error 0
       :float 1
@@ -2333,6 +2334,7 @@
       :intmap 0
       :list 0
       :listtype 0
+      :locale 0
       :map 0
       :maptype 0
       :mempool 0
@@ -2362,6 +2364,7 @@
       :struct 0
       :thenelse 0
       :thenelselist 0
+      :translation 0
       :type 0
       :typedef 0
       :typelist 0
@@ -2384,8 +2387,8 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 86
-      :tests 204
-      :total 236)
+      :tests 207
+      :total 239)
     :funcnums
      (vx/test/testcoveragenums
       :pct 46
@@ -2396,12 +2399,12 @@
      (vx/test/testcoveragenums
       :pct 31
       :tests 67
-      :total 212)
+      :total 215)
     :typenums
      (vx/test/testcoveragenums
       :pct 5
       :tests 4
-      :total 67))
+      :total 70))
   :passfail true
   :testpkg "vx/core")
  (vx/test/testpackage
@@ -12818,6 +12821,27 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/repl"
+     :casename "any<-macro"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 5
+ (any<-macro : int
+  \"(+ \"
+  (- 7 5)
+  \" 3)\"))"
+        :testpkg "vx/repl"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/repl"
      :casename "any<-repl"
      :describelist
       (vx/test/testdescribelist
@@ -12850,8 +12874,7 @@
    :repllist
     (repllist
      (repl :val 2)
-     (repl :val 3)
-    ))))"
+     (repl :val 3)))))"
         :testpkg "vx/repl"
         :testresult
          (vx/test/testresult
@@ -12910,27 +12933,6 @@
           :passfail true
           :expected vx/data/textblock/delimcomma
           :actual vx/data/textblock/delimcomma))))
-    (vx/test/testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "macro"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test
- 5
- (macro : int
-  \"(+ \"
-  (- 7 5)
-  \" 3)\"))"
-        :testpkg "vx/repl"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/repl"
@@ -13061,6 +13063,50 @@
      (tb/textblock
       :text \"3\")))
   (empty argmap)))"
+        :testpkg "vx/repl"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/repl/repl
+            :type +
+            :repllist
+             (vx/repl/repllist
+              (vx/repl/repl
+               :val 2)
+              (vx/repl/repl
+               :val 3)))
+          :actual
+           (vx/repl/repl
+            :type +
+            :repllist
+             (vx/repl/repllist
+              (vx/repl/repl
+               :val 2)
+              (vx/repl/repl
+               :val 3)))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-macro"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (repl
+  :type vx/core/+
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl<-macro
+  \"(+ \"
+  (- 7 5)
+  \" 3)\"))"
         :testpkg "vx/repl"
         :testresult
          (vx/test/testresult
@@ -13901,15 +13947,16 @@
      (intmap
       :any-repl<-functype-args 0
       :any<-liblist-string 0
+      :any<-macro 1
       :any<-repl 2
       :any<-script 1
       :anylist<-repllist 0
       :argmap<-textblock-argmap 0
       :const<-string 2
-      :macro 1
       :repl-empty<-textblock-argmap 4
       :repl-paren<-textblock-argmap 1
       :repl<-liblist-string 0
+      :repl<-macro 1
       :repl<-script 4
       :repl<-string-argmap 7
       :repl<-textblock 5
@@ -13927,29 +13974,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 18)
+      :total 19)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 18)
+      :total 19)
     :constnums
      (vx/test/testcoveragenums
       :total 3)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 24
-      :total 24)
+      :tests 25
+      :total 25)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 66
-      :tests 12
-      :total 18)
+      :pct 68
+      :tests 13
+      :total 19)
     :testpkg "vx/repl"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 50
-      :tests 12
-      :total 24)
+      :pct 52
+      :tests 13
+      :total 25)
     :typenums
      (vx/test/testcoveragenums
       :total 3))

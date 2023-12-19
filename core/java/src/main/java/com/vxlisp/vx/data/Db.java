@@ -59,11 +59,11 @@ public final class Db {
     public Type_db vx_copy(final Object... vals) {
       Type_db output = this;
       boolean ischanged = false;
+      Class_db val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_db val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_dbid = val.dbid();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":dbid");
@@ -244,11 +244,11 @@ public final class Db {
     public Type_dbcell vx_copy(final Object... vals) {
       Type_dbcell output = this;
       boolean ischanged = false;
+      Class_dbcell val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbcell val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_dbcellid = val.dbcellid();
       Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
       Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
@@ -454,12 +454,12 @@ public final class Db {
     public Type_dbcellmap vx_copy(final Object... vals) {
       Type_dbcellmap output = this;
       boolean ischanged = false;
+      Class_dbcellmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbcellmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<>(valmap.vx_mapdbcell());
+      Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<>(val.vx_mapdbcell());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -603,11 +603,11 @@ public final class Db {
     public Type_dbfield vx_copy(final Object... vals) {
       Type_dbfield output = this;
       boolean ischanged = false;
+      Class_dbfield val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbfield val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_dbfieldid = val.dbfieldid();
       Core.Type_any vx_p_type = val.type();
       Core.Type_any vx_p_value = val.value();
@@ -787,12 +787,12 @@ public final class Db {
     public Type_dbfieldmap vx_copy(final Object... vals) {
       Type_dbfieldmap output = this;
       boolean ischanged = false;
+      Class_dbfieldmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbfieldmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<>(valmap.vx_mapdbfield());
+      Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<>(val.vx_mapdbfield());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -885,8 +885,17 @@ public final class Db {
     public Type_dbid vx_copy(final Object... vals) {
       Type_dbid output = this;
       boolean ischanged = false;
+      Class_dbid val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_dbid work = new Class_dbid();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -978,11 +987,11 @@ public final class Db {
     public Type_dblink vx_copy(final Object... vals) {
       Type_dblink output = this;
       boolean ischanged = false;
+      Class_dblink val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dblink val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Db.Type_dbid vx_p_fromid = val.fromid();
       Db.Type_dbid vx_p_toid = val.toid();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -1125,11 +1134,11 @@ public final class Db {
     public Type_dblinklist vx_copy(final Object... vals) {
       Type_dblinklist output = this;
       boolean ischanged = false;
+      Class_dblinklist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dblinklist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Db.Type_dblink> listval = new ArrayList<>(val.vx_listdblink());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1258,11 +1267,11 @@ public final class Db {
     public Type_dbnode vx_copy(final Object... vals) {
       Type_dbnode output = this;
       boolean ischanged = false;
+      Class_dbnode val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbnode val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Db.Type_dbid vx_p_dbid = val.dbid();
       Db.Type_dblinklist vx_p_links = val.links();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -1453,11 +1462,11 @@ public final class Db {
     public Type_dbnote vx_copy(final Object... vals) {
       Type_dbnote output = this;
       boolean ischanged = false;
+      Class_dbnote val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbnote val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Db.Type_dbid vx_p_dbid = val.dbid();
       Db.Type_dbid vx_p_valid = val.valid();
       Db.Type_dbid vx_p_noteid = val.noteid();
@@ -1678,11 +1687,11 @@ public final class Db {
     public Type_dbtable vx_copy(final Object... vals) {
       Type_dbtable output = this;
       boolean ischanged = false;
+      Class_dbtable val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbtable val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_dbtableid = val.dbtableid();
       Db.Type_db vx_p_db = val.db();
       Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
@@ -1914,11 +1923,11 @@ public final class Db {
     public Type_dbvalue vx_copy(final Object... vals) {
       Type_dbvalue output = this;
       boolean ischanged = false;
+      Class_dbvalue val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_dbvalue val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Db.Type_dbid vx_p_dbid = val.dbid();
       Db.Type_dbid vx_p_fromid = val.fromid();
       Db.Type_dbid vx_p_toid = val.toid();

@@ -542,7 +542,7 @@ func CppFromConst(cnst *vxconst, pkg *vxpackage) (string, string, string, string
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				allowtype, _ := TypeAllowFromType(cnsttype)
-				listtypename := JavaNameFromType(allowtype)
+				listtypename := CppNameFromType(allowtype)
 				if listtypename == "any" {
 					listtypename = ""
 				}
@@ -2403,7 +2403,7 @@ func CppFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, e
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core::f_log_1(" + JavaNameTFromType(fnc.vxtype) + ", vx_core::vx_new_string(\"" + funcname + "\"), "
+			output += "vx_core::f_log_1(" + CppNameTFromType(fnc.vxtype) + ", vx_core::vx_new_string(\"" + funcname + "\"), "
 		}
 		switch fnc.name {
 		case "native":

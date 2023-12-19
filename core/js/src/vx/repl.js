@@ -93,6 +93,33 @@ export default class vx_repl {
   }
 
   /**
+   * @function any_from_macro
+   * A function that joins any number of values into a string and then parses and evaluates it.
+   * @param  {typemap} generic
+   * @param  {anylist} ... anylist
+   * @return {any-1}
+   */
+  static t_any_from_macro = {}
+  static e_any_from_macro = {vx_type: vx_repl.t_any_from_macro}
+
+  // (func any<-macro)
+  static f_any_from_macro(generic, context, ...anylist) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    anylist = vx_core.f_new(vx_core.t_anylist, ...anylist)
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_any, "any-2": vx_core.t_any},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const repl = vx_repl.f_repl_from_macro(context, ...anylist)
+        const val = vx_repl.f_any_from_repl(context, repl)
+        return vx_core.f_any_from_any({"any-1": vx_core.t_any, "any-2": vx_core.t_any}, val)
+      })
+    )
+    return output
+  }
+
+  /**
    * @function any_from_repl
    * Run an arbitrary program in the REPL.
    * @param  {repl} repl
@@ -257,60 +284,6 @@ export default class vx_repl {
   }
 
   /**
-   * @function macro
-   * A function that joins any number of values into a string and then parses and evaluates it.
-   * @param  {typemap} generic
-   * @param  {anylist} ... anylist
-   * @return {any-1}
-   */
-  static t_macro = {}
-  static e_macro = {vx_type: vx_repl.t_macro}
-
-  // (func macro)
-  static f_macro(generic, context, ...anylist) {
-    const generic_any_1 = generic["any-1"]
-    let output = vx_core.f_empty(generic_any_1)
-    anylist = vx_core.f_new(vx_core.t_anylist, ...anylist)
-    output = vx_core.f_let(
-      {"any-1": vx_core.t_any, "any-2": vx_core.t_any},
-      [],
-      vx_core.f_new(vx_core.t_any_from_func, () => {
-        const textlist = vx_core.f_list_from_list(
-          {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_anylist},
-          anylist,
-          vx_core.f_new(vx_core.t_any_from_any, (item) => 
-            vx_core.f_let(
-              {"any-1": vx_core.t_string, "any-2": vx_core.t_any},
-              [],
-              vx_core.f_new(vx_core.t_any_from_func, () => {
-                const typ = vx_core.f_type_from_any(item)
-                return vx_core.f_switch(
-                  {"any-1": vx_core.t_string, "any-2": vx_core.t_any},
-                  typ,
-                  vx_core.f_case_1(
-                    vx_core.t_string,
-                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_any({"any-1": vx_core.t_string, "any-2": vx_core.t_any}, item)})
-                  ),
-                  vx_core.f_else(
-                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_string_from_any(item)})
-                  )
-                )
-              })
-            ))
-        )
-        const script = vx_type.f_string_from_stringlist_join(textlist, "")
-        const tb = vx_repl.f_textblock_from_script(script)
-        const repl = vx_repl.f_repl_from_textblock(tb)
-        return vx_core.f_any_from_any(
-          {"any-1": vx_core.t_any, "any-2": vx_core.t_any},
-          vx_repl.f_any_from_repl(context, repl)
-        )
-      })
-    )
-    return output
-  }
-
-  /**
    * @function repl_empty_from_textblock_argmap
    * Returns a repl from an empty delim textblock
    * @param  {textblock} textblock
@@ -437,6 +410,54 @@ export default class vx_repl {
   // (func repl<-liblist-string)
   static f_repl_from_liblist_string(liblist, text) {
     let output = vx_repl.e_repl
+    return output
+  }
+
+  /**
+   * @function repl_from_macro
+   * A function that joins any number of values into a string and then parses it.
+   * @param  {anylist} ... anylist
+   * @return {repl}
+   */
+  static t_repl_from_macro = {}
+  static e_repl_from_macro = {vx_type: vx_repl.t_repl_from_macro}
+
+  // (func repl<-macro)
+  static f_repl_from_macro(context, ...anylist) {
+    let output = vx_repl.e_repl
+    anylist = vx_core.f_new(vx_core.t_anylist, ...anylist)
+    output = vx_core.f_let(
+      {"any-1": vx_repl.t_repl},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const textlist = vx_core.f_list_from_list(
+          {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_anylist},
+          anylist,
+          vx_core.f_new(vx_core.t_any_from_any, (item) => 
+            vx_core.f_let(
+              {"any-1": vx_core.t_string, "any-2": vx_core.t_any},
+              [],
+              vx_core.f_new(vx_core.t_any_from_func, () => {
+                const typ = vx_core.f_type_from_any(item)
+                return vx_core.f_switch(
+                  {"any-1": vx_core.t_string, "any-2": vx_core.t_any},
+                  typ,
+                  vx_core.f_case_1(
+                    vx_core.t_string,
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_any({"any-1": vx_core.t_string, "any-2": vx_core.t_any}, item)})
+                  ),
+                  vx_core.f_else(
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_string_from_any(item)})
+                  )
+                )
+              })
+            ))
+        )
+        const script = vx_type.f_string_from_stringlist_join(textlist, "")
+        const tb = vx_repl.f_textblock_from_script(script)
+        return vx_repl.f_repl_from_textblock(tb)
+      })
+    )
     return output
   }
 
@@ -771,15 +792,16 @@ export default class vx_repl {
       "repllist": vx_repl.e_repllist,
       "any-repl<-functype-args": vx_repl.e_any_repl_from_functype_args,
       "any<-liblist-string": vx_repl.e_any_from_liblist_string,
+      "any<-macro": vx_repl.e_any_from_macro,
       "any<-repl": vx_repl.e_any_from_repl,
       "any<-script": vx_repl.e_any_from_script,
       "anylist<-repllist": vx_repl.e_anylist_from_repllist,
       "argmap<-textblock-argmap": vx_repl.e_argmap_from_textblock_argmap,
       "const<-string": vx_repl.e_const_from_string,
-      "macro": vx_repl.e_macro,
       "repl-empty<-textblock-argmap": vx_repl.e_repl_empty_from_textblock_argmap,
       "repl-paren<-textblock-argmap": vx_repl.e_repl_paren_from_textblock_argmap,
       "repl<-liblist-string": vx_repl.e_repl_from_liblist_string,
+      "repl<-macro": vx_repl.e_repl_from_macro,
       "repl<-script": vx_repl.e_repl_from_script,
       "repl<-string-argmap": vx_repl.e_repl_from_string_argmap,
       "repl<-textblock": vx_repl.e_repl_from_textblock,
@@ -791,15 +813,16 @@ export default class vx_repl {
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any-repl<-functype-args": vx_repl.t_any_repl_from_functype_args,
       "any<-liblist-string": vx_repl.t_any_from_liblist_string,
+      "any<-macro": vx_repl.t_any_from_macro,
       "any<-repl": vx_repl.t_any_from_repl,
       "any<-script": vx_repl.t_any_from_script,
       "anylist<-repllist": vx_repl.t_anylist_from_repllist,
       "argmap<-textblock-argmap": vx_repl.t_argmap_from_textblock_argmap,
       "const<-string": vx_repl.t_const_from_string,
-      "macro": vx_repl.t_macro,
       "repl-empty<-textblock-argmap": vx_repl.t_repl_empty_from_textblock_argmap,
       "repl-paren<-textblock-argmap": vx_repl.t_repl_paren_from_textblock_argmap,
       "repl<-liblist-string": vx_repl.t_repl_from_liblist_string,
+      "repl<-macro": vx_repl.t_repl_from_macro,
       "repl<-script": vx_repl.t_repl_from_script,
       "repl<-string-argmap": vx_repl.t_repl_from_string_argmap,
       "repl<-textblock": vx_repl.t_repl_from_textblock,
@@ -990,6 +1013,25 @@ export default class vx_repl {
       fn            : vx_repl.f_any_from_liblist_string
     }
 
+    // (func any<-macro)
+    vx_repl.t_any_from_macro['vx_type'] = vx_core.t_type
+    vx_repl.t_any_from_macro['vx_value'] = {
+      name          : "any<-macro",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_from_macro
+    }
+
     // (func any<-repl)
     vx_repl.t_any_from_repl['vx_type'] = vx_core.t_type
     vx_repl.t_any_from_repl['vx_value'] = {
@@ -1085,25 +1127,6 @@ export default class vx_repl {
       fn            : vx_repl.f_const_from_string
     }
 
-    // (func macro)
-    vx_repl.t_macro['vx_type'] = vx_core.t_type
-    vx_repl.t_macro['vx_value'] = {
-      name          : "macro",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_macro
-    }
-
     // (func repl-empty<-textblock-argmap)
     vx_repl.t_repl_empty_from_textblock_argmap['vx_type'] = vx_core.t_type
     vx_repl.t_repl_empty_from_textblock_argmap['vx_value'] = {
@@ -1159,6 +1182,25 @@ export default class vx_repl {
       properties    : [],
       proplast      : {},
       fn            : vx_repl.f_repl_from_liblist_string
+    }
+
+    // (func repl<-macro)
+    vx_repl.t_repl_from_macro['vx_type'] = vx_core.t_type
+    vx_repl.t_repl_from_macro['vx_value'] = {
+      name          : "repl<-macro",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_macro
     }
 
     // (func repl<-script)

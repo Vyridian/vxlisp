@@ -104,11 +104,11 @@ public final class Event {
     public Type_event vx_copy(final Object... vals) {
       Type_event output = this;
       boolean ischanged = false;
+      Class_event val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_event val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_name = val.name();
       Core.Type_any vx_p_from = val.from();
       Core.Type_any vx_p_to = val.to();

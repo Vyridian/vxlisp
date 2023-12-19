@@ -39,6 +39,10 @@ namespace vx_repl {
   typedef Abstract_any_from_liblist_string* Func_any_from_liblist_string;
   extern Func_any_from_liblist_string e_any_from_liblist_string;
   extern Func_any_from_liblist_string t_any_from_liblist_string;
+  class Abstract_any_from_macro;
+  typedef Abstract_any_from_macro* Func_any_from_macro;
+  extern Func_any_from_macro e_any_from_macro;
+  extern Func_any_from_macro t_any_from_macro;
   class Abstract_any_from_repl;
   typedef Abstract_any_from_repl* Func_any_from_repl;
   extern Func_any_from_repl e_any_from_repl;
@@ -59,10 +63,6 @@ namespace vx_repl {
   typedef Abstract_const_from_string* Func_const_from_string;
   extern Func_const_from_string e_const_from_string;
   extern Func_const_from_string t_const_from_string;
-  class Abstract_macro;
-  typedef Abstract_macro* Func_macro;
-  extern Func_macro e_macro;
-  extern Func_macro t_macro;
   class Abstract_repl_empty_from_textblock_argmap;
   typedef Abstract_repl_empty_from_textblock_argmap* Func_repl_empty_from_textblock_argmap;
   extern Func_repl_empty_from_textblock_argmap e_repl_empty_from_textblock_argmap;
@@ -75,6 +75,10 @@ namespace vx_repl {
   typedef Abstract_repl_from_liblist_string* Func_repl_from_liblist_string;
   extern Func_repl_from_liblist_string e_repl_from_liblist_string;
   extern Func_repl_from_liblist_string t_repl_from_liblist_string;
+  class Abstract_repl_from_macro;
+  typedef Abstract_repl_from_macro* Func_repl_from_macro;
+  extern Func_repl_from_macro e_repl_from_macro;
+  extern Func_repl_from_macro t_repl_from_macro;
   class Abstract_repl_from_script;
   typedef Abstract_repl_from_script* Func_repl_from_script;
   extern Func_repl_from_script e_repl_from_script;
@@ -138,6 +142,9 @@ namespace vx_repl {
 
   // (func repl<-liblist-string)
   vx_repl::Type_repl f_repl_from_liblist_string(vx_repl::Type_liblist liblist, vx_core::Type_string text);
+
+  // (func repl<-macro)
+  vx_repl::Type_repl f_repl_from_macro(vx_core::Type_context context, vx_core::Type_anylist anylist);
 
   // (func repl<-script)
   vx_repl::Type_repl f_repl_from_script(vx_core::Type_string script);
@@ -338,6 +345,33 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func any<-macro)
+  class Abstract_any_from_macro : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_macro() {};
+    virtual ~Abstract_any_from_macro() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_macro : public virtual Abstract_any_from_macro {
+  public:
+    Class_any_from_macro();
+    virtual ~Class_any_from_macro() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func any<-repl)
   class Abstract_any_from_repl : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
@@ -469,33 +503,6 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func macro)
-  class Abstract_macro : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
-  public:
-    Abstract_macro() {};
-    virtual ~Abstract_macro() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_macro : public virtual Abstract_macro {
-  public:
-    Class_macro();
-    virtual ~Class_macro() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
   // (func repl-empty<-textblock-argmap)
   class Abstract_repl_empty_from_textblock_argmap : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -562,6 +569,33 @@ namespace vx_repl {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func repl<-macro)
+  class Abstract_repl_from_macro : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_repl_from_macro() {};
+    virtual ~Abstract_repl_from_macro() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_repl_from_macro : public virtual Abstract_repl_from_macro {
+  public:
+    Class_repl_from_macro();
+    virtual ~Class_repl_from_macro() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -742,61 +776,19 @@ namespace vx_repl {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func macro)
-  template <class T> T* f_macro(T* generic_any_1, vx_core::Type_context context, vx_core::Type_anylist anylist) {
+  // (func any<-macro)
+  template <class T> T* f_any_from_macro(T* generic_any_1, vx_core::Type_context context, vx_core::Type_anylist anylist) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve(anylist);
     output = vx_core::f_let(
       generic_any_1,
-      vx_core::t_any_from_func->vx_fn_new({anylist, generic_any_1, context}, [anylist, generic_any_1, context]() {
-        vx_core::Type_stringlist textlist = vx_core::f_list_from_list(
-          vx_core::t_stringlist,
-          anylist,
-          vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item) {
-            vx_core::Type_any output_1 = 
-              vx_core::f_let(
-                vx_core::t_string,
-                vx_core::t_any_from_func->vx_fn_new({item}, [item]() {
-                  vx_core::Type_any typ = vx_core::f_type_from_any(item);
-                  vx_core::vx_ref_plus(typ);
-                  vx_core::Type_string output_1 = vx_core::f_switch(
-                    vx_core::t_string,
-                    typ,
-                    vx_core::vx_new(vx_core::t_thenelselist, {
-                      vx_core::f_case_1(
-                        vx_core::t_string,
-                        vx_core::t_any_from_func->vx_fn_new({item}, [item]() {
-                          vx_core::Type_string output_1 = vx_core::f_any_from_any(vx_core::t_string, item);
-                          return output_1;
-                        })
-                      ),
-                      vx_core::f_else(
-                        vx_core::t_any_from_func->vx_fn_new({item}, [item]() {
-                          vx_core::Type_string output_1 = vx_core::f_string_from_any(item);
-                          return output_1;
-                        })
-                      )
-                    })
-                  );
-                  vx_core::vx_release_one_except(typ, output_1);
-                  return output_1;
-                })
-              );
-            return output_1;
-          })
-        );
-        vx_core::vx_ref_plus(textlist);
-        vx_core::Type_string script = vx_type::f_string_from_stringlist_join(textlist, vx_core::vx_new_string(""));
-        vx_core::vx_ref_plus(script);
-        vx_data_textblock::Type_textblock tb = vx_repl::f_textblock_from_script(script);
-        vx_core::vx_ref_plus(tb);
-        vx_repl::Type_repl repl = vx_repl::f_repl_from_textblock(tb);
+      vx_core::t_any_from_func->vx_fn_new({context, anylist, generic_any_1}, [context, anylist, generic_any_1]() {
+        vx_repl::Type_repl repl = vx_repl::f_repl_from_macro(context, anylist);
         vx_core::vx_ref_plus(repl);
-        vx_core::Type_any output_1 = vx_core::f_any_from_any(
-          generic_any_1,
-          vx_repl::f_any_from_repl(context, repl)
-        );
-        vx_core::vx_release_one_except({textlist, script, tb, repl}, output_1);
+        vx_core::Type_any val = vx_repl::f_any_from_repl(context, repl);
+        vx_core::vx_ref_plus(val);
+        vx_core::Type_any output_1 = vx_core::f_any_from_any(generic_any_1, val);
+        vx_core::vx_release_one_except({repl, val}, output_1);
         return output_1;
       })
     );

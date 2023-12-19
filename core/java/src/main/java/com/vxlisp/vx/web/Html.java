@@ -59,11 +59,11 @@ public final class Html {
     public Type_body vx_copy(final Object... vals) {
       Type_body output = this;
       boolean ischanged = false;
+      Class_body val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_body val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
@@ -242,11 +242,11 @@ public final class Html {
     public Type_details vx_copy(final Object... vals) {
       Type_details output = this;
       boolean ischanged = false;
+      Class_details val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_details val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_divchildlist vx_p_summary = val.summary();
@@ -442,11 +442,11 @@ public final class Html {
     public Type_div vx_copy(final Object... vals) {
       Type_div output = this;
       boolean ischanged = false;
+      Class_div val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_div val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_divchildlist vx_p_nodes = val.nodes();
@@ -606,12 +606,12 @@ public final class Html {
     public Type_divchild vx_copy(final Object... vals) {
       Type_divchild output = this;
       boolean ischanged = false;
+      Class_divchild val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_divchild val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (msgblock != Core.e_msgblock) {
+      if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_divchild work = new Class_divchild();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -696,11 +696,11 @@ public final class Html {
     public Type_divchildlist vx_copy(final Object... vals) {
       Type_divchildlist output = this;
       boolean ischanged = false;
+      Class_divchildlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_divchildlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_divchild> listval = new ArrayList<>(val.vx_listdivchild());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -817,11 +817,11 @@ public final class Html {
     public Type_divlist vx_copy(final Object... vals) {
       Type_divlist output = this;
       boolean ischanged = false;
+      Class_divlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_divlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_div> listval = new ArrayList<>(val.vx_listdiv());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -938,11 +938,11 @@ public final class Html {
     public Type_footer vx_copy(final Object... vals) {
       Type_footer output = this;
       boolean ischanged = false;
+      Class_footer val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_footer val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
@@ -1109,11 +1109,11 @@ public final class Html {
     public Type_h1 vx_copy(final Object... vals) {
       Type_h1 output = this;
       boolean ischanged = false;
+      Class_h1 val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_h1 val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_text = val.text();
@@ -1305,11 +1305,11 @@ public final class Html {
     public Type_h2 vx_copy(final Object... vals) {
       Type_h2 output = this;
       boolean ischanged = false;
+      Class_h2 val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_h2 val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_text = val.text();
@@ -1501,11 +1501,11 @@ public final class Html {
     public Type_h3 vx_copy(final Object... vals) {
       Type_h3 output = this;
       boolean ischanged = false;
+      Class_h3 val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_h3 val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_text = val.text();
@@ -1673,11 +1673,11 @@ public final class Html {
     public Type_head vx_copy(final Object... vals) {
       Type_head output = this;
       boolean ischanged = false;
+      Class_head val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_head val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Html.Type_headchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":nodes");
@@ -1808,12 +1808,12 @@ public final class Html {
     public Type_headchild vx_copy(final Object... vals) {
       Type_headchild output = this;
       boolean ischanged = false;
+      Class_headchild val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_headchild val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (msgblock != Core.e_msgblock) {
+      if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_headchild work = new Class_headchild();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1898,11 +1898,11 @@ public final class Html {
     public Type_headchildlist vx_copy(final Object... vals) {
       Type_headchildlist output = this;
       boolean ischanged = false;
+      Class_headchildlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_headchildlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_headchild> listval = new ArrayList<>(val.vx_listheadchild());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2055,11 +2055,11 @@ public final class Html {
     public Type_html vx_copy(final Object... vals) {
       Type_html output = this;
       boolean ischanged = false;
+      Class_html val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_html val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_lang = val.lang();
       Html.Type_head vx_p_head = val.head();
       Html.Type_body vx_p_body = val.body();
@@ -2255,11 +2255,11 @@ public final class Html {
     public Type_meta vx_copy(final Object... vals) {
       Type_meta output = this;
       boolean ischanged = false;
+      Class_meta val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_meta val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_charset = val.charset();
@@ -2433,11 +2433,11 @@ public final class Html {
     public Type_node vx_copy(final Object... vals) {
       Type_node output = this;
       boolean ischanged = false;
+      Class_node val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_node val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -2583,11 +2583,11 @@ public final class Html {
     public Type_nodelist vx_copy(final Object... vals) {
       Type_nodelist output = this;
       boolean ischanged = false;
+      Class_nodelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_nodelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_node> listval = new ArrayList<>(val.vx_listnode());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2728,11 +2728,11 @@ public final class Html {
     public Type_p vx_copy(final Object... vals) {
       Type_p output = this;
       boolean ischanged = false;
+      Class_p val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_p val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_text = val.text();
@@ -2921,12 +2921,12 @@ public final class Html {
     public Type_propmap vx_copy(final Object... vals) {
       Type_propmap output = this;
       boolean ischanged = false;
+      Class_propmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_propmap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(valmap.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3058,11 +3058,11 @@ public final class Html {
     public Type_style vx_copy(final Object... vals) {
       Type_style output = this;
       boolean ischanged = false;
+      Class_style val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_style val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_name = val.name();
       Html.Type_propmap vx_p_props = val.props();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -3208,11 +3208,11 @@ public final class Html {
     public Type_stylelist vx_copy(final Object... vals) {
       Type_stylelist output = this;
       boolean ischanged = false;
+      Class_stylelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_stylelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_style> listval = new ArrayList<>(val.vx_liststyle());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3350,12 +3350,12 @@ public final class Html {
     public Type_stylemap vx_copy(final Object... vals) {
       Type_stylemap output = this;
       boolean ischanged = false;
+      Class_stylemap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_stylemap valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Html.Type_style> mapval = new LinkedHashMap<>(valmap.vx_mapstyle());
+      Map<String, Html.Type_style> mapval = new LinkedHashMap<>(val.vx_mapstyle());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3523,11 +3523,11 @@ public final class Html {
     public Type_stylesheet vx_copy(final Object... vals) {
       Type_stylesheet output = this;
       boolean ischanged = false;
+      Class_stylesheet val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_stylesheet val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_name = val.name();
@@ -3751,11 +3751,11 @@ public final class Html {
     public Type_table vx_copy(final Object... vals) {
       Type_table output = this;
       boolean ischanged = false;
+      Class_table val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_table val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_tbody vx_p_tbody = val.tbody();
@@ -3951,11 +3951,11 @@ public final class Html {
     public Type_tbody vx_copy(final Object... vals) {
       Type_tbody output = this;
       boolean ischanged = false;
+      Class_tbody val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_tbody val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_trlist vx_p_nodes = val.nodes();
@@ -4151,11 +4151,11 @@ public final class Html {
     public Type_td vx_copy(final Object... vals) {
       Type_td output = this;
       boolean ischanged = false;
+      Class_td val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_td val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_divchildlist vx_p_nodes = val.nodes();
@@ -4327,11 +4327,11 @@ public final class Html {
     public Type_tdlist vx_copy(final Object... vals) {
       Type_tdlist output = this;
       boolean ischanged = false;
+      Class_tdlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_tdlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_td> listval = new ArrayList<>(val.vx_listtd());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -4472,11 +4472,11 @@ public final class Html {
     public Type_thead vx_copy(final Object... vals) {
       Type_thead output = this;
       boolean ischanged = false;
+      Class_thead val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_thead val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_trlist vx_p_nodes = val.nodes();
@@ -4672,11 +4672,11 @@ public final class Html {
     public Type_title vx_copy(final Object... vals) {
       Type_title output = this;
       boolean ischanged = false;
+      Class_title val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_title val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_text = val.text();
@@ -4862,11 +4862,11 @@ public final class Html {
     public Type_tr vx_copy(final Object... vals) {
       Type_tr output = this;
       boolean ischanged = false;
+      Class_tr val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_tr val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Html.Type_tdlist vx_p_nodes = val.nodes();
@@ -5038,11 +5038,11 @@ public final class Html {
     public Type_trlist vx_copy(final Object... vals) {
       Type_trlist output = this;
       boolean ischanged = false;
+      Class_trlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_trlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Html.Type_tr> listval = new ArrayList<>(val.vx_listtr());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

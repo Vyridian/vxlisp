@@ -22,12 +22,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 204, ":total", 236), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 207, ":total", 239), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 61, ":total", 131), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 67, ":total", 212), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 67)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 67, ":total", 215), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 70)
     )
   }
 
@@ -58,6 +58,7 @@ export default class vx_core_test {
           "constlist", 0,
           "constmap", 0,
           "context", 0,
+          "date", 0,
           "decimal", 0,
           "error", 0,
           "float", 1,
@@ -70,6 +71,7 @@ export default class vx_core_test {
           "intmap", 0,
           "list", 0,
           "listtype", 0,
+          "locale", 0,
           "map", 0,
           "maptype", 0,
           "mempool", 0,
@@ -99,6 +101,7 @@ export default class vx_core_test {
           "struct", 0,
           "thenelse", 0,
           "thenelselist", 0,
+          "translation", 0,
           "type", 0,
           "typedef", 0,
           "typelist", 0,

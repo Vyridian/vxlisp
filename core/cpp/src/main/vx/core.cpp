@@ -6328,6 +6328,63 @@ namespace vx_core {
 
   //}
 
+  // (type date)
+  // class Class_date {
+    Abstract_date::~Abstract_date() {}
+
+    Class_date::Class_date() : Abstract_date::Abstract_date() {
+      vx_core::refcount += 1;
+    }
+
+    Class_date::~Class_date() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_date::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_core::e_date, vals);
+    }
+
+    vx_core::Type_any Class_date::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_date output = vx_core::e_date;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_date::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_core::Class_date::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_date::vx_empty() const {return vx_core::e_date;}
+    vx_core::Type_any Class_date::vx_type() const {return vx_core::t_date;}
+
+    vx_core::Type_typedef Class_date::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "date", // name
+        ":string", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_date::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
   // (type error)
   // class Class_error {
     Abstract_error::~Abstract_error() {}
@@ -7078,6 +7135,89 @@ namespace vx_core {
     }
 
     vx_core::Type_constdef Class_listtype::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
+  // (type locale)
+  // class Class_locale {
+    Abstract_locale::~Abstract_locale() {}
+
+    Class_locale::Class_locale() : Abstract_locale::Abstract_locale() {
+      vx_core::refcount += 1;
+    }
+
+    Class_locale::~Class_locale() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      vx_core::vx_release_one({
+        
+      });
+    }
+
+    // vx_get_any(key)
+    vx_core::Type_any Class_locale::vx_get_any(vx_core::Type_string key) const {
+      vx_core::Type_any output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      }
+      vx_core::vx_release_except(key, output);
+      return output;
+    }
+
+    // vx_map()
+    vx_core::vx_Type_mapany Class_locale::vx_map() const {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+
+    vx_core::Type_any Class_locale::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_core::e_locale, vals);
+    }
+
+    vx_core::Type_any Class_locale::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_locale output = vx_core::e_locale;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_core::Type_locale val = vx_core::vx_any_from_any(vx_core::t_locale, copyval);
+      output = val;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_locale::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_core::Class_locale::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_locale::vx_empty() const {return vx_core::e_locale;}
+    vx_core::Type_any Class_locale::vx_type() const {return vx_core::t_locale;}
+
+    vx_core::Type_typedef Class_locale::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "locale", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_locale::vx_constdef() const {return this->vx_p_constdef;}
 
 
   //}
@@ -9039,7 +9179,9 @@ namespace vx_core {
       vx_core::vx_release_one({
         this->vx_p_user,
         this->vx_p_connectlist,
-        this->vx_p_connectmap
+        this->vx_p_connectmap,
+        this->vx_p_locale,
+        this->vx_p_translation
       });
     }
 
@@ -9070,6 +9212,24 @@ namespace vx_core {
       return output;
     }
 
+    // locale()
+    vx_core::Type_locale Class_session::locale() const {
+      vx_core::Type_locale output = this->vx_p_locale;
+      if (!output) {
+        output = vx_core::e_locale;
+      }
+      return output;
+    }
+
+    // translation()
+    vx_core::Type_translation Class_session::translation() const {
+      vx_core::Type_translation output = this->vx_p_translation;
+      if (!output) {
+        output = vx_core::e_translation;
+      }
+      return output;
+    }
+
     // vx_get_any(key)
     vx_core::Type_any Class_session::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -9081,6 +9241,10 @@ namespace vx_core {
         output = this->connectlist();
       } else if (skey == ":connectmap") {
         output = this->connectmap();
+      } else if (skey == ":locale") {
+        output = this->locale();
+      } else if (skey == ":translation") {
+        output = this->translation();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -9092,6 +9256,8 @@ namespace vx_core {
       output[":user"] = this->user();
       output[":connectlist"] = this->connectlist();
       output[":connectmap"] = this->connectmap();
+      output[":locale"] = this->locale();
+      output[":translation"] = this->translation();
       return output;
     }
 
@@ -9111,6 +9277,8 @@ namespace vx_core {
       vx_core::Type_user vx_p_user = val->user();
       vx_core::Type_connectlist vx_p_connectlist = val->connectlist();
       vx_core::Type_connectmap vx_p_connectmap = val->connectmap();
+      vx_core::Type_locale vx_p_locale = val->locale();
+      vx_core::Type_translation vx_p_translation = val->translation();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -9130,6 +9298,10 @@ namespace vx_core {
           } else if (testkey == ":connectlist") {
             key = testkey;
           } else if (testkey == ":connectmap") {
+            key = testkey;
+          } else if (testkey == ":locale") {
+            key = testkey;
+          } else if (testkey == ":translation") {
             key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
@@ -9164,6 +9336,24 @@ namespace vx_core {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :connectmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
+          } else if (key == ":locale") {
+            if (vx_p_locale == valsub) {
+            } else if (valsubtype == vx_core::t_locale) {
+              ischanged = true;
+              vx_p_locale = vx_core::vx_any_from_any(vx_core::t_locale, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :locale " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":translation") {
+            if (vx_p_translation == valsub) {
+            } else if (valsubtype == vx_core::t_translation) {
+              ischanged = true;
+              vx_p_translation = vx_core::vx_any_from_any(vx_core::t_translation, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session :translation " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new session) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -9193,6 +9383,20 @@ namespace vx_core {
           }
           output->vx_p_connectmap = vx_p_connectmap;
           vx_core::vx_reserve(vx_p_connectmap);
+        }
+        if (output->vx_p_locale != vx_p_locale) {
+          if (output->vx_p_locale) {
+            vx_core::vx_release_one(output->vx_p_locale);
+          }
+          output->vx_p_locale = vx_p_locale;
+          vx_core::vx_reserve(vx_p_locale);
+        }
+        if (output->vx_p_translation != vx_p_translation) {
+          if (output->vx_p_translation) {
+            vx_core::vx_release_one(output->vx_p_translation);
+          }
+          output->vx_p_translation = vx_p_translation;
+          vx_core::vx_reserve(vx_p_translation);
         }
       }
       if (msgblock != vx_core::e_msgblock) {
@@ -9233,6 +9437,14 @@ namespace vx_core {
           vx_core::vx_new_arg(
             "connectmap", // name
             vx_core::t_connectmap // type
+          ),
+          vx_core::vx_new_arg(
+            "locale", // name
+            vx_core::t_locale // type
+          ),
+          vx_core::vx_new_arg(
+            "translation", // name
+            vx_core::t_translation // type
           )
         }) // properties
       );
@@ -10535,6 +10747,155 @@ namespace vx_core {
     }
 
     vx_core::Type_constdef Class_thenelselist::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
+  // (type translation)
+  // class Class_translation {
+    Abstract_translation::~Abstract_translation() {}
+
+    Class_translation::Class_translation() : Abstract_translation::Abstract_translation() {
+      vx_core::refcount += 1;
+    }
+
+    Class_translation::~Class_translation() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      vx_core::vx_release_one({
+        this->vx_p_translationmap
+      });
+    }
+
+    // translationmap()
+    vx_core::Type_stringmap Class_translation::translationmap() const {
+      vx_core::Type_stringmap output = this->vx_p_translationmap;
+      if (!output) {
+        output = vx_core::e_stringmap;
+      }
+      return output;
+    }
+
+    // vx_get_any(key)
+    vx_core::Type_any Class_translation::vx_get_any(vx_core::Type_string key) const {
+      vx_core::Type_any output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      } else if (skey == ":translationmap") {
+        output = this->translationmap();
+      }
+      vx_core::vx_release_except(key, output);
+      return output;
+    }
+
+    // vx_map()
+    vx_core::vx_Type_mapany Class_translation::vx_map() const {
+      vx_core::vx_Type_mapany output;
+      output[":translationmap"] = this->translationmap();
+      return output;
+    }
+
+    vx_core::Type_any Class_translation::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_core::e_translation, vals);
+    }
+
+    vx_core::Type_any Class_translation::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_translation output = vx_core::e_translation;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_core::Type_translation val = vx_core::vx_any_from_any(vx_core::t_translation, copyval);
+      output = val;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_stringmap vx_p_translationmap = val->translationmap();
+      std::string key = "";
+      for (vx_core::Type_any valsub : vals) {
+        vx_core::Type_any valsubtype = valsub->vx_type();
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (key == "") {
+          std::string testkey = "";
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            testkey = valstr->vx_string();
+          }
+          if (false) {
+          } else if (testkey == ":translationmap") {
+            key = testkey;
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new translation) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+        } else {
+          if (false) {
+          } else if (key == ":translationmap") {
+            if (vx_p_translationmap == valsub) {
+            } else if (valsubtype == vx_core::t_stringmap) {
+              ischanged = true;
+              vx_p_translationmap = vx_core::vx_any_from_any(vx_core::t_stringmap, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new translation :translationmap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new translation) - Invalid Key: " + key);
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+          key = "";
+        }
+      }
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_core::Class_translation();
+        if (output->vx_p_translationmap != vx_p_translationmap) {
+          if (output->vx_p_translationmap) {
+            vx_core::vx_release_one(output->vx_p_translationmap);
+          }
+          output->vx_p_translationmap = vx_p_translationmap;
+          vx_core::vx_reserve(vx_p_translationmap);
+        }
+      }
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_translation::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_core::Class_translation::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_translation::vx_empty() const {return vx_core::e_translation;}
+    vx_core::Type_any Class_translation::vx_type() const {return vx_core::t_translation;}
+
+    vx_core::Type_typedef Class_translation::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "translation", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "translationmap", // name
+            vx_core::t_stringmap // type
+          )
+        }) // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_translation::vx_constdef() const {return this->vx_p_constdef;}
 
 
   //}
@@ -25624,6 +25985,8 @@ namespace vx_core {
   vx_core::Type_constmap t_constmap = NULL;
   vx_core::Type_context e_context = NULL;
   vx_core::Type_context t_context = NULL;
+  vx_core::Type_date e_date = NULL;
+  vx_core::Type_date t_date = NULL;
   vx_core::Type_error e_error = NULL;
   vx_core::Type_error t_error = NULL;
   vx_core::Type_funclist e_funclist = NULL;
@@ -25636,6 +25999,8 @@ namespace vx_core {
   vx_core::Type_intmap t_intmap = NULL;
   vx_core::Type_listtype e_listtype = NULL;
   vx_core::Type_listtype t_listtype = NULL;
+  vx_core::Type_locale e_locale = NULL;
+  vx_core::Type_locale t_locale = NULL;
   vx_core::Type_maptype e_maptype = NULL;
   vx_core::Type_maptype t_maptype = NULL;
   vx_core::Type_mempool e_mempool = NULL;
@@ -25678,6 +26043,8 @@ namespace vx_core {
   vx_core::Type_thenelse t_thenelse = NULL;
   vx_core::Type_thenelselist e_thenelselist = NULL;
   vx_core::Type_thenelselist t_thenelselist = NULL;
+  vx_core::Type_translation e_translation = NULL;
+  vx_core::Type_translation t_translation = NULL;
   vx_core::Type_type e_type = NULL;
   vx_core::Type_type t_type = NULL;
   vx_core::Type_typelist e_typelist = NULL;
@@ -26171,6 +26538,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_context);
       vx_core::t_context = new Class_context();
       vx_core::vx_reserve_type(vx_core::t_context);
+      vx_core::e_date = new Class_date();
+      vx_core::vx_reserve_empty(vx_core::e_date);
+      vx_core::t_date = new Class_date();
+      vx_core::vx_reserve_type(vx_core::t_date);
       vx_core::e_error = new Class_error();
       vx_core::vx_reserve_empty(vx_core::e_error);
       vx_core::t_error = new Class_error();
@@ -26195,6 +26566,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_listtype);
       vx_core::t_listtype = new Class_listtype();
       vx_core::vx_reserve_type(vx_core::t_listtype);
+      vx_core::e_locale = new Class_locale();
+      vx_core::vx_reserve_empty(vx_core::e_locale);
+      vx_core::t_locale = new Class_locale();
+      vx_core::vx_reserve_type(vx_core::t_locale);
       vx_core::e_maptype = new Class_maptype();
       vx_core::vx_reserve_empty(vx_core::e_maptype);
       vx_core::t_maptype = new Class_maptype();
@@ -26279,6 +26654,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_thenelselist);
       vx_core::t_thenelselist = new Class_thenelselist();
       vx_core::vx_reserve_type(vx_core::t_thenelselist);
+      vx_core::e_translation = new Class_translation();
+      vx_core::vx_reserve_empty(vx_core::e_translation);
+      vx_core::t_translation = new Class_translation();
+      vx_core::vx_reserve_type(vx_core::t_translation);
       vx_core::e_type = new Class_type();
       vx_core::vx_reserve_empty(vx_core::e_type);
       vx_core::t_type = new Class_type();
@@ -26972,12 +27351,14 @@ namespace vx_core {
       maptype["constlist"] = vx_core::t_constlist;
       maptype["constmap"] = vx_core::t_constmap;
       maptype["context"] = vx_core::t_context;
+      maptype["date"] = vx_core::t_date;
       maptype["error"] = vx_core::t_error;
       maptype["funclist"] = vx_core::t_funclist;
       maptype["funcmap"] = vx_core::t_funcmap;
       maptype["intlist"] = vx_core::t_intlist;
       maptype["intmap"] = vx_core::t_intmap;
       maptype["listtype"] = vx_core::t_listtype;
+      maptype["locale"] = vx_core::t_locale;
       maptype["maptype"] = vx_core::t_maptype;
       maptype["mempool"] = vx_core::t_mempool;
       maptype["none"] = vx_core::t_none;
@@ -26999,6 +27380,7 @@ namespace vx_core {
       maptype["stringmap"] = vx_core::t_stringmap;
       maptype["thenelse"] = vx_core::t_thenelse;
       maptype["thenelselist"] = vx_core::t_thenelselist;
+      maptype["translation"] = vx_core::t_translation;
       maptype["type"] = vx_core::t_type;
       maptype["typelist"] = vx_core::t_typelist;
       maptype["typemap"] = vx_core::t_typemap;

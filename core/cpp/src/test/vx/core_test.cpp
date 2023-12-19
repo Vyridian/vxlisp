@@ -3442,8 +3442,8 @@ namespace vx_core_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(86), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(204), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(236)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(207), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(239)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(46), 
@@ -3463,12 +3463,12 @@ namespace vx_core_test {
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(31), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(67), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(212)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(215)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(5), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(67)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(70)
       })
     });
     return output;
@@ -3498,6 +3498,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":constlist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":constmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":context"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":date"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":decimal"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":error"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":float"), vx_core::vx_new_int(1),
@@ -3510,6 +3511,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":intmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":list"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":listtype"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":locale"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":map"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":maptype"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":mempool"), vx_core::vx_new_int(0),
@@ -3539,6 +3541,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":struct"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":thenelse"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":thenelselist"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":translation"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":type"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":typedef"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":typelist"), vx_core::vx_new_int(0),

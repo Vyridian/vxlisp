@@ -1,11 +1,9 @@
-
 /**
  * App
- *
  */
 
 import com.vxlisp.vx.*;
- 
+
 public final class App {
 
   public static void main(String[] args) {

@@ -117,11 +117,11 @@ public final class Tree {
     public Type_branch vx_copy(final Object... vals) {
       Type_branch output = this;
       boolean ischanged = false;
+      Class_branch val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_branch val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Tree.Type_brancharrow vx_p_brancharrow = val.brancharrow();
       Tree.Type_branchlist vx_p_branchlist = val.branchlist();
@@ -291,8 +291,17 @@ public final class Tree {
     public Type_brancharrow vx_copy(final Object... vals) {
       Type_brancharrow output = this;
       boolean ischanged = false;
+      Class_brancharrow val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_brancharrow work = new Class_brancharrow();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }
@@ -371,11 +380,11 @@ public final class Tree {
     public Type_branchlist vx_copy(final Object... vals) {
       Type_branchlist output = this;
       boolean ischanged = false;
+      Class_branchlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_branchlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Tree.Type_branch> listval = new ArrayList<>(val.vx_listbranch());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -515,11 +524,11 @@ public final class Tree {
     public Type_leaf vx_copy(final Object... vals) {
       Type_leaf output = this;
       boolean ischanged = false;
+      Class_leaf val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_leaf val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Core.Type_any vx_p_value = val.value();
@@ -680,11 +689,11 @@ public final class Tree {
     public Type_leaflist vx_copy(final Object... vals) {
       Type_leaflist output = this;
       boolean ischanged = false;
+      Class_leaflist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_leaflist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Tree.Type_leaf> listval = new ArrayList<>(val.vx_listleaf());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -824,11 +833,11 @@ public final class Tree {
     public Type_tree vx_copy(final Object... vals) {
       Type_tree output = this;
       boolean ischanged = false;
+      Class_tree val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_tree val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_id = val.id();
       Core.Type_string vx_p_name = val.name();
       Tree.Type_branch vx_p_branch = val.branch();

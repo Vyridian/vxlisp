@@ -38,52 +38,35 @@ func ExecuteProjectCommand(project *vxproject, origcommand *vxcommand) *vxmsgblo
 	path := StringPathFromProjectCmd(project, origcommand)
 	command := NewCommandCopy(origcommand)
 	command.path = path
+	issource := false
 	switch command.code {
 	case ":doc":
 		msgs := WriteDocFromProjectCmd(project, command)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-	case ":source":
-		switch command.lang {
-		case ":cpp":
-			msgs := CppWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":csharp":
-			msgs := CSharpWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":java":
-			msgs := JavaWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":js":
-			msgs := WriteJsFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":kotlin":
-			msgs := KotlinWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":swift":
-			msgs := SwiftWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
+	case ":source", ":test":
+		if !issource {
+			switch command.lang {
+			case ":cpp":
+				msgs := CppWriteFromProjectCmd(project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			case ":csharp":
+				msgs := LangWriteFromProjectCmd(langcsharp, project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			case ":java":
+				msgs := LangWriteFromProjectCmd(langjava, project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			case ":js":
+				msgs := WriteJsFromProjectCmd(project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			case ":kotlin":
+				msgs := LangWriteFromProjectCmd(langkotlin, project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			case ":swift":
+				msgs := LangWriteFromProjectCmd(langswift, project, command)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			}
 		}
-	case ":test":
-		switch command.lang {
-		case ":cpp":
-			msgs := CppWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":csharp":
-			msgs := CSharpWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":java":
-			msgs := JavaWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":js":
-			msgs := WriteJsFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":kotlin":
-			msgs := KotlinWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		case ":swift":
-			msgs := SwiftWriteFromProjectCmd(project, command)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-		}
+		issource = true
 	case ":webserver":
 		WebServerStart(project, command)
 	}

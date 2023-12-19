@@ -66,12 +66,12 @@ public final class State {
     public Type_value_map vx_copy(final Object... vals) {
       Type_value_map output = this;
       boolean ischanged = false;
+      Class_value_map val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_value_map valmap = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(valmap, vals);
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<>(valmap.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

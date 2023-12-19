@@ -123,11 +123,11 @@ public final class File {
     public Type_file vx_copy(final Object... vals) {
       Type_file output = this;
       boolean ischanged = false;
+      Class_file val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_file val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_name = val.name();
       File.Type_fileformat vx_p_format = val.format();
       Core.Type_string vx_p_path = val.path();
@@ -290,8 +290,17 @@ public final class File {
     public Type_fileformat vx_copy(final Object... vals) {
       Type_fileformat output = this;
       boolean ischanged = false;
+      Class_fileformat val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_fileformat work = new Class_fileformat();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
       }
       return output;
     }

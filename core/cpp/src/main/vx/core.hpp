@@ -91,6 +91,10 @@ namespace vx_core {
   typedef Abstract_context* Type_context;
   extern Type_context e_context;
   extern Type_context t_context;
+  class Abstract_date;
+  typedef Abstract_date* Type_date;
+  extern Type_date e_date;
+  extern Type_date t_date;
   class Abstract_decimal;
   typedef Abstract_decimal* Type_decimal;
   extern Type_decimal e_decimal;
@@ -139,6 +143,10 @@ namespace vx_core {
   typedef Abstract_listtype* Type_listtype;
   extern Type_listtype e_listtype;
   extern Type_listtype t_listtype;
+  class Abstract_locale;
+  typedef Abstract_locale* Type_locale;
+  extern Type_locale e_locale;
+  extern Type_locale t_locale;
   class Abstract_map;
   typedef Abstract_map* Type_map;
   extern Type_map e_map;
@@ -255,6 +263,10 @@ namespace vx_core {
   typedef Abstract_thenelselist* Type_thenelselist;
   extern Type_thenelselist e_thenelselist;
   extern Type_thenelselist t_thenelselist;
+  class Abstract_translation;
+  typedef Abstract_translation* Type_translation;
+  extern Type_translation e_translation;
+  extern Type_translation t_translation;
   class Abstract_type;
   typedef Abstract_type* Type_type;
   extern Type_type e_type;
@@ -4136,6 +4148,26 @@ namespace vx_core {
     virtual vx_core::Type_state state() const override;
   };
 
+  // (type date)
+  class Abstract_date : public virtual vx_core::Abstract_any {
+  public:
+    Abstract_date() {};
+    virtual ~Abstract_date() = 0;
+  };
+  class Class_date : public virtual Abstract_date {
+  public:
+    Class_date();
+    virtual ~Class_date() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+  };
+
   // (type error)
   class Abstract_error : public virtual vx_core::Abstract_any {
   public:
@@ -4318,6 +4350,32 @@ namespace vx_core {
     virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
+  };
+
+  // (type locale)
+  class Abstract_locale : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_locale() {};
+    virtual ~Abstract_locale() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+  };
+  class Class_locale : public virtual Abstract_locale {
+  public:
+    Class_locale();
+    virtual ~Class_locale() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
   };
 
   // (type maptype)
@@ -4752,6 +4810,12 @@ namespace vx_core {
     // connectmap()
     vx_core::Type_connectmap vx_p_connectmap = NULL;
     virtual vx_core::Type_connectmap connectmap() const = 0;
+    // locale()
+    vx_core::Type_locale vx_p_locale = NULL;
+    virtual vx_core::Type_locale locale() const = 0;
+    // translation()
+    vx_core::Type_translation vx_p_translation = NULL;
+    virtual vx_core::Type_translation translation() const = 0;
   };
   class Class_session : public virtual Abstract_session {
   public:
@@ -4770,6 +4834,8 @@ namespace vx_core {
     virtual vx_core::Type_user user() const override;
     virtual vx_core::Type_connectlist connectlist() const override;
     virtual vx_core::Type_connectmap connectmap() const override;
+    virtual vx_core::Type_locale locale() const override;
+    virtual vx_core::Type_translation translation() const override;
   };
 
   // (type setting)
@@ -5028,6 +5094,36 @@ namespace vx_core {
     virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
     virtual std::vector<vx_core::Type_thenelse> vx_listthenelse() const override;
     virtual vx_core::Type_thenelse vx_get_thenelse(vx_core::Type_int index) const override;
+  };
+
+  // (type translation)
+  class Abstract_translation : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_translation() {};
+    virtual ~Abstract_translation() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // translationmap()
+    vx_core::Type_stringmap vx_p_translationmap = NULL;
+    virtual vx_core::Type_stringmap translationmap() const = 0;
+  };
+  class Class_translation : public virtual Abstract_translation {
+  public:
+    Class_translation();
+    virtual ~Class_translation() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_stringmap translationmap() const override;
   };
 
   // (type type)

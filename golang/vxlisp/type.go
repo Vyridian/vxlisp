@@ -77,6 +77,8 @@ var settingtype = NewTypeStruct("vx/core/setting")
 
 var stringtype = NewType("vx/core/string")
 
+var stringprimitivetype = NewType("string")
+
 var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
 
 var stringmaptype = NewTypeMap("vx/core/stringmap", stringtype)

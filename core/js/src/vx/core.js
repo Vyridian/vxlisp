@@ -1111,6 +1111,12 @@ export default class vx_core {
   static t_context = {}
 
   /**
+   * type: date
+   * A simple UTC date.
+   */
+  static t_date = {}
+
+  /**
    * type: decimal
    * A clean version of float like Java BigDecimal.
    */
@@ -1181,6 +1187,12 @@ export default class vx_core {
    * A generic type that extends :list.
    */
   static t_listtype = {}
+
+  /**
+   * type: locale
+   * Localization data.
+   */
+  static t_locale = {}
 
   /**
    * type: map
@@ -1350,6 +1362,12 @@ export default class vx_core {
    * type: thenelselist
    */
   static t_thenelselist = {}
+
+  /**
+   * type: translation
+   * i18 language translation.
+   */
+  static t_translation = {}
 
   /**
    * type: type
@@ -4722,6 +4740,7 @@ export default class vx_core {
   static e_constlist = []
   static e_constmap = {}
   static e_context = {}
+  static e_date = {}
   static e_decimal = {}
   static e_error = {}
   static e_float = 0
@@ -4734,6 +4753,7 @@ export default class vx_core {
   static e_intmap = {}
   static e_list = []
   static e_listtype = {}
+  static e_locale = {}
   static e_map = {}
   static e_maptype = {}
   static e_mempool = {}
@@ -4763,6 +4783,7 @@ export default class vx_core {
   static e_struct = {}
   static e_thenelse = {}
   static e_thenelselist = []
+  static e_translation = {}
   static e_type = {}
   static e_typedef = {}
   static e_typelist = []
@@ -4809,6 +4830,7 @@ export default class vx_core {
       "constlist": vx_core.e_constlist,
       "constmap": vx_core.e_constmap,
       "context": vx_core.e_context,
+      "date": vx_core.e_date,
       "decimal": vx_core.e_decimal,
       "error": vx_core.e_error,
       "float": vx_core.e_float,
@@ -4821,6 +4843,7 @@ export default class vx_core {
       "intmap": vx_core.e_intmap,
       "list": vx_core.e_list,
       "listtype": vx_core.e_listtype,
+      "locale": vx_core.e_locale,
       "map": vx_core.e_map,
       "maptype": vx_core.e_maptype,
       "mempool": vx_core.e_mempool,
@@ -4850,6 +4873,7 @@ export default class vx_core {
       "struct": vx_core.e_struct,
       "thenelse": vx_core.e_thenelse,
       "thenelselist": vx_core.e_thenelselist,
+      "translation": vx_core.e_translation,
       "type": vx_core.e_type,
       "typedef": vx_core.e_typedef,
       "typelist": vx_core.e_typelist,
@@ -5190,6 +5214,7 @@ export default class vx_core {
       "constlist": vx_core.t_constlist,
       "constmap": vx_core.t_constmap,
       "context": vx_core.t_context,
+      "date": vx_core.t_date,
       "decimal": vx_core.t_decimal,
       "error": vx_core.t_error,
       "float": vx_core.t_float,
@@ -5202,6 +5227,7 @@ export default class vx_core {
       "intmap": vx_core.t_intmap,
       "list": vx_core.t_list,
       "listtype": vx_core.t_listtype,
+      "locale": vx_core.t_locale,
       "map": vx_core.t_map,
       "maptype": vx_core.t_maptype,
       "mempool": vx_core.t_mempool,
@@ -5231,6 +5257,7 @@ export default class vx_core {
       "struct": vx_core.t_struct,
       "thenelse": vx_core.t_thenelse,
       "thenelselist": vx_core.t_thenelselist,
+      "translation": vx_core.t_translation,
       "type": vx_core.t_type,
       "typedef": vx_core.t_typedef,
       "typelist": vx_core.t_typelist,
@@ -5683,6 +5710,25 @@ export default class vx_core {
     vx_core.e_context['vx_type'] = vx_core.t_context
     vx_core.e_context['vx_value'] = {}
 
+    // (type date)
+    vx_core.t_date['vx_type'] = vx_core.t_type
+    vx_core.t_date['vx_value'] = {
+      name          : "date",
+      pkgname       : "vx/core",
+      extends       : ":string",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_date['vx_type'] = vx_core.t_date
+    vx_core.e_date['vx_value'] = {}
+
     // (type decimal)
     vx_core.t_decimal['vx_type'] = vx_core.t_type
     vx_core.t_decimal['vx_value'] = {
@@ -5931,6 +5977,25 @@ export default class vx_core {
     }
     vx_core.e_listtype['vx_type'] = vx_core.t_listtype
     vx_core.e_listtype['vx_value'] = {}
+
+    // (type locale)
+    vx_core.t_locale['vx_type'] = vx_core.t_type
+    vx_core.t_locale['vx_value'] = {
+      name          : "locale",
+      pkgname       : "vx/core",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_locale['vx_type'] = vx_core.t_locale
+    vx_core.e_locale['vx_value'] = {}
 
     // (type map)
     vx_core.t_map['vx_type'] = vx_core.t_type
@@ -6432,11 +6497,21 @@ export default class vx_core {
           "name" : "connectmap",
           "type" : vx_core.t_connectmap,
           "multi": false
+        },
+        "locale": {
+          "name" : "locale",
+          "type" : vx_core.t_locale,
+          "multi": false
+        },
+        "translation": {
+          "name" : "translation",
+          "type" : vx_core.t_translation,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "connectmap",
-        "type" : vx_core.t_connectmap,
+        "name" : "translation",
+        "type" : vx_core.t_translation,
         "multi": false
       }
     }
@@ -6668,6 +6743,35 @@ export default class vx_core {
       proplast      : {}
     }
     vx_core.e_thenelselist['vx_type'] = vx_core.t_thenelselist
+
+    // (type translation)
+    vx_core.t_translation['vx_type'] = vx_core.t_type
+    vx_core.t_translation['vx_value'] = {
+      name          : "translation",
+      pkgname       : "vx/core",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "translationmap": {
+          "name" : "translationmap",
+          "type" : vx_core.t_stringmap,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "translationmap",
+        "type" : vx_core.t_stringmap,
+        "multi": false
+      }
+    }
+    vx_core.e_translation['vx_type'] = vx_core.t_translation
+    vx_core.e_translation['vx_value'] = {}
 
     // (type type)
     vx_core.t_type['vx_type'] = vx_core.t_type

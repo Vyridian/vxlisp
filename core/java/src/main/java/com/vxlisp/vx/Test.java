@@ -96,11 +96,11 @@ public final class Test {
     public Type_testcase vx_copy(final Object... vals) {
       Type_testcase output = this;
       boolean ischanged = false;
+      Class_testcase val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testcase val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_boolean vx_p_passfail = val.passfail();
       Core.Type_string vx_p_testpkg = val.testpkg();
       Core.Type_string vx_p_casename = val.casename();
@@ -278,11 +278,11 @@ public final class Test {
     public Type_testcaselist vx_copy(final Object... vals) {
       Type_testcaselist output = this;
       boolean ischanged = false;
+      Class_testcaselist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testcaselist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testcase> listval = new ArrayList<>(val.vx_listtestcase());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -435,11 +435,11 @@ public final class Test {
     public Type_testcoveragedetail vx_copy(final Object... vals) {
       Type_testcoveragedetail output = this;
       boolean ischanged = false;
+      Class_testcoveragedetail val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testcoveragedetail val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_intmap vx_p_constmap = val.constmap();
       Core.Type_intmap vx_p_funcmap = val.funcmap();
       Core.Type_string vx_p_testpkg = val.testpkg();
@@ -647,11 +647,11 @@ public final class Test {
     public Type_testcoveragenums vx_copy(final Object... vals) {
       Type_testcoveragenums output = this;
       boolean ischanged = false;
+      Class_testcoveragenums val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testcoveragenums val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_int vx_p_pct = val.pct();
       Core.Type_string vx_p_testpkg = val.testpkg();
       Core.Type_int vx_p_tests = val.tests();
@@ -916,11 +916,11 @@ public final class Test {
     public Type_testcoveragesummary vx_copy(final Object... vals) {
       Type_testcoveragesummary output = this;
       boolean ischanged = false;
+      Class_testcoveragesummary val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testcoveragesummary val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Test.Type_testcoveragenums vx_p_bigospacenums = val.bigospacenums();
       Test.Type_testcoveragenums vx_p_bigotimenums = val.bigotimenums();
       Test.Type_testcoveragenums vx_p_constnums = val.constnums();
@@ -1168,11 +1168,11 @@ public final class Test {
     public Type_testdescribe vx_copy(final Object... vals) {
       Type_testdescribe output = this;
       boolean ischanged = false;
+      Class_testdescribe val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testdescribe val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_describename = val.describename();
       Core.Type_string vx_p_testpkg = val.testpkg();
       Test.Type_testresult vx_p_testresult = val.testresult();
@@ -1334,11 +1334,11 @@ public final class Test {
     public Type_testdescribelist vx_copy(final Object... vals) {
       Type_testdescribelist output = this;
       boolean ischanged = false;
+      Class_testdescribelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testdescribelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testdescribe> listval = new ArrayList<>(val.vx_listtestdescribe());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1503,11 +1503,11 @@ public final class Test {
     public Type_testpackage vx_copy(final Object... vals) {
       Type_testpackage output = this;
       boolean ischanged = false;
+      Class_testpackage val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testpackage val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Test.Type_testcaselist vx_p_caselist = val.caselist();
       Test.Type_testcoveragedetail vx_p_coveragedetail = val.coveragedetail();
       Test.Type_testcoveragesummary vx_p_coveragesummary = val.coveragesummary();
@@ -1695,11 +1695,11 @@ public final class Test {
     public Type_testpackagelist vx_copy(final Object... vals) {
       Type_testpackagelist output = this;
       boolean ischanged = false;
+      Class_testpackagelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testpackagelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testpackage> listval = new ArrayList<>(val.vx_listtestpackage());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1864,11 +1864,11 @@ public final class Test {
     public Type_testresult vx_copy(final Object... vals) {
       Type_testresult output = this;
       boolean ischanged = false;
+      Class_testresult val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testresult val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_string vx_p_code = val.code();
       Core.Type_boolean vx_p_passfail = val.passfail();
       Core.Type_any vx_p_expected = val.expected();
@@ -2056,11 +2056,11 @@ public final class Test {
     public Type_testresultlist vx_copy(final Object... vals) {
       Type_testresultlist output = this;
       boolean ischanged = false;
+      Class_testresultlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_testresultlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Test.Type_testresult> listval = new ArrayList<>(val.vx_listtestresult());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

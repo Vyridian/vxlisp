@@ -69,11 +69,11 @@ public final class Csv {
     public Type_csv vx_copy(final Object... vals) {
       Type_csv output = this;
       boolean ischanged = false;
+      Class_csv val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_csv val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       Core.Type_stringlist vx_p_headers = val.headers();
       Csv.Type_csvrows vx_p_rows = val.rows();
       ArrayList<String> validkeys = new ArrayList<>();
@@ -215,11 +215,11 @@ public final class Csv {
     public Type_csvrows vx_copy(final Object... vals) {
       Type_csvrows output = this;
       boolean ischanged = false;
+      Class_csvrows val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Type_csvrows val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       List<Core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
