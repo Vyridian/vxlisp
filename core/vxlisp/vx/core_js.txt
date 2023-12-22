@@ -171,6 +171,33 @@
     return output
   }
 
+  static vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value) {
+    let output = vx_core.f_empty(generic_list_1)
+    const fn = fn_any_from_key_value['vx_value']
+    if (fn) {
+      const entries = Object.entries(valuemap['vx_value'])
+      const values = entries.map(fn)
+      output = vx_core.f_new(generic_list_1, ...values)
+    }
+    return output
+  }
+
+  static vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value) {
+    let output = vx_core.f_empty(generic_map_1)
+    const fn = fn_any_from_key_value['vx_value']
+    if (fn) {
+      const entries = Object.entries(valuemap['vx_value'])
+      const values = []
+      for (const [key, value] of entries) {
+        const chgvalue = fn([key, value])
+        values.push(key)
+        values.push(chgvalue)
+      }
+      output = vx_core.f_new(generic_map_1, ...values)
+    }
+    return output
+  }
+
   static vx_new(type, values) {
     let output
     if (values.length == 1) {

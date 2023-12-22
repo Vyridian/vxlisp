@@ -1,0 +1,728 @@
+  interface vx_Type_const {
+    fun vx_constdef() : vx_core.Type_constdef
+  }
+
+  interface Type_replfunc {
+    fun vx_repl(Core.Type_anylist arglist) : vx_core.Type_any
+  }
+
+  interface Type_replfunc_async {
+    fun vx_repl(Core.Type_anylist arglist) : CompletableFuture<vx_core.Type_any>
+  }
+
+  val emptylistany : List<vx_core.Type_any> = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+
+  val emptymapany : Map<String, vx_core.Type_any> = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+
+  fun <T> immutablelist(listany : List<T>) : List<T> {
+    return Collections.unmodifiableList(listany)
+  }
+
+  fun <T> immutablemap(mapany : Map<String, T>) : Map<String, T> {
+    return Collections.unmodifiableMap(mapany)
+  }
+
+  class Class_base {
+    protected var vx_iref : int = 0
+    protected var vxconstdef : vx_core.Type_constdef = null
+    protected var vxmsgblock : vx_core.Type_msgblock = null
+    fun vx_dispose() : List<Type_any> {
+      this.vx_iref = 0
+      this.vxmsgblock = null
+      return emptylistany
+    }
+    fun vx_msgblock() : vx_core.Type_msgblock {
+      return vxmsgblock
+    }
+    fun vx_release() : boolean {
+      var output : boolean = false
+      if (this.vx_iref < 0) {
+      } else if (vx_iref == 0) {
+        vx_iref = -1
+        output = true
+      } else {
+        vx_iref -= 1
+      }
+      return output
+    }
+    fun vx_reserve() : void {
+      this.vx_iref += 1
+    }
+  }
+
+  class KeyValue<T> {
+    var key : String = ""
+    var value : T = null
+  }
+
+  fun constdef_new(
+    pkgname : String,
+    name : String,
+    typ : vx_core.Type_any
+  ) : vx_core.Type_constdef {
+    var output : vx_core.Class_constdef = new vx_core.Class_constdef()
+    output.vx_p_pkgname = vx_core.vx_new_string(pkgname)
+    output.vx_p_name = vx_core.vx_new_string(name)
+    output.vx_p_type = typ
+    return output
+  }
+
+  fun funcdef_new(
+    pkgname : String,
+    name : String,
+    idx : int,
+    async : boolean,
+    typ : vx_core.Type_any
+  ) : vx_core.Type_funcdef {
+    var output : vx_core.Class_funcdef = new vx_core.Class_funcdef()
+    output.vx_p_pkgname = vx_core.vx_new_string(pkgname)
+    output.vx_p_name = vx_core.vx_new_string(name)
+    output.vx_p_idx = vx_core.vx_new_int(idx)
+    output.vx_p_async = vx_core.vx_new_boolean(async)
+    output.vx_p_type = typ
+    return output
+  }
+
+  fun arrayany_from_anylist(vx_core.Type_anylist list) : vx_core.Type_any[] {
+    return list.vx_list().toArray(new vx_core.Type_any[0])
+  }
+
+  //@SafeVarargs
+  fun <T> arraylist_from_array(items : T...) : List<T> {
+    List<T> output = new ArrayList<T>(Arrays.asList(items))
+    output = vx_core.immutablelist(output)
+    return output
+  }
+
+  fun <T extends vx_core.Type_any, U extends vx_core.Type_any> arraylist_from_arraylist(
+    generic_any_1 : T,
+    listval : List<U>
+  ) : List<T> {
+    var output : List<T> = new ArrayList<>()
+    for (value : Core.Type_any in listval) {
+      val t_val : T = vx_core.f_any_from_any(generic_any_1, value)
+      output.add(t_val)
+    }
+    output = vx_core.immutablelist(output)
+    return output
+  }
+
+  fun <T, U> arraylist_from_arraylist_fn(
+    listval : List<U>,
+    fn_any_from_any : Function<U, T>
+  ) : List<T> {
+    List<T> output = new ArrayList<>()
+    for (U value_u : listval) {
+      T t_val = fn_any_from_any.apply(value_u)
+      output.add(t_val)
+    }
+    output = vx_core.immutablelist(output)
+    return output
+  }
+
+  fun <T extends vx_core.Type_any, U extends vx_core.Type_any> arraylist_from_linkedhashmap(
+    generic_any_1 : T,
+    mapval : Map<String, U>
+  ) : List<T> {
+    val output : List<T> = new ArrayList<T>()
+    val keys : Set<String> = mapval.keySet()
+    for (key : String in keys) {
+      val u_val : U = mapval.get(key)
+      val t_val : T = vx_core.f_any_from_any(generic_any_1, u_val)
+      output.add(t_val)
+    }
+    output = vx_core.immutablelist(output)
+    return output
+  }
+
+  fun <T, U> arraylist_from_linkedhashmap_fn(
+    mapval : Map<String, U>,
+    fn_any_from_key_value : BiFunction<String, U, T>
+  ) : List<T> {
+    val output : List<T> = new ArrayList<T>()
+    val keys : Set<String> = mapval.keySet()
+    for (key : String in keys) {
+      val u_val : U = mapval.get(key)
+      val t_val : T = fn_any_from_key_value.apply(key, u_val)
+      output.add(t_val)
+    }
+    return output
+  }
+
+  fun <T> async_new_completed(val : T) : CompletableFuture<T> {
+    val output : CompletableFuture<T> = CompletableFuture.completedFuture(val)
+    return output
+  }
+
+  fun <T extends vx_core.Type_any, U extends vx_core.Type_any> async_from_async(
+    T generic_any_1,
+    CompletableFuture<U> future
+  ) : CompletableFuture<T> {
+    val output : CompletableFuture<T> = future.thenApply(val -> {
+      return vx_core.f_any_from_any(generic_any_1, val)
+    })
+    return output
+  }
+
+  fun <T, U> async_from_async_fn(
+    future : CompletableFuture<U>,
+    fn : Function<? super U, ? extends T>
+  ) : CompletableFuture<T> {
+    val output : CompletableFuture<T> = future.thenApply(fn)
+    return output
+  }
+
+  fun <T> async_arraylist_from_arraylist_async(
+    list_future : List<CompletableFuture<T>>
+  ) : CompletableFuture<List<T>> {
+    val allFutures : CompletableFuture<Void> = CompletableFuture.allOf(
+      list_future.toArray(new CompletableFuture[list_future.size()])
+    )
+    val output : CompletableFuture<List<T>> = allFutures.thenApply(v -> {
+      val list : List<T> = list_future.stream()
+        .map(future -> future.join())
+        .collect(Collectors.toList())
+      return vx_core.immutablelist(list)
+    })
+    return output
+  }
+
+  //@SafeVarargs
+  fun <T> hashmap_from_keyvalues(keyvalues : KeyValue<T>...) : LinkedHashMap<String, T> {
+    val output : LinkedHashMap<String, T> = new LinkedHashMap<String, T>()
+    for (keyvalue : KeyValue<T> in keyvalues) {
+      val key : String = keyvalue.key
+      val value : T = keyvalue.value
+      output.put(key, value)
+    }
+    return output
+  }
+
+  fun <T> keyvalue_from_key_value(String key : String, value : T) : KeyValue<T> {
+    val output : KeyValue<T> = new KeyValue<T>()
+    output.key = key
+    output.value = value
+    return output
+  }
+
+  fun <T> map_from_list_fn(
+    listval : List<T>,
+    fn_any_from_any : Function<T, vx_core.Type_string>
+  ) : Map<String, T> {
+    var output : Map<String, T> = new LinkedHashMap<>()
+    for (val : T in listval) {
+      val valkey : vx_core.Type_string = fn_any_from_any.apply(val)
+      val key : String = valkey.vx_string()
+      output.put(key, val)
+    }
+    return output
+  }
+
+  fun <T extends vx_core.Type_any> map_from_map(
+    mapval : LinkedHashMap<String, vx_core.Type_any>
+  ) : LinkedHashMap<String, T> {
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>()
+    Set<String> keys = mapval.keySet()
+    for (String key : keys) {
+      vx_core.Type_any value = mapval.get(key)
+      try {
+        @SuppressWarnings("unchecked")
+        T castval = (T)value
+        output.put(key, castval)
+      } catch (Exception ex) {
+        vx_core.vx_log("map<-map", ex)
+      }
+    }
+    return output
+  }
+
+  // vx_boolean_from_string_ends(string, string)
+  fun vx_boolean_from_string_ends(text : String, ends : String) : boolean {
+    return text.endsWith(ends)
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  fun vx_boolean_from_string_find(text : String, find : String) : boolean {
+    return text.contains(find)
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  fun vx_boolean_from_string_starts(text : String, starts : String) : boolean {
+    return text.startsWith(starts)
+  }
+
+  // vx_eqeq(any, any)
+  fun vx_eqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : boolean {
+    var output : boolean = false
+    if (val1 == val2) {
+      output = true
+    } else if (val1.vx_msgblock() != vx_core.e_msgblock) {
+    } else if (val2.vx_msgblock() != vx_core.e_msgblock) {
+    } else {
+      val type1 : vx_core.Type_any = val1.vx_type()
+      val type2 : vx_core.Type_any = val2.vx_type()
+      if (type1 != type2) {
+      } else if (type1 == vx_core.t_int) {
+        val valint1 : vx_core.Type_int = (Core.Type_int)val1
+        val valint2 : vx_core.Type_int = (Core.Type_int)val2
+        if (valint1.vx_int() == valint2.vx_int()) {
+          output = true
+        }
+      } else if (type1 == vx_core.t_float) {
+        val valfloat1 : vx_core.Type_float = (Core.Type_float)val1
+        val valfloat2 : vx_core.Type_float = (Core.Type_float)val2
+        if (valfloat1.vx_float() == valfloat2.vx_float()) {
+          output = true
+        }
+      } else if (type1 == vx_core.t_decimal) {
+        val valdecimal1 : vx_core.Type_decimal = (Core.Type_decimal)val1
+        val valdecimal2 : vx_core.Type_decimal = (Core.Type_decimal)val2
+        if (valdecimal1.vx_string() == valdecimal2.vx_string()) {
+          output = true
+        }
+      } else if (type1 == vx_core.t_string) {
+        val valstring1 : vx_core.Type_string = (Core.Type_string)val1
+        val valstring2 : vx_core.Type_string = (Core.Type_string)val2
+        if (valstring1.vx_string() == valstring2.vx_string()) {
+          output = true
+        }
+      }
+    }
+    return output
+  }
+
+  // vx_float_from_string(string)
+  fun vx_float_from_string(text : String) : float {
+    var output : float = 0
+    try {
+      output = Float.parseFloat(text)
+    } catch (Exception e) {
+    }    
+    return output
+  }
+
+  // vx_global_package_set(string, map<any>, map<any>, map<func>)
+  fun vx_global_package_set(
+    pkgname : String,
+    maptype : Map<String, vx_core.Type_any>,
+    mapconst : Map<String, vx_core.Type_any>,
+    mapfunc : Map<String, vx_core.Type_func>
+  ) : void {
+    val typemap : vx_core.Class_typemap = new vx_core.Class_typemap()
+		  typemap.vx_p_map = vx_core.immutablemap(maptype)
+	   val constmap : vx_core.Class_constmap = new vx_core.Class_constmap()
+		  constmap.vx_p_map = vx_core.immutablemap(mapconst)
+		  val funcmap : vx_core.Class_funcmap = new vx_core.Class_funcmap()
+		  funcmap.vx_p_map = vx_core.immutablemap(mapfunc)
+    val global : vx_core.Class_project = (Core.Class_project)Core.c_global
+    var packagemap : vx_core.Class_packagemap = (Core.Class_packagemap)global.vx_p_packagemap
+    if (packagemap == null) {
+      packagemap = new vx_core.Class_packagemap()
+      global.vx_p_packagemap = packagemap
+    }
+    val mappackage : Map<String, vx_core.Type_package> = new LinkedHashMap<>(packagemap.vx_p_map)
+		  val pkg : vx_core.Class_package = new vx_core.Class_package()
+		  pkg.vx_p_constmap = constmap
+		  pkg.vx_p_typemap = typemap
+		  pkg.vx_p_funcmap = funcmap
+    mappackage.put(pkgname, pkg)
+    packagemap.vx_p_map = vx_core.immutablemap(mappackage)
+  }
+
+  // vx_int_from_string(string)
+  fun vx_int_from_string(text : String) int {
+    var output : int = 0
+    try {
+      output = Integer.parseInt(text)
+    } catch (Exception e) {
+    }    
+    return output
+  }
+
+  // vx_int_from_string_find(string, string)
+  fun vx_int_from_string_find(text : String, find : String) : int {
+    return text.indexOf(find)
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  fun vx_int_from_string_findlast(text : String, findlast : String) : int {
+    return text.lastIndexOf(findlast)
+  }
+
+  // vx_is_float(string)
+  fun vx_is_float(text : String) : boolean {
+    var output : boolean = false
+    try {
+      Float.parseFloat(text)
+      output = true
+    } catch (Exception e) {
+    }    
+    return output
+  }
+
+  // vx_is_float(any)
+  fun vx_is_float(value : Core.Type_any) : boolean {
+    var output : boolean = false
+    if (value instanceof vx_core.Type_number) {
+      output = true
+    } else if (value instanceof vx_core.Type_string) {
+      val valuestring : vx_core.Type_string = (Core.Type_string)value
+      output = vx_core.vx_is_float(valuestring.vx_string())
+    }
+    return output
+  }
+
+  // vx_is_int(string)
+  fun vx_is_int(text : String) : boolean {
+    var output : boolean = false
+    switch (text) {
+    case "notanumber":
+    case "infinity":
+    case "neginfinity":
+      output = true
+      break
+    default:
+      try {
+        Integer.parseInt(text)
+        output = true
+      } catch (Exception e) {
+      }
+      break
+    }
+    return output
+  }
+
+  // vx_is_int(any)
+  fun vx_is_int(value : vx_core.Type_any) : boolean {
+    var result : boolean = false
+    if (value == vx_core.c_infinity) {
+      result = true
+    } else if (value == vx_core.c_neginfinity) {
+      result = true
+    } else if (value == vx_core.c_notanumber) {
+      result = true
+    } else if (value instanceof vx_core.Type_int) {
+      result = true
+    } else if (value instanceof vx_core.Type_float) {
+      val valfloat : vx_core.Type_float = (Core.Type_float)value
+      val floatval : float = valfloat.vx_float()
+      if ((int)floatval == floatval) {
+        result = true
+      }
+    } else if (value instanceof vx_core.Type_decimal) {
+      val valdec : vx_core.Type_decimal = (Core.Type_decimal)value
+      val strval : String = valdec.vx_string()
+      try {
+        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
+          result = true
+        }
+      } catch (Exception ex) {
+      }
+    } else if (value instanceof vx_core.Type_string) {
+      val valstr : vx_core.Type_string = (Core.Type_string)value
+      val strval : String = valstr.vx_string()
+      result = vx_is_int(strval)
+    }
+    return result
+  }
+
+  // vx_log(object...)
+  fun vx_log(values : Object...) : void {
+    for (value : Object in values) {
+      var text : String = ""
+      if (value == null) {
+        text = "null"
+      } else if (value instanceof vx_core.Type_string) {
+        val valstring : vx_core.Type_string = (Core.Type_string)value
+        text = valstring.vx_string()
+      } else if (value instanceof vx_core.Type_any) {
+        val valany : vx_core.Type_any = (Core.Type_any)value
+        val valstring : vx_core.Type_string = vx_core.f_string_from_any(valany)
+        text = valstring.vx_string()
+      } else {
+        text = value.toString()
+      }
+      println(text)
+    }
+  }
+
+  // vx_msg_error
+  fun vx_msg_error(text : String) : Type_msg {
+    val output : Class_msg = new Class_msg()
+    output.vx_p_text = vx_core.vx_new_string(text)
+    output.vx_p_severity = vx_core.c_msg_severe
+    return output
+  }
+
+  // vx_msg_from_exception
+  fun vx_msg_from_exception(text : String, err : Exception) : Type_msg {
+    val output : Class_msg = new Class_msg()
+    output.vx_p_text = vx_core.vx_new_string(text)
+    output.vx_p_severity = vx_core.c_msg_severe
+    output.err = err
+    vx_core.vx_log(output)
+    return output
+  }
+
+  fun vx_new_boolean(isval : boolean) : Type_boolean {
+    var output : Type_boolean = vx_core.c_false
+    if (isval) {
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  fun vx_new_float(fval : float) : Type_float {
+    var output : Class_float = new vx_core.Class_float()
+    output.vxfloat = fval
+    return output
+  }
+
+  fun vx_new_int(ival : int) : Type_int {
+    var output : Type_int
+    if ((ival == 0) && vx_core.e_int != null) {
+      output = vx_core.e_int
+    } else {
+      val work : Class_int = new vx_core.Class_int()
+      work.vxint = ival
+      output = work
+    }
+    return output
+  }
+
+  fun vx_new_string(text : String) : Type_string {
+    var output : Type_string
+    if (text.equals("") && vx_core.e_string != null) {
+      output = vx_core.e_string
+    } else {
+      val work : Class_string = new vx_core.Class_string()
+      work.vxstring = text
+      output = work
+    }
+    return output
+  }
+
+  fun vx_string_from_any(value : Core.Type_any) : String {
+    return vx_string_from_any_indent(value, 0, false)
+  }
+
+  fun vx_string_from_any_indent(
+    value : Core.Type_any,
+    indent : int,
+    linefeed : boolean
+  ) : String {
+    val indenttext : String = " ".repeat(indent)
+    var output : String = ""
+    if (indent > 50) {
+      output = "Error: Max Depth Exceeded"
+    } else if (value == null) {
+      output = "null"
+    } else if (value == value.vx_type()) {
+      if (value instanceof vx_core.Type_func) {
+        val valuefunc : vx_core.Type_func = (Core.Type_func)value
+        val funcdef : vx_core.Type_funcdef = valuefunc.vx_funcdef()
+        output = funcdef.pkgname().vx_string() + "/" + funcdef.name().vx_string()
+      } else {
+        val typedef : vx_core.Type_typedef = value.vx_typedef()
+        output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string()
+      }
+    } else if (value instanceof vx_core.Type_boolean) {
+      val valbool : vx_core.Type_boolean = vx_core.f_any_from_any(Core.t_boolean, value)
+      if (valbool.vx_boolean() == true) {
+        output = "true"
+      } else {
+        output = "false"
+      }
+    } else if (value instanceof vx_core.Type_decimal) {
+      val valdec : vx_core.Type_decimal = vx_core.f_any_from_any(Core.t_decimal, value)
+      output = valdec.vx_string()
+    } else if (value instanceof vx_core.Type_float) {
+      val valfloat : vx_core.Type_float = vx_core.f_any_from_any(Core.t_float, value)
+      output = Float.toString(valfloat.vx_float())
+      if (output.endsWith(".0")) {
+        output = output.substring(0, output.length() - 2)
+      }
+    } else if (value instanceof vx_core.Type_int) {
+      if (value == vx_core.c_notanumber) {
+        output = "notanumber"
+      } else if (value == vx_core.c_infinity) {
+        output = "infinity"
+      } else if (value == vx_core.c_neginfinity) {
+        output = "neginfinity"
+      } else {
+        val valint : vx_core.Type_int = vx_core.f_any_from_any(Core.t_int, value)
+        output = Integer.toString(valint.vx_int())
+      }
+    } else if (value instanceof vx_core.Type_string) {
+      val valstring : vx_core.Type_string = vx_core.f_any_from_any(Core.t_string, value)
+      output = "\"" + valstring.vx_string() + "\""
+    } else if (value instanceof vx_core.vx_Type_const) {
+      val constvalue : vx_core.vx_Type_const = (Core.vx_Type_const)value
+      val constdef : vx_core.Type_constdef = constvalue.vx_constdef()
+      val constpkg : String = constdef.pkgname().vx_string()
+      val constname : String = constdef.name().vx_string()
+      if (constpkg.equals("vx/core")) {
+        output = constname
+      } else {
+        output = constpkg + "/" + constname
+      }
+    } else if (value instanceof vx_core.Type_list) {
+      val vallist : vx_core.Type_list = vx_core.f_any_from_any(Core.t_list, value)
+      val typedef : vx_core.Type_typedef = vallist.vx_typedef()
+      val typedefname : vx_core.Type_string = typedef.name()
+      var indentint : int = indent
+      indentint += 1
+      val listval : List<vx_core.Type_any> = vallist.vx_list()
+      for (valsub : Core.Type_any in listval) {
+        val valtext : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
+        output += "\n " + indenttext + valtext
+      }
+      if (vallist.vx_msgblock() != null) {
+        val msgtext : String = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed)
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
+      }
+      output = "(" + typedefname.vx_string() + output + ")"
+    } else if (value instanceof vx_core.Type_map) {
+      val valmap : vx_core.Type_map = vx_core.f_any_from_any(Core.t_map, value)
+      val typedef : vx_core.Type_typedef = valmap.vx_typedef()
+      val typedefname : vx_core.Type_string = typedef.name()
+      var indentint : int = indent
+      indentint += 2
+      val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
+      val keys : Set<String> = mapval.keySet()
+      for (val key : String in keys) {
+        val valsub : vx_core.Type_any = mapval.get(key)
+        if (!key.startsWith(":")) {
+          key = ":" + key
+        }
+        var strval : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
+        if (strval.contains("\n")) {
+          strval = "\n  " + indenttext + strval
+        } else {
+          strval = " " + strval
+        }
+        output += "\n" + indenttext + " " + key + strval
+      }
+      if (valmap.vx_msgblock() != null) {
+        val msgtext : String = vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed)
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
+      }
+      output = "(" + typedefname.vx_string() + output + ")"
+    } else if (value instanceof vx_core.Type_struct) {
+      val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(Core.t_struct, value)
+      val typedef : vx_core.Type_typedef = valstruct.vx_typedef()
+      val typedefname : vx_core.Type_string = typedef.name()
+      var indentint2 : int = indent
+      indentint2 += 2
+      val mapval2 : Map<String, vx_core.Type_any> = valstruct.vx_map()
+      val keys2 : Set<String> = mapval2.keySet()
+      for (val : String in keys2) {
+        val valsub2 : vx_core.Type_any = mapval2.get(key)
+        if (!vx_ore.f_is_empty_1(valsub2).vx_boolean()) {
+          if (!key.startsWith(":")) {
+            key = ":" + key
+          }
+          val strval2 : String = vx_core.vx_string_from_any_indent(valsub2, indentint2, linefeed)
+          if (strval2.contains("\n")) {
+            strval2 = "\n  " + indenttext + strval2
+          } else {
+            strval2 = " " + strval2
+          }
+          output += "\n" + indenttext + " " + key + strval2
+        }
+      }
+      if (valstruct.vx_msgblock() != null) {
+        val msgtext2 : String = vx_core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed)
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2
+      }
+      output = "(" + typedefname.vx_string() + output + ")"
+    } else if (value instanceof vx_core.Type_func) {
+      val valfunc : vx_core.Type_func = vx_core.f_any_from_any(Core.t_func, value)
+      val funcdef : vx_core.Type_funcdef = valfunc.vx_funcdef()
+      val funcdefname : vx_core.Type_string = vx_core.f_funcname_from_funcdef(funcdef)
+      output = funcdefname.vx_string()
+      if (valfunc.vx_msgblock() != null) {
+        val msgtext : String = vx_core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed)
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
+      }
+      output = "(" + output + ")"
+    }
+    return output
+  }
+
+  fun vx_string_from_string_start_end(
+    text : String,
+    start : int,
+    end : int
+  ) : String {
+    var output : String = ""
+    maxlen : int = text.length()
+    if (end < 0) {
+     end += maxlen
+    }
+    if (start < 1) {
+    } else if (start > end) {
+    } else if (start > maxlen) {
+    } else {
+      if (end >= maxlen) {
+        end = maxlen
+      }
+      output = text.substring(start - 1, end)
+    }
+    return output
+  }
+
+  fun typedef_new(
+    pkgname : String,
+    name : String,
+    extend : String,
+    traits : vx_core.Type_typelist,
+    allowtypes : vx_core.Type_typelist,
+    disallowtypes : vx_core.Type_typelist,
+    allowfuncs : vx_core.Type_funclist,
+    disallowfuncs : vx_core.Type_funclist,
+    allowvalues : vx_core.Type_anylist,
+    disallowvalues : vx_core.Type_anylist,
+    properties : vx_core.Type_argmap
+  ) : vx_core.Type_typedef {
+    val output : vx_core.Class_typedef = new vx_core.Class_typedef()
+    output.vx_p_pkgname = vx_core.vx_new_string(pkgname)
+    output.vx_p_name = vx_core.vx_new_string(name)
+    output.vx_p_extend = vx_core.vx_new_string(extend)
+    output.vx_p_traits = traits
+    output.vx_p_allowtypes = allowtypes
+    output.vx_p_disallowtypes = disallowtypes
+    output.vx_p_allowfuncs = disallowfuncs
+    output.vx_p_disallowfuncs = disallowfuncs
+    output.vx_p_allowvalues = disallowvalues
+    output.vx_p_disallowvalues = disallowvalues
+    output.vx_p_properties = properties
+    return output
+  }
+
+  fun vx_anylist_from_arraystring(arraystring: String[]) : vx_core.Type_anylist {
+    val listany : List<Object> = new ArrayList<>()
+    for (svalue : string in arraystring) {
+      value : vx_core.Type_string = vx_core.vx_new_string(svalue)
+      listany.add(value)
+    }
+    val arrayany : Object[] = listany.toArray()
+    val output : vx_core.Type_anylist = vx_core.t_anylist.vx_new(arrayany)
+    return output
+  }
+
+  // Warning!: Blocking
+  fun <T extends vx_core.Type_any> vx_sync_from_async(
+    generic_any_1 : T,
+    future : CompletableFuture<T>
+  ) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    try {
+      output = future.get()
+    } catch (Exception e) {
+      val msg : vx_core.Type_msg = vx_core.vx_msg_from_exception("sync<-async", e)
+      val val : vx_core.Type_any = generic_any_1.vx_new(msg)
+      output = vx_core.f_any_from_any(generic_any_1, val)
+    }
+    return output
+  }

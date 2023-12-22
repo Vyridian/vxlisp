@@ -807,6 +807,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">
             (f) map&lt;-list
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">
+            (f) map&lt;-map
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">
             (f) mempool-addref
           </li>
@@ -958,17 +961,32 @@
           <li class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">
             (t) csv
           </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrowmap')">
+            (t) csvrowmap
+          </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrows')">
             (t) csvrows
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/data/csv/delimcsv')">
             (c) delimcsv
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-file')">
+            (f) csv&lt;-file
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-string')">
+            (f) csv&lt;-string
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-textblock')">
             (f) csv&lt;-textblock
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv-read&lt;-file')">
+            (f) csv-read&lt;-file
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csvrows&lt;-textblock')">
             (f) csvrows&lt;-textblock
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/stringmap&lt;-csv')">
+            (f) stringmap&lt;-csv
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/csv/textblock-csv&lt;-string')">
             (f) textblock-csv&lt;-string
@@ -1324,8 +1342,17 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/data/xml/delimxml')">
             (c) delimxml
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-file')">
+            (f) xml&lt;-file
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-string')">
+            (f) xml&lt;-string
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-textblock')">
             (f) xml&lt;-textblock
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-read&lt;-file')">
+            (f) xml-read&lt;-file
           </li>
         </ul>
       </details>
@@ -1607,6 +1634,28 @@
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/test/trlist&lt;-testcaselist')">
             (f) trlist&lt;-testcaselist
+          </li>
+        </ul>
+      </details>
+      <details>
+        <summary>
+          <span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span>
+        </summary>
+        <ul class="packagenav" id="n_pkgnav_vx/translate">
+          <li class="nfunc" onclick="docjs.navigate('func_vx/translate/translate')">
+            (f) translate
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/translate/translate_1')">
+            (f) translate
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/translate/translation&lt;-context')">
+            (f) translation&lt;-context
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load')">
+            (f) translation-load
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load-session')">
+            (f) translation-load-session
           </li>
         </ul>
       </details>
@@ -2201,6 +2250,7 @@
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/sample')">vx/sample</span></li>
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span></li>
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/test')">vx/test</span></li>
+            <li><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span></li>
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span></li>
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/web/html')">vx/web/html</span></li>
             <li><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span></li>
@@ -4054,7 +4104,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
             </li>
           </ul>
         </details>
@@ -5316,7 +5366,7 @@ output : list-1 := (empty list-1)
    &quot;output = valstart;
     List&lt;Core.Type_any&gt; listval = list.vx_list();
     for (Core.Type_any item : listval) {
-      output = fn_reduce.f_any_from_reduce(generic_any_1, output, item);
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }&quot;)
  :test (test
         24
@@ -5362,7 +5412,7 @@ output : list-1 := (empty list-1)
       if (first) {
         first = false;
       } else {
-        output = fn_reduce_next.f_any_from_reduce_next(generic_any_1, output, current, next);
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
       }
       current = next;
     }&quot;)
@@ -5385,8 +5435,7 @@ output : list-1 := (empty list-1)
       output = val
     }&quot;
   :java
-   &quot;Core.Type_any val = valuemap.vx_map().getOrDefault(key.vx_string(), output);
-    output = Core.f_any_from_any(generic_any_1, val);&quot;)
+   &quot;Core.vx_any_from_map(generic_any_1, valuemap, key);&quot;)
  :test (test
         &quot;v2&quot;
         (any&lt;-map
@@ -5673,7 +5722,7 @@ output : list-1 := (empty list-1)
    &quot;List&lt;Core.Type_any&gt; listvalue = values.vx_list();
     for (Core.Type_any value : listvalue) {
       if (value != Core.c_nothing) {
-        output = fn_any_from_any.f_any_from_any(generic_any_1, value);
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
         break;
       }
     }&quot;)
@@ -5821,7 +5870,7 @@ output : list-1 := (empty list-1)
         switch (code.vx_string()) {
         case “:then”:
           Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.f_boolean_from_func();
+          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
           if (cond.vx_boolean() == true) {
             fnany = thenelse.fn_any();
           }
@@ -5834,7 +5883,7 @@ output : list-1 := (empty list-1)
       return fnany;
     });
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :doc  &quot;Logical If function&quot;
  :test (test-true
@@ -6067,7 +6116,7 @@ output : list-1 := (empty list-1)
       output = fn()
     }&quot;
   :java
-   &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
+   &quot;fn_any.vx_any_from_func(generic_any_1);&quot;)
  :test (test
         7
         (let
@@ -6087,7 +6136,7 @@ output : list-1 := (empty list-1)
       output = await fn()
     }&quot;
   :java
-   &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
+   &quot;fn_any_async.vx_any_from_func_async(generic_any_1);&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)
 
 (func list&lt;-list : list-1
@@ -6110,7 +6159,7 @@ output : list-1 := (empty list-1)
   :java
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;Core.Type_any&gt; list_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any.f_any_from_any(generic_list_1, val);
+      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));&quot;)
  :doc &quot;Returns a list of processed items from another list&quot;)
@@ -6136,7 +6185,7 @@ output : list-1 := (empty list-1)
   :java
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;CompletableFuture&lt;Core.Type_any&gt;&gt; list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any_async.f_any_from_any_async(generic_list_1, val);
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
     });
     CompletableFuture&lt;List&lt;Core.Type_any&gt;&gt; async_list_result = Core.async_arraylist_from_arraylist_async(list_async_result);
     output = Core.async_from_async_fn(async_list_result, (list_result) -&gt; {
@@ -6163,7 +6212,7 @@ output : list-1 := (empty list-1)
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;Core.Type_any&gt; list_result = new ArrayList&lt;&gt;();
     for (Core.Type_any val : list_value) {
-      Core.Type_any listoflist = fn_any_from_any.f_any_from_any(generic_list_1, val);
+      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
       if (listoflist instanceof Core.Type_list) {
         Core.Type_list vallist = (Core.Type_list)listoflist;
         List&lt;Core.Type_any&gt; listval = vallist.vx_list();
@@ -6179,19 +6228,14 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
-    output = vx_core::vx_any_from_any(generic_list_1, list)&quot;
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
-   &quot;const fn = fn_any_from_key_value['vx_value']
-    if (fn) {
-      const entries = Object.entries(valuemap['vx_value'])
-      const values = entries.map(fn)
-      output = vx_core.f_new(generic_list_1, ...values)
-    }&quot;
+   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;
   :java
    &quot;Map&lt;String, Core.Type_any&gt; map_value = valuemap.vx_map();
     List&lt;Core.Type_any&gt; listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -&gt; {
       Core.Type_string valkey = Core.vx_new_string(key);
-      return fn_any_from_key_value.f_any_from_key_value(Core.t_any, valkey, val);
+      return fn_any_from_key_value.vx_any_from_key_value(Core.t_any, valkey, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));&quot;)
  :test (test
@@ -6258,8 +6302,8 @@ output : list-1 := (empty list-1)
  :doc &quot;The default function for app main execution. Arguments come from the command line.&quot;)
 
 (func map&lt;-list : map-1
- [vallist      : list-2
-  fn-any&lt;-any  : any&lt;-any :: string]
+ [vallist     : list-2
+  fn-any&lt;-any : any&lt;-any :: string]
  (native
   :cpp
    &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
@@ -6280,8 +6324,8 @@ output : list-1 := (empty list-1)
     }&quot;
   :java
    &quot;List&lt;Core.Type_any&gt; listval = vallist.vx_list();
-    Map&lt;String, Core.Type_any&gt; mapresult = Core.map_from_list_fn(listval, (val) -&gt; {
-      return fn_any_from_any.f_any_from_any(Core.t_string, val);
+    Map&lt;String, Core.Type_any&gt; mapresult = Core.vx_map_from_list_fn(listval, (val) -&gt; {
+      return fn_any_from_any.vx_any_from_any(Core.t_string, val);
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));&quot;)
  :test (test
@@ -6293,7 +6337,32 @@ output : list-1 := (empty list-1)
          (fn : string
           [val : string]
           (string &quot;key&quot; val))))
- :doc &quot;Returns a map from a list by applying a function to each key value.&quot;)
+ :doc &quot;Returns a map from a list by applying a function to generate a key for each value.&quot;)
+
+(func map&lt;-map : map-1
+ [valuemap          : map-2
+  fn-any&lt;-key-value : any&lt;-key-value]
+ (native
+  :cpp
+   &quot;vx_core::Type_any map = vx_core::vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_map_1, map);&quot;
+  :js
+   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+  :java
+   &quot;Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;)
+ :test (test
+        (stringmap
+         :a &quot;a1&quot;
+         :b &quot;b2&quot;)
+        (map&lt;-map : stringmap
+         (stringmap
+          :a &quot;1&quot;
+          :b &quot;2&quot;)
+         (fn : string
+          [key : string
+           val : string]
+          (string key val))))
+ :doc &quot;Returns a map from a map by applying a function to each key value.&quot;)
 
 (func mempool-addref : none
  [values : anylist :...]
@@ -6581,7 +6650,7 @@ output : list-1 := (empty list-1)
     }&quot;
   :java
    &quot;if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))
 
@@ -6608,7 +6677,7 @@ output : list-1 := (empty list-1)
     }&quot;
   :java
    &quot;if (fn_any != null) {
-      output = fn_any.f_any_from_func_async(generic_any_1);
+      output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;)
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))
 
@@ -6770,7 +6839,7 @@ output : list-1 := (empty list-1)
       }
     }
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :test (test 1
         (switch : int
@@ -15698,7 +15767,7 @@ improves readability.</div>
    &quot;output = valstart;
     List&lt;Core.Type_any&gt; listval = list.vx_list();
     for (Core.Type_any item : listval) {
-      output = fn_reduce.f_any_from_reduce(generic_any_1, output, item);
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }&quot;)
  :test (test
         24
@@ -15812,7 +15881,7 @@ improves readability.</div>
       if (first) {
         first = false;
       } else {
-        output = fn_reduce_next.f_any_from_reduce_next(generic_any_1, output, current, next);
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
       }
       current = next;
     }&quot;)
@@ -15906,8 +15975,7 @@ improves readability.</div>
       output = val
     }&quot;
   :java
-   &quot;Core.Type_any val = valuemap.vx_map().getOrDefault(key.vx_string(), output);
-    output = Core.f_any_from_any(generic_any_1, val);&quot;)
+   &quot;Core.vx_any_from_map(generic_any_1, valuemap, key);&quot;)
  :test (test
         &quot;v2&quot;
         (any&lt;-map
@@ -17716,7 +17784,7 @@ improves readability.</div>
    &quot;List&lt;Core.Type_any&gt; listvalue = values.vx_list();
     for (Core.Type_any value : listvalue) {
       if (value != Core.c_nothing) {
-        output = fn_any_from_any.f_any_from_any(generic_any_1, value);
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
         break;
       }
     }&quot;)
@@ -18319,7 +18387,7 @@ improves readability.</div>
         switch (code.vx_string()) {
         case “:then”:
           Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.f_boolean_from_func();
+          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
           if (cond.vx_boolean() == true) {
             fnany = thenelse.fn_any();
           }
@@ -18332,7 +18400,7 @@ improves readability.</div>
       return fnany;
     });
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :doc  &quot;Logical If function&quot;
  :test (test-true
@@ -19352,7 +19420,7 @@ improves readability.</div>
       output = fn()
     }&quot;
   :java
-   &quot;fn_any.f_any_from_func(generic_any_1);&quot;)
+   &quot;fn_any.vx_any_from_func(generic_any_1);&quot;)
  :test (test
         7
         (let
@@ -19435,7 +19503,7 @@ improves readability.</div>
       output = await fn()
     }&quot;
   :java
-   &quot;fn_any_async.f_any_from_func_async(generic_any_1);&quot;)
+   &quot;fn_any_async.vx_any_from_func_async(generic_any_1);&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)</div>
                 </li>
               </ul>
@@ -19521,7 +19589,7 @@ improves readability.</div>
   :java
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;Core.Type_any&gt; list_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any.f_any_from_any(generic_list_1, val);
+      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));&quot;)
  :doc &quot;Returns a list of processed items from another list&quot;)</div>
@@ -19610,7 +19678,7 @@ improves readability.</div>
   :java
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;CompletableFuture&lt;Core.Type_any&gt;&gt; list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any_async.f_any_from_any_async(generic_list_1, val);
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
     });
     CompletableFuture&lt;List&lt;Core.Type_any&gt;&gt; async_list_result = Core.async_arraylist_from_arraylist_async(list_async_result);
     output = Core.async_from_async_fn(async_list_result, (list_result) -&gt; {
@@ -19700,7 +19768,7 @@ improves readability.</div>
    &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
     List&lt;Core.Type_any&gt; list_result = new ArrayList&lt;&gt;();
     for (Core.Type_any val : list_value) {
-      Core.Type_any listoflist = fn_any_from_any.f_any_from_any(generic_list_1, val);
+      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
       if (listoflist instanceof Core.Type_list) {
         Core.Type_list vallist = (Core.Type_list)listoflist;
         List&lt;Core.Type_any&gt; listval = vallist.vx_list();
@@ -19787,19 +19855,14 @@ improves readability.</div>
  (native
   :cpp
    &quot;vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
-    output = vx_core::vx_any_from_any(generic_list_1, list)&quot;
+    output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
-   &quot;const fn = fn_any_from_key_value['vx_value']
-    if (fn) {
-      const entries = Object.entries(valuemap['vx_value'])
-      const values = entries.map(fn)
-      output = vx_core.f_new(generic_list_1, ...values)
-    }&quot;
+   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;
   :java
    &quot;Map&lt;String, Core.Type_any&gt; map_value = valuemap.vx_map();
     List&lt;Core.Type_any&gt; listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -&gt; {
       Core.Type_string valkey = Core.vx_new_string(key);
-      return fn_any_from_key_value.f_any_from_key_value(Core.t_any, valkey, val);
+      return fn_any_from_key_value.vx_any_from_key_value(Core.t_any, valkey, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));&quot;)
  :test (test
@@ -20173,7 +20236,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns a map from a list by applying a function to each key value.</div>
+                <div class="txt">Returns a map from a list by applying a function to generate a key for each value.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -20238,8 +20301,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func map&lt;-list : map-1
- [vallist      : list-2
-  fn-any&lt;-any  : any&lt;-any :: string]
+ [vallist     : list-2
+  fn-any&lt;-any : any&lt;-any :: string]
  (native
   :cpp
    &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
@@ -20260,8 +20323,8 @@ improves readability.</div>
     }&quot;
   :java
    &quot;List&lt;Core.Type_any&gt; listval = vallist.vx_list();
-    Map&lt;String, Core.Type_any&gt; mapresult = Core.map_from_list_fn(listval, (val) -&gt; {
-      return fn_any_from_any.f_any_from_any(Core.t_string, val);
+    Map&lt;String, Core.Type_any&gt; mapresult = Core.vx_map_from_list_fn(listval, (val) -&gt; {
+      return fn_any_from_any.vx_any_from_any(Core.t_string, val);
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));&quot;)
  :test (test
@@ -20273,7 +20336,107 @@ improves readability.</div>
          (fn : string
           [val : string]
           (string &quot;key&quot; val))))
- :doc &quot;Returns a map from a list by applying a function to each key value.&quot;)</div>
+ :doc &quot;Returns a map from a list by applying a function to generate a key for each value.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/map&lt;-map">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a map from a map by applying a function to each key value.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">map&lt;-map</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/map-1')">vx/core/map-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">valuemap</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/map-2')">vx/core/map-2</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">fn-any&lt;-key-value</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-key-value')">vx/core/any&lt;-key-value</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ (stringmap
+  :a &quot;a1&quot;
+  :b &quot;b2&quot;)
+ (map&lt;-map : stringmap
+  (stringmap
+   :a &quot;1&quot;
+   :b &quot;2&quot;)
+  (fn : string
+   [key : string
+    val : string]
+   (string key val))))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func map&lt;-map : map-1
+ [valuemap          : map-2
+  fn-any&lt;-key-value : any&lt;-key-value]
+ (native
+  :cpp
+   &quot;vx_core::Type_any map = vx_core::vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_map_1, map);&quot;
+  :js
+   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+  :java
+   &quot;Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;)
+ :test (test
+        (stringmap
+         :a &quot;a1&quot;
+         :b &quot;b2&quot;)
+        (map&lt;-map : stringmap
+         (stringmap
+          :a &quot;1&quot;
+          :b &quot;2&quot;)
+         (fn : string
+          [key : string
+           val : string]
+          (string key val))))
+ :doc &quot;Returns a map from a map by applying a function to each key value.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -22043,7 +22206,7 @@ improves readability.</div>
     }&quot;
   :java
    &quot;if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))</div>
                 </li>
@@ -22129,7 +22292,7 @@ improves readability.</div>
     }&quot;
   :java
    &quot;if (fn_any != null) {
-      output = fn_any.f_any_from_func_async(generic_any_1);
+      output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;)
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))</div>
                 </li>
@@ -22950,7 +23113,7 @@ improves readability.</div>
       }
     }
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :test (test 1
         (switch : int
@@ -23709,12 +23872,16 @@ improves readability.</div>
                 <div class="td">vx/collection</div>
               </div>
               <div class="tr">
-                <div class="td">type</div>
-                <div class="td">vx/type</div>
+                <div class="td">fil</div>
+                <div class="td">vx/data/file</div>
               </div>
               <div class="tr">
                 <div class="td">tb</div>
                 <div class="td">vx/data/textblock</div>
+              </div>
+              <div class="tr">
+                <div class="td">type</div>
+                <div class="td">vx/type</div>
               </div>
             </div>
           </li>
@@ -23726,7 +23893,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">csv</span>, <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrows')">csvrows</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">csv</span>, <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrowmap')">csvrowmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrows')">csvrows</span>
             </li>
           </ul>
         </details>
@@ -23746,7 +23913,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-textblock')">csv&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csvrows&lt;-textblock')">csvrows&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/textblock-csv&lt;-string')">textblock-csv&lt;-string</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-file')">csv&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-string')">csv&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-textblock')">csv&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv-read&lt;-file')">csv-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csvrows&lt;-textblock')">csvrows&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/stringmap&lt;-csv')">stringmap&lt;-csv</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/textblock-csv&lt;-string')">textblock-csv&lt;-string</span>
             </li>
           </ul>
         </details>
@@ -23758,14 +23925,18 @@ improves readability.</div>
             <li>
               <div class="source">(package vx/data/csv
  :libs (lib collection :path vx/collection)
-       (lib type :path vx/type)
-       (lib tb :path vx/data/textblock)
+       (lib fil        :path vx/data/file)
+       (lib tb         :path vx/data/textblock)
+       (lib type       :path vx/type)
  :doc &quot;Csv handler&quot;)
 
 (type csv : struct
  :properties
   [headers : stringlist
    rows    : csvrows])
+
+(type csvrowmap : map
+ :allowtypes [stringlist])
 
 (type csvrows : list
  :allowtypes [stringlist])
@@ -23780,13 +23951,38 @@ improves readability.</div>
     tb/delimcomma))
  :doc &quot;Csv File Delimiters&quot;)
 
+(func csv&lt;-file : csv
+ [file : fil/file]
+ (let : csv
+  [text : string := (:text file)]
+  (csv&lt;-string text))
+ :doc &quot;Returns a parsed csv from a file.&quot;)
+
+(func csv&lt;-string : csv
+ [text : string]
+ (csv&lt;-textblock
+  (tb/textblock-parse&lt;-string-delim
+   text
+   delimcsv))
+ :doc &quot;Returns a parsed csv from a string.&quot;)
+
 (func csv&lt;-textblock : csv
  [textblock : tb/textblock]
  (let
   [allrows : csvrows    := (csvrows&lt;-textblock textblock)
    headers : stringlist := (:1 allrows)
    rows    : csvrows    := (list&lt;-list-end allrows 2)]
-  (csv :headers headers :rows rows)))
+  (csv :headers headers :rows rows))
+ :doc &quot;Returns a parsed csv from a textblock.&quot;)
+
+(func csv-read&lt;-file : csv
+ [file : fil/file]
+ (let : csv
+  [loaded : fil/file := (fil/file-read&lt;-file
+                         file)]
+  (csv&lt;-file loaded))
+ :context
+ :doc &quot;Returns a parsed csv from a file.&quot;)
 
 (func csvrows&lt;-textblock : csvrows
  [textblock : tb/textblock]
@@ -23795,6 +23991,23 @@ improves readability.</div>
    children : tb/textblocklist := (tb/children&lt;-textblock parsedtb)
    strings  : stringlist       := (tb/stringlist&lt;-textblocklist children)]
   (csvrows strings)))
+
+(func stringmap&lt;-csv : stringmap
+ [csv : csv]
+ (let : stringmap
+  [rows   : csvrows   := (:rows csv)
+   rowmap : csvrowmap := (map&lt;-list : csvrowmap
+                          rows
+                          (fn : string
+                           [textlist : stringlist]
+                           (:1 textlist)))]
+  (map&lt;-map : stringmap
+   rowmap
+   (fn : stringmap
+    [key : string
+     val : stringlist]
+    (:2 val))))
+ :doc &quot;Returns a stringmap using the first 2 values in each row.&quot;)
 
 (func textblock-csv&lt;-string : textblock
  [text : string]
@@ -23963,6 +24176,57 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_type_vx/data/csv/csvrowmap">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrowmap')">csvrowmap</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">csvrowmap</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:map</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Allowed Types:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/stringlist')">stringlist</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type csvrowmap : map
+ :allowtypes [stringlist])</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_type_vx/data/csv/csvrows">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csvrows')">csvrows</span></div>
             <div class="lbl">Description:</div>
@@ -24060,12 +24324,143 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/data/csv/csv&lt;-file">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-file')">csv&lt;-file</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed csv from a file.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">csv&lt;-file</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">vx/data/csv/csv</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">file</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func csv&lt;-file : csv
+ [file : fil/file]
+ (let : csv
+  [text : string := (:text file)]
+  (csv&lt;-string text))
+ :doc &quot;Returns a parsed csv from a file.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/csv/csv&lt;-string">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-string')">csv&lt;-string</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed csv from a string.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">csv&lt;-string</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">vx/data/csv/csv</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func csv&lt;-string : csv
+ [text : string]
+ (csv&lt;-textblock
+  (tb/textblock-parse&lt;-string-delim
+   text
+   delimcsv))
+ :doc &quot;Returns a parsed csv from a string.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/data/csv/csv&lt;-textblock">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv&lt;-textblock')">csv&lt;-textblock</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Returns a parsed csv from a textblock.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -24121,7 +24516,75 @@ improves readability.</div>
   [allrows : csvrows    := (csvrows&lt;-textblock textblock)
    headers : stringlist := (:1 allrows)
    rows    : csvrows    := (list&lt;-list-end allrows 2)]
-  (csv :headers headers :rows rows)))</div>
+  (csv :headers headers :rows rows))
+ :doc &quot;Returns a parsed csv from a textblock.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/csv/csv-read&lt;-file">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/csv-read&lt;-file')">csv-read&lt;-file</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed csv from a file.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">csv-read&lt;-file</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">vx/data/csv/csv</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">file</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func csv-read&lt;-file : csv
+ [file : fil/file]
+ (let : csv
+  [loaded : fil/file := (fil/file-read&lt;-file
+                         file)]
+  (csv&lt;-file loaded))
+ :context
+ :doc &quot;Returns a parsed csv from a file.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -24188,6 +24651,81 @@ improves readability.</div>
    children : tb/textblocklist := (tb/children&lt;-textblock parsedtb)
    strings  : stringlist       := (tb/stringlist&lt;-textblocklist children)]
   (csvrows strings)))</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/csv/stringmap&lt;-csv">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/csv')">vx/data/csv</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/csv/stringmap&lt;-csv')">stringmap&lt;-csv</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a stringmap using the first 2 values in each row.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">stringmap&lt;-csv</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">vx/core/stringmap</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">csv</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/csv/csv')">vx/data/csv/csv</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func stringmap&lt;-csv : stringmap
+ [csv : csv]
+ (let : stringmap
+  [rows   : csvrows   := (:rows csv)
+   rowmap : csvrowmap := (map&lt;-list : csvrowmap
+                          rows
+                          (fn : string
+                           [textlist : stringlist]
+                           (:1 textlist)))]
+  (map&lt;-map : stringmap
+   rowmap
+   (fn : stringmap
+    [key : string
+     val : stringlist]
+    (:2 val))))
+ :doc &quot;Returns a stringmap using the first 2 values in each row.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -45407,6 +45945,10 @@ improves readability.</div>
                 <div class="td">vx/test</div>
               </div>
               <div class="tr">
+                <div class="td">fil</div>
+                <div class="td">vx/data/file</div>
+              </div>
+              <div class="tr">
                 <div class="td">tb</div>
                 <div class="td">vx/data/textblock</div>
               </div>
@@ -45440,7 +45982,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-textblock')">xml&lt;-textblock</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-file')">xml&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-string')">xml&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-textblock')">xml&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-read&lt;-file')">xml-read&lt;-file</span>
             </li>
           </ul>
         </details>
@@ -45451,7 +45993,8 @@ improves readability.</div>
           <ul>
             <li>
               <div class="source">(package vx/data/xml
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib fil :path vx/data/file)
+       (lib tb  :path vx/data/textblock)
  :doc &quot;Xml handler&quot;)
 
 (type xml : struct
@@ -45460,8 +46003,8 @@ improves readability.</div>
 (type xmlnode : struct
  :properties [nodes : xmlnode
               props : xmlpropmap
-							tag   : string
-							text  : string])
+              tag   : string
+              text  : string])
 
 (type xmlnodelist : list
  :allowtypes [xmlnode])
@@ -45480,13 +46023,38 @@ improves readability.</div>
 	  (copy tb/delimbracketangle
 		 :delimlist
 		  (delimlist
-			 delimxmlequal
-			 tb/delimquote)))
- ))
+     delimxmlequal
+     tb/delimwhitespace
+     tb/delimquote)))))
+
+(func xml&lt;-file : xml
+ [file : fil/file]
+ (let : xml
+  [text : string := (:text file)]
+  (xml&lt;-string text))
+ :doc &quot;Returns a parsed xml from a file.&quot;)
+
+(func xml&lt;-string : xml
+ [text : string]
+ (xml&lt;-textblock
+  (tb/textblock-parse&lt;-string-delim
+   text
+   delimxml))
+ :doc &quot;Returns a parsed xml from a string.&quot;)
 
 (func xml&lt;-textblock : xml
  [textblock : tb/textblock]
- (xml))
+ (xml)
+ :doc &quot;Returns a parsed xml from a textblock.&quot;)
+
+(func xml-read&lt;-file : xml
+ [file : fil/file]
+ (let : xml
+  [loaded : fil/file := (fil/file-read&lt;-file
+                         file)]
+  (xml&lt;-file loaded))
+ :context
+ :doc &quot;Returns a parsed xml from a file.&quot;)
 </div>
             </li>
           </ul>
@@ -45650,8 +46218,8 @@ improves readability.</div>
                   <div class="source">(type xmlnode : struct
  :properties [nodes : xmlnode
               props : xmlpropmap
-							tag   : string
-							text  : string])</div>
+              tag   : string
+              text  : string])</div>
                 </li>
               </ul>
             </details>
@@ -45838,9 +46406,140 @@ improves readability.</div>
 	  (copy tb/delimbracketangle
 		 :delimlist
 		  (delimlist
-			 delimxmlequal
-			 tb/delimquote)))
- ))</div>
+     delimxmlequal
+     tb/delimwhitespace
+     tb/delimquote)))))</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/xml/xml&lt;-file">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/xml')">vx/data/xml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-file')">xml&lt;-file</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed xml from a file.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">xml&lt;-file</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/xml/xml')">vx/data/xml/xml</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">file</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func xml&lt;-file : xml
+ [file : fil/file]
+ (let : xml
+  [text : string := (:text file)]
+  (xml&lt;-string text))
+ :doc &quot;Returns a parsed xml from a file.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/xml/xml&lt;-string">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/xml')">vx/data/xml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-string')">xml&lt;-string</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed xml from a string.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">xml&lt;-string</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/xml/xml')">vx/data/xml/xml</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func xml&lt;-string : xml
+ [text : string]
+ (xml&lt;-textblock
+  (tb/textblock-parse&lt;-string-delim
+   text
+   delimxml))
+ :doc &quot;Returns a parsed xml from a string.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -45850,7 +46549,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Returns a parsed xml from a textblock.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -45902,7 +46601,75 @@ improves readability.</div>
                 <li>
                   <div class="source">(func xml&lt;-textblock : xml
  [textblock : tb/textblock]
- (xml))</div>
+ (xml)
+ :doc &quot;Returns a parsed xml from a textblock.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/xml/xml-read&lt;-file">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/xml')">vx/data/xml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-read&lt;-file')">xml-read&lt;-file</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a parsed xml from a file.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">xml-read&lt;-file</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/xml/xml')">vx/data/xml/xml</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">file</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func xml-read&lt;-file : xml
+ [file : fil/file]
+ (let : xml
+  [loaded : fil/file := (fil/file-read&lt;-file
+                         file)]
+  (xml&lt;-file loaded))
+ :context
+ :doc &quot;Returns a parsed xml from a file.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -54757,6 +55524,480 @@ improves readability.</div>
   testcaselist
   trlist&lt;-testcase)
  :doc &quot;Returns a trlist from a testcaselist.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+      <div class="d" id="d_pkg_vx/translate">
+        <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span></div>
+        <div class="lbl">Description:</div>
+        <ul>
+          <li>
+            <div class="txt">Language to language translation tools</div>
+          </li>
+        </ul>
+        <div class="lbl">Package Name:</div>
+        <ul>
+          <li>
+            <div class="txt">vx/translate</div>
+          </li>
+        </ul>
+        <details open="true">
+          <summary>
+            <span class="lbl">Libraries:</span>
+          </summary>
+        <ul>
+          <li>
+            <div class="table">
+              <div class="th">
+                <div class="td">Name</div>
+                <div class="td">Path</div>
+              </div>
+              <div class="tr">
+                <div class="td">vx/core</div>
+                <div class="td">vx/core</div>
+              </div>
+              <div class="tr">
+                <div class="td">vx/test</div>
+                <div class="td">vx/test</div>
+              </div>
+              <div class="tr">
+                <div class="td">csv</div>
+                <div class="td">vx/data/csv</div>
+              </div>
+              <div class="tr">
+                <div class="td">fil</div>
+                <div class="td">vx/data/file</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Types:</span>
+          </summary>
+          <ul>
+            <li>
+              
+            </li>
+          </ul>
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Constants:</span>
+          </summary>
+          <ul>
+            <li>
+      
+            </li>
+          </ul>
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Functions:</span>
+          </summary>
+          <ul>
+            <li>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translate')">translate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translate_1')">translate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation&lt;-context')">translation&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load')">translation-load</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load-session')">translation-load-session</span>
+            </li>
+          </ul>
+        </details>
+        <details open="true">
+          <summary>
+            <span class="lbl">Source Code:</span>
+          </summary>
+          <ul>
+            <li>
+              <div class="source">(package vx/translate
+ :libs (lib csv :path vx/data/csv)
+       (lib fil :path vx/data/file)
+ :doc &quot;Language to language translation tools&quot;)
+
+(func translate : string
+ [translation : translation
+  text        : string]
+ (if : string
+  (is-empty translation)
+  text
+  (let : string
+   [textmap : stringmap := (:translationmap translation)
+    xlate   : string    := (any&lt;-map textmap text)]
+   (if : string
+    (is-empty xlate)
+    text
+    xlate)))
+ :doc &quot;Returns a translated string from a translation or the original text if not found.&quot;)
+
+(func translate : string
+ [text : string]
+ (translate
+  (translation&lt;-context)
+  text)
+ :context
+ :doc &quot;Returns a translated string from current context.&quot;)
+
+(func translation&lt;-context : translation
+ (:translation (session&lt;-context))
+ :context
+ :doc &quot;Returns a translated string from current context.&quot;)
+
+(func translation-load : translation
+ [code : string]
+ (let : translation
+  [filecsv : file      := (file
+                           :name (string code &quot;.csv&quot;)
+                           :path &quot;translation&quot;)
+   csvread : csv/csv   := (csv/csv-read&lt;-file filecsv)
+   textmap : stringmap := (csv/stringmap&lt;-csv csvread)]
+  (translation
+   :translationmap textmap))
+ :context
+ :doc &quot;Returns a translation from the translation folder.&quot;)
+
+(func translation-load-session : translation
+ [translation : translation]
+ :context
+ :sideeffects &quot;Alters current (:translation session)&quot;
+ :doc &quot;Returns a translation from the translation folder.&quot;)
+</div>
+            </li>
+          </ul>
+        </details>
+      </div>
+          <div class="d" id="d_func_vx/translate/translate">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translate')">translate</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a translated string from a translation or the original text if not found.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translate</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">translation</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func translate : string
+ [translation : translation
+  text        : string]
+ (if : string
+  (is-empty translation)
+  text
+  (let : string
+   [textmap : stringmap := (:translationmap translation)
+    xlate   : string    := (any&lt;-map textmap text)]
+   (if : string
+    (is-empty xlate)
+    text
+    xlate)))
+ :doc &quot;Returns a translated string from a translation or the original text if not found.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/translate/translate_1">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translate_1')">translate</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a translated string from current context.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translate</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func translate : string
+ [text : string]
+ (translate
+  (translation&lt;-context)
+  text)
+ :context
+ :doc &quot;Returns a translated string from current context.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/translate/translation&lt;-context">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation&lt;-context')">translation&lt;-context</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a translated string from current context.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translation&lt;-context</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func translation&lt;-context : translation
+ (:translation (session&lt;-context))
+ :context
+ :doc &quot;Returns a translated string from current context.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/translate/translation-load">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load')">translation-load</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a translation from the translation folder.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translation-load</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">code</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func translation-load : translation
+ [code : string]
+ (let : translation
+  [filecsv : file      := (file
+                           :name (string code &quot;.csv&quot;)
+                           :path &quot;translation&quot;)
+   csvread : csv/csv   := (csv/csv-read&lt;-file filecsv)
+   textmap : stringmap := (csv/stringmap&lt;-csv csvread)]
+  (translation
+   :translationmap textmap))
+ :context
+ :doc &quot;Returns a translation from the translation folder.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/translate/translation-load-session">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/translate')">vx/translate</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/translate/translation-load-session')">translation-load-session</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a translation from the translation folder.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">translation-load-session</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">translation</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">vx/core/translation</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func translation-load-session : translation
+ [translation : translation]
+ :context
+ :sideeffects &quot;Alters current (:translation session)&quot;
+ :doc &quot;Returns a translation from the translation folder.&quot;)</div>
                 </li>
               </ul>
             </details>

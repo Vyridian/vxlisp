@@ -1250,7 +1250,7 @@
    "output = valstart;
     List<Core.Type_any> listval = list.vx_list();
     for (Core.Type_any item : listval) {
-      output = fn_reduce.f_any_from_reduce(generic_any_1, output, item);
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }")
  :test (test
         24
@@ -1296,7 +1296,7 @@
       if (first) {
         first = false;
       } else {
-        output = fn_reduce_next.f_any_from_reduce_next(generic_any_1, output, current, next);
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
       }
       current = next;
     }")
@@ -1319,8 +1319,7 @@
       output = val
     }"
   :java
-   "Core.Type_any val = valuemap.vx_map().getOrDefault(key.vx_string(), output);
-    output = Core.f_any_from_any(generic_any_1, val);")
+   "Core.vx_any_from_map(generic_any_1, valuemap, key);")
  :test (test
         "v2"
         (any<-map
@@ -1607,7 +1606,7 @@
    "List<Core.Type_any> listvalue = values.vx_list();
     for (Core.Type_any value : listvalue) {
       if (value != Core.c_nothing) {
-        output = fn_any_from_any.f_any_from_any(generic_any_1, value);
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
         break;
       }
     }")
@@ -1755,7 +1754,7 @@
         switch (code.vx_string()) {
         case “:then”:
           Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.f_boolean_from_func();
+          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
           if (cond.vx_boolean() == true) {
             fnany = thenelse.fn_any();
           }
@@ -1768,7 +1767,7 @@
       return fnany;
     });
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :doc  "Logical If function"
  :test (test-true
@@ -2001,7 +2000,7 @@
       output = fn()
     }"
   :java
-   "fn_any.f_any_from_func(generic_any_1);")
+   "fn_any.vx_any_from_func(generic_any_1);")
  :test (test
         7
         (let
@@ -2021,7 +2020,7 @@
       output = await fn()
     }"
   :java
-   "fn_any_async.f_any_from_func_async(generic_any_1);")
+   "fn_any_async.vx_any_from_func_async(generic_any_1);")
  :doc "Same as normal let but returns async values.")
 
 (func list<-list : list-1
@@ -2044,7 +2043,7 @@
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
-      return fn_any_from_any.f_any_from_any(generic_list_1, val);
+      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));")
  :doc "Returns a list of processed items from another list")
@@ -2070,7 +2069,7 @@
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
-      return fn_any_from_any_async.f_any_from_any_async(generic_list_1, val);
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
     });
     CompletableFuture<List<Core.Type_any>> async_list_result = Core.async_arraylist_from_arraylist_async(list_async_result);
     output = Core.async_from_async_fn(async_list_result, (list_result) -> {
@@ -2097,7 +2096,7 @@
    "List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = new ArrayList<>();
     for (Core.Type_any val : list_value) {
-      Core.Type_any listoflist = fn_any_from_any.f_any_from_any(generic_list_1, val);
+      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
       if (listoflist instanceof Core.Type_list) {
         Core.Type_list vallist = (Core.Type_list)listoflist;
         List<Core.Type_any> listval = vallist.vx_list();
@@ -2113,19 +2112,14 @@
  (native
   :cpp
    "vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
-    output = vx_core::vx_any_from_any(generic_list_1, list)"
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
   :js
-   "const fn = fn_any_from_key_value['vx_value']
-    if (fn) {
-      const entries = Object.entries(valuemap['vx_value'])
-      const values = entries.map(fn)
-      output = vx_core.f_new(generic_list_1, ...values)
-    }"
+   "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)"
   :java
    "Map<String, Core.Type_any> map_value = valuemap.vx_map();
     List<Core.Type_any> listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -> {
       Core.Type_string valkey = Core.vx_new_string(key);
-      return fn_any_from_key_value.f_any_from_key_value(Core.t_any, valkey, val);
+      return fn_any_from_key_value.vx_any_from_key_value(Core.t_any, valkey, val);
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));")
  :test (test
@@ -2192,8 +2186,8 @@
  :doc "The default function for app main execution. Arguments come from the command line.")
 
 (func map<-list : map-1
- [vallist      : list-2
-  fn-any<-any  : any<-any :: string]
+ [vallist     : list-2
+  fn-any<-any : any<-any :: string]
  (native
   :cpp
    "vx_core::vx_Type_listany listany = vallist->vx_list();
@@ -2214,8 +2208,8 @@
     }"
   :java
    "List<Core.Type_any> listval = vallist.vx_list();
-    Map<String, Core.Type_any> mapresult = Core.map_from_list_fn(listval, (val) -> {
-      return fn_any_from_any.f_any_from_any(Core.t_string, val);
+    Map<String, Core.Type_any> mapresult = Core.vx_map_from_list_fn(listval, (val) -> {
+      return fn_any_from_any.vx_any_from_any(Core.t_string, val);
     });
     output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));")
  :test (test
@@ -2227,7 +2221,32 @@
          (fn : string
           [val : string]
           (string "key" val))))
- :doc "Returns a map from a list by applying a function to each key value.")
+ :doc "Returns a map from a list by applying a function to generate a key for each value.")
+
+(func map<-map : map-1
+ [valuemap          : map-2
+  fn-any<-key-value : any<-key-value]
+ (native
+  :cpp
+   "vx_core::Type_any map = vx_core::vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_map_1, map);"
+  :js
+   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)"
+  :java
+   "Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);")
+ :test (test
+        (stringmap
+         :a "a1"
+         :b "b2")
+        (map<-map : stringmap
+         (stringmap
+          :a "1"
+          :b "2")
+         (fn : string
+          [key : string
+           val : string]
+          (string key val))))
+ :doc "Returns a map from a map by applying a function to each key value.")
 
 (func mempool-addref : none
  [values : anylist :...]
@@ -2515,7 +2534,7 @@
     }"
   :java
    "if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))
 
@@ -2542,7 +2561,7 @@
     }"
   :java
    "if (fn_any != null) {
-      output = fn_any.f_any_from_func_async(generic_any_1);
+      output = fn_any.vx_any_from_func_async(generic_any_1);
     }")
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))
 
@@ -2704,7 +2723,7 @@
       }
     }
     if (fn_any != null) {
-      output = fn_any.f_any_from_func(generic_any_1);
+      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :test (test 1
         (switch : int

@@ -8,8 +8,8 @@
         iscontinue = false;
       } else {
         icount += 1;
-        output = fn_loop.f_any_from_any(generic_any_1, output);
-        Core.Type_boolean valcontinue = fn_until.f_boolean_from_any(output);
+        output = fn_loop.vx_any_from_any(generic_any_1, output);
+        Core.Type_boolean valcontinue = fn_until.vx_boolean_from_any(output);
         iscontinue = !valcontinue.vx_boolean();
       }
     }
@@ -26,10 +26,10 @@
         iscontinue = false;
       } else {
         icount += 1;
-        Core.Type_boolean valcontinue = fn_while.f_boolean_from_any(output);
+        Core.Type_boolean valcontinue = fn_while.vx_boolean_from_any(output);
         iscontinue = valcontinue.vx_boolean();
         if (iscontinue) {
-          output = fn_loop.f_any_from_any(generic_any_1, output);
+          output = fn_loop.vx_any_from_any(generic_any_1, output);
         }
       }
     }
@@ -43,12 +43,12 @@
     int iend = end.vx_int();
     if (istart <= iend) {
       for (int i = istart; i <= iend; i++) {
-        Core.Type_any val = fn_loop.f_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
         listvals.add(val);
       }
     } else {
       for (int i = istart; i >= iend; i--) {
-        Core.Type_any val = fn_loop.f_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
         listvals.add(val);
       }
     }
@@ -70,11 +70,11 @@
       if (icount >= imax) {
         iscontinue = false;
       } else {
-        Core.Type_boolean valwhile = fn_while.f_boolean_from_any(work);
+        Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
         iscontinue = !valwhile.vx_boolean();
         if (iscontinue) {
           icount += 1;
-          work = fn_loop.f_any_from_any(Core.t_any, work);
+          work = fn_loop.vx_any_from_any(Core.t_any, work);
           listvals.add(work);
         }
       }
@@ -91,7 +91,7 @@
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
     for (Core.Type_any val : listval) {
-      Core.Type_any newval = fn_filter.f_any_from_any(Core.t_any, val);
+      Core.Type_any newval = fn_filter.vx_any_from_any(Core.t_any, val);
       Core.Type_boolean isempty = Core.f_is_empty_1(newval);
       if (!isempty.vx_boolean()) {
         items.add(newval);

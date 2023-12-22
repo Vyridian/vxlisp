@@ -682,6 +682,19 @@ namespace vx_core {
     return output;
   }
 
+  // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    vx_core::vx_Type_mapany map_value = valuemap->vx_map();
+    vx_core::vx_Type_mapany mapnew;
+    for (auto const& [key, val] : map_value) {
+      vx_core::Type_string valkey = vx_core::vx_new_string(key);
+      vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
+      mapnew[key] = result;
+    }
+    vx_core::Type_any output = generic_map_1->vx_new_from_map(mapnew);
+    return output;
+  }
+
   // vx_memory_leak_test()
   bool vx_memory_leak_test() {
     bool output = true;
@@ -1371,6 +1384,11 @@ namespace vx_core {
     return output;
   }
 
+  // vx_string_from_string_start(string, int)
+  std::string vx_string_from_string_start(std::string text, long start) {
+   return vx_core::vx_string_from_string_start_end(text, start, text.length());
+  }
+
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end) {
     std::string output = "";
@@ -1759,6 +1777,9 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       const vx_core::Class_map* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any);
       vx_core::vx_release_except(key, output);
@@ -1807,17 +1828,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -1826,9 +1850,9 @@ namespace vx_core {
           vx_core::Type_any valany = valsub;
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -4740,6 +4764,9 @@ namespace vx_core {
       vx_core::Type_arg output = vx_core::e_arg;
       const vx_core::Class_argmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_arg> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_arg);
       vx_core::vx_release_except(key, output);
@@ -4803,17 +4830,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_arg> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -4825,14 +4855,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_arg) {
             valany = vx_core::vx_any_from_any(vx_core::t_arg, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -5382,6 +5412,9 @@ namespace vx_core {
       vx_core::Type_connect output = vx_core::e_connect;
       const vx_core::Class_connectmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_connect> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_connect);
       vx_core::vx_release_except(key, output);
@@ -5445,17 +5478,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_connect> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -5467,14 +5503,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_connect) {
             valany = vx_core::vx_any_from_any(vx_core::t_connect, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -5954,6 +5990,9 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       const vx_core::Class_constmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any);
       vx_core::vx_release_except(key, output);
@@ -6002,17 +6041,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -6021,9 +6063,9 @@ namespace vx_core {
           vx_core::Type_any valany = valsub;
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -6622,6 +6664,9 @@ namespace vx_core {
       vx_core::Type_func output = vx_core::e_func;
       const vx_core::Class_funcmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_func> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_func);
       vx_core::vx_release_except(key, output);
@@ -6685,17 +6730,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_func> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -6707,14 +6755,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_func) {
             valany = vx_core::vx_any_from_any(vx_core::t_func, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -6942,6 +6990,9 @@ namespace vx_core {
       vx_core::Type_int output = vx_core::e_int;
       const vx_core::Class_intmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_int> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_int);
       vx_core::vx_release_except(key, output);
@@ -7005,17 +7056,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_int> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -7027,14 +7081,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_int) {
             valany = vx_core::vx_any_from_any(vx_core::t_int, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -7722,6 +7776,9 @@ namespace vx_core {
       vx_core::Type_number output = vx_core::e_number;
       const vx_core::Class_numbermap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_number> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_number);
       vx_core::vx_release_except(key, output);
@@ -7785,17 +7842,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_number> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -7807,14 +7867,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_number) {
             valany = vx_core::vx_any_from_any(vx_core::t_number, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -8184,6 +8244,9 @@ namespace vx_core {
       vx_core::Type_package output = vx_core::e_package;
       const vx_core::Class_packagemap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_package> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_package);
       vx_core::vx_release_except(key, output);
@@ -8247,17 +8310,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_package> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -8269,14 +8335,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_package) {
             valany = vx_core::vx_any_from_any(vx_core::t_package, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -8653,6 +8719,9 @@ namespace vx_core {
       vx_core::Type_permission output = vx_core::e_permission;
       const vx_core::Class_permissionmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_permission> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_permission);
       vx_core::vx_release_except(key, output);
@@ -8716,17 +8785,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_permission> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -8738,14 +8810,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_permission) {
             valany = vx_core::vx_any_from_any(vx_core::t_permission, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -9634,6 +9706,9 @@ namespace vx_core {
       vx_core::Type_statelistener output = vx_core::e_statelistener;
       const vx_core::Class_state* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_statelistener> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_statelistener);
       vx_core::vx_release_except(key, output);
@@ -9697,17 +9772,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_statelistener> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -9719,14 +9797,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_statelistener) {
             valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -10171,6 +10249,9 @@ namespace vx_core {
       vx_core::Type_string output = vx_core::e_string;
       const vx_core::Class_stringmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_string> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_string);
       vx_core::vx_release_except(key, output);
@@ -10234,17 +10315,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -10256,14 +10340,14 @@ namespace vx_core {
           } else if (valsubtype == vx_core::t_string) {
             valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -11115,6 +11199,9 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       const vx_core::Class_typemap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any);
       vx_core::vx_release_except(key, output);
@@ -11163,17 +11250,20 @@ namespace vx_core {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -11182,9 +11272,9 @@ namespace vx_core {
           vx_core::Type_any valany = valsub;
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -22138,6 +22228,81 @@ namespace vx_core {
 
   //}
 
+  // (func map<-map)
+  // class Class_map_from_map {
+    Abstract_map_from_map::~Abstract_map_from_map() {}
+
+    Class_map_from_map::Class_map_from_map() : Abstract_map_from_map::Abstract_map_from_map() {
+      vx_core::refcount += 1;
+    }
+
+    Class_map_from_map::~Class_map_from_map() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_map_from_map::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_map_from_map output = vx_core::e_map_from_map;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_map_from_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_map_from_map output = vx_core::e_map_from_map;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_map_from_map::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "map<-map", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_map_from_map::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_map_from_map::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "map<-map", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_map_from_map::vx_empty() const {return vx_core::e_map_from_map;}
+    vx_core::Type_any Class_map_from_map::vx_type() const {return vx_core::t_map_from_map;}
+    vx_core::Type_msgblock Class_map_from_map::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_map_from_map::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_map_from_map::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map generic_map_1 = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_map valuemap = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Func_any_from_key_value fn_any_from_key_value = vx_core::vx_any_from_any(vx_core::t_any_from_key_value, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_map_from_map(generic_map_1, valuemap, fn_any_from_key_value);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func mempool-addref)
   void f_mempool_addref(vx_core::Type_anylist values) {
     vx_core::vx_reserve(values);
@@ -26295,6 +26460,8 @@ namespace vx_core {
   vx_core::Func_main t_main = NULL;
   vx_core::Func_map_from_list e_map_from_list = NULL;
   vx_core::Func_map_from_list t_map_from_list = NULL;
+  vx_core::Func_map_from_map e_map_from_map = NULL;
+  vx_core::Func_map_from_map t_map_from_map = NULL;
   vx_core::Func_mempool_addref e_mempool_addref = NULL;
   vx_core::Func_mempool_addref t_mempool_addref = NULL;
   vx_core::Func_mempool_release e_mempool_release = NULL;
@@ -27130,6 +27297,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_map_from_list);
       vx_core::t_map_from_list = new vx_core::Class_map_from_list();
       vx_core::vx_reserve_type(vx_core::t_map_from_list);
+      vx_core::e_map_from_map = new vx_core::Class_map_from_map();
+      vx_core::vx_reserve_empty(vx_core::e_map_from_map);
+      vx_core::t_map_from_map = new vx_core::Class_map_from_map();
+      vx_core::vx_reserve_type(vx_core::t_map_from_map);
       vx_core::e_mempool_addref = new vx_core::Class_mempool_addref();
       vx_core::vx_reserve_empty(vx_core::e_mempool_addref);
       vx_core::t_mempool_addref = new vx_core::Class_mempool_addref();
@@ -27513,6 +27684,7 @@ namespace vx_core {
       mapfunc["log_1"] = vx_core::t_log_1;
       mapfunc["main"] = vx_core::t_main;
       mapfunc["map<-list"] = vx_core::t_map_from_list;
+      mapfunc["map<-map"] = vx_core::t_map_from_map;
       mapfunc["mempool-addref"] = vx_core::t_mempool_addref;
       mapfunc["mempool-release"] = vx_core::t_mempool_release;
       mapfunc["mempool-removeref"] = vx_core::t_mempool_removeref;

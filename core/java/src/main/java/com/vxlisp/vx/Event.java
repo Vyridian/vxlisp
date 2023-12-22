@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 public final class Event {
 
 
@@ -351,7 +350,7 @@ public final class Event {
    * (func any<-from-to)
    */
   public static interface Func_any_from_from_to extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_any_from_from_to(final T generic_any_1, final Core.Type_any from, final Core.Type_any to);
+    public <T extends Core.Type_any> T vx_any_from_from_to(final T generic_any_1, final Core.Type_any from, final Core.Type_any to);
   }
 
   public static class Class_any_from_from_to extends Core.Class_base implements Func_any_from_from_to {
@@ -409,7 +408,7 @@ public final class Event {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_from_to(final T generic_any_1, final Core.Type_any from, final Core.Type_any to) {
+    public <T extends Core.Type_any> T vx_any_from_from_to(final T generic_any_1, final Core.Type_any from, final Core.Type_any to) {
       return Event.f_any_from_from_to(generic_any_1, from, to);
     }
 

@@ -13,6 +13,9 @@ type vxlang struct {
 	pkgname    string
 	pkgref     string
 	indent     string
+	lineend    string
+	itfext     string
+	classext   string
 }
 
 // var langcpp = NewLangCpp()
@@ -33,6 +36,7 @@ func NewLangCpp() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "::"
 	output.indent = "  "
+	output.lineend = ";"
 	return output
 }
 
@@ -45,6 +49,7 @@ func NewLangCsharp() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "."
 	output.indent = "  "
+	output.lineend = ";"
 	return output
 }
 
@@ -57,6 +62,9 @@ func NewLangJava() *vxlang {
 	output.pkgname = "Core"
 	output.pkgref = "."
 	output.indent = "  "
+	output.lineend = ";"
+	output.itfext = "extends"
+	output.classext = "extends"
 	return output
 }
 
@@ -69,6 +77,7 @@ func NewLangJs() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "."
 	output.indent = "  "
+	output.lineend = ";"
 	return output
 }
 
@@ -81,6 +90,8 @@ func NewLangKotlin() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "."
 	output.indent = "  "
+	output.lineend = ""
+	output.classext = ":"
 	return output
 }
 
@@ -93,6 +104,17 @@ func NewLangSwift() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "."
 	output.indent = "  "
+	output.lineend = ""
+	return output
+}
+
+func LangClassHeader(lang *vxlang, classname string, indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	switch lang.name {
+	case "java":
+		output = lineindent + "public class " + classname + " {\n"
+	}
 	return output
 }
 
@@ -108,6 +130,21 @@ func LangFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
+}
+
+func LangClassHeaderFromType(lang *vxlang, typ *vxtype, indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	typename := LangFromName(typ.alias)
+	switch lang.name {
+	case "csharp":
+		output = lineindent + "class Class_" + typename + " : vx_core.Class_base, Type_" + LangNameFromType(lang, typ) + " {"
+	case "java":
+		output = lineindent + "public static class Class_" + typename + " extends Core.Class_base implements Type_" + LangNameFromType(lang, typ) + " {"
+	case "kotlin":
+		output = lineindent + "class Class_" + typename + " : vx_core.Class_base, Type_" + LangNameFromType(lang, typ) + " {"
+	}
+	return output
 }
 
 func LangConstDefsFromListConst(values []*vxconst, indent string) string {
@@ -230,6 +267,7 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 	cmdpath := PathFromProjectCmd(project, command)
 	pkgprefix := ""
 	switch lang.name {
+	case "csharp":
 	case "java", "kotlin":
 		pkgprefix = project.javadomain + "."
 	}
@@ -257,6 +295,7 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 		subproject := pkg.project
 		subprefix := ""
 		switch lang.name {
+		case "csharp":
 		case "java", "kotlin":
 			subprefix = subproject.javadomain + "/"
 		}
@@ -421,7 +460,7 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
-		"\n  public static class " + cnstclassname + " extends " + extends + " implements Core.vx_Type_const {" +
+		"\n  public static class " + cnstclassname + " " + lang.classext + " " + extends + " implements Core.vx_Type_const {" +
 		"\n" +
 		"\n    @Override" +
 		"\n    public Core.Type_constdef vx_constdef() {" +
@@ -620,7 +659,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 						"\n    public Core.Func_any_from_any" + contextname + "_async vx_fn_new(Core.Class_any_from_any" + contextname + "_async.IFn fn) {return Core.e_any_from_any" + contextname + "_async;}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any" + contextname + "_async(final T generic_any_1" + contextarg + ", final U value) {" +
+						"\n    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any" + contextname + "_async(final T generic_any_1" + contextarg + ", final U value) {" +
 						asyncbody +
 						"\n      return output;" +
 						"\n    }" +
@@ -631,7 +670,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 						"\n    public Core.Func_any_from_any" + contextname + " vx_fn_new(Core.Class_any_from_any" + contextname + ".IFn fn) {return Core.e_any_from_any" + contextname + ";}" +
 						"\n" +
 						"\n    @Override" +
-						"\n    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any" + contextname + "(final T generic_any_1" + contextarg + ", final U value) {" +
+						"\n    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any" + contextname + "(final T generic_any_1" + contextarg + ", final U value) {" +
 						"\n      T output = Core.f_empty(generic_any_1);" +
 						"\n      " + argtypename + " inputval = (" + argtypename + ")value;" +
 						"\n      Core.Type_any outputval = " + pkgname + ".f_" + funcname + "(" + subargnames + ");" +
@@ -774,7 +813,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	output := "" +
 		doc +
 		interfacefunc +
-		"\n  public static class Class_" + funcname + " extends Core.Class_base implements Func_" + funcname + " {" +
+		"\n  public static class Class_" + funcname + " " + lang.classext + " Core.Class_base implements Func_" + funcname + " {" +
 		"\n" +
 		instancevars +
 		"\n    @Override" +
@@ -812,7 +851,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		interfacefn +
 		instancefuncs +
 		"\n    @Override" +
-		"\n    public " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
+		"\n    public " + genericdefinition + functypetext + " vx_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
 		staticfuncs +
 		returnvalue +
 		"\n    }" +
@@ -855,8 +894,23 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix str
 	msgblock := NewMsgBlock("LangFromPackage")
 	pkgpath, pkgname := LangPackagePathFromPrefixName(lang, pkgprefix, pkg.name)
 	specialcode := prj.maptext[pkg.name+"_"+lang.name+".txt"]
+	if pkg.name == "core" {
+		MsgLog("specialcode", pkg.name+"_"+lang.name+".txt", len(specialcode))
+	}
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
+	packageline := "package " + pkgpath + lang.lineend + "\n"
+	packageopen := ""
+	packageclose := ""
+	switch lang.name {
+	case "csharp":
+		packageopen = "namespace " + pkgname + "{\n\n"
+		packageclose = "\n}"
+	case "java":
+		packageopen = "public final class " + pkgname + " {\n\n"
+		packageclose = "\n}"
+	case "kotlin":
+	}
 	packagestatic := "" +
 		"\n    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();" +
 		"\n    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();" +
@@ -900,7 +954,6 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix str
 		"\n  }" +
 		"\n"
 	body := "" +
-		"\n" +
 		specialcode +
 		typetexts +
 		consttexts +
@@ -909,14 +962,11 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix str
 		//		emptytypes
 	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, false)
 	output := "" +
-		"package " + pkgpath + ";" +
-		"\n" +
+		packageline +
 		imports +
-		"\n" +
-		"\npublic final class " + pkgname + " {" +
-		"\n" +
+		packageopen +
 		body +
-		"\n}" +
+		packageclose +
 		"\n"
 	return output, msgblock
 }
@@ -951,7 +1001,6 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 	staticfuncs := ""
 	valnew := ""
 	extendinterface := ""
-	extendsclass := " extends Core.Class_base"
 	valcopy := "" +
 		"\n      boolean ischanged = false;" +
 		"\n      Class_" + typename + " val = this;" +
@@ -1463,6 +1512,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          }" +
 			"\n          if (valany != null) {" +
 			"\n            ischanged = true;" +
+			"\n            if (key.startsWith(\":\")) {" +
+			"\n              key = key.substring(1);" +
+			"\n            }" +
 			"\n            mapval.put(key, valany);" +
 			"\n            key = \"\";" +
 			"\n          }" +
@@ -1794,7 +1846,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		"\n   * (type " + typ.name + ")" +
 		"\n   */" +
 		sinterface +
-		"\n  public static class Class_" + typename + extendsclass + " implements Type_" + LangNameFromType(lang, typ) + " {" +
+		LangClassHeaderFromType(lang, typ, 1) +
 		"\n" +
 		instancefuncs +
 		"\n    @Override" +
@@ -2430,7 +2482,9 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 				}
 			}
 		}
-		output += "\n"
+		if output != "" {
+			output += "\n\n"
+		}
 	}
 	return output
 }
@@ -2465,7 +2519,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		output = "" +
-			"\n  public interface Type_any {" +
+			LangInterfaceHeader(lang, anytype, emptylisttype, 1) +
 			basics +
 			"\n    public Core.Type_typedef vx_typedef();" +
 			"\n    public List<Type_any> vx_dispose();" +
@@ -2476,44 +2530,44 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			"\n"
 	case "vx/core/boolean":
 		output = "" +
-			"\n  public interface Type_boolean extends Core.Type_any {" +
+			LangInterfaceHeader(lang, booleantype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/decimal":
 		output = "" +
-			"\n  public interface Type_decimal extends Core.Type_number {" +
+			LangInterfaceHeader(lang, decimaltype, []*vxtype{numbertype}, 1) +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/float":
 		output = "" +
-			"\n  public interface Type_float extends Core.Type_number {" +
+			LangInterfaceHeader(lang, floattype, []*vxtype{numbertype}, 1) +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/func":
 		output = "" +
-			"\n  public interface Type_func extends Core.Type_any {" +
+			LangInterfaceHeader(lang, functype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n	   public Core.Type_funcdef vx_funcdef();" +
 			"\n  }" +
 			"\n"
 	case "vx/core/int":
 		output = "" +
-			"\n  public interface Type_int extends Core.Type_number {" +
+			LangInterfaceHeader(lang, inttype, []*vxtype{numbertype}, 1) +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/string":
 		output = "" +
-			"\n  public interface Type_string extends Core.Type_any {" +
+			LangInterfaceHeader(lang, stringtype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n  }" +
 			"\n"
 	case "vx/core/list":
 		output = "" +
-			"\n  public interface Type_list extends Core.Type_any {" +
+			LangInterfaceHeader(lang, listtype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n    public List<Core.Type_any> vx_list();" +
 			"\n    public Core.Type_any vx_any(final Core.Type_int index);" +
@@ -2521,7 +2575,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			"\n"
 	case "vx/core/map":
 		output = "" +
-			"\n  public interface Type_map extends Core.Type_any {" +
+			LangInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval);" +
 			"\n    public Core.Type_any vx_any(final Core.Type_string key);" +
@@ -2530,7 +2584,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			"\n"
 	case "vx/core/struct":
 		output = "" +
-			"\n  public interface Type_struct extends Core.Type_any {" +
+			LangInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n    public Core.Type_any vx_any(final Core.Type_string key);" +
 			"\n    public Map<String, Core.Type_any> vx_map();" +
@@ -2556,20 +2610,20 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			extras += "" +
 				"\n    public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals);"
 		}
-		extends := ""
+		var extends []*vxtype
 		switch typ.extends {
 		case "boolean":
-			extends += "Core.Type_boolean"
+			extends = append(extends, booleantype)
 		case "decimal":
-			extends += "Core.Type_decimal"
+			extends = append(extends, decimaltype)
 		case "float":
-			extends += "Core.Type_float"
+			extends = append(extends, floattype)
 		case "int":
-			extends += "Core.Type_int"
+			extends = append(extends, inttype)
 		case "string":
-			extends += "Core.Type_string"
+			extends = append(extends, stringtype)
 		case ":list":
-			extends += "Core.Type_list"
+			extends = append(extends, listtype)
 			allowclass := "Core.Type_any"
 			allowname := "any"
 			allowtypes := ListAllowTypeFromType(typ)
@@ -2584,7 +2638,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 					"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_int index);"
 			}
 		case ":map":
-			extends = "Core.Type_map"
+			extends = append(extends, maptype)
 			allowclass := "Core.Type_any"
 			allowname := "any"
 			allowtypes := ListAllowTypeFromType(typ)
@@ -2599,23 +2653,18 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 					"\n    public " + allowclass + " vx_" + allowname + "(final Core.Type_string key);"
 			}
 		case ":struct":
-			extends = "Core.Type_struct"
+			extends = append(extends, structtype)
 			if len(typ.traits) > 0 {
-				var traitnames []string
-				for _, trait := range typ.traits {
-					traitnames = append(traitnames, LangNameTypeFullFromType(lang, trait))
-				}
-				extends = StringFromListStringJoin(traitnames, ", ")
+				extends = append(extends, typ.traits...)
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
 				extras += "\n    public " + LangNameTypeFromType(lang, arg.vxtype) + " " + LangFromName(arg.alias) + "();"
 			}
 		default:
-			extends += "Core.Type_any"
+			extends = append(extends, anytype)
 		}
-		typename := LangNameFromType(lang, typ)
 		output = "" +
-			"\n  public interface Type_" + typename + " extends " + extends + " {" +
+			LangInterfaceHeader(lang, typ, extends, 1) +
 			basics +
 			extras +
 			"\n  }" +
@@ -2778,12 +2827,42 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 	}
 	interfaces += "" +
-		"\n    public " + generictypes + returntype + " f_" + funcname + "(" + argtext + ");"
+		"\n    public " + generictypes + returntype + " vx_" + funcname + "(" + argtext + ");"
 	output := "" +
-		"\n  public static interface Func_" + funcname + " extends " + extends + " {" +
+		"\n  public static interface Func_" + funcname + " " + lang.itfext + " " + extends + " {" +
 		interfaces +
 		"\n  }" +
 		"\n"
+	return output
+}
+
+func LangInterfaceHeader(lang *vxlang, typ *vxtype, extendtypes []*vxtype, indent int) string {
+	lineindent := LangIndent(lang, indent, true)
+	output := ""
+	extendtext := ""
+	var extendtexts []string
+	for _, extendtype := range extendtypes {
+		extendpart := LangNameTypeFromType(lang, extendtype)
+		extendtexts = append(extendtexts, extendpart)
+	}
+	extendtext = StringFromListStringJoin(extendtexts, ", ")
+	switch lang.name {
+	case "csharp":
+		if extendtext != "" {
+			extendtext = " : " + extendtext
+		}
+		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extendtext + " {"
+	case "java":
+		if extendtext != "" {
+			extendtext = " extends " + extendtext
+		}
+		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {"
+	case "kotlin":
+		if extendtext != "" {
+			extendtext = " : " + extendtext
+		}
+		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extendtext + " {"
+	}
 	return output
 }
 
@@ -2946,13 +3025,21 @@ func LangNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
 }
 
 func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname string) (string, string) {
-	pkgpath := pkgprefix + pkgname
-	ipos := IntFromStringFindLast(pkgpath, "/")
-	name := StringSubstring(pkgpath, ipos+1, len(pkgpath))
-	pkgpath = StringSubstring(pkgpath, 0, ipos)
-	pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
-	pkgpath = LangFromName(pkgpath)
-	name = LangNameFromPkgName(lang, name)
+	pkgpath := ""
+	name := ""
+	switch lang.name {
+	case "java":
+		pkgpath = pkgprefix + pkgname
+		ipos := IntFromStringFindLast(pkgpath, "/")
+		name = StringSubstring(pkgpath, ipos+1, len(pkgpath))
+		pkgpath = StringSubstring(pkgpath, 0, ipos)
+		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		pkgpath = LangFromName(pkgpath)
+		name = LangNameFromPkgName(lang, name)
+	case "kotlin":
+		name = LangNameFromPkgName(lang, pkgname)
+		pkgpath = name
+	}
 	return pkgpath, name
 }
 
@@ -3278,10 +3365,9 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		"\n"
 	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, true)
 	output := "" +
-		"\npackage " + pkgpath + ";" +
+		"\npackage " + pkgpath + lang.lineend +
 		"\n" +
 		imports +
-		"\n" +
 		"\npublic final class " + pkgname + "Test {" +
 		"\n" +
 		body +
@@ -3666,13 +3752,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for whole App.
- */
-public class AppTest {
-
-` +
+ */` +
+		LangClassHeader(lang, "AppTest", 0) +
 		contexttext + `
-` +
-		tests + `
+` + tests + `
   @Test
   @DisplayName("writetestsuite")
   void test_writetestsuite() {
@@ -3690,6 +3773,7 @@ public class AppTest {
 
 func LangTestLib(lang *vxlang) string {
 	output := ""
+	classheader := LangClassHeader(lang, "TestLib", 0)
 	switch lang.name {
 	case "java":
 		output = `
@@ -3700,9 +3784,7 @@ import com.vxlisp.vx.*;
 import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
 import com.vxlisp.vx.web.Html;
-
-public class TestLib {
-
+` + classheader + `
   public static boolean run_testcase(final Test.Type_testcase testcase) {
     String testpkg = testcase.testpkg().vx_string();
     String casename = testcase.casename().vx_string();

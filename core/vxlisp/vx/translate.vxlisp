@@ -1,0 +1,51 @@
+(package vx/translate
+ :libs (lib csv :path vx/data/csv)
+       (lib fil :path vx/data/file)
+ :doc "Language to language translation tools")
+
+(func translate : string
+ [translation : translation
+  text        : string]
+ (if : string
+  (is-empty translation)
+  text
+  (let : string
+   [textmap : stringmap := (:translationmap translation)
+    xlate   : string    := (any<-map textmap text)]
+   (if : string
+    (is-empty xlate)
+    text
+    xlate)))
+ :doc "Returns a translated string from a translation or the original text if not found.")
+
+(func translate : string
+ [text : string]
+ (translate
+  (translation<-context)
+  text)
+ :context
+ :doc "Returns a translated string from current context.")
+
+(func translation<-context : translation
+ (:translation (session<-context))
+ :context
+ :doc "Returns a translated string from current context.")
+
+(func translation-load : translation
+ [code : string]
+ (let : translation
+  [filecsv : file      := (file
+                           :name (string code ".csv")
+                           :path "translation")
+   csvread : csv/csv   := (csv/csv-read<-file filecsv)
+   textmap : stringmap := (csv/stringmap<-csv csvread)]
+  (translation
+   :translationmap textmap))
+ :context
+ :doc "Returns a translation from the translation folder.")
+
+(func translation-load-session : translation
+ [translation : translation]
+ :context
+ :sideeffects "Alters current (:translation session)"
+ :doc "Returns a translation from the translation folder.")

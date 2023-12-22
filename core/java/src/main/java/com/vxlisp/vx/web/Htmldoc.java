@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import com.vxlisp.vx.*;
 
-
 public final class Htmldoc {
 
   /**
@@ -17,7 +16,7 @@ public final class Htmldoc {
    * (func boolean-write<-id-htmltext)
    */
   public static interface Func_boolean_write_from_id_htmltext extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext);
+    public Core.Type_boolean vx_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext);
   }
 
   public static class Class_boolean_write_from_id_htmltext extends Core.Class_base implements Func_boolean_write_from_id_htmltext {
@@ -74,7 +73,7 @@ public final class Htmldoc {
     }
 
     @Override
-    public Core.Type_boolean f_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
+    public Core.Type_boolean vx_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
       return Htmldoc.f_boolean_write_from_id_htmltext(id, htmltext);
     }
 
@@ -98,7 +97,7 @@ public final class Htmldoc {
    * (func boolean-write<-stylesheet)
    */
   public static interface Func_boolean_write_from_stylesheet extends Core.Func_any_from_any_async {
-    public CompletableFuture<Core.Type_boolean> f_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet);
+    public CompletableFuture<Core.Type_boolean> vx_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet);
   }
 
   public static class Class_boolean_write_from_stylesheet extends Core.Class_base implements Func_boolean_write_from_stylesheet {
@@ -150,7 +149,7 @@ public final class Htmldoc {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Html.Type_stylesheet inputval = Core.f_any_from_any(Html.t_stylesheet, value);
       CompletableFuture<Core.Type_boolean> future = Htmldoc.f_boolean_write_from_stylesheet(inputval);
       @SuppressWarnings("unchecked")
@@ -167,7 +166,7 @@ public final class Htmldoc {
     }
 
     @Override
-    public CompletableFuture<Core.Type_boolean> f_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
+    public CompletableFuture<Core.Type_boolean> vx_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
       return Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
     }
 
@@ -189,7 +188,7 @@ public final class Htmldoc {
    * (func string<-id)
    */
   public static interface Func_string_from_id extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_id(final Core.Type_string id);
+    public Core.Type_string vx_string_from_id(final Core.Type_string id);
   }
 
   public static class Class_string_from_id extends Core.Class_base implements Func_string_from_id {
@@ -241,7 +240,7 @@ public final class Htmldoc {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Htmldoc.f_string_from_id(inputval);
@@ -257,7 +256,7 @@ public final class Htmldoc {
     }
 
     @Override
-    public Core.Type_string f_string_from_id(final Core.Type_string id) {
+    public Core.Type_string vx_string_from_id(final Core.Type_string id) {
       return Htmldoc.f_string_from_id(id);
     }
 

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import com.vxlisp.vx.*;
 
-
 public final class Db {
 
 
@@ -488,6 +487,9 @@ public final class Db {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -821,6 +823,9 @@ public final class Db {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }

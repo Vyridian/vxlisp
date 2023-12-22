@@ -181,16 +181,6 @@
     return output;
   }
 
-  public static <T> Map<String, T> map_from_list_fn(final List<T> listval, final Function<T, Core.Type_string> fn_any_from_any) {
-    Map<String, T> output = new LinkedHashMap<>();
-    for (T val : listval) {
-      Core.Type_string valkey = fn_any_from_any.apply(val);
-      String key = valkey.vx_string();
-      output.put(key, val);
-    }
-    return output;
-  }
-
   public static <T extends Core.Type_any> LinkedHashMap<String, T> map_from_map(final LinkedHashMap<String, Core.Type_any> mapval) {
     LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
     Set<String> keys = mapval.keySet();
@@ -204,6 +194,18 @@
         Core.vx_log("map<-map", ex);
       }
     }
+    return output;
+  }
+
+  // vx_any_from_map(generic_any_1, map, string)
+  public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
+    T output = Core.f_empty(generic_any_1);
+    String skey = key.vx_string();
+    if (skey.startsWith(":")) {
+      skey = skey.substring(1);
+    }
+    Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    output = Core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
@@ -410,6 +412,36 @@
       }
       System.out.println(text);
     }
+  }
+
+  // vx_map_from_list_fn(generic_map, list, fn_any_from_key_value)
+  public static <T> Map<String, T> vx_map_from_list_fn(final List<T> listval, final Function<T, Core.Type_string> fn_any_from_any) {
+    Map<String, T> output = new LinkedHashMap<>();
+    for (T val : listval) {
+      Core.Type_string valkey = fn_any_from_any.apply(val);
+      String key = valkey.vx_string();
+      output.put(key, val);
+    }
+    return output;
+  }
+
+  // vx_map_from_map_fn(generic_map, map, fn_any_from_key_value)
+  public static <T extends Core.Type_map> T vx_map_from_map_fn(T generic_map_1, Core.Type_map valuemap, Core.Func_any_from_key_value fn_any_from_key_value) {
+    T output = Core.f_empty(generic_map_1);
+    Map<String, Core.Type_any> mapvalue = valuemap.vx_map();
+    if (mapvalue.size() > 0) {
+      Set<String> keys = mapvalue.keySet();
+      Map<String, Core.Type_any> mapnew = new LinkedHashMap<>();
+      for (String key : keys) {
+        Core.Type_any value = mapvalue.get(key);
+        Core.Type_string stringkey = Core.vx_new_string(key);
+        Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(Core.t_any, stringkey, value);
+        mapnew.put(key, chgvalue);
+      }
+      Core.Type_map anymap = generic_map_1.vx_new_from_map(mapnew);
+      output = Core.f_any_from_any(generic_map_1, anymap);
+    }
+    return output;
   }
 
   // vx_msg_error

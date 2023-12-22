@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
+#include "../../vx/data/file.hpp"
 #include "../../vx/data/textblock.hpp"
 #include "xml.hpp"
 
@@ -594,6 +595,9 @@ namespace vx_data_xml {
       vx_core::Type_string output = vx_core::e_string;
       const vx_data_xml::Class_xmlpropmap* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_string> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_string);
       vx_core::vx_release_except(key, output);
@@ -657,17 +661,20 @@ namespace vx_data_xml {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_string> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -679,14 +686,14 @@ namespace vx_data_xml {
           } else if (valsubtype == vx_core::t_string) {
             valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + key + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }
@@ -756,6 +763,7 @@ namespace vx_data_xml {
                     vx_data_textblock::t_delimlist,
                     vx_core::vx_new(vx_core::t_anylist, {
                       vx_data_xml::c_delimxmlequal,
+                      vx_data_textblock::c_delimwhitespace,
                       vx_data_textblock::c_delimquote
                     })
                   )
@@ -811,6 +819,312 @@ namespace vx_data_xml {
       vx_core::vx_reserve_type(output);
     }
 
+
+  //}
+
+  // (func xml-read<-file)
+  vx_data_xml::Type_xml f_xml_read_from_file(vx_core::Type_context context, vx_data_file::Type_file file) {
+    vx_data_xml::Type_xml output = vx_data_xml::e_xml;
+    vx_core::vx_reserve(file);
+    output = vx_core::f_let(
+      vx_data_xml::t_xml,
+      vx_core::t_any_from_func->vx_fn_new({context, file}, [context, file]() {
+        vx_data_file::Type_file loaded = vx_data_file::f_file_read_from_file(context, file);
+        vx_core::vx_ref_plus(loaded);
+        vx_data_xml::Type_xml output_1 = vx_data_xml::f_xml_from_file(loaded);
+        vx_core::vx_release_one_except(loaded, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(file, output);
+    return output;
+  }
+
+  // (func xml-read<-file)
+  // class Class_xml_read_from_file {
+    Abstract_xml_read_from_file::~Abstract_xml_read_from_file() {}
+
+    Class_xml_read_from_file::Class_xml_read_from_file() : Abstract_xml_read_from_file::Abstract_xml_read_from_file() {
+      vx_core::refcount += 1;
+    }
+
+    Class_xml_read_from_file::~Class_xml_read_from_file() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_xml_read_from_file::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_read_from_file output = vx_data_xml::e_xml_read_from_file;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_read_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_read_from_file output = vx_data_xml::e_xml_read_from_file;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_xml_read_from_file::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/xml", // pkgname
+        "xml-read<-file", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_xml_read_from_file::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_xml_read_from_file::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml-read<-file", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_read_from_file::vx_empty() const {return vx_data_xml::e_xml_read_from_file;}
+    vx_core::Type_any Class_xml_read_from_file::vx_type() const {return vx_data_xml::t_xml_read_from_file;}
+    vx_core::Type_msgblock Class_xml_read_from_file::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_xml_read_from_file::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_xml_read_from_file::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_xml_read_from_file::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file, val);
+      output = vx_data_xml::f_xml_read_from_file(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_read_from_file::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_data_xml::f_xml_read_from_file(context, file);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func xml<-file)
+  vx_data_xml::Type_xml f_xml_from_file(vx_data_file::Type_file file) {
+    vx_data_xml::Type_xml output = vx_data_xml::e_xml;
+    vx_core::vx_reserve(file);
+    output = vx_core::f_let(
+      vx_data_xml::t_xml,
+      vx_core::t_any_from_func->vx_fn_new({file}, [file]() {
+        vx_core::Type_string text = file->text();
+        vx_core::vx_ref_plus(text);
+        vx_data_xml::Type_xml output_1 = vx_data_xml::f_xml_from_string(text);
+        vx_core::vx_release_one_except(text, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(file, output);
+    return output;
+  }
+
+  // (func xml<-file)
+  // class Class_xml_from_file {
+    Abstract_xml_from_file::~Abstract_xml_from_file() {}
+
+    Class_xml_from_file::Class_xml_from_file() : Abstract_xml_from_file::Abstract_xml_from_file() {
+      vx_core::refcount += 1;
+    }
+
+    Class_xml_from_file::~Class_xml_from_file() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_xml_from_file::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_from_file output = vx_data_xml::e_xml_from_file;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_from_file output = vx_data_xml::e_xml_from_file;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_xml_from_file::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/xml", // pkgname
+        "xml<-file", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_xml_from_file::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_xml_from_file::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml<-file", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_file::vx_empty() const {return vx_data_xml::e_xml_from_file;}
+    vx_core::Type_any Class_xml_from_file::vx_type() const {return vx_data_xml::t_xml_from_file;}
+    vx_core::Type_msgblock Class_xml_from_file::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_xml_from_file::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_xml_from_file::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_xml_from_file::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file, val);
+      output = vx_data_xml::f_xml_from_file(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_file::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_data_xml::f_xml_from_file(file);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func xml<-string)
+  vx_data_xml::Type_xml f_xml_from_string(vx_core::Type_string text) {
+    vx_data_xml::Type_xml output = vx_data_xml::e_xml;
+    vx_core::vx_reserve(text);
+    output = vx_data_xml::f_xml_from_textblock(
+      vx_data_textblock::f_textblock_parse_from_string_delim(
+        text,
+        vx_data_xml::c_delimxml
+      )
+    );
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func xml<-string)
+  // class Class_xml_from_string {
+    Abstract_xml_from_string::~Abstract_xml_from_string() {}
+
+    Class_xml_from_string::Class_xml_from_string() : Abstract_xml_from_string::Abstract_xml_from_string() {
+      vx_core::refcount += 1;
+    }
+
+    Class_xml_from_string::~Class_xml_from_string() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_xml_from_string::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_from_string output = vx_data_xml::e_xml_from_string;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_string::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_xml::Func_xml_from_string output = vx_data_xml::e_xml_from_string;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_xml_from_string::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/xml", // pkgname
+        "xml<-string", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_xml_from_string::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_xml_from_string::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml<-string", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_string::vx_empty() const {return vx_data_xml::e_xml_from_string;}
+    vx_core::Type_any Class_xml_from_string::vx_type() const {return vx_data_xml::t_xml_from_string;}
+    vx_core::Type_msgblock Class_xml_from_string::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_xml_from_string::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_xml_from_string::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_xml_from_string::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_data_xml::f_xml_from_string(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_xml_from_string::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_data_xml::f_xml_from_string(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
 
   //}
 
@@ -920,6 +1234,12 @@ namespace vx_data_xml {
   vx_data_xml::Type_xmlpropmap t_xmlpropmap = NULL;
   vx_data_xml::Const_delimxml c_delimxml = NULL;
   vx_data_xml::Const_delimxmlequal c_delimxmlequal = NULL;
+  vx_data_xml::Func_xml_read_from_file e_xml_read_from_file = NULL;
+  vx_data_xml::Func_xml_read_from_file t_xml_read_from_file = NULL;
+  vx_data_xml::Func_xml_from_file e_xml_from_file = NULL;
+  vx_data_xml::Func_xml_from_file t_xml_from_file = NULL;
+  vx_data_xml::Func_xml_from_string e_xml_from_string = NULL;
+  vx_data_xml::Func_xml_from_string t_xml_from_string = NULL;
   vx_data_xml::Func_xml_from_textblock e_xml_from_textblock = NULL;
   vx_data_xml::Func_xml_from_textblock t_xml_from_textblock = NULL;
 
@@ -946,6 +1266,18 @@ namespace vx_data_xml {
       vx_core::vx_reserve_empty(vx_data_xml::e_xmlpropmap);
       vx_data_xml::t_xmlpropmap = new Class_xmlpropmap();
       vx_core::vx_reserve_type(vx_data_xml::t_xmlpropmap);
+      vx_data_xml::e_xml_read_from_file = new vx_data_xml::Class_xml_read_from_file();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xml_read_from_file);
+      vx_data_xml::t_xml_read_from_file = new vx_data_xml::Class_xml_read_from_file();
+      vx_core::vx_reserve_type(vx_data_xml::t_xml_read_from_file);
+      vx_data_xml::e_xml_from_file = new vx_data_xml::Class_xml_from_file();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xml_from_file);
+      vx_data_xml::t_xml_from_file = new vx_data_xml::Class_xml_from_file();
+      vx_core::vx_reserve_type(vx_data_xml::t_xml_from_file);
+      vx_data_xml::e_xml_from_string = new vx_data_xml::Class_xml_from_string();
+      vx_core::vx_reserve_empty(vx_data_xml::e_xml_from_string);
+      vx_data_xml::t_xml_from_string = new vx_data_xml::Class_xml_from_string();
+      vx_core::vx_reserve_type(vx_data_xml::t_xml_from_string);
       vx_data_xml::e_xml_from_textblock = new vx_data_xml::Class_xml_from_textblock();
       vx_core::vx_reserve_empty(vx_data_xml::e_xml_from_textblock);
       vx_data_xml::t_xml_from_textblock = new vx_data_xml::Class_xml_from_textblock();
@@ -962,6 +1294,9 @@ namespace vx_data_xml {
       maptype["xmlpropmap"] = vx_data_xml::t_xmlpropmap;
       mapconst["delimxml"] = vx_data_xml::c_delimxml;
       mapconst["delimxmlequal"] = vx_data_xml::c_delimxmlequal;
+      mapfunc["xml-read<-file"] = vx_data_xml::t_xml_read_from_file;
+      mapfunc["xml<-file"] = vx_data_xml::t_xml_from_file;
+      mapfunc["xml<-string"] = vx_data_xml::t_xml_from_string;
       mapfunc["xml<-textblock"] = vx_data_xml::t_xml_from_textblock;
       vx_core::vx_global_package_set("vx/data/xml", maptype, mapconst, mapfunc);
 	   }

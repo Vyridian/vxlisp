@@ -4,8 +4,9 @@ import vx_data_csv from "../../../src/vx/data/csv.js"
 import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
 import vx_collection from "../../../src/vx/collection.js"
-import vx_type from "../../../src/vx/type.js"
+import vx_data_file from "../../../src/vx/data/file.js"
 import vx_data_textblock from "../../../src/vx/data/textblock.js"
+import vx_type from "../../../src/vx/type.js"
 
 export default class vx_data_csv_test {
 
@@ -26,12 +27,12 @@ export default class vx_data_csv_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/csv", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 2, ":total", 6), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 1, ":total", 3), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 63, ":tests", 7, ":total", 11), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 1, ":total", 7), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 16, ":tests", 1, ":total", 6), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
 
@@ -43,6 +44,7 @@ export default class vx_data_csv_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "csv", 0,
+          "csvrowmap", 0,
           "csvrows", 0
         ),
       "constmap",
@@ -53,8 +55,12 @@ export default class vx_data_csv_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "csv-read<-file", 0,
+          "csv<-file", 0,
+          "csv<-string", 0,
           "csv<-textblock", 0,
           "csvrows<-textblock", 0,
+          "stringmap<-csv", 0,
           "textblock-csv<-string", 1
         )
     )

@@ -1,5 +1,6 @@
 (package vx/data/xml
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib fil :path vx/data/file)
+       (lib tb  :path vx/data/textblock)
  :doc "Xml handler")
 
 (type xml : struct
@@ -8,8 +9,8 @@
 (type xmlnode : struct
  :properties [nodes : xmlnode
               props : xmlpropmap
-							tag   : string
-							text  : string])
+              tag   : string
+              text  : string])
 
 (type xmlnodelist : list
  :allowtypes [xmlnode])
@@ -28,10 +29,35 @@
 	  (copy tb/delimbracketangle
 		 :delimlist
 		  (delimlist
-			 delimxmlequal
-			 tb/delimquote)))
- ))
+     delimxmlequal
+     tb/delimwhitespace
+     tb/delimquote)))))
+
+(func xml<-file : xml
+ [file : fil/file]
+ (let : xml
+  [text : string := (:text file)]
+  (xml<-string text))
+ :doc "Returns a parsed xml from a file.")
+
+(func xml<-string : xml
+ [text : string]
+ (xml<-textblock
+  (tb/textblock-parse<-string-delim
+   text
+   delimxml))
+ :doc "Returns a parsed xml from a string.")
 
 (func xml<-textblock : xml
  [textblock : tb/textblock]
- (xml))
+ (xml)
+ :doc "Returns a parsed xml from a textblock.")
+
+(func xml-read<-file : xml
+ [file : fil/file]
+ (let : xml
+  [loaded : fil/file := (fil/file-read<-file
+                         file)]
+  (xml<-file loaded))
+ :context
+ :doc "Returns a parsed xml from a file.")

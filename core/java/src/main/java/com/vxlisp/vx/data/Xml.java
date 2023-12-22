@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import com.vxlisp.vx.*;
 
-
 public final class Xml {
 
 
@@ -580,6 +579,9 @@ public final class Xml {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -666,6 +668,7 @@ public final class Xml {
                           Textblock.t_delimlist,
                           Core.t_anylist.vx_new(
                             Xml.c_delimxmlequal,
+                            Textblock.c_delimwhitespace,
                             Textblock.c_delimquote
                           )
                         )
@@ -736,13 +739,305 @@ public final class Xml {
   public static final Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
 
   /**
+   * @function xml_read_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   * (func xml-read<-file)
+   */
+  public static interface Func_xml_read_from_file extends Core.Func_any_from_any_context {
+    public Xml.Type_xml vx_xml_read_from_file(final Core.Type_context context, final File.Type_file file);
+  }
+
+  public static class Class_xml_read_from_file extends Core.Class_base implements Func_xml_read_from_file {
+
+    @Override
+    public Func_xml_read_from_file vx_new(Object... vals) {
+      Class_xml_read_from_file output = new Class_xml_read_from_file();
+      return output;
+    }
+
+    @Override
+    public Func_xml_read_from_file vx_copy(Object... vals) {
+      Class_xml_read_from_file output = new Class_xml_read_from_file();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml-read<-file", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/xml", // pkgname
+          "xml", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_xml_read_from_file vx_empty() {return e_xml_read_from_file;}
+    @Override
+    public Func_xml_read_from_file vx_type() {return t_xml_read_from_file;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      File.Type_file inputval = (File.Type_file)value;
+      Core.Type_any outputval = Xml.f_xml_read_from_file(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
+      output = Xml.f_xml_read_from_file(context, file);
+      return output;
+    }
+
+    @Override
+    public Xml.Type_xml vx_xml_read_from_file(final Core.Type_context context, final File.Type_file file) {
+      return Xml.f_xml_read_from_file(context, file);
+    }
+
+  }
+
+  public static final Func_xml_read_from_file e_xml_read_from_file = new Xml.Class_xml_read_from_file();
+  public static final Func_xml_read_from_file t_xml_read_from_file = new Xml.Class_xml_read_from_file();
+
+  public static Xml.Type_xml f_xml_read_from_file(final Core.Type_context context, final File.Type_file file) {
+    Xml.Type_xml output = Xml.e_xml;
+    output = Core.f_let(
+      Xml.t_xml,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final File.Type_file loaded = File.f_file_read_from_file(context, file);
+        return Xml.f_xml_from_file(loaded);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function xml_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   * (func xml<-file)
+   */
+  public static interface Func_xml_from_file extends Core.Func_any_from_any {
+    public Xml.Type_xml vx_xml_from_file(final File.Type_file file);
+  }
+
+  public static class Class_xml_from_file extends Core.Class_base implements Func_xml_from_file {
+
+    @Override
+    public Func_xml_from_file vx_new(Object... vals) {
+      Class_xml_from_file output = new Class_xml_from_file();
+      return output;
+    }
+
+    @Override
+    public Func_xml_from_file vx_copy(Object... vals) {
+      Class_xml_from_file output = new Class_xml_from_file();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml<-file", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/xml", // pkgname
+          "xml", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_xml_from_file vx_empty() {return e_xml_from_file;}
+    @Override
+    public Func_xml_from_file vx_type() {return t_xml_from_file;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      File.Type_file inputval = (File.Type_file)value;
+      Core.Type_any outputval = Xml.f_xml_from_file(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
+      output = Xml.f_xml_from_file(file);
+      return output;
+    }
+
+    @Override
+    public Xml.Type_xml vx_xml_from_file(final File.Type_file file) {
+      return Xml.f_xml_from_file(file);
+    }
+
+  }
+
+  public static final Func_xml_from_file e_xml_from_file = new Xml.Class_xml_from_file();
+  public static final Func_xml_from_file t_xml_from_file = new Xml.Class_xml_from_file();
+
+  public static Xml.Type_xml f_xml_from_file(final File.Type_file file) {
+    Xml.Type_xml output = Xml.e_xml;
+    output = Core.f_let(
+      Xml.t_xml,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string text = file.text();
+        return Xml.f_xml_from_string(text);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function xml_from_string
+   * Returns a parsed xml from a string.
+   * @param  {string} text
+   * @return {xml}
+   * (func xml<-string)
+   */
+  public static interface Func_xml_from_string extends Core.Func_any_from_any {
+    public Xml.Type_xml vx_xml_from_string(final Core.Type_string text);
+  }
+
+  public static class Class_xml_from_string extends Core.Class_base implements Func_xml_from_string {
+
+    @Override
+    public Func_xml_from_string vx_new(Object... vals) {
+      Class_xml_from_string output = new Class_xml_from_string();
+      return output;
+    }
+
+    @Override
+    public Func_xml_from_string vx_copy(Object... vals) {
+      Class_xml_from_string output = new Class_xml_from_string();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/xml", // pkgname
+        "xml<-string", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/xml", // pkgname
+          "xml", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_xml_from_string vx_empty() {return e_xml_from_string;}
+    @Override
+    public Func_xml_from_string vx_type() {return t_xml_from_string;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Xml.f_xml_from_string(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Xml.f_xml_from_string(text);
+      return output;
+    }
+
+    @Override
+    public Xml.Type_xml vx_xml_from_string(final Core.Type_string text) {
+      return Xml.f_xml_from_string(text);
+    }
+
+  }
+
+  public static final Func_xml_from_string e_xml_from_string = new Xml.Class_xml_from_string();
+  public static final Func_xml_from_string t_xml_from_string = new Xml.Class_xml_from_string();
+
+  public static Xml.Type_xml f_xml_from_string(final Core.Type_string text) {
+    Xml.Type_xml output = Xml.e_xml;
+    output = Xml.f_xml_from_textblock(
+      Textblock.f_textblock_parse_from_string_delim(
+        text,
+        Xml.c_delimxml
+      )
+    );
+    return output;
+  }
+
+  /**
    * @function xml_from_textblock
+   * Returns a parsed xml from a textblock.
    * @param  {textblock} textblock
    * @return {xml}
    * (func xml<-textblock)
    */
   public static interface Func_xml_from_textblock extends Core.Func_any_from_any {
-    public Xml.Type_xml f_xml_from_textblock(final Textblock.Type_textblock textblock);
+    public Xml.Type_xml vx_xml_from_textblock(final Textblock.Type_textblock textblock);
   }
 
   public static class Class_xml_from_textblock extends Core.Class_base implements Func_xml_from_textblock {
@@ -794,7 +1089,7 @@ public final class Xml {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Textblock.Type_textblock inputval = (Textblock.Type_textblock)value;
       Core.Type_any outputval = Xml.f_xml_from_textblock(inputval);
@@ -810,7 +1105,7 @@ public final class Xml {
     }
 
     @Override
-    public Xml.Type_xml f_xml_from_textblock(final Textblock.Type_textblock textblock) {
+    public Xml.Type_xml vx_xml_from_textblock(final Textblock.Type_textblock textblock) {
       return Xml.f_xml_from_textblock(textblock);
     }
 
@@ -840,6 +1135,9 @@ public final class Xml {
     maptype.put("xmlpropmap", Xml.t_xmlpropmap);
     mapconst.put("delimxml", Xml.c_delimxml);
     mapconst.put("delimxmlequal", Xml.c_delimxmlequal);
+    mapfunc.put("xml-read<-file", Xml.t_xml_read_from_file);
+    mapfunc.put("xml<-file", Xml.t_xml_from_file);
+    mapfunc.put("xml<-string", Xml.t_xml_from_string);
     mapfunc.put("xml<-textblock", Xml.t_xml_from_textblock);
     Core.vx_global_package_set("vx/data/xml", maptype, mapconst, mapfunc);
   }

@@ -2,8 +2,9 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/collection.hpp"
-#include "../../../main/vx/type.hpp"
+#include "../../../main/vx/data/file.hpp"
 #include "../../../main/vx/data/textblock.hpp"
+#include "../../../main/vx/type.hpp"
 
 #include "csv_test.hpp"
 
@@ -256,34 +257,34 @@ namespace vx_data_csv_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(1)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(33), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(2), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(6)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(63), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(33), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(14), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(16), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(9), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(6)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(2)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
       })
     });
     return output;
@@ -294,14 +295,19 @@ namespace vx_data_csv_test {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/csv"),
       vx_core::vx_new_string(":typemap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":csv"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":csvrowmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":csvrows"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":delimcsv"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
+        vx_core::vx_new_string(":csv-read<-file"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":csv<-file"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":csv<-string"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":csv<-textblock"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":csvrows<-textblock"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stringmap<-csv"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":textblock-csv<-string"), vx_core::vx_new_int(1)
       })
     });

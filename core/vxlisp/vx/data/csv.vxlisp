@@ -1,13 +1,17 @@
 (package vx/data/csv
  :libs (lib collection :path vx/collection)
-       (lib type :path vx/type)
-       (lib tb :path vx/data/textblock)
+       (lib fil        :path vx/data/file)
+       (lib tb         :path vx/data/textblock)
+       (lib type       :path vx/type)
  :doc "Csv handler")
 
 (type csv : struct
  :properties
   [headers : stringlist
    rows    : csvrows])
+
+(type csvrowmap : map
+ :allowtypes [stringlist])
 
 (type csvrows : list
  :allowtypes [stringlist])
@@ -22,13 +26,38 @@
     tb/delimcomma))
  :doc "Csv File Delimiters")
 
+(func csv<-file : csv
+ [file : fil/file]
+ (let : csv
+  [text : string := (:text file)]
+  (csv<-string text))
+ :doc "Returns a parsed csv from a file.")
+
+(func csv<-string : csv
+ [text : string]
+ (csv<-textblock
+  (tb/textblock-parse<-string-delim
+   text
+   delimcsv))
+ :doc "Returns a parsed csv from a string.")
+
 (func csv<-textblock : csv
  [textblock : tb/textblock]
  (let
   [allrows : csvrows    := (csvrows<-textblock textblock)
    headers : stringlist := (:1 allrows)
    rows    : csvrows    := (list<-list-end allrows 2)]
-  (csv :headers headers :rows rows)))
+  (csv :headers headers :rows rows))
+ :doc "Returns a parsed csv from a textblock.")
+
+(func csv-read<-file : csv
+ [file : fil/file]
+ (let : csv
+  [loaded : fil/file := (fil/file-read<-file
+                         file)]
+  (csv<-file loaded))
+ :context
+ :doc "Returns a parsed csv from a file.")
 
 (func csvrows<-textblock : csvrows
  [textblock : tb/textblock]
@@ -37,6 +66,23 @@
    children : tb/textblocklist := (tb/children<-textblock parsedtb)
    strings  : stringlist       := (tb/stringlist<-textblocklist children)]
   (csvrows strings)))
+
+(func stringmap<-csv : stringmap
+ [csv : csv]
+ (let : stringmap
+  [rows   : csvrows   := (:rows csv)
+   rowmap : csvrowmap := (map<-list : csvrowmap
+                          rows
+                          (fn : string
+                           [textlist : stringlist]
+                           (:1 textlist)))]
+  (map<-map : stringmap
+   rowmap
+   (fn : stringmap
+    [key : string
+     val : stringlist]
+    (:2 val))))
+ :doc "Returns a stringmap using the first 2 values in each row.")
 
 (func textblock-csv<-string : textblock
  [text : string]

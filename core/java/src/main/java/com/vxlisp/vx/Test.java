@@ -8,7 +8,6 @@ import java.util.Map;
 import com.vxlisp.vx.data.*;
 import com.vxlisp.vx.web.*;
 
-
 public final class Test {
 
 
@@ -2523,7 +2522,7 @@ public final class Test {
    * (func context-test)
    */
   public static interface Func_context_test extends Core.Func_any_from_any {
-    public Core.Type_context f_context_test(final Core.Type_anylist args);
+    public Core.Type_context vx_context_test(final Core.Type_anylist args);
   }
 
   public static class Class_context_test extends Core.Class_base implements Func_context_test {
@@ -2575,7 +2574,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_anylist inputval = (Core.Type_anylist)value;
       Core.Type_any outputval = Test.f_context_test(inputval);
@@ -2591,7 +2590,7 @@ public final class Test {
     }
 
     @Override
-    public Core.Type_context f_context_test(final Core.Type_anylist args) {
+    public Core.Type_context vx_context_test(final Core.Type_anylist args) {
       return Test.f_context_test(args);
     }
 
@@ -2631,7 +2630,7 @@ public final class Test {
    * (func div<-testcaselist)
    */
   public static interface Func_div_from_testcaselist extends Core.Func_any_from_any {
-    public Html.Type_div f_div_from_testcaselist(final Test.Type_testcaselist testcaselist);
+    public Html.Type_div vx_div_from_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 
   public static class Class_div_from_testcaselist extends Core.Class_base implements Func_div_from_testcaselist {
@@ -2683,7 +2682,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testcaselist inputval = (Test.Type_testcaselist)value;
       Core.Type_any outputval = Test.f_div_from_testcaselist(inputval);
@@ -2699,7 +2698,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_div f_div_from_testcaselist(final Test.Type_testcaselist testcaselist) {
+    public Html.Type_div vx_div_from_testcaselist(final Test.Type_testcaselist testcaselist) {
       return Test.f_div_from_testcaselist(testcaselist);
     }
 
@@ -2809,7 +2808,7 @@ public final class Test {
    * (func div<-testpackage)
    */
   public static interface Func_div_from_testpackage extends Core.Func_any_from_any {
-    public Html.Type_div f_div_from_testpackage(final Test.Type_testpackage testpackage);
+    public Html.Type_div vx_div_from_testpackage(final Test.Type_testpackage testpackage);
   }
 
   public static class Class_div_from_testpackage extends Core.Class_base implements Func_div_from_testpackage {
@@ -2861,7 +2860,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testpackage inputval = (Test.Type_testpackage)value;
       Core.Type_any outputval = Test.f_div_from_testpackage(inputval);
@@ -2877,7 +2876,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_div f_div_from_testpackage(final Test.Type_testpackage testpackage) {
+    public Html.Type_div vx_div_from_testpackage(final Test.Type_testpackage testpackage) {
       return Test.f_div_from_testpackage(testpackage);
     }
 
@@ -2978,7 +2977,7 @@ public final class Test {
    * (func div<-testpackagelist)
    */
   public static interface Func_div_from_testpackagelist extends Core.Func_any_from_any {
-    public Html.Type_div f_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
+    public Html.Type_div vx_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
   public static class Class_div_from_testpackagelist extends Core.Class_base implements Func_div_from_testpackagelist {
@@ -3030,7 +3029,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testpackagelist inputval = (Test.Type_testpackagelist)value;
       Core.Type_any outputval = Test.f_div_from_testpackagelist(inputval);
@@ -3046,7 +3045,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_div f_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
+    public Html.Type_div vx_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
       return Test.f_div_from_testpackagelist(testpackagelist);
     }
 
@@ -3188,7 +3187,7 @@ public final class Test {
    * (func divchildlist<-testpackagelist)
    */
   public static interface Func_divchildlist_from_testpackagelist extends Core.Func_any_from_any {
-    public Html.Type_divchildlist f_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
+    public Html.Type_divchildlist vx_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
   public static class Class_divchildlist_from_testpackagelist extends Core.Class_base implements Func_divchildlist_from_testpackagelist {
@@ -3240,7 +3239,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testpackagelist inputval = (Test.Type_testpackagelist)value;
       Core.Type_any outputval = Test.f_divchildlist_from_testpackagelist(inputval);
@@ -3256,7 +3255,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_divchildlist f_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
+    public Html.Type_divchildlist vx_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
       return Test.f_divchildlist_from_testpackagelist(testpackagelist);
     }
 
@@ -3282,7 +3281,7 @@ public final class Test {
    * (func file-test)
    */
   public static interface Func_file_test extends Core.Type_func, Core.Type_replfunc {
-    public File.Type_file f_file_test();
+    public File.Type_file vx_file_test();
   }
 
   public static class Class_file_test extends Core.Class_base implements Func_file_test {
@@ -3337,7 +3336,7 @@ public final class Test {
     }
 
     @Override
-    public File.Type_file f_file_test() {
+    public File.Type_file vx_file_test() {
       return Test.f_file_test();
     }
 
@@ -3367,7 +3366,7 @@ public final class Test {
    * (func file-testhtml)
    */
   public static interface Func_file_testhtml extends Core.Type_func, Core.Type_replfunc {
-    public File.Type_file f_file_testhtml();
+    public File.Type_file vx_file_testhtml();
   }
 
   public static class Class_file_testhtml extends Core.Class_base implements Func_file_testhtml {
@@ -3422,7 +3421,7 @@ public final class Test {
     }
 
     @Override
-    public File.Type_file f_file_testhtml() {
+    public File.Type_file vx_file_testhtml() {
       return Test.f_file_testhtml();
     }
 
@@ -3452,7 +3451,7 @@ public final class Test {
    * (func file-testnode)
    */
   public static interface Func_file_testnode extends Core.Type_func, Core.Type_replfunc {
-    public File.Type_file f_file_testnode();
+    public File.Type_file vx_file_testnode();
   }
 
   public static class Class_file_testnode extends Core.Class_base implements Func_file_testnode {
@@ -3507,7 +3506,7 @@ public final class Test {
     }
 
     @Override
-    public File.Type_file f_file_testnode() {
+    public File.Type_file vx_file_testnode() {
       return Test.f_file_testnode();
     }
 
@@ -3538,7 +3537,7 @@ public final class Test {
    * (func html<-divtest)
    */
   public static interface Func_html_from_divtest extends Core.Func_any_from_any {
-    public Html.Type_html f_html_from_divtest(final Html.Type_div divtest);
+    public Html.Type_html vx_html_from_divtest(final Html.Type_div divtest);
   }
 
   public static class Class_html_from_divtest extends Core.Class_base implements Func_html_from_divtest {
@@ -3590,7 +3589,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_div inputval = (Html.Type_div)value;
       Core.Type_any outputval = Test.f_html_from_divtest(inputval);
@@ -3606,7 +3605,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_html f_html_from_divtest(final Html.Type_div divtest) {
+    public Html.Type_html vx_html_from_divtest(final Html.Type_div divtest) {
       return Test.f_html_from_divtest(divtest);
     }
 
@@ -3674,7 +3673,7 @@ public final class Test {
    * (func p<-passfail)
    */
   public static interface Func_p_from_passfail extends Core.Func_any_from_any {
-    public Html.Type_p f_p_from_passfail(final Core.Type_boolean passfail);
+    public Html.Type_p vx_p_from_passfail(final Core.Type_boolean passfail);
   }
 
   public static class Class_p_from_passfail extends Core.Class_base implements Func_p_from_passfail {
@@ -3726,7 +3725,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_boolean inputval = (Core.Type_boolean)value;
       Core.Type_any outputval = Test.f_p_from_passfail(inputval);
@@ -3742,7 +3741,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_p f_p_from_passfail(final Core.Type_boolean passfail) {
+    public Html.Type_p vx_p_from_passfail(final Core.Type_boolean passfail) {
       return Test.f_p_from_passfail(passfail);
     }
 
@@ -3784,7 +3783,7 @@ public final class Test {
    * (func p<-testcoveragenums)
    */
   public static interface Func_p_from_testcoveragenums extends Core.Func_any_from_any {
-    public Html.Type_p f_p_from_testcoveragenums(final Test.Type_testcoveragenums nums);
+    public Html.Type_p vx_p_from_testcoveragenums(final Test.Type_testcoveragenums nums);
   }
 
   public static class Class_p_from_testcoveragenums extends Core.Class_base implements Func_p_from_testcoveragenums {
@@ -3836,7 +3835,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testcoveragenums inputval = (Test.Type_testcoveragenums)value;
       Core.Type_any outputval = Test.f_p_from_testcoveragenums(inputval);
@@ -3852,7 +3851,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_p f_p_from_testcoveragenums(final Test.Type_testcoveragenums nums) {
+    public Html.Type_p vx_p_from_testcoveragenums(final Test.Type_testcoveragenums nums) {
       return Test.f_p_from_testcoveragenums(nums);
     }
 
@@ -3897,7 +3896,7 @@ public final class Test {
    * (func resolve-testcase)
    */
   public static interface Func_resolve_testcase extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testcase> f_resolve_testcase(final Test.Type_testcase testcase);
+    public CompletableFuture<Test.Type_testcase> vx_resolve_testcase(final Test.Type_testcase testcase);
   }
 
   public static class Class_resolve_testcase extends Core.Class_base implements Func_resolve_testcase {
@@ -3949,7 +3948,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testcase inputval = Core.f_any_from_any(Test.t_testcase, value);
       CompletableFuture<Test.Type_testcase> future = Test.f_resolve_testcase(inputval);
       @SuppressWarnings("unchecked")
@@ -3966,7 +3965,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testcase> f_resolve_testcase(final Test.Type_testcase testcase) {
+    public CompletableFuture<Test.Type_testcase> vx_resolve_testcase(final Test.Type_testcase testcase) {
       return Test.f_resolve_testcase(testcase);
     }
 
@@ -4024,7 +4023,7 @@ public final class Test {
    * (func resolve-testcaselist)
    */
   public static interface Func_resolve_testcaselist extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testcaselist> f_resolve_testcaselist(final Test.Type_testcaselist testcaselist);
+    public CompletableFuture<Test.Type_testcaselist> vx_resolve_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 
   public static class Class_resolve_testcaselist extends Core.Class_base implements Func_resolve_testcaselist {
@@ -4076,7 +4075,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testcaselist inputval = Core.f_any_from_any(Test.t_testcaselist, value);
       CompletableFuture<Test.Type_testcaselist> future = Test.f_resolve_testcaselist(inputval);
       @SuppressWarnings("unchecked")
@@ -4093,7 +4092,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testcaselist> f_resolve_testcaselist(final Test.Type_testcaselist testcaselist) {
+    public CompletableFuture<Test.Type_testcaselist> vx_resolve_testcaselist(final Test.Type_testcaselist testcaselist) {
       return Test.f_resolve_testcaselist(testcaselist);
     }
 
@@ -4122,7 +4121,7 @@ public final class Test {
    * (func resolve-testdescribe)
    */
   public static interface Func_resolve_testdescribe extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testdescribe> f_resolve_testdescribe(final Test.Type_testdescribe testdescribe);
+    public CompletableFuture<Test.Type_testdescribe> vx_resolve_testdescribe(final Test.Type_testdescribe testdescribe);
   }
 
   public static class Class_resolve_testdescribe extends Core.Class_base implements Func_resolve_testdescribe {
@@ -4174,7 +4173,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testdescribe inputval = Core.f_any_from_any(Test.t_testdescribe, value);
       CompletableFuture<Test.Type_testdescribe> future = Test.f_resolve_testdescribe(inputval);
       @SuppressWarnings("unchecked")
@@ -4191,7 +4190,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testdescribe> f_resolve_testdescribe(final Test.Type_testdescribe testdescribe) {
+    public CompletableFuture<Test.Type_testdescribe> vx_resolve_testdescribe(final Test.Type_testdescribe testdescribe) {
       return Test.f_resolve_testdescribe(testdescribe);
     }
 
@@ -4231,7 +4230,7 @@ public final class Test {
    * (func resolve-testdescribelist)
    */
   public static interface Func_resolve_testdescribelist extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testdescribelist> f_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist);
+    public CompletableFuture<Test.Type_testdescribelist> vx_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist);
   }
 
   public static class Class_resolve_testdescribelist extends Core.Class_base implements Func_resolve_testdescribelist {
@@ -4283,7 +4282,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testdescribelist inputval = Core.f_any_from_any(Test.t_testdescribelist, value);
       CompletableFuture<Test.Type_testdescribelist> future = Test.f_resolve_testdescribelist(inputval);
       @SuppressWarnings("unchecked")
@@ -4300,7 +4299,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testdescribelist> f_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist) {
+    public CompletableFuture<Test.Type_testdescribelist> vx_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist) {
       return Test.f_resolve_testdescribelist(testdescribelist);
     }
 
@@ -4329,7 +4328,7 @@ public final class Test {
    * (func resolve-testpackage)
    */
   public static interface Func_resolve_testpackage extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testpackage> f_resolve_testpackage(final Test.Type_testpackage testpackage);
+    public CompletableFuture<Test.Type_testpackage> vx_resolve_testpackage(final Test.Type_testpackage testpackage);
   }
 
   public static class Class_resolve_testpackage extends Core.Class_base implements Func_resolve_testpackage {
@@ -4381,7 +4380,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testpackage inputval = Core.f_any_from_any(Test.t_testpackage, value);
       CompletableFuture<Test.Type_testpackage> future = Test.f_resolve_testpackage(inputval);
       @SuppressWarnings("unchecked")
@@ -4398,7 +4397,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testpackage> f_resolve_testpackage(final Test.Type_testpackage testpackage) {
+    public CompletableFuture<Test.Type_testpackage> vx_resolve_testpackage(final Test.Type_testpackage testpackage) {
       return Test.f_resolve_testpackage(testpackage);
     }
 
@@ -4450,7 +4449,7 @@ public final class Test {
    * (func resolve-testpackagelist)
    */
   public static interface Func_resolve_testpackagelist extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testpackagelist> f_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist);
+    public CompletableFuture<Test.Type_testpackagelist> vx_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
   public static class Class_resolve_testpackagelist extends Core.Class_base implements Func_resolve_testpackagelist {
@@ -4502,7 +4501,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testpackagelist inputval = Core.f_any_from_any(Test.t_testpackagelist, value);
       CompletableFuture<Test.Type_testpackagelist> future = Test.f_resolve_testpackagelist(inputval);
       @SuppressWarnings("unchecked")
@@ -4519,7 +4518,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testpackagelist> f_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
+    public CompletableFuture<Test.Type_testpackagelist> vx_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
       return Test.f_resolve_testpackagelist(testpackagelist);
     }
 
@@ -4548,7 +4547,7 @@ public final class Test {
    * (func resolve-testresult)
    */
   public static interface Func_resolve_testresult extends Core.Func_any_from_any_async {
-    public CompletableFuture<Test.Type_testresult> f_resolve_testresult(final Test.Type_testresult testresult);
+    public CompletableFuture<Test.Type_testresult> vx_resolve_testresult(final Test.Type_testresult testresult);
   }
 
   public static class Class_resolve_testresult extends Core.Class_base implements Func_resolve_testresult {
@@ -4600,7 +4599,7 @@ public final class Test {
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Test.Type_testresult inputval = Core.f_any_from_any(Test.t_testresult, value);
       CompletableFuture<Test.Type_testresult> future = Test.f_resolve_testresult(inputval);
       @SuppressWarnings("unchecked")
@@ -4617,7 +4616,7 @@ public final class Test {
     }
 
     @Override
-    public CompletableFuture<Test.Type_testresult> f_resolve_testresult(final Test.Type_testresult testresult) {
+    public CompletableFuture<Test.Type_testresult> vx_resolve_testresult(final Test.Type_testresult testresult) {
       return Test.f_resolve_testresult(testresult);
     }
 
@@ -4680,7 +4679,7 @@ public final class Test {
    * (func security-test)
    */
   public static interface Func_security_test extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_security f_security_test();
+    public Core.Type_security vx_security_test();
   }
 
   public static class Class_security_test extends Core.Class_base implements Func_security_test {
@@ -4735,7 +4734,7 @@ public final class Test {
     }
 
     @Override
-    public Core.Type_security f_security_test() {
+    public Core.Type_security vx_security_test() {
       return Test.f_security_test();
     }
 
@@ -4773,7 +4772,7 @@ public final class Test {
    * (func test)
    */
   public static interface Func_test extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
+    public Test.Type_testresult vx_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test extends Core.Class_base implements Func_test {
@@ -4831,7 +4830,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
       return Test.f_test(context, expected, actual);
     }
 
@@ -4872,7 +4871,7 @@ public final class Test {
    * (func test)
    */
   public static interface Func_test_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_1 extends Core.Class_base implements Func_test_1 {
@@ -4930,7 +4929,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_1(context, expected, fn_actual);
     }
 
@@ -4968,7 +4967,7 @@ public final class Test {
    * (func test-false)
    */
   public static interface Func_test_false extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_false(final Core.Type_context context, final Core.Type_any actual);
+    public Test.Type_testresult vx_test_false(final Core.Type_context context, final Core.Type_any actual);
   }
 
   public static class Class_test_false extends Core.Class_base implements Func_test_false {
@@ -5020,7 +5019,7 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Test.f_test_false(context, inputval);
@@ -5037,7 +5036,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_false(final Core.Type_context context, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test_false(final Core.Type_context context, final Core.Type_any actual) {
       return Test.f_test_false(context, actual);
     }
 
@@ -5080,7 +5079,7 @@ public final class Test {
    * (func test-false)
    */
   public static interface Func_test_false_1 extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_false_1 extends Core.Class_base implements Func_test_false_1 {
@@ -5132,7 +5131,7 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Func_any_from_func_async inputval = (Core.Func_any_from_func_async)value;
       Core.Type_any outputval = Test.f_test_false_1(context, inputval);
@@ -5149,7 +5148,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_false_1(context, fn_actual);
     }
 
@@ -5188,7 +5187,7 @@ public final class Test {
    * (func test-gt)
    */
   public static interface Func_test_gt extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
+    public Test.Type_testresult vx_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_gt extends Core.Class_base implements Func_test_gt {
@@ -5246,7 +5245,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
       return Test.f_test_gt(context, expected, actual);
     }
 
@@ -5287,7 +5286,7 @@ public final class Test {
    * (func test-gt)
    */
   public static interface Func_test_gt_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_gt_1 extends Core.Class_base implements Func_test_gt_1 {
@@ -5345,7 +5344,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_gt_1(context, expected, fn_actual);
     }
 
@@ -5384,7 +5383,7 @@ public final class Test {
    * (func test-ne)
    */
   public static interface Func_test_ne extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
+    public Test.Type_testresult vx_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_ne extends Core.Class_base implements Func_test_ne {
@@ -5442,7 +5441,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
       return Test.f_test_ne(context, expected, actual);
     }
 
@@ -5483,7 +5482,7 @@ public final class Test {
    * (func test-ne)
    */
   public static interface Func_test_ne_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_ne_1 extends Core.Class_base implements Func_test_ne_1 {
@@ -5541,7 +5540,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_ne_1(context, expected, fn_actual);
     }
 
@@ -5580,7 +5579,7 @@ public final class Test {
    * (func test-string)
    */
   public static interface Func_test_string extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
+    public Test.Type_testresult vx_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
   public static class Class_test_string extends Core.Class_base implements Func_test_string {
@@ -5638,7 +5637,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
       return Test.f_test_string(context, expected, actual);
     }
 
@@ -5680,7 +5679,7 @@ public final class Test {
    * (func test-string)
    */
   public static interface Func_test_string_1 extends Core.Type_func, Core.Type_replfunc {
-    public Test.Type_testresult f_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_string_1 extends Core.Class_base implements Func_test_string_1 {
@@ -5738,7 +5737,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_string_1(context, expected, fn_actual);
     }
 
@@ -5776,7 +5775,7 @@ public final class Test {
    * (func test-true)
    */
   public static interface Func_test_true extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_true(final Core.Type_context context, final Core.Type_any actual);
+    public Test.Type_testresult vx_test_true(final Core.Type_context context, final Core.Type_any actual);
   }
 
   public static class Class_test_true extends Core.Class_base implements Func_test_true {
@@ -5828,7 +5827,7 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Test.f_test_true(context, inputval);
@@ -5845,7 +5844,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_true(final Core.Type_context context, final Core.Type_any actual) {
+    public Test.Type_testresult vx_test_true(final Core.Type_context context, final Core.Type_any actual) {
       return Test.f_test_true(context, actual);
     }
 
@@ -5888,7 +5887,7 @@ public final class Test {
    * (func test-true)
    */
   public static interface Func_test_true_1 extends Core.Func_any_from_any_context {
-    public Test.Type_testresult f_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
+    public Test.Type_testresult vx_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
   public static class Class_test_true_1 extends Core.Class_base implements Func_test_true_1 {
@@ -5940,7 +5939,7 @@ public final class Test {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Func_any_from_func_async inputval = (Core.Func_any_from_func_async)value;
       Core.Type_any outputval = Test.f_test_true_1(context, inputval);
@@ -5957,7 +5956,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult f_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
+    public Test.Type_testresult vx_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
       return Test.f_test_true_1(context, fn_actual);
     }
 
@@ -5996,7 +5995,7 @@ public final class Test {
    * (func tr<-testdescribe-casename)
    */
   public static interface Func_tr_from_testdescribe_casename extends Core.Type_func, Core.Type_replfunc {
-    public Html.Type_tr f_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename);
+    public Html.Type_tr vx_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename);
   }
 
   public static class Class_tr_from_testdescribe_casename extends Core.Class_base implements Func_tr_from_testdescribe_casename {
@@ -6053,7 +6052,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_tr f_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename) {
+    public Html.Type_tr vx_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename) {
       return Test.f_tr_from_testdescribe_casename(testdescribe, casename);
     }
 
@@ -6159,7 +6158,7 @@ public final class Test {
    * (func trlist<-testcase)
    */
   public static interface Func_trlist_from_testcase extends Core.Func_any_from_any {
-    public Html.Type_trlist f_trlist_from_testcase(final Test.Type_testcase testcase);
+    public Html.Type_trlist vx_trlist_from_testcase(final Test.Type_testcase testcase);
   }
 
   public static class Class_trlist_from_testcase extends Core.Class_base implements Func_trlist_from_testcase {
@@ -6211,7 +6210,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testcase inputval = (Test.Type_testcase)value;
       Core.Type_any outputval = Test.f_trlist_from_testcase(inputval);
@@ -6227,7 +6226,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_trlist f_trlist_from_testcase(final Test.Type_testcase testcase) {
+    public Html.Type_trlist vx_trlist_from_testcase(final Test.Type_testcase testcase) {
       return Test.f_trlist_from_testcase(testcase);
     }
 
@@ -6265,7 +6264,7 @@ public final class Test {
    * (func trlist<-testcaselist)
    */
   public static interface Func_trlist_from_testcaselist extends Core.Func_any_from_any {
-    public Html.Type_trlist f_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist);
+    public Html.Type_trlist vx_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 
   public static class Class_trlist_from_testcaselist extends Core.Class_base implements Func_trlist_from_testcaselist {
@@ -6317,7 +6316,7 @@ public final class Test {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Test.Type_testcaselist inputval = (Test.Type_testcaselist)value;
       Core.Type_any outputval = Test.f_trlist_from_testcaselist(inputval);
@@ -6333,7 +6332,7 @@ public final class Test {
     }
 
     @Override
-    public Html.Type_trlist f_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist) {
+    public Html.Type_trlist vx_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist) {
       return Test.f_trlist_from_testcaselist(testcaselist);
     }
 

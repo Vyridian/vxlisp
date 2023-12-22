@@ -7,7 +7,6 @@ import java.util.Map;
 import com.vxlisp.vx.data.*;
 import java.util.concurrent.CompletableFuture;
 
-
 public final class Repl {
 
   // vx_string_from_listarg(type, context, liststring)
@@ -692,7 +691,7 @@ public final class Repl {
    * (func any-repl<-functype-args)
    */
   public static interface Func_any_repl_from_functype_args extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_any f_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args);
+    public Core.Type_any vx_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args);
   }
 
   public static class Class_any_repl_from_functype_args extends Core.Class_base implements Func_any_repl_from_functype_args {
@@ -749,7 +748,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args) {
+    public Core.Type_any vx_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args) {
       return Repl.f_any_repl_from_functype_args(type, args);
     }
 
@@ -776,7 +775,7 @@ public final class Repl {
    * (func any<-liblist-string)
    */
   public static interface Func_any_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_any f_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text);
+    public Core.Type_any vx_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text);
   }
 
   public static class Class_any_from_liblist_string extends Core.Class_base implements Func_any_from_liblist_string {
@@ -834,7 +833,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text) {
+    public Core.Type_any vx_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text) {
       return Repl.f_any_from_liblist_string(context, liblist, text);
     }
 
@@ -863,7 +862,7 @@ public final class Repl {
    * (func any<-macro)
    */
   public static interface Func_any_from_macro extends Core.Func_any_from_any_context {
-    public <T extends Core.Type_any> T f_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist);
+    public <T extends Core.Type_any> T vx_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist);
   }
 
   public static class Class_any_from_macro extends Core.Class_base implements Func_any_from_macro {
@@ -915,7 +914,7 @@ public final class Repl {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_anylist inputval = (Core.Type_anylist)value;
       Core.Type_any outputval = Repl.f_any_from_macro(Core.t_any, context, inputval);
@@ -933,7 +932,7 @@ public final class Repl {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist) {
+    public <T extends Core.Type_any> T vx_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist) {
       return Repl.f_any_from_macro(generic_any_1, context, anylist);
     }
 
@@ -963,7 +962,7 @@ public final class Repl {
    * (func any<-repl)
    */
   public static interface Func_any_from_repl extends Core.Func_any_from_any_context {
-    public Core.Type_any f_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl);
+    public Core.Type_any vx_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl);
   }
 
   public static class Class_any_from_repl extends Core.Class_base implements Func_any_from_repl {
@@ -1015,7 +1014,7 @@ public final class Repl {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Repl.Type_repl inputval = (Repl.Type_repl)value;
       Core.Type_any outputval = Repl.f_any_from_repl(context, inputval);
@@ -1032,7 +1031,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl) {
+    public Core.Type_any vx_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl) {
       return Repl.f_any_from_repl(context, repl);
     }
 
@@ -1089,7 +1088,7 @@ public final class Repl {
    * (func any<-script)
    */
   public static interface Func_any_from_script extends Core.Func_any_from_any_context {
-    public Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script);
+    public Core.Type_any vx_any_from_script(final Core.Type_context context, final Core.Type_string script);
   }
 
   public static class Class_any_from_script extends Core.Class_base implements Func_any_from_script {
@@ -1141,7 +1140,7 @@ public final class Repl {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_any_from_script(context, inputval);
@@ -1158,7 +1157,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script) {
+    public Core.Type_any vx_any_from_script(final Core.Type_context context, final Core.Type_string script) {
       return Repl.f_any_from_script(context, script);
     }
 
@@ -1188,7 +1187,7 @@ public final class Repl {
    * (func anylist<-repllist)
    */
   public static interface Func_anylist_from_repllist extends Core.Func_any_from_any_context {
-    public Core.Type_anylist f_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist);
+    public Core.Type_anylist vx_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist);
   }
 
   public static class Class_anylist_from_repllist extends Core.Class_base implements Func_anylist_from_repllist {
@@ -1240,7 +1239,7 @@ public final class Repl {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Repl.Type_repllist inputval = (Repl.Type_repllist)value;
       Core.Type_any outputval = Repl.f_anylist_from_repllist(context, inputval);
@@ -1257,7 +1256,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_anylist f_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist) {
+    public Core.Type_anylist vx_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist) {
       return Repl.f_anylist_from_repllist(context, repllist);
     }
 
@@ -1289,7 +1288,7 @@ public final class Repl {
    * (func argmap<-textblock-argmap)
    */
   public static interface Func_argmap_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_argmap f_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
+    public Core.Type_argmap vx_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
   public static class Class_argmap_from_textblock_argmap extends Core.Class_base implements Func_argmap_from_textblock_argmap {
@@ -1346,7 +1345,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_argmap f_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+    public Core.Type_argmap vx_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
       return Repl.f_argmap_from_textblock_argmap(textblock, argmap);
     }
 
@@ -1377,7 +1376,7 @@ public final class Repl {
    * (func const<-string)
    */
   public static interface Func_const_from_string extends Core.Func_any_from_any {
-    public Core.Type_any f_const_from_string(final Core.Type_string text);
+    public Core.Type_any vx_const_from_string(final Core.Type_string text);
   }
 
   public static class Class_const_from_string extends Core.Class_base implements Func_const_from_string {
@@ -1429,7 +1428,7 @@ public final class Repl {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_const_from_string(inputval);
@@ -1445,7 +1444,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_const_from_string(final Core.Type_string text) {
+    public Core.Type_any vx_const_from_string(final Core.Type_string text) {
       return Repl.f_const_from_string(text);
     }
 
@@ -1503,7 +1502,7 @@ public final class Repl {
    * (func repl-empty<-textblock-argmap)
    */
   public static interface Func_repl_empty_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repl f_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
+    public Repl.Type_repl vx_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
   public static class Class_repl_empty_from_textblock_argmap extends Core.Class_base implements Func_repl_empty_from_textblock_argmap {
@@ -1560,7 +1559,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+    public Repl.Type_repl vx_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
       return Repl.f_repl_empty_from_textblock_argmap(textblock, argmap);
     }
 
@@ -1624,7 +1623,7 @@ public final class Repl {
    * (func repl-paren<-textblock-argmap)
    */
   public static interface Func_repl_paren_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repl f_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
+    public Repl.Type_repl vx_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
   public static class Class_repl_paren_from_textblock_argmap extends Core.Class_base implements Func_repl_paren_from_textblock_argmap {
@@ -1681,7 +1680,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+    public Repl.Type_repl vx_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
       return Repl.f_repl_paren_from_textblock_argmap(textblock, argmap);
     }
 
@@ -1779,7 +1778,7 @@ public final class Repl {
    * (func repl<-liblist-string)
    */
   public static interface Func_repl_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repl f_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text);
+    public Repl.Type_repl vx_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text);
   }
 
   public static class Class_repl_from_liblist_string extends Core.Class_base implements Func_repl_from_liblist_string {
@@ -1836,7 +1835,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text) {
+    public Repl.Type_repl vx_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text) {
       return Repl.f_repl_from_liblist_string(liblist, text);
     }
 
@@ -1858,7 +1857,7 @@ public final class Repl {
    * (func repl<-macro)
    */
   public static interface Func_repl_from_macro extends Core.Func_any_from_any_context {
-    public Repl.Type_repl f_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist);
+    public Repl.Type_repl vx_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist);
   }
 
   public static class Class_repl_from_macro extends Core.Class_base implements Func_repl_from_macro {
@@ -1910,7 +1909,7 @@ public final class Repl {
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_anylist inputval = (Core.Type_anylist)value;
       Core.Type_any outputval = Repl.f_repl_from_macro(context, inputval);
@@ -1927,7 +1926,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist) {
+    public Repl.Type_repl vx_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist) {
       return Repl.f_repl_from_macro(context, anylist);
     }
 
@@ -1988,7 +1987,7 @@ public final class Repl {
    * (func repl<-script)
    */
   public static interface Func_repl_from_script extends Core.Func_any_from_any {
-    public Repl.Type_repl f_repl_from_script(final Core.Type_string script);
+    public Repl.Type_repl vx_repl_from_script(final Core.Type_string script);
   }
 
   public static class Class_repl_from_script extends Core.Class_base implements Func_repl_from_script {
@@ -2040,7 +2039,7 @@ public final class Repl {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_repl_from_script(inputval);
@@ -2056,7 +2055,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_script(final Core.Type_string script) {
+    public Repl.Type_repl vx_repl_from_script(final Core.Type_string script) {
       return Repl.f_repl_from_script(script);
     }
 
@@ -2086,7 +2085,7 @@ public final class Repl {
    * (func repl<-string-argmap)
    */
   public static interface Func_repl_from_string_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repl f_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap);
+    public Repl.Type_repl vx_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap);
   }
 
   public static class Class_repl_from_string_argmap extends Core.Class_base implements Func_repl_from_string_argmap {
@@ -2143,7 +2142,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap) {
+    public Repl.Type_repl vx_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap) {
       return Repl.f_repl_from_string_argmap(text, argmap);
     }
 
@@ -2326,7 +2325,7 @@ public final class Repl {
    * (func repl<-textblock)
    */
   public static interface Func_repl_from_textblock extends Core.Func_any_from_any {
-    public Repl.Type_repl f_repl_from_textblock(final Textblock.Type_textblock textblock);
+    public Repl.Type_repl vx_repl_from_textblock(final Textblock.Type_textblock textblock);
   }
 
   public static class Class_repl_from_textblock extends Core.Class_base implements Func_repl_from_textblock {
@@ -2378,7 +2377,7 @@ public final class Repl {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Textblock.Type_textblock inputval = (Textblock.Type_textblock)value;
       Core.Type_any outputval = Repl.f_repl_from_textblock(inputval);
@@ -2394,7 +2393,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_textblock(final Textblock.Type_textblock textblock) {
+    public Repl.Type_repl vx_repl_from_textblock(final Textblock.Type_textblock textblock) {
       return Repl.f_repl_from_textblock(textblock);
     }
 
@@ -2423,7 +2422,7 @@ public final class Repl {
    * (func repl<-textblock-argmap)
    */
   public static interface Func_repl_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repl f_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
+    public Repl.Type_repl vx_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
   public static class Class_repl_from_textblock_argmap extends Core.Class_base implements Func_repl_from_textblock_argmap {
@@ -2480,7 +2479,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl f_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+    public Repl.Type_repl vx_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
       return Repl.f_repl_from_textblock_argmap(textblock, argmap);
     }
 
@@ -2528,7 +2527,7 @@ public final class Repl {
    * (func repllist<-textblocklist-argmap)
    */
   public static interface Func_repllist_from_textblocklist_argmap extends Core.Type_func, Core.Type_replfunc {
-    public Repl.Type_repllist f_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap);
+    public Repl.Type_repllist vx_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap);
   }
 
   public static class Class_repllist_from_textblocklist_argmap extends Core.Class_base implements Func_repllist_from_textblocklist_argmap {
@@ -2585,7 +2584,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repllist f_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap) {
+    public Repl.Type_repllist vx_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap) {
       return Repl.f_repllist_from_textblocklist_argmap(textblocklist, argmap);
     }
 
@@ -2616,7 +2615,7 @@ public final class Repl {
    * (func textblock<-script)
    */
   public static interface Func_textblock_from_script extends Core.Func_any_from_any {
-    public Textblock.Type_textblock f_textblock_from_script(final Core.Type_string script);
+    public Textblock.Type_textblock vx_textblock_from_script(final Core.Type_string script);
   }
 
   public static class Class_textblock_from_script extends Core.Class_base implements Func_textblock_from_script {
@@ -2668,7 +2667,7 @@ public final class Repl {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_textblock_from_script(inputval);
@@ -2684,7 +2683,7 @@ public final class Repl {
     }
 
     @Override
-    public Textblock.Type_textblock f_textblock_from_script(final Core.Type_string script) {
+    public Textblock.Type_textblock vx_textblock_from_script(final Core.Type_string script) {
       return Repl.f_textblock_from_script(script);
     }
 
@@ -2710,7 +2709,7 @@ public final class Repl {
    * (func typefunc<-string)
    */
   public static interface Func_typefunc_from_string extends Core.Func_any_from_any {
-    public Core.Type_any f_typefunc_from_string(final Core.Type_string text);
+    public Core.Type_any vx_typefunc_from_string(final Core.Type_string text);
   }
 
   public static class Class_typefunc_from_string extends Core.Class_base implements Func_typefunc_from_string {
@@ -2762,7 +2761,7 @@ public final class Repl {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_typefunc_from_string(inputval);
@@ -2778,7 +2777,7 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_any f_typefunc_from_string(final Core.Type_string text) {
+    public Core.Type_any vx_typefunc_from_string(final Core.Type_string text) {
       return Repl.f_typefunc_from_string(text);
     }
 

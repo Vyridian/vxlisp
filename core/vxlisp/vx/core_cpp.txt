@@ -244,6 +244,9 @@ let-async
   // vx_map_from_list(listany, any<-any)
   vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any);
 
+  // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+
   // vx_memory_leak_test()
   bool vx_memory_leak_test();
 
@@ -390,6 +393,9 @@ let-async
 
   // vx_string_from_string_repeat(string, int)
   std::string vx_string_from_string_repeat(std::string text, long repeat);
+
+  // vx_string_from_string_start(string, int)
+  std::string vx_string_from_string_start(std::string text, long start);
 
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end);
@@ -1203,6 +1209,19 @@ let-async
     return output;
   }
 
+  // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    vx_core::vx_Type_mapany map_value = valuemap->vx_map();
+    vx_core::vx_Type_mapany mapnew;
+    for (auto const& [key, val] : map_value) {
+      vx_core::Type_string valkey = vx_core::vx_new_string(key);
+      vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
+      mapnew[key] = result;
+    }
+    vx_core::Type_any output = generic_map_1->vx_new_from_map(mapnew);
+    return output;
+  }
+
   // vx_memory_leak_test()
   bool vx_memory_leak_test() {
     bool output = true;
@@ -1890,6 +1909,11 @@ let-async
       output += text;
     }
     return output;
+  }
+
+  // vx_string_from_string_start(string, int)
+  std::string vx_string_from_string_start(std::string text, long start) {
+   return vx_core::vx_string_from_string_start_end(text, start, text.length());
   }
 
   // vx_string_from_string_start_end(string, int, int)

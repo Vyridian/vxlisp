@@ -2020,6 +2020,58 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_map_from_map(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "map<-map",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("a1"),
+                  Core.vx_new_string(":b"),
+                  Core.vx_new_string("b2")
+                )
+              ),
+              Core.f_map_from_map(
+                Core.t_stringmap,
+                Core.f_new(
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("1"),
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("2")
+                  )
+                ),
+                Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+                  Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+                  Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
+                  return 
+                    Core.f_new(
+                      Core.t_string,
+                      Core.t_anylist.vx_new(
+                        key,
+                        val
+                      )
+                    );
+                })
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_new(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -2590,6 +2642,7 @@ public final class CoreTest {
       CoreTest.f_let(context),
       CoreTest.f_list_from_map(context),
       CoreTest.f_map_from_list(context),
+      CoreTest.f_map_from_map(context),
       CoreTest.f_new(context),
       CoreTest.f_or(context),
       CoreTest.f_or_1(context),
@@ -2610,11 +2663,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 207, ":total", 239), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 61, ":total", 131), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 155), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 67, ":total", 215), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 208, ":total", 240), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 62, ":total", 132), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 156), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 156), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 68, ":total", 216), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 70)
     );
   }
@@ -2819,6 +2872,7 @@ public final class CoreTest {
         ":log_1", 0,
         ":main", 0,
         ":map<-list", 1,
+        ":map<-map", 1,
         ":mempool-addref", 0,
         ":mempool-release", 0,
         ":mempool-removeref", 0,

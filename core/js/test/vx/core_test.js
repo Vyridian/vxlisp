@@ -22,11 +22,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 207, ":total", 239), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 61, ":total", 131), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 208, ":total", 240), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 62, ":total", 132), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 67, ":total", 215), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 68, ":total", 216), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 70)
     )
   }
@@ -238,6 +238,7 @@ export default class vx_core_test {
           "log_1", 0,
           "main", 0,
           "map<-list", 1,
+          "map<-map", 1,
           "mempool-addref", 0,
           "mempool-release", 0,
           "mempool-removeref", 0,
@@ -2373,6 +2374,51 @@ export default class vx_core_test {
     return output
   }
 
+  static f_map_from_map(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "map<-map",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":a",
+                "a1",
+                ":b",
+                "b2"
+              ),
+              vx_core.f_map_from_map(
+                {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "map-1": vx_core.t_stringmap, "map-2": vx_core.t_stringmap},
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":a",
+                  "1",
+                  ":b",
+                  "2"
+                ),
+                vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+                  vx_core.f_new(
+                    vx_core.t_string,
+                    key,
+                    val
+                  ))
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_new(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -2954,6 +3000,7 @@ export default class vx_core_test {
       vx_core_test.f_let(context),
       vx_core_test.f_list_from_map(context),
       vx_core_test.f_map_from_list(context),
+      vx_core_test.f_map_from_map(context),
       vx_core_test.f_new(context),
       vx_core_test.f_or(context),
       vx_core_test.f_or_1(context),

@@ -35,6 +35,8 @@ var emptygenerictypes = make(map[string]*vxtype)
 
 var emptytype = NewType("")
 
+var emptylisttype = []*vxtype{}
+
 var anylisttype = NewTypeList("vx/core/anylist", anytype)
 
 var anytype = NewType("vx/core/any")
@@ -51,23 +53,29 @@ var booleantype = NewType("vx/core/boolean")
 
 var decimaltype = NewType("vx/core/decimal")
 
+var functype = NewType("vx/core/func")
+
+var floattype = NewType("vx/core/float")
+
 var inttype = NewType("vx/core/int")
 
 var intlisttype = NewTypeList("vx/core/intlist", inttype)
 
 var intmaptype = NewTypeMap("vx/core/intmap", inttype)
 
-//var listtype = NewTypeList("vx/core/list", anytype)
+var listtype = NewTypeList("vx/core/list", anytype)
 
 var listtype1 = NewTypeList("vx/core/list-1", anytype)
 
 var listtype2 = NewTypeList("vx/core/list-2", anytype)
 
-//var maptype = NewTypeMap("vx/core/map", anytype)
+var maptype = NewTypeMap("vx/core/map", anytype)
 
 var maptype1 = NewTypeMap("vx/core/map1", anytype)
 
 var maptype2 = NewTypeMap("vx/core/map2", anytype)
+
+var numbertype = NewType("vx/core/number")
 
 var contexttype = NewContextType()
 
@@ -83,7 +91,7 @@ var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
 
 var stringmaptype = NewTypeMap("vx/core/stringmap", stringtype)
 
-//var structtype = NewTypeStruct("vx/core/struct")
+var structtype = NewTypeStruct("vx/core/struct")
 
 //var structtype1 = NewType("vx/core/struct-1")
 

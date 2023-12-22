@@ -765,6 +765,10 @@ namespace vx_core {
   typedef Abstract_map_from_list* Func_map_from_list;
   extern Func_map_from_list e_map_from_list;
   extern Func_map_from_list t_map_from_list;
+  class Abstract_map_from_map;
+  typedef Abstract_map_from_map* Func_map_from_map;
+  extern Func_map_from_map e_map_from_map;
+  extern Func_map_from_map t_map_from_map;
   class Abstract_mempool_addref;
   typedef Abstract_mempool_addref* Func_mempool_addref;
   extern Func_mempool_addref e_mempool_addref;
@@ -1136,6 +1140,9 @@ namespace vx_core {
   // vx_map_from_list(listany, any<-any)
   vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any);
 
+  // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+
   // vx_memory_leak_test()
   bool vx_memory_leak_test();
 
@@ -1282,6 +1289,9 @@ namespace vx_core {
 
   // vx_string_from_string_repeat(string, int)
   std::string vx_string_from_string_repeat(std::string text, long repeat);
+
+  // vx_string_from_string_start(string, int)
+  std::string vx_string_from_string_start(std::string text, long start);
 
   // vx_string_from_string_start_end(string, int, int)
   std::string vx_string_from_string_start_end(std::string text, long start, long end);
@@ -6991,6 +7001,29 @@ namespace vx_core {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func map<-map)
+  class Abstract_map_from_map : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_map_from_map() {};
+    virtual ~Abstract_map_from_map() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_map_from_map : public virtual Abstract_map_from_map {
+  public:
+    Class_map_from_map();
+    virtual ~Class_map_from_map() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func mempool-addref)
   class Abstract_mempool_addref : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -8509,6 +8542,16 @@ namespace vx_core {
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
     output = vx_core::vx_new_from_map(generic_map_1, mapany);
     vx_core::vx_release_one_except({vallist, fn_any_from_any}, output);
+    return output;
+  }
+
+  // (func map<-map)
+  template <class N, class O> N* f_map_from_map(N* generic_map_1, O* valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    N* output = vx_core::vx_empty(generic_map_1);
+    vx_core::vx_reserve({valuemap, fn_any_from_key_value});
+    vx_core::Type_any map = vx_core::vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
+    output = vx_core::vx_any_from_any(generic_map_1, map);
+    vx_core::vx_release_one_except({valuemap, fn_any_from_key_value}, output);
     return output;
   }
 

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
  */
 public class AppTest {
 
-
   Core.Type_anylist arglist = Core.e_anylist;
   Core.Type_context context = com.vxlisp.vx.Test.f_context_test(arglist);
 
@@ -128,6 +127,14 @@ public class AppTest {
 
 
   @Test
+  @DisplayName("vx/translate")
+  void test_vx_translate() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = TranslateTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
   @DisplayName("vx/type")
   void test_vx_type() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = TypeTest.test_package(context);
@@ -177,6 +184,7 @@ public class AppTest {
     SampleTest.test_package(context),
     StateTest.test_package(context),
     TestTest.test_package(context),
+    TranslateTest.test_package(context),
     TypeTest.test_package(context),
     HtmlTest.test_package(context),
     HtmldocTest.test_package(context),

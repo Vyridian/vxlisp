@@ -1,6 +1,7 @@
 #include "../../../main/vx/data/xml.hpp"
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
+#include "../../../main/vx/data/file.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 
 #include "xml_test.hpp"
@@ -25,29 +26,29 @@ namespace vx_data_xml_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(2)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(40), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(1)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(4)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(1)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(4)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(1)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(4)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(7)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -72,6 +73,9 @@ namespace vx_data_xml_test {
         vx_core::vx_new_string(":delimxmlequal"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
+        vx_core::vx_new_string(":xml-read<-file"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":xml<-file"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":xml<-string"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":xml<-textblock"), vx_core::vx_new_int(0)
       })
     });

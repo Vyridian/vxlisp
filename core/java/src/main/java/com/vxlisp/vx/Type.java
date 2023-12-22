@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public final class Type {
 
 
@@ -68,7 +67,7 @@ public final class Type {
    * (func allowtypenames<-type)
    */
   public static interface Func_allowtypenames_from_type extends Core.Func_any_from_any {
-    public Core.Type_stringlist f_allowtypenames_from_type(final Core.Type_any type);
+    public Core.Type_stringlist vx_allowtypenames_from_type(final Core.Type_any type);
   }
 
   public static class Class_allowtypenames_from_type extends Core.Class_base implements Func_allowtypenames_from_type {
@@ -120,7 +119,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_allowtypenames_from_type(inputval);
@@ -136,7 +135,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_stringlist f_allowtypenames_from_type(final Core.Type_any type) {
+    public Core.Type_stringlist vx_allowtypenames_from_type(final Core.Type_any type) {
       return Type.f_allowtypenames_from_type(type);
     }
 
@@ -161,7 +160,7 @@ public final class Type {
    * (func allowtypes<-type)
    */
   public static interface Func_allowtypes_from_type extends Core.Func_any_from_any {
-    public Core.Type_typelist f_allowtypes_from_type(final Core.Type_any type);
+    public Core.Type_typelist vx_allowtypes_from_type(final Core.Type_any type);
   }
 
   public static class Class_allowtypes_from_type extends Core.Class_base implements Func_allowtypes_from_type {
@@ -213,7 +212,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_allowtypes_from_type(inputval);
@@ -229,7 +228,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_typelist f_allowtypes_from_type(final Core.Type_any type) {
+    public Core.Type_typelist vx_allowtypes_from_type(final Core.Type_any type) {
       return Type.f_allowtypes_from_type(type);
     }
 
@@ -252,7 +251,7 @@ public final class Type {
    * (func any<-int)
    */
   public static interface Func_any_from_int extends Core.Func_any_from_any {
-    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val);
+    public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int val);
   }
 
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
@@ -304,7 +303,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_int inputval = (Core.Type_int)value;
       Core.Type_any outputval = Type.f_any_from_int(Core.t_any, inputval);
@@ -321,7 +320,7 @@ public final class Type {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val) {
+    public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int val) {
       return Type.f_any_from_int(generic_any_1, val);
     }
 
@@ -344,7 +343,7 @@ public final class Type {
    * (func boolean<-string-ends)
    */
   public static interface Func_boolean_from_string_ends extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends);
+    public Core.Type_boolean vx_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends);
   }
 
   public static class Class_boolean_from_string_ends extends Core.Class_base implements Func_boolean_from_string_ends {
@@ -401,7 +400,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends) {
+    public Core.Type_boolean vx_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends) {
       return Type.f_boolean_from_string_ends(text, ends);
     }
 
@@ -426,7 +425,7 @@ public final class Type {
    * (func boolean<-string-starts)
    */
   public static interface Func_boolean_from_string_starts extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts);
+    public Core.Type_boolean vx_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts);
   }
 
   public static class Class_boolean_from_string_starts extends Core.Class_base implements Func_boolean_from_string_starts {
@@ -483,7 +482,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts) {
+    public Core.Type_boolean vx_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts) {
       return Type.f_boolean_from_string_starts(text, starts);
     }
 
@@ -508,7 +507,7 @@ public final class Type {
    * (func int<-string-find)
    */
   public static interface Func_int_from_string_find extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_int f_int_from_string_find(final Core.Type_string text, final Core.Type_string find);
+    public Core.Type_int vx_int_from_string_find(final Core.Type_string text, final Core.Type_string find);
   }
 
   public static class Class_int_from_string_find extends Core.Class_base implements Func_int_from_string_find {
@@ -565,7 +564,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_int f_int_from_string_find(final Core.Type_string text, final Core.Type_string find) {
+    public Core.Type_int vx_int_from_string_find(final Core.Type_string text, final Core.Type_string find) {
       return Type.f_int_from_string_find(text, find);
     }
 
@@ -590,7 +589,7 @@ public final class Type {
    * (func int<-string-findkeyword)
    */
   public static interface Func_int_from_string_findkeyword extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_int f_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find);
+    public Core.Type_int vx_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find);
   }
 
   public static class Class_int_from_string_findkeyword extends Core.Class_base implements Func_int_from_string_findkeyword {
@@ -647,7 +646,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_int f_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find) {
+    public Core.Type_int vx_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find) {
       return Type.f_int_from_string_findkeyword(text, find);
     }
 
@@ -672,7 +671,7 @@ public final class Type {
    * (func int<-string-findlast)
    */
   public static interface Func_int_from_string_findlast extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast);
+    public Core.Type_int vx_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast);
   }
 
   public static class Class_int_from_string_findlast extends Core.Class_base implements Func_int_from_string_findlast {
@@ -729,7 +728,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
+    public Core.Type_int vx_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
       return Type.f_int_from_string_findlast(text, findlast);
     }
 
@@ -752,7 +751,7 @@ public final class Type {
    * (func is-boolean)
    */
   public static interface Func_is_boolean extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_boolean(final Core.Type_any value);
+    public Core.Type_boolean vx_is_boolean(final Core.Type_any value);
   }
 
   public static class Class_is_boolean extends Core.Class_base implements Func_is_boolean {
@@ -804,7 +803,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_is_boolean(inputval);
@@ -820,7 +819,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_boolean(final Core.Type_any value) {
+    public Core.Type_boolean vx_is_boolean(final Core.Type_any value) {
       return Type.f_is_boolean(value);
     }
 
@@ -845,7 +844,7 @@ public final class Type {
    * (func is-decimal)
    */
   public static interface Func_is_decimal extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_decimal(final Core.Type_any value);
+    public Core.Type_boolean vx_is_decimal(final Core.Type_any value);
   }
 
   public static class Class_is_decimal extends Core.Class_base implements Func_is_decimal {
@@ -897,7 +896,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_is_decimal(inputval);
@@ -913,7 +912,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_decimal(final Core.Type_any value) {
+    public Core.Type_boolean vx_is_decimal(final Core.Type_any value) {
       return Type.f_is_decimal(value);
     }
 
@@ -938,7 +937,7 @@ public final class Type {
    * (func is-none)
    */
   public static interface Func_is_none extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_none(final Core.Type_any value);
+    public Core.Type_boolean vx_is_none(final Core.Type_any value);
   }
 
   public static class Class_is_none extends Core.Class_base implements Func_is_none {
@@ -990,7 +989,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_is_none(inputval);
@@ -1006,7 +1005,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_none(final Core.Type_any value) {
+    public Core.Type_boolean vx_is_none(final Core.Type_any value) {
       return Type.f_is_none(value);
     }
 
@@ -1031,7 +1030,7 @@ public final class Type {
    * (func is-string)
    */
   public static interface Func_is_string extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_string(final Core.Type_any value);
+    public Core.Type_boolean vx_is_string(final Core.Type_any value);
   }
 
   public static class Class_is_string extends Core.Class_base implements Func_is_string {
@@ -1083,7 +1082,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_is_string(inputval);
@@ -1099,7 +1098,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_string(final Core.Type_any value) {
+    public Core.Type_boolean vx_is_string(final Core.Type_any value) {
       return Type.f_is_string(value);
     }
 
@@ -1125,7 +1124,7 @@ public final class Type {
    * (func is-type)
    */
   public static interface Func_is_type extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_is_type(final Core.Type_any val, final Core.Type_any type);
+    public Core.Type_boolean vx_is_type(final Core.Type_any val, final Core.Type_any type);
   }
 
   public static class Class_is_type extends Core.Class_base implements Func_is_type {
@@ -1182,7 +1181,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_type(final Core.Type_any val, final Core.Type_any type) {
+    public Core.Type_boolean vx_is_type(final Core.Type_any val, final Core.Type_any type) {
       return Type.f_is_type(val, type);
     }
 
@@ -1221,7 +1220,7 @@ public final class Type {
    * (func is-type<-any-typelist)
    */
   public static interface Func_is_type_from_any_typelist extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean f_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist);
+    public Core.Type_boolean vx_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist);
   }
 
   public static class Class_is_type_from_any_typelist extends Core.Class_base implements Func_is_type_from_any_typelist {
@@ -1278,7 +1277,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_boolean f_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist) {
+    public Core.Type_boolean vx_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist) {
       return Type.f_is_type_from_any_typelist(val, typelist);
     }
 
@@ -1314,7 +1313,7 @@ public final class Type {
    * (func length<-string)
    */
   public static interface Func_length_from_string extends Core.Func_any_from_any {
-    public Core.Type_int f_length_from_string(final Core.Type_string text);
+    public Core.Type_int vx_length_from_string(final Core.Type_string text);
   }
 
   public static class Class_length_from_string extends Core.Class_base implements Func_length_from_string {
@@ -1366,7 +1365,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Type.f_length_from_string(inputval);
@@ -1382,7 +1381,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_int f_length_from_string(final Core.Type_string text) {
+    public Core.Type_int vx_length_from_string(final Core.Type_string text) {
       return Type.f_length_from_string(text);
     }
 
@@ -1406,7 +1405,7 @@ public final class Type {
    * (func string<-int)
    */
   public static interface Func_string_from_int extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_int(final Core.Type_int val);
+    public Core.Type_string vx_string_from_int(final Core.Type_int val);
   }
 
   public static class Class_string_from_int extends Core.Class_base implements Func_string_from_int {
@@ -1458,7 +1457,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_int inputval = (Core.Type_int)value;
       Core.Type_any outputval = Type.f_string_from_int(inputval);
@@ -1474,7 +1473,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_string f_string_from_int(final Core.Type_int val) {
+    public Core.Type_string vx_string_from_int(final Core.Type_int val) {
       return Type.f_string_from_int(val);
     }
 
@@ -1531,7 +1530,7 @@ public final class Type {
    * (func string<-string-end)
    */
   public static interface Func_string_from_string_end extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos);
+    public Core.Type_string vx_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos);
   }
 
   public static class Class_string_from_string_end extends Core.Class_base implements Func_string_from_string_end {
@@ -1588,7 +1587,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_string f_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos) {
+    public Core.Type_string vx_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos) {
       return Type.f_string_from_string_end(text, endpos);
     }
 
@@ -1612,7 +1611,7 @@ public final class Type {
    * (func string<-string-start)
    */
   public static interface Func_string_from_string_start extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos);
+    public Core.Type_string vx_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos);
   }
 
   public static class Class_string_from_string_start extends Core.Class_base implements Func_string_from_string_start {
@@ -1669,7 +1668,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_string f_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos) {
+    public Core.Type_string vx_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos) {
       return Type.f_string_from_string_start(text, startpos);
     }
 
@@ -1698,7 +1697,7 @@ public final class Type {
    * (func string<-string-start-end)
    */
   public static interface Func_string_from_string_start_end extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end);
+    public Core.Type_string vx_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end);
   }
 
   public static class Class_string_from_string_start_end extends Core.Class_base implements Func_string_from_string_start_end {
@@ -1756,7 +1755,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_string f_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end) {
+    public Core.Type_string vx_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end) {
       return Type.f_string_from_string_start_end(text, start, end);
     }
 
@@ -1781,7 +1780,7 @@ public final class Type {
    * (func string<-stringlist-join)
    */
   public static interface Func_string_from_stringlist_join extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim);
+    public Core.Type_string vx_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim);
   }
 
   public static class Class_string_from_stringlist_join extends Core.Class_base implements Func_string_from_stringlist_join {
@@ -1838,7 +1837,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_string f_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim) {
+    public Core.Type_string vx_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim) {
       return Type.f_string_from_stringlist_join(vals, delim);
     }
 
@@ -1862,7 +1861,7 @@ public final class Type {
    * (func stringlist<-string-split)
    */
   public static interface Func_stringlist_from_string_split extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim);
+    public Core.Type_stringlist vx_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim);
   }
 
   public static class Class_stringlist_from_string_split extends Core.Class_base implements Func_stringlist_from_string_split {
@@ -1919,7 +1918,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim) {
+    public Core.Type_stringlist vx_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim) {
       return Type.f_stringlist_from_string_split(text, delim);
     }
 
@@ -1942,7 +1941,7 @@ public final class Type {
    * (func traitnames<-any)
    */
   public static interface Func_traitnames_from_any extends Core.Func_any_from_any {
-    public Core.Type_stringlist f_traitnames_from_any(final Core.Type_any val);
+    public Core.Type_stringlist vx_traitnames_from_any(final Core.Type_any val);
   }
 
   public static class Class_traitnames_from_any extends Core.Class_base implements Func_traitnames_from_any {
@@ -1994,7 +1993,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_traitnames_from_any(inputval);
@@ -2010,7 +2009,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_stringlist f_traitnames_from_any(final Core.Type_any val) {
+    public Core.Type_stringlist vx_traitnames_from_any(final Core.Type_any val) {
       return Type.f_traitnames_from_any(val);
     }
 
@@ -2035,7 +2034,7 @@ public final class Type {
    * (func traits<-any)
    */
   public static interface Func_traits_from_any extends Core.Func_any_from_any {
-    public Core.Type_typelist f_traits_from_any(final Core.Type_any val);
+    public Core.Type_typelist vx_traits_from_any(final Core.Type_any val);
   }
 
   public static class Class_traits_from_any extends Core.Class_base implements Func_traits_from_any {
@@ -2087,7 +2086,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Type.f_traits_from_any(inputval);
@@ -2103,7 +2102,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_typelist f_traits_from_any(final Core.Type_any val) {
+    public Core.Type_typelist vx_traits_from_any(final Core.Type_any val) {
       return Type.f_traits_from_any(val);
     }
 
@@ -2128,7 +2127,7 @@ public final class Type {
    * (func traits<-typedef)
    */
   public static interface Func_traits_from_typedef extends Core.Func_any_from_any {
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef);
+    public Core.Type_typelist vx_traits_from_typedef(final Core.Type_typedef vtypedef);
   }
 
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
@@ -2180,7 +2179,7 @@ public final class Type {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_typedef inputval = (Core.Type_typedef)value;
       Core.Type_any outputval = Type.f_traits_from_typedef(inputval);
@@ -2196,7 +2195,7 @@ public final class Type {
     }
 
     @Override
-    public Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
+    public Core.Type_typelist vx_traits_from_typedef(final Core.Type_typedef vtypedef) {
       return Type.f_traits_from_typedef(vtypedef);
     }
 

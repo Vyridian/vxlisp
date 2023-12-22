@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import com.vxlisp.vx.*;
 
-
 public final class Html {
 
 
@@ -163,7 +162,7 @@ public final class Html {
    * Details Tag
    * (type details)
    */
-  public interface Type_details extends Html.Type_node, Html.Type_divchild {
+  public interface Type_details extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_details vx_new(final Object... vals);
     public Html.Type_details vx_copy(final Object... vals);
     public Html.Type_details vx_empty();
@@ -375,7 +374,7 @@ public final class Html {
    * Div Tag
    * (type div)
    */
-  public interface Type_div extends Html.Type_node, Html.Type_divchild {
+  public interface Type_div extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_div vx_new(final Object... vals);
     public Html.Type_div vx_copy(final Object... vals);
     public Html.Type_div vx_empty();
@@ -1042,7 +1041,7 @@ public final class Html {
    * Header 1 Tag
    * (type h1)
    */
-  public interface Type_h1 extends Html.Type_node, Html.Type_divchild {
+  public interface Type_h1 extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_h1 vx_new(final Object... vals);
     public Html.Type_h1 vx_copy(final Object... vals);
     public Html.Type_h1 vx_empty();
@@ -1238,7 +1237,7 @@ public final class Html {
    * Header 2 Tag
    * (type h2)
    */
-  public interface Type_h2 extends Html.Type_node, Html.Type_divchild {
+  public interface Type_h2 extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_h2 vx_new(final Object... vals);
     public Html.Type_h2 vx_copy(final Object... vals);
     public Html.Type_h2 vx_empty();
@@ -1434,7 +1433,7 @@ public final class Html {
    * Header 3 Tag
    * (type h3)
    */
-  public interface Type_h3 extends Html.Type_node, Html.Type_divchild {
+  public interface Type_h3 extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_h3 vx_new(final Object... vals);
     public Html.Type_h3 vx_copy(final Object... vals);
     public Html.Type_h3 vx_empty();
@@ -2188,7 +2187,7 @@ public final class Html {
    * Meta Tag
    * (type meta)
    */
-  public interface Type_meta extends Html.Type_node, Html.Type_headchild {
+  public interface Type_meta extends Core.Type_struct, Html.Type_node, Html.Type_headchild {
     public Html.Type_meta vx_new(final Object... vals);
     public Html.Type_meta vx_copy(final Object... vals);
     public Html.Type_meta vx_empty();
@@ -2661,7 +2660,7 @@ public final class Html {
    * Paragraph Tag
    * (type p)
    */
-  public interface Type_p extends Html.Type_node, Html.Type_divchild {
+  public interface Type_p extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_p vx_new(final Object... vals);
     public Html.Type_p vx_copy(final Object... vals);
     public Html.Type_p vx_empty();
@@ -2955,6 +2954,9 @@ public final class Html {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -3384,6 +3386,9 @@ public final class Html {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -3432,7 +3437,7 @@ public final class Html {
    * Programmable Cascading Style Sheet CSS type
    * (type stylesheet)
    */
-  public interface Type_stylesheet extends Html.Type_node, Html.Type_headchild {
+  public interface Type_stylesheet extends Core.Type_struct, Html.Type_node, Html.Type_headchild {
     public Html.Type_stylesheet vx_new(final Object... vals);
     public Html.Type_stylesheet vx_copy(final Object... vals);
     public Html.Type_stylesheet vx_empty();
@@ -3672,7 +3677,7 @@ public final class Html {
    * <table> Tag
    * (type table)
    */
-  public interface Type_table extends Html.Type_node, Html.Type_divchild {
+  public interface Type_table extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
     public Html.Type_table vx_new(final Object... vals);
     public Html.Type_table vx_copy(final Object... vals);
     public Html.Type_table vx_empty();
@@ -3884,7 +3889,7 @@ public final class Html {
    * <tbody> Tag
    * (type tbody)
    */
-  public interface Type_tbody extends Html.Type_node {
+  public interface Type_tbody extends Core.Type_struct, Html.Type_node {
     public Html.Type_tbody vx_new(final Object... vals);
     public Html.Type_tbody vx_copy(final Object... vals);
     public Html.Type_tbody vx_empty();
@@ -4084,7 +4089,7 @@ public final class Html {
    * <tr> Tag
    * (type td)
    */
-  public interface Type_td extends Html.Type_node {
+  public interface Type_td extends Core.Type_struct, Html.Type_node {
     public Html.Type_td vx_new(final Object... vals);
     public Html.Type_td vx_copy(final Object... vals);
     public Html.Type_td vx_empty();
@@ -4405,7 +4410,7 @@ public final class Html {
    * <thead> Tag
    * (type thead)
    */
-  public interface Type_thead extends Html.Type_node {
+  public interface Type_thead extends Core.Type_struct, Html.Type_node {
     public Html.Type_thead vx_new(final Object... vals);
     public Html.Type_thead vx_copy(final Object... vals);
     public Html.Type_thead vx_empty();
@@ -4605,7 +4610,7 @@ public final class Html {
    * Title Tag
    * (type title)
    */
-  public interface Type_title extends Html.Type_node, Html.Type_headchild {
+  public interface Type_title extends Core.Type_struct, Html.Type_node, Html.Type_headchild {
     public Html.Type_title vx_new(final Object... vals);
     public Html.Type_title vx_copy(final Object... vals);
     public Html.Type_title vx_empty();
@@ -4795,7 +4800,7 @@ public final class Html {
    * <tr> Tag
    * (type tr)
    */
-  public interface Type_tr extends Html.Type_node {
+  public interface Type_tr extends Core.Type_struct, Html.Type_node {
     public Html.Type_tr vx_new(final Object... vals);
     public Html.Type_tr vx_copy(final Object... vals);
     public Html.Type_tr vx_empty();
@@ -5118,7 +5123,7 @@ public final class Html {
    * (func htmlstring<-string)
    */
   public static interface Func_htmlstring_from_string extends Core.Func_any_from_any {
-    public Core.Type_string f_htmlstring_from_string(final Core.Type_string text);
+    public Core.Type_string vx_htmlstring_from_string(final Core.Type_string text);
   }
 
   public static class Class_htmlstring_from_string extends Core.Class_base implements Func_htmlstring_from_string {
@@ -5170,7 +5175,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Html.f_htmlstring_from_string(inputval);
@@ -5186,7 +5191,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_htmlstring_from_string(final Core.Type_string text) {
+    public Core.Type_string vx_htmlstring_from_string(final Core.Type_string text) {
       return Html.f_htmlstring_from_string(text);
     }
 
@@ -5214,7 +5219,7 @@ public final class Html {
    * (func string-indent)
    */
   public static interface Func_string_indent extends Core.Func_any_from_any {
-    public Core.Type_string f_string_indent(final Core.Type_int indent);
+    public Core.Type_string vx_string_indent(final Core.Type_int indent);
   }
 
   public static class Class_string_indent extends Core.Class_base implements Func_string_indent {
@@ -5266,7 +5271,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_int inputval = (Core.Type_int)value;
       Core.Type_any outputval = Html.f_string_indent(inputval);
@@ -5282,7 +5287,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_indent(final Core.Type_int indent) {
+    public Core.Type_string vx_string_indent(final Core.Type_int indent) {
       return Html.f_string_indent(indent);
     }
 
@@ -5306,7 +5311,7 @@ public final class Html {
    * (func string<-body-indent)
    */
   public static interface Func_string_from_body_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_body_indent(final Html.Type_body body, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_body_indent(final Html.Type_body body, final Core.Type_int indent);
   }
 
   public static class Class_string_from_body_indent extends Core.Class_base implements Func_string_from_body_indent {
@@ -5363,7 +5368,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_body_indent(final Html.Type_body body, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_body_indent(final Html.Type_body body, final Core.Type_int indent) {
       return Html.f_string_from_body_indent(body, indent);
     }
 
@@ -5393,7 +5398,7 @@ public final class Html {
    * (func string<-details-indent)
    */
   public static interface Func_string_from_details_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_details_indent(final Html.Type_details details, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_details_indent(final Html.Type_details details, final Core.Type_int indent);
   }
 
   public static class Class_string_from_details_indent extends Core.Class_base implements Func_string_from_details_indent {
@@ -5450,7 +5455,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_details_indent(final Html.Type_details details, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_details_indent(final Html.Type_details details, final Core.Type_int indent) {
       return Html.f_string_from_details_indent(details, indent);
     }
 
@@ -5504,7 +5509,7 @@ public final class Html {
    * (func string<-div-indent)
    */
   public static interface Func_string_from_div_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_div_indent(final Html.Type_div div, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_div_indent(final Html.Type_div div, final Core.Type_int indent);
   }
 
   public static class Class_string_from_div_indent extends Core.Class_base implements Func_string_from_div_indent {
@@ -5561,7 +5566,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_div_indent(final Html.Type_div div, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_div_indent(final Html.Type_div div, final Core.Type_int indent) {
       return Html.f_string_from_div_indent(div, indent);
     }
 
@@ -5609,7 +5614,7 @@ public final class Html {
    * (func string<-footer-indent)
    */
   public static interface Func_string_from_footer_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_footer_indent(final Html.Type_footer footer, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_footer_indent(final Html.Type_footer footer, final Core.Type_int indent);
   }
 
   public static class Class_string_from_footer_indent extends Core.Class_base implements Func_string_from_footer_indent {
@@ -5666,7 +5671,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_footer_indent(final Html.Type_footer footer, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_footer_indent(final Html.Type_footer footer, final Core.Type_int indent) {
       return Html.f_string_from_footer_indent(footer, indent);
     }
 
@@ -5696,7 +5701,7 @@ public final class Html {
    * (func string<-h1-indent)
    */
   public static interface Func_string_from_h1_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_h1_indent(final Html.Type_h1 h1, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_h1_indent(final Html.Type_h1 h1, final Core.Type_int indent);
   }
 
   public static class Class_string_from_h1_indent extends Core.Class_base implements Func_string_from_h1_indent {
@@ -5753,7 +5758,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_h1_indent(final Html.Type_h1 h1, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_h1_indent(final Html.Type_h1 h1, final Core.Type_int indent) {
       return Html.f_string_from_h1_indent(h1, indent);
     }
 
@@ -5798,7 +5803,7 @@ public final class Html {
    * (func string<-h2-indent)
    */
   public static interface Func_string_from_h2_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_h2_indent(final Html.Type_h2 h2, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_h2_indent(final Html.Type_h2 h2, final Core.Type_int indent);
   }
 
   public static class Class_string_from_h2_indent extends Core.Class_base implements Func_string_from_h2_indent {
@@ -5855,7 +5860,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_h2_indent(final Html.Type_h2 h2, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_h2_indent(final Html.Type_h2 h2, final Core.Type_int indent) {
       return Html.f_string_from_h2_indent(h2, indent);
     }
 
@@ -5900,7 +5905,7 @@ public final class Html {
    * (func string<-h3-indent)
    */
   public static interface Func_string_from_h3_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_h3_indent(final Html.Type_h3 h3, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_h3_indent(final Html.Type_h3 h3, final Core.Type_int indent);
   }
 
   public static class Class_string_from_h3_indent extends Core.Class_base implements Func_string_from_h3_indent {
@@ -5957,7 +5962,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_h3_indent(final Html.Type_h3 h3, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_h3_indent(final Html.Type_h3 h3, final Core.Type_int indent) {
       return Html.f_string_from_h3_indent(h3, indent);
     }
 
@@ -6002,7 +6007,7 @@ public final class Html {
    * (func string<-head-indent)
    */
   public static interface Func_string_from_head_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_head_indent(final Html.Type_head head, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_head_indent(final Html.Type_head head, final Core.Type_int indent);
   }
 
   public static class Class_string_from_head_indent extends Core.Class_base implements Func_string_from_head_indent {
@@ -6059,7 +6064,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_head_indent(final Html.Type_head head, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_head_indent(final Html.Type_head head, final Core.Type_int indent) {
       return Html.f_string_from_head_indent(head, indent);
     }
 
@@ -6088,7 +6093,7 @@ public final class Html {
    * (func string<-html)
    */
   public static interface Func_string_from_html extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_html(final Html.Type_html html);
+    public Core.Type_string vx_string_from_html(final Html.Type_html html);
   }
 
   public static class Class_string_from_html extends Core.Class_base implements Func_string_from_html {
@@ -6140,7 +6145,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_html inputval = (Html.Type_html)value;
       Core.Type_any outputval = Html.f_string_from_html(inputval);
@@ -6156,7 +6161,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_html(final Html.Type_html html) {
+    public Core.Type_string vx_string_from_html(final Html.Type_html html) {
       return Html.f_string_from_html(html);
     }
 
@@ -6208,7 +6213,7 @@ public final class Html {
    * (func string<-indent)
    */
   public static interface Func_string_from_indent extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_indent(final Core.Type_int indent);
+    public Core.Type_string vx_string_from_indent(final Core.Type_int indent);
   }
 
   public static class Class_string_from_indent extends Core.Class_base implements Func_string_from_indent {
@@ -6260,7 +6265,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_int inputval = (Core.Type_int)value;
       Core.Type_any outputval = Html.f_string_from_indent(inputval);
@@ -6276,7 +6281,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_indent(final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_indent(final Core.Type_int indent) {
       return Html.f_string_from_indent(indent);
     }
 
@@ -6311,7 +6316,7 @@ public final class Html {
    * (func string<-meta-indent)
    */
   public static interface Func_string_from_meta_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_meta_indent(final Html.Type_meta meta, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_meta_indent(final Html.Type_meta meta, final Core.Type_int indent);
   }
 
   public static class Class_string_from_meta_indent extends Core.Class_base implements Func_string_from_meta_indent {
@@ -6368,7 +6373,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_meta_indent(final Html.Type_meta meta, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_meta_indent(final Html.Type_meta meta, final Core.Type_int indent) {
       return Html.f_string_from_meta_indent(meta, indent);
     }
 
@@ -6410,7 +6415,7 @@ public final class Html {
    * (func string<-node-indent)
    */
   public static interface Func_string_from_node_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_node_indent(final Core.Type_any node, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_node_indent(final Core.Type_any node, final Core.Type_int indent);
   }
 
   public static class Class_string_from_node_indent extends Core.Class_base implements Func_string_from_node_indent {
@@ -6467,7 +6472,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_node_indent(final Core.Type_any node, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_node_indent(final Core.Type_any node, final Core.Type_int indent) {
       return Html.f_string_from_node_indent(node, indent);
     }
 
@@ -6649,7 +6654,7 @@ public final class Html {
    * (func string<-nodelist-indent)
    */
   public static interface Func_string_from_nodelist_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_nodelist_indent(final Core.Type_list nodelist, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_nodelist_indent(final Core.Type_list nodelist, final Core.Type_int indent);
   }
 
   public static class Class_string_from_nodelist_indent extends Core.Class_base implements Func_string_from_nodelist_indent {
@@ -6706,7 +6711,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_nodelist_indent(final Core.Type_list nodelist, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_nodelist_indent(final Core.Type_list nodelist, final Core.Type_int indent) {
       return Html.f_string_from_nodelist_indent(nodelist, indent);
     }
 
@@ -6746,7 +6751,7 @@ public final class Html {
    * (func string<-nodelist-tag-prop-indent)
    */
   public static interface Func_string_from_nodelist_tag_prop_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_nodelist_tag_prop_indent(final Core.Type_list nodes, final Core.Type_string tag, final Core.Type_string prop, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_nodelist_tag_prop_indent(final Core.Type_list nodes, final Core.Type_string tag, final Core.Type_string prop, final Core.Type_int indent);
   }
 
   public static class Class_string_from_nodelist_tag_prop_indent extends Core.Class_base implements Func_string_from_nodelist_tag_prop_indent {
@@ -6805,7 +6810,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_nodelist_tag_prop_indent(final Core.Type_list nodes, final Core.Type_string tag, final Core.Type_string prop, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_nodelist_tag_prop_indent(final Core.Type_list nodes, final Core.Type_string tag, final Core.Type_string prop, final Core.Type_int indent) {
       return Html.f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
     }
 
@@ -6879,7 +6884,7 @@ public final class Html {
    * (func string<-p-indent)
    */
   public static interface Func_string_from_p_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_p_indent(final Html.Type_p p, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_p_indent(final Html.Type_p p, final Core.Type_int indent);
   }
 
   public static class Class_string_from_p_indent extends Core.Class_base implements Func_string_from_p_indent {
@@ -6936,7 +6941,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_p_indent(final Html.Type_p p, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_p_indent(final Html.Type_p p, final Core.Type_int indent) {
       return Html.f_string_from_p_indent(p, indent);
     }
 
@@ -6987,7 +6992,7 @@ public final class Html {
    * (func string<-propname-val)
    */
   public static interface Func_string_from_propname_val extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_propname_val(final Core.Type_string key, final Core.Type_string val);
+    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string val);
   }
 
   public static class Class_string_from_propname_val extends Core.Class_base implements Func_string_from_propname_val {
@@ -7044,7 +7049,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_propname_val(final Core.Type_string key, final Core.Type_string val) {
+    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string val) {
       return Html.f_string_from_propname_val(key, val);
     }
 
@@ -7081,7 +7086,7 @@ public final class Html {
    * (func string<-propstyle)
    */
   public static interface Func_string_from_propstyle extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_propstyle(final Html.Type_style style);
+    public Core.Type_string vx_string_from_propstyle(final Html.Type_style style);
   }
 
   public static class Class_string_from_propstyle extends Core.Class_base implements Func_string_from_propstyle {
@@ -7133,7 +7138,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_style inputval = (Html.Type_style)value;
       Core.Type_any outputval = Html.f_string_from_propstyle(inputval);
@@ -7149,7 +7154,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_propstyle(final Html.Type_style style) {
+    public Core.Type_string vx_string_from_propstyle(final Html.Type_style style) {
       return Html.f_string_from_propstyle(style);
     }
 
@@ -7188,7 +7193,7 @@ public final class Html {
    * (func string<-style-indent)
    */
   public static interface Func_string_from_style_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_style_indent(final Html.Type_style style, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_style_indent(final Html.Type_style style, final Core.Type_int indent);
   }
 
   public static class Class_string_from_style_indent extends Core.Class_base implements Func_string_from_style_indent {
@@ -7245,7 +7250,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_style_indent(final Html.Type_style style, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_style_indent(final Html.Type_style style, final Core.Type_int indent) {
       return Html.f_string_from_style_indent(style, indent);
     }
 
@@ -7291,7 +7296,7 @@ public final class Html {
    * (func string<-stylelist-indent)
    */
   public static interface Func_string_from_stylelist_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_stylelist_indent(final Html.Type_stylelist stylelist, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_stylelist_indent(final Html.Type_stylelist stylelist, final Core.Type_int indent);
   }
 
   public static class Class_string_from_stylelist_indent extends Core.Class_base implements Func_string_from_stylelist_indent {
@@ -7348,7 +7353,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_stylelist_indent(final Html.Type_stylelist stylelist, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_stylelist_indent(final Html.Type_stylelist stylelist, final Core.Type_int indent) {
       return Html.f_string_from_stylelist_indent(stylelist, indent);
     }
 
@@ -7386,7 +7391,7 @@ public final class Html {
    * (func string<-stylepropmap-indent)
    */
   public static interface Func_string_from_stylepropmap_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_stylepropmap_indent(final Html.Type_propmap propmap, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_stylepropmap_indent(final Html.Type_propmap propmap, final Core.Type_int indent);
   }
 
   public static class Class_string_from_stylepropmap_indent extends Core.Class_base implements Func_string_from_stylepropmap_indent {
@@ -7443,7 +7448,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_stylepropmap_indent(final Html.Type_propmap propmap, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_stylepropmap_indent(final Html.Type_propmap propmap, final Core.Type_int indent) {
       return Html.f_string_from_stylepropmap_indent(propmap, indent);
     }
 
@@ -7492,7 +7497,7 @@ public final class Html {
    * (func string<-stylesheet-indent)
    */
   public static interface Func_string_from_stylesheet_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_stylesheet_indent(final Html.Type_stylesheet stylesheet, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_stylesheet_indent(final Html.Type_stylesheet stylesheet, final Core.Type_int indent);
   }
 
   public static class Class_string_from_stylesheet_indent extends Core.Class_base implements Func_string_from_stylesheet_indent {
@@ -7549,7 +7554,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_stylesheet_indent(final Html.Type_stylesheet stylesheet, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_stylesheet_indent(final Html.Type_stylesheet stylesheet, final Core.Type_int indent) {
       return Html.f_string_from_stylesheet_indent(stylesheet, indent);
     }
 
@@ -7597,7 +7602,7 @@ public final class Html {
    * (func string<-table-indent)
    */
   public static interface Func_string_from_table_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_table_indent(final Html.Type_table table, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_table_indent(final Html.Type_table table, final Core.Type_int indent);
   }
 
   public static class Class_string_from_table_indent extends Core.Class_base implements Func_string_from_table_indent {
@@ -7654,7 +7659,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_table_indent(final Html.Type_table table, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_table_indent(final Html.Type_table table, final Core.Type_int indent) {
       return Html.f_string_from_table_indent(table, indent);
     }
 
@@ -7710,7 +7715,7 @@ public final class Html {
    * (func string<-tbody-indent)
    */
   public static interface Func_string_from_tbody_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_tbody_indent(final Html.Type_tbody tbody, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_tbody_indent(final Html.Type_tbody tbody, final Core.Type_int indent);
   }
 
   public static class Class_string_from_tbody_indent extends Core.Class_base implements Func_string_from_tbody_indent {
@@ -7767,7 +7772,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_tbody_indent(final Html.Type_tbody tbody, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_tbody_indent(final Html.Type_tbody tbody, final Core.Type_int indent) {
       return Html.f_string_from_tbody_indent(tbody, indent);
     }
 
@@ -7797,7 +7802,7 @@ public final class Html {
    * (func string<-td-indent)
    */
   public static interface Func_string_from_td_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_td_indent(final Html.Type_td td, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_td_indent(final Html.Type_td td, final Core.Type_int indent);
   }
 
   public static class Class_string_from_td_indent extends Core.Class_base implements Func_string_from_td_indent {
@@ -7854,7 +7859,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_td_indent(final Html.Type_td td, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_td_indent(final Html.Type_td td, final Core.Type_int indent) {
       return Html.f_string_from_td_indent(td, indent);
     }
 
@@ -7884,7 +7889,7 @@ public final class Html {
    * (func string<-thead-indent)
    */
   public static interface Func_string_from_thead_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_thead_indent(final Html.Type_thead thead, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_thead_indent(final Html.Type_thead thead, final Core.Type_int indent);
   }
 
   public static class Class_string_from_thead_indent extends Core.Class_base implements Func_string_from_thead_indent {
@@ -7941,7 +7946,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_thead_indent(final Html.Type_thead thead, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_thead_indent(final Html.Type_thead thead, final Core.Type_int indent) {
       return Html.f_string_from_thead_indent(thead, indent);
     }
 
@@ -7971,7 +7976,7 @@ public final class Html {
    * (func string<-title-indent)
    */
   public static interface Func_string_from_title_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_title_indent(final Html.Type_title title, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_title_indent(final Html.Type_title title, final Core.Type_int indent);
   }
 
   public static class Class_string_from_title_indent extends Core.Class_base implements Func_string_from_title_indent {
@@ -8028,7 +8033,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_title_indent(final Html.Type_title title, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_title_indent(final Html.Type_title title, final Core.Type_int indent) {
       return Html.f_string_from_title_indent(title, indent);
     }
 
@@ -8067,7 +8072,7 @@ public final class Html {
    * (func string<-tr-indent)
    */
   public static interface Func_string_from_tr_indent extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string f_string_from_tr_indent(final Html.Type_tr tr, final Core.Type_int indent);
+    public Core.Type_string vx_string_from_tr_indent(final Html.Type_tr tr, final Core.Type_int indent);
   }
 
   public static class Class_string_from_tr_indent extends Core.Class_base implements Func_string_from_tr_indent {
@@ -8124,7 +8129,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_tr_indent(final Html.Type_tr tr, final Core.Type_int indent) {
+    public Core.Type_string vx_string_from_tr_indent(final Html.Type_tr tr, final Core.Type_int indent) {
       return Html.f_string_from_tr_indent(tr, indent);
     }
 
@@ -8153,7 +8158,7 @@ public final class Html {
    * (func string<-uri)
    */
   public static interface Func_string_from_uri extends Core.Func_any_from_any {
-    public Core.Type_string f_string_from_uri(final Core.Type_string uri);
+    public Core.Type_string vx_string_from_uri(final Core.Type_string uri);
   }
 
   public static class Class_string_from_uri extends Core.Class_base implements Func_string_from_uri {
@@ -8205,7 +8210,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Html.f_string_from_uri(inputval);
@@ -8221,7 +8226,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_string_from_uri(final Core.Type_string uri) {
+    public Core.Type_string vx_string_from_uri(final Core.Type_string uri) {
       return Html.f_string_from_uri(uri);
     }
 
@@ -8244,7 +8249,7 @@ public final class Html {
    * (func style<-stylesheet-name)
    */
   public static interface Func_style_from_stylesheet_name extends Core.Type_func, Core.Type_replfunc {
-    public Html.Type_style f_style_from_stylesheet_name(final Html.Type_stylesheet stylesheet, final Core.Type_string name);
+    public Html.Type_style vx_style_from_stylesheet_name(final Html.Type_stylesheet stylesheet, final Core.Type_string name);
   }
 
   public static class Class_style_from_stylesheet_name extends Core.Class_base implements Func_style_from_stylesheet_name {
@@ -8301,7 +8306,7 @@ public final class Html {
     }
 
     @Override
-    public Html.Type_style f_style_from_stylesheet_name(final Html.Type_stylesheet stylesheet, final Core.Type_string name) {
+    public Html.Type_style vx_style_from_stylesheet_name(final Html.Type_stylesheet stylesheet, final Core.Type_string name) {
       return Html.f_style_from_stylesheet_name(stylesheet, name);
     }
 
@@ -8328,7 +8333,7 @@ public final class Html {
    * (func stylemap<-stylelist)
    */
   public static interface Func_stylemap_from_stylelist extends Core.Func_any_from_any {
-    public Html.Type_stylemap f_stylemap_from_stylelist(final Html.Type_stylelist stylelist);
+    public Html.Type_stylemap vx_stylemap_from_stylelist(final Html.Type_stylelist stylelist);
   }
 
   public static class Class_stylemap_from_stylelist extends Core.Class_base implements Func_stylemap_from_stylelist {
@@ -8380,7 +8385,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_stylelist inputval = (Html.Type_stylelist)value;
       Core.Type_any outputval = Html.f_stylemap_from_stylelist(inputval);
@@ -8396,7 +8401,7 @@ public final class Html {
     }
 
     @Override
-    public Html.Type_stylemap f_stylemap_from_stylelist(final Html.Type_stylelist stylelist) {
+    public Html.Type_stylemap vx_stylemap_from_stylelist(final Html.Type_stylelist stylelist) {
       return Html.f_stylemap_from_stylelist(stylelist);
     }
 
@@ -8427,7 +8432,7 @@ public final class Html {
    * (func stylemap<-stylesheet)
    */
   public static interface Func_stylemap_from_stylesheet extends Core.Func_any_from_any {
-    public Html.Type_stylemap f_stylemap_from_stylesheet(final Html.Type_stylesheet stylesheet);
+    public Html.Type_stylemap vx_stylemap_from_stylesheet(final Html.Type_stylesheet stylesheet);
   }
 
   public static class Class_stylemap_from_stylesheet extends Core.Class_base implements Func_stylemap_from_stylesheet {
@@ -8479,7 +8484,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_stylesheet inputval = (Html.Type_stylesheet)value;
       Core.Type_any outputval = Html.f_stylemap_from_stylesheet(inputval);
@@ -8495,7 +8500,7 @@ public final class Html {
     }
 
     @Override
-    public Html.Type_stylemap f_stylemap_from_stylesheet(final Html.Type_stylesheet stylesheet) {
+    public Html.Type_stylemap vx_stylemap_from_stylesheet(final Html.Type_stylesheet stylesheet) {
       return Html.f_stylemap_from_stylesheet(stylesheet);
     }
 
@@ -8518,7 +8523,7 @@ public final class Html {
    * (func styles<-stylesheet)
    */
   public static interface Func_styles_from_stylesheet extends Core.Func_any_from_any {
-    public Html.Type_stylelist f_styles_from_stylesheet(final Html.Type_stylesheet stylesheet);
+    public Html.Type_stylelist vx_styles_from_stylesheet(final Html.Type_stylesheet stylesheet);
   }
 
   public static class Class_styles_from_stylesheet extends Core.Class_base implements Func_styles_from_stylesheet {
@@ -8570,7 +8575,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_stylesheet inputval = (Html.Type_stylesheet)value;
       Core.Type_any outputval = Html.f_styles_from_stylesheet(inputval);
@@ -8586,7 +8591,7 @@ public final class Html {
     }
 
     @Override
-    public Html.Type_stylelist f_styles_from_stylesheet(final Html.Type_stylesheet stylesheet) {
+    public Html.Type_stylelist vx_styles_from_stylesheet(final Html.Type_stylesheet stylesheet) {
       return Html.f_styles_from_stylesheet(stylesheet);
     }
 
@@ -8609,7 +8614,7 @@ public final class Html {
    * (func stylesheet-loadmap)
    */
   public static interface Func_stylesheet_loadmap extends Core.Func_any_from_any {
-    public Html.Type_stylesheet f_stylesheet_loadmap(final Html.Type_stylesheet stylesheet);
+    public Html.Type_stylesheet vx_stylesheet_loadmap(final Html.Type_stylesheet stylesheet);
   }
 
   public static class Class_stylesheet_loadmap extends Core.Class_base implements Func_stylesheet_loadmap {
@@ -8661,7 +8666,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Html.Type_stylesheet inputval = (Html.Type_stylesheet)value;
       Core.Type_any outputval = Html.f_stylesheet_loadmap(inputval);
@@ -8677,7 +8682,7 @@ public final class Html {
     }
 
     @Override
-    public Html.Type_stylesheet f_stylesheet_loadmap(final Html.Type_stylesheet stylesheet) {
+    public Html.Type_stylesheet vx_stylesheet_loadmap(final Html.Type_stylesheet stylesheet) {
       return Html.f_stylesheet_loadmap(stylesheet);
     }
 
@@ -8708,7 +8713,7 @@ public final class Html {
    * (func uri<-string)
    */
   public static interface Func_uri_from_string extends Core.Func_any_from_any {
-    public Core.Type_string f_uri_from_string(final Core.Type_string text);
+    public Core.Type_string vx_uri_from_string(final Core.Type_string text);
   }
 
   public static class Class_uri_from_string extends Core.Class_base implements Func_uri_from_string {
@@ -8760,7 +8765,7 @@ public final class Html {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Html.f_uri_from_string(inputval);
@@ -8776,7 +8781,7 @@ public final class Html {
     }
 
     @Override
-    public Core.Type_string f_uri_from_string(final Core.Type_string text) {
+    public Core.Type_string vx_uri_from_string(final Core.Type_string text) {
       return Html.f_uri_from_string(text);
     }
 

@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public final class Collection {
 
   public static <T extends Core.Type_any> T vx_any_from_for_until_loop_max(T generic_any_1, T start, Core.Func_boolean_from_any fn_until, Core.Func_any_from_any fn_loop, Core.Type_int max) {
@@ -18,8 +17,8 @@ public final class Collection {
         iscontinue = false;
       } else {
         icount += 1;
-        output = fn_loop.f_any_from_any(generic_any_1, output);
-        Core.Type_boolean valcontinue = fn_until.f_boolean_from_any(output);
+        output = fn_loop.vx_any_from_any(generic_any_1, output);
+        Core.Type_boolean valcontinue = fn_until.vx_boolean_from_any(output);
         iscontinue = !valcontinue.vx_boolean();
       }
     }
@@ -36,10 +35,10 @@ public final class Collection {
         iscontinue = false;
       } else {
         icount += 1;
-        Core.Type_boolean valcontinue = fn_while.f_boolean_from_any(output);
+        Core.Type_boolean valcontinue = fn_while.vx_boolean_from_any(output);
         iscontinue = valcontinue.vx_boolean();
         if (iscontinue) {
-          output = fn_loop.f_any_from_any(generic_any_1, output);
+          output = fn_loop.vx_any_from_any(generic_any_1, output);
         }
       }
     }
@@ -53,12 +52,12 @@ public final class Collection {
     int iend = end.vx_int();
     if (istart <= iend) {
       for (int i = istart; i <= iend; i++) {
-        Core.Type_any val = fn_loop.f_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
         listvals.add(val);
       }
     } else {
       for (int i = istart; i >= iend; i--) {
-        Core.Type_any val = fn_loop.f_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
         listvals.add(val);
       }
     }
@@ -80,11 +79,11 @@ public final class Collection {
       if (icount >= imax) {
         iscontinue = false;
       } else {
-        Core.Type_boolean valwhile = fn_while.f_boolean_from_any(work);
+        Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
         iscontinue = !valwhile.vx_boolean();
         if (iscontinue) {
           icount += 1;
-          work = fn_loop.f_any_from_any(Core.t_any, work);
+          work = fn_loop.vx_any_from_any(Core.t_any, work);
           listvals.add(work);
         }
       }
@@ -101,7 +100,7 @@ public final class Collection {
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
     for (Core.Type_any val : listval) {
-      Core.Type_any newval = fn_filter.f_any_from_any(Core.t_any, val);
+      Core.Type_any newval = fn_filter.vx_any_from_any(Core.t_any, val);
       Core.Type_boolean isempty = Core.f_is_empty_1(newval);
       if (!isempty.vx_boolean()) {
         items.add(newval);
@@ -144,7 +143,7 @@ public final class Collection {
    * (func any<-for-until-loop)
    */
   public static interface Func_any_from_for_until_loop extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop);
+    public <T extends Core.Type_any> T vx_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop);
   }
 
   public static class Class_any_from_for_until_loop extends Core.Class_base implements Func_any_from_for_until_loop {
@@ -203,7 +202,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop) {
+    public <T extends Core.Type_any> T vx_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop) {
       return Collection.f_any_from_for_until_loop(generic_any_1, start, fn_until, fn_loop);
     }
 
@@ -237,7 +236,7 @@ public final class Collection {
    * (func any<-for-until-loop-max)
    */
   public static interface Func_any_from_for_until_loop_max extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_any_from_for_until_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
+    public <T extends Core.Type_any> T vx_any_from_for_until_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
   public static class Class_any_from_for_until_loop_max extends Core.Class_base implements Func_any_from_for_until_loop_max {
@@ -297,7 +296,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_for_until_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
+    public <T extends Core.Type_any> T vx_any_from_for_until_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
       return Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     }
 
@@ -322,7 +321,7 @@ public final class Collection {
    * (func any<-for-while-loop)
    */
   public static interface Func_any_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_any_from_for_while_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
+    public <T extends Core.Type_any> T vx_any_from_for_while_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
   }
 
   public static class Class_any_from_for_while_loop extends Core.Class_base implements Func_any_from_for_while_loop {
@@ -381,7 +380,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_for_while_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop) {
+    public <T extends Core.Type_any> T vx_any_from_for_while_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop) {
       return Collection.f_any_from_for_while_loop(generic_any_1, start, fn_while, fn_loop);
     }
 
@@ -416,7 +415,7 @@ public final class Collection {
    * (func any<-for-while-loop-max)
    */
   public static interface Func_any_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T f_any_from_for_while_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
+    public <T extends Core.Type_any> T vx_any_from_for_while_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
   public static class Class_any_from_for_while_loop_max extends Core.Class_base implements Func_any_from_for_while_loop_max {
@@ -476,7 +475,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any> T f_any_from_for_while_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
+    public <T extends Core.Type_any> T vx_any_from_for_while_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
       return Collection.f_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     }
 
@@ -499,7 +498,7 @@ public final class Collection {
    * (func is-list)
    */
   public static interface Func_is_list extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_list(final Core.Type_any val);
+    public Core.Type_boolean vx_is_list(final Core.Type_any val);
   }
 
   public static class Class_is_list extends Core.Class_base implements Func_is_list {
@@ -551,7 +550,7 @@ public final class Collection {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Collection.f_is_list(inputval);
@@ -567,7 +566,7 @@ public final class Collection {
     }
 
     @Override
-    public Core.Type_boolean f_is_list(final Core.Type_any val) {
+    public Core.Type_boolean vx_is_list(final Core.Type_any val) {
       return Collection.f_is_list(val);
     }
 
@@ -593,7 +592,7 @@ public final class Collection {
    * (func is-map)
    */
   public static interface Func_is_map extends Core.Func_any_from_any {
-    public Core.Type_boolean f_is_map(final Core.Type_any val);
+    public Core.Type_boolean vx_is_map(final Core.Type_any val);
   }
 
   public static class Class_is_map extends Core.Class_base implements Func_is_map {
@@ -645,7 +644,7 @@ public final class Collection {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_any inputval = (Core.Type_any)value;
       Core.Type_any outputval = Collection.f_is_map(inputval);
@@ -661,7 +660,7 @@ public final class Collection {
     }
 
     @Override
-    public Core.Type_boolean f_is_map(final Core.Type_any val) {
+    public Core.Type_boolean vx_is_map(final Core.Type_any val) {
       return Collection.f_is_map(val);
     }
 
@@ -700,7 +699,7 @@ public final class Collection {
    * (func list<-for-end-loop)
    */
   public static interface Func_list_from_for_end_loop extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list> X f_list_from_for_end_loop(final X generic_any_1, final Core.Type_int start, final Core.Type_int end, final Core.Func_any_from_int fn_loop);
+    public <X extends Core.Type_list> X vx_list_from_for_end_loop(final X generic_any_1, final Core.Type_int start, final Core.Type_int end, final Core.Func_any_from_int fn_loop);
   }
 
   public static class Class_list_from_for_end_loop extends Core.Class_base implements Func_list_from_for_end_loop {
@@ -759,7 +758,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list> X f_list_from_for_end_loop(final X generic_list_1, final Core.Type_int start, final Core.Type_int end, final Core.Func_any_from_int fn_loop) {
+    public <X extends Core.Type_list> X vx_list_from_for_end_loop(final X generic_list_1, final Core.Type_int start, final Core.Type_int end, final Core.Func_any_from_int fn_loop) {
       return Collection.f_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     }
 
@@ -784,7 +783,7 @@ public final class Collection {
    * (func list<-for-while-loop)
    */
   public static interface Func_list_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, X extends Core.Type_list> X f_list_from_for_while_loop(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
+    public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
   }
 
   public static class Class_list_from_for_while_loop extends Core.Class_base implements Func_list_from_for_while_loop {
@@ -843,7 +842,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any, X extends Core.Type_list> X f_list_from_for_while_loop(final X generic_list_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop) {
+    public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop(final X generic_list_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop) {
       return Collection.f_list_from_for_while_loop(generic_list_1, start, fn_while, fn_loop);
     }
 
@@ -875,7 +874,7 @@ public final class Collection {
    * (func list<-for-while-loop-max)
    */
   public static interface Func_list_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, X extends Core.Type_list> X f_list_from_for_while_loop_max(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
+    public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop_max(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
   public static class Class_list_from_for_while_loop_max extends Core.Class_base implements Func_list_from_for_while_loop_max {
@@ -935,7 +934,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any, X extends Core.Type_list> X f_list_from_for_while_loop_max(final X generic_list_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
+    public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop_max(final X generic_list_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max) {
       return Collection.f_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     }
 
@@ -959,7 +958,7 @@ public final class Collection {
    * (func list<-list-end)
    */
   public static interface Func_list_from_list_end extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list> X f_list_from_list_end(final X generic_any_1, final X values, final Core.Type_int end);
+    public <X extends Core.Type_list> X vx_list_from_list_end(final X generic_any_1, final X values, final Core.Type_int end);
   }
 
   public static class Class_list_from_list_end extends Core.Class_base implements Func_list_from_list_end {
@@ -1017,7 +1016,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list> X f_list_from_list_end(final X generic_list_1, final X values, final Core.Type_int end) {
+    public <X extends Core.Type_list> X vx_list_from_list_end(final X generic_list_1, final X values, final Core.Type_int end) {
       return Collection.f_list_from_list_end(generic_list_1, values, end);
     }
 
@@ -1041,7 +1040,7 @@ public final class Collection {
    * (func list<-list-filter)
    */
   public static interface Func_list_from_list_filter extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_filter(final X generic_any_1, final Y vallist, final Core.Func_any_from_any fn_filter);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filter(final X generic_any_1, final Y vallist, final Core.Func_any_from_any fn_filter);
   }
 
   public static class Class_list_from_list_filter extends Core.Class_base implements Func_list_from_list_filter {
@@ -1099,7 +1098,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_filter(final X generic_list_1, final Y vallist, final Core.Func_any_from_any fn_filter) {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filter(final X generic_list_1, final Y vallist, final Core.Func_any_from_any fn_filter) {
       return Collection.f_list_from_list_filter(generic_list_1, vallist, fn_filter);
     }
 
@@ -1123,7 +1122,7 @@ public final class Collection {
    * (func list<-list-filtertypes)
    */
   public static interface Func_list_from_list_filtertypes extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_filtertypes(final X generic_any_1, final Y vallist, final Core.Type_typelist filtertypes);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filtertypes(final X generic_any_1, final Y vallist, final Core.Type_typelist filtertypes);
   }
 
   public static class Class_list_from_list_filtertypes extends Core.Class_base implements Func_list_from_list_filtertypes {
@@ -1181,7 +1180,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_filtertypes(final X generic_list_1, final Y vallist, final Core.Type_typelist filtertypes) {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filtertypes(final X generic_list_1, final Y vallist, final Core.Type_typelist filtertypes) {
       return Collection.f_list_from_list_filtertypes(generic_list_1, vallist, filtertypes);
     }
 
@@ -1217,7 +1216,7 @@ public final class Collection {
    * (func list<-list-start)
    */
   public static interface Func_list_from_list_start extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list> X f_list_from_list_start(final X generic_any_1, final X values, final Core.Type_int start);
+    public <X extends Core.Type_list> X vx_list_from_list_start(final X generic_any_1, final X values, final Core.Type_int start);
   }
 
   public static class Class_list_from_list_start extends Core.Class_base implements Func_list_from_list_start {
@@ -1275,7 +1274,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list> X f_list_from_list_start(final X generic_list_1, final X values, final Core.Type_int start) {
+    public <X extends Core.Type_list> X vx_list_from_list_start(final X generic_list_1, final X values, final Core.Type_int start) {
       return Collection.f_list_from_list_start(generic_list_1, values, start);
     }
 
@@ -1305,7 +1304,7 @@ public final class Collection {
    * (func list<-list-start-end)
    */
   public static interface Func_list_from_list_start_end extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list> X f_list_from_list_start_end(final X generic_any_1, final X values, final Core.Type_int start, final Core.Type_int end);
+    public <X extends Core.Type_list> X vx_list_from_list_start_end(final X generic_any_1, final X values, final Core.Type_int start, final Core.Type_int end);
   }
 
   public static class Class_list_from_list_start_end extends Core.Class_base implements Func_list_from_list_start_end {
@@ -1364,7 +1363,7 @@ public final class Collection {
     }
 
     @Override
-    public <X extends Core.Type_list> X f_list_from_list_start_end(final X generic_list_1, final X values, final Core.Type_int start, final Core.Type_int end) {
+    public <X extends Core.Type_list> X vx_list_from_list_start_end(final X generic_list_1, final X values, final Core.Type_int start, final Core.Type_int end) {
       return Collection.f_list_from_list_start_end(generic_list_1, values, start, end);
     }
 

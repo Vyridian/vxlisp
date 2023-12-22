@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-
 public final class State {
 
 
@@ -100,6 +99,9 @@ public final class State {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -150,7 +152,7 @@ public final class State {
    * (func change)
    */
   public static interface Func_change extends Core.Func_any_from_any {
-    public Core.Type_boolean f_change(final State.Type_value_map valuemap);
+    public Core.Type_boolean vx_change(final State.Type_value_map valuemap);
   }
 
   public static class Class_change extends Core.Class_base implements Func_change {
@@ -202,7 +204,7 @@ public final class State {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       State.Type_value_map inputval = (State.Type_value_map)value;
       Core.Type_any outputval = State.f_change(inputval);
@@ -218,7 +220,7 @@ public final class State {
     }
 
     @Override
-    public Core.Type_boolean f_change(final State.Type_value_map valuemap) {
+    public Core.Type_boolean vx_change(final State.Type_value_map valuemap) {
       return State.f_change(valuemap);
     }
 
@@ -239,7 +241,7 @@ public final class State {
    * (func register)
    */
   public static interface Func_register extends Core.Func_any_from_any {
-    public Core.Type_boolean f_register(final Core.Type_statelistener listener);
+    public Core.Type_boolean vx_register(final Core.Type_statelistener listener);
   }
 
   public static class Class_register extends Core.Class_base implements Func_register {
@@ -291,7 +293,7 @@ public final class State {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_statelistener inputval = (Core.Type_statelistener)value;
       Core.Type_any outputval = State.f_register(inputval);
@@ -307,7 +309,7 @@ public final class State {
     }
 
     @Override
-    public Core.Type_boolean f_register(final Core.Type_statelistener listener) {
+    public Core.Type_boolean vx_register(final Core.Type_statelistener listener) {
       return State.f_register(listener);
     }
 

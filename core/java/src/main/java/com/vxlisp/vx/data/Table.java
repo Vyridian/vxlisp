@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import com.vxlisp.vx.*;
 
-
 public final class Table {
 
 
@@ -394,6 +393,9 @@ public final class Table {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }
@@ -1463,6 +1465,9 @@ public final class Table {
           }
           if (valany != null) {
             ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
             mapval.put(key, valany);
             key = "";
           }

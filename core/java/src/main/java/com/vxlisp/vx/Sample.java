@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
 public final class Sample {
 
 
@@ -219,7 +218,7 @@ public final class Sample {
    * (func main)
    */
   public static interface Func_main extends Core.Type_func, Core.Type_replfunc {
-    public void f_main();
+    public void vx_main();
   }
 
   public static class Class_main extends Core.Class_base implements Func_main {
@@ -274,7 +273,7 @@ public final class Sample {
     }
 
     @Override
-    public void f_main() {Sample.f_main();
+    public void vx_main() {Sample.f_main();
     }
 
   }
@@ -294,7 +293,7 @@ public final class Sample {
    * (func myfunc)
    */
   public static interface Func_myfunc extends Core.Func_any_from_any {
-    public Core.Type_int f_myfunc(final Core.Type_int myarg);
+    public Core.Type_int vx_myfunc(final Core.Type_int myarg);
   }
 
   public static class Class_myfunc extends Core.Class_base implements Func_myfunc {
@@ -346,7 +345,7 @@ public final class Sample {
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_int inputval = (Core.Type_int)value;
       Core.Type_any outputval = Sample.f_myfunc(inputval);
@@ -362,7 +361,7 @@ public final class Sample {
     }
 
     @Override
-    public Core.Type_int f_myfunc(final Core.Type_int myarg) {
+    public Core.Type_int vx_myfunc(final Core.Type_int myarg) {
       return Sample.f_myfunc(myarg);
     }
 

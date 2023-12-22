@@ -1753,6 +1753,39 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "map<-map"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :a \"a1\"
+  :b \"b2\")
+ (map<-map : stringmap
+  (stringmap
+   :a \"1\"
+   :b \"2\")
+  (fn : string
+   [key : string
+    val : string]
+   (string key val))))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "a1"
+            :b "b2")
+          :actual
+           (stringmap
+            :a "a1"
+            :b "b2")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "new"
      :describelist
       (vx/test/testdescribelist
@@ -2251,6 +2284,7 @@
       :log_1 0
       :main 0
       :map<-list 1
+      :map<-map 1
       :mempool-addref 0
       :mempool-release 0
       :mempool-removeref 0
@@ -2375,10 +2409,10 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 155)
+      :total 156)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 155)
+      :total 156)
     :constnums
      (vx/test/testcoveragenums
       :pct 14
@@ -2387,19 +2421,19 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 86
-      :tests 207
-      :total 239)
+      :tests 208
+      :total 240)
     :funcnums
      (vx/test/testcoveragenums
       :pct 46
-      :tests 61
-      :total 131)
+      :tests 62
+      :total 132)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
       :pct 31
-      :tests 67
-      :total 215)
+      :tests 68
+      :total 216)
     :typenums
      (vx/test/testcoveragenums
       :pct 5
@@ -2679,44 +2713,49 @@
       :delimcsv 0)
     :funcmap
      (intmap
+      :csv-read<-file 0
+      :csv<-file 0
+      :csv<-string 0
       :csv<-textblock 0
       :csvrows<-textblock 0
+      :stringmap<-csv 0
       :textblock-csv<-string 1)
     :testpkg "vx/data/csv"
     :typemap
      (intmap
       :csv 0
+      :csvrowmap 0
       :csvrows 0))
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :constnums
      (vx/test/testcoveragenums
       :total 1)
     :docnums
      (vx/test/testcoveragenums
-      :pct 33
-      :tests 2
-      :total 6)
+      :pct 63
+      :tests 7
+      :total 11)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 33
+      :pct 14
       :tests 1
-      :total 3)
+      :total 7)
     :testpkg "vx/data/csv"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 16
+      :pct 9
       :tests 1
-      :total 6)
+      :total 11)
     :typenums
      (vx/test/testcoveragenums
-      :total 2))
+      :total 3))
   :passfail true
   :testpkg "vx/data/csv")
  (vx/test/testpackage
@@ -12739,6 +12778,9 @@
       :delimxmlequal 0)
     :funcmap
      (intmap
+      :xml-read<-file 0
+      :xml<-file 0
+      :xml<-string 0
       :xml<-textblock 0)
     :testpkg "vx/data/xml"
     :typemap
@@ -12751,23 +12793,25 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 4)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 4)
     :constnums
      (vx/test/testcoveragenums
       :total 2)
     :docnums
      (vx/test/testcoveragenums
-      :total 7)
+      :pct 40
+      :tests 4
+      :total 10)
     :funcnums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 4)
     :testpkg "vx/data/xml"
     :totalnums
      (vx/test/testcoveragenums
-      :total 7)
+      :total 10)
     :typenums
      (vx/test/testcoveragenums
       :total 4))
@@ -14274,6 +14318,45 @@
       :total 11))
   :passfail true
   :testpkg "vx/test")
+ (vx/test/testpackage
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :funcmap
+     (intmap
+      :translate 0
+      :translate_1 0
+      :translation-load 0
+      :translation-load-session 0
+      :translation<-context 0)
+    :testpkg "vx/translate")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 5)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 5)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 5
+      :total 5)
+    :funcnums
+     (vx/test/testcoveragenums
+      :total 4)
+    :testpkg "vx/translate"
+    :totalnums
+     (vx/test/testcoveragenums
+      :total 4)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/translate")
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist

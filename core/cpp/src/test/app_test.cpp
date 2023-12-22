@@ -17,6 +17,7 @@
 #include "vx/sample_test.hpp"
 #include "vx/state_test.hpp"
 #include "vx/test_test.hpp"
+#include "vx/translate_test.hpp"
 #include "vx/type_test.hpp"
 #include "vx/web/html_test.hpp"
 #include "vx/web/htmldoc_test.hpp"
@@ -42,6 +43,7 @@ vx_test::Type_testpackagelist testsuite(vx_core::Type_context context) {
     vx_sample_test::test_package(context),
     vx_state_test::test_package(context),
     vx_test_test::test_package(context),
+    vx_translate_test::test_package(context),
     vx_type_test::test_package(context),
     vx_web_html_test::test_package(context),
     vx_web_htmldoc_test::test_package(context),

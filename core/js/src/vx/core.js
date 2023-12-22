@@ -175,6 +175,33 @@ export default class vx_core {
     return output
   }
 
+  static vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value) {
+    let output = vx_core.f_empty(generic_list_1)
+    const fn = fn_any_from_key_value['vx_value']
+    if (fn) {
+      const entries = Object.entries(valuemap['vx_value'])
+      const values = entries.map(fn)
+      output = vx_core.f_new(generic_list_1, ...values)
+    }
+    return output
+  }
+
+  static vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value) {
+    let output = vx_core.f_empty(generic_map_1)
+    const fn = fn_any_from_key_value['vx_value']
+    if (fn) {
+      const entries = Object.entries(valuemap['vx_value'])
+      const values = []
+      for (const [key, value] of entries) {
+        const chgvalue = fn([key, value])
+        values.push(key)
+        values.push(chgvalue)
+      }
+      output = vx_core.f_new(generic_map_1, ...values)
+    }
+    return output
+  }
+
   static vx_new(type, values) {
     let output
     if (values.length == 1) {
@@ -3574,12 +3601,7 @@ export default class vx_core {
     const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
-    const fn = fn_any_from_key_value['vx_value']
-    if (fn) {
-      const entries = Object.entries(valuemap['vx_value'])
-      const values = entries.map(fn)
-      output = vx_core.f_new(generic_list_1, ...values)
-    }
+    output = vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)
     return output
   }
 
@@ -3681,7 +3703,7 @@ export default class vx_core {
 
   /**
    * @function map_from_list
-   * Returns a map from a list by applying a function to each key value.
+   * Returns a map from a list by applying a function to generate a key for each value.
    * @param  {typemap} generic
    * @param  {list} vallist
    * @param  {any_from_any} fn_any_from_any
@@ -3707,6 +3729,26 @@ export default class vx_core {
       vx_type: generic_map_1,
       vx_value: valmap
     }
+    return output
+  }
+
+  /**
+   * @function map_from_map
+   * Returns a map from a map by applying a function to each key value.
+   * @param  {typemap} generic
+   * @param  {map} valuemap
+   * @param  {any_from_key_value} fn_any_from_key_value
+   * @return {map-1}
+   */
+  static t_map_from_map = {}
+  static e_map_from_map = {vx_type: vx_core.t_map_from_map}
+
+  // (func map<-map)
+  static f_map_from_map(generic, valuemap, fn_any_from_key_value) {
+    const generic_any_1 = generic["any-1"]
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)
     return output
   }
 
@@ -4988,6 +5030,7 @@ export default class vx_core {
       "log_1": vx_core.e_log_1,
       "main": vx_core.e_main,
       "map<-list": vx_core.e_map_from_list,
+      "map<-map": vx_core.e_map_from_map,
       "mempool-addref": vx_core.e_mempool_addref,
       "mempool-release": vx_core.e_mempool_release,
       "mempool-removeref": vx_core.e_mempool_removeref,
@@ -5145,6 +5188,7 @@ export default class vx_core {
       "log_1": vx_core.t_log_1,
       "main": vx_core.t_main,
       "map<-list": vx_core.t_map_from_list,
+      "map<-map": vx_core.t_map_from_map,
       "mempool-addref": vx_core.t_mempool_addref,
       "mempool-release": vx_core.t_mempool_release,
       "mempool-removeref": vx_core.t_mempool_removeref,
@@ -9048,6 +9092,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_map_from_list
+    }
+
+    // (func map<-map)
+    vx_core.t_map_from_map['vx_type'] = vx_core.t_type
+    vx_core.t_map_from_map['vx_value'] = {
+      name          : "map<-map",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_map_from_map
     }
 
     // (func mempool-addref)

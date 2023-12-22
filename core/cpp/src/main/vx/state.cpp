@@ -36,6 +36,9 @@ namespace vx_state {
       vx_core::Type_any output = vx_core::e_any;
       const vx_state::Class_value_map* map = this;
       std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
       std::map<std::string, vx_core::Type_any> mapval = map->vx_p_map;
       output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_any);
       vx_core::vx_release_except(key, output);
@@ -84,17 +87,20 @@ namespace vx_state {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
       std::vector<std::string> keys;
       std::map<std::string, vx_core::Type_any> mapval;
-      std::string key = "";
+      std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (key == "") {
+        } else if (skey == "") {
           if (valsubtype == vx_core::t_string) {
             vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            key = valstring->vx_string();
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -103,9 +109,9 @@ namespace vx_state {
           vx_core::Type_any valany = valsub;
           if (valany) {
             ischanged = true;
-            mapval[key] = valany;
-            keys.push_back(key);
-            key = "";
+            mapval[skey] = valany;
+            keys.push_back(skey);
+            skey = "";
           }
         }
       }

@@ -1,6 +1,7 @@
 'strict mode'
 
 import vx_core from "../../vx/core.js"
+import vx_data_file from "../../vx/data/file.js"
 import vx_data_textblock from "../../vx/data/textblock.js"
 
 export default class vx_data_xml {
@@ -37,7 +38,75 @@ export default class vx_data_xml {
   static c_delimxmlequal = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/data/xml', name: 'delimxmlequal'}}
 
   /**
+   * @function xml_read_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   */
+  static t_xml_read_from_file = {}
+  static e_xml_read_from_file = {vx_type: vx_data_xml.t_xml_read_from_file}
+
+  // (func xml-read<-file)
+  static f_xml_read_from_file(context, file) {
+    let output = vx_data_xml.e_xml
+    output = vx_core.f_let(
+      {"any-1": vx_data_xml.t_xml},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const loaded = vx_data_file.f_file_read_from_file(context, file)
+        return vx_data_xml.f_xml_from_file(loaded)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function xml_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   */
+  static t_xml_from_file = {}
+  static e_xml_from_file = {vx_type: vx_data_xml.t_xml_from_file}
+
+  // (func xml<-file)
+  static f_xml_from_file(file) {
+    let output = vx_data_xml.e_xml
+    output = vx_core.f_let(
+      {"any-1": vx_data_xml.t_xml},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":text")
+        return vx_data_xml.f_xml_from_string(text)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function xml_from_string
+   * Returns a parsed xml from a string.
+   * @param  {string} text
+   * @return {xml}
+   */
+  static t_xml_from_string = {}
+  static e_xml_from_string = {vx_type: vx_data_xml.t_xml_from_string}
+
+  // (func xml<-string)
+  static f_xml_from_string(text) {
+    let output = vx_data_xml.e_xml
+    output = vx_data_xml.f_xml_from_textblock(
+      vx_data_textblock.f_textblock_parse_from_string_delim(
+        text,
+        vx_data_xml.c_delimxml
+      )
+    )
+    return output
+  }
+
+  /**
    * @function xml_from_textblock
+   * Returns a parsed xml from a textblock.
    * @param  {textblock} textblock
    * @return {xml}
    */
@@ -70,9 +139,15 @@ export default class vx_data_xml {
       "xmlnode": vx_data_xml.e_xmlnode,
       "xmlnodelist": vx_data_xml.e_xmlnodelist,
       "xmlpropmap": vx_data_xml.e_xmlpropmap,
+      "xml-read<-file": vx_data_xml.e_xml_read_from_file,
+      "xml<-file": vx_data_xml.e_xml_from_file,
+      "xml<-string": vx_data_xml.e_xml_from_string,
       "xml<-textblock": vx_data_xml.e_xml_from_textblock
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "xml-read<-file": vx_data_xml.t_xml_read_from_file,
+      "xml<-file": vx_data_xml.t_xml_from_file,
+      "xml<-string": vx_data_xml.t_xml_from_string,
       "xml<-textblock": vx_data_xml.t_xml_from_textblock
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
@@ -212,6 +287,7 @@ export default class vx_data_xml {
           vx_core.f_new(
             vx_data_textblock.t_delimlist,
             vx_data_xml.c_delimxmlequal,
+            vx_data_textblock.c_delimwhitespace,
             vx_data_textblock.c_delimquote
           )
         )
@@ -224,6 +300,63 @@ export default class vx_data_xml {
       ":starttext",
       "="
     ))
+
+    // (func xml-read<-file)
+    vx_data_xml.t_xml_read_from_file['vx_type'] = vx_core.t_type
+    vx_data_xml.t_xml_read_from_file['vx_value'] = {
+      name          : "xml-read<-file",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_read_from_file
+    }
+
+    // (func xml<-file)
+    vx_data_xml.t_xml_from_file['vx_type'] = vx_core.t_type
+    vx_data_xml.t_xml_from_file['vx_value'] = {
+      name          : "xml<-file",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_from_file
+    }
+
+    // (func xml<-string)
+    vx_data_xml.t_xml_from_string['vx_type'] = vx_core.t_type
+    vx_data_xml.t_xml_from_string['vx_value'] = {
+      name          : "xml<-string",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_from_string
+    }
 
     // (func xml<-textblock)
     vx_data_xml.t_xml_from_textblock['vx_type'] = vx_core.t_type

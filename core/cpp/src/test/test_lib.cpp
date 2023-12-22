@@ -182,7 +182,7 @@ namespace test_lib {
     vx_test::Type_testresult testresult_resolved = vx_core::vx_sync_from_async(vx_test::t_testresult, async_testresult);
     vx_test::Type_testresult output = test_lib::run_testresult(testpkg, testname, message, testresult_resolved);
     vx_core::vx_release_except(testresult_resolved, output);
-		return output;
+    return output;
   }
 
   vx_test::Type_testdescribe run_testdescribe(std::string testpkg, std::string casename, vx_test::Type_testdescribe testdescribe) {
@@ -195,7 +195,7 @@ namespace test_lib {
       vx_core::vx_new_string(":testresult"), testresult_resolved
     });
     vx_core::vx_release_one_except(testdescribe, output);
-		return output;
+    return output;
   }
 
   // Blocking
@@ -204,7 +204,7 @@ namespace test_lib {
     vx_core::vx_Type_async async_testdescribe = vx_test::f_resolve_testdescribe(testdescribe);
     vx_test::Type_testdescribe testdescribe_resolved = vx_core::vx_sync_from_async(vx_test::t_testdescribe, async_testdescribe);
     vx_test::Type_testdescribe output = test_lib::run_testdescribe(testpkg, casename, testdescribe_resolved);
-		return output;
+    return output;
   }
 
   vx_test::Type_testdescribelist run_testdescribelist(std::string testpkg, std::string casename, vx_test::Type_testdescribelist testdescribelist) {
@@ -213,12 +213,12 @@ namespace test_lib {
     vx_core::vx_Type_listany listtestdescribe_resolved;
     for (vx_test::Type_testdescribe testdescribe : listtestdescribe) {
       vx_test::Type_testdescribe testdescribe_resolved = test_lib::run_testdescribe(testpkg, casename, testdescribe);
-			listtestdescribe_resolved.push_back(testdescribe_resolved);
+      listtestdescribe_resolved.push_back(testdescribe_resolved);
     }
-		vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
-			vx_test::t_testdescribelist,
-			testdescribelist->vx_new_from_list(listtestdescribe_resolved)
-		);
+    vx_test::Type_testdescribelist output = vx_core::vx_any_from_any(
+      vx_test::t_testdescribelist,
+      testdescribelist->vx_new_from_list(listtestdescribe_resolved)
+    );
     vx_core::vx_release_one_except(testdescribelist, output);
     return output;
   }
@@ -242,7 +242,7 @@ namespace test_lib {
       vx_core::vx_new_string(":describelist"), testdescribelist_resolved
     });
     vx_core::vx_release_one_except(testcase, output);
-		return output;
+    return output;
   }
 
   // Blocking
@@ -251,7 +251,7 @@ namespace test_lib {
     vx_core::vx_Type_async async_testcase = vx_test::f_resolve_testcase(testcase);
     vx_test::Type_testcase testcase_resolved = vx_core::vx_sync_from_async(vx_test::t_testcase, async_testcase);
     vx_test::Type_testcase output = test_lib::run_testcase(testcase_resolved);
-		return output;
+    return output;
   }
 
 	vx_test::Type_testcaselist run_testcaselist(vx_test::Type_testcaselist testcaselist) {
@@ -260,12 +260,12 @@ namespace test_lib {
     vx_core::vx_Type_listany listtestcase_resolved;
     for (vx_test::Type_testcase testcase : listtestcase) {
       vx_test::Type_testcase testcase_resolved = test_lib::run_testcase(testcase);
-			listtestcase_resolved.push_back(testcase_resolved);
+      listtestcase_resolved.push_back(testcase_resolved);
     }
-		vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
-			vx_test::t_testcaselist,
-			testcaselist->vx_new_from_list(listtestcase_resolved)
-		);
+    vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
+      vx_test::t_testcaselist,
+      testcaselist->vx_new_from_list(listtestcase_resolved)
+    );
     vx_core::vx_release_one_except(testcaselist, output);
     return output;
   }
@@ -283,11 +283,11 @@ namespace test_lib {
     vx_core::vx_reserve(testpackage);
     vx_test::Type_testcaselist testcaselist = testpackage->caselist();
     vx_test::Type_testcaselist testcaselist_resolved = test_lib::run_testcaselist(testcaselist);
-		vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {
+    vx_test::Type_testpackage output = vx_core::vx_copy(testpackage, {
       vx_core::vx_new_string(":caselist"), testcaselist_resolved
     });
     vx_core::vx_release_one_except(testpackage, output);
-		return output;
+    return output;
   }
 
   // Blocking
@@ -296,7 +296,7 @@ namespace test_lib {
     vx_core::vx_Type_async async_testpackage = vx_test::f_resolve_testpackage(testpackage);
     vx_test::Type_testpackage testpackage_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackage, async_testpackage);
     vx_test::Type_testpackage output = test_lib::run_testpackage(testpackage_resolved);
-		return output;
+    return output;
   }
 
   vx_test::Type_testpackagelist run_testpackagelist(vx_test::Type_testpackagelist testpackagelist) {
@@ -305,12 +305,12 @@ namespace test_lib {
     vx_core::vx_Type_listany listtestpackage_resolved;
     for (vx_test::Type_testpackage testpackage : listtestpackage) {
       vx_test::Type_testpackage testpackage_resolved = test_lib::run_testpackage(testpackage);
-			listtestpackage_resolved.push_back(testpackage_resolved);
+      listtestpackage_resolved.push_back(testpackage_resolved);
     }
-		vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
-			vx_test::t_testpackagelist,
-			testpackagelist->vx_new_from_list(listtestpackage_resolved)
-		);
+    vx_test::Type_testpackagelist output = vx_core::vx_any_from_any(
+      vx_test::t_testpackagelist,
+      testpackagelist->vx_new_from_list(listtestpackage_resolved)
+    );
     vx_core::vx_release_one_except(testpackagelist, output);
     return output;
   }
@@ -321,7 +321,7 @@ namespace test_lib {
     vx_core::vx_Type_async async_testpackagelist = vx_test::f_resolve_testpackagelist(testpackagelist);
     vx_test::Type_testpackagelist testpackagelist_resolved = vx_core::vx_sync_from_async(vx_test::t_testpackagelist, async_testpackagelist);
     vx_test::Type_testpackagelist output = test_lib::run_testpackagelist(testpackagelist_resolved);
-		return output;
+    return output;
   }
 
   vx_core::Type_boolean write_html(vx_web_html::Type_html htmlnode) {
@@ -839,7 +839,7 @@ namespace test_lib {
                 vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
                 vx_core::vx_ref_plus(passfail);
                 vx_test::Type_testresult output_1 = vx_core::f_copy(
-									vx_test::t_testresult,
+                  vx_test::t_testresult,
                   testresult,
                   vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":passfail"),
@@ -916,7 +916,7 @@ namespace test_lib {
               vx_core::Type_boolean passfail = vx_core::f_eq(expected, actual);
               vx_core::vx_ref_plus(passfail);
               vx_test::Type_testresult output_1 = vx_core::f_copy(
-								vx_test::t_testresult,
+                vx_test::t_testresult,
                 testresult,
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_string(":passfail"),
