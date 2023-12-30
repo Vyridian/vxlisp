@@ -1379,6 +1379,47 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_copy(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "copy",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy (stringmap :a \"1\")\n  :b \"2\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("1"),
+                  Core.vx_new_string(":b"),
+                  Core.vx_new_string("2")
+                )
+              ),
+              Core.f_copy(
+                Core.f_new(
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("1")
+                  )
+                ),
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":b"),
+                  Core.vx_new_string("2")
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_empty(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -2626,6 +2667,7 @@ public final class CoreTest {
       CoreTest.f_compare(context),
       CoreTest.f_contains(context),
       CoreTest.f_contains_1(context),
+      CoreTest.f_copy(context),
       CoreTest.f_empty(context),
       CoreTest.f_first_from_list(context),
       CoreTest.f_first_from_list_any_from_any(context),
@@ -2663,12 +2705,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 208, ":total", 240), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 62, ":total", 132), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 156), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 156), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 68, ":total", 216), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 70)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 212, ":total", 244), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 63, ":total", 132), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 158), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 158), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 69, ":total", 218), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 72)
     );
   }
 
@@ -2740,6 +2782,8 @@ public final class CoreTest {
         ":thenelse", 0,
         ":thenelselist", 0,
         ":translation", 0,
+        ":translationlist", 0,
+        ":translationmap", 0,
         ":type", 0,
         ":typedef", 0,
         ":typelist", 0,
@@ -2834,7 +2878,7 @@ public final class CoreTest {
         ":contains", 2,
         ":contains_1", 3,
         ":context-main", 0,
-        ":copy", 0,
+        ":copy", 1,
         ":else", 0,
         ":empty", 3,
         ":extends<-any", 0,
@@ -2879,6 +2923,8 @@ public final class CoreTest {
         ":mempool-removerefchildren", 0,
         ":mempool-reserve", 0,
         ":msg<-error", 0,
+        ":msg<-error_1", 0,
+        ":msg<-error_2", 0,
         ":msg<-warning", 0,
         ":msgblock<-msgblock-msg", 0,
         ":msgblock<-msgblock-msgblock", 0,

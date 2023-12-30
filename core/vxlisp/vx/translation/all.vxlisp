@@ -1,0 +1,26 @@
+(package vx/translation/all
+ :libs (lib trn :path vx/translate)
+       (lib en  :path vx/translation/en)
+       (lib es  :path vx/translation/es)
+ :doc "Translation utilities")
+
+(func context-all : context
+ [args : anylist :...]
+ (context
+  :session
+   (session
+    :translation (translation-en)
+    :translationmap (translationmap-all)))
+ :doc "Returns the default context for app main execution. Arguments come from the command line.")
+
+(func translationmap-all : translationmap
+ (trn/translationmap<-translations
+  (en/translation-en)
+  (es/translation-es))
+ :test (test
+        "Hola"
+        (trn/translate<-translationmap-name-string
+         (translationmap-all)
+         "es"
+         "Hello"))
+ :doc "Returns a translationmap with all translations.")

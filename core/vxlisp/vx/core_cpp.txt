@@ -422,10 +422,9 @@ let-async
     return output;
   }
 
-  // vx_boolean_contains_from_set_val(set<T>, val)
-  template <class T> static bool vx_boolean_contains_from_set_val(std::set<T> set, T val) {
-    const bool output = set.find(val) != set.end();
-    return output;
+  // vx_boolean_from_list_find(list<T>, T find)
+  template <class T> static bool vx_boolean_from_list_find(std::vector<T> list, T find) {
+    return std::find(list.begin(), list.end(), find) != list.end();
   }
 
   // vx_copy(T, args)

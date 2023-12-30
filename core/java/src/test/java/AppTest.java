@@ -1,8 +1,28 @@
 
+import com.vxlisp.vx.Core;
+import com.vxlisp.vx.CollectionTest;
+import com.vxlisp.vx.CoreTest;
+import com.vxlisp.vx.data.CsvTest;
+import com.vxlisp.vx.data.DbTest;
+import com.vxlisp.vx.data.FileTest;
+import com.vxlisp.vx.data.TableTest;
+import com.vxlisp.vx.data.TextblockTest;
+import com.vxlisp.vx.data.TreeTest;
+import com.vxlisp.vx.data.XmlTest;
+import com.vxlisp.vx.EventTest;
+import com.vxlisp.vx.ReplTest;
+import com.vxlisp.vx.SampleTest;
+import com.vxlisp.vx.StateTest;
+import com.vxlisp.vx.TestTest;
+import com.vxlisp.vx.TranslateTest;
+import com.vxlisp.vx.translation.AllTest;
+import com.vxlisp.vx.translation.EnTest;
+import com.vxlisp.vx.translation.EsTest;
+import com.vxlisp.vx.TypeTest;
+import com.vxlisp.vx.web.HtmlTest;
+import com.vxlisp.vx.web.HtmldocTest;
+import com.vxlisp.vx.web.HttpTest;
 
-import com.vxlisp.vx.data.*;
-import com.vxlisp.vx.web.*;
-import com.vxlisp.vx.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -135,6 +155,30 @@ public class AppTest {
 
 
   @Test
+  @DisplayName("vx/translation/all")
+  void test_vx_translation_all() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = AllTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
+  @DisplayName("vx/translation/en")
+  void test_vx_translation_en() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = EnTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
+  @DisplayName("vx/translation/es")
+  void test_vx_translation_es() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = EsTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
   @DisplayName("vx/type")
   void test_vx_type() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = TypeTest.test_package(context);
@@ -185,6 +229,9 @@ public class AppTest {
     StateTest.test_package(context),
     TestTest.test_package(context),
     TranslateTest.test_package(context),
+    AllTest.test_package(context),
+    EnTest.test_package(context),
+    EsTest.test_package(context),
     TypeTest.test_package(context),
     HtmlTest.test_package(context),
     HtmldocTest.test_package(context),

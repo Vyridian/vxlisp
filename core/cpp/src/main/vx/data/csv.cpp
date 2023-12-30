@@ -289,8 +289,8 @@ namespace vx_data_csv {
       vx_data_csv::Type_csvrowmap valmap = vx_core::vx_any_from_any(vx_data_csv::t_csvrowmap, copyval);
       output = valmap;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::vector<std::string> keys;
-      std::map<std::string, vx_core::Type_stringlist> mapval;
+      std::map<std::string, vx_core::Type_stringlist> mapval = valmap->vx_mapstringlist();
+      std::vector<std::string> keys = valmap->vx_p_keys;
       std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -322,12 +322,14 @@ namespace vx_data_csv {
           if (valany) {
             ischanged = true;
             mapval[skey] = valany;
-            keys.push_back(skey);
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
             skey = "";
           }
         }
       }
-      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_data_csv::Class_csvrowmap();
         output->vx_p_keys = keys;
         output->vx_p_map = mapval;

@@ -870,16 +870,21 @@
                                origsingle
                                (case :whitespace
                                 (let : string
-                                 [text2 : string := (type/string<-string-start
-                                                     text pos)
+                                 [text2 : string  := (type/string<-string-start
+                                                      text pos)
                                   pos2   : int    := (type/int<-string-findkeyword
-                                                     text2
-                                                     :nonwhitespace)
+                                                      text2
+                                                      :nonwhitespace)
                                   pos3   : int    := (if : int
-                                                      (= 0 pos2)
-                                                      (length<-string
-                                                       text2)
-                                                      pos2)]
+                                                      (then
+                                                       (= 0 pos2)
+                                                       (length<-string
+                                                        text2))
+                                                      (then
+                                                       (= pos2 pos)
+                                                       pos2)
+                                                      (else
+                                                       (-1 pos2)))]
                                  (type/string<-string-start-end
                                   text
                                   pos

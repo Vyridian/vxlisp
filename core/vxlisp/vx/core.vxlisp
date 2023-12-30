@@ -315,6 +315,8 @@
 
 (type msg : struct
  :properties [code     : string  :doc "Message Code"
+              detail   : any     :doc "Message Detail"
+              path     : string  :doc "Message Path"
               severity : int     :doc "Message Severity"
               text     : string  :doc "Message Text"]
  :create
@@ -403,11 +405,12 @@
  :doc        "Security rules")
 
 (type session : struct
- :properties [user        : user
-              connectlist : connectlist
-              connectmap  : connectmap
-              locale      : locale
-              translation : translation]
+ :properties [user           : user
+              connectlist    : connectlist
+              connectmap     : connectmap
+              locale         : locale
+              translation    : translation
+              translationmap : translationmap]
  :doc        "Session")
 
 (type setting : struct
@@ -470,8 +473,17 @@
  :allowtypes [thenelse])
 
 (type translation : struct
- :properties [translationmap : stringmap]
+ :properties [name    : string
+              wordmap : stringmap]
  :doc "i18 language translation.")
+
+(type translationlist : list
+ :allowtypes [translation]
+ :doc "i18 language translation list.")
+
+(type translationmap : map
+ :allowtypes [translation]
+ :doc "i18 language translation map.")
 
 (type type : type
  :doc     "Original Type Class")
@@ -1537,6 +1549,14 @@
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));")
+ :bigospace :n
+ :bigotime :n
+ :test (test
+        (stringmap
+         :a "1"
+         :b "2")
+        (copy (stringmap :a "1")
+         :b "2"))
  :doc "Returns a copy of a given value with the given values added or updated.")
 
 (func else : thenelse
@@ -2336,6 +2356,24 @@
   :text error)
  :doc "Returns a msg from error string")
 
+(func msg<-error : msg
+ [code   : string
+  detail : any]
+ (msg
+  :code code
+  :severity msg-error)
+ :doc "Returns a msg from error code and detail")
+
+(func msg<-error : msg
+ [path   : string
+  code   : string
+  detail : any]
+ (msg
+  :code code
+  :path path
+  :severity msg-error)
+ :doc "Returns a msg from error path code and detail")
+
 (func msg<-warning : msg
  [warning : string]
  (msg
@@ -2454,8 +2492,7 @@
    [reduce  : boolean
     current : boolean
     next    : boolean]
-   (or reduce (or current next)))
- )
+   (or reduce (or current next))))
  :doc  "Returns true if any value is true"
  :test (test-true (or false true false))
        (test-false (or false false false)))

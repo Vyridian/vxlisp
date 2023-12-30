@@ -192,25 +192,6 @@ output : list-1 := (empty list-1)
          3))
  :doc "Returns a sub list from positions 0 to end.")
 
-(func list<-list-filtertypes : list-1
- [vallist     : list-2
-  filtertypes : typelist :...]
- (list<-list-filter
-  vallist
-  (fn : any
-   [val : any]
-   (if
-    (is-type<-any-typelist val filtertypes)
-    val)))
- :test (test
-        (list
-         "a" 1 "b" "c")
-        (list<-list-filtertypes : list
-         (list
-          "a" 1 "b" "c" 4.5)
-         string int))
- :doc "Filter List to only include matching types")
-
 (func list<-list-filter : list-1
  [vallist   : list-2
   fn-filter : any<-any]
@@ -235,6 +216,25 @@ output : list-1 := (empty list-1)
             (is-string val)
             (string val "1"))))))
  :doc "Filter List to only include non-empty values")
+
+(func list<-list-filtertypes : list-1
+ [vallist     : list-2
+  filtertypes : typelist :...]
+ (list<-list-filter
+  vallist
+  (fn : any
+   [val : any]
+   (if
+    (is-type<-any-typelist val filtertypes)
+    val)))
+ :test (test
+        (list
+         "a" 1 "b" "c")
+        (list<-list-filtertypes : list
+         (list
+          "a" 1 "b" "c" 4.5)
+         string int))
+ :doc "Filter List to only include matching types")
 
 (func list<-list-start : list-1
  [values : list-1

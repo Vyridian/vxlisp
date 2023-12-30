@@ -1,0 +1,29 @@
+(package vx/translation/en
+ :libs (lib trn :path vx/translate)
+ :doc "English Translation Stub")
+
+(func context-en : context
+ [args : anylist :...]
+ (context
+  :session
+   (session
+    :translation (translation-en)))
+ :doc "Returns the default context for app main execution. Arguments come from the command line.")
+
+(func translation-en : translation
+ (translation
+  :name "en"
+  :wordmap (words))
+ :test (test
+        "Hello"
+        (trn/translate<-translation-string
+         (translation-en)
+         "Hello"))
+ :doc "Returns translation data")
+
+(func words : stringmap
+ (stringmap
+"Hello" "Hello"
+"World" "World"
+ )
+ :doc "Word Translation")

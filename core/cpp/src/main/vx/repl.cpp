@@ -2278,7 +2278,7 @@ namespace vx_repl {
             vx_repl::Type_repl output_1 = vx_core::f_let(
               vx_repl::t_repl,
               vx_core::t_any_from_func->vx_fn_new({argmap, text}, [argmap, text]() {
-                vx_core::Type_any arg = vx_core::f_any_from_map(vx_core::t_arg, argmap, text);
+                vx_core::Type_any arg = vx_core::f_any_from_map(vx_core::t_any, argmap, text);
                 vx_core::vx_ref_plus(arg);
                 vx_repl::Type_repl output_1 = vx_core::f_if_2(
                   vx_repl::t_repl,
@@ -2926,7 +2926,7 @@ namespace vx_repl {
             vx_core::t_any_from_func->vx_fn_new({pkg, name}, [pkg, name]() {
               vx_core::Type_funcmap funcmap = pkg->funcmap();
               vx_core::vx_ref_plus(funcmap);
-              vx_core::Type_any funcval = vx_core::f_any_from_map(vx_core::t_func, funcmap, name);
+              vx_core::Type_any funcval = vx_core::f_any_from_map(vx_core::t_any, funcmap, name);
               vx_core::vx_ref_plus(funcval);
               vx_core::Type_any output_1 = vx_core::f_if_1(
                 vx_core::t_any,

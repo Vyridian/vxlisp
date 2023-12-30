@@ -4957,6 +4957,8 @@ public final class Core {
     public Core.Type_msg vx_type();
     public Core.Type_typedef vx_typedef();
     public Core.Type_string code();
+    public Core.Type_any detail();
+    public Core.Type_string path();
     public Core.Type_int severity();
     public Core.Type_string text();
   }
@@ -4970,6 +4972,20 @@ public final class Core {
     @Override
     public Core.Type_string code() {
       return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
+    }
+
+    protected Core.Type_any vx_p_detail;
+
+    @Override
+    public Core.Type_any detail() {
+      return this.vx_p_detail == null ? Core.e_any : this.vx_p_detail;
+    }
+
+    protected Core.Type_string vx_p_path;
+
+    @Override
+    public Core.Type_string path() {
+      return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
     }
 
     protected Core.Type_int vx_p_severity;
@@ -4994,6 +5010,12 @@ public final class Core {
       case ":code":
         output = this.code();
         break;
+      case ":detail":
+        output = this.detail();
+        break;
+      case ":path":
+        output = this.path();
+        break;
       case ":severity":
         output = this.severity();
         break;
@@ -5008,6 +5030,8 @@ public final class Core {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":code", this.code());
+      output.put(":detail", this.detail());
+      output.put(":path", this.path());
       output.put(":severity", this.severity());
       output.put(":text", this.text());
       return Core.immutablemap(output);
@@ -5026,6 +5050,8 @@ public final class Core {
         ischanged = true;
       }
       Core.Type_string vx_p_code = val.code();
+      Core.Type_any vx_p_detail = val.detail();
+      Core.Type_string vx_p_path = val.path();
       Core.Type_int vx_p_severity = val.severity();
       Core.Type_string vx_p_text = val.text();
       String key = "";
@@ -5052,6 +5078,29 @@ public final class Core {
               vx_p_code = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new msg :code " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":detail":
+            if (valsub == vx_p_detail) {
+            } else if (valsub instanceof Core.Type_any) {
+              ischanged = true;
+              vx_p_detail = (Core.Type_any)valsub;
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new msg :detail " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":path":
+            if (valsub == vx_p_path) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_path = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_path = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new msg :path " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -7112,6 +7161,7 @@ public final class Core {
     public Core.Type_connectmap connectmap();
     public Core.Type_locale locale();
     public Core.Type_translation translation();
+    public Core.Type_translationmap translationmap();
   }
 
   public static class Class_session extends Core.Class_base implements Type_session {
@@ -7151,6 +7201,13 @@ public final class Core {
       return this.vx_p_translation == null ? Core.e_translation : this.vx_p_translation;
     }
 
+    protected Core.Type_translationmap vx_p_translationmap;
+
+    @Override
+    public Core.Type_translationmap translationmap() {
+      return this.vx_p_translationmap == null ? Core.e_translationmap : this.vx_p_translationmap;
+    }
+
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
@@ -7171,6 +7228,9 @@ public final class Core {
       case ":translation":
         output = this.translation();
         break;
+      case ":translationmap":
+        output = this.translationmap();
+        break;
       }
       return output;
     }
@@ -7183,6 +7243,7 @@ public final class Core {
       output.put(":connectmap", this.connectmap());
       output.put(":locale", this.locale());
       output.put(":translation", this.translation());
+      output.put(":translationmap", this.translationmap());
       return Core.immutablemap(output);
     }
 
@@ -7203,12 +7264,14 @@ public final class Core {
       Core.Type_connectmap vx_p_connectmap = val.connectmap();
       Core.Type_locale vx_p_locale = val.locale();
       Core.Type_translation vx_p_translation = val.translation();
+      Core.Type_translationmap vx_p_translationmap = val.translationmap();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":user");
       validkeys.add(":connectlist");
       validkeys.add(":connectmap");
       validkeys.add(":locale");
       validkeys.add(":translation");
+      validkeys.add(":translationmap");
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -7282,6 +7345,16 @@ public final class Core {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":translationmap":
+            if (valsub == vx_p_translationmap) {
+            } else if (valsub instanceof Core.Type_translationmap) {
+              ischanged = true;
+              vx_p_translationmap = (Core.Type_translationmap)valsub;
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new session :translationmap " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_msg msg = Core.vx_msg_error("(new session) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
@@ -7296,6 +7369,7 @@ public final class Core {
         work.vx_p_connectmap = vx_p_connectmap;
         work.vx_p_locale = vx_p_locale;
         work.vx_p_translation = vx_p_translation;
+        work.vx_p_translationmap = vx_p_translationmap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -8630,16 +8704,24 @@ public final class Core {
     public Core.Type_translation vx_copy(final Object... vals);
     public Core.Type_translation vx_empty();
     public Core.Type_translation vx_type();
-    public Core.Type_stringmap translationmap();
+    public Core.Type_string name();
+    public Core.Type_stringmap wordmap();
   }
 
   public static class Class_translation extends Core.Class_base implements Type_translation {
 
-    protected Core.Type_stringmap vx_p_translationmap;
+    protected Core.Type_string vx_p_name;
 
     @Override
-    public Core.Type_stringmap translationmap() {
-      return this.vx_p_translationmap == null ? Core.e_stringmap : this.vx_p_translationmap;
+    public Core.Type_string name() {
+      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+    }
+
+    protected Core.Type_stringmap vx_p_wordmap;
+
+    @Override
+    public Core.Type_stringmap wordmap() {
+      return this.vx_p_wordmap == null ? Core.e_stringmap : this.vx_p_wordmap;
     }
 
     @Override
@@ -8647,8 +8729,11 @@ public final class Core {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
       switch (skey) {
-      case ":translationmap":
-        output = this.translationmap();
+      case ":name":
+        output = this.name();
+        break;
+      case ":wordmap":
+        output = this.wordmap();
         break;
       }
       return output;
@@ -8657,7 +8742,8 @@ public final class Core {
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
-      output.put(":translationmap", this.translationmap());
+      output.put(":name", this.name());
+      output.put(":wordmap", this.wordmap());
       return Core.immutablemap(output);
     }
 
@@ -8673,9 +8759,11 @@ public final class Core {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Core.Type_stringmap vx_p_translationmap = val.translationmap();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_stringmap vx_p_wordmap = val.wordmap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":translationmap");
+      validkeys.add(":name");
+      validkeys.add(":wordmap");
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -8699,13 +8787,26 @@ public final class Core {
           }
         } else {
           switch (key) {
-          case ":translationmap":
-            if (valsub == vx_p_translationmap) {
+          case ":name":
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new translation :name " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":wordmap":
+            if (valsub == vx_p_wordmap) {
             } else if (valsub instanceof Core.Type_stringmap) {
               ischanged = true;
-              vx_p_translationmap = (Core.Type_stringmap)valsub;
+              vx_p_wordmap = (Core.Type_stringmap)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new translation :translationmap " + valsub.toString() + ") - Invalid Value");
+              Core.Type_msg msg = Core.vx_msg_error("(new translation :wordmap " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -8718,7 +8819,8 @@ public final class Core {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_translation work = new Class_translation();
-        work.vx_p_translationmap = vx_p_translationmap;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_wordmap = vx_p_wordmap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -8753,6 +8855,276 @@ public final class Core {
 
   public static final Type_translation e_translation = new Class_translation();
   public static final Type_translation t_translation = new Class_translation();
+
+  /**
+   * type: translationlist
+   * i18 language translation list.
+   * (type translationlist)
+   */
+  public interface Type_translationlist extends Core.Type_list {
+    public Core.Type_translationlist vx_new(final Object... vals);
+    public Core.Type_translationlist vx_copy(final Object... vals);
+    public Core.Type_translationlist vx_empty();
+    public Core.Type_translationlist vx_type();
+    public List<Core.Type_translation> vx_listtranslation();
+    public Core.Type_translation vx_translation(final Core.Type_int index);
+  }
+
+  public static class Class_translationlist extends Core.Class_base implements Type_translationlist {
+
+    protected List<Core.Type_translation> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_translation>());
+
+    @Override
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+
+    @Override
+    public Core.Type_translation vx_translation(final Core.Type_int index) {
+      Core.Type_translation output = Core.e_translation;
+      Class_translationlist list = this;
+      int iindex = index.vx_int();
+      List<Core.Type_translation> listval = list.vx_p_list;
+      if (iindex < listval.size()) {
+        output = listval.get(iindex);
+      }
+      return output;
+    }
+
+    @Override
+    public List<Core.Type_translation> vx_listtranslation() {return vx_p_list;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_int index) {
+      return this.vx_translation(index);
+    }
+
+    @Override
+    public Type_translationlist vx_new(final Object... vals) {return e_translationlist.vx_copy(vals);}
+
+    @Override
+    public Type_translationlist vx_copy(final Object... vals) {
+      Type_translationlist output = this;
+      boolean ischanged = false;
+      Class_translationlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      List<Core.Type_translation> listval = new ArrayList<>(val.vx_listtranslation());
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_translation) {
+          ischanged = true;
+          listval.add((Core.Type_translation)valsub);
+        } else if (valsub instanceof Core.Type_translation) {
+          ischanged = true;
+          listval.add((Core.Type_translation)valsub);
+        } else if (valsub instanceof Type_translationlist) {
+          Type_translationlist multi = (Type_translationlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtranslation());
+        } else if (valsub instanceof List) {
+          List<?> listunknown = (List<?>)valsub;
+          for (Object item : listunknown) {
+            if (item instanceof Core.Type_translation) {
+              Core.Type_translation valitem = (Core.Type_translation)item;
+              ischanged = true;
+              listval.add(valitem);
+            }
+          }
+        } else {
+          Core.Type_msg msg = Core.vx_msg_error("(new translationlist) - Invalid Type: " + valsub.toString());
+          msgblock = msgblock.vx_copy(msg);
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_translationlist work = new Class_translationlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_translationlist vx_empty() {return e_translationlist;}
+    @Override
+    public Type_translationlist vx_type() {return t_translationlist;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "translationlist", // name
+        ":list", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_translation), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_translationlist e_translationlist = new Class_translationlist();
+  public static final Type_translationlist t_translationlist = new Class_translationlist();
+
+  /**
+   * type: translationmap
+   * i18 language translation map.
+   * (type translationmap)
+   */
+  public interface Type_translationmap extends Core.Type_map {
+    public Core.Type_translationmap vx_new(final Object... vals);
+    public Core.Type_translationmap vx_copy(final Object... vals);
+    public Core.Type_translationmap vx_empty();
+    public Core.Type_translationmap vx_type();
+    public Map<String, Core.Type_translation> vx_maptranslation();
+    public Core.Type_translation vx_translation(final Core.Type_string key);
+  }
+
+  public static class Class_translationmap extends Core.Class_base implements Type_translationmap {
+
+    protected Map<String, Core.Type_translation> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_translation>());
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+
+    @Override
+    public Core.Type_translation vx_translation(final Core.Type_string key) {
+      Core.Type_translation output = Core.e_translation;
+      Class_translationmap map = this;
+      String skey = key.vx_string();
+      Map<String, Core.Type_translation> mapval = map.vx_p_map;
+      output = mapval.getOrDefault(skey, Core.e_translation);
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_translation> vx_maptranslation() {return vx_p_map;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      return this.vx_translation(key);
+    }
+
+    @Override
+    public Type_translationmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Class_translationmap output = new Class_translationmap();
+      Core.Type_msgblock msgblock = Core.e_msgblock;
+      Map<String, Core.Type_translation> map = new LinkedHashMap<>();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any val = mapval.get(key);
+        if (val instanceof Core.Type_translation) {
+          Core.Type_translation castval = (Core.Type_translation)val;
+          map.put(key, castval);
+        } else {
+          Core.Type_msg msg = Core.vx_msg_error("(translationmap) Invalid Value: " + val.toString() + "");
+          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+        }
+      }
+      output.vx_p_map = Core.immutablemap(map);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_translationmap vx_new(final Object... vals) {return e_translationmap.vx_copy(vals);}
+
+    @Override
+    public Type_translationmap vx_copy(final Object... vals) {
+      Type_translationmap output = this;
+      boolean ischanged = false;
+      Class_translationmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Map<String, Core.Type_translation> mapval = new LinkedHashMap<>(val.vx_maptranslation());
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (key.equals("")) {
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;
+            key = valstring.vx_string();
+          } else if (valsub instanceof String) {
+            key = (String)valsub;
+          } else {
+            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+        } else {
+          Core.Type_translation valany = null;
+          if (valsub instanceof Core.Type_translation) {
+            valany = (Core.Type_translation)valsub;
+          } else if (valsub instanceof Core.Type_translation) {
+            valany = (Core.Type_translation)valsub;
+          } else {
+            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+          if (valany != null) {
+            ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
+            mapval.put(key, valany);
+            key = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_translationmap work = new Class_translationmap();
+        work.vx_p_map = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_translationmap vx_empty() {return e_translationmap;}
+    @Override
+    public Type_translationmap vx_type() {return t_translationmap;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "translationmap", // name
+        ":map", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_translation), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_translationmap e_translationmap = new Class_translationmap();
+  public static final Type_translationmap t_translationmap = new Class_translationmap();
 
   /**
    * type: type
@@ -15224,7 +15596,7 @@ public final class Core {
    * Returns value from a map or empty if not found
    * @param  {map-1} valuemap
    * @param  {string} key
-   * @return {any}
+   * @return {any-1}
    * (func any<-map)
    */
   public static interface Func_any_from_map extends Core.Type_func, Core.Type_replfunc {
@@ -15257,7 +15629,7 @@ public final class Core {
         false, // async
         Core.typedef_new(
           "vx/core", // pkgname
-          "any", // name
+          "any-1", // name
           "", // extends
           Core.e_typelist, // traits
           Core.e_typelist, // allowtypes
@@ -21077,6 +21449,188 @@ public final class Core {
   }
 
   /**
+   * @function msg_from_error 1
+   * Returns a msg from error code and detail
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   * (func msg<-error)
+   */
+  public static interface Func_msg_from_error_1 extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_msg vx_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail);
+  }
+
+  public static class Class_msg_from_error_1 extends Core.Class_base implements Func_msg_from_error_1 {
+
+    @Override
+    public Func_msg_from_error_1 vx_new(Object... vals) {
+      Class_msg_from_error_1 output = new Class_msg_from_error_1();
+      return output;
+    }
+
+    @Override
+    public Func_msg_from_error_1 vx_copy(Object... vals) {
+      Class_msg_from_error_1 output = new Class_msg_from_error_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "msg<-error", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "msg", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_msg_from_error_1 vx_empty() {return e_msg_from_error_1;}
+    @Override
+    public Func_msg_from_error_1 vx_type() {return t_msg_from_error_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string code = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any detail = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_msg_from_error_1(code, detail);
+      return output;
+    }
+
+    @Override
+    public Core.Type_msg vx_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail) {
+      return Core.f_msg_from_error_1(code, detail);
+    }
+
+  }
+
+  public static final Func_msg_from_error_1 e_msg_from_error_1 = new Core.Class_msg_from_error_1();
+  public static final Func_msg_from_error_1 t_msg_from_error_1 = new Core.Class_msg_from_error_1();
+
+  public static Core.Type_msg f_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail) {
+    Core.Type_msg output = Core.e_msg;
+    output = Core.f_new(
+      Core.t_msg,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":code"),
+        code,
+        Core.vx_new_string(":severity"),
+        Core.c_msg_error
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function msg_from_error 2
+   * Returns a msg from error path code and detail
+   * @param  {string} path
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   * (func msg<-error)
+   */
+  public static interface Func_msg_from_error_2 extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_msg vx_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail);
+  }
+
+  public static class Class_msg_from_error_2 extends Core.Class_base implements Func_msg_from_error_2 {
+
+    @Override
+    public Func_msg_from_error_2 vx_new(Object... vals) {
+      Class_msg_from_error_2 output = new Class_msg_from_error_2();
+      return output;
+    }
+
+    @Override
+    public Func_msg_from_error_2 vx_copy(Object... vals) {
+      Class_msg_from_error_2 output = new Class_msg_from_error_2();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "msg<-error", // name
+        2, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "msg", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_msg_from_error_2 vx_empty() {return e_msg_from_error_2;}
+    @Override
+    public Func_msg_from_error_2 vx_type() {return t_msg_from_error_2;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string code = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any detail = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_msg_from_error_2(path, code, detail);
+      return output;
+    }
+
+    @Override
+    public Core.Type_msg vx_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail) {
+      return Core.f_msg_from_error_2(path, code, detail);
+    }
+
+  }
+
+  public static final Func_msg_from_error_2 e_msg_from_error_2 = new Core.Class_msg_from_error_2();
+  public static final Func_msg_from_error_2 t_msg_from_error_2 = new Core.Class_msg_from_error_2();
+
+  public static Core.Type_msg f_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail) {
+    Core.Type_msg output = Core.e_msg;
+    output = Core.f_new(
+      Core.t_msg,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":code"),
+        code,
+        Core.vx_new_string(":path"),
+        path,
+        Core.vx_new_string(":severity"),
+        Core.c_msg_error
+      )
+    );
+    return output;
+  }
+
+  /**
    * @function msg_from_warning
    * Returns a msg from a warning string
    * @param  {string} warning
@@ -24860,6 +25414,8 @@ public final class Core {
     maptype.put("thenelse", Core.t_thenelse);
     maptype.put("thenelselist", Core.t_thenelselist);
     maptype.put("translation", Core.t_translation);
+    maptype.put("translationlist", Core.t_translationlist);
+    maptype.put("translationmap", Core.t_translationmap);
     maptype.put("type", Core.t_type);
     maptype.put("typedef", Core.t_typedef);
     maptype.put("typelist", Core.t_typelist);
@@ -24995,6 +25551,8 @@ public final class Core {
     mapfunc.put("mempool-removerefchildren", Core.t_mempool_removerefchildren);
     mapfunc.put("mempool-reserve", Core.t_mempool_reserve);
     mapfunc.put("msg<-error", Core.t_msg_from_error);
+    mapfunc.put("msg<-error_1", Core.t_msg_from_error_1);
+    mapfunc.put("msg<-error_2", Core.t_msg_from_error_2);
     mapfunc.put("msg<-warning", Core.t_msg_from_warning);
     mapfunc.put("msgblock<-msgblock-msg", Core.t_msgblock_from_msgblock_msg);
     mapfunc.put("msgblock<-msgblock-msgblock", Core.t_msgblock_from_msgblock_msgblock);

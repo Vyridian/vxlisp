@@ -2212,7 +2212,7 @@ public final class Repl {
             return Core.f_let(
               Repl.t_repl,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Core.Type_any arg = Core.f_any_from_map(Core.t_arg, argmap, text);
+                final Core.Type_any arg = Core.f_any_from_map(Core.t_any, argmap, text);
                 return Core.f_if_2(
                   Repl.t_repl,
                   Core.t_thenelselist.vx_new(
@@ -2821,7 +2821,7 @@ public final class Repl {
             Core.t_any,
             Core.t_any_from_func.vx_fn_new(() -> {
               final Core.Type_funcmap funcmap = pkg.funcmap();
-              final Core.Type_any funcval = Core.f_any_from_map(Core.t_func, funcmap, name);
+              final Core.Type_any funcval = Core.f_any_from_map(Core.t_any, funcmap, name);
               return Core.f_if_1(
                 Core.t_any,
                 Core.f_notempty_1(funcval),

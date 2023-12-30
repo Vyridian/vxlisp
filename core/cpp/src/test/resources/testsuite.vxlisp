@@ -1298,6 +1298,33 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "copy"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :a \"1\"
+  :b \"2\")
+ (copy (stringmap :a \"1\")
+  :b \"2\"))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "1"
+            :b "2")
+          :actual
+           (stringmap
+            :a "1"
+            :b "2")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "empty"
      :describelist
       (vx/test/testdescribelist
@@ -2246,7 +2273,7 @@
       :contains 2
       :contains_1 3
       :context-main 0
-      :copy 0
+      :copy 1
       :else 0
       :empty 3
       :extends<-any 0
@@ -2291,6 +2318,8 @@
       :mempool-removerefchildren 0
       :mempool-reserve 0
       :msg<-error 0
+      :msg<-error_1 0
+      :msg<-error_2 0
       :msg<-warning 0
       :msgblock<-msgblock-msg 0
       :msgblock<-msgblock-msgblock 0
@@ -2399,6 +2428,8 @@
       :thenelse 0
       :thenelselist 0
       :translation 0
+      :translationlist 0
+      :translationmap 0
       :type 0
       :typedef 0
       :typelist 0
@@ -2409,10 +2440,12 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 156)
+      :tests 1
+      :total 158)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 156)
+      :tests 1
+      :total 158)
     :constnums
      (vx/test/testcoveragenums
       :pct 14
@@ -2421,24 +2454,24 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 86
-      :tests 208
-      :total 240)
+      :tests 212
+      :total 244)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 46
-      :tests 62
+      :pct 47
+      :tests 63
       :total 132)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
       :pct 31
-      :tests 68
-      :total 216)
+      :tests 69
+      :total 218)
     :typenums
      (vx/test/testcoveragenums
       :pct 5
       :tests 4
-      :total 70))
+      :total 72))
   :passfail true
   :testpkg "vx/core")
  (vx/test/testpackage
@@ -12770,51 +12803,1985 @@
   :passfail true
   :testpkg "vx/data/tree")
  (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "textblock-xml<-string"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (tb/textblock
+  :text
+   \"<doc>
+      <tag1>
+        <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+      </tag1>
+    </doc>\"
+  :startpos 1
+  :endpos 70
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text \"<doc>\"
+     :startpos 1
+     :endpos 5
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"doc\"
+        :startpos 2
+        :endpos 4)))
+    (tb/textblock
+     :text \"
+  \"
+     :startpos 6
+     :endpos 8
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"<tag1>\"
+     :startpos 9
+     :endpos 14
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"tag1\"
+        :startpos 10
+        :endpos 13)))
+    (tb/textblock
+     :text \"
+    \"
+     :startpos 15
+     :endpos 19
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+     :startpos 20
+     :endpos 53
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"tag2\"
+        :startpos 21
+        :endpos 24)
+       (tb/textblock
+        :text \" \"
+        :startpos 25
+        :endpos 25
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (textblock
+        :text \"prop1\"
+        :startpos 26
+        :endpos 30)
+       (textblock
+        :text \"=\"
+        :startpos 31
+        :endpos 31
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text \"\\"val1\\"\"
+        :startpos 32
+        :endpos 37
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text \"val1\"
+           :startpos 33
+           :endpos 36)))
+       (tb/textblock
+        :text \" \"
+        :startpos 38
+        :endpos 38
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text \"prop2\"
+        :startpos 39
+        :endpos 43)
+       (textblock
+        :text \"=\"
+        :startpos 44
+        :endpos 44
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text \"\\"val2\\"\"
+        :startpos 45
+        :endpos 50
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text \"val2\"
+           :startpos 46
+           :endpos 49)))
+        (tb/textblock
+         :text \" \"
+         :startpos 51
+         :endpos 51
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"/\"
+         :startpos 52
+         :endpos 52)))
+    (tb/textblock
+     :text \"
+  \"
+     :startpos 54
+     :endpos 56
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"</tag1>\"
+     :startpos 57
+     :endpos 63
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"/tag1\"
+        :startpos 58
+        :endpos 62)))
+    (tb/textblock
+     :text \"
+\"
+     :startpos 64
+     :endpos 64
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"</doc>\"
+     :startpos 65
+     :endpos 70
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"/doc\"
+        :startpos 66
+        :endpos 69)))))
+ (textblock-xml<-string
+  \"<doc>
+     <tag1>
+       <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+     </tag1>
+   </doc>\"))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text
+             "<doc>
+  <tag1>
+    <tag2 prop1=\"val1\" prop2=\"val2\" />
+  </tag1>
+</doc>"
+            :startpos 1
+            :endpos 70
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<doc>"
+               :startpos 1
+               :endpos 5
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "doc"
+                  :startpos 2
+                  :endpos 4)))
+              (vx/data/textblock/textblock
+               :text
+                "
+  "
+               :startpos 6
+               :endpos 8
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "<tag1>"
+               :startpos 9
+               :endpos 14
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "tag1"
+                  :startpos 10
+                  :endpos 13)))
+              (vx/data/textblock/textblock
+               :text
+                "
+    "
+               :startpos 15
+               :endpos 19
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+               :startpos 20
+               :endpos 53
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "tag2"
+                  :startpos 21
+                  :endpos 24)
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 25
+                  :endpos 25
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "prop1"
+                  :startpos 26
+                  :endpos 30)
+                 (vx/data/textblock/textblock
+                  :text "="
+                  :startpos 31
+                  :endpos 31
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimxmlequal"
+                    :starttext "="))
+                 (vx/data/textblock/textblock
+                  :text "\"val1\""
+                  :startpos 32
+                  :endpos 37
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimquote"
+                    :starttext quote
+                    :endtext quote)
+                  :children
+                   (vx/data/textblock/textblocklist
+                    (vx/data/textblock/textblock
+                     :text "val1"
+                     :startpos 33
+                     :endpos 36)))
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 38
+                  :endpos 38
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "prop2"
+                  :startpos 39
+                  :endpos 43)
+                 (vx/data/textblock/textblock
+                  :text "="
+                  :startpos 44
+                  :endpos 44
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimxmlequal"
+                    :starttext "="))
+                 (vx/data/textblock/textblock
+                  :text "\"val2\""
+                  :startpos 45
+                  :endpos 50
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimquote"
+                    :starttext quote
+                    :endtext quote)
+                  :children
+                   (vx/data/textblock/textblocklist
+                    (vx/data/textblock/textblock
+                     :text "val2"
+                     :startpos 46
+                     :endpos 49)))
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 51
+                  :endpos 51
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "/"
+                  :startpos 52
+                  :endpos 52)))
+              (vx/data/textblock/textblock
+               :text
+                "
+  "
+               :startpos 54
+               :endpos 56
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "</tag1>"
+               :startpos 57
+               :endpos 63
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "/tag1"
+                  :startpos 58
+                  :endpos 62)))
+              (vx/data/textblock/textblock
+               :text
+                "
+"
+               :startpos 64
+               :endpos 64
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "</doc>"
+               :startpos 65
+               :endpos 70
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "/doc"
+                  :startpos 66
+                  :endpos 69)))))
+          :actual
+           (vx/data/textblock/textblock
+            :text
+             "<doc>
+  <tag1>
+    <tag2 prop1=\"val1\" prop2=\"val2\" />
+  </tag1>
+</doc>"
+            :startpos 1
+            :endpos 70
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<doc>"
+               :startpos 1
+               :endpos 5
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "doc"
+                  :startpos 2
+                  :endpos 4)))
+              (vx/data/textblock/textblock
+               :text
+                "
+  "
+               :startpos 6
+               :endpos 8
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "<tag1>"
+               :startpos 9
+               :endpos 14
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "tag1"
+                  :startpos 10
+                  :endpos 13)))
+              (vx/data/textblock/textblock
+               :text
+                "
+    "
+               :startpos 15
+               :endpos 19
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+               :startpos 20
+               :endpos 53
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "tag2"
+                  :startpos 21
+                  :endpos 24)
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 25
+                  :endpos 25
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "prop1"
+                  :startpos 26
+                  :endpos 30)
+                 (vx/data/textblock/textblock
+                  :text "="
+                  :startpos 31
+                  :endpos 31
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimxmlequal"
+                    :starttext "="))
+                 (vx/data/textblock/textblock
+                  :text "\"val1\""
+                  :startpos 32
+                  :endpos 37
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimquote"
+                    :starttext quote
+                    :endtext quote)
+                  :children
+                   (vx/data/textblock/textblocklist
+                    (vx/data/textblock/textblock
+                     :text "val1"
+                     :startpos 33
+                     :endpos 36)))
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 38
+                  :endpos 38
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "prop2"
+                  :startpos 39
+                  :endpos 43)
+                 (vx/data/textblock/textblock
+                  :text "="
+                  :startpos 44
+                  :endpos 44
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimxmlequal"
+                    :starttext "="))
+                 (vx/data/textblock/textblock
+                  :text "\"val2\""
+                  :startpos 45
+                  :endpos 50
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimquote"
+                    :starttext quote
+                    :endtext quote)
+                  :children
+                   (vx/data/textblock/textblocklist
+                    (vx/data/textblock/textblock
+                     :text "val2"
+                     :startpos 46
+                     :endpos 49)))
+                 (vx/data/textblock/textblock
+                  :text " "
+                  :startpos 51
+                  :endpos 51
+                  :delim
+                   (vx/data/textblock/delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (vx/data/textblock/textblock
+                  :text "/"
+                  :startpos 52
+                  :endpos 52)))
+              (vx/data/textblock/textblock
+               :text
+                "
+  "
+               :startpos 54
+               :endpos 56
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "</tag1>"
+               :startpos 57
+               :endpos 63
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "/tag1"
+                  :startpos 58
+                  :endpos 62)))
+              (vx/data/textblock/textblock
+               :text
+                "
+"
+               :startpos 64
+               :endpos 64
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimwhitespace"
+                 :starttext ":whitespace"))
+              (vx/data/textblock/textblock
+               :text "</doc>"
+               :startpos 65
+               :endpos 70
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">")
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "/doc"
+                  :startpos 66
+                  :endpos 69)))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-angle<-xml-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag :notag)
+ (xml-angle<-xml-textblock
+  (empty xml)
+  (empty tb/textblock)))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag ":notag")
+          :actual
+           (vx/data/xml/xml
+            :tag ":notag")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\")
+ (xml-angle<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"<doc>\"
+   :startpos 1
+   :endpos 5
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"doc\"
+      :startpos 2
+      :endpos 4)))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\"))))
+ (xml-angle<-xml-textblock
+  (xml
+   :tag \"tag1\")
+  (tb/textblock
+   :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+   :startpos 20
+   :endpos 53
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag2\"
+      :startpos 21
+      :endpos 24)
+     (tb/textblock
+      :text \" \"
+      :startpos 25
+      :endpos 25
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop1\"
+      :startpos 26
+      :endpos 30)
+     (tb/textblock
+      :text \"=\"
+      :startpos 31
+      :endpos 31
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val1\\"\"
+      :startpos 32
+      :endpos 37
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val1\"
+         :startpos 33
+         :endpos 36)))
+     (tb/textblock
+      :text \" \"
+      :startpos 38
+      :endpos 38
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop2\"
+      :startpos 39
+      :endpos 43)
+     (tb/textblock
+      :text \"=\"
+      :startpos 44
+      :endpos 44
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val2\\"\"
+      :startpos 45
+      :endpos 50
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val2\"
+         :startpos 46
+         :endpos 49)))
+      (tb/textblock
+       :text \" \"
+       :startpos 51
+       :endpos 51
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"/\"
+       :startpos 52
+       :endpos 52)))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-close<-xml-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\")
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"/\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\")
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"</doc>\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  (msg
+   :severity 2
+   :text \"Invalid Xml Close tag: /wrong\"))
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"/wrong\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"top\"
+  :children
+   (xmllist
+    (xml
+     :tag \"doc\")))
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\"
+   :parent
+    (xml
+     :tag \"top\"))
+  (tb/textblock
+   :text \"/\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "top"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "doc")))
+          :actual
+           (vx/data/xml/xml
+            :tag "top"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "doc")))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-parse<-xml-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\")
+ (xml-parse<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"<doc>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"doc\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\")
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"
+  \"
+   :delim
+    (copy tb/delimwhitespace
+     :pos 0))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc")
+          :actual
+           (vx/data/xml/xml
+            :tag "doc")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\"
+  :parent
+   (xml
+    :tag \"doc\"))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"<tag1>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag1\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1"
+            :parent
+             (vx/data/xml/xml
+              :tag "doc"))
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1"
+            :parent
+             (vx/data/xml/xml
+              :tag "doc"))))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\")))
+  :parent
+   (xml
+    :tag \"doc\"))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblock
+   :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag2\")
+     (tb/textblock
+      :text \" \"
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop1\")
+     (tb/textblock
+      :text \"=\"
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val1\\"\"
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val1\")))
+     (tb/textblock
+      :text \" \"
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop2\")
+     (tb/textblock
+      :text \"=\"
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val2\\"\"
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val2\")))
+      (tb/textblock
+       :text \" \"
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"/\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2")))
+            :parent
+             (vx/data/xml/xml
+              :tag "doc"))
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2")))
+            :parent
+             (vx/data/xml/xml
+              :tag "doc"))))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+    :tag \"tag1\"
+    :children
+     (xmllist
+      (xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :children
+    (xmllist
+     (xml
+      :tag \"tag2\"
+      :propmap
+       (stringmap
+        :prop1 \"val1\"
+        :prop2 \"val2\")))
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblock
+   :text \"</tag1>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"/tag1\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2"))))))
+          :actual
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2"))))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-parse<-xml-textblocklist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag1\"
+     :children
+      (xmllist
+       (xml
+        :tag \"tag2\"
+        :propmap
+         (stringmap
+          :prop1 \"val1\"
+          :prop2 \"val2\"))))))
+ (xml-parse<-xml-textblocklist
+  (empty xml)
+  (tb/textblocklist
+   (tb/textblock
+    :text \"<doc>\"
+    :startpos 1
+    :endpos 5
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"doc\"
+       :startpos 2
+       :endpos 4)))
+   (tb/textblock
+    :text \"
+  \"
+    :startpos 6
+    :endpos 8
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"<tag1>\"
+    :startpos 9
+    :endpos 14
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"tag1\"
+       :startpos 10
+       :endpos 13)))
+   (tb/textblock
+    :text \"
+    \"
+    :startpos 15
+    :endpos 19
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+    :startpos 20
+    :endpos 53
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"tag2\"
+       :startpos 21
+       :endpos 24)
+      (tb/textblock
+       :text \" \"
+       :startpos 25
+       :endpos 25
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"prop1\"
+       :startpos 26
+       :endpos 30)
+      (tb/textblock
+       :text \"=\"
+       :startpos 31
+       :endpos 31
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text \"\\"val1\\"\"
+       :startpos 32
+       :endpos 37
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text \"val1\"
+          :startpos 33
+          :endpos 36)))
+      (tb/textblock
+       :text \" \"
+       :startpos 38
+       :endpos 38
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"prop2\"
+       :startpos 39
+       :endpos 43)
+      (tb/textblock
+       :text \"=\"
+       :startpos 44
+       :endpos 44
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text \"\\"val2\\"\"
+       :startpos 45
+       :endpos 50
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text \"val2\"
+          :startpos 46
+          :endpos 49)))
+       (tb/textblock
+        :text \" \"
+        :startpos 51
+        :endpos 51
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text \"/\"
+        :startpos 52
+        :endpos 52)))
+   (tb/textblock
+    :text \"
+  \"
+    :startpos 54
+    :endpos 56
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"</tag1>\"
+    :startpos 57
+    :endpos 63
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"/tag1\"
+       :startpos 58
+       :endpos 62)))
+   (tb/textblock
+    :text \"
+\"
+    :startpos 64
+    :endpos 64
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"</doc>\"
+    :startpos 65
+    :endpos 70
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"/doc\"
+       :startpos 66
+       :endpos 69))))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2"))))))
+          :actual
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2"))))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-properties<-xml-textblocklist"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\"))))
+ (xml-properties<-xml-textblocklist
+  (xml
+   :tag :notag
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblocklist
+   (tb/textblock
+    :text \"tag2\")
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"prop1\")
+   (tb/textblock
+    :text \"=\"
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text \"\\"val1\\"\"
+    :startpos 32
+    :endpos 37
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"val1\")))
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"prop2\")
+   (tb/textblock
+    :text \"=\"
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text \"\\"val2\\"\"
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"val2\")))
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"/\"))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))
+          :actual
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-property<-xml-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\")
+ (xml-property<-xml-textblock
+  (xml
+   :tag \":notag\")
+  (tb/textblock
+   :text \"tag1\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1")
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\"
+  :prop \"prop1\")
+ (xml-property<-xml-textblock
+  (xml
+   :tag \"tag1\")
+  (tb/textblock
+   :text \"prop1\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1"
+            :prop "prop1")
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1"
+            :prop "prop1")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"tag1\"
+  :propmap
+   (stringmap
+    :prop1 \"val1\"))
+ (xml-property<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :prop \"prop1\")
+  (tb/textblock
+   :delim
+    (copy tb/delimquote
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"val1\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "tag1"
+            :propmap
+             (stringmap
+              :prop1 "val1"))
+          :actual
+           (vx/data/xml/xml
+            :tag "tag1"
+            :propmap
+             (stringmap
+              :prop1 "val1"))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml-text<-xml-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :text \"text1\")
+ (xml-text<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"text1\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :text "text1")
+          :actual
+           (vx/data/xml/xml
+            :text "text1")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :text \"text1\")))
+ (xml-text<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"text1\")))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :text "text1")))
+          :actual
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :text "text1")))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "xml<-textblock"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag1\"
+     :children
+      (xmllist
+       (xml
+        :tag \"tag2\"
+        :propmap
+         (stringmap
+          :prop1 \"val1\"
+          :prop2 \"val2\"))))))
+ (xml<-textblock
+  (tb/textblock
+   :text
+    \"<doc>
+       <tag1>
+         <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+       </tag1>
+     </doc>\"
+   :startpos 1
+   :endpos 70
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"<doc>\"
+      :startpos 1
+      :endpos 5
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"doc\"
+         :startpos 2
+         :endpos 4)))
+     (tb/textblock
+      :text \"
+  \"
+      :startpos 6
+      :endpos 8
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"<tag1>\"
+      :startpos 9
+      :endpos 14
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"tag1\"
+         :startpos 10
+         :endpos 13)))
+     (tb/textblock
+      :text \"
+    \"
+      :startpos 15
+      :endpos 19
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+      :startpos 20
+      :endpos 53
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"tag2\"
+         :startpos 21
+         :endpos 24)
+        (tb/textblock
+         :text \" \"
+         :startpos 25
+         :endpos 25
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"prop1\"
+         :startpos 26
+         :endpos 30)
+        (tb/textblock
+         :text \"=\"
+         :startpos 31
+         :endpos 31
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text \"\\"val1\\"\"
+         :startpos 32
+         :endpos 37
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text \"val1\"
+            :startpos 33
+            :endpos 36)))
+        (tb/textblock
+         :text \" \"
+         :startpos 38
+         :endpos 38
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"prop2\"
+         :startpos 39
+         :endpos 43)
+        (tb/textblock
+         :text \"=\"
+         :startpos 44
+         :endpos 44
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text \"\\"val2\\"\"
+         :startpos 45
+         :endpos 50
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text \"val2\"
+            :startpos 46
+            :endpos 49)))
+         (tb/textblock
+          :text \" \"
+          :startpos 51
+          :endpos 51
+          :delim
+           (copy tb/delimwhitespace
+            :pos 0))
+         (tb/textblock
+          :text \"/\"
+          :startpos 52
+          :endpos 52)))
+     (tb/textblock
+      :text \"
+  \"
+      :startpos 54
+      :endpos 56
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"</tag1>\"
+      :startpos 57
+      :endpos 63
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"/tag1\"
+         :startpos 58
+         :endpos 62)))
+     (tb/textblock
+      :text \"
+\"
+      :startpos 64
+      :endpos 64
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"</doc>\"
+      :startpos 65
+      :endpos 70
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"/doc\"
+         :startpos 66
+         :endpos 69)))))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2"))))))
+          :actual
+           (vx/data/xml/xml
+            :tag "doc"
+            :children
+             (vx/data/xml/xmllist
+              (vx/data/xml/xml
+               :tag "tag1"
+               :children
+                (vx/data/xml/xmllist
+                 (vx/data/xml/xml
+                  :tag "tag2"
+                  :propmap
+                   (stringmap
+                    :prop1 "val1"
+                    :prop2 "val2")))))))))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :constmap
      (intmap
       :delimxml 0
+      :delimxmlcdata 0
+      :delimxmlcomment 0
       :delimxmlequal 0)
     :funcmap
      (intmap
+      :textblock-xml<-string 1
+      :xml-angle<-xml-textblock 3
+      :xml-close<-xml-textblock 4
+      :xml-parse<-xml-textblock 5
+      :xml-parse<-xml-textblocklist 1
+      :xml-properties<-xml-textblocklist 1
+      :xml-property<-xml-textblock 3
       :xml-read<-file 0
+      :xml-text<-xml-textblock 2
       :xml<-file 0
       :xml<-string 0
-      :xml<-textblock 0)
+      :xml<-textblock 1)
     :testpkg "vx/data/xml"
     :typemap
      (intmap
       :xml 0
-      :xmlnode 0
-      :xmlnodelist 0
+      :xmllist 0
       :xmlpropmap 0))
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 4)
+      :total 12)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 4)
+      :total 12)
     :constnums
      (vx/test/testcoveragenums
-      :total 2)
+      :total 4)
     :docnums
      (vx/test/testcoveragenums
-      :pct 40
-      :tests 4
-      :total 10)
+      :pct 63
+      :tests 12
+      :total 19)
     :funcnums
      (vx/test/testcoveragenums
-      :total 4)
+      :pct 75
+      :tests 9
+      :total 12)
     :testpkg "vx/data/xml"
     :totalnums
      (vx/test/testcoveragenums
-      :total 10)
+      :pct 47
+      :tests 9
+      :total 19)
     :typenums
      (vx/test/testcoveragenums
-      :total 4))
+      :total 3))
   :passfail true
   :testpkg "vx/data/xml")
  (vx/test/testpackage
@@ -14319,44 +16286,266 @@
   :passfail true
   :testpkg "vx/test")
  (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translate"
+     :casename "translate<-translation-string"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"Hola\"
+ (translate<-translation-string
+  (translation
+   :wordmap
+    (stringmap
+     \"Hello\" \"Hola\"))
+  \"Hello\"))"
+        :testpkg "vx/translate"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "Hola"
+          :actual "Hola")))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :funcmap
      (intmap
+      :session<-session-name 0
+      :session<-session-translation 0
+      :session<-session-translationmap-name 0
       :translate 0
-      :translate_1 0
-      :translation-load 0
+      :translate<-translation-string 1
+      :translate<-translationmap-name-string 0
       :translation-load-session 0
-      :translation<-context 0)
+      :translation<-context 0
+      :translation<-session-name 0
+      :translationmap<-translations 0)
     :testpkg "vx/translate")
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 5)
+      :total 10)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 5)
+      :total 10)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 5
-      :total 5)
+      :tests 10
+      :total 10)
     :funcnums
      (vx/test/testcoveragenums
-      :total 4)
+      :pct 10
+      :tests 1
+      :total 10)
     :testpkg "vx/translate"
     :totalnums
      (vx/test/testcoveragenums
-      :total 4)
+      :pct 10
+      :tests 1
+      :total 10)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
   :passfail true
   :testpkg "vx/translate")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translation/all"
+     :casename "translationmap-all"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"Hola\"
+ (trn/translate<-translationmap-name-string
+  (translationmap-all)
+  \"es\"
+  \"Hello\"))"
+        :testpkg "vx/translation/all"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "Hola"
+          :actual "Hola")))))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :funcmap
+     (intmap
+      :context-all 0
+      :translationmap-all 1)
+    :testpkg "vx/translation/all")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 2)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 2)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 2
+      :total 2)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :testpkg "vx/translation/all"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/translation/all")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translation/en"
+     :casename "translation-en"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"Hello\"
+ (trn/translate<-translation-string
+  (translation-en)
+  \"Hello\"))"
+        :testpkg "vx/translation/en"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "Hello"
+          :actual "Hello")))))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :funcmap
+     (intmap
+      :context-en 0
+      :translation-en 1
+      :words 0)
+    :testpkg "vx/translation/en")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 3)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 3)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 3
+      :total 3)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 33
+      :tests 1
+      :total 3)
+    :testpkg "vx/translation/en"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 33
+      :tests 1
+      :total 3)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/translation/en")
+ (vx/test/testpackage
+  :caselist
+   (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translation/es"
+     :casename "translation-es"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"Hola\"
+ (trn/translate<-translation-string
+  (translation-es)
+  \"Hello\"))"
+        :testpkg "vx/translation/es"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "Hola"
+          :actual "Hola")))))
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :funcmap
+     (intmap
+      :translation-es 1
+      :words 0)
+    :testpkg "vx/translation/es")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 2)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 2)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100
+      :tests 2
+      :total 2)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :testpkg "vx/translation/es"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/translation/es")
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist

@@ -85,8 +85,8 @@ namespace vx_state {
       vx_state::Type_value_map valmap = vx_core::vx_any_from_any(vx_state::t_value_map, copyval);
       output = valmap;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::vector<std::string> keys;
-      std::map<std::string, vx_core::Type_any> mapval;
+      std::map<std::string, vx_core::Type_any> mapval = valmap->vx_map();
+      std::vector<std::string> keys = valmap->vx_p_keys;
       std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -110,12 +110,14 @@ namespace vx_state {
           if (valany) {
             ischanged = true;
             mapval[skey] = valany;
-            keys.push_back(skey);
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
             skey = "";
           }
         }
       }
-      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_state::Class_value_map();
         output->vx_p_keys = keys;
         output->vx_p_map = mapval;

@@ -1352,11 +1352,19 @@ export default class vx_data_textblock {
               vx_core.f_new(vx_core.t_any_from_func, () => {
                 const text2 = vx_type.f_string_from_string_start(text, pos)
                 const pos2 = vx_type.f_int_from_string_findkeyword(text2, ":nonwhitespace")
-                const pos3 = vx_core.f_if_1(
+                const pos3 = vx_core.f_if_2(
                   {"any-1": vx_core.t_int},
-                  vx_core.f_eq(0, pos2),
-                  vx_type.f_length_from_string(text2),
-                  pos2
+                  vx_core.f_then(
+                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(0, pos2)}),
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_type.f_length_from_string(text2)})
+                  ),
+                  vx_core.f_then(
+                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(pos2, pos)}),
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return pos2})
+                  ),
+                  vx_core.f_else(
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_minus1(pos2)})
+                  )
                 )
                 return vx_type.f_string_from_string_start_end(text, pos, pos3)
               })

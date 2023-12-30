@@ -31,7 +31,7 @@
    :lang    :cpp
    :path    ../cpp/src/main
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build C++ Source Code")
   (cmd testcpp
    :code    :test
@@ -45,7 +45,7 @@
    :lang    :csharp
    :path    ../csharp/src/main
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build C# Source Code")
   (cmd testcsharp
    :code    :test
@@ -58,35 +58,33 @@
    :lang    :js
    :path    ../js/src
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build JavaScript Source Code")
   (cmd testjs
    :code    :test
    :lang    :js
    :path    ../js/test
    :context vx/test/context-test
-//   :filter  vx/repl/repl<-textblock-argmap
    :doc     "Build JavaScript Test Code")
   (cmd srcjava
    :code    :source
    :lang    :java
    :path    ../java/src/main/java
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build Java Source Code")
   (cmd testjava
    :code    :test
    :lang    :java
    :path    ../java/src/test/java
    :context vx/test/context-test
-   //:filter  vx/repl/any<-script
    :doc     "Build Java Test Code")
   (cmd srckotlin
    :code    :source
    :lang    :kotlin
    :path    ../kotlin/app/src/main/kotlin/app
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build Kotlin Source Code")
   (cmd testkotlin
    :code    :test
@@ -99,7 +97,7 @@
    :lang    :swift
    :path    ../swift/src/main
    :main    vx/core/main
-   :context vx/core/context-main
+   :context vx/translation/en/context-en
    :doc     "Build Swift Source Code")
   (cmd testswift
    :code    :test

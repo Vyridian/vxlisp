@@ -635,7 +635,24 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 		chgargs, msgs := ListArgLink(fnc.listarg, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = chgargs
-		if fnc.name == "any<-map" {
+		switch fnc.name {
+		case "any<-list":
+			if len(fnc.listarg) == 2 {
+				arg1 := fnc.listarg[0]
+				argvalue := arg1.value
+				argtype := argvalue.vxtype
+				switch argtype.extends {
+				case ":list":
+					if BooleanGenericFromType(argtype) {
+					} else {
+						allowtype, ok := TypeAllowFromType(argtype)
+						if ok {
+							fnc.vxtype = allowtype
+						}
+					}
+				}
+			}
+		case "any<-map":
 			if len(fnc.listarg) == 2 {
 				arg1 := fnc.listarg[0]
 				typearg1 := arg1.value.vxtype
@@ -880,11 +897,6 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 					} else if fnc.vxtype.isgeneric {
 						fnc.vxtype = expectedtype
 					}
-					//if fnc.vxtype.isgeneric {
-					//} else if fnc.vxtype.name == "" {
-					//} else {
-					//mapgeneric = MapGenericSetType(mapgeneric, fnc.generictype.name, fnc.vxtype)
-					//}
 				}
 				fnc, msgs = FuncValidate(fnc, textblock, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)

@@ -4,7 +4,6 @@
 #include <functional>
 #include <future>
 #include <map>
-#include <set>
 #include <string>
 #include <vector>
 
@@ -267,6 +266,14 @@ namespace vx_core {
   typedef Abstract_translation* Type_translation;
   extern Type_translation e_translation;
   extern Type_translation t_translation;
+  class Abstract_translationlist;
+  typedef Abstract_translationlist* Type_translationlist;
+  extern Type_translationlist e_translationlist;
+  extern Type_translationlist t_translationlist;
+  class Abstract_translationmap;
+  typedef Abstract_translationmap* Type_translationmap;
+  extern Type_translationmap e_translationmap;
+  extern Type_translationmap t_translationmap;
   class Abstract_type;
   typedef Abstract_type* Type_type;
   extern Type_type e_type;
@@ -793,6 +800,14 @@ namespace vx_core {
   typedef Abstract_msg_from_error* Func_msg_from_error;
   extern Func_msg_from_error e_msg_from_error;
   extern Func_msg_from_error t_msg_from_error;
+  class Abstract_msg_from_error_1;
+  typedef Abstract_msg_from_error_1* Func_msg_from_error_1;
+  extern Func_msg_from_error_1 e_msg_from_error_1;
+  extern Func_msg_from_error_1 t_msg_from_error_1;
+  class Abstract_msg_from_error_2;
+  typedef Abstract_msg_from_error_2* Func_msg_from_error_2;
+  extern Func_msg_from_error_2 e_msg_from_error_2;
+  extern Func_msg_from_error_2 t_msg_from_error_2;
   class Abstract_msg_from_warning;
   typedef Abstract_msg_from_warning* Func_msg_from_warning;
   extern Func_msg_from_warning e_msg_from_warning;
@@ -1318,10 +1333,9 @@ namespace vx_core {
     return output;
   }
 
-  // vx_boolean_contains_from_set_val(set<T>, val)
-  template <class T> static bool vx_boolean_contains_from_set_val(std::set<T> set, T val) {
-    const bool output = set.find(val) != set.end();
-    return output;
+  // vx_boolean_from_list_find(list<T>, T find)
+  template <class T> static bool vx_boolean_from_list_find(std::vector<T> list, T find) {
+    return std::find(list.begin(), list.end(), find) != list.end();
   }
 
   // vx_copy(T, args)
@@ -1554,6 +1568,12 @@ namespace vx_core {
     // code()
     vx_core::Type_string vx_p_code = NULL;
     virtual vx_core::Type_string code() const = 0;
+    // detail()
+    vx_core::Type_any vx_p_detail = NULL;
+    virtual vx_core::Type_any detail() const = 0;
+    // path()
+    vx_core::Type_string vx_p_path = NULL;
+    virtual vx_core::Type_string path() const = 0;
     // severity()
     vx_core::Type_int vx_p_severity = NULL;
     virtual vx_core::Type_int severity() const = 0;
@@ -1576,6 +1596,8 @@ namespace vx_core {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string code() const override;
+    virtual vx_core::Type_any detail() const override;
+    virtual vx_core::Type_string path() const override;
     virtual vx_core::Type_int severity() const override;
     virtual vx_core::Type_string text() const override;
   };
@@ -3525,6 +3547,12 @@ namespace vx_core {
   // (func msg<-error)
   vx_core::Type_msg f_msg_from_error(vx_core::Type_string error);
 
+  // (func msg<-error)
+  vx_core::Type_msg f_msg_from_error_1(vx_core::Type_string code, vx_core::Type_any detail);
+
+  // (func msg<-error)
+  vx_core::Type_msg f_msg_from_error_2(vx_core::Type_string path, vx_core::Type_string code, vx_core::Type_any detail);
+
   // (func msg<-warning)
   vx_core::Type_msg f_msg_from_warning(vx_core::Type_string warning);
 
@@ -4826,6 +4854,9 @@ namespace vx_core {
     // translation()
     vx_core::Type_translation vx_p_translation = NULL;
     virtual vx_core::Type_translation translation() const = 0;
+    // translationmap()
+    vx_core::Type_translationmap vx_p_translationmap = NULL;
+    virtual vx_core::Type_translationmap translationmap() const = 0;
   };
   class Class_session : public virtual Abstract_session {
   public:
@@ -4846,6 +4877,7 @@ namespace vx_core {
     virtual vx_core::Type_connectmap connectmap() const override;
     virtual vx_core::Type_locale locale() const override;
     virtual vx_core::Type_translation translation() const override;
+    virtual vx_core::Type_translationmap translationmap() const override;
   };
 
   // (type setting)
@@ -5115,9 +5147,12 @@ namespace vx_core {
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     // vx_get_any(key)
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-    // translationmap()
-    vx_core::Type_stringmap vx_p_translationmap = NULL;
-    virtual vx_core::Type_stringmap translationmap() const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+    // wordmap()
+    vx_core::Type_stringmap vx_p_wordmap = NULL;
+    virtual vx_core::Type_stringmap wordmap() const = 0;
   };
   class Class_translation : public virtual Abstract_translation {
   public:
@@ -5133,7 +5168,80 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-    virtual vx_core::Type_stringmap translationmap() const override;
+    virtual vx_core::Type_string name() const override;
+    virtual vx_core::Type_stringmap wordmap() const override;
+  };
+
+  // (type translationlist)
+  class Abstract_translationlist : public virtual vx_core::Abstract_list {
+  public:
+    Abstract_translationlist() {};
+    virtual ~Abstract_translationlist() = 0;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const = 0;
+    // vx_list()
+    virtual vx_core::vx_Type_listany vx_list() const = 0;
+    // vx_new_from_list(T, List<T>)
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const = 0;
+    std::vector<vx_core::Type_translation> vx_p_list;
+    // vx_listtranslation()
+    virtual std::vector<vx_core::Type_translation> vx_listtranslation() const = 0;
+    // vx_get_translation(index)
+    virtual vx_core::Type_translation vx_get_translation(vx_core::Type_int index) const = 0;
+  };
+  class Class_translationlist : public virtual Abstract_translationlist {
+  public:
+    Class_translationlist();
+    virtual ~Class_translationlist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
+    virtual vx_core::vx_Type_listany vx_list() const override;
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+    virtual std::vector<vx_core::Type_translation> vx_listtranslation() const override;
+    virtual vx_core::Type_translation vx_get_translation(vx_core::Type_int index) const override;
+  };
+
+  // (type translationmap)
+  class Abstract_translationmap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_translationmap() {};
+    virtual ~Abstract_translationmap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_core::Type_translation> vx_p_map;
+    // vx_maptranslation()
+    virtual std::map<std::string, vx_core::Type_translation> vx_maptranslation() const = 0;
+    // vx_get_translation(key)
+    virtual vx_core::Type_translation vx_get_translation(vx_core::Type_string key) const = 0;
+  };
+  class Class_translationmap : public virtual Abstract_translationmap {
+  public:
+    Class_translationmap();
+    virtual ~Class_translationmap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_core::Type_translation> vx_maptranslation() const override;
+    virtual vx_core::Type_translation vx_get_translation(vx_core::Type_string key) const override;
   };
 
   // (type type)
@@ -7163,6 +7271,52 @@ namespace vx_core {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func msg<-error)
+  class Abstract_msg_from_error_1 : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_msg_from_error_1() {};
+    virtual ~Abstract_msg_from_error_1() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_msg_from_error_1 : public virtual Abstract_msg_from_error_1 {
+  public:
+    Class_msg_from_error_1();
+    virtual ~Class_msg_from_error_1() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func msg<-error)
+  class Abstract_msg_from_error_2 : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_msg_from_error_2() {};
+    virtual ~Abstract_msg_from_error_2() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_msg_from_error_2 : public virtual Abstract_msg_from_error_2 {
+  public:
+    Class_msg_from_error_2();
+    virtual ~Class_msg_from_error_2() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

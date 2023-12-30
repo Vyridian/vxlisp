@@ -45,6 +45,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_compare(vx_core::Type_context context);
   vx_test::Type_testcase f_contains(vx_core::Type_context context);
   vx_test::Type_testcase f_contains(vx_core::Type_context context);
+  vx_test::Type_testcase f_copy(vx_core::Type_context context);
   vx_test::Type_testcase f_empty(vx_core::Type_context context);
   vx_test::Type_testcase f_first_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_first_from_list_any_from_any(vx_core::Type_context context);

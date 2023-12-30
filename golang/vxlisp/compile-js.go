@@ -1368,7 +1368,7 @@ func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
 		")"
 }
 
-func WriteJsFromProjectCmd(project *vxproject, command *vxcommand) *vxmsgblock {
+func JsWriteFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteJsFromProjectCmd")
 	files, msgs := JsFilesFromProjectCmd(project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)

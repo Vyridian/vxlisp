@@ -3360,8 +3360,8 @@ namespace vx_web_html {
       vx_web_html::Type_propmap valmap = vx_core::vx_any_from_any(vx_web_html::t_propmap, copyval);
       output = valmap;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::vector<std::string> keys;
-      std::map<std::string, vx_core::Type_string> mapval;
+      std::map<std::string, vx_core::Type_string> mapval = valmap->vx_mapstring();
+      std::vector<std::string> keys = valmap->vx_p_keys;
       std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3393,12 +3393,14 @@ namespace vx_web_html {
           if (valany) {
             ischanged = true;
             mapval[skey] = valany;
-            keys.push_back(skey);
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
             skey = "";
           }
         }
       }
-      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_web_html::Class_propmap();
         output->vx_p_keys = keys;
         output->vx_p_map = mapval;
@@ -3871,8 +3873,8 @@ namespace vx_web_html {
       vx_web_html::Type_stylemap valmap = vx_core::vx_any_from_any(vx_web_html::t_stylemap, copyval);
       output = valmap;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::vector<std::string> keys;
-      std::map<std::string, vx_web_html::Type_style> mapval;
+      std::map<std::string, vx_web_html::Type_style> mapval = valmap->vx_mapstyle();
+      std::vector<std::string> keys = valmap->vx_p_keys;
       std::string skey = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3904,12 +3906,14 @@ namespace vx_web_html {
           if (valany) {
             ischanged = true;
             mapval[skey] = valany;
-            keys.push_back(skey);
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
             skey = "";
           }
         }
       }
-      if (ischanged || (mapval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_web_html::Class_stylemap();
         output->vx_p_keys = keys;
         output->vx_p_map = mapval;

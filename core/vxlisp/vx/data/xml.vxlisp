@@ -1,37 +1,244 @@
 (package vx/data/xml
- :libs (lib fil :path vx/data/file)
-       (lib tb  :path vx/data/textblock)
+ :libs (lib fil  :path vx/data/file)
+       (lib tb   :path vx/data/textblock)
+       (lib type :path vx/type)
  :doc "Xml handler")
 
 (type xml : struct
- :properties [nodes : xmlnodelist])
+ :properties [tag      : string
+              text     : string
+              prop     : string
+              propmap  : stringmap
+              children : xmllist
+              parent   : xml])
 
-(type xmlnode : struct
- :properties [nodes : xmlnode
-              props : xmlpropmap
-              tag   : string
-              text  : string])
-
-(type xmlnodelist : list
- :allowtypes [xmlnode])
+(type xmllist : list
+ :allowtypes [xml])
 
 (type xmlpropmap : map
  :allowtypes [string])
 
+(const delimxmlcdata : tb/delim
+ (delim
+  :name "delimxmlcomment"
+  :starttext "<![CDATA["
+  :endtext "]]>"))
+
+(const delimxmlcomment : tb/delim
+ (delim
+  :name "delimxmlcomment"
+  :starttext "<!--"
+  :endtext "-->"))
+
 (const delimxmlequal : tb/delim
  (delim
+  :name "delimxmlequal"
   :starttext "="))
 
 (const delimxml : tb/delim
- (delim
+ (tb/delim
   :delimlist
-	 (delimlist
-	  (copy tb/delimbracketangle
-		 :delimlist
-		  (delimlist
-     delimxmlequal
-     tb/delimwhitespace
-     tb/delimquote)))))
+	  (tb/delimlist
+    tb/delimwhitespace
+    delimxmlcomment
+    delimxmlcdata
+	   (copy tb/delimbracketangle
+		   :delimlist
+		    (tb/delimlist
+       delimxmlequal
+       tb/delimwhitespace
+       tb/delimquote)))))
+
+(func textblock-xml<-string : tb/textblock
+ [text : string]
+ (tb/textblock-parse<-string-delim
+  text
+  delimxml)
+ :test (test
+        (tb/textblock
+         :text
+          "<doc>
+             <tag1>
+               <tag2 prop1=\"val1\" prop2=\"val2\" />
+             </tag1>
+           </doc>"
+         :startpos 1
+         :endpos 70
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text "<doc>"
+            :startpos 1
+            :endpos 5
+            :delim
+             (copy tb/delimbracketangle
+              :pos 0)
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "doc"
+               :startpos 2
+               :endpos 4)))
+           (tb/textblock
+            :text "\n  "
+            :startpos 6
+            :endpos 8
+            :delim
+             (copy tb/delimwhitespace
+              :pos 0))
+           (tb/textblock
+            :text "<tag1>"
+            :startpos 9
+            :endpos 14
+            :delim
+             (copy tb/delimbracketangle
+              :pos 0)
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "tag1"
+               :startpos 10
+               :endpos 13)))
+           (tb/textblock
+            :text "\n    "
+            :startpos 15
+            :endpos 19
+            :delim
+             (copy tb/delimwhitespace
+              :pos 0))
+           (tb/textblock
+            :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+            :startpos 20
+            :endpos 53
+            :delim
+             (copy tb/delimbracketangle
+              :pos 0)
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "tag2"
+               :startpos 21
+               :endpos 24)
+              (tb/textblock
+               :text " "
+               :startpos 25
+               :endpos 25
+               :delim
+                (copy tb/delimwhitespace
+                 :pos 0))
+              (textblock
+               :text "prop1"
+               :startpos 26
+               :endpos 30)
+              (textblock
+               :text "="
+               :startpos 31
+               :endpos 31
+               :delim
+                (copy delimxmlequal
+                 :pos 0))
+              (tb/textblock
+               :text "\"val1\""
+               :startpos 32
+               :endpos 37
+               :delim
+                (copy tb/delimquote
+                 :pos 0)
+               :children
+                (tb/textblocklist
+                 (tb/textblock
+                  :text "val1"
+                  :startpos 33
+                  :endpos 36)))
+              (tb/textblock
+               :text " "
+               :startpos 38
+               :endpos 38
+               :delim
+                (copy tb/delimwhitespace
+                 :pos 0))
+              (tb/textblock
+               :text "prop2"
+               :startpos 39
+               :endpos 43)
+              (textblock
+               :text "="
+               :startpos 44
+               :endpos 44
+               :delim
+                (copy delimxmlequal
+                 :pos 0))
+              (tb/textblock
+               :text "\"val2\""
+               :startpos 45
+               :endpos 50
+               :delim
+                (copy tb/delimquote
+                 :pos 0)
+               :children
+                (tb/textblocklist
+                 (tb/textblock
+                  :text "val2"
+                  :startpos 46
+                  :endpos 49)))
+               (tb/textblock
+                :text " "
+                :startpos 51
+                :endpos 51
+                :delim
+                 (copy tb/delimwhitespace
+                  :pos 0))
+               (tb/textblock
+                :text "/"
+                :startpos 52
+                :endpos 52)))
+           (tb/textblock
+            :text "\n  "
+            :startpos 54
+            :endpos 56
+            :delim
+             (copy tb/delimwhitespace
+              :pos 0))
+           (tb/textblock
+            :text "</tag1>"
+            :startpos 57
+            :endpos 63
+            :delim
+             (copy tb/delimbracketangle
+              :pos 0)
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "/tag1"
+               :startpos 58
+               :endpos 62)))
+           (tb/textblock
+            :text "\n"
+            :startpos 64
+            :endpos 64
+            :delim
+             (copy tb/delimwhitespace
+              :pos 0))
+           (tb/textblock
+            :text "</doc>"
+            :startpos 65
+            :endpos 70
+            :delim
+             (copy tb/delimbracketangle
+              :pos 0)
+            :children
+             (tb/textblocklist
+              (tb/textblock
+               :text "/doc"
+               :startpos 66
+               :endpos 69)))))
+        (textblock-xml<-string
+         "<doc>
+            <tag1>
+              <tag2 prop1=\"val1\" prop2=\"val2\" />
+            </tag1>
+          </doc>"))
+ :doc "Returns a parsed textblock from a string.")
 
 (func xml<-file : xml
  [file : fil/file]
@@ -43,15 +250,1012 @@
 (func xml<-string : xml
  [text : string]
  (xml<-textblock
-  (tb/textblock-parse<-string-delim
-   text
-   delimxml))
+  (textblock-xml<-string
+   text))
  :doc "Returns a parsed xml from a string.")
 
 (func xml<-textblock : xml
  [textblock : tb/textblock]
- (xml)
+ (xml-parse<-xml-textblocklist
+  (empty xml)
+  (:children textblock))
+ :test (test
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+            :tag "tag1"
+            :children
+             (xmllist
+              (xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))))
+        (xml<-textblock
+         (tb/textblock
+          :text
+           "<doc>
+              <tag1>
+                <tag2 prop1=\"val1\" prop2=\"val2\" />
+              </tag1>
+            </doc>"
+          :startpos 1
+          :endpos 70
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "<doc>"
+             :startpos 1
+             :endpos 5
+             :delim
+              (copy tb/delimbracketangle
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "doc"
+                :startpos 2
+                :endpos 4)))
+            (tb/textblock
+             :text "\n  "
+             :startpos 6
+             :endpos 8
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "<tag1>"
+             :startpos 9
+             :endpos 14
+             :delim
+              (copy tb/delimbracketangle
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "tag1"
+                :startpos 10
+                :endpos 13)))
+            (tb/textblock
+             :text "\n    "
+             :startpos 15
+             :endpos 19
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+             :startpos 20
+             :endpos 53
+             :delim
+              (copy tb/delimbracketangle
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "tag2"
+                :startpos 21
+                :endpos 24)
+               (tb/textblock
+                :text " "
+                :startpos 25
+                :endpos 25
+                :delim
+                 (copy tb/delimwhitespace
+                  :pos 0))
+               (tb/textblock
+                :text "prop1"
+                :startpos 26
+                :endpos 30)
+               (tb/textblock
+                :text "="
+                :startpos 31
+                :endpos 31
+                :delim
+                 (copy delimxmlequal
+                  :pos 0))
+               (tb/textblock
+                :text "\"val1\""
+                :startpos 32
+                :endpos 37
+                :delim
+                 (copy tb/delimquote
+                  :pos 0)
+                :children
+                 (tb/textblocklist
+                  (tb/textblock
+                   :text "val1"
+                   :startpos 33
+                   :endpos 36)))
+               (tb/textblock
+                :text " "
+                :startpos 38
+                :endpos 38
+                :delim
+                 (copy tb/delimwhitespace
+                  :pos 0))
+               (tb/textblock
+                :text "prop2"
+                :startpos 39
+                :endpos 43)
+               (tb/textblock
+                :text "="
+                :startpos 44
+                :endpos 44
+                :delim
+                 (copy delimxmlequal
+                  :pos 0))
+               (tb/textblock
+                :text "\"val2\""
+                :startpos 45
+                :endpos 50
+                :delim
+                 (copy tb/delimquote
+                  :pos 0)
+                :children
+                 (tb/textblocklist
+                  (tb/textblock
+                   :text "val2"
+                   :startpos 46
+                   :endpos 49)))
+                (tb/textblock
+                 :text " "
+                 :startpos 51
+                 :endpos 51
+                 :delim
+                  (copy tb/delimwhitespace
+                   :pos 0))
+                (tb/textblock
+                 :text "/"
+                 :startpos 52
+                 :endpos 52)))
+            (tb/textblock
+             :text "\n  "
+             :startpos 54
+             :endpos 56
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "</tag1>"
+             :startpos 57
+             :endpos 63
+             :delim
+              (copy tb/delimbracketangle
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "/tag1"
+                :startpos 58
+                :endpos 62)))
+            (tb/textblock
+             :text "\n"
+             :startpos 64
+             :endpos 64
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "</doc>"
+             :startpos 65
+             :endpos 70
+             :delim
+              (copy tb/delimbracketangle
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "/doc"
+                :startpos 66
+                :endpos 69)))))))
  :doc "Returns a parsed xml from a textblock.")
+
+(func xml-angle<-xml-textblock : xml
+ [xmlarg : xml
+  tb     : tb/textblock]
+ (if : xml
+  (then // close tag
+   (=
+    (:text tb)
+    (string
+     "</"
+     (:tag xmlarg)
+     ">"))
+   (xml-close<-xml-textblock
+    xmlarg
+    tb))
+  (else
+   (let : xml
+    [children : tb/textblocklist := (:children tb)
+     xmlchg   : xml              := (xml
+                                     :tag    :notag
+                                     :parent xmlarg)]
+    (xml-properties<-xml-textblocklist
+     xmlchg
+     children))))
+ :test (test
+        (xml
+         :tag :notag)
+        (xml-angle<-xml-textblock
+         (empty xml)
+         (empty tb/textblock)))
+       (test
+        (xml
+         :tag "doc")
+        (xml-angle<-xml-textblock
+         (empty xml)
+         (tb/textblock
+          :text "<doc>"
+          :startpos 1
+          :endpos 5
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "doc"
+             :startpos 2
+             :endpos 4)))))
+       (test
+        (xml
+         :tag "tag1"
+         :children
+          (xmllist
+           (xml
+            :tag "tag2"
+            :propmap
+             (stringmap
+              :prop1 "val1"
+              :prop2 "val2"))))
+        (xml-angle<-xml-textblock
+         (xml
+          :tag "tag1")
+         (tb/textblock
+          :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+          :startpos 20
+          :endpos 53
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "tag2"
+             :startpos 21
+             :endpos 24)
+            (tb/textblock
+             :text " "
+             :startpos 25
+             :endpos 25
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "prop1"
+             :startpos 26
+             :endpos 30)
+            (tb/textblock
+             :text "="
+             :startpos 31
+             :endpos 31
+             :delim
+              (copy delimxmlequal
+               :pos 0))
+            (tb/textblock
+             :text "\"val1\""
+             :startpos 32
+             :endpos 37
+             :delim
+              (copy tb/delimquote
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "val1"
+                :startpos 33
+                :endpos 36)))
+            (tb/textblock
+             :text " "
+             :startpos 38
+             :endpos 38
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "prop2"
+             :startpos 39
+             :endpos 43)
+            (tb/textblock
+             :text "="
+             :startpos 44
+             :endpos 44
+             :delim
+              (copy delimxmlequal
+               :pos 0))
+            (tb/textblock
+             :text "\"val2\""
+             :startpos 45
+             :endpos 50
+             :delim
+              (copy tb/delimquote
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "val2"
+                :startpos 46
+                :endpos 49)))
+             (tb/textblock
+              :text " "
+              :startpos 51
+              :endpos 51
+              :delim
+               (copy tb/delimwhitespace
+                :pos 0))
+             (tb/textblock
+              :text "/"
+              :startpos 52
+              :endpos 52)))))
+ :doc "Returns a modified xml from a single textblock.")
+
+(func xml-close<-xml-textblock : xml
+ [xmlarg : xml
+  tb     : tb/textblock]
+ (let : xml
+  [tag        : string  := (:tag xmlarg)
+   text       : string  := (:text tb)
+   parent     : xml     := (:parent xmlarg)
+   isnoparent : boolean := (is-empty parent)]
+  (if : xml
+   (then // self close tag
+    (or
+     (= "/" text)
+     (=
+      text
+      (string "</" tag ">")))
+    (if : xml
+     (then isnoparent xmlarg)
+     (else
+      (copy parent
+       :children
+        (xmllist
+         (:children parent)
+         (copy xmlarg
+          :parent
+           (empty xml)))))))
+   (else
+    (copy xmlarg
+     (msg<-error
+      (string
+       "Invalid Xml Close tag: "
+       text))))))
+ :test (test
+        (xml
+         :tag "doc")
+        (xml-close<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "/")))
+       (test
+        (xml
+         :tag "doc")
+        (xml-close<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "</doc>")))
+       (test
+        (xml
+         :tag "doc"
+         (msg
+          :severity 2
+          :text "Invalid Xml Close tag: /wrong"))
+        (xml-close<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "/wrong")))
+       (test
+        (xml
+         :tag "top"
+         :children
+          (xmllist
+           (xml
+            :tag "doc")))
+        (xml-close<-xml-textblock
+         (xml
+          :tag "doc"
+          :parent
+           (xml
+            :tag "top"))
+         (tb/textblock
+          :text "/")))
+ :doc "Returns a modified xml from a closing tag.")
+
+(func xml-parse<-xml-textblock : xml
+ [xmlarg : xml
+  tb     : tb/textblock]
+ (let : xml
+  [delim     : tb/delim := (:delim tb)
+   text      : string   := (:text  tb)
+   starttext : string   := (:starttext delim)]
+  (switch : xml
+   starttext
+   (case ""
+    (xml-text<-xml-textblock
+     xmlarg
+     tb))
+   (case (:starttext tb/delimbracketangle)
+    (xml-angle<-xml-textblock
+     xmlarg
+     tb))
+   (case (:starttext tb/delimwhitespace)
+    xmlarg)
+   (case (:starttext delimxmlcomment)
+    xmlarg)
+   (case (:starttext delimxmlcdata)
+    xmlarg)))
+ :test (test
+        (xml
+         :tag "doc")
+        (xml-parse<-xml-textblock
+         (empty xml)
+         (tb/textblock
+          :text "<doc>"
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "doc")))))
+       (test
+        (xml
+         :tag "doc")
+        (xml-parse<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "\n  "
+          :delim
+           (copy tb/delimwhitespace
+            :pos 0))))
+       (test
+        (xml
+         :tag "tag1"
+         :parent
+          (xml
+           :tag "doc"))
+        (xml-parse<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "<tag1>"
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "tag1")))))
+       (test
+        (xml
+         :tag "tag1"
+         :children
+          (xmllist
+           (xml
+            :tag "tag2"
+            :propmap
+             (stringmap
+              :prop1 "val1"
+              :prop2 "val2")))
+         :parent
+          (xml
+           :tag "doc"))
+        (xml-parse<-xml-textblock
+         (xml
+          :tag "tag1"
+          :parent
+           (xml
+            :tag "doc"))
+         (tb/textblock
+          :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "tag2")
+            (tb/textblock
+             :text " "
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "prop1")
+            (tb/textblock
+             :text "="
+             :delim
+              (copy delimxmlequal
+               :pos 0))
+            (tb/textblock
+             :text "\"val1\""
+             :delim
+              (copy tb/delimquote
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "val1")))
+            (tb/textblock
+             :text " "
+             :delim
+              (copy tb/delimwhitespace
+               :pos 0))
+            (tb/textblock
+             :text "prop2")
+            (tb/textblock
+             :text "="
+             :delim
+              (copy delimxmlequal
+               :pos 0))
+            (tb/textblock
+             :text "\"val2\""
+             :delim
+              (copy tb/delimquote
+               :pos 0)
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "val2")))
+             (tb/textblock
+              :text " "
+              :delim
+               (copy tb/delimwhitespace
+                :pos 0))
+             (tb/textblock
+              :text "/")))))
+       (test
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+           :tag "tag1"
+           :children
+            (xmllist
+             (xml
+              :tag "tag2"
+              :propmap
+               (stringmap
+                :prop1 "val1"
+                :prop2 "val2"))))))
+        (xml-parse<-xml-textblock
+         (xml
+          :tag "tag1"
+          :children
+           (xmllist
+            (xml
+             :tag "tag2"
+             :propmap
+              (stringmap
+               :prop1 "val1"
+               :prop2 "val2")))
+          :parent
+           (xml
+            :tag "doc"))
+         (tb/textblock
+          :text "</tag1>"
+          :delim
+           (copy tb/delimbracketangle
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "/tag1")))))
+
+/*
+          (tb/textblock
+           :text "</doc>"
+           :startpos 65
+           :endpos 70
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "/doc"
+              :startpos 66
+              :endpos 69)))))
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+            :tag "tag1"
+            :children
+             (xmllist
+              (xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))))
+
+*/
+ :doc "Returns a modified xml from a single textblock.")
+
+(func xml-parse<-xml-textblocklist : xml
+ [xmlarg        : xml
+  textblocklist : tb/textblocklist]
+ (any<-list-reduce : xml
+  textblocklist
+  xmlarg
+  (fn : xml
+   [reduce  : xml
+    current : tb/textblock]
+    (xml-parse<-xml-textblock
+     reduce
+     current)))
+ :test (test
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+            :tag "tag1"
+            :children
+             (xmllist
+              (xml
+               :tag "tag2"
+               :propmap
+                (stringmap
+                 :prop1 "val1"
+                 :prop2 "val2"))))))
+        (xml-parse<-xml-textblocklist
+         (empty xml)
+         (tb/textblocklist
+          (tb/textblock
+           :text "<doc>"
+           :startpos 1
+           :endpos 5
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "doc"
+              :startpos 2
+              :endpos 4)))
+          (tb/textblock
+           :text "\n  "
+           :startpos 6
+           :endpos 8
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "<tag1>"
+           :startpos 9
+           :endpos 14
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "tag1"
+              :startpos 10
+              :endpos 13)))
+          (tb/textblock
+           :text "\n    "
+           :startpos 15
+           :endpos 19
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
+           :startpos 20
+           :endpos 53
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "tag2"
+              :startpos 21
+              :endpos 24)
+             (tb/textblock
+              :text " "
+              :startpos 25
+              :endpos 25
+              :delim
+               (copy tb/delimwhitespace
+                :pos 0))
+             (tb/textblock
+              :text "prop1"
+              :startpos 26
+              :endpos 30)
+             (tb/textblock
+              :text "="
+              :startpos 31
+              :endpos 31
+              :delim
+               (copy delimxmlequal
+                :pos 0))
+             (tb/textblock
+              :text "\"val1\""
+              :startpos 32
+              :endpos 37
+              :delim
+               (copy tb/delimquote
+                :pos 0)
+              :children
+               (tb/textblocklist
+                (tb/textblock
+                 :text "val1"
+                 :startpos 33
+                 :endpos 36)))
+             (tb/textblock
+              :text " "
+              :startpos 38
+              :endpos 38
+              :delim
+               (copy tb/delimwhitespace
+                :pos 0))
+             (tb/textblock
+              :text "prop2"
+              :startpos 39
+              :endpos 43)
+             (tb/textblock
+              :text "="
+              :startpos 44
+              :endpos 44
+              :delim
+               (copy delimxmlequal
+                :pos 0))
+             (tb/textblock
+              :text "\"val2\""
+              :startpos 45
+              :endpos 50
+              :delim
+               (copy tb/delimquote
+                :pos 0)
+              :children
+               (tb/textblocklist
+                (tb/textblock
+                 :text "val2"
+                 :startpos 46
+                 :endpos 49)))
+              (tb/textblock
+               :text " "
+               :startpos 51
+               :endpos 51
+               :delim
+                (copy tb/delimwhitespace
+                 :pos 0))
+              (tb/textblock
+               :text "/"
+               :startpos 52
+               :endpos 52)))
+          (tb/textblock
+           :text "\n  "
+           :startpos 54
+           :endpos 56
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "</tag1>"
+           :startpos 57
+           :endpos 63
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "/tag1"
+              :startpos 58
+              :endpos 62)))
+          (tb/textblock
+           :text "\n"
+           :startpos 64
+           :endpos 64
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "</doc>"
+           :startpos 65
+           :endpos 70
+           :delim
+            (copy tb/delimbracketangle
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "/doc"
+              :startpos 66
+              :endpos 69))))))
+ :doc "Returns a modified xml from a textblocklist.")
+
+(func xml-property<-xml-textblock : xml
+ [xmlarg : xml
+  tbarg  : tb/textblock]
+ (let : xml
+  [delim     : tb/delim  := (:delim   tbarg)
+   text      : string    := (:text    tbarg)
+   delimname : string    := (:name    delim)
+   tag       : string    := (:tag     xmlarg)
+   prop      : string    := (:prop    xmlarg)
+   propmap   : stringmap := (:propmap xmlarg)]
+  (switch : xml
+   delimname
+   (case "" // plain text
+    (if : xml
+     (then
+      (boolean<-string-starts
+       text
+       "/")
+      (xml-close<-xml-textblock
+       xmlarg tbarg))
+     (then
+      (= ":notag" tag)
+      (copy xmlarg
+       :tag text))
+     (then
+      (= "" prop)
+      (copy xmlarg
+       :prop text))))
+   (case "delimquote"
+    (if : xml
+     (= "" prop)
+     (copy xmlarg
+      (msg<-error
+       "Found quoted text with no matching attribute."))
+     (copy xmlarg
+      :prop ""
+      :propmap
+       (copy propmap
+        prop (:text
+              (:1
+               (:children tbarg)))))))
+   (else xmlarg)))
+ :test (test
+        (xml
+         :tag "tag1")
+        (xml-property<-xml-textblock
+         (xml
+          :tag ":notag")
+         (tb/textblock
+          :text "tag1")))
+       (test
+        (xml
+         :tag "tag1"
+         :prop "prop1")
+        (xml-property<-xml-textblock
+         (xml
+          :tag "tag1")
+         (tb/textblock
+          :text "prop1")))
+       (test
+        (xml
+         :tag "tag1"
+         :propmap
+          (stringmap
+           :prop1 "val1"))
+        (xml-property<-xml-textblock
+         (xml
+          :tag "tag1"
+          :prop "prop1")
+         (tb/textblock
+          :delim
+           (copy tb/delimquote
+            :pos 0)
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "val1")))))
+ :doc "Returns a modified xml from a single property.")
+
+(func xml-properties<-xml-textblocklist : xml
+ [xmlarg        : xml
+  textblocklist : tb/textblocklist]
+ (let : xml
+  [xmlchg : xml := (any<-list-reduce : xml
+                    textblocklist
+                    xmlarg
+                    (fn : xml
+                     [reduce  : xml
+                      current : tb/textblock]
+                     (xml-property<-xml-textblock
+                      reduce
+                      current)))]
+  xmlchg)
+ :test (test
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+            :tag "tag2"
+            :propmap
+             (stringmap
+              :prop1 "val1"
+              :prop2 "val2"))))
+        (xml-properties<-xml-textblocklist
+         (xml
+          :tag :notag
+          :parent
+           (xml
+            :tag "doc"))
+         (tb/textblocklist
+          (tb/textblock
+           :text "tag2")
+          (tb/textblock
+           :text " "
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "prop1")
+          (tb/textblock
+           :text "="
+           :delim
+            (copy delimxmlequal
+             :pos 0))
+          (tb/textblock
+           :text "\"val1\""
+           :startpos 32
+           :endpos 37
+           :delim
+            (copy tb/delimquote
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "val1")))
+          (tb/textblock
+           :text " "
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "prop2")
+          (tb/textblock
+           :text "="
+           :delim
+            (copy delimxmlequal
+             :pos 0))
+          (tb/textblock
+           :text "\"val2\""
+           :delim
+            (copy tb/delimquote
+             :pos 0)
+           :children
+            (tb/textblocklist
+             (tb/textblock
+              :text "val2")))
+          (tb/textblock
+           :text " "
+           :delim
+            (copy tb/delimwhitespace
+             :pos 0))
+          (tb/textblock
+           :text "/"))))
+ :doc "Returns a modified xml from a textblocklist.")
 
 (func xml-read<-file : xml
  [file : fil/file]
@@ -61,3 +1265,41 @@
   (xml<-file loaded))
  :context
  :doc "Returns a parsed xml from a file.")
+
+(func xml-text<-xml-textblock : xml
+ [xmlarg : xml
+  tb     : tb/textblock]
+ (let : xml
+  [text   : string := (:text tb)
+   xmlchg : xml    := (xml
+                       :text text)]
+  (if : xml
+   (then // text node
+    (is-empty xmlarg)
+    xmlchg)
+   (else // add text
+    (copy xmlarg
+     :children
+      (xmllist
+       (:children xmlarg)
+       xmlchg)))))
+ :test (test
+        (xml
+         :text "text1")
+        (xml-text<-xml-textblock
+         (empty xml)
+         (tb/textblock
+          :text "text1")))
+       (test
+        (xml
+         :tag "doc"
+         :children
+          (xmllist
+           (xml
+            :text "text1")))
+        (xml-text<-xml-textblock
+         (xml
+          :tag "doc")
+         (tb/textblock
+          :text "text1")))
+ :doc "Returns a modified xml from text.")

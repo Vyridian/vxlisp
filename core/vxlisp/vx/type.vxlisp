@@ -3,7 +3,8 @@
 
 (func allowtypenames<-type : stringlist
  [type : any]
- (typenames<-typelist (allowtypes<-type type))
+ (typenames<-typelist
+  (allowtypes<-type type))
  :doc "Get the name of a given type")
 
 (func allowtypes<-type : typelist

@@ -19,6 +19,9 @@ import vx_sample_test from "./vx/sample_test.js"
 import vx_state_test from "./vx/state_test.js"
 import vx_test_test from "./vx/test_test.js"
 import vx_translate_test from "./vx/translate_test.js"
+import vx_translation_all_test from "./vx/translation/all_test.js"
+import vx_translation_en_test from "./vx/translation/en_test.js"
+import vx_translation_es_test from "./vx/translation/es_test.js"
 import vx_type_test from "./vx/type_test.js"
 import vx_web_html_test from "./vx/web/html_test.js"
 import vx_web_htmldoc_test from "./vx/web/htmldoc_test.js"
@@ -55,6 +58,9 @@ export default class app_test {
       vx_state_test.test_package(context),
       vx_test_test.test_package(context),
       vx_translate_test.test_package(context),
+      vx_translation_all_test.test_package(context),
+      vx_translation_en_test.test_package(context),
+      vx_translation_es_test.test_package(context),
       vx_type_test.test_package(context),
       vx_web_html_test.test_package(context),
       vx_web_htmldoc_test.test_package(context),

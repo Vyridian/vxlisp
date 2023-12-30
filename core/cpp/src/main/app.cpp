@@ -1,6 +1,8 @@
 
 #include <iostream>
 #include "vx/core.hpp"
+#include "vx/translation/en.hpp"
+
 
 int main(int iarglen, char* arrayarg[]) {
   int output = 0;
@@ -9,7 +11,7 @@ int main(int iarglen, char* arrayarg[]) {
 				vx_core::vx_reserve(arglist);
     vx_core::Type_context context = vx_core::e_context;
     std::string soutput = "";
-    context = vx_core::f_context_main(arglist);
+    context = vx_translation_en::f_context_en(arglist);
     vx_core::vx_reserve_context(context);
     vx_core::Type_string mainstring = vx_core::f_main(arglist);
     soutput = mainstring->vx_string();

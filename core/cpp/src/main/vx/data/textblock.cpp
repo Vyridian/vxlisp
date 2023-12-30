@@ -5140,11 +5140,36 @@ namespace vx_data_textblock {
                     vx_core::vx_ref_plus(text2);
                     vx_core::Type_int pos2 = vx_type::f_int_from_string_findkeyword(text2, vx_core::vx_new_string(":nonwhitespace"));
                     vx_core::vx_ref_plus(pos2);
-                    vx_core::Type_int pos3 = vx_core::f_if_1(
+                    vx_core::Type_int pos3 = vx_core::f_if_2(
                       vx_core::t_int,
-                      vx_core::f_eq(vx_core::vx_new_int(0), pos2),
-                      vx_type::f_length_from_string(text2),
-                      pos2
+                      vx_core::vx_new(vx_core::t_thenelselist, {
+                        vx_core::f_then(
+                          vx_core::t_boolean_from_func->vx_fn_new({pos2}, [pos2]() {
+                            vx_core::Type_boolean output_1 = vx_core::f_eq(vx_core::vx_new_int(0), pos2);
+                            return output_1;
+                          }),
+                          vx_core::t_any_from_func->vx_fn_new({text2}, [text2]() {
+                            vx_core::Type_int output_1 = vx_type::f_length_from_string(text2);
+                            return output_1;
+                          })
+                        ),
+                        vx_core::f_then(
+                          vx_core::t_boolean_from_func->vx_fn_new({pos2, pos}, [pos2, pos]() {
+                            vx_core::Type_boolean output_1 = vx_core::f_eq(pos2, pos);
+                            return output_1;
+                          }),
+                          vx_core::t_any_from_func->vx_fn_new({pos2}, [pos2]() {
+                            vx_core::Type_any output_1 = pos2;
+                            return output_1;
+                          })
+                        ),
+                        vx_core::f_else(
+                          vx_core::t_any_from_func->vx_fn_new({pos2}, [pos2]() {
+                            vx_core::Type_int output_1 = vx_core::f_minus1(pos2);
+                            return output_1;
+                          })
+                        )
+                      })
                     );
                     vx_core::vx_ref_plus(pos3);
                     vx_core::Type_string output_1 = vx_type::f_string_from_string_start_end(text, pos, pos3);

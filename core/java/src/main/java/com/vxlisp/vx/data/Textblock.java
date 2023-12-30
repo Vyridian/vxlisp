@@ -5119,11 +5119,31 @@ public final class Textblock {
                     Core.t_any_from_func.vx_fn_new(() -> {
                       final Core.Type_string text2 = Type.f_string_from_string_start(text, pos);
                       final Core.Type_int pos2 = Type.f_int_from_string_findkeyword(text2, Core.vx_new_string(":nonwhitespace"));
-                      final Core.Type_int pos3 = Core.f_if_1(
+                      final Core.Type_int pos3 = Core.f_if_2(
                         Core.t_int,
-                        Core.f_eq(Core.vx_new_int(0), pos2),
-                        Type.f_length_from_string(text2),
-                        pos2
+                        Core.t_thenelselist.vx_new(
+                            Core.f_then(
+                              Core.t_boolean_from_func.vx_fn_new(() -> {
+                                return Core.f_eq(Core.vx_new_int(0), pos2);
+                              }),
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Type.f_length_from_string(text2);
+                              })
+                            ),
+                            Core.f_then(
+                              Core.t_boolean_from_func.vx_fn_new(() -> {
+                                return Core.f_eq(pos2, pos);
+                              }),
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return pos2;
+                              })
+                            ),
+                            Core.f_else(
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Core.f_minus1(pos2);
+                              })
+                            )
+                        )
                       );
                       return Type.f_string_from_string_start_end(text, pos, pos3);
                     })

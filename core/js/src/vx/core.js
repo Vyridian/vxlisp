@@ -1397,6 +1397,18 @@ export default class vx_core {
   static t_translation = {}
 
   /**
+   * type: translationlist
+   * i18 language translation list.
+   */
+  static t_translationlist = {}
+
+  /**
+   * type: translationmap
+   * i18 language translation map.
+   */
+  static t_translationmap = {}
+
+  /**
    * type: type
    * Original Type Class
    */
@@ -2563,7 +2575,7 @@ export default class vx_core {
    * @param  {typemap} generic
    * @param  {map} valuemap
    * @param  {string} key
-   * @return {any}
+   * @return {any-1}
    */
   static t_any_from_map = {}
   static e_any_from_map = {vx_type: vx_core.t_any_from_map}
@@ -3897,6 +3909,55 @@ export default class vx_core {
   }
 
   /**
+   * @function msg_from_error
+   * Returns a msg from error code and detail
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   */
+  static t_msg_from_error_1 = {}
+  static e_msg_from_error_1 = {vx_type: vx_core.t_msg_from_error_1}
+
+  // (func msg<-error)
+  static f_msg_from_error_1(code, detail) {
+    let output = vx_core.e_msg
+    output = vx_core.f_new(
+      vx_core.t_msg,
+      ":code",
+      code,
+      ":severity",
+      vx_core.c_msg_error
+    )
+    return output
+  }
+
+  /**
+   * @function msg_from_error
+   * Returns a msg from error path code and detail
+   * @param  {string} path
+   * @param  {string} code
+   * @param  {any} detail
+   * @return {msg}
+   */
+  static t_msg_from_error_2 = {}
+  static e_msg_from_error_2 = {vx_type: vx_core.t_msg_from_error_2}
+
+  // (func msg<-error)
+  static f_msg_from_error_2(path, code, detail) {
+    let output = vx_core.e_msg
+    output = vx_core.f_new(
+      vx_core.t_msg,
+      ":code",
+      code,
+      ":path",
+      path,
+      ":severity",
+      vx_core.c_msg_error
+    )
+    return output
+  }
+
+  /**
    * @function msg_from_warning
    * Returns a msg from a warning string
    * @param  {string} warning
@@ -4826,6 +4887,8 @@ export default class vx_core {
   static e_thenelse = {}
   static e_thenelselist = []
   static e_translation = {}
+  static e_translationlist = []
+  static e_translationmap = {}
   static e_type = {}
   static e_typedef = {}
   static e_typelist = []
@@ -4916,6 +4979,8 @@ export default class vx_core {
       "thenelse": vx_core.e_thenelse,
       "thenelselist": vx_core.e_thenelselist,
       "translation": vx_core.e_translation,
+      "translationlist": vx_core.e_translationlist,
+      "translationmap": vx_core.e_translationmap,
       "type": vx_core.e_type,
       "typedef": vx_core.e_typedef,
       "typelist": vx_core.e_typelist,
@@ -5037,6 +5102,8 @@ export default class vx_core {
       "mempool-removerefchildren": vx_core.e_mempool_removerefchildren,
       "mempool-reserve": vx_core.e_mempool_reserve,
       "msg<-error": vx_core.e_msg_from_error,
+      "msg<-error_1": vx_core.e_msg_from_error_1,
+      "msg<-error_2": vx_core.e_msg_from_error_2,
       "msg<-warning": vx_core.e_msg_from_warning,
       "msgblock<-msgblock-msg": vx_core.e_msgblock_from_msgblock_msg,
       "msgblock<-msgblock-msgblock": vx_core.e_msgblock_from_msgblock_msgblock,
@@ -5195,6 +5262,8 @@ export default class vx_core {
       "mempool-removerefchildren": vx_core.t_mempool_removerefchildren,
       "mempool-reserve": vx_core.t_mempool_reserve,
       "msg<-error": vx_core.t_msg_from_error,
+      "msg<-error_1": vx_core.t_msg_from_error_1,
+      "msg<-error_2": vx_core.t_msg_from_error_2,
       "msg<-warning": vx_core.t_msg_from_warning,
       "msgblock<-msgblock-msg": vx_core.t_msgblock_from_msgblock_msg,
       "msgblock<-msgblock-msgblock": vx_core.t_msgblock_from_msgblock_msgblock,
@@ -5302,6 +5371,8 @@ export default class vx_core {
       "thenelse": vx_core.t_thenelse,
       "thenelselist": vx_core.t_thenelselist,
       "translation": vx_core.t_translation,
+      "translationlist": vx_core.t_translationlist,
+      "translationmap": vx_core.t_translationmap,
       "type": vx_core.t_type,
       "typedef": vx_core.t_typedef,
       "typelist": vx_core.t_typelist,
@@ -6127,6 +6198,16 @@ export default class vx_core {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "detail": {
+          "name" : "detail",
+          "type" : vx_core.t_any,
+          "multi": false
+        },
+        "path": {
+          "name" : "path",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
         "severity": {
           "name" : "severity",
           "type" : vx_core.t_int,
@@ -6551,11 +6632,16 @@ export default class vx_core {
           "name" : "translation",
           "type" : vx_core.t_translation,
           "multi": false
+        },
+        "translationmap": {
+          "name" : "translationmap",
+          "type" : vx_core.t_translationmap,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "translation",
-        "type" : vx_core.t_translation,
+        "name" : "translationmap",
+        "type" : vx_core.t_translationmap,
         "multi": false
       }
     }
@@ -6802,20 +6888,62 @@ export default class vx_core {
       disallowvalues: [],
       traits        : [],
       properties    : {
-        "translationmap": {
-          "name" : "translationmap",
+        "name": {
+          "name" : "name",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "wordmap": {
+          "name" : "wordmap",
           "type" : vx_core.t_stringmap,
           "multi": false
         }
       },
       proplast      : {
-        "name" : "translationmap",
+        "name" : "wordmap",
         "type" : vx_core.t_stringmap,
         "multi": false
       }
     }
     vx_core.e_translation['vx_type'] = vx_core.t_translation
     vx_core.e_translation['vx_value'] = {}
+
+    // (type translationlist)
+    vx_core.t_translationlist['vx_type'] = vx_core.t_type
+    vx_core.t_translationlist['vx_value'] = {
+      name          : "translationlist",
+      pkgname       : "vx/core",
+      extends       : ":list",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_translation],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_translationlist['vx_type'] = vx_core.t_translationlist
+
+    // (type translationmap)
+    vx_core.t_translationmap['vx_type'] = vx_core.t_type
+    vx_core.t_translationmap['vx_value'] = {
+      name          : "translationmap",
+      pkgname       : "vx/core",
+      extends       : ":map",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_translation],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_translationmap['vx_type'] = vx_core.t_translationmap
+    vx_core.e_translationmap['vx_value'] = {}
 
     // (type type)
     vx_core.t_type['vx_type'] = vx_core.t_type
@@ -9225,6 +9353,44 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_msg_from_error
+    }
+
+    // (func msg<-error)
+    vx_core.t_msg_from_error_1['vx_type'] = vx_core.t_type
+    vx_core.t_msg_from_error_1['vx_value'] = {
+      name          : "msg<-error",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_msg_from_error_1
+    }
+
+    // (func msg<-error)
+    vx_core.t_msg_from_error_2['vx_type'] = vx_core.t_type
+    vx_core.t_msg_from_error_2['vx_value'] = {
+      name          : "msg<-error",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 2,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_msg_from_error_2
     }
 
     // (func msg<-warning)

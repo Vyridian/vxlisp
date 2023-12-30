@@ -522,19 +522,19 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "31% 68/216")
+                  :text "31% 69/218")
                  (vx/web/html/p
-                  :text "5% 4/70")
+                  :text "5% 4/72")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "46% 62/132")
+                  :text "47% 63/132")
                  (vx/web/html/p
-                  :text "86% 208/240")
+                  :text "86% 212/244")
                  (vx/web/html/p
-                  :text "0% 0/156")
+                  :text "0% 1/158")
                  (vx/web/html/p
-                  :text "0% 0/156"))
+                  :text "0% 1/158"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -2743,6 +2743,46 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "false")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "copy")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmap
+  :a \"1\"
+  :b \"2\")
+ (copy (stringmap :a \"1\")
+  :b \"2\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"1\"
+ :b \"2\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"1\"
+ :b \"2\")")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -15932,26 +15972,2293 @@
                  (vx/web/html/p
                   :text "vx/data/xml")
                  (vx/web/html/p
-                  :text "0% 0/10")
+                  :text "47% 9/19")
+                 (vx/web/html/p
+                  :text "0% 0/3")
                  (vx/web/html/p
                   :text "0% 0/4")
                  (vx/web/html/p
-                  :text "0% 0/2")
+                  :text "75% 9/12")
                  (vx/web/html/p
-                  :text "0% 0/4")
+                  :text "63% 12/19")
                  (vx/web/html/p
-                  :text "40% 4/10")
+                  :text "0% 0/12")
                  (vx/web/html/p
-                  :text "0% 0/4")
-                 (vx/web/html/p
-                  :text "0% 0/4"))
+                  :text "0% 0/12"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
                   :nodes
                    (vx/web/html/divchildlist
                     (vx/web/html/table
-                     :tbody (vx/web/html/tbody)
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "textblock-xml<-string")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (tb/textblock
+  :text
+   \"<doc>
+      <tag1>
+        <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+      </tag1>
+    </doc>\"
+  :startpos 1
+  :endpos 70
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text \"<doc>\"
+     :startpos 1
+     :endpos 5
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"doc\"
+        :startpos 2
+        :endpos 4)))
+    (tb/textblock
+     :text \"
+  \"
+     :startpos 6
+     :endpos 8
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"<tag1>\"
+     :startpos 9
+     :endpos 14
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"tag1\"
+        :startpos 10
+        :endpos 13)))
+    (tb/textblock
+     :text \"
+    \"
+     :startpos 15
+     :endpos 19
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+     :startpos 20
+     :endpos 53
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"tag2\"
+        :startpos 21
+        :endpos 24)
+       (tb/textblock
+        :text \" \"
+        :startpos 25
+        :endpos 25
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (textblock
+        :text \"prop1\"
+        :startpos 26
+        :endpos 30)
+       (textblock
+        :text \"=\"
+        :startpos 31
+        :endpos 31
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text \"\\"val1\\"\"
+        :startpos 32
+        :endpos 37
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text \"val1\"
+           :startpos 33
+           :endpos 36)))
+       (tb/textblock
+        :text \" \"
+        :startpos 38
+        :endpos 38
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text \"prop2\"
+        :startpos 39
+        :endpos 43)
+       (textblock
+        :text \"=\"
+        :startpos 44
+        :endpos 44
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text \"\\"val2\\"\"
+        :startpos 45
+        :endpos 50
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text \"val2\"
+           :startpos 46
+           :endpos 49)))
+        (tb/textblock
+         :text \" \"
+         :startpos 51
+         :endpos 51
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"/\"
+         :startpos 52
+         :endpos 52)))
+    (tb/textblock
+     :text \"
+  \"
+     :startpos 54
+     :endpos 56
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"</tag1>\"
+     :startpos 57
+     :endpos 63
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"/tag1\"
+        :startpos 58
+        :endpos 62)))
+    (tb/textblock
+     :text \"
+\"
+     :startpos 64
+     :endpos 64
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text \"</doc>\"
+     :startpos 65
+     :endpos 70
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text \"/doc\"
+        :startpos 66
+        :endpos 69)))))
+ (textblock-xml<-string
+  \"<doc>
+     <tag1>
+       <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+     </tag1>
+   </doc>\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text
+  \"<doc>
+  <tag1>
+    <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+  </tag1>
+</doc>\"
+ :startpos 1
+ :endpos 70
+ :children
+  (vx/data/textblock/textblocklist
+   (vx/data/textblock/textblock
+    :text \"<doc>\"
+    :startpos 1
+    :endpos 5
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"doc\"
+       :startpos 2
+       :endpos 4)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+  \"
+    :startpos 6
+    :endpos 8
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"<tag1>\"
+    :startpos 9
+    :endpos 14
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"tag1\"
+       :startpos 10
+       :endpos 13)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+    \"
+    :startpos 15
+    :endpos 19
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+    :startpos 20
+    :endpos 53
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"tag2\"
+       :startpos 21
+       :endpos 24)
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 25
+       :endpos 25
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"prop1\"
+       :startpos 26
+       :endpos 30)
+      (vx/data/textblock/textblock
+       :text \"=\"
+       :startpos 31
+       :endpos 31
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimxmlequal\"
+         :starttext \"=\"))
+      (vx/data/textblock/textblock
+       :text \"\\"val1\\"\"
+       :startpos 32
+       :endpos 37
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimquote\"
+         :starttext quote
+         :endtext quote)
+       :children
+        (vx/data/textblock/textblocklist
+         (vx/data/textblock/textblock
+          :text \"val1\"
+          :startpos 33
+          :endpos 36)))
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 38
+       :endpos 38
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"prop2\"
+       :startpos 39
+       :endpos 43)
+      (vx/data/textblock/textblock
+       :text \"=\"
+       :startpos 44
+       :endpos 44
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimxmlequal\"
+         :starttext \"=\"))
+      (vx/data/textblock/textblock
+       :text \"\\"val2\\"\"
+       :startpos 45
+       :endpos 50
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimquote\"
+         :starttext quote
+         :endtext quote)
+       :children
+        (vx/data/textblock/textblocklist
+         (vx/data/textblock/textblock
+          :text \"val2\"
+          :startpos 46
+          :endpos 49)))
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 51
+       :endpos 51
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"/\"
+       :startpos 52
+       :endpos 52)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+  \"
+    :startpos 54
+    :endpos 56
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"</tag1>\"
+    :startpos 57
+    :endpos 63
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"/tag1\"
+       :startpos 58
+       :endpos 62)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+\"
+    :startpos 64
+    :endpos 64
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"</doc>\"
+    :startpos 65
+    :endpos 70
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"/doc\"
+       :startpos 66
+       :endpos 69)))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/textblock/textblock
+ :text
+  \"<doc>
+  <tag1>
+    <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+  </tag1>
+</doc>\"
+ :startpos 1
+ :endpos 70
+ :children
+  (vx/data/textblock/textblocklist
+   (vx/data/textblock/textblock
+    :text \"<doc>\"
+    :startpos 1
+    :endpos 5
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"doc\"
+       :startpos 2
+       :endpos 4)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+  \"
+    :startpos 6
+    :endpos 8
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"<tag1>\"
+    :startpos 9
+    :endpos 14
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"tag1\"
+       :startpos 10
+       :endpos 13)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+    \"
+    :startpos 15
+    :endpos 19
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+    :startpos 20
+    :endpos 53
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"tag2\"
+       :startpos 21
+       :endpos 24)
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 25
+       :endpos 25
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"prop1\"
+       :startpos 26
+       :endpos 30)
+      (vx/data/textblock/textblock
+       :text \"=\"
+       :startpos 31
+       :endpos 31
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimxmlequal\"
+         :starttext \"=\"))
+      (vx/data/textblock/textblock
+       :text \"\\"val1\\"\"
+       :startpos 32
+       :endpos 37
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimquote\"
+         :starttext quote
+         :endtext quote)
+       :children
+        (vx/data/textblock/textblocklist
+         (vx/data/textblock/textblock
+          :text \"val1\"
+          :startpos 33
+          :endpos 36)))
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 38
+       :endpos 38
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"prop2\"
+       :startpos 39
+       :endpos 43)
+      (vx/data/textblock/textblock
+       :text \"=\"
+       :startpos 44
+       :endpos 44
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimxmlequal\"
+         :starttext \"=\"))
+      (vx/data/textblock/textblock
+       :text \"\\"val2\\"\"
+       :startpos 45
+       :endpos 50
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimquote\"
+         :starttext quote
+         :endtext quote)
+       :children
+        (vx/data/textblock/textblocklist
+         (vx/data/textblock/textblock
+          :text \"val2\"
+          :startpos 46
+          :endpos 49)))
+      (vx/data/textblock/textblock
+       :text \" \"
+       :startpos 51
+       :endpos 51
+       :delim
+        (vx/data/textblock/delim
+         :name \"delimwhitespace\"
+         :starttext \":whitespace\"))
+      (vx/data/textblock/textblock
+       :text \"/\"
+       :startpos 52
+       :endpos 52)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+  \"
+    :startpos 54
+    :endpos 56
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"</tag1>\"
+    :startpos 57
+    :endpos 63
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"/tag1\"
+       :startpos 58
+       :endpos 62)))
+   (vx/data/textblock/textblock
+    :text
+     \"
+\"
+    :startpos 64
+    :endpos 64
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimwhitespace\"
+      :starttext \":whitespace\"))
+   (vx/data/textblock/textblock
+    :text \"</doc>\"
+    :startpos 65
+    :endpos 70
+    :delim
+     (vx/data/textblock/delim
+      :name \"delimbracketangle\"
+      :starttext \"<\"
+      :endtext \">\")
+    :children
+     (vx/data/textblock/textblocklist
+      (vx/data/textblock/textblock
+       :text \"/doc\"
+       :startpos 66
+       :endpos 69)))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-angle<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag :notag)
+ (xml-angle<-xml-textblock
+  (empty xml)
+  (empty tb/textblock)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \":notag\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \":notag\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-angle<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\")
+ (xml-angle<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"<doc>\"
+   :startpos 1
+   :endpos 5
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"doc\"
+      :startpos 2
+      :endpos 4)))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-angle<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\"))))
+ (xml-angle<-xml-textblock
+  (xml
+   :tag \"tag1\")
+  (tb/textblock
+   :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+   :startpos 20
+   :endpos 53
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag2\"
+      :startpos 21
+      :endpos 24)
+     (tb/textblock
+      :text \" \"
+      :startpos 25
+      :endpos 25
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop1\"
+      :startpos 26
+      :endpos 30)
+     (tb/textblock
+      :text \"=\"
+      :startpos 31
+      :endpos 31
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val1\\"\"
+      :startpos 32
+      :endpos 37
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val1\"
+         :startpos 33
+         :endpos 36)))
+     (tb/textblock
+      :text \" \"
+      :startpos 38
+      :endpos 38
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop2\"
+      :startpos 39
+      :endpos 43)
+     (tb/textblock
+      :text \"=\"
+      :startpos 44
+      :endpos 44
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val2\\"\"
+      :startpos 45
+      :endpos 50
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val2\"
+         :startpos 46
+         :endpos 49)))
+      (tb/textblock
+       :text \" \"
+       :startpos 51
+       :endpos 51
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"/\"
+       :startpos 52
+       :endpos 52)))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\"))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\"))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-close<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\")
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"/\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-close<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\")
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"</doc>\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-close<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  (msg
+   :severity 2
+   :text \"Invalid Xml Close tag: /wrong\"))
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"/wrong\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-close<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"top\"
+  :children
+   (xmllist
+    (xml
+     :tag \"doc\")))
+ (xml-close<-xml-textblock
+  (xml
+   :tag \"doc\"
+   :parent
+    (xml
+     :tag \"top\"))
+  (tb/textblock
+   :text \"/\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"top\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"doc\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"top\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"doc\")))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\")
+ (xml-parse<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"<doc>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"doc\")))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\")
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"
+  \"
+   :delim
+    (copy tb/delimwhitespace
+     :pos 0))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\"
+  :parent
+   (xml
+    :tag \"doc\"))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"<tag1>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag1\")))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :parent
+  (vx/data/xml/xml
+   :tag \"doc\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :parent
+  (vx/data/xml/xml
+   :tag \"doc\"))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\")))
+  :parent
+   (xml
+    :tag \"doc\"))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblock
+   :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"tag2\")
+     (tb/textblock
+      :text \" \"
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop1\")
+     (tb/textblock
+      :text \"=\"
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val1\\"\"
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val1\")))
+     (tb/textblock
+      :text \" \"
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"prop2\")
+     (tb/textblock
+      :text \"=\"
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text \"\\"val2\\"\"
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"val2\")))
+      (tb/textblock
+       :text \" \"
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"/\")))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\")))
+ :parent
+  (vx/data/xml/xml
+   :tag \"doc\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\")))
+ :parent
+  (vx/data/xml/xml
+   :tag \"doc\"))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+    :tag \"tag1\"
+    :children
+     (xmllist
+      (xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))
+ (xml-parse<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :children
+    (xmllist
+     (xml
+      :tag \"tag2\"
+      :propmap
+       (stringmap
+        :prop1 \"val1\"
+        :prop2 \"val2\")))
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblock
+   :text \"</tag1>\"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"/tag1\")))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-parse<-xml-textblocklist")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag1\"
+     :children
+      (xmllist
+       (xml
+        :tag \"tag2\"
+        :propmap
+         (stringmap
+          :prop1 \"val1\"
+          :prop2 \"val2\"))))))
+ (xml-parse<-xml-textblocklist
+  (empty xml)
+  (tb/textblocklist
+   (tb/textblock
+    :text \"<doc>\"
+    :startpos 1
+    :endpos 5
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"doc\"
+       :startpos 2
+       :endpos 4)))
+   (tb/textblock
+    :text \"
+  \"
+    :startpos 6
+    :endpos 8
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"<tag1>\"
+    :startpos 9
+    :endpos 14
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"tag1\"
+       :startpos 10
+       :endpos 13)))
+   (tb/textblock
+    :text \"
+    \"
+    :startpos 15
+    :endpos 19
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+    :startpos 20
+    :endpos 53
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"tag2\"
+       :startpos 21
+       :endpos 24)
+      (tb/textblock
+       :text \" \"
+       :startpos 25
+       :endpos 25
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"prop1\"
+       :startpos 26
+       :endpos 30)
+      (tb/textblock
+       :text \"=\"
+       :startpos 31
+       :endpos 31
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text \"\\"val1\\"\"
+       :startpos 32
+       :endpos 37
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text \"val1\"
+          :startpos 33
+          :endpos 36)))
+      (tb/textblock
+       :text \" \"
+       :startpos 38
+       :endpos 38
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text \"prop2\"
+       :startpos 39
+       :endpos 43)
+      (tb/textblock
+       :text \"=\"
+       :startpos 44
+       :endpos 44
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text \"\\"val2\\"\"
+       :startpos 45
+       :endpos 50
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text \"val2\"
+          :startpos 46
+          :endpos 49)))
+       (tb/textblock
+        :text \" \"
+        :startpos 51
+        :endpos 51
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text \"/\"
+        :startpos 52
+        :endpos 52)))
+   (tb/textblock
+    :text \"
+  \"
+    :startpos 54
+    :endpos 56
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"</tag1>\"
+    :startpos 57
+    :endpos 63
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"/tag1\"
+       :startpos 58
+       :endpos 62)))
+   (tb/textblock
+    :text \"
+\"
+    :startpos 64
+    :endpos 64
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"</doc>\"
+    :startpos 65
+    :endpos 70
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"/doc\"
+       :startpos 66
+       :endpos 69))))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-properties<-xml-textblocklist")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag2\"
+     :propmap
+      (stringmap
+       :prop1 \"val1\"
+       :prop2 \"val2\"))))
+ (xml-properties<-xml-textblocklist
+  (xml
+   :tag :notag
+   :parent
+    (xml
+     :tag \"doc\"))
+  (tb/textblocklist
+   (tb/textblock
+    :text \"tag2\")
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"prop1\")
+   (tb/textblock
+    :text \"=\"
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text \"\\"val1\\"\"
+    :startpos 32
+    :endpos 37
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"val1\")))
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"prop2\")
+   (tb/textblock
+    :text \"=\"
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text \"\\"val2\\"\"
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text \"val2\")))
+   (tb/textblock
+    :text \" \"
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text \"/\"))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\"))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag2\"
+    :propmap
+     (stringmap
+      :prop1 \"val1\"
+      :prop2 \"val2\"))))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-property<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\")
+ (xml-property<-xml-textblock
+  (xml
+   :tag \":notag\")
+  (tb/textblock
+   :text \"tag1\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-property<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\"
+  :prop \"prop1\")
+ (xml-property<-xml-textblock
+  (xml
+   :tag \"tag1\")
+  (tb/textblock
+   :text \"prop1\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :prop \"prop1\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :prop \"prop1\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-property<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"tag1\"
+  :propmap
+   (stringmap
+    :prop1 \"val1\"))
+ (xml-property<-xml-textblock
+  (xml
+   :tag \"tag1\"
+   :prop \"prop1\")
+  (tb/textblock
+   :delim
+    (copy tb/delimquote
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"val1\")))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :propmap
+  (stringmap
+   :prop1 \"val1\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"tag1\"
+ :propmap
+  (stringmap
+   :prop1 \"val1\"))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-text<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :text \"text1\")
+ (xml-text<-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text \"text1\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :text \"text1\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :text \"text1\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml-text<-xml-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :text \"text1\")))
+ (xml-text<-xml-textblock
+  (xml
+   :tag \"doc\")
+  (tb/textblock
+   :text \"text1\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :text \"text1\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :text \"text1\")))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "xml<-textblock")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (xml
+  :tag \"doc\"
+  :children
+   (xmllist
+    (xml
+     :tag \"tag1\"
+     :children
+      (xmllist
+       (xml
+        :tag \"tag2\"
+        :propmap
+         (stringmap
+          :prop1 \"val1\"
+          :prop2 \"val2\"))))))
+ (xml<-textblock
+  (tb/textblock
+   :text
+    \"<doc>
+       <tag1>
+         <tag2 prop1=\\"val1\\" prop2=\\"val2\\" />
+       </tag1>
+     </doc>\"
+   :startpos 1
+   :endpos 70
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text \"<doc>\"
+      :startpos 1
+      :endpos 5
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"doc\"
+         :startpos 2
+         :endpos 4)))
+     (tb/textblock
+      :text \"
+  \"
+      :startpos 6
+      :endpos 8
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"<tag1>\"
+      :startpos 9
+      :endpos 14
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"tag1\"
+         :startpos 10
+         :endpos 13)))
+     (tb/textblock
+      :text \"
+    \"
+      :startpos 15
+      :endpos 19
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
+      :startpos 20
+      :endpos 53
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"tag2\"
+         :startpos 21
+         :endpos 24)
+        (tb/textblock
+         :text \" \"
+         :startpos 25
+         :endpos 25
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"prop1\"
+         :startpos 26
+         :endpos 30)
+        (tb/textblock
+         :text \"=\"
+         :startpos 31
+         :endpos 31
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text \"\\"val1\\"\"
+         :startpos 32
+         :endpos 37
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text \"val1\"
+            :startpos 33
+            :endpos 36)))
+        (tb/textblock
+         :text \" \"
+         :startpos 38
+         :endpos 38
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text \"prop2\"
+         :startpos 39
+         :endpos 43)
+        (tb/textblock
+         :text \"=\"
+         :startpos 44
+         :endpos 44
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text \"\\"val2\\"\"
+         :startpos 45
+         :endpos 50
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text \"val2\"
+            :startpos 46
+            :endpos 49)))
+         (tb/textblock
+          :text \" \"
+          :startpos 51
+          :endpos 51
+          :delim
+           (copy tb/delimwhitespace
+            :pos 0))
+         (tb/textblock
+          :text \"/\"
+          :startpos 52
+          :endpos 52)))
+     (tb/textblock
+      :text \"
+  \"
+      :startpos 54
+      :endpos 56
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"</tag1>\"
+      :startpos 57
+      :endpos 63
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"/tag1\"
+         :startpos 58
+         :endpos 62)))
+     (tb/textblock
+      :text \"
+\"
+      :startpos 64
+      :endpos 64
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text \"</doc>\"
+      :startpos 65
+      :endpos 70
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text \"/doc\"
+         :startpos 66
+         :endpos 69)))))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/data/xml/xml
+ :tag \"doc\"
+ :children
+  (vx/data/xml/xmllist
+   (vx/data/xml/xml
+    :tag \"tag1\"
+    :children
+     (vx/data/xml/xmllist
+      (vx/data/xml/xml
+       :tag \"tag2\"
+       :propmap
+        (stringmap
+         :prop1 \"val1\"
+         :prop2 \"val2\"))))))")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes
@@ -18203,26 +20510,363 @@
                  (vx/web/html/p
                   :text "vx/translate")
                  (vx/web/html/p
-                  :text "0% 0/4")
+                  :text "10% 1/10")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/4")
+                  :text "10% 1/10")
                  (vx/web/html/p
-                  :text "100% 5/5")
+                  :text "100% 10/10")
                  (vx/web/html/p
-                  :text "0% 0/5")
+                  :text "0% 0/10")
                  (vx/web/html/p
-                  :text "0% 0/5"))
+                  :text "0% 0/10"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
                   :nodes
                    (vx/web/html/divchildlist
                     (vx/web/html/table
-                     :tbody (vx/web/html/tbody)
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "translate<-translation-string")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"Hola\"
+ (translate<-translation-string
+  (translation
+   :wordmap
+    (stringmap
+     \"Hello\" \"Hola\"))
+  \"Hello\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))))))
+                     :thead
+                      (vx/web/html/thead
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass?")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Name")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Test")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Expected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Actual"))))))))))))))
+           (vx/web/html/div
+            :nodes
+             (vx/web/html/divchildlist
+              (vx/web/html/details
+               :summary
+                (vx/web/html/divchildlist
+                 (vx/web/html/p
+                  :text "Pass")
+                 (vx/web/html/p
+                  :text "vx/translation/all")
+                 (vx/web/html/p
+                  :text "50% 1/2")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "50% 1/2")
+                 (vx/web/html/p
+                  :text "100% 2/2")
+                 (vx/web/html/p
+                  :text "0% 0/2")
+                 (vx/web/html/p
+                  :text "0% 0/2"))
+               :nodes
+                (vx/web/html/divchildlist
+                 (vx/web/html/div
+                  :nodes
+                   (vx/web/html/divchildlist
+                    (vx/web/html/table
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "translationmap-all")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"Hola\"
+ (trn/translate<-translationmap-name-string
+  (translationmap-all)
+  \"es\"
+  \"Hello\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))))))
+                     :thead
+                      (vx/web/html/thead
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass?")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Name")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Test")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Expected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Actual"))))))))))))))
+           (vx/web/html/div
+            :nodes
+             (vx/web/html/divchildlist
+              (vx/web/html/details
+               :summary
+                (vx/web/html/divchildlist
+                 (vx/web/html/p
+                  :text "Pass")
+                 (vx/web/html/p
+                  :text "vx/translation/en")
+                 (vx/web/html/p
+                  :text "33% 1/3")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "33% 1/3")
+                 (vx/web/html/p
+                  :text "100% 3/3")
+                 (vx/web/html/p
+                  :text "0% 0/3")
+                 (vx/web/html/p
+                  :text "0% 0/3"))
+               :nodes
+                (vx/web/html/divchildlist
+                 (vx/web/html/div
+                  :nodes
+                   (vx/web/html/divchildlist
+                    (vx/web/html/table
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "translation-en")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"Hello\"
+ (trn/translate<-translation-string
+  (translation-en)
+  \"Hello\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hello\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hello\"")))))))
+                     :thead
+                      (vx/web/html/thead
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass?")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Name")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Test")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Expected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Actual"))))))))))))))
+           (vx/web/html/div
+            :nodes
+             (vx/web/html/divchildlist
+              (vx/web/html/details
+               :summary
+                (vx/web/html/divchildlist
+                 (vx/web/html/p
+                  :text "Pass")
+                 (vx/web/html/p
+                  :text "vx/translation/es")
+                 (vx/web/html/p
+                  :text "50% 1/2")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "100% 0/0")
+                 (vx/web/html/p
+                  :text "50% 1/2")
+                 (vx/web/html/p
+                  :text "100% 2/2")
+                 (vx/web/html/p
+                  :text "0% 0/2")
+                 (vx/web/html/p
+                  :text "0% 0/2"))
+               :nodes
+                (vx/web/html/divchildlist
+                 (vx/web/html/div
+                  :nodes
+                   (vx/web/html/divchildlist
+                    (vx/web/html/table
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "translation-es")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"Hola\"
+ (trn/translate<-translation-string
+  (translation-es)
+  \"Hello\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"Hola\"")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes

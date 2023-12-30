@@ -47,7 +47,7 @@ func ExecuteProjectCommand(project *vxproject, origcommand *vxcommand) *vxmsgblo
 		if !issource {
 			switch command.lang {
 			case ":cpp":
-				msgs := CppWriteFromProjectCmd(project, command)
+				msgs := CppWriteFromProjectCmd(langcpp, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			case ":csharp":
 				msgs := LangWriteFromProjectCmd(langcsharp, project, command)
@@ -56,7 +56,7 @@ func ExecuteProjectCommand(project *vxproject, origcommand *vxcommand) *vxmsgblo
 				msgs := LangWriteFromProjectCmd(langjava, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			case ":js":
-				msgs := WriteJsFromProjectCmd(project, command)
+				msgs := JsWriteFromProjectCmd(langjs, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			case ":kotlin":
 				msgs := LangWriteFromProjectCmd(langkotlin, project, command)

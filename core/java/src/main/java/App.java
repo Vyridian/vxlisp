@@ -1,8 +1,8 @@
 /**
  * App
  */
-
-import com.vxlisp.vx.*;
+import com.vxlisp.vx.Core;
+import com.vxlisp.vx.translation.En;
 
 public final class App {
 
@@ -10,7 +10,7 @@ public final class App {
     try {
       String output = "";
       Core.Type_anylist arglist = Core.vx_anylist_from_arraystring(args);
-      Core.Type_context context = Core.f_context_main(arglist);
+      Core.Type_context context = En.f_context_en(arglist);
       Core.Type_string mainstring = Core.f_main(arglist);
       output = mainstring.vx_string();
       System.out.println(output);

@@ -3,24 +3,34 @@
        (lib fil :path vx/data/file)
  :doc "Language to language translation tools")
 
-(func translate : string
- [translation : translation
-  text        : string]
- (if : string
-  (is-empty translation)
-  text
-  (let : string
-   [textmap : stringmap := (:translationmap translation)
-    xlate   : string    := (any<-map textmap text)]
-   (if : string
-    (is-empty xlate)
-    text
-    xlate)))
- :doc "Returns a translated string from a translation or the original text if not found.")
+(func session<-session-name : session
+ [session : session
+  name    : string]
+ (copy session
+  :translation (translation<-session-name
+                session
+                name))
+ :doc "Returns an updated session with a translationmap and a translation name.")
+
+(func session<-session-translation : session
+ [session     : session
+  translation : translation]
+ (copy session
+  :translation translation)
+ :doc "Returns an updated session with a translation.")
+
+(func session<-session-translationmap-name : session
+ [session        : session
+  translationmap : translationmap
+  name           : string]
+ (copy session
+  :translation (any<-map translationmap name)
+  :translationmap translationmap)
+ :doc "Returns an updated session with a translationmap and a translation name.")
 
 (func translate : string
  [text : string]
- (translate
+ (translate<-translation-string
   (translation<-context)
   text)
  :context
@@ -31,21 +41,63 @@
  :context
  :doc "Returns a translated string from current context.")
 
-(func translation-load : translation
- [code : string]
+(func translate<-translation-string : string
+ [translation : translation
+  text        : string]
+ (if : string
+  (is-empty translation)
+  text
+  (let : string
+   [wordmap : stringmap := (:wordmap translation)
+    xlate   : string    := (any<-map wordmap text)]
+   (if : string
+    (is-empty xlate)
+    text
+    xlate)))
+ :test (test
+        "Hola"
+        (translate<-translation-string
+         (translation
+          :wordmap
+           (stringmap
+            "Hello" "Hola"))
+         "Hello"))
+ :doc "Returns a translated string from a translation or the original text if not found.")
+
+(func translate<-translationmap-name-string : string
+ [translationmap : translationmap
+  name           : string
+  text           : string]
+ (let : string
+  [translation : translation := (any<-map
+                                 translationmap
+                                 name)]
+  (translate<-translation-string
+   translation
+   text))
+ :doc "Returns a translated string from a translation map given a translation name and text.")
+
+(func translation<-session-name : translation
+ [session : session
+  name    : string]
  (let : translation
-  [filecsv : file      := (file
-                           :name (string code ".csv")
-                           :path "translation")
-   csvread : csv/csv   := (csv/csv-read<-file filecsv)
-   textmap : stringmap := (csv/stringmap<-csv csvread)]
-  (translation
-   :translationmap textmap))
- :context
- :doc "Returns a translation from the translation folder.")
+  [translationmap : translationmap := (:translationmap session)]
+  (any<-map : translation
+   translationmap
+   name))
+ :doc "Returns a translation from a session by name.")
 
 (func translation-load-session : translation
  [translation : translation]
  :context
  :sideeffects "Alters current (:translation session)"
  :doc "Returns a translation from the translation folder.")
+
+(func translationmap<-translations : translationmap
+ [translations : translationlist :...]
+ (map<-list : translationmap
+  translations
+  (fn : string
+   [translation : translation]
+   (:name translation)))
+ :doc "Returns a translationmap from one or more translations.")

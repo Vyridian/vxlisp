@@ -16,13 +16,13 @@ type vxlang struct {
 	lineend    string
 	itfext     string
 	classext   string
+	typeref    string
 }
 
-// var langcpp = NewLangCpp()
+var langcpp = NewLangCpp()
 var langcsharp = NewLangCsharp()
 var langjava = NewLangJava()
-
-// var langjs = NewLangJs()
+var langjs = NewLangJs()
 var langkotlin = NewLangKotlin()
 var langswift = NewLangSwift()
 
@@ -37,6 +37,7 @@ func NewLangCpp() *vxlang {
 	output.pkgref = "::"
 	output.indent = "  "
 	output.lineend = ";"
+	output.typeref = "->"
 	return output
 }
 
@@ -50,6 +51,7 @@ func NewLangCsharp() *vxlang {
 	output.pkgref = "."
 	output.indent = "  "
 	output.lineend = ";"
+	output.typeref = "."
 	return output
 }
 
@@ -65,6 +67,7 @@ func NewLangJava() *vxlang {
 	output.lineend = ";"
 	output.itfext = "extends"
 	output.classext = "extends"
+	output.typeref = "."
 	return output
 }
 
@@ -78,6 +81,7 @@ func NewLangJs() *vxlang {
 	output.pkgref = "."
 	output.indent = "  "
 	output.lineend = ";"
+	output.typeref = "."
 	return output
 }
 
@@ -92,6 +96,7 @@ func NewLangKotlin() *vxlang {
 	output.indent = "  "
 	output.lineend = ""
 	output.classext = ":"
+	output.typeref = "."
 	return output
 }
 
@@ -105,6 +110,7 @@ func NewLangSwift() *vxlang {
 	output.pkgref = "."
 	output.indent = "  "
 	output.lineend = ""
+	output.typeref = "."
 	return output
 }
 
@@ -1973,7 +1979,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 					structvalue := funcargs[0].value
 					work, msgs := LangFromValue(lang, structvalue, pkgname, fnc, 0, true, test, subpath)
 					msgblock = MsgblockAddBlock(msgblock, msgs)
-					work = work + "." + LangFromName(propname) + "()"
+					work = work + lang.typeref + LangFromName(propname) + "()"
 					argtexts = append(argtexts, work)
 					isskip = true
 				}
@@ -2411,6 +2417,52 @@ func LangGenericFromType(lang *vxlang, typ *vxtype) string {
 	return output
 }
 
+func LangImport(lang *vxlang, project *vxproject, pkgname string, imports string) string {
+	output := ""
+	importline := ""
+	switch lang.name {
+	case "cpp":
+		importline = "#include \"" + pkgname + ".hpp\""
+	case "java":
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		name := StringSubstring(pkgname, ipos+1, len(pkgname))
+		name = StringUCaseFirst(name)
+		importname := project.javadomain + "." + path + "." + name
+		importline = "import " + importname + lang.lineend
+	default:
+		importline = "import " + pkgname + lang.lineend
+	}
+	if !BooleanFromStringContains(imports, importline) {
+		output = importline + "\n"
+	}
+	return output
+}
+
+func LangImportTest(lang *vxlang, project *vxproject, pkgname string, imports string) string {
+	output := ""
+	importline := ""
+	switch lang.name {
+	case "cpp":
+		importline = "#include \"" + pkgname + "test.hpp\""
+	case "java":
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		name := StringSubstring(pkgname, ipos+1, len(pkgname))
+		name = StringUCaseFirst(name)
+		importname := project.javadomain + "." + path + "." + name + "Test"
+		importline = "import " + importname + lang.lineend
+	default:
+		importline = "import " + pkgname + "test" + lang.lineend
+	}
+	if !BooleanFromStringContains(imports, importline) {
+		output = importline + "\n"
+	}
+	return output
+}
+
 func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body string, test bool) string {
 	output := ""
 	switch lang.name {
@@ -2476,7 +2528,7 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
-				importline := "\nimport " + libpath + ";"
+				importline := "\nimport " + libpath + lang.lineend
 				if IntFromStringFind(output, importline) < 0 {
 					output += importline
 				}
@@ -2941,6 +2993,8 @@ func LangNameFromFunc(fnc *vxfunc) string {
 func LangNameFromPkgName(lang *vxlang, pkgname string) string {
 	output := ""
 	switch lang.name {
+	case "cpp":
+		output = pkgname
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		output = StringSubstring(pkgname, ipos+1, len(pkgname))
@@ -3549,7 +3603,8 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 	indent1 := LangIndent(lang, 1, true)
 	indent2 := LangIndent(lang, 2, true)
 	indent3 := LangIndent(lang, 3, true)
-	includetext := ""
+	imports := ""
+	imports = LangImport(lang, project, "vx/core", imports)
 	contexttext := LangVar(lang, "context", contexttype, "Core.f_context_main(arglist)", 3, true, false)
 	maintext := "" +
 		LangVar(lang, "mainval", stringtype, "Core.f_main(arglist)", 3, true, false) +
@@ -3567,7 +3622,7 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname == "" {
 			} else if contextfunc.pkgname != mainfunc.pkgname {
-				includetext += "\nimport " + contextfunc.pkgname + ";"
+				imports += LangImport(lang, project, contextfunc.pkgname, imports)
 			}
 			if contextfunc.async {
 				contexttext = "" +
@@ -3579,7 +3634,7 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 		}
 		if mainfunc != emptyfunc {
 			if mainfunc.pkgname != "" {
-				includetext += "\nimport " + mainfunc.pkgname + ";"
+				imports += LangImport(lang, project, mainfunc.pkgname, imports)
 			}
 			params := "arglist"
 			if mainfunc.context {
@@ -3595,7 +3650,6 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			}
 		}
 	}
-	imports := ""
 	packageopen := ""
 	classopen := ""
 	classclose := ""
@@ -3611,7 +3665,6 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 	outputclose = LangVarSet(lang, "output", "mainstring.vx_string()", 3)
 	switch lang.name {
 	case "java":
-		imports = indent0 + "import com.vxlisp.vx.*;\n"
 		classopen = indent0 + "public final class App {\n"
 		classclose = indent0 + "}\n"
 		mainopen = indent1 + "public static void main(String[] args) {"
@@ -3624,7 +3677,6 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 		arglistinit = LangVar(lang, "arglist", anylisttype, "Core.vx_anylist_from_arraystring(args)", 3, true, false)
 		outputprint = indent3 + "System.out.println(output);"
 	case "kotlin":
-		imports = indent0 + "import com.vxlisp.vx.Core as vx_core\n"
 		packageopen = indent0 + "package App\n"
 		mainopen = indent1 + "fun main(args : Array<String>) {"
 		mainclose = indent1 + "}\n"
@@ -3659,6 +3711,7 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 
 func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix string) string {
 	imports := ""
+	imports += LangImport(lang, project, "vx/core", imports)
 	contexttext := `
   Core.Type_anylist arglist = Core.e_anylist;
   Core.Type_context context = ` + pkgprefix + `vx.Test.f_context_test(arglist);`
@@ -3669,6 +3722,11 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
+			switch contextfunc.pkgname {
+			case "vx/test":
+			default:
+				imports += LangImport(lang, project, contextfunc.pkgname, imports)
+			}
 			libprefix := ""
 			switch lang.name {
 			case "java", "kotlin":
@@ -3680,14 +3738,6 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			if pos >= 0 {
 				pkgpath = pkgname[0:pos]
 				pkgpath = libprefix + StringFromStringFindReplace(pkgpath, "/", ".")
-			}
-			if contextfunc.pkgname != "" {
-				importline := "\nimport " + pkgpath + ".*;"
-				if importline == "\nimport com.vxlisp.vx.*;" {
-				} else if BooleanFromStringContains(imports, importline) {
-				} else {
-					imports += importline
-				}
 			}
 			if contextfunc.async {
 				contexttext = `
@@ -3712,26 +3762,14 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 		}
 		if iscontinue {
 			pkgname := pkg.name
-			pkgpath := ""
+			imports += LangImportTest(lang, project, pkgname, imports)
 			pos := strings.LastIndex(pkgname, "/")
 			if pos >= 0 {
-				pkgpath = pkgname[0:pos]
 				pkgname = pkgname[pos+1:]
 			}
 			pkgname = StringUCaseFirst(pkgname)
 			testpackage := "\n    " + pkgname + "Test.test_package(context)"
 			listtestpackage = append(listtestpackage, testpackage)
-			libprefix := ""
-			switch lang.name {
-			case "java", "kotlin":
-				libprefix = pkg.project.javadomain + "."
-			}
-			importline := "\nimport " + libprefix + StringFromStringFindReplace(pkgpath, "/", ".") + ".*;"
-			if importline == "\nimport com.vxlisp.vx.*;" {
-			} else if BooleanFromStringContains(imports, importline) {
-			} else {
-				imports += importline
-			}
 			tests += `
   @Test
   @DisplayName("` + pkg.name + `")
@@ -3746,7 +3784,6 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
 	output := `
 ` + imports + `
-import com.vxlisp.vx.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

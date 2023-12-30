@@ -118,6 +118,7 @@ namespace vx_collection {
 
   // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
   vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter) {
+    vx_core::vx_reserve({vallist, fn_filter});
 	  	vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_Type_listany listval = vallist->vx_list();
     vx_core::vx_Type_listany items;
@@ -132,7 +133,7 @@ namespace vx_collection {
       vx_core::vx_release(isempty);
     }
     output = generic_list_1->vx_new(items);
-    vx_core::vx_release_except({vallist, fn_filter}, output);
+    vx_core::vx_release_one_except({vallist, fn_filter}, output);
 		  return output;
  	}
 

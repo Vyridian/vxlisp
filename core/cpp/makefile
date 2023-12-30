@@ -1,7 +1,7 @@
 DIR_ROOT=.
 DIR_MAIN=main
 DIR_TEST=test
-DIRS_SUB=vx vx/data vx/web
+DIRS_SUB=vx vx/data vx/translation vx/web
 DIRS_INC=$(DIR_ROOT)/include/
 
 CC=g++

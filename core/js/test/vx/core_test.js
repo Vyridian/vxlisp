@@ -22,12 +22,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 208, ":total", 240), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 62, ":total", 132), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 212, ":total", 244), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 63, ":total", 132), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 68, ":total", 216), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 70)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 69, ":total", 218), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 72)
     )
   }
 
@@ -102,6 +102,8 @@ export default class vx_core_test {
           "thenelse", 0,
           "thenelselist", 0,
           "translation", 0,
+          "translationlist", 0,
+          "translationmap", 0,
           "type", 0,
           "typedef", 0,
           "typelist", 0,
@@ -200,7 +202,7 @@ export default class vx_core_test {
           "contains", 2,
           "contains_1", 3,
           "context-main", 0,
-          "copy", 0,
+          "copy", 1,
           "else", 0,
           "empty", 3,
           "extends<-any", 0,
@@ -245,6 +247,8 @@ export default class vx_core_test {
           "mempool-removerefchildren", 0,
           "mempool-reserve", 0,
           "msg<-error", 0,
+          "msg<-error_1", 0,
+          "msg<-error_2", 0,
           "msg<-warning", 0,
           "msgblock<-msgblock-msg", 0,
           "msgblock<-msgblock-msgblock", 0,
@@ -1709,6 +1713,44 @@ export default class vx_core_test {
     return output
   }
 
+  static f_copy(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "copy",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy (stringmap :a \"1\")\n  :b \"2\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":a",
+                "1",
+                ":b",
+                "2"
+              ),
+              vx_core.f_copy(
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":a",
+                  "1"
+                ),
+                ":b",
+                "2"
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_empty(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -2984,6 +3026,7 @@ export default class vx_core_test {
       vx_core_test.f_compare(context),
       vx_core_test.f_contains(context),
       vx_core_test.f_contains_1(context),
+      vx_core_test.f_copy(context),
       vx_core_test.f_empty(context),
       vx_core_test.f_first_from_list(context),
       vx_core_test.f_first_from_list_any_from_any(context),

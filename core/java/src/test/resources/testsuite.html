@@ -420,11 +420,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">31% 68/216</p>
-              <p class="coveragenums">5% 4/70</p>
+              <p class="coveragenums">31% 69/218</p>
+              <p class="coveragenums">5% 4/72</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">46% 62/132</p>
-              <p class="coveragenums">86% 208/240</p>
+              <p class="coveragenums">47% 63/132</p>
+              <p class="coveragenums">86% 212/244</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -1793,6 +1793,32 @@
                     </td>
                     <td>
                       <p class="preformatted">false</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">copy</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmap
+  :a "1"
+  :b "2")
+ (copy (stringmap :a "1")
+  :b "2"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "1"
+ :b "2")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "1"
+ :b "2")</p>
                     </td>
                   </tr>
                   <tr>
@@ -13332,11 +13358,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/xml</p>
-              <p class="coveragenums">0% 0/10</p>
+              <p class="coveragenums">47% 9/19</p>
+              <p class="coveragenums">0% 0/3</p>
               <p class="coveragenums">0% 0/4</p>
-              <p class="coveragenums">0% 0/2</p>
-              <p class="coveragenums">0% 0/4</p>
-              <p class="coveragenums">40% 4/10</p>
+              <p class="coveragenums">75% 9/12</p>
+              <p class="coveragenums">63% 12/19</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -13361,7 +13387,1978 @@
                     </td>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblock-xml&lt;-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (tb/textblock
+  :text
+   "&lt;doc&gt;
+      &lt;tag1&gt;
+        &lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;
+      &lt;/tag1&gt;
+    &lt;/doc&gt;"
+  :startpos 1
+  :endpos 70
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text "&lt;doc&gt;"
+     :startpos 1
+     :endpos 5
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "doc"
+        :startpos 2
+        :endpos 4)))
+    (tb/textblock
+     :text "
+  "
+     :startpos 6
+     :endpos 8
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text "&lt;tag1&gt;"
+     :startpos 9
+     :endpos 14
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "tag1"
+        :startpos 10
+        :endpos 13)))
+    (tb/textblock
+     :text "
+    "
+     :startpos 15
+     :endpos 19
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text "&lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;"
+     :startpos 20
+     :endpos 53
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "tag2"
+        :startpos 21
+        :endpos 24)
+       (tb/textblock
+        :text " "
+        :startpos 25
+        :endpos 25
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (textblock
+        :text "prop1"
+        :startpos 26
+        :endpos 30)
+       (textblock
+        :text "="
+        :startpos 31
+        :endpos 31
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text "\"val1\""
+        :startpos 32
+        :endpos 37
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text "val1"
+           :startpos 33
+           :endpos 36)))
+       (tb/textblock
+        :text " "
+        :startpos 38
+        :endpos 38
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text "prop2"
+        :startpos 39
+        :endpos 43)
+       (textblock
+        :text "="
+        :startpos 44
+        :endpos 44
+        :delim
+         (copy delimxmlequal
+          :pos 0))
+       (tb/textblock
+        :text "\"val2\""
+        :startpos 45
+        :endpos 50
+        :delim
+         (copy tb/delimquote
+          :pos 0)
+        :children
+         (tb/textblocklist
+          (tb/textblock
+           :text "val2"
+           :startpos 46
+           :endpos 49)))
+        (tb/textblock
+         :text " "
+         :startpos 51
+         :endpos 51
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "/"
+         :startpos 52
+         :endpos 52)))
+    (tb/textblock
+     :text "
+  "
+     :startpos 54
+     :endpos 56
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text "&lt;/tag1&gt;"
+     :startpos 57
+     :endpos 63
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "/tag1"
+        :startpos 58
+        :endpos 62)))
+    (tb/textblock
+     :text "
+"
+     :startpos 64
+     :endpos 64
+     :delim
+      (copy tb/delimwhitespace
+       :pos 0))
+    (tb/textblock
+     :text "&lt;/doc&gt;"
+     :startpos 65
+     :endpos 70
+     :delim
+      (copy tb/delimbracketangle
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "/doc"
+        :startpos 66
+        :endpos 69)))))
+ (textblock-xml&lt;-string
+  "&lt;doc&gt;
+     &lt;tag1&gt;
+       &lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;
+     &lt;/tag1&gt;
+   &lt;/doc&gt;"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text
+  "&lt;doc&gt;
+  &lt;tag1&gt;
+    &lt;tag2 prop1="val1" prop2="val2" /&gt;
+  &lt;/tag1&gt;
+&lt;/doc&gt;"
+ :startpos 1
+ :endpos 70
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;doc&gt;"
+    :startpos 1
+    :endpos 5
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "doc"
+       :startpos 2
+       :endpos 4)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 6
+    :endpos 8
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;tag1&gt;"
+    :startpos 9
+    :endpos 14
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag1"
+       :startpos 10
+       :endpos 13)))
+   (textblock
+    :text
+     "
+    "
+    :startpos 15
+    :endpos 19
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;tag2 prop1="val1" prop2="val2" /&gt;"
+    :startpos 20
+    :endpos 53
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag2"
+       :startpos 21
+       :endpos 24)
+      (textblock
+       :text " "
+       :startpos 25
+       :endpos 25
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop1"
+       :startpos 26
+       :endpos 30)
+      (textblock
+       :text "="
+       :startpos 31
+       :endpos 31
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val1""
+       :startpos 32
+       :endpos 37
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val1"
+          :startpos 33
+          :endpos 36)))
+      (textblock
+       :text " "
+       :startpos 38
+       :endpos 38
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop2"
+       :startpos 39
+       :endpos 43)
+      (textblock
+       :text "="
+       :startpos 44
+       :endpos 44
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val2""
+       :startpos 45
+       :endpos 50
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val2"
+          :startpos 46
+          :endpos 49)))
+      (textblock
+       :text " "
+       :startpos 51
+       :endpos 51
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "/"
+       :startpos 52
+       :endpos 52)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 54
+    :endpos 56
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;/tag1&gt;"
+    :startpos 57
+    :endpos 63
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/tag1"
+       :startpos 58
+       :endpos 62)))
+   (textblock
+    :text
+     "
+"
+    :startpos 64
+    :endpos 64
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;/doc&gt;"
+    :startpos 65
+    :endpos 70
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/doc"
+       :startpos 66
+       :endpos 69)))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text
+  "&lt;doc&gt;
+  &lt;tag1&gt;
+    &lt;tag2 prop1="val1" prop2="val2" /&gt;
+  &lt;/tag1&gt;
+&lt;/doc&gt;"
+ :startpos 1
+ :endpos 70
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;doc&gt;"
+    :startpos 1
+    :endpos 5
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "doc"
+       :startpos 2
+       :endpos 4)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 6
+    :endpos 8
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;tag1&gt;"
+    :startpos 9
+    :endpos 14
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag1"
+       :startpos 10
+       :endpos 13)))
+   (textblock
+    :text
+     "
+    "
+    :startpos 15
+    :endpos 19
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;tag2 prop1="val1" prop2="val2" /&gt;"
+    :startpos 20
+    :endpos 53
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag2"
+       :startpos 21
+       :endpos 24)
+      (textblock
+       :text " "
+       :startpos 25
+       :endpos 25
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop1"
+       :startpos 26
+       :endpos 30)
+      (textblock
+       :text "="
+       :startpos 31
+       :endpos 31
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val1""
+       :startpos 32
+       :endpos 37
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val1"
+          :startpos 33
+          :endpos 36)))
+      (textblock
+       :text " "
+       :startpos 38
+       :endpos 38
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop2"
+       :startpos 39
+       :endpos 43)
+      (textblock
+       :text "="
+       :startpos 44
+       :endpos 44
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val2""
+       :startpos 45
+       :endpos 50
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val2"
+          :startpos 46
+          :endpos 49)))
+      (textblock
+       :text " "
+       :startpos 51
+       :endpos 51
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "/"
+       :startpos 52
+       :endpos 52)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 54
+    :endpos 56
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;/tag1&gt;"
+    :startpos 57
+    :endpos 63
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/tag1"
+       :startpos 58
+       :endpos 62)))
+   (textblock
+    :text
+     "
+"
+    :startpos 64
+    :endpos 64
+    :delim
+     (delim
+      :name "delimwhitespace"
+      :starttext ":whitespace"))
+   (textblock
+    :text "&lt;/doc&gt;"
+    :startpos 65
+    :endpos 70
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/doc"
+       :startpos 66
+       :endpos 69)))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-angle&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag :notag)
+ (xml-angle&lt;-xml-textblock
+  (empty xml)
+  (empty tb/textblock)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag ":notag")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag ":notag")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-angle&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc")
+ (xml-angle&lt;-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text "&lt;doc&gt;"
+   :startpos 1
+   :endpos 5
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "doc"
+      :startpos 2
+      :endpos 4)))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-angle&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1"
+  :children
+   (xmllist
+    (xml
+     :tag "tag2"
+     :propmap
+      (stringmap
+       :prop1 "val1"
+       :prop2 "val2"))))
+ (xml-angle&lt;-xml-textblock
+  (xml
+   :tag "tag1")
+  (tb/textblock
+   :text "&lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;"
+   :startpos 20
+   :endpos 53
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "tag2"
+      :startpos 21
+      :endpos 24)
+     (tb/textblock
+      :text " "
+      :startpos 25
+      :endpos 25
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "prop1"
+      :startpos 26
+      :endpos 30)
+     (tb/textblock
+      :text "="
+      :startpos 31
+      :endpos 31
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text "\"val1\""
+      :startpos 32
+      :endpos 37
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "val1"
+         :startpos 33
+         :endpos 36)))
+     (tb/textblock
+      :text " "
+      :startpos 38
+      :endpos 38
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "prop2"
+      :startpos 39
+      :endpos 43)
+     (tb/textblock
+      :text "="
+      :startpos 44
+      :endpos 44
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text "\"val2\""
+      :startpos 45
+      :endpos 50
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "val2"
+         :startpos 46
+         :endpos 49)))
+      (tb/textblock
+       :text " "
+       :startpos 51
+       :endpos 51
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text "/"
+       :startpos 52
+       :endpos 52)))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2"))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-close&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc")
+ (xml-close&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "/")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-close&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc")
+ (xml-close&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "&lt;/doc&gt;")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-close&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  (msg
+   :severity 2
+   :text "Invalid Xml Close tag: /wrong"))
+ (xml-close&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "/wrong")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-close&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "top"
+  :children
+   (xmllist
+    (xml
+     :tag "doc")))
+ (xml-close&lt;-xml-textblock
+  (xml
+   :tag "doc"
+   :parent
+    (xml
+     :tag "top"))
+  (tb/textblock
+   :text "/")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "top"
+ :children
+  (xmllist
+   (xml
+    :tag "doc")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "top"
+ :children
+  (xmllist
+   (xml
+    :tag "doc")))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc")
+ (xml-parse&lt;-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text "&lt;doc&gt;"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "doc")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc")
+ (xml-parse&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "
+  "
+   :delim
+    (copy tb/delimwhitespace
+     :pos 0))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1"
+  :parent
+   (xml
+    :tag "doc"))
+ (xml-parse&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "&lt;tag1&gt;"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "tag1")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :parent
+  (xml
+   :tag "doc"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :parent
+  (xml
+   :tag "doc"))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1"
+  :children
+   (xmllist
+    (xml
+     :tag "tag2"
+     :propmap
+      (stringmap
+       :prop1 "val1"
+       :prop2 "val2")))
+  :parent
+   (xml
+    :tag "doc"))
+ (xml-parse&lt;-xml-textblock
+  (xml
+   :tag "tag1"
+   :parent
+    (xml
+     :tag "doc"))
+  (tb/textblock
+   :text "&lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "tag2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "prop1")
+     (tb/textblock
+      :text "="
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text "\"val1\""
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "val1")))
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "prop2")
+     (tb/textblock
+      :text "="
+      :delim
+       (copy delimxmlequal
+        :pos 0))
+     (tb/textblock
+      :text "\"val2\""
+      :delim
+       (copy tb/delimquote
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "val2")))
+      (tb/textblock
+       :text " "
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text "/")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2")))
+ :parent
+  (xml
+   :tag "doc"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2")))
+ :parent
+  (xml
+   :tag "doc"))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  :children
+   (xmllist
+    (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))
+ (xml-parse&lt;-xml-textblock
+  (xml
+   :tag "tag1"
+   :children
+    (xmllist
+     (xml
+      :tag "tag2"
+      :propmap
+       (stringmap
+        :prop1 "val1"
+        :prop2 "val2")))
+   :parent
+    (xml
+     :tag "doc"))
+  (tb/textblock
+   :text "&lt;/tag1&gt;"
+   :delim
+    (copy tb/delimbracketangle
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "/tag1")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-parse&lt;-xml-textblocklist</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  :children
+   (xmllist
+    (xml
+     :tag "tag1"
+     :children
+      (xmllist
+       (xml
+        :tag "tag2"
+        :propmap
+         (stringmap
+          :prop1 "val1"
+          :prop2 "val2"))))))
+ (xml-parse&lt;-xml-textblocklist
+  (empty xml)
+  (tb/textblocklist
+   (tb/textblock
+    :text "&lt;doc&gt;"
+    :startpos 1
+    :endpos 5
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "doc"
+       :startpos 2
+       :endpos 4)))
+   (tb/textblock
+    :text "
+  "
+    :startpos 6
+    :endpos 8
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "&lt;tag1&gt;"
+    :startpos 9
+    :endpos 14
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "tag1"
+       :startpos 10
+       :endpos 13)))
+   (tb/textblock
+    :text "
+    "
+    :startpos 15
+    :endpos 19
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "&lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;"
+    :startpos 20
+    :endpos 53
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "tag2"
+       :startpos 21
+       :endpos 24)
+      (tb/textblock
+       :text " "
+       :startpos 25
+       :endpos 25
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text "prop1"
+       :startpos 26
+       :endpos 30)
+      (tb/textblock
+       :text "="
+       :startpos 31
+       :endpos 31
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text "\"val1\""
+       :startpos 32
+       :endpos 37
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "val1"
+          :startpos 33
+          :endpos 36)))
+      (tb/textblock
+       :text " "
+       :startpos 38
+       :endpos 38
+       :delim
+        (copy tb/delimwhitespace
+         :pos 0))
+      (tb/textblock
+       :text "prop2"
+       :startpos 39
+       :endpos 43)
+      (tb/textblock
+       :text "="
+       :startpos 44
+       :endpos 44
+       :delim
+        (copy delimxmlequal
+         :pos 0))
+      (tb/textblock
+       :text "\"val2\""
+       :startpos 45
+       :endpos 50
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "val2"
+          :startpos 46
+          :endpos 49)))
+       (tb/textblock
+        :text " "
+        :startpos 51
+        :endpos 51
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text "/"
+        :startpos 52
+        :endpos 52)))
+   (tb/textblock
+    :text "
+  "
+    :startpos 54
+    :endpos 56
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "&lt;/tag1&gt;"
+    :startpos 57
+    :endpos 63
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "/tag1"
+       :startpos 58
+       :endpos 62)))
+   (tb/textblock
+    :text "
+"
+    :startpos 64
+    :endpos 64
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "&lt;/doc&gt;"
+    :startpos 65
+    :endpos 70
+    :delim
+     (copy tb/delimbracketangle
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "/doc"
+       :startpos 66
+       :endpos 69))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-properties&lt;-xml-textblocklist</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  :children
+   (xmllist
+    (xml
+     :tag "tag2"
+     :propmap
+      (stringmap
+       :prop1 "val1"
+       :prop2 "val2"))))
+ (xml-properties&lt;-xml-textblocklist
+  (xml
+   :tag :notag
+   :parent
+    (xml
+     :tag "doc"))
+  (tb/textblocklist
+   (tb/textblock
+    :text "tag2")
+   (tb/textblock
+    :text " "
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "prop1")
+   (tb/textblock
+    :text "="
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text "\"val1\""
+    :startpos 32
+    :endpos 37
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "val1")))
+   (tb/textblock
+    :text " "
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "prop2")
+   (tb/textblock
+    :text "="
+    :delim
+     (copy delimxmlequal
+      :pos 0))
+   (tb/textblock
+    :text "\"val2\""
+    :delim
+     (copy tb/delimquote
+      :pos 0)
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text "val2")))
+   (tb/textblock
+    :text " "
+    :delim
+     (copy tb/delimwhitespace
+      :pos 0))
+   (tb/textblock
+    :text "/"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag2"
+    :propmap
+     (stringmap
+      :prop1 "val1"
+      :prop2 "val2"))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-property&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1")
+ (xml-property&lt;-xml-textblock
+  (xml
+   :tag ":notag")
+  (tb/textblock
+   :text "tag1")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-property&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1"
+  :prop "prop1")
+ (xml-property&lt;-xml-textblock
+  (xml
+   :tag "tag1")
+  (tb/textblock
+   :text "prop1")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :prop "prop1")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :prop "prop1")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-property&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "tag1"
+  :propmap
+   (stringmap
+    :prop1 "val1"))
+ (xml-property&lt;-xml-textblock
+  (xml
+   :tag "tag1"
+   :prop "prop1")
+  (tb/textblock
+   :delim
+    (copy tb/delimquote
+     :pos 0)
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "val1")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :propmap
+  (stringmap
+   :prop1 "val1"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "tag1"
+ :propmap
+  (stringmap
+   :prop1 "val1"))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-text&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :text "text1")
+ (xml-text&lt;-xml-textblock
+  (empty xml)
+  (tb/textblock
+   :text "text1")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :text "text1")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :text "text1")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml-text&lt;-xml-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  :children
+   (xmllist
+    (xml
+     :text "text1")))
+ (xml-text&lt;-xml-textblock
+  (xml
+   :tag "doc")
+  (tb/textblock
+   :text "text1")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :text "text1")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :text "text1")))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">xml&lt;-textblock</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (xml
+  :tag "doc"
+  :children
+   (xmllist
+    (xml
+     :tag "tag1"
+     :children
+      (xmllist
+       (xml
+        :tag "tag2"
+        :propmap
+         (stringmap
+          :prop1 "val1"
+          :prop2 "val2"))))))
+ (xml&lt;-textblock
+  (tb/textblock
+   :text
+    "&lt;doc&gt;
+       &lt;tag1&gt;
+         &lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;
+       &lt;/tag1&gt;
+     &lt;/doc&gt;"
+   :startpos 1
+   :endpos 70
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "&lt;doc&gt;"
+      :startpos 1
+      :endpos 5
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "doc"
+         :startpos 2
+         :endpos 4)))
+     (tb/textblock
+      :text "
+  "
+      :startpos 6
+      :endpos 8
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "&lt;tag1&gt;"
+      :startpos 9
+      :endpos 14
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "tag1"
+         :startpos 10
+         :endpos 13)))
+     (tb/textblock
+      :text "
+    "
+      :startpos 15
+      :endpos 19
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "&lt;tag2 prop1=\"val1\" prop2=\"val2\" /&gt;"
+      :startpos 20
+      :endpos 53
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "tag2"
+         :startpos 21
+         :endpos 24)
+        (tb/textblock
+         :text " "
+         :startpos 25
+         :endpos 25
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "prop1"
+         :startpos 26
+         :endpos 30)
+        (tb/textblock
+         :text "="
+         :startpos 31
+         :endpos 31
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text "\"val1\""
+         :startpos 32
+         :endpos 37
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text "val1"
+            :startpos 33
+            :endpos 36)))
+        (tb/textblock
+         :text " "
+         :startpos 38
+         :endpos 38
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "prop2"
+         :startpos 39
+         :endpos 43)
+        (tb/textblock
+         :text "="
+         :startpos 44
+         :endpos 44
+         :delim
+          (copy delimxmlequal
+           :pos 0))
+        (tb/textblock
+         :text "\"val2\""
+         :startpos 45
+         :endpos 50
+         :delim
+          (copy tb/delimquote
+           :pos 0)
+         :children
+          (tb/textblocklist
+           (tb/textblock
+            :text "val2"
+            :startpos 46
+            :endpos 49)))
+         (tb/textblock
+          :text " "
+          :startpos 51
+          :endpos 51
+          :delim
+           (copy tb/delimwhitespace
+            :pos 0))
+         (tb/textblock
+          :text "/"
+          :startpos 52
+          :endpos 52)))
+     (tb/textblock
+      :text "
+  "
+      :startpos 54
+      :endpos 56
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "&lt;/tag1&gt;"
+      :startpos 57
+      :endpos 63
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "/tag1"
+         :startpos 58
+         :endpos 62)))
+     (tb/textblock
+      :text "
+"
+      :startpos 64
+      :endpos 64
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "&lt;/doc&gt;"
+      :startpos 65
+      :endpos 70
+      :delim
+       (copy tb/delimbracketangle
+        :pos 0)
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "/doc"
+         :startpos 66
+         :endpos 69)))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(xml
+ :tag "doc"
+ :children
+  (xmllist
+   (xml
+    :tag "tag1"
+    :children
+     (xmllist
+      (xml
+       :tag "tag2"
+       :propmap
+        (stringmap
+         :prop1 "val1"
+         :prop2 "val2"))))))</p>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </details>
@@ -14908,11 +16905,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/translate</p>
-              <p class="coveragenums">0% 0/4</p>
+              <p class="coveragenums">10% 1/10</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">0% 0/4</p>
-              <p class="coveragenums">100% 5/5</p>
+              <p class="coveragenums">10% 1/10</p>
+              <p class="coveragenums">100% 10/10</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -14937,7 +16934,216 @@
                     </td>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translate&lt;-translation-string</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "Hola"
+ (translate&lt;-translation-string
+  (translation
+   :wordmap
+    (stringmap
+     "Hello" "Hola"))
+  "Hello"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>
+              <p class="passflag">Pass</p>
+              <p class="pkgname">vx/translation/all</p>
+              <p class="coveragenums">50% 1/2</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">50% 1/2</p>
+              <p class="coveragenums">100% 2/2</p>
+              <p class="coveragenums">0% 0/0</p>
+              <p class="coveragenums">0% 0/0</p>
+            </summary>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      <p>Pass?</p>
+                    </td>
+                    <td>
+                      <p>Name</p>
+                    </td>
+                    <td>
+                      <p>Test</p>
+                    </td>
+                    <td>
+                      <p>Expected</p>
+                    </td>
+                    <td>
+                      <p>Actual</p>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translationmap-all</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "Hola"
+ (trn/translate&lt;-translationmap-name-string
+  (translationmap-all)
+  "es"
+  "Hello"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>
+              <p class="passflag">Pass</p>
+              <p class="pkgname">vx/translation/en</p>
+              <p class="coveragenums">33% 1/3</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">33% 1/3</p>
+              <p class="coveragenums">100% 3/3</p>
+              <p class="coveragenums">0% 0/0</p>
+              <p class="coveragenums">0% 0/0</p>
+            </summary>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      <p>Pass?</p>
+                    </td>
+                    <td>
+                      <p>Name</p>
+                    </td>
+                    <td>
+                      <p>Test</p>
+                    </td>
+                    <td>
+                      <p>Expected</p>
+                    </td>
+                    <td>
+                      <p>Actual</p>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translation-en</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "Hello"
+ (trn/translate&lt;-translation-string
+  (translation-en)
+  "Hello"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hello"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hello"</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>
+              <p class="passflag">Pass</p>
+              <p class="pkgname">vx/translation/es</p>
+              <p class="coveragenums">50% 1/2</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">100% 0/0</p>
+              <p class="coveragenums">50% 1/2</p>
+              <p class="coveragenums">100% 2/2</p>
+              <p class="coveragenums">0% 0/0</p>
+              <p class="coveragenums">0% 0/0</p>
+            </summary>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      <p>Pass?</p>
+                    </td>
+                    <td>
+                      <p>Name</p>
+                    </td>
+                    <td>
+                      <p>Test</p>
+                    </td>
+                    <td>
+                      <p>Expected</p>
+                    </td>
+                    <td>
+                      <p>Actual</p>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translation-es</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "Hola"
+ (trn/translate&lt;-translation-string
+  (translation-es)
+  "Hello"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Hola"</p>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </details>
