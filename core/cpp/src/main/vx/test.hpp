@@ -7,6 +7,7 @@
 
 namespace vx_test {
 
+
   // forward declarations
   class Abstract_testcase;
   typedef Abstract_testcase* Type_testcase;
@@ -1631,4 +1632,5 @@ namespace vx_test {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

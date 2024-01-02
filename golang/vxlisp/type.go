@@ -51,6 +51,8 @@ var arglisttype = NewTypeList("vx/core/arglist", argtype)
 
 var booleantype = NewType("vx/core/boolean")
 
+var contexttype = NewContextType()
+
 var decimaltype = NewType("vx/core/decimal")
 
 var functype = NewType("vx/core/func")
@@ -75,9 +77,9 @@ var maptype1 = NewTypeMap("vx/core/map1", anytype)
 
 var maptype2 = NewTypeMap("vx/core/map2", anytype)
 
-var numbertype = NewType("vx/core/number")
+var msgtype = NewType("vx/core/msg")
 
-var contexttype = NewContextType()
+var numbertype = NewType("vx/core/number")
 
 var sessiontype = NewTypeStruct("vx/core/session")
 

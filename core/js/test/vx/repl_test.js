@@ -9,6 +9,7 @@ import vx_data_textblock from "../../src/vx/data/textblock.js"
 
 export default class vx_repl_test {
 
+
   static test_package(context) {
     const testcaselist = vx_repl_test.test_cases(context)
     const output = vx_core.f_new(
@@ -26,12 +27,12 @@ export default class vx_repl_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/repl", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 25, ":total", 25), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 68, ":tests", 13, ":total", 19), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 28, ":total", 28), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 61, ":tests", 13, ":total", 21), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 52, ":tests", 13, ":total", 25), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 13, ":total", 28), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4)
     )
   }
 
@@ -44,6 +45,7 @@ export default class vx_repl_test {
           vx_core.t_intmap,
           "liblist", 0,
           "repl", 0,
+          "replarglist", 0,
           "repllist", 0
         ),
       "constmap",
@@ -64,6 +66,7 @@ export default class vx_repl_test {
           "anylist<-repllist", 0,
           "argmap<-textblock-argmap", 0,
           "const<-string", 2,
+          "repl-bracket<-textblock-argmap", 0,
           "repl-empty<-textblock-argmap", 4,
           "repl-paren<-textblock-argmap", 1,
           "repl<-liblist-string", 0,
@@ -72,6 +75,7 @@ export default class vx_repl_test {
           "repl<-string-argmap", 7,
           "repl<-textblock", 5,
           "repl<-textblock-argmap", 4,
+          "replarglist<-replarglist-textblock-argmap", 0,
           "repllist<-textblocklist-argmap", 0,
           "textblock<-script", 2,
           "typefunc<-string", 2
@@ -1443,5 +1447,4 @@ export default class vx_repl_test {
     )
     return output
   }
-
 }

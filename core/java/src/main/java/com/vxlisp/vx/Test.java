@@ -4856,7 +4856,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -4953,7 +4953,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5065,7 +5065,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-false", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-false", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5172,7 +5172,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-false", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-false", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5271,7 +5271,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-gt", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-gt", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5368,7 +5368,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-gt", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-gt", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5467,7 +5467,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-ne", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-ne", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5564,7 +5564,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-ne", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-ne", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5664,7 +5664,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-string", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-string", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5761,7 +5761,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-string", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-string", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5873,7 +5873,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-true", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-true", err);
       output = output.vx_copy(msg);
     }
     return output;
@@ -5980,7 +5980,7 @@ public final class Test {
         )
       );
     } catch (Exception err) {
-      Core.Type_msg msg = Core.vx_msg_from_exception("test-true", err);
+      Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-true", err);
       output = output.vx_copy(msg);
     }
     return output;

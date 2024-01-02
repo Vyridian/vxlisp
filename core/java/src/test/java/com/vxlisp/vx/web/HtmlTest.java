@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class HtmlTest {
 
   static Test.Type_testcase f_string_from_body_indent(final Core.Type_context context) {

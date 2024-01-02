@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.data.*;
 
-
 public final class ReplTest {
 
   static Test.Type_testcase f_any_from_macro(final Core.Type_context context) {
@@ -1598,12 +1597,12 @@ public final class ReplTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/repl", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 25, ":total", 25), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 68, ":tests", 13, ":total", 19), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 52, ":tests", 13, ":total", 25), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 28, ":total", 28), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 13, ":total", 21), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 13, ":total", 28), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4)
     );
   }
 
@@ -1613,6 +1612,7 @@ public final class ReplTest {
       ":typemap", Core.t_intmap.vx_new(
         ":liblist", 0,
         ":repl", 0,
+        ":replarglist", 0,
         ":repllist", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
@@ -1629,6 +1629,7 @@ public final class ReplTest {
         ":anylist<-repllist", 0,
         ":argmap<-textblock-argmap", 0,
         ":const<-string", 2,
+        ":repl-bracket<-textblock-argmap", 0,
         ":repl-empty<-textblock-argmap", 4,
         ":repl-paren<-textblock-argmap", 1,
         ":repl<-liblist-string", 0,
@@ -1637,6 +1638,7 @@ public final class ReplTest {
         ":repl<-string-argmap", 7,
         ":repl<-textblock", 5,
         ":repl<-textblock-argmap", 4,
+        ":replarglist<-replarglist-textblock-argmap", 0,
         ":repllist<-textblocklist-argmap", 0,
         ":textblock<-script", 2,
         ":typefunc<-string", 2

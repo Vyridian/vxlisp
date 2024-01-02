@@ -367,6 +367,114 @@ public final class Translate {
   }
 
   /**
+   * @function translate 1
+   * Returns a translated string from a msg.
+   * @param  {msg} msg
+   * @return {string}
+   * (func translate)
+   */
+  public static interface Func_translate_1 extends Core.Func_any_from_any_context {
+    public Core.Type_string vx_translate_1(final Core.Type_context context, final Core.Type_msg msg);
+  }
+
+  public static class Class_translate_1 extends Core.Class_base implements Func_translate_1 {
+
+    @Override
+    public Func_translate_1 vx_new(Object... vals) {
+      Class_translate_1 output = new Class_translate_1();
+      return output;
+    }
+
+    @Override
+    public Func_translate_1 vx_copy(Object... vals) {
+      Class_translate_1 output = new Class_translate_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/translate", // pkgname
+        "translate", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_translate_1 vx_empty() {return e_translate_1;}
+    @Override
+    public Func_translate_1 vx_type() {return t_translate_1;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_msg inputval = (Core.Type_msg)value;
+      Core.Type_any outputval = Translate.f_translate_1(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_msg msg = Core.f_any_from_any(Core.t_msg, arglist.vx_any(Core.vx_new_int(0)));
+      output = Translate.f_translate_1(context, msg);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_translate_1(final Core.Type_context context, final Core.Type_msg msg) {
+      return Translate.f_translate_1(context, msg);
+    }
+
+  }
+
+  public static final Func_translate_1 e_translate_1 = new Translate.Class_translate_1();
+  public static final Func_translate_1 t_translate_1 = new Translate.Class_translate_1();
+
+  public static Core.Type_string f_translate_1(final Core.Type_context context, final Core.Type_msg msg) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string path = msg.path();
+        final Core.Type_string code = msg.code();
+        final Core.Type_string text = Core.f_new(
+          Core.t_string,
+          Core.t_anylist.vx_new(
+              Core.vx_new_string("!"),
+              path,
+              Core.vx_new_string(" "),
+              code
+          )
+        );
+        return Translate.f_translate(context, text);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function translate_from_translation_string
    * Returns a translated string from a translation or the original text if not found.
    * @param  {translation} translation
@@ -917,6 +1025,7 @@ public final class Translate {
     mapfunc.put("session<-session-translation", Translate.t_session_from_session_translation);
     mapfunc.put("session<-session-translationmap-name", Translate.t_session_from_session_translationmap_name);
     mapfunc.put("translate", Translate.t_translate);
+    mapfunc.put("translate_1", Translate.t_translate_1);
     mapfunc.put("translate<-translation-string", Translate.t_translate_from_translation_string);
     mapfunc.put("translate<-translationmap-name-string", Translate.t_translate_from_translationmap_name_string);
     mapfunc.put("translation-load-session", Translate.t_translation_load_session);

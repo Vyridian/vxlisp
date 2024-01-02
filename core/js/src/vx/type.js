@@ -2,7 +2,9 @@
 
 import vx_core from "../vx/core.js"
 
+
 export default class vx_type {
+
 
   static vx_int_from_string_findkeyword(text, find) {
     let output = -1

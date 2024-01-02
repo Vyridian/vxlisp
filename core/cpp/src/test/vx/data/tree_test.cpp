@@ -1,10 +1,10 @@
 #include "../../../main/vx/data/tree.hpp"
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
-
 #include "tree_test.hpp"
 
 namespace vx_data_tree_test {
+
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany listtestcase;

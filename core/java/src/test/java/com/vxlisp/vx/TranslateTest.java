@@ -6,8 +6,60 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.data.*;
 
-
 public final class TranslateTest {
+
+  static Test.Type_testcase f_translate(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/translate",
+      ":casename", "translate",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"!NotFound!\"\n (translate \"!NotFound!\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("!NotFound!"),
+              Translate.f_translate(context, Core.vx_new_string("!NotFound!"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_translate_1(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/translate",
+      ":casename", "translate_1",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"Repl Type Not Found\"\n (translate\n  (msg\n   :path \"vx/repl/repl/repl<-string-argmap\"\n   :code \"repltypenotfound\")))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("Repl Type Not Found"),
+              Translate.f_translate_1(
+                context,
+                Core.f_new(
+                  Core.t_msg,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
+                    Core.vx_new_string(":code"),
+                    Core.vx_new_string("repltypenotfound")
+                  )
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
 
   static Test.Type_testcase f_translate_from_translation_string(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
@@ -47,6 +99,8 @@ public final class TranslateTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+      TranslateTest.f_translate(context),
+      TranslateTest.f_translate_1(context),
       TranslateTest.f_translate_from_translation_string(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
@@ -57,11 +111,11 @@ public final class TranslateTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/translate", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 10, ":total", 10), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 10, ":tests", 1, ":total", 10), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 10, ":tests", 1, ":total", 10), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 11, ":total", 11), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 3, ":total", 10), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 3, ":total", 10), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -79,7 +133,8 @@ public final class TranslateTest {
         ":session<-session-name", 0,
         ":session<-session-translation", 0,
         ":session<-session-translationmap-name", 0,
-        ":translate", 0,
+        ":translate", 1,
+        ":translate_1", 1,
         ":translate<-translation-string", 1,
         ":translate<-translationmap-name-string", 0,
         ":translation-load-session", 0,

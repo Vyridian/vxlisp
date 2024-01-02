@@ -4,6 +4,7 @@ import vx_core from "../src/vx/core.js"
 import vx_test from "../src/vx/test.js"
 import vx_web_html from "../src/vx/web/html.js"
 import vx_web_htmldoc from "../src/vx/web/htmldoc.js"
+import vx_translation_en from "../src/vx/translation/en.js"
 import vx_collection_test from "./vx/collection_test.js"
 import vx_core_test from "./vx/core_test.js"
 import vx_data_csv_test from "./vx/data/csv_test.js"
@@ -30,7 +31,8 @@ import vx_web_http_test from "./vx/web/http_test.js"
 export default class app_test {
 
   static async f_displaytestsuite() {
-    const context = vx_core.e_context
+			 const arglist = []
+    const context = vx_translation_en.f_context_test(...arglist)
     const stylesheet = vx_test.c_stylesheet_test
     const testpackagelist = app_test.f_testpackagelist_from_all_test(context)
     const resolvedtestpackagelist = await vx_test.f_resolve_testpackagelist(testpackagelist)

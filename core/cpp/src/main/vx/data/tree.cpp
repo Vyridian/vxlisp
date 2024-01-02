@@ -6,6 +6,7 @@
 namespace vx_data_tree {
 
 
+
   // (type branch)
   // class Class_branch {
     Abstract_branch::~Abstract_branch() {}

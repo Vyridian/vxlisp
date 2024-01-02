@@ -4,6 +4,7 @@
 
 namespace vx_event {
 
+
   // forward declarations
   class Abstract_event;
   typedef Abstract_event* Type_event;
@@ -116,4 +117,5 @@ namespace vx_event {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

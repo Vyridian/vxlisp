@@ -1417,27 +1417,24 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
   inline vx_Class_package const vx_package;
 `
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
 		"\n#define " + StringUCase(pkgname+"_hpp") +
 		"\n" +
 		headerimports +
-		"\nnamespace " + pkgname + " {" +
-		"\n" +
+		namespaceopen +
 		header +
-		"\n}" +
+		namespaceclose +
 		"\n#endif" +
 		"\n"
 	bodyimports := CppImportsFromPackage(pkg, "", body, false)
 	output := "" +
 		bodyimports +
-		"#include \"" + headerfilename + ".hpp\"" +
-		"\n" +
-		"\nnamespace " + pkgname + " {" +
-		"\n" +
+		"#include \"" + headerfilename + ".hpp\"\n" +
+		namespaceopen +
 		body +
-		"\n}" +
-		"\n"
+		namespaceclose
 	return output, headeroutput, msgblock
 }
 
@@ -2123,6 +2120,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 				case "vx/core/msg", "vx/core/msgblock":
 					valnewswitch += "" +
 						"\n            if (valsubtype == " + argttype + ") {" +
+						"\n              ischanged = true;" +
 						"\n              vx_p_" + argname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);" +
 						"\n            }"
 				default:
@@ -2200,7 +2198,10 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          key = \"\";" +
 					"\n        }" +
 					"\n      }" +
-					"\n      output = " + CppPointerNewFromClassName(fullclassname) + ";"
+					"\n      if (ischanged) {" +
+					"\n        output = " + CppPointerNewFromClassName(fullclassname) + ";" +
+					argassign +
+					"\n      }"
 			case "vx/core/msgblock":
 				valnew = "" +
 					"\n      std::string key = \"\";" +
@@ -4284,14 +4285,14 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname+"_test")
 	headertext := "" +
 		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
 		"\n#define " + StringUCase(pkgname+"_test_hpp") +
 		"\n#include \"" + slashprefix + "../main/vx/core.hpp\"" +
 		"\n#include \"" + slashprefix + "../main/vx/test.hpp\"" +
 		"\n" +
-		"\nnamespace " + pkgname + "_test {" +
-		"\n" +
+		namespaceopen +
 		typeheaders +
 		constheaders +
 		funcheaders +
@@ -4301,17 +4302,16 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 		"\n  vx_test::Type_testcoveragedetail test_coveragedetail();" +
 		"\n  vx_test::Type_testpackage test_package(vx_core::Type_context context);" +
 		"\n" +
-		"\n}" +
+		namespaceclose +
 		"\n#endif" +
 		"\n"
 	output := "" +
 		imports +
-		"\n#include \"" + simplename + "_test.hpp\"" +
+		"#include \"" + simplename + "_test.hpp\"" +
 		"\n" +
-		"\nnamespace " + pkgname + "_test {" +
-		"\n" +
+		namespaceopen +
 		body +
-		"\n}\n"
+		namespaceclose
 	return output, headertext, msgblock
 }
 

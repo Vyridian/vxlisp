@@ -7,6 +7,7 @@
 namespace vx_data_db {
 
 
+
   // (type db)
   // class Class_db {
     Abstract_db::~Abstract_db() {}

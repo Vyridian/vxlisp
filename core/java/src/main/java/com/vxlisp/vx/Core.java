@@ -470,10 +470,21 @@ public final class Core {
     return output;
   }
 
-  // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(final String text, final Exception err) {
+  // vx_msg_error
+  public static Type_msg vx_msg_error(final String path, final String code, final Core.Type_any detail) {
     Class_msg output = new Class_msg();
-    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string(code);
+    output.vx_p_detail = detail;
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception
+  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string("exception");
     output.vx_p_severity = Core.c_msg_severe;
     output.err = err;
     Core.vx_log(output);
@@ -1173,8 +1184,9 @@ public final class Core {
     public Core.Type_arg vx_empty();
     public Core.Type_arg vx_type();
     public Core.Type_string name();
-    public Core.Type_type argtype();
+    public Core.Type_any argtype();
     public Core.Func_any_from_func fn_any();
+    public Core.Type_string doc();
   }
 
   public static class Class_arg extends Core.Class_base implements Type_arg {
@@ -1186,11 +1198,11 @@ public final class Core {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_type vx_p_argtype;
+    protected Core.Type_any vx_p_argtype;
 
     @Override
-    public Core.Type_type argtype() {
-      return this.vx_p_argtype == null ? Core.e_type : this.vx_p_argtype;
+    public Core.Type_any argtype() {
+      return this.vx_p_argtype == null ? Core.e_any : this.vx_p_argtype;
     }
 
     protected Core.Func_any_from_func vx_p_fn_any;
@@ -1198,6 +1210,13 @@ public final class Core {
     @Override
     public Core.Func_any_from_func fn_any() {
       return this.vx_p_fn_any == null ? Core.e_any_from_func : this.vx_p_fn_any;
+    }
+
+    protected Core.Type_string vx_p_doc;
+
+    @Override
+    public Core.Type_string doc() {
+      return this.vx_p_doc == null ? Core.e_string : this.vx_p_doc;
     }
 
     @Override
@@ -1214,6 +1233,9 @@ public final class Core {
       case ":fn-any":
         output = this.fn_any();
         break;
+      case ":doc":
+        output = this.doc();
+        break;
       }
       return output;
     }
@@ -1224,6 +1246,7 @@ public final class Core {
       output.put(":name", this.name());
       output.put(":argtype", this.argtype());
       output.put(":fn-any", this.fn_any());
+      output.put(":doc", this.doc());
       return Core.immutablemap(output);
     }
 
@@ -1240,12 +1263,14 @@ public final class Core {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
-      Core.Type_type vx_p_argtype = val.argtype();
+      Core.Type_any vx_p_argtype = val.argtype();
       Core.Func_any_from_func vx_p_fn_any = val.fn_any();
+      Core.Type_string vx_p_doc = val.doc();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":argtype");
       validkeys.add(":fn-any");
+      validkeys.add(":doc");
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1284,9 +1309,9 @@ public final class Core {
             break;
           case ":argtype":
             if (valsub == vx_p_argtype) {
-            } else if (valsub instanceof Core.Type_type) {
+            } else if (valsub instanceof Core.Type_any) {
               ischanged = true;
-              vx_p_argtype = (Core.Type_type)valsub;
+              vx_p_argtype = (Core.Type_any)valsub;
             } else {
               Core.Type_msg msg = Core.vx_msg_error("(new arg :argtype " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
@@ -1302,6 +1327,19 @@ public final class Core {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":doc":
+            if (valsub == vx_p_doc) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_doc = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_doc = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new arg :doc " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_msg msg = Core.vx_msg_error("(new arg) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
@@ -1314,6 +1352,7 @@ public final class Core {
         work.vx_p_name = vx_p_name;
         work.vx_p_argtype = vx_p_argtype;
         work.vx_p_fn_any = vx_p_fn_any;
+        work.vx_p_doc = vx_p_doc;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -5045,7 +5084,6 @@ public final class Core {
       Type_msg output = this;
       boolean ischanged = false;
       Class_msg val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -5062,9 +5100,6 @@ public final class Core {
             key = valstr.vx_string();
           } else if (valsub instanceof String) {
             key = (String)valsub;
-          } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new msg) - Invalid Key Type: " + valsub.toString());
-            msgblock = msgblock.vx_copy(msg);
           }
         } else {
           switch (key) {
@@ -5076,9 +5111,6 @@ public final class Core {
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_code = Core.t_string.vx_new(valsub);
-            } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new msg :code " + valsub.toString() + ") - Invalid Value");
-              msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":detail":
@@ -5086,9 +5118,6 @@ public final class Core {
             } else if (valsub instanceof Core.Type_any) {
               ischanged = true;
               vx_p_detail = (Core.Type_any)valsub;
-            } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new msg :detail " + valsub.toString() + ") - Invalid Value");
-              msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":path":
@@ -5099,9 +5128,6 @@ public final class Core {
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_path = Core.t_string.vx_new(valsub);
-            } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new msg :path " + valsub.toString() + ") - Invalid Value");
-              msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":severity":
@@ -5112,9 +5138,6 @@ public final class Core {
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_severity = Core.t_int.vx_new(valsub);
-            } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new msg :severity " + valsub.toString() + ") - Invalid Value");
-              msgblock = msgblock.vx_copy(msg);
             }
             break;
           case ":text":
@@ -5125,9 +5148,6 @@ public final class Core {
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
-            } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new msg :text " + valsub.toString() + ") - Invalid Value");
-              msgblock = msgblock.vx_copy(msg);
             }
             break;
           }
@@ -5136,7 +5156,11 @@ public final class Core {
       }
       if (ischanged) {
         Class_msg work = new Class_msg();
-        work.vxmsgblock = msgblock;
+        work.vx_p_code = vx_p_code;
+        work.vx_p_detail = vx_p_detail;
+        work.vx_p_path = vx_p_path;
+        work.vx_p_severity = vx_p_severity;
+        work.vx_p_text = vx_p_text;
         output = work;
       }
       return output;

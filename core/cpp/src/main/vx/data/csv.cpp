@@ -11,6 +11,7 @@
 namespace vx_data_csv {
 
 
+
   // (type csv)
   // class Class_csv {
     Abstract_csv::~Abstract_csv() {}

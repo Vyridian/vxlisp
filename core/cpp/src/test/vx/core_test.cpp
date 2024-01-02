@@ -1,9 +1,9 @@
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
-
 #include "core_test.hpp"
 
 namespace vx_core_test {
+
 
   vx_test::Type_testcase t_boolean(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: t_boolean");

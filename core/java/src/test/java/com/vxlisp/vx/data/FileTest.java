@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class FileTest {
 
   static Test.Type_testcase f_boolean_exists_from_file(final Core.Type_context context) {

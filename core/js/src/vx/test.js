@@ -4,7 +4,9 @@ import vx_core from "../vx/core.js"
 import vx_data_file from "../vx/data/file.js"
 import vx_web_html from "../vx/web/html.js"
 
+
 export default class vx_test {
+
 
   /**
    * type: testcase
@@ -392,6 +394,69 @@ export default class vx_test {
       {"any-1": vx_web_html.t_divchild, "any-2": vx_test.t_testpackage, "list-1": vx_web_html.t_divchildlist, "list-2": vx_test.t_testpackagelist},
       testpackagelist,
       vx_core.f_new(vx_core.t_any_from_any, vx_test.t_div_from_testpackage)
+    )
+    return output
+  }
+
+  /**
+   * @function file_test
+   * Default file location for testsuite.vxlisp
+   * @return {file}
+   */
+  static t_file_test = {}
+  static e_file_test = {vx_type: vx_test.t_file_test}
+
+  // (func file-test)
+  static f_file_test() {
+    let output = vx_data_file.e_file
+    output = vx_core.f_new(
+      vx_data_file.t_file,
+      ":name",
+      "testsuite.vxlisp",
+      ":path",
+      "src/test/resources"
+    )
+    return output
+  }
+
+  /**
+   * @function file_testhtml
+   * Default file location for testsuite.html
+   * @return {file}
+   */
+  static t_file_testhtml = {}
+  static e_file_testhtml = {vx_type: vx_test.t_file_testhtml}
+
+  // (func file-testhtml)
+  static f_file_testhtml() {
+    let output = vx_data_file.e_file
+    output = vx_core.f_new(
+      vx_data_file.t_file,
+      ":name",
+      "testsuite.html",
+      ":path",
+      "src/test/resources"
+    )
+    return output
+  }
+
+  /**
+   * @function file_testnode
+   * Default file location for testsuitenode.vxlisp
+   * @return {file}
+   */
+  static t_file_testnode = {}
+  static e_file_testnode = {vx_type: vx_test.t_file_testnode}
+
+  // (func file-testnode)
+  static f_file_testnode() {
+    let output = vx_data_file.e_file
+    output = vx_core.f_new(
+      vx_data_file.t_file,
+      ":name",
+      "testsuitenode.vxlisp",
+      ":path",
+      "src/test/resources"
     )
     return output
   }
@@ -2120,6 +2185,63 @@ export default class vx_test {
       properties    : [],
       proplast      : {},
       fn            : vx_test.f_divchildlist_from_testpackagelist
+    }
+
+    // (func file-test)
+    vx_test.t_file_test['vx_type'] = vx_core.t_type
+    vx_test.t_file_test['vx_value'] = {
+      name          : "file-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_test
+    }
+
+    // (func file-testhtml)
+    vx_test.t_file_testhtml['vx_type'] = vx_core.t_type
+    vx_test.t_file_testhtml['vx_value'] = {
+      name          : "file-testhtml",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_testhtml
+    }
+
+    // (func file-testnode)
+    vx_test.t_file_testnode['vx_type'] = vx_core.t_type
+    vx_test.t_file_testnode['vx_value'] = {
+      name          : "file-testnode",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_testnode
     }
 
     // (func html<-divtest)

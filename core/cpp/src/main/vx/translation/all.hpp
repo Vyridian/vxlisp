@@ -7,6 +7,7 @@
 
 namespace vx_translation_all {
 
+
   // forward declarations
   class Abstract_context_all;
   typedef Abstract_context_all* Func_context_all;
@@ -80,4 +81,5 @@ namespace vx_translation_all {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

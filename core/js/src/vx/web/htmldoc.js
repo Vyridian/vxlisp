@@ -3,7 +3,9 @@
 import vx_core from "../../vx/core.js"
 import vx_web_html from "../../vx/web/html.js"
 
+
 export default class vx_web_htmldoc {
+
   /**
    * @function boolean_write_from_id_htmltext
    * Writes to an html node with given id and text.

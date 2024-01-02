@@ -15964,6 +15964,7 @@
       :anylist<-repllist 0
       :argmap<-textblock-argmap 0
       :const<-string 2
+      :repl-bracket<-textblock-argmap 0
       :repl-empty<-textblock-argmap 4
       :repl-paren<-textblock-argmap 1
       :repl<-liblist-string 0
@@ -15972,6 +15973,7 @@
       :repl<-string-argmap 7
       :repl<-textblock 5
       :repl<-textblock-argmap 4
+      :replarglist<-replarglist-textblock-argmap 0
       :repllist<-textblocklist-argmap 0
       :textblock<-script 2
       :typefunc<-string 2)
@@ -15980,37 +15982,38 @@
      (intmap
       :liblist 0
       :repl 0
+      :replarglist 0
       :repllist 0))
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 19)
+      :total 21)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 19)
+      :total 21)
     :constnums
      (vx/test/testcoveragenums
       :total 3)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 25
-      :total 25)
+      :tests 28
+      :total 28)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 68
+      :pct 61
       :tests 13
-      :total 19)
+      :total 21)
     :testpkg "vx/repl"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 52
+      :pct 46
       :tests 13
-      :total 25)
+      :total 28)
     :typenums
      (vx/test/testcoveragenums
-      :total 3))
+      :total 4))
   :passfail true
   :testpkg "vx/repl")
  (vx/test/testpackage
@@ -16291,6 +16294,45 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/translate"
+     :casename "translate"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"!NotFound!\"
+ (translate \"!NotFound!\"))"
+        :testpkg "vx/translate"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "!NotFound!"
+          :actual "!NotFound!"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translate"
+     :casename "translate_1"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"Repl Type Not Found\"
+ (translate
+  (msg
+   :path \"vx/repl/repl/repl<-string-argmap\"
+   :code \"repltypenotfound\")))"
+        :testpkg "vx/translate"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "Repl Type Not Found"
+          :actual "Repl Type Not Found"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/translate"
      :casename "translate<-translation-string"
      :describelist
       (vx/test/testdescribelist
@@ -16318,9 +16360,10 @@
       :session<-session-name 0
       :session<-session-translation 0
       :session<-session-translationmap-name 0
-      :translate 0
+      :translate 1
       :translate<-translation-string 1
       :translate<-translationmap-name-string 0
+      :translate_1 1
       :translation-load-session 0
       :translation<-context 0
       :translation<-session-name 0
@@ -16330,28 +16373,28 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 10)
+      :total 11)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 10)
+      :total 11)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 10
-      :total 10)
+      :tests 11
+      :total 11)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 10
-      :tests 1
+      :pct 30
+      :tests 3
       :total 10)
     :testpkg "vx/translate"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 10
-      :tests 1
+      :pct 30
+      :tests 3
       :total 10)
     :typenums
      (vx/test/testcoveragenums
@@ -16449,6 +16492,8 @@
     :funcmap
      (intmap
       :context-en 0
+      :context-test 0
+      :securitydata-test 0
       :translation-en 1
       :words 0)
     :testpkg "vx/translation/en")
@@ -16456,29 +16501,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 5)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 5)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 3
-      :total 3)
+      :tests 5
+      :total 5)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 33
+      :pct 20
       :tests 1
-      :total 3)
+      :total 5)
     :testpkg "vx/translation/en"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 33
+      :pct 20
       :tests 1
-      :total 3)
+      :total 5)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

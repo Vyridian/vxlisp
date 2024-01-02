@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
-
+import com.vxlisp.vx.data.*;
 
 public final class EnTest {
 
@@ -45,11 +45,11 @@ public final class EnTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/translation/en", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 3, ":total", 3), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 1, ":total", 3), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 1, ":total", 3), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 5, ":total", 5), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 20, ":tests", 1, ":total", 5), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 5), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 5), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 20, ":tests", 1, ":total", 5), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -65,6 +65,8 @@ public final class EnTest {
       ),
       ":funcmap", Core.t_intmap.vx_new(
         ":context-en", 0,
+        ":context-test", 0,
+        ":securitydata-test", 0,
         ":translation-en", 1,
         ":words", 0
       )

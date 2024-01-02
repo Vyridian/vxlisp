@@ -9,6 +9,7 @@
 namespace vx_test {
 
 
+
   // (type testcase)
   // class Class_testcase {
     Abstract_testcase::~Abstract_testcase() {}

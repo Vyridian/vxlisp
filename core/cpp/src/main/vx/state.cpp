@@ -7,6 +7,7 @@
 namespace vx_state {
 
 
+
   // (type value-map)
   // class Class_value_map {
     Abstract_value_map::~Abstract_value_map() {}

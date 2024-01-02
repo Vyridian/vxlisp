@@ -3,9 +3,11 @@
 import vx_translation_en from "../../../src/vx/translation/en.js"
 import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
+import vx_data_file from "../../../src/vx/data/file.js"
 import vx_translate from "../../../src/vx/translate.js"
 
 export default class vx_translation_en_test {
+
 
   static test_package(context) {
     const testcaselist = vx_translation_en_test.test_cases(context)
@@ -24,11 +26,11 @@ export default class vx_translation_en_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/translation/en", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 3, ":total", 3), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 1, ":total", 3), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 5, ":total", 5), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 20, ":tests", 1, ":total", 5), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 1, ":total", 3), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 20, ":tests", 1, ":total", 5), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -49,6 +51,8 @@ export default class vx_translation_en_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "context-en", 0,
+          "context-test", 0,
+          "securitydata-test", 0,
           "translation-en", 1,
           "words", 0
         )
@@ -89,5 +93,4 @@ export default class vx_translation_en_test {
     )
     return output
   }
-
 }

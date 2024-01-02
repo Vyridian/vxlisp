@@ -5,6 +5,7 @@
 namespace vx_event {
 
 
+
   // (type event)
   // class Class_event {
     Abstract_event::~Abstract_event() {}

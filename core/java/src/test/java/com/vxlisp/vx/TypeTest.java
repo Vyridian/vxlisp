@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class TypeTest {
 
   static Test.Type_testcase f_boolean_from_string_ends(final Core.Type_context context) {

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class CsvTest {
 
   static Test.Type_testcase f_textblock_csv_from_string(final Core.Type_context context) {

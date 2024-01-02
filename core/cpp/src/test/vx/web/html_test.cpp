@@ -2,10 +2,10 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/type.hpp"
-
 #include "html_test.hpp"
 
 namespace vx_web_html_test {
+
 
   vx_test::Type_testcase f_string_from_body_indent(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_string_from_body_indent");

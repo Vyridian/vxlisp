@@ -7,6 +7,7 @@
 #include "core.hpp"
 
 namespace vx_core {
+
 // :body
 
   long refcount = 0;
@@ -2111,29 +2112,71 @@ namespace vx_core {
           if (false) {
           } else if (key == ":code") {
             if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_code = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             }
           } else if (key == ":detail") {
             if (valsubtype == vx_core::t_any) {
+              ischanged = true;
               vx_p_detail = vx_core::vx_any_from_any(vx_core::t_any, valsub);
             }
           } else if (key == ":path") {
             if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_path = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             }
           } else if (key == ":severity") {
             if (valsubtype == vx_core::t_int) {
+              ischanged = true;
               vx_p_severity = vx_core::vx_any_from_any(vx_core::t_int, valsub);
             }
           } else if (key == ":text") {
             if (valsubtype == vx_core::t_string) {
+              ischanged = true;
               vx_p_text = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             }
           }
           key = "";
         }
       }
-      output = new vx_core::Class_msg();
+      if (ischanged) {
+        output = new vx_core::Class_msg();
+        if (output->vx_p_code != vx_p_code) {
+          if (output->vx_p_code) {
+            vx_core::vx_release_one(output->vx_p_code);
+          }
+          output->vx_p_code = vx_p_code;
+          vx_core::vx_reserve(vx_p_code);
+        }
+        if (output->vx_p_detail != vx_p_detail) {
+          if (output->vx_p_detail) {
+            vx_core::vx_release_one(output->vx_p_detail);
+          }
+          output->vx_p_detail = vx_p_detail;
+          vx_core::vx_reserve(vx_p_detail);
+        }
+        if (output->vx_p_path != vx_p_path) {
+          if (output->vx_p_path) {
+            vx_core::vx_release_one(output->vx_p_path);
+          }
+          output->vx_p_path = vx_p_path;
+          vx_core::vx_reserve(vx_p_path);
+        }
+        if (output->vx_p_severity != vx_p_severity) {
+          if (output->vx_p_severity) {
+            vx_core::vx_release_one(output->vx_p_severity);
+          }
+          output->vx_p_severity = vx_p_severity;
+          vx_core::vx_reserve(vx_p_severity);
+        }
+        if (output->vx_p_text != vx_p_text) {
+          if (output->vx_p_text) {
+            vx_core::vx_release_one(output->vx_p_text);
+          }
+          output->vx_p_text = vx_p_text;
+          vx_core::vx_reserve(vx_p_text);
+        }
+      }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
@@ -2431,10 +2474,12 @@ namespace vx_core {
           if (false) {
           } else if (key == ":msgs") {
             if (valsubtype == vx_core::t_msglist) {
+              ischanged = true;
               vx_p_msgs = vx_core::vx_any_from_any(vx_core::t_msglist, valsub);
             }
           } else if (key == ":msgblocks") {
             if (valsubtype == vx_core::t_msgblocklist) {
+              ischanged = true;
               vx_p_msgblocks = vx_core::vx_any_from_any(vx_core::t_msgblocklist, valsub);
             }
           }
@@ -4425,7 +4470,8 @@ namespace vx_core {
       vx_core::vx_release_one({
         this->vx_p_name,
         this->vx_p_argtype,
-        this->vx_p_fn_any
+        this->vx_p_fn_any,
+        this->vx_p_doc
       });
     }
 
@@ -4439,10 +4485,10 @@ namespace vx_core {
     }
 
     // argtype()
-    vx_core::Type_type Class_arg::argtype() const {
-      vx_core::Type_type output = this->vx_p_argtype;
+    vx_core::Type_any Class_arg::argtype() const {
+      vx_core::Type_any output = this->vx_p_argtype;
       if (!output) {
-        output = vx_core::e_type;
+        output = vx_core::e_any;
       }
       return output;
     }
@@ -4452,6 +4498,15 @@ namespace vx_core {
       vx_core::Func_any_from_func output = this->vx_p_fn_any;
       if (!output) {
         output = vx_core::e_any_from_func;
+      }
+      return output;
+    }
+
+    // doc()
+    vx_core::Type_string Class_arg::doc() const {
+      vx_core::Type_string output = this->vx_p_doc;
+      if (!output) {
+        output = vx_core::e_string;
       }
       return output;
     }
@@ -4467,6 +4522,8 @@ namespace vx_core {
         output = this->argtype();
       } else if (skey == ":fn-any") {
         output = this->fn_any();
+      } else if (skey == ":doc") {
+        output = this->doc();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -4478,6 +4535,7 @@ namespace vx_core {
       output[":name"] = this->name();
       output[":argtype"] = this->argtype();
       output[":fn-any"] = this->fn_any();
+      output[":doc"] = this->doc();
       return output;
     }
 
@@ -4495,8 +4553,9 @@ namespace vx_core {
       output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
-      vx_core::Type_type vx_p_argtype = val->argtype();
+      vx_core::Type_any vx_p_argtype = val->argtype();
       vx_core::Func_any_from_func vx_p_fn_any = val->fn_any();
+      vx_core::Type_string vx_p_doc = val->doc();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4517,6 +4576,8 @@ namespace vx_core {
             key = testkey;
           } else if (testkey == ":fn-any") {
             key = testkey;
+          } else if (testkey == ":doc") {
+            key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -4533,13 +4594,9 @@ namespace vx_core {
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":argtype") {
-            if (vx_p_argtype == valsub) {
-            } else if (valsubtype == vx_core::t_type) {
+            if (vx_p_argtype != valsub) {
               ischanged = true;
-              vx_p_argtype = vx_core::vx_any_from_any(vx_core::t_type, valsub);
-            } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :argtype " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
-              msgblock = vx_core::vx_copy(msgblock, {msg});
+              vx_p_argtype = valsub;
             }
           } else if (key == ":fn-any") {
             if (vx_p_fn_any == valsub) {
@@ -4548,6 +4605,15 @@ namespace vx_core {
               vx_p_fn_any = vx_core::vx_any_from_any(vx_core::t_any_from_func, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :fn-any " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":doc") {
+            if (vx_p_doc == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_doc = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new arg :doc " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
@@ -4579,6 +4645,13 @@ namespace vx_core {
           }
           output->vx_p_fn_any = vx_p_fn_any;
           vx_core::vx_reserve(vx_p_fn_any);
+        }
+        if (output->vx_p_doc != vx_p_doc) {
+          if (output->vx_p_doc) {
+            vx_core::vx_release_one(output->vx_p_doc);
+          }
+          output->vx_p_doc = vx_p_doc;
+          vx_core::vx_reserve(vx_p_doc);
         }
       }
       if (msgblock != vx_core::e_msgblock) {
@@ -4614,11 +4687,15 @@ namespace vx_core {
           ),
           vx_core::vx_new_arg(
             "argtype", // name
-            vx_core::t_type // type
+            vx_core::t_any // type
           ),
           vx_core::vx_new_arg(
             "fn-any", // name
             vx_core::t_any_from_func // type
+          ),
+          vx_core::vx_new_arg(
+            "doc", // name
+            vx_core::t_string // type
           )
         }) // properties
       );

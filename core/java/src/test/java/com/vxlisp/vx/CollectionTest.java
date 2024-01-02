@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class CollectionTest {
 
   static Test.Type_testcase f_any_from_for_until_loop(final Core.Type_context context) {

@@ -3,6 +3,7 @@
 #include "collection.hpp"
 
 namespace vx_collection {
+
 // :body
 
   // vx_any_from_for_until_loop_max(generic_any_1, start, fn-until, fn-loop, max)

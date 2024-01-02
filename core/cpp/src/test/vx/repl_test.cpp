@@ -4,10 +4,10 @@
 #include "../../main/vx/collection.hpp"
 #include "../../main/vx/type.hpp"
 #include "../../main/vx/data/textblock.hpp"
-
 #include "repl_test.hpp"
 
 namespace vx_repl_test {
+
 
   vx_test::Type_testcase f_any_from_macro(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_any_from_macro");
@@ -1810,33 +1810,33 @@ namespace vx_repl_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(25), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(28), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(28)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(68), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(61), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(13), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(19)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(19)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(19)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(52), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(46), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(13), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(28)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(4)
       })
     });
     return output;
@@ -1848,6 +1848,7 @@ namespace vx_repl_test {
       vx_core::vx_new_string(":typemap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":liblist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":repl"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":replarglist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":repllist"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
@@ -1864,6 +1865,7 @@ namespace vx_repl_test {
         vx_core::vx_new_string(":anylist<-repllist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":argmap<-textblock-argmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":const<-string"), vx_core::vx_new_int(2),
+        vx_core::vx_new_string(":repl-bracket<-textblock-argmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":repl-empty<-textblock-argmap"), vx_core::vx_new_int(4),
         vx_core::vx_new_string(":repl-paren<-textblock-argmap"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":repl<-liblist-string"), vx_core::vx_new_int(0),
@@ -1872,6 +1874,7 @@ namespace vx_repl_test {
         vx_core::vx_new_string(":repl<-string-argmap"), vx_core::vx_new_int(7),
         vx_core::vx_new_string(":repl<-textblock"), vx_core::vx_new_int(5),
         vx_core::vx_new_string(":repl<-textblock-argmap"), vx_core::vx_new_int(4),
+        vx_core::vx_new_string(":replarglist<-replarglist-textblock-argmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":repllist<-textblocklist-argmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":textblock<-script"), vx_core::vx_new_int(2),
         vx_core::vx_new_string(":typefunc<-string"), vx_core::vx_new_int(2)

@@ -7,6 +7,7 @@ import vx_type from "../../src/vx/type.js"
 
 export default class vx_collection_test {
 
+
   static test_package(context) {
     const testcaselist = vx_collection_test.test_cases(context)
     const output = vx_core.f_new(
@@ -449,5 +450,4 @@ export default class vx_collection_test {
     )
     return output
   }
-
 }

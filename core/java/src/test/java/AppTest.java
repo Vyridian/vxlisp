@@ -1,5 +1,6 @@
 
 import com.vxlisp.vx.Core;
+import com.vxlisp.vx.translation.En;
 import com.vxlisp.vx.CollectionTest;
 import com.vxlisp.vx.CoreTest;
 import com.vxlisp.vx.data.CsvTest;
@@ -29,10 +30,11 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for whole App.
  */
-public class AppTest {
+public final class AppTest {
+
 
   Core.Type_anylist arglist = Core.e_anylist;
-  Core.Type_context context = com.vxlisp.vx.Test.f_context_test(arglist);
+  Core.Type_context context = com.vxlisp.vx.translation.En.f_context_test(arglist);
 
   @Test
   @DisplayName("vx/collection")
@@ -239,5 +241,4 @@ public class AppTest {
     );
     TestLib.write_testpackagelist_async(context, testpackagelist);
   }
-
 }

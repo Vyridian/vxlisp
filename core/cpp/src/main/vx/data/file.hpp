@@ -6,6 +6,7 @@
 
 namespace vx_data_file {
 
+
   // forward declarations
   class Abstract_file;
   typedef Abstract_file* Type_file;
@@ -398,4 +399,5 @@ namespace vx_data_file {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

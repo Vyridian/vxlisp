@@ -5,6 +5,7 @@
 namespace vx_sample {
 
 
+
   // (type mytype)
   // class Class_mytype {
     Abstract_mytype::~Abstract_mytype() {}

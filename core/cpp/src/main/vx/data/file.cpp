@@ -8,6 +8,7 @@
 #include "file.hpp"
 
 namespace vx_data_file {
+
 // :body
 
   vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file) {

@@ -452,10 +452,21 @@
     return output;
   }
 
-  // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(final String text, final Exception err) {
+  // vx_msg_error
+  public static Type_msg vx_msg_error(final String path, final String code, final Core.Type_any detail) {
     Class_msg output = new Class_msg();
-    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string(code);
+    output.vx_p_detail = detail;
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception
+  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string("exception");
     output.vx_p_severity = Core.c_msg_severe;
     output.err = err;
     Core.vx_log(output);

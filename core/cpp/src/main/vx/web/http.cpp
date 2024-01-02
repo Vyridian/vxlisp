@@ -8,6 +8,7 @@
 namespace vx_web_http {
 
 
+
   // (type response)
   // class Class_response {
     Abstract_response::~Abstract_response() {}

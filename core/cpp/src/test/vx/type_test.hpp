@@ -5,6 +5,7 @@
 
 namespace vx_type_test {
 
+
   vx_test::Type_testcase f_boolean_from_string_ends(vx_core::Type_context context);
   vx_test::Type_testcase f_boolean_from_string_starts(vx_core::Type_context context);
   vx_test::Type_testcase f_int_from_string_find(vx_core::Type_context context);
@@ -27,4 +28,5 @@ namespace vx_type_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

@@ -4,10 +4,10 @@
 #include "../../../main/vx/translate.hpp"
 #include "../../../main/vx/translation/en.hpp"
 #include "../../../main/vx/translation/es.hpp"
-
 #include "all_test.hpp"
 
 namespace vx_translation_all_test {
+
 
   vx_test::Type_testcase f_translationmap_all(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_translationmap_all");

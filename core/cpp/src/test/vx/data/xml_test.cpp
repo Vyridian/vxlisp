@@ -4,10 +4,10 @@
 #include "../../../main/vx/data/file.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 #include "../../../main/vx/type.hpp"
-
 #include "xml_test.hpp"
 
 namespace vx_data_xml_test {
+
 
   vx_test::Type_testcase f_textblock_xml_from_string(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_textblock_xml_from_string");

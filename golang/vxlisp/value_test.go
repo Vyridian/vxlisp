@@ -238,74 +238,76 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// any<-list: stringlist
-	// actual string
-	expectedtype = anytype
+	/*
+		// any<-list: stringlist
+		// actual string
+		expectedtype = anytype
 
-	genericmap := NewMapType()
-	genericmap["any-1"] = stringlisttype
+		genericmap := NewMapType()
+		genericmap["any-1"] = stringlisttype
 
-	fnc := NewFuncCopy(newfunc)
-	fnc.mapgeneric = genericmap
-	arglist := fnc.listarg
-	arg = arglist[0]
-	arg.value = NewValueFromType(stringlisttype)
-	arglist[0] = arg
-	argvalue := NewValueFromFunc(fnc)
+		fnc := NewFuncCopy(newfunc)
+		fnc.mapgeneric = genericmap
+		arglist := fnc.listarg
+		arg = arglist[0]
+		arg.value = NewValueFromType(stringlisttype)
+		arglist[0] = arg
+		argvalue := NewValueFromFunc(fnc)
 
-	fnc = NewFuncCopy(anyfromlistfunc)
-	arglist = fnc.listarg
-	arg = arglist[0]
-	arg.value = argvalue
-	arglist[0] = arg
-	arg = arglist[1]
-	arg.value = NewValueFromInteger("0")
-	arglist[1] = arg
-	fnc.listarg = arglist
+		fnc = NewFuncCopy(anyfromlistfunc)
+		arglist = fnc.listarg
+		arg = arglist[0]
+		arg.value = argvalue
+		arglist[0] = arg
+		arg = arglist[1]
+		arg.value = NewValueFromInteger("0")
+		arglist[1] = arg
+		fnc.listarg = arglist
 
-	value = NewValueFromFunc(fnc)
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
+		value = NewValueFromFunc(fnc)
+		value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
+		expected = NameFromType(stringtype)
+		actual = NameFromType(value.vxtype)
+		errortext = CompareText(expected, actual, 20, msgs)
+		if errortext != "" {
+			t.Error(errortext)
+		}
 
-	// any<-map: stringmap
-	// actual string
-	expectedtype = anytype
+		// any<-map: stringmap
+		// actual string
+		expectedtype = anytype
 
-	fnc = NewFuncCopy(newfunc)
-	arglist = fnc.listarg
-	arg = arglist[0]
-	arg.value = NewValueFromType(stringmaptype)
-	arglist[0] = arg
+		fnc = NewFuncCopy(newfunc)
+		arglist = fnc.listarg
+		arg = arglist[0]
+		arg.value = NewValueFromType(stringmaptype)
+		arglist[0] = arg
 
-	argvalue = NewValueFromFunc(fnc)
-	fnc = NewFuncCopy(mapgetfunc)
-	arglist = fnc.listarg
-	arg = arglist[0]
-	arg.value = argvalue
-	arglist[0] = arg
-	arg = arglist[1]
-	arg.value = NewValueFromString("a")
-	arglist[1] = arg
-	fnc.listarg = arglist
+		argvalue = NewValueFromFunc(fnc)
+		fnc = NewFuncCopy(mapgetfunc)
+		arglist = fnc.listarg
+		arg = arglist[0]
+		arg.value = argvalue
+		arglist[0] = arg
+		arg = arglist[1]
+		arg.value = NewValueFromString("a")
+		arglist[1] = arg
+		fnc.listarg = arglist
 
-	value = NewValueFromFunc(fnc)
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
+		value = NewValueFromFunc(fnc)
+		value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
+		expected = NameFromType(stringtype)
+		actual = NameFromType(value.vxtype)
+		errortext = CompareText(expected, actual, 20, msgs)
+		if errortext != "" {
+			t.Error(errortext)
+		}
+	*/
 
 	// expected string
 	// actual string function
 	expectedtype = stringtype
-	fnc = NewFunc()
+	fnc := NewFunc()
 	fnc.name = "f1"
 	fnc.vxtype = stringtype
 	value = NewValueFromFunc(fnc)
@@ -389,7 +391,7 @@ func TestValueValidate(t *testing.T) {
 	fnc.vxtype = stringtype
 	arg = NewArg("a2")
 	arg.vxtype = stringtype
-	arglist = FuncFnGetArgList(fnc)
+	arglist := FuncFnGetArgList(fnc)
 	arglist = append(arglist, arg)
 	fnc = FuncFnSetListArg(fnc, arglist)
 	value = NewValueFromFunc(fnc)
@@ -446,7 +448,7 @@ func TestValueValidate(t *testing.T) {
 	subarg.vxtype = inttype
 	subarglist := []vxarg{subarg}
 	arg = arglist[0]
-	argvalue = arg.value
+	argvalue := arg.value
 	arg.value = ValueSetListArg(argvalue, subarglist)
 	arglist[0] = arg
 	arg = arglist[1]

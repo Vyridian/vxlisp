@@ -37,8 +37,7 @@
    :code    :test
    :lang    :cpp
    :path    ../cpp/src/test
-   :context vx/test/context-test
-//   :filter  vx/repl/repl<-string-argmap
+   :context vx/translation/en/context-test
    :doc     "Build C++ Test Code")
   (cmd srccsharp
    :code    :source
@@ -51,7 +50,7 @@
    :code    :test
    :lang    :csharp
    :path    ../csharp/src/test
-   :context vx/test/context-test
+   :context vx/translation/en/context-test
    :doc     "Build C# Test Code")
   (cmd srcjs
    :code    :source
@@ -64,7 +63,7 @@
    :code    :test
    :lang    :js
    :path    ../js/test
-   :context vx/test/context-test
+   :context vx/translation/en/context-test
    :doc     "Build JavaScript Test Code")
   (cmd srcjava
    :code    :source
@@ -77,7 +76,7 @@
    :code    :test
    :lang    :java
    :path    ../java/src/test/java
-   :context vx/test/context-test
+   :context vx/translation/en/context-test
    :doc     "Build Java Test Code")
   (cmd srckotlin
    :code    :source
@@ -90,7 +89,7 @@
    :code    :test
    :lang    :kotlin
    :path    ../kotlin/app/src/test/kotlin/app
-   :context vx/test/context-test
+   :context vx/translation/en/context-test
    :doc     "Build Kotlin Test Code")
   (cmd srcswift
    :code    :source
@@ -103,6 +102,6 @@
    :code    :test
    :lang    :swift
    :path    ../swift/src/test
-   :context vx/test/context-test
+   :context vx/translation/en/context-test
    :doc     "Build Swift Test Code")
 )

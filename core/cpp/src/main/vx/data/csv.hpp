@@ -11,6 +11,7 @@
 
 namespace vx_data_csv {
 
+
   // forward declarations
   class Abstract_csv;
   typedef Abstract_csv* Type_csv;
@@ -385,4 +386,5 @@ namespace vx_data_csv {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

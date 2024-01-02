@@ -9,6 +9,7 @@
 
 namespace vx_core {
 
+
   // forward declarations
   class Abstract_any;
   typedef Abstract_any* Type_any;
@@ -3762,11 +3763,14 @@ namespace vx_core {
     vx_core::Type_string vx_p_name = NULL;
     virtual vx_core::Type_string name() const = 0;
     // argtype()
-    vx_core::Type_type vx_p_argtype = NULL;
-    virtual vx_core::Type_type argtype() const = 0;
+    vx_core::Type_any vx_p_argtype = NULL;
+    virtual vx_core::Type_any argtype() const = 0;
     // fn-any()
     vx_core::Func_any_from_func vx_p_fn_any = NULL;
     virtual vx_core::Func_any_from_func fn_any() const = 0;
+    // doc()
+    vx_core::Type_string vx_p_doc = NULL;
+    virtual vx_core::Type_string doc() const = 0;
   };
   class Class_arg : public virtual Abstract_arg {
   public:
@@ -3783,8 +3787,9 @@ namespace vx_core {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string name() const override;
-    virtual vx_core::Type_type argtype() const override;
+    virtual vx_core::Type_any argtype() const override;
     virtual vx_core::Func_any_from_func fn_any() const override;
+    virtual vx_core::Type_string doc() const override;
   };
 
   // (type arglist)
@@ -8792,4 +8797,5 @@ namespace vx_core {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

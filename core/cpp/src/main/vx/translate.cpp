@@ -6,6 +6,7 @@
 namespace vx_translate {
 
 
+
   // (func session<-session-name)
   vx_core::Type_session f_session_from_session_name(vx_core::Type_session session, vx_core::Type_string name) {
     vx_core::Type_session output = vx_core::e_session;
@@ -371,6 +372,122 @@ namespace vx_translate {
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_translate::f_translate(context, text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func translate)
+  vx_core::Type_string f_translate_1(vx_core::Type_context context, vx_core::Type_msg msg) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(msg);
+    output = vx_core::f_let(
+      vx_core::t_string,
+      vx_core::t_any_from_func->vx_fn_new({msg, context}, [msg, context]() {
+        vx_core::Type_string path = msg->path();
+        vx_core::vx_ref_plus(path);
+        vx_core::Type_string code = msg->code();
+        vx_core::vx_ref_plus(code);
+        vx_core::Type_string text = vx_core::f_new(
+          vx_core::t_string,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string("!"),
+            path,
+            vx_core::vx_new_string(" "),
+            code
+          })
+        );
+        vx_core::vx_ref_plus(text);
+        vx_core::Type_string output_1 = vx_translate::f_translate(context, text);
+        vx_core::vx_release_one_except({path, code, text}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(msg, output);
+    return output;
+  }
+
+  // (func translate)
+  // class Class_translate_1 {
+    Abstract_translate_1::~Abstract_translate_1() {}
+
+    Class_translate_1::Class_translate_1() : Abstract_translate_1::Abstract_translate_1() {
+      vx_core::refcount += 1;
+    }
+
+    Class_translate_1::~Class_translate_1() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_translate_1::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_translate::Func_translate_1 output = vx_translate::e_translate_1;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_translate_1::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_translate::Func_translate_1 output = vx_translate::e_translate_1;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_translate_1::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/translate", // pkgname
+        "translate", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_translate_1::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_translate_1::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/translate", // pkgname
+        "translate", // name
+        1, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_translate_1::vx_empty() const {return vx_translate::e_translate_1;}
+    vx_core::Type_any Class_translate_1::vx_type() const {return vx_translate::t_translate_1;}
+    vx_core::Type_msgblock Class_translate_1::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_translate_1::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_translate_1::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_translate_1::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_msg inputval = vx_core::vx_any_from_any(vx_core::t_msg, val);
+      output = vx_translate::f_translate_1(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_translate_1::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_msg msg = vx_core::vx_any_from_any(vx_core::t_msg, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_translate::f_translate_1(context, msg);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -955,6 +1072,8 @@ namespace vx_translate {
   vx_translate::Func_session_from_session_translationmap_name t_session_from_session_translationmap_name = NULL;
   vx_translate::Func_translate e_translate = NULL;
   vx_translate::Func_translate t_translate = NULL;
+  vx_translate::Func_translate_1 e_translate_1 = NULL;
+  vx_translate::Func_translate_1 t_translate_1 = NULL;
   vx_translate::Func_translate_from_translation_string e_translate_from_translation_string = NULL;
   vx_translate::Func_translate_from_translation_string t_translate_from_translation_string = NULL;
   vx_translate::Func_translate_from_translationmap_name_string e_translate_from_translationmap_name_string = NULL;
@@ -989,6 +1108,10 @@ namespace vx_translate {
       vx_core::vx_reserve_empty(vx_translate::e_translate);
       vx_translate::t_translate = new vx_translate::Class_translate();
       vx_core::vx_reserve_type(vx_translate::t_translate);
+      vx_translate::e_translate_1 = new vx_translate::Class_translate_1();
+      vx_core::vx_reserve_empty(vx_translate::e_translate_1);
+      vx_translate::t_translate_1 = new vx_translate::Class_translate_1();
+      vx_core::vx_reserve_type(vx_translate::t_translate_1);
       vx_translate::e_translate_from_translation_string = new vx_translate::Class_translate_from_translation_string();
       vx_core::vx_reserve_empty(vx_translate::e_translate_from_translation_string);
       vx_translate::t_translate_from_translation_string = new vx_translate::Class_translate_from_translation_string();
@@ -1021,6 +1144,7 @@ namespace vx_translate {
       mapfunc["session<-session-translation"] = vx_translate::t_session_from_session_translation;
       mapfunc["session<-session-translationmap-name"] = vx_translate::t_session_from_session_translationmap_name;
       mapfunc["translate"] = vx_translate::t_translate;
+      mapfunc["translate_1"] = vx_translate::t_translate_1;
       mapfunc["translate<-translation-string"] = vx_translate::t_translate_from_translation_string;
       mapfunc["translate<-translationmap-name-string"] = vx_translate::t_translate_from_translationmap_name_string;
       mapfunc["translation-load-session"] = vx_translate::t_translation_load_session;

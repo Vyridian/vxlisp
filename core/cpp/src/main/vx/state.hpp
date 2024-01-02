@@ -4,6 +4,7 @@
 
 namespace vx_state {
 
+
   // forward declarations
   class Abstract_value_map;
   typedef Abstract_value_map* Type_value_map;
@@ -114,4 +115,5 @@ namespace vx_state {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

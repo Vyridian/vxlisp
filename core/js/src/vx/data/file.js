@@ -3,7 +3,9 @@
 import vx_core from "../../vx/core.js"
 import vx_data_textblock from "../../vx/data/textblock.js"
 
+
 export default class vx_data_file {
+
 
   /**
    * type: file
@@ -15,6 +17,82 @@ export default class vx_data_file {
    * type: fileformat
    */
   static t_fileformat = {}
+  /**
+   * @function boolean_exists_from_file
+   * Returns true if file/path exists.
+   * @param  {file} file
+   * @return {boolean}
+   */
+  static t_boolean_exists_from_file = {}
+  static e_boolean_exists_from_file = {vx_type: vx_data_file.t_boolean_exists_from_file}
+
+  // (func boolean-exists<-file)
+  static f_boolean_exists_from_file(file) {
+    let output = vx_core.e_boolean
+    return output
+  }
+
+  /**
+   * @function boolean_write_from_file_any
+   * Write any data structure as a file.
+   * @param  {file} file
+   * @param  {any} val
+   * @return {boolean}
+   */
+  static t_boolean_write_from_file_any = {}
+  static e_boolean_write_from_file_any = {vx_type: vx_data_file.t_boolean_write_from_file_any}
+
+  // (func boolean-write<-file-any)
+  static f_boolean_write_from_file_any(context, file, val) {
+    let output = vx_core.e_boolean
+    output = vx_data_file.f_boolean_write_from_file_string(
+      context,
+      file,
+      vx_core.f_string_from_any(val)
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_write_from_file_string
+   * Write a File to Disk
+   * @param  {file} file
+   * @param  {string} text
+   * @return {boolean}
+   */
+  static t_boolean_write_from_file_string = {}
+  static e_boolean_write_from_file_string = {vx_type: vx_data_file.t_boolean_write_from_file_string}
+
+  // (func boolean-write<-file-string)
+  static f_boolean_write_from_file_string(context, file, text) {
+    let output = vx_core.e_boolean
+    try {
+    } catch (err) {
+      console.log(err)
+    }
+    return output
+  }
+
+  /**
+   * @function file_read_from_file
+   * Read a Text File from Disk
+   * @param  {file} file
+   * @return {file}
+   */
+  static t_file_read_from_file = {}
+  static e_file_read_from_file = {vx_type: vx_data_file.t_file_read_from_file}
+
+  // (func file-read<-file)
+  static f_file_read_from_file(context, file) {
+    let output = vx_data_file.e_file
+    output = vx_core.f_copy(
+      file,
+      ":text",
+      vx_data_file.f_string_read_from_file(context, file)
+    )
+    return output
+  }
+
   /**
    * @function name_from_file
    * Returns path and name from file.
@@ -48,6 +126,20 @@ export default class vx_data_file {
   }
 
   /**
+   * @function pathcurrent_from_os
+   * Returns current system path.
+   * @return {string}
+   */
+  static t_pathcurrent_from_os = {}
+  static e_pathcurrent_from_os = {vx_type: vx_data_file.t_pathcurrent_from_os}
+
+  // (func pathcurrent<-os)
+  static f_pathcurrent_from_os() {
+    let output = vx_core.e_string
+    return output
+  }
+
+  /**
    * @function pathfull_from_file
    * Returns full path and name from file.
    * @param  {file} file
@@ -73,6 +165,25 @@ export default class vx_data_file {
         )
       })
     )
+    return output
+  }
+
+  /**
+   * @function string_read_from_file
+   * Read text from a File
+   * @param  {file} file
+   * @return {string}
+   */
+  static t_string_read_from_file = {}
+  static e_string_read_from_file = {vx_type: vx_data_file.t_string_read_from_file}
+
+  // (func string-read<-file)
+  static f_string_read_from_file(context, file) {
+    let output = vx_core.e_string
+    try {
+    } catch (err) {
+      console.log(err)
+    }
     return output
   }
 
@@ -190,6 +301,82 @@ export default class vx_data_file {
     vx_data_file.e_fileformat['vx_type'] = vx_data_file.t_fileformat
     vx_data_file.e_fileformat['vx_value'] = {}
 
+    // (func boolean-exists<-file)
+    vx_data_file.t_boolean_exists_from_file['vx_type'] = vx_core.t_type
+    vx_data_file.t_boolean_exists_from_file['vx_value'] = {
+      name          : "boolean-exists<-file",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_boolean_exists_from_file
+    }
+
+    // (func boolean-write<-file-any)
+    vx_data_file.t_boolean_write_from_file_any['vx_type'] = vx_core.t_type
+    vx_data_file.t_boolean_write_from_file_any['vx_value'] = {
+      name          : "boolean-write<-file-any",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_boolean_write_from_file_any
+    }
+
+    // (func boolean-write<-file-string)
+    vx_data_file.t_boolean_write_from_file_string['vx_type'] = vx_core.t_type
+    vx_data_file.t_boolean_write_from_file_string['vx_value'] = {
+      name          : "boolean-write<-file-string",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_boolean_write_from_file_string
+    }
+
+    // (func file-read<-file)
+    vx_data_file.t_file_read_from_file['vx_type'] = vx_core.t_type
+    vx_data_file.t_file_read_from_file['vx_value'] = {
+      name          : "file-read<-file",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_file_read_from_file
+    }
+
     // (func name<-file)
     vx_data_file.t_name_from_file['vx_type'] = vx_core.t_type
     vx_data_file.t_name_from_file['vx_value'] = {
@@ -228,6 +415,25 @@ export default class vx_data_file {
       fn            : vx_data_file.f_path_from_file
     }
 
+    // (func pathcurrent<-os)
+    vx_data_file.t_pathcurrent_from_os['vx_type'] = vx_core.t_type
+    vx_data_file.t_pathcurrent_from_os['vx_value'] = {
+      name          : "pathcurrent<-os",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_pathcurrent_from_os
+    }
+
     // (func pathfull<-file)
     vx_data_file.t_pathfull_from_file['vx_type'] = vx_core.t_type
     vx_data_file.t_pathfull_from_file['vx_value'] = {
@@ -245,6 +451,25 @@ export default class vx_data_file {
       properties    : [],
       proplast      : {},
       fn            : vx_data_file.f_pathfull_from_file
+    }
+
+    // (func string-read<-file)
+    vx_data_file.t_string_read_from_file['vx_type'] = vx_core.t_type
+    vx_data_file.t_string_read_from_file['vx_value'] = {
+      name          : "string-read<-file",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_string_read_from_file
     }
 
   }

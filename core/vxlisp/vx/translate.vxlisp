@@ -33,8 +33,32 @@
  (translate<-translation-string
   (translation<-context)
   text)
+ :test (test
+        "!NotFound!"
+        (translate "!NotFound!"))
  :context
  :doc "Returns a translated string from current context.")
+
+(func translate : string
+ [msg : msg]
+ (let : string
+  [path : string := (:path msg)
+   code : string := (:code msg)
+   text : string := (string
+                     "!"
+                     path
+                     " "
+                     code)]
+  (translate
+   text))
+ :test (test
+        "Repl Type Not Found"
+        (translate
+         (msg
+          :path "vx/repl/repl/repl<-string-argmap"
+          :code "repltypenotfound")))
+ :context
+ :doc "Returns a translated string from a msg.")
 
 (func translation<-context : translation
  (:translation (session<-context))

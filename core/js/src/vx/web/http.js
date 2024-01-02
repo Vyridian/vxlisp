@@ -5,7 +5,9 @@ import vx_data_csv from "../../vx/data/csv.js"
 import vx_data_textblock from "../../vx/data/textblock.js"
 import vx_data_xml from "../../vx/data/xml.js"
 
+
 export default class vx_web_http {
+
 
   /**
    * type: response

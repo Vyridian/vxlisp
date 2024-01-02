@@ -10,7 +10,7 @@ public final class File {
 
 
   public static Core.Type_string vx_string_read_from_file(File.Type_file file) throws java.io.IOException {
-		Core.Type_string output = Core.e_string;
+    Core.Type_string output = Core.e_string;
     Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
     Path path = Paths.get(sfullpath);
@@ -23,8 +23,8 @@ public final class File {
       Core.Type_msg msg = Core.vx_msg_error("File Not Found: " + sfullpath);
       output = Core.t_string.vx_copy(output, msg);
     }
-		return output;
-	}
+    return output;
+	 }
 
   /**
    * type: file
@@ -600,11 +600,11 @@ public final class File {
         java.nio.file.Files.write(path, bytes);
         output = Core.c_true;
       } catch (Exception err) {
-        Core.Type_msg msg = Core.vx_msg_from_exception("boolean-write<-file-string", err);
+        Core.Type_msg msg = Core.vx_msg_from_exception("vx/data/file/boolean-write<-file-string", err);
         output = output.vx_copy(msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: boolean-write<-file-string");
+      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("boolean-write<-file-string"));
       output = output.vx_copy(msg);
     }
     return output;
@@ -707,7 +707,7 @@ public final class File {
         )
       );
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: file-read<-file");
+      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("file-read<-file"));
       output = output.vx_copy(msg);
     }
     return output;
@@ -1172,11 +1172,11 @@ public final class File {
       try {
         output = vx_string_read_from_file(file);
       } catch (Exception err) {
-        Core.Type_msg msg = Core.vx_msg_from_exception("string-read<-file", err);
+        Core.Type_msg msg = Core.vx_msg_from_exception("vx/data/file/string-read<-file", err);
         output = output.vx_copy(msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("Permission Denied: string-read<-file");
+      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("string-read<-file"));
       output = output.vx_copy(msg);
     }
     return output;

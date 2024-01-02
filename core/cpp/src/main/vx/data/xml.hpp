@@ -10,6 +10,7 @@
 
 namespace vx_data_xml {
 
+
   // forward declarations
   class Abstract_xml;
   typedef Abstract_xml* Type_xml;
@@ -569,4 +570,5 @@ namespace vx_data_xml {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

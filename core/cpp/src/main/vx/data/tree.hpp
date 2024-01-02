@@ -5,6 +5,7 @@
 
 namespace vx_data_tree {
 
+
   // forward declarations
   class Abstract_branch;
   typedef Abstract_branch* Type_branch;
@@ -283,4 +284,5 @@ namespace vx_data_tree {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

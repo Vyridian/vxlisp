@@ -5,7 +5,9 @@ import vx_collection from "../vx/collection.js"
 import vx_type from "../vx/type.js"
 import vx_data_textblock from "../vx/data/textblock.js"
 
+
 export default class vx_repl {
+
 
   /**
    * type: liblist
@@ -18,6 +20,12 @@ export default class vx_repl {
    * Repl structure
    */
   static t_repl = {}
+
+  /**
+   * type: replarglist
+   * Builder for a repllist
+   */
+  static t_replarglist = {}
 
   /**
    * type: repllist
@@ -279,6 +287,25 @@ export default class vx_repl {
           )
         )
       })
+    )
+    return output
+  }
+
+  /**
+   * @function repl_bracket_from_textblock_argmap
+   * Returns a repl from a squarebracket parsed textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   */
+  static t_repl_bracket_from_textblock_argmap = {}
+  static e_repl_bracket_from_textblock_argmap = {vx_type: vx_repl.t_repl_bracket_from_textblock_argmap}
+
+  // (func repl-bracket<-textblock-argmap)
+  static f_repl_bracket_from_textblock_argmap(textblock, argmap) {
+    let output = vx_repl.e_repl
+    output = vx_core.f_empty(
+      vx_repl.t_repl
     )
     return output
   }
@@ -583,13 +610,7 @@ export default class vx_repl {
                               vx_core.f_else(
                                 vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                                   vx_repl.t_repl,
-                                  vx_core.f_msg_from_error(
-                                    vx_core.f_new(
-                                      vx_core.t_string,
-                                      "Repl Type Not Found: ",
-                                      text
-                                    )
-                                  )
+                                  vx_core.f_msg_from_error_1(":repltypenotfound", text)
                                 )})
                               )
                             )
@@ -662,7 +683,119 @@ export default class vx_repl {
               ":starttext"
             ),
             vx_core.f_new(vx_core.t_any_from_func, () => {return vx_repl.f_repl_paren_from_textblock_argmap(textblock, argmap)})
+          ),
+          vx_core.f_case_1(
+            vx_core.f_any_from_struct(
+              {"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim},
+              vx_data_textblock.c_delimbracketsquare,
+              ":starttext"
+            ),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_repl.f_repl_bracket_from_textblock_argmap(textblock, argmap)})
           )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function replarglist_from_replarglist_textblock_argmap
+   * Returns a modified replarglist from by applying a textblock
+   * @param  {replarglist} replargs
+   * @param  {textblock} tb
+   * @param  {argmap} argmap
+   * @return {replarglist}
+   */
+  static t_replarglist_from_replarglist_textblock_argmap = {}
+  static e_replarglist_from_replarglist_textblock_argmap = {vx_type: vx_repl.t_replarglist_from_replarglist_textblock_argmap}
+
+  // (func replarglist<-replarglist-textblock-argmap)
+  static f_replarglist_from_replarglist_textblock_argmap(replargs, tb, argmap) {
+    let output = vx_repl.e_replarglist
+    output = vx_core.f_let(
+      {"any-1": vx_repl.t_replarglist},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const key = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_repl.t_replarglist}, replargs, ":key")
+        const current = vx_core.f_any_from_struct({"any-1": vx_repl.t_repl, "struct-2": vx_repl.t_replarglist}, replargs, ":current")
+        const repllist = vx_core.f_any_from_struct({"any-1": vx_repl.t_repllist, "struct-2": vx_repl.t_replarglist}, replargs, ":repllist")
+        const currlist = vx_core.f_any_from_struct({"any-1": vx_repl.t_repllist, "struct-2": vx_repl.t_repl}, current, ":repllist")
+        const text = vx_core.f_any_from_struct(
+          {"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_textblock},
+          vx_data_textblock.t_textblock,
+          ":text"
+        )
+        return vx_core.f_if_2(
+          {"any-1": vx_repl.t_replarglist},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(key, "")}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_if_2(
+              {"any-1": vx_repl.t_replarglist},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq_1(text)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(replargs, ":key", text)})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(text, ":=")}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(replargs, ":key", text)})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(text, ":doc")}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(replargs, ":key", text)})
+              ),
+              vx_core.f_else(
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+                  replargs,
+                  ":current",
+                  vx_core.f_new(
+                    vx_repl.t_repl,
+                    ":name",
+                    text
+                  ),
+                  ":repllist",
+                  vx_core.f_copy(repllist, current)
+                )})
+              )
+            )})
+          ),
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq_1(key)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              replargs,
+              ":key",
+              "",
+              ":current",
+              vx_core.f_copy(current, ":type", text)
+            )})
+          ),
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(key, ":=")}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              replargs,
+              ":key",
+              "",
+              ":current",
+              vx_core.f_copy(
+                current,
+                ":repllist",
+                vx_core.f_copy(
+                  currlist,
+                  vx_repl.f_repl_from_textblock_argmap(tb, argmap)
+                )
+              )
+            )})
+          ),
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(key, ":doc")}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              replargs,
+              ":key",
+              "",
+              ":current",
+              vx_core.f_copy(current, ":doc", text)
+            )})
+          ),
+          vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return replargs}))
         )
       })
     )
@@ -777,6 +910,7 @@ export default class vx_repl {
   // empty types
   static e_liblist = []
   static e_repl = {}
+  static e_replarglist = {}
   static e_repllist = []
 
 
@@ -789,6 +923,7 @@ export default class vx_repl {
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
       "liblist": vx_repl.e_liblist,
       "repl": vx_repl.e_repl,
+      "replarglist": vx_repl.e_replarglist,
       "repllist": vx_repl.e_repllist,
       "any-repl<-functype-args": vx_repl.e_any_repl_from_functype_args,
       "any<-liblist-string": vx_repl.e_any_from_liblist_string,
@@ -798,6 +933,7 @@ export default class vx_repl {
       "anylist<-repllist": vx_repl.e_anylist_from_repllist,
       "argmap<-textblock-argmap": vx_repl.e_argmap_from_textblock_argmap,
       "const<-string": vx_repl.e_const_from_string,
+      "repl-bracket<-textblock-argmap": vx_repl.e_repl_bracket_from_textblock_argmap,
       "repl-empty<-textblock-argmap": vx_repl.e_repl_empty_from_textblock_argmap,
       "repl-paren<-textblock-argmap": vx_repl.e_repl_paren_from_textblock_argmap,
       "repl<-liblist-string": vx_repl.e_repl_from_liblist_string,
@@ -806,6 +942,7 @@ export default class vx_repl {
       "repl<-string-argmap": vx_repl.e_repl_from_string_argmap,
       "repl<-textblock": vx_repl.e_repl_from_textblock,
       "repl<-textblock-argmap": vx_repl.e_repl_from_textblock_argmap,
+      "replarglist<-replarglist-textblock-argmap": vx_repl.e_replarglist_from_replarglist_textblock_argmap,
       "repllist<-textblocklist-argmap": vx_repl.e_repllist_from_textblocklist_argmap,
       "textblock<-script": vx_repl.e_textblock_from_script,
       "typefunc<-string": vx_repl.e_typefunc_from_string
@@ -819,6 +956,7 @@ export default class vx_repl {
       "anylist<-repllist": vx_repl.t_anylist_from_repllist,
       "argmap<-textblock-argmap": vx_repl.t_argmap_from_textblock_argmap,
       "const<-string": vx_repl.t_const_from_string,
+      "repl-bracket<-textblock-argmap": vx_repl.t_repl_bracket_from_textblock_argmap,
       "repl-empty<-textblock-argmap": vx_repl.t_repl_empty_from_textblock_argmap,
       "repl-paren<-textblock-argmap": vx_repl.t_repl_paren_from_textblock_argmap,
       "repl<-liblist-string": vx_repl.t_repl_from_liblist_string,
@@ -827,6 +965,7 @@ export default class vx_repl {
       "repl<-string-argmap": vx_repl.t_repl_from_string_argmap,
       "repl<-textblock": vx_repl.t_repl_from_textblock,
       "repl<-textblock-argmap": vx_repl.t_repl_from_textblock_argmap,
+      "replarglist<-replarglist-textblock-argmap": vx_repl.t_replarglist_from_replarglist_textblock_argmap,
       "repllist<-textblocklist-argmap": vx_repl.t_repllist_from_textblocklist_argmap,
       "textblock<-script": vx_repl.t_textblock_from_script,
       "typefunc<-string": vx_repl.t_typefunc_from_string
@@ -834,6 +973,7 @@ export default class vx_repl {
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       "liblist": vx_repl.t_liblist,
       "repl": vx_repl.t_repl,
+      "replarglist": vx_repl.t_replarglist,
       "repllist": vx_repl.t_repllist
     })
     const pkg = vx_core.vx_new_struct(vx_core.t_package, {
@@ -877,6 +1017,11 @@ export default class vx_repl {
       disallowvalues: [],
       traits        : [],
       properties    : {
+        "name": {
+          "name" : "name",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
         "type": {
           "name" : "type",
           "type" : vx_core.t_any,
@@ -896,16 +1041,60 @@ export default class vx_repl {
           "name" : "val",
           "type" : vx_core.t_any,
           "multi": false
+        },
+        "doc": {
+          "name" : "doc",
+          "type" : vx_core.t_string,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "val",
-        "type" : vx_core.t_any,
+        "name" : "doc",
+        "type" : vx_core.t_string,
         "multi": false
       }
     }
     vx_repl.e_repl['vx_type'] = vx_repl.t_repl
     vx_repl.e_repl['vx_value'] = {}
+
+    // (type replarglist)
+    vx_repl.t_replarglist['vx_type'] = vx_core.t_type
+    vx_repl.t_replarglist['vx_value'] = {
+      name          : "replarglist",
+      pkgname       : "vx/repl",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {
+        "key": {
+          "name" : "key",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "current": {
+          "name" : "current",
+          "type" : vx_repl.t_repl,
+          "multi": false
+        },
+        "repllist": {
+          "name" : "repllist",
+          "type" : vx_repl.t_repllist,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "repllist",
+        "type" : vx_repl.t_repllist,
+        "multi": false
+      }
+    }
+    vx_repl.e_replarglist['vx_type'] = vx_repl.t_replarglist
+    vx_repl.e_replarglist['vx_value'] = {}
 
     // (type repllist)
     vx_repl.t_repllist['vx_type'] = vx_core.t_type
@@ -952,7 +1141,6 @@ export default class vx_repl {
         vx_data_textblock.c_delimquote,
         vx_data_textblock.c_delimquoteblock,
         vx_data_textblock.c_delimwhitespace,
-        vx_repl.c_delimvxlispbracket,
         vx_repl.c_delimvxlispparen
       )
     ))
@@ -1127,6 +1315,25 @@ export default class vx_repl {
       fn            : vx_repl.f_const_from_string
     }
 
+    // (func repl-bracket<-textblock-argmap)
+    vx_repl.t_repl_bracket_from_textblock_argmap['vx_type'] = vx_core.t_type
+    vx_repl.t_repl_bracket_from_textblock_argmap['vx_value'] = {
+      name          : "repl-bracket<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_bracket_from_textblock_argmap
+    }
+
     // (func repl-empty<-textblock-argmap)
     vx_repl.t_repl_empty_from_textblock_argmap['vx_type'] = vx_core.t_type
     vx_repl.t_repl_empty_from_textblock_argmap['vx_value'] = {
@@ -1277,6 +1484,25 @@ export default class vx_repl {
       properties    : [],
       proplast      : {},
       fn            : vx_repl.f_repl_from_textblock_argmap
+    }
+
+    // (func replarglist<-replarglist-textblock-argmap)
+    vx_repl.t_replarglist_from_replarglist_textblock_argmap['vx_type'] = vx_core.t_type
+    vx_repl.t_replarglist_from_replarglist_textblock_argmap['vx_value'] = {
+      name          : "replarglist<-replarglist-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_replarglist_from_replarglist_textblock_argmap
     }
 
     // (func repllist<-textblocklist-argmap)

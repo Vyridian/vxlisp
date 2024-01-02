@@ -7,6 +7,7 @@
 
 namespace vx_web_http {
 
+
   // forward declarations
   class Abstract_response;
   typedef Abstract_response* Type_response;
@@ -318,4 +319,5 @@ namespace vx_web_http {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

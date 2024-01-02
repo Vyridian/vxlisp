@@ -5,6 +5,7 @@
 
 namespace vx_core_test {
 
+
   vx_test::Type_testcase t_boolean(vx_core::Type_context context);
   vx_test::Type_testcase t_float(vx_core::Type_context context);
   vx_test::Type_testcase t_int(vx_core::Type_context context);
@@ -81,4 +82,5 @@ namespace vx_core_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

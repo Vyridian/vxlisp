@@ -5,6 +5,7 @@
 
 namespace vx_type {
 
+
   // forward declarations
   class Abstract_allowtypenames_from_type;
   typedef Abstract_allowtypenames_from_type* Func_allowtypenames_from_type;
@@ -799,4 +800,5 @@ namespace vx_type {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

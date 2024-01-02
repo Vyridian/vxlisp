@@ -5,6 +5,7 @@
 namespace vx_web_htmldoc {
 
 
+
   // (func boolean-write<-id-htmltext)
   vx_core::Type_boolean f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
     vx_core::Type_boolean output = vx_core::e_boolean;

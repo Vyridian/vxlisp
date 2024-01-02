@@ -1,10 +1,10 @@
 #include "../../../main/vx/data/table.hpp"
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
-
 #include "table_test.hpp"
 
 namespace vx_data_table_test {
+
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany listtestcase;

@@ -1,7 +1,9 @@
 'strict mode'
 
 
+
 export default class vx_core {
+
 
   // vx_boolean_from_string_ends(string, string)
   static vx_boolean_from_string_ends(text, ends) {
@@ -5503,18 +5505,23 @@ export default class vx_core {
         },
         "argtype": {
           "name" : "argtype",
-          "type" : vx_core.t_type,
+          "type" : vx_core.t_any,
           "multi": false
         },
         "fn-any": {
           "name" : "fn-any",
           "type" : vx_core.t_any_from_func,
           "multi": false
+        },
+        "doc": {
+          "name" : "doc",
+          "type" : vx_core.t_string,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "fn-any",
-        "type" : vx_core.t_any_from_func,
+        "name" : "doc",
+        "type" : vx_core.t_string,
         "multi": false
       }
     }

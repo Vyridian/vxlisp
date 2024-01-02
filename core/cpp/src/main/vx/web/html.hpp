@@ -8,6 +8,7 @@
 
 namespace vx_web_html {
 
+
   // forward declarations
   class Abstract_body;
   typedef Abstract_body* Type_body;
@@ -2393,4 +2394,5 @@ namespace vx_web_html {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

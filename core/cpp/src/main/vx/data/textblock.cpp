@@ -8,6 +8,7 @@
 namespace vx_data_textblock {
 
 
+
   // (type delim)
   // class Class_delim {
     Abstract_delim::~Abstract_delim() {}

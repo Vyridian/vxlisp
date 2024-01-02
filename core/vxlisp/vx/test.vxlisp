@@ -186,6 +186,16 @@
  )
  :doc "The default Test Stylesheet")
 
+(func context-test : context
+ [args : anylist :...]
+ (context
+  :session
+   (session
+    :user
+     (user
+      :security (security-test))))
+ :doc "Returns the default context for test case execution. Arguments come from the command line.")
+
 (func div<-testcaselist : div
  [testcaselist : testcaselist]
  (div
@@ -267,16 +277,6 @@
  [testpackagelist : testpackagelist]
  (list<-list testpackagelist div<-testpackage)
  :doc "Returns a divlist from a testpackagelist.")
-
-(func context-test : context
- [args : anylist :...]
- (context
-  :session
-   (session
-    :user
-     (user
-      :security (security-test))))
- :doc "Returns the default context for test case execution. Arguments come from the command line.")
 
 (func file-test : file/file
  (file

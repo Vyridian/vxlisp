@@ -1,11 +1,12 @@
 #include "../../../main/vx/translation/en.hpp"
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
+#include "../../../main/vx/data/file.hpp"
 #include "../../../main/vx/translate.hpp"
-
 #include "en_test.hpp"
 
 namespace vx_translation_en_test {
+
 
   vx_test::Type_testcase f_translation_en(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_translation_en");
@@ -60,28 +61,28 @@ namespace vx_translation_en_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(3), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(5), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(33), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(20), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(33), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(20), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(5)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
@@ -103,6 +104,8 @@ namespace vx_translation_en_test {
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":context-en"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":context-test"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":securitydata-test"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":translation-en"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":words"), vx_core::vx_new_int(0)
       })

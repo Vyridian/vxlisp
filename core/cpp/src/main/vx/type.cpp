@@ -3,6 +3,7 @@
 #include "type.hpp"
 
 namespace vx_type {
+
 // :body
 
   // vx_int_from_string_findkeyword(string, string)

@@ -178,13 +178,22 @@ public final class Repl {
     public Repl.Type_repl vx_copy(final Object... vals);
     public Repl.Type_repl vx_empty();
     public Repl.Type_repl vx_type();
+    public Core.Type_string name();
     public Core.Type_any type();
     public Repl.Type_repllist repllist();
     public Core.Type_boolean async();
     public Core.Type_any val();
+    public Core.Type_string doc();
   }
 
   public static class Class_repl extends Core.Class_base implements Type_repl {
+
+    protected Core.Type_string vx_p_name;
+
+    @Override
+    public Core.Type_string name() {
+      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+    }
 
     protected Core.Type_any vx_p_type;
 
@@ -214,11 +223,21 @@ public final class Repl {
       return this.vx_p_val == null ? Core.e_any : this.vx_p_val;
     }
 
+    protected Core.Type_string vx_p_doc;
+
+    @Override
+    public Core.Type_string doc() {
+      return this.vx_p_doc == null ? Core.e_string : this.vx_p_doc;
+    }
+
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
       switch (skey) {
+      case ":name":
+        output = this.name();
+        break;
       case ":type":
         output = this.type();
         break;
@@ -231,6 +250,9 @@ public final class Repl {
       case ":val":
         output = this.val();
         break;
+      case ":doc":
+        output = this.doc();
+        break;
       }
       return output;
     }
@@ -238,10 +260,12 @@ public final class Repl {
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":name", this.name());
       output.put(":type", this.type());
       output.put(":repllist", this.repllist());
       output.put(":async", this.async());
       output.put(":val", this.val());
+      output.put(":doc", this.doc());
       return Core.immutablemap(output);
     }
 
@@ -257,15 +281,19 @@ public final class Repl {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
+      Core.Type_string vx_p_name = val.name();
       Core.Type_any vx_p_type = val.type();
       Repl.Type_repllist vx_p_repllist = val.repllist();
       Core.Type_boolean vx_p_async = val.async();
       Core.Type_any vx_p_val = val.val();
+      Core.Type_string vx_p_doc = val.doc();
       ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":name");
       validkeys.add(":type");
       validkeys.add(":repllist");
       validkeys.add(":async");
       validkeys.add(":val");
+      validkeys.add(":doc");
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -289,6 +317,19 @@ public final class Repl {
           }
         } else {
           switch (key) {
+          case ":name":
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new repl :name " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
@@ -332,6 +373,19 @@ public final class Repl {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":doc":
+            if (valsub == vx_p_doc) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_doc = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_doc = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new repl :doc " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_msg msg = Core.vx_msg_error("(new repl) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
@@ -341,10 +395,12 @@ public final class Repl {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_repl work = new Class_repl();
+        work.vx_p_name = vx_p_name;
         work.vx_p_type = vx_p_type;
         work.vx_p_repllist = vx_p_repllist;
         work.vx_p_async = vx_p_async;
         work.vx_p_val = vx_p_val;
+        work.vx_p_doc = vx_p_doc;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -379,6 +435,193 @@ public final class Repl {
 
   public static final Type_repl e_repl = new Class_repl();
   public static final Type_repl t_repl = new Class_repl();
+
+  /**
+   * type: replarglist
+   * Builder for a repllist
+   * (type replarglist)
+   */
+  public interface Type_replarglist extends Core.Type_struct {
+    public Repl.Type_replarglist vx_new(final Object... vals);
+    public Repl.Type_replarglist vx_copy(final Object... vals);
+    public Repl.Type_replarglist vx_empty();
+    public Repl.Type_replarglist vx_type();
+    public Core.Type_string key();
+    public Repl.Type_repl current();
+    public Repl.Type_repllist repllist();
+  }
+
+  public static class Class_replarglist extends Core.Class_base implements Type_replarglist {
+
+    protected Core.Type_string vx_p_key;
+
+    @Override
+    public Core.Type_string key() {
+      return this.vx_p_key == null ? Core.e_string : this.vx_p_key;
+    }
+
+    protected Repl.Type_repl vx_p_current;
+
+    @Override
+    public Repl.Type_repl current() {
+      return this.vx_p_current == null ? Repl.e_repl : this.vx_p_current;
+    }
+
+    protected Repl.Type_repllist vx_p_repllist;
+
+    @Override
+    public Repl.Type_repllist repllist() {
+      return this.vx_p_repllist == null ? Repl.e_repllist : this.vx_p_repllist;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":key":
+        output = this.key();
+        break;
+      case ":current":
+        output = this.current();
+        break;
+      case ":repllist":
+        output = this.repllist();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":key", this.key());
+      output.put(":current", this.current());
+      output.put(":repllist", this.repllist());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_replarglist vx_new(final Object... vals) {return e_replarglist.vx_copy(vals);}
+
+    @Override
+    public Type_replarglist vx_copy(final Object... vals) {
+      Type_replarglist output = this;
+      boolean ischanged = false;
+      Class_replarglist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Core.Type_string vx_p_key = val.key();
+      Repl.Type_repl vx_p_current = val.current();
+      Repl.Type_repllist vx_p_repllist = val.repllist();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":key");
+      validkeys.add(":current");
+      validkeys.add(":repllist");
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+          }
+          boolean isvalidkey = validkeys.contains(testkey);
+          if (isvalidkey) {
+            key = testkey;
+          } else {
+            Core.Type_msg msg = Core.vx_msg_error("(new replarglist) - Invalid Key Type: " + valsub.toString());
+            msgblock = msgblock.vx_copy(msg);
+          }
+        } else {
+          switch (key) {
+          case ":key":
+            if (valsub == vx_p_key) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_key = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_key = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :key " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":current":
+            if (valsub == vx_p_current) {
+            } else if (valsub instanceof Repl.Type_repl) {
+              ischanged = true;
+              vx_p_current = (Repl.Type_repl)valsub;
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :current " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":repllist":
+            if (valsub == vx_p_repllist) {
+            } else if (valsub instanceof Repl.Type_repllist) {
+              ischanged = true;
+              vx_p_repllist = (Repl.Type_repllist)valsub;
+            } else {
+              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :repllist " + valsub.toString() + ") - Invalid Value");
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_msg msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + key);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_replarglist work = new Class_replarglist();
+        work.vx_p_key = vx_p_key;
+        work.vx_p_current = vx_p_current;
+        work.vx_p_repllist = vx_p_repllist;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_replarglist vx_empty() {return e_replarglist;}
+    @Override
+    public Type_replarglist vx_type() {return t_replarglist;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/repl", // pkgname
+        "replarglist", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_replarglist e_replarglist = new Class_replarglist();
+  public static final Type_replarglist t_replarglist = new Class_replarglist();
 
   /**
    * type: repllist
@@ -602,7 +845,6 @@ public final class Repl {
                     Textblock.c_delimquote,
                     Textblock.c_delimquoteblock,
                     Textblock.c_delimwhitespace,
-                    Repl.c_delimvxlispbracket,
                     Repl.c_delimvxlispparen
                   )
                 )
@@ -1494,6 +1736,89 @@ public final class Repl {
   }
 
   /**
+   * @function repl_bracket_from_textblock_argmap
+   * Returns a repl from a squarebracket parsed textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl-bracket<-textblock-argmap)
+   */
+  public static interface Func_repl_bracket_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+    public Repl.Type_repl vx_repl_bracket_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
+  }
+
+  public static class Class_repl_bracket_from_textblock_argmap extends Core.Class_base implements Func_repl_bracket_from_textblock_argmap {
+
+    @Override
+    public Func_repl_bracket_from_textblock_argmap vx_new(Object... vals) {
+      Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
+      return output;
+    }
+
+    @Override
+    public Func_repl_bracket_from_textblock_argmap vx_copy(Object... vals) {
+      Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/repl", // pkgname
+        "repl-bracket<-textblock-argmap", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/repl", // pkgname
+          "repl", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_repl_bracket_from_textblock_argmap vx_empty() {return e_repl_bracket_from_textblock_argmap;}
+    @Override
+    public Func_repl_bracket_from_textblock_argmap vx_type() {return t_repl_bracket_from_textblock_argmap;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_argmap argmap = Core.f_any_from_any(Core.t_argmap, arglist.vx_any(Core.vx_new_int(1)));
+      output = Repl.f_repl_bracket_from_textblock_argmap(textblock, argmap);
+      return output;
+    }
+
+    @Override
+    public Repl.Type_repl vx_repl_bracket_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+      return Repl.f_repl_bracket_from_textblock_argmap(textblock, argmap);
+    }
+
+  }
+
+  public static final Func_repl_bracket_from_textblock_argmap e_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
+  public static final Func_repl_bracket_from_textblock_argmap t_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
+
+  public static Repl.Type_repl f_repl_bracket_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
+    Repl.Type_repl output = Repl.e_repl;
+    output = Core.f_empty(
+      Repl.t_repl
+    );
+    return output;
+  }
+
+  /**
    * @function repl_empty_from_textblock_argmap
    * Returns a repl from an empty delim textblock
    * @param  {textblock} textblock
@@ -2281,15 +2606,7 @@ public final class Repl {
                                                 return Core.f_new(
                                                   Repl.t_repl,
                                                   Core.t_anylist.vx_new(
-                                                      Core.f_msg_from_error(
-                                                        Core.f_new(
-                                                          Core.t_string,
-                                                          Core.t_anylist.vx_new(
-                                                            Core.vx_new_string("Repl Type Not Found: "),
-                                                            text
-                                                          )
-                                                        )
-                                                      )
+                                                      Core.f_msg_from_error_1(Core.vx_new_string(":repltypenotfound"), text)
                                                   )
                                                 );
                                               })
@@ -2509,6 +2826,261 @@ public final class Repl {
               Textblock.c_delimparen.starttext(),
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Repl.f_repl_paren_from_textblock_argmap(textblock, argmap);
+              })
+            ),
+            Core.f_case_1(
+              Textblock.c_delimbracketsquare.starttext(),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Repl.f_repl_bracket_from_textblock_argmap(textblock, argmap);
+              })
+            )
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function replarglist_from_replarglist_textblock_argmap
+   * Returns a modified replarglist from by applying a textblock
+   * @param  {replarglist} replargs
+   * @param  {textblock} tb
+   * @param  {argmap} argmap
+   * @return {replarglist}
+   * (func replarglist<-replarglist-textblock-argmap)
+   */
+  public static interface Func_replarglist_from_replarglist_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+    public Repl.Type_replarglist vx_replarglist_from_replarglist_textblock_argmap(final Repl.Type_replarglist replargs, final Textblock.Type_textblock tb, final Core.Type_argmap argmap);
+  }
+
+  public static class Class_replarglist_from_replarglist_textblock_argmap extends Core.Class_base implements Func_replarglist_from_replarglist_textblock_argmap {
+
+    @Override
+    public Func_replarglist_from_replarglist_textblock_argmap vx_new(Object... vals) {
+      Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
+      return output;
+    }
+
+    @Override
+    public Func_replarglist_from_replarglist_textblock_argmap vx_copy(Object... vals) {
+      Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/repl", // pkgname
+        "replarglist<-replarglist-textblock-argmap", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/repl", // pkgname
+          "replarglist", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_replarglist_from_replarglist_textblock_argmap vx_empty() {return e_replarglist_from_replarglist_textblock_argmap;}
+    @Override
+    public Func_replarglist_from_replarglist_textblock_argmap vx_type() {return t_replarglist_from_replarglist_textblock_argmap;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Repl.Type_replarglist replargs = Core.f_any_from_any(Repl.t_replarglist, arglist.vx_any(Core.vx_new_int(0)));
+      Textblock.Type_textblock tb = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_argmap argmap = Core.f_any_from_any(Core.t_argmap, arglist.vx_any(Core.vx_new_int(2)));
+      output = Repl.f_replarglist_from_replarglist_textblock_argmap(replargs, tb, argmap);
+      return output;
+    }
+
+    @Override
+    public Repl.Type_replarglist vx_replarglist_from_replarglist_textblock_argmap(final Repl.Type_replarglist replargs, final Textblock.Type_textblock tb, final Core.Type_argmap argmap) {
+      return Repl.f_replarglist_from_replarglist_textblock_argmap(replargs, tb, argmap);
+    }
+
+  }
+
+  public static final Func_replarglist_from_replarglist_textblock_argmap e_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
+  public static final Func_replarglist_from_replarglist_textblock_argmap t_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
+
+  public static Repl.Type_replarglist f_replarglist_from_replarglist_textblock_argmap(final Repl.Type_replarglist replargs, final Textblock.Type_textblock tb, final Core.Type_argmap argmap) {
+    Repl.Type_replarglist output = Repl.e_replarglist;
+    output = Core.f_let(
+      Repl.t_replarglist,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string key = replargs.key();
+        final Repl.Type_repl current = replargs.current();
+        final Repl.Type_repllist repllist = replargs.repllist();
+        final Repl.Type_repllist currlist = current.repllist();
+        final Core.Type_string text = Textblock.t_textblock.text();
+        return Core.f_if_2(
+          Repl.t_replarglist,
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(key, Core.vx_new_string(""));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_if_2(
+                  Repl.t_replarglist,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eq_1(Core.t_anylist.vx_new(
+                            text));
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_copy(
+                            replargs,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string(":key"),
+                                text
+                            )
+                          );
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eq(text, Core.vx_new_string(":="));
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_copy(
+                            replargs,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string(":key"),
+                                text
+                            )
+                          );
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eq(text, Core.vx_new_string(":doc"));
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_copy(
+                            replargs,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string(":key"),
+                                text
+                            )
+                          );
+                        })
+                      ),
+                      Core.f_else(
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_copy(
+                            replargs,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string(":current"),
+                                Core.f_new(
+                                  Repl.t_repl,
+                                  Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":name"),
+                                    text
+                                  )
+                                ),
+                                Core.vx_new_string(":repllist"),
+                                Core.f_copy(repllist, Core.t_anylist.vx_new(
+                                  current))
+                            )
+                          );
+                        })
+                      )
+                  )
+                );
+              })
+            ),
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq_1(Core.t_anylist.vx_new(
+                  key));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_copy(
+                  replargs,
+                  Core.t_anylist.vx_new(
+                      Core.vx_new_string(":key"),
+                      Core.vx_new_string(""),
+                      Core.vx_new_string(":current"),
+                      Core.f_copy(
+                        current,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":type"),
+                          text
+                        )
+                      )
+                  )
+                );
+              })
+            ),
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(key, Core.vx_new_string(":="));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_copy(
+                  replargs,
+                  Core.t_anylist.vx_new(
+                      Core.vx_new_string(":key"),
+                      Core.vx_new_string(""),
+                      Core.vx_new_string(":current"),
+                      Core.f_copy(
+                        current,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":repllist"),
+                          Core.f_copy(
+                            currlist,
+                            Core.t_anylist.vx_new(
+                              Repl.f_repl_from_textblock_argmap(tb, argmap)
+                            )
+                          )
+                        )
+                      )
+                  )
+                );
+              })
+            ),
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(key, Core.vx_new_string(":doc"));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_copy(
+                  replargs,
+                  Core.t_anylist.vx_new(
+                      Core.vx_new_string(":key"),
+                      Core.vx_new_string(""),
+                      Core.vx_new_string(":current"),
+                      Core.f_copy(
+                        current,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":doc"),
+                          text
+                        )
+                      )
+                  )
+                );
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return replargs;
               })
             )
           )
@@ -2848,6 +3420,7 @@ public final class Repl {
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
     maptype.put("liblist", Repl.t_liblist);
     maptype.put("repl", Repl.t_repl);
+    maptype.put("replarglist", Repl.t_replarglist);
     maptype.put("repllist", Repl.t_repllist);
     mapconst.put("delimvxlisp", Repl.c_delimvxlisp);
     mapconst.put("delimvxlispbracket", Repl.c_delimvxlispbracket);
@@ -2860,6 +3433,7 @@ public final class Repl {
     mapfunc.put("anylist<-repllist", Repl.t_anylist_from_repllist);
     mapfunc.put("argmap<-textblock-argmap", Repl.t_argmap_from_textblock_argmap);
     mapfunc.put("const<-string", Repl.t_const_from_string);
+    mapfunc.put("repl-bracket<-textblock-argmap", Repl.t_repl_bracket_from_textblock_argmap);
     mapfunc.put("repl-empty<-textblock-argmap", Repl.t_repl_empty_from_textblock_argmap);
     mapfunc.put("repl-paren<-textblock-argmap", Repl.t_repl_paren_from_textblock_argmap);
     mapfunc.put("repl<-liblist-string", Repl.t_repl_from_liblist_string);
@@ -2868,6 +3442,7 @@ public final class Repl {
     mapfunc.put("repl<-string-argmap", Repl.t_repl_from_string_argmap);
     mapfunc.put("repl<-textblock", Repl.t_repl_from_textblock);
     mapfunc.put("repl<-textblock-argmap", Repl.t_repl_from_textblock_argmap);
+    mapfunc.put("replarglist<-replarglist-textblock-argmap", Repl.t_replarglist_from_replarglist_textblock_argmap);
     mapfunc.put("repllist<-textblocklist-argmap", Repl.t_repllist_from_textblocklist_argmap);
     mapfunc.put("textblock<-script", Repl.t_textblock_from_script);
     mapfunc.put("typefunc<-string", Repl.t_typefunc_from_string);

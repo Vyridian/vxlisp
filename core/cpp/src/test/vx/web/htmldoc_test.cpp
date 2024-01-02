@@ -2,10 +2,10 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/web/html.hpp"
-
 #include "htmldoc_test.hpp"
 
 namespace vx_web_htmldoc_test {
+
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany listtestcase;

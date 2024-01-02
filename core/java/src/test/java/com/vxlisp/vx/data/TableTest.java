@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class TableTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {

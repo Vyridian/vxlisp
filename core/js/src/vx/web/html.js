@@ -3,7 +3,9 @@
 import vx_core from "../../vx/core.js"
 import vx_type from "../../vx/type.js"
 
+
 export default class vx_web_html {
+
 
   /**
    * type: body

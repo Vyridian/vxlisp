@@ -5,6 +5,9 @@
 
 namespace vx_translate_test {
 
+
+  vx_test::Type_testcase f_translate(vx_core::Type_context context);
+  vx_test::Type_testcase f_translate(vx_core::Type_context context);
   vx_test::Type_testcase f_translate_from_translation_string(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
@@ -13,4 +16,5 @@ namespace vx_translate_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

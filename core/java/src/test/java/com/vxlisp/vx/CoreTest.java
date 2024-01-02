@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class CoreTest {
 
   static Test.Type_testcase t_boolean(final Core.Type_context context) {

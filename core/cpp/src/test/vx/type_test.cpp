@@ -1,10 +1,10 @@
 #include "../../main/vx/type.hpp"
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
-
 #include "type_test.hpp"
 
 namespace vx_type_test {
+
 
   vx_test::Type_testcase f_boolean_from_string_ends(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_boolean_from_string_ends");

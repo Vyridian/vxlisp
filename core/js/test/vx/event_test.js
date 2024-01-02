@@ -6,6 +6,7 @@ import vx_test from "../../src/vx/test.js"
 
 export default class vx_event_test {
 
+
   static test_package(context) {
     const testcaselist = vx_event_test.test_cases(context)
     const output = vx_core.f_new(
@@ -61,5 +62,4 @@ export default class vx_event_test {
     )
     return output
   }
-
 }

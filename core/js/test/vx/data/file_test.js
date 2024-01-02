@@ -7,6 +7,7 @@ import vx_data_textblock from "../../../src/vx/data/textblock.js"
 
 export default class vx_data_file_test {
 
+
   static test_package(context) {
     const testcaselist = vx_data_file_test.test_cases(context)
     const output = vx_core.f_new(
@@ -63,5 +64,4 @@ export default class vx_data_file_test {
     )
     return output
   }
-
 }

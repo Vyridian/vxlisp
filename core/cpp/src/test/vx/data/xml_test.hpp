@@ -5,6 +5,7 @@
 
 namespace vx_data_xml_test {
 
+
   vx_test::Type_testcase f_textblock_xml_from_string(vx_core::Type_context context);
   vx_test::Type_testcase f_xml_angle_from_xml_textblock(vx_core::Type_context context);
   vx_test::Type_testcase f_xml_close_from_xml_textblock(vx_core::Type_context context);
@@ -21,4 +22,5 @@ namespace vx_data_xml_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

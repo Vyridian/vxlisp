@@ -1,5 +1,6 @@
 (package vx/translation/en
- :libs (lib trn :path vx/translate)
+ :libs (lib file :path vx/data/file)
+       (lib trn  :path vx/translate)
  :doc "English Translation Stub")
 
 (func context-en : context
@@ -7,8 +8,31 @@
  (context
   :session
    (session
-    :translation (translation-en)))
+    :translation
+     (translation-en)))
  :doc "Returns the default context for app main execution. Arguments come from the command line.")
+
+(func context-test : context
+ [args : anylist :...]
+ (context
+  :session
+   (session
+    :translation
+     (translation-en)
+    :user
+     (user
+      :security (securitydata-test))))
+ :doc "Returns the default context for test case execution. Arguments come from the command line.")
+
+(func securitydata-test : security
+ (security
+  :allowfuncs
+   (funclist
+    file/boolean-write<-file-any
+    file/boolean-write<-file-string
+    file/file-read<-file
+    file/string-read<-file))
+ :doc "Returns the default security for test case execution. Arguments come from the command line.")
 
 (func translation-en : translation
  (translation
@@ -25,5 +49,8 @@
  (stringmap
 "Hello" "Hello"
 "World" "World"
+"!vx/core/func exception" "Exception in Function"
+"!vx/core/func permissiondenied" "Permission Denied to Function"
+"!vx/repl/repl/repl<-string-argmap repltypenotfound" "Repl Type Not Found"
  )
  :doc "Word Translation")

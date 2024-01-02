@@ -7,6 +7,7 @@ import vx_translate from "../../../src/vx/translate.js"
 
 export default class vx_translation_es_test {
 
+
   static test_package(context) {
     const testcaselist = vx_translation_es_test.test_cases(context)
     const output = vx_core.f_new(
@@ -88,5 +89,4 @@ export default class vx_translation_es_test {
     )
     return output
   }
-
 }

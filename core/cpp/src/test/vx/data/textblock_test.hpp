@@ -5,6 +5,7 @@
 
 namespace vx_data_textblock_test {
 
+
   vx_test::Type_testcase t_delimlist(vx_core::Type_context context);
   vx_test::Type_testcase f_delim_first_from_delim_delim(vx_core::Type_context context);
   vx_test::Type_testcase f_delim_first_from_string_delimlist(vx_core::Type_context context);
@@ -30,4 +31,5 @@ namespace vx_data_textblock_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

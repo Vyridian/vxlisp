@@ -1,8 +1,8 @@
 /**
  * App
  */
-
-import com.vxlisp.vx.Core as vx_core
+import vx/core
+import vx/translation/en
 
 package App
 
@@ -10,7 +10,7 @@ package App
     try {
       var output : String
       val arglist : vx_core.Type_anylist = vx_core.vx_anylist_from_arraystring(args)
-      val context : vx_core.Type_context = vx_core.f_context_main(arglist)
+      val context : vx_core.Type_context = vx_translation_en.f_context_en(arglist)
       val mainstring : vx_core.Type_string = vx_core.f_main(arglist)
       output = mainstring.vx_string()
       println(output)

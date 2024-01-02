@@ -7,7 +7,8 @@ import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
 import com.vxlisp.vx.web.Html;
 
-public class TestLib {
+public final class TestLib {
+
 
   public static boolean run_testcase(final Test.Type_testcase testcase) {
     String testpkg = testcase.testpkg().vx_string();

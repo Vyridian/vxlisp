@@ -7,6 +7,7 @@
 namespace vx_data_table {
 
 
+
   // (type cell)
   // class Class_cell {
     Abstract_cell::~Abstract_cell() {}

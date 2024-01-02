@@ -4,6 +4,7 @@
 
 namespace vx_sample {
 
+
   // forward declarations
   class Abstract_mytype;
   typedef Abstract_mytype* Type_mytype;
@@ -125,4 +126,5 @@ namespace vx_sample {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

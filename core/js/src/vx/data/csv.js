@@ -6,7 +6,9 @@ import vx_data_file from "../../vx/data/file.js"
 import vx_data_textblock from "../../vx/data/textblock.js"
 import vx_type from "../../vx/type.js"
 
+
 export default class vx_data_csv {
+
 
   /**
    * type: csv

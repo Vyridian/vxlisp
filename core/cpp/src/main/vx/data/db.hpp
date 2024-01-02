@@ -7,6 +7,7 @@
 
 namespace vx_data_db {
 
+
   // forward declarations
   class Abstract_db;
   typedef Abstract_db* Type_db;
@@ -512,4 +513,5 @@ namespace vx_data_db {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

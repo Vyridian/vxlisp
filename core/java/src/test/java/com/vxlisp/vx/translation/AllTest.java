@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class AllTest {
 
   static Test.Type_testcase f_translationmap_all(final Core.Type_context context) {

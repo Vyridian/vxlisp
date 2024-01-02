@@ -7,6 +7,7 @@
 
 namespace vx_data_textblock {
 
+
   // forward declarations
   class Abstract_delim;
   typedef Abstract_delim* Type_delim;
@@ -1268,4 +1269,5 @@ namespace vx_data_textblock {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

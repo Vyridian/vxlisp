@@ -5,6 +5,7 @@
 
 namespace vx_web_htmldoc {
 
+
   // forward declarations
   class Abstract_boolean_write_from_id_htmltext;
   typedef Abstract_boolean_write_from_id_htmltext* Func_boolean_write_from_id_htmltext;
@@ -112,4 +113,5 @@ namespace vx_web_htmldoc {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

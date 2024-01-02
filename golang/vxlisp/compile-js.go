@@ -86,7 +86,7 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 	return output
 }
 
-func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
+func JsFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFilesFromProjectCmd")
 	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
@@ -115,7 +115,7 @@ func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *
 		}
 		switch command.code {
 		case ":source":
-			jstext, msgs := JsFromPackage(pkg, project)
+			jstext, msgs := JsFromPackage(lang, pkg, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + ".js"
@@ -123,7 +123,7 @@ func JsFilesFromProjectCmd(project *vxproject, command *vxcommand) ([]*vxfile, *
 			file.text = jstext
 			files = append(files, file)
 		case ":test":
-			jstext, msgs := JsTestFromPackage(pkg, project, command)
+			jstext, msgs := JsTestFromPackage(lang, pkg, project, command)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "_test.js"
@@ -391,7 +391,7 @@ func JsFromName(name string) string {
 	return output
 }
 
-func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
+func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromPackage")
 	imports := ""
 	if len(pkg.listlib) > 0 {
@@ -523,21 +523,18 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 	for _, fncid := range fnckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			switch fnc.clientserver {
-			case ":server":
-			default:
-				fnctext, fncstatics, msgs := JsFromFunc(fnc)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-				allfuncs += fnctext
-				statics += fncstatics
-			}
+			fnctext, fncstatics, msgs := JsFromFunc(fnc)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			allfuncs += fnctext
+			statics += fncstatics
 		}
 	}
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
-		"\nexport default class " + pkgname + " {" +
 		"\n" +
+		namespaceopen +
 		specialcode +
 		alltypes +
 		allconsts +
@@ -548,8 +545,7 @@ func JsFromPackage(pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 		pkgdef +
 		statics +
 		"\n  }" +
-		"\n}" +
-		"\n"
+		namespaceclose
 	return output, msgblock
 }
 
@@ -1078,7 +1074,7 @@ func JsTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JsTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand) (string, *vxmsgblock) {
+func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromPackage")
 	imports := ""
 	depth := IntCountFromStringFind(pkg.name, "/") + 1
@@ -1239,11 +1235,11 @@ func JsTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand) (stri
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname+"_test")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
-		"\nexport default class " + pkgname + "_test {" +
-		"\n" +
+		namespaceopen +
 		"\n  static test_package(context) {" +
 		"\n    const testcaselist = " + pkgname + "_test.test_cases(context)" +
 		"\n    const output = vx_core.f_new(" +
@@ -1300,9 +1296,7 @@ func JsTestFromPackage(pkg *vxpackage, prj *vxproject, command *vxcommand) (stri
 		"\n    )" +
 		"\n    return output" +
 		"\n  }" +
-		"\n" +
-		"\n}" +
-		"\n"
+		namespaceclose
 	return output, msgblock
 }
 
@@ -1350,9 +1344,9 @@ func JsTestFromValue(value vxvalue) string {
 	return output
 }
 
-func JsTextFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
+func JsTextFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTextFromProjectCmd")
-	prjjs, msgs := JsFilesFromProjectCmd(prj, cmd)
+	prjjs, msgs := JsFilesFromProjectCmd(lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	text := StringFromListFile(prjjs)
 	return text, msgblock
@@ -1370,7 +1364,7 @@ func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
 
 func JsWriteFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("WriteJsFromProjectCmd")
-	files, msgs := JsFilesFromProjectCmd(project, command)
+	files, msgs := JsFilesFromProjectCmd(lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1409,7 +1403,7 @@ func JsApp(project *vxproject, cmd *vxcommand) string {
 				switch contextfunc.pkgname {
 				case "", "vx/core":
 				default:
-					importname := StringFromStringFindReplace(mainfunc.pkgname, "/", "_")
+					importname := StringFromStringFindReplace(contextfunc.pkgname, "/", "_")
 					includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\""
 				}
 			}
@@ -1457,10 +1451,10 @@ export default class app {
   static async f_main(arglist) {` +
 		contexttext +
 		maintext + `
-		return output
-	}
+    return output
+  }
 
-	static async f_htmlmain() {
+  static async f_htmlmain() {
     const argtext = vx_web_htmldoc.f_string_from_id("args")
     const elem = document.getElementById("args")
     const arglist = vx_type.f_stringlist_from_string_split(argtext, " ")
@@ -1475,6 +1469,31 @@ export default class app {
 }
 
 func JsAppTest(project *vxproject, command *vxcommand) string {
+	includetext := ""
+	contexttext := `
+    const context = vx_core.f_context_main(arglist)`
+	if command.context == "" {
+	} else {
+		contextfunc := FuncFromProjectFuncname(project, command.context)
+		if command.context != "" && contextfunc == emptyfunc {
+			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
+		}
+		if contextfunc != emptyfunc {
+			switch contextfunc.pkgname {
+			case "", "vx/core":
+			default:
+				importname := StringFromStringFindReplace(contextfunc.pkgname, "/", "_")
+				includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\"\n"
+			}
+		}
+		if contextfunc.async {
+			contexttext = `
+    const context = await ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+		} else {
+			contexttext = `
+    const context = ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+		}
+	}
 	listpackage := project.listpackage
 	var listimport []string
 	var listtest []string
@@ -1501,13 +1520,15 @@ func JsAppTest(project *vxproject, command *vxcommand) string {
 import vx_core from "../src/vx/core.js"
 import vx_test from "../src/vx/test.js"
 import vx_web_html from "../src/vx/web/html.js"
-import vx_web_htmldoc from "../src/vx/web/htmldoc.js"
-` + packageimports + `
+import vx_web_htmldoc from "../src/vx/web/htmldoc.js"` +
+		includetext +
+		packageimports + `
 
 export default class app_test {
 
   static async f_displaytestsuite() {
-    const context = vx_core.e_context
+			 const arglist = []` +
+		contexttext + `
     const stylesheet = vx_test.c_stylesheet_test
     const testpackagelist = app_test.f_testpackagelist_from_all_test(context)
     const resolvedtestpackagelist = await vx_test.f_resolve_testpackagelist(testpackagelist)

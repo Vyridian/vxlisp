@@ -3,7 +3,6 @@
        (lib type :path vx/type)
        (lib tb   :path vx/data/textblock)
        (lib javafuture)
-
  :doc "Read-Evaluate-Print-Loop processor.")
 
 (type liblist : list
@@ -11,11 +10,19 @@
  :doc "List of library names")
 
 (type repl : struct
- :properties [type     : any
+ :properties [name     : string
+              type     : any
               repllist : repllist
               async    : boolean
-              val      : any]
+              val      : any
+              doc      : string]
  :doc "Repl structure")
+
+(type replarglist : struct
+ :properties [key      : string
+              current  : repl
+              repllist : repllist]
+ :doc "Builder for a repllist")
 
 (type repllist : list
  :allowtypes [repl]
@@ -41,7 +48,6 @@
     delimquote
     delimquoteblock
     delimwhitespace
-    delimvxlispbracket
     delimvxlispparen))
  :doc "vxlisp Square Bracket Delimiters")
 
@@ -63,7 +69,9 @@
  [liblist : liblist
   text    : string :doc "Program to run"]
  (let : any
-  [repl : repl := (repl<-liblist-string liblist text)]
+  [repl : repl := (repl<-liblist-string
+                   liblist
+                   text)]
   (any<-repl repl))
  :context
  :doc "Run an arbitrary program in the REPL.")
@@ -71,8 +79,10 @@
 (func any<-macro : any-1
  [anylist : anylist :...]
  (let : any-1
-  [repl : repl := (repl<-macro anylist)
-   val  : any  := (any<-repl repl)]
+  [repl : repl := (repl<-macro
+                   anylist)
+   val  : any  := (any<-repl
+                   repl)]
   (any<-any : any-1
    val))
  :context
@@ -83,28 +93,6 @@
          (- 7 5)
          " 3)"))
  :doc "A function that joins any number of values into a string and then parses and evaluates it.")
-
-(func any-repl<-functype-args : any
- [type : any
-  args : anylist]
- (native
-  :cpp
-   "vx_core::Type_replfunc replfunc = dynamic_cast<vx_core::Type_replfunc>(type);
-    output = replfunc->vx_repl(args);"
-  :js
-   "const vxvalue = type['vx_value']
-    if (vxvalue != undefined) {
-      const fn = vxvalue['fn']
-      if (fn != undefined) {
-        output = fn(...args)
-      }
-    }"
-  :java
-   "if (type instanceof Core.Type_replfunc) {
-      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
-      output = replfunc.vx_repl(args);
-    }")
- :doc "Returns any from a repl func and args.")
 
 (func any<-repl : any
  [repl : repl]
@@ -143,27 +131,6 @@
             (repl :val 3)))))
  :doc "Run an arbitrary program in the REPL.")
 
-/*
-(func any<-repl-async : any
- [repl : repl]
- (let-async : any
-  [val      : any      := (:val repl)
-   repltype : any      := (:type repl)
-   repllist : repllist := (:repllist repl)
-   args     : anylist  := (anylist<-repllist repllist)]
-  (if
-   (then (!-empty val) val)
-   (then (is-func repltype)
-    (any-repl<-functype-args
-     repltype
-     args))
-   (else
-    (new repltype args))))
- :async
- :context
- :doc "Run an arbitrary program in the REPL.")
-*/
-
 (func any<-script : any
  [script : string]
  (let : any
@@ -189,18 +156,27 @@
  :sideeffects "Since any code can be run. This is unsafe by nature."
  :doc "Run an arbitrary script.")
 
-/*
-(func any<-script-async : any
- [text : string]
- (let-async : any
-  [textblock : tb/textblock := (textblock-repl<-string text)
-   repl      : repl         := (repl<-textblock textblock)]
-  (any<-repl-async repl))
- :context
- :async
- :sideeffects "Since any code can be run. This is unsafe by nature."
- :doc "Run an arbitrary script asynchronously.")
-*/
+(func any-repl<-functype-args : any
+ [type : any
+  args : anylist]
+ (native
+  :cpp
+   "vx_core::Type_replfunc replfunc = dynamic_cast<vx_core::Type_replfunc>(type);
+    output = replfunc->vx_repl(args);"
+  :js
+   "const vxvalue = type['vx_value']
+    if (vxvalue != undefined) {
+      const fn = vxvalue['fn']
+      if (fn != undefined) {
+        output = fn(...args)
+      }
+    }"
+  :java
+   "if (type instanceof Core.Type_replfunc) {
+      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
+      output = replfunc.vx_repl(args);
+    }")
+ :doc "Returns any from a repl func and args.")
 
 (func anylist<-repllist : anylist
  [repllist : repllist]
@@ -211,6 +187,68 @@
    (any<-repl repl)))
  :context
  :doc "Run an arbitrary program in the REPL.")
+
+(func replarglist<-replarglist-textblock-argmap : replarglist
+ [replargs : replarglist
+  tb       : tb/textblock
+  argmap   : argmap]
+ (let : replarglist
+  [key      : string   := (:key replargs)
+   current  : repl     := (:current  replargs)
+   repllist : repllist := (:repllist replargs)
+   currlist : repllist := (:repllist current)
+   text     : string   := (:text     textblock)]
+  (if : replarglist
+   (then
+    (= key "")
+    (if : replarglist
+     (then
+      (= text ":")
+      (copy replargs
+       :key text))
+     (then
+      (= text ":=")
+      (copy replargs
+       :key text))
+     (then
+      (= text ":doc")
+      (copy replargs
+       :key text))
+     (else // new arg
+      (copy replargs
+       :current
+        (repl
+         :name text)
+       :repllist
+        (copy repllist
+         current)))))
+   (then
+    (= key ":")
+    (copy replargs
+     :key ""
+     :current
+      (copy current
+       :type text)))
+   (then
+    (= key ":=")
+    (copy replargs
+     :key ""
+     :current
+      (copy current
+       :repllist
+        (copy currlist
+         (repl<-textblock-argmap
+          tb
+          argmap)))))
+   (then
+    (= key ":doc")
+    (copy replargs
+     :key ""
+     :current
+      (copy current
+       :doc text)))
+   (else replargs)))
+ :doc "Returns a modified replarglist from by applying a textblock")
 
 (func argmap<-textblock-argmap : argmap
  [textblock : tb/textblock
@@ -396,9 +434,8 @@
            (else // error
             (repl
              (msg<-error
-              (string
-               "Repl Type Not Found: "
-               text))))))))))))))
+              :repltypenotfound
+              text)))))))))))))
  :test (test
         (repl :val "Hello")
         (repl<-string-argmap
@@ -543,6 +580,10 @@
    (case (:starttext tb/delimparen)
     (repl-paren<-textblock-argmap
      textblock
+     argmap))
+   (case (:starttext tb/delimbracketsquare)
+    (repl-bracket<-textblock-argmap
+     textblock
      argmap))))
  :test (test
         (repl :val 2)
@@ -627,6 +668,87 @@
                 :text "3")))))
          (empty argmap)))
  :doc "Returns a repl from a parsed textblock")
+
+(func repl-bracket<-textblock-argmap : repl
+ [textblock : tb/textblock
+  argmap    : argmap]
+ (repl)
+/*
+ (let : repl
+  [childlst : tb/textblocklist := (:children textblock)
+   children : tb/textblocklist := (tb/textblocklist<-textblocklist-remove
+                                   childlst
+                                   tb/delimwhitespace)
+   tbname   : tb/textblock     := (:1 children)
+   sname    : string           := (:text tbname)
+   tbtype   : tb/textblock     := (tb/textblock<-textblocklist-key
+                                   children
+                                   ":")
+   tbvalue  : tb/textblock     := (tb/textblock<-textblocklist-key
+                                   children
+                                   ":=")
+   tbdoc    : tb/textblock     := (tb/textblock<-textblocklist-key
+                                   children
+                                   ":doc")
+   replarg  : repl             := (repl<-string-argmap
+                                   "vx/core/arg" argmap)
+   repls    : repllist         := (repllist
+                                   replarg)
+   replargs : repl             := (repl<-string-argmap
+                                   "vx/core/arglist" argmap)]
+  (copy replargs
+   :repllist repls))
+ :test (test
+        (repl
+         :type vx/core/+
+         :repllist
+          (repllist
+           (repl
+            :val 2)
+           (repl
+            :val 3)))
+        (repl-bracket<-textblock-argmap
+         (tb/textblock
+          :text "[val : int := (+ 2 3)]"
+          :delim
+           (copy delimvxlispbracket
+            :delimlist
+             (empty delimlist))
+          :children
+           (tb/textblocklist
+            (tb/textblock
+             :text "val")
+            (tb/textblock
+             :text ":")
+            (tb/textblock
+             :text "int")
+            (tb/textblock
+             :text ":=")
+            (tb/textblock
+             :delim
+              (copy delimvxlispparen
+               :delimlist
+                (empty delimlist))
+             :children
+              (tb/textblocklist
+               (tb/textblock
+                :text "+")
+               (tb/textblock
+                :text " "
+                :delim
+                 (copy tb/delimwhitespace
+                  :pos 0))
+               (tb/textblock
+                :text "2")
+               (tb/textblock
+                :text " "
+                :delim
+                 (copy tb/delimwhitespace
+                  :pos 0))
+               (tb/textblock
+                :text "3")))))
+         (empty argmap)))*/
+ :doc "Returns a repl from a squarebracket parsed textblock")
 
 (func repl-empty<-textblock-argmap : repl
  [textblock : tb/textblock
@@ -881,3 +1003,35 @@
         (typefunc<-string
          "+"))
  :doc "Returns a type, or func from a fully qualified name.")
+
+/*
+(func any<-repl-async : any
+ [repl : repl]
+ (let-async : any
+  [val      : any      := (:val repl)
+   repltype : any      := (:type repl)
+   repllist : repllist := (:repllist repl)
+   args     : anylist  := (anylist<-repllist repllist)]
+  (if
+   (then (!-empty val) val)
+   (then (is-func repltype)
+    (any-repl<-functype-args
+     repltype
+     args))
+   (else
+    (new repltype args))))
+ :async
+ :context
+ :doc "Run an arbitrary program in the REPL.")
+
+(func any<-script-async : any
+ [text : string]
+ (let-async : any
+  [textblock : tb/textblock := (textblock-repl<-string text)
+   repl      : repl         := (repl<-textblock textblock)]
+  (any<-repl-async repl))
+ :context
+ :async
+ :sideeffects "Since any code can be run. This is unsafe by nature."
+ :doc "Run an arbitrary script asynchronously.")
+*/

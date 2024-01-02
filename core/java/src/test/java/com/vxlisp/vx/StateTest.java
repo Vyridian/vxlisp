@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class StateTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {

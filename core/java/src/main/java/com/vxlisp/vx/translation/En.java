@@ -3,6 +3,7 @@ package com.vxlisp.vx.translation;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import com.vxlisp.vx.*;
+import com.vxlisp.vx.data.*;
 
 public final class En {
 
@@ -102,6 +103,208 @@ public final class En {
           Core.t_anylist.vx_new(
             Core.vx_new_string(":translation"),
             En.f_translation_en()
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function context_test
+   * Returns the default context for test case execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-test)
+   */
+  public static interface Func_context_test extends Core.Func_any_from_any {
+    public Core.Type_context vx_context_test(final Core.Type_anylist args);
+  }
+
+  public static class Class_context_test extends Core.Class_base implements Func_context_test {
+
+    @Override
+    public Func_context_test vx_new(Object... vals) {
+      Class_context_test output = new Class_context_test();
+      return output;
+    }
+
+    @Override
+    public Func_context_test vx_copy(Object... vals) {
+      Class_context_test output = new Class_context_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/translation/en", // pkgname
+        "context-test", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_test vx_empty() {return e_context_test;}
+    @Override
+    public Func_context_test vx_type() {return t_context_test;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_anylist inputval = (Core.Type_anylist)value;
+      Core.Type_any outputval = En.f_context_test(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
+      output = En.f_context_test(args);
+      return output;
+    }
+
+    @Override
+    public Core.Type_context vx_context_test(final Core.Type_anylist args) {
+      return En.f_context_test(args);
+    }
+
+  }
+
+  public static final Func_context_test e_context_test = new En.Class_context_test();
+  public static final Func_context_test t_context_test = new En.Class_context_test();
+
+  public static Core.Type_context f_context_test(final Core.Type_anylist args) {
+    Core.Type_context output = Core.e_context;
+    output = Core.f_new(
+      Core.t_context,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":session"),
+        Core.f_new(
+          Core.t_session,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":translation"),
+            En.f_translation_en(),
+            Core.vx_new_string(":user"),
+            Core.f_new(
+              Core.t_user,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":security"),
+                En.f_securitydata_test()
+              )
+            )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function securitydata_test
+   * Returns the default security for test case execution. Arguments come from the command line.
+   * @return {security}
+   * (func securitydata-test)
+   */
+  public static interface Func_securitydata_test extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_security vx_securitydata_test();
+  }
+
+  public static class Class_securitydata_test extends Core.Class_base implements Func_securitydata_test {
+
+    @Override
+    public Func_securitydata_test vx_new(Object... vals) {
+      Class_securitydata_test output = new Class_securitydata_test();
+      return output;
+    }
+
+    @Override
+    public Func_securitydata_test vx_copy(Object... vals) {
+      Class_securitydata_test output = new Class_securitydata_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/translation/en", // pkgname
+        "securitydata-test", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "security", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_securitydata_test vx_empty() {return e_securitydata_test;}
+    @Override
+    public Func_securitydata_test vx_type() {return t_securitydata_test;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      output = En.f_securitydata_test();
+      return output;
+    }
+
+    @Override
+    public Core.Type_security vx_securitydata_test() {
+      return En.f_securitydata_test();
+    }
+
+  }
+
+  public static final Func_securitydata_test e_securitydata_test = new En.Class_securitydata_test();
+  public static final Func_securitydata_test t_securitydata_test = new En.Class_securitydata_test();
+
+  public static Core.Type_security f_securitydata_test() {
+    Core.Type_security output = Core.e_security;
+    output = Core.f_new(
+      Core.t_security,
+      Core.t_anylist.vx_new(
+        Core.vx_new_string(":allowfuncs"),
+        Core.f_new(
+          Core.t_funclist,
+          Core.t_anylist.vx_new(
+            File.t_boolean_write_from_file_any,
+            File.t_boolean_write_from_file_string,
+            File.t_file_read_from_file,
+            File.t_string_read_from_file
           )
         )
       )
@@ -273,7 +476,13 @@ public final class En {
         Core.vx_new_string("Hello"),
         Core.vx_new_string("Hello"),
         Core.vx_new_string("World"),
-        Core.vx_new_string("World")
+        Core.vx_new_string("World"),
+        Core.vx_new_string("!vx/core/func exception"),
+        Core.vx_new_string("Exception in Function"),
+        Core.vx_new_string("!vx/core/func permissiondenied"),
+        Core.vx_new_string("Permission Denied to Function"),
+        Core.vx_new_string("!vx/repl/repl/repl<-string-argmap repltypenotfound"),
+        Core.vx_new_string("Repl Type Not Found")
       )
     );
     return output;
@@ -285,6 +494,8 @@ public final class En {
     Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
     mapfunc.put("context-en", En.t_context_en);
+    mapfunc.put("context-test", En.t_context_test);
+    mapfunc.put("securitydata-test", En.t_securitydata_test);
     mapfunc.put("translation-en", En.t_translation_en);
     mapfunc.put("words", En.t_words);
     Core.vx_global_package_set("vx/translation/en", maptype, mapconst, mapfunc);

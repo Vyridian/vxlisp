@@ -15407,11 +15407,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/repl</p>
-              <p class="coveragenums">52% 13/25</p>
+              <p class="coveragenums">46% 13/28</p>
+              <p class="coveragenums">0% 0/4</p>
               <p class="coveragenums">0% 0/3</p>
-              <p class="coveragenums">0% 0/3</p>
-              <p class="coveragenums">68% 13/19</p>
-              <p class="coveragenums">100% 25/25</p>
+              <p class="coveragenums">61% 13/21</p>
+              <p class="coveragenums">100% 28/28</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -16905,11 +16905,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/translate</p>
-              <p class="coveragenums">10% 1/10</p>
+              <p class="coveragenums">30% 3/10</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">10% 1/10</p>
-              <p class="coveragenums">100% 10/10</p>
+              <p class="coveragenums">30% 3/10</p>
+              <p class="coveragenums">100% 11/11</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>
@@ -16935,6 +16935,47 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translate</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "!NotFound!"
+ (translate "!NotFound!"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"!NotFound!"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"!NotFound!"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">translate_1</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "Repl Type Not Found"
+ (translate
+  (msg
+   :path "vx/repl/repl/repl&lt;-string-argmap"
+   :code "repltypenotfound")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Repl Type Not Found"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"Repl Type Not Found"</p>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                       <p class="passflag">Pass</p>
@@ -17031,11 +17072,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/translation/en</p>
-              <p class="coveragenums">33% 1/3</p>
+              <p class="coveragenums">20% 1/5</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">33% 1/3</p>
-              <p class="coveragenums">100% 3/3</p>
+              <p class="coveragenums">20% 1/5</p>
+              <p class="coveragenums">100% 5/5</p>
               <p class="coveragenums">0% 0/0</p>
               <p class="coveragenums">0% 0/0</p>
             </summary>

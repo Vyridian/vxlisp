@@ -3,6 +3,7 @@
 #include "../main/vx/core.hpp"
 #include "../main/vx/test.hpp"
 #include "test_lib.hpp"
+#include "../main/vx/translation/en.hpp"
 #include "vx/collection_test.hpp"
 #include "vx/core_test.hpp"
 #include "vx/data/csv_test.hpp"
@@ -64,7 +65,7 @@ int main(int iarglen, char* arrayarg[]) {
     vx_core::vx_log("Test Start");
     vx_core::Type_anylist arglist = vx_core::vx_anylist_from_arraystring(iarglen, arrayarg, true);
 				vx_core::vx_reserve(arglist);
-    vx_core::Type_context context = vx_test::f_context_test(arglist);
+    vx_core::Type_context context = vx_translation_en::f_context_test(arglist);
     vx_core::vx_reserve_context(context);
 		  test_lib::test_helloworld();
     test_lib::test_async_new_from_value();

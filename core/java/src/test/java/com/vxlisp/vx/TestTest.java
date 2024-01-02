@@ -7,7 +7,6 @@ import java.util.List;
 import com.vxlisp.vx.data.*;
 import com.vxlisp.vx.web.*;
 
-
 public final class TestTest {
 
   static Test.Type_testcase f_file_test(final Core.Type_context context) {

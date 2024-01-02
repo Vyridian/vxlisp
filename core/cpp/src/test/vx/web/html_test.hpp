@@ -5,6 +5,7 @@
 
 namespace vx_web_html_test {
 
+
   vx_test::Type_testcase f_string_from_body_indent(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_div_indent(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_head_indent(vx_core::Type_context context);
@@ -18,4 +19,5 @@ namespace vx_web_html_test {
   vx_test::Type_testpackage test_package(vx_core::Type_context context);
 
 }
+
 #endif

@@ -2,10 +2,10 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/translate.hpp"
-
 #include "es_test.hpp"
 
 namespace vx_translation_es_test {
+
 
   vx_test::Type_testcase f_translation_es(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_translation_es");

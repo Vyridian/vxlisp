@@ -3,7 +3,9 @@
 import vx_core from "../../vx/core.js"
 import vx_translate from "../../vx/translate.js"
 
+
 export default class vx_translation_es {
+
   /**
    * @function translation_es
    * Returns translation data

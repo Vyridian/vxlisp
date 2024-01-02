@@ -4,7 +4,9 @@ import vx_core from "../vx/core.js"
 import vx_data_csv from "../vx/data/csv.js"
 import vx_data_file from "../vx/data/file.js"
 
+
 export default class vx_translate {
+
   /**
    * @function session_from_session_name
    * Returns an updated session with a translationmap and a translation name.
@@ -82,6 +84,37 @@ export default class vx_translate {
     output = vx_translate.f_translate_from_translation_string(
       vx_translate.f_translation_from_context(context),
       text
+    )
+    return output
+  }
+
+  /**
+   * @function translate
+   * Returns a translated string from a msg.
+   * @param  {msg} msg
+   * @return {string}
+   */
+  static t_translate_1 = {}
+  static e_translate_1 = {vx_type: vx_translate.t_translate_1}
+
+  // (func translate)
+  static f_translate_1(context, msg) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const path = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_msg}, msg, ":path")
+        const code = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_core.t_msg}, msg, ":code")
+        const text = vx_core.f_new(
+          vx_core.t_string,
+          "!",
+          path,
+          " ",
+          code
+        )
+        return vx_translate.f_translate(context, text)
+      })
     )
     return output
   }
@@ -238,6 +271,7 @@ export default class vx_translate {
       "session<-session-translation": vx_translate.e_session_from_session_translation,
       "session<-session-translationmap-name": vx_translate.e_session_from_session_translationmap_name,
       "translate": vx_translate.e_translate,
+      "translate_1": vx_translate.e_translate_1,
       "translate<-translation-string": vx_translate.e_translate_from_translation_string,
       "translate<-translationmap-name-string": vx_translate.e_translate_from_translationmap_name_string,
       "translation-load-session": vx_translate.e_translation_load_session,
@@ -250,6 +284,7 @@ export default class vx_translate {
       "session<-session-translation": vx_translate.t_session_from_session_translation,
       "session<-session-translationmap-name": vx_translate.t_session_from_session_translationmap_name,
       "translate": vx_translate.t_translate,
+      "translate_1": vx_translate.t_translate_1,
       "translate<-translation-string": vx_translate.t_translate_from_translation_string,
       "translate<-translationmap-name-string": vx_translate.t_translate_from_translationmap_name_string,
       "translation-load-session": vx_translate.t_translation_load_session,
@@ -343,6 +378,25 @@ export default class vx_translate {
       properties    : [],
       proplast      : {},
       fn            : vx_translate.f_translate
+    }
+
+    // (func translate)
+    vx_translate.t_translate_1['vx_type'] = vx_core.t_type
+    vx_translate.t_translate_1['vx_value'] = {
+      name          : "translate",
+      pkgname       : "vx/translate",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_translate.f_translate_1
     }
 
     // (func translate<-translation-string)

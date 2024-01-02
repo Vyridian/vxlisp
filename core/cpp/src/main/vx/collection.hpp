@@ -5,6 +5,7 @@
 
 namespace vx_collection {
 
+
   // forward declarations
   class Abstract_any_from_for_until_loop;
   typedef Abstract_any_from_for_until_loop* Func_any_from_for_until_loop;
@@ -558,4 +559,5 @@ namespace vx_collection {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

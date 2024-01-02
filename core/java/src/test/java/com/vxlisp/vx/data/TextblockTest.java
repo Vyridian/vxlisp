@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
-
 public final class TextblockTest {
 
   static Test.Type_testcase t_delimlist(final Core.Type_context context) {

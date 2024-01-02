@@ -5,10 +5,10 @@
 #include "../../../main/vx/data/file.hpp"
 #include "../../../main/vx/data/textblock.hpp"
 #include "../../../main/vx/type.hpp"
-
 #include "csv_test.hpp"
 
 namespace vx_data_csv_test {
+
 
   vx_test::Type_testcase f_textblock_csv_from_string(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_textblock_csv_from_string");

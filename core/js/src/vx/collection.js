@@ -3,7 +3,9 @@
 import vx_core from "../vx/core.js"
 import vx_type from "../vx/type.js"
 
+
 export default class vx_collection {
+
   static vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max) {
     let output = start
     let iscontinue = true

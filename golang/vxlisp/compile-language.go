@@ -114,16 +114,6 @@ func NewLangSwift() *vxlang {
 	return output
 }
 
-func LangClassHeader(lang *vxlang, classname string, indent int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	switch lang.name {
-	case "java":
-		output = lineindent + "public class " + classname + " {\n"
-	}
-	return output
-}
-
 func LangFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
 	msgblock := NewMsgBlock("LangFileCopyTestdataFromProjectPath")
 	sourcepath := PathFromProjectPath(project, "./testdata")
@@ -712,7 +702,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		permissiontop = lineindent + "if (Core.f_boolean_permission_from_func(context, " + LangNameTFromFunc(lang, fnc) + ").vx_boolean()) {"
 		permissionbottom = "" +
 			lineindent + "} else {" +
-			lineindent + "  Core.Type_msg msg = Core.vx_msg_error(\"Permission Denied: " + fnc.name + "\");" +
+			LangVar(lang, "msg", msgtype, "Core.vx_msg_error(\"vx/core/func\", \"permissiondenied\", Core.vx_new_string(\""+fnc.name+"\"))", 3, true, false) +
 			lineindent + "  output = output.vx_copy(msg);" +
 			lineindent + "}"
 		subindent += "  "
@@ -722,7 +712,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		msgtop = linesubindent + "try {"
 		msgbottom = "" +
 			linesubindent + "} catch (Exception err) {" +
-			linesubindent + "  Core.Type_msg msg = Core.vx_msg_from_exception(\"" + fnc.name + "\", err);" +
+			linesubindent + "  Core.Type_msg msg = Core.vx_msg_from_exception(\"" + fnc.pkgname + "/" + fnc.name + "\", err);" +
 			linesubindent + "  output = output.vx_copy(msg);" +
 			linesubindent + "}"
 		subindent += "  "
@@ -906,17 +896,7 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix str
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
 	packageline := "package " + pkgpath + lang.lineend + "\n"
-	packageopen := ""
-	packageclose := ""
-	switch lang.name {
-	case "csharp":
-		packageopen = "namespace " + pkgname + "{\n\n"
-		packageclose = "\n}"
-	case "java":
-		packageopen = "public final class " + pkgname + " {\n\n"
-		packageclose = "\n}"
-	case "kotlin":
-	}
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
 	packagestatic := "" +
 		"\n    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();" +
 		"\n    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();" +
@@ -970,10 +950,9 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix str
 	output := "" +
 		packageline +
 		imports +
-		packageopen +
+		namespaceopen +
 		body +
-		packageclose +
-		"\n"
+		namespaceclose
 	return output, msgblock
 }
 
@@ -1545,6 +1524,13 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		vx_map := ""
 		valcopyend := ""
 		switch NameFromType(typ) {
+		case "vx/core/msg":
+			valcopy = "" +
+				"\n      boolean ischanged = false;" +
+				"\n      Class_" + typename + " val = this;" +
+				"\n      if (this instanceof Core.vx_Type_const) {" +
+				"\n        ischanged = true;" +
+				"\n      }"
 		case "vx/core/msgblock":
 			valcopy = "" +
 				"\n      boolean ischanged = false;" +
@@ -1605,6 +1591,15 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 						"\n              ischanged = true;" +
 						"\n              vx_p_" + argname + " = Core.t_string.vx_new(valsub);"
 				}
+				valnewswitcherr := ""
+				switch NameFromType(typ) {
+				case "vx/core/msg":
+				default:
+					valnewswitcherr = "" +
+						"\n            } else {" +
+						"\n              Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
+						"\n              msgblock = msgblock.vx_copy(msg);"
+				}
 				valnewswitch += "" +
 					"\n          case \":" + arg.name + "\":" +
 					"\n            if (valsub == vx_p_" + argname + ") {" +
@@ -1612,9 +1607,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n              ischanged = true;" +
 					"\n              vx_p_" + argname + " = (" + argclassname + ")valsub;" +
 					argalt +
-					"\n            } else {" +
-					"\n              Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
-					"\n              msgblock = msgblock.vx_copy(msg);" +
+					valnewswitcherr +
 					"\n            }" +
 					"\n            break;"
 				instancefuncs += "" +
@@ -1687,9 +1680,6 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n            key = valstr.vx_string();" +
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            key = (String)valsub;" +
-					"\n          } else {" +
-					"\n            Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
-					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n        } else {" +
 					"\n          switch (key) {" +
@@ -1700,7 +1690,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n      }" +
 					"\n      if (ischanged) {" +
 					"\n        Class_" + typename + " work = new Class_" + typename + "();" +
-					"\n        work.vxmsgblock = msgblock;" +
+					valcopyend +
 					"\n        output = work;" +
 					"\n      }"
 			case "vx/core/msgblock":
@@ -2423,6 +2413,9 @@ func LangImport(lang *vxlang, project *vxproject, pkgname string, imports string
 	switch lang.name {
 	case "cpp":
 		importline = "#include \"" + pkgname + ".hpp\""
+	case "csharp":
+		path := StringFromStringFindReplace(pkgname, "/", ".")
+		importline = "using " + path + ";"
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		path := StringSubstring(pkgname, 0, ipos)
@@ -2432,7 +2425,8 @@ func LangImport(lang *vxlang, project *vxproject, pkgname string, imports string
 		importname := project.javadomain + "." + path + "." + name
 		importline = "import " + importname + lang.lineend
 	default:
-		importline = "import " + pkgname + lang.lineend
+		path := StringFromStringFindReplace(pkgname, "/", ".")
+		importline = "import " + path + lang.lineend
 	}
 	if !BooleanFromStringContains(imports, importline) {
 		output = importline + "\n"
@@ -2446,6 +2440,9 @@ func LangImportTest(lang *vxlang, project *vxproject, pkgname string, imports st
 	switch lang.name {
 	case "cpp":
 		importline = "#include \"" + pkgname + "test.hpp\""
+	case "csharp":
+		path := StringFromStringFindReplace(pkgname, "/", ".")
+		importline = "using " + path + ";"
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		path := StringSubstring(pkgname, 0, ipos)
@@ -2455,7 +2452,8 @@ func LangImportTest(lang *vxlang, project *vxproject, pkgname string, imports st
 		importname := project.javadomain + "." + path + "." + name + "Test"
 		importline = "import " + importname + lang.lineend
 	default:
-		importline = "import " + pkgname + "test" + lang.lineend
+		path := StringFromStringFindReplace(pkgname, "/", ".")
+		importline = "import " + path + "test" + lang.lineend
 	}
 	if !BooleanFromStringContains(imports, importline) {
 		output = importline + "\n"
@@ -2535,7 +2533,7 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 			}
 		}
 		if output != "" {
-			output += "\n\n"
+			output += "\n"
 		}
 	}
 	return output
@@ -2993,13 +2991,11 @@ func LangNameFromFunc(fnc *vxfunc) string {
 func LangNameFromPkgName(lang *vxlang, pkgname string) string {
 	output := ""
 	switch lang.name {
-	case "cpp":
-		output = pkgname
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		output = StringSubstring(pkgname, ipos+1, len(pkgname))
 		output = StringUCaseFirst(output)
-	case "kotlin":
+	default:
 		output = pkgname
 	}
 	output = StringFromStringFindReplace(output, "<", "lt")
@@ -3078,6 +3074,31 @@ func LangNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
 	return name
 }
 
+func LangNamespaceFromPackage(lang *vxlang, pkgname string) (string, string) {
+	namespaceopen := ""
+	namespaceclose := ""
+	switch lang.name {
+	case "cpp":
+		namespaceopen = "\nnamespace " + pkgname + " {\n\n"
+		namespaceclose = "\n}\n"
+	case "csharp":
+		namespaceopen = "\nnamespace " + pkgname + " {\n\n"
+		namespaceclose = "\n}\n"
+	case "java":
+		namespaceopen = "\npublic final class " + pkgname + " {\n\n"
+		namespaceclose = "\n}\n"
+	case "js":
+		namespaceopen = "\nexport default class " + pkgname + " {\n\n"
+		namespaceclose = "\n}\n"
+	case "kotlin":
+		namespaceopen = "" +
+			"\nclass final class " + pkgname + " {" +
+			"\n		companion object {\n\n"
+		namespaceclose = "\n}\n}\n"
+	}
+	return namespaceopen, namespaceclose
+}
+
 func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname string) (string, string) {
 	pkgpath := ""
 	name := ""
@@ -3091,6 +3112,9 @@ func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname strin
 		pkgpath = LangFromName(pkgpath)
 		name = LangNameFromPkgName(lang, name)
 	case "kotlin":
+		name = LangNameFromPkgName(lang, pkgname)
+		pkgpath = name
+	default:
 		name = LangNameFromPkgName(lang, pkgname)
 		pkgpath = name
 	}
@@ -3782,6 +3806,7 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 		}
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "AppTest")
 	output := `
 ` + imports + `
 import org.junit.jupiter.api.DisplayName;
@@ -3790,7 +3815,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit test for whole App.
  */` +
-		LangClassHeader(lang, "AppTest", 0) +
+		namespaceopen +
 		contexttext + `
 ` + tests + `
   @Test
@@ -3801,16 +3826,14 @@ import org.junit.jupiter.api.Test;
 		`
     );
     TestLib.write_testpackagelist_async(context, testpackagelist);
-  }
-
-}
-`
+  }` +
+		namespaceclose
 	return output
 }
 
 func LangTestLib(lang *vxlang) string {
 	output := ""
-	classheader := LangClassHeader(lang, "TestLib", 0)
+	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "TestLib")
 	switch lang.name {
 	case "java":
 		output = `
@@ -3821,7 +3844,7 @@ import com.vxlisp.vx.*;
 import com.vxlisp.vx.data.File;
 import com.vxlisp.vx.Test;
 import com.vxlisp.vx.web.Html;
-` + classheader + `
+` + namespaceopen + `
   public static boolean run_testcase(final Test.Type_testcase testcase) {
     String testpkg = testcase.testpkg().vx_string();
     String casename = testcase.casename().vx_string();
@@ -3958,9 +3981,8 @@ import com.vxlisp.vx.web.Html;
     output = output && valboolean.vx_boolean();
     return output;
   }
-
-}
-`
+` +
+			namespaceclose
 	}
 	return output
 }

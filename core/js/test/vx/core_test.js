@@ -5,6 +5,7 @@ import vx_test from "../../src/vx/test.js"
 
 export default class vx_core_test {
 
+
   static test_package(context) {
     const testcaselist = vx_core_test.test_cases(context)
     const output = vx_core.f_new(
@@ -3058,5 +3059,4 @@ export default class vx_core_test {
     )
     return output
   }
-
 }

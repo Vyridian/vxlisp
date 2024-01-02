@@ -5,6 +5,7 @@
 namespace vx_translation_es {
 
 
+
   // (func translation-es)
   vx_core::Type_translation f_translation_es() {
     vx_core::Type_translation output = vx_core::e_translation;

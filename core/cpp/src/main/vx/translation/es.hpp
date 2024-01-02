@@ -5,6 +5,7 @@
 
 namespace vx_translation_es {
 
+
   // forward declarations
   class Abstract_translation_es;
   typedef Abstract_translation_es* Func_translation_es;
@@ -74,4 +75,5 @@ namespace vx_translation_es {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

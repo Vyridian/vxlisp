@@ -7,6 +7,7 @@ import vx_type from "../../../src/vx/type.js"
 
 export default class vx_web_html_test {
 
+
   static test_package(context) {
     const testcaselist = vx_web_html_test.test_cases(context)
     const output = vx_core.f_new(
@@ -370,5 +371,4 @@ export default class vx_web_html_test {
     )
     return output
   }
-
 }

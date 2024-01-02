@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public final class SampleTest {
 
   static Test.Type_testcase c_myconst(final Core.Type_context context) {

@@ -5,7 +5,9 @@ import vx_translate from "../../vx/translate.js"
 import vx_translation_en from "../../vx/translation/en.js"
 import vx_translation_es from "../../vx/translation/es.js"
 
+
 export default class vx_translation_all {
+
   /**
    * @function context_all
    * Returns the default context for app main execution. Arguments come from the command line.

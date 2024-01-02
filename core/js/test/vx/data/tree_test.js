@@ -6,6 +6,7 @@ import vx_test from "../../../src/vx/test.js"
 
 export default class vx_data_tree_test {
 
+
   static test_package(context) {
     const testcaselist = vx_data_tree_test.test_cases(context)
     const output = vx_core.f_new(
@@ -66,5 +67,4 @@ export default class vx_data_tree_test {
     )
     return output
   }
-
 }

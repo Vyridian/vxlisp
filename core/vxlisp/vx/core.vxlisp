@@ -28,8 +28,9 @@
 
 (type arg : struct
  :properties [name    : string
-              argtype : type
-              fn-any  : any<-func]
+              argtype : any
+              fn-any  : any<-func
+              doc     : string]
  :doc        "A function argument")
 
 (type arglist : list
@@ -68,7 +69,7 @@
 
 (type compilelanguages
  :default     :unknown
- :allowvalues [:unknown :c :c++ :clj :cljs :go :java :js :rust])
+ :allowvalues [:unknown :cpp :csharp :java :js :kotlin :swift])
 
 (type connect
  :doc "General connect trait")

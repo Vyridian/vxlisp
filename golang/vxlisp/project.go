@@ -93,11 +93,11 @@ func ExecuteProjectFromArgs(listarg []string) *vxmsgblock {
 		case 0:
 		default:
 			switch lastarg {
-			case "--path":
+			case "--path", ":path":
 				projectpath = arg
 			default:
 				switch arg {
-				case "--path":
+				case "--path", ":path":
 					lastarg = arg
 				default:
 					cmdtexts = append(cmdtexts, arg)

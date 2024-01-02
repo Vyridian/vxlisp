@@ -1,10 +1,10 @@
 #include "../../main/vx/sample.hpp"
 #include "../../main/vx/core.hpp"
 #include "../../main/vx/test.hpp"
-
 #include "sample_test.hpp"
 
 namespace vx_sample_test {
+
 
   vx_test::Type_testcase c_myconst(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: c_myconst");

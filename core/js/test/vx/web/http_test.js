@@ -9,6 +9,7 @@ import vx_data_xml from "../../../src/vx/data/xml.js"
 
 export default class vx_web_http_test {
 
+
   static test_package(context) {
     const testcaselist = vx_web_http_test.test_cases(context)
     const output = vx_core.f_new(
@@ -69,5 +70,4 @@ export default class vx_web_http_test {
     )
     return output
   }
-
 }

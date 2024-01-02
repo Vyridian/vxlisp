@@ -7,6 +7,7 @@
 
 namespace vx_data_table {
 
+
   // forward declarations
   class Abstract_cell;
   typedef Abstract_cell* Type_cell;
@@ -520,4 +521,5 @@ namespace vx_data_table {
   inline vx_Class_package const vx_package;
 
 }
+
 #endif

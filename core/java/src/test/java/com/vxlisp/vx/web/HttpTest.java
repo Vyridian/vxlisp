@@ -7,7 +7,6 @@ import java.util.List;
 import com.vxlisp.vx.*;
 import com.vxlisp.vx.data.*;
 
-
 public final class HttpTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {

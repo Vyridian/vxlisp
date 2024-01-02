@@ -10,6 +10,7 @@
 namespace vx_data_xml {
 
 
+
   // (type xml)
   // class Class_xml {
     Abstract_xml::~Abstract_xml() {}
