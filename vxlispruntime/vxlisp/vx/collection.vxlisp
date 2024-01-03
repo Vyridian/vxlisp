@@ -1,0 +1,271 @@
+(package vx/collection
+ :libs (lib type :path vx/type)
+ :doc "Collection Package")
+
+(func any<-for-until-loop : any-1
+ [start    : any-1
+  fn-until : boolean<-any :: any-1
+  fn-loop  : any<-any :: any-1 :: any-1]
+ (any<-for-until-loop-max
+  start
+  fn-until
+  fn-loop
+  1000)
+ :test (test
+        8
+        (any<-for-until-loop
+         1
+         (fn : boolean
+          [current : int]
+          (> current 6))
+         (fn : int
+          [current : int]
+          (+ current current))))
+ :doc "Returns a value using an until loop. Maximum 1000 times.")
+
+(func any<-for-until-loop-max : any-1
+ [start    : any-1
+  fn-until : boolean<-any
+  fn-loop  : any<-any :: any-1 :: any-1
+  max      : int]
+ (native
+  :cpp
+   "vx_core::Type_any any = vx_collection::vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
+    output = vx_core::vx_any_from_any(generic_any_1, any);"
+  :js
+   "vx_collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max)"
+  :java
+   "Collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);")
+ :doc `Returns a value using a until loop.
+output : any-1 := start
+count : int := 0
+(while continue
+  continue : boolean := (count <= max)
+  (if continue
+    count += 1
+    output = (fn-loop output)
+    continue = (fn-until output)))`)
+
+(func any<-for-while-loop : any-1
+ [start    : any-1
+  fn-while : boolean<-any :: any-1
+  fn-loop  : any<-any :: any-1 :: any-1]
+ (any<-for-while-loop-max
+  start
+  fn-while
+  fn-loop
+  1000)
+ :test (test
+        8
+        (any<-for-while-loop
+         1
+         (fn : boolean
+          [current : int]
+          (< current 5))
+         (fn : int
+          [current : int]
+          (+ current current))))
+ :doc "Returns a value using a while loop. Maximum 1000 times.")
+
+(func any<-for-while-loop-max : any-1
+ [start    : any-1
+  fn-while : boolean<-any :: any-1
+  fn-loop  : any<-any :: any-1 :: any-1
+  max      : int]
+ (native
+  :cpp
+   "vx_core::Type_any any = vx_collection::vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
+    output = vx_core::vx_any_from_any(generic_any_1, any);"
+  :js
+   "vx_collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max)"
+  :java
+   "Collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);")
+ :doc "Returns a value using a while loop.
+       output : any-1 := start
+       count : int := 0
+       (while continue
+        continue : boolean := (count <= max)
+        (if continue
+         continue = (fn-while output)
+         (if continue
+          count += 1
+          output = (fn-loop output))))")
+
+(func is-list : boolean
+ [val : any :doc "Any value"]
+ (= ":list" (extends<-any val))
+ :test (test-true
+        (is-list (empty stringlist)))
+ :doc "Returns true if the given value is a list.")
+
+(func is-map : boolean
+ [val : any :doc "Any value"]
+ (= ":map" (extends<-any val))
+ :test (test-true
+        (is-map (empty stringmap)))
+ :doc "Returns true if the given value is a map.")
+
+(func list<-for-end-loop : list-1
+ [start   : int
+  end     : int
+  fn-loop : any<-int :: any-1]
+ (native
+  :cpp
+   "vx_core::Type_any list = vx_collection::vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
+  :js
+   "vx_collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop)"
+  :java
+   "Collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);")
+ :test (test
+        (intlist 4 9)
+        (list<-for-end-loop : intlist
+         2
+         3
+         (fn
+          [current : int]
+          (* current current))))
+ :doc `Returns a list of any-1 by iterating i from for to next where each item is (loop i).
+This is similar to a for next loop in other languages.
+output : list-1 := (empty list-1)
+(if start <= end
+ (for i=start to end
+  val : any-1 := (fn-loop i)
+  output += val)
+ (else
+  (for i=start to end; i--
+   val : any-1 := (fn-loop i)
+   output += val)
+ ))`)
+
+(func list<-for-while-loop : list-1
+ [start    : any-1
+  fn-while : boolean<-any
+  fn-loop  : any<-any :: any-1 :: any-1]
+ (list<-for-while-loop-max start fn-while fn-loop 1000)
+/*
+ :test (test
+        (intlist 1 2)
+        (list<-for-while-loop : intlist
+         1
+         (fn : boolean
+          [current : int]
+          (< current 3))
+         (fn
+          [current : int]
+          (+1 current))))
+*/
+ :doc "Returns a list of any-1 using a while loop. Max: 1000")
+
+(func list<-for-while-loop-max : list-1
+ [start    : any-1
+  fn-while : boolean<-any
+  fn-loop  : any<-any :: any-1 :: any-1
+  max      : int]
+ (native
+  :cpp
+   "vx_core::Type_any list = vx_collection::vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
+  :js
+   "vx_collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max)"
+  :java
+   "Collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);")
+ :doc `Returns a list of any-1 using a while loop.
+1. output : list-1 := (empty list-1)
+2. value : any-1 := start.
+3. value : any-1 := (fn-loop value).
+4. check : boolean := (fn-while value).
+5. if (= check true) output := (copy output value), Go to 3 (Maximum max times).
+6. else end.`)
+
+(func list<-list-end : list-1
+ [values : list-1
+  end    : int]
+ (list<-list-start-end
+  values 1 end)
+ :test (test
+        (stringlist
+         "a" "b" "c")
+        (list<-list-end
+         (stringlist
+          "a" "b" "c" "d")
+         3))
+ :doc "Returns a sub list from positions 0 to end.")
+
+(func list<-list-filter : list-1
+ [vallist   : list-2
+  fn-filter : any<-any]
+ (native
+  :cpp
+   "vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
+  :js
+   "vx_collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter)"
+  :java
+   "Collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter);")
+ :test (test
+        (stringlist
+         "a1" "b1" "c1" "d1")
+        (list<-list-filter : stringlist
+         (list
+          "a" 4 "b" (list) "c" (map) "d")
+         (fn : string
+          [val : any]
+          (if
+           (then
+            (is-string val)
+            (string val "1"))))))
+ :doc "Filter List to only include non-empty values")
+
+(func list<-list-filtertypes : list-1
+ [vallist     : list-2
+  filtertypes : typelist :...]
+ (list<-list-filter
+  vallist
+  (fn : any
+   [val : any]
+   (if
+    (is-type<-any-typelist val filtertypes)
+    val)))
+ :test (test
+        (list
+         "a" 1 "b" "c")
+        (list<-list-filtertypes : list
+         (list
+          "a" 1 "b" "c" 4.5)
+         string int))
+ :doc "Filter List to only include matching types")
+
+(func list<-list-start : list-1
+ [values : list-1
+  start  : int]
+ (list<-list-start-end values start (length<-list values))
+ :test (test
+        (stringlist
+         "b" "c" "d")
+        (list<-list-start
+         (stringlist
+          "a" "b" "c" "d")
+         2))
+ :doc "Returns a sub list from start to list end.")
+
+(func list<-list-start-end : list-1
+ [values : list-1
+  start  : int
+  end    : int]
+ (native
+  :cpp
+   "vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
+    output = vx_core::vx_any_from_any(generic_list_1, any);"
+  :js
+   "vx_collection.vx_list_from_list_start_end(generic_list_1, values, start, end)"
+  :java
+   "Collection.vx_list_from_list_start_end(generic_list_1, values, start, end);")
+ :test (test
+        (stringlist
+         "b" "c")
+        (list<-list-start-end
+         (stringlist
+          "a" "b" "c" "d")
+         2 3))
+ :doc "Returns a list from another list")

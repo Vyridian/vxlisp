@@ -24,7 +24,7 @@ public final class File {
       output = Core.t_string.vx_copy(output, msg);
     }
     return output;
-	 }
+  }
 
   /**
    * type: file

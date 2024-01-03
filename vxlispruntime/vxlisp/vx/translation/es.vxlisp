@@ -1,0 +1,21 @@
+(package vx/translation/es
+ :libs (lib trn :path vx/translate)
+ :doc "Spanish Translation Stub")
+
+(func translation-es : translation
+ (translation
+  :name "es"
+  :wordmap (words))
+ :test (test
+        "Hola"
+        (trn/translate<-translation-string
+         (translation-es)
+         "Hello"))
+ :doc "Returns translation data")
+
+(func words : stringmap
+ (stringmap
+"Hello" "Hola"
+"World" "Mundo"
+ )
+ :doc "Word Translation")

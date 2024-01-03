@@ -1,0 +1,107 @@
+(project core
+ :version    "0.5"
+ :author     "Vyridian"
+ :doc        "The vx/core project"
+ :javadomain "com.vxlisp"
+ :libs
+  (lib javaniofile
+   :path "java.nio.file.*"
+   :lang :java)
+  (lib javafuture
+   :path "java.util.concurrent.CompletableFuture"
+   :lang :java)
+  (lib javafunction
+   :path "java.util.function.*"
+   :lang :java)
+  (lib javacollectors
+   :path "java.util.stream.Collectors"
+   :lang :java)
+ :cmds
+  (cmd doc
+   :code :doc
+   :path ../doc
+   :doc  "Build documentation html")
+  (cmd webserver
+   :code :webserver
+   :path ..
+   :port 8081
+   :doc  "Run Simple Development Web Server")
+  (cmd srccpp
+   :code    :source
+   :lang    :cpp
+   :path    ../cpp/src/main
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build C++ Source Code")
+  (cmd testcpp
+   :code    :test
+   :lang    :cpp
+   :path    ../cpp/src/test
+   :context vx/translation/en/context-test
+   :doc     "Build C++ Test Code")
+  (cmd srccsharp
+   :code    :source
+   :lang    :csharp
+   :path    ../csharp/src/main
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build C# Source Code")
+  (cmd testcsharp
+   :code    :test
+   :lang    :csharp
+   :path    ../csharp/src/test
+   :context vx/translation/en/context-test
+   :doc     "Build C# Test Code")
+  (cmd srcjs
+   :code    :source
+   :lang    :js
+   :path    ../js/src
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build JavaScript Source Code")
+  (cmd testjs
+   :code    :test
+   :lang    :js
+   :path    ../js/test
+   :context vx/translation/en/context-test
+   :doc     "Build JavaScript Test Code")
+  (cmd srcjava
+   :code    :source
+   :lang    :java
+   :path    ../java/src/main/java
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build Java Source Code")
+  (cmd testjava
+   :code    :test
+   :lang    :java
+   :path    ../java/src/test/java
+   :context vx/translation/en/context-test
+   :doc     "Build Java Test Code")
+  (cmd srckotlin
+   :code    :source
+   :lang    :kotlin
+   :path    ../kotlin/app/src/main/kotlin/app
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build Kotlin Source Code")
+  (cmd testkotlin
+   :code    :test
+   :lang    :kotlin
+   :path    ../kotlin/app/src/test/kotlin/app
+   :context vx/translation/en/context-test
+   :doc     "Build Kotlin Test Code")
+  (cmd srcswift
+   :code    :source
+   :lang    :swift
+   :path    ../swift/src/main
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build Swift Source Code")
+  (cmd testswift
+   :code    :test
+   :lang    :swift
+   :path    ../swift/src/test
+   :context vx/translation/en/context-test
+   :doc     "Build Swift Test Code")
+)

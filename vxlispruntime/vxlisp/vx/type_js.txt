@@ -1,0 +1,42 @@
+
+  static vx_int_from_string_findkeyword(text, find) {
+    let output = -1
+    if (text != "") {
+      switch (find) {
+      case ":nonwhitespace":
+        const wschars1 = [" ", "\n", "\r", "\t"]
+        let ilen = text.length
+        for (let i = 0; i < ilen; i++) {
+          const char = text.charAt(i)
+          if (!wschars1.includes(char)) {
+            output = i
+            break
+          }
+        }
+        break
+      case ":whitespace":
+        const wschars2 = [" ", "\n", "\r", "\t"]
+        for (let char of wschars2) {
+          const pos = text.indexOf(char)
+          if (pos < 0) {
+          } else if (output < 0) {
+           output = pos
+          } else if (pos < output) {
+           output = pos
+          }
+        }
+        break
+      default:
+        output = text.indexOf(find)
+        break
+      }
+    }
+    output += 1
+    return output
+  }
+
+  static vx_stringlist_from_string_split(text, delim) {
+    const liststring = text.split(delim)
+    const output = vx_core.f_new(vx_core.t_stringlist, ...liststring)
+    return output
+  }

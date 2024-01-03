@@ -1,0 +1,27 @@
+(package vx/event
+ :doc "Event Handling")
+
+(type event : struct
+ :properties
+  [name            : string
+   from            : any
+   to              : any
+   fn-any<-any     : any<-any
+   fn-any<-from-to : any<-from-to]
+ :doc "Generic event")
+
+(const event-click : event
+ (event
+  :name ":click")
+ :doc "Click Event")
+
+(const event-move : event
+ (event
+  :name ":move")
+ :doc "Move Event")
+
+(func any<-from-to : any-1
+ [from : any
+  to   : any]
+ :doc "From to handling function.")
+ 

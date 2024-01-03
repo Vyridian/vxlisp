@@ -1,0 +1,59 @@
+(package vx/data/table
+ :doc "General data table")
+
+(type cell : struct
+ :properties
+  [id    : string
+   value : any])
+
+(type celllist : list
+ :allowtypes [cell])
+
+(type cellmap : map
+ :allowtypes [cell])
+
+(type field : struct
+ :properties
+  [id      : string
+   name    : string
+   fldtype : any])
+
+(type fieldlist : list
+ :allowtypes [field])
+
+(type fieldmap : list
+ :allowtypes [field])
+
+(type filter : struct
+ :properties
+  [id      : string
+   name    : string
+   idlist  : stringlist])
+
+(type row : struct
+ :properties
+  [id       : string
+   cellmap  : cellmap
+   cellsort : sort])
+
+(type rowlist : list
+ :allowtypes [row])
+
+(type rowmap : map
+ :allowtypes [row])
+
+(type sort : struct
+ :properties
+  [id      : string
+   name    : string
+   idlist  : stringlist])
+
+(type table : struct
+ :properties
+  [id        : string
+   name      : string
+   fieldmap  : fieldmap
+   fieldsort : sort
+   rowmap    : rowmap
+   rowfilter : filter
+   rowsort   : sort])

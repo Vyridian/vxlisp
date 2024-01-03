@@ -241,7 +241,7 @@ func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 		if len(project.listprjpath) > 0 {
 			var subprojects []*vxproject
 			for _, subprojectpath := range project.listprjpath {
-				subproject, msgs := ProjectReadFromPath(subprojectpath)
+				subproject, msgs := ProjectReadAllFromPath(subprojectpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				subprojects = append(subprojects, subproject)
 			}
