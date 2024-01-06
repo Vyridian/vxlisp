@@ -886,13 +886,10 @@ func LangFromName(name string) string {
 	return output
 }
 
-func LangFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, pkgprefix string) (string, *vxmsgblock) {
+func LangFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject, pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangFromPackage")
 	pkgpath, pkgname := LangPackagePathFromPrefixName(lang, pkgprefix, pkg.name)
-	specialcode := prj.maptext[pkg.name+"_"+lang.name+".txt"]
-	if pkg.name == "core" {
-		MsgLog("specialcode", pkg.name+"_"+lang.name+".txt", len(specialcode))
-	}
+	specialcode := project.mapnative[pkg.name+"_"+lang.name+".txt"]
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
 	packageline := "package " + pkgpath + lang.lineend + "\n"
@@ -3650,8 +3647,8 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			}
 			if contextfunc.async {
 				contexttext = "" +
-					LangVar(lang, "asynccontext", contexttype, LangNameFFromFunc(lang, contextfunc)+"(arglist)", 3, true, true)
-				LangVar(lang, "context", contexttype, "Core.vx_sync_from_async(vx_core::t_context, asynccontext)", 3, true, false)
+					LangVar(lang, "asynccontext", contexttype, LangNameFFromFunc(lang, contextfunc)+"(arglist)", 3, true, true) +
+					LangVar(lang, "context", contexttype, "Core.vx_sync_from_async(vx_core::t_context, asynccontext)", 3, true, false)
 			} else {
 				contexttext = LangVar(lang, "context", contexttype, LangNameFFromFunc(lang, contextfunc)+"(arglist)", 3, true, false)
 			}
@@ -3667,8 +3664,8 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			mainfunctext := LangNameFFromFunc(lang, mainfunc) + "(" + params + ")"
 			if mainfunc.async {
 				maintext = "" +
-					LangVar(lang, "asyncstring", stringtype, mainfunctext, 3, true, true)
-				LangVar(lang, "mainstring", stringtype, "Core.vx_sync_from_async(Core.t_string, asyncstring)", 3, true, false)
+					LangVar(lang, "asyncstring", stringtype, mainfunctext, 3, true, true) +
+					LangVar(lang, "mainstring", stringtype, "Core.vx_sync_from_async(Core.t_string, asyncstring)", 3, true, false)
 			} else {
 				maintext = LangVar(lang, "mainstring", stringtype, mainfunctext, 3, true, false)
 			}
@@ -3786,15 +3783,16 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 		}
 		if iscontinue {
 			pkgname := pkg.name
-			imports += LangImportTest(lang, project, pkgname, imports)
-			pos := strings.LastIndex(pkgname, "/")
-			if pos >= 0 {
-				pkgname = pkgname[pos+1:]
-			}
-			pkgname = StringUCaseFirst(pkgname)
-			testpackage := "\n    " + pkgname + "Test.test_package(context)"
-			listtestpackage = append(listtestpackage, testpackage)
-			tests += `
+			if pkg.name != "" {
+				imports += LangImportTest(lang, project, pkgname, imports)
+				pos := strings.LastIndex(pkgname, "/")
+				if pos >= 0 {
+					pkgname = pkgname[pos+1:]
+				}
+				pkgname = StringUCaseFirst(pkgname)
+				testpackage := "\n    " + pkgname + "Test.test_package(context)"
+				listtestpackage = append(listtestpackage, testpackage)
+				tests += `
   @Test
   @DisplayName("` + pkg.name + `")
   void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
@@ -3803,6 +3801,7 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
   }
 
 `
+			}
 		}
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")

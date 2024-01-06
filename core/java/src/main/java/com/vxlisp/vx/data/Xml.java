@@ -580,7 +580,6 @@ public final class Xml {
                 Core.f_new(
                   Textblock.t_delimlist,
                   Core.t_anylist.vx_new(
-                    Textblock.c_delimwhitespace,
                     Xml.c_delimxmlcomment,
                     Xml.c_delimxmlcdata,
                     Core.f_copy(

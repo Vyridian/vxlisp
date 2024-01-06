@@ -719,27 +719,6 @@ export default class vx_data_textblock {
   }
 
   /**
-   * @function textblock_groupby_from_textblock_delim
-   * Returns a textblock grouped by the given delim.
-   * @param  {textblock} textblockarg
-   * @param  {delim} delimarg
-   * @return {textblock}
-   */
-  static t_textblock_groupby_from_textblock_delim = {}
-  static e_textblock_groupby_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_groupby_from_textblock_delim}
-
-  // (func textblock-groupby<-textblock-delim)
-  static f_textblock_groupby_from_textblock_delim(textblockarg, delimarg) {
-    let output = vx_data_textblock.e_textblock
-    output = vx_core.f_new(
-      vx_data_textblock.t_textblock,
-      ":delim",
-      delimarg
-    )
-    return output
-  }
-
-  /**
    * @function textblock_init
    * Returns a textblock ready for parsing.
    * @param  {textblock} textblockarg
@@ -1251,9 +1230,22 @@ export default class vx_data_textblock {
         const delimlistl = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, open, ":delimlist")
         const lenopen = vx_type.f_length_from_string(textopen)
         const posminus = vx_core.f_minus1(pos)
-        const startleft = vx_core.f_minus1(startpos)
-        const endleft = vx_core.f_plus(startleft, posminus)
-        const startright = vx_core.f_plus_2(startleft, pos, lenopen)
+        const startleft = vx_core.f_if_1(
+          {"any-1": vx_core.t_int},
+          vx_core.f_eq(pos, 1),
+          vx_core.f_minus1(startpos),
+          startpos
+        )
+        const endleft = vx_core.f_if_1(
+          {"any-1": vx_core.t_int},
+          vx_core.f_eq(pos, 1),
+          vx_core.f_minus1(startpos),
+          vx_core.f_plus(
+            vx_core.f_minus1(startleft),
+            posminus
+          )
+        )
+        const startright = vx_core.f_plus_2(startpos, posminus, lenopen)
         const startopen = vx_core.f_plus(startpos, posminus)
         const textleft = vx_type.f_string_from_string_end(text, posminus)
         const textpar = vx_type.f_string_from_string_start(text, pos)
@@ -1266,54 +1258,83 @@ export default class vx_data_textblock {
           ":starttext",
           textclose
         )
+        const tbleft = vx_core.f_if_2(
+          {"any-1": vx_data_textblock.t_textblock},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq("", textleft)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_empty(
+              vx_data_textblock.t_textblock
+            )})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+              vx_data_textblock.t_textblock,
+              ":text",
+              textleft,
+              ":startpos",
+              startleft,
+              ":endpos",
+              endleft
+            )})
+          )
+        )
+        const tbpar1 = vx_core.f_copy(
+          textblockarg,
+          ":text",
+          textpar,
+          ":startpos",
+          startopen,
+          ":delim",
+          vx_core.f_copy(
+            open,
+            ":pos",
+            0,
+            ":delimlist",
+            vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delima, ":delimlist")
+          ),
+          ":parent",
+          parent
+        )
+        const tbfind = vx_core.f_if_2(
+          {"any-1": vx_data_textblock.t_textblock},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq("", textleft)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_empty(
+              vx_data_textblock.t_textblock
+            )})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_data_textblock.f_textblock_findparent_from_textblock(parent)})
+          )
+        )
+        const tbparent = vx_core.f_if_2(
+          {"any-1": vx_data_textblock.t_textblock},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(tbfind)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return tbpar1})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_data_textblock.f_textblock_addchild_from_textblock_find_child(tbpar1, tbfind, tbleft)})
+          )
+        )
         return vx_core.f_new(
           vx_data_textblock.t_textblock,
           ":text",
-          textleft,
+          textright,
           ":startpos",
-          startleft,
+          startright,
           ":endpos",
-          endleft,
+          endpos,
           ":delim",
           vx_core.f_new(
             vx_data_textblock.t_delim,
             ":delimlist",
             delimlistl
           ),
+          ":close",
+          close,
           ":parent",
-          vx_core.f_new(
-            vx_data_textblock.t_textblock,
-            ":text",
-            textright,
-            ":startpos",
-            startright,
-            ":endpos",
-            endpos,
-            ":delim",
-            vx_core.f_new(
-              vx_data_textblock.t_delim,
-              ":delimlist",
-              delimlistl
-            ),
-            ":close",
-            close,
-            ":parent",
-            vx_core.f_copy(
-              textblockarg,
-              ":startpos",
-              startopen,
-              ":delim",
-              vx_core.f_copy(
-                open,
-                ":pos",
-                0,
-                ":delimlist",
-                vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delima, ":delimlist")
-              ),
-              ":parent",
-              parent
-            )
-          )
+          tbparent
         )
       })
     )
@@ -1575,7 +1596,6 @@ export default class vx_data_textblock {
       "textblock-addchild<-textblock-find-child": vx_data_textblock.e_textblock_addchild_from_textblock_find_child,
       "textblock-delimnotfound": vx_data_textblock.e_textblock_delimnotfound,
       "textblock-findparent<-textblock": vx_data_textblock.e_textblock_findparent_from_textblock,
-      "textblock-groupby<-textblock-delim": vx_data_textblock.e_textblock_groupby_from_textblock_delim,
       "textblock-init": vx_data_textblock.e_textblock_init,
       "textblock-parse": vx_data_textblock.e_textblock_parse,
       "textblock-parse-one": vx_data_textblock.e_textblock_parse_one,
@@ -1604,7 +1624,6 @@ export default class vx_data_textblock {
       "textblock-addchild<-textblock-find-child": vx_data_textblock.t_textblock_addchild_from_textblock_find_child,
       "textblock-delimnotfound": vx_data_textblock.t_textblock_delimnotfound,
       "textblock-findparent<-textblock": vx_data_textblock.t_textblock_findparent_from_textblock,
-      "textblock-groupby<-textblock-delim": vx_data_textblock.t_textblock_groupby_from_textblock_delim,
       "textblock-init": vx_data_textblock.t_textblock_init,
       "textblock-parse": vx_data_textblock.t_textblock_parse,
       "textblock-parse-one": vx_data_textblock.t_textblock_parse_one,
@@ -2224,25 +2243,6 @@ export default class vx_data_textblock {
       properties    : [],
       proplast      : {},
       fn            : vx_data_textblock.f_textblock_findparent_from_textblock
-    }
-
-    // (func textblock-groupby<-textblock-delim)
-    vx_data_textblock.t_textblock_groupby_from_textblock_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_groupby_from_textblock_delim['vx_value'] = {
-      name          : "textblock-groupby<-textblock-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_groupby_from_textblock_delim
     }
 
     // (func textblock-init)

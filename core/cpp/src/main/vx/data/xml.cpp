@@ -681,7 +681,6 @@ namespace vx_data_xml {
           vx_core::f_new(
             vx_data_textblock::t_delimlist,
             vx_core::vx_new(vx_core::t_anylist, {
-              vx_data_textblock::c_delimwhitespace,
               vx_data_xml::c_delimxmlcomment,
               vx_data_xml::c_delimxmlcdata,
               vx_core::f_copy(

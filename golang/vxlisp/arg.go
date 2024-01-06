@@ -347,38 +347,41 @@ func ListKeyFromMapArg(maparg map[string]vxarg) []string {
 }
 
 func StringFromArg(arg vxarg) string {
-	return StringFromArgIndent(arg, " ")
+	return StringFromArgIndent(arg, 0)
 }
 
-func StringFromArgIndent(arg vxarg, indent string) string {
-	lineindent := "\n" + indent
+func StringFromArgIndent(arg vxarg, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
-		"(arg" +
-		lineindent + ":name  " + arg.name +
-		lineindent + ":alias " + arg.alias
+		lineindent + "(arg" +
+		lineindent + " :name  " + arg.name +
+		lineindent + " :alias " + arg.alias
 	if arg.vxtype.name != "" {
-		output += lineindent + ":type  " + NameFromType(arg.vxtype)
+		output += lineindent + " :type  " + NameFromType(arg.vxtype)
 	}
 	if arg.isgeneric {
-		output += lineindent + ":isgeneric " + StringFromBoolean(arg.isgeneric)
+		output += lineindent + " :isgeneric " + StringFromBoolean(arg.isgeneric)
 	}
 	if arg.generictype != nil {
-		output += lineindent + ":generictype " + NameFromType(arg.generictype)
+		output += lineindent + " :generictype " + NameFromType(arg.generictype)
 	}
 	if len(arg.mapgeneric) > 0 {
-		output += lineindent + ":genericmap " + ListNameFromMapType(arg.mapgeneric)
+		output += lineindent + " :genericmap " + ListNameFromMapType(arg.mapgeneric)
 	}
 	if arg.async {
-		output += lineindent + ":async " + StringFromBoolean(arg.async)
+		output += lineindent + " :async " + StringFromBoolean(arg.async)
 	}
 	if arg.doc != "" {
-		output += lineindent + ":doc " + arg.doc
+		output += lineindent + " :doc " + arg.doc
 	}
 	if arg.multi {
-		output += lineindent + ":multi " + StringFromBoolean(arg.multi)
+		output += lineindent + " :multi " + StringFromBoolean(arg.multi)
 	}
 	if arg.value.code != "" {
-		output += lineindent + ":value " + StringFromValueIndent(arg.value, indent+" ")
+		output += lineindent + " :value " + StringFromValueIndent(arg.value, indent+1)
 	}
 	if arg.isdefault {
 		output += lineindent + ":default " + StringFromBoolean(arg.isdefault)
@@ -388,14 +391,17 @@ func StringFromArgIndent(arg vxarg, indent string) string {
 }
 
 func StringFromListArg(listarg []vxarg) string {
-	return StringFromListArgIndent(listarg, " ")
+	return StringFromListArgIndent(listarg, 0)
 }
 
-func StringFromListArgIndent(listarg []vxarg, indent string) string {
-	lineindent := "\n" + indent
-	output := "(arglist"
+func StringFromListArgIndent(listarg []vxarg, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := lineindent + "(arglist"
 	for _, arg := range listarg {
-		output += lineindent + StringFromArgIndent(arg, indent+" ")
+		output += lineindent + StringFromArgIndent(arg, indent+1)
 	}
 	output += ")"
 	return output

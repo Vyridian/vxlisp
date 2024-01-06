@@ -210,29 +210,35 @@ func NameFromConst(cnst *vxconst) string {
 }
 
 func StringFromConst(cnst *vxconst) string {
-	return StringFromConstIndent(cnst, "")
+	return StringFromConstIndent(cnst, 0)
 }
 
-func StringFromConstIndent(cnst *vxconst, indent string) string {
-	lineindent := "\n" + indent
+func StringFromConstIndent(cnst *vxconst, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
-		"(const" +
-		lineindent + ":name    " + cnst.name +
-		lineindent + ":pkgname " + cnst.pkgname +
-		lineindent + ":type    " + NameFromType(cnst.vxtype)
+		lineindent + "(const" +
+		lineindent + " :name    " + cnst.name +
+		lineindent + " :pkgname " + cnst.pkgname +
+		lineindent + " :type    " + NameFromType(cnst.vxtype)
 	if cnst.value.code != "" {
-		output += lineindent + ":value " + StringFromValueIndent(cnst.value, indent+" ")
+		output += lineindent + " :value " + StringFromValueIndent(cnst.value, indent+2)
 	}
 	output += ")"
 	return output
 }
 
-func StringFromListConstIndent(listconst []*vxconst, indent string) string {
-	lineindent := "\n" + indent
-	output := "["
+func StringFromListConstIndent(listconst []*vxconst, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := lineindent + "["
 	if len(listconst) > 0 {
 		for _, cnst := range listconst {
-			output += lineindent + StringFromConstIndent(cnst, indent+" ")
+			output += lineindent + StringFromConstIndent(cnst, indent+2)
 		}
 	}
 	output += "]"

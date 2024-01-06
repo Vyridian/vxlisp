@@ -4586,120 +4586,6 @@
         :describename
          "(test
  (textblock
-  :text \"\"
-  :delim
-   (delim
-    :delimlist delimlisttest2)
-  :parent
-   (textblock
-    :text \"{a,b},{c d}>\"
-    :startpos 2
-    :endpos 13
-    :delim
-     (delim
-      :delimlist delimlisttest2)
-    :close
-     (copy delimclose
-      :starttext \">\")
-    :parent
-     (textblock
-      :text \"<{a,b},{c d}>\"
-      :startpos 1
-      :endpos 13
-      :delim
-       (copy delimbracketangle
-        :delimlist delimlisttest1)
-      :parent
-       (textblock
-        :text \"<{a,b},{c d}>\"
-        :startpos 1
-        :endpos 13))))
- (textblock-parse-one
-  (textblock
-   :text \"<{a,b},{c d}>\"
-   :startpos 1
-   :endpos 13
-   :delim delimtest1
-   :parent
-    (textblock
-     :text \"<{a,b},{c d}>\"
-     :startpos 1
-     :endpos 13))))"
-        :testpkg "vx/data/textblock"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (vx/data/textblock/textblock
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest2)
-            :parent
-             (vx/data/textblock/textblock
-              :text "{a,b},{c d}>"
-              :startpos 2
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest2)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext ">")
-              :parent
-               (vx/data/textblock/textblock
-                :text "<{a,b},{c d}>"
-                :startpos 1
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketangle"
-                  :starttext "<"
-                  :endtext ">"
-                  :delimlist vx/data/textblock/delimlisttest1)
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13))))
-          :actual
-           (vx/data/textblock/textblock
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest2)
-            :parent
-             (vx/data/textblock/textblock
-              :text "{a,b},{c d}>"
-              :startpos 2
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest2)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext ">")
-              :parent
-               (vx/data/textblock/textblock
-                :text "<{a,b},{c d}>"
-                :startpos 1
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketangle"
-                  :starttext "<"
-                  :endtext ">"
-                  :delimlist vx/data/textblock/delimlisttest1)
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13))))))
-       (vx/test/testdescribe
-        :describename
-         "(test
- (textblock
   :text \"{a,b},{c d}>\"
   :startpos 2
   :endpos 13
@@ -4724,34 +4610,15 @@
       :endpos 13)))
  (textblock-parse-one
   (textblock
-   :text \"\"
-   :delim
-    (delim
-     :delimlist delimlisttest2)
+   :text \"<{a,b},{c d}>\"
+   :startpos 1
+   :endpos 13
+   :delim delimtest1
    :parent
     (textblock
-     :text \"{a,b},{c d}>\"
-     :startpos 2
-     :endpos 13
-     :delim
-      (delim
-       :delimlist delimlisttest2)
-     :close
-      (copy delimclose
-       :starttext \">\")
-     :parent
-      (textblock
-       :text \"<{a,b},{c d}>\"
-       :startpos 1
-       :endpos 13
-       :delim
-        (copy delimbracketangle
-         :delimlist delimlisttest1)
-       :parent
-        (textblock
-         :text \"<{a,b},{c d}>\"
-         :startpos 1
-         :endpos 13))))))"
+     :text \"<{a,b},{c d}>\"
+     :startpos 1
+     :endpos 13))))"
         :testpkg "vx/data/textblock"
         :testresult
          (vx/test/testresult
@@ -4817,179 +4684,6 @@
         :describename
          "(test
  (textblock
-  :startpos 1
-  :endpos 1
-  :delim
-   (delim
-    :delimlist delimlisttest3)
-  :parent
-   (textblock
-    :text \"a,b},{c d}>\"
-    :startpos 3
-    :endpos 13
-    :delim
-     (delim
-      :delimlist delimlisttest3)
-    :close
-     (copy delimclose
-      :starttext \"}\")
-    :parent
-     (textblock
-      :text \"{a,b},{c d}>\"
-      :startpos 2
-      :endpos 13
-      :delim
-       (copy delimbracketcurly
-        :delimlist delimlisttest2)
-      :close
-       (copy delimclose
-        :starttext \">\")
-      :parent
-       (textblock
-        :text \"<{a,b},{c d}>\"
-        :startpos 1
-        :endpos 13
-        :delim
-         (copy delimbracketangle
-          :delimlist delimlisttest1)
-        :parent
-         (textblock
-          :text \"<{a,b},{c d}>\"
-          :startpos 1
-          :endpos 13)))))
- (textblock-parse-one
-  (textblock
-   :text \"{a,b},{c d}>\"
-   :startpos 2
-   :endpos 13
-   :delim
-    (delim
-     :delimlist delimlisttest2)
-   :close
-    (copy delimclose
-     :starttext \">\")
-   :parent
-    (textblock
-     :text \"<{a,b},{c d}>\"
-     :startpos 1
-     :endpos 13
-     :delim
-      (copy delimbracketangle
-       :delimlist delimlisttest1)
-     :parent
-      (textblock
-       :text \"<{a,b},{c d}>\"
-       :startpos 1
-       :endpos 13)))))"
-        :testpkg "vx/data/textblock"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (vx/data/textblock/textblock
-            :startpos 1
-            :endpos 1
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest3)
-            :parent
-             (vx/data/textblock/textblock
-              :text "a,b},{c d}>"
-              :startpos 3
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext "}")
-              :parent
-               (vx/data/textblock/textblock
-                :text "{a,b},{c d}>"
-                :startpos 2
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">"
-                    :delimlist vx/data/textblock/delimlisttest1)
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)))))
-          :actual
-           (vx/data/textblock/textblock
-            :startpos 1
-            :endpos 1
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest3)
-            :parent
-             (vx/data/textblock/textblock
-              :text "a,b},{c d}>"
-              :startpos 3
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext "}")
-              :parent
-               (vx/data/textblock/textblock
-                :text "{a,b},{c d}>"
-                :startpos 2
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">"
-                    :delimlist vx/data/textblock/delimlisttest1)
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)))))))
-       (vx/test/testdescribe
-        :describename
-         "(test
- (textblock
   :text \"a,b},{c d}>\"
   :startpos 3
   :endpos 13
@@ -5025,46 +4719,28 @@
         :endpos 13))))
  (textblock-parse-one
   (textblock
-   :startpos 1
-   :endpos 1
+   :text \"{a,b},{c d}>\"
+   :startpos 2
+   :endpos 13
    :delim
     (delim
-     :delimlist delimlisttest3)
+     :delimlist delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext \">\")
    :parent
     (textblock
-     :text \"a,b},{c d}>\"
-     :startpos 3
+     :text \"<{a,b},{c d}>\"
+     :startpos 1
      :endpos 13
      :delim
-      (delim
-       :delimlist delimlisttest3)
-     :close
-      (copy delimclose
-       :starttext \"}\")
+      (copy delimbracketangle
+       :delimlist delimlisttest1)
      :parent
       (textblock
-       :text \"{a,b},{c d}>\"
-       :startpos 2
-       :endpos 13
-       :delim
-        (copy delimbracketcurly
-         :delimlist delimlisttest2)
-       :close
-        (copy delimclose
-         :starttext \">\")
-       :parent
-        (textblock
-         :text \"<{a,b},{c d}>\"
-         :startpos 1
-         :endpos 13
-         :delim
-          (copy delimbracketangle
-           :delimlist delimlisttest1)
-         :parent
-          (textblock
-           :text \"<{a,b},{c d}>\"
-           :startpos 1
-           :endpos 13)))))))"
+       :text \"<{a,b},{c d}>\"
+       :startpos 1
+       :endpos 13)))))"
         :testpkg "vx/data/textblock"
         :testresult
          (vx/test/testresult
@@ -7016,319 +6692,6 @@
         :describename
          "(test
  (textblock
-  :startpos 7
-  :endpos 7
-  :delim
-   (delim
-    :delimlist delimlisttest3)
-  :parent
-   (textblock
-    :text \"c d}>\"
-    :startpos 9
-    :endpos 13
-    :delim
-     (delim
-      :delimlist delimlisttest3)
-  :close
-   (copy delimclose
-    :starttext \"}\")
-  :parent
-   (textblock
-    :text \"{c d}>\"
-    :startpos 8
-    :endpos 13
-    :delim
-     (copy delimbracketcurly
-      :delimlist delimlisttest2)
-    :close
-     (copy delimclose
-      :starttext \">\")
-    :parent
-     (textblock
-      :text \"<{a,b},{c d}>\"
-      :startpos 1
-      :endpos 13
-      :delim
-       (copy delimbracketangle
-        :delimlist delimlisttest1)
-      :parent
-       (textblock
-        :text \"<{a,b},{c d}>\"
-        :startpos 1
-        :endpos 13)
-      :children
-       (textblocklist
-        (textblock
-         :text \"{a,b}\"
-         :startpos 2
-         :endpos 6
-         :delim
-          (copy delimbracketcurly
-           :pos 0)
-         :children
-          (textblocklist
-           (textblock
-            :text \"a\"
-            :startpos 3
-            :endpos 3)
-           (textblock
-            :text \",\"
-            :startpos 4
-            :endpos 4
-            :delim
-             (copy delimcomma
-              :pos 0))
-           (textblock
-            :text \"b\"
-            :startpos 5
-            :endpos 5)))
-        (textblock
-         :text \",\"
-         :startpos 7
-         :endpos 7
-         :delim
-          (copy delimcomma
-           :pos)))))))
- (textblock-parse-one
-  (textblock
-   :text \"{c d}>\"
-   :startpos 8
-   :endpos 13
-   :delim
-    (delim
-     :delimlist delimlisttest2)
-   :close
-    (copy delimclose
-     :starttext \">\")
-   :parent
-    (textblock
-     :text \"<{a,b},{c d}>\"
-     :startpos 1
-     :endpos 13
-     :delim
-      (copy delimbracketangle
-       :delimlist delimlisttest1)
-     :parent
-      (textblock
-       :text \"<{a,b},{c d}>\"
-       :startpos 1
-       :endpos 13)
-     :children
-      (textblocklist
-       (textblock
-        :text \"{a,b}\"
-        :startpos 2
-        :endpos 6
-        :delim
-         (copy delimbracketcurly
-          :pos 0)
-        :children
-         (textblocklist
-          (textblock
-           :text \"a\"
-           :startpos 3
-           :endpos 3)
-          (textblock
-           :text \",\"
-           :startpos 4
-           :endpos 4
-           :delim
-            (copy delimcomma
-             :pos 0))
-          (textblock
-           :text \"b\"
-           :startpos 5
-           :endpos 5)))
-       (textblock
-        :text \",\"
-        :startpos 7
-        :endpos 7
-        :delim
-         (copy delimcomma
-          :pos 0)))))))"
-        :testpkg "vx/data/textblock"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (vx/data/textblock/textblock
-            :startpos 7
-            :endpos 7
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest3)
-            :parent
-             (vx/data/textblock/textblock
-              :text "c d}>"
-              :startpos 9
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext "}")
-              :parent
-               (vx/data/textblock/textblock
-                :text "{c d}>"
-                :startpos 8
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">"
-                    :delimlist vx/data/textblock/delimlisttest1)
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)
-                  :children
-                   (vx/data/textblock/textblocklist
-                    (vx/data/textblock/textblock
-                     :text "{a,b}"
-                     :startpos 2
-                     :endpos 6
-                     :delim
-                      (vx/data/textblock/delim
-                       :name "delimbracketcurly"
-                       :starttext "{"
-                       :endtext "}")
-                     :children
-                      (vx/data/textblock/textblocklist
-                       (vx/data/textblock/textblock
-                        :text "a"
-                        :startpos 3
-                        :endpos 3)
-                       (vx/data/textblock/textblock
-                        :text ","
-                        :startpos 4
-                        :endpos 4
-                        :delim
-                         (vx/data/textblock/delim
-                          :name "delimcomma"
-                          :starttext ","))
-                       (vx/data/textblock/textblock
-                        :text "b"
-                        :startpos 5
-                        :endpos 5)))
-                    (vx/data/textblock/textblock
-                     :text ","
-                     :startpos 7
-                     :endpos 7
-                     :delim
-                      (vx/data/textblock/delim
-                       :name "delimcomma"
-                       :starttext ",")))))))
-          :actual
-           (vx/data/textblock/textblock
-            :startpos 7
-            :endpos 7
-            :delim
-             (vx/data/textblock/delim
-              :delimlist vx/data/textblock/delimlisttest3)
-            :parent
-             (vx/data/textblock/textblock
-              :text "c d}>"
-              :startpos 9
-              :endpos 13
-              :delim
-               (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext "}")
-              :parent
-               (vx/data/textblock/textblock
-                :text "{c d}>"
-                :startpos 8
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">"
-                    :delimlist vx/data/textblock/delimlisttest1)
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)
-                  :children
-                   (vx/data/textblock/textblocklist
-                    (vx/data/textblock/textblock
-                     :text "{a,b}"
-                     :startpos 2
-                     :endpos 6
-                     :delim
-                      (vx/data/textblock/delim
-                       :name "delimbracketcurly"
-                       :starttext "{"
-                       :endtext "}")
-                     :children
-                      (vx/data/textblock/textblocklist
-                       (vx/data/textblock/textblock
-                        :text "a"
-                        :startpos 3
-                        :endpos 3)
-                       (vx/data/textblock/textblock
-                        :text ","
-                        :startpos 4
-                        :endpos 4
-                        :delim
-                         (vx/data/textblock/delim
-                          :name "delimcomma"
-                          :starttext ","))
-                       (vx/data/textblock/textblock
-                        :text "b"
-                        :startpos 5
-                        :endpos 5)))
-                    (vx/data/textblock/textblock
-                     :text ","
-                     :startpos 7
-                     :endpos 7
-                     :delim
-                      (vx/data/textblock/delim
-                       :name "delimcomma"
-                       :starttext ",")))))))))
-       (vx/test/testdescribe
-        :describename
-         "(test
- (textblock
   :text \"c d}>\"
   :startpos 9
   :endpos 13
@@ -7397,79 +6760,61 @@
              :pos 0))))))
  (textblock-parse-one
   (textblock
-   :startpos 7
-   :endpos 7
+   :text \"{c d}>\"
+   :startpos 8
+   :endpos 13
    :delim
     (delim
-     :delimlist delimlisttest3)
-   :parent
-    (textblock
-     :text \"c d}>\"
-     :startpos 9
-     :endpos 13
-     :delim
-      (delim
-       :delimlist delimlisttest3)
+     :delimlist delimlisttest2)
    :close
     (copy delimclose
-     :starttext \"}\")
+     :starttext \">\")
    :parent
     (textblock
-     :text \"{c d}>\"
-     :startpos 8
+     :text \"<{a,b},{c d}>\"
+     :startpos 1
      :endpos 13
      :delim
-      (copy delimbracketcurly
-       :delimlist delimlisttest2)
-     :close
-      (copy delimclose
-       :starttext \">\")
+      (copy delimbracketangle
+       :delimlist delimlisttest1)
      :parent
       (textblock
        :text \"<{a,b},{c d}>\"
        :startpos 1
-       :endpos 13
-       :delim
-        (copy delimbracketangle
-         :delimlist delimlisttest1)
-       :parent
-        (textblock
-         :text \"<{a,b},{c d}>\"
-         :startpos 1
-         :endpos 13)
-       :children
-        (textblocklist
-         (textblock
-          :text \"{a,b}\"
-          :startpos 2
-          :endpos 6
-          :delim
-           (copy delimbracketcurly
-            :pos 0)
-          :children
-           (textblocklist
-            (textblock
-             :text \"a\"
-             :startpos 3
-             :endpos 3)
-            (textblock
-             :text \",\"
-             :startpos 4
-             :endpos 4
-             :delim
-              (copy delimcomma
-               :pos 0))
-            (textblock
-             :text \"b\"
-             :startpos 5
-             :endpos 5)))
-         (textblock
-          :text \",\"
-          :startpos 7
-          :endpos 7
-          :delim
-           (copy delimcomma
-            :pos)))))))))"
+       :endpos 13)
+     :children
+      (textblocklist
+       (textblock
+        :text \"{a,b}\"
+        :startpos 2
+        :endpos 6
+        :delim
+         (copy delimbracketcurly
+          :pos 0)
+        :children
+         (textblocklist
+          (textblock
+           :text \"a\"
+           :startpos 3
+           :endpos 3)
+          (textblock
+           :text \",\"
+           :startpos 4
+           :endpos 4
+           :delim
+            (copy delimcomma
+             :pos 0))
+          (textblock
+           :text \"b\"
+           :startpos 5
+           :endpos 5)))
+       (textblock
+        :text \",\"
+        :startpos 7
+        :endpos 7
+        :delim
+         (copy delimcomma
+          :pos 0)))))))"
         :testpkg "vx/data/textblock"
         :testresult
          (vx/test/testresult
@@ -11473,34 +10818,135 @@
         :describename
          "(test
  (textblock
-  :text \"\"
+  :text \"c}\"
+  :startpos 4
+  :endpos 5
+  :close
+   (copy delimclose
+    :starttext \"}\")
+  :parent
+   (textblock
+    :text \"{c}\"
+    :startpos 3
+    :endpos 5
+    :delim
+     (copy delimbracketcurly
+      :pos 0)
+    :parent
+     (textblock
+      :text \"ab{c}\"
+      :startpos 1
+      :endpos 5
+      :children
+       (textblocklist
+        (textblock
+         :text \"ab\"
+         :startpos 1
+         :endpos 2)))))
+ (textblock<-open-textblock
+  (copy delimbracketcurly
+   :pos 3)
+  (textblock
+   :text \"ab{c}\"
+   :startpos 1
+   :endpos 5
+   :delim delimbracketcurly
+   :parent
+    (textblock
+     :text \"ab{c}\"
+     :startpos 1
+     :endpos 5))))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text "c}"
+            :startpos 4
+            :endpos 5
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext "}")
+            :parent
+             (vx/data/textblock/textblock
+              :text "{c}"
+              :startpos 3
+              :endpos 5
+              :delim
+               (vx/data/textblock/delim
+                :name "delimbracketcurly"
+                :starttext "{"
+                :endtext "}")
+              :parent
+               (vx/data/textblock/textblock
+                :text "ab{c}"
+                :startpos 1
+                :endpos 5
+                :children
+                 (vx/data/textblock/textblocklist
+                  (vx/data/textblock/textblock
+                   :text "ab"
+                   :startpos 1
+                   :endpos 2)))))
+          :actual
+           (vx/data/textblock/textblock
+            :text "c}"
+            :startpos 4
+            :endpos 5
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext "}")
+            :parent
+             (vx/data/textblock/textblock
+              :text "{c}"
+              :startpos 3
+              :endpos 5
+              :delim
+               (vx/data/textblock/delim
+                :name "delimbracketcurly"
+                :starttext "{"
+                :endtext "}")
+              :parent
+               (vx/data/textblock/textblock
+                :text "ab{c}"
+                :startpos 1
+                :endpos 5
+                :children
+                 (vx/data/textblock/textblocklist
+                  (vx/data/textblock/textblock
+                   :text "ab"
+                   :startpos 1
+                   :endpos 2)))))))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :text \"{a,b},{c d}>\"
+  :startpos 2
+  :endpos 13
   :delim
    (delim
     :delimlist delimlisttest2)
+  :close
+   (copy delimclose
+    :starttext \">\")
   :parent
    (textblock
-    :text \"{a,b},{c d}>\"
-    :startpos 2
+    :text \"<{a,b},{c d}>\"
+    :startpos 1
     :endpos 13
     :delim
-     (delim
-      :delimlist delimlisttest2)
-    :close
-     (copy delimclose
-      :starttext \">\")
+     (copy delimbracketangle
+      :delimlist delimlisttest1)
     :parent
      (textblock
       :text \"<{a,b},{c d}>\"
       :startpos 1
-      :endpos 13
-      :delim
-       (copy delimbracketangle
-        :delimlist delimlisttest1)
-      :parent
-       (textblock
-        :text \"<{a,b},{c d}>\"
-        :startpos 1
-        :endpos 13))))
+      :endpos 13)))
  (textblock<-open-textblock
   (copy delimtest2
    :pos 1)
@@ -11521,114 +10967,97 @@
           :passfail true
           :expected
            (vx/data/textblock/textblock
+            :text "{a,b},{c d}>"
+            :startpos 2
+            :endpos 13
             :delim
              (vx/data/textblock/delim
               :delimlist vx/data/textblock/delimlisttest2)
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext ">")
             :parent
              (vx/data/textblock/textblock
-              :text "{a,b},{c d}>"
-              :startpos 2
+              :text "<{a,b},{c d}>"
+              :startpos 1
               :endpos 13
               :delim
                (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest2)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext ">")
+                :name "delimbracketangle"
+                :starttext "<"
+                :endtext ">"
+                :delimlist vx/data/textblock/delimlisttest1)
               :parent
                (vx/data/textblock/textblock
                 :text "<{a,b},{c d}>"
                 :startpos 1
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketangle"
-                  :starttext "<"
-                  :endtext ">"
-                  :delimlist vx/data/textblock/delimlisttest1)
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13))))
+                :endpos 13)))
           :actual
            (vx/data/textblock/textblock
+            :text "{a,b},{c d}>"
+            :startpos 2
+            :endpos 13
             :delim
              (vx/data/textblock/delim
               :delimlist vx/data/textblock/delimlisttest2)
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext ">")
             :parent
              (vx/data/textblock/textblock
-              :text "{a,b},{c d}>"
-              :startpos 2
+              :text "<{a,b},{c d}>"
+              :startpos 1
               :endpos 13
               :delim
                (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest2)
-              :close
-               (vx/data/textblock/delim
-                :name "delimclose"
-                :starttext ">")
+                :name "delimbracketangle"
+                :starttext "<"
+                :endtext ">"
+                :delimlist vx/data/textblock/delimlisttest1)
               :parent
                (vx/data/textblock/textblock
                 :text "<{a,b},{c d}>"
                 :startpos 1
-                :endpos 13
-                :delim
-                 (vx/data/textblock/delim
-                  :name "delimbracketangle"
-                  :starttext "<"
-                  :endtext ">"
-                  :delimlist vx/data/textblock/delimlisttest1)
-                :parent
-                 (vx/data/textblock/textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13))))))
+                :endpos 13)))))
        (vx/test/testdescribe
         :describename
          "(test
  (textblock
-  :startpos 1
-  :endpos 1
+  :text \"a,b},{c d}>\"
+  :startpos 3
+  :endpos 13
   :delim
    (delim
     :delimlist delimlisttest3)
+  :close
+   (copy delimclose
+    :starttext \"}\")
   :parent
    (textblock
-    :text \"a,b},{c d}>\"
-    :startpos 3
+    :text \"{a,b},{c d}>\"
+    :startpos 2
     :endpos 13
     :delim
-     (delim
-      :delimlist delimlisttest3)
+     (copy delimbracketcurly
+      :delimlist delimlisttest2)
     :close
      (copy delimclose
-      :starttext \"}\")
+      :starttext \">\")
     :parent
      (textblock
-      :text \"{a,b},{c d}>\"
-      :startpos 2
+      :text \"<{a,b},{c d}>\"
+      :startpos 1
       :endpos 13
       :delim
-       (copy delimbracketcurly
-        :delimlist delimlisttest2)
-      :close
-       (copy delimclose
-        :starttext \">\")
+       (copy delimbracketangle
+        :pos 0)
       :parent
        (textblock
         :text \"<{a,b},{c d}>\"
         :startpos 1
-        :endpos 13
-        :delim
-         (copy delimbracketangle
-          :pos 0)
-        :parent
-         (textblock
-          :text \"<{a,b},{c d}>\"
-          :startpos 1
-          :endpos 13)))))
+        :endpos 13))))
  (textblock<-open-textblock
   (copy delimtest3
    :pos 1)
@@ -11662,102 +11091,88 @@
           :passfail true
           :expected
            (vx/data/textblock/textblock
-            :startpos 1
-            :endpos 1
+            :text "a,b},{c d}>"
+            :startpos 3
+            :endpos 13
             :delim
              (vx/data/textblock/delim
               :delimlist vx/data/textblock/delimlisttest3)
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext "}")
             :parent
              (vx/data/textblock/textblock
-              :text "a,b},{c d}>"
-              :startpos 3
+              :text "{a,b},{c d}>"
+              :startpos 2
               :endpos 13
               :delim
                (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
+                :name "delimbracketcurly"
+                :starttext "{"
+                :endtext "}"
+                :delimlist vx/data/textblock/delimlisttest2)
               :close
                (vx/data/textblock/delim
                 :name "delimclose"
-                :starttext "}")
+                :starttext ">")
               :parent
                (vx/data/textblock/textblock
-                :text "{a,b},{c d}>"
-                :startpos 2
+                :text "<{a,b},{c d}>"
+                :startpos 1
                 :endpos 13
                 :delim
                  (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
+                  :name "delimbracketangle"
+                  :starttext "<"
+                  :endtext ">")
                 :parent
                  (vx/data/textblock/textblock
                   :text "<{a,b},{c d}>"
                   :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">")
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)))))
+                  :endpos 13))))
           :actual
            (vx/data/textblock/textblock
-            :startpos 1
-            :endpos 1
+            :text "a,b},{c d}>"
+            :startpos 3
+            :endpos 13
             :delim
              (vx/data/textblock/delim
               :delimlist vx/data/textblock/delimlisttest3)
+            :close
+             (vx/data/textblock/delim
+              :name "delimclose"
+              :starttext "}")
             :parent
              (vx/data/textblock/textblock
-              :text "a,b},{c d}>"
-              :startpos 3
+              :text "{a,b},{c d}>"
+              :startpos 2
               :endpos 13
               :delim
                (vx/data/textblock/delim
-                :delimlist vx/data/textblock/delimlisttest3)
+                :name "delimbracketcurly"
+                :starttext "{"
+                :endtext "}"
+                :delimlist vx/data/textblock/delimlisttest2)
               :close
                (vx/data/textblock/delim
                 :name "delimclose"
-                :starttext "}")
+                :starttext ">")
               :parent
                (vx/data/textblock/textblock
-                :text "{a,b},{c d}>"
-                :startpos 2
+                :text "<{a,b},{c d}>"
+                :startpos 1
                 :endpos 13
                 :delim
                  (vx/data/textblock/delim
-                  :name "delimbracketcurly"
-                  :starttext "{"
-                  :endtext "}"
-                  :delimlist vx/data/textblock/delimlisttest2)
-                :close
-                 (vx/data/textblock/delim
-                  :name "delimclose"
-                  :starttext ">")
+                  :name "delimbracketangle"
+                  :starttext "<"
+                  :endtext ">")
                 :parent
                  (vx/data/textblock/textblock
                   :text "<{a,b},{c d}>"
                   :startpos 1
-                  :endpos 13
-                  :delim
-                   (vx/data/textblock/delim
-                    :name "delimbracketangle"
-                    :starttext "<"
-                    :endtext ">")
-                  :parent
-                   (vx/data/textblock/textblock
-                    :text "<{a,b},{c d}>"
-                    :startpos 1
-                    :endpos 13)))))))))
+                  :endpos 13))))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/data/textblock"
@@ -12699,17 +12114,16 @@
       :textblock-addchild<-textblock-find-child 0
       :textblock-delimnotfound 4
       :textblock-findparent<-textblock 0
-      :textblock-groupby<-textblock-delim 0
       :textblock-init 1
       :textblock-parse 1
-      :textblock-parse-one 24
+      :textblock-parse-one 21
       :textblock-parse<-string-delim 0
       :textblock-replace<-textblock-find-replace 0
       :textblock-startleft<-string-delim-offset 1
       :textblock-startright<-string-delim-offset 2
       :textblock<-close-textblock 2
       :textblock<-empty-textblock 0
-      :textblock<-open-textblock 2
+      :textblock<-open-textblock 3
       :textblock<-single-textblock 3
       :textblock<-string-delim 1
       :textblock<-textblock-delim 0
@@ -12727,31 +12141,31 @@
      (vx/test/testcoveragenums
       :pct 3
       :tests 1
-      :total 27)
+      :total 26)
     :bigotimenums
      (vx/test/testcoveragenums
       :pct 3
       :tests 1
-      :total 27)
+      :total 26)
     :constnums
      (vx/test/testcoveragenums
       :total 22)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 53
-      :total 53)
+      :tests 52
+      :total 52)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 62
+      :pct 65
       :tests 17
-      :total 27)
+      :total 26)
     :testpkg "vx/data/textblock"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 33
+      :pct 34
       :tests 18
-      :total 53)
+      :total 52)
     :typenums
      (vx/test/testcoveragenums
       :pct 25
@@ -12842,10 +12256,7 @@
      :text \"
   \"
      :startpos 6
-     :endpos 8
-     :delim
-      (copy tb/delimwhitespace
-       :pos 0))
+     :endpos 8)
     (tb/textblock
      :text \"<tag1>\"
      :startpos 9
@@ -12863,10 +12274,7 @@
      :text \"
     \"
      :startpos 15
-     :endpos 19
-     :delim
-      (copy tb/delimwhitespace
-       :pos 0))
+     :endpos 19)
     (tb/textblock
      :text \"<tag2 prop1=\\"val1\\" prop2=\\"val2\\" />\"
      :startpos 20
@@ -12957,10 +12365,7 @@
      :text \"
   \"
      :startpos 54
-     :endpos 56
-     :delim
-      (copy tb/delimwhitespace
-       :pos 0))
+     :endpos 56)
     (tb/textblock
      :text \"</tag1>\"
      :startpos 57
@@ -12978,10 +12383,7 @@
      :text \"
 \"
      :startpos 64
-     :endpos 64
-     :delim
-      (copy tb/delimwhitespace
-       :pos 0))
+     :endpos 64)
     (tb/textblock
      :text \"</doc>\"
      :startpos 65
@@ -13038,11 +12440,7 @@
                 "
   "
                :startpos 6
-               :endpos 8
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 8)
               (vx/data/textblock/textblock
                :text "<tag1>"
                :startpos 9
@@ -13063,11 +12461,7 @@
                 "
     "
                :startpos 15
-               :endpos 19
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 19)
               (vx/data/textblock/textblock
                :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
                :startpos 20
@@ -13170,11 +12564,7 @@
                 "
   "
                :startpos 54
-               :endpos 56
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 56)
               (vx/data/textblock/textblock
                :text "</tag1>"
                :startpos 57
@@ -13195,11 +12585,7 @@
                 "
 "
                :startpos 64
-               :endpos 64
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 64)
               (vx/data/textblock/textblock
                :text "</doc>"
                :startpos 65
@@ -13247,11 +12633,7 @@
                 "
   "
                :startpos 6
-               :endpos 8
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 8)
               (vx/data/textblock/textblock
                :text "<tag1>"
                :startpos 9
@@ -13272,11 +12654,7 @@
                 "
     "
                :startpos 15
-               :endpos 19
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 19)
               (vx/data/textblock/textblock
                :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
                :startpos 20
@@ -13379,11 +12757,7 @@
                 "
   "
                :startpos 54
-               :endpos 56
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 56)
               (vx/data/textblock/textblock
                :text "</tag1>"
                :startpos 57
@@ -13404,11 +12778,7 @@
                 "
 "
                :startpos 64
-               :endpos 64
-               :delim
-                (vx/data/textblock/delim
-                 :name "delimwhitespace"
-                 :starttext ":whitespace"))
+               :endpos 64)
               (vx/data/textblock/textblock
                :text "</doc>"
                :startpos 65

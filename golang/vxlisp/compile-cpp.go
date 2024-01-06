@@ -1197,7 +1197,7 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 	specialfirst := ""
 	specialheader := ""
 	specialbody := ""
-	extratext, ok := prj.maptext[pkg.name+"_cpp.txt"]
+	extratext, ok := prj.mapnative[pkg.name+"_cpp.txt"]
 	if ok {
 		delimheaderfirst := "// :headerfirst\n"
 		delimheadertype := "// :headertype\n"

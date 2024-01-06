@@ -675,7 +675,6 @@ export default class vx_data_xml {
       ":delimlist",
       vx_core.f_new(
         vx_data_textblock.t_delimlist,
-        vx_data_textblock.c_delimwhitespace,
         vx_data_xml.c_delimxmlcomment,
         vx_data_xml.c_delimxmlcdata,
         vx_core.f_copy(

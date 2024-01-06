@@ -498,46 +498,49 @@ func ScopeFromListFuncArg(listarg []vxarg) vxscope {
 }
 
 func StringFromFunc(fnc *vxfunc) string {
-	return StringFromFuncIndent(fnc, " ")
+	return StringFromFuncIndent(fnc, 0)
 }
 
-func StringFromFuncIndent(fnc *vxfunc, indent string) string {
+func StringFromFuncIndent(fnc *vxfunc, indent int) string {
 	output := ""
-	if len(indent) > 30 {
+	if indent > 30 {
 		output += "..."
 	} else {
-		lineindent := "\n" + indent
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
 		output += "" +
-			"(func" +
-			lineindent + ":name  " + fnc.name +
-			lineindent + ":alias " + fnc.alias +
-			lineindent + ":pkg   " + fnc.pkgname
+			lineindent + "(func" +
+			lineindent + " :name  " + fnc.name +
+			lineindent + " :alias " + fnc.alias +
+			lineindent + " :pkg   " + fnc.pkgname
 		if fnc.idx > 0 {
-			output += lineindent + ":idx   " + StringFromInt(fnc.idx)
+			output += lineindent + " :idx   " + StringFromInt(fnc.idx)
 		}
 		if fnc.vxtype.name != "" {
-			output += lineindent + ":type  " + NameFromType(fnc.vxtype)
+			output += lineindent + " :type  " + NameFromType(fnc.vxtype)
 		}
 		if fnc.async {
-			output += lineindent + ":async " + StringFromBoolean(fnc.async)
+			output += lineindent + " :async " + StringFromBoolean(fnc.async)
 		}
 		if fnc.isgeneric {
-			output += lineindent + ":isgeneric " + StringFromBoolean(fnc.isgeneric)
+			output += lineindent + " :isgeneric " + StringFromBoolean(fnc.isgeneric)
 		}
 		if fnc.generictype != nil {
-			output += lineindent + ":generictype " + NameFromType(fnc.generictype)
+			output += lineindent + " :generictype " + NameFromType(fnc.generictype)
 		}
 		if len(fnc.mapgeneric) > 0 {
-			output += lineindent + ":genericmap " + ListNameFromMapType(fnc.mapgeneric)
+			output += lineindent + " :genericmap " + ListNameFromMapType(fnc.mapgeneric)
 		}
 		if len(fnc.listarg) > 0 {
-			output += lineindent + ":args " + StringFromListArgIndent(fnc.listarg, indent+" ")
+			output += lineindent + " :args " + StringFromListArgIndent(fnc.listarg, indent+2)
 		}
 		if fnc.value.code != "" {
-			output += lineindent + ":value " + StringFromValueIndent(fnc.value, indent+" ")
+			output += lineindent + " :value " + StringFromValueIndent(fnc.value, indent+2)
 		}
 		if len(fnc.listtestvalue) > 0 {
-			output += lineindent + ":test " + StringFromListValueIndent(fnc.listtestvalue, indent+" ")
+			output += lineindent + " :test " + StringFromListValueIndent(fnc.listtestvalue, indent+2)
 		}
 		output += ")"
 	}
@@ -545,16 +548,19 @@ func StringFromFuncIndent(fnc *vxfunc, indent string) string {
 }
 
 func StringFromListFunc(listfunc []*vxfunc) string {
-	return StringFromListFuncIndent(listfunc, "")
+	return StringFromListFuncIndent(listfunc, 0)
 }
 
-func StringFromListFuncIndent(listfunc []*vxfunc, indent string) string {
+func StringFromListFuncIndent(listfunc []*vxfunc, indent int) string {
 	output := ""
 	if len(listfunc) > 0 {
-		lineindent := "\n" + indent
-		output += "(funclist"
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
+		output += lineindent + "(funclist"
 		for _, fnc := range listfunc {
-			output += lineindent + StringFromFuncIndent(fnc, indent+" ")
+			output += lineindent + StringFromFuncIndent(fnc, indent+2)
 		}
 		output += ")"
 	}

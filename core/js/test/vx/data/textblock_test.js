@@ -26,11 +26,11 @@ export default class vx_data_textblock_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/textblock", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 53, ":total", 53), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 17, ":total", 27), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 52, ":total", 52), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 17, ":total", 26), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 18, ":total", 53), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 34, ":tests", 18, ":total", 52), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4)
     )
   }
@@ -88,17 +88,16 @@ export default class vx_data_textblock_test {
           "textblock-addchild<-textblock-find-child", 0,
           "textblock-delimnotfound", 4,
           "textblock-findparent<-textblock", 0,
-          "textblock-groupby<-textblock-delim", 0,
           "textblock-init", 1,
           "textblock-parse", 1,
-          "textblock-parse-one", 24,
+          "textblock-parse-one", 21,
           "textblock-parse<-string-delim", 0,
           "textblock-replace<-textblock-find-replace", 0,
           "textblock-startleft<-string-delim-offset", 1,
           "textblock-startright<-string-delim-offset", 2,
           "textblock<-close-textblock", 2,
           "textblock<-empty-textblock", 0,
-          "textblock<-open-textblock", 2,
+          "textblock<-open-textblock", 3,
           "textblock<-single-textblock", 3,
           "textblock<-string-delim", 1,
           "textblock<-textblock-delim", 0,
@@ -1619,97 +1618,7 @@ export default class vx_data_textblock_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :text \"\"\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock-parse-one\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_data_textblock.t_textblock,
-                ":text",
-                "",
-                ":delim",
-                vx_core.f_new(
-                  vx_data_textblock.t_delim,
-                  ":delimlist",
-                  vx_data_textblock.c_delimlisttest2
-                ),
-                ":parent",
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "{a,b},{c d}>",
-                  ":startpos",
-                  2,
-                  ":endpos",
-                  13,
-                  ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest2
-                  ),
-                  ":close",
-                  vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    ">"
-                  ),
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "<{a,b},{c d}>",
-                    ":startpos",
-                    1,
-                    ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketangle,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest1
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13
-                    )
-                  )
-                )
-              ),
-              vx_data_textblock.f_textblock_parse_one(
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "<{a,b},{c d}>",
-                  ":startpos",
-                  1,
-                  ":endpos",
-                  13,
-                  ":delim",
-                  vx_data_textblock.c_delimtest1,
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "<{a,b},{c d}>",
-                    ":startpos",
-                    1,
-                    ":endpos",
-                    13
-                  )
-                )
-              )
-            )
-          ),
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :text \"{a,b},{c d}>\"\n  :startpos 2\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)))\n (textblock-parse-one\n  (textblock\n   :text \"\"\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :parent\n    (textblock\n     :text \"{a,b},{c d}>\"\n     :startpos 2\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13))))))",
+            ":describename", "(test\n (textblock\n  :text \"{a,b},{c d}>\"\n  :startpos 2\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)))\n (textblock-parse-one\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1764,175 +1673,13 @@ export default class vx_data_textblock_test {
                 vx_core.f_new(
                   vx_data_textblock.t_textblock,
                   ":text",
-                  "",
-                  ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest2
-                  ),
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "{a,b},{c d}>",
-                    ":startpos",
-                    2,
-                    ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_new(
-                      vx_data_textblock.t_delim,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest2
-                    ),
-                    ":close",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      ">"
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketangle,
-                        ":delimlist",
-                        vx_data_textblock.c_delimlisttest1
-                      ),
-                      ":parent",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "<{a,b},{c d}>",
-                        ":startpos",
-                        1,
-                        ":endpos",
-                        13
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          ),
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :startpos 1\n  :endpos 1\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :parent\n   (textblock\n    :text \"a,b},{c d}>\"\n    :startpos 3\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n    :close\n     (copy delimclose\n      :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{a,b},{c d}>\"\n      :startpos 2\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)))))\n (textblock-parse-one\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_data_textblock.t_textblock,
-                ":startpos",
-                1,
-                ":endpos",
-                1,
-                ":delim",
-                vx_core.f_new(
-                  vx_data_textblock.t_delim,
-                  ":delimlist",
-                  vx_data_textblock.c_delimlisttest3
-                ),
-                ":parent",
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "a,b},{c d}>",
+                  "<{a,b},{c d}>",
                   ":startpos",
-                  3,
+                  1,
                   ":endpos",
                   13,
                   ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest3
-                  ),
-                  ":close",
-                  vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    "}"
-                  ),
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "{a,b},{c d}>",
-                    ":startpos",
-                    2,
-                    ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketcurly,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest2
-                    ),
-                    ":close",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      ">"
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketangle,
-                        ":delimlist",
-                        vx_data_textblock.c_delimlisttest1
-                      ),
-                      ":parent",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "<{a,b},{c d}>",
-                        ":startpos",
-                        1,
-                        ":endpos",
-                        13
-                      )
-                    )
-                  )
-                )
-              ),
-              vx_data_textblock.f_textblock_parse_one(
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "{a,b},{c d}>",
-                  ":startpos",
-                  2,
-                  ":endpos",
-                  13,
-                  ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest2
-                  ),
-                  ":close",
-                  vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    ">"
-                  ),
+                  vx_data_textblock.c_delimtest1,
                   ":parent",
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
@@ -1941,23 +1688,7 @@ export default class vx_data_textblock_test {
                     ":startpos",
                     1,
                     ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketangle,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest1
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13
-                    )
+                    13
                   )
                 )
               )
@@ -1965,7 +1696,7 @@ export default class vx_data_textblock_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :text \"a,b},{c d}>\"\n  :startpos 3\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock-parse-one\n  (textblock\n   :startpos 1\n   :endpos 1\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :parent\n    (textblock\n     :text \"a,b},{c d}>\"\n     :startpos 3\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \"}\")\n     :parent\n      (textblock\n       :text \"{a,b},{c d}>\"\n       :startpos 2\n       :endpos 13\n       :delim\n        (copy delimbracketcurly\n         :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)))))))",
+            ":describename", "(test\n (textblock\n  :text \"a,b},{c d}>\"\n  :startpos 3\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock-parse-one\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2041,84 +1772,48 @@ export default class vx_data_textblock_test {
               vx_data_textblock.f_textblock_parse_one(
                 vx_core.f_new(
                   vx_data_textblock.t_textblock,
+                  ":text",
+                  "{a,b},{c d}>",
                   ":startpos",
-                  1,
+                  2,
                   ":endpos",
-                  1,
+                  13,
                   ":delim",
                   vx_core.f_new(
                     vx_data_textblock.t_delim,
                     ":delimlist",
-                    vx_data_textblock.c_delimlisttest3
+                    vx_data_textblock.c_delimlisttest2
+                  ),
+                  ":close",
+                  vx_core.f_copy(
+                    vx_data_textblock.c_delimclose,
+                    ":starttext",
+                    ">"
                   ),
                   ":parent",
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
-                    "a,b},{c d}>",
+                    "<{a,b},{c d}>",
                     ":startpos",
-                    3,
+                    1,
                     ":endpos",
                     13,
                     ":delim",
-                    vx_core.f_new(
-                      vx_data_textblock.t_delim,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest3
-                    ),
-                    ":close",
                     vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      "}"
+                      vx_data_textblock.c_delimbracketangle,
+                      ":delimlist",
+                      vx_data_textblock.c_delimlisttest1
                     ),
                     ":parent",
                     vx_core.f_new(
                       vx_data_textblock.t_textblock,
                       ":text",
-                      "{a,b},{c d}>",
+                      "<{a,b},{c d}>",
                       ":startpos",
-                      2,
+                      1,
                       ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketcurly,
-                        ":delimlist",
-                        vx_data_textblock.c_delimlisttest2
-                      ),
-                      ":close",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimclose,
-                        ":starttext",
-                        ">"
-                      ),
-                      ":parent",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "<{a,b},{c d}>",
-                        ":startpos",
-                        1,
-                        ":endpos",
-                        13,
-                        ":delim",
-                        vx_core.f_copy(
-                          vx_data_textblock.c_delimbracketangle,
-                          ":delimlist",
-                          vx_data_textblock.c_delimlisttest1
-                        ),
-                        ":parent",
-                        vx_core.f_new(
-                          vx_data_textblock.t_textblock,
-                          ":text",
-                          "<{a,b},{c d}>",
-                          ":startpos",
-                          1,
-                          ":endpos",
-                          13
-                        )
-                      )
+                      13
                     )
                   )
                 )
@@ -3878,288 +3573,7 @@ export default class vx_data_textblock_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :startpos 7\n  :endpos 7\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :parent\n   (textblock\n    :text \"c d}>\"\n    :startpos 9\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{c d}>\"\n    :startpos 8\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n           (textblock\n            :text \",\"\n            :startpos 4\n            :endpos 4\n            :delim\n             (copy delimcomma\n              :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))\n        (textblock\n         :text \",\"\n         :startpos 7\n         :endpos 7\n         :delim\n          (copy delimcomma\n           :pos)))))))\n (textblock-parse-one\n  (textblock\n   :text \"{c d}>\"\n   :startpos 8\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0)))))))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_data_textblock.t_textblock,
-                ":startpos",
-                7,
-                ":endpos",
-                7,
-                ":delim",
-                vx_core.f_new(
-                  vx_data_textblock.t_delim,
-                  ":delimlist",
-                  vx_data_textblock.c_delimlisttest3
-                ),
-                ":parent",
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "c d}>",
-                  ":startpos",
-                  9,
-                  ":endpos",
-                  13,
-                  ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest3
-                  ),
-                  ":close",
-                  vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    "}"
-                  ),
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "{c d}>",
-                    ":startpos",
-                    8,
-                    ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketcurly,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest2
-                    ),
-                    ":close",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      ">"
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketangle,
-                        ":delimlist",
-                        vx_data_textblock.c_delimlisttest1
-                      ),
-                      ":parent",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "<{a,b},{c d}>",
-                        ":startpos",
-                        1,
-                        ":endpos",
-                        13
-                      ),
-                      ":children",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblocklist,
-                        vx_core.f_new(
-                          vx_data_textblock.t_textblock,
-                          ":text",
-                          "{a,b}",
-                          ":startpos",
-                          2,
-                          ":endpos",
-                          6,
-                          ":delim",
-                          vx_core.f_copy(
-                            vx_data_textblock.c_delimbracketcurly,
-                            ":pos",
-                            0
-                          ),
-                          ":children",
-                          vx_core.f_new(
-                            vx_data_textblock.t_textblocklist,
-                            vx_core.f_new(
-                              vx_data_textblock.t_textblock,
-                              ":text",
-                              "a",
-                              ":startpos",
-                              3,
-                              ":endpos",
-                              3
-                            ),
-                            vx_core.f_new(
-                              vx_data_textblock.t_textblock,
-                              ":text",
-                              ",",
-                              ":startpos",
-                              4,
-                              ":endpos",
-                              4,
-                              ":delim",
-                              vx_core.f_copy(
-                                vx_data_textblock.c_delimcomma,
-                                ":pos",
-                                0
-                              )
-                            ),
-                            vx_core.f_new(
-                              vx_data_textblock.t_textblock,
-                              ":text",
-                              "b",
-                              ":startpos",
-                              5,
-                              ":endpos",
-                              5
-                            )
-                          )
-                        ),
-                        vx_core.f_new(
-                          vx_data_textblock.t_textblock,
-                          ":text",
-                          ",",
-                          ":startpos",
-                          7,
-                          ":endpos",
-                          7,
-                          ":delim",
-                          vx_core.f_copy(
-                            vx_data_textblock.c_delimcomma,
-                            ":pos"
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              ),
-              vx_data_textblock.f_textblock_parse_one(
-                vx_core.f_new(
-                  vx_data_textblock.t_textblock,
-                  ":text",
-                  "{c d}>",
-                  ":startpos",
-                  8,
-                  ":endpos",
-                  13,
-                  ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest2
-                  ),
-                  ":close",
-                  vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    ">"
-                  ),
-                  ":parent",
-                  vx_core.f_new(
-                    vx_data_textblock.t_textblock,
-                    ":text",
-                    "<{a,b},{c d}>",
-                    ":startpos",
-                    1,
-                    ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketangle,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest1
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13
-                    ),
-                    ":children",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblocklist,
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "{a,b}",
-                        ":startpos",
-                        2,
-                        ":endpos",
-                        6,
-                        ":delim",
-                        vx_core.f_copy(
-                          vx_data_textblock.c_delimbracketcurly,
-                          ":pos",
-                          0
-                        ),
-                        ":children",
-                        vx_core.f_new(
-                          vx_data_textblock.t_textblocklist,
-                          vx_core.f_new(
-                            vx_data_textblock.t_textblock,
-                            ":text",
-                            "a",
-                            ":startpos",
-                            3,
-                            ":endpos",
-                            3
-                          ),
-                          vx_core.f_new(
-                            vx_data_textblock.t_textblock,
-                            ":text",
-                            ",",
-                            ":startpos",
-                            4,
-                            ":endpos",
-                            4,
-                            ":delim",
-                            vx_core.f_copy(
-                              vx_data_textblock.c_delimcomma,
-                              ":pos",
-                              0
-                            )
-                          ),
-                          vx_core.f_new(
-                            vx_data_textblock.t_textblock,
-                            ":text",
-                            "b",
-                            ":startpos",
-                            5,
-                            ":endpos",
-                            5
-                          )
-                        )
-                      ),
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        ",",
-                        ":startpos",
-                        7,
-                        ":endpos",
-                        7,
-                        ":delim",
-                        vx_core.f_copy(
-                          vx_data_textblock.c_delimcomma,
-                          ":pos",
-                          0
-                        )
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          ),
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :text \"c d}>\"\n  :startpos 9\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5)))\n          (textblock\n           :text \",\"\n           :startpos 7\n           :endpos 7\n           :delim\n            (copy delimcomma\n             :pos 0))))))\n (textblock-parse-one\n  (textblock\n   :startpos 7\n   :endpos 7\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :parent\n    (textblock\n     :text \"c d}>\"\n     :startpos 9\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{c d}>\"\n     :startpos 8\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos)))))))))",
+            ":describename", "(test\n (textblock\n  :text \"c d}>\"\n  :startpos 9\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5)))\n          (textblock\n           :text \",\"\n           :startpos 7\n           :endpos 7\n           :delim\n            (copy delimcomma\n             :pos 0))))))\n (textblock-parse-one\n  (textblock\n   :text \"{c d}>\"\n   :startpos 8\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0)))))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -4306,82 +3720,65 @@ export default class vx_data_textblock_test {
               vx_data_textblock.f_textblock_parse_one(
                 vx_core.f_new(
                   vx_data_textblock.t_textblock,
+                  ":text",
+                  "{c d}>",
                   ":startpos",
-                  7,
+                  8,
                   ":endpos",
-                  7,
+                  13,
                   ":delim",
                   vx_core.f_new(
                     vx_data_textblock.t_delim,
                     ":delimlist",
-                    vx_data_textblock.c_delimlisttest3
+                    vx_data_textblock.c_delimlisttest2
+                  ),
+                  ":close",
+                  vx_core.f_copy(
+                    vx_data_textblock.c_delimclose,
+                    ":starttext",
+                    ">"
                   ),
                   ":parent",
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
-                    "c d}>",
+                    "<{a,b},{c d}>",
                     ":startpos",
-                    9,
+                    1,
                     ":endpos",
                     13,
                     ":delim",
-                    vx_core.f_new(
-                      vx_data_textblock.t_delim,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest3
-                    ),
-                    ":close",
                     vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      "}"
+                      vx_data_textblock.c_delimbracketangle,
+                      ":delimlist",
+                      vx_data_textblock.c_delimlisttest1
                     ),
                     ":parent",
                     vx_core.f_new(
                       vx_data_textblock.t_textblock,
                       ":text",
-                      "{c d}>",
+                      "<{a,b},{c d}>",
                       ":startpos",
-                      8,
+                      1,
                       ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketcurly,
-                        ":delimlist",
-                        vx_data_textblock.c_delimlisttest2
-                      ),
-                      ":close",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimclose,
-                        ":starttext",
-                        ">"
-                      ),
-                      ":parent",
+                      13
+                    ),
+                    ":children",
+                    vx_core.f_new(
+                      vx_data_textblock.t_textblocklist,
                       vx_core.f_new(
                         vx_data_textblock.t_textblock,
                         ":text",
-                        "<{a,b},{c d}>",
+                        "{a,b}",
                         ":startpos",
-                        1,
+                        2,
                         ":endpos",
-                        13,
+                        6,
                         ":delim",
                         vx_core.f_copy(
-                          vx_data_textblock.c_delimbracketangle,
-                          ":delimlist",
-                          vx_data_textblock.c_delimlisttest1
-                        ),
-                        ":parent",
-                        vx_core.f_new(
-                          vx_data_textblock.t_textblock,
-                          ":text",
-                          "<{a,b},{c d}>",
-                          ":startpos",
-                          1,
-                          ":endpos",
-                          13
+                          vx_data_textblock.c_delimbracketcurly,
+                          ":pos",
+                          0
                         ),
                         ":children",
                         vx_core.f_new(
@@ -4389,69 +3786,51 @@ export default class vx_data_textblock_test {
                           vx_core.f_new(
                             vx_data_textblock.t_textblock,
                             ":text",
-                            "{a,b}",
+                            "a",
                             ":startpos",
-                            2,
+                            3,
                             ":endpos",
-                            6,
-                            ":delim",
-                            vx_core.f_copy(
-                              vx_data_textblock.c_delimbracketcurly,
-                              ":pos",
-                              0
-                            ),
-                            ":children",
-                            vx_core.f_new(
-                              vx_data_textblock.t_textblocklist,
-                              vx_core.f_new(
-                                vx_data_textblock.t_textblock,
-                                ":text",
-                                "a",
-                                ":startpos",
-                                3,
-                                ":endpos",
-                                3
-                              ),
-                              vx_core.f_new(
-                                vx_data_textblock.t_textblock,
-                                ":text",
-                                ",",
-                                ":startpos",
-                                4,
-                                ":endpos",
-                                4,
-                                ":delim",
-                                vx_core.f_copy(
-                                  vx_data_textblock.c_delimcomma,
-                                  ":pos",
-                                  0
-                                )
-                              ),
-                              vx_core.f_new(
-                                vx_data_textblock.t_textblock,
-                                ":text",
-                                "b",
-                                ":startpos",
-                                5,
-                                ":endpos",
-                                5
-                              )
-                            )
+                            3
                           ),
                           vx_core.f_new(
                             vx_data_textblock.t_textblock,
                             ":text",
                             ",",
                             ":startpos",
-                            7,
+                            4,
                             ":endpos",
-                            7,
+                            4,
                             ":delim",
                             vx_core.f_copy(
                               vx_data_textblock.c_delimcomma,
-                              ":pos"
+                              ":pos",
+                              0
                             )
+                          ),
+                          vx_core.f_new(
+                            vx_data_textblock.t_textblock,
+                            ":text",
+                            "b",
+                            ":startpos",
+                            5,
+                            ":endpos",
+                            5
                           )
+                        )
+                      ),
+                      vx_core.f_new(
+                        vx_data_textblock.t_textblock,
+                        ":text",
+                        ",",
+                        ":startpos",
+                        7,
+                        ":endpos",
+                        7,
+                        ":delim",
+                        vx_core.f_copy(
+                          vx_data_textblock.c_delimcomma,
+                          ":pos",
+                          0
                         )
                       )
                     )
@@ -8259,40 +7638,134 @@ export default class vx_data_textblock_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :text \"\"\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock<-open-textblock\n  (copy delimtest2\n   :pos 1)\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
+            ":describename", "(test\n (textblock\n  :text \"c}\"\n  :startpos 4\n  :endpos 5\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{c}\"\n    :startpos 3\n    :endpos 5\n    :delim\n     (copy delimbracketcurly\n      :pos 0)\n    :parent\n     (textblock\n      :text \"ab{c}\"\n      :startpos 1\n      :endpos 5\n      :children\n       (textblocklist\n        (textblock\n         :text \"ab\"\n         :startpos 1\n         :endpos 2)))))\n (textblock<-open-textblock\n  (copy delimbracketcurly\n   :pos 3)\n  (textblock\n   :text \"ab{c}\"\n   :startpos 1\n   :endpos 5\n   :delim delimbracketcurly\n   :parent\n    (textblock\n     :text \"ab{c}\"\n     :startpos 1\n     :endpos 5))))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_data_textblock.t_textblock,
                 ":text",
-                "",
+                "c}",
+                ":startpos",
+                4,
+                ":endpos",
+                5,
+                ":close",
+                vx_core.f_copy(
+                  vx_data_textblock.c_delimclose,
+                  ":starttext",
+                  "}"
+                ),
+                ":parent",
+                vx_core.f_new(
+                  vx_data_textblock.t_textblock,
+                  ":text",
+                  "{c}",
+                  ":startpos",
+                  3,
+                  ":endpos",
+                  5,
+                  ":delim",
+                  vx_core.f_copy(
+                    vx_data_textblock.c_delimbracketcurly,
+                    ":pos",
+                    0
+                  ),
+                  ":parent",
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "ab{c}",
+                    ":startpos",
+                    1,
+                    ":endpos",
+                    5,
+                    ":children",
+                    vx_core.f_new(
+                      vx_data_textblock.t_textblocklist,
+                      vx_core.f_new(
+                        vx_data_textblock.t_textblock,
+                        ":text",
+                        "ab",
+                        ":startpos",
+                        1,
+                        ":endpos",
+                        2
+                      )
+                    )
+                  )
+                )
+              ),
+              vx_data_textblock.f_textblock_from_open_textblock(
+                vx_core.f_copy(
+                  vx_data_textblock.c_delimbracketcurly,
+                  ":pos",
+                  3
+                ),
+                vx_core.f_new(
+                  vx_data_textblock.t_textblock,
+                  ":text",
+                  "ab{c}",
+                  ":startpos",
+                  1,
+                  ":endpos",
+                  5,
+                  ":delim",
+                  vx_data_textblock.c_delimbracketcurly,
+                  ":parent",
+                  vx_core.f_new(
+                    vx_data_textblock.t_textblock,
+                    ":text",
+                    "ab{c}",
+                    ":startpos",
+                    1,
+                    ":endpos",
+                    5
+                  )
+                )
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (textblock\n  :text \"{a,b},{c d}>\"\n  :startpos 2\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)))\n (textblock<-open-textblock\n  (copy delimtest2\n   :pos 1)\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_data_textblock.t_textblock,
+                ":text",
+                "{a,b},{c d}>",
+                ":startpos",
+                2,
+                ":endpos",
+                13,
                 ":delim",
                 vx_core.f_new(
                   vx_data_textblock.t_delim,
                   ":delimlist",
                   vx_data_textblock.c_delimlisttest2
                 ),
+                ":close",
+                vx_core.f_copy(
+                  vx_data_textblock.c_delimclose,
+                  ":starttext",
+                  ">"
+                ),
                 ":parent",
                 vx_core.f_new(
                   vx_data_textblock.t_textblock,
                   ":text",
-                  "{a,b},{c d}>",
+                  "<{a,b},{c d}>",
                   ":startpos",
-                  2,
+                  1,
                   ":endpos",
                   13,
                   ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
-                    ":delimlist",
-                    vx_data_textblock.c_delimlisttest2
-                  ),
-                  ":close",
                   vx_core.f_copy(
-                    vx_data_textblock.c_delimclose,
-                    ":starttext",
-                    ">"
+                    vx_data_textblock.c_delimbracketangle,
+                    ":delimlist",
+                    vx_data_textblock.c_delimlisttest1
                   ),
                   ":parent",
                   vx_core.f_new(
@@ -8302,23 +7775,7 @@ export default class vx_data_textblock_test {
                     ":startpos",
                     1,
                     ":endpos",
-                    13,
-                    ":delim",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketangle,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest1
-                    ),
-                    ":parent",
-                    vx_core.f_new(
-                      vx_data_textblock.t_textblock,
-                      ":text",
-                      "<{a,b},{c d}>",
-                      ":startpos",
-                      1,
-                      ":endpos",
-                      13
-                    )
+                    13
                   )
                 )
               ),
@@ -8354,63 +7811,65 @@ export default class vx_data_textblock_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (textblock\n  :startpos 1\n  :endpos 1\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :parent\n   (textblock\n    :text \"a,b},{c d}>\"\n    :startpos 3\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n    :close\n     (copy delimclose\n      :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{a,b},{c d}>\"\n      :startpos 2\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :pos 0)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)))))\n (textblock<-open-textblock\n  (copy delimtest3\n   :pos 1)\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
+            ":describename", "(test\n (textblock\n  :text \"a,b},{c d}>\"\n  :startpos 3\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :pos 0)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock<-open-textblock\n  (copy delimtest3\n   :pos 1)\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_data_textblock.t_textblock,
+                ":text",
+                "a,b},{c d}>",
                 ":startpos",
-                1,
+                3,
                 ":endpos",
-                1,
+                13,
                 ":delim",
                 vx_core.f_new(
                   vx_data_textblock.t_delim,
                   ":delimlist",
                   vx_data_textblock.c_delimlisttest3
                 ),
+                ":close",
+                vx_core.f_copy(
+                  vx_data_textblock.c_delimclose,
+                  ":starttext",
+                  "}"
+                ),
                 ":parent",
                 vx_core.f_new(
                   vx_data_textblock.t_textblock,
                   ":text",
-                  "a,b},{c d}>",
+                  "{a,b},{c d}>",
                   ":startpos",
-                  3,
+                  2,
                   ":endpos",
                   13,
                   ":delim",
-                  vx_core.f_new(
-                    vx_data_textblock.t_delim,
+                  vx_core.f_copy(
+                    vx_data_textblock.c_delimbracketcurly,
                     ":delimlist",
-                    vx_data_textblock.c_delimlisttest3
+                    vx_data_textblock.c_delimlisttest2
                   ),
                   ":close",
                   vx_core.f_copy(
                     vx_data_textblock.c_delimclose,
                     ":starttext",
-                    "}"
+                    ">"
                   ),
                   ":parent",
                   vx_core.f_new(
                     vx_data_textblock.t_textblock,
                     ":text",
-                    "{a,b},{c d}>",
+                    "<{a,b},{c d}>",
                     ":startpos",
-                    2,
+                    1,
                     ":endpos",
                     13,
                     ":delim",
                     vx_core.f_copy(
-                      vx_data_textblock.c_delimbracketcurly,
-                      ":delimlist",
-                      vx_data_textblock.c_delimlisttest2
-                    ),
-                    ":close",
-                    vx_core.f_copy(
-                      vx_data_textblock.c_delimclose,
-                      ":starttext",
-                      ">"
+                      vx_data_textblock.c_delimbracketangle,
+                      ":pos",
+                      0
                     ),
                     ":parent",
                     vx_core.f_new(
@@ -8420,23 +7879,7 @@ export default class vx_data_textblock_test {
                       ":startpos",
                       1,
                       ":endpos",
-                      13,
-                      ":delim",
-                      vx_core.f_copy(
-                        vx_data_textblock.c_delimbracketangle,
-                        ":pos",
-                        0
-                      ),
-                      ":parent",
-                      vx_core.f_new(
-                        vx_data_textblock.t_textblock,
-                        ":text",
-                        "<{a,b},{c d}>",
-                        ":startpos",
-                        1,
-                        ":endpos",
-                        13
-                      )
+                      13
                     )
                   )
                 )

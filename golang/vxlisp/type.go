@@ -818,28 +818,31 @@ func NameWithoutGenericFromType(typ *vxtype) string {
 }
 
 func StringFromType(typ *vxtype) string {
-	return StringFromTypeIndent(typ, " ")
+	return StringFromTypeIndent(typ, 0)
 }
 
-func StringFromTypeIndent(typ *vxtype, indent string) string {
-	lineindent := "\n" + indent
+func StringFromTypeIndent(typ *vxtype, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
-		"(type" +
-		lineindent + ":name     " + typ.name +
-		lineindent + ":pkgname  " + typ.pkgname +
-		lineindent + ":extends  " + typ.extends
+		lineindent + "(type" +
+		lineindent + " :name     " + typ.name +
+		lineindent + " :pkgname  " + typ.pkgname +
+		lineindent + " :extends  " + typ.extends
 	if typ.isfunc {
-		output += lineindent + ":isfunc " + StringFromBoolean(typ.isfunc)
+		output += lineindent + " :isfunc " + StringFromBoolean(typ.isfunc)
 	}
 	//if typ.signature == nil {
 	//} else if len(typ.signature.vxtypes) > 0 {
 	//	output += lineindent + ":signature " + SignatureToText(typ.signature)
 	//}
 	if len(typ.properties) > 0 {
-		output += lineindent + ":properties " + StringFromListArgIndent(typ.properties, indent+" ")
+		output += lineindent + " :properties " + StringFromListArgIndent(typ.properties, indent+1)
 	}
 	if len(typ.traits) > 0 {
-		output += lineindent + ":traits " + ListNameFromListType(typ.traits)
+		output += lineindent + " :traits " + ListNameFromListType(typ.traits)
 	}
 	if len(typ.allowtypes) > 0 {
 		output += lineindent + ":allowtypes " + ListNameFromListType(typ.allowtypes)
@@ -848,18 +851,21 @@ func StringFromTypeIndent(typ *vxtype, indent string) string {
 		output += lineindent + ":disallowtypes " + ListNameFromListType(typ.disallowtypes)
 	}
 	if len(typ.testvalues) > 0 {
-		output += lineindent + ":testvalues " + StringFromListValueIndent(typ.testvalues, indent+" ")
+		output += lineindent + ":testvalues " + StringFromListValueIndent(typ.testvalues, indent+1)
 	}
 	output += ")"
 	return output
 }
 
-func StringFromListTypeIndent(listtype []*vxtype, indent string) string {
-	lineindent := "\n" + indent
-	output := "(typelist"
+func StringFromListTypeIndent(listtype []*vxtype, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := lineindent + "(typelist"
 	if len(listtype) > 0 {
 		for _, typ := range listtype {
-			output += lineindent + StringFromTypeIndent(typ, indent+" ")
+			output += lineindent + StringFromTypeIndent(typ, indent+1)
 		}
 	}
 	output += ")"
@@ -867,15 +873,18 @@ func StringFromListTypeIndent(listtype []*vxtype, indent string) string {
 }
 
 func StringFromMapType(maptype map[string]*vxtype) string {
-	return StringFromMapTypeIndent(maptype, " ")
+	return StringFromMapTypeIndent(maptype, 0)
 }
 
-func StringFromMapTypeIndent(maptype map[string]*vxtype, indent string) string {
-	lineindent := "\n" + indent
-	output := "(typemap"
+func StringFromMapTypeIndent(maptype map[string]*vxtype, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := lineindent + "(typemap"
 	if len(maptype) > 0 {
 		for key, typ := range maptype {
-			output += lineindent + key + " " + StringFromTypeIndent(typ, indent+" ")
+			output += lineindent + " " + key + " " + StringFromTypeIndent(typ, indent+2)
 		}
 	}
 	output += ")"

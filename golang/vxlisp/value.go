@@ -189,56 +189,62 @@ func ListValueValidateTestFuncs(listvalue []vxvalue, textblock *vxtextblock, pat
 }
 
 func StringFromListValue(listvalue []vxvalue) string {
-	return StringFromListValueIndent(listvalue, "")
+	return StringFromListValueIndent(listvalue, 0)
 }
 
-func StringFromListValueIndent(listvalue []vxvalue, indent string) string {
-	lineindent := "\n" + indent
-	output := "(valuelist"
+func StringFromListValueIndent(listvalue []vxvalue, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := lineindent + "(valuelist"
 	for _, value := range listvalue {
-		output += lineindent + StringFromValueIndent(value, indent+" ")
+		output += lineindent + StringFromValueIndent(value, indent+1)
 	}
 	output += ")"
 	return output
 }
 
 func StringFromValue(value vxvalue) string {
-	return StringFromValueIndent(value, " ")
+	return StringFromValueIndent(value, 0)
 }
 
-func StringFromValueIndent(value vxvalue, indent string) string {
-	lineindent := "\n" + indent
+func StringFromValueIndent(value vxvalue, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
 		"(value" +
-		lineindent + ":code  " + value.code
+		lineindent + " :code  " + value.code
 	if value.name != "" {
-		output += lineindent + ":name  " + value.name
+		output += lineindent + " :name  " + value.name
 	}
 	if value.pkg != "" {
-		output += lineindent + ":pkg   " + value.pkg
+		output += lineindent + " :pkg   " + value.pkg
 	}
 	if value.vxtype == nil {
 	} else if value.vxtype.name != "" {
-		output += lineindent + ":type  " + NameFromType(value.vxtype)
+		output += lineindent + ": type  " + NameFromType(value.vxtype)
 	}
 	if value.generictype.name != "" {
-		output += lineindent + ":generictype " + NameFromType(value.generictype)
+		output += lineindent + ": generictype " + NameFromType(value.generictype)
 	}
 	if value.multi {
-		output += lineindent + ":multi " + StringFromBoolean(value.multi)
+		output += lineindent + " :multi " + StringFromBoolean(value.multi)
 	}
-	output += lineindent + ":value "
+	output += lineindent + " :value "
 	switch value.code {
 	case ":arg":
 		arg := ArgFromValue(value)
-		output += StringFromArgIndent(arg, indent+" ")
+		output += StringFromArgIndent(arg, indent+1)
 	case ":arglist":
 		args := ListArgFromValue(value)
-		output += StringFromListArgIndent(args, indent+" ")
+		output += StringFromListArgIndent(args, indent+1)
 	case ":const":
 		output += NameFromConst(ConstFromValue(value))
 	case ":func":
-		output += StringFromFuncIndent(FuncFromValue(value), indent+" ")
+		output += StringFromFuncIndent(FuncFromValue(value), indent+1)
 	case ":funcref":
 		output += NameFromFunc(FuncFromValue(value))
 	case ":type":

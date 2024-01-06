@@ -417,7 +417,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 	allempty := ""
 	emptytypes := ""
 	pkgname := JsFromName(pkg.name)
-	specialcode := prj.maptext[pkg.name+"_js.txt"]
+	specialcode := prj.mapnative[pkg.name+"_js.txt"]
 	statics := ""
 	constkeys := ListKeyFromMapConst(pkg.mapconst)
 	var constvalues []string

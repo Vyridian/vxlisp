@@ -144,6 +144,7 @@ func ListPackageValidateLibraries(listpackage []*vxpackage, prj *vxproject) ([]*
 	mappackage := MapPackageFromListPackage(listpackage)
 	mapprjlib := MapLibraryFromListLibrary(prj.listlib)
 	for _, pkg := range listpackage {
+		//mapprjlib := MapLibraryFromListLibrary(pkg.project.listlib)
 		listlib := pkg.listlib
 		for _, lib := range listlib {
 			libpath := lib.path
@@ -360,16 +361,20 @@ func PackagePathNameFromName(pkgname string) (string, string) {
 }
 
 func StringFromListPackage(listpackage []*vxpackage) string {
-	return StringFromListPackageIndent(listpackage, " ")
+	return StringFromListPackageIndent(listpackage, 1)
 }
 
-func StringFromListPackageIndent(listpackage []*vxpackage, indent string) string {
+func StringFromListPackageIndent(listpackage []*vxpackage, indent int) string {
 	output := ""
 	if len(listpackage) > 0 {
-		lineindent := "\n" + indent
-		output += "(packagelist"
+		output := ""
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
+		output = lineindent + "(packagelist"
 		for _, pkg := range listpackage {
-			output += lineindent + StringFromPackageIndent(pkg, indent+" ")
+			output += lineindent + StringFromPackageIndent(pkg, indent+1)
 		}
 		output += ")"
 	}
@@ -377,20 +382,23 @@ func StringFromListPackageIndent(listpackage []*vxpackage, indent string) string
 }
 
 func StringFromPackage(pkg *vxpackage) string {
-	return StringFromPackageIndent(pkg, " ")
+	return StringFromPackageIndent(pkg, 1)
 }
 
-func StringFromPackageIndent(pkg *vxpackage, indent string) string {
-	lineindent := "\n" + indent
+func StringFromPackageIndent(pkg *vxpackage, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
-		"(package" +
-		lineindent + ":name  \"" + pkg.name + "\"" +
-		lineindent + ":alias \"" + pkg.alias + "\"" +
-		lineindent + ":doc   \"" + pkg.doc + "\"" +
-		lineindent + ":libs " + StringFromListLibraryIndent(pkg.listlib, indent+" ") +
-		lineindent + ":types " + StringFromListTypeIndent(pkg.listtype, indent+" ") +
-		lineindent + ":consts " + StringFromListConstIndent(pkg.listconst, indent+" ") +
-		lineindent + ":funcs " + StringFromListFuncIndent(pkg.listfunc, indent+" ") +
+		lineindent + "(package" +
+		lineindent + " :name  \"" + pkg.name + "\"" +
+		lineindent + " :alias \"" + pkg.alias + "\"" +
+		lineindent + " :doc   \"" + pkg.doc + "\"" +
+		lineindent + " :libs " + StringFromListLibraryIndent(pkg.listlib, indent+1) +
+		lineindent + " :types " + StringFromListTypeIndent(pkg.listtype, indent+1) +
+		lineindent + " :consts " + StringFromListConstIndent(pkg.listconst, indent+1) +
+		lineindent + " :funcs " + StringFromListFuncIndent(pkg.listfunc, indent+1) +
 		")"
 	StringFromTextblock(pkg.textblock)
 	return output

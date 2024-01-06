@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	"maps"
+)
+
 type vxpath struct {
 	doc  string
 	name string
@@ -19,7 +23,7 @@ type vxproject struct {
 	listpackage []*vxpackage
 	listprjpath []string
 	listproject []*vxproject
-	maptext     map[string]string
+	mapnative   map[string]string
 	textblock   *vxtextblock
 }
 
@@ -220,22 +224,23 @@ func PathFromTextblock(textblock *vxtextblock) (*vxpath, *vxmsgblock) {
 
 func ProjectReadFromFilename(filename string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromFile")
-	var prj = NewProject()
+	var project = NewProject()
 	textblock, msgs := TextblockFromReadFile(filename)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		parseprj, msgs := ProjectFromTextblock(textblock)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		prj = parseprj
+		project = parseprj
 	}
 	filename = StringFromStringBefore(filename, "/project.vxlisp")
-	prj.path = filename
-	return prj, msgblock
+	project.path = filename
+	return project, msgblock
 }
 
 func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 	msgblock := NewMsgBlock("ProjectFromPath")
 	project, msgs := ProjectReadAllFromPath(projectpath)
+	maptext := project.mapnative
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		if len(project.listprjpath) > 0 {
@@ -243,24 +248,31 @@ func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			for _, subprojectpath := range project.listprjpath {
 				subproject, msgs := ProjectReadAllFromPath(subprojectpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
+				listpackage := ListPackageFromProject(subproject)
+				if !msgblock.iserror {
+					listpackage, msgs = ListPackageValidateLibraries(listpackage, subproject)
+					msgblock = MsgblockAddBlock(msgblock, msgs)
+				}
+				subproject.listpackage = listpackage
 				subprojects = append(subprojects, subproject)
+				maps.Copy(maptext, subproject.mapnative)
 			}
 			project.listproject = subprojects
 		}
-		pkgs := ListPackageFromProject(project)
+		listpackage := ListPackageFromProject(project)
 		if !msgblock.iserror {
-			pkgs, msgs = ListPackageValidateLibraries(pkgs, project)
+			listpackage, msgs = ListPackageValidateLibraries(listpackage, project)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 		if !msgblock.iserror {
-			pkgs, msgs = ListPackageLink(pkgs)
+			listpackage, msgs = ListPackageLink(listpackage)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			project.listpackage = pkgs
+			project.listpackage = listpackage
 		}
 		if !msgblock.iserror {
-			pkgs, msgs = ListPackageValidate(pkgs)
+			listpackage, msgs = ListPackageValidate(listpackage)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			project.listpackage = pkgs
+			project.listpackage = listpackage
 		}
 	}
 	return project, msgblock
@@ -295,7 +307,7 @@ func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 	}
 	if !msgblock.iserror {
 		var extrafilenames []string
-		langs := []string{"cpp", "java", "js"}
+		langs := []string{"cpp", "csharp", "java", "js", "kotlin", "swift"}
 		for _, lang := range langs {
 			extralangfilenames, msgs := ListStringReadFromPathExtension(projectpath, "_"+lang+".txt")
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -320,7 +332,7 @@ func ProjectReadAllFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			pkg.project = project
 		}
 		project.listpackage = packages
-		project.maptext = maptext
+		project.mapnative = maptext
 	}
 	return project, msgblock
 }
@@ -408,77 +420,128 @@ func ProjectFromTextblock(textblock *vxtextblock) (*vxproject, *vxmsgblock) {
 }
 
 func StringFromCmd(cmd *vxcommand) string {
-	return StringFromCmdIndent(cmd, "")
+	return StringFromCmdIndent(cmd, 0)
 }
 
-func StringFromCmdIndent(cmd *vxcommand, indent string) string {
-	lineindent := "\n" + indent
-	var output = "" +
+func StringFromCmdIndent(cmd *vxcommand, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output := "" +
 		lineindent + "(cmd" +
 		lineindent + " :name " + cmd.name +
 		lineindent + " :code " + cmd.code +
 		lineindent + " :lang " + cmd.lang +
 		lineindent + " :path " + cmd.path +
-		lineindent + " :doc  " + cmd.doc +
-		")"
+		lineindent + " :doc  " + cmd.doc + ")"
 	return output
 }
 
 func StringFromListCmd(cmds []*vxcommand) string {
-	return StringFromListCmdIndent(cmds, "")
+	return StringFromListCmdIndent(cmds, 0)
 }
 
-func StringFromListCmdIndent(cmds []*vxcommand, indent string) string {
-	output := "(cmdlist"
+func StringFromListCmdIndent(cmds []*vxcommand, indent int) string {
+	output := ""
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
+	output = lineindent + "(cmdlist"
 	for _, cmd := range cmds {
-		output += StringFromCmdIndent(cmd, indent+" ")
+		output += StringFromCmdIndent(cmd, indent+1)
 	}
 	output += ")"
 	return output
 }
 
 func StringFromListPath(listpath []*vxpath) string {
-	return StringFromListPathIndent(listpath, "")
+	return StringFromListPathIndent(listpath, 0)
 }
 
-func StringFromListPathIndent(listpath []*vxpath, indent string) string {
-	output := "(pathlist"
-	for _, path := range listpath {
-		output += StringFromPathIndent(path, indent+" ")
+func StringFromListPathIndent(listpath []*vxpath, indent int) string {
+	output := ""
+	if len(listpath) == 0 {
+		output = "[]"
+	} else {
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
+		output = lineindent + "(pathlist"
+		for _, path := range listpath {
+			output += StringFromPathIndent(path, indent+1)
+		}
+		output += ")"
 	}
-	output += ")"
 	return output
 }
 
 func StringFromPath(path *vxpath) string {
-	return StringFromPathIndent(path, "")
+	return StringFromPathIndent(path, 0)
 }
 
-func StringFromPathIndent(path *vxpath, indent string) string {
-	lineindent := "\n" + indent
-	var output = "" +
-		lineindent + "(path" +
+func StringFromPathIndent(path *vxpath, indent int) string {
+	lineindent := ""
+	startindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+		startindent = lineindent
+	}
+	output := "" +
+		startindent + "(path" +
 		lineindent + " :name " + path.name +
 		lineindent + " :path " + path.path +
 		lineindent + " :doc  " + path.doc + ")"
 	return output
 }
 
-func StringFromProject(prj *vxproject) string {
+func StringFromProject(project *vxproject) string {
+	return StringFromProjectIndent(project, 0)
+}
+
+func StringFromProjectIndent(project *vxproject, indent int) string {
 	var pkgnames []string
-	for _, pkg := range prj.listpackage {
+	lineindent := ""
+	startindent := ""
+	lineindent = "\n" + StringRepeat(" ", indent)
+	if indent > 0 {
+		startindent = lineindent
+	}
+	for _, pkg := range project.listpackage {
 		pkgnames = append(pkgnames, pkg.name)
 	}
 	var output = "" +
-		"(project" +
-		"\n :name     " + prj.name +
-		"\n :author   " + prj.author +
-		"\n :version  " + prj.version +
-		"\n :doc      " + prj.doc +
-		"\n :cmds " + StringFromListCmdIndent(prj.listcmd, " ") +
-		"\n :libs " + StringFromListLibraryIndent(prj.listlib, " ") +
-		"\n :paths " + StringFromListPathIndent(prj.listpath, " ") +
-		"\n :packages [" + StringFromListStringJoin(pkgnames, " ") + "])"
+		startindent + "(project" +
+		lineindent + " :name     " + project.name +
+		lineindent + " :author   " + project.author +
+		lineindent + " :version  " + project.version +
+		lineindent + " :doc      " + project.doc +
+		lineindent + " :cmds " + StringFromListCmdIndent(project.listcmd, indent+2) +
+		lineindent + " :libs " + StringFromListLibraryIndent(project.listlib, indent+2) +
+		lineindent + " :paths " + StringFromListPathIndent(project.listpath, indent+2) +
+		lineindent + " :packages [" + StringFromListStringJoin(pkgnames, " ") + "]" +
+		lineindent + " :projects " + StringFromListProjectIndent(project.listproject, 2) + ")"
+	return output
+}
+
+func StringFromListProjectIndent(listproject []*vxproject, indent int) string {
+	output := ""
+	if len(listproject) == 0 {
+		output = "[]"
+	} else {
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
+		var listtextproject []string
+		for _, project := range listproject {
+			textproject := StringFromProjectIndent(project, indent+1)
+			listtextproject = append(listtextproject, textproject)
+		}
+		output = lineindent + "(projectlist" + StringFromListStringJoin(listtextproject, lineindent+" ") + ")"
+	}
 	return output
 }
 

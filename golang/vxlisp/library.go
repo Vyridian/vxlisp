@@ -8,10 +8,14 @@ type vxlibrary struct {
 	pkg  *vxpackage
 }
 
-var emptylistlibrary = []*vxlibrary{}
+var emptylistlibrary = NewListLibrary()
 
 func NewLibrary() *vxlibrary {
 	return new(vxlibrary)
+}
+
+func NewListLibrary() []*vxlibrary {
+	return []*vxlibrary{}
 }
 
 func NewMapLibrary() map[string]*vxlibrary {
@@ -65,6 +69,14 @@ func LibraryFromTextblock(textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
 	return library, msgblock
 }
 
+func ListLibraryFromMapLibrary(maplibrary map[string]*vxlibrary) []*vxlibrary {
+	output := NewListLibrary()
+	for _, library := range maplibrary {
+		output = append(output, library)
+	}
+	return output
+}
+
 func MapLibraryFromListLibrary(listlibrary []*vxlibrary) map[string]*vxlibrary {
 	output := NewMapLibrary()
 	for _, library := range listlibrary {
@@ -75,11 +87,14 @@ func MapLibraryFromListLibrary(listlibrary []*vxlibrary) map[string]*vxlibrary {
 }
 
 func StringFromLibrary(library *vxlibrary) string {
-	return StringFromLibraryIndent(library, "")
+	return StringFromLibraryIndent(library, 0)
 }
 
-func StringFromLibraryIndent(library *vxlibrary, indent string) string {
-	lineindent := "\n" + indent
+func StringFromLibraryIndent(library *vxlibrary, indent int) string {
+	lineindent := ""
+	if indent > 0 {
+		lineindent = "\n" + StringRepeat(" ", indent)
+	}
 	output := "" +
 		lineindent + "(library" +
 		lineindent + " :name " + library.name +
@@ -90,14 +105,21 @@ func StringFromLibraryIndent(library *vxlibrary, indent string) string {
 }
 
 func StringFromListLibrary(listlib []*vxlibrary) string {
-	return StringFromListLibraryIndent(listlib, "")
+	return StringFromListLibraryIndent(listlib, 0)
 }
 
-func StringFromListLibraryIndent(listlib []*vxlibrary, indent string) string {
-	output := "["
-	for _, lib := range listlib {
-		output += StringFromLibraryIndent(lib, indent+" ")
+func StringFromListLibraryIndent(listlib []*vxlibrary, indent int) string {
+	output := ""
+	if len(listlib) > 0 {
+		lineindent := ""
+		if indent > 0 {
+			lineindent = "\n" + StringRepeat(" ", indent)
+		}
+		output = lineindent + "(librarylist"
+		for _, lib := range listlib {
+			output += StringFromLibraryIndent(lib, indent+1)
+		}
+		output += ")"
 	}
-	output += "]"
 	return output
 }

@@ -39,7 +39,7 @@
  (tb/delim
   :delimlist
 	  (tb/delimlist
-    tb/delimwhitespace
+//    tb/delimwhitespace
     delimxmlcomment
     delimxmlcdata
 	   (copy tb/delimbracketangle
@@ -82,10 +82,7 @@
            (tb/textblock
             :text "\n  "
             :startpos 6
-            :endpos 8
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 8)
            (tb/textblock
             :text "<tag1>"
             :startpos 9
@@ -102,10 +99,7 @@
            (tb/textblock
             :text "\n    "
             :startpos 15
-            :endpos 19
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 19)
            (tb/textblock
             :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
             :startpos 20
@@ -195,10 +189,7 @@
            (tb/textblock
             :text "\n  "
             :startpos 54
-            :endpos 56
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 56)
            (tb/textblock
             :text "</tag1>"
             :startpos 57
@@ -215,10 +206,7 @@
            (tb/textblock
             :text "\n"
             :startpos 64
-            :endpos 64
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 64)
            (tb/textblock
             :text "</doc>"
             :startpos 65

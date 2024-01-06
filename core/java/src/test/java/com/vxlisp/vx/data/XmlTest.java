@@ -16,7 +16,7 @@ public final class XmlTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (tb/textblock\n  :text\n   \"<doc>\n      <tag1>\n        <tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\n      </tag1>\n    </doc>\"\n  :startpos 1\n  :endpos 70\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text \"<doc>\"\n     :startpos 1\n     :endpos 5\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"doc\"\n        :startpos 2\n        :endpos 4)))\n    (tb/textblock\n     :text \"\n  \"\n     :startpos 6\n     :endpos 8\n     :delim\n      (copy tb/delimwhitespace\n       :pos 0))\n    (tb/textblock\n     :text \"<tag1>\"\n     :startpos 9\n     :endpos 14\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"tag1\"\n        :startpos 10\n        :endpos 13)))\n    (tb/textblock\n     :text \"\n    \"\n     :startpos 15\n     :endpos 19\n     :delim\n      (copy tb/delimwhitespace\n       :pos 0))\n    (tb/textblock\n     :text \"<tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\"\n     :startpos 20\n     :endpos 53\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"tag2\"\n        :startpos 21\n        :endpos 24)\n       (tb/textblock\n        :text \" \"\n        :startpos 25\n        :endpos 25\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (textblock\n        :text \"prop1\"\n        :startpos 26\n        :endpos 30)\n       (textblock\n        :text \"=\"\n        :startpos 31\n        :endpos 31\n        :delim\n         (copy delimxmlequal\n          :pos 0))\n       (tb/textblock\n        :text \"\\\"val1\\\"\"\n        :startpos 32\n        :endpos 37\n        :delim\n         (copy tb/delimquote\n          :pos 0)\n        :children\n         (tb/textblocklist\n          (tb/textblock\n           :text \"val1\"\n           :startpos 33\n           :endpos 36)))\n       (tb/textblock\n        :text \" \"\n        :startpos 38\n        :endpos 38\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (tb/textblock\n        :text \"prop2\"\n        :startpos 39\n        :endpos 43)\n       (textblock\n        :text \"=\"\n        :startpos 44\n        :endpos 44\n        :delim\n         (copy delimxmlequal\n          :pos 0))\n       (tb/textblock\n        :text \"\\\"val2\\\"\"\n        :startpos 45\n        :endpos 50\n        :delim\n         (copy tb/delimquote\n          :pos 0)\n        :children\n         (tb/textblocklist\n          (tb/textblock\n           :text \"val2\"\n           :startpos 46\n           :endpos 49)))\n        (tb/textblock\n         :text \" \"\n         :startpos 51\n         :endpos 51\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"/\"\n         :startpos 52\n         :endpos 52)))\n    (tb/textblock\n     :text \"\n  \"\n     :startpos 54\n     :endpos 56\n     :delim\n      (copy tb/delimwhitespace\n       :pos 0))\n    (tb/textblock\n     :text \"</tag1>\"\n     :startpos 57\n     :endpos 63\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"/tag1\"\n        :startpos 58\n        :endpos 62)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 64\n     :endpos 64\n     :delim\n      (copy tb/delimwhitespace\n       :pos 0))\n    (tb/textblock\n     :text \"</doc>\"\n     :startpos 65\n     :endpos 70\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"/doc\"\n        :startpos 66\n        :endpos 69)))))\n (textblock-xml<-string\n  \"<doc>\n     <tag1>\n       <tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\n     </tag1>\n   </doc>\"))",
+          ":describename", "(test\n (tb/textblock\n  :text\n   \"<doc>\n      <tag1>\n        <tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\n      </tag1>\n    </doc>\"\n  :startpos 1\n  :endpos 70\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text \"<doc>\"\n     :startpos 1\n     :endpos 5\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"doc\"\n        :startpos 2\n        :endpos 4)))\n    (tb/textblock\n     :text \"\n  \"\n     :startpos 6\n     :endpos 8)\n    (tb/textblock\n     :text \"<tag1>\"\n     :startpos 9\n     :endpos 14\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"tag1\"\n        :startpos 10\n        :endpos 13)))\n    (tb/textblock\n     :text \"\n    \"\n     :startpos 15\n     :endpos 19)\n    (tb/textblock\n     :text \"<tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\"\n     :startpos 20\n     :endpos 53\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"tag2\"\n        :startpos 21\n        :endpos 24)\n       (tb/textblock\n        :text \" \"\n        :startpos 25\n        :endpos 25\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (textblock\n        :text \"prop1\"\n        :startpos 26\n        :endpos 30)\n       (textblock\n        :text \"=\"\n        :startpos 31\n        :endpos 31\n        :delim\n         (copy delimxmlequal\n          :pos 0))\n       (tb/textblock\n        :text \"\\\"val1\\\"\"\n        :startpos 32\n        :endpos 37\n        :delim\n         (copy tb/delimquote\n          :pos 0)\n        :children\n         (tb/textblocklist\n          (tb/textblock\n           :text \"val1\"\n           :startpos 33\n           :endpos 36)))\n       (tb/textblock\n        :text \" \"\n        :startpos 38\n        :endpos 38\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (tb/textblock\n        :text \"prop2\"\n        :startpos 39\n        :endpos 43)\n       (textblock\n        :text \"=\"\n        :startpos 44\n        :endpos 44\n        :delim\n         (copy delimxmlequal\n          :pos 0))\n       (tb/textblock\n        :text \"\\\"val2\\\"\"\n        :startpos 45\n        :endpos 50\n        :delim\n         (copy tb/delimquote\n          :pos 0)\n        :children\n         (tb/textblocklist\n          (tb/textblock\n           :text \"val2\"\n           :startpos 46\n           :endpos 49)))\n        (tb/textblock\n         :text \" \"\n         :startpos 51\n         :endpos 51\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"/\"\n         :startpos 52\n         :endpos 52)))\n    (tb/textblock\n     :text \"\n  \"\n     :startpos 54\n     :endpos 56)\n    (tb/textblock\n     :text \"</tag1>\"\n     :startpos 57\n     :endpos 63\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"/tag1\"\n        :startpos 58\n        :endpos 62)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 64\n     :endpos 64)\n    (tb/textblock\n     :text \"</doc>\"\n     :startpos 65\n     :endpos 70\n     :delim\n      (copy tb/delimbracketangle\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"/doc\"\n        :startpos 66\n        :endpos 69)))))\n (textblock-xml<-string\n  \"<doc>\n     <tag1>\n       <tag2 prop1=\\\"val1\\\" prop2=\\\"val2\\\" />\n     </tag1>\n   </doc>\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -77,15 +77,7 @@ public final class XmlTest {
                           Core.vx_new_string(":startpos"),
                           Core.vx_new_int(6),
                           Core.vx_new_string(":endpos"),
-                          Core.vx_new_int(8),
-                          Core.vx_new_string(":delim"),
-                          Core.f_copy(
-                            Textblock.c_delimwhitespace,
-                            Core.t_anylist.vx_new(
-                              Core.vx_new_string(":pos"),
-                              Core.vx_new_int(0)
-                            )
-                          )
+                          Core.vx_new_int(8)
                         )
                       ),
                       Core.f_new(
@@ -132,15 +124,7 @@ public final class XmlTest {
                           Core.vx_new_string(":startpos"),
                           Core.vx_new_int(15),
                           Core.vx_new_string(":endpos"),
-                          Core.vx_new_int(19),
-                          Core.vx_new_string(":delim"),
-                          Core.f_copy(
-                            Textblock.c_delimwhitespace,
-                            Core.t_anylist.vx_new(
-                              Core.vx_new_string(":pos"),
-                              Core.vx_new_int(0)
-                            )
-                          )
+                          Core.vx_new_int(19)
                         )
                       ),
                       Core.f_new(
@@ -387,15 +371,7 @@ public final class XmlTest {
                           Core.vx_new_string(":startpos"),
                           Core.vx_new_int(54),
                           Core.vx_new_string(":endpos"),
-                          Core.vx_new_int(56),
-                          Core.vx_new_string(":delim"),
-                          Core.f_copy(
-                            Textblock.c_delimwhitespace,
-                            Core.t_anylist.vx_new(
-                              Core.vx_new_string(":pos"),
-                              Core.vx_new_int(0)
-                            )
-                          )
+                          Core.vx_new_int(56)
                         )
                       ),
                       Core.f_new(
@@ -442,15 +418,7 @@ public final class XmlTest {
                           Core.vx_new_string(":startpos"),
                           Core.vx_new_int(64),
                           Core.vx_new_string(":endpos"),
-                          Core.vx_new_int(64),
-                          Core.vx_new_string(":delim"),
-                          Core.f_copy(
-                            Textblock.c_delimwhitespace,
-                            Core.t_anylist.vx_new(
-                              Core.vx_new_string(":pos"),
-                              Core.vx_new_int(0)
-                            )
-                          )
+                          Core.vx_new_int(64)
                         )
                       ),
                       Core.f_new(

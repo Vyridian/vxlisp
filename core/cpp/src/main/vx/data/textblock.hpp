@@ -139,10 +139,6 @@ namespace vx_data_textblock {
   typedef Abstract_textblock_findparent_from_textblock* Func_textblock_findparent_from_textblock;
   extern Func_textblock_findparent_from_textblock e_textblock_findparent_from_textblock;
   extern Func_textblock_findparent_from_textblock t_textblock_findparent_from_textblock;
-  class Abstract_textblock_groupby_from_textblock_delim;
-  typedef Abstract_textblock_groupby_from_textblock_delim* Func_textblock_groupby_from_textblock_delim;
-  extern Func_textblock_groupby_from_textblock_delim e_textblock_groupby_from_textblock_delim;
-  extern Func_textblock_groupby_from_textblock_delim t_textblock_groupby_from_textblock_delim;
   class Abstract_textblock_init;
   typedef Abstract_textblock_init* Func_textblock_init;
   extern Func_textblock_init e_textblock_init;
@@ -234,9 +230,6 @@ namespace vx_data_textblock {
 
   // (func textblock-findparent<-textblock)
   vx_data_textblock::Type_textblock f_textblock_findparent_from_textblock(vx_data_textblock::Type_textblock textblockarg);
-
-  // (func textblock-groupby<-textblock-delim)
-  vx_data_textblock::Type_textblock f_textblock_groupby_from_textblock_delim(vx_data_textblock::Type_textblock textblockarg, vx_data_textblock::Type_delim delimarg);
 
   // (func textblock-init)
   vx_data_textblock::Type_textblock f_textblock_init(vx_data_textblock::Type_textblock textblockarg);
@@ -901,29 +894,6 @@ namespace vx_data_textblock {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
-  // (func textblock-groupby<-textblock-delim)
-  class Abstract_textblock_groupby_from_textblock_delim : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
-  public:
-    Abstract_textblock_groupby_from_textblock_delim() {};
-    virtual ~Abstract_textblock_groupby_from_textblock_delim() = 0;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_textblock_groupby_from_textblock_delim : public virtual Abstract_textblock_groupby_from_textblock_delim {
-  public:
-    Class_textblock_groupby_from_textblock_delim();
-    virtual ~Class_textblock_groupby_from_textblock_delim() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

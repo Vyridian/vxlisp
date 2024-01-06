@@ -3446,95 +3446,6 @@ namespace vx_data_textblock {
 
   //}
 
-  // (func textblock-groupby<-textblock-delim)
-  vx_data_textblock::Type_textblock f_textblock_groupby_from_textblock_delim(vx_data_textblock::Type_textblock textblockarg, vx_data_textblock::Type_delim delimarg) {
-    vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
-    vx_core::vx_reserve({textblockarg, delimarg});
-    output = vx_core::f_new(
-      vx_data_textblock::t_textblock,
-      vx_core::vx_new(vx_core::t_anylist, {
-        vx_core::vx_new_string(":delim"),
-        delimarg
-      })
-    );
-    vx_core::vx_release_one_except({textblockarg, delimarg}, output);
-    return output;
-  }
-
-  // (func textblock-groupby<-textblock-delim)
-  // class Class_textblock_groupby_from_textblock_delim {
-    Abstract_textblock_groupby_from_textblock_delim::~Abstract_textblock_groupby_from_textblock_delim() {}
-
-    Class_textblock_groupby_from_textblock_delim::Class_textblock_groupby_from_textblock_delim() : Abstract_textblock_groupby_from_textblock_delim::Abstract_textblock_groupby_from_textblock_delim() {
-      vx_core::refcount += 1;
-    }
-
-    Class_textblock_groupby_from_textblock_delim::~Class_textblock_groupby_from_textblock_delim() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_textblock_groupby_from_textblock_delim::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_data_textblock::Func_textblock_groupby_from_textblock_delim output = vx_data_textblock::e_textblock_groupby_from_textblock_delim;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_textblock_groupby_from_textblock_delim::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_data_textblock::Func_textblock_groupby_from_textblock_delim output = vx_data_textblock::e_textblock_groupby_from_textblock_delim;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_textblock_groupby_from_textblock_delim::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/data/textblock", // pkgname
-        "textblock-groupby<-textblock-delim", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_textblock_groupby_from_textblock_delim::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_textblock_groupby_from_textblock_delim::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/data/textblock", // pkgname
-        "textblock-groupby<-textblock-delim", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_textblock_groupby_from_textblock_delim::vx_empty() const {return vx_data_textblock::e_textblock_groupby_from_textblock_delim;}
-    vx_core::Type_any Class_textblock_groupby_from_textblock_delim::vx_type() const {return vx_data_textblock::t_textblock_groupby_from_textblock_delim;}
-    vx_core::Type_msgblock Class_textblock_groupby_from_textblock_delim::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_textblock_groupby_from_textblock_delim::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_textblock_groupby_from_textblock_delim::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_data_textblock::Type_textblock textblockarg = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_data_textblock::Type_delim delimarg = vx_core::vx_any_from_any(vx_data_textblock::t_delim, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_data_textblock::f_textblock_groupby_from_textblock_delim(textblockarg, delimarg);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
   // (func textblock-init)
   vx_data_textblock::Type_textblock f_textblock_init(vx_data_textblock::Type_textblock textblockarg) {
     vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
@@ -4931,14 +4842,27 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(lenopen);
         vx_core::Type_int posminus = vx_core::f_minus1(pos);
         vx_core::vx_ref_plus(posminus);
-        vx_core::Type_int startleft = vx_core::f_minus1(startpos);
+        vx_core::Type_int startleft = vx_core::f_if_1(
+          vx_core::t_int,
+          vx_core::f_eq(pos, vx_core::vx_new_int(1)),
+          vx_core::f_minus1(startpos),
+          startpos
+        );
         vx_core::vx_ref_plus(startleft);
-        vx_core::Type_int endleft = vx_core::f_plus(startleft, posminus);
+        vx_core::Type_int endleft = vx_core::f_if_1(
+          vx_core::t_int,
+          vx_core::f_eq(pos, vx_core::vx_new_int(1)),
+          vx_core::f_minus1(startpos),
+          vx_core::f_plus(
+            vx_core::f_minus1(startleft),
+            posminus
+          )
+        );
         vx_core::vx_ref_plus(endleft);
         vx_core::Type_int startright = vx_core::f_plus_2(
           vx_core::vx_new(vx_core::t_intlist, {
-            startleft,
-            pos,
+            startpos,
+            posminus,
             lenopen
           })
         );
@@ -4963,15 +4887,119 @@ namespace vx_data_textblock {
           })
         );
         vx_core::vx_ref_plus(close);
+        vx_data_textblock::Type_textblock tbleft = vx_core::f_if_2(
+          vx_data_textblock::t_textblock,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({textleft}, [textleft]() {
+                vx_core::Type_boolean output_1 = vx_core::f_eq(vx_core::vx_new_string(""), textleft);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_core::Type_any output_1 = vx_core::f_empty(
+                  vx_data_textblock::t_textblock
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({textleft, startleft, endleft}, [textleft, startleft, endleft]() {
+                vx_data_textblock::Type_textblock output_1 = vx_core::f_new(
+                  vx_data_textblock::t_textblock,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::vx_new_string(":text"),
+                    textleft,
+                    vx_core::vx_new_string(":startpos"),
+                    startleft,
+                    vx_core::vx_new_string(":endpos"),
+                    endleft
+                  })
+                );
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(tbleft);
+        vx_data_textblock::Type_textblock tbpar1 = vx_core::f_copy(
+          vx_data_textblock::t_textblock,
+          textblockarg,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":text"),
+            textpar,
+            vx_core::vx_new_string(":startpos"),
+            startopen,
+            vx_core::vx_new_string(":delim"),
+            vx_core::f_copy(
+              vx_data_textblock::t_delim,
+              open,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":pos"),
+                vx_core::vx_new_int(0),
+                vx_core::vx_new_string(":delimlist"),
+                delima->delimlist()
+              })
+            ),
+            vx_core::vx_new_string(":parent"),
+            parent
+          })
+        );
+        vx_core::vx_ref_plus(tbpar1);
+        vx_data_textblock::Type_textblock tbfind = vx_core::f_if_2(
+          vx_data_textblock::t_textblock,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({textleft}, [textleft]() {
+                vx_core::Type_boolean output_1 = vx_core::f_eq(vx_core::vx_new_string(""), textleft);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                vx_core::Type_any output_1 = vx_core::f_empty(
+                  vx_data_textblock::t_textblock
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({parent}, [parent]() {
+                vx_data_textblock::Type_textblock output_1 = vx_data_textblock::f_textblock_findparent_from_textblock(parent);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(tbfind);
+        vx_data_textblock::Type_textblock tbparent = vx_core::f_if_2(
+          vx_data_textblock::t_textblock,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({tbfind}, [tbfind]() {
+                vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(tbfind);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({tbpar1}, [tbpar1]() {
+                vx_core::Type_any output_1 = tbpar1;
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({tbpar1, tbfind, tbleft}, [tbpar1, tbfind, tbleft]() {
+                vx_data_textblock::Type_textblock output_1 = vx_data_textblock::f_textblock_addchild_from_textblock_find_child(tbpar1, tbfind, tbleft);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(tbparent);
         vx_data_textblock::Type_textblock output_1 = vx_core::f_new(
           vx_data_textblock::t_textblock,
           vx_core::vx_new(vx_core::t_anylist, {
             vx_core::vx_new_string(":text"),
-            textleft,
+            textright,
             vx_core::vx_new_string(":startpos"),
-            startleft,
+            startright,
             vx_core::vx_new_string(":endpos"),
-            endleft,
+            endpos,
             vx_core::vx_new_string(":delim"),
             vx_core::f_new(
               vx_data_textblock::t_delim,
@@ -4980,53 +5008,13 @@ namespace vx_data_textblock {
                 delimlistl
               })
             ),
+            vx_core::vx_new_string(":close"),
+            close,
             vx_core::vx_new_string(":parent"),
-            vx_core::f_new(
-              vx_data_textblock::t_textblock,
-              vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(":text"),
-                textright,
-                vx_core::vx_new_string(":startpos"),
-                startright,
-                vx_core::vx_new_string(":endpos"),
-                endpos,
-                vx_core::vx_new_string(":delim"),
-                vx_core::f_new(
-                  vx_data_textblock::t_delim,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":delimlist"),
-                    delimlistl
-                  })
-                ),
-                vx_core::vx_new_string(":close"),
-                close,
-                vx_core::vx_new_string(":parent"),
-                vx_core::f_copy(
-                  vx_data_textblock::t_textblock,
-                  textblockarg,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":startpos"),
-                    startopen,
-                    vx_core::vx_new_string(":delim"),
-                    vx_core::f_copy(
-                      vx_data_textblock::t_delim,
-                      open,
-                      vx_core::vx_new(vx_core::t_anylist, {
-                        vx_core::vx_new_string(":pos"),
-                        vx_core::vx_new_int(0),
-                        vx_core::vx_new_string(":delimlist"),
-                        delima->delimlist()
-                      })
-                    ),
-                    vx_core::vx_new_string(":parent"),
-                    parent
-                  })
-                )
-              })
-            )
+            tbparent
           })
         );
-        vx_core::vx_release_one_except({text, parent, startpos, endpos, delima, pos, textopen, textclose, delimlistl, lenopen, posminus, startleft, endleft, startright, startopen, textleft, textpar, textright, close}, output_1);
+        vx_core::vx_release_one_except({text, parent, startpos, endpos, delima, pos, textopen, textclose, delimlistl, lenopen, posminus, startleft, endleft, startright, startopen, textleft, textpar, textright, close, tbleft, tbpar1, tbfind, tbparent}, output_1);
         return output_1;
       })
     );
@@ -5720,8 +5708,6 @@ namespace vx_data_textblock {
   vx_data_textblock::Func_textblock_delimnotfound t_textblock_delimnotfound = NULL;
   vx_data_textblock::Func_textblock_findparent_from_textblock e_textblock_findparent_from_textblock = NULL;
   vx_data_textblock::Func_textblock_findparent_from_textblock t_textblock_findparent_from_textblock = NULL;
-  vx_data_textblock::Func_textblock_groupby_from_textblock_delim e_textblock_groupby_from_textblock_delim = NULL;
-  vx_data_textblock::Func_textblock_groupby_from_textblock_delim t_textblock_groupby_from_textblock_delim = NULL;
   vx_data_textblock::Func_textblock_init e_textblock_init = NULL;
   vx_data_textblock::Func_textblock_init t_textblock_init = NULL;
   vx_data_textblock::Func_textblock_parse e_textblock_parse = NULL;
@@ -5842,10 +5828,6 @@ namespace vx_data_textblock {
       vx_core::vx_reserve_empty(vx_data_textblock::e_textblock_findparent_from_textblock);
       vx_data_textblock::t_textblock_findparent_from_textblock = new vx_data_textblock::Class_textblock_findparent_from_textblock();
       vx_core::vx_reserve_type(vx_data_textblock::t_textblock_findparent_from_textblock);
-      vx_data_textblock::e_textblock_groupby_from_textblock_delim = new vx_data_textblock::Class_textblock_groupby_from_textblock_delim();
-      vx_core::vx_reserve_empty(vx_data_textblock::e_textblock_groupby_from_textblock_delim);
-      vx_data_textblock::t_textblock_groupby_from_textblock_delim = new vx_data_textblock::Class_textblock_groupby_from_textblock_delim();
-      vx_core::vx_reserve_type(vx_data_textblock::t_textblock_groupby_from_textblock_delim);
       vx_data_textblock::e_textblock_init = new vx_data_textblock::Class_textblock_init();
       vx_core::vx_reserve_empty(vx_data_textblock::e_textblock_init);
       vx_data_textblock::t_textblock_init = new vx_data_textblock::Class_textblock_init();
@@ -5966,7 +5948,6 @@ namespace vx_data_textblock {
       mapfunc["textblock-addchild<-textblock-find-child"] = vx_data_textblock::t_textblock_addchild_from_textblock_find_child;
       mapfunc["textblock-delimnotfound"] = vx_data_textblock::t_textblock_delimnotfound;
       mapfunc["textblock-findparent<-textblock"] = vx_data_textblock::t_textblock_findparent_from_textblock;
-      mapfunc["textblock-groupby<-textblock-delim"] = vx_data_textblock::t_textblock_groupby_from_textblock_delim;
       mapfunc["textblock-init"] = vx_data_textblock::t_textblock_init;
       mapfunc["textblock-parse"] = vx_data_textblock::t_textblock_parse;
       mapfunc["textblock-parse-one"] = vx_data_textblock::t_textblock_parse_one;
