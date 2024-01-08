@@ -4,6 +4,20 @@
 
 export default class vx_core {
 
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  static vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce) {
+    let output = vx_core.f_empty(generic_any_1)
+    output = start
+    const fn = fn_reduce['vx_value']
+    if (fn) {
+      const mapval = map['vx_value']
+      for (let key in mapval) {
+        const value = mapval[key]
+        output = fn(output, key, value)
+      }
+    }
+    return output
+  }
 
   // vx_boolean_from_string_ends(string, string)
   static vx_boolean_from_string_ends(text, ends) {
@@ -1677,7 +1691,7 @@ export default class vx_core {
   static f_multiply_2(...nums) {
     let output = vx_core.e_int
     nums = vx_core.f_new(vx_core.t_intlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-2": vx_core.t_intlist},
       nums,
       1,
@@ -1700,7 +1714,7 @@ export default class vx_core {
   static f_multiply_3(...nums) {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       1,
@@ -1757,7 +1771,7 @@ export default class vx_core {
   static f_plus_2(...nums) {
     let output = vx_core.e_int
     nums = vx_core.f_new(vx_core.t_intlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-2": vx_core.t_intlist},
       nums,
       0,
@@ -1780,7 +1794,7 @@ export default class vx_core {
   static f_plus_3(...nums) {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       0,
@@ -1853,7 +1867,7 @@ export default class vx_core {
   static f_minus_2(...nums) {
     let output = vx_core.e_int
     nums = vx_core.f_new(vx_core.t_intlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-2": vx_core.t_intlist},
       nums,
       0,
@@ -1876,7 +1890,7 @@ export default class vx_core {
   static f_minus_3(...nums) {
     let output = vx_core.e_number
     nums = vx_core.f_new(vx_core.t_numberlist, ...nums)
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_number, "any-2": vx_core.t_number, "list-2": vx_core.t_numberlist},
       nums,
       0,
@@ -1978,7 +1992,7 @@ export default class vx_core {
   static f_lt_1(...values) {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
-    output = vx_core.f_any_from_list_reduce_next(
+    output = vx_core.f_any_from_list_start_reduce_next(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
       values,
       true,
@@ -2101,7 +2115,7 @@ export default class vx_core {
   static f_eq_1(...values) {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
-    output = vx_core.f_any_from_list_reduce_next(
+    output = vx_core.f_any_from_list_start_reduce_next(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
       values,
       false,
@@ -2171,7 +2185,7 @@ export default class vx_core {
   static f_gt_1(...values) {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
-    output = vx_core.f_any_from_list_reduce_next(
+    output = vx_core.f_any_from_list_start_reduce_next(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
       values,
       true,
@@ -2318,7 +2332,7 @@ export default class vx_core {
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list({"any-1": vx_core.t_boolean, "list-1": vx_core.t_booleanlist}, values, 1)})
       ),
       vx_core.f_else(
-        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list_reduce_next(
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_any_from_list_start_reduce_next(
           {"any-1": vx_core.t_boolean, "any-2": vx_core.t_boolean, "list-2": vx_core.t_booleanlist},
           values,
           true,
@@ -2401,6 +2415,25 @@ export default class vx_core {
   static async f_any_from_any_context_async(generic, context, value) {
     const generic_any_1 = generic["any-1"]
     let output = Promise.resolve(vx_core.f_empty(generic_any_1))
+    return output
+  }
+
+  /**
+   * @function any_from_any_key_value
+   * Generic Function returning Generic any-1 from a any-1, a key, and a value.
+   * @param  {typemap} generic
+   * @param  {any} current
+   * @param  {string} key
+   * @param  {any} value
+   * @return {any-1}
+   */
+  static t_any_from_any_key_value = {}
+  static e_any_from_any_key_value = {vx_type: vx_core.t_any_from_any_key_value}
+
+  // (func any<-any-key-value)
+  static f_any_from_any_key_value(generic, current, key, value) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
     return output
   }
 
@@ -2513,7 +2546,7 @@ export default class vx_core {
   }
 
   /**
-   * @function any_from_list_reduce
+   * @function any_from_list_start_reduce
    * Returns a val from a list reduce operation
    * @param  {typemap} generic
    * @param  {list} list
@@ -2521,11 +2554,11 @@ export default class vx_core {
    * @param  {any_from_reduce} fn_reduce
    * @return {any-1}
    */
-  static t_any_from_list_reduce = {}
-  static e_any_from_list_reduce = {vx_type: vx_core.t_any_from_list_reduce}
+  static t_any_from_list_start_reduce = {}
+  static e_any_from_list_start_reduce = {vx_type: vx_core.t_any_from_list_start_reduce}
 
-  // (func any<-list-reduce)
-  static f_any_from_list_reduce(generic, list, valstart, fn_reduce) {
+  // (func any<-list-start-reduce)
+  static f_any_from_list_start_reduce(generic, list, valstart, fn_reduce) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     output = output = valstart
@@ -2539,7 +2572,7 @@ export default class vx_core {
   }
 
   /**
-   * @function any_from_list_reduce_next
+   * @function any_from_list_start_reduce_next
    * Returns a val from a list reduce operation
    * @param  {typemap} generic
    * @param  {list} list
@@ -2547,11 +2580,11 @@ export default class vx_core {
    * @param  {any_from_reduce_next} fn_reduce_next
    * @return {any-1}
    */
-  static t_any_from_list_reduce_next = {}
-  static e_any_from_list_reduce_next = {vx_type: vx_core.t_any_from_list_reduce_next}
+  static t_any_from_list_start_reduce_next = {}
+  static e_any_from_list_start_reduce_next = {vx_type: vx_core.t_any_from_list_start_reduce_next}
 
-  // (func any<-list-reduce-next)
-  static f_any_from_list_reduce_next(generic, list, valstart, fn_reduce_next) {
+  // (func any<-list-start-reduce-next)
+  static f_any_from_list_start_reduce_next(generic, list, valstart, fn_reduce_next) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     output = output = valstart
@@ -2594,6 +2627,26 @@ export default class vx_core {
     if (val != undefined) {
       output = val
     }
+    return output
+  }
+
+  /**
+   * @function any_from_map_start_reduce
+   * Returns a value by reducing each element of a map.
+   * @param  {typemap} generic
+   * @param  {map} map
+   * @param  {any} start
+   * @param  {any_from_any_key_value} fn_reduce
+   * @return {any-1}
+   */
+  static t_any_from_map_start_reduce = {}
+  static e_any_from_map_start_reduce = {vx_type: vx_core.t_any_from_map_start_reduce}
+
+  // (func any<-map-start-reduce)
+  static f_any_from_map_start_reduce(generic, map, start, fn_reduce) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    output = vx_core.vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
     return output
   }
 
@@ -4153,7 +4206,7 @@ export default class vx_core {
   static f_or_1(...values) {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_booleanlist, ...values)
-    output = vx_core.f_any_from_list_reduce_next(
+    output = vx_core.f_any_from_list_start_reduce_next(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_boolean, "list-2": vx_core.t_booleanlist},
       values,
       false,
@@ -5032,15 +5085,17 @@ export default class vx_core {
       "any<-any-async": vx_core.e_any_from_any_async,
       "any<-any-context": vx_core.e_any_from_any_context,
       "any<-any-context-async": vx_core.e_any_from_any_context_async,
+      "any<-any-key-value": vx_core.e_any_from_any_key_value,
       "any<-func": vx_core.e_any_from_func,
       "any<-func-async": vx_core.e_any_from_func_async,
       "any<-int": vx_core.e_any_from_int,
       "any<-key-value": vx_core.e_any_from_key_value,
       "any<-key-value-async": vx_core.e_any_from_key_value_async,
       "any<-list": vx_core.e_any_from_list,
-      "any<-list-reduce": vx_core.e_any_from_list_reduce,
-      "any<-list-reduce-next": vx_core.e_any_from_list_reduce_next,
+      "any<-list-start-reduce": vx_core.e_any_from_list_start_reduce,
+      "any<-list-start-reduce-next": vx_core.e_any_from_list_start_reduce_next,
       "any<-map": vx_core.e_any_from_map,
+      "any<-map-start-reduce": vx_core.e_any_from_map_start_reduce,
       "any<-none": vx_core.e_any_from_none,
       "any<-none-async": vx_core.e_any_from_none_async,
       "any<-reduce": vx_core.e_any_from_reduce,
@@ -5192,15 +5247,17 @@ export default class vx_core {
       "any<-any-async": vx_core.t_any_from_any_async,
       "any<-any-context": vx_core.t_any_from_any_context,
       "any<-any-context-async": vx_core.t_any_from_any_context_async,
+      "any<-any-key-value": vx_core.t_any_from_any_key_value,
       "any<-func": vx_core.t_any_from_func,
       "any<-func-async": vx_core.t_any_from_func_async,
       "any<-int": vx_core.t_any_from_int,
       "any<-key-value": vx_core.t_any_from_key_value,
       "any<-key-value-async": vx_core.t_any_from_key_value_async,
       "any<-list": vx_core.t_any_from_list,
-      "any<-list-reduce": vx_core.t_any_from_list_reduce,
-      "any<-list-reduce-next": vx_core.t_any_from_list_reduce_next,
+      "any<-list-start-reduce": vx_core.t_any_from_list_start_reduce,
+      "any<-list-start-reduce-next": vx_core.t_any_from_list_start_reduce_next,
       "any<-map": vx_core.t_any_from_map,
+      "any<-map-start-reduce": vx_core.t_any_from_map_start_reduce,
       "any<-none": vx_core.t_any_from_none,
       "any<-none-async": vx_core.t_any_from_none_async,
       "any<-reduce": vx_core.t_any_from_reduce,
@@ -7994,6 +8051,25 @@ export default class vx_core {
       fn            : vx_core.f_any_from_any_context_async
     }
 
+    // (func any<-any-key-value)
+    vx_core.t_any_from_any_key_value['vx_type'] = vx_core.t_type
+    vx_core.t_any_from_any_key_value['vx_value'] = {
+      name          : "any<-any-key-value",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_any_from_any_key_value
+    }
+
     // (func any<-func)
     vx_core.t_any_from_func['vx_type'] = vx_core.t_type
     vx_core.t_any_from_func['vx_value'] = {
@@ -8108,10 +8184,10 @@ export default class vx_core {
       fn            : vx_core.f_any_from_list
     }
 
-    // (func any<-list-reduce)
-    vx_core.t_any_from_list_reduce['vx_type'] = vx_core.t_type
-    vx_core.t_any_from_list_reduce['vx_value'] = {
-      name          : "any<-list-reduce",
+    // (func any<-list-start-reduce)
+    vx_core.t_any_from_list_start_reduce['vx_type'] = vx_core.t_type
+    vx_core.t_any_from_list_start_reduce['vx_value'] = {
+      name          : "any<-list-start-reduce",
       pkgname       : "vx/core",
       extends       : ":func",
       idx           : 0,
@@ -8124,13 +8200,13 @@ export default class vx_core {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_core.f_any_from_list_reduce
+      fn            : vx_core.f_any_from_list_start_reduce
     }
 
-    // (func any<-list-reduce-next)
-    vx_core.t_any_from_list_reduce_next['vx_type'] = vx_core.t_type
-    vx_core.t_any_from_list_reduce_next['vx_value'] = {
-      name          : "any<-list-reduce-next",
+    // (func any<-list-start-reduce-next)
+    vx_core.t_any_from_list_start_reduce_next['vx_type'] = vx_core.t_type
+    vx_core.t_any_from_list_start_reduce_next['vx_value'] = {
+      name          : "any<-list-start-reduce-next",
       pkgname       : "vx/core",
       extends       : ":func",
       idx           : 0,
@@ -8143,7 +8219,7 @@ export default class vx_core {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_core.f_any_from_list_reduce_next
+      fn            : vx_core.f_any_from_list_start_reduce_next
     }
 
     // (func any<-map)
@@ -8163,6 +8239,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_any_from_map
+    }
+
+    // (func any<-map-start-reduce)
+    vx_core.t_any_from_map_start_reduce['vx_type'] = vx_core.t_type
+    vx_core.t_any_from_map_start_reduce['vx_value'] = {
+      name          : "any<-map-start-reduce",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_any_from_map_start_reduce
     }
 
     // (func any<-none)

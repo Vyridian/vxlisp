@@ -2336,7 +2336,7 @@ public final class Textblock {
               Textblock.t_delim,
               Core.t_any_from_func.vx_fn_new(() -> {
                 final Textblock.Type_delimlist resolvedlist = Textblock.f_delimlist_pos_from_string_delimlist(text, delimlist);
-                return Core.f_any_from_list_reduce(
+                return Core.f_any_from_list_start_reduce(
                   Textblock.t_delim,
                   resolvedlist,
                   Core.f_empty(

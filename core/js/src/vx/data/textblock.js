@@ -276,7 +276,7 @@ export default class vx_data_textblock {
           [],
           vx_core.f_new(vx_core.t_any_from_func, () => {
             const resolvedlist = vx_data_textblock.f_delimlist_pos_from_string_delimlist(text, delimlist)
-            return vx_core.f_any_from_list_reduce(
+            return vx_core.f_any_from_list_start_reduce(
               {"any-1": vx_data_textblock.t_delim, "any-2": vx_data_textblock.t_delim, "list-2": vx_data_textblock.t_delimlist},
               resolvedlist,
               vx_core.f_empty(

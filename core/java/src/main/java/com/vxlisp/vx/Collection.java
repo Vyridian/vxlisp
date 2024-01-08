@@ -213,7 +213,7 @@ public final class Collection {
 
   public static <T extends Core.Type_any> T f_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop) {
     T output = Core.f_empty(generic_any_1);
-    output = Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, Core.vx_new_int(1000));
+    output = Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, Core.vx_new_int(10000));
     return output;
   }
 

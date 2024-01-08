@@ -268,7 +268,7 @@ export default class vx_data_xml {
   // (func xml-parse<-xml-textblocklist)
   static f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist) {
     let output = vx_data_xml.e_xml
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_data_xml.t_xml, "any-2": vx_data_textblock.t_textblock, "list-2": vx_data_textblock.t_textblocklist},
       textblocklist,
       xmlarg,
@@ -295,7 +295,7 @@ export default class vx_data_xml {
       {"any-1": vx_data_xml.t_xml},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const xmlchg = vx_core.f_any_from_list_reduce(
+        const xmlchg = vx_core.f_any_from_list_start_reduce(
           {"any-1": vx_data_xml.t_xml, "any-2": vx_data_textblock.t_textblock, "list-2": vx_data_textblock.t_textblocklist},
           textblocklist,
           xmlarg,

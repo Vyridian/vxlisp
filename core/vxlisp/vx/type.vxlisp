@@ -155,7 +155,7 @@
 (func is-type<-any-typelist : boolean
  [val      : any
   typelist : typelist]
- (any<-list-reduce : boolean
+ (any<-list-start-reduce : boolean
   typelist
   false
   (fn : boolean

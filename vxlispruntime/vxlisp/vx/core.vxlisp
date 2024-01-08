@@ -646,7 +646,7 @@
 
 (func + : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : int
@@ -659,7 +659,7 @@
 
 (func + : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : number
@@ -716,7 +716,7 @@
 
 (func - : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : int
@@ -728,7 +728,7 @@
 
 (func - : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : number
@@ -785,7 +785,7 @@
 
 (func * : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   1
   (fn : int
@@ -800,7 +800,7 @@
 
 (func * : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   1
   (fn : number
@@ -890,7 +890,7 @@
 
 (func = : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -972,7 +972,7 @@
 
 (func < : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -1050,7 +1050,7 @@
 
 (func > : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -1134,7 +1134,7 @@
   (case 0 true)
   (case 1 (:1 values))
   (else
-   (any<-list-reduce-next : boolean
+   (any<-list-start-reduce-next : boolean
     values
     true
     (fn : boolean
@@ -1239,7 +1239,7 @@
         (:2 (stringlist "a" "b" "c")))
  :doc "Returns nth value from a list or none if out of bounds")
 
-(func any<-list-reduce : any-1
+(func any<-list-start-reduce : any-1
  [list      : list-2
   valstart  : any-1
   fn-reduce : any<-reduce]
@@ -1267,7 +1267,7 @@
     }")
  :test (test
         24
-        (any<-list-reduce : int
+        (any<-list-start-reduce : int
          (intlist 3 2 4)
          1
          (fn : int
@@ -1277,7 +1277,7 @@
         ))
  :doc "Returns a val from a list reduce operation")
 
-(func any<-list-reduce-next : any-1
+(func any<-list-start-reduce-next : any-1
  [list           : list-2
   valstart       : any-1
   fn-reduce-next : any<-reduce-next]
@@ -2486,7 +2486,7 @@
 
 (func or : boolean
  [values : booleanlist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   false
   (fn : boolean

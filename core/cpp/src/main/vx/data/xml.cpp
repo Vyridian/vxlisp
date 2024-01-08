@@ -1395,7 +1395,7 @@ namespace vx_data_xml {
   vx_data_xml::Type_xml f_xml_parse_from_xml_textblocklist(vx_data_xml::Type_xml xmlarg, vx_data_textblock::Type_textblocklist textblocklist) {
     vx_data_xml::Type_xml output = vx_data_xml::e_xml;
     vx_core::vx_reserve({xmlarg, textblocklist});
-    output = vx_core::f_any_from_list_reduce(
+    output = vx_core::f_any_from_list_start_reduce(
       vx_data_xml::t_xml,
       textblocklist,
       xmlarg,
@@ -1492,7 +1492,7 @@ namespace vx_data_xml {
     output = vx_core::f_let(
       vx_data_xml::t_xml,
       vx_core::t_any_from_func->vx_fn_new({textblocklist, xmlarg}, [textblocklist, xmlarg]() {
-        vx_data_xml::Type_xml xmlchg = vx_core::f_any_from_list_reduce(
+        vx_data_xml::Type_xml xmlchg = vx_core::f_any_from_list_start_reduce(
           vx_data_xml::t_xml,
           textblocklist,
           xmlarg,

@@ -1,3 +1,17 @@
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  static vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce) {
+    let output = vx_core.f_empty(generic_any_1)
+    output = start
+    const fn = fn_reduce['vx_value']
+    if (fn) {
+      const mapval = map['vx_value']
+      for (let key in mapval) {
+        const value = mapval[key]
+        output = fn(output, key, value)
+      }
+    }
+    return output
+  }
 
   // vx_boolean_from_string_ends(string, string)
   static vx_boolean_from_string_ends(text, ends) {

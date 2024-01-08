@@ -23,11 +23,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 212, ":total", 244), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 63, ":total", 132), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 214, ":total", 246), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 64, ":total", 134), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 69, ":total", 218), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 70, ":total", 220), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 72)
     )
   }
@@ -176,15 +176,17 @@ export default class vx_core_test {
           "any<-any-async", 0,
           "any<-any-context", 0,
           "any<-any-context-async", 0,
+          "any<-any-key-value", 0,
           "any<-func", 0,
           "any<-func-async", 0,
           "any<-int", 0,
           "any<-key-value", 0,
           "any<-key-value-async", 0,
           "any<-list", 2,
-          "any<-list-reduce", 1,
-          "any<-list-reduce-next", 0,
+          "any<-list-start-reduce", 1,
+          "any<-list-start-reduce-next", 0,
           "any<-map", 1,
+          "any<-map-start-reduce", 1,
           "any<-none", 0,
           "any<-none-async", 0,
           "any<-reduce", 0,
@@ -1512,23 +1514,23 @@ export default class vx_core_test {
     return output
   }
 
-  static f_any_from_list_reduce(context) {
+  static f_any_from_list_start_reduce(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "any<-list-reduce",
+      ":casename", "any<-list-start-reduce",
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 24\n (any<-list-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))\n ))",
+            ":describename", "(test\n 24\n (any<-list-start-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))))",
             ":testresult",
             vx_test.f_test(
               context,
               24,
-              vx_core.f_any_from_list_reduce(
+              vx_core.f_any_from_list_start_reduce(
                 {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-2": vx_core.t_intlist},
                 vx_core.f_new(
                   vx_core.t_intlist,
@@ -1575,6 +1577,42 @@ export default class vx_core_test {
                   "v3"
                 ),
                 ":b"
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_any_from_map_start_reduce(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "any<-map-start-reduce",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"xayb\"\n (any<-map-start-reduce\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"\"\n  (fn : string\n   [current : string\n    key     : string\n    value   : any]\n   (copy current\n    value\n    key))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "xayb",
+              vx_core.f_any_from_map_start_reduce(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":a",
+                  "x",
+                  ":b",
+                  "y"
+                ),
+                "",
+                vx_core.f_new(vx_core.t_any_from_any_key_value, (current, key, value) => 
+                  vx_core.f_copy(current, value, key))
               )
             )
           )
@@ -3022,8 +3060,9 @@ export default class vx_core_test {
       vx_core_test.f_and(context),
       vx_core_test.f_and_1(context),
       vx_core_test.f_any_from_list(context),
-      vx_core_test.f_any_from_list_reduce(context),
+      vx_core_test.f_any_from_list_start_reduce(context),
       vx_core_test.f_any_from_map(context),
+      vx_core_test.f_any_from_map_start_reduce(context),
       vx_core_test.f_compare(context),
       vx_core_test.f_contains(context),
       vx_core_test.f_contains_1(context),

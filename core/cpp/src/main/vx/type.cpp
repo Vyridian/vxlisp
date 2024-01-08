@@ -1269,7 +1269,7 @@ namespace vx_type {
   vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist) {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve({val, typelist});
-    output = vx_core::f_any_from_list_reduce(
+    output = vx_core::f_any_from_list_start_reduce(
       vx_core::t_boolean,
       typelist,
       vx_core::vx_new_boolean(false),

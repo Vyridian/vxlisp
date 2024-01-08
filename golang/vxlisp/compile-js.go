@@ -170,7 +170,7 @@ func JsFromArgs(args []vxarg, indent string) string {
 	return output
 }
 
-func JsFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
+func JsFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromConst")
 	path := cnst.pkgname + "/" + cnst.name
 	doc := ""
@@ -191,7 +191,7 @@ func JsFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	if cnst.value.code == "" {
 		value = JsEmptyValueFromType(cnsttype)
 	} else {
-		clstextjs, msgs := JsFromValue(cnst.value, cnst.pkgname, emptyfunc, 2, true, false, path)
+		clstextjs, msgs := JsFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 2, true, false, path)
 		value = clstextjs
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
@@ -230,7 +230,7 @@ func JsFromConst(cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	return output, statics, msgblock
 }
 
-func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
+func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromFunc")
 	var args []string
 	funcname := NameFromFunc(fnc)
@@ -346,7 +346,7 @@ func JsFromFunc(fnc *vxfunc) (string, string, *vxmsgblock) {
 			lineindent + "}"
 		indent += 1
 	}
-	valuetext, msgs := JsFromValue(fnc.value, fnc.pkgname, fnc, indent, true, false, path)
+	valuetext, msgs := JsFromValue(lang, fnc.value, fnc.pkgname, fnc, indent, true, false, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if strings.Index(valuetext, "output ") > 0 {
 	} else if strings.Index(valuetext, "output.") > 0 {
@@ -513,7 +513,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
 	for _, cnstid := range cnstkeys {
 		cnst := pkg.mapconst[cnstid]
-		consttext, statictext, msgs := JsFromConst(cnst, pkg)
+		consttext, statictext, msgs := JsFromConst(lang, cnst, pkg)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		allconsts += consttext
 		statics += statictext
@@ -523,7 +523,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 	for _, fncid := range fnckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			fnctext, fncstatics, msgs := JsFromFunc(fnc)
+			fnctext, fncstatics, msgs := JsFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			allfuncs += fnctext
 			statics += fncstatics
@@ -621,7 +621,7 @@ func JsFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	return output, statics, msgblock
 }
 
-func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, encode bool, test bool, path string) (string, *vxmsgblock) {
+func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, indent int, encode bool, test bool, path string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromValue")
 	sindent := StringRepeat("  ", indent)
 	output := ""
@@ -676,13 +676,13 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 				}
 				if valuetext == ":js" {
 					isNative = true
-				} else if BooleanFromStringStarts(valuetext, ":") {
+				} else if valuetext != ":auto" && BooleanFromStringStarts(valuetext, ":") {
 					isNative = false
 				} else if isNative {
 					if argvalue.name == "newline" {
 						argtext = "\n"
 					} else {
-						clstextjs, msgs := JsFromValue(argvalue, pkgname, parentfn, 0, false, test, subpath)
+						clstextjs, msgs := JsFromValue(lang, argvalue, pkgname, parentfn, 0, false, test, subpath)
 						argtext = clstextjs
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						if nativeindent == "undefined" {
@@ -698,8 +698,11 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 							multiline = true
 						}
 					}
-					argtext1 := StringRemoveQuotes(argtext)
-					argtexts = append(argtexts, argtext1)
+					argtext = StringRemoveQuotes(argtext)
+					if argtext == ":auto" {
+						argtext = LangNativeAutoFromFunc(lang, parentfn)
+					}
+					argtexts = append(argtexts, argtext)
 				}
 			}
 			if len(argtexts) > 0 {
@@ -754,7 +757,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 							lambdaargs = append(lambdaargs, lambdaarg.name)
 						}
 						lambdatext := strings.Join(lambdaargs, ", ")
-						work, msgs := JsFromValue(argvalue, pkgname, fnc, 0, true, test, argsubpath)
+						work, msgs := JsFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						if funcarg.vxtype.name == "any<-key-value" {
 							argtext = "([" + lambdatext + "]) => " + work
@@ -770,13 +773,13 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 							argtext = "[]"
 						case 1:
 							for _, lambdaarg := range arglist {
-								lambdavaluetext, msgs := JsFromValue(lambdaarg.value, pkgname, fnc, 1, true, test, argsubpath)
+								lambdavaluetext, msgs := JsFromValue(lang, lambdaarg.value, pkgname, fnc, 1, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								lambdatext := "const " + JsFromName(lambdaarg.name) + " = " + lambdavaluetext
 								lambdaargs = append(lambdaargs, lambdatext)
 							}
 							lambdatext := strings.Join(lambdaargs, "\n  ")
-							work, msgs := JsFromValue(argvalue, pkgname, fnc, 1, true, test, argsubpath)
+							work, msgs := JsFromValue(lang, argvalue, pkgname, fnc, 1, true, test, argsubpath)
 							msgblock = MsgblockAddBlock(msgblock, msgs)
 							argtext = "() => {" +
 								"\n  " + lambdatext +
@@ -789,7 +792,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 						}
 					} else if funcname == "vx/core/fn" {
 					} else if funcarg.vxtype.isfunc {
-						work, msgs := JsFromValue(argvalue, pkgname, fnc, 0, true, test, argsubpath)
+						work, msgs := JsFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						iswrapnew := true
 						switch argvalue.code {
@@ -811,7 +814,7 @@ func JsFromValue(value vxvalue, pkgname string, parentfn *vxfunc, indent int, en
 						}
 					}
 					if argtext == "" {
-						work, msgs := JsFromValue(argvalue, pkgname, fnc, 0, true, test, argsubpath)
+						work, msgs := JsFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 						argtext = work
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 					}
@@ -996,14 +999,14 @@ func JsNamesTFromMapType(maptype map[string]*vxtype) string {
 	return "{" + strings.Join(outputtypes, ", ") + "}"
 }
 
-func JsTestFromConst(cnst *vxconst) (string, *vxmsgblock) {
+func JsTestFromConst(lang *vxlang, cnst *vxconst) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromConst")
 	output := ""
 	path := cnst.pkgname + "/" + cnst.name
 	if len(cnst.listtestvalue) > 0 {
 		var listtestdescribe []string
 		for _, testvalue := range cnst.listtestvalue {
-			clstextjs, msgs := JsFromValue(testvalue, cnst.pkgname, emptyfunc, 7, true, true, path)
+			clstextjs, msgs := JsFromValue(lang, testvalue, cnst.pkgname, emptyfunc, 7, true, true, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			clstext := "" +
 				"\n          vx_core.f_new(" +
@@ -1035,14 +1038,14 @@ func JsTestFromConst(cnst *vxconst) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JsTestFromFunc(fnc *vxfunc) (string, *vxmsgblock) {
+func JsTestFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromFunc")
 	output := ""
 	path := fnc.pkgname + "/" + fnc.name + JsIndexFromFunc(fnc)
 	if len(fnc.listtestvalue) > 0 {
 		var listtestdescribe []string
 		for _, testvalue := range fnc.listtestvalue {
-			clstextjs, msgs := JsFromValue(testvalue, fnc.pkgname, emptyfunc, 6, true, true, path)
+			clstextjs, msgs := JsFromValue(lang, testvalue, fnc.pkgname, emptyfunc, 6, true, true, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			clstext := "" +
 				"\n          vx_core.f_new(" +
@@ -1109,7 +1112,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 	for _, typid := range typkeys {
 		covertypetotal += 1
 		typ := pkg.maptype[typid]
-		test, msgs := JsTestFromType(typ)
+		test, msgs := JsTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(covertype, "\""+typid+"\", "+StringFromInt(len(typ.testvalues)))
 		if command.filter == "" {
@@ -1134,7 +1137,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 	for _, cnstid := range cnstkeys {
 		coverconsttotal += 1
 		cnst := pkg.mapconst[cnstid]
-		test, msgs := JsTestFromConst(cnst)
+		test, msgs := JsTestFromConst(lang, cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(coverconst, "\""+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
 		if command.filter == "" {
@@ -1166,7 +1169,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 			case ":server":
 			default:
 				isfound = true
-				test, msgs := JsTestFromFunc(fnc)
+				test, msgs := JsTestFromFunc(lang, fnc)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				coverfunc = append(coverfunc, "\""+fncid+JsIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
@@ -1300,14 +1303,14 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 	return output, msgblock
 }
 
-func JsTestFromType(typ *vxtype) (string, *vxmsgblock) {
+func JsTestFromType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromType")
 	output := ""
 	path := typ.pkgname + "/" + typ.name
 	if len(typ.testvalues) > 0 {
 		var listtestdescribe []string
 		for _, testvalue := range typ.testvalues {
-			clstextjs, msgs := JsFromValue(testvalue, typ.pkgname, emptyfunc, 6, true, true, path)
+			clstextjs, msgs := JsFromValue(lang, testvalue, typ.pkgname, emptyfunc, 6, true, true, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			clstext := "" +
 				"\n          vx_core.f_new(" +

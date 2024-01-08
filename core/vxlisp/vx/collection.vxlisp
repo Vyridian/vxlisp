@@ -10,7 +10,7 @@
   start
   fn-until
   fn-loop
-  1000)
+  10000)
  :test (test
         8
         (any<-for-until-loop

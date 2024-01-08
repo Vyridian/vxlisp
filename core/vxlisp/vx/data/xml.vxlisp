@@ -884,7 +884,7 @@
 (func xml-parse<-xml-textblocklist : xml
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
- (any<-list-reduce : xml
+ (any<-list-start-reduce : xml
   textblocklist
   xmlarg
   (fn : xml
@@ -1162,7 +1162,7 @@
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
  (let : xml
-  [xmlchg : xml := (any<-list-reduce : xml
+  [xmlchg : xml := (any<-list-start-reduce : xml
                     textblocklist
                     xmlarg
                     (fn : xml

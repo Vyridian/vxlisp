@@ -1132,7 +1132,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "31% 69/218")
+                  :text "31% 70/220")
                  (p
                   :style
                    (style
@@ -1156,7 +1156,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "47% 63/132")
+                  :text "47% 64/134")
                  (p
                   :style
                    (style
@@ -1164,7 +1164,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "86% 212/244")
+                  :text "86% 214/246")
                  (p
                   :style
                    (style
@@ -6294,7 +6294,7 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "any<-list-reduce")))
+                                :text "any<-list-start-reduce")))
                             (td
                              :nodes
                               (divchildlist
@@ -6311,14 +6311,13 @@
                                 :text
                                  "(test
  24
- (any<-list-reduce : int
+ (any<-list-start-reduce : int
   (intlist 3 2 4)
   1
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- ))")))
+   (* total num))))")))
                             (td
                              :nodes
                               (divchildlist
@@ -6430,6 +6429,95 @@
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text ""v2"")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "any<-map-start-reduce")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "xayb"
+ (any<-map-start-reduce
+  (stringmap
+   :a "x"
+   :b "y")
+  ""
+  (fn : string
+   [current : string
+    key     : string
+    value   : any]
+   (copy current
+    value
+    key))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""xayb"")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""xayb"")))))
                          (tr
                           :nodes
                            (tdlist

@@ -420,13 +420,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">31% 69/218</p>
+              <p class="coveragenums">31% 70/220</p>
               <p class="coveragenums">5% 4/72</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">47% 63/132</p>
-              <p class="coveragenums">86% 212/244</p>
-              <p class="coveragenums">0% 1/158</p>
-              <p class="coveragenums">0% 1/158</p>
+              <p class="coveragenums">47% 64/134</p>
+              <p class="coveragenums">86% 214/246</p>
+              <p class="coveragenums">0% 1/160</p>
+              <p class="coveragenums">0% 1/160</p>
             </summary>
             <div>
               <table>
@@ -1628,19 +1628,18 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">any&lt;-list-reduce</p>
+                      <p class="preformatted">any&lt;-list-start-reduce</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
  24
- (any&lt;-list-reduce : int
+ (any&lt;-list-start-reduce : int
   (intlist 3 2 4)
   1
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- ))</p>
+   (* total num))))</p>
                     </td>
                     <td>
                       <p class="preformatted">24</p>
@@ -1671,6 +1670,36 @@
                     </td>
                     <td>
                       <p class="preformatted">"v2"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">any&lt;-map-start-reduce</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "xayb"
+ (any&lt;-map-start-reduce
+  (stringmap
+   :a "x"
+   :b "y")
+  ""
+  (fn : string
+   [current : string
+    key     : string
+    value   : any]
+   (copy current
+    value
+    key))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"xayb"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"xayb"</p>
                     </td>
                   </tr>
                   <tr>

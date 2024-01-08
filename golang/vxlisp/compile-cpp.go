@@ -635,10 +635,10 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	var listreleasename []string
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any-async", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value-async",
 		"vx/core/any<-func-async", "vx/core/any<-key-value-async",
-		"vx/core/any<-list-reduce-async", "vx/core/any<-list-reduce-next-async",
-		"vx/core/any<-none-async", "vx/core/any<-reduce-async",
-		"vx/core/any<-reduce-next-async":
+		"vx/core/any<-none-async",
+		"vx/core/any<-reduce-async", "vx/core/any<-reduce-next-async":
 		listsimplearg = append(listsimplearg, "vx_core::Type_any generic_any_1")
 	}
 	funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
@@ -670,11 +670,10 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 			"vx/core/boolean<-any":
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+			"vx/core/any<-any-key-value",
 			"vx/core/any<-int",
 			"vx/core/any<-func", "vx/core/any<-func-async",
 			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-			"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-async",
-			"vx/core/any<-list-reduce-next", "vx/core/any<-list-reduce-next-async",
 			"vx/core/any<-none", "vx/core/any<-none-async",
 			"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 			"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
@@ -751,10 +750,10 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 		"\n        vx_core::vx_release_one(this->vx_p_msgblock);" +
 		"\n      }"
 	switch NameFromFunc(fnc) {
-	case "vx/core/any<-any", "vx/core/any<-any-context", "vx/core/any<-func",
-		"vx/core/any<-int",
+	case "vx/core/any<-any", "vx/core/any<-any-context",
+		"vx/core/any<-any-key-value",
+		"vx/core/any<-func", "vx/core/any<-int",
 		"vx/core/any<-key-value", "vx/core/any<-none",
-		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-next",
 		"vx/core/boolean<-any":
 		returntype := CppNameTypeFromType(lang, fnc.vxtype)
@@ -782,6 +781,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 			"\n    }" +
 			"\n"
 	case "vx/core/any<-any-async", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value-async",
 		"vx/core/any<-func-async",
 		"vx/core/any<-none-async", "vx/core/any<-key-value-async",
 		"vx/core/any<-reduce-async", "vx/core/any<-reduce-next-async":
@@ -2434,7 +2434,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 				}
 				if valuetext == ":cpp" {
 					isNative = true
-				} else if BooleanFromStringStarts(valuetext, ":") {
+				} else if valuetext != ":auto" && BooleanFromStringStarts(valuetext, ":") {
 					isNative = false
 				} else if isNative {
 					if argvalue.name == "newline" {
@@ -2457,6 +2457,9 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 						}
 					}
 					argtext = StringRemoveQuotes(argtext)
+					if argtext == ":auto" {
+						argtext = LangNativeAutoFromFunc(lang, parentfn)
+					}
 					argtexts = append(argtexts, argtext)
 				}
 			}
@@ -2536,8 +2539,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
-								case "any<-key-value-async",
-									"any<-list-reduce-async", "any<-list-reduce-next-async",
+								case "any<-any-key-value-async", "any<-key-value-async",
 									"any<-reduce-async", "any<-reduce-next-async":
 									argtext = "" +
 										CppNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
@@ -2571,8 +2573,8 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									"\n  " + returntype + " output_1 = " + work + ";" +
 									"\n  return output_1;"
 								switch funcarg.vxtype.name {
-								case "any<-int", "any<-key-value",
-									"any<-list-reduce", "any<-list-reduce-next",
+								case "any<-int",
+									"any<-any-key-value", "any<-key-value",
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
 									argtext = "" +
@@ -3426,6 +3428,16 @@ func CppHeaderFnFromFunc(fnc *vxfunc) string {
 			"\n    typedef std::function<vx_core::vx_Type_async(vx_core::Type_context, vx_core::Type_any)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
+	case "vx/core/any<-any-key-value":
+		interfaces = "" +
+			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_string, vx_core::Type_any)> IFn;" +
+			"\n    IFn fn;" +
+			"\n    vx_core::vx_Type_listany lambdavars;"
+	case "vx/core/any<-any-key-value-async":
+		interfaces = "" +
+			"\n    typedef std::function<vx_core::vx_Type_async(vx_core::Type_any, vx_core::Type_string, vx_core::Type_any)> IFn;" +
+			"\n    IFn fn;" +
+			"\n    vx_core::vx_Type_listany lambdavars;"
 	case "vx/core/any<-func", "vx/core/any<-none":
 		interfaces = "" +
 			"\n    typedef std::function<vx_core::Type_any()> IFn;" +
@@ -3441,12 +3453,12 @@ func CppHeaderFnFromFunc(fnc *vxfunc) string {
 			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_int)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
-	case "vx/core/any<-list-reduce":
+	case "vx/core/any<-list-start-reduce":
 		interfaces = "" +
 			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
-	case "vx/core/any<-list-reduce-next":
+	case "vx/core/any<-list-start-reduce-next":
 		interfaces = "" +
 			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce_next)> IFn;" +
 			"\n    IFn fn;" +
@@ -3519,6 +3531,7 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 	var listsimpleargtext []string
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any-async", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value-async",
 		"vx/core/any<-func-async", "vx/core/any<-key-value-async",
 		"vx/core/any<-none-async", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next-async":
@@ -3575,20 +3588,20 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 	simpleargtext := StringFromListStringJoin(listsimpleargtext, ", ")
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context",
+		"vx/core/any<-any-key-value",
 		"vx/core/any<-int",
 		"vx/core/any<-func", "vx/core/any<-key-value",
-		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
-		"vx/core/any<-none", "vx/core/any<-reduce",
-		"vx/core/any<-reduce-next":
+		"vx/core/any<-none",
+		"vx/core/any<-reduce", "vx/core/any<-reduce-next":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + funcname + "::IFn fn) const = 0;" +
 			"\n    virtual vx_core::Type_any vx_" + funcname + "(" + simpleargtext + ") const = 0;"
 	case "vx/core/any<-any-async", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value-async",
 		"vx/core/any<-func-async", "vx/core/any<-key-value-async",
-		"vx/core/any<-list-reduce-async", "vx/core/any<-list-reduce-next-async",
-		"vx/core/any<-none-async", "vx/core/any<-reduce-async",
-		"vx/core/any<-reduce-next-async":
+		"vx/core/any<-none-async",
+		"vx/core/any<-reduce-async", "vx/core/any<-reduce-next-async":
 		extends = "public vx_core::Abstract_func"
 		abstractinterfaces += "" +
 			"\n    virtual vx_core::Func_" + funcname + " vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + funcname + "::IFn fn) const = 0;" +

@@ -618,6 +618,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">
             (f) any&lt;-any-context-async
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">
+            (f) any&lt;-any-key-value
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">
             (f) any&lt;-int
           </li>
@@ -636,14 +639,17 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">
             (f) any&lt;-list
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">
-            (f) any&lt;-list-reduce
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">
+            (f) any&lt;-list-start-reduce
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">
-            (f) any&lt;-list-reduce-next
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">
+            (f) any&lt;-list-start-reduce-next
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">
             (f) any&lt;-map
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">
+            (f) any&lt;-map-start-reduce
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">
             (f) any&lt;-none
@@ -2579,7 +2585,7 @@
   start
   fn-until
   fn-loop
-  1000)
+  10000)
  :test (test
         8
         (any&lt;-for-until-loop
@@ -2926,7 +2932,7 @@ output : list-1 := (empty list-1)
   start
   fn-until
   fn-loop
-  1000)
+  10000)
  :test (test
         8
         (any&lt;-for-until-loop
@@ -4215,7 +4221,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
             </li>
           </ul>
         </details>
@@ -4873,27 +4879,25 @@ output : list-1 := (empty list-1)
 
 (func + : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : int
    [total : int
     num   : int]
-   (+ total num))
- )
+   (+ total num)))
  :alias &quot;plus&quot;
  :doc   &quot;Math int plus&quot;)
 
 (func + : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : number
    [total : number
     num   : number]
-   (+ total num))
- )
+   (+ total num)))
  :alias &quot;plus&quot;
  :doc   &quot;Math number plus&quot;)
 
@@ -4943,7 +4947,7 @@ output : list-1 := (empty list-1)
 
 (func - : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : int
@@ -4955,7 +4959,7 @@ output : list-1 := (empty list-1)
 
 (func - : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : number
@@ -5012,7 +5016,7 @@ output : list-1 := (empty list-1)
 
 (func * : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   1
   (fn : int
@@ -5027,7 +5031,7 @@ output : list-1 := (empty list-1)
 
 (func * : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   1
   (fn : number
@@ -5117,7 +5121,7 @@ output : list-1 := (empty list-1)
 
 (func = : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -5199,7 +5203,7 @@ output : list-1 := (empty list-1)
 
 (func &lt; : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -5277,7 +5281,7 @@ output : list-1 := (empty list-1)
 
 (func &gt; : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -5361,7 +5365,7 @@ output : list-1 := (empty list-1)
   (case 0 true)
   (case 1 (:1 values))
   (else
-   (any&lt;-list-reduce-next : boolean
+   (any&lt;-list-start-reduce-next : boolean
     values
     true
     (fn : boolean
@@ -5407,6 +5411,12 @@ output : list-1 := (empty list-1)
  :async
  :context
  :doc &quot;Generic Function taking any value any-2 and returning generic any-1&quot;)
+
+(func any&lt;-any-key-value : any-1
+ [current : any-1
+  key     : string
+  value   : any-2]
+ :doc &quot;Generic Function returning Generic any-1 from a any-1, a key, and a value.&quot;)
 
 (func any&lt;-int : any-1
  [value : int]
@@ -5466,7 +5476,7 @@ output : list-1 := (empty list-1)
         (:2 (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)))
  :doc &quot;Returns nth value from a list or none if out of bounds&quot;)
 
-(func any&lt;-list-reduce : any-1
+(func any&lt;-list-start-reduce : any-1
  [list      : list-2
   valstart  : any-1
   fn-reduce : any&lt;-reduce]
@@ -5494,17 +5504,16 @@ output : list-1 := (empty list-1)
     }&quot;)
  :test (test
         24
-        (any&lt;-list-reduce : int
+        (any&lt;-list-start-reduce : int
          (intlist 3 2 4)
          1
          (fn : int
           [total : int
            num   : int]
-          (* total num))
-        ))
+          (* total num))))
  :doc &quot;Returns a val from a list reduce operation&quot;)
 
-(func any&lt;-list-reduce-next : any-1
+(func any&lt;-list-start-reduce-next : any-1
  [list           : list-2
   valstart       : any-1
   fn-reduce-next : any&lt;-reduce-next]
@@ -5569,6 +5578,30 @@ output : list-1 := (empty list-1)
           :c &quot;v3&quot;)
          :b))
  :doc &quot;Returns value from a map or empty if not found&quot;)
+
+(func any&lt;-map-start-reduce : any-1
+ [map       : map-1
+  start     : any-1
+  fn-reduce : any&lt;-any-key-value :: any-1 :: any-1]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;xayb&quot;
+        (any&lt;-map-start-reduce
+         (stringmap
+          :a &quot;x&quot;
+          :b &quot;y&quot;)
+         &quot;&quot;
+         (fn : string
+          [current : string
+           key     : string
+           value   : any]
+          (copy current
+           value
+           key))))
+ :doc &quot;Returns a value by reducing each element of a map.&quot;)
 
 (func any&lt;-none : any-1
  []
@@ -6713,7 +6746,7 @@ output : list-1 := (empty list-1)
 
 (func or : boolean
  [values : booleanlist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -12585,14 +12618,13 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func + : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : int
    [total : int
     num   : int]
-   (+ total num))
- )
+   (+ total num)))
  :alias &quot;plus&quot;
  :doc   &quot;Math int plus&quot;)</div>
                 </li>
@@ -12656,14 +12688,13 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func + : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : number
    [total : number
     num   : number]
-   (+ total num))
- )
+   (+ total num)))
  :alias &quot;plus&quot;
  :doc   &quot;Math number plus&quot;)</div>
                 </li>
@@ -12961,7 +12992,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func - : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : int
@@ -13031,7 +13062,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func - : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   0
   (fn : number
@@ -13338,7 +13369,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func * : int
  [nums : intlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   1
   (fn : int
@@ -13413,7 +13444,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func * : number
  [nums : numberlist :...]
- (any&lt;-list-reduce
+ (any&lt;-list-start-reduce
   nums
   1
   (fn : number
@@ -13701,7 +13732,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func = : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -14278,7 +14309,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(func &lt; : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -14750,7 +14781,7 @@ improves readability.</div>
                 <li>
                   <div class="source">(func &gt; : boolean
  [values : anylist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -15260,7 +15291,7 @@ improves readability.</div>
   (case 0 true)
   (case 1 (:1 values))
   (else
-   (any&lt;-list-reduce-next : boolean
+   (any&lt;-list-start-reduce-next : boolean
     values
     true
     (fn : boolean
@@ -15538,6 +15569,80 @@ improves readability.</div>
  :async
  :context
  :doc &quot;Generic Function taking any value any-2 and returning generic any-1&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/any&lt;-any-key-value">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Generic Function returning Generic any-1 from a any-1, a key, and a value.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any&lt;-any-key-value</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">current</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">key</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">value</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any&lt;-any-key-value : any-1
+ [current : any-1
+  key     : string
+  value   : any-2]
+ :doc &quot;Generic Function returning Generic any-1 from a any-1, a key, and a value.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -15961,8 +16066,8 @@ improves readability.</div>
               </ul>
             </details>
           </div>
-          <div class="d" id="d_func_vx/core/any&lt;-list-reduce">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce')">any&lt;-list-reduce</span></div>
+          <div class="d" id="d_func_vx/core/any&lt;-list-start-reduce">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
@@ -15972,7 +16077,7 @@ improves readability.</div>
             <div class="lbl">Function Name:</div>
             <ul>
               <li>
-                <div class="txt">any&lt;-list-reduce</div>
+                <div class="txt">any&lt;-list-start-reduce</div>
               </li>
             </ul>
             <div class="lbl">Return Type:</div>
@@ -16020,14 +16125,13 @@ improves readability.</div>
               <ul>
                 <li><div class="test">(test
  24
- (any&lt;-list-reduce : int
+ (any&lt;-list-start-reduce : int
   (intlist 3 2 4)
   1
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- ))</div></li>
+   (* total num))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -16036,7 +16140,7 @@ improves readability.</div>
               </summary>
               <ul>
                 <li>
-                  <div class="source">(func any&lt;-list-reduce : any-1
+                  <div class="source">(func any&lt;-list-start-reduce : any-1
  [list      : list-2
   valstart  : any-1
   fn-reduce : any&lt;-reduce]
@@ -16064,21 +16168,20 @@ improves readability.</div>
     }&quot;)
  :test (test
         24
-        (any&lt;-list-reduce : int
+        (any&lt;-list-start-reduce : int
          (intlist 3 2 4)
          1
          (fn : int
           [total : int
            num   : int]
-          (* total num))
-        ))
+          (* total num))))
  :doc &quot;Returns a val from a list reduce operation&quot;)</div>
                 </li>
               </ul>
             </details>
           </div>
-          <div class="d" id="d_func_vx/core/any&lt;-list-reduce-next">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-reduce-next')">any&lt;-list-reduce-next</span></div>
+          <div class="d" id="d_func_vx/core/any&lt;-list-start-reduce-next">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
@@ -16088,7 +16191,7 @@ improves readability.</div>
             <div class="lbl">Function Name:</div>
             <ul>
               <li>
-                <div class="txt">any&lt;-list-reduce-next</div>
+                <div class="txt">any&lt;-list-start-reduce-next</div>
               </li>
             </ul>
             <div class="lbl">Return Type:</div>
@@ -16142,7 +16245,7 @@ improves readability.</div>
               </summary>
               <ul>
                 <li>
-                  <div class="source">(func any&lt;-list-reduce-next : any-1
+                  <div class="source">(func any&lt;-list-start-reduce-next : any-1
  [list           : list-2
   valstart       : any-1
   fn-reduce-next : any&lt;-reduce-next]
@@ -16278,6 +16381,112 @@ improves readability.</div>
           :c &quot;v3&quot;)
          :b))
  :doc &quot;Returns value from a map or empty if not found&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/any&lt;-map-start-reduce">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a value by reducing each element of a map.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any&lt;-map-start-reduce</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">map</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/map-1')">vx/core/map-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">start</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">fn-reduce</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-any-key-value')">vx/core/any&lt;-any-key-value</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;xayb&quot;
+ (any&lt;-map-start-reduce
+  (stringmap
+   :a &quot;x&quot;
+   :b &quot;y&quot;)
+  &quot;&quot;
+  (fn : string
+   [current : string
+    key     : string
+    value   : any]
+   (copy current
+    value
+    key))))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any&lt;-map-start-reduce : any-1
+ [map       : map-1
+  start     : any-1
+  fn-reduce : any&lt;-any-key-value :: any-1 :: any-1]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;xayb&quot;
+        (any&lt;-map-start-reduce
+         (stringmap
+          :a &quot;x&quot;
+          :b &quot;y&quot;)
+         &quot;&quot;
+         (fn : string
+          [current : string
+           key     : string
+           value   : any]
+          (copy current
+           value
+           key))))
+ :doc &quot;Returns a value by reducing each element of a map.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -22046,7 +22255,7 @@ improves readability.</div>
                 <li>
                   <div class="source">(func or : boolean
  [values : booleanlist :...]
- (any&lt;-list-reduce-next : boolean
+ (any&lt;-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -28826,7 +29035,7 @@ improves readability.</div>
      (delimlist-pos&lt;-string-delimlist
       text
       delimlist)]
-    (any&lt;-list-reduce : delim
+    (any&lt;-list-start-reduce : delim
      resolvedlist
      (empty delim)
      delim-first&lt;-delim-delim))))
@@ -34966,7 +35175,7 @@ improves readability.</div>
      (delimlist-pos&lt;-string-delimlist
       text
       delimlist)]
-    (any&lt;-list-reduce : delim
+    (any&lt;-list-start-reduce : delim
      resolvedlist
      (empty delim)
      delim-first&lt;-delim-delim))))
@@ -46499,7 +46708,7 @@ improves readability.</div>
 (func xml-parse&lt;-xml-textblocklist : xml
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
- (any&lt;-list-reduce : xml
+ (any&lt;-list-start-reduce : xml
   textblocklist
   xmlarg
   (fn : xml
@@ -46777,7 +46986,7 @@ improves readability.</div>
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
  (let : xml
-  [xmlchg : xml := (any&lt;-list-reduce : xml
+  [xmlchg : xml := (any&lt;-list-start-reduce : xml
                     textblocklist
                     xmlarg
                     (fn : xml
@@ -49488,7 +49697,7 @@ improves readability.</div>
                   <div class="source">(func xml-parse&lt;-xml-textblocklist : xml
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
- (any&lt;-list-reduce : xml
+ (any&lt;-list-start-reduce : xml
   textblocklist
   xmlarg
   (fn : xml
@@ -49998,7 +50207,7 @@ improves readability.</div>
  [xmlarg        : xml
   textblocklist : tb/textblocklist]
  (let : xml
-  [xmlchg : xml := (any&lt;-list-reduce : xml
+  [xmlchg : xml := (any&lt;-list-start-reduce : xml
                     textblocklist
                     xmlarg
                     (fn : xml
@@ -61878,7 +62087,7 @@ improves readability.</div>
 (func is-type&lt;-any-typelist : boolean
  [val      : any
   typelist : typelist]
- (any&lt;-list-reduce : boolean
+ (any&lt;-list-start-reduce : boolean
   typelist
   false
   (fn : boolean
@@ -63136,7 +63345,7 @@ improves readability.</div>
                   <div class="source">(func is-type&lt;-any-typelist : boolean
  [val      : any
   typelist : typelist]
- (any&lt;-list-reduce : boolean
+ (any&lt;-list-start-reduce : boolean
   typelist
   false
   (fn : boolean

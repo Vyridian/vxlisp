@@ -1167,21 +1167,20 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
-     :casename "any<-list-reduce"
+     :casename "any<-list-start-reduce"
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
         :describename
          "(test
  24
- (any<-list-reduce : int
+ (any<-list-start-reduce : int
   (intlist 3 2 4)
   1
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- ))"
+   (* total num))))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -1212,6 +1211,35 @@
           :passfail true
           :expected "v2"
           :actual "v2"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "any<-map-start-reduce"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"xayb\"
+ (any<-map-start-reduce
+  (stringmap
+   :a \"x\"
+   :b \"y\")
+  \"\"
+  (fn : string
+   [current : string
+    key     : string
+    value   : any]
+   (copy current
+    value
+    key))))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "xayb"
+          :actual "xayb"))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
@@ -2246,15 +2274,17 @@
       :any<-any-async 0
       :any<-any-context 0
       :any<-any-context-async 0
+      :any<-any-key-value 0
       :any<-func 0
       :any<-func-async 0
       :any<-int 0
       :any<-key-value 0
       :any<-key-value-async 0
       :any<-list 2
-      :any<-list-reduce 1
-      :any<-list-reduce-next 0
+      :any<-list-start-reduce 1
+      :any<-list-start-reduce-next 0
       :any<-map 1
+      :any<-map-start-reduce 1
       :any<-none 0
       :any<-none-async 0
       :any<-reduce 0
@@ -2441,11 +2471,11 @@
     :bigospacenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 158)
+      :total 160)
     :bigotimenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 158)
+      :total 160)
     :constnums
      (vx/test/testcoveragenums
       :pct 14
@@ -2454,19 +2484,19 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 86
-      :tests 212
-      :total 244)
+      :tests 214
+      :total 246)
     :funcnums
      (vx/test/testcoveragenums
       :pct 47
-      :tests 63
-      :total 132)
+      :tests 64
+      :total 134)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
       :pct 31
-      :tests 69
-      :total 218)
+      :tests 70
+      :total 220)
     :typenums
      (vx/test/testcoveragenums
       :pct 5

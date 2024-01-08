@@ -1181,20 +1181,20 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_list_reduce(final Core.Type_context context) {
+  static Test.Type_testcase f_any_from_list_start_reduce(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "any<-list-reduce",
+      ":casename", "any<-list-start-reduce",
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 24\n (any<-list-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))\n ))",
+          ":describename", "(test\n 24\n (any<-list-start-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_int(24),
-              Core.f_any_from_list_reduce(
+              Core.f_any_from_list_start_reduce(
                 Core.t_int,
                 Core.f_new(
                   Core.t_intlist,
@@ -1246,6 +1246,52 @@ public final class CoreTest {
                   )
                 ),
                 Core.vx_new_string(":b")
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_any_from_map_start_reduce(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "any<-map-start-reduce",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"xayb\"\n (any<-map-start-reduce\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"\"\n  (fn : string\n   [current : string\n    key     : string\n    value   : any]\n   (copy current\n    value\n    key))))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("xayb"),
+              Core.f_any_from_map_start_reduce(
+                Core.t_string,
+                Core.f_new(
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("x"),
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("y")
+                  )
+                ),
+                Core.vx_new_string(""),
+                Core.t_any_from_any_key_value.vx_fn_new((current_any, key_any, value_any) -> {
+                  Core.Type_string current = Core.f_any_from_any(Core.t_string, current_any);
+                  Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+                  Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+                  return 
+                    Core.f_copy(
+                      current,
+                      Core.t_anylist.vx_new(
+                        value,
+                        key
+                      )
+                    );
+                })
               )
             )
         )
@@ -2661,8 +2707,9 @@ public final class CoreTest {
       CoreTest.f_and(context),
       CoreTest.f_and_1(context),
       CoreTest.f_any_from_list(context),
-      CoreTest.f_any_from_list_reduce(context),
+      CoreTest.f_any_from_list_start_reduce(context),
       CoreTest.f_any_from_map(context),
+      CoreTest.f_any_from_map_start_reduce(context),
       CoreTest.f_compare(context),
       CoreTest.f_contains(context),
       CoreTest.f_contains_1(context),
@@ -2704,11 +2751,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 212, ":total", 244), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 63, ":total", 132), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 158), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 158), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 69, ":total", 218), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 214, ":total", 246), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 64, ":total", 134), 
+      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
+      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 70, ":total", 220), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 72)
     );
   }
@@ -2850,15 +2897,17 @@ public final class CoreTest {
         ":any<-any-async", 0,
         ":any<-any-context", 0,
         ":any<-any-context-async", 0,
+        ":any<-any-key-value", 0,
         ":any<-func", 0,
         ":any<-func-async", 0,
         ":any<-int", 0,
         ":any<-key-value", 0,
         ":any<-key-value-async", 0,
         ":any<-list", 2,
-        ":any<-list-reduce", 1,
-        ":any<-list-reduce-next", 0,
+        ":any<-list-start-reduce", 1,
+        ":any<-list-start-reduce-next", 0,
         ":any<-map", 1,
+        ":any<-map-start-reduce", 1,
         ":any<-none", 0,
         ":any<-none-async", 0,
         ":any<-reduce", 0,

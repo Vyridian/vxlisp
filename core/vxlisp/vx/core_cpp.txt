@@ -29,8 +29,8 @@ any<-func-async
 any<-key-value
 any<-key-value-async
 any<-list
-any<-list-reduce
-any<-list-reduce-next
+any<-list-start-reduce
+any<-list-start-reduce-next
 any<-map
 any<-none
 any<-none-async
@@ -78,15 +78,6 @@ let-async
   typedef std::future<vx_core::Type_any>* vx_Type_future;
   typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
 
-/*
-  // class vx_Abstract_const
-  class vx_Abstract_const {
-  public:
-    virtual vx_core::Type_constdef vx_constdef() const = 0;
-  };
-  typedef vx_core::vx_Abstract_const* vx_Type_const;
-*/
-
   // class vx_Class_async
   class vx_Class_async {
   public:
@@ -117,6 +108,9 @@ let-async
 
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+
+  // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
+  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce);
 
   // vx_anylist_from_arraystring(long, array<string>)
   vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[], bool isskipfirst);
@@ -412,6 +406,14 @@ let-async
     return output;
   }
 
+  // vx_empty(T)
+  template <class T> static T* vx_empty(T* generic_any_1) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_empty();
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_map(T, key, defaultval)
   template <class T> static T* vx_any_from_map(const std::map<std::string, T*> &map, const std::string key, T* defaultval) {
     T* output = defaultval;
@@ -439,14 +441,6 @@ let-async
   template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = copyval->vx_copy(copyval, vals);
-    output = vx_core::vx_any_from_any(generic_any_1, val);
-    return output;
-  }
-
-  // vx_empty(T)
-  template <class T> static T* vx_empty(T* generic_any_1) {
-    T* output;
-    vx_core::Type_any val = generic_any_1->vx_empty();
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
@@ -626,6 +620,17 @@ let-async
         output = fn_reduce_next->vx_any_from_reduce_next(output, current, next);
       }
       current = next;
+    }
+    return output;
+  }
+
+  // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
+  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce) {
+    vx_core::Type_any output = start;
+    std::map<std::string, vx_core::Type_any> mapval = map->vx_map();
+    for (auto const& [skey, value] : mapval) {
+      vx_core::Type_string key = vx_core::vx_new_string(skey);
+      output = fn_reduce->vx_any_from_any_key_value(output, key, value);
     }
     return output;
   }

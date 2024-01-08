@@ -225,7 +225,7 @@
      (delimlist-pos<-string-delimlist
       text
       delimlist)]
-    (any<-list-reduce : delim
+    (any<-list-start-reduce : delim
      resolvedlist
      (empty delim)
      delim-first<-delim-delim))))

@@ -301,7 +301,7 @@ export default class vx_type {
   // (func is-type<-any-typelist)
   static f_is_type_from_any_typelist(val, typelist) {
     let output = vx_core.e_boolean
-    output = vx_core.f_any_from_list_reduce(
+    output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_typelist},
       typelist,
       false,

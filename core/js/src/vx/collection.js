@@ -145,7 +145,7 @@ export default class vx_collection {
   static f_any_from_for_until_loop(generic, start, fn_until, fn_loop) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_collection.f_any_from_for_until_loop_max({"any-1": vx_core.t_any}, start, fn_until, fn_loop, 1000)
+    output = vx_collection.f_any_from_for_until_loop_max({"any-1": vx_core.t_any}, start, fn_until, fn_loop, 10000)
     return output
   }
 

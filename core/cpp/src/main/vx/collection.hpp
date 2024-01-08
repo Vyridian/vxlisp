@@ -434,7 +434,7 @@ namespace vx_collection {
   template <class T> T* f_any_from_for_until_loop(T* generic_any_1, T* start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve({start, fn_until, fn_loop});
-    output = vx_collection::f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, vx_core::vx_new_int(1000));
+    output = vx_collection::f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, vx_core::vx_new_int(10000));
     vx_core::vx_release_one_except({start, fn_until, fn_loop}, output);
     return output;
   }

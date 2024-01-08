@@ -646,27 +646,25 @@
 
 (func + : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : int
    [total : int
     num   : int]
-   (+ total num))
- )
+   (+ total num)))
  :alias "plus"
  :doc   "Math int plus")
 
 (func + : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : number
    [total : number
     num   : number]
-   (+ total num))
- )
+   (+ total num)))
  :alias "plus"
  :doc   "Math number plus")
 
@@ -716,7 +714,7 @@
 
 (func - : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : int
@@ -728,7 +726,7 @@
 
 (func - : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   0
   (fn : number
@@ -785,7 +783,7 @@
 
 (func * : int
  [nums : intlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   1
   (fn : int
@@ -800,7 +798,7 @@
 
 (func * : number
  [nums : numberlist :...]
- (any<-list-reduce
+ (any<-list-start-reduce
   nums
   1
   (fn : number
@@ -890,7 +888,7 @@
 
 (func = : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   false
   (fn : boolean
@@ -972,7 +970,7 @@
 
 (func < : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -1050,7 +1048,7 @@
 
 (func > : boolean
  [values : anylist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   true
   (fn : boolean
@@ -1134,7 +1132,7 @@
   (case 0 true)
   (case 1 (:1 values))
   (else
-   (any<-list-reduce-next : boolean
+   (any<-list-start-reduce-next : boolean
     values
     true
     (fn : boolean
@@ -1180,6 +1178,12 @@
  :async
  :context
  :doc "Generic Function taking any value any-2 and returning generic any-1")
+
+(func any<-any-key-value : any-1
+ [current : any-1
+  key     : string
+  value   : any-2]
+ :doc "Generic Function returning Generic any-1 from a any-1, a key, and a value.")
 
 (func any<-int : any-1
  [value : int]
@@ -1239,7 +1243,7 @@
         (:2 (stringlist "a" "b" "c")))
  :doc "Returns nth value from a list or none if out of bounds")
 
-(func any<-list-reduce : any-1
+(func any<-list-start-reduce : any-1
  [list      : list-2
   valstart  : any-1
   fn-reduce : any<-reduce]
@@ -1267,17 +1271,16 @@
     }")
  :test (test
         24
-        (any<-list-reduce : int
+        (any<-list-start-reduce : int
          (intlist 3 2 4)
          1
          (fn : int
           [total : int
            num   : int]
-          (* total num))
-        ))
+          (* total num))))
  :doc "Returns a val from a list reduce operation")
 
-(func any<-list-reduce-next : any-1
+(func any<-list-start-reduce-next : any-1
  [list           : list-2
   valstart       : any-1
   fn-reduce-next : any<-reduce-next]
@@ -1342,6 +1345,30 @@
           :c "v3")
          :b))
  :doc "Returns value from a map or empty if not found")
+
+(func any<-map-start-reduce : any-1
+ [map       : map-1
+  start     : any-1
+  fn-reduce : any<-any-key-value :: any-1 :: any-1]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "xayb"
+        (any<-map-start-reduce
+         (stringmap
+          :a "x"
+          :b "y")
+         ""
+         (fn : string
+          [current : string
+           key     : string
+           value   : any]
+          (copy current
+           value
+           key))))
+ :doc "Returns a value by reducing each element of a map.")
 
 (func any<-none : any-1
  []
@@ -2486,7 +2513,7 @@
 
 (func or : boolean
  [values : booleanlist :...]
- (any<-list-reduce-next : boolean
+ (any<-list-start-reduce-next : boolean
   values
   false
   (fn : boolean

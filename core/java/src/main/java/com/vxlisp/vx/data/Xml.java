@@ -1354,7 +1354,7 @@ public final class Xml {
 
   public static Xml.Type_xml f_xml_parse_from_xml_textblocklist(final Xml.Type_xml xmlarg, final Textblock.Type_textblocklist textblocklist) {
     Xml.Type_xml output = Xml.e_xml;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Xml.t_xml,
       textblocklist,
       xmlarg,
@@ -1448,7 +1448,7 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Xml.Type_xml xmlchg = Core.f_any_from_list_reduce(
+        final Xml.Type_xml xmlchg = Core.f_any_from_list_start_reduce(
           Xml.t_xml,
           textblocklist,
           xmlarg,

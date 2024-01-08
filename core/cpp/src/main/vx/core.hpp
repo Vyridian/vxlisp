@@ -513,6 +513,10 @@ namespace vx_core {
   typedef Abstract_any_from_any_context_async* Func_any_from_any_context_async;
   extern Func_any_from_any_context_async e_any_from_any_context_async;
   extern Func_any_from_any_context_async t_any_from_any_context_async;
+  class Abstract_any_from_any_key_value;
+  typedef Abstract_any_from_any_key_value* Func_any_from_any_key_value;
+  extern Func_any_from_any_key_value e_any_from_any_key_value;
+  extern Func_any_from_any_key_value t_any_from_any_key_value;
   class Abstract_any_from_func;
   typedef Abstract_any_from_func* Func_any_from_func;
   extern Func_any_from_func e_any_from_func;
@@ -537,18 +541,22 @@ namespace vx_core {
   typedef Abstract_any_from_list* Func_any_from_list;
   extern Func_any_from_list e_any_from_list;
   extern Func_any_from_list t_any_from_list;
-  class Abstract_any_from_list_reduce;
-  typedef Abstract_any_from_list_reduce* Func_any_from_list_reduce;
-  extern Func_any_from_list_reduce e_any_from_list_reduce;
-  extern Func_any_from_list_reduce t_any_from_list_reduce;
-  class Abstract_any_from_list_reduce_next;
-  typedef Abstract_any_from_list_reduce_next* Func_any_from_list_reduce_next;
-  extern Func_any_from_list_reduce_next e_any_from_list_reduce_next;
-  extern Func_any_from_list_reduce_next t_any_from_list_reduce_next;
+  class Abstract_any_from_list_start_reduce;
+  typedef Abstract_any_from_list_start_reduce* Func_any_from_list_start_reduce;
+  extern Func_any_from_list_start_reduce e_any_from_list_start_reduce;
+  extern Func_any_from_list_start_reduce t_any_from_list_start_reduce;
+  class Abstract_any_from_list_start_reduce_next;
+  typedef Abstract_any_from_list_start_reduce_next* Func_any_from_list_start_reduce_next;
+  extern Func_any_from_list_start_reduce_next e_any_from_list_start_reduce_next;
+  extern Func_any_from_list_start_reduce_next t_any_from_list_start_reduce_next;
   class Abstract_any_from_map;
   typedef Abstract_any_from_map* Func_any_from_map;
   extern Func_any_from_map e_any_from_map;
   extern Func_any_from_map t_any_from_map;
+  class Abstract_any_from_map_start_reduce;
+  typedef Abstract_any_from_map_start_reduce* Func_any_from_map_start_reduce;
+  extern Func_any_from_map_start_reduce e_any_from_map_start_reduce;
+  extern Func_any_from_map_start_reduce t_any_from_map_start_reduce;
   class Abstract_any_from_none;
   typedef Abstract_any_from_none* Func_any_from_none;
   extern Func_any_from_none e_any_from_none;
@@ -990,15 +998,6 @@ namespace vx_core {
   typedef std::future<vx_core::Type_any>* vx_Type_future;
   typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
 
-/*
-  // class vx_Abstract_const
-  class vx_Abstract_const {
-  public:
-    virtual vx_core::Type_constdef vx_constdef() const = 0;
-  };
-  typedef vx_core::vx_Abstract_const* vx_Type_const;
-*/
-
   // class vx_Class_async
   class vx_Class_async {
   public:
@@ -1029,6 +1028,9 @@ namespace vx_core {
 
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+
+  // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
+  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce);
 
   // vx_anylist_from_arraystring(long, array<string>)
   vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[], bool isskipfirst);
@@ -1324,6 +1326,14 @@ namespace vx_core {
     return output;
   }
 
+  // vx_empty(T)
+  template <class T> static T* vx_empty(T* generic_any_1) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_empty();
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_map(T, key, defaultval)
   template <class T> static T* vx_any_from_map(const std::map<std::string, T*> &map, const std::string key, T* defaultval) {
     T* output = defaultval;
@@ -1351,14 +1361,6 @@ namespace vx_core {
   template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = copyval->vx_copy(copyval, vals);
-    output = vx_core::vx_any_from_any(generic_any_1, val);
-    return output;
-  }
-
-  // vx_empty(T)
-  template <class T> static T* vx_empty(T* generic_any_1) {
-    T* output;
-    vx_core::Type_any val = generic_any_1->vx_empty();
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
@@ -2271,22 +2273,20 @@ namespace vx_core {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func any<-list-reduce)
-  class Abstract_any_from_list_reduce : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func any<-list-start-reduce)
+  class Abstract_any_from_list_start_reduce : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_any_from_list_reduce() {};
-    virtual ~Abstract_any_from_list_reduce() = 0;
+    Abstract_any_from_list_start_reduce() {};
+    virtual ~Abstract_any_from_list_start_reduce() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce)> IFn;
     IFn fn;
     vx_core::vx_Type_listany lambdavars;
-    virtual vx_core::Func_any_from_list_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce::IFn fn) const = 0;
-    virtual vx_core::Type_any vx_any_from_list_reduce(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce fn_reduce) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_any_from_list_reduce : public virtual Abstract_any_from_list_reduce {
+  class Class_any_from_list_start_reduce : public virtual Abstract_any_from_list_start_reduce {
   public:
-    Class_any_from_list_reduce();
-    virtual ~Class_any_from_list_reduce() override;
+    Class_any_from_list_start_reduce();
+    virtual ~Class_any_from_list_start_reduce() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -2296,27 +2296,23 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_list_reduce vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce::IFn fn) const;
-    virtual vx_core::Type_any vx_any_from_list_reduce(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce fn_reduce) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func any<-list-reduce-next)
-  class Abstract_any_from_list_reduce_next : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func any<-list-start-reduce-next)
+  class Abstract_any_from_list_start_reduce_next : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_any_from_list_reduce_next() {};
-    virtual ~Abstract_any_from_list_reduce_next() = 0;
+    Abstract_any_from_list_start_reduce_next() {};
+    virtual ~Abstract_any_from_list_start_reduce_next() = 0;
     typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce_next)> IFn;
     IFn fn;
     vx_core::vx_Type_listany lambdavars;
-    virtual vx_core::Func_any_from_list_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce_next::IFn fn) const = 0;
-    virtual vx_core::Type_any vx_any_from_list_reduce_next(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_any_from_list_reduce_next : public virtual Abstract_any_from_list_reduce_next {
+  class Class_any_from_list_start_reduce_next : public virtual Abstract_any_from_list_start_reduce_next {
   public:
-    Class_any_from_list_reduce_next();
-    virtual ~Class_any_from_list_reduce_next() override;
+    Class_any_from_list_start_reduce_next();
+    virtual ~Class_any_from_list_start_reduce_next() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -2326,8 +2322,6 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_list_reduce_next vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_list_reduce_next::IFn fn) const;
-    virtual vx_core::Type_any vx_any_from_list_reduce_next(vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -6269,6 +6263,36 @@ namespace vx_core {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func any<-any-key-value)
+  class Abstract_any_from_any_key_value : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_any_key_value() {};
+    virtual ~Abstract_any_from_any_key_value() = 0;
+    typedef std::function<vx_core::Type_any(vx_core::Type_any, vx_core::Type_string, vx_core::Type_any)> IFn;
+    IFn fn;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_any_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_key_value::IFn fn) const = 0;
+    virtual vx_core::Type_any vx_any_from_any_key_value(vx_core::Type_any current, vx_core::Type_string key, vx_core::Type_any value) const = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_any_key_value : public virtual Abstract_any_from_any_key_value {
+  public:
+    Class_any_from_any_key_value();
+    virtual ~Class_any_from_any_key_value() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_key_value::IFn fn) const;
+    virtual vx_core::Type_any vx_any_from_any_key_value(vx_core::Type_any current, vx_core::Type_string key, vx_core::Type_any value) const;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func any<-int)
   class Abstract_any_from_int : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -6296,6 +6320,29 @@ namespace vx_core {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_int vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int::IFn fn) const;
     virtual vx_core::Type_any vx_any_from_int(vx_core::Type_int value) const;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func any<-map-start-reduce)
+  class Abstract_any_from_map_start_reduce : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_map_start_reduce() {};
+    virtual ~Abstract_any_from_map_start_reduce() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_map_start_reduce : public virtual Abstract_any_from_map_start_reduce {
+  public:
+    Class_any_from_map_start_reduce();
+    virtual ~Class_any_from_map_start_reduce() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -8348,8 +8395,8 @@ namespace vx_core {
     return output;
   }
 
-  // (func any<-list-reduce)
-  template <class T, class Y> T* f_any_from_list_reduce(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce fn_reduce) {
+  // (func any<-list-start-reduce)
+  template <class T, class Y> T* f_any_from_list_start_reduce(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce fn_reduce) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve({list, valstart, fn_reduce});
     vx_core::Type_any work = valstart;
@@ -8362,8 +8409,8 @@ namespace vx_core {
     return output;
   }
 
-  // (func any<-list-reduce-next)
-  template <class T, class Y> T* f_any_from_list_reduce_next(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
+  // (func any<-list-start-reduce-next)
+  template <class T, class Y> T* f_any_from_list_start_reduce_next(T* generic_any_1, Y* list, T* valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve({list, valstart, fn_reduce_next});
     vx_core::Type_any result = vx_core::vx_any_from_list_result_next(generic_any_1, list, valstart, fn_reduce_next);
@@ -8562,11 +8609,29 @@ namespace vx_core {
     return output;
   }
 
+  // (func any<-any-key-value)
+  template <class T, class U> T* f_any_from_any_key_value(T* generic_any_1, T* current, vx_core::Type_string key, U* value) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({current, key, value});
+    vx_core::vx_release_one_except({current, key, value}, output);
+    return output;
+  }
+
   // (func any<-int)
   template <class T> T* f_any_from_int(T* generic_any_1, vx_core::Type_int value) {
     T* output = vx_core::vx_empty(generic_any_1);
     vx_core::vx_reserve(value);
     vx_core::vx_release_one_except(value, output);
+    return output;
+  }
+
+  // (func any<-map-start-reduce)
+  template <class T, class N> T* f_any_from_map_start_reduce(T* generic_any_1, N* map, T* start, vx_core::Func_any_from_any_key_value fn_reduce) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({map, start, fn_reduce});
+    vx_core::Type_any result = vx_core::vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+    output = vx_core::vx_any_from_any(generic_any_1, result);
+    vx_core::vx_release_one_except({map, start, fn_reduce}, output);
     return output;
   }
 

@@ -1288,7 +1288,7 @@ public final class Type {
 
   public static Core.Type_boolean f_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_boolean,
       typelist,
       Core.vx_new_boolean(false),

@@ -507,10 +507,10 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		case "vx/core/copy", "vx/core/empty", "vx/core/new":
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+			"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
 			"vx/core/any<-int",
 			"vx/core/any<-func", "vx/core/any<-func-async",
 			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-			"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
 			"vx/core/any<-none", "vx/core/any<-none-async",
 			"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 			"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
@@ -573,12 +573,11 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
 		"vx/core/any<-int",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-async",
-		"vx/core/any<-list-reduce-next", "vx/core/any<-list-reduce-next-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
 		"vx/core/boolean<-any":
@@ -1915,7 +1914,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 				}
 				if valuetext == (":" + lang.name) {
 					isNative = true
-				} else if BooleanFromStringStarts(valuetext, ":") {
+				} else if valuetext != ":auto" && BooleanFromStringStarts(valuetext, ":") {
 					isNative = false
 				} else if isNative {
 					if argvalue.name == "newline" {
@@ -1936,8 +1935,11 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 						} else if argvalue.name != "" {
 							multiline = true
 						}
+						argtext = StringRemoveQuotes(argtext)
+						if argtext == ":auto" {
+							argtext = LangNativeAutoFromFunc(lang, parentfn)
+						}
 					}
-					argtext = StringRemoveQuotes(argtext)
 					argtexts = append(argtexts, argtext)
 				}
 			}
@@ -2024,8 +2026,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
-								case "any<-key-value-async",
-									"any<-list-reduce-async", "any<-list-reduce-next-async",
+								case "any<-any-key-value-async", "any<-key-value-async",
 									"any<-reduce-async", "any<-reduce-next-async":
 									argtext = "" +
 										LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
@@ -2052,8 +2053,8 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
-								case "any<-int", "any<-key-value",
-									"any<-list-reduce", "any<-list-reduce-next",
+								case "any<-int",
+									"any<-any-key-value", "any<-key-value",
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
 									argtext = "" +
@@ -2157,9 +2158,8 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 								}
 							case ":funcref":
 								switch funcarg.vxtype.name {
-								case "any<-key-value", "any<-key-value-async",
-									"any<-list-reduce", "any<-list-reduce-async",
-									"any<-list-reduce-next", "any<-list-reduce-next-async",
+								case "any<-any-key-value", "any<-any-key-value-async",
+									"any<-key-value", "any<-key-value-async",
 									"any<-reduce", "any<-reduce-async",
 									"any<-reduce-next", "any<-reduce-next-async":
 									funcargfunc := FuncFromValue(argvalue)
@@ -2725,10 +2725,10 @@ func LangInterfaceFnFromFunc(lang *vxlang, fnc *vxfunc) string {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
 		"vx/core/any<-int",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
-		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
@@ -2818,9 +2818,9 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-		"vx/core/any<-list-reduce", "vx/core/any<-list-reduce-next",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
@@ -2981,8 +2981,16 @@ func LangNameFFromFunc(lang *vxlang, fnc *vxfunc) string {
 	return name
 }
 
+func LangNameFromArg(lang *vxlang, arg vxarg) string {
+	return LangFromName(arg.alias)
+}
+
 func LangNameFromFunc(fnc *vxfunc) string {
 	return LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
+}
+
+func LangNameFromFuncFull(lang *vxlang, fnc *vxfunc) string {
+	return LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc)
 }
 
 func LangNameFromPkgName(lang *vxlang, pkgname string) string {
@@ -3094,6 +3102,35 @@ func LangNamespaceFromPackage(lang *vxlang, pkgname string) (string, string) {
 		namespaceclose = "\n}\n}\n"
 	}
 	return namespaceopen, namespaceclose
+}
+
+func LangNativeAutoFromFunc(lang *vxlang, fnc *vxfunc) string {
+	output := ""
+	var listargname []string
+	if fnc.generictype != nil {
+		argname := LangNameTFromTypeGeneric(lang, fnc.generictype)
+		listargname = append(listargname, argname)
+	}
+	if fnc.context {
+		argname := "context"
+		listargname = append(listargname, argname)
+	}
+	for _, arg := range fnc.listarg {
+		argname := LangNameFromArg(lang, arg)
+		listargname = append(listargname, argname)
+	}
+	argnames := StringFromListStringJoin(listargname, ", ")
+	output = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangNameFromFunc(fnc) + "(" + argnames + ")" + lang.lineend
+	switch lang.name {
+	case "cpp":
+		if fnc.generictype != nil {
+			argname := LangNameTFromTypeGeneric(lang, fnc.generictype)
+			output = "" +
+				"vx_core::Type_any result = " + output +
+				"\noutput = vx_core::vx_any_from_any(" + argname + ", result);"
+		}
+	}
+	return output
 }
 
 func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname string) (string, string) {

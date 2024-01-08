@@ -215,6 +215,20 @@ public final class Core {
     return output;
   }
 
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  public static <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, Core.Func_any_from_any_key_value fn_reduce) {
+    T output = Core.f_empty(generic_any_1);
+    output = start;
+    Map<String, Core.Type_any> mapval = map.vx_map();
+    Set<String> keys = mapval.keySet();
+    for (String skey : keys) {
+      Core.Type_string key = Core.vx_new_string(skey);
+      Core.Type_any value = mapval.get(skey);
+      output = fn_reduce.vx_any_from_any_key_value(generic_any_1, output, key, value);
+    }
+    return output;
+  }
+
   // vx_any_from_map(generic_any_1, map, string)
   public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
@@ -11503,7 +11517,7 @@ public final class Core {
 
   public static Core.Type_int f_multiply_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_int,
       nums,
       Core.vx_new_int(1),
@@ -11604,7 +11618,7 @@ public final class Core {
 
   public static Core.Type_number f_multiply_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_number,
       nums,
       Core.vx_new_int(1),
@@ -11871,7 +11885,7 @@ public final class Core {
 
   public static Core.Type_int f_plus_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_int,
       nums,
       Core.vx_new_int(0),
@@ -11972,7 +11986,7 @@ public final class Core {
 
   public static Core.Type_number f_plus_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_number,
       nums,
       Core.vx_new_int(0),
@@ -12330,7 +12344,7 @@ public final class Core {
 
   public static Core.Type_int f_minus_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_int,
       nums,
       Core.vx_new_int(0),
@@ -12431,7 +12445,7 @@ public final class Core {
 
   public static Core.Type_number f_minus_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
-    output = Core.f_any_from_list_reduce(
+    output = Core.f_any_from_list_start_reduce(
       Core.t_number,
       nums,
       Core.vx_new_int(0),
@@ -12891,7 +12905,7 @@ public final class Core {
 
   public static Core.Type_boolean f_lt_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_any_from_list_reduce_next(
+    output = Core.f_any_from_list_start_reduce_next(
       Core.t_boolean,
       values,
       Core.vx_new_boolean(true),
@@ -13429,7 +13443,7 @@ public final class Core {
 
   public static Core.Type_boolean f_eq_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_any_from_list_reduce_next(
+    output = Core.f_any_from_list_start_reduce_next(
       Core.t_boolean,
       values,
       Core.vx_new_boolean(false),
@@ -13713,7 +13727,7 @@ public final class Core {
 
   public static Core.Type_boolean f_gt_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_any_from_list_reduce_next(
+    output = Core.f_any_from_list_start_reduce_next(
       Core.t_boolean,
       values,
       Core.vx_new_boolean(true),
@@ -14372,7 +14386,7 @@ public final class Core {
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_any_from_list_reduce_next(
+            return Core.f_any_from_list_start_reduce_next(
               Core.t_boolean,
               values,
               Core.vx_new_boolean(true),
@@ -14801,6 +14815,108 @@ public final class Core {
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
     CompletableFuture<T> output = Core.async_new_completed(Core.f_empty(generic_any_1));
+    return output;
+  }
+
+  /**
+   * @function any_from_any_key_value
+   * Generic Function returning Generic any-1 from a any-1, a key, and a value.
+   * @param  {any-1} current
+   * @param  {string} key
+   * @param  {any-2} value
+   * @return {any-1}
+   * (func any<-any-key-value)
+   */
+  public static interface Func_any_from_any_key_value extends Core.Type_func, Core.Type_replfunc {
+    public Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value);
+  }
+
+  public static class Class_any_from_any_key_value extends Core.Class_base implements Func_any_from_any_key_value {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn) {
+      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      output.fn = fn;
+      return output;
+    }
+
+    @Override
+    public Func_any_from_any_key_value vx_new(Object... vals) {
+      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_any_key_value vx_copy(Object... vals) {
+      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "any<-any-key-value", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_any_key_value vx_empty() {return e_any_from_any_key_value;}
+    @Override
+    public Func_any_from_any_key_value vx_type() {return t_any_from_any_key_value;}
+
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_any current, Core.Type_string key, Core.Type_any value);
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_any_from_any_key_value(generic_any_1, current, key, value);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      if (fn != null) {
+        output = Core.f_any_from_any(generic_any_1, fn.resolve(current, key, value));
+      }
+      return output;
+    }
+
+  }
+
+  public static final Func_any_from_any_key_value e_any_from_any_key_value = new Core.Class_any_from_any_key_value();
+  public static final Func_any_from_any_key_value t_any_from_any_key_value = new Core.Class_any_from_any_key_value();
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value) {
+    T output = Core.f_empty(generic_any_1);
     return output;
   }
 
@@ -15395,39 +15511,29 @@ public final class Core {
   }
 
   /**
-   * @function any_from_list_reduce
+   * @function any_from_list_start_reduce
    * Returns a val from a list reduce operation
    * @param  {list-2} list
    * @param  {any-1} valstart
    * @param  {any<-reduce} fn-reduce
    * @return {any-1}
-   * (func any<-list-reduce)
+   * (func any<-list-start-reduce)
    */
-  public static interface Func_any_from_list_reduce extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_list_reduce vx_fn_new(Core.Class_any_from_list_reduce.IFn fn);
-    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce);
+  public static interface Func_any_from_list_start_reduce extends Core.Type_func, Core.Type_replfunc {
+    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce);
   }
 
-  public static class Class_any_from_list_reduce extends Core.Class_base implements Func_any_from_list_reduce {
-
-    public IFn fn = null;
+  public static class Class_any_from_list_start_reduce extends Core.Class_base implements Func_any_from_list_start_reduce {
 
     @Override
-    public Func_any_from_list_reduce vx_fn_new(Core.Class_any_from_list_reduce.IFn fn) {
-      Class_any_from_list_reduce output = new Class_any_from_list_reduce();
-      output.fn = fn;
+    public Func_any_from_list_start_reduce vx_new(Object... vals) {
+      Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
 
     @Override
-    public Func_any_from_list_reduce vx_new(Object... vals) {
-      Class_any_from_list_reduce output = new Class_any_from_list_reduce();
-      return output;
-    }
-
-    @Override
-    public Func_any_from_list_reduce vx_copy(Object... vals) {
-      Class_any_from_list_reduce output = new Class_any_from_list_reduce();
+    public Func_any_from_list_start_reduce vx_copy(Object... vals) {
+      Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
 
@@ -15438,7 +15544,7 @@ public final class Core {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/core", // pkgname
-        "any<-list-reduce", // name
+        "any<-list-start-reduce", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -15458,14 +15564,9 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_list_reduce vx_empty() {return e_any_from_list_reduce;}
+    public Func_any_from_list_start_reduce vx_empty() {return e_any_from_list_start_reduce;}
     @Override
-    public Func_any_from_list_reduce vx_type() {return t_any_from_list_reduce;}
-
-    @FunctionalInterface
-    public static interface IFn {
-      public Core.Type_any resolve(Core.Type_list list, Core.Type_any valstart, Core.Func_any_from_reduce fn_reduce);
-    }
+    public Func_any_from_list_start_reduce vx_type() {return t_any_from_list_start_reduce;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -15473,25 +15574,21 @@ public final class Core {
       Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       Core.Func_any_from_reduce fn_reduce = Core.f_any_from_any(Core.t_any_from_reduce, arglist.vx_any(Core.vx_new_int(2)));
-      output = Core.f_any_from_list_reduce(generic_any_1, list, valstart, fn_reduce);
+      output = Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
-      T output = Core.f_empty(generic_any_1);
-      if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(list, valstart, fn_reduce));
-      }
-      return output;
+    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
+      return Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
     }
 
   }
 
-  public static final Func_any_from_list_reduce e_any_from_list_reduce = new Core.Class_any_from_list_reduce();
-  public static final Func_any_from_list_reduce t_any_from_list_reduce = new Core.Class_any_from_list_reduce();
+  public static final Func_any_from_list_start_reduce e_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
+  public static final Func_any_from_list_start_reduce t_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
 
-  public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
+  public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
     T output = Core.f_empty(generic_any_1);
     output = valstart;
     List<Core.Type_any> listval = list.vx_list();
@@ -15502,39 +15599,29 @@ public final class Core {
   }
 
   /**
-   * @function any_from_list_reduce_next
+   * @function any_from_list_start_reduce_next
    * Returns a val from a list reduce operation
    * @param  {list-2} list
    * @param  {any-1} valstart
    * @param  {any<-reduce-next} fn-reduce-next
    * @return {any-1}
-   * (func any<-list-reduce-next)
+   * (func any<-list-start-reduce-next)
    */
-  public static interface Func_any_from_list_reduce_next extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_list_reduce_next vx_fn_new(Core.Class_any_from_list_reduce_next.IFn fn);
-    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next);
+  public static interface Func_any_from_list_start_reduce_next extends Core.Type_func, Core.Type_replfunc {
+    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next);
   }
 
-  public static class Class_any_from_list_reduce_next extends Core.Class_base implements Func_any_from_list_reduce_next {
-
-    public IFn fn = null;
+  public static class Class_any_from_list_start_reduce_next extends Core.Class_base implements Func_any_from_list_start_reduce_next {
 
     @Override
-    public Func_any_from_list_reduce_next vx_fn_new(Core.Class_any_from_list_reduce_next.IFn fn) {
-      Class_any_from_list_reduce_next output = new Class_any_from_list_reduce_next();
-      output.fn = fn;
+    public Func_any_from_list_start_reduce_next vx_new(Object... vals) {
+      Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
 
     @Override
-    public Func_any_from_list_reduce_next vx_new(Object... vals) {
-      Class_any_from_list_reduce_next output = new Class_any_from_list_reduce_next();
-      return output;
-    }
-
-    @Override
-    public Func_any_from_list_reduce_next vx_copy(Object... vals) {
-      Class_any_from_list_reduce_next output = new Class_any_from_list_reduce_next();
+    public Func_any_from_list_start_reduce_next vx_copy(Object... vals) {
+      Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
 
@@ -15545,7 +15632,7 @@ public final class Core {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/core", // pkgname
-        "any<-list-reduce-next", // name
+        "any<-list-start-reduce-next", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -15565,14 +15652,9 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_list_reduce_next vx_empty() {return e_any_from_list_reduce_next;}
+    public Func_any_from_list_start_reduce_next vx_empty() {return e_any_from_list_start_reduce_next;}
     @Override
-    public Func_any_from_list_reduce_next vx_type() {return t_any_from_list_reduce_next;}
-
-    @FunctionalInterface
-    public static interface IFn {
-      public Core.Type_any resolve(Core.Type_list list, Core.Type_any valstart, Core.Func_any_from_reduce_next fn_reduce_next);
-    }
+    public Func_any_from_list_start_reduce_next vx_type() {return t_any_from_list_start_reduce_next;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -15580,25 +15662,21 @@ public final class Core {
       Core.Type_list list = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any valstart = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
       Core.Func_any_from_reduce_next fn_reduce_next = Core.f_any_from_any(Core.t_any_from_reduce_next, arglist.vx_any(Core.vx_new_int(2)));
-      output = Core.f_any_from_list_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      output = Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
-      T output = Core.f_empty(generic_any_1);
-      if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(list, valstart, fn_reduce_next));
-      }
-      return output;
+    public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
+      return Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
     }
 
   }
 
-  public static final Func_any_from_list_reduce_next e_any_from_list_reduce_next = new Core.Class_any_from_list_reduce_next();
-  public static final Func_any_from_list_reduce_next t_any_from_list_reduce_next = new Core.Class_any_from_list_reduce_next();
+  public static final Func_any_from_list_start_reduce_next e_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
+  public static final Func_any_from_list_start_reduce_next t_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
 
-  public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
+  public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
     T output = Core.f_empty(generic_any_1);
     output = valstart;
     final List<Core.Type_any> listval = list.vx_list();
@@ -15694,6 +15772,90 @@ public final class Core {
   public static <T extends Core.Type_any, N extends Core.Type_map> T f_any_from_map(final T generic_any_1, final N valuemap, final Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
     output = Core.vx_any_from_map(generic_any_1, valuemap, key);
+    return output;
+  }
+
+  /**
+   * @function any_from_map_start_reduce
+   * Returns a value by reducing each element of a map.
+   * @param  {map-1} map
+   * @param  {any-1} start
+   * @param  {any<-any-key-value} fn-reduce
+   * @return {any-1}
+   * (func any<-map-start-reduce)
+   */
+  public static interface Func_any_from_map_start_reduce extends Core.Type_func, Core.Type_replfunc {
+    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce);
+  }
+
+  public static class Class_any_from_map_start_reduce extends Core.Class_base implements Func_any_from_map_start_reduce {
+
+    @Override
+    public Func_any_from_map_start_reduce vx_new(Object... vals) {
+      Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_map_start_reduce vx_copy(Object... vals) {
+      Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "any<-map-start-reduce", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_map_start_reduce vx_empty() {return e_any_from_map_start_reduce;}
+    @Override
+    public Func_any_from_map_start_reduce vx_type() {return t_any_from_map_start_reduce;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any start = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Func_any_from_any_key_value fn_reduce = Core.f_any_from_any(Core.t_any_from_any_key_value, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce) {
+      return Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+    }
+
+  }
+
+  public static final Func_any_from_map_start_reduce e_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
+  public static final Func_any_from_map_start_reduce t_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
+
+  public static <T extends Core.Type_any, N extends Core.Type_map> T f_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce) {
+    T output = Core.f_empty(generic_any_1);
+    output = Core.vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
     return output;
   }
 
@@ -22525,7 +22687,7 @@ public final class Core {
 
   public static Core.Type_boolean f_or_1(final Core.Type_booleanlist values) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.f_any_from_list_reduce_next(
+    output = Core.f_any_from_list_start_reduce_next(
       Core.t_boolean,
       values,
       Core.vx_new_boolean(false),
@@ -25503,15 +25665,17 @@ public final class Core {
     mapfunc.put("any<-any-async", Core.t_any_from_any_async);
     mapfunc.put("any<-any-context", Core.t_any_from_any_context);
     mapfunc.put("any<-any-context-async", Core.t_any_from_any_context_async);
+    mapfunc.put("any<-any-key-value", Core.t_any_from_any_key_value);
     mapfunc.put("any<-func", Core.t_any_from_func);
     mapfunc.put("any<-func-async", Core.t_any_from_func_async);
     mapfunc.put("any<-int", Core.t_any_from_int);
     mapfunc.put("any<-key-value", Core.t_any_from_key_value);
     mapfunc.put("any<-key-value-async", Core.t_any_from_key_value_async);
     mapfunc.put("any<-list", Core.t_any_from_list);
-    mapfunc.put("any<-list-reduce", Core.t_any_from_list_reduce);
-    mapfunc.put("any<-list-reduce-next", Core.t_any_from_list_reduce_next);
+    mapfunc.put("any<-list-start-reduce", Core.t_any_from_list_start_reduce);
+    mapfunc.put("any<-list-start-reduce-next", Core.t_any_from_list_start_reduce_next);
     mapfunc.put("any<-map", Core.t_any_from_map);
+    mapfunc.put("any<-map-start-reduce", Core.t_any_from_map_start_reduce);
     mapfunc.put("any<-none", Core.t_any_from_none);
     mapfunc.put("any<-none-async", Core.t_any_from_none_async);
     mapfunc.put("any<-reduce", Core.t_any_from_reduce);

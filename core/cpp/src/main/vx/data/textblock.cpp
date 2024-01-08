@@ -2080,7 +2080,7 @@ namespace vx_data_textblock {
               vx_core::t_any_from_func->vx_fn_new({text, delimlist}, [text, delimlist]() {
                 vx_data_textblock::Type_delimlist resolvedlist = vx_data_textblock::f_delimlist_pos_from_string_delimlist(text, delimlist);
                 vx_core::vx_ref_plus(resolvedlist);
-                vx_data_textblock::Type_delim output_1 = vx_core::f_any_from_list_reduce(
+                vx_data_textblock::Type_delim output_1 = vx_core::f_any_from_list_start_reduce(
                   vx_data_textblock::t_delim,
                   resolvedlist,
                   vx_core::f_empty(

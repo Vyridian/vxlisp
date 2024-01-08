@@ -522,19 +522,19 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "31% 69/218")
+                  :text "31% 70/220")
                  (vx/web/html/p
                   :text "5% 4/72")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "47% 63/132")
+                  :text "47% 64/134")
                  (vx/web/html/p
-                  :text "86% 212/244")
+                  :text "86% 214/246")
                  (vx/web/html/p
-                  :text "0% 1/158")
+                  :text "0% 1/160")
                  (vx/web/html/p
-                  :text "0% 1/158"))
+                  :text "0% 1/160"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -2479,7 +2479,7 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "any<-list-reduce")))
+                                :text "any<-list-start-reduce")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -2487,14 +2487,13 @@
                                 :text
                                  "(test
  24
- (any<-list-reduce : int
+ (any<-list-start-reduce : int
   (intlist 3 2 4)
   1
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- ))")))
+   (* total num))))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -2541,6 +2540,48 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "\"v2\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "any<-map-start-reduce")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"xayb\"
+ (any<-map-start-reduce
+  (stringmap
+   :a \"x\"
+   :b \"y\")
+  \"\"
+  (fn : string
+   [current : string
+    key     : string
+    value   : any]
+   (copy current
+    value
+    key))))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"xayb\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"xayb\"")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
