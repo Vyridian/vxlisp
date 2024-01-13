@@ -2,36 +2,34 @@
   // vx_int_from_string_findkeyword(string, string)
   public static int vx_int_from_string_findkeyword(String text, String find) {
     int output = -1;
-    if (text != "") {
-      if (find == ":nonwhitespace") {
-        String wschars1 = " \n\r\t";
-				int ilen = text.length();
-        for (int i = 0; i < ilen; i++) {
-					char cchar = text.charAt(i);
-          int pos = wschars1.indexOf(cchar);
-					if (pos < 0) {
-						output = i;
-            break;
-          }
+    if (text == "") {
+	     output = text.indexOf(find);
+    } else if (find == ":nonwhitespace") {
+      String wschars1 = " \n\r\t";
+      int ilen = text.length();
+      for (int i = 0; i < ilen; i++) {
+        char cchar = text.charAt(i);
+        int pos = wschars1.indexOf(cchar);
+        if (pos < 0) {
+          output = i;
+          break;
         }
-      } else if (find == ":whitespace") {
-        char[] wschars2 = {' ', '\n', '\r', '\t'};
-        for (char cchar : wschars2) {
-          int pos = text.indexOf(cchar);
-          if (pos < 0) {
-          } else if (output < 0) {
-           output = pos;
-          } else if (pos < output) {
-           output = pos;
-          }
-				}
-      } else {
-			  output = text.indexOf(find);
-			}
-		}
+      }
+    } else if (find == ":whitespace") {
+      char[] wschars2 = {' ', '\n', '\r', '\t'};
+      for (char cchar : wschars2) {
+        int pos = text.indexOf(cchar);
+        if (pos < 0) {
+        } else if (output < 0) {
+          output = pos;
+        } else if (pos < output) {
+          output = pos;
+        }
+      }
+		  }
     output += 1;
-		return output;
-	}
+		  return output;
+ 	}
 
   public static Core.Type_string vx_string_from_stringlist_join(Core.Type_stringlist vals, Core.Type_string delim) {
     List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {
@@ -42,6 +40,15 @@
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
 	}
+
+  // vx_string_trim(string)
+  public static Core.Type_string vx_string_trim(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.trim();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
 
   public static Core.Type_stringlist vx_stringlist_from_string_split(Core.Type_string text, Core.Type_string delim) {
     Core.Type_stringlist output = Core.e_stringlist;

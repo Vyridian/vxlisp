@@ -590,6 +590,7 @@
       Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
       Core.Type_typedef typedef = vallist.vx_typedef();
       Core.Type_string typedefname = typedef.name();
+	  String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 1;
       List<Core.Type_any> listval = vallist.vx_list();
@@ -601,11 +602,12 @@
         String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_map) {
       Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
       Core.Type_typedef typedef = valmap.vx_typedef();
       Core.Type_string typedefname = typedef.name();
+	  String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
@@ -627,11 +629,12 @@
         String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
+	  String stypedefname = typedefname.vx_string();
       int indentint2 = indent;
       indentint2 += 2;
       Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
@@ -651,11 +654,13 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (valstruct.vx_msgblock() != null) {
+      if (stypedefname == "msg") {
+      } else if (stypedefname == "msgblock") {
+      } else if (valstruct.vx_msgblock() != null) {
         String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_func) {
       Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();

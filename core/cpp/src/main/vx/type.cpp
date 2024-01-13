@@ -56,7 +56,16 @@ namespace vx_type {
     }
     vx_core::Type_string output = vx_core::vx_new_string(str);
     return output;
-	}
+ 	}
+
+  // vx_string_trim(string)
+  vx_core::Type_string vx_string_trim(vx_core::Type_string text) {
+    std::string_view stext = text->vx_string();
+    stext.remove_prefix(std::min(stext.find_first_not_of(" \t\r\v\n"), stext.size()));
+    stext.remove_suffix(std::min(stext.size() - stext.find_last_not_of(" \t\r\v\n") - 1, stext.size()));
+    vx_core::Type_string output = vx_core::vx_new_string(static_cast<std::string>(stext));
+    return output;
+  }
 
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim) {
@@ -1456,6 +1465,100 @@ namespace vx_type {
 
   //}
 
+  // (func string-trim)
+  vx_core::Type_string f_string_trim(vx_core::Type_string text) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(text);
+    output = vx_type::vx_string_trim(text);
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func string-trim)
+  // class Class_string_trim {
+    Abstract_string_trim::~Abstract_string_trim() {}
+
+    Class_string_trim::Class_string_trim() : Abstract_string_trim::Abstract_string_trim() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_trim::~Class_string_trim() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_trim::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_trim output = vx_type::e_string_trim;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_trim::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_trim output = vx_type::e_string_trim;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_trim::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "string-trim", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_trim::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_trim::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string-trim", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_trim::vx_empty() const {return vx_type::e_string_trim;}
+    vx_core::Type_any Class_string_trim::vx_type() const {return vx_type::t_string_trim;}
+    vx_core::Type_msgblock Class_string_trim::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_trim::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_trim::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_trim::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_type::f_string_trim(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_trim::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_string_trim(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func string<-int)
   vx_core::Type_string f_string_from_int(vx_core::Type_int val) {
     vx_core::Type_string output = vx_core::e_string;
@@ -2324,6 +2427,8 @@ namespace vx_type {
   vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist = NULL;
   vx_type::Func_length_from_string e_length_from_string = NULL;
   vx_type::Func_length_from_string t_length_from_string = NULL;
+  vx_type::Func_string_trim e_string_trim = NULL;
+  vx_type::Func_string_trim t_string_trim = NULL;
   vx_type::Func_string_from_int e_string_from_int = NULL;
   vx_type::Func_string_from_int t_string_from_int = NULL;
   vx_type::Func_string_from_string_end e_string_from_string_end = NULL;
@@ -2408,6 +2513,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_length_from_string);
       vx_type::t_length_from_string = new vx_type::Class_length_from_string();
       vx_core::vx_reserve_type(vx_type::t_length_from_string);
+      vx_type::e_string_trim = new vx_type::Class_string_trim();
+      vx_core::vx_reserve_empty(vx_type::e_string_trim);
+      vx_type::t_string_trim = new vx_type::Class_string_trim();
+      vx_core::vx_reserve_type(vx_type::t_string_trim);
       vx_type::e_string_from_int = new vx_type::Class_string_from_int();
       vx_core::vx_reserve_empty(vx_type::e_string_from_int);
       vx_type::t_string_from_int = new vx_type::Class_string_from_int();
@@ -2463,6 +2572,7 @@ namespace vx_type {
       mapfunc["is-type"] = vx_type::t_is_type;
       mapfunc["is-type<-any-typelist"] = vx_type::t_is_type_from_any_typelist;
       mapfunc["length<-string"] = vx_type::t_length_from_string;
+      mapfunc["string-trim"] = vx_type::t_string_trim;
       mapfunc["string<-int"] = vx_type::t_string_from_int;
       mapfunc["string<-string-end"] = vx_type::t_string_from_string_end;
       mapfunc["string<-string-start"] = vx_type::t_string_from_string_start;

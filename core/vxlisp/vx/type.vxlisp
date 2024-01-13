@@ -318,6 +318,18 @@
          "$"))
  :doc "Returns a string by joining a stringlist by the delimiter")
 
+(func string-trim : string
+ [text  : string]
+ (native
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
+ :test (test
+        "ab"
+        (string-trim
+         " \t\nab\n\t "))
+ :doc "Trims whitespace from the front and back of text")
+
 (func stringlist<-string-split : stringlist
  [text  : string
   delim : string]

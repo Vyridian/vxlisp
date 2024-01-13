@@ -1593,7 +1593,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 				default:
 					valnewswitcherr = "" +
 						"\n            } else {" +
-						"\n              Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
+						"\n              msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
 						"\n              msgblock = msgblock.vx_copy(msg);"
 				}
 				valnewswitch += "" +
@@ -1618,6 +1618,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n"
 			}
 			defaultkey := ""
+			defaultstring := ""
 			lastarg := props[len(props)-1]
 			if lastarg.isdefault {
 				lastargname := LangFromName(lastarg.name)
@@ -1643,10 +1644,13 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 						"\n            ischanged = true;" +
 						"\n            vx_p_" + lastargname + " = Core.t_float.vx_new(valsub);"
 				case "vx/core/string":
-					defaultkey += "" +
-						"\n          } else if (valsub instanceof String) { // default property" +
-						"\n            ischanged = true;" +
-						"\n            vx_p_" + lastargname + " = Core.t_string.vx_new(valsub);"
+					defaultstring += "" +
+						"\n            } else if (valsub instanceof Core.Type_string) { // default property" +
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + lastargname + " = (Core.Type_string)valsub;" +
+						"\n            } else if (valsub instanceof String) { // default property" +
+						"\n              ischanged = true;" +
+						"\n              vx_p_" + lastargname + " = Core.t_string.vx_new(valsub);"
 				}
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
@@ -1692,27 +1696,28 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			case "vx/core/msgblock":
 				valnew = "" +
 					"\n      String key = \"\";" +
+					"\n      Core.Type_msg msg;" +
 					"\n      for (Object valsub : vals) {" +
 					"\n        if (valsub instanceof Core.Type_msgblock) {" +
-					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
-					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
-					"\n          vx_p_msgblocks = msgblocks;" +
-					"\n          ischanged = true;" +
-					"\n        } else if (valsub instanceof Core.Type_msg) {" +
-					"\n          Core.Type_msglist msgs = this.msgs();" +
-					"\n          msgs = msgs.vx_copy(valsub);" +
-					"\n          vx_p_msgs = msgs;" +
-					"\n          ischanged = true;" +
+					"\n          if (valsub != Core.e_msgblock) {" +
+					"\n            vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);" +
+					"\n            ischanged = true;" +
+					"\n          }" +
 					"\n        } else if (valsub instanceof Core.Type_msgblocklist) {" +
-					"\n          Core.Type_msgblocklist msgblocks = this.msgblocks();" +
-					"\n          msgblocks = msgblocks.vx_copy(valsub);" +
-					"\n          vx_p_msgblocks = msgblocks;" +
-					"\n          ischanged = true;" +
+					"\n          if (valsub != Core.e_msgblocklist) {" +
+					"\n            vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);" +
+					"\n            ischanged = true;" +
+					"\n          }" +
+					"\n        } else if (valsub instanceof Core.Type_msg) {" +
+					"\n          if (valsub != Core.e_msg) {" +
+					"\n            vx_p_msgs = vx_p_msgs.vx_copy(valsub);" +
+					"\n            ischanged = true;" +
+					"\n          }" +
 					"\n        } else if (valsub instanceof Core.Type_msglist) {" +
-					"\n          Core.Type_msglist msgs = this.msgs();" +
-					"\n          msgs = msgs.vx_copy(valsub);" +
-					"\n          vx_p_msgs = msgs;" +
-					"\n          ischanged = true;" +
+					"\n          if (valsub != Core.e_msglist) {" +
+					"\n            vx_p_msgs = vx_p_msgs.vx_copy(valsub);" +
+					"\n            ischanged = true;" +
+					"\n          }" +
 					"\n        } else if (key == \"\") {" +
 					"\n          if (valsub instanceof Core.Type_string) {" +
 					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
@@ -1731,41 +1736,62 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n        }" +
 					"\n      }" +
 					"\n      if (ischanged) {" +
-					"\n        Class_" + typename + " work = new Class_" + typename + "();" +
-					"\n        work.vx_p_msgs = vx_p_msgs;" +
-					"\n        work.vx_p_msgblocks = vx_p_msgblocks;" +
-					"\n        output = work;" +
+					"\n        if ((vx_p_msgs.vx_list().size() == 0) && (vx_p_msgblocks.vx_list().size() == 1)) {" +
+					"\n          output = vx_p_msgblocks.vx_listmsgblock().get(0);" +
+					"\n        } else {" +
+					"\n          Class_" + typename + " work = new Class_" + typename + "();" +
+					"\n          work.vx_p_msgs = vx_p_msgs;" +
+					"\n          work.vx_p_msgblocks = vx_p_msgblocks;" +
+					"\n          output = work;" +
+					"\n        }" +
 					"\n      }"
 			default:
 				valnew = "" +
 					validkeys +
 					"\n      String key = \"\";" +
+					"\n      Core.Type_msg msg;" +
 					"\n      for (Object valsub : vals) {" +
 					"\n        if (valsub instanceof Core.Type_msgblock) {" +
 					"\n          msgblock = msgblock.vx_copy(valsub);" +
 					"\n        } else if (valsub instanceof Core.Type_msg) {" +
 					"\n          msgblock = msgblock.vx_copy(valsub);" +
 					"\n        } else if (key == \"\") {" +
+					"\n          boolean istestkey = false;" +
 					"\n          String testkey = \"\";" +
 					"\n          if (valsub instanceof Core.Type_string) {" +
 					"\n            Core.Type_string valstr = (Core.Type_string)valsub;" +
 					"\n            testkey = valstr.vx_string();" +
+					"\n            istestkey = true;" +
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            testkey = (String)valsub;" +
-					"\n          }" +
-					"\n          boolean isvalidkey = validkeys.contains(testkey);" +
-					"\n          if (isvalidkey) {" +
-					"\n            key = testkey;" +
+					"\n            istestkey = true;" +
 					defaultkey +
 					"\n          } else {" +
-					"\n            Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
+					"\n            String svalsub;" +
+					"\n            if (valsub instanceof Core.Type_any) {" +
+					"\n              Core.Type_any anyvalsub = (Core.Type_any)valsub;" +
+					"\n              svalsub = Core.vx_string_from_any(anyvalsub);" +
+					"\n            } else {" +
+					"\n              svalsub = valsub.toString();" +
+					"\n            }" +
+					"\n            msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key Type: \" + svalsub);" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
+					"\n          }" +
+					"\n          if (istestkey) {" +
+					"\n            boolean isvalidkey = validkeys.contains(testkey);" +
+					"\n            if (isvalidkey) {" +
+					"\n              key = testkey;" +
+					defaultstring +
+					"\n            } else {" +
+					"\n              msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key: \" + testkey);" +
+					"\n              msgblock = msgblock.vx_copy(msg);" +
+					"\n            }" +
 					"\n          }" +
 					"\n        } else {" +
 					"\n          switch (key) {" +
 					valnewswitch +
 					"\n          default:" +
-					"\n            Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key: \" + key);" +
+					"\n            msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key: \" + key);" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n          key = \"\";" +
@@ -2166,15 +2192,15 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									funcarglist := funcargfunc.listarg
 									lambdatext, lambdavartext, lambdaargtext := LangLambdaFromArgList(lang, funcarglist, funcargfunc.isgeneric)
 									work := LangNameFFromFunc(lang, funcargfunc) + "(" + lambdaargtext + ")"
-									outputtype := "Core.Type_any"
+									outputtype := LangNameTypeFromType(lang, anytype)
 									if funcargfunc.async {
 										outputtype = "CompletableFuture<Core.Type_any>"
 									}
 									argtext = "" +
 										LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
-										"\n  " + outputtype + " output_" + StringFromInt(subindent) + " = " + work + ";" +
-										"\n  return output_" + StringFromInt(subindent) + ";" +
+										"\n  " + outputtype + " output_" + StringFromInt(subindent) + " = " + work + lang.lineend +
+										"\n  return output_" + StringFromInt(subindent) + lang.lineend +
 										"\n})"
 								}
 							default:
@@ -2918,7 +2944,8 @@ func LangLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (strin
 	var lambdavars []string
 	var lambdaargnames []string
 	if isgeneric {
-		lambdaargnames = append(lambdaargnames, "vx_core::t_any")
+		lambdaargname := LangNameTFromType(lang, anytype)
+		lambdaargnames = append(lambdaargnames, lambdaargname)
 	}
 	for _, lambdaarg := range arglist {
 		argvaltype := ""
@@ -2927,13 +2954,22 @@ func LangLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (strin
 		lambdaargnames = append(lambdaargnames, lambdaargname)
 		switch NameFromType(argtype) {
 		case "vx/core/any", "vx/core/any-1":
-			lambdatypenames = append(lambdatypenames, "Core.Type_any "+lambdaargname)
+			argtypename := LangNameTypeFromType(lang, anytype)
+			lambdatypenames = append(lambdatypenames, argtypename+" "+lambdaargname)
 		default:
-			argvaltype = LangNameTypeFullFromType(lang, argtype)
-			argvaltname := LangNameTFromType(lang, argtype)
-			lambdatypenames = append(lambdatypenames, "Core.Type_any "+lambdaargname+"_any")
-			lambdavar := argvaltype + " " + lambdaargname + " = Core.f_any_from_any(" + argvaltname + ", " + lambdaargname + "_any);"
-			lambdavars = append(lambdavars, lambdavar)
+			switch lambdaarg.name {
+			case "key":
+				argtypename := LangNameTypeFromType(lang, argtype)
+				lambdatypenames = append(lambdatypenames, argtypename+" "+lambdaargname)
+			default:
+				argvaltype = LangNameTypeFullFromType(lang, argtype)
+				argvaltname := LangNameTFromType(lang, argtype)
+				argtypename := LangNameTypeFromType(lang, anytype)
+				lambdatypenames = append(lambdatypenames, argtypename+" "+lambdaargname+"_any")
+				corepkgname := LangNameFromPkgName(lang, "vx/core")
+				lambdavar := argvaltype + " " + lambdaargname + " = " + corepkgname + lang.pkgref + "f_any_from_any(" + argvaltname + ", " + lambdaargname + "_any)" + lang.lineend
+				lambdavars = append(lambdavars, lambdavar)
+			}
 		}
 	}
 	lambdanames := StringFromListStringJoin(lambdaargnames, ", ")
@@ -2948,7 +2984,7 @@ func LangLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (strin
 func LangNameCFromConst(lang *vxlang, cnst *vxconst) string {
 	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
-		name = LangNameFromPkgName(lang, cnst.pkgname) + "." + name
+		name = LangNameFromPkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -3442,8 +3478,8 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		"\n      \":constnums\", " + LangTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
 		"\n      \":docnums\", " + LangTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
 		"\n      \":funcnums\", " + LangTypeCoverageNumsValNew(coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
-		"\n      \":ospacenums\", " + LangTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
-		"\n      \":otimenums\", " + LangTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
+		"\n      \":bigospacenums\", " + LangTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
+		"\n      \":bigotimenums\", " + LangTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
 		"\n      \":totalnums\", " + LangTypeCoverageNumsValNew(coverpct, covercnt, covertotal) + ", " +
 		"\n      \":typenums\", " + LangTypeCoverageNumsValNew(covertypepct, covertypecnt, covertypetotal) +
 		"\n    );" +

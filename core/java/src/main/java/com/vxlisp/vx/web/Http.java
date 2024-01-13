@@ -80,25 +80,41 @@ public final class Http {
       validkeys.add(":ok");
       validkeys.add(":status");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
+          boolean istestkey = false;
           String testkey = "";
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
             testkey = (String)valsub;
-          }
-          boolean isvalidkey = validkeys.contains(testkey);
-          if (isvalidkey) {
-            key = testkey;
+            istestkey = true;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new response) - Invalid Key Type: " + valsub.toString());
+            String svalsub;
+            if (valsub instanceof Core.Type_any) {
+              Core.Type_any anyvalsub = (Core.Type_any)valsub;
+              svalsub = Core.vx_string_from_any(anyvalsub);
+            } else {
+              svalsub = valsub.toString();
+            }
+            msg = Core.vx_msg_error("(new response) - Invalid Key Type: " + svalsub);
             msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              msg = Core.vx_msg_error("(new response) - Invalid Key: " + testkey);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
           switch (key) {
@@ -111,7 +127,7 @@ public final class Http {
               ischanged = true;
               vx_p_ok = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new response :ok " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new response :ok " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -124,12 +140,12 @@ public final class Http {
               ischanged = true;
               vx_p_status = Core.t_int.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new response :status " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new response :status " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.vx_msg_error("(new response) - Invalid Key: " + key);
+            msg = Core.vx_msg_error("(new response) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

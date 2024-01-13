@@ -35,6 +35,11 @@
     return output
   }
 
+  static vx_string_trim(text) {
+    let output = text.trim()
+    return output
+  }
+
   static vx_stringlist_from_string_split(text, delim) {
     const liststring = text.split(delim)
     const output = vx_core.f_new(vx_core.t_stringlist, ...liststring)

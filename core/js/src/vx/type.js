@@ -42,6 +42,11 @@ export default class vx_type {
     return output
   }
 
+  static vx_string_trim(text) {
+    let output = text.trim()
+    return output
+  }
+
   static vx_stringlist_from_string_split(text, delim) {
     const liststring = text.split(delim)
     const output = vx_core.f_new(vx_core.t_stringlist, ...liststring)
@@ -331,6 +336,22 @@ export default class vx_type {
   }
 
   /**
+   * @function string_trim
+   * Trims whitespace from the front and back of text
+   * @param  {string} text
+   * @return {string}
+   */
+  static t_string_trim = {}
+  static e_string_trim = {vx_type: vx_type.t_string_trim}
+
+  // (func string-trim)
+  static f_string_trim(text) {
+    let output = vx_core.e_string
+    output = vx_type.vx_string_trim(text);
+    return output
+  }
+
+  /**
    * @function string_from_int
    * Function Type converting int to string
    * @param  {int} val
@@ -532,6 +553,7 @@ export default class vx_type {
       "is-type": vx_type.e_is_type,
       "is-type<-any-typelist": vx_type.e_is_type_from_any_typelist,
       "length<-string": vx_type.e_length_from_string,
+      "string-trim": vx_type.e_string_trim,
       "string<-int": vx_type.e_string_from_int,
       "string<-string-end": vx_type.e_string_from_string_end,
       "string<-string-start": vx_type.e_string_from_string_start,
@@ -558,6 +580,7 @@ export default class vx_type {
       "is-type": vx_type.t_is_type,
       "is-type<-any-typelist": vx_type.t_is_type_from_any_typelist,
       "length<-string": vx_type.t_length_from_string,
+      "string-trim": vx_type.t_string_trim,
       "string<-int": vx_type.t_string_from_int,
       "string<-string-end": vx_type.t_string_from_string_end,
       "string<-string-start": vx_type.t_string_from_string_start,
@@ -863,6 +886,25 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_length_from_string
+    }
+
+    // (func string-trim)
+    vx_type.t_string_trim['vx_type'] = vx_core.t_type
+    vx_type.t_string_trim['vx_value'] = {
+      name          : "string-trim",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_string_trim
     }
 
     // (func string<-int)

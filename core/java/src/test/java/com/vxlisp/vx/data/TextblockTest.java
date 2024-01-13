@@ -10826,8 +10826,8 @@ public final class TextblockTest {
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 52, ":total", 52), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 17, ":total", 26), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
       ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 34, ":tests", 18, ":total", 52), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 25, ":tests", 1, ":total", 4)
     );

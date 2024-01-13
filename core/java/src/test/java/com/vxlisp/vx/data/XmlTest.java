@@ -3053,8 +3053,8 @@ public final class XmlTest {
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 63, ":tests", 12, ":total", 19), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 75, ":tests", 9, ":total", 12), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
       ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 9, ":total", 19), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );

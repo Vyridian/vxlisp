@@ -2753,8 +2753,8 @@ public final class CoreTest {
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 214, ":total", 246), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 64, ":total", 134), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
       ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 70, ":total", 220), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 72)
     );

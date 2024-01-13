@@ -1599,8 +1599,8 @@ public final class ReplTest {
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 28, ":total", 28), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 13, ":total", 21), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21), 
       ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 13, ":total", 28), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4)
     );

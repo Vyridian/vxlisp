@@ -1841,6 +1841,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">
             (f) string&lt;-stringlist-join
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">
+            (f) string-trim
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">
             (f) stringlist&lt;-string-split
           </li>
@@ -61920,7 +61923,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
             </li>
           </ul>
         </details>
@@ -62249,6 +62252,18 @@ improves readability.</div>
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)
+
+(func string-trim : string
+ [text  : string]
+ (native
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
+ :test (test
+        &quot;ab&quot;
+        (string-trim
+         &quot; \t\nab\n\t &quot;))
+ :doc &quot;Trims whitespace from the front and back of text&quot;)
 
 (func stringlist&lt;-string-split : stringlist
  [text  : string
@@ -63956,6 +63971,80 @@ improves readability.</div>
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/type/string-trim">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Trims whitespace from the front and back of text</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string-trim</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;ab&quot;
+ (string-trim
+  &quot; \t\nab\n\t &quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string-trim : string
+ [text  : string]
+ (native
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
+ :test (test
+        &quot;ab&quot;
+        (string-trim
+         &quot; \t\nab\n\t &quot;))
+ :doc &quot;Trims whitespace from the front and back of text&quot;)</div>
                 </li>
               </ul>
             </details>

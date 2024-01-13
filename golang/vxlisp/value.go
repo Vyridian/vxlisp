@@ -199,7 +199,7 @@ func StringFromListValueIndent(listvalue []vxvalue, indent int) string {
 	}
 	output := lineindent + "(valuelist"
 	for _, value := range listvalue {
-		output += lineindent + StringFromValueIndent(value, indent+1)
+		output += StringFromValueIndent(value, indent+1)
 	}
 	output += ")"
 	return output
@@ -215,7 +215,7 @@ func StringFromValueIndent(value vxvalue, indent int) string {
 		lineindent = "\n" + StringRepeat(" ", indent)
 	}
 	output := "" +
-		"(value" +
+		lineindent + "(value" +
 		lineindent + " :code  " + value.code
 	if value.name != "" {
 		output += lineindent + " :name  " + value.name
@@ -225,10 +225,10 @@ func StringFromValueIndent(value vxvalue, indent int) string {
 	}
 	if value.vxtype == nil {
 	} else if value.vxtype.name != "" {
-		output += lineindent + ": type  " + NameFromType(value.vxtype)
+		output += lineindent + " :type  " + NameFromType(value.vxtype)
 	}
 	if value.generictype.name != "" {
-		output += lineindent + ": generictype " + NameFromType(value.generictype)
+		output += lineindent + " :generictype " + NameFromType(value.generictype)
 	}
 	if value.multi {
 		output += lineindent + " :multi " + StringFromBoolean(value.multi)
@@ -237,14 +237,14 @@ func StringFromValueIndent(value vxvalue, indent int) string {
 	switch value.code {
 	case ":arg":
 		arg := ArgFromValue(value)
-		output += StringFromArgIndent(arg, indent+1)
+		output += StringFromArgIndent(arg, indent+2)
 	case ":arglist":
 		args := ListArgFromValue(value)
-		output += StringFromListArgIndent(args, indent+1)
+		output += StringFromListArgIndent(args, indent+2)
 	case ":const":
 		output += NameFromConst(ConstFromValue(value))
 	case ":func":
-		output += StringFromFuncIndent(FuncFromValue(value), indent+1)
+		output += StringFromFuncIndent(FuncFromValue(value), indent+2)
 	case ":funcref":
 		output += NameFromFunc(FuncFromValue(value))
 	case ":type":

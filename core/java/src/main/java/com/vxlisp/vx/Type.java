@@ -10,36 +10,34 @@ public final class Type {
   // vx_int_from_string_findkeyword(string, string)
   public static int vx_int_from_string_findkeyword(String text, String find) {
     int output = -1;
-    if (text != "") {
-      if (find == ":nonwhitespace") {
-        String wschars1 = " \n\r\t";
-				int ilen = text.length();
-        for (int i = 0; i < ilen; i++) {
-					char cchar = text.charAt(i);
-          int pos = wschars1.indexOf(cchar);
-					if (pos < 0) {
-						output = i;
-            break;
-          }
+    if (text == "") {
+	     output = text.indexOf(find);
+    } else if (find == ":nonwhitespace") {
+      String wschars1 = " \n\r\t";
+      int ilen = text.length();
+      for (int i = 0; i < ilen; i++) {
+        char cchar = text.charAt(i);
+        int pos = wschars1.indexOf(cchar);
+        if (pos < 0) {
+          output = i;
+          break;
         }
-      } else if (find == ":whitespace") {
-        char[] wschars2 = {' ', '\n', '\r', '\t'};
-        for (char cchar : wschars2) {
-          int pos = text.indexOf(cchar);
-          if (pos < 0) {
-          } else if (output < 0) {
-           output = pos;
-          } else if (pos < output) {
-           output = pos;
-          }
-				}
-      } else {
-			  output = text.indexOf(find);
-			}
-		}
+      }
+    } else if (find == ":whitespace") {
+      char[] wschars2 = {' ', '\n', '\r', '\t'};
+      for (char cchar : wschars2) {
+        int pos = text.indexOf(cchar);
+        if (pos < 0) {
+        } else if (output < 0) {
+          output = pos;
+        } else if (pos < output) {
+          output = pos;
+        }
+      }
+		  }
     output += 1;
-		return output;
-	}
+		  return output;
+ 	}
 
   public static Core.Type_string vx_string_from_stringlist_join(Core.Type_stringlist vals, Core.Type_string delim) {
     List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {
@@ -50,6 +48,15 @@ public final class Type {
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
 	}
+
+  // vx_string_trim(string)
+  public static Core.Type_string vx_string_trim(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.trim();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
 
   public static Core.Type_stringlist vx_stringlist_from_string_split(Core.Type_string text, Core.Type_string delim) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -1398,6 +1405,97 @@ public final class Type {
   }
 
   /**
+   * @function string_trim
+   * Trims whitespace from the front and back of text
+   * @param  {string} text
+   * @return {string}
+   * (func string-trim)
+   */
+  public static interface Func_string_trim extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_trim(final Core.Type_string text);
+  }
+
+  public static class Class_string_trim extends Core.Class_base implements Func_string_trim {
+
+    @Override
+    public Func_string_trim vx_new(Object... vals) {
+      Class_string_trim output = new Class_string_trim();
+      return output;
+    }
+
+    @Override
+    public Func_string_trim vx_copy(Object... vals) {
+      Class_string_trim output = new Class_string_trim();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "string-trim", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_trim vx_empty() {return e_string_trim;}
+    @Override
+    public Func_string_trim vx_type() {return t_string_trim;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Type.f_string_trim(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Type.f_string_trim(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_trim(final Core.Type_string text) {
+      return Type.f_string_trim(text);
+    }
+
+  }
+
+  public static final Func_string_trim e_string_trim = new Type.Class_string_trim();
+  public static final Func_string_trim t_string_trim = new Type.Class_string_trim();
+
+  public static Core.Type_string f_string_trim(final Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    output = Type.vx_string_trim(text);
+    return output;
+  }
+
+  /**
    * @function string_from_int
    * Function Type converting int to string
    * @param  {int} val
@@ -2230,6 +2328,7 @@ public final class Type {
     mapfunc.put("is-type", Type.t_is_type);
     mapfunc.put("is-type<-any-typelist", Type.t_is_type_from_any_typelist);
     mapfunc.put("length<-string", Type.t_length_from_string);
+    mapfunc.put("string-trim", Type.t_string_trim);
     mapfunc.put("string<-int", Type.t_string_from_int);
     mapfunc.put("string<-string-end", Type.t_string_from_string_end);
     mapfunc.put("string<-string-start", Type.t_string_from_string_start);

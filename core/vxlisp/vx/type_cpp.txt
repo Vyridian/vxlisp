@@ -9,6 +9,9 @@
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
+  // vx_string_trim(string)
+  vx_core::Type_string vx_string_trim(vx_core::Type_string text);
+
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
@@ -64,7 +67,16 @@
     }
     vx_core::Type_string output = vx_core::vx_new_string(str);
     return output;
-	}
+ 	}
+
+  // vx_string_trim(string)
+  vx_core::Type_string vx_string_trim(vx_core::Type_string text) {
+    std::string_view stext = text->vx_string();
+    stext.remove_prefix(std::min(stext.find_first_not_of(" \t\r\v\n"), stext.size()));
+    stext.remove_suffix(std::min(stext.size() - stext.find_last_not_of(" \t\r\v\n") - 1, stext.size()));
+    vx_core::Type_string output = vx_core::vx_new_string(static_cast<std::string>(stext));
+    return output;
+  }
 
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim) {

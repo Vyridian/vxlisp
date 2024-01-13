@@ -24,11 +24,11 @@ export default class vx_type_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/type", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 79, ":tests", 19, ":total", 24), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 15, ":total", 24), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 20, ":total", 25), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 64, ":tests", 16, ":total", 25), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 62, ":tests", 15, ":total", 24), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 64, ":tests", 16, ":total", 25), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -63,6 +63,7 @@ export default class vx_type_test {
           "is-type", 4,
           "is-type<-any-typelist", 4,
           "length<-string", 2,
+          "string-trim", 1,
           "string<-int", 5,
           "string<-string-end", 2,
           "string<-string-start", 2,
@@ -432,6 +433,30 @@ export default class vx_type_test {
     return output
   }
 
+  static f_string_trim(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "string-trim",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "ab",
+              vx_type.f_string_trim(" \t\nab\n\t ")
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_string_from_int(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -707,6 +732,7 @@ export default class vx_type_test {
       vx_type_test.f_is_type(context),
       vx_type_test.f_is_type_from_any_typelist(context),
       vx_type_test.f_length_from_string(context),
+      vx_type_test.f_string_trim(context),
       vx_type_test.f_string_from_int(context),
       vx_type_test.f_string_from_string_end(context),
       vx_type_test.f_string_from_string_start(context),

@@ -139,25 +139,41 @@ public final class File {
       validkeys.add(":permission");
       validkeys.add(":text");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
+          boolean istestkey = false;
           String testkey = "";
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
             testkey = (String)valsub;
-          }
-          boolean isvalidkey = validkeys.contains(testkey);
-          if (isvalidkey) {
-            key = testkey;
+            istestkey = true;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new file) - Invalid Key Type: " + valsub.toString());
+            String svalsub;
+            if (valsub instanceof Core.Type_any) {
+              Core.Type_any anyvalsub = (Core.Type_any)valsub;
+              svalsub = Core.vx_string_from_any(anyvalsub);
+            } else {
+              svalsub = valsub.toString();
+            }
+            msg = Core.vx_msg_error("(new file) - Invalid Key Type: " + svalsub);
             msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              msg = Core.vx_msg_error("(new file) - Invalid Key: " + testkey);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
           switch (key) {
@@ -170,7 +186,7 @@ public final class File {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new file :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new file :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -180,7 +196,7 @@ public final class File {
               ischanged = true;
               vx_p_format = (File.Type_fileformat)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new file :format " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new file :format " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -193,7 +209,7 @@ public final class File {
               ischanged = true;
               vx_p_path = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new file :path " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new file :path " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -203,7 +219,7 @@ public final class File {
               ischanged = true;
               vx_p_permission = (Core.Type_permission)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -216,12 +232,12 @@ public final class File {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new file :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new file :text " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.vx_msg_error("(new file) - Invalid Key: " + key);
+            msg = Core.vx_msg_error("(new file) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

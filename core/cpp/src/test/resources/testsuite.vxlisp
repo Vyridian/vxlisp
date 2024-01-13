@@ -16292,6 +16292,27 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/type"
+     :casename "string-trim"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"ab\"
+ (string-trim
+  \" 	
+ab
+	 \"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "ab"
+          :actual "ab"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/type"
      :casename "string<-int"
      :describelist
       (vx/test/testdescribelist
@@ -16569,6 +16590,7 @@
       :is-type 4
       :is-type<-any-typelist 4
       :length<-string 2
+      :string-trim 1
       :string<-int 5
       :string<-string-end 2
       :string<-string-start 2
@@ -16583,29 +16605,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 24)
+      :total 25)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 24)
+      :total 25)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
-      :pct 79
-      :tests 19
-      :total 24)
+      :pct 80
+      :tests 20
+      :total 25)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 62
-      :tests 15
-      :total 24)
+      :pct 64
+      :tests 16
+      :total 25)
     :testpkg "vx/type"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 62
-      :tests 15
-      :total 24)
+      :pct 64
+      :tests 16
+      :total 25)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

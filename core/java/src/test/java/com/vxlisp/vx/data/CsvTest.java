@@ -235,8 +235,8 @@ public final class CsvTest {
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 63, ":tests", 7, ":total", 11), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 1, ":total", 7), 
-      ":ospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":otimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
       ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 9, ":tests", 1, ":total", 11), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );

@@ -80,25 +80,41 @@ public final class Csv {
       validkeys.add(":headers");
       validkeys.add(":rows");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
+          boolean istestkey = false;
           String testkey = "";
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
             testkey = (String)valsub;
-          }
-          boolean isvalidkey = validkeys.contains(testkey);
-          if (isvalidkey) {
-            key = testkey;
+            istestkey = true;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new csv) - Invalid Key Type: " + valsub.toString());
+            String svalsub;
+            if (valsub instanceof Core.Type_any) {
+              Core.Type_any anyvalsub = (Core.Type_any)valsub;
+              svalsub = Core.vx_string_from_any(anyvalsub);
+            } else {
+              svalsub = valsub.toString();
+            }
+            msg = Core.vx_msg_error("(new csv) - Invalid Key Type: " + svalsub);
             msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              msg = Core.vx_msg_error("(new csv) - Invalid Key: " + testkey);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
           switch (key) {
@@ -108,7 +124,7 @@ public final class Csv {
               ischanged = true;
               vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -118,12 +134,12 @@ public final class Csv {
               ischanged = true;
               vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.vx_msg_error("(new csv) - Invalid Key: " + key);
+            msg = Core.vx_msg_error("(new csv) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

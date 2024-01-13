@@ -295,25 +295,41 @@ public final class Repl {
       validkeys.add(":val");
       validkeys.add(":doc");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
+          boolean istestkey = false;
           String testkey = "";
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
             testkey = (String)valsub;
-          }
-          boolean isvalidkey = validkeys.contains(testkey);
-          if (isvalidkey) {
-            key = testkey;
+            istestkey = true;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new repl) - Invalid Key Type: " + valsub.toString());
+            String svalsub;
+            if (valsub instanceof Core.Type_any) {
+              Core.Type_any anyvalsub = (Core.Type_any)valsub;
+              svalsub = Core.vx_string_from_any(anyvalsub);
+            } else {
+              svalsub = valsub.toString();
+            }
+            msg = Core.vx_msg_error("(new repl) - Invalid Key Type: " + svalsub);
             msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              msg = Core.vx_msg_error("(new repl) - Invalid Key: " + testkey);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
           switch (key) {
@@ -326,7 +342,7 @@ public final class Repl {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :name " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -336,7 +352,7 @@ public final class Repl {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :type " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :type " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -346,7 +362,7 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :repllist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :repllist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -359,7 +375,7 @@ public final class Repl {
               ischanged = true;
               vx_p_async = Core.t_boolean.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :async " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :async " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -369,7 +385,7 @@ public final class Repl {
               ischanged = true;
               vx_p_val = (Core.Type_any)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :val " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :val " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -382,12 +398,12 @@ public final class Repl {
               ischanged = true;
               vx_p_doc = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new repl :doc " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new repl :doc " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.vx_msg_error("(new repl) - Invalid Key: " + key);
+            msg = Core.vx_msg_error("(new repl) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -521,25 +537,41 @@ public final class Repl {
       validkeys.add(":current");
       validkeys.add(":repllist");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
+          boolean istestkey = false;
           String testkey = "";
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
             testkey = (String)valsub;
-          }
-          boolean isvalidkey = validkeys.contains(testkey);
-          if (isvalidkey) {
-            key = testkey;
+            istestkey = true;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("(new replarglist) - Invalid Key Type: " + valsub.toString());
+            String svalsub;
+            if (valsub instanceof Core.Type_any) {
+              Core.Type_any anyvalsub = (Core.Type_any)valsub;
+              svalsub = Core.vx_string_from_any(anyvalsub);
+            } else {
+              svalsub = valsub.toString();
+            }
+            msg = Core.vx_msg_error("(new replarglist) - Invalid Key Type: " + svalsub);
             msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + testkey);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
           switch (key) {
@@ -552,7 +584,7 @@ public final class Repl {
               ischanged = true;
               vx_p_key = Core.t_string.vx_new(valsub);
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :key " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new replarglist :key " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -562,7 +594,7 @@ public final class Repl {
               ischanged = true;
               vx_p_current = (Repl.Type_repl)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :current " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new replarglist :current " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -572,12 +604,12 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              Core.Type_msg msg = Core.vx_msg_error("(new replarglist :repllist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_error("(new replarglist :repllist " + valsub.toString() + ") - Invalid Value");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            Core.Type_msg msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + key);
+            msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

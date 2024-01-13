@@ -381,7 +381,7 @@ func StringFromArgIndent(arg vxarg, indent int) string {
 		output += lineindent + " :multi " + StringFromBoolean(arg.multi)
 	}
 	if arg.value.code != "" {
-		output += lineindent + " :value " + StringFromValueIndent(arg.value, indent+1)
+		output += lineindent + " :value " + StringFromValueIndent(arg.value, indent+2)
 	}
 	if arg.isdefault {
 		output += lineindent + ":default " + StringFromBoolean(arg.isdefault)
@@ -401,7 +401,7 @@ func StringFromListArgIndent(listarg []vxarg, indent int) string {
 	}
 	output := lineindent + "(arglist"
 	for _, arg := range listarg {
-		output += lineindent + StringFromArgIndent(arg, indent+1)
+		output += StringFromArgIndent(arg, indent+1)
 	}
 	output += ")"
 	return output
