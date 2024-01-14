@@ -491,6 +491,7 @@ public final class Db {
         ischanged = true;
       }
       Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<>(val.vx_mapdbcell());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -504,7 +505,7 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -514,7 +515,7 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbcell) {
             valany = (Db.Type_dbcell)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -843,6 +844,7 @@ public final class Db {
         ischanged = true;
       }
       Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<>(val.vx_mapdbfield());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -856,7 +858,7 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -866,7 +868,7 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbfield) {
             valany = (Db.Type_dbfield)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1209,6 +1211,7 @@ public final class Db {
         ischanged = true;
       }
       List<Db.Type_dblink> listval = new ArrayList<>(val.vx_listdblink());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1233,8 +1236,12 @@ public final class Db {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/db/dblinklist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new dblinklist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/db/dblinklist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

@@ -936,6 +936,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">
             (f) string&lt;-func
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-string-find-replace')">
+            (f) string&lt;-string-find-replace
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">
             (f) switch
           </li>
@@ -1841,6 +1844,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">
             (f) string&lt;-stringlist-join
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">
+            (f) string-outdent
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">
             (f) string-trim
           </li>
@@ -2268,26 +2274,6 @@
                   <div class="td">Build C# Test Code</div>
                 </div>
                 <div class="tr">
-                  <div class="td">srcjs</div>
-                  <div class="td">:source</div>
-                  <div class="td">../js/src</div>
-                  <div class="td">:js</div>
-                  <div class="td">vx/core/main</div>
-                  <div class="td">vx/translation/en/context-en</div>
-                  <div class="td">0</div>
-                  <div class="td">Build JavaScript Source Code</div>
-                </div>
-                <div class="tr">
-                  <div class="td">testjs</div>
-                  <div class="td">:test</div>
-                  <div class="td">../js/test</div>
-                  <div class="td">:js</div>
-                  <div class="td"></div>
-                  <div class="td">vx/translation/en/context-test</div>
-                  <div class="td">0</div>
-                  <div class="td">Build JavaScript Test Code</div>
-                </div>
-                <div class="tr">
                   <div class="td">srcjava</div>
                   <div class="td">:source</div>
                   <div class="td">../java/src/main/java</div>
@@ -2306,6 +2292,26 @@
                   <div class="td">vx/translation/en/context-test</div>
                   <div class="td">0</div>
                   <div class="td">Build Java Test Code</div>
+                </div>
+                <div class="tr">
+                  <div class="td">srcjs</div>
+                  <div class="td">:source</div>
+                  <div class="td">../js/src</div>
+                  <div class="td">:js</div>
+                  <div class="td">vx/core/main</div>
+                  <div class="td">vx/translation/en/context-en</div>
+                  <div class="td">0</div>
+                  <div class="td">Build JavaScript Source Code</div>
+                </div>
+                <div class="tr">
+                  <div class="td">testjs</div>
+                  <div class="td">:test</div>
+                  <div class="td">../js/test</div>
+                  <div class="td">:js</div>
+                  <div class="td"></div>
+                  <div class="td">vx/translation/en/context-test</div>
+                  <div class="td">0</div>
+                  <div class="td">Build JavaScript Test Code</div>
                 </div>
                 <div class="tr">
                   <div class="td">srckotlin</div>
@@ -2440,19 +2446,6 @@
    :path    ../csharp/src/test
    :context vx/translation/en/context-test
    :doc     &quot;Build C# Test Code&quot;)
-  (cmd srcjs
-   :code    :source
-   :lang    :js
-   :path    ../js/src
-   :main    vx/core/main
-   :context vx/translation/en/context-en
-   :doc     &quot;Build JavaScript Source Code&quot;)
-  (cmd testjs
-   :code    :test
-   :lang    :js
-   :path    ../js/test
-   :context vx/translation/en/context-test
-   :doc     &quot;Build JavaScript Test Code&quot;)
   (cmd srcjava
    :code    :source
    :lang    :java
@@ -2466,6 +2459,19 @@
    :path    ../java/src/test/java
    :context vx/translation/en/context-test
    :doc     &quot;Build Java Test Code&quot;)
+  (cmd srcjs
+   :code    :source
+   :lang    :js
+   :path    ../js/src
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     &quot;Build JavaScript Source Code&quot;)
+  (cmd testjs
+   :code    :test
+   :lang    :js
+   :path    ../js/test
+   :context vx/translation/en/context-test
+   :doc     &quot;Build JavaScript Test Code&quot;)
   (cmd srckotlin
    :code    :source
    :lang    :kotlin
@@ -4224,7 +4230,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-string-find-replace')">string&lt;-string-find-replace</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
             </li>
           </ul>
         </details>
@@ -6948,6 +6954,22 @@ output : list-1 := (empty list-1)
 (func string&lt;-func : string
  []
  :doc &quot;Function Type returning string with any parameters&quot;)
+
+(func string&lt;-string-find-replace : string
+ [text    : string
+  find    : string
+  replace : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;a!b!c&quot;
+        (string&lt;-string-find-replace
+         &quot;axybxyc&quot;
+         &quot;xy&quot;
+         &quot;!&quot;))
+ :doc &quot;Returns a string with all instances of find replaced by replace.&quot;)
 
 (func switch : any-1
  [val          : any-2
@@ -23640,6 +23662,96 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/core/string&lt;-string-find-replace">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-string-find-replace')">string&lt;-string-find-replace</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a string with all instances of find replaced by replace.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string&lt;-string-find-replace</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">find</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">replace</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;a!b!c&quot;
+ (string&lt;-string-find-replace
+  &quot;axybxyc&quot;
+  &quot;xy&quot;
+  &quot;!&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string&lt;-string-find-replace : string
+ [text    : string
+  find    : string
+  replace : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;a!b!c&quot;
+        (string&lt;-string-find-replace
+         &quot;axybxyc&quot;
+         &quot;xy&quot;
+         &quot;!&quot;))
+ :doc &quot;Returns a string with all instances of find replaced by replace.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/core/switch">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span></div>
             <div class="lbl">Description:</div>
@@ -29057,12 +29169,16 @@ improves readability.</div>
   delim : delim]
  (let : delim
   [find : string := (:starttext delim)
-   pos  : int    := (int&lt;-string-findkeyword text find)]
+   pos  : int    := (typ/int&lt;-string-findkeyword
+                     text
+                     find)]
   (if : delim
-   (= pos 0)
-   delim
-   (copy delim
-    :pos pos)))
+   (then
+    (= pos 0)
+    delim)
+   (else
+    (copy delim
+     :pos pos))))
  :test (test
         (copy delimcomma
          :pos 2)
@@ -29170,10 +29286,10 @@ improves readability.</div>
                                (&lt; endpos startright)
                                startright
                                endpos)
-   textleft    : string    := (type/string&lt;-string-end
+   textleft    : string    := (typ/string&lt;-string-end
                                text
                                posminus)
-   textright   : string    := (type/string&lt;-string-start
+   textright   : string    := (typ/string&lt;-string-start
                                text
                                (+
                                 pos
@@ -29524,13 +29640,13 @@ improves readability.</div>
    startopen  : int       := (+
                               startpos
                               posminus)
-   textleft   : string    := (type/string&lt;-string-end
+   textleft   : string    := (typ/string&lt;-string-end
                               text
                               posminus)
-   textpar   : string     := (type/string&lt;-string-start
+   textpar   : string     := (typ/string&lt;-string-start
                               text
                               pos)
-   textright : string     := (type/string&lt;-string-start
+   textright : string     := (typ/string&lt;-string-start
                               text
                               (+
                                pos
@@ -29734,9 +29850,9 @@ improves readability.</div>
                                origsingle
                                (case :whitespace
                                 (let : string
-                                 [text2 : string  := (type/string&lt;-string-start
+                                 [text2 : string  := (typ/string&lt;-string-start
                                                       text pos)
-                                  pos2   : int    := (type/int&lt;-string-findkeyword
+                                  pos2   : int    := (typ/int&lt;-string-findkeyword
                                                       text2
                                                       :nonwhitespace)
                                   pos3   : int    := (if : int
@@ -29749,7 +29865,7 @@ improves readability.</div>
                                                        pos2)
                                                       (else
                                                        (-1 pos2)))]
-                                 (type/string&lt;-string-start-end
+                                 (typ/string&lt;-string-start-end
                                   text
                                   pos
                                   pos3)))
@@ -29777,13 +29893,13 @@ improves readability.</div>
                                startsingle
                                (-1 startsingle))
    startright  : int       := (+1 endsingle)
-   textleft    : string    := (type/string&lt;-string-end
+   textleft    : string    := (typ/string&lt;-string-end
                                text
                                posminus)
-   textpar     : string    := (type/string&lt;-string-start
+   textpar     : string    := (typ/string&lt;-string-start
                                text
                                pos)
-   textright   : string    := (type/string&lt;-string-start
+   textright   : string    := (typ/string&lt;-string-start
                                text
                                (+
                                 pos
@@ -30223,16 +30339,17 @@ improves readability.</div>
    (then // if delim not closed then error
     (! (is-empty close))
     (copy parent
-     :delimlist
-      (copy delims
-       (copy textblockarg
-        :parent
-         (empty textblock)
-        :msg
-         (msg&lt;-error
-          (string
-           &quot;Close delim not found: &quot;
-           (:name delima)))))))
+     (copy delimp
+      :delimlist
+       (copy delims
+        (copy textblockarg
+         :parent
+          (empty textblock)
+         :msg
+          (msg&lt;-error
+           (string
+            &quot;Close delim not found: &quot;
+            (:name delima))))))))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -35266,12 +35383,16 @@ improves readability.</div>
   delim : delim]
  (let : delim
   [find : string := (:starttext delim)
-   pos  : int    := (int&lt;-string-findkeyword text find)]
+   pos  : int    := (typ/int&lt;-string-findkeyword
+                     text
+                     find)]
   (if : delim
-   (= pos 0)
-   delim
-   (copy delim
-    :pos pos)))
+   (then
+    (= pos 0)
+    delim)
+   (else
+    (copy delim
+     :pos pos))))
  :test (test
         (copy delimcomma
          :pos 2)
@@ -36030,10 +36151,10 @@ improves readability.</div>
                                (&lt; endpos startright)
                                startright
                                endpos)
-   textleft    : string    := (type/string&lt;-string-end
+   textleft    : string    := (typ/string&lt;-string-end
                                text
                                posminus)
-   textright   : string    := (type/string&lt;-string-start
+   textright   : string    := (typ/string&lt;-string-start
                                text
                                (+
                                 pos
@@ -36648,13 +36769,13 @@ improves readability.</div>
    startopen  : int       := (+
                               startpos
                               posminus)
-   textleft   : string    := (type/string&lt;-string-end
+   textleft   : string    := (typ/string&lt;-string-end
                               text
                               posminus)
-   textpar   : string     := (type/string&lt;-string-start
+   textpar   : string     := (typ/string&lt;-string-start
                               text
                               pos)
-   textright : string     := (type/string&lt;-string-start
+   textright : string     := (typ/string&lt;-string-start
                               text
                               (+
                                pos
@@ -37271,9 +37392,9 @@ improves readability.</div>
                                origsingle
                                (case :whitespace
                                 (let : string
-                                 [text2 : string  := (type/string&lt;-string-start
+                                 [text2 : string  := (typ/string&lt;-string-start
                                                       text pos)
-                                  pos2   : int    := (type/int&lt;-string-findkeyword
+                                  pos2   : int    := (typ/int&lt;-string-findkeyword
                                                       text2
                                                       :nonwhitespace)
                                   pos3   : int    := (if : int
@@ -37286,7 +37407,7 @@ improves readability.</div>
                                                        pos2)
                                                       (else
                                                        (-1 pos2)))]
-                                 (type/string&lt;-string-start-end
+                                 (typ/string&lt;-string-start-end
                                   text
                                   pos
                                   pos3)))
@@ -37314,13 +37435,13 @@ improves readability.</div>
                                startsingle
                                (-1 startsingle))
    startright  : int       := (+1 endsingle)
-   textleft    : string    := (type/string&lt;-string-end
+   textleft    : string    := (typ/string&lt;-string-end
                                text
                                posminus)
-   textpar     : string    := (type/string&lt;-string-start
+   textpar     : string    := (typ/string&lt;-string-start
                                text
                                pos)
-   textright   : string    := (type/string&lt;-string-start
+   textright   : string    := (typ/string&lt;-string-start
                                text
                                (+
                                 pos
@@ -38472,16 +38593,17 @@ improves readability.</div>
    (then // if delim not closed then error
     (! (is-empty close))
     (copy parent
-     :delimlist
-      (copy delims
-       (copy textblockarg
-        :parent
-         (empty textblock)
-        :msg
-         (msg&lt;-error
-          (string
-           &quot;Close delim not found: &quot;
-           (:name delima)))))))
+     (copy delimp
+      :delimlist
+       (copy delims
+        (copy textblockarg
+         :parent
+          (empty textblock)
+         :msg
+          (msg&lt;-error
+           (string
+            &quot;Close delim not found: &quot;
+            (:name delima))))))))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -61923,7 +62045,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">string-outdent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
             </li>
           </ul>
         </details>
@@ -61994,9 +62116,7 @@ improves readability.</div>
     output = vx_core::vx_new_int(ipos);&quot;
   :js
    &quot;vx_core.vx_int_from_string_find(text, find) + 1&quot;
-  :java
-   &quot;int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);&quot;)
+  :java :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -62008,14 +62128,9 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp
-   &quot;int ipos = vx_type::vx_int_from_string_findkeyword(text-&gt;vx_string(), find-&gt;vx_string());
-    output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_type.vx_int_from_string_findkeyword(text, find)&quot;
-  :java
-   &quot;int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
-    output = Core.vx_new_int(ipos);&quot;)
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -62037,9 +62152,7 @@ improves readability.</div>
     output = vx_core::vx_new_int(ipos);&quot;
   :js
    &quot;vx_core.vx_int_from_string_findlast(text, findlast) + 1&quot;
-  :java
-   &quot;int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);&quot;)
+  :java :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -62252,6 +62365,45 @@ improves readability.</div>
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)
+
+(func string-outdent : string
+ [text : string]
+ (let : string
+  [pos    : int    := (int&lt;-string-findkeyword
+                       text
+                       :nonwhitespace)]
+  (if : string
+   (then
+    (= 0 pos)
+    text)
+   (else
+    (let : string
+     [indent  : string := (string&lt;-string-end
+                           text
+                           (-1 pos))
+      rest    : string := (string&lt;-string-start
+                           text
+                           pos)
+      linepos : int    := (int&lt;-string-find
+                           indent
+                           &quot;\n&quot;)
+      outdent : string := (if : string
+                           (= 0 linepos)
+                           &quot;&quot;
+                           &quot;\n&quot;)]
+     (string&lt;-string-find-replace
+      rest
+      indent
+      outdent)))))
+ :test (test
+        &quot;ab&quot;
+        (string-outdent
+         &quot;ab&quot;))
+       (test
+        &quot;a\nb&quot;
+        (string-outdent
+         &quot;\n a\n b&quot;))
+ :doc &quot;Returns a string replacing leading whitespace on all lines based on first line.&quot;)
 
 (func string-trim : string
  [text  : string]
@@ -62733,9 +62885,7 @@ improves readability.</div>
     output = vx_core::vx_new_int(ipos);&quot;
   :js
    &quot;vx_core.vx_int_from_string_find(text, find) + 1&quot;
-  :java
-   &quot;int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);&quot;)
+  :java :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -62820,14 +62970,9 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp
-   &quot;int ipos = vx_type::vx_int_from_string_findkeyword(text-&gt;vx_string(), find-&gt;vx_string());
-    output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_type.vx_int_from_string_findkeyword(text, find)&quot;
-  :java
-   &quot;int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
-    output = Core.vx_new_int(ipos);&quot;)
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -62917,9 +63062,7 @@ improves readability.</div>
     output = vx_core::vx_new_int(ipos);&quot;
   :js
    &quot;vx_core.vx_int_from_string_findlast(text, findlast) + 1&quot;
-  :java
-   &quot;int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);&quot;)
+  :java :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -63971,6 +64114,111 @@ improves readability.</div>
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/type/string-outdent">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">string-outdent</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a string replacing leading whitespace on all lines based on first line.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string-outdent</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;ab&quot;
+ (string-outdent
+  &quot;ab&quot;))</div></li>
+                <li><div class="test">(test
+ &quot;a\nb&quot;
+ (string-outdent
+  &quot;\n a\n b&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string-outdent : string
+ [text : string]
+ (let : string
+  [pos    : int    := (int&lt;-string-findkeyword
+                       text
+                       :nonwhitespace)]
+  (if : string
+   (then
+    (= 0 pos)
+    text)
+   (else
+    (let : string
+     [indent  : string := (string&lt;-string-end
+                           text
+                           (-1 pos))
+      rest    : string := (string&lt;-string-start
+                           text
+                           pos)
+      linepos : int    := (int&lt;-string-find
+                           indent
+                           &quot;\n&quot;)
+      outdent : string := (if : string
+                           (= 0 linepos)
+                           &quot;&quot;
+                           &quot;\n&quot;)]
+     (string&lt;-string-find-replace
+      rest
+      indent
+      outdent)))))
+ :test (test
+        &quot;ab&quot;
+        (string-outdent
+         &quot;ab&quot;))
+       (test
+        &quot;a\nb&quot;
+        (string-outdent
+         &quot;\n a\n b&quot;))
+ :doc &quot;Returns a string replacing leading whitespace on all lines based on first line.&quot;)</div>
                 </li>
               </ul>
             </details>

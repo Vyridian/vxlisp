@@ -1019,6 +1019,12 @@ export default class vx_core {
     return output
   }
 
+  // vx_string_from_string_find_replace(string, string, string)
+  static vx_string_from_string_find_replace(text, find, replace) {
+    const output = text.replaceAll(find, replace);
+    return output;
+  }
+
   static vx_string_from_string_start_end(text, start, end) {
     let output = ""
     const maxlen = text.length
@@ -2646,7 +2652,7 @@ export default class vx_core {
   static f_any_from_map_start_reduce(generic, map, start, fn_reduce) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_core.vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+    output = vx_core.vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce)
     return output
   }
 
@@ -4604,6 +4610,24 @@ export default class vx_core {
   }
 
   /**
+   * @function string_from_string_find_replace
+   * Returns a string with all instances of find replaced by replace.
+   * @param  {string} text
+   * @param  {string} find
+   * @param  {string} replace
+   * @return {string}
+   */
+  static t_string_from_string_find_replace = {}
+  static e_string_from_string_find_replace = {vx_type: vx_core.t_string_from_string_find_replace}
+
+  // (func string<-string-find-replace)
+  static f_string_from_string_find_replace(text, find, replace) {
+    let output = vx_core.e_string
+    output = vx_core.vx_string_from_string_find_replace(text, find, replace)
+    return output
+  }
+
+  /**
    * @function switch
    * @param  {typemap} generic
    * @param  {any} val
@@ -5191,6 +5215,7 @@ export default class vx_core {
       "string<-any": vx_core.e_string_from_any,
       "string<-any-indent": vx_core.e_string_from_any_indent,
       "string<-func": vx_core.e_string_from_func,
+      "string<-string-find-replace": vx_core.e_string_from_string_find_replace,
       "switch": vx_core.e_switch,
       "then": vx_core.e_then,
       "traits<-typedef": vx_core.e_traits_from_typedef,
@@ -5353,6 +5378,7 @@ export default class vx_core {
       "string<-any": vx_core.t_string_from_any,
       "string<-any-indent": vx_core.t_string_from_any_indent,
       "string<-func": vx_core.t_string_from_func,
+      "string<-string-find-replace": vx_core.t_string_from_string_find_replace,
       "switch": vx_core.t_switch,
       "then": vx_core.t_then,
       "traits<-typedef": vx_core.t_traits_from_typedef,
@@ -10063,6 +10089,25 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_string_from_func
+    }
+
+    // (func string<-string-find-replace)
+    vx_core.t_string_from_string_find_replace['vx_type'] = vx_core.t_type
+    vx_core.t_string_from_string_find_replace['vx_value'] = {
+      name          : "string<-string-find-replace",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_string_from_string_find_replace
     }
 
     // (func switch)

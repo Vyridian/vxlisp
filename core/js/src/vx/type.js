@@ -336,6 +336,56 @@ export default class vx_type {
   }
 
   /**
+   * @function string_outdent
+   * Returns a string replacing leading whitespace on all lines based on first line.
+   * @param  {string} text
+   * @return {string}
+   */
+  static t_string_outdent = {}
+  static e_string_outdent = {vx_type: vx_type.t_string_outdent}
+
+  // (func string-outdent)
+  static f_string_outdent(text) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const pos = vx_type.f_int_from_string_findkeyword(text, ":nonwhitespace")
+        return vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(0, pos)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return text})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+              {"any-1": vx_core.t_string},
+              [],
+              vx_core.f_new(vx_core.t_any_from_func, () => {
+                const indent = vx_type.f_string_from_string_end(
+                  text,
+                  vx_core.f_minus1(pos)
+                )
+                const rest = vx_type.f_string_from_string_start(text, pos)
+                const linepos = vx_type.f_int_from_string_find(indent, "\n")
+                const outdent = vx_core.f_if_1(
+                  {"any-1": vx_core.t_string},
+                  vx_core.f_eq(0, linepos),
+                  "",
+                  "\n"
+                )
+                return vx_core.f_string_from_string_find_replace(rest, indent, outdent)
+              })
+            )})
+          )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function string_trim
    * Trims whitespace from the front and back of text
    * @param  {string} text
@@ -347,7 +397,7 @@ export default class vx_type {
   // (func string-trim)
   static f_string_trim(text) {
     let output = vx_core.e_string
-    output = vx_type.vx_string_trim(text);
+    output = vx_type.vx_string_trim(text)
     return output
   }
 
@@ -553,6 +603,7 @@ export default class vx_type {
       "is-type": vx_type.e_is_type,
       "is-type<-any-typelist": vx_type.e_is_type_from_any_typelist,
       "length<-string": vx_type.e_length_from_string,
+      "string-outdent": vx_type.e_string_outdent,
       "string-trim": vx_type.e_string_trim,
       "string<-int": vx_type.e_string_from_int,
       "string<-string-end": vx_type.e_string_from_string_end,
@@ -580,6 +631,7 @@ export default class vx_type {
       "is-type": vx_type.t_is_type,
       "is-type<-any-typelist": vx_type.t_is_type_from_any_typelist,
       "length<-string": vx_type.t_length_from_string,
+      "string-outdent": vx_type.t_string_outdent,
       "string-trim": vx_type.t_string_trim,
       "string<-int": vx_type.t_string_from_int,
       "string<-string-end": vx_type.t_string_from_string_end,
@@ -886,6 +938,25 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_length_from_string
+    }
+
+    // (func string-outdent)
+    vx_type.t_string_outdent['vx_type'] = vx_core.t_type
+    vx_type.t_string_outdent['vx_value'] = {
+      name          : "string-outdent",
+      pkgname       : "vx/type",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_type.f_string_outdent
     }
 
     // (func string-trim)

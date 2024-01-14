@@ -73,6 +73,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_resolve_async(vx_core::Type_context context);
   vx_test::Type_testcase f_string_repeat(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_any(vx_core::Type_context context);
+  vx_test::Type_testcase f_string_from_string_find_replace(vx_core::Type_context context);
   vx_test::Type_testcase f_switch(vx_core::Type_context context);
   vx_test::Type_testcase f_type_from_any(vx_core::Type_context context);
   vx_test::Type_testcase f_typename_from_any(vx_core::Type_context context);

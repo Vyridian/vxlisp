@@ -346,6 +346,7 @@ public final class Xml {
         ischanged = true;
       }
       List<Xml.Type_xml> listval = new ArrayList<>(val.vx_listxml());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -370,8 +371,12 @@ public final class Xml {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/xml/xmllist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new xmllist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/xml/xmllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -487,6 +492,7 @@ public final class Xml {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -500,7 +506,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -510,7 +516,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {

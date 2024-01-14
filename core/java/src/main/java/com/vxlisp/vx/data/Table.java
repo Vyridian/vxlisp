@@ -240,6 +240,7 @@ public final class Table {
         ischanged = true;
       }
       List<Table.Type_cell> listval = new ArrayList<>(val.vx_listcell());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -264,8 +265,12 @@ public final class Table {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/table/celllist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new celllist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/table/celllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -381,6 +386,7 @@ public final class Table {
         ischanged = true;
       }
       Map<String, Table.Type_cell> mapval = new LinkedHashMap<>(val.vx_mapcell());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -394,7 +400,7 @@ public final class Table {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -404,7 +410,7 @@ public final class Table {
           } else if (valsub instanceof Table.Type_cell) {
             valany = (Table.Type_cell)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -713,6 +719,7 @@ public final class Table {
         ischanged = true;
       }
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -737,8 +744,12 @@ public final class Table {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/table/fieldlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new fieldlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/table/fieldlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -833,6 +844,7 @@ public final class Table {
         ischanged = true;
       }
       List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -857,8 +869,12 @@ public final class Table {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/table/fieldmap", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new fieldmap) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/table/fieldmap", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1360,6 +1376,7 @@ public final class Table {
         ischanged = true;
       }
       List<Table.Type_row> listval = new ArrayList<>(val.vx_listrow());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1384,8 +1401,12 @@ public final class Table {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/table/rowlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new rowlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/table/rowlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1501,6 +1522,7 @@ public final class Table {
         ischanged = true;
       }
       Map<String, Table.Type_row> mapval = new LinkedHashMap<>(val.vx_maprow());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1514,7 +1536,7 @@ public final class Table {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -1524,7 +1546,7 @@ public final class Table {
           } else if (valsub instanceof Table.Type_row) {
             valany = (Table.Type_row)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {

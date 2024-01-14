@@ -749,6 +749,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_divchild> listval = new ArrayList<>(val.vx_listdivchild());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -773,8 +774,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/divchildlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new divchildlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/divchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -870,6 +875,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_div> listval = new ArrayList<>(val.vx_listdiv());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -894,8 +900,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/divlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new divlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/divlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2040,6 +2050,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_headchild> listval = new ArrayList<>(val.vx_listheadchild());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -2064,8 +2075,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/headchildlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new headchildlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/headchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2773,6 +2788,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_node> listval = new ArrayList<>(val.vx_listnode());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -2797,8 +2813,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/nodelist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new nodelist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/nodelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -3130,6 +3150,7 @@ public final class Html {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3143,7 +3164,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3153,7 +3174,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3436,6 +3457,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_style> listval = new ArrayList<>(val.vx_liststyle());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -3460,8 +3482,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/stylelist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new stylelist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/stylelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -3578,6 +3604,7 @@ public final class Html {
         ischanged = true;
       }
       Map<String, Html.Type_style> mapval = new LinkedHashMap<>(val.vx_mapstyle());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3591,7 +3618,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3601,7 +3628,7 @@ public final class Html {
           } else if (valsub instanceof Html.Type_style) {
             valany = (Html.Type_style)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -4622,6 +4649,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_td> listval = new ArrayList<>(val.vx_listtd());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -4646,8 +4674,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/tdlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new tdlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/tdlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -5381,6 +5413,7 @@ public final class Html {
         ischanged = true;
       }
       List<Html.Type_tr> listval = new ArrayList<>(val.vx_listtr());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -5405,8 +5438,12 @@ public final class Html {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/web/html/trlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new trlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/web/html/trlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

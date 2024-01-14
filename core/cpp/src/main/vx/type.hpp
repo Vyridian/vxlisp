@@ -67,6 +67,10 @@ namespace vx_type {
   typedef Abstract_length_from_string* Func_length_from_string;
   extern Func_length_from_string e_length_from_string;
   extern Func_length_from_string t_length_from_string;
+  class Abstract_string_outdent;
+  typedef Abstract_string_outdent* Func_string_outdent;
+  extern Func_string_outdent e_string_outdent;
+  extern Func_string_outdent t_string_outdent;
   class Abstract_string_trim;
   typedef Abstract_string_trim* Func_string_trim;
   extern Func_string_trim e_string_trim;
@@ -111,6 +115,9 @@ namespace vx_type {
 
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find);
+
+  // vx_int_from_string_findkeyword(string, string)
+  vx_core::Type_int vx_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find);
 
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
@@ -163,6 +170,9 @@ namespace vx_type {
 
   // (func length<-string)
   vx_core::Type_int f_length_from_string(vx_core::Type_string text);
+
+  // (func string-outdent)
+  vx_core::Type_string f_string_outdent(vx_core::Type_string text);
 
   // (func string-trim)
   vx_core::Type_string f_string_trim(vx_core::Type_string text);
@@ -557,6 +567,33 @@ namespace vx_type {
   public:
     Class_length_from_string();
     virtual ~Class_length_from_string() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string-outdent)
+  class Abstract_string_outdent : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_outdent() {};
+    virtual ~Abstract_string_outdent() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_outdent : public virtual Abstract_string_outdent {
+  public:
+    Class_string_outdent();
+    virtual ~Class_string_outdent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

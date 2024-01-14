@@ -310,11 +310,15 @@ export default class vx_data_textblock {
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const find = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delim, ":starttext")
         const pos = vx_type.f_int_from_string_findkeyword(text, find)
-        return vx_core.f_if_1(
+        return vx_core.f_if_2(
           {"any-1": vx_data_textblock.t_delim},
-          vx_core.f_eq(pos, 0),
-          delim,
-          vx_core.f_copy(delim, ":pos", pos)
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(pos, 0)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return delim})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(delim, ":pos", pos)})
+          )
         )
       })
     )
@@ -507,21 +511,24 @@ export default class vx_data_textblock {
             )}),
             vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
               parent,
-              ":delimlist",
               vx_core.f_copy(
-                delims,
+                delimp,
+                ":delimlist",
                 vx_core.f_copy(
-                  textblockarg,
-                  ":parent",
-                  vx_core.f_empty(
-                    vx_data_textblock.t_textblock
-                  ),
-                  ":msg",
-                  vx_core.f_msg_from_error(
-                    vx_core.f_new(
-                      vx_core.t_string,
-                      "Close delim not found: ",
-                      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delima, ":name")
+                  delims,
+                  vx_core.f_copy(
+                    textblockarg,
+                    ":parent",
+                    vx_core.f_empty(
+                      vx_data_textblock.t_textblock
+                    ),
+                    ":msg",
+                    vx_core.f_msg_from_error(
+                      vx_core.f_new(
+                        vx_core.t_string,
+                        "Close delim not found: ",
+                        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delima, ":name")
+                      )
                     )
                   )
                 )

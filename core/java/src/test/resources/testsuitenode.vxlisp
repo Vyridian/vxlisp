@@ -1132,7 +1132,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "31% 70/220")
+                  :text "32% 71/221")
                  (p
                   :style
                    (style
@@ -1156,7 +1156,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "47% 64/134")
+                  :text "48% 65/135")
                  (p
                   :style
                    (style
@@ -1164,7 +1164,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "86% 214/246")
+                  :text "87% 215/247")
                  (p
                   :style
                    (style
@@ -1172,7 +1172,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/160")
+                  :text "0% 1/161")
                  (p
                   :style
                    (style
@@ -1180,7 +1180,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/160"))
+                  :text "0% 1/161"))
                :nodes
                 (divchildlist
                  (div
@@ -11362,6 +11362,87 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
+                                :text "string<-string-find-replace")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "a!b!c"
+ (string<-string-find-replace
+  "axybxyc"
+  "xy"
+  "!"))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""a!b!c"")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""a!b!c"")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
                                 :text "switch")))
                             (td
                              :nodes
@@ -11910,16 +11991,16 @@
                  (p
                   :style
                    (style
-                    :name ".failflag"
+                    :name ".passflag"
                     :props
                      (propmap
-                      :background-color "red"
+                      :background-color "green"
                       :color "white"
                       :padding-left "4px"
                       :padding-right "4px"
                       :padding-top "1px"
                       :padding-bottom "1px"))
-                  :text "Fail")
+                  :text "Pass")
                  (p
                   :style
                    (style
@@ -12004,16 +12085,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -12241,14 +12322,82 @@
  :children
   (textblocklist
    (textblock
-    :text
-     ""a","b"
-1,"2""
+    :text ""a""
     :startpos 1
+    :endpos 3
+    :delim
+     (delim
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2)))
+   (textblock
+    :text ","
+    :startpos 4
+    :endpos 4
+    :delim
+     (delim
+      :name "delimcomma"
+      :starttext ","))
+   (textblock
+    :text ""b""
+    :startpos 5
+    :endpos 7
+    :delim
+     (delim
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "b"
+       :startpos 6
+       :endpos 6)))
+   (textblock
+    :text
+     "
+"
+    :startpos 8
+    :endpos 8
+    :delim
+     (delim
+      :name "delimline"
+      :starttext
+       "
+"))
+   (textblock
+    :text "1"
+    :startpos 9
+    :endpos 9)
+   (textblock
+    :text ","
+    :startpos 10
+    :endpos 10
+    :delim
+     (delim
+      :name "delimcomma"
+      :starttext ","))
+   (textblock
+    :text ""2""
+    :startpos 11
     :endpos 13
     :delim
      (delim
-      :name "delimcsv"))))")))))))
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "2"
+       :startpos 12
+       :endpos 12)))))")))))))
                      :thead
                       (thead
                        :nodes
@@ -12996,16 +13145,16 @@
                  (p
                   :style
                    (style
-                    :name ".failflag"
+                    :name ".passflag"
                     :props
                      (propmap
-                      :background-color "red"
+                      :background-color "green"
                       :color "white"
                       :padding-left "4px"
                       :padding-right "4px"
                       :padding-top "1px"
                       :padding-bottom "1px"))
-                  :text "Fail")
+                  :text "Pass")
                  (p
                   :style
                    (style
@@ -13350,16 +13499,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -13427,7 +13576,11 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "(delim)")))))
+                                :text
+                                 "(delim
+ :name "delimcomma"
+ :starttext ","
+ :pos 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -13437,16 +13590,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -13512,7 +13665,11 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "vx/data/textblock/delimcomma")))))
+                                :text
+                                 "(delim
+ :name "delimcomma"
+ :starttext ","
+ :pos 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -13522,16 +13679,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -13610,8 +13767,15 @@
                                     :white-space "pre"))
                                 :text
                                  "(delimlist
- vx/data/textblock/delimspace
- vx/data/textblock/delimcomma)")))))
+ (delim
+  :name "delimspace"
+  :starttext " "
+  :endtext " "
+  :pos 3)
+ (delim
+  :name "delimcomma"
+  :starttext ","
+  :pos 2))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -15134,16 +15298,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -15364,7 +15528,75 @@
     :text "<{a,b},{c d}>"
     :startpos 1
     :endpos 13
-    :delim (delim))))")))))
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "{a,b}"
+       :startpos 2
+       :endpos 6
+       :delim
+        (delim
+         :name "delimbracketcurly"
+         :starttext "{"
+         :endtext "}")
+       :children
+        (textblocklist
+         (textblock
+          :text "a"
+          :startpos 3
+          :endpos 3)
+         (textblock
+          :text ","
+          :startpos 4
+          :endpos 4
+          :delim
+           (delim
+            :name "delimcomma"
+            :starttext ","))
+         (textblock
+          :text "b"
+          :startpos 5
+          :endpos 5)))
+      (textblock
+       :text ","
+       :startpos 7
+       :endpos 7
+       :delim
+        (delim
+         :name "delimcomma"
+         :starttext ","))
+      (textblock
+       :text "{c d}"
+       :startpos 8
+       :endpos 12
+       :delim
+        (delim
+         :name "delimbracketcurly"
+         :starttext "{"
+         :endtext "}")
+       :children
+        (textblocklist
+         (textblock
+          :text "c"
+          :startpos 9
+          :endpos 9)
+         (textblock
+          :text " "
+          :startpos 10
+          :endpos 10
+          :delim
+           (delim
+            :name "delimwhitespace"
+            :starttext ":whitespace"))
+         (textblock
+          :text "d"
+          :startpos 11
+          :endpos 11)))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -15484,16 +15716,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -15613,16 +15845,32 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "<{a,b},{c d}>"
- :startpos 1
+ :text "{a,b},{c d}>"
+ :startpos 2
  :endpos 13
- :children
-  (textblocklist
-   (textblock
-    :text "<{a,b},{c d}>"
-    :startpos 1
-    :endpos 13
-    :delim (delim))))")))))
+ :delim
+  (delim
+   :delimlist vx/data/textblock/delimlisttest2)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext ">")
+ :parent
+  (textblock
+   :text "<{a,b},{c d}>"
+   :startpos 1
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketangle"
+     :starttext "<"
+     :endtext ">"
+     :delimlist vx/data/textblock/delimlisttest1)
+   :parent
+    (textblock
+     :text "<{a,b},{c d}>"
+     :startpos 1
+     :endpos 13)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -15632,16 +15880,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -15800,39 +16048,47 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "<{a,b},{c d}>"
- :startpos 1
+ :text "a,b},{c d}>"
+ :startpos 3
  :endpos 13
  :delim
   (delim
-   :name "delimbracketangle"
-   :starttext "<"
-   :endtext ">"
-   :delimlist vx/data/textblock/delimlisttest1)
+   :delimlist vx/data/textblock/delimlisttest3)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext "}")
  :parent
   (textblock
-   :text "<{a,b},{c d}>"
-   :startpos 1
-   :endpos 13)
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@7c098bb3"))))"))))")))))
+   :text "{a,b},{c d}>"
+   :startpos 2
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketcurly"
+     :starttext "{"
+     :endtext "}"
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<{a,b},{c d}>"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "<"
+       :endtext ">"
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "<{a,b},{c d}>"
+       :startpos 1
+       :endpos 13))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -15842,16 +16098,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -16048,21 +16304,22 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "a,b},{c"
+ :text "a"
  :startpos 3
- :endpos 9
+ :endpos 3
  :parent
   (textblock
-   :startpos 10
-   :endpos 9
+   :text ","
+   :startpos 4
+   :endpos 4
    :delim
     (delim
-     :name "delimwhitespace"
-     :starttext ":whitespace")
+     :name "delimcomma"
+     :starttext ",")
    :parent
     (textblock
-     :text " d}>"
-     :startpos 10
+     :text "b},{c d}>"
+     :startpos 5
      :endpos 13
      :delim
       (delim
@@ -16681,16 +16938,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -16904,74 +17161,62 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "b},{c"
+ :text "b"
  :startpos 5
- :endpos 9
+ :endpos 5
  :parent
   (textblock
-   :startpos 10
-   :endpos 9
+   :text ",{c d}>"
+   :startpos 7
+   :endpos 13
    :delim
     (delim
-     :name "delimwhitespace"
-     :starttext ":whitespace")
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext ">")
    :parent
     (textblock
-     :text " d}>"
-     :startpos 10
-     :endpos 13
+     :text "{a,b}"
+     :startpos 2
+     :endpos 6
      :delim
       (delim
-       :delimlist vx/data/textblock/delimlisttest3)
-     :close
-      (delim
-       :name "delimclose"
-       :starttext "}")
+       :name "delimbracketcurly"
+       :starttext "{"
+       :endtext "}")
+     :close vx/data/textblock/delimclosing
      :parent
       (textblock
-       :text "{a,b},{c d}>"
-       :startpos 2
+       :text "<{a,b},{c d}>"
+       :startpos 1
        :endpos 13
        :delim
         (delim
-         :name "delimbracketcurly"
-         :starttext "{"
-         :endtext "}"
-         :delimlist vx/data/textblock/delimlisttest2)
-       :close
-        (delim
-         :name "delimclose"
-         :starttext ">")
+         :name "delimbracketangle"
+         :starttext "<"
+         :endtext ">"
+         :delimlist vx/data/textblock/delimlisttest1)
        :parent
         (textblock
          :text "<{a,b},{c d}>"
          :startpos 1
-         :endpos 13
-         :delim
-          (delim
-           :name "delimbracketangle"
-           :starttext "<"
-           :endtext ">"
-           :delimlist vx/data/textblock/delimlisttest1)
-         :parent
-          (textblock
-           :text "<{a,b},{c d}>"
-           :startpos 1
-           :endpos 13))
-       :children
-        (textblocklist
-         (textblock
-          :text "a"
-          :startpos 3
-          :endpos 3)
-         (textblock
-          :text ","
-          :startpos 4
-          :endpos 4
-          :delim
-           (delim
-            :name "delimcomma"
-            :starttext ",")))))))")))))
+         :endpos 13))
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 3
+        :endpos 3)
+       (textblock
+        :text ","
+        :startpos 4
+        :endpos 4
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -17269,16 +17514,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -17517,68 +17762,74 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "<{a,b},{c d}>"
- :startpos 1
- :endpos 13
- :delim
-  (delim
-   :name "delimbracketangle"
-   :starttext "<"
-   :endtext ">"
-   :delimlist vx/data/textblock/delimlisttest1)
+ :startpos 7
+ :endpos 7
  :parent
   (textblock
-   :text "<{a,b},{c d}>"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :text ","
+   :startpos 7
+   :endpos 7
+   :delim
+    (delim
+     :name "delimcomma"
+     :starttext ",")
+   :parent
+    (textblock
+     :text "{c d}>"
+     :startpos 8
+     :endpos 13
+     :delim
+      (delim
+       :delimlist vx/data/textblock/delimlisttest2)
+     :close
+      (delim
+       :name "delimclose"
+       :starttext ">")
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
+       :text "<{a,b},{c d}>"
+       :startpos 1
+       :endpos 13
        :delim
         (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5))))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@31e4bb20"))))"))))")))))
+         :name "delimbracketangle"
+         :starttext "<"
+         :endtext ">"
+         :delimlist vx/data/textblock/delimlisttest1)
+       :parent
+        (textblock
+         :text "<{a,b},{c d}>"
+         :startpos 1
+         :endpos 13)
+       :children
+        (textblocklist
+         (textblock
+          :text "{a,b}"
+          :startpos 2
+          :endpos 6
+          :delim
+           (delim
+            :name "delimbracketcurly"
+            :starttext "{"
+            :endtext "}")
+          :children
+           (textblocklist
+            (textblock
+             :text "a"
+             :startpos 3
+             :endpos 3)
+            (textblock
+             :text ","
+             :startpos 4
+             :endpos 4
+             :delim
+              (delim
+               :name "delimcomma"
+               :starttext ","))
+            (textblock
+             :text "b"
+             :startpos 5
+             :endpos 5))))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -18231,16 +18482,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -18502,76 +18753,84 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "<{a,b},{c d}>"
- :startpos 1
+ :text "c d}>"
+ :startpos 9
  :endpos 13
  :delim
   (delim
-   :name "delimbracketangle"
-   :starttext "<"
-   :endtext ">"
-   :delimlist vx/data/textblock/delimlisttest1)
+   :delimlist vx/data/textblock/delimlisttest3)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext "}")
  :parent
   (textblock
-   :text "<{a,b},{c d}>"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :text "{c d}>"
+   :startpos 8
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketcurly"
+     :starttext "{"
+     :endtext "}"
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<{a,b},{c d}>"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "<"
+       :endtext ">"
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
-       :delim
-        (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5)))
-   (textblock
-    :text ","
-    :startpos 7
-    :endpos 7
-    :delim
-     (delim
-      :name "delimcomma"
-      :starttext ",")))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@18cebaa5"))))"))))")))))
+       :text "<{a,b},{c d}>"
+       :startpos 1
+       :endpos 13)
+     :children
+      (textblocklist
+       (textblock
+        :text "{a,b}"
+        :startpos 2
+        :endpos 6
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "a"
+           :startpos 3
+           :endpos 3)
+          (textblock
+           :text ","
+           :startpos 4
+           :endpos 4
+           :delim
+            (delim
+             :name "delimcomma"
+             :starttext ","))
+          (textblock
+           :text "b"
+           :startpos 5
+           :endpos 5)))
+       (textblock
+        :text ","
+        :startpos 7
+        :endpos 7
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -19844,16 +20103,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -20173,106 +20432,99 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "{c d}>"
- :startpos 8
- :endpos 13
- :delim
-  (delim
-   :name "delimbracketcurly"
-   :starttext "{"
-   :endtext "}"
-   :delimlist vx/data/textblock/delimlisttest2)
- :close
-  (delim
-   :name "delimclose"
-   :starttext ">")
+ :text "d"
+ :startpos 11
+ :endpos 11
  :parent
   (textblock
-   :text "<{a,b},{c d}>"
-   :startpos 1
+   :text ">"
+   :startpos 13
    :endpos 13
    :delim
     (delim
-     :name "delimbracketangle"
-     :starttext "<"
-     :endtext ">"
-     :delimlist vx/data/textblock/delimlisttest1)
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext ">")
    :parent
     (textblock
-     :text "<{a,b},{c d}>"
-     :startpos 1
-     :endpos 13)
-   :children
-    (textblocklist
-     (textblock
-      :text "{a,b}"
-      :startpos 2
-      :endpos 6
-      :delim
-       (delim
-        :name "delimbracketcurly"
-        :starttext "{"
-        :endtext "}")
-      :children
-       (textblocklist
+     :text "{c d}"
+     :startpos 8
+     :endpos 12
+     :delim
+      (delim
+       :name "delimbracketcurly"
+       :starttext "{"
+       :endtext "}")
+     :close vx/data/textblock/delimclosing
+     :parent
+      (textblock
+       :text "<{a,b},{c d}>"
+       :startpos 1
+       :endpos 13
+       :delim
+        (delim
+         :name "delimbracketangle"
+         :starttext "<"
+         :endtext ">"
+         :delimlist vx/data/textblock/delimlisttest1)
+       :parent
         (textblock
-         :text "a"
-         :startpos 3
-         :endpos 3)
-        (textblock
-         :text ","
-         :startpos 4
-         :endpos 4
-         :delim
-          (delim
-           :name "delimcomma"
-           :starttext ","))
-        (textblock
-         :text "b"
-         :startpos 5
-         :endpos 5)))
-     (textblock
-      :text ","
-      :startpos 7
-      :endpos 7
-      :delim
-       (delim
-        :name "delimcomma"
-        :starttext ","))))
- :children
-  (textblocklist
-   (textblock
-    :text "c"
-    :startpos 9
-    :endpos 9)
-   (textblock
-    :text " "
-    :startpos 10
-    :endpos 10
-    :delim
-     (delim
-      :name "delimwhitespace"
-      :starttext ":whitespace")))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimcomma
- vx/data/textblock/delimtest3
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@463b4ac8"))))"))))")))))
+         :text "<{a,b},{c d}>"
+         :startpos 1
+         :endpos 13)
+       :children
+        (textblocklist
+         (textblock
+          :text "{a,b}"
+          :startpos 2
+          :endpos 6
+          :delim
+           (delim
+            :name "delimbracketcurly"
+            :starttext "{"
+            :endtext "}")
+          :children
+           (textblocklist
+            (textblock
+             :text "a"
+             :startpos 3
+             :endpos 3)
+            (textblock
+             :text ","
+             :startpos 4
+             :endpos 4
+             :delim
+              (delim
+               :name "delimcomma"
+               :starttext ","))
+            (textblock
+             :text "b"
+             :startpos 5
+             :endpos 5)))
+         (textblock
+          :text ","
+          :startpos 7
+          :endpos 7
+          :delim
+           (delim
+            :name "delimcomma"
+            :starttext ","))))
+     :children
+      (textblocklist
+       (textblock
+        :text "c"
+        :startpos 9
+        :endpos 9)
+       (textblock
+        :text " "
+        :startpos 10
+        :endpos 10
+        :delim
+         (delim
+          :name "delimwhitespace"
+          :starttext ":whitespace"))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -20704,16 +20956,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -21024,103 +21276,95 @@
                                     :white-space "pre"))
                                 :text
                                  "(textblock
- :text "<{a,b},{c d}>"
- :startpos 1
+ :startpos 13
  :endpos 13
- :delim
-  (delim
-   :name "delimbracketangle"
-   :starttext "<"
-   :endtext ">"
-   :delimlist vx/data/textblock/delimlisttest1)
  :parent
   (textblock
-   :text "<{a,b},{c d}>"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :startpos 14
+   :endpos 14
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest1)
+   :parent
+    (textblock
+     :text "<{a,b},{c d}>"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "<"
+       :endtext ">")
+     :close vx/data/textblock/delimclosing
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
-       :delim
-        (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5)))
-   (textblock
-    :text ","
-    :startpos 7
-    :endpos 7
-    :delim
-     (delim
-      :name "delimcomma"
-      :starttext ","))
-   (textblock
-    :text "{c d}"
-    :startpos 8
-    :endpos 12
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
-      (textblock
-       :text "c"
-       :startpos 9
-       :endpos 9)
-      (textblock
-       :text " "
-       :startpos 10
-       :endpos 10
-       :delim
-        (delim
-         :name "delimwhitespace"
-         :starttext ":whitespace"))
-      (textblock
-       :text "d"
-       :startpos 11
-       :endpos 11))))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@765f05af"))))"))))")))))
+       :text "<{a,b},{c d}>"
+       :startpos 1
+       :endpos 13)
+     :children
+      (textblocklist
+       (textblock
+        :text "{a,b}"
+        :startpos 2
+        :endpos 6
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "a"
+           :startpos 3
+           :endpos 3)
+          (textblock
+           :text ","
+           :startpos 4
+           :endpos 4
+           :delim
+            (delim
+             :name "delimcomma"
+             :starttext ","))
+          (textblock
+           :text "b"
+           :startpos 5
+           :endpos 5)))
+       (textblock
+        :text ","
+        :startpos 7
+        :endpos 7
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))
+       (textblock
+        :text "{c d}"
+        :startpos 8
+        :endpos 12
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "c"
+           :startpos 9
+           :endpos 9)
+          (textblock
+           :text " "
+           :startpos 10
+           :endpos 10
+           :delim
+            (delim
+             :name "delimwhitespace"
+             :starttext ":whitespace"))
+          (textblock
+           :text "d"
+           :startpos 11
+           :endpos 11)))))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -25255,16 +25499,16 @@
                  (p
                   :style
                    (style
-                    :name ".failflag"
+                    :name ".passflag"
                     :props
                      (propmap
-                      :background-color "red"
+                      :background-color "green"
                       :color "white"
                       :padding-left "4px"
                       :padding-right "4px"
                       :padding-top "1px"
                       :padding-bottom "1px"))
-                  :text "Fail")
+                  :text "Pass")
                  (p
                   :style
                    (style
@@ -25349,16 +25593,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -25795,15 +26039,186 @@
  :children
   (textblocklist
    (textblock
-    :text
-     "<doc>
-  <tag1>
-    <tag2 prop1="val1" prop2="val2" />
-  </tag1>
-</doc>"
+    :text "<doc>"
     :startpos 1
+    :endpos 5
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "doc"
+       :startpos 2
+       :endpos 4)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 6
+    :endpos 8)
+   (textblock
+    :text "<tag1>"
+    :startpos 9
+    :endpos 14
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag1"
+       :startpos 10
+       :endpos 13)))
+   (textblock
+    :text
+     "
+    "
+    :startpos 15
+    :endpos 19)
+   (textblock
+    :text "<tag2 prop1="val1" prop2="val2" />"
+    :startpos 20
+    :endpos 53
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag2"
+       :startpos 21
+       :endpos 24)
+      (textblock
+       :text " "
+       :startpos 25
+       :endpos 25
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop1"
+       :startpos 26
+       :endpos 30)
+      (textblock
+       :text "="
+       :startpos 31
+       :endpos 31
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val1""
+       :startpos 32
+       :endpos 37
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val1"
+          :startpos 33
+          :endpos 36)))
+      (textblock
+       :text " "
+       :startpos 38
+       :endpos 38
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop2"
+       :startpos 39
+       :endpos 43)
+      (textblock
+       :text "="
+       :startpos 44
+       :endpos 44
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val2""
+       :startpos 45
+       :endpos 50
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val2"
+          :startpos 46
+          :endpos 49)))
+      (textblock
+       :text " "
+       :startpos 51
+       :endpos 51
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "/"
+       :startpos 52
+       :endpos 52)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 54
+    :endpos 56)
+   (textblock
+    :text "</tag1>"
+    :startpos 57
+    :endpos 63
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "/tag1"
+       :startpos 58
+       :endpos 62)))
+   (textblock
+    :text
+     "
+"
+    :startpos 64
+    :endpos 64)
+   (textblock
+    :text "</doc>"
+    :startpos 65
     :endpos 70
-    :delim (delim))))")))))
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">")
+    :children
+     (textblocklist
+      (textblock
+       :text "/doc"
+       :startpos 66
+       :endpos 69)))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -28540,16 +28955,16 @@
                  (p
                   :style
                    (style
-                    :name ".failflag"
+                    :name ".passflag"
                     :props
                      (propmap
-                      :background-color "red"
+                      :background-color "green"
                       :color "white"
                       :padding-left "4px"
                       :padding-right "4px"
                       :padding-top "1px"
                       :padding-bottom "1px"))
-                  :text "Fail")
+                  :text "Pass")
                  (p
                   :style
                    (style
@@ -28634,16 +29049,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -28704,7 +29119,8 @@
                                     :display "block"
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
-                                    :white-space "pre")))))))
+                                    :white-space "pre"))
+                                :text "5")))))
                          (tr
                           :nodes
                            (tdlist
@@ -28883,16 +29299,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -28951,7 +29367,8 @@
                                     :display "block"
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
-                                    :white-space "pre")))))))
+                                    :white-space "pre"))
+                                :text "5")))))
                          (tr
                           :nodes
                            (tdlist
@@ -29592,16 +30009,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -29678,7 +30095,15 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "(repl)")))))
+                                :text
+                                 "(repl
+ :type vx/core/+
+ :repllist
+  (repllist
+   (repl
+    :val 2)
+   (repl
+    :val 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -29940,16 +30365,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -30024,7 +30449,15 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "(repl)")))))
+                                :text
+                                 "(repl
+ :type vx/core/+
+ :repllist
+  (repllist
+   (repl
+    :val 2)
+   (repl
+    :val 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -31666,16 +32099,16 @@
                                (p
                                 :style
                                  (style
-                                  :name ".failflag"
+                                  :name ".passflag"
                                   :props
                                    (propmap
-                                    :background-color "red"
+                                    :background-color "green"
                                     :color "white"
                                     :padding-left "4px"
                                     :padding-right "4px"
                                     :padding-top "1px"
                                     :padding-bottom "1px"))
-                                :text "Fail")))
+                                :text "Pass")))
                             (td
                              :nodes
                               (divchildlist
@@ -31834,7 +32267,39 @@
     :endpos 7
     :delim
      (delim
-      :name "delimvxlisp"))))")))))
+      :name "delimvxlispparen"
+      :starttext "("
+      :endtext ")")
+    :children
+     (textblocklist
+      (textblock
+       :text "+"
+       :startpos 2
+       :endpos 2)
+      (textblock
+       :text " "
+       :startpos 3
+       :endpos 3
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "2"
+       :startpos 4
+       :endpos 4)
+      (textblock
+       :text " "
+       :startpos 5
+       :endpos 5
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "3"
+       :startpos 6
+       :endpos 6)))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33815,7 +34280,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "64% 16/25")
+                  :text "65% 17/26")
                  (p
                   :style
                    (style
@@ -33839,7 +34304,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "64% 16/25")
+                  :text "65% 17/26")
                  (p
                   :style
                    (style
@@ -33847,7 +34312,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "80% 20/25")
+                  :text "80% 21/26")
                  (p
                   :style
                    (style
@@ -33855,7 +34320,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/25")
+                  :text "0% 0/26")
                  (p
                   :style
                    (style
@@ -33863,7 +34328,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/25"))
+                  :text "0% 0/26"))
                :nodes
                 (divchildlist
                  (div
@@ -35441,6 +35906,171 @@
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text "0")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "string-outdent")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "ab"
+ (string-outdent
+  "ab"))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""ab"")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""ab"")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "string-outdent")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "a
+b"
+ (string-outdent
+  "
+ a
+ b"))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 ""a
+b"")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 ""a
+b"")))))
                          (tr
                           :nodes
                            (tdlist

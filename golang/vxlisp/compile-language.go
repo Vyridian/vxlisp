@@ -80,7 +80,7 @@ func NewLangJs() *vxlang {
 	output.pkgname = "vx_core"
 	output.pkgref = "."
 	output.indent = "  "
-	output.lineend = ";"
+	output.lineend = ""
 	output.typeref = "."
 	return output
 }
@@ -162,16 +162,16 @@ func LangConstDefsFromListConst(values []*vxconst, indent string) string {
 	return output
 }
 
-func LangDebugFromFunc(fnc *vxfunc, lineindent string) (string, string) {
+func LangDebugFromFunc(lang *vxlang, fnc *vxfunc, lineindent string) (string, string) {
 	debugstart := ""
 	debugend := ""
 	if fnc.debug {
-		debugstart = lineindent + "Core.debug(\"" + fnc.name + "\", \"start\""
+		debugstart = lineindent + "Core.vx_log(\"" + fnc.name + "\", \"start\""
 		for _, arg := range fnc.listarg {
 			debugstart += ", " + LangTypeStringValNew(arg.name+"=") + ", " + LangFromName(arg.alias)
 		}
-		debugstart += ");"
-		debugend = lineindent + "Core.debug(\"" + fnc.name + "\", \"end\", output);"
+		debugstart += ")" + lang.lineend
+		debugend = lineindent + "Core.vx_log(\"" + fnc.name + "\", \"end\", output)" + lang.lineend
 	}
 	return debugstart, debugend
 }
@@ -733,7 +733,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		valuetext = linesubindent + StringFromStringIndent(valuetext, subindent)
 	}
 	interfacefn := LangInterfaceFnFromFunc(lang, fnc)
-	debugtop, debugbottom := LangDebugFromFunc(fnc, lineindent)
+	debugtop, debugbottom := LangDebugFromFunc(lang, fnc, lineindent)
 	switch NameFromFunc(fnc) {
 	case "vx/core/new":
 		f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
@@ -1194,6 +1194,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      StringBuilder sb = new StringBuilder(val.vx_string());"
 		valnew = "" +
+			"\n      Core.Type_msg msg;" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -1230,8 +1231,12 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n        } else if (valsub instanceof Float) {" +
 			"\n          ischanged = true;" +
 			"\n          sb.append((Float)valsub);" +
+			"\n        } else if (valsub instanceof Core.Type_any) {" +
+			"\n          Core.Type_any anysub = (Core.Type_any)valsub;" +
+			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
+			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
+			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
@@ -1295,16 +1300,19 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		switch typ.name {
 		case "msgblocklist":
 			valnew = "" +
+				"\n      Core.Type_msg msg;" +
 				"\n      for (Object valsub : vals) {" +
 				"\n        if (valsub instanceof Core.Type_msg) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		case "msglist":
 			valnew = "" +
+				"\n      Core.Type_msg msg;" +
 				"\n      for (Object valsub : vals) {" +
 				"\n        if (valsub instanceof Core.Type_msgblock) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		default:
 			valnew = "" +
+				"\n      Core.Type_msg msg;" +
 				"\n      for (Object valsub : vals) {" +
 				"\n        if (valsub instanceof Core.Type_msgblock) {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);" +
@@ -1354,8 +1362,12 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n              listval.add(valitem);" +
 			"\n            }" +
 			"\n          }" +
+			"\n        } else if (valsub instanceof Core.Type_any) {" +
+			"\n          Core.Type_any anysub = (Core.Type_any)valsub;" +
+			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
+			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Type: \" + valsub.toString());" +
+			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
@@ -1441,6 +1453,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      Map<String, " + allowclass + "> mapval = new LinkedHashMap<>(val.vx_map" + allowname + "());"
 		valnew = "" +
+			"\n      Core.Type_msg msg;" +
 			"\n      String key = \"\";" +
 			"\n      for (Object valsub : vals) {" +
 			"\n        if (valsub instanceof Core.Type_msgblock) {" +
@@ -1454,7 +1467,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          } else if (valsub instanceof String) {" +
 			"\n            key = (String)valsub;" +
 			"\n          } else {" +
-			"\n            Core.Type_msg msg = Core.vx_msg_error(\"Key Expected: \" + valsub.toString() + \"\");" +
+			"\n            msg = Core.vx_msg_error(\"Key Expected: \" + valsub.toString() + \"\");" +
 			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n        } else {" +
@@ -1488,7 +1501,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		}
 		valnew += "" +
 			"\n          } else {" +
-			"\n            Core.Type_msg msg = Core.vx_msg_error(\"Invalid Key/Value: \" + key + \" \"  + valsub.toString() + \"\");" +
+			"\n            msg = Core.vx_msg_error(\"Invalid Key/Value: \" + key + \" \"  + valsub.toString() + \"\");" +
 			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n          if (valany != null) {" +

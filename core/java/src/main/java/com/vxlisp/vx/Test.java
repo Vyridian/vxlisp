@@ -299,6 +299,7 @@ public final class Test {
         ischanged = true;
       }
       List<Test.Type_testcase> listval = new ArrayList<>(val.vx_listtestcase());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -323,8 +324,12 @@ public final class Test {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/test/testcaselist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new testcaselist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/test/testcaselist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1419,6 +1424,7 @@ public final class Test {
         ischanged = true;
       }
       List<Test.Type_testdescribe> listval = new ArrayList<>(val.vx_listtestdescribe());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1443,8 +1449,12 @@ public final class Test {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/test/testdescribelist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new testdescribelist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/test/testdescribelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1796,6 +1806,7 @@ public final class Test {
         ischanged = true;
       }
       List<Test.Type_testpackage> listval = new ArrayList<>(val.vx_listtestpackage());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1820,8 +1831,12 @@ public final class Test {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/test/testpackagelist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new testpackagelist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/test/testpackagelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2173,6 +2188,7 @@ public final class Test {
         ischanged = true;
       }
       List<Test.Type_testresult> listval = new ArrayList<>(val.vx_listtestresult());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -2197,8 +2213,12 @@ public final class Test {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/test/testresultlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new testresultlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/test/testresultlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

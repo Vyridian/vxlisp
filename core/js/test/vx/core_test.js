@@ -23,11 +23,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 86, ":tests", 214, ":total", 246), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 64, ":total", 134), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 87, ":tests", 215, ":total", 247), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 48, ":tests", 65, ":total", 135), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 70, ":total", 220), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 71, ":total", 221), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 72)
     )
   }
@@ -282,6 +282,7 @@ export default class vx_core_test {
           "string<-any", 6,
           "string<-any-indent", 0,
           "string<-func", 0,
+          "string<-string-find-replace", 1,
           "switch", 1,
           "then", 0,
           "traits<-typedef", 0,
@@ -2893,6 +2894,30 @@ export default class vx_core_test {
     return output
   }
 
+  static f_string_from_string_find_replace(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "string<-string-find-replace",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"a!b!c\"\n (string<-string-find-replace\n  \"axybxyc\"\n  \"xy\"\n  \"!\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "a!b!c",
+              vx_core.f_string_from_string_find_replace("axybxyc", "xy", "!")
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_switch(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -3092,6 +3117,7 @@ export default class vx_core_test {
       vx_core_test.f_resolve_async(context),
       vx_core_test.f_string_repeat(context),
       vx_core_test.f_string_from_any(context),
+      vx_core_test.f_string_from_string_find_replace(context),
       vx_core_test.f_switch(context),
       vx_core_test.f_type_from_any(context),
       vx_core_test.f_typename_from_any(context)

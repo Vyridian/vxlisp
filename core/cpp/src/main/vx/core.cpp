@@ -1377,6 +1377,13 @@ namespace vx_core {
     return output;
   }
 
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace) {
+    std::string stext = vx_core::vx_string_from_string_find_replace(text->vx_string(), find->vx_string(), replace->vx_string());
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
+    return output;
+  }
+
   // vx_string_from_string_find_replacefirst(string, string, string)
   std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst) {
     std::string output = text;
@@ -26099,6 +26106,90 @@ namespace vx_core {
 
   //}
 
+  // (func string<-string-find-replace)
+  vx_core::Type_string f_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve({text, find, replace});
+    output = vx_core::vx_string_from_string_find_replace(text, find, replace);
+    vx_core::vx_release_one_except({text, find, replace}, output);
+    return output;
+  }
+
+  // (func string<-string-find-replace)
+  // class Class_string_from_string_find_replace {
+    Abstract_string_from_string_find_replace::~Abstract_string_from_string_find_replace() {}
+
+    Class_string_from_string_find_replace::Class_string_from_string_find_replace() : Abstract_string_from_string_find_replace::Abstract_string_from_string_find_replace() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_from_string_find_replace::~Class_string_from_string_find_replace() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_from_string_find_replace::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_string_from_string_find_replace output = vx_core::e_string_from_string_find_replace;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_string_find_replace::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_string_from_string_find_replace output = vx_core::e_string_from_string_find_replace;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_string_find_replace::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "string<-string-find-replace", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_from_string_find_replace::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_from_string_find_replace::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "string<-string-find-replace", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_string_find_replace::vx_empty() const {return vx_core::e_string_from_string_find_replace;}
+    vx_core::Type_any Class_string_from_string_find_replace::vx_type() const {return vx_core::t_string_from_string_find_replace;}
+    vx_core::Type_msgblock Class_string_from_string_find_replace::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_string_find_replace::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_string_from_string_find_replace::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string find = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      vx_core::Type_string replace = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(2)));
+      output = vx_core::f_string_from_string_find_replace(text, find, replace);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func traits<-typedef)
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
     vx_core::Type_typelist output = vx_core::e_typelist;
@@ -27416,6 +27507,8 @@ namespace vx_core {
   vx_core::Func_string_from_any_indent t_string_from_any_indent = NULL;
   vx_core::Func_string_from_func e_string_from_func = NULL;
   vx_core::Func_string_from_func t_string_from_func = NULL;
+  vx_core::Func_string_from_string_find_replace e_string_from_string_find_replace = NULL;
+  vx_core::Func_string_from_string_find_replace t_string_from_string_find_replace = NULL;
   vx_core::Func_traits_from_typedef e_traits_from_typedef = NULL;
   vx_core::Func_traits_from_typedef t_traits_from_typedef = NULL;
   vx_core::Func_type_from_any e_type_from_any = NULL;
@@ -28345,6 +28438,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_string_from_func);
       vx_core::t_string_from_func = new vx_core::Class_string_from_func();
       vx_core::vx_reserve_type(vx_core::t_string_from_func);
+      vx_core::e_string_from_string_find_replace = new vx_core::Class_string_from_string_find_replace();
+      vx_core::vx_reserve_empty(vx_core::e_string_from_string_find_replace);
+      vx_core::t_string_from_string_find_replace = new vx_core::Class_string_from_string_find_replace();
+      vx_core::vx_reserve_type(vx_core::t_string_from_string_find_replace);
       vx_core::e_traits_from_typedef = new vx_core::Class_traits_from_typedef();
       vx_core::vx_reserve_empty(vx_core::e_traits_from_typedef);
       vx_core::t_traits_from_typedef = new vx_core::Class_traits_from_typedef();
@@ -28636,6 +28733,7 @@ namespace vx_core {
       mapfunc["string<-any"] = vx_core::t_string_from_any;
       mapfunc["string<-any-indent"] = vx_core::t_string_from_any_indent;
       mapfunc["string<-func"] = vx_core::t_string_from_func;
+      mapfunc["string<-string-find-replace"] = vx_core::t_string_from_string_find_replace;
       mapfunc["traits<-typedef"] = vx_core::t_traits_from_typedef;
       mapfunc["type<-any"] = vx_core::t_type_from_any;
       mapfunc["typedef<-any"] = vx_core::t_typedef_from_any;

@@ -420,13 +420,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">31% 70/220</p>
+              <p class="coveragenums">32% 71/221</p>
               <p class="coveragenums">5% 4/72</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">47% 64/134</p>
-              <p class="coveragenums">86% 214/246</p>
-              <p class="coveragenums">0% 1/160</p>
-              <p class="coveragenums">0% 1/160</p>
+              <p class="coveragenums">48% 65/135</p>
+              <p class="coveragenums">87% 215/247</p>
+              <p class="coveragenums">0% 1/161</p>
+              <p class="coveragenums">0% 1/161</p>
             </summary>
             <div>
               <table>
@@ -2883,6 +2883,28 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
+                      <p class="preformatted">string&lt;-string-find-replace</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "a!b!c"
+ (string&lt;-string-find-replace
+  "axybxyc"
+  "xy"
+  "!"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a!b!c"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a!b!c"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
                       <p class="preformatted">switch</p>
                     </td>
                     <td>
@@ -3015,7 +3037,7 @@
         <div>
           <details>
             <summary>
-              <p class="failflag">Fail</p>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/csv</p>
               <p class="coveragenums">9% 1/11</p>
               <p class="coveragenums">0% 0/3</p>
@@ -3049,7 +3071,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-csv&lt;-string</p>
@@ -3230,14 +3252,82 @@
  :children
   (textblocklist
    (textblock
-    :text
-     ""a","b"
-1,"2""
+    :text ""a""
     :startpos 1
+    :endpos 3
+    :delim
+     (delim
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2)))
+   (textblock
+    :text ","
+    :startpos 4
+    :endpos 4
+    :delim
+     (delim
+      :name "delimcomma"
+      :starttext ","))
+   (textblock
+    :text ""b""
+    :startpos 5
+    :endpos 7
+    :delim
+     (delim
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "b"
+       :startpos 6
+       :endpos 6)))
+   (textblock
+    :text
+     "
+"
+    :startpos 8
+    :endpos 8
+    :delim
+     (delim
+      :name "delimline"
+      :starttext
+       "
+"))
+   (textblock
+    :text "1"
+    :startpos 9
+    :endpos 9)
+   (textblock
+    :text ","
+    :startpos 10
+    :endpos 10
+    :delim
+     (delim
+      :name "delimcomma"
+      :starttext ","))
+   (textblock
+    :text ""2""
+    :startpos 11
     :endpos 13
     :delim
      (delim
-      :name "delimcsv"))))</p>
+      :name "delimquote"
+      :starttext """
+      :endtext """)
+    :children
+     (textblocklist
+      (textblock
+       :text "2"
+       :startpos 12
+       :endpos 12)))))</p>
                     </td>
                   </tr>
                 </tbody>
@@ -3462,7 +3552,7 @@
         <div>
           <details>
             <summary>
-              <p class="failflag">Fail</p>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/textblock</p>
               <p class="coveragenums">34% 18/52</p>
               <p class="coveragenums">25% 1/4</p>
@@ -3575,7 +3665,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">delim-first&lt;-string-delimlist</p>
@@ -3597,12 +3687,15 @@
  :pos 2)</p>
                     </td>
                     <td>
-                      <p class="preformatted">(delim)</p>
+                      <p class="preformatted">(delim
+ :name "delimcomma"
+ :starttext ","
+ :pos 2)</p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">delim-pos&lt;-string-delim</p>
@@ -3622,12 +3715,15 @@
  :pos 2)</p>
                     </td>
                     <td>
-                      <p class="preformatted">vx/data/textblock/delimcomma</p>
+                      <p class="preformatted">(delim
+ :name "delimcomma"
+ :starttext ","
+ :pos 2)</p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">delimlist-pos&lt;-string-delimlist</p>
@@ -3659,8 +3755,15 @@
                     </td>
                     <td>
                       <p class="preformatted">(delimlist
- vx/data/textblock/delimspace
- vx/data/textblock/delimcomma)</p>
+ (delim
+  :name "delimspace"
+  :starttext " "
+  :endtext " "
+  :pos 3)
+ (delim
+  :name "delimcomma"
+  :starttext ","
+  :pos 2))</p>
                     </td>
                   </tr>
                   <tr>
@@ -4753,7 +4856,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse</p>
@@ -4927,7 +5030,75 @@
     :text "&lt;{a,b},{c d}&gt;"
     :startpos 1
     :endpos 13
-    :delim (delim))))</p>
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "{a,b}"
+       :startpos 2
+       :endpos 6
+       :delim
+        (delim
+         :name "delimbracketcurly"
+         :starttext "{"
+         :endtext "}")
+       :children
+        (textblocklist
+         (textblock
+          :text "a"
+          :startpos 3
+          :endpos 3)
+         (textblock
+          :text ","
+          :startpos 4
+          :endpos 4
+          :delim
+           (delim
+            :name "delimcomma"
+            :starttext ","))
+         (textblock
+          :text "b"
+          :startpos 5
+          :endpos 5)))
+      (textblock
+       :text ","
+       :startpos 7
+       :endpos 7
+       :delim
+        (delim
+         :name "delimcomma"
+         :starttext ","))
+      (textblock
+       :text "{c d}"
+       :startpos 8
+       :endpos 12
+       :delim
+        (delim
+         :name "delimbracketcurly"
+         :starttext "{"
+         :endtext "}")
+       :children
+        (textblocklist
+         (textblock
+          :text "c"
+          :startpos 9
+          :endpos 9)
+         (textblock
+          :text " "
+          :startpos 10
+          :endpos 10
+          :delim
+           (delim
+            :name "delimwhitespace"
+            :starttext ":whitespace"))
+         (textblock
+          :text "d"
+          :startpos 11
+          :endpos 11)))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -4981,7 +5152,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -5054,21 +5225,37 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "&lt;{a,b},{c d}&gt;"
- :startpos 1
+ :text "{a,b},{c d}&gt;"
+ :startpos 2
  :endpos 13
- :children
-  (textblocklist
-   (textblock
-    :text "&lt;{a,b},{c d}&gt;"
-    :startpos 1
-    :endpos 13
-    :delim (delim))))</p>
+ :delim
+  (delim
+   :delimlist vx/data/textblock/delimlisttest2)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext "&gt;")
+ :parent
+  (textblock
+   :text "&lt;{a,b},{c d}&gt;"
+   :startpos 1
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketangle"
+     :starttext "&lt;"
+     :endtext "&gt;"
+     :delimlist vx/data/textblock/delimlisttest1)
+   :parent
+    (textblock
+     :text "&lt;{a,b},{c d}&gt;"
+     :startpos 1
+     :endpos 13)))</p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -5180,44 +5367,52 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "&lt;{a,b},{c d}&gt;"
- :startpos 1
+ :text "a,b},{c d}&gt;"
+ :startpos 3
  :endpos 13
  :delim
   (delim
-   :name "delimbracketangle"
-   :starttext "&lt;"
-   :endtext "&gt;"
-   :delimlist vx/data/textblock/delimlisttest1)
+   :delimlist vx/data/textblock/delimlisttest3)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext "}")
  :parent
   (textblock
-   :text "&lt;{a,b},{c d}&gt;"
-   :startpos 1
-   :endpos 13)
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@7c098bb3"))))"))))</p>
+   :text "{a,b},{c d}&gt;"
+   :startpos 2
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketcurly"
+     :starttext "{"
+     :endtext "}"
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext "&gt;")
+   :parent
+    (textblock
+     :text "&lt;{a,b},{c d}&gt;"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "&lt;"
+       :endtext "&gt;"
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
+       :endpos 13))))</p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -5367,21 +5562,22 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "a,b},{c"
+ :text "a"
  :startpos 3
- :endpos 9
+ :endpos 3
  :parent
   (textblock
-   :startpos 10
-   :endpos 9
+   :text ","
+   :startpos 4
+   :endpos 4
    :delim
     (delim
-     :name "delimwhitespace"
-     :starttext ":whitespace")
+     :name "delimcomma"
+     :starttext ",")
    :parent
     (textblock
-     :text " d}&gt;"
-     :startpos 10
+     :text "b},{c d}&gt;"
+     :startpos 5
      :endpos 13
      :delim
       (delim
@@ -5873,7 +6069,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -6040,74 +6236,62 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "b},{c"
+ :text "b"
  :startpos 5
- :endpos 9
+ :endpos 5
  :parent
   (textblock
-   :startpos 10
-   :endpos 9
+   :text ",{c d}&gt;"
+   :startpos 7
+   :endpos 13
    :delim
     (delim
-     :name "delimwhitespace"
-     :starttext ":whitespace")
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext "&gt;")
    :parent
     (textblock
-     :text " d}&gt;"
-     :startpos 10
-     :endpos 13
+     :text "{a,b}"
+     :startpos 2
+     :endpos 6
      :delim
       (delim
-       :delimlist vx/data/textblock/delimlisttest3)
-     :close
-      (delim
-       :name "delimclose"
-       :starttext "}")
+       :name "delimbracketcurly"
+       :starttext "{"
+       :endtext "}")
+     :close vx/data/textblock/delimclosing
      :parent
       (textblock
-       :text "{a,b},{c d}&gt;"
-       :startpos 2
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
        :endpos 13
        :delim
         (delim
-         :name "delimbracketcurly"
-         :starttext "{"
-         :endtext "}"
-         :delimlist vx/data/textblock/delimlisttest2)
-       :close
-        (delim
-         :name "delimclose"
-         :starttext "&gt;")
+         :name "delimbracketangle"
+         :starttext "&lt;"
+         :endtext "&gt;"
+         :delimlist vx/data/textblock/delimlisttest1)
        :parent
         (textblock
          :text "&lt;{a,b},{c d}&gt;"
          :startpos 1
-         :endpos 13
-         :delim
-          (delim
-           :name "delimbracketangle"
-           :starttext "&lt;"
-           :endtext "&gt;"
-           :delimlist vx/data/textblock/delimlisttest1)
-         :parent
-          (textblock
-           :text "&lt;{a,b},{c d}&gt;"
-           :startpos 1
-           :endpos 13))
-       :children
-        (textblocklist
-         (textblock
-          :text "a"
-          :startpos 3
-          :endpos 3)
-         (textblock
-          :text ","
-          :startpos 4
-          :endpos 4
-          :delim
-           (delim
-            :name "delimcomma"
-            :starttext ",")))))))</p>
+         :endpos 13))
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 3
+        :endpos 3)
+       (textblock
+        :text ","
+        :startpos 4
+        :endpos 4
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -6339,7 +6523,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -6531,68 +6715,74 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "&lt;{a,b},{c d}&gt;"
- :startpos 1
- :endpos 13
- :delim
-  (delim
-   :name "delimbracketangle"
-   :starttext "&lt;"
-   :endtext "&gt;"
-   :delimlist vx/data/textblock/delimlisttest1)
+ :startpos 7
+ :endpos 7
  :parent
   (textblock
-   :text "&lt;{a,b},{c d}&gt;"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :text ","
+   :startpos 7
+   :endpos 7
+   :delim
+    (delim
+     :name "delimcomma"
+     :starttext ",")
+   :parent
+    (textblock
+     :text "{c d}&gt;"
+     :startpos 8
+     :endpos 13
+     :delim
+      (delim
+       :delimlist vx/data/textblock/delimlisttest2)
+     :close
+      (delim
+       :name "delimclose"
+       :starttext "&gt;")
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
+       :endpos 13
        :delim
         (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5))))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@31e4bb20"))))"))))</p>
+         :name "delimbracketangle"
+         :starttext "&lt;"
+         :endtext "&gt;"
+         :delimlist vx/data/textblock/delimlisttest1)
+       :parent
+        (textblock
+         :text "&lt;{a,b},{c d}&gt;"
+         :startpos 1
+         :endpos 13)
+       :children
+        (textblocklist
+         (textblock
+          :text "{a,b}"
+          :startpos 2
+          :endpos 6
+          :delim
+           (delim
+            :name "delimbracketcurly"
+            :starttext "{"
+            :endtext "}")
+          :children
+           (textblocklist
+            (textblock
+             :text "a"
+             :startpos 3
+             :endpos 3)
+            (textblock
+             :text ","
+             :startpos 4
+             :endpos 4
+             :delim
+              (delim
+               :name "delimcomma"
+               :starttext ","))
+            (textblock
+             :text "b"
+             :startpos 5
+             :endpos 5))))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -7118,7 +7308,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -7333,76 +7523,84 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "&lt;{a,b},{c d}&gt;"
- :startpos 1
+ :text "c d}&gt;"
+ :startpos 9
  :endpos 13
  :delim
   (delim
-   :name "delimbracketangle"
-   :starttext "&lt;"
-   :endtext "&gt;"
-   :delimlist vx/data/textblock/delimlisttest1)
+   :delimlist vx/data/textblock/delimlisttest3)
+ :close
+  (delim
+   :name "delimclose"
+   :starttext "}")
  :parent
   (textblock
-   :text "&lt;{a,b},{c d}&gt;"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :text "{c d}&gt;"
+   :startpos 8
+   :endpos 13
+   :delim
+    (delim
+     :name "delimbracketcurly"
+     :starttext "{"
+     :endtext "}"
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext "&gt;")
+   :parent
+    (textblock
+     :text "&lt;{a,b},{c d}&gt;"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "&lt;"
+       :endtext "&gt;"
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
-       :delim
-        (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5)))
-   (textblock
-    :text ","
-    :startpos 7
-    :endpos 7
-    :delim
-     (delim
-      :name "delimcomma"
-      :starttext ",")))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@18cebaa5"))))"))))</p>
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
+       :endpos 13)
+     :children
+      (textblocklist
+       (textblock
+        :text "{a,b}"
+        :startpos 2
+        :endpos 6
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "a"
+           :startpos 3
+           :endpos 3)
+          (textblock
+           :text ","
+           :startpos 4
+           :endpos 4
+           :delim
+            (delim
+             :name "delimcomma"
+             :starttext ","))
+          (textblock
+           :text "b"
+           :startpos 5
+           :endpos 5)))
+       (textblock
+        :text ","
+        :startpos 7
+        :endpos 7
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -8487,7 +8685,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -8760,106 +8958,99 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "{c d}&gt;"
- :startpos 8
- :endpos 13
- :delim
-  (delim
-   :name "delimbracketcurly"
-   :starttext "{"
-   :endtext "}"
-   :delimlist vx/data/textblock/delimlisttest2)
- :close
-  (delim
-   :name "delimclose"
-   :starttext "&gt;")
+ :text "d"
+ :startpos 11
+ :endpos 11
  :parent
   (textblock
-   :text "&lt;{a,b},{c d}&gt;"
-   :startpos 1
+   :text "&gt;"
+   :startpos 13
    :endpos 13
    :delim
     (delim
-     :name "delimbracketangle"
-     :starttext "&lt;"
-     :endtext "&gt;"
-     :delimlist vx/data/textblock/delimlisttest1)
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (delim
+     :name "delimclose"
+     :starttext "&gt;")
    :parent
     (textblock
-     :text "&lt;{a,b},{c d}&gt;"
-     :startpos 1
-     :endpos 13)
-   :children
-    (textblocklist
-     (textblock
-      :text "{a,b}"
-      :startpos 2
-      :endpos 6
-      :delim
-       (delim
-        :name "delimbracketcurly"
-        :starttext "{"
-        :endtext "}")
-      :children
-       (textblocklist
+     :text "{c d}"
+     :startpos 8
+     :endpos 12
+     :delim
+      (delim
+       :name "delimbracketcurly"
+       :starttext "{"
+       :endtext "}")
+     :close vx/data/textblock/delimclosing
+     :parent
+      (textblock
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
+       :endpos 13
+       :delim
+        (delim
+         :name "delimbracketangle"
+         :starttext "&lt;"
+         :endtext "&gt;"
+         :delimlist vx/data/textblock/delimlisttest1)
+       :parent
         (textblock
-         :text "a"
-         :startpos 3
-         :endpos 3)
-        (textblock
-         :text ","
-         :startpos 4
-         :endpos 4
-         :delim
-          (delim
-           :name "delimcomma"
-           :starttext ","))
-        (textblock
-         :text "b"
-         :startpos 5
-         :endpos 5)))
-     (textblock
-      :text ","
-      :startpos 7
-      :endpos 7
-      :delim
-       (delim
-        :name "delimcomma"
-        :starttext ","))))
- :children
-  (textblocklist
-   (textblock
-    :text "c"
-    :startpos 9
-    :endpos 9)
-   (textblock
-    :text " "
-    :startpos 10
-    :endpos 10
-    :delim
-     (delim
-      :name "delimwhitespace"
-      :starttext ":whitespace")))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimcomma
- vx/data/textblock/delimtest3
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@463b4ac8"))))"))))</p>
+         :text "&lt;{a,b},{c d}&gt;"
+         :startpos 1
+         :endpos 13)
+       :children
+        (textblocklist
+         (textblock
+          :text "{a,b}"
+          :startpos 2
+          :endpos 6
+          :delim
+           (delim
+            :name "delimbracketcurly"
+            :starttext "{"
+            :endtext "}")
+          :children
+           (textblocklist
+            (textblock
+             :text "a"
+             :startpos 3
+             :endpos 3)
+            (textblock
+             :text ","
+             :startpos 4
+             :endpos 4
+             :delim
+              (delim
+               :name "delimcomma"
+               :starttext ","))
+            (textblock
+             :text "b"
+             :startpos 5
+             :endpos 5)))
+         (textblock
+          :text ","
+          :startpos 7
+          :endpos 7
+          :delim
+           (delim
+            :name "delimcomma"
+            :starttext ","))))
+     :children
+      (textblocklist
+       (textblock
+        :text "c"
+        :startpos 9
+        :endpos 9)
+       (textblock
+        :text " "
+        :startpos 10
+        :endpos 10
+        :delim
+         (delim
+          :name "delimwhitespace"
+          :starttext ":whitespace"))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -9225,7 +9416,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-parse-one</p>
@@ -9489,103 +9680,95 @@
                     </td>
                     <td>
                       <p class="preformatted">(textblock
- :text "&lt;{a,b},{c d}&gt;"
- :startpos 1
+ :startpos 13
  :endpos 13
- :delim
-  (delim
-   :name "delimbracketangle"
-   :starttext "&lt;"
-   :endtext "&gt;"
-   :delimlist vx/data/textblock/delimlisttest1)
  :parent
   (textblock
-   :text "&lt;{a,b},{c d}&gt;"
-   :startpos 1
-   :endpos 13)
- :children
-  (textblocklist
-   (textblock
-    :text "{a,b}"
-    :startpos 2
-    :endpos 6
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
+   :startpos 14
+   :endpos 14
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest1)
+   :parent
+    (textblock
+     :text "&lt;{a,b},{c d}&gt;"
+     :startpos 1
+     :endpos 13
+     :delim
+      (delim
+       :name "delimbracketangle"
+       :starttext "&lt;"
+       :endtext "&gt;")
+     :close vx/data/textblock/delimclosing
+     :parent
       (textblock
-       :text "a"
-       :startpos 3
-       :endpos 3)
-      (textblock
-       :text ","
-       :startpos 4
-       :endpos 4
-       :delim
-        (delim
-         :name "delimcomma"
-         :starttext ","))
-      (textblock
-       :text "b"
-       :startpos 5
-       :endpos 5)))
-   (textblock
-    :text ","
-    :startpos 7
-    :endpos 7
-    :delim
-     (delim
-      :name "delimcomma"
-      :starttext ","))
-   (textblock
-    :text "{c d}"
-    :startpos 8
-    :endpos 12
-    :delim
-     (delim
-      :name "delimbracketcurly"
-      :starttext "{"
-      :endtext "}")
-    :children
-     (textblocklist
-      (textblock
-       :text "c"
-       :startpos 9
-       :endpos 9)
-      (textblock
-       :text " "
-       :startpos 10
-       :endpos 10
-       :delim
-        (delim
-         :name "delimwhitespace"
-         :starttext ":whitespace"))
-      (textblock
-       :text "d"
-       :startpos 11
-       :endpos 11))))
- :msgblock
-  (msgblock
-   :msgs
-    (msglist
-     (msg
-      :severity 3
-      :text "(new textblock) - Invalid Key: :delimlist")
-     (msg
-      :severity 3
-      :text
-       "(new textblock) - Invalid Key Type: (delimlist
- vx/data/textblock/delimtest2
- :msgblock
-  (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 3
-     :text "(new delimlist) - Invalid Type: com.vxlisp.vx.data.Textblock$Class_textblock@765f05af"))))"))))</p>
+       :text "&lt;{a,b},{c d}&gt;"
+       :startpos 1
+       :endpos 13)
+     :children
+      (textblocklist
+       (textblock
+        :text "{a,b}"
+        :startpos 2
+        :endpos 6
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "a"
+           :startpos 3
+           :endpos 3)
+          (textblock
+           :text ","
+           :startpos 4
+           :endpos 4
+           :delim
+            (delim
+             :name "delimcomma"
+             :starttext ","))
+          (textblock
+           :text "b"
+           :startpos 5
+           :endpos 5)))
+       (textblock
+        :text ","
+        :startpos 7
+        :endpos 7
+        :delim
+         (delim
+          :name "delimcomma"
+          :starttext ","))
+       (textblock
+        :text "{c d}"
+        :startpos 8
+        :endpos 12
+        :delim
+         (delim
+          :name "delimbracketcurly"
+          :starttext "{"
+          :endtext "}")
+        :children
+         (textblocklist
+          (textblock
+           :text "c"
+           :startpos 9
+           :endpos 9)
+          (textblock
+           :text " "
+           :startpos 10
+           :endpos 10
+           :delim
+            (delim
+             :name "delimwhitespace"
+             :starttext ":whitespace"))
+          (textblock
+           :text "d"
+           :startpos 11
+           :endpos 11)))))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -12629,7 +12812,7 @@
         <div>
           <details>
             <summary>
-              <p class="failflag">Fail</p>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/xml</p>
               <p class="coveragenums">47% 9/19</p>
               <p class="coveragenums">0% 0/3</p>
@@ -12663,7 +12846,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock-xml&lt;-string</p>
@@ -13053,15 +13236,186 @@
  :children
   (textblocklist
    (textblock
-    :text
-     "&lt;doc&gt;
-  &lt;tag1&gt;
-    &lt;tag2 prop1="val1" prop2="val2" /&gt;
-  &lt;/tag1&gt;
-&lt;/doc&gt;"
+    :text "&lt;doc&gt;"
     :startpos 1
+    :endpos 5
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "doc"
+       :startpos 2
+       :endpos 4)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 6
+    :endpos 8)
+   (textblock
+    :text "&lt;tag1&gt;"
+    :startpos 9
+    :endpos 14
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag1"
+       :startpos 10
+       :endpos 13)))
+   (textblock
+    :text
+     "
+    "
+    :startpos 15
+    :endpos 19)
+   (textblock
+    :text "&lt;tag2 prop1="val1" prop2="val2" /&gt;"
+    :startpos 20
+    :endpos 53
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "tag2"
+       :startpos 21
+       :endpos 24)
+      (textblock
+       :text " "
+       :startpos 25
+       :endpos 25
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop1"
+       :startpos 26
+       :endpos 30)
+      (textblock
+       :text "="
+       :startpos 31
+       :endpos 31
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val1""
+       :startpos 32
+       :endpos 37
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val1"
+          :startpos 33
+          :endpos 36)))
+      (textblock
+       :text " "
+       :startpos 38
+       :endpos 38
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "prop2"
+       :startpos 39
+       :endpos 43)
+      (textblock
+       :text "="
+       :startpos 44
+       :endpos 44
+       :delim
+        (delim
+         :name "delimxmlequal"
+         :starttext "="))
+      (textblock
+       :text ""val2""
+       :startpos 45
+       :endpos 50
+       :delim
+        (delim
+         :name "delimquote"
+         :starttext """
+         :endtext """)
+       :children
+        (textblocklist
+         (textblock
+          :text "val2"
+          :startpos 46
+          :endpos 49)))
+      (textblock
+       :text " "
+       :startpos 51
+       :endpos 51
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "/"
+       :startpos 52
+       :endpos 52)))
+   (textblock
+    :text
+     "
+  "
+    :startpos 54
+    :endpos 56)
+   (textblock
+    :text "&lt;/tag1&gt;"
+    :startpos 57
+    :endpos 63
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/tag1"
+       :startpos 58
+       :endpos 62)))
+   (textblock
+    :text
+     "
+"
+    :startpos 64
+    :endpos 64)
+   (textblock
+    :text "&lt;/doc&gt;"
+    :startpos 65
     :endpos 70
-    :delim (delim))))</p>
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;")
+    :children
+     (textblocklist
+      (textblock
+       :text "/doc"
+       :startpos 66
+       :endpos 69)))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -14463,7 +14817,7 @@
         <div>
           <details>
             <summary>
-              <p class="failflag">Fail</p>
+              <p class="passflag">Pass</p>
               <p class="pkgname">vx/repl</p>
               <p class="coveragenums">46% 13/28</p>
               <p class="coveragenums">0% 0/4</p>
@@ -14497,7 +14851,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">any&lt;-macro</p>
@@ -14514,7 +14868,7 @@
                       <p class="preformatted">5</p>
                     </td>
                     <td>
-                      <p class="preformatted"></p>
+                      <p class="preformatted">5</p>
                     </td>
                   </tr>
                   <tr>
@@ -14570,7 +14924,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">any&lt;-script</p>
@@ -14585,7 +14939,7 @@
                       <p class="preformatted">5</p>
                     </td>
                     <td>
-                      <p class="preformatted"></p>
+                      <p class="preformatted">5</p>
                     </td>
                   </tr>
                   <tr>
@@ -14800,7 +15154,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">repl&lt;-macro</p>
@@ -14831,7 +15185,14 @@
     :val 3)))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl)</p>
+                      <p class="preformatted">(repl
+ :type vx/core/+
+ :repllist
+  (repllist
+   (repl
+    :val 2)
+   (repl
+    :val 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -14905,7 +15266,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">repl&lt;-script</p>
@@ -14934,7 +15295,14 @@
     :val 3)))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl)</p>
+                      <p class="preformatted">(repl
+ :type vx/core/+
+ :repllist
+  (repllist
+   (repl
+    :val 2)
+   (repl
+    :val 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15534,7 +15902,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <p class="failflag">Fail</p>
+                      <p class="passflag">Pass</p>
                     </td>
                     <td>
                       <p class="preformatted">textblock&lt;-script</p>
@@ -15646,7 +16014,39 @@
     :endpos 7
     :delim
      (delim
-      :name "delimvxlisp"))))</p>
+      :name "delimvxlispparen"
+      :starttext "("
+      :endtext ")")
+    :children
+     (textblocklist
+      (textblock
+       :text "+"
+       :startpos 2
+       :endpos 2)
+      (textblock
+       :text " "
+       :startpos 3
+       :endpos 3
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "2"
+       :startpos 4
+       :endpos 4)
+      (textblock
+       :text " "
+       :startpos 5
+       :endpos 5
+       :delim
+        (delim
+         :name "delimwhitespace"
+         :starttext ":whitespace"))
+      (textblock
+       :text "3"
+       :startpos 6
+       :endpos 6)))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -16206,13 +16606,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/type</p>
-              <p class="coveragenums">64% 16/25</p>
+              <p class="coveragenums">65% 17/26</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">64% 16/25</p>
-              <p class="coveragenums">80% 20/25</p>
-              <p class="coveragenums">0% 0/25</p>
-              <p class="coveragenums">0% 0/25</p>
+              <p class="coveragenums">65% 17/26</p>
+              <p class="coveragenums">80% 21/26</p>
+              <p class="coveragenums">0% 0/26</p>
+              <p class="coveragenums">0% 0/26</p>
             </summary>
             <div>
               <table>
@@ -16621,6 +17021,51 @@
                     </td>
                     <td>
                       <p class="preformatted">0</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string-outdent</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "ab"
+ (string-outdent
+  "ab"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"ab"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"ab"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string-outdent</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "a
+b"
+ (string-outdent
+  "
+ a
+ b"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a
+b"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a
+b"</p>
                     </td>
                   </tr>
                   <tr>

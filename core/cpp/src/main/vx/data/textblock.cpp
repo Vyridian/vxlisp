@@ -2191,18 +2191,33 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(find);
         vx_core::Type_int pos = vx_type::f_int_from_string_findkeyword(text, find);
         vx_core::vx_ref_plus(pos);
-        vx_data_textblock::Type_delim output_1 = vx_core::f_if_1(
+        vx_data_textblock::Type_delim output_1 = vx_core::f_if_2(
           vx_data_textblock::t_delim,
-          vx_core::f_eq(pos, vx_core::vx_new_int(0)),
-          delim,
-          vx_core::f_copy(
-            vx_data_textblock::t_delim,
-            delim,
-            vx_core::vx_new(vx_core::t_anylist, {
-              vx_core::vx_new_string(":pos"),
-              pos
-            })
-          )
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({pos}, [pos]() {
+                vx_core::Type_boolean output_1 = vx_core::f_eq(pos, vx_core::vx_new_int(0));
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({delim}, [delim]() {
+                vx_core::Type_any output_1 = delim;
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({delim, pos}, [delim, pos]() {
+                vx_core::Type_any output_1 = vx_core::f_copy(
+                  vx_data_textblock::t_delim,
+                  delim,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::vx_new_string(":pos"),
+                    pos
+                  })
+                );
+                return output_1;
+              })
+            )
+          })
         );
         vx_core::vx_release_one_except({find, pos}, output_1);
         return output_1;
@@ -2951,33 +2966,39 @@ namespace vx_data_textblock {
                 );
                 return output_1;
               }),
-              vx_core::t_any_from_func->vx_fn_new({parent, delims, textblockarg, delima}, [parent, delims, textblockarg, delima]() {
+              vx_core::t_any_from_func->vx_fn_new({parent, delimp, delims, textblockarg, delima}, [parent, delimp, delims, textblockarg, delima]() {
                 vx_core::Type_any output_1 = vx_core::f_copy(
                   vx_data_textblock::t_textblock,
                   parent,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":delimlist"),
                     vx_core::f_copy(
-                      vx_data_textblock::t_delimlist,
-                      delims,
+                      vx_data_textblock::t_delim,
+                      delimp,
                       vx_core::vx_new(vx_core::t_anylist, {
+                        vx_core::vx_new_string(":delimlist"),
                         vx_core::f_copy(
-                          vx_data_textblock::t_textblock,
-                          textblockarg,
+                          vx_data_textblock::t_delimlist,
+                          delims,
                           vx_core::vx_new(vx_core::t_anylist, {
-                            vx_core::vx_new_string(":parent"),
-                            vx_core::f_empty(
-                              vx_data_textblock::t_textblock
-                            ),
-                            vx_core::vx_new_string(":msg"),
-                            vx_core::f_msg_from_error(
-                              vx_core::f_new(
-                                vx_core::t_string,
-                                vx_core::vx_new(vx_core::t_anylist, {
-                                  vx_core::vx_new_string("Close delim not found: "),
-                                  delima->name()
-                                })
-                              )
+                            vx_core::f_copy(
+                              vx_data_textblock::t_textblock,
+                              textblockarg,
+                              vx_core::vx_new(vx_core::t_anylist, {
+                                vx_core::vx_new_string(":parent"),
+                                vx_core::f_empty(
+                                  vx_data_textblock::t_textblock
+                                ),
+                                vx_core::vx_new_string(":msg"),
+                                vx_core::f_msg_from_error(
+                                  vx_core::f_new(
+                                    vx_core::t_string,
+                                    vx_core::vx_new(vx_core::t_anylist, {
+                                      vx_core::vx_new_string("Close delim not found: "),
+                                      delima->name()
+                                    })
+                                  )
+                                )
+                              })
                             )
                           })
                         )

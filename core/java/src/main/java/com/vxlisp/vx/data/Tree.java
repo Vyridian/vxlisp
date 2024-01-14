@@ -401,6 +401,7 @@ public final class Tree {
         ischanged = true;
       }
       List<Tree.Type_branch> listval = new ArrayList<>(val.vx_listbranch());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -425,8 +426,12 @@ public final class Tree {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/tree/branchlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new branchlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/tree/branchlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -726,6 +731,7 @@ public final class Tree {
         ischanged = true;
       }
       List<Tree.Type_leaf> listval = new ArrayList<>(val.vx_listleaf());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -750,8 +756,12 @@ public final class Tree {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/tree/leaflist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new leaflist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/tree/leaflist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

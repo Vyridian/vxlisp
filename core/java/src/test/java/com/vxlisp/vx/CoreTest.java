@@ -2544,6 +2544,27 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_string_from_string_find_replace(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "string<-string-find-replace",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"a!b!c\"\n (string<-string-find-replace\n  \"axybxyc\"\n  \"xy\"\n  \"!\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("a!b!c"),
+              Core.f_string_from_string_find_replace(Core.vx_new_string("axybxyc"), Core.vx_new_string("xy"), Core.vx_new_string("!"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_switch(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -2739,6 +2760,7 @@ public final class CoreTest {
       CoreTest.f_resolve_async(context),
       CoreTest.f_string_repeat(context),
       CoreTest.f_string_from_any(context),
+      CoreTest.f_string_from_string_find_replace(context),
       CoreTest.f_switch(context),
       CoreTest.f_type_from_any(context),
       CoreTest.f_typename_from_any(context)
@@ -2751,11 +2773,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 86, ":tests", 214, ":total", 246), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 64, ":total", 134), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 160), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 70, ":total", 220), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 87, ":tests", 215, ":total", 247), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 48, ":tests", 65, ":total", 135), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 71, ":total", 221), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 72)
     );
   }
@@ -3003,6 +3025,7 @@ public final class CoreTest {
         ":string<-any", 6,
         ":string<-any-indent", 0,
         ":string<-func", 0,
+        ":string<-string-find-replace", 1,
         ":switch", 1,
         ":then", 0,
         ":traits<-typedef", 0,

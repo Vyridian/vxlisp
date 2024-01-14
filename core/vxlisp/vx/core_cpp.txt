@@ -382,6 +382,9 @@ let-async
   // vx_string_from_string_find_replace(string, string, string)
   std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace);
 
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace);
+
   // vx_string_from_string_find_replacefirst(string, string, string)
   std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst);
 
@@ -1893,6 +1896,13 @@ let-async
         pos = output.find(find, pos + replace.size());
       }
     }
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace) {
+    std::string stext = vx_core::vx_string_from_string_find_replace(text->vx_string(), find->vx_string(), replace->vx_string());
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
     return output;
   }
 

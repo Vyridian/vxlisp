@@ -325,6 +325,7 @@ public final class Textblock {
         ischanged = true;
       }
       List<Textblock.Type_delim> listval = new ArrayList<>(val.vx_listdelim());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -349,8 +350,12 @@ public final class Textblock {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/textblock/delimlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new delimlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/textblock/delimlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -867,6 +872,7 @@ public final class Textblock {
         ischanged = true;
       }
       List<Textblock.Type_textblock> listval = new ArrayList<>(val.vx_listtextblock());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -891,8 +897,12 @@ public final class Textblock {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/data/textblock/textblocklist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new textblocklist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/data/textblock/textblocklist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2472,15 +2482,27 @@ public final class Textblock {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string find = delim.starttext();
         final Core.Type_int pos = Type.f_int_from_string_findkeyword(text, find);
-        return Core.f_if_1(
+        return Core.f_if_2(
           Textblock.t_delim,
-          Core.f_eq(pos, Core.vx_new_int(0)),
-          delim,
-          Core.f_copy(
-            delim,
-            Core.t_anylist.vx_new(
-              Core.vx_new_string(":pos"),
-              pos
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(pos, Core.vx_new_int(0));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return delim;
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_copy(
+                  delim,
+                  Core.t_anylist.vx_new(
+                      Core.vx_new_string(":pos"),
+                      pos
+                  )
+                );
+              })
             )
           )
         );
@@ -3202,24 +3224,29 @@ public final class Textblock {
                 return Core.f_copy(
                   parent,
                   Core.t_anylist.vx_new(
-                      Core.vx_new_string(":delimlist"),
                       Core.f_copy(
-                        delims,
+                        delimp,
                         Core.t_anylist.vx_new(
+                          Core.vx_new_string(":delimlist"),
                           Core.f_copy(
-                            textblockarg,
+                            delims,
                             Core.t_anylist.vx_new(
-                              Core.vx_new_string(":parent"),
-                              Core.f_empty(
-                                Textblock.t_textblock
-                              ),
-                              Core.vx_new_string(":msg"),
-                              Core.f_msg_from_error(
-                                Core.f_new(
-                                  Core.t_string,
-                                  Core.t_anylist.vx_new(
-                                    Core.vx_new_string("Close delim not found: "),
-                                    delima.name()
+                              Core.f_copy(
+                                textblockarg,
+                                Core.t_anylist.vx_new(
+                                  Core.vx_new_string(":parent"),
+                                  Core.f_empty(
+                                    Textblock.t_textblock
+                                  ),
+                                  Core.vx_new_string(":msg"),
+                                  Core.f_msg_from_error(
+                                    Core.f_new(
+                                      Core.t_string,
+                                      Core.t_anylist.vx_new(
+                                        Core.vx_new_string("Close delim not found: "),
+                                        delima.name()
+                                      )
+                                    )
                                   )
                                 )
                               )

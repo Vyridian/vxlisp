@@ -1013,6 +1013,12 @@
     return output
   }
 
+  // vx_string_from_string_find_replace(string, string, string)
+  static vx_string_from_string_find_replace(text, find, replace) {
+    const output = text.replaceAll(find, replace);
+    return output;
+  }
+
   static vx_string_from_string_start_end(text, start, end) {
     let output = ""
     const maxlen = text.length

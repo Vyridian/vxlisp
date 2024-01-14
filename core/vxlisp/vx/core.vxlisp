@@ -2713,6 +2713,22 @@
  []
  :doc "Function Type returning string with any parameters")
 
+(func string<-string-find-replace : string
+ [text    : string
+  find    : string
+  replace : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "a!b!c"
+        (string<-string-find-replace
+         "axybxyc"
+         "xy"
+         "!"))
+ :doc "Returns a string with all instances of find replaced by replace.")
+
 (func switch : any-1
  [val          : any-2
   thenelselist : thenelselist :...]

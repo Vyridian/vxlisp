@@ -7,7 +7,7 @@ It's pretty simple.
 * Open Source = Good
 * Closed Source = Bad
 
-## Concise consistent syntax
+## Easy, Concise, Consistent
 
 * Parenthesis - Lisps contains each idea in a list. A function foo(1, 2) would be written as (foo 1 2). Note: empty parentheses () are invalid in vxlisp.
 
@@ -44,6 +44,12 @@ vxlisp (and all lisps) always put the verb first.
 * Backtick Quote `` - When needed any string surrounded by backticks will be kept intact including indentation, double quotes and escape characters. e.g. The following text would have a linefeed and a number of spaces "line1\n     line2".
     `line1
      line2`
+
+* 1 Based Indexing - Most languages start strings, arrays and lists at position 0. This is unintuitive and unnecessary. E.g. "ab" = "abcd".substring(0, 2) is unituitive compared with "ab" = (string<-string-start-end "abcd" 1 2).
+
+## Crash Resistant
+
+* Most languages throw an exception when attempting to retrieve and object that is out of range or passes an empty value. E.g. exception = ["a", "b"].get(4), exception = null.get(4) produce exceptions. vxlisp always maintains empty values that won't crash. "" = (:4 (stringlist "a" "b")), "" = (:4 (empty stringlist))
 
 ## Interoperable with native code
 

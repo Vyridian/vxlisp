@@ -339,16 +339,6 @@ public final class Core {
     return output;
   }
 
-  // vx_int_from_string_find(string, string)
-  public static int vx_int_from_string_find(String text, String find) {
-    return text.indexOf(find);
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  public static int vx_int_from_string_findlast(String text, String findlast) {
-    return text.lastIndexOf(findlast);
-  }
-
   // vx_is_float(string)
   public static boolean vx_is_float(String text) {
     boolean output = false;
@@ -608,7 +598,7 @@ public final class Core {
       Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
       Core.Type_typedef typedef = vallist.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 1;
       List<Core.Type_any> listval = vallist.vx_list();
@@ -625,7 +615,7 @@ public final class Core {
       Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
       Core.Type_typedef typedef = valmap.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
@@ -652,7 +642,7 @@ public final class Core {
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint2 = indent;
       indentint2 += 2;
       Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
@@ -690,6 +680,19 @@ public final class Core {
       }
       output = "(" + output + ")";
     }
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static String vx_string_from_string_find_replace(String text, String find, String replace) {
+    String output = text.replaceAll(find, replace);
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static Core.Type_string vx_string_from_string_find_replace(Core.Type_string text, Core.Type_string find, Core.Type_string replace) {
+    String stext = Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
+    Core.Type_string output = Core.vx_new_string(stext);
     return output;
   }
 
@@ -955,6 +958,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -976,8 +980,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/any<-anylist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new any<-anylist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/any<-anylist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1062,6 +1070,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1086,8 +1095,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/anylist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new anylist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/anylist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1477,6 +1490,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_arg> listval = new ArrayList<>(val.vx_listarg());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1501,8 +1515,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/arglist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new arglist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/arglist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1619,6 +1637,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_arg> mapval = new LinkedHashMap<>(val.vx_maparg());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1632,7 +1651,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -1642,7 +1661,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_arg) {
             valany = (Core.Type_arg)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1833,6 +1852,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_boolean> listval = new ArrayList<>(val.vx_listboolean());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -1857,8 +1877,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/booleanlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new booleanlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/booleanlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2141,6 +2165,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_connect> listval = new ArrayList<>(val.vx_listconnect());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -2165,8 +2190,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/connectlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new connectlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/connectlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2283,6 +2312,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_connect> mapval = new LinkedHashMap<>(val.vx_mapconnect());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2296,7 +2326,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -2306,7 +2336,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_connect) {
             valany = (Core.Type_connect)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -2670,6 +2700,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -2694,8 +2725,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/constlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new constlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/constlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2802,6 +2837,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2815,7 +2851,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -2825,7 +2861,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3815,6 +3851,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_func> listval = new ArrayList<>(val.vx_listfunc());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -3839,8 +3876,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/funclist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new funclist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/funclist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -3957,6 +3998,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_func> mapval = new LinkedHashMap<>(val.vx_mapfunc());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3970,7 +4012,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3980,7 +4022,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_func) {
             valany = (Core.Type_func)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -4170,6 +4212,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_int> listval = new ArrayList<>(val.vx_listint());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -4194,8 +4237,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/intlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new intlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/intlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -4312,6 +4359,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_int> mapval = new LinkedHashMap<>(val.vx_mapint());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -4325,7 +4373,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -4335,7 +4383,7 @@ public final class Core {
           } else if (valsub instanceof Integer) {
             valany = Core.t_int.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -4441,6 +4489,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -4465,8 +4514,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/list", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new list) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/list", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -4744,6 +4797,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -4757,7 +4811,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -4767,7 +4821,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -5527,6 +5581,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_msgblock> listval = new ArrayList<>(val.vx_listmsgblock());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
@@ -5546,8 +5601,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/msgblocklist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new msgblocklist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/msgblocklist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -5643,6 +5702,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_msg> listval = new ArrayList<>(val.vx_listmsg());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -5662,8 +5722,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/msglist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new msglist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/msglist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -5948,6 +6012,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_number> listval = new ArrayList<>(val.vx_listnumber());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -5972,8 +6037,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/numberlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new numberlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/numberlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -6090,6 +6159,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_number> mapval = new LinkedHashMap<>(val.vx_mapnumber());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -6103,7 +6173,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -6113,7 +6183,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_number) {
             valany = (Core.Type_number)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -6491,6 +6561,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_package> mapval = new LinkedHashMap<>(val.vx_mappackage());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -6504,7 +6575,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -6514,7 +6585,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_package) {
             valany = (Core.Type_package)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -6772,6 +6843,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_permission> listval = new ArrayList<>(val.vx_listpermission());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -6796,8 +6868,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/permissionlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new permissionlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/permissionlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -6914,6 +6990,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_permission> mapval = new LinkedHashMap<>(val.vx_mappermission());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -6927,7 +7004,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -6937,7 +7014,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_permission) {
             valany = (Core.Type_permission)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -7837,6 +7914,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -7850,7 +7928,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -7860,7 +7938,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_statelistener) {
             valany = (Core.Type_statelistener)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -8148,6 +8226,7 @@ public final class Core {
         ischanged = true;
       }
       StringBuilder sb = new StringBuilder(val.vx_string());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -8184,8 +8263,12 @@ public final class Core {
         } else if (valsub instanceof Float) {
           ischanged = true;
           sb.append((Float)valsub);
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/string", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new string) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/string", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -8282,6 +8365,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_string> listval = new ArrayList<>(val.vx_liststring());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -8306,8 +8390,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/stringlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new stringlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/stringlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -8424,6 +8512,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -8437,7 +8526,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -8447,7 +8536,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -8883,6 +8972,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_thenelse> listval = new ArrayList<>(val.vx_listthenelse());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -8907,8 +8997,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/thenelselist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new thenelselist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/thenelselist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -9182,6 +9276,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_translation> listval = new ArrayList<>(val.vx_listtranslation());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -9206,8 +9301,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/translationlist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new translationlist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/translationlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -9324,6 +9423,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_translation> mapval = new LinkedHashMap<>(val.vx_maptranslation());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -9337,7 +9437,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -9347,7 +9447,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_translation) {
             valany = (Core.Type_translation)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -9939,6 +10039,7 @@ public final class Core {
         ischanged = true;
       }
       List<Core.Type_any> listval = new ArrayList<>(val.vx_list());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -9963,8 +10064,12 @@ public final class Core {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/core/typelist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new typelist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/core/typelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -10071,6 +10176,7 @@ public final class Core {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -10084,7 +10190,7 @@ public final class Core {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -10094,7 +10200,7 @@ public final class Core {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_msg msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -24775,6 +24881,89 @@ public final class Core {
   }
 
   /**
+   * @function string_from_string_find_replace
+   * Returns a string with all instances of find replaced by replace.
+   * @param  {string} text
+   * @param  {string} find
+   * @param  {string} replace
+   * @return {string}
+   * (func string<-string-find-replace)
+   */
+  public static interface Func_string_from_string_find_replace extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_string vx_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace);
+  }
+
+  public static class Class_string_from_string_find_replace extends Core.Class_base implements Func_string_from_string_find_replace {
+
+    @Override
+    public Func_string_from_string_find_replace vx_new(Object... vals) {
+      Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_string_find_replace vx_copy(Object... vals) {
+      Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "string<-string-find-replace", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_string_find_replace vx_empty() {return e_string_from_string_find_replace;}
+    @Override
+    public Func_string_from_string_find_replace vx_type() {return t_string_from_string_find_replace;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_string replace = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_string_from_string_find_replace(text, find, replace);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace) {
+      return Core.f_string_from_string_find_replace(text, find, replace);
+    }
+
+  }
+
+  public static final Func_string_from_string_find_replace e_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
+  public static final Func_string_from_string_find_replace t_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
+
+  public static Core.Type_string f_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace) {
+    Core.Type_string output = Core.e_string;
+    output = Core.vx_string_from_string_find_replace(text, find, replace);
+    return output;
+  }
+
+  /**
    * @function switch
    * @param  {any-2} val
    * @param  {thenelselist} thenelselist
@@ -26053,6 +26242,7 @@ public final class Core {
     mapfunc.put("string<-any", Core.t_string_from_any);
     mapfunc.put("string<-any-indent", Core.t_string_from_any_indent);
     mapfunc.put("string<-func", Core.t_string_from_func);
+    mapfunc.put("string<-string-find-replace", Core.t_string_from_string_find_replace);
     mapfunc.put("switch", Core.t_switch);
     mapfunc.put("then", Core.t_then);
     mapfunc.put("traits<-typedef", Core.t_traits_from_typedef);

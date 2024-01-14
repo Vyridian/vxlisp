@@ -937,6 +937,10 @@ namespace vx_core {
   typedef Abstract_string_from_func* Func_string_from_func;
   extern Func_string_from_func e_string_from_func;
   extern Func_string_from_func t_string_from_func;
+  class Abstract_string_from_string_find_replace;
+  typedef Abstract_string_from_string_find_replace* Func_string_from_string_find_replace;
+  extern Func_string_from_string_find_replace e_string_from_string_find_replace;
+  extern Func_string_from_string_find_replace t_string_from_string_find_replace;
   class Abstract_switch;
   typedef Abstract_switch* Func_switch;
   extern Func_switch e_switch;
@@ -1301,6 +1305,9 @@ namespace vx_core {
 
   // vx_string_from_string_find_replace(string, string, string)
   std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace);
+
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace);
 
   // vx_string_from_string_find_replacefirst(string, string, string)
   std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst);
@@ -3610,6 +3617,9 @@ namespace vx_core {
 
   // (func string<-func)
   vx_core::Type_string f_string_from_func();
+
+  // (func string<-string-find-replace)
+  vx_core::Type_string f_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace);
 
   // (func traits<-typedef)
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef);
@@ -8065,6 +8075,29 @@ namespace vx_core {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_string_from_func vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_string_from_func::IFn fn) const;
     virtual vx_core::Type_string vx_string_from_func() const;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-string-find-replace)
+  class Abstract_string_from_string_find_replace : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_string_find_replace() {};
+    virtual ~Abstract_string_from_string_find_replace() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_string_find_replace : public virtual Abstract_string_from_string_find_replace {
+  public:
+    Class_string_from_string_find_replace();
+    virtual ~Class_string_from_string_find_replace() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

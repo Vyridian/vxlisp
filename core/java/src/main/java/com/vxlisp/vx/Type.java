@@ -6,12 +6,22 @@ import java.util.Map;
 
 public final class Type {
 
+  // vx_int_from_string_find(string, string)
+  public static int vx_int_from_string_find(String text, String find) {
+    return text.indexOf(find) + 1;
+  }
+
+  // vx_int_from_string_find(string, string)
+  public static Core.Type_int vx_int_from_string_find(Core.Type_string text, Core.Type_string find) {
+    int ipos = vx_int_from_string_find(text.vx_string(), find.vx_string());
+    Core.Type_int output = Core.vx_new_int(ipos);
+    return output;
+  }
 
   // vx_int_from_string_findkeyword(string, string)
   public static int vx_int_from_string_findkeyword(String text, String find) {
     int output = -1;
     if (text == "") {
-	     output = text.indexOf(find);
     } else if (find == ":nonwhitespace") {
       String wschars1 = " \n\r\t";
       int ilen = text.length();
@@ -34,11 +44,33 @@ public final class Type {
           output = pos;
         }
       }
+    } else {
+	     output = text.indexOf(find);
 		  }
     output += 1;
 		  return output;
  	}
 
+  // vx_int_from_string_findkeyword(string, string)
+  public static Core.Type_int vx_int_from_string_findkeyword(Core.Type_string text, Core.Type_string find) {
+    int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
+    Core.Type_int output = Core.vx_new_int(ipos);
+    return output;
+  }
+ 
+  // vx_int_from_string_findlast(string, string)
+  public static int vx_int_from_string_findlast(String text, String findlast) {
+    return text.lastIndexOf(findlast) + 1;
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  public static Core.Type_int vx_int_from_string_findlast(Core.Type_string text, Core.Type_string findlast) {
+    int ipos = vx_int_from_string_findlast(text.vx_string(), findlast.vx_string());
+    Core.Type_int output = Core.vx_new_int(ipos);
+    return output;
+  }
+
+  // vx_string_from_stringlist_join(stringlist, string)
   public static Core.Type_string vx_string_from_stringlist_join(Core.Type_stringlist vals, Core.Type_string delim) {
     List<String> listvalstring = Core.arraylist_from_arraylist_fn(vals.vx_list(), (item) -> {
       Core.Type_string valstring = Core.f_any_from_any(Core.t_string, item);
@@ -582,8 +614,7 @@ public final class Type {
 
   public static Core.Type_int f_int_from_string_find(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
-    int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);
+    output = Type.vx_int_from_string_find(text, find);
     return output;
   }
 
@@ -664,8 +695,7 @@ public final class Type {
 
   public static Core.Type_int f_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
-    int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
-    output = Core.vx_new_int(ipos);
+    output = Type.vx_int_from_string_findkeyword(text, find);
     return output;
   }
 
@@ -746,8 +776,7 @@ public final class Type {
 
   public static Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
     Core.Type_int output = Core.e_int;
-    int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);
+    output = Type.vx_int_from_string_findlast(text, findlast);
     return output;
   }
 
@@ -1401,6 +1430,137 @@ public final class Type {
     Core.Type_int output = Core.e_int;
     int len = text.vx_string().length();
     output = Core.vx_new_int(len);
+    return output;
+  }
+
+  /**
+   * @function string_outdent
+   * Returns a string replacing leading whitespace on all lines based on first line.
+   * @param  {string} text
+   * @return {string}
+   * (func string-outdent)
+   */
+  public static interface Func_string_outdent extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_outdent(final Core.Type_string text);
+  }
+
+  public static class Class_string_outdent extends Core.Class_base implements Func_string_outdent {
+
+    @Override
+    public Func_string_outdent vx_new(Object... vals) {
+      Class_string_outdent output = new Class_string_outdent();
+      return output;
+    }
+
+    @Override
+    public Func_string_outdent vx_copy(Object... vals) {
+      Class_string_outdent output = new Class_string_outdent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "string-outdent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_outdent vx_empty() {return e_string_outdent;}
+    @Override
+    public Func_string_outdent vx_type() {return t_string_outdent;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Type.f_string_outdent(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Type.f_string_outdent(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_outdent(final Core.Type_string text) {
+      return Type.f_string_outdent(text);
+    }
+
+  }
+
+  public static final Func_string_outdent e_string_outdent = new Type.Class_string_outdent();
+  public static final Func_string_outdent t_string_outdent = new Type.Class_string_outdent();
+
+  public static Core.Type_string f_string_outdent(final Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_int pos = Type.f_int_from_string_findkeyword(text, Core.vx_new_string(":nonwhitespace"));
+        return Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(Core.vx_new_int(0), pos);
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return text;
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_let(
+                  Core.t_string,
+                  Core.t_any_from_func.vx_fn_new(() -> {
+                    final Core.Type_string indent = Type.f_string_from_string_end(
+                      text,
+                      Core.f_minus1(pos)
+                    );
+                    final Core.Type_string rest = Type.f_string_from_string_start(text, pos);
+                    final Core.Type_int linepos = Type.f_int_from_string_find(indent, Core.vx_new_string("\n"));
+                    final Core.Type_string outdent = Core.f_if_1(
+                      Core.t_string,
+                      Core.f_eq(Core.vx_new_int(0), linepos),
+                      Core.vx_new_string(""),
+                      Core.vx_new_string("\n")
+                    );
+                    return Core.f_string_from_string_find_replace(rest, indent, outdent);
+                  })
+                );
+              })
+            )
+          )
+        );
+      })
+    );
     return output;
   }
 
@@ -2328,6 +2488,7 @@ public final class Type {
     mapfunc.put("is-type", Type.t_is_type);
     mapfunc.put("is-type<-any-typelist", Type.t_is_type_from_any_typelist);
     mapfunc.put("length<-string", Type.t_length_from_string);
+    mapfunc.put("string-outdent", Type.t_string_outdent);
     mapfunc.put("string-trim", Type.t_string_trim);
     mapfunc.put("string<-int", Type.t_string_from_int);
     mapfunc.put("string<-string-end", Type.t_string_from_string_end);

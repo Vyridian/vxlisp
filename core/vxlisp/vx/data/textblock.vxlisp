@@ -244,12 +244,16 @@
   delim : delim]
  (let : delim
   [find : string := (:starttext delim)
-   pos  : int    := (int<-string-findkeyword text find)]
+   pos  : int    := (typ/int<-string-findkeyword
+                     text
+                     find)]
   (if : delim
-   (= pos 0)
-   delim
-   (copy delim
-    :pos pos)))
+   (then
+    (= pos 0)
+    delim)
+   (else
+    (copy delim
+     :pos pos))))
  :test (test
         (copy delimcomma
          :pos 2)
@@ -357,10 +361,10 @@
                                (< endpos startright)
                                startright
                                endpos)
-   textleft    : string    := (type/string<-string-end
+   textleft    : string    := (typ/string<-string-end
                                text
                                posminus)
-   textright   : string    := (type/string<-string-start
+   textright   : string    := (typ/string<-string-start
                                text
                                (+
                                 pos
@@ -711,13 +715,13 @@
    startopen  : int       := (+
                               startpos
                               posminus)
-   textleft   : string    := (type/string<-string-end
+   textleft   : string    := (typ/string<-string-end
                               text
                               posminus)
-   textpar   : string     := (type/string<-string-start
+   textpar   : string     := (typ/string<-string-start
                               text
                               pos)
-   textright : string     := (type/string<-string-start
+   textright : string     := (typ/string<-string-start
                               text
                               (+
                                pos
@@ -921,9 +925,9 @@
                                origsingle
                                (case :whitespace
                                 (let : string
-                                 [text2 : string  := (type/string<-string-start
+                                 [text2 : string  := (typ/string<-string-start
                                                       text pos)
-                                  pos2   : int    := (type/int<-string-findkeyword
+                                  pos2   : int    := (typ/int<-string-findkeyword
                                                       text2
                                                       :nonwhitespace)
                                   pos3   : int    := (if : int
@@ -936,7 +940,7 @@
                                                        pos2)
                                                       (else
                                                        (-1 pos2)))]
-                                 (type/string<-string-start-end
+                                 (typ/string<-string-start-end
                                   text
                                   pos
                                   pos3)))
@@ -964,13 +968,13 @@
                                startsingle
                                (-1 startsingle))
    startright  : int       := (+1 endsingle)
-   textleft    : string    := (type/string<-string-end
+   textleft    : string    := (typ/string<-string-end
                                text
                                posminus)
-   textpar     : string    := (type/string<-string-start
+   textpar     : string    := (typ/string<-string-start
                                text
                                pos)
-   textright   : string    := (type/string<-string-start
+   textright   : string    := (typ/string<-string-start
                                text
                                (+
                                 pos
@@ -1410,16 +1414,17 @@
    (then // if delim not closed then error
     (! (is-empty close))
     (copy parent
-     :delimlist
-      (copy delims
-       (copy textblockarg
-        :parent
-         (empty textblock)
-        :msg
-         (msg<-error
-          (string
-           "Close delim not found: "
-           (:name delima)))))))
+     (copy delimp
+      :delimlist
+       (copy delims
+        (copy textblockarg
+         :parent
+          (empty textblock)
+         :msg
+          (msg<-error
+           (string
+            "Close delim not found: "
+            (:name delima))))))))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)

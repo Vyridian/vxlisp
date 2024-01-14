@@ -101,6 +101,7 @@ public final class Repl {
         ischanged = true;
       }
       List<Core.Type_string> listval = new ArrayList<>(val.vx_liststring());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -125,8 +126,12 @@ public final class Repl {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/repl/liblist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new liblist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/repl/liblist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -709,6 +714,7 @@ public final class Repl {
         ischanged = true;
       }
       List<Repl.Type_repl> listval = new ArrayList<>(val.vx_listrepl());
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
@@ -733,8 +739,12 @@ public final class Repl {
               listval.add(valitem);
             }
           }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_error("vx/repl/repllist", "invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(new repllist) - Invalid Type: " + valsub.toString());
+          msg = Core.vx_msg_error("vx/repl/repllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

@@ -321,16 +321,6 @@
     return output;
   }
 
-  // vx_int_from_string_find(string, string)
-  public static int vx_int_from_string_find(String text, String find) {
-    return text.indexOf(find);
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  public static int vx_int_from_string_findlast(String text, String findlast) {
-    return text.lastIndexOf(findlast);
-  }
-
   // vx_is_float(string)
   public static boolean vx_is_float(String text) {
     boolean output = false;
@@ -590,7 +580,7 @@
       Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
       Core.Type_typedef typedef = vallist.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 1;
       List<Core.Type_any> listval = vallist.vx_list();
@@ -607,7 +597,7 @@
       Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
       Core.Type_typedef typedef = valmap.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint = indent;
       indentint += 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
@@ -634,7 +624,7 @@
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-	  String stypedefname = typedefname.vx_string();
+      String stypedefname = typedefname.vx_string();
       int indentint2 = indent;
       indentint2 += 2;
       Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
@@ -672,6 +662,19 @@
       }
       output = "(" + output + ")";
     }
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static String vx_string_from_string_find_replace(String text, String find, String replace) {
+    String output = text.replaceAll(find, replace);
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static Core.Type_string vx_string_from_string_find_replace(Core.Type_string text, Core.Type_string find, Core.Type_string replace) {
+    String stext = Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
+    Core.Type_string output = Core.vx_new_string(stext);
     return output;
   }
 

@@ -9,34 +9,40 @@ namespace vx_type {
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find) {
     int output = -1;
-    if (text != "") {
-      if (find == ":nonwhitespace") {
-        std::string wschars1 = " \n\r\t";
-        int ilen = text.length();
-        for (int i = 0; i < ilen; i++) {
-          char cchar = text[i];
-          int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
-          if (pos < 0) {
-            output = i;
-            break;
-          }
+    if (text == "") {
+    } else if (find == ":nonwhitespace") {
+      std::string wschars1 = " \n\r\t";
+      int ilen = text.length();
+      for (int i = 0; i < ilen; i++) {
+        char cchar = text[i];
+        int pos = vx_core::vx_int_from_sizet(wschars1.find(cchar));
+        if (pos < 0) {
+          output = i;
+          break;
         }
-      } else if (find == ":whitespace") {
-        std::string wschars2 = " \n\r\t";
-        for (char cchar : wschars2) {
-          int pos = vx_core::vx_int_from_sizet(text.find(cchar));
-          if (pos < 0) {
-          } else if (output < 0) {
-           output = pos;
-          } else if (pos < output) {
-           output = pos;
-          }
-        }
-      } else {
-        output = text.find(find);
       }
+    } else if (find == ":whitespace") {
+      std::string wschars2 = " \n\r\t";
+      for (char cchar : wschars2) {
+        int pos = vx_core::vx_int_from_sizet(text.find(cchar));
+        if (pos < 0) {
+        } else if (output < 0) {
+         output = pos;
+        } else if (pos < output) {
+         output = pos;
+        }
+      }
+    } else {
+      output = text.find(find);
     }
     output += 1;
+    return output;
+  }
+
+  // vx_int_from_string_findkeyword(string, string)
+  vx_core::Type_int vx_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find) {
+    int ipos = vx_type::vx_int_from_string_findkeyword(text->vx_string(), find->vx_string());
+    vx_core::Type_int output = vx_core::vx_new_int(ipos);
     return output;
   }
 
@@ -624,8 +630,7 @@ namespace vx_type {
   vx_core::Type_int f_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find) {
     vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve({text, find});
-    int ipos = vx_type::vx_int_from_string_findkeyword(text->vx_string(), find->vx_string());
-    output = vx_core::vx_new_int(ipos);
+    output = vx_type::vx_int_from_string_findkeyword(text, find);
     vx_core::vx_release_one_except({text, find}, output);
     return output;
   }
@@ -1459,6 +1464,152 @@ namespace vx_type {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_length_from_string(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func string-outdent)
+  vx_core::Type_string f_string_outdent(vx_core::Type_string text) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(text);
+    output = vx_core::f_let(
+      vx_core::t_string,
+      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+        vx_core::Type_int pos = vx_type::f_int_from_string_findkeyword(text, vx_core::vx_new_string(":nonwhitespace"));
+        vx_core::vx_ref_plus(pos);
+        vx_core::Type_string output_1 = vx_core::f_if_2(
+          vx_core::t_string,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({pos}, [pos]() {
+                vx_core::Type_boolean output_1 = vx_core::f_eq(vx_core::vx_new_int(0), pos);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                vx_core::Type_any output_1 = text;
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({text, pos}, [text, pos]() {
+                vx_core::Type_string output_1 = vx_core::f_let(
+                  vx_core::t_string,
+                  vx_core::t_any_from_func->vx_fn_new({text, pos}, [text, pos]() {
+                    vx_core::Type_string indent = vx_type::f_string_from_string_end(
+                      text,
+                      vx_core::f_minus1(pos)
+                    );
+                    vx_core::vx_ref_plus(indent);
+                    vx_core::Type_string rest = vx_type::f_string_from_string_start(text, pos);
+                    vx_core::vx_ref_plus(rest);
+                    vx_core::Type_int linepos = vx_type::f_int_from_string_find(indent, vx_core::vx_new_string("\n"));
+                    vx_core::vx_ref_plus(linepos);
+                    vx_core::Type_string outdent = vx_core::f_if_1(
+                      vx_core::t_string,
+                      vx_core::f_eq(vx_core::vx_new_int(0), linepos),
+                      vx_core::vx_new_string(""),
+                      vx_core::vx_new_string("\n")
+                    );
+                    vx_core::vx_ref_plus(outdent);
+                    vx_core::Type_string output_1 = vx_core::f_string_from_string_find_replace(rest, indent, outdent);
+                    vx_core::vx_release_one_except({indent, rest, linepos, outdent}, output_1);
+                    return output_1;
+                  })
+                );
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_release_one_except(pos, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func string-outdent)
+  // class Class_string_outdent {
+    Abstract_string_outdent::~Abstract_string_outdent() {}
+
+    Class_string_outdent::Class_string_outdent() : Abstract_string_outdent::Abstract_string_outdent() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_outdent::~Class_string_outdent() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_outdent::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_outdent output = vx_type::e_string_outdent;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_outdent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_outdent output = vx_type::e_string_outdent;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_outdent::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "string-outdent", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_outdent::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_outdent::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string-outdent", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_outdent::vx_empty() const {return vx_type::e_string_outdent;}
+    vx_core::Type_any Class_string_outdent::vx_type() const {return vx_type::t_string_outdent;}
+    vx_core::Type_msgblock Class_string_outdent::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_outdent::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_outdent::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_outdent::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_type::f_string_outdent(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_outdent::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_string_outdent(text);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -2427,6 +2578,8 @@ namespace vx_type {
   vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist = NULL;
   vx_type::Func_length_from_string e_length_from_string = NULL;
   vx_type::Func_length_from_string t_length_from_string = NULL;
+  vx_type::Func_string_outdent e_string_outdent = NULL;
+  vx_type::Func_string_outdent t_string_outdent = NULL;
   vx_type::Func_string_trim e_string_trim = NULL;
   vx_type::Func_string_trim t_string_trim = NULL;
   vx_type::Func_string_from_int e_string_from_int = NULL;
@@ -2513,6 +2666,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_length_from_string);
       vx_type::t_length_from_string = new vx_type::Class_length_from_string();
       vx_core::vx_reserve_type(vx_type::t_length_from_string);
+      vx_type::e_string_outdent = new vx_type::Class_string_outdent();
+      vx_core::vx_reserve_empty(vx_type::e_string_outdent);
+      vx_type::t_string_outdent = new vx_type::Class_string_outdent();
+      vx_core::vx_reserve_type(vx_type::t_string_outdent);
       vx_type::e_string_trim = new vx_type::Class_string_trim();
       vx_core::vx_reserve_empty(vx_type::e_string_trim);
       vx_type::t_string_trim = new vx_type::Class_string_trim();
@@ -2572,6 +2729,7 @@ namespace vx_type {
       mapfunc["is-type"] = vx_type::t_is_type;
       mapfunc["is-type<-any-typelist"] = vx_type::t_is_type_from_any_typelist;
       mapfunc["length<-string"] = vx_type::t_length_from_string;
+      mapfunc["string-outdent"] = vx_type::t_string_outdent;
       mapfunc["string-trim"] = vx_type::t_string_trim;
       mapfunc["string<-int"] = vx_type::t_string_from_int;
       mapfunc["string<-string-end"] = vx_type::t_string_from_string_end;
